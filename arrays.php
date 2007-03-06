@@ -1,0 +1,114 @@
+<?php
+
+$stat_report_array = array(
+	0  => "Statistics Reports",
+	99 => "Summary",
+	5  => "UDP/TCP Destination Port",
+	6  => "UDP/TCP Source Port",
+	7  => "UDP/TCP Port",
+	8  => "Destination IP",
+	9  => "SourceIP",
+	10 => "Source/Destination IP",
+	11 => "Source or Destination IP",
+	12 => "IP Protocol",
+	17 => "Input Interface",
+	18 => "Output Interface",
+	23 => "Input/Output Interface",
+	19 => "Source AS",
+	20 => "Destination AS",
+	21 => "Source/Destination AS",
+	22 => "IP ToS",
+	24 => "Source Prefix",
+	25 => "Destination Prefix",
+	26 => "Source/Destination Prefix"
+	);
+
+$print_report_array = array(
+	 0  => "Print Reports",
+	 1  => "Flow Times",
+	 4  => "AS Numbers",
+	 5  => "132 Columns",
+	 9  => "1 Line with Tags",
+	 10 => "AS Aggregation",
+	 11 => "Protocol Port Aggregation",
+	 12 => "Source Prefix Aggregation",
+	 13 => "Destination Prefix Aggregation",
+	 14 => "Prefix Aggregation",
+	 24 => "Full (Catalyst)"
+	);
+
+$flow_select_array = array(
+	  1 => "Any Part in Specified Time Span",
+	  2 => "End Time in Specified Time Span",
+	  3 => "Start Time in Specified Time Span",
+	  4 => "Entirely in Specified Time Span"
+	);
+
+$resolve_addresses_array = array (
+	  'Y' => "Yes",
+	  'N' => "No"
+	);
+
+$device_name_field = array("friendly_name" => '',
+		"method" => "drop_array",
+		"default" => 0,
+		"description" => '',
+		"value" => '',
+		"array" => array());
+
+$stat_report_field = array("friendly_name" => '',
+		'name' => 'stat_report',
+		"method" => "drop_array",
+		"default" => 10,
+		"description" => '',
+		"value" => (isset($_POST['stat_report']) ? $_POST['stat_report'] : 10),
+		"array" => $stat_report_array);
+
+$flow_select_field = array("friendly_name" => '',
+		"method" => "drop_array",
+		"default" => 1,
+		"description" => '',
+		"value" => (isset($_POST['flow_select']) ? $_POST['flow_select'] : 1),
+		"array" => $flow_select_array);
+
+$print_report_field = array("friendly_name" => '',
+		"method" => "drop_array",
+		"default" => 0,
+		"description" => '',
+		"value" => (isset($_POST['print_report']) ? $_POST['print_report'] : 0),
+		"array" => $print_report_array);
+
+$resolve_addresses_field = array("friendly_name" => '',
+		"method" => "drop_array",
+		"default" => 'Y',
+		"description" => '',
+		"value" => (isset($_POST['resolve_addresses']) ? $_POST['resolve_addresses'] : 'Y'),
+		"array" => $resolve_addresses_array);
+
+$stat_columns_array = array(
+	5  => array(1, 2, '', 'Port', 'Flows', 'Bytes', 'Packets'),
+	6  => array(1, 2, '', 'Port', 'Flows', 'Bytes', 'Packets'),
+	7  => array(1, 2, '', 'Port', 'Flows', 'Bytes', 'Packets'),
+	8  => array(1, 2, 0,  'Destination IP', 'Flows', 'Bytes', 'Packets'),
+	9  => array(1, 2, 0,  'Source IP', 'Flows', 'Bytes', 'Packets'),
+	10 => array(1, 3, '0,1', 'Source IP', 'Destination IP', 'Flows', 'Bytes', 'Packets'),
+	11 => array(1, 2, 0,  'Source/Desination IP', 'Flows', 'Bytes', 'Packets'),
+	12 => array(1, 2, '', 'Protocol', 'Flows', 'Bytes', 'Packets'),
+	17 => array(1, 2, '', 'Input Interface', 'Flows', 'Bytes', 'Packets'),
+	18 => array(1, 2, '', 'Output Interface', 'Flows', 'Bytes', 'Packets'),
+	19 => array(1, 2, '', 'Source AS', 'Flows', 'Bytes', 'Packets'),
+	20 => array(1, 2, '', 'Destination AS', 'Flows', 'Bytes', 'Packets'),
+	21 => array(1, 3, '', 'Source AS', 'Destination AS', 'Flows', 'Bytes', 'Packets'),
+	22 => array(1, 2, '', 'TOS', 'Flows', 'Bytes', 'Packets'),
+	23 => array(1, 3, '', 'Input Interface', 'Output Interface', 'Flows', 'Bytes', 'Packets'),
+	24 => array(1, 2, '', 'Source Prefix', 'Flows', 'Bytes', 'Packets'),
+	25 => array(1, 2, '', 'Destination Prefix', 'Flows', 'Bytes', 'Packets'),
+	26 => array(1, 3, '', 'Source Prefix', 'Destination Prefix', 'Flows', 'Bytes', 'Packets'),
+	);
+
+$print_columns_array = array(
+	4  => array(1, 5, '', 'Source IP', 'Destination IP', 'Protocol', 'Source AS', 'Destination AS', 'Bytes', 'Packets'),
+	5  => array(1, 11, '3,6', 'Start Time', 'End Time', 'Source Interface', 'Source IP', 'Source Port', 'Destination Interface', 'Destination IP', 'Dest Port', 'Protocol', 'Flags', 'Packets', 'Bytes'),
+	);
+
+?>
