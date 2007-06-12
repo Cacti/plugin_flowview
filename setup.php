@@ -56,21 +56,21 @@ function flowview_config_settings () {
 			"path_flowtools" => array(
 			"friendly_name" => "Flow Tools Binary Path",
 			"description" => "The path to your flow-cat, flow=filter, and flow-stat binary.",
-			"method" => "textbox",
+			"method" => "dirpath",
 			"max_length" => 255,
 			'default' => '/usr/bin/'
 		),
 			"path_flowtools_workdir" => array(
 			"friendly_name" => "Flow Tools Work Directory",
 			"description" => "This is the path to a temporary directory to do work.",
-			"method" => "textbox",
+			"method" => "dirpath",
 			"max_length" => 255,
 			'default' => '/tmp/'
 		),
 			"path_flows_dir" => array(
 			"friendly_name" => "Flows Directory",
 			"description" => "This is the path to base the path of your flow folder structure.",
-			"method" => "textbox",
+			"method" => "dirpath",
 			"max_length" => 255,
 			'default' => '/var/netflow/flows/completed/'
 		),
@@ -81,7 +81,7 @@ function flowview_config_settings () {
 			'default' => '0',
 			"array" => array(
 				-2 => '/YYYY-MM/YYYY-MM-DD',
-				4  => 'YYYY-MM-DD-HH')
+				4  => 'YYYY-MM-DD-HH',
 				-1 => '/YYYY-MM-DD',
 				0  => '/',
 				1  => '/YYYY',
