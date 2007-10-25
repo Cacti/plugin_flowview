@@ -24,7 +24,6 @@
 
 chdir('../../');
 include_once("./include/auth.php");
-include_once("./include/config.php");
 include($config['base_path'] . '/plugins/flowview/functions.php');
 
 ini_set("max_execution_time", 240);
