@@ -71,12 +71,20 @@ $resolve_addresses_array = array (
 	  'N' => "No"
 	);
 
+$devices_arr = db_fetch_assoc("SELECT folder, name FROM plugin_flowview_devices ORDER BY name");
+$devices = array();
+if (!empty($devices_arr)) {
+	foreach ($devices_arr as $d) {
+		$devices[$d['folder']] = $d['name'];
+	}
+}
+
 $device_name_field = array("friendly_name" => '',
 		"method" => "drop_array",
 		"default" => 0,
 		"description" => '',
-		"value" => '',
-		"array" => array());
+		"value" => (isset($_POST['device_name']) ? $_POST['device_name'] : 0),
+		"array" => $devices);
 
 $stat_report_field = array("friendly_name" => '',
 		'name' => 'stat_report',
@@ -133,4 +141,4 @@ $print_columns_array = array(
 	5  => array(1, 11, '3,6', 'Start Time', 'End Time', 'Source Interface', 'Source IP', 'Source Port', 'Destination Interface', 'Destination IP', 'Dest Port', 'Protocol', 'Flags', 'Packets', 'Bytes'),
 	);
 
-?>
+

@@ -1,0 +1,87 @@
+#!/usr/bin/php
+<?php
+/*
+# description: Start Flow-Capture
+# chkconfig: 2345 95 00
+*/
+
+$cacti_base = '/var/www/html';
+
+
+include_once($cacti_base . '/include/global.php');
+
+# --- Connect to the mysql database
+$conn = mysql_pconnect("$database_hostname:$database_port", $database_username, $database_password);
+if ($conn) {
+	mysql_select_db($database_default);
+} else {
+	echo "Could not connect to the database\n";
+	exit;
+}
+
+if (isset($_SERVER['argv'][1])) {
+	switch (strtolower($_SERVER['argv'][1])) {
+		case 'start':
+			$devices = db_fetch_assocs("SELECT * FROM plugin_flowview_devices");
+			if (!empty($devices)) {
+				$path = db_fetch_cell("SELECT value FROM `settings` WHERE name = 'path_flows_dir'");
+				if ($path == '')
+					break;
+				if (substr($path, -1) == '/') {
+					$path = substr($path, 0, -1);
+				}
+				foreach ($devices as $device) {
+					$port = $device['port'];
+					$folder = $device['folder'];
+					$nest = $device['nesting'];
+					$v = $device['version'];
+					$rotate = $device['rotation'];
+					$expire = $rotate;
+
+					if ($n == 4)
+						$n = 0;
+					if (is_dir("$path/$folder")) {
+						shell_exec("/usr/bin/flow-capture -w $path/$folder 0/0/$port -S5 -V$v -n $rotate -e $expire -N $nest");
+					}
+				}
+			}			
+			break;
+		case 'stop':
+			$devices = db_fetch_assocs("SELECT * FROM plugin_flowview_devices");
+			if (!empty($devices)) {
+				shell_exec('killall -9 /usr/bin/flow-capture');
+			}			
+			break;
+		default:
+			break;
+	}
+}
+
+
+function db_fetch_assocs($query) {
+	$a = array();
+	$q = mysql_query($query);
+	while ($row = mysql_fetch_assoc($q)) {
+		$a[] = $row;
+	}
+	return $a;
+}
+
+function db_execute($query) {
+	$file = fopen('sqllog.txt', 'a+');
+	fwrite($file, $query . "\n");
+	fclose($file);
+	mysql_query($query);
+	return mysql_insert_id();
+}
+
+function db_fetch_cell($query) {
+	$q = mysql_query($query);
+	if ($q) {
+		$row = mysql_fetch_row($q);
+		return $row[0];
+	}
+	return NULL;
+}
+
+

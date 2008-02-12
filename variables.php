@@ -53,8 +53,8 @@
 
 
 	$device = '';
-	if (isset($_POST['device']))
-		$device = $_POST['device'];
+	if (isset($_POST['device_name']))
+		$device = $_POST['device_name'];
 
 	$start_date = ''; // date("n/j/Y",time() - 28800);
 	if (isset($_POST['start_date']))

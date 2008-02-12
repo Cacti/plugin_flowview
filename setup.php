@@ -161,6 +161,24 @@ function flowview_setup_table () {
 				) TYPE=HEAP;";
 		$sql[] = "REPLACE INTO user_auth_realm VALUES (68, 1);";
 	}
+
+	if (!in_array('plugin_flowview_devices', $tables)) {
+		$sql[] = "CREATE TABLE plugin_flowview_devices (
+				  id int(12) NOT NULL auto_increment,
+				  name varchar(64) NOT NULL,
+				  folder varchar(64) NOT NULL,
+				  from varchar(32) NOT NULL default '0',
+				  port int(12) NOT NULL,
+				  nesting varchar(4) NOT NULL default '-1',
+				  version varchar(12) NOT NULL default '5',
+				  rotation int(12) NOT NULL default '1',
+				  expire int(3) NOT NULL default '7',
+				  PRIMARY KEY  (id),
+				  KEY folder (folder),
+				) TYPE=MyISAM;";
+		$sql[] = "INSERT INTO plugin_flowview_devices (name, folder, port) VALUES ('Default', 'Router', 2055)";
+	}
+
 	if (!empty($sql)) {
 		for ($a = 0; $a < count($sql); $a++) {
 			$result = mysql_query($sql[$a]);
@@ -168,4 +186,5 @@ function flowview_setup_table () {
 	}
 }
 
-?>
+
+
