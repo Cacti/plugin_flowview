@@ -43,7 +43,12 @@ function createfilter () {
 	if (substr($workdir, -1 , 1) == '/')
 		$workdir = substr($workdir, 0, -1);
 
-	$pathstructure = read_config_option('path_flows_structure');
+	$pathstructure = '';
+	if ($device != '') {
+		$pathstructure = db_fetch_cell("SELECT nesting FROM plugin_flowview_devices WHERE folder = '$device'");
+	} else {
+		$pathstructure = read_config_option('path_flows_structure');
+	}
 	if ($pathstructure == '')
 		$pathstructure = 0;
 
@@ -516,11 +521,8 @@ function getfolderpath($n, $device, $start, $end) {
 
 	$folderpath = '';
 
-	// Subtract the flow file length minus 1
-	$start = $start - 300 - 1;
-
 	// Add Flow Interval plus 1
-	$end = $end + 1800 + 1;
+	$end = $end + 300 + 1;
 
 	$dir = read_config_option('path_flows_dir');
 	if ($dir == '')
@@ -530,6 +532,21 @@ function getfolderpath($n, $device, $start, $end) {
 
 	if ($device != '')
 		$dir .= "/$device";
+
+	switch ($n) {
+		case -2:
+ 		case -1:
+		case 0:
+		case 1:
+		case 2:
+		case -3:
+		case 3:
+ 			$start = strtotime(date('m/d/Y', $start));
+ 			break;
+ 		case 4:
+ 			$start = strtotime(date('m/d/Y G:00', $start));
+  			break;
+ 	}
 
 	while ($start < $end) {
 		$y = date("Y", $start);

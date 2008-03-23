@@ -32,7 +32,7 @@ function plugin_init_flowview() {
 
 function flowview_version () {
 	return array( 'name' 	=> 'flowview',
-			'version' 	=> '0.4',
+			'version' 	=> '0.5',
 			'longname'	=> 'FlowView',
 			'author'	=> 'Jimmy Conner',
 			'homepage'	=> 'http://cactiusers.org',
