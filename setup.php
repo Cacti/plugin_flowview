@@ -46,6 +46,8 @@ function flowview_config_arrays () {
 
 	$user_auth_realms[68]='Flow Viewer';
 	$user_auth_realm_filenames['flowview.php'] = 68;
+	$user_auth_realm_filenames['flowview_devices.php'] = 68;
+
 	$temp = $menu["Utilities"]['logout.php'];
 	unset($menu["Utilities"]['logout.php']);
 	$menu["Utilities"]['plugins/flowview/flowview.php'] = "Flow Viewer";
@@ -55,7 +57,12 @@ function flowview_config_arrays () {
 function flowview_draw_navigation_text ($nav) {
 	$nav["flowview.php:"] = array("title" => "Flow Viewer", "mapping" => "index.php:", "url" => "flowview.php", "level" => "1");
 	$nav["flowview.php:view"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "2");
-
+	$nav["flowview.php:save"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "2");
+	$nav["flowview.php:loadquery"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "2");
+	$nav["flowview_devices.php:"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
+	$nav["flowview_devices.php:edit"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
+	$nav["flowview_devices.php:save"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
+	$nav["flowview_devices.php:actions"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
 	return $nav;
 }
 
@@ -86,20 +93,6 @@ function flowview_config_settings () {
 			"method" => "dirpath",
 			"max_length" => 255,
 			'default' => '/var/netflow/flows/completed/'
-		),
-			"path_flows_structure" => array(
-			"friendly_name" => "Flows Directory Structure",
-			"description" => "This is the relivant directory structure that your netflow flows are contained in.",
-			"method" => "drop_array",
-			'default' => '0',
-			"array" => array(
-				-2 => '/YYYY-MM/YYYY-MM-DD',
-				4  => 'YYYY-MM-DD-HH',
-				-1 => '/YYYY-MM-DD',
-				0  => '/',
-				1  => '/YYYY',
-				2  => '/YYYY/YYYY-MM',
-				3  => '/YYYY/YYYY-MM/YYYY-MM-DD')
 		),
 	);
 
@@ -167,17 +160,51 @@ function flowview_setup_table () {
 				  id int(12) NOT NULL auto_increment,
 				  name varchar(64) NOT NULL,
 				  folder varchar(64) NOT NULL,
-				  from varchar(32) NOT NULL default '0',
+				  allowfrom varchar(32) NOT NULL default '0',
 				  port int(12) NOT NULL,
 				  nesting varchar(4) NOT NULL default '-1',
 				  version varchar(12) NOT NULL default '5',
-				  rotation int(12) NOT NULL default '1',
+				  rotation int(12) NOT NULL default '1439',
 				  expire int(3) NOT NULL default '7',
+				  compression int(1) NOT NULL default '0',
 				  PRIMARY KEY  (id),
 				  KEY folder (folder),
 				) TYPE=MyISAM;";
 		$sql[] = "INSERT INTO plugin_flowview_devices (name, folder, port) VALUES ('Default', 'Router', 2055)";
 	}
+
+	if (!in_array('plugin_flowview_queries', $tables)) {
+		$sql[] = "CREATE TABLE `plugin_flowview_queries` (
+				  `id` int(12) NOT NULL auto_increment,
+				  `name` varchar(255) NOT NULL,
+				  `device` varchar(32) NOT NULL,
+				  `startdate` varchar(32) NOT NULL,
+				  `starttime` varchar(32) NOT NULL,
+				  `enddate` varchar(32) NOT NULL,
+				  `endtime` varchar(32) NOT NULL,
+				  `tosfields` varchar(32) NOT NULL,
+				  `tcpflags` varchar(32) NOT NULL,
+				  `protocols` varchar(8) NOT NULL,
+				  `sourceip` varchar(255) NOT NULL,
+				  `sourceport` varchar(255) NOT NULL,
+				  `sourceinterface` varchar(64) NOT NULL,
+				  `sourceas` varchar(64) NOT NULL,
+				  `destip` varchar(255) NOT NULL,
+				  `destport` varchar(255) NOT NULL,
+				  `destinterface` varchar(64) NOT NULL,
+				  `destas` varchar(64) NOT NULL,
+				  `statistics` int(3) NOT NULL,
+				  `printed` int(3) NOT NULL,
+				  `includeif` int(2) NOT NULL,
+				  `sortfield` int(2) NOT NULL,
+				  `cutofflines` int(4) NOT NULL,
+				  `cutoffoctets` varchar(8) NOT NULL,
+				  `resolve` varchar(2) NOT NULL,
+				  PRIMARY KEY  (`id`),
+				  KEY `name` (`name`)
+				) TYPE=MyISAM;";
+	}
+
 
 	if (!empty($sql)) {
 		for ($a = 0; $a < count($sql); $a++) {

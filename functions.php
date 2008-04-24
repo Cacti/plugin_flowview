@@ -46,8 +46,6 @@ function createfilter () {
 	$pathstructure = '';
 	if ($device != '') {
 		$pathstructure = db_fetch_cell("SELECT nesting FROM plugin_flowview_devices WHERE folder = '$device'");
-	} else {
-		$pathstructure = read_config_option('path_flows_structure');
 	}
 	if ($pathstructure == '')
 		$pathstructure = 0;
@@ -60,7 +58,6 @@ function createfilter () {
 
 	$flow_cat_command = "$flowbin/flow-cat -t \"" . date("m/d/Y H:i:s", $start) . '" -T "' . date("m/d/Y H:i:s", $end) . '" ';
 	$flow_cat_command .= getfolderpath($pathstructure, $device, $start, $end);
-
 	$flownfilter_command = "$flowbin/flow-nfilter -f $filterfile -FFlowViewer_filter";
 
 	$flowstat = $flowbin . '/flow-stat';
@@ -75,7 +72,6 @@ function createfilter () {
 		}
 		$flow_command .= " | $flowstat_command";
 	}
-
 	if ($print_report != 0) {
 		$flow_command .= " | $flowbin/flow-print -f" . $print_report;
 	}
@@ -113,8 +109,6 @@ function createfilter () {
 		if (!is_dir($workdir))
 			return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
 		return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
-
-
 	}
 	@fputs($f, $filter);
 	@fclose($f);
@@ -148,6 +142,8 @@ function parsestatoutput($output) {
 
 	$clines = $stat_columns_array[$stat_report][0];
 	$octect_col = $stat_columns_array[$stat_report][1];
+	$proto_col = $stat_columns_array[$stat_report][3];
+
 	$ip_col = $stat_columns_array[$stat_report][2];
 	$ip_col = explode(',',$ip_col);
 
@@ -155,6 +151,8 @@ function parsestatoutput($output) {
 	array_shift($columns);
 	array_shift($columns);
 	array_shift($columns);
+	array_shift($columns);
+
 	$x = 1;
 	foreach ($columns as $column) {
 		$o .= "<td><a href='javascript:Sort($x);'><font color=white><b>$column</b></font></a></td>";
@@ -175,6 +173,7 @@ function parsestatoutput($output) {
 		}
 	}
 
+	$i = 0;
 	foreach ($output as $out) {
 		if (substr($out, 0, 1) != '#' && $out != '') {
 			$out = trim($out);
@@ -183,12 +182,17 @@ function parsestatoutput($output) {
 			}
 			$out = explode(' ', $out);
 			if ($octect_col == '' || $cutoff_octets == '' || $out[$octect_col] > $cutoff_octets-1) {
-				$o .= '<tr align=right bgcolor="#E1E1E1">';
+				$o .= '<tr align=right bgcolor="' . flowview_altcolor($i) . '">';
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
 						if ($dns != '' && in_array($c, $ip_col))
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
+						if ($c == $octect_col && $octect_col != '')
+							 $out2 = plugin_flowview_formatoctet($out2);
+						if ($c == $proto_col && $proto_col != '') {
+							 $out2 = plugin_flowview_get_protocol($out2);
+						}
 						$o .= "<td>$out2</td>";
 						$c++;
 					}
@@ -199,15 +203,43 @@ function parsestatoutput($output) {
 		}
 		if ($cutoff_lines < $cut)
 			break;
+		$i++;
 	}
 
 	$o .= '</table>';
 	return $o;
 }
 
+function plugin_flowview_get_protocol ($prot) {
+	global $config;
+	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	if (isset($ip_protocols_array[$prot]))
+		return $ip_protocols_array[$prot];
+	return $prot;
+}
+
+function plugin_flowview_formatoctet($size, $div = 1024) {
+	$x=0;
+	$tag = array('Bytes', 'KB', 'MB', 'GB', 'TB');
+	while ($size > $div) {
+		$size = $size / $div;
+		$x++;
+	}
+	return round($size, 2) . ' ' . $tag[$x];
+}
+
+function flowview_altcolor($i) {
+	global $colors;
+	if ($i/2 == intval($i/2)) {
+		return '#' . $colors["light"];
+	} else {
+		return '#' . $colors["alternate"];
+	}
+}
+
 
 function parseprintoutput($output) {
-	global $config;
+	global $config, $colors;
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
@@ -220,10 +252,13 @@ function parseprintoutput($output) {
 
 	$clines = $print_columns_array[$print_report][0];
 	$octect_col = $print_columns_array[$print_report][1];
+	$proto_col = $print_columns_array[$print_report][3];
+
 	$ip_col = $print_columns_array[$print_report][2];
 	$ip_col = explode(',',$ip_col);
 
 	$columns = $print_columns_array[$print_report];
+	array_shift($columns);
 	array_shift($columns);
 	array_shift($columns);
 	array_shift($columns);
@@ -246,6 +281,7 @@ function parseprintoutput($output) {
 		}
 	}
 
+	$i = 0;
 	$firstline = true;
 	foreach ($output as $out) {
 		if (substr($out, 0, 1) != '#' && $out != '' && $firstline == false) {
@@ -256,12 +292,16 @@ function parseprintoutput($output) {
 			$out = explode(' ', $out);
 
 			if ($octect_col == '' || $cutoff_octets == '' || $out[$octect_col] > $cutoff_octets-1) {
-				$o .= '<tr align=right bgcolor="#E1E1E1">';
+				$o .= '<tr align=right bgcolor="' . flowview_altcolor($i) . '">';
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
 						if ($dns != '' && in_array($c, $ip_col))
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
+						if ($c == $octect_col && $octect_col != '')
+							 $out2 = plugin_flowview_formatoctet($out2);
+						if ($c == $proto_col && $proto_col != '')
+							 $out2 = plugin_flowview_get_protocol($out2);
 						$o .= "<td>$out2</td>";
 						$c++;
 					}
@@ -273,6 +313,7 @@ function parseprintoutput($output) {
 		if ($cutoff_lines < $cut)
 			break;
 		$firstline = false;
+		$i++;
 	}
 
 	$o .= '</table>';
@@ -553,9 +594,7 @@ function getfolderpath($n, $device, $start, $end) {
 		$m = date("m", $start);
 		$d = date("d", $start);
 		$h = date("G", $start);
-
 		$folderpath .= $dir;
-
 		switch ($n) {
 			case -2:
 				$folderpath .= "/$y-$m/$y-$m-$d ";

@@ -26,7 +26,7 @@
 #  Input arguments (received from the form):
 #  Name                 Description
 #  -----------------------------------------------------------------------
-#  device_name          An identifying name of the device (e.g. router1)
+#  device               An identifying name of the device (e.g. router1)
 #  flow_select          Identifies which flows to include wrt time period
 #  start_date           Start date of analysis period
 #  start_time           Start time of analysis period
@@ -51,6 +51,38 @@
 #  resolve_addresses    Whether or not to resolve IP addresses
 */
 
+
+
+	$query = '';
+	if (isset($_REQUEST['query']) && $_REQUEST['query'] != '' && is_numeric($_REQUEST['query']) && isset($_REQUEST['action']) && ($_REQUEST['action'] == 'view' || $_REQUEST['action'] == 'loadquery')) {
+		$query = $_REQUEST['query'];
+		$q = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id = $query");
+		$_POST['query'] = $query = $q['name'];
+		$_POST['device_name'] = $device = $q['device'];
+		$_POST['start_date'] = $start_date = strtoupper($q['startdate']);
+		$_POST['start_time'] = $start_time = strtoupper($q['starttime']);
+		$_POST['tos_fields'] = $tos_fields = $q['tosfields'];
+		$_POST['end_date'] = $end_date = strtoupper($q['enddate']);
+		$_POST['end_time'] = $end_time = strtoupper($q['endtime']);
+		$_POST['tcp_flags'] = $tcp_flags = $q['tcpflags'];
+		$_POST['protocols'] = $protocols = $q['protocols'];
+		$_POST['source_address'] = $source_address = $q['sourceip'];
+		$_POST['source_port'] = $source_port = $q['sourceport'];
+		$_POST['source_if'] = $source_if = $q['sourceinterface'];
+		$_POST['source_as'] = $source_as = $q['sourceas'];
+		$_POST['dest_address'] = $dest_address = $q['destip'];
+		$_POST['dest_port'] = $dest_port = $q['destport'];
+		$_POST['dest_if'] = $dest_if = $q['destinterface'];
+		$_POST['dest_as'] = $dest_as = $q['destas'];
+		$_POST['sort_field'] = $sort_field = $q['sortfield'];
+		$_POST['cutoff_lines'] = $cutoff_lines = $q['cutofflines'];
+		$_POST['cutoff_octets'] = $cutoff_octets = $q['cutoffoctets'];
+		$_POST['action'] = $action = $_REQUEST['action'];
+		$_POST['stat_report'] = $stat_report = $q['statistics'];
+		$_POST['flow_select'] = $flow_select = $q['includeif'];
+		$_POST['print_report'] = $print_report = $q['printed'];
+		$_POST['resolve_addresses'] = $resolve_addresses = $q['resolve'];
+	} else {
 
 	$device = '';
 	if (isset($_POST['device_name']))
@@ -147,4 +179,6 @@
 	$resolve_addresses = 'Y';
 	if (isset($_POST['resolve_addresses']))
 		$resolve_addresses = $_POST['resolve_addresses'];
+
+	}
 ?>
