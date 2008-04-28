@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007 The Cacti Group                                      |
+ | Copyright (C) 2008 The Cacti Group                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -22,6 +22,31 @@
  +-------------------------------------------------------------------------+
 */
 
+
+function plugin_flowview_run_schedule($id) {
+	global $config;
+
+	$schedule = db_fetch_row("SELECT * FROM plugin_flowview_schedules WHERE id = $id");
+	$query = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id = " . $schedule['savedquery']);
+
+	$fromname = read_config_option('settings_from_name');
+	if (strlen($fromname) < 1)
+		$fromname = 'Cacti Flowview';
+
+	$from= read_config_option('settings_from_email');
+	if (strlen($from) < 1)
+		$from = 'cacti@cactiusers.org';
+
+	$subject = 'Netflow - ' . $query['name'];
+
+	$_REQUEST['schedule'] = $id;
+	$_REQUEST['query'] = $schedule['savedquery'];
+	$_REQUEST['action'] = 'loadquery';
+	include($config['base_path'] . '/plugins/flowview/variables.php');
+
+	$message = createfilter ();
+	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
+}
 
 function createfilter () {
 	global $config;
@@ -155,7 +180,10 @@ function parsestatoutput($output) {
 
 	$x = 1;
 	foreach ($columns as $column) {
-		$o .= "<td><a href='javascript:Sort($x);'><font color=white><b>$column</b></font></a></td>";
+		if (isset($_REQUEST['schedule']))
+			$o .= "<td><font color=white><b>$column</b></font></td>";
+		else
+			$o .= "<td><a href='javascript:Sort($x);'><font color=white><b>$column</b></font></a></td>";
 		$x++;
 	}
 	$o .= "</tr>\n";

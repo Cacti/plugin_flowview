@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007 The Cacti Group                                      |
+ | Copyright (C) 2008 The Cacti Group                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -27,7 +27,7 @@ chdir('../../');
 
 include("./include/auth.php");
 
-include_once($config['base_path'] . '/plugins/routerconfigs/functions.php');
+include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
 $ds_actions = array(1 => "Delete");
 
@@ -193,14 +193,34 @@ switch ($action) {
 		break;
 	case 'edit':
 		include_once("./include/top_header.php");
+		display_tabs ();
 		edit_devices();
 		include_once("./include/bottom_footer.php");
 		break;
 	default:
 		include_once("./include/top_header.php");
+		display_tabs ();
 		show_devices ();
 		include_once("./include/bottom_footer.php");
 		break;
+}
+
+function display_tabs () {
+	/* draw the categories tabs on the top of the page */
+	print "<table class='tabs' width='98%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Viewer') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview.php'>Viewer</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td bgcolor='silver' nowrap='nowrap' width='" . (strlen('Devices') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview_devices.php'>Devices</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview_schedules.php'>Schedules</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td></td>\n</tr></table>\n";
 }
 
 function actions_devices () {

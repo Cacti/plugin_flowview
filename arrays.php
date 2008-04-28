@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007 The Cacti Group                                      |
+ | Copyright (C) 2008 The Cacti Group                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -176,7 +176,7 @@ $resolve_addresses_field = array("friendly_name" => '',
 $stat_columns_array = array(
 	5  => array(1, 2, '', '', 'Port', 'Flows', 'Bytes', 'Packets'),
 	6  => array(1, 2, '', '', 'Port', 'Flows', 'Bytes', 'Packets'),
-	7  => array(1, 2, '', 'Port', 'Flows', 'Bytes', 'Packets'),
+	7  => array(1, 2, '', '', 'Port', 'Flows', 'Bytes', 'Packets'),
 	8  => array(1, 2, 0, '',  'Destination IP', 'Flows', 'Bytes', 'Packets'),
 	9  => array(1, 2, 0, '',  'Source IP', 'Flows', 'Bytes', 'Packets'),
 	10 => array(1, 3, '0,1', '', 'Source IP', 'Destination IP', 'Flows', 'Bytes', 'Packets'),

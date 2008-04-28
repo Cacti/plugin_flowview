@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007 The Cacti Group                                      |
+ | Copyright (C) 2008 The Cacti Group                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -47,6 +47,7 @@ function flowview_config_arrays () {
 	$user_auth_realms[68]='Flow Viewer';
 	$user_auth_realm_filenames['flowview.php'] = 68;
 	$user_auth_realm_filenames['flowview_devices.php'] = 68;
+	$user_auth_realm_filenames['flowview_schedules.php'] = 68;
 
 	$temp = $menu["Utilities"]['logout.php'];
 	unset($menu["Utilities"]['logout.php']);
@@ -63,6 +64,10 @@ function flowview_draw_navigation_text ($nav) {
 	$nav["flowview_devices.php:edit"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
 	$nav["flowview_devices.php:save"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
 	$nav["flowview_devices.php:actions"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
+	$nav["flowview_schedules.php:"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
+	$nav["flowview_schedules.php:edit"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
+	$nav["flowview_schedules.php:save"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
+	$nav["flowview_schedules.php:actions"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
 	return $nav;
 }
 
@@ -127,6 +132,16 @@ function flowview_poller_bottom () {
 	flowview_setup_table ();
 	$time = time() - 3600;
 	db_execute("delete from plugin_flowview_dnscache where time > 0 and time < $time");
+
+	$t = time();
+	$schedules = db_fetch_assoc("SELECT * FROM plugin_flowview_schedules WHERE enabled = 'on' AND ($t - sendinterval > lastsent)");
+	if (!empty($schedules)) {
+		$command_string = trim(read_config_option("path_php_binary"));
+		if (trim($command_string) == '')
+			$command_string = "php";
+		$extra_args = ' -q ' . $config['base_path'] . '/plugins/flowview/flowview_process.php';
+		exec_background($command_string, $extra_args);
+	}
 }
 
 function flowview_setup_table () {
@@ -202,6 +217,19 @@ function flowview_setup_table () {
 				  `resolve` varchar(2) NOT NULL,
 				  PRIMARY KEY  (`id`),
 				  KEY `name` (`name`)
+				) TYPE=MyISAM;";
+	}
+	if (!in_array('plugin_flowview_schedules', $tables)) {
+		$sql[] = "CREATE TABLE `plugin_flowview_schedules` (
+				  `id` int(12) NOT NULL auto_increment,
+				  `enabled` varchar(3) NOT NULL default 'on',
+				  `sendinterval` int(20) NOT NULL,
+				  `lastsent` int(20) NOT NULL,
+				  `start` datetime NOT NULL,
+				  `email` text NOT NULL,
+				  `savedquery` int(12) NOT NULL,
+				  PRIMARY KEY  (`id`),
+				  KEY `savedquery` (`savedquery`)
 				) TYPE=MyISAM;";
 	}
 

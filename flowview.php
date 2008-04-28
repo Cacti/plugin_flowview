@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007 The Cacti Group                                      |
+ | Copyright (C) 2008 The Cacti Group                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -36,6 +36,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'view') {
 	flowview_display_report();
 }
 include("./include/bottom_footer.php");
+
+function display_tabs () {
+	/* draw the categories tabs on the top of the page */
+	print "<table class='tabs' width='80%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+	print "<td bgcolor='silver' nowrap='nowrap' width='" . (strlen('Viewer') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview.php'>Viewer</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Devices') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview_devices.php'>Devices</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview_schedules.php'>Schedules</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td></td>\n</tr></table>\n";
+}
+
 
 function flowview_display_report() {
 	global $config, $colors;
@@ -84,14 +103,15 @@ function flowview_display_form() {
 	print '<form action="' . $config['url_path'] . 'plugins/flowview/flowview.php" method=POST name=flowview>';
 
 	print '<br><br><center>';
-	html_start_box("<strong>Flow Viewer</strong>", "80%", $colors["header"], "1", "center", "");
+	display_tabs ();
+	html_start_box("<strong>Flow Viewer</strong><a href='device_schedules.php' align=right> <font color=white><b>Schedules</b></font></a>", "80%", $colors["header"], "1", "center", "");
 	print "<tr><td><table width='100%'>";
 
 	?>
 	<tr><td><b>Saved Query</b>:</td><td colspan=8>
 	<?php draw_edit_control("query", $query_name_field); ?>
 
-	<tr><td><b><a href='flowview_devices.php'>Device</a></b>:</td><td colspan=8>
+	<tr><td><b>Device</b>:</td><td colspan=8>
 	<?php draw_edit_control("device_name", $device_name_field); ?>
 
 	<tr><td><b>Start Date</b>:</td><td><input type=text size=10 name=start_date value='<?php echo $start_date; ?>'></td><td><b>Start Time:</td><td><input type=text size=8 name=start_time value='<?php echo $start_time; ?>'>  </b></td><td><b>TOS Fields:</td><td><input type=text size=10 name=tos_fields  value='<?php echo $tos_fields; ?>'></td><td colspan=2>(e.g., -0x0b/0x0F)</td></tr><b>

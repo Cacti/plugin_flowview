@@ -52,3 +52,16 @@ CREATE TABLE `plugin_flowview_queries` (
 				  PRIMARY KEY  (`id`),
 				  KEY `name` (`name`)
 				) TYPE=MyISAM;
+
+CREATE TABLE `plugin_flowview_schedules` (
+  `id` int(12) NOT NULL auto_increment,
+  `enabled` varchar(3) NOT NULL default 'on',
+  `sendinterval` int(20) NOT NULL,
+  `lastsent` int(20) NOT NULL,
+  `start` datetime NOT NULL,
+  `email` text NOT NULL,
+  `savedquery` int(12) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `savedquery` (`savedquery`)
+) TYPE=MyISAM;
+
