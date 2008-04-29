@@ -393,19 +393,19 @@ function show_schedules () {
 
 	$c=0;
 	$i=0;
-	foreach ($result as $row) {
-		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-		print '<td><a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
-		print '<td>' . $sendinterval_arr[$row['sendinterval']] . '</td>';
-		print '<td>' . $row['start'] . '</td>';
-		print '<td>' . date("Y-m-d G:i:s", $row['lastsent']+$row['sendinterval']) . '</td>';
-		print '<td>' . $row['email'] . '</td>';
-
-		print '<td>' . ($row['enabled'] == 'on' ? "<font color=green><b>Yes</b></font>" :  "<font color=red><b>No</b></font>" ). '</td>';
-
-		print '<td style="' . get_checkbox_style() . '" width="1%" align="right">';
-		print '<input type="checkbox" style="margin: 0px;" name="chk_' . $row["id"] . '" title="' . $row["name"] . '"></td>';
-		print "</tr>";
+	if (count($result)) {
+		foreach ($result as $row) {
+			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+			print '<td><a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
+			print '<td>' . $sendinterval_arr[$row['sendinterval']] . '</td>';
+			print '<td>' . $row['start'] . '</td>';
+			print '<td>' . date("Y-m-d G:i:s", $row['lastsent']+$row['sendinterval']) . '</td>';
+			print '<td>' . $row['email'] . '</td>';
+			print '<td>' . ($row['enabled'] == 'on' ? "<font color=green><b>Yes</b></font>" :  "<font color=red><b>No</b></font>" ). '</td>';
+			print '<td style="' . get_checkbox_style() . '" width="1%" align="right">';
+			print '<input type="checkbox" style="margin: 0px;" name="chk_' . $row["id"] . '" title="' . $row["name"] . '"></td>';
+			print "</tr>";
+		}
 	}
 	html_end_box(false);
 	draw_actions_dropdown($ds_actions);
