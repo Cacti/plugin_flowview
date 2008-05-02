@@ -348,7 +348,7 @@ if (myDiv.addEventListener){
 
 </script>
 
-<?
+<?php
 
 
 
@@ -356,8 +356,7 @@ if (myDiv.addEventListener){
 }
 
 function show_schedules () {
-	global $action, $sendinterval_arr;
-	global $colors, $config, $ds_actions;
+	global $sendinterval_arr, $colors, $config, $ds_actions;
 
 	load_current_session_value("page", "sess_flowview_schedules_current_page", "1");
 	$num_rows = 30;
@@ -391,7 +390,6 @@ function show_schedules () {
 	print $nav;
 	html_header_checkbox(array('Query', 'Interval', 'Start Date', 'Next Send', 'Email', 'Enabled'));
 
-	$c=0;
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
