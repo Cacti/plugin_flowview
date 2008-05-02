@@ -32,7 +32,7 @@ ini_set("memory_limit", "256M");
 
 flowview_display_form();
 
-if (isset($_POST['action']) && $_POST['action'] == 'view') {
+if (isset($_POST['action']) && $_POST['action'] == 'view' && !isset($_REQUEST['action2_x'])) {
 	flowview_display_report();
 }
 include("./include/bottom_footer.php");
@@ -104,7 +104,7 @@ function flowview_display_form() {
 
 	print '<br><br><center>';
 	display_tabs ();
-	html_start_box("<strong>Flow Viewer</strong><a href='device_schedules.php' align=right> <font color=white><b>Schedules</b></font></a>", "80%", $colors["header"], "1", "center", "");
+	html_start_box("<strong>Flow Viewer</strong>", "80%", $colors["header"], "1", "center", "");
 	print "<tr><td><table width='100%'>";
 
 	?>
@@ -142,7 +142,7 @@ function flowview_display_form() {
 	<tr><td colspan=9><HR size=2></td></tr>
 	<tr><td colspan=9>
 	<input type='hidden' name='action' value='view'>
-	<CENTER><input type=image name=action src='<?php echo $config['url_path']; ?>images/button_view.gif' value='view'>&nbsp;<a href='<?php echo $config['url_path']; ?>plugins/flowview/flowview.php'><img src='<?php echo $config['url_path']; ?>images/button_clear.gif' border=0></a>&nbsp;<input type=image name=action src='<?php echo $config['url_path']; ?>images/button_save.gif' value='save'>
+	<CENTER><input type=image name=action src='<?php echo $config['url_path']; ?>images/button_view.gif' value='view'>&nbsp;<a href='<?php echo $config['url_path']; ?>plugins/flowview/flowview.php'><img src='<?php echo $config['url_path']; ?>images/button_clear.gif' border=0></a>&nbsp;<input type=image name=action2 src='<?php echo $config['url_path']; ?>images/button_save.gif' value='save'>
 
 	</CENTER></td></tr>
 
@@ -150,8 +150,7 @@ function flowview_display_form() {
 	print "</table></td></tr>";
 	html_end_box();
 
-
-	if ($action == 'save' && isset($_POST['queryname']) && $_POST['queryname'] != '') {
+	if (isset($_REQUEST['action2_x']) && isset($_POST['queryname']) && $_POST['queryname'] != '') {
 		$queryname = $_POST['queryname'];
 		$queryname = form_input_validate($queryname, "queryname", "", false, 3);
 		$sql = "INSERT INTO `plugin_flowview_queries` (`name` , `device` , `startdate` , `starttime` , `enddate` , `endtime` , `tosfields` , `tcpflags` , `protocols`, `sourceip` , `sourceport` , `sourceinterface` , `sourceas` , `destip` , `destport` , `destinterface` , `destas` , `statistics` , `printed` , `includeif` , `sortfield` , `cutofflines` , `cutoffoctets` , `resolve` )
@@ -159,7 +158,7 @@ function flowview_display_form() {
 			'$queryname', '$device', '$start_date', '$start_time', '$end_date', '$end_time', '$tos_fields', '$tcp_flags', '$protocols', '$source_address', '$source_port', '$source_if', '$source_as', '$dest_address', '$dest_port', '$dest_if', '$dest_as', $stat_report, $print_report, $flow_select, $sort_field, $cutoff_lines, '$cutoff_octets', '$resolve_addresses')";
 		db_execute($sql);
 		echo "<center>Query '<b>$queryname</b>' has been saved.<center>";
-	} else if ($action == 'save' && isset($_POST['query']) && $_POST['query'] != '') {
+	} else if (isset($_REQUEST['action2_x']) && isset($_POST['query']) && $_POST['query'] != '') {
 		$queryname = $_POST['query'];
 		input_validate_input_number($queryname);
 		$sql = "UPDATE `plugin_flowview_queries` set `device` = '$device', `startdate` = '$start_date', `starttime` = '$start_time', `enddate` = '$end_date', `endtime` = '$end_time', 
@@ -168,7 +167,7 @@ function flowview_display_form() {
 			 WHERE `id` = $queryname";
 		db_execute($sql);
 		echo "<center>Query has been updated.<center>";
-	} else if ($action == 'save') {
+	} else if (isset($_REQUEST['action2_x'])) {
 		print '<br><br>';
 		html_start_box("<strong></strong>", "30%", $colors["header"], "1", "center", "");
 		print '<tr><td><b>Query Name</b>:</td><td>';
