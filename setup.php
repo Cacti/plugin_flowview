@@ -32,7 +32,7 @@ function plugin_init_flowview() {
 
 function flowview_version () {
 	return array( 'name' 	=> 'flowview',
-			'version' 	=> '0.5.1',
+			'version' 	=> '0.5.2',
 			'longname'	=> 'FlowView',
 			'author'	=> 'Jimmy Conner',
 			'homepage'	=> 'http://cactiusers.org',
@@ -183,7 +183,7 @@ function flowview_setup_table () {
 				  expire int(3) NOT NULL default '7',
 				  compression int(1) NOT NULL default '0',
 				  PRIMARY KEY  (id),
-				  KEY folder (folder),
+				  KEY folder (folder)
 				) TYPE=MyISAM;";
 		$sql[] = "INSERT INTO plugin_flowview_devices (name, folder, port) VALUES ('Default', 'Router', 2055)";
 	}
