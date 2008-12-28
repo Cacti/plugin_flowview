@@ -399,20 +399,25 @@ function show_devices () {
 
 	$c=0;
 	$i=0;
-	foreach ($result as $row) {
+	if (count($result)) {
+		foreach ($result as $row) {
+			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+			print '<td><a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
+			print '<td>' . $row['folder'] . '</td>';
+			print '<td>' . $nesting_arr[$row['nesting']] . '</td>';
+			print '<td>' . $row['allowfrom'] . '</td>';
+			print '<td>' . $row['port'] . '</td>';
+			print '<td>' . $version_arr[$row['version']] . '</td>';
+			print '<td>' . $row['compression'] . '</td>';
+			print '<td>' . $rotation_arr[$row['rotation']] . '</td>';
+			print '<td>' . $expire_arr[$row['expire']] . '</td>';
+			print '<td style="' . get_checkbox_style() . '" width="1%" align="right">';
+			print '<input type="checkbox" style="margin: 0px;" name="chk_' . $row["id"] . '" title="' . $row["name"] . '"></td>';
+			print "</tr>";
+		}
+	} else {
 		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-		print '<td><a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
-		print '<td>' . $row['folder'] . '</td>';
-		print '<td>' . $nesting_arr[$row['nesting']] . '</td>';
-		print '<td>' . $row['allowfrom'] . '</td>';
-		print '<td>' . $row['port'] . '</td>';
-		print '<td>' . $version_arr[$row['version']] . '</td>';
-		print '<td>' . $row['compression'] . '</td>';
-		print '<td>' . $rotation_arr[$row['rotation']] . '</td>';
-		print '<td>' . $expire_arr[$row['expire']] . '</td>';
-		print '<td style="' . get_checkbox_style() . '" width="1%" align="right">';
-		print '<input type="checkbox" style="margin: 0px;" name="chk_' . $row["id"] . '" title="' . $row["name"] . '"></td>';
-		print "</tr>";
+		print '<td colspan=10><center>No Devices</center></td></tr>';
 	}
 	html_end_box(false);
 	draw_actions_dropdown($ds_actions);
