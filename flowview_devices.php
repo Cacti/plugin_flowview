@@ -55,7 +55,7 @@ $rotation_arr = array(
 			287 => '5 Minutes',
 			144 => '10 Minutes',
 			95 => '15 Minutes',
-			
+
 			);
 $version_arr = array(
 			1 => 'NetFlow version 1',
@@ -207,7 +207,7 @@ switch ($action) {
 
 function display_tabs () {
 	/* draw the categories tabs on the top of the page */
-	print "<table class='tabs' width='98%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
 	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Viewer') * 9) . "' align='center' class='tab'>
 			<span class='textHeader'><a href='flowview.php'>Viewer</a></span>
 			</td>\n
@@ -350,7 +350,7 @@ function edit_devices () {
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>Device:</strong> $header_label", "98%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Device:</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
 		"fields" => inject_form_variables($device_edit, $device)
@@ -375,7 +375,7 @@ function show_devices () {
 	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices");
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_devices.php?");
 
-	html_start_box("", "98%", $colors["header"], "4", "center", "");
+	html_start_box("", "100%", $colors["header"], "4", "center", "");
 	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
 			<td colspan='10'>
 				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
