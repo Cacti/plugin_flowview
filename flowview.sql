@@ -19,7 +19,7 @@ CREATE TABLE plugin_flowview_devices (
 				  compression int(1) NOT NULL default '0',
 				  PRIMARY KEY  (id),
 				  KEY folder (folder)
-				) TYPE=MyISAM;
+				) ENGINE=MyISAM;
 
 INSERT INTO plugin_flowview_devices (name, folder, port) VALUES ('Default', 'Router', 2055);
 
@@ -51,7 +51,7 @@ CREATE TABLE `plugin_flowview_queries` (
 				  `resolve` varchar(2) NOT NULL,
 				  PRIMARY KEY  (`id`),
 				  KEY `name` (`name`)
-				) TYPE=MyISAM;
+				) ENGINE=MyISAM;
 
 CREATE TABLE `plugin_flowview_schedules` (
   `id` int(12) NOT NULL auto_increment,
@@ -63,5 +63,5 @@ CREATE TABLE `plugin_flowview_schedules` (
   `savedquery` int(12) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `savedquery` (`savedquery`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
