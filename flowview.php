@@ -103,7 +103,7 @@ function flowview_display_form() {
 	print '<form action="' . $config['url_path'] . 'plugins/flowview/flowview.php" method=POST name=flowview>';
 
 	display_tabs ();
-	html_start_box("<strong>Flow Viewer</strong>", "100%", $colors["header"], "1", "center", "");
+	html_start_box("<strong>Flow Viewer</strong>", "100%", $colors["header"], "3", "center", "");
 	print "<tr><td><table width='100%'>";
 
 	?>
@@ -117,10 +117,10 @@ function flowview_display_form() {
 	<tr><td><b>End Date</b>:</td><td><input type=text size=10 name=end_date value='<?php echo $end_date; ?>'></td><td><b>End Time:</td><td><input type=text size=8 name=end_time value='<?php echo $end_time; ?>'>  </b></td><td><b>TCP Flags:</td><td><input type=text size=10 name=tcp_flags  value='<?php echo $tcp_flags; ?>'></td><td><b>Protocols</b>:</td><td><?php draw_edit_control("protocols", $ip_protocol_field); ?></td></tr>
 	<tr><td><b>Source IP</b>:</td><td><input type=text size=19 name=source_address  value='<?php echo $source_address; ?>'></td><td><b>Source Port</b>:</td><td><input type=text size=5 name=source_port  value='<?php echo $source_port; ?>'></td><td><b>Source Interface</b>:</td><td><input type=text size=2 name=source_if  value='<?php echo $source_if; ?>'></td><td><b>Source AS</b>:</td><td><input type=text size=6 name=source_as  value='<?php echo $source_as; ?>'></td></tr>
 	<tr><td><b>Dest IP</b>:</td><td><input type=text size=19 name=dest_address  value='<?php echo $dest_address; ?>'></td><td><b>Dest Port</b>:</td><td><input type=text size=5 name=dest_port  value='<?php echo $dest_port; ?>'></td><td><b>Dest Interface</b>:</td><td><input type=text size=2 name=dest_if  value='<?php echo $dest_if; ?>'></td><td><b>Dest AS</b>:</td><td><input type=text size=6 name=dest_as  value='<?php echo $dest_as; ?>'></td></tr>
-
-	<tr><td colspan=9><center>Note: Multiple field entries, separated by commas, are permitted in the fields above.<br>
-	A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)<b></center><HR size=2></td></tr>
-	<tr><td colspan=2><b>Reporting Parameters</b>:</td></tr>
+	<tr><td colspan=9><hr size=2>Note: Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will
+	negate an entry (e.g. -80 for Port, would mean any Port but 80)<b></center><HR size=2></td></tr></table>
+	<?php html_end_box(false);
+	html_start_box("<strong>Reporting Parameters</strong>", "100%", $colors["header"], "3", "center", "");?>
 	<tr><td><b>Statistics</b>:</td><td colspan=2>
 	<?php draw_edit_control("stat_report", $stat_report_field); ?>
 	</td><td><b>Printed</b>:</td><td colspan=2>
