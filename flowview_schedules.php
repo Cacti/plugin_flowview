@@ -191,7 +191,7 @@ function actions_schedules () {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one schedule.</span></td></tr>\n";
 		$save_html = "";
 	}else{
-		$save_html = "<input type='image' src='" . $config['url_path'] . "images/button_yes.gif' alt='Save' align='absmiddle'>";
+		$save_html = "<input type='submit' value='Save'>";
 	}
 
 	print "	<tr>
@@ -199,7 +199,7 @@ function actions_schedules () {
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<a href='flowview_schedules.php'><img src='" . $config['url_path'] . "images/button_no.gif' alt='Cancel' align='absmiddle' border='0'></a>
+				<input type='button' onClick='javascript:document.location=\"flowview_schedules.php\"' value='Cancel'>
 				$save_html
 			</td>
 		</tr>
@@ -369,23 +369,38 @@ function show_schedules () {
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_schedules.php?");
 
 	html_start_box("", "100%", $colors["header"], "4", "center", "");
-	$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-			<td colspan='10'>
-				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-					<tr>
-						<td align='left' class='textHeaderDark'>
-							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-						</td>\n
-						<td align='center' class='textHeaderDark'>
-							Showing Rows " . (($num_rows*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $num_rows) || ($total_rows < ($num_rows*$_REQUEST["page"]))) ? $total_rows : ($num_rows*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-						</td>\n
-						<td align='right' class='textHeaderDark'>
-							<strong>"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-						</td>\n
-					</tr>
-				</table>
-			</td>
-		</tr>\n";
+
+	if ($total_rows > 0) {
+		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+				<td colspan='10'>
+					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+						<tr>
+							<td align='left' class='textHeaderDark'>
+								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+							</td>\n
+							<td align='center' class='textHeaderDark'>
+								Showing Rows " . (($num_rows*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $num_rows) || ($total_rows < ($num_rows*$_REQUEST["page"]))) ? $total_rows : ($num_rows*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+							</td>\n
+							<td align='right' class='textHeaderDark'>
+								<strong>"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+							</td>\n
+						</tr>
+					</table>
+				</td>
+			</tr>\n";
+	}else{
+		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
+				<td colspan='10'>
+					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+						<tr>
+							<td align='center' class='textHeaderDark'>
+								No Rows Found
+							</td>\n
+						</tr>
+					</table>
+				</td>
+			</tr>\n";
+	}
 
 	print $nav;
 	html_header_checkbox(array('Query', 'Interval', 'Start Date', 'Next Send', 'Email', 'Enabled'));
@@ -408,7 +423,7 @@ function show_schedules () {
 	html_end_box(false);
 	draw_actions_dropdown($ds_actions);
 
-	print "&nbsp;&nbsp;&nbsp;<a href='flowview_schedules.php?action=edit'><img border=0 src='" . $config['url_path'] . "images/button_add.gif'></a>";
+	print "&nbsp;&nbsp;&nbsp;<input type='button' onClick='javascript:document.location=\"flowview_schedules.php?action=edit\"' value='Add'>";
 
 }
 

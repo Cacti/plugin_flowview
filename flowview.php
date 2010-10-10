@@ -39,7 +39,7 @@ include("./include/bottom_footer.php");
 
 function display_tabs () {
 	/* draw the categories tabs on the top of the page */
-	print "<table class='tabs' width='80%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
 	print "<td bgcolor='silver' nowrap='nowrap' width='" . (strlen('Viewer') * 9) . "' align='center' class='tab'>
 			<span class='textHeader'><a href='flowview.php'>Viewer</a></span>
 			</td>\n
@@ -82,7 +82,7 @@ function flowview_display_report() {
 		echo $filter;
 	}
 
-	print '</center></td></tr>';
+	print '</td></tr>';
 	print "</table></td></tr>";
 	html_end_box();
 	?>
@@ -102,9 +102,8 @@ function flowview_display_form() {
 
 	print '<form action="' . $config['url_path'] . 'plugins/flowview/flowview.php" method=POST name=flowview>';
 
-	print '<br><br><center>';
 	display_tabs ();
-	html_start_box("<strong>Flow Viewer</strong>", "80%", $colors["header"], "1", "center", "");
+	html_start_box("<strong>Flow Viewer</strong>", "100%", $colors["header"], "1", "center", "");
 	print "<tr><td><table width='100%'>";
 
 	?>
@@ -142,7 +141,7 @@ function flowview_display_form() {
 	<tr><td colspan=9><HR size=2></td></tr>
 	<tr><td colspan=9>
 	<input type='hidden' name='action' value='view'>
-	<CENTER><input type=image name=action src='<?php echo $config['url_path']; ?>images/button_view.gif' value='view'>&nbsp;<a href='<?php echo $config['url_path']; ?>plugins/flowview/flowview.php'><img src='<?php echo $config['url_path']; ?>images/button_clear.gif' border=0></a>&nbsp;<input type=image name=action2 src='<?php echo $config['url_path']; ?>images/button_save.gif' value='save'>
+	<CENTER><input type='submit' name='action_x' value='View'>&nbsp;<input type='button' onClick='javascript:document.location="<?php echo $config['url_path']; ?>plugins/flowview/flowview.php"' value='Clear'>&nbsp;<input type='submit' name='action2_x' value='Save'>
 
 	</CENTER></td></tr>
 
@@ -161,7 +160,7 @@ function flowview_display_form() {
 	} else if (isset($_REQUEST['action2_x']) && isset($_POST['query']) && $_POST['query'] != '') {
 		$queryname = $_POST['query'];
 		input_validate_input_number($queryname);
-		$sql = "UPDATE `plugin_flowview_queries` set `device` = '$device', `startdate` = '$start_date', `starttime` = '$start_time', `enddate` = '$end_date', `endtime` = '$end_time', 
+		$sql = "UPDATE `plugin_flowview_queries` set `device` = '$device', `startdate` = '$start_date', `starttime` = '$start_time', `enddate` = '$end_date', `endtime` = '$end_time',
 			 `tosfields` = '$tos_fields', `tcpflags` = '$tcp_flags', `protocols` = '$protocols', `sourceip` = '$source_address', `sourceport` = '$source_port', `sourceinterface` = '$source_if', `sourceas` = '$source_as', `destip` = '$dest_address',
 			 `destport` = '$dest_port', `destinterface` = '$dest_if', `destas` = '$dest_as', `statistics` = $stat_report, `printed` = $print_report, `includeif` = $flow_select, `sortfield` = $sort_field, `cutofflines` = $cutoff_lines, `cutoffoctets` = '$cutoff_octets', `resolve` = '$resolve_addresses'
 			 WHERE `id` = $queryname";
@@ -172,7 +171,7 @@ function flowview_display_form() {
 		html_start_box("<strong></strong>", "30%", $colors["header"], "1", "center", "");
 		print '<tr><td><b>Query Name</b>:</td><td>';
 		draw_edit_control("queryname", $query_newname_field);
-		print "&nbsp;&nbsp;&nbsp;&nbsp;<input type=image name=action src='" . $config['url_path'] . "images/button_save.gif' value='save'>";
+		print "&nbsp;&nbsp;&nbsp;&nbsp;<input type='submit' name='action_x' value='Save'>";
 		print '</td></tr>';
 		html_end_box();
 	}
