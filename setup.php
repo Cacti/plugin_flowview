@@ -102,8 +102,8 @@ function flowview_config_settings () {
 	global $settings, $tabs;
 	$temp = array(
 		"flowview_header" => array(
-		"friendly_name" => "Flow Viewer",
-		"method" => "spacer",
+			"friendly_name" => "Flow Viewer",
+			"method" => "spacer",
 		),
 			"path_flowtools" => array(
 			"friendly_name" => "Flow Tools Binary Path",
@@ -134,7 +134,7 @@ function flowview_config_settings () {
 		$settings["path"] = $temp;
 
 	$tabs["misc"] = "Misc";
-	
+
 	$temp = array(
 		"flowview_header" => array(
 			"friendly_name" => "Flow View",
@@ -240,7 +240,7 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'savedquery', 'type' => 'int(12)', 'NULL' => false);
 	$data['primary'] = 'id';
 	$data['keys'][] = array('name' => 'savedquery', 'columns' => 'savedquery');
-	$data['type'] = 'HEAP';
+	$data['type'] = 'MEMORY';
 	$data['comment'] = 'Plugin Flowview - Scheduling for running and emails of saved queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_schedules', $data);
 }
