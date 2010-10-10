@@ -240,7 +240,7 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'savedquery', 'type' => 'int(12)', 'NULL' => false);
 	$data['primary'] = 'id';
 	$data['keys'][] = array('name' => 'savedquery', 'columns' => 'savedquery');
-	$data['type'] = 'MEMORY';
+	$data['type'] = 'MyISAM';
 	$data['comment'] = 'Plugin Flowview - Scheduling for running and emails of saved queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_schedules', $data);
 }
