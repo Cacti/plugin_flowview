@@ -52,8 +52,6 @@ function createfilter () {
 	global $config;
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 
-	flowview_setup_table ();
-
 	$filter = '';
 
 	$flowbin = read_config_option('path_flowtools');

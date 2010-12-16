@@ -29,6 +29,8 @@ function plugin_flowview_install () {
 	api_plugin_register_hook('flowview', 'poller_bottom', 'flowview_poller_bottom', 'setup.php');
 
 	api_plugin_register_realm('flowview', 'flowview.php,flowview_devices.php,flowview_schedules.php', 'Flow Viewer', 1);
+
+	flowview_setup_table();
 }
 
 function plugin_flowview_uninstall () {
@@ -56,11 +58,11 @@ function flowview_check_upgrade () {
 	$current = $current['version'];
 	$old = read_config_option('plugin_flowview_version');
 	if ($current != $old)
-		flowview_setup_table ();
+		flowview_setup_table();
+
 	// Set the new version
 	db_execute("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', '$current')");
 }
-
 
 function plugin_flowview_version () {
 	return array(
@@ -157,7 +159,6 @@ function flowview_config_settings () {
 function flowview_poller_bottom () {
 	global $config;
 	include_once($config["library_path"] . "/database.php");
-	flowview_setup_table ();
 	$time = time() - 3600;
 	db_execute("delete from plugin_flowview_dnscache where time > 0 and time < $time");
 
