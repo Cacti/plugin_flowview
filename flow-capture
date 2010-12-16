@@ -7,7 +7,6 @@
 
 $cacti_base = '/var/www/html';
 
-
 include_once($cacti_base . '/include/global.php');
 
 if (isset($_SERVER['argv'][1])) {

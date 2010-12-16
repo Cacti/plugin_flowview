@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008 The Cacti Group                                      |
+ | Copyright (C) 2008-2010 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -40,9 +40,9 @@
 #  dest_ports           Constrain flows examined to these dest. ports
 #  dest_ifs             Constrain flows examined to these output interfaces
 #  dest_ases            Constrain flows examined to these dest. ASes
-#  tos_fields           Constrain flows examined by specified TOS field values 
-#  tcp_flags            Constrain flows examined by specified TCP flag values 
-#  protocols            Constrain flows examined to these protocols 
+#  tos_fields           Constrain flows examined by specified TOS field values
+#  tcp_flags            Constrain flows examined by specified TCP flag values
+#  protocols            Constrain flows examined to these protocols
 #  print_report         Select from these various report options
 #  stat_report          Select from these various statistics options
 #  cutoff_lines         Number of report lines to print out

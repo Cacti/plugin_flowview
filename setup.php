@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008 The Cacti Group                                      |
+ | Copyright (C) 2008-2010 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -63,14 +63,15 @@ function flowview_check_upgrade () {
 
 
 function plugin_flowview_version () {
-	return array( 'name' 	=> 'flowview',
-			'version' 	=> '0.6',
-			'longname'	=> 'FlowView',
-			'author'	=> 'Jimmy Conner',
-			'homepage'	=> 'http://cactiusers.org',
-			'email'	=> 'jimmy@sqmail.org',
-			'url'		=> 'http://cactiusers.org/cacti/versions.php'
-			);
+	return array(
+		'name'     => 'flowview',
+		'version'  => '0.7',
+		'longname' => 'FlowView',
+		'author'   => 'Jimmy Conner',
+		'homepage' => 'http://cactiusers.org',
+		'email'    => 'jimmy@sqmail.org',
+		'url'      => 'http://cactiusers.org/cacti/versions.php'
+	);
 }
 
 function flowview_config_arrays () {
@@ -80,8 +81,8 @@ function flowview_config_arrays () {
 	unset($menu["Utilities"]['logout.php']);
 	$menu["Utilities"]['plugins/flowview/flowview.php'] = "Flow Viewer";
 	$menu["Utilities"]['logout.php'] = $temp;
-
 }
+
 function flowview_draw_navigation_text ($nav) {
 	$nav["flowview.php:"] = array("title" => "Flow Viewer", "mapping" => "index.php:", "url" => "flowview.php", "level" => "1");
 	$nav["flowview.php:view"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "2");
@@ -105,21 +106,21 @@ function flowview_config_settings () {
 			"friendly_name" => "Flow Viewer",
 			"method" => "spacer",
 		),
-			"path_flowtools" => array(
+		"path_flowtools" => array(
 			"friendly_name" => "Flow Tools Binary Path",
 			"description" => "The path to your flow-cat, flow=filter, and flow-stat binary.",
 			"method" => "dirpath",
 			"max_length" => 255,
 			'default' => '/usr/bin/'
 		),
-			"path_flowtools_workdir" => array(
+		"path_flowtools_workdir" => array(
 			"friendly_name" => "Flow Tools Work Directory",
 			"description" => "This is the path to a temporary directory to do work.",
 			"method" => "dirpath",
 			"max_length" => 255,
 			'default' => '/tmp/'
 		),
-			"path_flows_dir" => array(
+		"path_flows_dir" => array(
 			"friendly_name" => "Flows Directory",
 			"description" => "This is the path to base the path of your flow folder structure.",
 			"method" => "dirpath",
@@ -161,7 +162,7 @@ function flowview_poller_bottom () {
 	db_execute("delete from plugin_flowview_dnscache where time > 0 and time < $time");
 
 	$t = time();
-	$schedules = db_fetch_assoc("SELECT * FROM plugin_flowview_schedules WHERE enabled = 'on' AND ($t - sendinterval > lastsent)");
+	$schedules = db_fetch_assoc("SELECT * FROM plugin_flowview_schedules WHERE enabled='on' AND ($t - sendinterval > lastsent)");
 	if (!empty($schedules)) {
 		$command_string = trim(read_config_option("path_php_binary"));
 		if (trim($command_string) == '')
@@ -176,9 +177,9 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'ip', 'type' => 'varchar(32)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'host', 'type' => 'varchar(255)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'time', 'type' => 'int(20)', 'NULL' => false, 'default' => '0');
-	$data['keys'][] = array('name' => 'ip', 'columns' => 'ip');
-	$data['type'] = 'HEAP';
-	$data['comment'] = 'Plugin Flowview - DNS Cache to help speed things up';
+	$data['keys'][]    = array('name' => 'ip', 'columns' => 'ip');
+	$data['type']      = 'MEMORY';
+	$data['comment']   = 'Plugin Flowview - DNS Cache to help speed things up';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_dnscache', $data);
 
 	$data = array();
@@ -192,10 +193,10 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'rotation', 'type' => 'int(12)', 'NULL' => false, 'default' => '1439');
 	$data['columns'][] = array('name' => 'expire', 'type' => 'int(3)', 'NULL' => false, 'default' => '7');
 	$data['columns'][] = array('name' => 'compression', 'type' => 'int(1)', 'NULL' => false, 'default' => '0');
-	$data['primary'] = 'id';
-	$data['keys'][] = array('name' => 'folder', 'columns' => 'folder');
-	$data['type'] = 'HEAP';
-	$data['comment'] = 'Plugin Flowview - List of Devices to collect flows from';
+	$data['primary']   = 'id';
+	$data['keys'][]    = array('name' => 'folder', 'columns' => 'folder');
+	$data['type']      = 'MEMORY';
+	$data['comment']   = 'Plugin Flowview - List of Devices to collect flows from';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_devices', $data);
 
 	$data = array();
@@ -224,10 +225,10 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'cutofflines', 'type' => 'int(4)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'curoffoctets', 'type' => 'varchar(8)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'resolve', 'type' => 'varchar(2)', 'NULL' => false);
-	$data['primary'] = 'id';
-	$data['keys'][] = array('name' => 'name', 'columns' => 'name');
-	$data['type'] = 'MyISAM';
-	$data['comment'] = 'Plugin Flowview - List of Saved Flow Queries';
+	$data['primary']   = 'id';
+	$data['keys'][]    = array('name' => 'name', 'columns' => 'name');
+	$data['type']      = 'MyISAM';
+	$data['comment']   = 'Plugin Flowview - List of Saved Flow Queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_queries', $data);
 
 	$data = array();
@@ -238,12 +239,9 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'start', 'type' => 'datetime', 'NULL' => false);
 	$data['columns'][] = array('name' => 'email', 'type' => 'text', 'NULL' => false);
 	$data['columns'][] = array('name' => 'savedquery', 'type' => 'int(12)', 'NULL' => false);
-	$data['primary'] = 'id';
-	$data['keys'][] = array('name' => 'savedquery', 'columns' => 'savedquery');
-	$data['type'] = 'MyISAM';
-	$data['comment'] = 'Plugin Flowview - Scheduling for running and emails of saved queries';
+	$data['primary']   = 'id';
+	$data['keys'][]    = array('name' => 'savedquery', 'columns' => 'savedquery');
+	$data['type']      = 'MyISAM';
+	$data['comment']   = 'Plugin Flowview - Scheduling for running and emails of saved queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_schedules', $data);
 }
-
-
-

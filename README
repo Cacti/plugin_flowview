@@ -4,7 +4,7 @@
     Contact ........ jimmy@sqmail.org
     Home Site ...... http://cactiusers.org
     Program ........ Flowviewer
-    Version ........ 0.6
+    Version ........ 0.7
     Purpose ........ A simple Viewer for your Netflow flows
 
 *******************************************************************************/
@@ -42,30 +42,32 @@
 
 ----[ Changelog
 
-	--- 0.6 ---
-		Now only PA 2.0 compatible
-		Fix for IE and saving Queries
-		Fix for Error when no devices
+    --- 0.7 ---
+	compat: Making compatible with 0.8.7g
 
-	--- 0.5 ---
-		Add flow-tools replacement startup script to allow launching of multiple processes based upon devices added
-		Fix issue with start and stop times close to midnight not loading the proper days data
-		Add Saved Queries
-		Change Sort field to be drop downs with column names
-		Add ability to schedule and email out Netflow Scans
+    --- 0.6 ---
+    compat: Now only PA 2.0 compatible
+    bug: Fix for IE and saving Queries
+    bug: Fix for Error when no devices
+
+    --- 0.5 ---
+    feature: Add flow-tools replacement startup script to allow launching of multiple processes based upon devices added
+    feature: Add Saved Queries
+    feature: Change Sort field to be drop downs with column names
+    feature: Add ability to schedule and email out Netflow Scans
+    bug: Fix issue with start and stop times close to midnight not loading the proper days data
 				
-	--- 0.4 ---
-		Minor fix for when using flow path "/"
-		Fix Cacti 0.8.7 Compatibility
+    --- 0.4 ---
+    bug: Minor fix for when using flow path "/"
+    bug: Fix Cacti 0.8.7 Compatibility
 
-	--- 0.3 ---
-		Add time support for relative times (NOW, -1 HOUR, -2 DAYS, -10 MINTUES)
-			Must leave Date blank for these to work properly
-		Add device name to path if present
+    --- 0.3 ---
+    feature: Add time support for relative times (NOW, -1 HOUR, -2 DAYS, -10 MINTUES) Must leave Date blank for these to work properly
+    feature: Add device name to path if present
 
-	--- 0.2 ---
-		Add DNS Support
+    --- 0.2 ---
+    feature: Add DNS Support
 
-	--- 0.1 ---
-		Initial release
+    --- 0.1 ---
+    Initial release
 

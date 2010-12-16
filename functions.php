@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008 The Cacti Group                                      |
+ | Copyright (C) 2008-2010 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -432,7 +432,7 @@ function flowview_create_tos_field_filter ($tos_fields) {
 	if ($excluded)
 		$filter .= "   default permit\n";
 	else
-		$filter .= "   default deny\n";	
+		$filter .= "   default deny\n";
 	return $filter;
 }
 
@@ -462,7 +462,7 @@ function flowview_create_tcp_flag_filter ($tcp_flags) {
 	if ($excluded)
 		$filter .= "   default permit\n";
 	else
-		$filter .= "   default deny\n";	
+		$filter .= "   default deny\n";
 	return $filter;
 }
 
@@ -486,7 +486,7 @@ function flowview_create_protocol_filter ($protocols) {
 	if ($excluded)
 		$filter .= "   default permit\n";
 	else
-		$filter .= "   default deny\n";	
+		$filter .= "   default deny\n";
 	return $filter;
 }
 
@@ -510,7 +510,7 @@ function flowview_create_as_filter ($as, $type) {
 	if ($excluded)
 		$filter .= "   default permit\n";
 	else
-		$filter .= "   default deny\n";	
+		$filter .= "   default deny\n";
 	return $filter;
 }
 
@@ -534,7 +534,7 @@ function flowview_create_port_filter ($port, $type) {
 	if ($excluded)
 		$filter .= "   default permit\n";
 	else
-		$filter .= "   default deny\n";	
+		$filter .= "   default deny\n";
 	return $filter;
 }
 
@@ -558,7 +558,7 @@ function flowview_create_if_filter ($source_if, $type) {
 	if ($excluded)
 		$filter .= "   default permit\n";
 	else
-		$filter .= "   default deny\n";	
+		$filter .= "   default deny\n";
 	return $filter;
 }
 
@@ -919,7 +919,7 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 	}
 
 	/* more error handling */
-	if ($response == "") { 
+	if ($response == "") {
 		db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
 		return $ip;
 	}
