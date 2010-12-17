@@ -22,20 +22,95 @@
  +-------------------------------------------------------------------------+
 */
 
+function flowview_display_report() {
+	global $config, $colors;
+
+	include($config['base_path'] . '/plugins/flowview/variables.php');
+	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
+	$rname = '';
+	if ($stat_report > 0)
+		$rname = $stat_report_array[$stat_report];
+	if ($print_report > 0)
+		$rname = $print_report_array[$print_report];
+
+	if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'current') {
+		$current = $_SESSION['flowview_current_flow'];
+	}else{
+		$current = '';
+		$error = flowview_check_fields();
+		if ($error != '') {
+			display_tabs();
+			print "<font color=red><strong>$error</strong></font>";
+			html_end_box();
+			return;
+		}
+	}
+
+	$filter = createfilter($current);
+	display_tabs();
+	html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
+	echo $filter;
+	html_end_box();
+
+	?>
+	<script language="JavaScript">
+	function Sort(s) {
+		document.flowview.sort_field.value = s;
+	}
+	</script>
+	<?php
+}
+
+function display_tabs () {
+	/* draw the categories tabs on the top of the page */
+
+	if (isset($_REQUEST['tab'])) {
+		$_SESSION['flowview_current_tab'] = $_REQUEST['tab'];
+	}elseif (isset($_SESSION['flowview_current_tab'])) {
+		/* do nothing */
+	}else{
+		$_SESSION['flowview_current_tab'] = 'filters';
+	}
+	$ct = $_SESSION['flowview_current_tab'];
+
+	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
+	print "<td bgcolor='" . ($ct == 'filters' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Filters') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview.php?tab=viewer'>Filters</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td bgcolor='" . ($ct == 'listeners' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Listeners') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview_devices.php?tab=listeners'>Listeners</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	print "<td bgcolor='" . ($ct == 'sched' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
+			<span class='textHeader'><a href='flowview_schedules.php?tab=sched'>Schedules</a></span>
+			</td>\n
+			<td width='1'></td>\n";
+	if (isset($_SESSION['flowview_current_flow'])) {
+		print "<td bgcolor='" . ($ct == 'current' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Current Flow') * 9) . "' align='center' class='tab'>
+				<span class='textHeader'><a href='flowview.php?tab=current'>Current Flow</a></span>
+				</td>\n
+				<td width='1'></td>\n";
+	}
+	print "<td></td>\n</tr></table>\n";
+}
 
 function plugin_flowview_run_schedule($id) {
 	global $config;
 
 	$schedule = db_fetch_row("SELECT * FROM plugin_flowview_schedules WHERE id = $id");
-	$query = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id = " . $schedule['savedquery']);
+	$query    = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id = " . $schedule['savedquery']);
 
 	$fromname = read_config_option('settings_from_name');
-	if (strlen($fromname) < 1)
+	if (strlen($fromname) < 1) {
 		$fromname = 'Cacti Flowview';
+	}
 
-	$from= read_config_option('settings_from_email');
-	if (strlen($from) < 1)
+	$from = read_config_option('settings_from_email');
+	if (strlen($from) < 1) {
 		$from = 'cacti@cactiusers.org';
+	}
 
 	$subject = 'Netflow - ' . $query['name'];
 
@@ -48,95 +123,120 @@ function plugin_flowview_run_schedule($id) {
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
 }
 
-function createfilter () {
+/** creatfilter()
+ *  
+ *  This function creates the NetFlow Report for the UI.  It presents this in a table
+ *  format and returns as a test string to the calling function.
+ */
+function createfilter ($current='') {
 	global $config;
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 
-	$filter = '';
+	if ($current == '') {
+		/* initialize the return string */
+		$filter  = '';
 
-	$flowbin = read_config_option('path_flowtools');
-	if ($flowbin == '')
-		$flowbin = '/usr/bin';
-	if (substr($flowbin, -1 , 1) == '/')
-		$flowbin = substr($flowbin, 0, -1);
-
-	$workdir = read_config_option('path_flowtools_workdir');
-	if ($workdir == '')
-		$workdir = '/tmp';
-	if (substr($workdir, -1 , 1) == '/')
-		$workdir = substr($workdir, 0, -1);
-
-	$pathstructure = '';
-	if ($device != '') {
-		$pathstructure = db_fetch_cell("SELECT nesting FROM plugin_flowview_devices WHERE folder = '$device'");
-	}
-	if ($pathstructure == '')
-		$pathstructure = 0;
-
-	$time = time();
-	$filterfile = "$workdir/FlowViewer_filter_" . time();
-
-	$start = strtotime($start_date . ' ' . $start_time);
-	$end = strtotime($end_date . ' ' . $end_time);
-
-	$flow_cat_command = "$flowbin/flow-cat -t \"" . date("m/d/Y H:i:s", $start) . '" -T "' . date("m/d/Y H:i:s", $end) . '" ';
-	$flow_cat_command .= getfolderpath($pathstructure, $device, $start, $end);
-	$flownfilter_command = "$flowbin/flow-nfilter -f $filterfile -FFlowViewer_filter";
-
-	$flowstat = $flowbin . '/flow-stat';
-	$flowstat_command = '';
-
-	$flow_command = "$flow_cat_command | $flownfilter_command";
-	if ($stat_report != 0) {
-		if ($stat_report == 99) {
-			$flowstat_command = "$flowbin/flow-stat -S" . $sort_field;
-		} else {
-			$flowstat_command = "$flowbin/flow-stat -f" . $stat_report . " -S" . ($sort_field-1);
+		/* get the flow report tool binary location */
+		$flowbin = read_config_option('path_flowtools');
+		if ($flowbin == '') {
+			$flowbin = '/usr/bin';
 		}
-		$flow_command .= " | $flowstat_command";
+		if (substr($flowbin, -1 , 1) == '/') {
+			$flowbin = substr($flowbin, 0, -1);
+		}
+
+		/* get working directory for temporary output */
+		$workdir = read_config_option('path_flowtools_workdir');
+		if ($workdir == '') {
+			$workdir = '/tmp';
+		}
+		if (substr($workdir, -1 , 1) == '/') {
+			$workdir = substr($workdir, 0, -1);
+		}
+
+		/* determine the location for the netflow reports */
+		$pathstructure = '';
+		if ($device != '') {
+			$pathstructure = db_fetch_cell("SELECT nesting FROM plugin_flowview_devices WHERE folder = '$device'");
+		}
+		if ($pathstructure == '') {
+			$pathstructure = 0;
+		}
+
+		/* construct the report command */
+		$time       = time();
+		$filterfile = "$workdir/FlowViewer_filter_" . time();
+	
+		$start = strtotime($start_date . ' ' . $start_time);
+		$end   = strtotime($end_date   . ' ' . $end_time);
+	
+		$flow_cat_command     = "$flowbin/flow-cat -t \"" . date("m/d/Y H:i:s", $start) . '" -T "' . date("m/d/Y H:i:s", $end) . '" ';
+		$flow_cat_command    .= getfolderpath($pathstructure, $device, $start, $end);
+		$flownfilter_command  = "$flowbin/flow-nfilter -f $filterfile -FFlowViewer_filter";
+	
+		$flowstat             = $flowbin . '/flow-stat';
+		$flowstat_command     = '';
+		$flow_command         = "$flow_cat_command | $flownfilter_command";
+	
+		if ($stat_report != 0) {
+			if ($stat_report == 99) {
+				$flowstat_command = "$flowbin/flow-stat -S" . $sort_field;
+			} else {
+				$flowstat_command = "$flowbin/flow-stat -f" . $stat_report . " -S" . ($sort_field-1);
+			}
+			$flow_command .= " | $flowstat_command";
+		}
+		if ($print_report != 0) {
+			$flow_command .= " | $flowbin/flow-print -f" . $print_report;
+		}
+	
+		/* Check to see if the flowtools binaries exists */
+		if (!is_file("$flowbin/flow-cat"))
+			return "Can not find the '<strong>flow-cat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+		if (!is_file("$flowbin/flow-nfilter"))
+			return "Can not find the '<strong>flow-nfilter</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+		if (!is_file("$flowbin/flow-stat"))
+			return "Can not find the '<strong>flow-stat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+		if (!is_file("$flowbin/flow-print"))
+			return "Can not find the '<strong>flow-print</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+	
+		// Create Filters
+		$filter .= flowview_create_ip_filter ($source_address, 'source');
+		$filter .= flowview_create_if_filter ($source_if, 'source');
+		$filter .= flowview_create_port_filter ($source_port, 'source');
+		$filter .= flowview_create_as_filter ($source_as, 'source');
+		$filter .= flowview_create_ip_filter ($dest_address, 'dest');
+		$filter .= flowview_create_if_filter ($dest_if, 'dest');
+		$filter .= flowview_create_port_filter ($dest_port, 'dest');
+		$filter .= flowview_create_as_filter ($dest_as, 'dest');
+		$filter .= flowview_create_protocol_filter ($protocols);
+		$filter .= flowview_create_tcp_flag_filter ($tcp_flags);
+		$filter .= flowview_create_tos_field_filter ($tos_fields);
+		$filter .= flowview_create_time_filter($start, $end);
+		$filter .= flowview_create_flowview_filter();
+	
+		/* Write filters to file */
+		$f = @fopen($filterfile, 'w');
+		if (!$f) {
+			clearstatcache();
+			if (!is_dir($workdir)) {
+				return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
+			}
+
+			return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
+		}
+
+		@fputs($f, $filter);
+		@fclose($f);
+	}else{
+		$flow_command = $current;
 	}
-	if ($print_report != 0) {
-		$flow_command .= " | $flowbin/flow-print -f" . $print_report;
-	}
 
-	// Check to see if the flowtools binaries exists
+	/* prime the UI */
+	$_SESSION['flowview_current_flow'] = $flow_command;
+	$_REQUEST['tab'] = 'current';
 
-	if (!is_file("$flowbin/flow-cat"))
-		return "Can not find the '<strong>flow-cat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
-	if (!is_file("$flowbin/flow-nfilter"))
-		return "Can not find the '<strong>flow-nfilter</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
-	if (!is_file("$flowbin/flow-stat"))
-		return "Can not find the '<strong>flow-stat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
-	if (!is_file("$flowbin/flow-print"))
-		return "Can not find the '<strong>flow-print</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
-
-	// Create Filters
-	$filter .= flowview_create_ip_filter ($source_address, 'source');
-	$filter .= flowview_create_if_filter ($source_if, 'source');
-	$filter .= flowview_create_port_filter ($source_port, 'source');
-	$filter .= flowview_create_as_filter ($source_as, 'source');
-	$filter .= flowview_create_ip_filter ($dest_address, 'dest');
-	$filter .= flowview_create_if_filter ($dest_if, 'dest');
-	$filter .= flowview_create_port_filter ($dest_port, 'dest');
-	$filter .= flowview_create_as_filter ($dest_as, 'dest');
-	$filter .= flowview_create_protocol_filter ($protocols);
-	$filter .= flowview_create_tcp_flag_filter ($tcp_flags);
-	$filter .= flowview_create_tos_field_filter ($tos_fields);
-	$filter .= flowview_create_time_filter($start, $end);
-	$filter .= flowview_create_flowview_filter();
-
-	// Write filters to file
-	$f = @fopen($filterfile, 'w');
-	if (!$f) {
-		clearstatcache();
-		if (!is_dir($workdir))
-			return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
-		return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
-	}
-	@fputs($f, $filter);
-	@fclose($f);
-
-	// Run the command
+	/* Run the command */
 	$output = shell_exec($flow_command);
 	unlink($filterfile);
 
@@ -152,7 +252,8 @@ function createfilter () {
 }
 
 function parsestatoutput($output) {
-	global $config;
+	global $config, $colors;
+
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
@@ -161,11 +262,12 @@ function parsestatoutput($output) {
 
 	$output = explode("\n", $output);
 
-	$o = '<table cellspacing=1 cellpadding=3 border=0 bgcolor="#00438C"><tr class="textHeaderDark" align=center>';
+	$o = '<table width="100%" cellspacing=0 cellpadding=2 border=0 bgcolor="#' . $colors["header"] . '">
+		<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
 
-	$clines = $stat_columns_array[$stat_report][0];
+	$clines     = $stat_columns_array[$stat_report][0];
 	$octect_col = $stat_columns_array[$stat_report][1];
-	$proto_col = $stat_columns_array[$stat_report][3];
+	$proto_col  = $stat_columns_array[$stat_report][3];
 
 	$ip_col = $stat_columns_array[$stat_report][2];
 	$ip_col = explode(',',$ip_col);
@@ -181,7 +283,7 @@ function parsestatoutput($output) {
 		if (isset($_REQUEST['schedule']))
 			$o .= "<td><font color=white><b>$column</b></font></td>";
 		else
-			$o .= "<td><a href='javascript:Sort($x);'><font color=white><b>$column</b></font></a></td>";
+			$o .= "<td align='right'><a class='textSubHeaderDark' href='javascript:Sort($x);'>$column</a></td>";
 		$x++;
 	}
 	$o .= "</tr>\n";

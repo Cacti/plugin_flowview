@@ -43,7 +43,7 @@ $stat_report_array = array(
 	24 => "Source Prefix",
 	25 => "Destination Prefix",
 	26 => "Source/Destination Prefix"
-	);
+);
 
 $print_report_array = array(
 	 0  => "Print Reports",
@@ -57,20 +57,19 @@ $print_report_array = array(
 	 13 => "Destination Prefix Aggregation",
 	 14 => "Prefix Aggregation",
 	 24 => "Full (Catalyst)"
-	);
+);
 
 $flow_select_array = array(
 	  1 => "Any Part in Specified Time Span",
 	  2 => "End Time in Specified Time Span",
 	  3 => "Start Time in Specified Time Span",
 	  4 => "Entirely in Specified Time Span"
-	);
+);
 
 $ip_protocols_array = array(
 	'' => '',
 	6 => 'TCP',
 	17 => 'UDP',
-
 	1 => 'ICMP',
 	2 => 'IGMP',
 	3 => 'GGP',
@@ -93,12 +92,12 @@ $ip_protocols_array = array(
 	89 => 'OSPF',
 	94 => 'IPIP',
 	98 => 'ENCAP',
-	);
+);
 
 $resolve_addresses_array = array (
 	  'Y' => "Yes",
 	  'N' => "No"
-	);
+);
 
 $devices_arr = db_fetch_assoc("SELECT folder, name FROM plugin_flowview_devices ORDER BY name");
 $devices = array();
@@ -117,61 +116,69 @@ if (!empty($queries_arr)) {
 }
 
 $query_newname_field = array("friendly_name" => '',
-		'name' => 'queryname',
-		"method" => "textbox",
-		"max_length" => 255,		"default" => '',
-		"description" => '',
-		"value" => (isset($_POST['queryname']) ? $_POST['queryname'] : ''));
+	'name' => 'queryname',
+	"method" => "textbox",
+	"max_length" => 255,		"default" => '',
+	"description" => '',
+	"value" => (isset($_POST['queryname']) ? $_POST['queryname'] : '')
+);
 
 $query_name_field = array("friendly_name" => '',
-		"method" => "drop_array",
-		"default" => 0,
-		"description" => '',
-		"value" => (isset($_REQUEST['query']) ? $_REQUEST['query'] : 0),
-		"array" => $queries);
+	"method" => "drop_array",
+	"default" => 0,
+	"description" => '',
+	"value" => (isset($_REQUEST['query']) ? $_REQUEST['query'] : 0),
+	"array" => $queries
+);
 
 $device_name_field = array("friendly_name" => '',
-		"method" => "drop_array",
-		"default" => 0,
-		"description" => '',
-		"value" => (isset($_POST['device_name']) ? $_POST['device_name'] : 0),
-		"array" => $devices);
+	"method" => "drop_array",
+	"default" => 0,
+	"description" => '',
+	"value" => (isset($_POST['device_name']) ? $_POST['device_name'] : 0),
+	"array" => $devices
+);
 
 $ip_protocol_field = array("friendly_name" => '',
-		"method" => "drop_array",
-		"default" => 0,
-		"description" => '',
-		"value" => (isset($_POST['protocols']) ? $_POST['protocols'] : ''),
-		"array" => $ip_protocols_array);
+	"method" => "drop_array",
+	"default" => 0,
+	"description" => '',
+	"value" => (isset($_POST['protocols']) ? $_POST['protocols'] : ''),
+	"array" => $ip_protocols_array
+);
 
 $stat_report_field = array("friendly_name" => '',
-		'name' => 'stat_report',
-		"method" => "drop_array",
-		"default" => 10,
-		"description" => '',
-		"value" => (isset($_POST['stat_report']) ? $_POST['stat_report'] : 10),
-		"array" => $stat_report_array);
+	'name' => 'stat_report',
+	"method" => "drop_array",
+	"default" => 10,
+	"description" => '',
+	"value" => (isset($_POST['stat_report']) ? $_POST['stat_report'] : 10),
+	"array" => $stat_report_array
+);
 
 $flow_select_field = array("friendly_name" => '',
-		"method" => "drop_array",
-		"default" => 1,
-		"description" => '',
-		"value" => (isset($_POST['flow_select']) ? $_POST['flow_select'] : 1),
-		"array" => $flow_select_array);
+	"method" => "drop_array",
+	"default" => 1,
+	"description" => '',
+	"value" => (isset($_POST['flow_select']) ? $_POST['flow_select'] : 1),
+	"array" => $flow_select_array
+);
 
 $print_report_field = array("friendly_name" => '',
-		"method" => "drop_array",
-		"default" => 0,
-		"description" => '',
-		"value" => (isset($_POST['print_report']) ? $_POST['print_report'] : 0),
-		"array" => $print_report_array);
+	"method" => "drop_array",
+	"default" => 0,
+	"description" => '',
+	"value" => (isset($_POST['print_report']) ? $_POST['print_report'] : 0),
+	"array" => $print_report_array
+);
 
 $resolve_addresses_field = array("friendly_name" => '',
-		"method" => "drop_array",
-		"default" => 'Y',
-		"description" => '',
-		"value" => (isset($_POST['resolve_addresses']) ? $_POST['resolve_addresses'] : 'Y'),
-		"array" => $resolve_addresses_array);
+	"method" => "drop_array",
+	"default" => 'Y',
+	"description" => '',
+	"value" => (isset($_POST['resolve_addresses']) ? $_POST['resolve_addresses'] : 'Y'),
+	"array" => $resolve_addresses_array
+);
 
 $stat_columns_array = array(
 	5  => array(1, 2, '', '', 'Port', 'Flows', 'Bytes', 'Packets'),
@@ -192,11 +199,11 @@ $stat_columns_array = array(
 	24 => array(1, 2, '', '', 'Source Prefix', 'Flows', 'Bytes', 'Packets'),
 	25 => array(1, 2, '', '', 'Destination Prefix', 'Flows', 'Bytes', 'Packets'),
 	26 => array(1, 3, '', '', 'Source Prefix', 'Destination Prefix', 'Flows', 'Bytes', 'Packets'),
-	);
+);
 
 $print_columns_array = array(
 	4  => array(1, 5, '', '2', 'Source IP', 'Destination IP', 'Protocol', 'Source AS', 'Destination AS', 'Bytes', 'Packets'),
 	5  => array(1, 11, '3,6', '8', 'Start Time', 'End Time', 'Source Interface', 'Source IP', 'Source Port', 'Destination Interface', 'Destination IP', 'Dest Port', 'Protocol', 'Flags', 'Packets', 'Bytes'),
-	);
+);
 
 

@@ -38,18 +38,17 @@ if (isset($_POST['action'])) {
 	$action = $_GET['action'];
 }
 
-
 $sendinterval_arr = array(
-			3600 => 'Every Hour',
-			7200 => 'Every 2 Hours',
-			14400 => 'Every 4 Hours',
-			21600 => 'Every 6 Hours',
-			43200 => 'Every 12 Hours',
-			86400 => 'Every Day',
-			432000 => 'Every Week',
-			864000 => 'Every 2 Weeks',
-			1728000 => 'Every Month',
-			);
+	3600 => 'Every Hour',
+	7200 => 'Every 2 Hours',
+	14400 => 'Every 4 Hours',
+	21600 => 'Every 6 Hours',
+	43200 => 'Every 12 Hours',
+	86400 => 'Every Day',
+	432000 => 'Every Week',
+	864000 => 'Every 2 Weeks',
+	1728000 => 'Every Month',
+);
 
 $schedule_edit = array(
 	"enabled" => array(
@@ -65,7 +64,7 @@ $schedule_edit = array(
 		"description" => "Name of the query to run.",
 		"value" => "|arg1:savedquery|",
 		"sql" => "SELECT id, name FROM plugin_flowview_queries"
-		),
+	),
 	"sendinterval" => array(
 		"friendly_name" => "Send Interval",
 		"description" => "How often to send this Netflow Query.",
@@ -73,7 +72,7 @@ $schedule_edit = array(
 		"method" => "drop_array",
 		'default' => '0',
 		"array" => $sendinterval_arr
-		),
+	),
 	"start" => array(
 		"method" => "textbox",
 		"friendly_name" => "Start Time",
@@ -82,20 +81,19 @@ $schedule_edit = array(
 		"max_length" => '26',
 		"size" => 20,
 		"default" => date("Y-m-d G:i:s", time())
-		),
+	),
 	"email" => array(
 		"method" => "textbox",
 		"friendly_name" => "Email Addresses",
 		"description" => "Email addresses (command delimitinated) to send this Netflow Scan to.",
 		"value" => "|arg1:email|",
 		"max_length" => '1000'
-		),
-
+	),
 	"id" => array(
 		"method" => "hidden_zero",
 		"value" => "|arg1:id|"
-		),
-	);
+	),
+);
 
 switch ($action) {
 	case 'actions':
@@ -105,35 +103,17 @@ switch ($action) {
 		save_schedules ();
 		break;
 	case 'edit':
-		include_once("./include/top_header.php");
+		include_once("./plugins/flowview/general_header.php");
 		display_tabs ();
 		edit_devices();
 		include_once("./include/bottom_footer.php");
 		break;
 	default:
-		include_once("./include/top_header.php");
+		include_once("./plugins/flowview/general_header.php");
 		display_tabs ();
 		show_schedules ();
 		include_once("./include/bottom_footer.php");
 		break;
-}
-
-function display_tabs () {
-	/* draw the categories tabs on the top of the page */
-	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
-	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Viewer') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview.php'>Viewer</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Devices') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview_devices.php'>Devices</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-	print "<td bgcolor='silver' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview_schedules.php'>Schedules</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-	print "<td></td>\n</tr></table>\n";
 }
 
 function actions_schedules () {
@@ -141,7 +121,6 @@ function actions_schedules () {
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
 		if ($_POST["drp_action"] == "1") {
-
 			for ($i=0; $i<count($selected_items); $i++) {
 				/* ================= input validation ================= */
 				input_validate_input_number($selected_items[$i]);
@@ -152,7 +131,6 @@ function actions_schedules () {
 		header("Location: flowview_schedules.php");
 		exit;
 	}
-
 
 	/* setup some variables */
 	$device_list = "";
@@ -171,7 +149,7 @@ function actions_schedules () {
 		$i++;
 	}
 
-	include_once("./include/top_header.php");
+	include_once("./plugins/flowview/general_header.php");
 	//display_tabs ();
 
 	html_start_box("<strong>" . $ds_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
@@ -208,8 +186,6 @@ function actions_schedules () {
 	html_end_box();
 
 	include_once("./include/bottom_footer.php");
-
-
 }
 
 function save_schedules () {

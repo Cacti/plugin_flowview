@@ -22,11 +22,8 @@
  +-------------------------------------------------------------------------+
 */
 
-
 chdir('../../');
-
 include("./include/auth.php");
-
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
 $ds_actions = array(1 => "Delete");
@@ -38,68 +35,68 @@ if (isset($_POST['action'])) {
 	$action = $_GET['action'];
 }
 
-
 $expire_arr = array(
-			2 => '2 Days',
-			5 => '5 Days',
-			7 => '1 Week',
-			14 => '2 Weeks',
-			30 => '1 Month',
-			61 => '2 Months',
-			92 => '3 Months',
-			183 => '6 Months',
-			365 => '1 Year',
-			);
-$rotation_arr = array(
-			1439 => '1 Minute',
-			287 => '5 Minutes',
-			144 => '10 Minutes',
-			95 => '15 Minutes',
+	2 => '2 Days',
+	5 => '5 Days',
+	7 => '1 Week',
+	14 => '2 Weeks',
+	30 => '1 Month',
+	61 => '2 Months',
+	92 => '3 Months',
+	183 => '6 Months',
+	365 => '1 Year',
+);
 
-			);
+$rotation_arr = array(
+	1439 => '1 Minute',
+	287 => '5 Minutes',
+	144 => '10 Minutes',
+	95 => '15 Minutes',
+);
+
 $version_arr = array(
-			1 => 'NetFlow version 1',
-			5 => 'NetFlow version 5',
-			6 => 'NetFlow version 6',
-			7 => 'NetFlow version 7',
-			'8.1' => 'NetFlow AS Aggregation',
-			'8.2' => 'NetFlow Proto Port Aggregation',
-			'8.3' => 'NetFlow Source Prefix Aggregation',
-			'8.4' => 'NetFlow Destination Prefix Aggregation',
-			'8.5' => 'NetFlow Prefix Aggregation',
-			'8.6' => 'NetFlow Destination',
-			'8.7' => 'NetFlow Source Destination',
-			'8.8' => 'NetFlow Full Flow',
-			'8.9' => 'NetFlow ToS AS Aggregation',
-			'8.10' => 'NetFlow ToS Proto Port Aggregation',
-			'8.11' => 'NetFlow ToS Source Prefix Aggregation',
-			'8.12' => 'NetFlow ToS Destination Prefix Aggregation',
-			'8.13' => 'NetFlow ToS Prefix Aggregation',
-			'8.14' => 'NetFlow ToS Prefix Port Aggregation',
-			1005   => 'Flow-Tools tagged version 5',
-			);
+	1 => 'NetFlow version 1',
+	5 => 'NetFlow version 5',
+	6 => 'NetFlow version 6',
+	7 => 'NetFlow version 7',
+	'8.1' => 'NetFlow AS Aggregation',
+	'8.2' => 'NetFlow Proto Port Aggregation',
+	'8.3' => 'NetFlow Source Prefix Aggregation',
+	'8.4' => 'NetFlow Destination Prefix Aggregation',
+	'8.5' => 'NetFlow Prefix Aggregation',
+	'8.6' => 'NetFlow Destination',
+	'8.7' => 'NetFlow Source Destination',
+	'8.8' => 'NetFlow Full Flow',
+	'8.9' => 'NetFlow ToS AS Aggregation',
+	'8.10' => 'NetFlow ToS Proto Port Aggregation',
+	'8.11' => 'NetFlow ToS Source Prefix Aggregation',
+	'8.12' => 'NetFlow ToS Destination Prefix Aggregation',
+	'8.13' => 'NetFlow ToS Prefix Aggregation',
+	'8.14' => 'NetFlow ToS Prefix Port Aggregation',
+	1005   => 'Flow-Tools tagged version 5',
+);
 
 $nesting_arr = array(
-			-2 => '/YYYY-MM/YYYY-MM-DD',
-			-1 => '/YYYY-MM-DD',
-			0  => '/',
-			1  => '/YYYY',
-			2  => '/YYYY/YYYY-MM',
-			3  => '/YYYY/YYYY-MM/YYYY-MM-DD'
-			);
-$compression_arr = array(
-			0 => '0&nbsp;&nbsp;&nbsp;&nbsp;(Disabled)',
-			1 => '1',
-			2 => '2',
-			3 => '3',
-			4 => '4',
-			5 => '5',
-			6 => '6',
-			7 => '7',
-			8 => '8',
-			9 => '9&nbsp;&nbsp;&nbsp;&nbsp;(Highest)'
-			);
+	-2 => '/YYYY-MM/YYYY-MM-DD',
+	-1 => '/YYYY-MM-DD',
+	0  => '/',
+	1  => '/YYYY',
+	2  => '/YYYY/YYYY-MM',
+	3  => '/YYYY/YYYY-MM/YYYY-MM-DD'
+);
 
+$compression_arr = array(
+	0 => '0&nbsp;&nbsp;&nbsp;&nbsp;(Disabled)',
+	1 => '1',
+	2 => '2',
+	3 => '3',
+	4 => '4',
+	5 => '5',
+	6 => '6',
+	7 => '7',
+	8 => '8',
+	9 => '9&nbsp;&nbsp;&nbsp;&nbsp;(Highest)'
+);
 
 $device_edit = array(
 	"name" => array(
@@ -108,14 +105,14 @@ $device_edit = array(
 		"description" => "Name of the device to be displayed.",
 		"value" => "|arg1:name|",
 		"max_length" => "64",
-		),
+	),
 	"folder" => array(
 		"method" => "textbox",
 		"friendly_name" => "Directory",
 		"description" => "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.",
 		"value" => "|arg1:folder|",
 		"max_length" => "64",
-		),
+	),
 	"allowfrom" => array(
 		"method" => "textbox",
 		"friendly_name" => "Allowed Host",
@@ -124,7 +121,7 @@ $device_edit = array(
 		"default" => '0',
 		"max_length" => "64",
 		"size" => "30"
-		),
+	),
 	"port" => array(
 		"method" => "textbox",
 		"friendly_name" => "Port",
@@ -133,7 +130,7 @@ $device_edit = array(
 		"default" => '2055',
 		"max_length" => "5",
 		"size" => "30"
-		),
+	),
 	"nesting" => array(
 		"friendly_name" => "Nesting",
 		"description" => "Directory Structure that will be used for the flows for this device.",
@@ -141,7 +138,7 @@ $device_edit = array(
 		"method" => "drop_array",
 		'default' => '-1',
 		"array" => $nesting_arr
-		),
+	),
 	"version" => array(
 		"friendly_name" => "Netflow Version",
 		"description" => "Netflow Protocol version used by the device.",
@@ -149,7 +146,7 @@ $device_edit = array(
 		"method" => "drop_array",
 		'default' => '5',
 		"array" => $version_arr
-		),
+	),
 	"compression" => array(
 		"friendly_name" => "Compression Level",
 		"description" => "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results.",
@@ -157,7 +154,7 @@ $device_edit = array(
 		"method" => "drop_array",
 		'default' => '0',
 		"array" => $compression_arr,
-		),
+	),
 	"rotation" => array(
 		"friendly_name" => "Rotation",
 		"description" => "How often to create a new Flow File.",
@@ -165,7 +162,7 @@ $device_edit = array(
 		"method" => "drop_array",
 		'default' => '1439',
 		"array" => $rotation_arr
-		),
+	),
 	"expire" => array(
 		"friendly_name" => "Expiration",
 		"description" => "How long to keep your flow files.",
@@ -173,16 +170,12 @@ $device_edit = array(
 		"method" => "drop_array",
 		'default' => '0',
 		"array" => $expire_arr
-		),
+	),
 	"id" => array(
 		"method" => "hidden_zero",
 		"value" => "|arg1:id|"
-		),
-	);
-
-
-
-
+	),
+);
 
 switch ($action) {
 	case 'actions':
@@ -192,35 +185,17 @@ switch ($action) {
 		save_devices ();
 		break;
 	case 'edit':
-		include_once("./include/top_header.php");
+		include_once("./plugins/flowview/general_header.php");
 		display_tabs ();
 		edit_devices();
 		include_once("./include/bottom_footer.php");
 		break;
 	default:
-		include_once("./include/top_header.php");
+		include_once("./plugins/flowview/general_header.php");
 		display_tabs ();
 		show_devices ();
 		include_once("./include/bottom_footer.php");
 		break;
-}
-
-function display_tabs () {
-	/* draw the categories tabs on the top of the page */
-	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
-	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Viewer') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview.php'>Viewer</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-	print "<td bgcolor='silver' nowrap='nowrap' width='" . (strlen('Devices') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview_devices.php'>Devices</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-	print "<td bgcolor='#DFDFDF' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview_schedules.php'>Schedules</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-	print "<td></td>\n</tr></table>\n";
 }
 
 function actions_devices () {
@@ -258,7 +233,7 @@ function actions_devices () {
 		$i++;
 	}
 
-	include_once("./include/top_header.php");
+	include_once("./plugins/flowview/general_header.php");
 	//display_tabs ();
 
 	html_start_box("<strong>" . $ds_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
@@ -438,11 +413,5 @@ function show_devices () {
 	draw_actions_dropdown($ds_actions);
 
 	print "&nbsp;&nbsp;&nbsp;<input type='button' onClick='javascript:document.location=\"flowview_devices.php?action=edit\"' value='Add'>";
-
 }
-
-
-
-
-
 

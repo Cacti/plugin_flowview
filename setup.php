@@ -23,12 +23,15 @@
 */
 
 function plugin_flowview_install () {
-	api_plugin_register_hook('flowview', 'config_arrays', 'flowview_config_arrays', 'setup.php');
-	api_plugin_register_hook('flowview', 'draw_navigation_text', 'flowview_draw_navigation_text', 'setup.php');
-	api_plugin_register_hook('flowview', 'config_settings', 'flowview_config_settings', 'setup.php');
-	api_plugin_register_hook('flowview', 'poller_bottom', 'flowview_poller_bottom', 'setup.php');
+	api_plugin_register_hook('flowview', 'config_arrays',         'flowview_config_arrays',        'setup.php');
+	api_plugin_register_hook('flowview', 'draw_navigation_text',  'flowview_draw_navigation_text', 'setup.php');
+	api_plugin_register_hook('flowview', 'config_settings',       'flowview_config_settings',      'setup.php');
+	api_plugin_register_hook('flowview', 'poller_bottom',         'flowview_poller_bottom',        'setup.php');
+	api_plugin_register_hook('flowview', 'top_header_tabs',       'flowview_show_tab',             'setup.php');
+        api_plugin_register_hook('flowview', 'top_graph_header_tabs', 'flowview_show_tab',             'setup.php');
 
-	api_plugin_register_realm('flowview', 'flowview.php,flowview_devices.php,flowview_schedules.php', 'Flow Viewer', 1);
+	api_plugin_register_realm('flowview', 'flowview.php', 'Plugin -> Flow Viewer', 1);
+	api_plugin_register_realm('flowview', 'flowview_report.php,flowview_devices.php,flowview_schedules.php', 'Plugin -> Flow Admin', 1);
 
 	flowview_setup_table();
 }
@@ -99,6 +102,18 @@ function flowview_draw_navigation_text ($nav) {
 	$nav["flowview_schedules.php:save"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
 	$nav["flowview_schedules.php:actions"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
 	return $nav;
+}
+
+function flowview_show_tab() {
+	global $config;
+
+	if (api_user_realm_auth('flowview.php')) {
+		if (substr_count($_SERVER["REQUEST_URI"], "flowview")) {
+			print '<a href="' . $config['url_path'] . 'plugins/flowview/flowview.php"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="FlowView" align="absmiddle" border="0"></a>';
+		}else{
+			print '<a href="' . $config['url_path'] . 'plugins/flowview/flowview.php"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="FlowView" align="absmiddle" border="0"></a>';
+		}
+	}
 }
 
 function flowview_config_settings () {
