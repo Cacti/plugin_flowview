@@ -337,16 +337,28 @@ function parseSummaryReport($output) {
 				/* Headers have no decimals */
 				if (!substr_count($l, ".")) {
 					echo "<tr bgcolor='" . flowview_altcolor($i) . "'>";
-					$parts = explode(" ", trim($l));
+					$parts = flowview_explode($l);
+					$k = 0;
+					$l = sizeof($parts);
 					foreach($parts as $p) {
-						if ($p != "") echo "<td align='right'><strong>" . $p . "</strong></td>";
+						echo "<td align='right'><strong>" . $p . "</strong></td>";
+						if ($l < 15 && $k == 10) {
+							echo "<td colspan='4'></td>";
+						}
+						$k++;
 					}
 					echo "</tr>";
 				}else{
 					echo "<tr bgcolor='" . flowview_altcolor($i) . "'>";
-					$parts = explode(" ", trim($l));
+					$parts = flowview_explode($l);
+					$k = 0;
+					$l = sizeof($parts);
 					foreach($parts as $p) {
-						if ($p != "") echo "<td align='right'>" . ($p*100) . "</td>";
+						echo "<td align='right'>" . ($p*100) . "</td>";
+						if ($l < 15 && $k == 10) {
+							echo "<td colspan='4'></td>";
+						}
+						$k++;
 					}
 					echo "</tr>";
 				}
@@ -357,6 +369,29 @@ function parseSummaryReport($output) {
 	}
 
 	return ob_get_clean();
+}
+
+function flowview_explode($string) {
+	$string=trim($string);
+
+	if (!strlen($string)) return array();
+
+	$array=explode(" ", $string);
+	foreach($array as $e) {
+		if ($e != '') {
+			$newa[] = $e;
+		}
+	}
+
+	return $newa;
+}
+
+function removeWhiteSpace($string) {
+	$string = str_replace("\t", " ", $string);
+	while (substr_count("  ",$string)) {
+		$string = str_replace("  ", " ", $string);
+	}
+	return $string;
 }
 
 function parsestatoutput($output) {
