@@ -49,8 +49,8 @@ function flowview_display_report() {
 		return;
 	}
 
-	$filter = createfilter();
 	display_tabs();
+	$filter = createfilter();
 	html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
 	echo $filter;
 	html_end_box();
@@ -278,41 +278,40 @@ function parseSummaryReport($output) {
 
 	$output = explode("\n", $output);
 
-	$o = '<table width="100%" cellspacing=0 cellpadding=2 border=0 bgcolor="#' . $colors["header"] . '">
-		<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
-
 	$insummary = true;
 	$inippsd   = false;
 	$inppfd    = false;
 	$inopfd    = false;
 	$inftd     = false;
 	$section   = "insummary";
-	$i = 0;
+	$i = 0; $j = 0;
+
+	/* do some output buffering */
+	ob_start();
 
 	if (sizeof($output)) {
-		html_start_box("<strong>Summary Statistics</strong>", "100%", $colors["header"], "3", "center", "");
 		foreach($output as $l) {
 			$l = trim($l);
 			if (substr($l,0,1) == "#" || strlen($l) == 0) continue;
 
 			if (substr_count($l, "IP packet size distribution")) {
 				html_end_box(false);
-				html_start_box("<strong>IP Packet Size Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				html_start_box("<strong>IP Packet Size Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
 				$section = "inippsd";
 				continue;
 			}elseif (substr_count($l, "Packets per flow distribution")) {
 				html_end_box(false);
-				html_start_box("<strong>Packets per Flow Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				html_start_box("<strong>Packets per Flow Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
 				$section = "inppfd";
 				continue;
 			}elseif (substr_count($l, "Octets per flow distribution")) {
 				html_end_box(false);
-				html_start_box("<strong>Octets per Flow Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				html_start_box("<strong>Octets per Flow Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
 				$section = "inopfd";
 				continue;
 			}elseif (substr_count($l, "Flow time distribution")) {
 				html_end_box(false);
-				html_start_box("<strong>Flow Time Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				html_start_box("<strong>Flow Time Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
 				$section = "inftd";
 				continue;
 			}
@@ -323,13 +322,13 @@ function parseSummaryReport($output) {
 					if ($i > 0) {
 						echo "</tr>";
 					}
-					echo "<tr>";
+					echo "<tr bgcolor='" . flowview_altcolor($j) . "' style='border:1px solid #FEFEFE;'>";
+					$j++;
 				}
 				$parts = explode(":", $l);
 				$header = trim($parts[0]);
 				$value  = trim($parts[1]);
-				echo "<td><strong>" . $header . "</strong></td><td>" . $value . "</td>"; 
-				$i++;
+				echo "<td><strong>" . $header . "</strong></td><td>" . number_format($value) . "</td>"; 
 				break;
 			case "inippsd":
 			case "inppfd":
@@ -337,25 +336,27 @@ function parseSummaryReport($output) {
 			case "inftd":
 				/* Headers have no decimals */
 				if (!substr_count($l, ".")) {
-					echo "<tr>";
+					echo "<tr bgcolor='" . flowview_altcolor($i) . "'>";
 					$parts = explode(" ", trim($l));
 					foreach($parts as $p) {
 						if ($p != "") echo "<td align='right'><strong>" . $p . "</strong></td>";
 					}
 					echo "</tr>";
 				}else{
-					echo "<tr>";
+					echo "<tr bgcolor='" . flowview_altcolor($i) . "'>";
 					$parts = explode(" ", trim($l));
 					foreach($parts as $p) {
-						if ($p != "") echo "<td align='right'>" . ($p*100) . " %</td>";
+						if ($p != "") echo "<td align='right'>" . ($p*100) . "</td>";
 					}
 					echo "</tr>";
 				}
 				break;
 			}
+			$i++;
 		}
-		html_end_box();
 	}
+
+	return ob_get_clean();
 }
 
 function parsestatoutput($output) {

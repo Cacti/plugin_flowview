@@ -111,7 +111,7 @@ function flowview_display_form() {
 	?>
 	<tr>
 		<td>
-			<table border='0' cellspacing='0' cellpadding='1' width='100%'>
+			<table border='0' cellspacing='0' cellpadding='3' width='100%' style='white-space:nowrap;'>
 				<tr>
 					<td>Saved Query:</td>
 					<td><?php draw_edit_control("query", $query_name_field);?></td>
@@ -159,7 +159,7 @@ function flowview_display_form() {
 				<tr>
 					<td colspan='9'>
 						<hr size='2'>
-						<center>Note: Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)</center>
+						<center><strong>Note:</strong> Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)</center>
 						<hr size='2'>
 					</td>
 				</tr>
@@ -169,24 +169,30 @@ function flowview_display_form() {
 	<?php html_end_box(false);?>
 	<?php html_start_box("<strong>Report Parameters</strong>", "100%", $colors["header"], "1", "center", "");?>
 	<tr>
-		<td>Statistics:</td>
-		<td colspan='2'><?php draw_edit_control("stat_report", $stat_report_field);?></td>
-		<td>Printed:</td>
-		<td colspan='2'><?php draw_edit_control("print_report", $print_report_field);?></td>
-		<td>Include if:</td>
-		<td colspan='2'><?php draw_edit_control("flow_select", $flow_select_field);?></td>
+		<td>
+			<table cellpadding='3' cellspacing='0' border='0' width='100%' style='white-space:nowrap;'>
+				<tr id='rsettings'>
+					<td>Statistics:</td>
+					<td><?php draw_edit_control("stat_report", $stat_report_field);?></td>
+					<td>Printed:</td>
+					<td><?php draw_edit_control("print_report", $print_report_field);?></td>
+					<td>Include if:</td>
+					<td><?php draw_edit_control("flow_select", $flow_select_field);?></td>
+					<td>Resolve Addresses:</td>
+					<td><?php draw_edit_control("resolve_addresses", $resolve_addresses_field);?></td>
+				</tr>
+				<tr id='rlimits'>
+					<td class='sortfield'>Sort Field:</td>
+					<td class='sortfield'><select id='sort_field' name='sort_field'></select></td>
+					<td>Max Flows:</td>
+					<td><?php draw_edit_control("cutoff_lines", $cutoff_lines_field);?></td>
+					<td>Minimum Bytes:</td>
+					<td><?php draw_edit_control("cutoff_octets", $cutoff_octets_field);?></td>
+				</tr>
+				<tr>
+			</table>
+		</td>
 	</tr>
-	<tr>
-		<td>Sort Field:</td>
-		<td><select id='sort_field' name='sort_field'></select></td>
-		<td>Cutoff Lines:</td>
-		<td><input type='text' size='3' name='cutoff_lines' value='<?php echo $cutoff_lines; ?>'></td>
-		<td>Cutoff Octets:</td>
-		<td><input type='text' size='13' name='cutoff_octets' value='<?php echo $cutoff_octets; ?>'></td>
-		<td>Resolve Addresses:</td>
-		<td><?php draw_edit_control("resolve_addresses", $resolve_addresses_field);?></td>
-	</tr>
-	<tr>
 		<td colspan='9'><hr size='2'></td>
 	</tr>
 	<tr>
@@ -213,38 +219,69 @@ function flowview_display_form() {
 	<script type="text/javascript">
 	<!--
 	function statSelect() {
-		stat = document.flowview.stat_report;
-		statval = stat.options[stat.selectedIndex].value;
-		SetStatOption(stat.value);
+		statval = $('#stat_report').val();
+		setStatOption(statval);
 		if (statval > 0) {
-			document.flowview.print_report.selectedIndex = 0;
+			$('#print_report').attr('value', 0);
+			$('#print_report').attr('disabled', 'disabled');
+			$('#rlimits').children('.sortfield').show();
+		}else{
+			$('#print_report').attr('disabled', '');
 		}
 		if (statval == 99 || statval < 1) {
-			document.flowview.cutoff_octets.disabled = 1;
-			document.flowview.sort_field.disabled = 1;
-			document.flowview.cutoff_lines.disabled = 1;
+			$('#rlimits').hide();
 		} else {
-			document.flowview.cutoff_octets.disabled = 0;
-			document.flowview.sort_field.disabled = 0;
-			document.flowview.cutoff_lines.disabled = 0;
+			$('#rlimits').show();
+		}
+
+		if (statval == 0 && $('#print_report').val() == 0) {
+			$('#view').attr('disabled','disabled');
+			$('#save').attr('disabled','disabled');
+			$('#saveas').attr('disabled','disabled');
+		}else{
+			$('#view').attr('disabled','');
+			$('#save').attr('disabled','');
+			$('#saveas').attr('disabled','');
 		}
 	}
 
 	function printSelect() {
-		stat = document.flowview.print_report;
-		statval = stat.options[stat.selectedIndex].value;
+		statval = $('#print_report').val();
 		if (statval > 0) {
-			document.flowview.stat_report.selectedIndex = 0;
-			document.flowview.sort_field.disabled = 1;
+			$('#stat_report').attr('value',0);
+			$('#stat_report').attr('disabled', 'disabled');
+			$('#sort_field').removeAttr('disabled');
+			$('#rlimits').hide();
+			$('#rlimits').children('.sortfield').hide();
 		} else {
+			$('#rlimits').show();
+			$('#cutoff_lines').removeAttr('disabled');
+			$('#cutoff_octets').removeAttr('disabled');
+			if ($('#stat_report').val() == 0) {
+				$('#stat_report').attr('value', 10);
+			}
+			$('#stat_report').removeAttr('disabled');
+			statSelect();
 			return;
 		}
 		if (statval == 4 || statval == 5) {
-			document.flowview.cutoff_octets.disabled = 0;
-			document.flowview.cutoff_lines.disabled = 0;
+			$('#cutoff_lines').removeAttr('disabled');
+			$('#cutoff_octets').removeAttr('disabled');
+			$('#rlimits').show();
 		} else {
-			document.flowview.cutoff_octets.disabled = 1;
-			document.flowview.cutoff_lines.disabled = 1;
+			$('#cutoff_lines').attr('disabled','disabled');
+			$('#cutoff_octets').attr('disabled','disabled');
+			$('#rlimits').hide();
+		}
+
+		if (statval == 0 && $('#stat_report').val() == 0) {
+			$('#view').attr('disabled','disabled');
+			$('#save').attr('disabled','disabled');
+			$('#saveas').attr('disabled','disabled');
+		}else{
+			$('#view').attr('disabled','');
+			$('#save').attr('disabled','');
+			$('#saveas').attr('disabled','');
 		}
 	}
 
@@ -363,17 +400,11 @@ function flowview_display_form() {
 						$('#query').attr('value', data);
 					}
 				});
-				//document.flowview.submit();
+				$('#fdialog').dialog('close');
 			});
 		}else{
 			$('#action').attr('value', 'save');
-			$.post('flowview.php', $('#flowview').serialize(), function(data) {
-				if (data!="error") {
-					$('#query').append("<option value='"+data+"'>"+$('#new_query').val()+"</option>");
-					$('#query').attr('value', data);
-				}
-			});
-			//document.flowview.submit();
+			$.post('flowview.php', $('#flowview').serialize());
 		}
 	});
 
@@ -404,16 +435,17 @@ function flowview_display_form() {
 		$('#tos_fields').attr('value','');
 		$('#tcp_flags').attr('value','');
 		// Report Settings
-		$('#stat_report').attr('value',0);
+		$('#stat_report').attr('value',10);
 		$('#print_report').attr('value',0);
 		$('#flow_select').attr('value',1);
 		$('#sort_field').attr('value',4);
 		$('#cutoff_lines').attr('value','100');
 		$('#cutoff_octets').attr('value', '');
 		$('#resolve_addresses').attr('value',0);
+		statSelect();
 	}
 
-	function SetStatOption(choose) {
+	function setStatOption(choose) {
 		stat = document.flowview.sort_field;
 		stat.options.length = 0;
 		defsort = 1;
@@ -496,7 +528,6 @@ function flowview_display_form() {
 		} else {
 			stat.value = defsort;
 		}
-
 	}
 
 	var sortfield='<?php echo $sort_field; ?>';

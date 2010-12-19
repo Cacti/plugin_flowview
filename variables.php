@@ -83,8 +83,12 @@ if (isset($_REQUEST['query']) && $_REQUEST['query'] > 0 && $_REQUEST['action'] =
 	$_POST['resolve_addresses'] = $resolve_addresses = $q['resolve'];
 } else {
 	$device = '';
-	if (isset($_POST['device_name']))
+	if (isset($_POST['device_name'])) {
 		$device = $_POST['device_name'];
+	}else{
+		$device = db_fetch_cell("SELECT folder FROM plugin_flowview_devices ORDER BY id LIMIT 1");;
+		$_POST['device_name'] = $device;
+	}
 
 	$start_date = ''; // date("n/j/Y",time() - 28800);
 	if (isset($_POST['start_date']))

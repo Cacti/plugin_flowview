@@ -134,6 +134,45 @@ $device_name_field = array("friendly_name" => '',
 	"array" => $devices
 );
 
+$cutoff_lines_field = array("friendly_name" => '',
+	"method" => "drop_array",
+	"default" => 20,
+	"description" => '',
+	"value" => (isset($_POST['cutoff_lines']) ? $_POST['cutoff_lines'] : 0),
+	"array" => array(
+		'999999999' => 'All',
+		'5'  => 'Top 5', 
+		'10'  => 'Top 10', 
+		'20'  => 'Top 20', 
+		'30'  => 'Top 30', 
+		'40'  => 'Top 40', 
+		'50'  => 'Top 50', 
+		'100' => 'Top 100', 
+		'200' => 'Top 200')
+);
+
+$cutoff_octets_field = array("friendly_name" => '',
+	"method" => "drop_array",
+	"default" => 0,
+	"description" => '',
+	"value" => (isset($_POST['cutoff_octets']) ? $_POST['cutoff_octets']:''),
+	"array" => array(
+		'0'         => 'No Limit', 
+		'1024'      => '1K   Bytes', 
+		'10240'     => '10K  Bytes',
+		'20480'     => '20K  Bytes',
+		'102400'    => '100K Bytes',
+		'512000'    => '500K Bytes',
+		'1024000'   => '1M   Bytes',
+		'10240000'  => '10M  Bytes',
+		'20480000'  => '20M  Bytes',
+		'51200000'  => '50M  Bytes',
+		'102400000' => '100M Bytes',
+		'204800000' => '200M Bytes',
+		'512000000' => '500M Bytes',
+		'1024000000'=> '1G   Bytes')
+);
+
 $ip_protocol_field = array("friendly_name" => '',
 	"method" => "drop_array",
 	"default" => 0,
