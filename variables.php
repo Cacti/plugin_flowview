@@ -53,10 +53,7 @@
 
 $query = '';
 
-if (isset($_REQUEST['query']) && $_REQUEST['query'] != '' && is_numeric($_REQUEST['query']) && 
-	isset($_REQUEST['action']) && !isset($_REQUEST['action2_x']) && 
-	($_REQUEST['action'] == 'view' || $_REQUEST['action'] == 'loadquery')) {
-
+if (isset($_REQUEST['query']) && $_REQUEST['query'] > 0 && ($_REQUEST['action'] == 'view' || $_REQUEST['action'] == 'loadquery')) {
 	$query = $_REQUEST['query'];
 	$q     = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id=$query");
 	$_POST['query']             = $query             = $q['name'];
@@ -180,6 +177,6 @@ if (isset($_REQUEST['query']) && $_REQUEST['query'] != '' && is_numeric($_REQUES
 	$resolve_addresses = 'Y';
 	if (isset($_POST['resolve_addresses']))
 		$resolve_addresses = $_POST['resolve_addresses'];
-
 }
+
 ?>

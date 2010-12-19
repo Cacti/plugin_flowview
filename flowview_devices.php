@@ -36,13 +36,13 @@ if (isset($_POST['action'])) {
 }
 
 $expire_arr = array(
-	2 => '2 Days',
-	5 => '5 Days',
-	7 => '1 Week',
-	14 => '2 Weeks',
-	30 => '1 Month',
-	61 => '2 Months',
-	92 => '3 Months',
+	2   => '2 Days',
+	5   => '5 Days',
+	7   => '1 Week',
+	14  => '2 Weeks',
+	30  => '1 Month',
+	61  => '2 Months',
+	92  => '3 Months',
 	183 => '6 Months',
 	365 => '1 Year',
 );
@@ -55,25 +55,25 @@ $rotation_arr = array(
 );
 
 $version_arr = array(
-	1 => 'NetFlow version 1',
-	5 => 'NetFlow version 5',
-	6 => 'NetFlow version 6',
-	7 => 'NetFlow version 7',
-	'8.1' => 'NetFlow AS Aggregation',
-	'8.2' => 'NetFlow Proto Port Aggregation',
-	'8.3' => 'NetFlow Source Prefix Aggregation',
-	'8.4' => 'NetFlow Destination Prefix Aggregation',
-	'8.5' => 'NetFlow Prefix Aggregation',
-	'8.6' => 'NetFlow Destination',
-	'8.7' => 'NetFlow Source Destination',
-	'8.8' => 'NetFlow Full Flow',
-	'8.9' => 'NetFlow ToS AS Aggregation',
+	'1'    => 'NetFlow version 1',
+	'5'    => 'NetFlow version 5',
+	'6'    => 'NetFlow version 6',
+	'7'    => 'NetFlow version 7',
+	'8.1'  => 'NetFlow AS Aggregation',
+	'8.2'  => 'NetFlow Proto Port Aggregation',
+	'8.3'  => 'NetFlow Source Prefix Aggregation',
+	'8.4'  => 'NetFlow Destination Prefix Aggregation',
+	'8.5'  => 'NetFlow Prefix Aggregation',
+	'8.6'  => 'NetFlow Destination',
+	'8.7'  => 'NetFlow Source Destination',
+	'8.8'  => 'NetFlow Full Flow',
+	'8.9'  => 'NetFlow ToS AS Aggregation',
 	'8.10' => 'NetFlow ToS Proto Port Aggregation',
 	'8.11' => 'NetFlow ToS Source Prefix Aggregation',
 	'8.12' => 'NetFlow ToS Destination Prefix Aggregation',
 	'8.13' => 'NetFlow ToS Prefix Aggregation',
 	'8.14' => 'NetFlow ToS Prefix Port Aggregation',
-	1005   => 'Flow-Tools tagged version 5',
+	'1005' => 'Flow-Tools tagged version 5',
 );
 
 $nesting_arr = array(
@@ -86,7 +86,7 @@ $nesting_arr = array(
 );
 
 $compression_arr = array(
-	0 => '0&nbsp;&nbsp;&nbsp;&nbsp;(Disabled)',
+	0 => '0 (Disabled)',
 	1 => '1',
 	2 => '2',
 	3 => '3',
@@ -95,7 +95,7 @@ $compression_arr = array(
 	6 => '6',
 	7 => '7',
 	8 => '8',
-	9 => '9&nbsp;&nbsp;&nbsp;&nbsp;(Highest)'
+	9 => '9 (Highest)'
 );
 
 $device_edit = array(
@@ -270,8 +270,6 @@ function actions_devices () {
 	html_end_box();
 
 	include_once("./include/bottom_footer.php");
-
-
 }
 
 function save_devices () {
@@ -290,14 +288,14 @@ function save_devices () {
 		$save['id'] = '';
 	}
 
-	$save['name'] = sql_sanitize($_POST['name']);
-	$save['folder'] = sql_sanitize($_POST['folder']);
-	$save['allowfrom'] = sql_sanitize($_POST['allowfrom']);
-	$save['port'] = $_POST['port'];
-	$save['nesting'] = sql_sanitize($_POST['nesting']);
-	$save['version'] = $_POST['version'];
-	$save['rotation'] = $_POST['rotation'];
-	$save['expire'] = $_POST['expire'];
+	$save['name']        = sql_sanitize($_POST['name']);
+	$save['folder']      = sql_sanitize($_POST['folder']);
+	$save['allowfrom']   = sql_sanitize($_POST['allowfrom']);
+	$save['port']        = $_POST['port'];
+	$save['nesting']     = sql_sanitize($_POST['nesting']);
+	$save['version']     = $_POST['version'];
+	$save['rotation']    = $_POST['rotation'];
+	$save['expire']      = $_POST['expire'];
 	$save['compression'] = $_POST['compression'];
 
 	$id = sql_save($save, 'plugin_flowview_devices', 'id', true);
@@ -340,17 +338,86 @@ function show_devices () {
 	global $action, $expire_arr, $rotation_arr, $version_arr, $nesting_arr;
 	global $colors, $config, $ds_actions;
 
-	load_current_session_value("page", "sess_wmi_devices_current_page", "1");
-	$num_rows = 30;
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_request("page"));
+	/* ==================================================== */
 
-	$sql = "SELECT * FROM plugin_flowview_devices limit " . ($num_rows*($_REQUEST["page"]-1)) . ", $num_rows";
+	/* clean up search string */
+	if (isset($_REQUEST["filter"])) {
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+	}
+
+	/* clean up sort_column */
+	if (isset($_REQUEST["sort_column"])) {
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+	}
+
+	/* clean up sort_direction string */
+	if (isset($_REQUEST["sort_direction"])) {
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+	}
+
+	/* if the user pushed the 'clear' button */
+	if (isset($_REQUEST["clear_x"])) {
+		kill_session_var("sess_flowview_current_page");
+		kill_session_var("sess_flowview_filter");
+		kill_session_var("sess_flowview_sort_column");
+		kill_session_var("sess_flowview_sort_direction");
+
+		unset($_REQUEST["page"]);
+		unset($_REQUEST["filter"]);
+		unset($_REQUEST["sort_column"]);
+		unset($_REQUEST["sort_direction"]);
+	}
+
+	/* remember these search fields in session vars so we don't have to keep passing them around */
+	load_current_session_value("page", "sess_flowview_current_page", "1");
+	load_current_session_value("filter", "sess_flowview_filter", "");
+	load_current_session_value("sort_column", "sess_flowview_sort_column", "name");
+	load_current_session_value("sort_direction", "sess_flowview_sort_direction", "ASC");
+
+	$sql_where = (strlen($_REQUEST["filter"]) ? "name LIKE '%" . $_REQUEST["filter"] . "%'":"");
+	$num_rows  = read_config_option("num_rows_device");
+
+	$sql    = "SELECT * 
+		FROM plugin_flowview_devices 
+		$sql_where
+		ORDER BY " . get_request_var_request("sort_column") . " " . get_request_var_request("sort_direction") .
+		" LIMIT " . ($num_rows*(get_request_var_request("page")-1) . "," . $num_rows);
+
 	$result = db_fetch_assoc($sql);
 
 	define("MAX_DISPLAY_PAGES", 21);
-	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices");
+	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices $sql_where");
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_devices.php?");
 
-	html_start_box("", "100%", $colors["header"], "4", "center", "");
+	html_start_box("<strong>FlowView Listeners</strong>", "100%", $colors["header"], "4", "center", "flowview_devices.php?action=edit");
+
+	?>
+	<tr bgcolor="#<?php print $colors["panel"];?>">
+		<td>
+		<form name="listeners" action="flowview_devices.php">
+			<table width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+					<td nowrap style='white-space: nowrap;' width="50">
+						Search:&nbsp;
+					</td>
+					<td width="1">
+						<input type="text" name="filter" size="40" value="<?php print htmlspecialchars(get_request_var_request("filter"));?>">
+					</td>
+					<td nowrap style='white-space: nowrap;'>
+						&nbsp;<input type="submit" value="Go" title="Set/Refresh Filters">
+						<input type="submit" name="clear" value="Clear" title="Clear Filters">
+					</td>
+				</tr>
+			</table>
+		<input type='hidden' name='page' value='1'>
+		</form>
+		</td>
+	</tr>
+	<?php
+
+	html_end_box();
 
 	if ($total_rows > 0) {
 		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
@@ -384,15 +451,29 @@ function show_devices () {
 			</tr>\n";
 	}
 
+	html_start_box("", "100%", $colors["header"], "4", "center", "");
 	print $nav;
-	html_header_checkbox(array('Name', 'Directory', 'Nesting', 'Allowed From', 'Port', 'Version', 'Compression', 'Rotation', 'Expire'));
+
+	$display_array = array(
+		'name'        => array('Name', 'ASC'),
+		'folder'      => array('Directory', 'ASC'),
+		'nexting'     => array('Nesting', 'ASC'),
+		'allowfrom'   => array('Allowed From', 'ASC'),
+		'port'        => array('Port', 'ASC'),
+		'version'     => array('Version', 'ASC'),
+		'compression' => array('Compression', 'ASC'),
+		'rotation'    => array('Rotation', 'ASC'),
+		'expire'      => array('Expire', 'ASC')
+	);
+
+	html_header_sort_checkbox($display_array, get_request_var_request("sort_column"), get_request_var_request("sort_direction"), false);
 
 	$c=0;
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-			print '<td><a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
+			print '<td><a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a></td>';
 			print '<td>' . $row['folder'] . '</td>';
 			print '<td>' . $nesting_arr[$row['nesting']] . '</td>';
 			print '<td>' . $row['allowfrom'] . '</td>';
@@ -405,13 +486,13 @@ function show_devices () {
 			print '<input type="checkbox" style="margin: 0px;" name="chk_' . $row["id"] . '" title="' . $row["name"] . '"></td>';
 			print "</tr>";
 		}
+
+		print $nav;
 	} else {
 		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
 		print '<td colspan=10><center>No Devices</center></td></tr>';
 	}
 	html_end_box(false);
 	draw_actions_dropdown($ds_actions);
-
-	print "&nbsp;&nbsp;&nbsp;<input type='button' onClick='javascript:document.location=\"flowview_devices.php?action=edit\"' value='Add'>";
 }
 

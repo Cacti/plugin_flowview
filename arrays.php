@@ -107,28 +107,22 @@ if (!empty($devices_arr)) {
 	}
 }
 
-$queries_arr = db_fetch_assoc("SELECT id, name FROM plugin_flowview_queries ORDER BY name");
-$queries = array('' => '');
-if (!empty($queries_arr)) {
-	foreach ($queries_arr as $d) {
-		$queries[$d['id']] = $d['name'];
-	}
-}
-
 $query_newname_field = array("friendly_name" => '',
 	'name' => 'queryname',
 	"method" => "textbox",
-	"max_length" => 255,		"default" => '',
+	"max_length" => 255,
+	"default" => '',
 	"description" => '',
 	"value" => (isset($_POST['queryname']) ? $_POST['queryname'] : '')
 );
 
 $query_name_field = array("friendly_name" => '',
-	"method" => "drop_array",
+	"method" => "drop_sql",
 	"default" => 0,
 	"description" => '',
 	"value" => (isset($_REQUEST['query']) ? $_REQUEST['query'] : 0),
-	"array" => $queries
+	"none_value" => "None",
+	"sql" => "SELECT id, name FROM plugin_flowview_queries ORDER BY name"
 );
 
 $device_name_field = array("friendly_name" => '',
@@ -136,6 +130,7 @@ $device_name_field = array("friendly_name" => '',
 	"default" => 0,
 	"description" => '',
 	"value" => (isset($_POST['device_name']) ? $_POST['device_name'] : 0),
+	"none_value" => "None",
 	"array" => $devices
 );
 

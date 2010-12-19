@@ -39,14 +39,14 @@ if (isset($_POST['action'])) {
 }
 
 $sendinterval_arr = array(
-	3600 => 'Every Hour',
-	7200 => 'Every 2 Hours',
-	14400 => 'Every 4 Hours',
-	21600 => 'Every 6 Hours',
-	43200 => 'Every 12 Hours',
-	86400 => 'Every Day',
-	432000 => 'Every Week',
-	864000 => 'Every 2 Weeks',
+	3600    => 'Every Hour',
+	7200    => 'Every 2 Hours',
+	14400   => 'Every 4 Hours',
+	21600   => 'Every 6 Hours',
+	43200   => 'Every 12 Hours',
+	86400   => 'Every Day',
+	432000  => 'Every Week',
+	864000  => 'Every 2 Weeks',
 	1728000 => 'Every Month',
 );
 
@@ -83,11 +83,13 @@ $schedule_edit = array(
 		"default" => date("Y-m-d G:i:s", time())
 	),
 	"email" => array(
-		"method" => "textbox",
+		"method" => "textarea",
 		"friendly_name" => "Email Addresses",
 		"description" => "Email addresses (command delimitinated) to send this Netflow Scan to.",
-		"value" => "|arg1:email|",
-		"max_length" => '1000'
+		"textarea_rows" => 4,
+		"textarea_cols" => 60,
+		"class" => "textAreaNotes",
+		"value" => "|arg1:email|"
 	),
 	"id" => array(
 		"method" => "hidden_zero",
@@ -105,7 +107,7 @@ switch ($action) {
 	case 'edit':
 		include_once("./plugins/flowview/general_header.php");
 		display_tabs ();
-		edit_devices();
+		edit_schedule();
 		include_once("./include/bottom_footer.php");
 		break;
 	default:
@@ -150,7 +152,8 @@ function actions_schedules () {
 	}
 
 	include_once("./plugins/flowview/general_header.php");
-	//display_tabs ();
+
+	display_tabs ();
 
 	html_start_box("<strong>" . $ds_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
 
@@ -235,43 +238,47 @@ function save_schedules () {
 	exit;
 }
 
-function edit_devices () {
-	global $schedule_edit, $colors;
+function edit_schedule() {
+	global $config, $schedule_edit, $colors;
 
-		print '		<script type="text/javascript" src="/include/jscalendar/calendar.js"></script>
-			<script type="text/javascript" src="/include/jscalendar/lang/calendar-en.js"></script>
-			<script type="text/javascript" src="/include/jscalendar/calendar-setup.js"></script>';
+	print '<script type="text/javascript" src="' . $config['url_path'] . '/include/jscalendar/calendar.js"></script>
+		<script type="text/javascript" src="' . $config['url_path'] . '/include/jscalendar/lang/calendar-en.js"></script>
+		<script type="text/javascript" src="' . $config['url_path'] . '/include/jscalendar/calendar-setup.js"></script>';
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var("id"));
 	/* ==================================================== */
 
-	$device = array();
+	$report = array();
 	if (!empty($_GET["id"])) {
-		$device = db_fetch_row("SELECT plugin_flowview_schedules.*,plugin_flowview_queries.name FROM plugin_flowview_schedules LEFT JOIN plugin_flowview_queries ON (plugin_flowview_schedules.savedquery = plugin_flowview_queries.id) WHERE plugin_flowview_schedules.id=" . $_GET["id"], FALSE);
-		$header_label = "[edit: " . $device["name"] . "]";
+		$report = db_fetch_row("SELECT pfs.*, pfq.name 
+			FROM plugin_flowview_schedules AS pfs 
+			LEFT JOIN plugin_flowview_queries AS pfq
+			ON (pfs.savedquery=pfq.id) 
+			WHERE pfs.id=" . $_GET["id"], FALSE);
+
+		$header_label = "[edit: " . $report["name"] . "]";
 	}else{
 		$header_label = "[new]";
 	}
 
-	html_start_box("<strong>Device:</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	html_start_box("<strong>Report:</strong> $header_label", "100%", $colors["header"], "3", "center", "");
 	draw_edit_form(array(
 		"config" => array("form_name" => "chk"),
-		"fields" => inject_form_variables($schedule_edit, $device)
+		"fields" => inject_form_variables($schedule_edit, $report)
 		)
 	);
 
 	html_end_box();
 	form_save_button("flowview_schedules.php");
 
-?>
+	?>
 	<script type='text/javascript'>
 	// Initialize the calendar
 	calendar=null;
 
 	// This function displays the calendar associated to the input field 'id'
 	function showCalendar2() {
-
 		var el = document.getElementById('start');
 		if (calendar != null) {
 			// we already have some calendar created
@@ -310,76 +317,141 @@ function edit_devices () {
 		calendar = null;
 	}
 
-	var el2 = document.getElementById('start');
-//	el2.OnClick = showCalendar2();
-
-
-
-var myDiv = document.getElementById('start');
-if (myDiv.addEventListener){
-  myDiv.addEventListener('click', showCalendar2, false);
-} else if (myDiv.attachEvent){
-  myDiv.attachEvent('onclick', showCalendar2);
-}
-
-</script>
-
-<?php
-
-
-
-
+	$('#start').after('&nbsp;<input type="image" src="<?php print $config['url_path'];?>images/calendar.gif" align="absmiddle" title="Start Selector" onclick="return showCalendar(\'start\')">');
+	$('#start').click(function() { showCalendar2(); });
+	</script>
+	<?php
 }
 
 function show_schedules () {
 	global $sendinterval_arr, $colors, $config, $ds_actions;
 
-	load_current_session_value("page", "sess_flowview_schedules_current_page", "1");
-	$num_rows = 30;
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_request("page"));
+	/* ==================================================== */
 
-	$sql = "SELECT plugin_flowview_schedules.*,plugin_flowview_queries.name FROM plugin_flowview_schedules LEFT JOIN plugin_flowview_queries ON (plugin_flowview_schedules.savedquery = plugin_flowview_queries.id) limit " . ($num_rows*($_REQUEST["page"]-1)) . ", $num_rows";
-	$result = db_fetch_assoc($sql);
+	/* clean up search string */
+	if (isset($_REQUEST["filter"])) {
+		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+	}
 
+	/* clean up sort_column */
+	if (isset($_REQUEST["sort_column"])) {
+		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
+	}
+
+	/* clean up sort_direction string */
+	if (isset($_REQUEST["sort_direction"])) {
+		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
+	}
+
+	/* if the user pushed the 'clear' button */
+	if (isset($_REQUEST["clear"])) {
+		kill_session_var("sess_schedules_current_page");
+		kill_session_var("sess_schedules_filter");
+		kill_session_var("sess_schedules_sort_column");
+		kill_session_var("sess_schedules_sort_direction");
+
+		unset($_REQUEST["page"]);
+		unset($_REQUEST["filter"]);
+		unset($_REQUEST["sort_column"]);
+		unset($_REQUEST["sort_direction"]);
+	}
+
+	/* remember these search fields in session vars so we don't have to keep passing them around */
+	load_current_session_value("page", "sess_schedules_current_page", "1");
+	load_current_session_value("filter", "sess_schedules_filter", "");
+	load_current_session_value("sort_column", "sess_schedules_sort_column", "name");
+	load_current_session_value("sort_direction", "sess_schedules_sort_direction", "ASC");
+
+	html_start_box("<strong>Host Templates</strong>", "100%", $colors["header"], "3", "center", "flowview_schedules.php?action=edit");
+	?>
+	<tr bgcolor="#<?php print $colors["panel"];?>">
+		<td>
+		<form name="form_schedule" action="flowview_schedules.php">
+			<table width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+					<td nowrap style='white-space: nowrap;' width="50">
+						Search:&nbsp;
+					</td>
+					<td width="1">
+						<input type="text" name="filter" size="40" value="<?php print htmlspecialchars(get_request_var_request("filter"));?>">
+					</td>
+					<td nowrap style='white-space: nowrap;'>
+						&nbsp;<input type="submit" value="Go" title="Set/Refresh Filters">
+						<input type="submit" name="clear" value="Clear" title="Clear Filters">
+					</td>
+				</tr>
+			</table>
+		<input type='hidden' name='page' value='1'>
+		</form>
+		</td>
+	</tr>
+	<?php
+	html_end_box();
+
+	$sql_where = "WHERE (name LIKE '%%" . get_request_var_request("filter") . "%%')";
+	$num_rows  = read_config_option("num_rows_device");
 	define("MAX_DISPLAY_PAGES", 21);
-	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_schedules");
+
+	$sql = "SELECT pfs.*, pfq.name 
+		FROM plugin_flowview_schedules AS pfs
+		LEFT JOIN plugin_flowview_queries AS pfq 
+		ON (pfs.savedquery=pfq.id) 
+		$sql_where
+		ORDER BY " . get_request_var_request("sort_column") . " " . get_request_var_request("sort_direction") . "
+		LIMIT " . ($num_rows*($_REQUEST["page"]-1)) . ", $num_rows";
+
+	$result     = db_fetch_assoc($sql);
+	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_schedules $sql_where");
+
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_schedules.php?");
 
-	html_start_box("", "100%", $colors["header"], "4", "center", "");
+	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	if ($total_rows > 0) {
 		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='10'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-							<td align='left' class='textHeaderDark'>
-								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-							</td>\n
-							<td align='center' class='textHeaderDark'>
-								Showing Rows " . (($num_rows*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $num_rows) || ($total_rows < ($num_rows*$_REQUEST["page"]))) ? $total_rows : ($num_rows*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-							</td>\n
-							<td align='right' class='textHeaderDark'>
-								<strong>"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
+			<td colspan='10'>
+				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+					<tr>
+						<td align='left' class='textHeaderDark'>
+							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]-1) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
+						</td>\n
+						<td align='center' class='textHeaderDark'>
+							Showing Rows " . (($num_rows*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $num_rows) || ($total_rows < ($num_rows*$_REQUEST["page"]))) ? $total_rows : ($num_rows*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
+						</td>\n
+						<td align='right' class='textHeaderDark'>
+							<strong>"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "<a class='linkOverDark' href='flowview_schedules.php?page=" . ($_REQUEST["page"]+1) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
+						</td>\n
+					</tr>
+				</table>
+			</td>
+		</tr>\n";
 	}else{
 		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='10'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-							<td align='center' class='textHeaderDark'>
-								No Rows Found
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
+			<td colspan='10'>
+				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
+					<tr>
+						<td align='center' class='textHeaderDark'>
+							No Rows Found
+						</td>\n
+					</tr>
+				</table>
+			</td>
+		</tr>\n";
 	}
 
 	print $nav;
-	html_header_checkbox(array('Query', 'Interval', 'Start Date', 'Next Send', 'Email', 'Enabled'));
+	$display_array = array(
+		'name'                  => array('Query', 'ASC'),
+		'sendinterval'          => array('Interval', 'ASC'),
+		'start'                 => array('Start Date', 'ASC'),
+		'lastsent+sendinterval' => array('Next Send', 'ASC'),
+		'email'                 => array('Email', 'ASC'),
+		'enabled'               => array('Enabled', 'ASC')
+	);
+
+	html_header_sort_checkbox($display_array, get_request_var_request("sort_column"), get_request_var_request("sort_direction"), false);
 
 	$i=0;
 	if (count($result)) {
@@ -398,13 +470,5 @@ function show_schedules () {
 	}
 	html_end_box(false);
 	draw_actions_dropdown($ds_actions);
-
-	print "&nbsp;&nbsp;&nbsp;<input type='button' onClick='javascript:document.location=\"flowview_schedules.php?action=edit\"' value='Add'>";
-
 }
-
-
-
-
-
 

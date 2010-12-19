@@ -28,7 +28,9 @@ function plugin_flowview_install () {
 	api_plugin_register_hook('flowview', 'config_settings',       'flowview_config_settings',      'setup.php');
 	api_plugin_register_hook('flowview', 'poller_bottom',         'flowview_poller_bottom',        'setup.php');
 	api_plugin_register_hook('flowview', 'top_header_tabs',       'flowview_show_tab',             'setup.php');
-        api_plugin_register_hook('flowview', 'top_graph_header_tabs', 'flowview_show_tab',             'setup.php');
+	api_plugin_register_hook('flowview', 'top_graph_header_tabs', 'flowview_show_tab',             'setup.php');
+	api_plugin_register_hook('flowview', 'page_head',             'flowview_page_head',            'setup.php');
+	api_plugin_register_hook('flowview', 'page_bottom',           'flowview_page_bottom',          'setup.php');
 
 	api_plugin_register_realm('flowview', 'flowview.php', 'Plugin -> Flow Viewer', 1);
 	api_plugin_register_realm('flowview', 'flowview_report.php,flowview_devices.php,flowview_schedules.php', 'Plugin -> Flow Admin', 1);
@@ -80,12 +82,15 @@ function plugin_flowview_version () {
 }
 
 function flowview_config_arrays () {
-	global $menu;
+	global $menu, $messages;
 
 	$temp = $menu["Utilities"]['logout.php'];
 	unset($menu["Utilities"]['logout.php']);
 	$menu["Utilities"]['plugins/flowview/flowview.php'] = "Flow Viewer";
 	$menu["Utilities"]['logout.php'] = $temp;
+
+	$messages['flow_deleted'] = array('message' => 'The Filter has been Deleted', 'type' => 'info');
+	$messages['flow_updated'] = array('message' => 'The Filter has been Updated', 'type' => 'info');
 }
 
 function flowview_draw_navigation_text ($nav) {
@@ -116,6 +121,31 @@ function flowview_show_tab() {
 	}
 }
 
+function flowview_page_head() {
+	global $config, $colors;
+	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.min.js'></script>\n";
+	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery-ui.min.js'></script>\n";
+	print "\t<link href='" . $config['url_path'] . "plugins/flowview/css/jquery-ui.css' rel='stylesheet'>\n";
+}
+
+function flowview_page_bottom() {
+	print "<div id='fdialog' style='text-align:center;display:none;'>
+		<table>
+			<tr>
+				<td><strong>Filter:</strong></td>
+				<td><input type='text' size='40' name='squery' id='squery' value='New Query'></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td align='right'>
+					<input id='qcancel' type='button' value='Cancel'>
+					<input id='qsave' type='button' value='Save'>
+				</td>
+			</tr>
+		</table>
+	</div>";
+}
+
 function flowview_config_settings () {
 	global $settings, $tabs;
 	$temp = array(
@@ -128,21 +158,21 @@ function flowview_config_settings () {
 			"description" => "The path to your flow-cat, flow=filter, and flow-stat binary.",
 			"method" => "dirpath",
 			"max_length" => 255,
-			'default' => '/usr/bin/'
+			'default' => '/usr/bin'
 		),
 		"path_flowtools_workdir" => array(
 			"friendly_name" => "Flow Tools Work Directory",
 			"description" => "This is the path to a temporary directory to do work.",
 			"method" => "dirpath",
 			"max_length" => 255,
-			'default' => '/tmp/'
+			'default' => '/tmp'
 		),
 		"path_flows_dir" => array(
 			"friendly_name" => "Flows Directory",
 			"description" => "This is the path to base the path of your flow folder structure.",
 			"method" => "dirpath",
 			"max_length" => 255,
-			'default' => '/var/netflow/flows/completed/'
+			'default' => '/var/netflow/flows/completed'
 		),
 	);
 
@@ -238,8 +268,8 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'printed', 'type' => 'int(3)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'includeif', 'type' => 'int(2)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'sortfield', 'type' => 'int(2)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'cutofflines', 'type' => 'int(4)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'curoffoctets', 'type' => 'varchar(8)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'cutofflines', 'type' => 'varchar(8)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'cutoffoctets', 'type' => 'varchar(8)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'resolve', 'type' => 'varchar(2)', 'NULL' => false);
 	$data['primary']   = 'id';
 	$data['keys'][]    = array('name' => 'name', 'columns' => 'name');
@@ -260,4 +290,17 @@ function flowview_setup_table () {
 	$data['type']      = 'MyISAM';
 	$data['comment']   = 'Plugin Flowview - Scheduling for running and emails of saved queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_schedules', $data);
+
+	$data = array();
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
+	$data['columns'][] = array('name' => 'begin_port', 'type' => 'int(12)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'end_port',   'type' => 'int(12)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'tcp',        'type' => 'tinyint', 'NULL' => false, 'default' => 0);
+	$data['columns'][] = array('name' => 'udp',        'type' => 'tinyint', 'NULL' => false, 'default' => 0);
+	$data['columns'][] = array('name' => 'description','type' => 'varchar(255)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'status',     'type' => 'tinyint', 'NULL' => false, 'default' => 0);
+	$data['primary']   = 'id';
+	$data['type']      = 'MyISAM';
+	$data['comment']   = 'Plugin Flowview - Database of well known Ports';
+	api_plugin_db_table_create ('flowview', 'plugin_flowview_ports', $data);
 }
