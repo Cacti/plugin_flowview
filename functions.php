@@ -26,8 +26,8 @@ function flowview_display_report() {
 	global $config, $colors;
 
 	if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'current') {
-		$current = $_SESSION['flowview_current_flow'];
-		$_REQUEST['query'] = $current;
+		$_POST = $_SESSION['flowview_current_flow'];
+		$_REQUEST['query'] = $_POST['query'];
 		$_REQUEST['action'] = 'view';
 	}
 
@@ -81,14 +81,20 @@ function display_tabs () {
 			<span class='textHeader'><a href='flowview.php?tab=filters'>Filters</a></span>
 			</td>\n
 			<td width='1'></td>\n";
-	print "<td bgcolor='" . ($ct == 'listeners' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Listeners') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview_devices.php?tab=listeners'>Listeners</a></span>
-			</td>\n
-			<td width='1'></td>\n";
-	print "<td bgcolor='" . ($ct == 'sched' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview_schedules.php?tab=sched'>Schedules</a></span>
-			</td>\n
-			<td width='1'></td>\n";
+	if (api_user_realm_auth('flowview_devices.php')) {
+		print "<td bgcolor='" . ($ct == 'listeners' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Listeners') * 9) . "' align='center' class='tab'>
+				<span class='textHeader'><a href='flowview_devices.php?tab=listeners'>Listeners</a></span>
+				</td>\n
+				<td width='1'></td>\n";
+	}
+
+	if (api_user_realm_auth('flowview_schedules.php')) {
+		print "<td bgcolor='" . ($ct == 'sched' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
+				<span class='textHeader'><a href='flowview_schedules.php?tab=sched'>Schedules</a></span>
+				</td>\n
+				<td width='1'></td>\n";
+	}
+
 	if (isset($_SESSION['flowview_current_flow'])) {
 		print "<td bgcolor='" . ($ct == 'current' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Current Flow') * 9) . "' align='center' class='tab'>
 				<span class='textHeader'><a href='flowview.php?tab=current'>Current Flow</a></span>
@@ -101,8 +107,8 @@ function display_tabs () {
 function plugin_flowview_run_schedule($id) {
 	global $config;
 
-	$schedule = db_fetch_row("SELECT * FROM plugin_flowview_schedules WHERE id = $id");
-	$query    = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id = " . $schedule['savedquery']);
+	$schedule = db_fetch_row("SELECT * FROM plugin_flowview_schedules WHERE id=$id");
+	$query    = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id=" . $schedule['savedquery']);
 
 	$fromname = read_config_option('settings_from_name');
 	if (strlen($fromname) < 1) {
@@ -117,11 +123,11 @@ function plugin_flowview_run_schedule($id) {
 	$subject = 'Netflow - ' . $query['name'];
 
 	$_REQUEST['schedule'] = $id;
-	$_REQUEST['query'] = $schedule['savedquery'];
-	$_REQUEST['action'] = 'loadquery';
+	$_REQUEST['query']    = $schedule['savedquery'];
+	$_REQUEST['action']   = 'loadquery';
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 
-	$message = createfilter ();
+	$message = createfilter();
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
 }
 
@@ -232,7 +238,7 @@ function createfilter ($current='') {
 	@fclose($f);
 
 	/* prime the UI */
-	$_SESSION['flowview_current_flow'] = $_REQUEST['query'];
+	$_SESSION['flowview_current_flow'] = $_POST;
 	$_REQUEST['tab'] = 'current';
 
 	/* Run the command */

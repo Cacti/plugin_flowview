@@ -192,6 +192,7 @@ function flowview_display_form() {
 		<td colspan='9'>
 			<input type='hidden' id='action' name='action' value='view'>
 			<input type='hidden' id='new_query' name='new_query' value=''>
+			<input type='hidden' id='changed' name='changed' value='0'>
 			<center>
 				<input id='view' type='button' name='view' value='View'>
 				<input id='defaults' type='button' value='Defaults'>
@@ -210,7 +211,7 @@ function flowview_display_form() {
 	?>
 	<script type="text/javascript">
 	<!--
-	function StatSelect() {
+	function statSelect() {
 		stat = document.flowview.stat_report;
 		statval = stat.options[stat.selectedIndex].value;
 		SetStatOption(stat.value);
@@ -228,7 +229,7 @@ function flowview_display_form() {
 		}
 	}
 
-	function PrintSelect() {
+	function printSelect() {
 		stat = document.flowview.print_report;
 		statval = stat.options[stat.selectedIndex].value;
 		if (statval > 0) {
@@ -247,6 +248,7 @@ function flowview_display_form() {
 	}
 
 	$('#device_name').change(function () {
+		<?php if (api_user_realm_auth('flowview_devices.php')) { ?>
 		if ($(this).val() == 0) {
 			$('#view').attr('disabled', 'disabled');
 			$('#save').attr('disabled', 'disabled');
@@ -254,21 +256,38 @@ function flowview_display_form() {
 			$('#view').removeAttr('disabled');
 			$('#save').removeAttr('disabled');
 		}
+		<?php }else{ ?>
+		if ($(this).val() == 0) {
+			$('#view').attr('disabled', 'disabled');
+		}else{
+			$('#view').removeAttr('disabled');
+		}
+		<?php } ?>
 	});
 
 	$().ready(function () {
 		$('#saveas').hide();
+		<?php if (api_user_realm_auth('flowview_devices.php')) { ?>
 		if ($('#query').val() == 0) {
 			$('#delete').hide();
 		}else{
 			$('#save').attr('value', 'Update');
 			$('#saveas').show();
 		}
+		<?php }else{ ?>
+		$('#delete').hide();
+		$('#save').hide();
+		<?php } ?>
 
 		$('#query').change(function() {
 			window.location="flowview.php?action=loadquery&query="+$('#query').val();
 		});
 
+		$('#flowview').change(function() {
+			$('#changed').attr('value', '1');
+		});
+
+		<?php if (api_user_realm_auth('flowview_devices.php')) { ?>
 		if ($('#device_name').val() == 0) {
 			$('#view').attr('disabled', 'disabled');
 			$('#save').attr('disabled', 'disabled');
@@ -276,16 +295,24 @@ function flowview_display_form() {
 			$('#view').removeAttr('disabled');
 			$('#save').removeAttr('disabled');
 		}
+		<?php }else{ ?>
+		if ($('#device_name').val() == 0) {
+			$('#view').attr('disabled', 'disabled');
+		}else{
+			$('#view').removeAttr('disabled');
+		}
+		<?php } ?>
 
 		$('#stat_report').change(function() {
-			StatSelect();
-		});
-		$('#print_report').change(function() {
-			PrintSelect();
+			statSelect();
 		});
 
-		StatSelect();
-		PrintSelect();
+		$('#print_report').change(function() {
+			printSelect();
+		});
+
+		statSelect();
+		printSelect();
 
 		$("#fdialog").dialog({
 			autoOpen: false,
