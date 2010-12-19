@@ -29,7 +29,7 @@ include("./include/auth.php");
 
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
-$sched_actions = array(1 => "Delete", 2 => "Send Now");
+$sched_actions = array(2 => "Send Now", 1 => "Delete", 3 => "Disable", 4 => "Enable");
 
 $action = "";
 if (isset($_POST['action'])) {
@@ -51,6 +51,15 @@ $sendinterval_arr = array(
 );
 
 $schedule_edit = array(
+	"title" => array(
+		"friendly_name" => "Title",
+		"method" => "textbox",
+		"default" => "New Schedule",
+		"description" => "Enter a Report Title for the FlowView Schedule.",
+		"value" => "|arg1:title|",
+		"max_length" => 128,
+		"size" => 60
+	),
 	"enabled" => array(
 		"friendly_name" => "Enabled",
 		"method" => "checkbox",
@@ -129,6 +138,20 @@ function actions_schedules () {
 				/* ==================================================== */
 				db_execute("DELETE FROM plugin_flowview_schedules WHERE id = " . $selected_items[$i]);
 			}
+		}elseif ($_POST["drp_action"] == "3") {
+			for ($i=0; $i<count($selected_items); $i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+				db_execute("UPDATE plugin_flowview_schedules SET enabled='' WHERE id = " . $selected_items[$i]);
+			}
+		}elseif ($_POST["drp_action"] == "4") {
+			for ($i=0; $i<count($selected_items); $i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+				db_execute("UPDATE plugin_flowview_schedules SET enabled='on' WHERE id = " . $selected_items[$i]);
+			}
 		}elseif ($_POST["drp_action"] == "2") {
 			for ($i=0; $i<count($selected_items); $i++) {
 				/* ================= input validation ================= */
@@ -168,14 +191,28 @@ function actions_schedules () {
 	if ($_POST["drp_action"] == "1") { /* Delete */
 		print "	<tr>
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
-					<p>To delete the following schedule(s), press the 'Continue' button.</p>
+					<p>To delete the following Schedule(s), press the 'Continue' button.</p>
 					<p><ul>$schedule_list</ul></p>
 				</td>
 				</tr>";
-	}else{
+	}elseif ($_POST["drp_action"] == "2") { /* Send Now */
 		print "	<tr>
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
-					<p>To send the following schedule(s), press the 'Continue' button.</p>
+					<p>To send the following Schedule(s), press the 'Continue' button.</p>
+					<p><ul>$schedule_list</ul></p>
+				</td>
+				</tr>";
+	}elseif ($_POST["drp_action"] == "3") { /* Disable */
+		print "	<tr>
+				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+					<p>To Disable the following Schedule(s), press the 'Continue' button.</p>
+					<p><ul>$schedule_list</ul></p>
+				</td>
+				</tr>";
+	}elseif ($_POST["drp_action"] == "4") { /* Enable */
+		print "	<tr>
+				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+					<p>To Enable the following Schedule(s), press the 'Continue' button.</p>
 					<p><ul>$schedule_list</ul></p>
 				</td>
 				</tr>";
@@ -204,14 +241,15 @@ function actions_schedules () {
 	include_once("./include/bottom_footer.php");
 }
 
-function save_schedules () {
+function save_schedules() {
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_post('id'));
 	input_validate_input_number(get_request_var_post('savedquery'));
 	input_validate_input_number(get_request_var_post('sendinterval'));
 	/* ==================================================== */
 
-	$save['savedquery'] = $_POST['savedquery'];
+	$save['title']        = sql_sanitize($_POST['title']);
+	$save['savedquery']   = $_POST['savedquery'];
 	$save['sendinterval'] = $_POST['sendinterval'];
 	$save['start'] = sql_sanitize($_POST['start']);
 	$save['email'] = sql_sanitize($_POST['email']);
@@ -374,7 +412,7 @@ function show_schedules () {
 	/* remember these search fields in session vars so we don't have to keep passing them around */
 	load_current_session_value("page", "sess_schedules_current_page", "1");
 	load_current_session_value("filter", "sess_schedules_filter", "");
-	load_current_session_value("sort_column", "sess_schedules_sort_column", "name");
+	load_current_session_value("sort_column", "sess_schedules_sort_column", "title");
 	load_current_session_value("sort_direction", "sess_schedules_sort_direction", "ASC");
 
 	html_start_box("<strong>Host Templates</strong>", "100%", $colors["header"], "3", "center", "flowview_schedules.php?action=edit");
@@ -459,6 +497,7 @@ function show_schedules () {
 
 	print $nav;
 	$display_array = array(
+		'title'                 => array('Schedule Title', 'ASC'),
 		'name'                  => array('Filter Name', 'ASC'),
 		'sendinterval'          => array('Interval', 'ASC'),
 		'start'                 => array('Start Date', 'ASC'),
@@ -473,7 +512,8 @@ function show_schedules () {
 	if (count($result)) {
 		foreach ($result as $row) {
 			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $row['id']); $i++;
-			form_selectable_cell('<a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a>', $row['id']);
+			form_selectable_cell('<a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['title'] . '</strong></a>', $row['id']);
+			form_selectable_cell($row['name'], $row['id']);
 			form_selectable_cell($sendinterval_arr[$row['sendinterval']], $row['id']);
 			form_selectable_cell($row['start'], $row['id']);
 			form_selectable_cell(date("Y-m-d G:i:s", $row['lastsent']+$row['sendinterval']), $row['id']);

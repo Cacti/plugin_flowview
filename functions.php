@@ -123,7 +123,7 @@ function plugin_flowview_run_schedule($id) {
 		$from = 'cacti@cactiusers.org';
 	}
 
-	$subject = 'Netflow - ' . $query['name'];
+	$subject = 'Netflow - ' . $schedule['title'];
 
 	$_REQUEST['schedule'] = $id;
 	$_REQUEST['query']    = $schedule['savedquery'];
