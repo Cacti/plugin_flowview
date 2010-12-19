@@ -107,11 +107,11 @@ function flowview_display_form() {
 
 	print '<form id="flowview" action="' . $config['url_path'] . 'plugins/flowview/flowview.php" method="post" name="flowview">';
 	display_tabs ();
-	html_start_box("<strong>Flow Filter Constraints</strong>", "100%", $colors["header"], "1", "center", "");
+	html_start_box("<strong>Flow Filter Constraints</strong>", "100%", $colors["header"], "3", "center", "");
 	?>
 	<tr>
 		<td>
-			<table border='0' cellspacing='0' cellpadding='3' width='100%' style='white-space:nowrap;'>
+			<table border='0' cellspacing='0' cellpadding='0' width='100%' style='white-space:nowrap;'>
 				<tr>
 					<td>Saved Query:</td>
 					<td><?php draw_edit_control("query", $query_name_field);?></td>

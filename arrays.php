@@ -140,7 +140,7 @@ $cutoff_lines_field = array("friendly_name" => '',
 	"description" => '',
 	"value" => (isset($_POST['cutoff_lines']) ? $_POST['cutoff_lines'] : 0),
 	"array" => array(
-		'999999999' => 'All',
+		'999999' => 'All',
 		'5'  => 'Top 5', 
 		'10'  => 'Top 10', 
 		'20'  => 'Top 20', 
