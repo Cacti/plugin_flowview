@@ -49,13 +49,25 @@ if (read_config_option("auth_method") != 0) {
 $page_title = api_plugin_hook_function('page_title', 'Cacti');
 
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title><?php echo $page_title; ?></title>
+	<?php
+	if (isset($_SESSION["custom"]) && ($_SESSION["custom"] == 0)) {
+		print "<meta http-equiv=refresh content='99999'>\r\n";
+	}else{
+		$refresh = api_plugin_hook_function('top_graph_refresh', '0');
+
+		if ($refresh > 0) {
+			print "<meta http-equiv=refresh content='" . htmlspecialchars($refresh,ENT_QUOTES) . "'>\r\n";
+		}
+	}
+	?>
 	<link href="<?php echo $config['url_path']; ?>include/main.css" rel="stylesheet">
-	<link href="<?php echo $config['url_path']; ?>images/favicon.ico" rel="shortcut icon"/>
-	<script type='text/javascript' src='<?php echo $config["url_path"]; ?>include/layout.js'></script>
-	<script type='text/javascript' src='<?php echo $config["url_path"]; ?>plugins/slowlog/js/swfobject.js'></script>
+	<link href="<?php echo $config['url_path']; ?>images/favicon.ico" rel="shortcut icon">
+	<script type="text/javascript" src="<?php echo $config['url_path']; ?>include/layout.js"></script>
+	<?php api_plugin_hook('page_head'); ?>	
 </head>
 <?php if ($oper_mode == OPER_MODE_NATIVE) {?>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" <?php print api_plugin_hook_function("body_style", "");?>>
@@ -64,9 +76,9 @@ $page_title = api_plugin_hook_function('page_title', 'Cacti');
 <body leftmargin="15" topmargin="15" marginwidth="15" marginheight="15" <?php print api_plugin_hook_function("body_style", "");?>>
 <?php }?>
 
-<table width="100%" height="100%" cellspacing="0" cellpadding="0">
+<table style="width:100%;height:100%;" cellspacing="0" cellpadding="0">
 <?php if ($oper_mode == OPER_MODE_NATIVE) { ;?>
-	<tr height="37" bgcolor="#a9a9a9" class="noprint">
+	<tr style="height:25px;" bgcolor="#a9a9a9" class="noprint">
 		<td colspan="2" valign="bottom" nowrap>
 			<table width="100%" cellspacing="0" cellpadding="0">
 				<tr style="background: transparent url('<?php print $config['url_path'];?>images/cacti_backdrop2.gif') no-repeat center right;">
@@ -79,9 +91,9 @@ $page_title = api_plugin_hook_function('page_title', 'Cacti');
 			</table>
 		</td>
 	</tr>
-	<tr height="2" colspan="2" bgcolor="#183c8f" class="noprint">
+	<tr style="height:2px;" bgcolor="#183c8f">
 		<td colspan="2">
-			<img src="<?php echo $config['url_path']; ?>images/transparent_line.gif" width="170" height="2" border="0"><br>
+			<img src="<?php echo $config['url_path']; ?>images/transparent_line.gif" style="height:2px;" border="0"><br>
 		</td>
 	</tr>
 	<tr height="5" bgcolor="#e9e9e9" class="noprint">
