@@ -60,14 +60,14 @@ $schedule_edit = array(
 	),
 	"savedquery" => array(
 		"method" => "drop_sql",
-		"friendly_name" => "Query Name",
+		"friendly_name" => "Filter Name",
 		"description" => "Name of the query to run.",
 		"value" => "|arg1:savedquery|",
 		"sql" => "SELECT id, name FROM plugin_flowview_queries"
 	),
 	"sendinterval" => array(
 		"friendly_name" => "Send Interval",
-		"description" => "How often to send this Netflow Query.",
+		"description" => "How often to send this Netflow Report?",
 		"value" => "|arg1:sendinterval|",
 		"method" => "drop_array",
 		'default' => '0',
@@ -443,7 +443,7 @@ function show_schedules () {
 
 	print $nav;
 	$display_array = array(
-		'name'                  => array('Query', 'ASC'),
+		'name'                  => array('Filter Name', 'ASC'),
 		'sendinterval'          => array('Interval', 'ASC'),
 		'start'                 => array('Start Date', 'ASC'),
 		'lastsent+sendinterval' => array('Next Send', 'ASC'),
@@ -457,7 +457,7 @@ function show_schedules () {
 	if (count($result)) {
 		foreach ($result as $row) {
 			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-			print '<td><a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
+			print '<td><a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a></td>';
 			print '<td>' . $sendinterval_arr[$row['sendinterval']] . '</td>';
 			print '<td>' . $row['start'] . '</td>';
 			print '<td>' . date("Y-m-d G:i:s", $row['lastsent']+$row['sendinterval']) . '</td>';
