@@ -129,8 +129,12 @@ function plugin_flowview_run_schedule($id) {
 	$_REQUEST['query']    = $schedule['savedquery'];
 	$_REQUEST['action']   = 'loadquery';
 	include($config['base_path'] . '/plugins/flowview/variables.php');
-
-	$message = createfilter();
+	$message  = "<body style='margin:10px;'>";
+	$message .= "<style type='text/css'>\n";
+	$message .= file_get_contents($config['base_path'] . '/include/main.css');
+	$message .= "</style>";
+	$message .= createfilter();
+	$message .= "</body>";
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
 }
 
@@ -289,6 +293,7 @@ function parseSummaryReport($output) {
 	/* do some output buffering */
 	ob_start();
 
+	html_start_box("<strong>Summary Statistics</strong>", "100%", $colors["header"], "3", "center", "");
 	if (sizeof($output)) {
 		foreach($output as $l) {
 			$l = trim($l);
@@ -367,6 +372,7 @@ function parseSummaryReport($output) {
 			$i++;
 		}
 	}
+	html_end_box(false);
 
 	return ob_get_clean();
 }

@@ -227,7 +227,7 @@ function actions_devices () {
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$device_list .= "<li>" . db_fetch_cell("select name from plugin_flowview_devices where id=" . $matches[1]) . "<br>";
+			$device_list .= "<li>" . db_fetch_cell("select name from plugin_flowview_devices where id=" . $matches[1]) . "</li>";
 			$device_array[$i] = $matches[1];
 		}
 		$i++;
@@ -243,8 +243,9 @@ function actions_devices () {
 	if ($_POST["drp_action"] == "1") { /* Delete */
 		print "	<tr>
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
-					<p>To delete the following devices, press the \"yes\" button below.</p>
-					<p>$device_list</p>
+					<p>To delete the following Net-Flow Listeners, press the 'Continue' button below.  After which, you will need to restart your Flow-Capture Service.</p>
+					<p>Also, remember to remove any left over files from your Net-Flow Capture location.</p>
+					<p><ul>$device_list</ul></p>
 				</td>
 				</tr>";
 	}
@@ -253,7 +254,7 @@ function actions_devices () {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one device.</span></td></tr>\n";
 		$save_html = "";
 	}else{
-		$save_html = "<input type='submit' value='Save'>";
+		$save_html = "<input type='submit' value='Continue'>";
 	}
 
 	print "	<tr>
@@ -391,6 +392,9 @@ function show_devices () {
 	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices $sql_where");
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_devices.php?");
 
+	/* print checkbox form for validation */
+	print "<form name='chk' method='post' action='flowview_devices.php'>\n";
+
 	html_start_box("<strong>FlowView Listeners</strong>", "100%", $colors["header"], "4", "center", "flowview_devices.php?action=edit");
 
 	?>
@@ -472,19 +476,18 @@ function show_devices () {
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-			print '<td><a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a></td>';
-			print '<td>' . $row['folder'] . '</td>';
-			print '<td>' . $nesting_arr[$row['nesting']] . '</td>';
-			print '<td>' . $row['allowfrom'] . '</td>';
-			print '<td>' . $row['port'] . '</td>';
-			print '<td>' . $version_arr[$row['version']] . '</td>';
-			print '<td>' . $row['compression'] . '</td>';
-			print '<td>' . $rotation_arr[$row['rotation']] . '</td>';
-			print '<td>' . $expire_arr[$row['expire']] . '</td>';
-			print '<td style="' . get_checkbox_style() . '" width="1%" align="right">';
-			print '<input type="checkbox" style="margin: 0px;" name="chk_' . $row["id"] . '" title="' . $row["name"] . '"></td>';
-			print "</tr>";
+			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $row['id']); $i++;
+			form_selectable_cell('<a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a>', $row['id']);
+			form_selectable_cell($row['folder'], $row['id']);
+			form_selectable_cell($nesting_arr[$row['nesting']], $row['id']);
+			form_selectable_cell($row['allowfrom'], $row['id']);
+			form_selectable_cell($row['port'], $row['id']);
+			form_selectable_cell($version_arr[$row['version']], $row['id']);
+			form_selectable_cell($row['compression'], $row['id']);
+			form_selectable_cell($rotation_arr[$row['rotation']], $row['id']);
+			form_selectable_cell($expire_arr[$row['expire']], $row['id']);
+			form_checkbox_cell($row['name'], $row['id']);
+			form_end_row();
 		}
 
 		print $nav;

@@ -29,7 +29,7 @@ include("./include/auth.php");
 
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
-$ds_actions = array(1 => "Delete");
+$sched_actions = array(1 => "Delete", 2 => "Send Now");
 
 $action = "";
 if (isset($_POST['action'])) {
@@ -119,7 +119,7 @@ switch ($action) {
 }
 
 function actions_schedules () {
-	global $colors, $ds_actions, $config;
+	global $colors, $sched_actions, $config;
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
 		if ($_POST["drp_action"] == "1") {
@@ -129,14 +129,20 @@ function actions_schedules () {
 				/* ==================================================== */
 				db_execute("DELETE FROM plugin_flowview_schedules WHERE id = " . $selected_items[$i]);
 			}
+		}elseif ($_POST["drp_action"] == "2") {
+			for ($i=0; $i<count($selected_items); $i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+				plugin_flowview_run_schedule($selected_items[$i]);
+			}
 		}
 		header("Location: flowview_schedules.php");
 		exit;
 	}
 
 	/* setup some variables */
-	$device_list = "";
-	$i = 0;
+	$schedule_list = "";
 
 	/* loop through each of the devices selected on the previous page and get more info about them */
 	while (list($var,$val) = each($_POST)) {
@@ -145,40 +151,47 @@ function actions_schedules () {
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$device_list .= "<li>" . db_fetch_cell("select name from plugin_flowview_schedules where id=" . $matches[1]) . "<br>";
-			$device_array[$i] = $matches[1];
+			$schedule_list .= "<li>" . db_fetch_cell("SELECT name FROM plugin_flowview_queries AS pfq
+				INNER JOIN plugin_flowview_schedules AS pfs 
+				ON pfq.id=pfs.savedquery
+				WHERE pfs.id=" . $matches[1]) . "</li>";
+			$schedule_array[] = $matches[1];
 		}
-		$i++;
 	}
 
 	include_once("./plugins/flowview/general_header.php");
 
-	display_tabs ();
-
-	html_start_box("<strong>" . $ds_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
+	html_start_box("<strong>" . $sched_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
 
 	print "<form action='flowview_schedules.php' method='post'>\n";
 
 	if ($_POST["drp_action"] == "1") { /* Delete */
 		print "	<tr>
 				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
-					<p>To delete the following schedules, press the \"yes\" button below.</p>
-					<p>$device_list</p>
+					<p>To delete the following schedule(s), press the 'Continue' button.</p>
+					<p><ul>$schedule_list</ul></p>
+				</td>
+				</tr>";
+	}else{
+		print "	<tr>
+				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+					<p>To send the following schedule(s), press the 'Continue' button.</p>
+					<p><ul>$schedule_list</ul></p>
 				</td>
 				</tr>";
 	}
 
-	if (!isset($device_array)) {
+	if (!isset($schedule_array)) {
 		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one schedule.</span></td></tr>\n";
 		$save_html = "";
 	}else{
-		$save_html = "<input type='submit' value='Save'>";
+		$save_html = "<input type='submit' value='Continue'>";
 	}
 
 	print "	<tr>
 			<td colspan='2' align='right' bgcolor='#eaeaea'>
 				<input type='hidden' name='action' value='actions'>
-				<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
+				<input type='hidden' name='selected_items' value='" . (isset($schedule_array) ? serialize($schedule_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
 				<input type='button' onClick='javascript:document.location=\"flowview_schedules.php\"' value='Cancel'>
 				$save_html
@@ -324,7 +337,7 @@ function edit_schedule() {
 }
 
 function show_schedules () {
-	global $sendinterval_arr, $colors, $config, $ds_actions;
+	global $sendinterval_arr, $colors, $config, $sched_actions;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_request("page"));
@@ -407,6 +420,9 @@ function show_schedules () {
 
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_schedules.php?");
 
+    /* print checkbox form for validation */
+    print "<form name='chk' method='post' action='flowview_schedules.php'>\n";
+
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
 	if ($total_rows > 0) {
@@ -456,19 +472,18 @@ function show_schedules () {
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
-			form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
-			print '<td><a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a></td>';
-			print '<td>' . $sendinterval_arr[$row['sendinterval']] . '</td>';
-			print '<td>' . $row['start'] . '</td>';
-			print '<td>' . date("Y-m-d G:i:s", $row['lastsent']+$row['sendinterval']) . '</td>';
-			print '<td>' . $row['email'] . '</td>';
-			print '<td>' . ($row['enabled'] == 'on' ? "<font color=green><b>Yes</b></font>" :  "<font color=red><b>No</b></font>" ). '</td>';
-			print '<td style="' . get_checkbox_style() . '" width="1%" align="right">';
-			print '<input type="checkbox" style="margin: 0px;" name="chk_' . $row["id"] . '" title="' . $row["name"] . '"></td>';
-			print "</tr>";
+			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $row['id']); $i++;
+			form_selectable_cell('<a href="flowview_schedules.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a>', $row['id']);
+			form_selectable_cell($sendinterval_arr[$row['sendinterval']], $row['id']);
+			form_selectable_cell($row['start'], $row['id']);
+			form_selectable_cell(date("Y-m-d G:i:s", $row['lastsent']+$row['sendinterval']), $row['id']);
+			form_selectable_cell($row['email'], $row['id']);
+			form_selectable_cell(($row['enabled'] == 'on' ? "<font color=green><b>Yes</b></font>":"<font color=red><b>No</b></font>"), $row['id']);
+			form_checkbox_cell($row['name'], $row['id']);
+			form_end_row();
 		}
 	}
 	html_end_box(false);
-	draw_actions_dropdown($ds_actions);
+	draw_actions_dropdown($sched_actions);
 }
 
