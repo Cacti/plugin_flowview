@@ -33,7 +33,7 @@ function plugin_flowview_install () {
 	api_plugin_register_hook('flowview', 'page_bottom',           'flowview_page_bottom',          'setup.php');
 
 	api_plugin_register_realm('flowview', 'flowview.php', 'Plugin -> Flow Viewer', 1);
-	api_plugin_register_realm('flowview', 'flowview_report.php,flowview_devices.php,flowview_schedules.php', 'Plugin -> Flow Admin', 1);
+	api_plugin_register_realm('flowview', 'flowview_devices.php,flowview_schedules.php', 'Plugin -> Flow Admin', 1);
 
 	flowview_setup_table();
 }
@@ -94,18 +94,18 @@ function flowview_config_arrays () {
 }
 
 function flowview_draw_navigation_text ($nav) {
-	$nav["flowview.php:"] = array("title" => "Flow Viewer", "mapping" => "index.php:", "url" => "flowview.php", "level" => "1");
-	$nav["flowview.php:view"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "2");
-	$nav["flowview.php:save"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "2");
-	$nav["flowview.php:loadquery"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "2");
-	$nav["flowview_devices.php:"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
-	$nav["flowview_devices.php:edit"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
-	$nav["flowview_devices.php:save"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
-	$nav["flowview_devices.php:actions"] = array("title" => "Devices", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "2");
-	$nav["flowview_schedules.php:"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
-	$nav["flowview_schedules.php:edit"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
-	$nav["flowview_schedules.php:save"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
-	$nav["flowview_schedules.php:actions"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "2");
+	$nav["flowview.php:"] = array("title" => "Flow Viewer", "mapping" => "", "url" => "flowview.php", "level" => "0");
+	$nav["flowview.php:view"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "1");
+	$nav["flowview.php:save"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "1");
+	$nav["flowview.php:loadquery"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "1");
+	$nav["flowview_devices.php:"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
+	$nav["flowview_devices.php:edit"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
+	$nav["flowview_devices.php:save"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
+	$nav["flowview_devices.php:actions"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
+	$nav["flowview_schedules.php:"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
+	$nav["flowview_schedules.php:edit"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
+	$nav["flowview_schedules.php:save"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
+	$nav["flowview_schedules.php:actions"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
 	return $nav;
 }
 
@@ -129,7 +129,7 @@ function flowview_page_head() {
 }
 
 function flowview_page_bottom() {
-	print "<div id='fdialog' style='text-align:center;display:none;'>
+	print "	<div id='fdialog' style='text-align:center;display:none;'>
 		<table>
 			<tr>
 				<td><strong>Filter:</strong></td>
@@ -143,7 +143,7 @@ function flowview_page_bottom() {
 				</td>
 			</tr>
 		</table>
-	</div>";
+	</div>\n";
 }
 
 function flowview_config_settings () {
@@ -292,7 +292,7 @@ function flowview_setup_table () {
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_schedules', $data);
 
 	$data = array();
-	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
+	$data['columns'][] = array('name' => 'id',         'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'begin_port', 'type' => 'int(12)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'end_port',   'type' => 'int(12)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'tcp',        'type' => 'tinyint', 'NULL' => false, 'default' => 0);
@@ -303,4 +303,12 @@ function flowview_setup_table () {
 	$data['type']      = 'MyISAM';
 	$data['comment']   = 'Plugin Flowview - Database of well known Ports';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_ports', $data);
+
+	$inserts = file('./plugin_flowview_ports.sql');
+	if (sizeof($inserts)) {
+		db_execute("TRUNCATE plugin_flowview_ports");
+		foreach($inserts as $i) {
+			db_execute($i);
+		}
+	}
 }

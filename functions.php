@@ -64,7 +64,10 @@ function flowview_display_report() {
 	<?php
 }
 
-function display_tabs () {
+function get_port_name($port_num, $port_proto) {
+}
+
+function display_tabs() {
 	/* draw the categories tabs on the top of the page */
 
 	if (isset($_REQUEST['tab'])) {
@@ -136,7 +139,7 @@ function plugin_flowview_run_schedule($id) {
  *  This function creates the NetFlow Report for the UI.  It presents this in a table
  *  format and returns as a test string to the calling function.
  */
-function createfilter ($current='') {
+function createfilter($current='') {
 	global $config;
 
 	include($config['base_path'] . '/plugins/flowview/variables.php');
@@ -270,14 +273,102 @@ function get_column_alignment($column) {
 	}
 }
 
+function parseSummaryReport($output) {
+	global $config, $colors;
+
+	$output = explode("\n", $output);
+
+	$o = '<table width="100%" cellspacing=0 cellpadding=2 border=0 bgcolor="#' . $colors["header"] . '">
+		<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
+
+	$insummary = true;
+	$inippsd   = false;
+	$inppfd    = false;
+	$inopfd    = false;
+	$inftd     = false;
+	$section   = "insummary";
+	$i = 0;
+
+	if (sizeof($output)) {
+		html_start_box("<strong>Summary Statistics</strong>", "100%", $colors["header"], "3", "center", "");
+		foreach($output as $l) {
+			$l = trim($l);
+			if (substr($l,0,1) == "#" || strlen($l) == 0) continue;
+
+			if (substr_count($l, "IP packet size distribution")) {
+				html_end_box(false);
+				html_start_box("<strong>IP Packet Size Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				$section = "inippsd";
+				continue;
+			}elseif (substr_count($l, "Packets per flow distribution")) {
+				html_end_box(false);
+				html_start_box("<strong>Packets per Flow Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				$section = "inppfd";
+				continue;
+			}elseif (substr_count($l, "Octets per flow distribution")) {
+				html_end_box(false);
+				html_start_box("<strong>Octets per Flow Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				$section = "inopfd";
+				continue;
+			}elseif (substr_count($l, "Flow time distribution")) {
+				html_end_box(false);
+				html_start_box("<strong>Flow Time Distribution</strong>", "100%", $colors["header"], "3", "center", "");
+				$section = "inftd";
+				continue;
+			}
+
+			switch($section) {
+			case "insummary":
+				if ($i % 2 == 0) {
+					if ($i > 0) {
+						echo "</tr>";
+					}
+					echo "<tr>";
+				}
+				$parts = explode(":", $l);
+				$header = trim($parts[0]);
+				$value  = trim($parts[1]);
+				echo "<td><strong>" . $header . "</strong></td><td>" . $value . "</td>"; 
+				$i++;
+				break;
+			case "inippsd":
+			case "inppfd":
+			case "inopfd":
+			case "inftd":
+				/* Headers have no decimals */
+				if (!substr_count($l, ".")) {
+					echo "<tr>";
+					$parts = explode(" ", trim($l));
+					foreach($parts as $p) {
+						if ($p != "") echo "<td align='right'><strong>" . $p . "</strong></td>";
+					}
+					echo "</tr>";
+				}else{
+					echo "<tr>";
+					$parts = explode(" ", trim($l));
+					foreach($parts as $p) {
+						if ($p != "") echo "<td align='right'>" . ($p*100) . " %</td>";
+					}
+					echo "</tr>";
+				}
+				break;
+			}
+		}
+		html_end_box();
+	}
+}
+
 function parsestatoutput($output) {
 	global $config, $colors;
 
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
-	if (!isset($stat_columns_array[$stat_report]))
+	if ($stat_report == 99) {
+		return parseSummaryReport($output);
+	}elseif (!isset($stat_columns_array[$stat_report])) {
 		return "<table><tr><td><font size=+1><pre>$output</pre></font></td></tr></table>";
+	}
 
 	$output = explode("\n", $output);
 

@@ -24,7 +24,8 @@
 
 chdir('../../');
 include_once("./include/auth.php");
-include($config['base_path'] . '/plugins/flowview/functions.php');
+include_once($config['base_path'] . '/plugins/flowview/functions.php');
+include_once($config['base_path'] . '/plugins/flowview/lib/open-flash-chart-object.php');
 
 ini_set("max_execution_time", 240);
 ini_set("memory_limit", "256M");
