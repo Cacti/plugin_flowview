@@ -25,7 +25,7 @@
 chdir('../../');
 include_once("./include/auth.php");
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
-include_once($config['base_path'] . '/plugins/flowview/lib/open-flash-chart-object.php');
+//include_once($config['base_path'] . '/plugins/flowview/lib/open-flash-chart-object.php');
 
 ini_set("max_execution_time", 240);
 ini_set("memory_limit", "256M");
@@ -34,7 +34,12 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save') {
 	flowview_save_filter();
 }elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete') {
 	flowview_delete_filter();
-}elseif ((isset($_REQUEST['action']) && $_REQUEST['action'] == 'view') || (isset($_REQUEST['tab']) && $_REQUEST["tab"] == 'current')) {
+}elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'charthtml') {
+	flowview_draw_chart();
+}elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'chartdata') {
+	flowview_viewchart();
+}elseif ((isset($_REQUEST['action']) && $_REQUEST['action'] == 'view') || 
+	(isset($_REQUEST['tab']) && strlen($_REQUEST["tab"]) > 10)) {
 	include_once("./plugins/flowview/general_header.php");
 	flowview_display_report();
 	include("./include/bottom_footer.php");
@@ -111,7 +116,7 @@ function flowview_display_form() {
 	?>
 	<tr>
 		<td>
-			<table border='0' cellspacing='0' cellpadding='0' width='100%' style='white-space:nowrap;'>
+			<table border='0' cellspacing='0' cellpadding='1' width='100%' style='white-space:nowrap;'>
 				<tr>
 					<td>Saved Query:</td>
 					<td><?php draw_edit_control("query", $query_name_field);?></td>
@@ -167,10 +172,10 @@ function flowview_display_form() {
 		</td>
 	</tr>
 	<?php html_end_box(false);?>
-	<?php html_start_box("<strong>Report Parameters</strong>", "100%", $colors["header"], "1", "center", "");?>
+	<?php html_start_box("<strong>Report Parameters</strong>", "100%", $colors["header"], "3", "center", "");?>
 	<tr>
 		<td>
-			<table cellpadding='3' cellspacing='0' border='0' width='100%' style='white-space:nowrap;'>
+			<table cellpadding='1' cellspacing='0' border='0' width='100%' style='white-space:nowrap;'>
 				<tr id='rsettings'>
 					<td>Statistics:</td>
 					<td><?php draw_edit_control("stat_report", $stat_report_field);?></td>
