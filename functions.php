@@ -115,18 +115,18 @@ function flowview_display_report() {
 						</td>
 					</tr>
 				</table>
-			<input type='hidden' name='page' value='1'>
-			<input type='hidden' name='tab'  id='tab' value='<?php print $sessionid;?>'>
+				<input type='hidden' name='page' value='1'>
+				<input type='hidden' name='tab'  id='tab' value='<?php print $sessionid;?>'>
 			</form>
 			</td>
 		</tr>
 		<?php
-	
+		html_end_box();
+
 		flowview_draw_chart('bytes', $rname);
 		flowview_draw_chart('packets', $rname);
 		flowview_draw_chart('flows', $rname);
 
-		html_end_box();
 	}elseif (isset($_POST['print_report']) && $_POST['print_report'] > 0) {
 		html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
 	}
@@ -465,7 +465,6 @@ function get_column_alignment($column) {
 	case "Bytes":
 	case "Packets":
 	case "Flows":
-	case "Port":
 		return "right";
 		break;
 	default:
@@ -621,12 +620,14 @@ function parsestatoutput($output, $title, $sessionid) {
 	$clines     = $stat_columns_array[$stat_report][0];
 	$octect_col = $stat_columns_array[$stat_report][1];
 	$proto_col  = $stat_columns_array[$stat_report][3];
+	$port_col   = $stat_columns_array[$stat_report][4];
 
 	$ip_col     = $stat_columns_array[$stat_report][2];
 	$ip_col     = explode(',',$ip_col);
 
 	$columns    = $stat_columns_array[$stat_report];
 
+	array_shift($columns);
 	array_shift($columns);
 	array_shift($columns);
 	array_shift($columns);
@@ -674,6 +675,9 @@ function parsestatoutput($output, $title, $sessionid) {
 						}elseif ($c == $octect_col && $octect_col != '') {
 							$data_array[$i][$c] = $out2;
 							$out2 = plugin_flowview_formatoctet($out2);
+						}elseif ($c == $port_col && $port_col != '') {
+							$out2 = flowview_translate_port($out2, false);
+							$data_array[$i][$c] = $out2;
 						}elseif ($c == $proto_col && $proto_col != '') {
 							$out2 = plugin_flowview_get_protocol($out2, 0);
 							$data_array[$i][$c] = $out2;
