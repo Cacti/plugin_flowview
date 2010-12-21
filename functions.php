@@ -74,57 +74,62 @@ function flowview_display_report() {
 
 	$filter = createfilter($sessionid);
 	display_tabs();
-	html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
 
-	?>
-	<tr bgcolor="#<?php print $colors["panel"];?>">
-		<td>
-		<form name="view" action="flowview.php?tab=$sessionid">
-			<table cellpadding="2" cellspacing="0">
-				<tr>
-					<td nowrap style='white-space: nowrap;'>
-						<strong>Show/Hide:</strong>&nbsp;
-					</td>
-					<td width="1">
-						<input type="checkbox" name="table" id="table" <?php print ($_REQUEST["table"] == "true" ? "checked":"");?>>
-					</td>
-					<td nowrap style='white-space: nowrap;'>
-						<label for="bytes">Table</label>
-					</td>
-					<td width="1">
-						<input type="checkbox" name="bytes" id="bytes" <?php print ($_REQUEST["bytes"] == "true" ? "checked":"");?>>
-					</td>
-					<td nowrap style='white-space: nowrap;'>
-						<label for="bytes">Bytes Bar</label>
-					</td>
-					<td width="1">
-						<input type="checkbox" name="packets" id="packets" <?php print ($_REQUEST["packets"] == "true" ? "checked":"");?>>
-					</td>
-					<td nowrap style='white-space: nowrap;'>
-						<label for="packets">Packets Bar</label>
-					</td>
-					<td width="1">
-						<input type="checkbox" name="flows" id="flows" <?php print ($_REQUEST["flows"] == "true" ? "checked":"");?>>
-					</td>
-					<td nowrap style='white-space: nowrap;'>
-						<label for="flows">Flows Bar</label>
-					</td>
-					<td nowrap style='white-space: nowrap;'>
-						<input type="submit" name="clear" value="Clear" title="Clear Filters">
-					</td>
-				</tr>
-			</table>
-		<input type='hidden' name='page' value='1'>
-		<input type='hidden' name='tab'  id='tab' value='<?php print $sessionid;?>'>
-		</form>
-		</td>
-	</tr>
-	<?php
-	html_end_box();
+	if (isset($_POST['stat_report']) && $_POST['stat_report'] != 99) {
+		html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
+		?>
+		<tr bgcolor="#<?php print $colors["panel"];?>">
+			<td>
+			<form name="view" action="flowview.php?tab=$sessionid">
+				<table cellpadding="2" cellspacing="0">
+					<tr>
+						<td nowrap style='white-space: nowrap;'>
+							<strong>Show/Hide:</strong>&nbsp;
+						</td>
+						<td width="1">
+							<input type="checkbox" name="table" id="table" <?php print ($_REQUEST["table"] == "true" ? "checked":"");?>>
+						</td>
+						<td nowrap style='white-space: nowrap;'>
+							<label for="bytes">Table</label>
+						</td>
+						<td width="1">
+							<input type="checkbox" name="bytes" id="bytes" <?php print ($_REQUEST["bytes"] == "true" ? "checked":"");?>>
+						</td>
+						<td nowrap style='white-space: nowrap;'>
+							<label for="bytes">Bytes Bar</label>
+						</td>
+						<td width="1">
+							<input type="checkbox" name="packets" id="packets" <?php print ($_REQUEST["packets"] == "true" ? "checked":"");?>>
+						</td>
+						<td nowrap style='white-space: nowrap;'>
+							<label for="packets">Packets Bar</label>
+						</td>
+						<td width="1">
+							<input type="checkbox" name="flows" id="flows" <?php print ($_REQUEST["flows"] == "true" ? "checked":"");?>>
+						</td>
+						<td nowrap style='white-space: nowrap;'>
+							<label for="flows">Flows Bar</label>
+						</td>
+						<td nowrap style='white-space: nowrap;'>
+							<input type="submit" name="clear" value="Clear" title="Clear Filters">
+						</td>
+					</tr>
+				</table>
+			<input type='hidden' name='page' value='1'>
+			<input type='hidden' name='tab'  id='tab' value='<?php print $sessionid;?>'>
+			</form>
+			</td>
+		</tr>
+		<?php
+	
+		flowview_draw_chart('bytes', $rname);
+		flowview_draw_chart('packets', $rname);
+		flowview_draw_chart('flows', $rname);
 
-	flowview_draw_chart('bytes', $rname);
-	flowview_draw_chart('packets', $rname);
-	flowview_draw_chart('flows', $rname);
+		html_end_box();
+	}elseif (isset($_POST['print_report']) && $_POST['print_report'] > 0) {
+		html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
+	}
 
 	echo "<div id='flowcontent'>";
 	echo $filter;
@@ -206,19 +211,19 @@ function display_tabs() {
 
 	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
 	print "<td bgcolor='" . ($ct == 'filters' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Filters') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a href='flowview.php?tab=filters'>Filters</a></span>
+			<span class='textHeader'><a title='Setup Flows' href='flowview.php?tab=filters'>Filters</a></span>
 			</td>\n
 			<td width='1'></td>\n";
 	if (api_user_realm_auth('flowview_devices.php')) {
 		print "<td bgcolor='" . ($ct == 'listeners' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Listeners') * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a href='flowview_devices.php?tab=listeners'>Listeners</a></span>
+				<span class='textHeader'><a title='Manage Listeners' href='flowview_devices.php?tab=listeners'>Listeners</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
 
 	if (api_user_realm_auth('flowview_schedules.php')) {
 		print "<td bgcolor='" . ($ct == 'sched' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a href='flowview_schedules.php?tab=sched'>Schedules</a></span>
+				<span class='textHeader'><a title='Manage e-Mail Reports' href='flowview_schedules.php?tab=sched'>Schedules</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
@@ -227,7 +232,7 @@ function display_tabs() {
 	foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
 		if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
 		print "<td bgcolor='" . ($ct == $sessionid ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen($data['title']) * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a href='flowview.php?tab=$sessionid'>" . $data['title'] . "</a></span>
+				<span class='textHeader'><a href='flowview.php?tab=$sessionid' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
@@ -288,6 +293,7 @@ function createfilter(&$sessionid='') {
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 
 	$output = '';
+	$title  = '';
 	if ($sessionid != '') {
 		$flowdata = unserialize(base64_decode($sessionid));
 		$title    = $flowdata['title'];
@@ -397,10 +403,12 @@ function createfilter(&$sessionid='') {
 		@fclose($f);
 
 		/* let's calculate the title and then session id */
-		if (isset($_REQUEST["query"]) && $_REQUEST["query"] > 0) {
-			$title = db_fetch_cell("SELECT name FROM plugin_flowview_queries WHERE id=" . $_REQUEST["query"]);
-		}else{
-			$title = "New Flow";
+		if ($title == '') {
+			if (isset($_REQUEST["query"]) && $_REQUEST["query"] > 0) {
+				$title = db_fetch_cell("SELECT name FROM plugin_flowview_queries WHERE id=" . $_REQUEST["query"]);
+			}else{
+				$title = "New Flow";
+			}
 		}
 
 		if (isset($_SESSION['flowview_flows'])) {
@@ -718,7 +726,7 @@ function flowview_altcolor($i) {
 }
 
 
-function parseprintoutput($output, $title) {
+function parseprintoutput($output, $title, $sessionid) {
 	global $config, $colors;
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 	include($config['base_path'] . '/plugins/flowview/arrays.php');

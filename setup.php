@@ -128,7 +128,6 @@ function flowview_page_head() {
 	global $config, $colors;
 	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.min.js'></script>\n";
 	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery-ui.min.js'></script>\n";
-	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.swfobject.min.js'></script>\n";
 	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
 	print "\t<link href='" . $config['url_path'] . "plugins/flowview/css/jquery-ui.css' rel='stylesheet'>\n";
 }

@@ -25,17 +25,19 @@
 chdir('../../');
 include_once("./include/auth.php");
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
-//include_once($config['base_path'] . '/plugins/flowview/lib/open-flash-chart-object.php');
 
 ini_set("max_execution_time", 240);
-ini_set("memory_limit", "256M");
+ini_set("memory_limit", "512M");
+
+/* purge old flows to keep the session size in check */
+purgeFlows();
 
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save') {
 	flowview_save_filter();
 }elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete') {
 	flowview_delete_filter();
-}elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'charthtml') {
-	flowview_draw_chart();
+}elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'killsession') {
+	flowview_delete_session();
 }elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'chartdata') {
 	flowview_viewchart();
 }elseif ((isset($_REQUEST['action']) && $_REQUEST['action'] == 'view') || 
@@ -55,6 +57,15 @@ function flowview_delete_filter() {
 	db_execute("DELETE FROM plugin_flowview_queries WHERE id=" . get_request_var_request('query'));
 	raise_message('flow_deleted');
 	header("Location: flowview.php");
+	exit;
+}
+
+function flowview_delete_session() {
+	global $config, $colors;
+	if (isset($_SESSION['flowview_flows'][$_REQUEST["session"]])) {
+		unset($_SESSION['flowview_flows'][$_REQUEST["session"]]);
+	}
+	header("Location: flowview.php?tab=filters");
 	exit;
 }
 
