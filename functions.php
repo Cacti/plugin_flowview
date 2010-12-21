@@ -420,7 +420,7 @@ function createfilter(&$sessionid='') {
 				$unique = true;
 				foreach($_SESSION['flowview_flows'] AS $sess => $data) {
 					if ($title == $data['title']) {
-						$title = $base . " ( " . $i . " )";
+						$title = $base . " (" . $i . ")";
 						$i++;
 						$unique = false;
 						break;
@@ -689,6 +689,9 @@ function parsestatoutput($output, $title, $sessionid) {
 							$out2 = plugin_flowview_get_protocol($out2, 0);
 							$data_array[$i][$c] = $out2;
 						}else{
+							if (is_numeric($out2)) {
+								$out2 = number_format($out2);
+							}
 							$data_array[$i][$c] = $out2;
 						}
 						$o .= "<td align='" . get_column_alignment($columns[$c]) . "'>$out2</td>";
@@ -844,6 +847,9 @@ function parseprintoutput($output, $title, $sessionid) {
 							$out2 = plugin_flowview_get_protocol($out2, $proto_hex);
 							$data_array[$i][$c] = $out2;
 						}else{
+							if (is_numeric($out2)) {
+								$out2 = number_format($out2);
+							}
 							$data_array[$i][$c] = $out2;
 						}
 						$o .= "<td align='" . get_column_alignment($columns[$c]) . "'>$out2</td>";
@@ -1652,13 +1658,13 @@ function flowview_autoscale($value) {
 	if ($value < 10000) {
 		return  array(1, "");
 	}elseif ($value < 1000000) {
-		return array(1000, "K");
+		return array(1024, "KB");
 	}elseif ($value < 100000000) {
-		return array(1000000, "M");
+		return array(1048576, "MB");
 	}elseif ($value < 10000000000) {
-		return array(100000000, "G");
+		return array(1073741824, "GB");
 	}else{
-		return array(10000000000, "P");
+		return array(1099511627776, "TB");
 	}
 }
 
