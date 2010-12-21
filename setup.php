@@ -298,12 +298,10 @@ function flowview_setup_table () {
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id',         'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'begin_port', 'type' => 'int(12)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'end_port',   'type' => 'int(12)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'tcp',        'type' => 'tinyint', 'NULL' => false, 'default' => 0);
-	$data['columns'][] = array('name' => 'udp',        'type' => 'tinyint', 'NULL' => false, 'default' => 0);
+	$data['columns'][] = array('name' => 'service',    'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'port',       'type' => 'int(12)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'proto',      'type' => 'char(4)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'description','type' => 'varchar(255)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'status',     'type' => 'tinyint', 'NULL' => false, 'default' => 0);
 	$data['primary']   = 'id';
 	$data['type']      = 'MyISAM';
 	$data['comment']   = 'Plugin Flowview - Database of well known Ports';

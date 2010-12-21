@@ -412,7 +412,8 @@ function createfilter(&$sessionid='') {
 		}
 
 		if (isset($_SESSION['flowview_flows'])) {
-			$base = $title;
+			$parts = explode("(", $title);
+			$base = trim($parts[0]);
 			$i = 1;
 			while (true) {
 				$unique = true;
@@ -674,7 +675,7 @@ function parsestatoutput($output, $title, $sessionid) {
 							$data_array[$i][$c] = $out2;
 							$out2 = plugin_flowview_formatoctet($out2);
 						}elseif ($c == $proto_col && $proto_col != '') {
-							$out2 = plugin_flowview_get_protocol($out2);
+							$out2 = plugin_flowview_get_protocol($out2, 0);
 							$data_array[$i][$c] = $out2;
 						}else{
 							$data_array[$i][$c] = $out2;
@@ -698,9 +699,12 @@ function parsestatoutput($output, $title, $sessionid) {
 	return $o;
 }
 
-function plugin_flowview_get_protocol ($prot) {
+function plugin_flowview_get_protocol ($prot, $prot_hex) {
 	global $config;
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	$prot = ltrim($prot,'0');
+	$prot = ($prot_hex ? hexdec($prot):$prot);
+
 	if (isset($ip_protocols_array[$prot]))
 		return $ip_protocols_array[$prot];
 	return $prot;
@@ -746,13 +750,19 @@ function parseprintoutput($output, $title, $sessionid) {
 
 	$clines     = $print_columns_array[$print_report][0];
 	$octect_col = $print_columns_array[$print_report][1];
-	$proto_col  = $print_columns_array[$print_report][3];
+	$proto_hex  = $print_columns_array[$print_report][3];
+	$proto_col  = $print_columns_array[$print_report][4];
 
 	$ip_col     = $print_columns_array[$print_report][2];
 	$ip_col     = explode(',',$ip_col);
+	$ports_col  = explode(',', $print_columns_array[$print_report][6]);
+	$ports_hex  = $print_columns_array[$print_report][5];
 
 	$columns    = $print_columns_array[$print_report];
 
+	array_shift($columns);
+	array_shift($columns);
+	array_shift($columns);
 	array_shift($columns);
 	array_shift($columns);
 	array_shift($columns);
@@ -780,8 +790,20 @@ function parseprintoutput($output, $title, $sessionid) {
 
 	$i = 0;
 	$firstline  = true;
+	$cfirst     = false;
 	$data_array = array();
 	foreach ($output as $out) {
+		if ($clines > 1 && strlen($out) && substr($out,0,1) != ' ') {
+			$cfirst = true;
+			$outf   = rtrim($out);
+			continue;
+		}elseif (trim($out) == '') {
+			continue;
+		}elseif ($clines > 1 && $cfirst = true) {
+			$out    = $outf . " " . trim($out);
+			$cfirst = false;
+		}
+
 		if (substr($out, 0, 1) != '#' && $out != '' && $firstline == false) {
 			$out = trim($out);
 			while (strpos($out, '  ')) {
@@ -797,11 +819,14 @@ function parseprintoutput($output, $title, $sessionid) {
 						if ($dns != '' && in_array($c, $ip_col)) {
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
 							$data_array[$i][$c] = $out2;
+						}elseif (in_array($c, $ports_col)) {
+							$out2 = flowview_translate_port($out2, $ports_hex);
+							$data_array[$i][$c] = $out2;
 						}elseif ($c == $octect_col && $octect_col != '') {
 							$data_array[$i][$c] = $out2;
 							$out2 = plugin_flowview_formatoctet($out2);
 						}elseif ($c == $proto_col && $proto_col != '') {
-							$out2 = plugin_flowview_get_protocol($out2);
+							$out2 = plugin_flowview_get_protocol($out2, $proto_hex);
 							$data_array[$i][$c] = $out2;
 						}else{
 							$data_array[$i][$c] = $out2;
@@ -824,6 +849,22 @@ function parseprintoutput($output, $title, $sessionid) {
 
 	$o .= '</table>';
 	return $o;
+}
+
+function flowview_translate_port($port, $is_hex) {
+	if ($is_hex) {
+		$port = hexdec($port);
+	}
+
+	$service = db_fetch_cell("SELECT service FROM plugin_flowview_ports WHERE port=$port LIMIT 1");
+
+	if ($service != '') {
+		return "$service ($port)";
+	}elseif ($port >= 49152) {
+		return "dynamic ($port)";
+	}else{
+		return "unknown ($port)";
+	}
 }
 
 function flowview_create_flowview_filter() {
