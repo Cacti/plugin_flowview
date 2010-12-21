@@ -266,7 +266,8 @@ function plugin_flowview_run_schedule($id) {
 	$message .= "<style type='text/css'>\n";
 	$message .= file_get_contents($config['base_path'] . '/include/main.css');
 	$message .= "</style>";
-	$message .= createfilter();
+	$sessionid = -1;
+	$message .= createfilter($sessionid);
 	$message .= "</body>";
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
 }
@@ -294,7 +295,7 @@ function createfilter(&$sessionid='') {
 
 	$output = '';
 	$title  = '';
-	if ($sessionid != '') {
+	if ($sessionid != '' && $sessionid != -1) {
 		$flowdata = unserialize(base64_decode($sessionid));
 		$title    = $flowdata['title'];
 		if (time() < $flowdata['expires']) {
@@ -432,21 +433,25 @@ function createfilter(&$sessionid='') {
 			}
 		}
 
-		$flowdata['command'] = $flow_command;
-		$flowdata['post']    = $_POST;
-		$flowdata['expires'] = time()+300;
-		$flowdata['title']   = $title;
-		$sessionid = base64_encode(serialize($flowdata));
-		$_REQUEST['tab'] = $sessionid;
+		if ($sessionid != -1) {
+			$flowdata['command'] = $flow_command;
+			$flowdata['post']    = $_POST;
+			$flowdata['expires'] = time()+300;
+			$flowdata['title']   = $title;
+			$sessionid = base64_encode(serialize($flowdata));
+			$_REQUEST['tab'] = $sessionid;
+		}
 
 		/* Run the command */
 		$output = shell_exec($flow_command);
 		unlink($filterfile);
 
-		/* store the raw data in to the request variable */
-		$_SESSION['flowview_flows'][$sessionid]['rawdata'] = $output;
-		$_SESSION['flowview_flows'][$sessionid]['title']   = $title;
-		$_SESSION['flowview_flows'][$sessionid]['expires'] = $flowdata['expires'];
+		if ($sessionid != -1) {
+			/* store the raw data in to the request variable */
+			$_SESSION['flowview_flows'][$sessionid]['rawdata'] = $output;
+			$_SESSION['flowview_flows'][$sessionid]['title']   = $title;
+			$_SESSION['flowview_flows'][$sessionid]['expires'] = $flowdata['expires'];
+		}
 	}
 
 	if ($stat_report != 0) {
@@ -633,7 +638,9 @@ function parsestatoutput($output, $title, $sessionid) {
 	array_shift($columns);
 	array_shift($columns);
 
-	$_SESSION['flowview_flows'][$sessionid]['columns'] = $columns;
+	if ($sessionid != -1) {
+		$_SESSION['flowview_flows'][$sessionid]['columns'] = $columns;
+	}
 
 	$x = 1;
 	foreach ($columns as $column) {
@@ -697,7 +704,9 @@ function parsestatoutput($output, $title, $sessionid) {
 		$i++;
 	}
 
-	$_SESSION['flowview_flows'][$sessionid]['data'] = $data_array;
+	if ($sessionid != -1) {
+		$_SESSION['flowview_flows'][$sessionid]['data'] = $data_array;
+	}
 
 	$o .= '</table>';
 	return $o;
@@ -772,7 +781,9 @@ function parseprintoutput($output, $title, $sessionid) {
 	array_shift($columns);
 	array_shift($columns);
 
-	$_SESSION['flowview_flows'][$sessionid]['columns'] = $columns;
+	if ($sessionid != -1) {
+		$_SESSION['flowview_flows'][$sessionid]['columns'] = $columns;
+	}
 
 	foreach ($columns as $column) {
 		$o .= "<th align='" . get_column_alignment($column) . "'>$column</th>";
@@ -849,7 +860,9 @@ function parseprintoutput($output, $title, $sessionid) {
 		$i++;
 	}
 
-	$_SESSION['flowview_flows'][$sessionid]['data'] = $data_array;
+	if ($sessionid != -1) {
+		$_SESSION['flowview_flows'][$sessionid]['data'] = $data_array;
+	}
 
 	$o .= '</table>';
 	return $o;
@@ -1534,6 +1547,9 @@ function flowview_viewchart() {
 
 	/* get the chart data from the session */
 	if (isset($_SESSION['flowview_flows'][$sessionid]['data'])) {
+		$data = $_SESSION['flowview_flows'][$sessionid]['data'];
+	}else{
+		$filter = createfilter($sessionid);
 		$data = $_SESSION['flowview_flows'][$sessionid]['data'];
 	}
 
