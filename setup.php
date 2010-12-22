@@ -87,11 +87,6 @@ function plugin_flowview_version () {
 function flowview_config_arrays () {
 	global $menu, $messages;
 
-	$temp = $menu["Utilities"]['logout.php'];
-	unset($menu["Utilities"]['logout.php']);
-	$menu["Utilities"]['plugins/flowview/flowview.php'] = "Flow Viewer";
-	$menu["Utilities"]['logout.php'] = $temp;
-
 	$messages['flow_deleted'] = array('message' => 'The Filter has been Deleted', 'type' => 'info');
 	$messages['flow_updated'] = array('message' => 'The Filter has been Updated', 'type' => 'info');
 }
