@@ -90,7 +90,7 @@ function flowview_display_report() {
 							<input type="checkbox" name="table" id="table" <?php print ($_REQUEST["table"] == "true" ? "checked":"");?>>
 						</td>
 						<td nowrap style='white-space: nowrap;'>
-							<label for="bytes">Table</label>
+							<label for="table">Table</label>
 						</td>
 						<td width="1">
 							<input type="checkbox" name="bytes" id="bytes" <?php print ($_REQUEST["bytes"] == "true" ? "checked":"");?>>
@@ -277,7 +277,8 @@ function purgeFlows() {
 	if (isset($_SESSION['flowview_flows']) && is_array($_SESSION['flowview_flows'])) {
 	foreach($_SESSION['flowview_flows'] AS $session => $data) {
 		if ($time > $data['expires']) {
-			unset($_SESSION['flowview_flows'][$session]);
+			unset($_SESSION['flowview_flows'][$session]['rawdata']);
+			unset($_SESSION['flowview_flows'][$session]['data']);
 		}
 	}
 	}
@@ -291,17 +292,20 @@ function purgeFlows() {
 function createfilter(&$sessionid='') {
 	global $config;
 
-	include($config['base_path'] . '/plugins/flowview/variables.php');
-
 	$output = '';
 	$title  = '';
 	if ($sessionid != '' && $sessionid != -1) {
 		$flowdata = unserialize(base64_decode($sessionid));
 		$title    = $flowdata['title'];
+		foreach($flowdata['post'] AS $item => $value) {
+			$_POST['item'] = $value;
+		}	
 		if (time() < $flowdata['expires']) {
 			$output = $_SESSION['flowview_flows'][$sessionid]['rawdata'];
 		}
 	}
+
+	include($config['base_path'] . '/plugins/flowview/variables.php');
 
 	if ($output=='') {
 		/* initialize the return string */
@@ -420,7 +424,7 @@ function createfilter(&$sessionid='') {
 				$unique = true;
 				foreach($_SESSION['flowview_flows'] AS $sess => $data) {
 					if ($title == $data['title']) {
-						$title = $base . " (" . $i . ")";
+						$title = $base . " ( " . $i . " )";
 						$i++;
 						$unique = false;
 						break;
@@ -689,9 +693,6 @@ function parsestatoutput($output, $title, $sessionid) {
 							$out2 = plugin_flowview_get_protocol($out2, 0);
 							$data_array[$i][$c] = $out2;
 						}else{
-							if (is_numeric($out2)) {
-								$out2 = number_format($out2);
-							}
 							$data_array[$i][$c] = $out2;
 						}
 						$o .= "<td align='" . get_column_alignment($columns[$c]) . "'>$out2</td>";
@@ -847,9 +848,6 @@ function parseprintoutput($output, $title, $sessionid) {
 							$out2 = plugin_flowview_get_protocol($out2, $proto_hex);
 							$data_array[$i][$c] = $out2;
 						}else{
-							if (is_numeric($out2)) {
-								$out2 = number_format($out2);
-							}
 							$data_array[$i][$c] = $out2;
 						}
 						$o .= "<td align='" . get_column_alignment($columns[$c]) . "'>$out2</td>";
@@ -1658,13 +1656,13 @@ function flowview_autoscale($value) {
 	if ($value < 10000) {
 		return  array(1, "");
 	}elseif ($value < 1000000) {
-		return array(1024, "KB");
+		return array(1000, "K");
 	}elseif ($value < 100000000) {
-		return array(1048576, "MB");
+		return array(1000000, "M");
 	}elseif ($value < 10000000000) {
-		return array(1073741824, "GB");
+		return array(100000000, "G");
 	}else{
-		return array(1099511627776, "TB");
+		return array(10000000000, "P");
 	}
 }
 
