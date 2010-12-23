@@ -200,11 +200,8 @@ function flowview_display_report() {
 			$('#flowcontent').hide();
 			$.get('flowview.php?action=updatesess&type=table&value=');
 		}else{
-			$.get('<?php print $config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=tabledata&exclude=" . $_REQUEST['exclude'] . "&title=$rname";?>', function(data) {
-				$('#flowcontent').html(data);
-			});
+			$.get('flowview.php?action=updatesess&type=table&value=on');
 			$('#flowcontent').show();
-			$('#sorttable').tablesorter();
 		}
 	});
 
