@@ -501,7 +501,7 @@ function createfilter(&$sessionid='') {
 				$unique = true;
 				foreach($_SESSION['flowview_flows'] AS $sess => $data) {
 					if ($title == $data['title']) {
-						$title = $base . " ( " . $i . " )";
+						$title = $base . " (" . $i . ")";
 						$i++;
 						$unique = false;
 						break;
