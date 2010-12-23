@@ -29,9 +29,6 @@ include_once($config['base_path'] . '/plugins/flowview/functions.php');
 ini_set("max_execution_time", 240);
 ini_set("memory_limit", "512M");
 
-/* purge old flows to keep the session size in check */
-purgeFlows();
-
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save') {
 	flowview_save_filter();
 }elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'delete') {
@@ -40,6 +37,10 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save') {
 	flowview_delete_session();
 }elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'chartdata') {
 	flowview_viewchart();
+}elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'tabledata') {
+	flowview_viewtable();
+}elseif (isset($_REQUEST['action']) && $_REQUEST['action'] == 'updatesess') {
+	flowview_updatesess();
 }elseif ((isset($_REQUEST['action']) && $_REQUEST['action'] == 'view') || 
 	(isset($_REQUEST['tab']) && strlen($_REQUEST["tab"]) > 10)) {
 	include_once("./plugins/flowview/general_header.php");
