@@ -231,6 +231,34 @@ function flowview_display_report() {
 		fshown=true;
 	}
 
+    $.tablesorter.addParser({ 
+        id: 'bytes', 
+        is: function(s) { 
+            return false; 
+        }, 
+        format: function(s) { 
+			if (s.indexOf('MB') > 0) {
+				loc=s.indexOf('MB');
+				return s.substring(0,loc) * 1024 * 1024;
+			}else if (s.indexOf('KB') > 0) {
+				loc=s.indexOf('KB');
+				return s.substring(0,loc) * 1024;
+			}else if (s.indexOf('Bytes') > 0) {
+				loc=s.indexOf('Bytes');
+				return s.substring(0,loc);
+			}else if (s.indexOf('GB') > 0) {
+				loc=s.indexOf('GB');
+				return s.substring(0,loc) * 1024 * 1024 * 1024;
+			}else if (s.indexOf('TB') > 0) {
+				loc=s.indexOf('TB');
+				return s.substring(0,loc) * 1024 * 1024 * 1024 * 1024;
+			}else{
+				return s;
+			}
+        }, 
+        type: 'numeric' 
+    }); 
+
 	$().ready(function() {
 		$('#sorttable').tablesorter();
 	});
@@ -701,7 +729,7 @@ function parsestatoutput($output, $title, $sessionid) {
 
 	$x = 1;
 	foreach ($columns as $column) {
-		$o .= "<th align='" . get_column_alignment($column) . "'>$column</th>";
+		$o .= "<th " . ($column == "Bytes" ? "class=\"{sorter: 'bytes'}\"":"") . " align='" . get_column_alignment($column) . "'>$column</th>";
 		$x++;
 	}
 	$o .= "</tr></thead><tbody>";
