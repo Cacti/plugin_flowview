@@ -204,6 +204,7 @@ function flowview_display_report() {
 				$('#flowcontent').html(data);
 			});
 			$('#flowcontent').show();
+			$('#sorttable').tablesorter();
 		}
 	});
 
@@ -213,22 +214,18 @@ function flowview_display_report() {
 			
 	if ($('#table').is(':checked')) {
 		$('#flowcontent').show();
-		tshown=true;
 	}
 
 	if ($('#bytes').is(':checked')) {
 		$('#wrapperbytes').show();
-		bshown=true;
 	}
 
 	if ($('#packets').is(':checked')) {
 		$('#wrapperpackets').show();
-		pshown=true;
 	}
 
 	if ($('#flows').is(':checked')) {
 		$('#wrapperflows').show();
-		fshown=true;
 	}
 
     $.tablesorter.addParser({ 
@@ -306,7 +303,7 @@ function display_tabs() {
 	foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
 		if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
 		print "<td bgcolor='" . ($ct == $sessionid ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen($data['title']) * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a href='flowview.php?tab=$sessionid' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></span>
+				<span class='textHeader'><a style='white-space:nowrap;' href='flowview.php?tab=$sessionid' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
