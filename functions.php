@@ -156,9 +156,7 @@ function flowview_display_report() {
 	}
 
 	echo "<div id='flowcontent'>";
-	if ($_REQUEST['table'] == 'on') {
-		echo $filter;
-	}
+	echo $filter;
 	html_end_box();
 	echo "</div>";
 	?>
@@ -211,6 +209,8 @@ function flowview_display_report() {
 			
 	if ($('#table').is(':checked')) {
 		$('#flowcontent').show();
+	}else{
+		$('#flowcontent').hide();
 	}
 
 	if ($('#bytes').is(':checked')) {
