@@ -207,7 +207,7 @@ function flowview_display_report() {
 		document.view.submit();
 	});
 			
-	if ($('#table').is(':checked')) {
+	if ($('#table').is(':checked') || <?php print $_POST['stat_report'];?> == 99) {
 		$('#flowcontent').show();
 	}else{
 		$('#flowcontent').hide();
@@ -534,9 +534,7 @@ function createfilter(&$sessionid='') {
 
 	if ($stat_report != 0) {
 		$output = parsestatoutput($output, $title, $sessionid);
-	}
-
-	if ($print_report != 0) {
+	}elseif ($print_report != 0) {
 		$output = parseprintoutput($output, $title, $sessionid);
 	}
 
