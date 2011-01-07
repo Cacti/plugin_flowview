@@ -280,7 +280,7 @@ function flowview_setup_table () {
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'titel', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'title', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'enabled', 'type' => 'varchar(3)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'sendinterval', 'type' => 'int(20)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'lastsent', 'type' => 'int(20)', 'NULL' => false);
