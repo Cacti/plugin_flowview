@@ -25,10 +25,8 @@
 $using_guest_account = false;
 $show_console_tab = true;
 
-$oper_mode = api_plugin_hook_function('top_header', OPER_MODE_NATIVE);
-if ($oper_mode == OPER_MODE_RESKIN) {
-	return;
-}
+$oper_mode = api_plugin_hook_function('general_header', OPER_MODE_NATIVE);
+if ($oper_mode != OPER_MODE_RESKIN) {
 
 if (read_config_option("auth_method") != 0) {
 	/* at this point this user is good to go... so get some setting about this
@@ -52,6 +50,7 @@ $page_title = api_plugin_hook_function('page_title', 'Cacti');
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?php echo $page_title; ?></title>
 	<?php
 	if (isset($_SESSION["custom"]) && ($_SESSION["custom"] == 0)) {
@@ -67,7 +66,7 @@ $page_title = api_plugin_hook_function('page_title', 'Cacti');
 	<link href="<?php echo $config['url_path']; ?>include/main.css" rel="stylesheet">
 	<link href="<?php echo $config['url_path']; ?>images/favicon.ico" rel="shortcut icon">
 	<script type="text/javascript" src="<?php echo $config['url_path']; ?>include/layout.js"></script>
-	<?php api_plugin_hook('page_head'); ?>	
+	<?php api_plugin_hook('page_head'); ?>
 </head>
 <?php if ($oper_mode == OPER_MODE_NATIVE) {?>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" <?php print api_plugin_hook_function("body_style", "");?>>
@@ -123,3 +122,4 @@ $page_title = api_plugin_hook_function('page_title', 'Cacti');
 <?php } ?>
 	<tr>
 		<td valign="top" style="padding: 5px; border-right: #aaaaaa 1px solid;">
+<?php } ?>

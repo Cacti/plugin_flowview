@@ -156,9 +156,7 @@ function flowview_display_report() {
 	}
 
 	echo "<div id='flowcontent'>";
-	if ($_REQUEST['table'] == 'on') {
-		echo $filter;
-	}
+	echo $filter;
 	html_end_box();
 	echo "</div>";
 	?>
@@ -200,9 +198,7 @@ function flowview_display_report() {
 			$('#flowcontent').hide();
 			$.get('flowview.php?action=updatesess&type=table&value=');
 		}else{
-			$.get('<?php print $config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=tabledata&exclude=" . $_REQUEST['exclude'] . "&title=$rname";?>', function(data) {
-				$('#flowcontent').html(data);
-			});
+			$.get('flowview.php?action=updatesess&type=table&value=on');
 			$('#flowcontent').show();
 		}
 	});
@@ -211,25 +207,51 @@ function flowview_display_report() {
 		document.view.submit();
 	});
 			
-	if ($('#table').is(':checked')) {
+	if ($('#table').is(':checked') || <?php print $_POST['stat_report'];?> == 99) {
 		$('#flowcontent').show();
-		tshown=true;
+	}else{
+		$('#flowcontent').hide();
 	}
 
 	if ($('#bytes').is(':checked')) {
 		$('#wrapperbytes').show();
-		bshown=true;
 	}
 
 	if ($('#packets').is(':checked')) {
 		$('#wrapperpackets').show();
-		pshown=true;
 	}
 
 	if ($('#flows').is(':checked')) {
 		$('#wrapperflows').show();
-		fshown=true;
 	}
+
+    $.tablesorter.addParser({ 
+        id: 'bytes', 
+        is: function(s) { 
+            return false; 
+        }, 
+        format: function(s) { 
+			if (s.indexOf('MB') > 0) {
+				loc=s.indexOf('MB');
+				return s.substring(0,loc) * 1024 * 1024;
+			}else if (s.indexOf('KB') > 0) {
+				loc=s.indexOf('KB');
+				return s.substring(0,loc) * 1024;
+			}else if (s.indexOf('Bytes') > 0) {
+				loc=s.indexOf('Bytes');
+				return s.substring(0,loc);
+			}else if (s.indexOf('GB') > 0) {
+				loc=s.indexOf('GB');
+				return s.substring(0,loc) * 1024 * 1024 * 1024;
+			}else if (s.indexOf('TB') > 0) {
+				loc=s.indexOf('TB');
+				return s.substring(0,loc) * 1024 * 1024 * 1024 * 1024;
+			}else{
+				return s;
+			}
+        }, 
+        type: 'numeric' 
+    }); 
 
 	$().ready(function() {
 		$('#sorttable').tablesorter();
@@ -278,7 +300,7 @@ function display_tabs() {
 	foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
 		if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
 		print "<td bgcolor='" . ($ct == $sessionid ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen($data['title']) * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a href='flowview.php?tab=$sessionid' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></span>
+				<span class='textHeader'><a style='white-space:nowrap;' href='flowview.php?tab=$sessionid' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
@@ -476,7 +498,7 @@ function createfilter(&$sessionid='') {
 				$unique = true;
 				foreach($_SESSION['flowview_flows'] AS $sess => $data) {
 					if ($title == $data['title']) {
-						$title = $base . " ( " . $i . " )";
+						$title = $base . " (" . $i . ")";
 						$i++;
 						$unique = false;
 						break;
@@ -512,9 +534,7 @@ function createfilter(&$sessionid='') {
 
 	if ($stat_report != 0) {
 		$output = parsestatoutput($output, $title, $sessionid);
-	}
-
-	if ($print_report != 0) {
+	}elseif ($print_report != 0) {
 		$output = parseprintoutput($output, $title, $sessionid);
 	}
 
@@ -701,7 +721,7 @@ function parsestatoutput($output, $title, $sessionid) {
 
 	$x = 1;
 	foreach ($columns as $column) {
-		$o .= "<th align='" . get_column_alignment($column) . "'>$column</th>";
+		$o .= "<th " . ($column == "Bytes" ? "class=\"{sorter: 'bytes'}\"":"") . " align='" . get_column_alignment($column) . "'>$column</th>";
 		$x++;
 	}
 	$o .= "</tr></thead><tbody>";

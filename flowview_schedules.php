@@ -454,7 +454,11 @@ function show_schedules () {
 		LIMIT " . ($num_rows*($_REQUEST["page"]-1)) . ", $num_rows";
 
 	$result     = db_fetch_assoc($sql);
-	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_schedules $sql_where");
+	$total_rows = db_fetch_cell("SELECT COUNT(*) 
+		FROM plugin_flowview_schedules AS pfs
+		LEFT JOIN plugin_flowview_queries AS pfq 
+		ON (pfs.savedquery=pfq.id) 
+		$sql_where");
 
 	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_schedules.php?");
 

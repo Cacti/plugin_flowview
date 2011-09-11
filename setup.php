@@ -121,11 +121,14 @@ function flowview_show_tab() {
 
 function flowview_page_head() {
 	global $config, $colors;
-	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.min.js'></script>\n";
-	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery-ui.min.js'></script>\n";
-	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.tablesorter.min.js'></script>\n";
-	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
-	print "\t<link href='" . $config['url_path'] . "plugins/flowview/css/jquery-ui.css' rel='stylesheet'>\n";
+	if (substr_count($_SERVER["REQUEST_URI"], "flowview")) {
+		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.min.js'></script>\n";
+		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery-ui.min.js'></script>\n";
+		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.tablesorter.min.js'></script>\n";
+		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.metadata.js'></script>\n";
+		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
+		print "\t<link href='" . $config['url_path'] . "plugins/flowview/css/jquery-ui.css' rel='stylesheet'>\n";
+	}
 }
 
 function flowview_page_bottom() {
@@ -279,7 +282,7 @@ function flowview_setup_table () {
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'titel', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'title', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'enabled', 'type' => 'varchar(3)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'sendinterval', 'type' => 'int(20)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'lastsent', 'type' => 'int(20)', 'NULL' => false);
