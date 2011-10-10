@@ -23,6 +23,7 @@ if (isset($_SERVER['argv'][1])) {
 		restart();
 		break;
 	default:
+		echo "Usage: /etc/init.d/flow-capture {start|stop|restart}\n";
 		break;
 	}
 }
