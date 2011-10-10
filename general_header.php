@@ -39,7 +39,9 @@ if (read_config_option("auth_method") != 0) {
 	}
 
 	/* find out if we should show the "console" tab or not, based on this user's permissions */
-	if (sizeof(db_fetch_assoc("select realm_id from user_auth_realm where realm_id=8 and user_id=" . $_SESSION["sess_user_id"])) == 0) {
+	$console_access = api_plugin_hook_function('auth_console_authorized', db_fetch_cell("SELECT realm_id FROM user_auth_realm WHERE realm_id=8 AND user_id=" . $_SESSION["sess_user_id"]));
+
+	if (empty($console_access)) {
 		$show_console_tab = false;
 	}
 }
