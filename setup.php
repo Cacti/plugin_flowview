@@ -75,7 +75,7 @@ function flowview_check_upgrade () {
 function plugin_flowview_version () {
 	return array(
 		'name'     => 'flowview',
-		'version'  => '1.0',
+		'version'  => '1.1',
 		'longname' => 'FlowView',
 		'author'   => 'Jimmy Conner',
 		'homepage' => 'http://cactiusers.org',
