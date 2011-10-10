@@ -207,7 +207,7 @@ function flowview_display_report() {
 		document.view.submit();
 	});
 			
-	if ($('#table').is(':checked') || <?php print $_POST['stat_report'];?> == 99) {
+	if ($('#table').is(':checked') || <?php print (isset($_POST['stat_report']) ? ($_POST['stat_report'] == 99 ? 'true':'false'):'true');?>) {
 		$('#flowcontent').show();
 	}else{
 		$('#flowcontent').hide();
