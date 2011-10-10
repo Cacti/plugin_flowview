@@ -371,8 +371,8 @@ function flowview_display_form() {
 
 		$("#fdialog").dialog({
 			autoOpen: false,
-			width: 320,
-			height: 90,
+			width: 370,
+			height: 95,
 			resizable: false,
 			modal: true
 		});
