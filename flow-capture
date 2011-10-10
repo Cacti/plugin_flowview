@@ -13,41 +13,66 @@ $tools_path = read_config_option("path_flowtools");
 
 if (isset($_SERVER['argv'][1])) {
 	switch (strtolower($_SERVER['argv'][1])) {
-		case 'start':
-			$devices = db_fetch_assoc("SELECT * FROM plugin_flowview_devices");
-			if (!empty($devices)) {
-				$path = db_fetch_cell("SELECT value FROM `settings` WHERE name = 'path_flows_dir'");
-				if ($path == '')
-					break;
-				if (substr($path, -1) == '/') {
-					$path = substr($path, 0, -1);
-				}
-				foreach ($devices as $device) {
-					$port = $device['port'];
-					$folder = $device['folder'];
-					$nest = $device['nesting'];
-					$v = $device['version'];
-					$from = $device['allowfrom'];
-					$comp = $device['compression'];
-					$rotate = $device['rotation'];
-					$expire = $device['expire'] * ($rotate + 1);
-					if (!is_dir("$path/$folder")) {
-						mkdir("$path/$folder");
-					}
-					if (is_dir("$path/$folder")) {
-						shell_exec($tools_path . "/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest");
-					}
-				}
-			}			
-			break;
-		case 'stop':
-			$devices = db_fetch_assoc("SELECT * FROM plugin_flowview_devices");
-			if (!empty($devices)) {
-				shell_exec('killall -9 ' . $tools_path . '/flow-capture');
-			}			
-			break;
-		default:
-			break;
+	case 'start':
+		start();
+		break;
+	case 'stop':
+		stop();
+		break;
+	case 'restart':
+		restart();
+		break;
+	default:
+		break;
 	}
 }
 
+function start() {
+	global $tools_path, $cacti_base;;
+
+	echo "NOTE: Starting Flow Tools\n";
+	$devices = db_fetch_assoc("SELECT * FROM plugin_flowview_devices");
+	if (!empty($devices)) {
+		$path = db_fetch_cell("SELECT value FROM `settings` WHERE name = 'path_flows_dir'");
+		if ($path == '')
+			break;
+		if (substr($path, -1) == '/') {
+			$path = substr($path, 0, -1);
+		}
+		foreach ($devices as $device) {
+			$port   = $device['port'];
+			$folder = $device['folder'];
+			$nest   = $device['nesting'];
+			$v      = $device['version'];
+			$from   = $device['allowfrom'];
+			$comp   = $device['compression'];
+			$rotate = $device['rotation'];
+			$expire = $device['expire'] * ($rotate + 1);
+			if (!is_dir("$path/$folder")) {
+				echo "NOTE: Making directory '$path/$folder'\n";
+				mkdir("$path/$folder");
+			}
+			if (is_dir("$path/$folder")) {
+				echo "NOTE: Launching flow-capture as '$tools_path/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest'\n";
+				shell_exec($tools_path . "/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest");
+			}
+		}
+	}else{
+		echo "WARNING: No flows configured\n";
+	}			
+}
+
+function stop() {
+	global $tools_path, $cacti_base;;
+
+	echo "NOTE: Stopping Flow Tools\n";
+	$devices = db_fetch_assoc("SELECT * FROM plugin_flowview_devices");
+	if (!empty($devices)) {
+		shell_exec('killall -9 ' . $tools_path . '/flow-capture');
+	}			
+}
+
+function restart() {
+	stop();
+	start();
+}

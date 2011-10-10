@@ -4,7 +4,7 @@
     Contact ........ jimmy@sqmail.org
     Home Site ...... http://cactiusers.org
     Program ........ Flowviewer
-    Version ........ 1.0
+    Version ........ 1.1
     Purpose ........ A simple Viewer for your Netflow flows
 
 *******************************************************************************/
@@ -42,6 +42,10 @@
 
 ----[ Changelog
 
+    --- 1.1 ---
+    bug: FlowView Settings were hidden for some reason
+    bug: flow-capture script incomplete
+
     --- 1.0 ---
     compat: Making compatible with 0.8.7g
     feature: Allow sending emails on demand
@@ -50,8 +54,8 @@
     feature: Add a Title for Scheduled Reports
     feature; Re-tool many reports into pure HTML
     feature: Add Graphs for Flows, Bytes, and Packets
-	feature: Support sortable tables
-	feature: Support excluding outliers from report
+    feature: Support sortable tables
+    feature: Support excluding outliers from report
     bug: Rename 'View' tab to 'Filter'
     bug: Rename 'Devices' to 'Listeners'
 

@@ -151,6 +151,7 @@ function flowview_page_bottom() {
 
 function flowview_config_settings () {
 	global $settings, $tabs;
+
 	$temp = array(
 		"flowview_header" => array(
 			"friendly_name" => "Flow Viewer",
@@ -177,27 +178,16 @@ function flowview_config_settings () {
 			"max_length" => 255,
 			'default' => '/var/netflow/flows/completed'
 		),
-	);
-
-	if (isset($settings["path"]))
-		$settings["path"] = array_merge($settings["path"], $temp);
-	else
-		$settings["path"] = $temp;
-
-	$tabs["misc"] = "Misc";
-
-	$temp = array(
-		"flowview_header" => array(
-			"friendly_name" => "Flow View",
-			"method" => "spacer",
-			),
 		"flowview_dns" => array(
 			"friendly_name" => "DNS Server",
 			"description" => "This is the DNS Server used to resolve names.",
 			"method" => "textbox",
 			"max_length" => 255,
-			),
+		),
 	);
+
+	$tabs["misc"] = "Misc";
+
 	if (isset($settings["misc"]))
 		$settings["misc"] = array_merge($settings["misc"], $temp);
 	else
