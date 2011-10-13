@@ -212,6 +212,8 @@ function flowview_poller_bottom () {
 }
 
 function flowview_setup_table () {
+	global $config;
+
 	$data = array();
 	$data['columns'][] = array('name' => 'ip', 'type' => 'varchar(32)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'host', 'type' => 'varchar(255)', 'NULL' => false, 'default' => '');
@@ -296,7 +298,7 @@ function flowview_setup_table () {
 	$data['comment']   = 'Plugin Flowview - Database of well known Ports';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_ports', $data);
 
-	$inserts = file('./plugin_flowview_ports.sql');
+	$inserts = file($config['url_path'] . 'plugins/flowview/plugin_flowview_ports.sql');
 	if (sizeof($inserts)) {
 		db_execute("TRUNCATE plugin_flowview_ports");
 		foreach($inserts as $i) {
