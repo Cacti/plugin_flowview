@@ -112,9 +112,9 @@ function flowview_show_tab() {
 
 	if (api_user_realm_auth('flowview.php')) {
 		if (substr_count($_SERVER["REQUEST_URI"], "flowview")) {
-			print '<a href="' . $config['url_path'] . 'plugins/flowview/flowview.php"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="FlowView" align="absmiddle" border="0"></a>';
+			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="FlowView" align="absmiddle" border="0"></a>';
 		}else{
-			print '<a href="' . $config['url_path'] . 'plugins/flowview/flowview.php"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="FlowView" align="absmiddle" border="0"></a>';
+			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="FlowView" align="absmiddle" border="0"></a>';
 		}
 	}
 }
@@ -127,7 +127,7 @@ function flowview_page_head() {
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.tablesorter.min.js'></script>\n";
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.metadata.js'></script>\n";
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
-		print "\t<link href='" . $config['url_path'] . "plugins/flowview/css/jquery-ui.css' rel='stylesheet'>\n";
+		print "\t<link href='" . htmlspecialchars($config['url_path'] . "plugins/flowview/css/jquery-ui.css") . "' rel='stylesheet'>\n";
 	}
 }
 

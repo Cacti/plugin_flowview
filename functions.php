@@ -107,6 +107,7 @@ function flowview_display_report() {
 								<option value='3'<?php echo ($_REQUEST["exclude"] == 3 ? " selected":"");?>>Top 3 Samples</option>
 								<option value='4'<?php echo ($_REQUEST["exclude"] == 4 ? " selected":"");?>>Top 4 Samples</option>
 								<option value='5'<?php echo ($_REQUEST["exclude"] == 5 ? " selected":"");?>>Top 5 Samples</option>
+							</select>
 						</td>
 						<td nowrap style='white-space: nowrap;'>
 							<strong>Show/Hide:</strong>&nbsp;
@@ -279,19 +280,19 @@ function display_tabs() {
 
 	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
 	print "<td bgcolor='" . ($ct == 'filters' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Filters') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a title='Setup Flows' href='flowview.php?tab=filters'>Filters</a></span>
+			<span class='textHeader'><a title='Setup Flows' href='" . htmlspecialchars("flowview.php?tab=filters") . "'>Filters</a></span>
 			</td>\n
 			<td width='1'></td>\n";
 	if (api_user_realm_auth('flowview_devices.php')) {
 		print "<td bgcolor='" . ($ct == 'listeners' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Listeners') * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a title='Manage Listeners' href='flowview_devices.php?tab=listeners'>Listeners</a></span>
+				<span class='textHeader'><a title='Manage Listeners' href='" . htmlspecialchars("flowview_devices.php?tab=listeners") . "'>Listeners</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
 
 	if (api_user_realm_auth('flowview_schedules.php')) {
 		print "<td bgcolor='" . ($ct == 'sched' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a title='Manage e-Mail Reports' href='flowview_schedules.php?tab=sched'>Schedules</a></span>
+				<span class='textHeader'><a title='Manage e-Mail Reports' href='" . htmlspecialchars("flowview_schedules.php?tab=sched") . "'>Schedules</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
@@ -300,7 +301,7 @@ function display_tabs() {
 	foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
 		if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
 		print "<td bgcolor='" . ($ct == $sessionid ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen($data['title']) * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a style='white-space:nowrap;' href='flowview.php?tab=$sessionid' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></span>
+				<span class='textHeader'><a style='white-space:nowrap;' href='" . htmlspecialchars("flowview.php?tab=$sessionid") . "' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='" . htmlspecialchars("flowview.php?action=killsession&session=$sessionid") . "' title='Remove Flow Cache'>x</a></span>
 				</td>\n
 				<td width='1'></td>\n";
 	}
@@ -444,13 +445,13 @@ function createfilter(&$sessionid='') {
 
 		/* Check to see if the flowtools binaries exists */
 		if (!is_file("$flowbin/flow-cat"))
-			return "Can not find the '<strong>flow-cat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+			return "Can not find the '<strong>flow-cat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
 		if (!is_file("$flowbin/flow-nfilter"))
-			return "Can not find the '<strong>flow-nfilter</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+			return "Can not find the '<strong>flow-nfilter</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
 		if (!is_file("$flowbin/flow-stat"))
-			return "Can not find the '<strong>flow-stat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+			return "Can not find the '<strong>flow-stat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
 		if (!is_file("$flowbin/flow-print"))
-			return "Can not find the '<strong>flow-print</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Flowtools Path Setting</a>!";
+			return "Can not find the '<strong>flow-print</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
 
 		// Create Filters
 		$filter .= flowview_create_ip_filter ($source_address, 'source');
@@ -472,10 +473,10 @@ function createfilter(&$sessionid='') {
 		if (!$f) {
 			clearstatcache();
 			if (!is_dir($workdir)) {
-				return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
+				return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Settings</a></strong>";
 			}
 
-			return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
+			return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Settings</a></strong>";
 		}
 
 		@fputs($f, $filter);
