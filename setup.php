@@ -178,8 +178,15 @@ function flowview_config_settings () {
 			"max_length" => 255,
 			'default' => '/var/netflow/flows/completed'
 		),
+		"flowview_dns_method" => array(
+			"friendly_name" => "Hostname Resolution",
+			"description" => "The method by which you wish to resolve hostnames.",
+			"method" => "drop_array",
+			"array" => array(0 => "Use Local Server", 1 => "Use DNS Server Below", 2 => "Don't Resolve DNS"),
+			"default" => 0
+		),
 		"flowview_dns" => array(
-			"friendly_name" => "DNS Server",
+			"friendly_name" => "Alternate DNS Server",
 			"description" => "This is the DNS Server used to resolve names.",
 			"method" => "textbox",
 			"max_length" => 255,

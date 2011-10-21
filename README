@@ -22,10 +22,10 @@
 
 	Required:
 
-    First, make sure you have the plugin architecture installed.
+	First, make sure you have the plugin architecture installed.
 
-    Then, Install just like any other plugin, just copy it into the plugin directory,
-    and Use Console->Plugin Mangement to Install and Enable.
+	Then, Install just like any other plugin, just copy it into the plugin directory,
+	and Use Console->Plugin Mangement to Install and Enable.
 
 	Then, you must install flow-tools.  Generally, flow-tools is available through yum, 
 	apt-get, emerge, etc.  Locate the path for your flow-tools (typically /usr/bin), and
@@ -66,6 +66,7 @@
 ----[ Changelog
     --- SVN ---
     feature: Support for Ugroup Plugin
+	feature: Use either the OS' DNS or Alternate
     bug: Some W3C Validation Changes
 
     --- 1.1 ---

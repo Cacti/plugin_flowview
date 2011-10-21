@@ -767,7 +767,7 @@ function parsestatoutput($output, $title, $sessionid) {
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
-						if ($dns != '' && in_array($c, $ip_col)) {
+						if (($dns != '' || read_config_option("flowview_dns_method") == 0) && in_array($c, $ip_col)) {
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
 							$data_array[$i][$c] = $out2;
 						}elseif ($c == $octect_col && $octect_col != '') {
@@ -922,7 +922,7 @@ function parseprintoutput($output, $title, $sessionid) {
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
-						if ($dns != '' && in_array($c, $ip_col)) {
+						if (($dns != '' || read_config_option("flowview_dns_method") == 0) && in_array($c, $ip_col)) {
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
 							$data_array[$i][$c] = $out2;
 						}elseif (in_array($c, $ports_col)) {
@@ -1491,112 +1491,121 @@ function flowview_draw_chart($type, $title) {
 */
 function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 	// First check to see if its in the cache
-	$cache = db_fetch_assoc("SELECT * from plugin_flowview_dnscache where ip = '$ip'");
+	$cache = db_fetch_assoc("SELECT * from plugin_flowview_dnscache where ip='$ip'");
 
 	if (isset($cache[0]['host']))
 		return $cache[0]['host'];
 
 	$time = time();
 
-	/* random transaction number (for routers etc to get the reply back) */
-	$data = rand(10, 99);
+	if (read_config_option("flowview_dns_method") == 1) {
+		/* random transaction number (for routers etc to get the reply back) */
+		$data = rand(10, 99);
 
-	/* trim it to 2 bytes */
-	$data = substr($data, 0, 2);
+		/* trim it to 2 bytes */
+		$data = substr($data, 0, 2);
 
-	/* create request header */
-	$data .= "\1\0\0\1\0\0\0\0\0\0";
+		/* create request header */
+		$data .= "\1\0\0\1\0\0\0\0\0\0";
 
-	/* split IP into octets */
-	$octets = explode(".", $ip);
+		/* split IP into octets */
+		$octets = explode(".", $ip);
 
-	/* perform a quick error check */
-	if (count($octets) != 4) return "ERROR";
+		/* perform a quick error check */
+		if (count($octets) != 4) return "ERROR";
 
-	/* needs a byte to indicate the length of each segment of the request */
-	for ($x=3; $x>=0; $x--) {
-		switch (strlen($octets[$x])) {
-		case 1: // 1 byte long segment
-			$data .= "\1"; break;
-		case 2: // 2 byte long segment
-			$data .= "\2"; break;
-		case 3: // 3 byte long segment
-			$data .= "\3"; break;
-		default: // segment is too big, invalid IP
-			return "ERROR";
-		}
-
-		/* and the segment itself */
-		$data .= $octets[$x];
-	}
-
-	/* and the final bit of the request */
-	$data .= "\7in-addr\4arpa\0\0\x0C\0\1";
-
-	/* create UDP socket */
-	$handle = @fsockopen("udp://$dns", 53);
-
-	@stream_set_timeout($handle, floor($timeout/1000), ($timeout*1000)%1000000);
-	@stream_set_blocking($handle, 1);
-
-	/* send our request (and store request size so we can cheat later) */
-	$requestsize = @fwrite($handle, $data);
-
-	/* get the response */
-	$response = @fread($handle, 1000);
-
-	/* check to see if it timed out */
-	$info = @stream_get_meta_data($handle);
-
-	/* close the socket */
-	@fclose($handle);
-
-	if ($info["timed_out"]) {
-		db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
-		return $ip;
-	}
-
-	/* more error handling */
-	if ($response == "") {
-		db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
-		return $ip;
-	}
-
-	/* parse the response and find the response type */
-	$type = @unpack("s", substr($response, $requestsize+2));
-
-	if ($type[1] == 0x0C00) {
-		/* set up our variables */
-		$host = "";
-		$len = 0;
-
-		/* set our pointer at the beginning of the hostname uses the request
-		   size from earlier rather than work it out.
-		*/
-		$position = $requestsize + 12;
-
-		/* reconstruct the hostname */
-		do {
-			/* get segment size */
-			$len = unpack("c", substr($response, $position));
-
-			/* null terminated string, so length 0 = finished */
-			if ($len[1] == 0) {
-				/* return the hostname, without the trailing '.' */
-				db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '" . substr($host, 0, strlen($host) -1) . "', '$time')");
-				return substr($host, 0, strlen($host) -1);
+		/* needs a byte to indicate the length of each segment of the request */
+		for ($x=3; $x>=0; $x--) {
+			switch (strlen($octets[$x])) {
+			case 1: // 1 byte long segment
+				$data .= "\1"; break;
+			case 2: // 2 byte long segment
+				$data .= "\2"; break;
+			case 3: // 3 byte long segment
+				$data .= "\3"; break;
+			default: // segment is too big, invalid IP
+				return "ERROR";
 			}
 
-			/* add the next segment to our host */
-			$host .= substr($response, $position+1, $len[1]) . ".";
+			/* and the segment itself */
+			$data .= $octets[$x];
+		}
 
-			/* move pointer on to the next segment */
-			$position += $len[1] + 1;
-		} while ($len != 0);
+		/* and the final bit of the request */
+		$data .= "\7in-addr\4arpa\0\0\x0C\0\1";
 
-		/* error - return the hostname we constructed (without the . on the end) */
-		db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
-		return $ip;
+		/* create UDP socket */
+		$handle = @fsockopen("udp://$dns", 53);
+
+		@stream_set_timeout($handle, floor($timeout/1000), ($timeout*1000)%1000000);
+		@stream_set_blocking($handle, 1);
+
+		/* send our request (and store request size so we can cheat later) */
+		$requestsize = @fwrite($handle, $data);
+
+		/* get the response */
+		$response = @fread($handle, 1000);
+
+		/* check to see if it timed out */
+		$info = @stream_get_meta_data($handle);
+
+		/* close the socket */
+		@fclose($handle);
+
+		if ($info["timed_out"]) {
+			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
+			return $ip;
+		}
+
+		/* more error handling */
+		if ($response == "") {
+			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
+			return $ip;
+		}
+
+		/* parse the response and find the response type */
+		$type = @unpack("s", substr($response, $requestsize+2));
+
+		if ($type[1] == 0x0C00) {
+			/* set up our variables */
+			$host = "";
+			$len = 0;
+
+			/* set our pointer at the beginning of the hostname uses the request
+			   size from earlier rather than work it out.
+			*/
+			$position = $requestsize + 12;
+
+			/* reconstruct the hostname */
+			do {
+				/* get segment size */
+				$len = unpack("c", substr($response, $position));
+
+				/* null terminated string, so length 0 = finished */
+				if ($len[1] == 0) {
+					/* return the hostname, without the trailing '.' */
+					db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '" . substr($host, 0, strlen($host) -1) . "', '$time')");
+					return substr($host, 0, strlen($host) -1);
+				}
+
+				/* add the next segment to our host */
+				$host .= substr($response, $position+1, $len[1]) . ".";
+
+				/* move pointer on to the next segment */
+				$position += $len[1] + 1;
+			} while ($len != 0);
+
+			/* error - return the hostname we constructed (without the . on the end) */
+			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
+			return $ip;
+		}
+	}else{
+		$dns_name = gethostbyaddr($ip);
+
+		if ($dns_name != $ip) {
+			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$dns_name', '" . ($time - 3540) . "')");
+			return $ip;
+		}
 	}
 
 	/* error - return the hostname */
