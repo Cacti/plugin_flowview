@@ -1,22 +1,22 @@
 /*******************************************************************************
 
-    Author ......... Jimmy Conner
-    Contact ........ jimmy@sqmail.org
-    Home Site ...... http://cactiusers.org
-    Program ........ Flowviewer
-    Version ........ 1.1
-    Purpose ........ A simple Viewer for your Netflow flows
+	Author ......... Jimmy Conner
+	Contact ........ jimmy@sqmail.org
+	Home Site ...... http://cactiusers.org
+	Program ........ Flowviewer
+	Version ........ 1.2
+	Purpose ........ A simple Viewer for your Netflow flows
 
 *******************************************************************************/
 
 
 ----[ Purpose
 
-    This plugin allows you to see reports based off the data in your Netflow flows.
+	This plugin allows you to see reports based off the data in your Netflow flows.
 
 ----[ Features
 
-    Fully customizable reports
+	Fully customizable reports
 
 ----[ Installation
 
@@ -56,59 +56,59 @@
 
 ----[ Possible Bugs?
    
-    If you figure out this problem, let me know!!!
-
+	If you figure out this problem, let me know!!!
 
 ----[ Future Changes
     
-    Got any ideas or complaints, please e-mail me!
+	Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
-    --- SVN ---
-    feature: Support for Ugroup Plugin
+	--- SVN ---
+	feature: Support for Ugroup Plugin
 	feature: Use either the OS' DNS or Alternate
-    bug: Some W3C Validation Changes
+	feature: Add strip domain capabilities
+	bug: Some W3C Validation Changes
 
-    --- 1.1 ---
-    bug: FlowView Settings were hidden for some reason
-    bug: flow-capture script incomplete
+	--- 1.1 ---
+	bug: FlowView Settings were hidden for some reason
+	bug: flow-capture script incomplete
 
-    --- 1.0 ---
-    compat: Making compatible with 0.8.7g
-    feature: Allow sending emails on demand
-    feature: Add SaveAs, Delete, Update to UI
-    feature: Add a Veiwer Only Permission Level
-    feature: Add a Title for Scheduled Reports
-    feature; Re-tool many reports into pure HTML
-    feature: Add Graphs for Flows, Bytes, and Packets
-    feature: Support sortable tables
-    feature: Support excluding outliers from report
-    bug: Rename 'View' tab to 'Filter'
-    bug: Rename 'Devices' to 'Listeners'
+	--- 1.0 ---
+	compat: Making compatible with 0.8.7g
+	feature: Allow sending emails on demand
+	feature: Add SaveAs, Delete, Update to UI
+	feature: Add a Veiwer Only Permission Level
+	feature: Add a Title for Scheduled Reports
+	feature; Re-tool many reports into pure HTML
+	feature: Add Graphs for Flows, Bytes, and Packets
+	feature: Support sortable tables
+	feature: Support excluding outliers from report
+	bug: Rename 'View' tab to 'Filter'
+	bug: Rename 'Devices' to 'Listeners'
 
-    --- 0.6 ---
-    compat: Now only PA 2.0 compatible
-    bug: Fix for IE and saving Queries
-    bug: Fix for Error when no devices
+	--- 0.6 ---
+	compat: Now only PA 2.0 compatible
+	bug: Fix for IE and saving Queries
+	bug: Fix for Error when no devices
 
-    --- 0.5 ---
-    feature: Add flow-tools replacement startup script to allow launching of multiple processes based upon devices added
-    feature: Add Saved Queries
-    feature: Change Sort field to be drop downs with column names
-    feature: Add ability to schedule and email out Netflow Scans
-    bug: Fix issue with start and stop times close to midnight not loading the proper days data
-				
-    --- 0.4 ---
-    bug: Minor fix for when using flow path "/"
-    bug: Fix Cacti 0.8.7 Compatibility
+	--- 0.5 ---
+	feature: Add flow-tools replacement startup script to allow launching of multiple processes based upon devices added
+	feature: Add Saved Queries
+	feature: Change Sort field to be drop downs with column names
+	feature: Add ability to schedule and email out Netflow Scans
+	bug: Fix issue with start and stop times close to midnight not loading the proper days data
 
-    --- 0.3 ---
-    feature: Add time support for relative times (NOW, -1 HOUR, -2 DAYS, -10 MINTUES) Must leave Date blank for these to work properly
-    feature: Add device name to path if present
+	--- 0.4 ---
+	bug: Minor fix for when using flow path "/"
+	bug: Fix Cacti 0.8.7 Compatibility
 
-    --- 0.2 ---
-    feature: Add DNS Support
+	--- 0.3 ---
+	feature: Add time support for relative times (NOW, -1 HOUR, -2 DAYS, -10 MINTUES) Must leave Date blank for these to work properly
+	feature: Add device name to path if present
 
-    --- 0.1 ---
-    Initial release
+	--- 0.2 ---
+	feature: Add DNS Support
+
+	--- 0.1 ---
+	Initial release
 

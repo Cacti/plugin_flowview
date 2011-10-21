@@ -75,7 +75,7 @@ function flowview_check_upgrade () {
 function plugin_flowview_version () {
 	return array(
 		'name'     => 'flowview',
-		'version'  => '1.1',
+		'version'  => '1.2',
 		'longname' => 'FlowView',
 		'author'   => 'Jimmy Conner',
 		'homepage' => 'http://cactiusers.org',
@@ -190,6 +190,13 @@ function flowview_config_settings () {
 			"description" => "This is the DNS Server used to resolve names.",
 			"method" => "textbox",
 			"max_length" => 255,
+		),
+		"flowview_strip_dns" => array(
+			"friendly_name" => "Strip Domain Names",
+			"description" => "A comma delimited list of domains names to strip from the domain.",
+			"method" => "textbox",
+			"max_length" => 255,
+			"size" => 80
 		),
 	);
 

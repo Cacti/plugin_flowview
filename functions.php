@@ -1583,9 +1583,10 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 				/* null terminated string, so length 0 = finished */
 				if ($len[1] == 0) {
+					$hostname = flowview_strip_dns(substr($host, 0, strlen($host) -1));
 					/* return the hostname, without the trailing '.' */
-					db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '" . substr($host, 0, strlen($host) -1) . "', '$time')");
-					return substr($host, 0, strlen($host) -1);
+					db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '" . $hostname . "', '$time')");
+					return $hostname;
 				}
 
 				/* add the next segment to our host */
@@ -1600,17 +1601,31 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 			return $ip;
 		}
 	}else{
-		$dns_name = gethostbyaddr($ip);
+		$dns_name = flowview_strip_dns(gethostbyaddr($ip));
 
 		if ($dns_name != $ip) {
 			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$dns_name', '" . ($time - 3540) . "')");
-			return $ip;
+			return $dns_name;
 		}
 	}
 
 	/* error - return the hostname */
 	db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
 	return $ip;
+}
+
+function flowview_strip_dns($value) {
+	$strip = read_config_option("flowview_strip_dns");
+
+	if (strlen($strip)) {
+		$strips = explode(",", $strip);
+
+		foreach($strips as $s) {
+			$value = trim(str_replace($s, "", $value), ".");
+		}
+	}
+
+	return $value;
 }
 
 function flowview_get_color($as_array = false) {
