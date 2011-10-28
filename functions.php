@@ -1486,7 +1486,7 @@ function flowview_draw_chart($type, $title) {
 	$chartid++;
 }
 
-/*	gethostbyaddr_wtimeout - This function provides a good method of performing
+/*	flowview_get_dns_from_ip - This function provides a good method of performing
   a rapid lookup of a DNS entry for a host so long as you don't have to look far.
 */
 function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
@@ -1601,7 +1601,12 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 			return $ip;
 		}
 	}else{
-		$dns_name = flowview_strip_dns(gethostbyaddr($ip));
+		$address = @gethostbyaddr($ip);
+		$dns_name = $ip;
+
+		if ($address !== false) {
+			$dns_name = flowview_strip_dns($address);
+		}
 
 		if ($dns_name != $ip) {
 			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$dns_name', '" . ($time - 3540) . "')");
