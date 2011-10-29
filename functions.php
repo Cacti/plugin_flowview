@@ -701,12 +701,15 @@ function parsestatoutput($output, $title, $sessionid) {
 				<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
 
 	$clines     = $stat_columns_array[$stat_report][0];
-	$octect_col = $stat_columns_array[$stat_report][1];
+	$octet_col  = $stat_columns_array[$stat_report][1];
 	$proto_col  = $stat_columns_array[$stat_report][3];
 	$port_col   = $stat_columns_array[$stat_report][4];
-
 	$ip_col     = $stat_columns_array[$stat_report][2];
-	$ip_col     = explode(',',$ip_col);
+	if (strlen($ip_col)) {
+		$ip_col = explode(',',$ip_col);
+	}else{
+		$ip_col = array();
+	}
 
 	$columns    = $stat_columns_array[$stat_report];
 
@@ -756,7 +759,7 @@ function parsestatoutput($output, $title, $sessionid) {
 				$out = str_replace('  ', ' ', $out);
 			}
 			$out = explode(' ', $out);
-			if ($octect_col == '' || $cutoff_octets == '' || $out[$octect_col] > $cutoff_octets-1) {
+			if ($octet_col == '' || $cutoff_octets == '' || $out[$octet_col] > $cutoff_octets-1) {
 				/* remove outliers */
 				if ($r < $j) {
 					$r++;
@@ -767,16 +770,16 @@ function parsestatoutput($output, $title, $sessionid) {
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
-						if (($dns != '' || read_config_option("flowview_dns_method") == 0) && in_array($c, $ip_col)) {
+						if (($dns != '' || read_config_option("flowview_dns_method") == 0) && (sizeof($ip_col) && in_array($c, $ip_col))) {
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
 							$data_array[$i][$c] = $out2;
-						}elseif ($c == $octect_col && $octect_col != '') {
+						}elseif ($c == $octet_col) {
 							$data_array[$i][$c] = $out2;
 							$out2 = plugin_flowview_formatoctet($out2);
-						}elseif ($c == $port_col && $port_col != '') {
+						}elseif ($c == $port_col) {
 							$out2 = flowview_translate_port($out2, false);
 							$data_array[$i][$c] = $out2;
-						}elseif ($c == $proto_col && $proto_col != '') {
+						}elseif ($c == $proto_col) {
 							$out2 = plugin_flowview_get_protocol($out2, 0);
 							$data_array[$i][$c] = $out2;
 						}else{
@@ -853,14 +856,17 @@ function parseprintoutput($output, $title, $sessionid) {
 		<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
 
 	$clines     = $print_columns_array[$print_report][0];
-	$octect_col = $print_columns_array[$print_report][1];
+	$octet_col  = $print_columns_array[$print_report][1];
 	$proto_hex  = $print_columns_array[$print_report][3];
 	$proto_col  = $print_columns_array[$print_report][4];
-
-	$ip_col     = $print_columns_array[$print_report][2];
-	$ip_col     = explode(',',$ip_col);
 	$ports_col  = explode(',', $print_columns_array[$print_report][6]);
 	$ports_hex  = $print_columns_array[$print_report][5];
+	$ip_col     = $stat_columns_array[$stat_report][2];
+	if (strlen($ip_col)) {
+		$ip_col = explode(',',$ip_col);
+	}else{
+		$ip_col = array();
+	}
 
 	$columns    = $print_columns_array[$print_report];
 
@@ -917,21 +923,21 @@ function parseprintoutput($output, $title, $sessionid) {
 			}
 			$out = explode(' ', $out);
 
-			if ($octect_col == '' || $cutoff_octets == '' || $out[$octect_col] > $cutoff_octets-1) {
+			if ($octet_col == '' || $cutoff_octets == '' || $out[$octet_col] > $cutoff_octets-1) {
 				$o .= '<tr align=left bgcolor="' . flowview_altcolor($i) . '">';
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
-						if (($dns != '' || read_config_option("flowview_dns_method") == 0) && in_array($c, $ip_col)) {
+						if (($dns != '' || read_config_option("flowview_dns_method") == 0) && (sizeof($ip_col) && in_array($c, $ip_col))) {
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
 							$data_array[$i][$c] = $out2;
 						}elseif (in_array($c, $ports_col)) {
 							$out2 = flowview_translate_port($out2, $ports_hex);
 							$data_array[$i][$c] = $out2;
-						}elseif ($c == $octect_col && $octect_col != '') {
+						}elseif ($c == $octet_col) {
 							$data_array[$i][$c] = $out2;
 							$out2 = plugin_flowview_formatoctet($out2);
-						}elseif ($c == $proto_col && $proto_col != '') {
+						}elseif ($c == $proto_col) {
 							$out2 = plugin_flowview_get_protocol($out2, $proto_hex);
 							$data_array[$i][$c] = $out2;
 						}else{
@@ -1498,6 +1504,14 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 	$time = time();
 
+	$slashpos = strpos($ip, '/');
+	if ($slashpos) {
+		$suffix = substr($ip,$slashpos);
+		$ip = substr($ip, 0,$slashpos);
+	}else{
+		$suffix = "";
+	}
+
 	if (read_config_option("flowview_dns_method") == 1) {
 		/* random transaction number (for routers etc to get the reply back) */
 		$data = rand(10, 99);
@@ -1554,7 +1568,7 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 		if ($info["timed_out"]) {
 			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
-			return $ip;
+			return $ip . $suffix;
 		}
 
 		/* more error handling */
@@ -1586,7 +1600,7 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 					$hostname = flowview_strip_dns(substr($host, 0, strlen($host) -1));
 					/* return the hostname, without the trailing '.' */
 					db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '" . $hostname . "', '$time')");
-					return $hostname;
+					return $hostname . $suffix;
 				}
 
 				/* add the next segment to our host */
@@ -1598,7 +1612,7 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 			/* error - return the hostname we constructed (without the . on the end) */
 			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
-			return $ip;
+			return $ip . $suffix;
 		}
 	}else{
 		$address = @gethostbyaddr($ip);
@@ -1610,13 +1624,13 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 
 		if ($dns_name != $ip) {
 			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$dns_name', '" . ($time - 3540) . "')");
-			return $dns_name;
+			return $dns_name . $suffix;
 		}
 	}
 
 	/* error - return the hostname */
 	db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
-	return $ip;
+	return $ip . $suffix;
 }
 
 function flowview_strip_dns($value) {
