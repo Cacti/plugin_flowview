@@ -312,7 +312,7 @@ function flowview_setup_table () {
 	$data['comment']   = 'Plugin Flowview - Database of well known Ports';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_ports', $data);
 
-	$inserts = file($config['url_path'] . 'plugins/flowview/plugin_flowview_ports.sql');
+	$inserts = file($config['base_path'] . 'plugins/flowview/plugin_flowview_ports.sql');
 	if (sizeof($inserts)) {
 		db_execute("TRUNCATE plugin_flowview_ports");
 		foreach($inserts as $i) {
