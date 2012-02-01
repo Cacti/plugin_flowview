@@ -62,20 +62,25 @@ function flowview_check_upgrade () {
 	$current = plugin_flowview_version ();
 	$current = $current['version'];
 	$old = read_config_option('plugin_flowview_version');
-	if ($current != $old)
+	if ($current != $old) {
 		flowview_setup_table();
+	}else{
+		return;
+	}
 
 	/* update titles for those that don't have them */
 	db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
 
 	/* Set the new version */
 	db_execute("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', '$current')");
+
+	db_execute("ALTER TABLE plugin_flowview_devices ENGINE=MyISAM");
 }
 
 function plugin_flowview_version () {
 	return array(
 		'name'     => 'flowview',
-		'version'  => '1.2',
+		'version'  => '1.3',
 		'longname' => 'FlowView',
 		'author'   => 'Jimmy Conner',
 		'homepage' => 'http://cactiusers.org',
@@ -250,7 +255,7 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'compression', 'type' => 'int(1)', 'NULL' => false, 'default' => '0');
 	$data['primary']   = 'id';
 	$data['keys'][]    = array('name' => 'folder', 'columns' => 'folder');
-	$data['type']      = 'MEMORY';
+	$data['type']      = 'MyISAM';
 	$data['comment']   = 'Plugin Flowview - List of Devices to collect flows from';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_devices', $data);
 
