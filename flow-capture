@@ -36,7 +36,7 @@ function start() {
 	if (!empty($devices)) {
 		$path = db_fetch_cell("SELECT value FROM `settings` WHERE name = 'path_flows_dir'");
 		if ($path == '')
-			break;
+			return;
 		if (substr($path, -1) == '/') {
 			$path = substr($path, 0, -1);
 		}
