@@ -770,7 +770,7 @@ function parsestatoutput($output, $title, $sessionid) {
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
-						if (($dns != '' || read_config_option("flowview_dns_method") == 0) && (sizeof($ip_col) && in_array($c, $ip_col))) {
+						if ($resolve_addresses == 'Y' && ($dns != '' || read_config_option("flowview_dns_method") == 0) && (sizeof($ip_col) && in_array($c, $ip_col))) {
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
 							$data_array[$i][$c] = $out2;
 						}elseif ($c == $octet_col) {
