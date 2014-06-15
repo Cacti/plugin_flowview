@@ -200,6 +200,11 @@ switch ($action) {
 
 function actions_devices () {
 	global $colors, $ds_actions, $config;
+
+	/* ================= input validation ================= */
+	input_validate_input_number(get_request_var_post('drp_action'));
+	/* ==================================================== */
+
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
 		if ($_POST["drp_action"] == "1") {
