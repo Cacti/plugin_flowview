@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2010 The Cacti Group                                 |
+ | Copyright (C) 2008-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -114,16 +114,16 @@ switch ($action) {
 		save_schedules ();
 		break;
 	case 'edit':
-		include_once("./plugins/flowview/general_header.php");
+		general_header();
 		display_tabs ();
 		edit_schedule();
-		include_once("./include/bottom_footer.php");
+		bottom_footer();
 		break;
 	default:
-		include_once("./plugins/flowview/general_header.php");
+		general_header();
 		display_tabs ();
 		show_schedules ();
-		include_once("./include/bottom_footer.php");
+		bottom_footer();
 		break;
 }
 
@@ -187,7 +187,7 @@ function actions_schedules () {
 		}
 	}
 
-	include_once("./plugins/flowview/general_header.php");
+	general_header();
 
 	html_start_box("<strong>" . $sched_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
 
@@ -195,28 +195,28 @@ function actions_schedules () {
 
 	if ($_POST["drp_action"] == "1") { /* Delete */
 		print "	<tr>
-				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td colspan='2' class='textArea'>
 					<p>To delete the following Schedule(s), press the 'Continue' button.</p>
 					<p><ul>$schedule_list</ul></p>
 				</td>
 				</tr>";
 	}elseif ($_POST["drp_action"] == "2") { /* Send Now */
 		print "	<tr>
-				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td colspan='2' class='textArea'>
 					<p>To send the following Schedule(s), press the 'Continue' button.</p>
 					<p><ul>$schedule_list</ul></p>
 				</td>
 				</tr>";
 	}elseif ($_POST["drp_action"] == "3") { /* Disable */
 		print "	<tr>
-				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td colspan='2' class='textArea'>
 					<p>To Disable the following Schedule(s), press the 'Continue' button.</p>
 					<p><ul>$schedule_list</ul></p>
 				</td>
 				</tr>";
 	}elseif ($_POST["drp_action"] == "4") { /* Enable */
 		print "	<tr>
-				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
+				<td colspan='2' class='textArea'>
 					<p>To Enable the following Schedule(s), press the 'Continue' button.</p>
 					<p><ul>$schedule_list</ul></p>
 				</td>
@@ -224,14 +224,14 @@ function actions_schedules () {
 	}
 
 	if (!isset($schedule_array)) {
-		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one schedule.</span></td></tr>\n";
+		print "<tr><td><span class='textError'>You must select at least one schedule.</span></td></tr>\n";
 		$save_html = "";
 	}else{
 		$save_html = "<input type='submit' value='Continue'>";
 	}
 
 	print "	<tr>
-			<td colspan='2' align='right' bgcolor='#eaeaea'>
+			<td colspan='2' align='right' class='saveRow'>
 				<input type='hidden' name='action' value='actions'>
 				<input type='hidden' name='selected_items' value='" . (isset($schedule_array) ? serialize($schedule_array) : '') . "'>
 				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
@@ -243,7 +243,7 @@ function actions_schedules () {
 
 	html_end_box();
 
-	include_once("./include/bottom_footer.php");
+	bottom_footer();
 }
 
 function save_schedules() {
@@ -422,19 +422,21 @@ function show_schedules () {
 
 	html_start_box("<strong>Host Templates</strong>", "100%", $colors["header"], "3", "center", "flowview_schedules.php?action=edit");
 	?>
-	<tr bgcolor="#<?php print $colors["panel"];?>">
+	<tr class='even'>
 		<td>
 		<form name="form_schedule" action="flowview_schedules.php">
-			<table width="100%" cellpadding="0" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td nowrap style='white-space: nowrap;' width="50">
-						Search:&nbsp;
+					<td width='55'>
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="40" value="<?php print htmlspecialchars(get_request_var_request("filter"));?>">
 					</td>
-					<td nowrap style='white-space: nowrap;'>
-						&nbsp;<input type="submit" value="Go" title="Set/Refresh Filters">
+					<td>
+						<input type="submit" value="Go" title="Set/Refresh Filters">
+					</td>
+					<td>
 						<input type="submit" name="clear" value="Clear" title="Clear Filters">
 					</td>
 				</tr>
@@ -448,6 +450,7 @@ function show_schedules () {
 
 	$sql_where = "WHERE (name LIKE '%%" . get_request_var_request("filter") . "%%')";
 	$num_rows  = read_config_option("num_rows_device");
+
 	define("MAX_DISPLAY_PAGES", 21);
 
 	$sql = "SELECT pfs.*, pfq.name 
@@ -472,39 +475,10 @@ function show_schedules () {
 
 	html_start_box("", "100%", $colors["header"], "3", "center", "");
 
-	if ($total_rows > 0) {
-		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-			<td colspan='10'>
-				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-					<tr>
-						<td align='left' class='textHeaderDark'>
-							<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("flowview_schedules.php?page=" . ($_REQUEST["page"]-1)) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-						</td>\n
-						<td align='center' class='textHeaderDark'>
-							Showing Rows " . (($num_rows*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $num_rows) || ($total_rows < ($num_rows*$_REQUEST["page"]))) ? $total_rows : ($num_rows*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-						</td>\n
-						<td align='right' class='textHeaderDark'>
-							<strong>"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("flowview_schedules.php?page=" . ($_REQUEST["page"]+1)) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-						</td>\n
-					</tr>
-				</table>
-			</td>
-		</tr>\n";
-	}else{
-		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-			<td colspan='10'>
-				<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-					<tr>
-						<td align='center' class='textHeaderDark'>
-							No Rows Found
-						</td>\n
-					</tr>
-				</table>
-			</td>
-		</tr>\n";
-	}
+	$nav = html_nav_bar("flowview_schedules.php", MAX_DISPLAY_PAGES, get_request_var_request("page"), $num_rows, $total_rows, 10, 'Schedules');
 
 	print $nav;
+
 	$display_array = array(
 		'title'                 => array('Schedule Title', 'ASC'),
 		'name'                  => array('Filter Name', 'ASC'),
@@ -520,7 +494,7 @@ function show_schedules () {
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
-			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $row['id']); $i++;
+			form_alternate_row('line' . $row["id"], true);
 			form_selectable_cell('<a href="' . htmlspecialchars('flowview_schedules.php?&action=edit&id=' . $row['id']) . '"><strong>' . $row['title'] . '</strong></a>', $row['id']);
 			form_selectable_cell($row['name'], $row['id']);
 			form_selectable_cell($sendinterval_arr[$row['sendinterval']], $row['id']);
@@ -532,7 +506,9 @@ function show_schedules () {
 			form_end_row();
 		}
 	}
+
 	html_end_box(false);
+
 	draw_actions_dropdown($sched_actions);
 }
 

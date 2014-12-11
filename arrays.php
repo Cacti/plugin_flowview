@@ -67,7 +67,7 @@ $flow_select_array = array(
 );
 
 $ip_protocols_array = array(
-	'' => '',
+	'' => 'Select One',
 	6  => 'TCP',
 	17 => 'UDP',
 	1  => 'ICMP',

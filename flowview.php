@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2010 The Cacti Group                                 |
+ | Copyright (C) 2008-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -43,14 +43,14 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save') {
 	flowview_updatesess();
 }elseif ((isset($_REQUEST['action']) && $_REQUEST['action'] == 'view') || 
 	(isset($_REQUEST['tab']) && strlen($_REQUEST["tab"]) > 10)) {
-	include_once("./plugins/flowview/general_header.php");
+	general_header();
 	flowview_display_report();
-	include("./include/bottom_footer.php");
+	bottom_footer();
 }else{
-	include_once("./plugins/flowview/general_header.php");
+	general_header();
 	display_output_messages();
 	flowview_display_form();
-	include("./include/bottom_footer.php");
+	bottom_footer();
 }
 
 function flowview_delete_filter() {
@@ -126,7 +126,7 @@ function flowview_display_form() {
 	display_tabs ();
 	html_start_box("<strong>Flow Filter Constraints</strong>", "100%", $colors["header"], "3", "center", "");
 	?>
-	<tr>
+	<tr class='even'>
 		<td>
 			<table border='0' cellspacing='0' cellpadding='1' width='100%' style='white-space:nowrap;'>
 				<tr>
@@ -185,7 +185,7 @@ function flowview_display_form() {
 	</tr>
 	<?php html_end_box(false);?>
 	<?php html_start_box("<strong>Report Parameters</strong>", "100%", $colors["header"], "3", "center", "");?>
-	<tr>
+	<tr class='even'>
 		<td>
 			<table cellpadding='1' cellspacing='0' border='0' width='100%' style='white-space:nowrap;'>
 				<tr id='rsettings'>
@@ -206,10 +206,10 @@ function flowview_display_form() {
 					<td>Minimum Bytes:</td>
 					<td><?php draw_edit_control("cutoff_octets", $cutoff_octets_field);?></td>
 				</tr>
-				<tr>
 			</table>
 		</td>
 	</tr>
+	<tr>
 		<td colspan='9'><hr size='2'></td>
 	</tr>
 	<tr>
@@ -240,10 +240,10 @@ function flowview_display_form() {
 		setStatOption(statval);
 		if (statval > 0) {
 			$('#print_report').attr('value', 0);
-			$('#print_report').attr('disabled', 'disabled');
+			$('#print_report').prop('disabled', true);
 			$('#rlimits').children('.sortfield').show();
 		}else{
-			$('#print_report').attr('disabled', '');
+			$('#print_report').prop('disabled', false);
 		}
 		if (statval == 99 || statval < 1) {
 			$('#rlimits').hide();
@@ -252,13 +252,13 @@ function flowview_display_form() {
 		}
 
 		if (statval == 0 && $('#print_report').val() == 0) {
-			$('#view').attr('disabled','disabled');
-			$('#save').attr('disabled','disabled');
-			$('#saveas').attr('disabled','disabled');
+			$('#view').prop('disabled', true);
+			$('#save').prop('disabled', true);
+			$('#saveas').prop('disabled', true);
 		}else{
-			$('#view').attr('disabled','');
-			$('#save').attr('disabled','');
-			$('#saveas').attr('disabled','');
+			$('#view').prop('disabled', false);
+			$('#save').prop('disabled', false);
+			$('#saveas').prop('disabled', false);
 		}
 	}
 
@@ -266,56 +266,56 @@ function flowview_display_form() {
 		statval = $('#print_report').val();
 		if (statval > 0) {
 			$('#stat_report').attr('value',0);
-			$('#stat_report').attr('disabled', 'disabled');
-			$('#sort_field').removeAttr('disabled');
+			$('#stat_report').prop('disabled', false);
+			$('#sort_field').prop('disabled', false);
 			$('#rlimits').hide();
 			$('#rlimits').children('.sortfield').hide();
 		} else {
 			$('#rlimits').show();
-			$('#cutoff_lines').removeAttr('disabled');
-			$('#cutoff_octets').removeAttr('disabled');
+			$('#cutoff_lines').prop('disabled', false);
+			$('#cutoff_octets').prop('disabled', false);
 			if ($('#stat_report').val() == 0) {
 				$('#stat_report').attr('value', 10);
 			}
-			$('#stat_report').removeAttr('disabled');
+			$('#stat_report').prop('disabled', false);
 			statSelect();
 			return;
 		}
 		if (statval == 4 || statval == 5) {
-			$('#cutoff_lines').removeAttr('disabled');
-			$('#cutoff_octets').removeAttr('disabled');
+			$('#cutoff_lines').prop('disabled', false);
+			$('#cutoff_octets').prop('disabled', false);
 			$('#rlimits').show();
 		} else {
-			$('#cutoff_lines').attr('disabled','disabled');
-			$('#cutoff_octets').attr('disabled','disabled');
+			$('#cutoff_lines').prop('disabled', true);
+			$('#cutoff_octets').prop('disabled', true);
 			$('#rlimits').hide();
 		}
 
 		if (statval == 0 && $('#stat_report').val() == 0) {
-			$('#view').attr('disabled','disabled');
-			$('#save').attr('disabled','disabled');
-			$('#saveas').attr('disabled','disabled');
+			$('#view').prop('disabled', true);
+			$('#save').prop('disabled', true);
+			$('#saveas').prop('disabled', true);
 		}else{
-			$('#view').attr('disabled','');
-			$('#save').attr('disabled','');
-			$('#saveas').attr('disabled','');
+			$('#view').prop('disabled', false);
+			$('#save').prop('disabled', false);
+			$('#saveas').prop('disabled', false);
 		}
 	}
 
 	$('#device_name').change(function () {
 		<?php if (api_user_realm_auth('flowview_devices.php')) { ?>
 		if ($(this).val() == 0) {
-			$('#view').attr('disabled', 'disabled');
-			$('#save').attr('disabled', 'disabled');
+			$('#view').prop('disabled', true);
+			$('#save').prop('disabled', true);
 		}else{
-			$('#view').removeAttr('disabled');
-			$('#save').removeAttr('disabled');
+			$('#view').prop('disabled', false);
+			$('#save').prop('disabled', false);
 		}
 		<?php }else{ ?>
 		if ($(this).val() == 0) {
-			$('#view').attr('disabled', 'disabled');
+			$('#view').prop('disabled', true);
 		}else{
-			$('#view').removeAttr('disabled');
+			$('#view').prop('disabled', false);
 		}
 		<?php } ?>
 	});
@@ -344,17 +344,17 @@ function flowview_display_form() {
 
 		<?php if (api_user_realm_auth('flowview_devices.php')) { ?>
 		if ($('#device_name').val() == 0) {
-			$('#view').attr('disabled', 'disabled');
-			$('#save').attr('disabled', 'disabled');
+			$('#view').prop('disabled', true);
+			$('#save').prop('disabled', true);
 		}else{
-			$('#view').removeAttr('disabled');
-			$('#save').removeAttr('disabled');
+			$('#view').prop('disabled', false);
+			$('#save').prop('disabled', false);
 		}
 		<?php }else{ ?>
 		if ($('#device_name').val() == 0) {
-			$('#view').attr('disabled', 'disabled');
+			$('#view').prop('disabled', true);
 		}else{
-			$('#view').removeAttr('disabled');
+			$('#view').prop('disabled', false);
 		}
 		<?php } ?>
 
@@ -384,6 +384,7 @@ function flowview_display_form() {
 	});
 
 	$('#saveas').click(function() {
+		console.log('This is saveas');
 		$('#squery').attr('value', $('#query>option:selected').text()+' (New)');
 		$('#fdialog').dialog('open');
 		$('#qcancel').click(function() {

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2010 The Cacti Group                                 |
+ | Copyright (C) 2008-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -185,26 +185,21 @@ switch ($action) {
 		save_devices ();
 		break;
 	case 'edit':
-		include_once("./plugins/flowview/general_header.php");
+		general_header();
 		display_tabs ();
 		edit_devices();
-		include_once("./include/bottom_footer.php");
+		bottom_footer();
 		break;
 	default:
-		include_once("./plugins/flowview/general_header.php");
+		general_header();
 		display_tabs ();
 		show_devices ();
-		include_once("./include/bottom_footer.php");
+		bottom_footer();
 		break;
 }
 
 function actions_devices () {
 	global $colors, $ds_actions, $config;
-
-	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_post('drp_action'));
-	/* ==================================================== */
-
 	if (isset($_POST["selected_items"])) {
 		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
 		if ($_POST["drp_action"] == "1") {
@@ -238,8 +233,7 @@ function actions_devices () {
 		$i++;
 	}
 
-	include_once("./plugins/flowview/general_header.php");
-	//display_tabs ();
+	general_header();
 
 	html_start_box("<strong>" . $ds_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
 
@@ -275,7 +269,7 @@ function actions_devices () {
 
 	html_end_box();
 
-	include_once("./include/bottom_footer.php");
+	bottom_footer();
 }
 
 function save_devices () {
@@ -394,28 +388,26 @@ function show_devices () {
 	$result = db_fetch_assoc($sql);
 
 	define("MAX_DISPLAY_PAGES", 21);
+
 	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices $sql_where");
-	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_devices.php?");
-
-	/* print checkbox form for validation */
-	print "<form name='chk' method='post' action='flowview_devices.php'>\n";
-
 	html_start_box("<strong>FlowView Listeners</strong>", "100%", $colors["header"], "4", "center", "flowview_devices.php?action=edit");
 
 	?>
-	<tr bgcolor="#<?php print $colors["panel"];?>">
+	<tr class='even'>
 		<td>
 		<form name="listeners" action="flowview_devices.php">
-			<table width="100%" cellpadding="0" cellspacing="0">
+			<table cellpadding="2" cellspacing="0">
 				<tr>
-					<td nowrap style='white-space: nowrap;' width="50">
-						Search:&nbsp;
+					<td width="55">
+						Search:
 					</td>
-					<td width="1">
+					<td>
 						<input type="text" name="filter" size="40" value="<?php print htmlspecialchars(get_request_var_request("filter"));?>">
 					</td>
-					<td nowrap style='white-space: nowrap;'>
-						&nbsp;<input type="submit" value="Go" title="Set/Refresh Filters">
+					<td>
+						<input type="submit" value="Go" title="Set/Refresh Filters">
+					</td>
+					<td>
 						<input type="submit" name="clear" value="Clear" title="Clear Filters">
 					</td>
 				</tr>
@@ -428,39 +420,13 @@ function show_devices () {
 
 	html_end_box();
 
-	if ($total_rows > 0) {
-		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='10'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-							<td align='left' class='textHeaderDark'>
-								<strong>&lt;&lt; "; if ($_REQUEST["page"] > 1) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("flowview_devices.php?page=" . ($_REQUEST["page"]-1)) . "'>"; } $nav .= "Previous"; if ($_REQUEST["page"] > 1) { $nav .= "</a>"; } $nav .= "</strong>
-							</td>\n
-							<td align='center' class='textHeaderDark'>
-								Showing Rows " . (($num_rows*($_REQUEST["page"]-1))+1) . " to " . ((($total_rows < $num_rows) || ($total_rows < ($num_rows*$_REQUEST["page"]))) ? $total_rows : ($num_rows*$_REQUEST["page"])) . " of $total_rows [$url_page_select]
-							</td>\n
-							<td align='right' class='textHeaderDark'>
-								<strong>"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "<a class='linkOverDark' href='" . htmlspecialchars("flowview_devices.php?page=" . ($_REQUEST["page"]+1)) . "'>"; } $nav .= "Next"; if (($_REQUEST["page"] * $num_rows) < $total_rows) { $nav .= "</a>"; } $nav .= " &gt;&gt;</strong>
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
-	}else{
-		$nav = "<tr bgcolor='#" . $colors["header"] . "'>
-				<td colspan='10'>
-					<table width='100%' cellspacing='0' cellpadding='0' border='0'>
-						<tr>
-							<td align='center' class='textHeaderDark'>
-								No Rows Found
-							</td>\n
-						</tr>
-					</table>
-				</td>
-			</tr>\n";
-	}
+	/* print checkbox form for validation */
+	print "<form name='chk' method='post' action='flowview_devices.php'>\n";
 
 	html_start_box("", "100%", $colors["header"], "4", "center", "");
+
+	$nav = html_nav_bar("flowview_devices.php", MAX_DISPLAY_PAGES, get_request_var_request("page"), $num_rows, $total_rows, 10, 'Listeners');
+
 	print $nav;
 
 	$display_array = array(
@@ -481,8 +447,8 @@ function show_devices () {
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
-			form_alternate_row_color($colors["alternate"], $colors["light"], $i, 'line' . $row['id']); $i++;
-			form_selectable_cell('<a href="' . htmlspecialchars('flowview_devices.php?&action=edit&id=' . $row['id']) . '"><strong>' . $row['name'] . '</strong></a>', $row['id']);
+			form_alternate_row('line' . $row["id"], true);
+			form_selectable_cell('<a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a>', $row['id']);
 			form_selectable_cell($row['folder'], $row['id']);
 			form_selectable_cell($nesting_arr[$row['nesting']], $row['id']);
 			form_selectable_cell($row['allowfrom'], $row['id']);
@@ -494,13 +460,13 @@ function show_devices () {
 			form_checkbox_cell($row['name'], $row['id']);
 			form_end_row();
 		}
-
-		print $nav;
 	} else {
-		form_alternate_row_color($colors["alternate"],$colors["light"],$i); $i++;
+		form_alternate_row();
 		print '<td colspan=10><center>No Devices</center></td></tr>';
 	}
+
 	html_end_box(false);
+
 	draw_actions_dropdown($ds_actions);
 }
 

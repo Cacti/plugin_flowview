@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2010 The Cacti Group                                 |
+ | Copyright (C) 2008-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -278,35 +278,23 @@ function display_tabs() {
 	}
 	$ct = $_SESSION['flowview_current_tab'];
 
-	print "<table class='tabs' width='100%' cellspacing='0' cellpadding='3' align='center'><tr>\n";
-	print "<td bgcolor='" . ($ct == 'filters' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Filters') * 9) . "' align='center' class='tab'>
-			<span class='textHeader'><a title='Setup Flows' href='" . htmlspecialchars("flowview.php?tab=filters") . "'>Filters</a></span>
-			</td>\n
-			<td width='1'></td>\n";
+	print "<table cellspacing='0' cellpadding='0' border='0'><tr><td><div class='tabs' style='float:left;'><nav><ul>\n";
+	print "<li><a title='Setup Flows' " . ($ct == 'filters' ? "class='selected'":"") . " href='flowview.php?tab=filters'>Filters</a></li>\n";
 	if (api_user_realm_auth('flowview_devices.php')) {
-		print "<td bgcolor='" . ($ct == 'listeners' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Listeners') * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a title='Manage Listeners' href='" . htmlspecialchars("flowview_devices.php?tab=listeners") . "'>Listeners</a></span>
-				</td>\n
-				<td width='1'></td>\n";
+		print "<li><a title='Manage Listeners' " . ($ct == 'listeners' ? "class='selected'":"") . " href='flowview_devices.php?tab=listeners'>Listeners</a></li>\n";
 	}
 
 	if (api_user_realm_auth('flowview_schedules.php')) {
-		print "<td bgcolor='" . ($ct == 'sched' ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen('Schedules') * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a title='Manage e-Mail Reports' href='" . htmlspecialchars("flowview_schedules.php?tab=sched") . "'>Schedules</a></span>
-				</td>\n
-				<td width='1'></td>\n";
+		print "<li><a title='Manage Schedules' " . ($ct == 'sched' ? "class='selected'":"") . " href='flowview_schedules.php?tab=sched'>Schedules</a></li>\n";
 	}
 
 	if (isset($_SESSION['flowview_flows']) && is_array($_SESSION['flowview_flows']) && sizeof($_SESSION['flowview_flows'])) {
 	foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
 		if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
-		print "<td bgcolor='" . ($ct == $sessionid ? "silver":"#DFDFDF") . "' nowrap='nowrap' width='" . (strlen($data['title']) * 9) . "' align='center' class='tab'>
-				<span class='textHeader'><a style='white-space:nowrap;' href='" . htmlspecialchars("flowview.php?tab=$sessionid") . "' title='View Flow'>" . $data['title'] . "</a>&nbsp<a href='" . htmlspecialchars("flowview.php?action=killsession&session=$sessionid") . "' title='Remove Flow Cache'>x</a></span>
-				</td>\n
-				<td width='1'></td>\n";
+		print "<li><a title='View Flow' " . ($ct == $sessionid ? "class='selected'":"") . " href='flowview.php?tab=$sessionid'>" . $data['title'] . "</a><a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></li>\n";
 	}
 	}
-	print "<td></td>\n</tr></table>\n";
+	print "</ul></nav></div></td></tr></table>\n";
 }
 
 function plugin_flowview_run_schedule($id) {
@@ -473,10 +461,10 @@ function createfilter(&$sessionid='') {
 		if (!$f) {
 			clearstatcache();
 			if (!is_dir($workdir)) {
-				return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Settings</a></strong>";
+				return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
 			}
 
-			return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Settings</a></strong>";
+			return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
 		}
 
 		@fputs($f, $filter);
@@ -701,15 +689,12 @@ function parsestatoutput($output, $title, $sessionid) {
 				<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
 
 	$clines     = $stat_columns_array[$stat_report][0];
-	$octet_col  = $stat_columns_array[$stat_report][1];
+	$octect_col = $stat_columns_array[$stat_report][1];
 	$proto_col  = $stat_columns_array[$stat_report][3];
 	$port_col   = $stat_columns_array[$stat_report][4];
+
 	$ip_col     = $stat_columns_array[$stat_report][2];
-	if (strlen($ip_col)) {
-		$ip_col = explode(',',$ip_col);
-	}else{
-		$ip_col = array();
-	}
+	$ip_col     = explode(',',$ip_col);
 
 	$columns    = $stat_columns_array[$stat_report];
 
@@ -759,7 +744,7 @@ function parsestatoutput($output, $title, $sessionid) {
 				$out = str_replace('  ', ' ', $out);
 			}
 			$out = explode(' ', $out);
-			if ($octet_col == '' || $cutoff_octets == '' || $out[$octet_col] > $cutoff_octets-1) {
+			if ($octect_col == '' || $cutoff_octets == '' || $out[$octect_col] > $cutoff_octets-1) {
 				/* remove outliers */
 				if ($r < $j) {
 					$r++;
@@ -770,16 +755,16 @@ function parsestatoutput($output, $title, $sessionid) {
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
-						if ($resolve_addresses == 'Y' && ($dns != '' || read_config_option("flowview_dns_method") == 0) && (sizeof($ip_col) && in_array($c, $ip_col))) {
+						if ($dns != '' && in_array($c, $ip_col)) {
 							$out2 = flowview_get_dns_from_ip($out2, $dns);
 							$data_array[$i][$c] = $out2;
-						}elseif ($c == $octet_col) {
+						}elseif ($c == $octect_col && $octect_col != '') {
 							$data_array[$i][$c] = $out2;
 							$out2 = plugin_flowview_formatoctet($out2);
-						}elseif ($c == $port_col) {
+						}elseif ($c == $port_col && $port_col != '') {
 							$out2 = flowview_translate_port($out2, false);
 							$data_array[$i][$c] = $out2;
-						}elseif ($c == $proto_col) {
+						}elseif ($c == $proto_col && $proto_col != '') {
 							$out2 = plugin_flowview_get_protocol($out2, 0);
 							$data_array[$i][$c] = $out2;
 						}else{
@@ -856,17 +841,14 @@ function parseprintoutput($output, $title, $sessionid) {
 		<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
 
 	$clines     = $print_columns_array[$print_report][0];
-	$octet_col  = $print_columns_array[$print_report][1];
+	$octect_col = $print_columns_array[$print_report][1];
 	$proto_hex  = $print_columns_array[$print_report][3];
 	$proto_col  = $print_columns_array[$print_report][4];
+
+	$ip_col     = $print_columns_array[$print_report][2];
+	$ip_col     = explode(',',$ip_col);
 	$ports_col  = explode(',', $print_columns_array[$print_report][6]);
 	$ports_hex  = $print_columns_array[$print_report][5];
-	$ip_col     = $stat_columns_array[$stat_report][2];
-	if (strlen($ip_col)) {
-		$ip_col = explode(',',$ip_col);
-	}else{
-		$ip_col = array();
-	}
 
 	$columns    = $print_columns_array[$print_report];
 

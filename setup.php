@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2010 The Cacti Group                                 |
+ | Copyright (C) 2008-2014 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -127,12 +127,9 @@ function flowview_show_tab() {
 function flowview_page_head() {
 	global $config, $colors;
 	if (substr_count($_SERVER["REQUEST_URI"], "flowview")) {
-		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.min.js'></script>\n";
-		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery-ui.min.js'></script>\n";
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.tablesorter.min.js'></script>\n";
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.metadata.js'></script>\n";
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
-		print "\t<link href='" . htmlspecialchars($config['url_path'] . "plugins/flowview/css/jquery-ui.css") . "' rel='stylesheet'>\n";
 	}
 }
 
