@@ -45,6 +45,7 @@
 
 	Next copy the 'flow-caputure' file in the flowview plugin directory to '/etc/init.d/'
 	or the appropriate location.  You have to edit this file to set the cacti base path.
+	This file also supercedes whatever the operating system installed.
 
 	Finally, start the 'flow-capture' process using '/etc/init.d/flow-capture start'.
 
@@ -63,7 +64,8 @@
 	Got any ideas or complaints, please e-mail me!
 
 ----[ Changelog
-	--- SVN ---
+	--- 2.0 ---
+	feature: Support for Cacti 1.0
 	feature: Support for Ugroup Plugin
 	feature: Use either the OS' DNS or Alternate
 	feature: Add strip domain capabilities

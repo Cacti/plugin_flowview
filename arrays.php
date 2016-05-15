@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2010 The Cacti Group                                 |
+ | Copyright (C) 2008-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -23,47 +23,47 @@
 */
 
 $stat_report_array = array(
-	0  => "Statistics Reports",
-	99 => "Summary",
-	5  => "UDP/TCP Destination Port",
-	6  => "UDP/TCP Source Port",
-	7  => "UDP/TCP Port",
-	8  => "Destination IP",
-	9  => "Source IP",
-	10 => "Source/Destination IP",
-	11 => "Source or Destination IP",
-	12 => "IP Protocol",
-	17 => "Input Interface",
-	18 => "Output Interface",
-	23 => "Input/Output Interface",
-	19 => "Source AS",
-	20 => "Destination AS",
-	21 => "Source/Destination AS",
-	22 => "IP ToS",
-	24 => "Source Prefix",
-	25 => "Destination Prefix",
-	26 => "Source/Destination Prefix"
+	0  => 'Statistics Reports',
+	99 => 'Summary',
+	5  => 'UDP/TCP Destination Port',
+	6  => 'UDP/TCP Source Port',
+	7  => 'UDP/TCP Port',
+	8  => 'Destination IP',
+	9  => 'Source IP',
+	10 => 'Source/Destination IP',
+	11 => 'Source or Destination IP',
+	12 => 'IP Protocol',
+	17 => 'Input Interface',
+	18 => 'Output Interface',
+	23 => 'Input/Output Interface',
+	19 => 'Source AS',
+	20 => 'Destination AS',
+	21 => 'Source/Destination AS',
+	22 => 'IP ToS',
+	24 => 'Source Prefix',
+	25 => 'Destination Prefix',
+	26 => 'Source/Destination Prefix'
 );
 
 $print_report_array = array(
-	 0  => "Print Reports",
-	 1  => "Flow Times",
-	 4  => "AS Numbers",
-	 5  => "132 Columns",
-	 9  => "1 Line with Tags",
-	 10 => "AS Aggregation",
-	 11 => "Protocol Port Aggregation",
-	 12 => "Source Prefix Aggregation",
-	 13 => "Destination Prefix Aggregation",
-	 14 => "Prefix Aggregation",
-	 24 => "Full (Catalyst)"
+	 0  => 'Print Reports',
+	 1  => 'Flow Times',
+	 4  => 'AS Numbers',
+	 5  => '132 Columns',
+	 9  => '1 Line with Tags',
+	 10 => 'AS Aggregation',
+	 11 => 'Protocol Port Aggregation',
+	 12 => 'Source Prefix Aggregation',
+	 13 => 'Destination Prefix Aggregation',
+	 14 => 'Prefix Aggregation',
+	 24 => 'Full (Catalyst)'
 );
 
 $flow_select_array = array(
-	  1 => "Any Part in Specified Time Span",
-	  2 => "End Time in Specified Time Span",
-	  3 => "Start Time in Specified Time Span",
-	  4 => "Entirely in Specified Time Span"
+	  1 => 'Any Part in Specified Time Span',
+	  2 => 'End Time in Specified Time Span',
+	  3 => 'Start Time in Specified Time Span',
+	  4 => 'Entirely in Specified Time Span'
 );
 
 $ip_protocols_array = array(
@@ -132,51 +132,60 @@ $ip_protocols_array = array(
 );
 
 $resolve_addresses_array = array (
-	  'Y' => "Yes",
-	  'N' => "No"
+	'Y' => 'Yes',
+	'N' => 'No'
 );
 
-$devices_arr = db_fetch_assoc("SELECT folder, name FROM plugin_flowview_devices ORDER BY name");
+$devices_arr = db_fetch_assoc('SELECT folder, name FROM plugin_flowview_devices ORDER BY name');
 $devices = array();
 if (!empty($devices_arr)) {
+	$ddevice = $devices_arr[0]['folder'];
 	foreach ($devices_arr as $d) {
 		$devices[$d['folder']] = $d['name'];
 	}
+}else{
+	$ddevice = 0;
 }
 
-$query_newname_field = array("friendly_name" => '',
+$query_newname_field = array(
+	'friendly_name' => '',
 	'name' => 'queryname',
-	"method" => "textbox",
-	"max_length" => 255,
-	"default" => '',
-	"description" => '',
-	"value" => (isset($_POST['queryname']) ? $_POST['queryname'] : '')
+	'method' => 'textbox',
+	'max_length' => 255,
+	'default' => '',
+	'description' => '',
+	'value' => (isset_request_var('queryname') ? get_nfilter_request_var('queryname') : '')
 );
 
-$query_name_field = array("friendly_name" => '',
-	"method" => "drop_sql",
-	"default" => 0,
-	"description" => '',
-	"value" => (isset($_REQUEST['query']) ? $_REQUEST['query'] : 0),
-	"none_value" => "None",
-	"sql" => "SELECT id, name FROM plugin_flowview_queries ORDER BY name"
+$query_name_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_sql',
+	'default' => 0,
+	'description' => '',
+	'value' => (isset_request_var('query') ? get_filter_request_var('query') : 0),
+	'none_value' => 'None',
+	'on_change' => 'applyFilter()',
+	'sql' => 'SELECT id, name FROM plugin_flowview_queries ORDER BY name'
 );
 
-$device_name_field = array("friendly_name" => '',
-	"method" => "drop_array",
-	"default" => 0,
-	"description" => '',
-	"value" => (isset($_POST['device_name']) ? $_POST['device_name'] : 0),
-	"none_value" => "None",
-	"array" => $devices
+
+$device_name_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_array',
+	'default' => 0,
+	'description' => '',
+	'value' => (isset_request_var('device_name') ? get_nfilter_request_var('device_name') : $ddevice),
+	'none_value' => 'None',
+	'array' => $devices
 );
 
-$cutoff_lines_field = array("friendly_name" => '',
-	"method" => "drop_array",
-	"default" => 20,
-	"description" => '',
-	"value" => (isset($_POST['cutoff_lines']) ? $_POST['cutoff_lines'] : 0),
-	"array" => array(
+$cutoff_lines_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_array',
+	'default' => 20,
+	'description' => '',
+	'value' => (isset_request_var('cutoff_lines') ? get_nfilter_request_var('cutoff_lines') : 0),
+	'array' => array(
 		'999999' => 'All',
 		'5'  => 'Top 5', 
 		'10'  => 'Top 10', 
@@ -188,12 +197,13 @@ $cutoff_lines_field = array("friendly_name" => '',
 		'200' => 'Top 200')
 );
 
-$cutoff_octets_field = array("friendly_name" => '',
-	"method" => "drop_array",
-	"default" => 0,
-	"description" => '',
-	"value" => (isset($_POST['cutoff_octets']) ? $_POST['cutoff_octets']:''),
-	"array" => array(
+$cutoff_octets_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_array',
+	'default' => 0,
+	'description' => '',
+	'value' => (isset_request_var('cutoff_octets') ? get_nfilter_request_var('cutoff_octets'):''),
+	'array' => array(
 		'0'         => 'No Limit', 
 		'1024'      => '1K   Bytes', 
 		'10240'     => '10K  Bytes',
@@ -210,45 +220,50 @@ $cutoff_octets_field = array("friendly_name" => '',
 		'1024000000'=> '1G   Bytes')
 );
 
-$ip_protocol_field = array("friendly_name" => '',
-	"method" => "drop_array",
-	"default" => 0,
-	"description" => '',
-	"value" => (isset($_POST['protocols']) ? $_POST['protocols'] : ''),
-	"array" => $ip_protocols_array
+$ip_protocol_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_array',
+	'default' => 0,
+	'description' => '',
+	'value' => (isset_request_var('protocols') ? get_nfilter_request_var('protocols') : ''),
+	'array' => $ip_protocols_array
 );
 
-$stat_report_field = array("friendly_name" => '',
+$stat_report_field = array(
+	'friendly_name' => '',
 	'name' => 'stat_report',
-	"method" => "drop_array",
-	"default" => 10,
-	"description" => '',
-	"value" => (isset($_POST['stat_report']) ? $_POST['stat_report'] : 10),
-	"array" => $stat_report_array
+	'method' => 'drop_array',
+	'default' => 10,
+	'description' => '',
+	'value' => (isset_request_var('stat_report') ? get_nfilter_request_var('stat_report') : 10),
+	'array' => $stat_report_array
 );
 
-$flow_select_field = array("friendly_name" => '',
-	"method" => "drop_array",
-	"default" => 1,
-	"description" => '',
-	"value" => (isset($_POST['flow_select']) ? $_POST['flow_select'] : 1),
-	"array" => $flow_select_array
+$flow_select_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_array',
+	'default' => 1,
+	'description' => '',
+	'value' => (isset_request_var('flow_select') ? get_nfilter_request_var('flow_select') : 1),
+	'array' => $flow_select_array
 );
 
-$print_report_field = array("friendly_name" => '',
-	"method" => "drop_array",
-	"default" => 0,
-	"description" => '',
-	"value" => (isset($_POST['print_report']) ? $_POST['print_report'] : 0),
-	"array" => $print_report_array
+$print_report_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_array',
+	'default' => 0,
+	'description' => '',
+	'value' => (isset_request_var('print_report') ? get_nfilter_request_var('print_report') : 0),
+	'array' => $print_report_array
 );
 
-$resolve_addresses_field = array("friendly_name" => '',
-	"method" => "drop_array",
-	"default" => 'Y',
-	"description" => '',
-	"value" => (isset($_POST['resolve_addresses']) ? $_POST['resolve_addresses'] : 'Y'),
-	"array" => $resolve_addresses_array
+$resolve_addresses_field = array(
+	'friendly_name' => '',
+	'method' => 'drop_array',
+	'default' => 'Y',
+	'description' => '',
+	'value' => (isset_request_var('resolve_addresses') ? get_nfilter_request_var('resolve_addresses') : 'Y'),
+	'array' => $resolve_addresses_array
 );
 
 $stat_columns_array = array(

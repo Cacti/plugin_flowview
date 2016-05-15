@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2014 The Cacti Group                                 |
+ | Copyright (C) 2008-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -22,31 +22,27 @@
  +-------------------------------------------------------------------------+
 */
 
+$no_http_headers = true;
+
 /* do NOT run this script through a web browser */
-if (!isset($_SERVER["argv"][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
-   die("<br><strong>This script is only meant to run at the command line.</strong>");
+if (!isset($_SERVER['argv'][0]) || isset($_SERVER['REQUEST_METHOD'])  || isset($_SERVER['REMOTE_ADDR'])) {
+   die('<br><strong>This script is only meant to run at the command line.</strong>');
 }
 
-error_reporting('E_ALL');
+error_reporting(E_ALL & ~E_DEPRECATED);
 $dir = dirname(__FILE__);
 chdir($dir);
 
-ini_set("max_execution_time", 0);
-ini_set("memory_limit", "256M");
+ini_set('max_execution_time', 0);
+ini_set('memory_limit', '256M');
 
 if (strpos($dir, 'plugins') !== false) {
 	chdir('../../');
 }
-if (file_exists("./include/global.php")) {
-	include("./include/global.php");
-} else {
-	include("./include/config.php");
-}
+include('./include/global.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
-
 $t = time();
-
 $r = intval($t / 60) * 60;
 
 $schedules = db_fetch_assoc("SELECT * FROM plugin_flowview_schedules WHERE enabled = 'on' AND ($t - sendinterval > lastsent)");
@@ -57,7 +53,4 @@ if (count($schedules)) {
 		db_execute("UPDATE plugin_flowview_schedules SET lastsent = $r WHERE id = " . $s['id']);
 	}
 }
-
-
-
 

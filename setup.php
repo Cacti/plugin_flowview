@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2014 The Cacti Group                                 |
+ | Copyright (C) 2008-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -74,13 +74,13 @@ function flowview_check_upgrade () {
 	/* Set the new version */
 	db_execute("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', '$current')");
 
-	db_execute("ALTER TABLE plugin_flowview_devices ENGINE=MyISAM");
+	db_execute('ALTER TABLE plugin_flowview_devices ENGINE=InnoDB');
 }
 
 function plugin_flowview_version () {
 	return array(
 		'name'     => 'flowview',
-		'version'  => '1.3',
+		'version'  => '2.0',
 		'longname' => 'FlowView',
 		'author'   => 'Jimmy Conner',
 		'homepage' => 'http://cactiusers.org',
@@ -97,18 +97,18 @@ function flowview_config_arrays () {
 }
 
 function flowview_draw_navigation_text ($nav) {
-	$nav["flowview.php:"] = array("title" => "Flow Viewer", "mapping" => "", "url" => "flowview.php", "level" => "0");
-	$nav["flowview.php:view"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "1");
-	$nav["flowview.php:save"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "1");
-	$nav["flowview.php:loadquery"] = array("title" => "Flow Viewer", "mapping" => "flowview.php:", "url" => "flowview.php", "level" => "1");
-	$nav["flowview_devices.php:"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
-	$nav["flowview_devices.php:edit"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
-	$nav["flowview_devices.php:save"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
-	$nav["flowview_devices.php:actions"] = array("title" => "Listeners", "mapping" => "flowview.php:", "url" => "flowview_devices.php", "level" => "1");
-	$nav["flowview_schedules.php:"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
-	$nav["flowview_schedules.php:edit"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
-	$nav["flowview_schedules.php:save"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
-	$nav["flowview_schedules.php:actions"] = array("title" => "Schedules", "mapping" => "flowview.php:", "url" => "flowview_schedules.php", "level" => "1");
+	$nav['flowview.php:'] = array('title' => 'Flow Viewer', 'mapping' => '', 'url' => 'flowview.php', 'level' => '0');
+	$nav['flowview.php:view'] = array('title' => '(view)', 'mapping' => 'flowview.php:', 'url' => 'flowview.php', 'level' => '1');
+	$nav['flowview.php:save'] = array('title' => '(save)', 'mapping' => 'flowview.php:', 'url' => 'flowview.php', 'level' => '1');
+	$nav['flowview.php:loadquery'] = array('title' => 'Flow Viewer', 'mapping' => 'flowview.php:', 'url' => 'flowview.php', 'level' => '1');
+	$nav['flowview_devices.php:'] = array('title' => 'Listeners', 'mapping' => 'flowview.php:', 'url' => 'flowview_devices.php', 'level' => '1');
+	$nav['flowview_devices.php:edit'] = array('title' => '(edit)', 'mapping' => 'flowview.php:,flowview_devices.php:', 'url' => 'flowview_devices.php', 'level' => '2');
+	$nav['flowview_devices.php:save'] = array('title' => '(save)', 'mapping' => 'flowview.php:', 'url' => 'flowview_devices.php', 'level' => '2');
+	$nav['flowview_devices.php:actions'] = array('title' => '(actions)', 'mapping' => 'flowview.php:', 'url' => 'flowview_devices.php', 'level' => '2');
+	$nav['flowview_schedules.php:'] = array('title' => 'Schedules', 'mapping' => 'flowview.php:', 'url' => 'flowview_schedules.php', 'level' => '1');
+	$nav['flowview_schedules.php:edit'] = array('title' => '(edit)', 'mapping' => 'flowview.php:,flowview_schedules.php:', 'url' => 'flowview_schedules.php', 'level' => '2');
+	$nav['flowview_schedules.php:save'] = array('title' => '(save)', 'mapping' => 'flowview.php:', 'url' => 'flowview_schedules.php', 'level' => '2');
+	$nav['flowview_schedules.php:actions'] = array('title' => '(actions)', 'mapping' => 'flowview.php:', 'url' => 'flowview_schedules.php', 'level' => '2');
 	return $nav;
 }
 
@@ -116,7 +116,7 @@ function flowview_show_tab() {
 	global $config;
 
 	if (api_user_realm_auth('flowview.php')) {
-		if (substr_count($_SERVER["REQUEST_URI"], "flowview")) {
+		if (substr_count($_SERVER['REQUEST_URI'], 'flowview')) {
 			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="FlowView" align="absmiddle" border="0"></a>';
 		}else{
 			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="FlowView" align="absmiddle" border="0"></a>';
@@ -126,9 +126,7 @@ function flowview_show_tab() {
 
 function flowview_page_head() {
 	global $config, $colors;
-	if (substr_count($_SERVER["REQUEST_URI"], "flowview")) {
-		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.tablesorter.min.js'></script>\n";
-		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/jquery.metadata.js'></script>\n";
+	if (substr_count($_SERVER['REQUEST_URI'], 'flowview')) {
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
 	}
 }
@@ -137,7 +135,7 @@ function flowview_page_bottom() {
 	print "	<div id='fdialog' style='text-align:center;display:none;'>
 		<table>
 			<tr>
-				<td><strong>Filter:</strong></td>
+				<td style='white-space:nowrap'>Filter Name</td>
 				<td><input type='text' size='40' name='squery' id='squery' value='New Query'></td>
 			</tr>
 			<tr>
@@ -155,73 +153,73 @@ function flowview_config_settings () {
 	global $settings, $tabs;
 
 	$temp = array(
-		"flowview_header" => array(
-			"friendly_name" => "Flow Viewer",
-			"method" => "spacer",
+		'flowview_header' => array(
+			'friendly_name' => 'Flow Viewer',
+			'method' => 'spacer',
 		),
-		"path_flowtools" => array(
-			"friendly_name" => "Flow Tools Binary Path",
-			"description" => "The path to your flow-cat, flow=filter, and flow-stat binary.",
-			"method" => "dirpath",
-			"max_length" => 255,
+		'path_flowtools' => array(
+			'friendly_name' => 'Flow Tools Binary Path',
+			'description' => 'The path to your flow-cat, flow-filter, and flow-stat binary.',
+			'method' => 'dirpath',
+			'max_length' => 255,
 			'default' => '/usr/bin'
 		),
-		"path_flowtools_workdir" => array(
-			"friendly_name" => "Flow Tools Work Directory",
-			"description" => "This is the path to a temporary directory to do work.",
-			"method" => "dirpath",
-			"max_length" => 255,
+		'path_flowtools_workdir' => array(
+			'friendly_name' => 'Flow Tools Work Directory',
+			'description' => 'This is the path to a temporary directory to do work.',
+			'method' => 'dirpath',
+			'max_length' => 255,
 			'default' => '/tmp'
 		),
-		"path_flows_dir" => array(
-			"friendly_name" => "Flows Directory",
-			"description" => "This is the path to base the path of your flow folder structure.",
-			"method" => "dirpath",
-			"max_length" => 255,
+		'path_flows_dir' => array(
+			'friendly_name' => 'Flows Directory',
+			'description' => 'This is the path to base the path of your flow folder structure.',
+			'method' => 'dirpath',
+			'max_length' => 255,
 			'default' => '/var/netflow/flows/completed'
 		),
-		"flowview_dns_method" => array(
-			"friendly_name" => "Hostname Resolution",
-			"description" => "The method by which you wish to resolve hostnames.",
-			"method" => "drop_array",
-			"array" => array(0 => "Use Local Server", 1 => "Use DNS Server Below", 2 => "Don't Resolve DNS"),
-			"default" => 0
+		'flowview_dns_method' => array(
+			'friendly_name' => 'Hostname Resolution',
+			'description' => 'The method by which you wish to resolve hostnames.',
+			'method' => 'drop_array',
+			'array' => array(0 => 'Use Local Server', 1 => 'Use DNS Server Below', 2 => "Don't Resolve DNS"),
+			'default' => 0
 		),
-		"flowview_dns" => array(
-			"friendly_name" => "Alternate DNS Server",
-			"description" => "This is the DNS Server used to resolve names.",
-			"method" => "textbox",
-			"max_length" => 255,
+		'flowview_dns' => array(
+			'friendly_name' => 'Alternate DNS Server',
+			'description' => 'This is the DNS Server used to resolve names.',
+			'method' => 'textbox',
+			'max_length' => 255,
 		),
-		"flowview_strip_dns" => array(
-			"friendly_name" => "Strip Domain Names",
-			"description" => "A comma delimited list of domains names to strip from the domain.",
-			"method" => "textbox",
-			"max_length" => 255,
-			"size" => 80
+		'flowview_strip_dns' => array(
+			'friendly_name' => 'Strip Domain Names',
+			'description' => 'A comma delimited list of domains names to strip from the domain.',
+			'method' => 'textbox',
+			'max_length' => 255,
+			'size' => 80
 		),
 	);
 
-	$tabs["misc"] = "Misc";
+	$tabs['misc'] = 'Misc';
 
-	if (isset($settings["misc"]))
-		$settings["misc"] = array_merge($settings["misc"], $temp);
+	if (isset($settings['misc']))
+		$settings['misc'] = array_merge($settings['misc'], $temp);
 	else
-		$settings["misc"]=$temp;
+		$settings['misc']=$temp;
 }
 
 function flowview_poller_bottom () {
 	global $config;
-	include_once($config["library_path"] . "/database.php");
+	include_once($config['library_path'] . '/database.php');
 	$time = time() - 3600;
 	db_execute("delete from plugin_flowview_dnscache where time > 0 and time < $time");
 
 	$t = time();
 	$schedules = db_fetch_assoc("SELECT * FROM plugin_flowview_schedules WHERE enabled='on' AND ($t - sendinterval > lastsent)");
 	if (!empty($schedules)) {
-		$command_string = trim(read_config_option("path_php_binary"));
+		$command_string = trim(read_config_option('path_php_binary'));
 		if (trim($command_string) == '')
-			$command_string = "php";
+			$command_string = 'php';
 		$extra_args = ' -q ' . $config['base_path'] . '/plugins/flowview/flowview_process.php';
 		exec_background($command_string, $extra_args);
 	}
@@ -252,7 +250,7 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'compression', 'type' => 'int(1)', 'NULL' => false, 'default' => '0');
 	$data['primary']   = 'id';
 	$data['keys'][]    = array('name' => 'folder', 'columns' => 'folder');
-	$data['type']      = 'MyISAM';
+	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - List of Devices to collect flows from';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_devices', $data);
 
@@ -260,10 +258,9 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(255)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'device', 'type' => 'varchar(32)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'timespan', 'type' => 'int(11)', 'NULL' => false, 'default' => 0);
 	$data['columns'][] = array('name' => 'startdate', 'type' => 'varchar(32)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'starttime', 'type' => 'varchar(32)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'enddate', 'type' => 'varchar(32)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'endtime', 'type' => 'varchar(32)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'tosfields', 'type' => 'varchar(32)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'tcpflags', 'type' => 'varchar(32)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'protocols', 'type' => 'varchar(8)', 'NULL' => false);
@@ -284,7 +281,7 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'resolve', 'type' => 'varchar(2)', 'NULL' => false);
 	$data['primary']   = 'id';
 	$data['keys'][]    = array('name' => 'name', 'columns' => 'name');
-	$data['type']      = 'MyISAM';
+	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - List of Saved Flow Queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_queries', $data);
 
@@ -299,7 +296,7 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'savedquery', 'type' => 'int(12)', 'NULL' => false);
 	$data['primary']   = 'id';
 	$data['keys'][]    = array('name' => 'savedquery', 'columns' => 'savedquery');
-	$data['type']      = 'MyISAM';
+	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - Scheduling for running and emails of saved queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_schedules', $data);
 
@@ -310,13 +307,13 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'proto',      'type' => 'char(4)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'description','type' => 'varchar(255)', 'NULL' => false, 'default' => '');
 	$data['primary']   = 'id';
-	$data['type']      = 'MyISAM';
+	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - Database of well known Ports';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_ports', $data);
 
 	$inserts = file($config['base_path'] . '/plugins/flowview/plugin_flowview_ports.sql');
 	if (sizeof($inserts)) {
-		db_execute("TRUNCATE plugin_flowview_ports");
+		db_execute('TRUNCATE plugin_flowview_ports');
 		foreach($inserts as $i) {
 			db_execute($i);
 		}

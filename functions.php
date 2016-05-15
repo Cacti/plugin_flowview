@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2014 The Cacti Group                                 |
+ | Copyright (C) 2008-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -25,9 +25,11 @@
 function flowview_display_report() {
 	global $config, $colors;
 
-	if (isset($_REQUEST['tab']) && strlen($_REQUEST['tab']) > 10) {
-		$flowdata  = unserialize(base64_decode($_REQUEST['tab']));
-		$sessionid = $_REQUEST['tab'];
+	general_header();
+
+	if (isset_request_var('tab') && strlen(get_nfilter_request_var('tab')) > 10) {
+		$flowdata  = unserialize(base64_decode(get_nfilter_request_var('tab')));
+		$sessionid = get_nfilter_request_var('tab');
 		foreach($flowdata['post'] as $item => $value) {
 			switch ($item) {
 			case 'bytes':
@@ -35,11 +37,10 @@ function flowview_display_report() {
 			case 'packets':
 				break;
 			default:
-				$_POST[$item] = $value;
+				set_request_var($item, $value);
 			}
 		}
-		$_REQUEST['query'] = $_POST['query'];
-		$_REQUEST['action'] = 'view';
+		set_request_var('action', 'view');
 	}else{
 		$sessionid = '';
 	}
@@ -57,87 +58,87 @@ function flowview_display_report() {
 	$error = flowview_check_fields();
 	if ($error != '') {
 		display_tabs();
-		print "<font color=red><strong>$error</strong></font>";
+		print "<font class='textError'>$error</font>";
 		html_end_box();
 		return;
 	}
 
    /* if the user pushed the 'clear' button */
-    if (isset($_REQUEST["clear"])) {
-        kill_session_var("sess_flows_exclude");
-        kill_session_var("sess_flows_table");
-        kill_session_var("sess_flows_bytes");
-        kill_session_var("sess_flows_packets");
-        kill_session_var("sess_flows_flows");
+    if (isset_request_var('clear')) {
+        kill_session_var('sess_flows_exclude');
+        kill_session_var('sess_flows_table');
+        kill_session_var('sess_flows_bytes');
+        kill_session_var('sess_flows_packets');
+        kill_session_var('sess_flows_flows');
 
-        unset($_REQUEST["exclude"]);
-        unset($_REQUEST["table"]);
-        unset($_REQUEST["bytes"]);
-        unset($_REQUEST["packets"]);
-        unset($_REQUEST["flows"]);
+        unset_request_var('exclude');
+        unset_request_var('table');
+        unset_request_var('bytes');
+        unset_request_var('packets');
+        unset_request_var('flows');
     }
 
     /* remember these search fields in session vars so we don't have to keep passing them around */
-    load_current_session_value("exclude", "sess_flows_exclude", "0");
-    load_current_session_value("table",   "sess_flows_table",   "on");
-    load_current_session_value("bytes",   "sess_flows_bytes",   "");
-    load_current_session_value("packets", "sess_flows_packets", "");
-    load_current_session_value("flows",   "sess_flows_flows",   "");
+    load_current_session_value('exclude', 'sess_flows_exclude', '0');
+    load_current_session_value('table',   'sess_flows_table',   'on');
+    load_current_session_value('bytes',   'sess_flows_bytes',   '');
+    load_current_session_value('packets', 'sess_flows_packets', '');
+    load_current_session_value('flows',   'sess_flows_flows',   '');
 
 	$filter = createfilter($sessionid);
 
 	display_tabs();
 
-	if (isset($_POST['stat_report']) && $_POST['stat_report'] != 99) {
-		html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
+	if (isset_request_var('stat_report') && get_nfilter_request_var('stat_report') != 99) {
+		html_start_box("Report: $rname", '100%', '', '3', 'center', '');
 		?>
-		<tr bgcolor="#<?php print $colors["panel"];?>">
+		<tr class='even'>
 			<td>
-			<form id="view" name="view" action="flowview.php" method="post">
-				<table cellpadding="2" cellspacing="0">
+			<form id='view' name='view' action='flowview.php' method='post'>
+				<table class='filterTable'>
 					<tr>
-						<td nowrap style='white-space: nowrap;'>
-							<strong>Exclude:</strong>&nbsp;
+						<td>
+							Exclude
 						</td>
-						<td nowrap style='white-space: nowrap;'>
+						<td>
 							<select name='exclude' id='exclude'>
-								<option value='0'<?php echo ($_REQUEST["exclude"] == 0 ? " selected":"");?>>None</option>
-								<option value='1'<?php echo ($_REQUEST["exclude"] == 1 ? " selected":"");?>>Top Sample</option>
-								<option value='2'<?php echo ($_REQUEST["exclude"] == 2 ? " selected":"");?>>Top 2 Samples</option>
-								<option value='3'<?php echo ($_REQUEST["exclude"] == 3 ? " selected":"");?>>Top 3 Samples</option>
-								<option value='4'<?php echo ($_REQUEST["exclude"] == 4 ? " selected":"");?>>Top 4 Samples</option>
-								<option value='5'<?php echo ($_REQUEST["exclude"] == 5 ? " selected":"");?>>Top 5 Samples</option>
+								<option value='0'<?php echo (get_request_var('exclude') == 0 ? ' selected':'');?>>None</option>
+								<option value='1'<?php echo (get_request_var('exclude') == 1 ? ' selected':'');?>>Top Sample</option>
+								<option value='2'<?php echo (get_request_var('exclude') == 2 ? ' selected':'');?>>Top 2 Samples</option>
+								<option value='3'<?php echo (get_request_var('exclude') == 3 ? ' selected':'');?>>Top 3 Samples</option>
+								<option value='4'<?php echo (get_request_var('exclude') == 4 ? ' selected':'');?>>Top 4 Samples</option>
+								<option value='5'<?php echo (get_request_var('exclude') == 5 ? ' selected':'');?>>Top 5 Samples</option>
 							</select>
 						</td>
-						<td nowrap style='white-space: nowrap;'>
-							<strong>Show/Hide:</strong>&nbsp;
+						<td>
+							Show/Hide
 						</td>
-						<td width="1">
-							<input type="checkbox" name="table" id="table" <?php print ($_REQUEST["table"] == "true" || $_REQUEST["table"] == "on" ? "checked":"");?>>
+						<td>
+							<input type='checkbox' name='table' id='table' <?php print (get_request_var('table') == 'true' || get_request_var('table') == 'on' ? 'checked':'');?>>
 						</td>
-						<td nowrap style='white-space: nowrap;'>
-							<label for="table">Table</label>
+						<td>
+							<label for='table'>Table</label>
 						</td>
-						<td width="1">
-							<input type="checkbox" name="bytes" id="bytes" <?php print ($_REQUEST["bytes"] == "true" || $_REQUEST["bytes"] == "on" ? "checked":"");?>>
+						<td>
+							<input type='checkbox' name='bytes' id='bytes' <?php print (get_request_var('bytes') == 'true' || get_request_var('bytes') == 'on' ? 'checked':'');?>>
 						</td>
-						<td nowrap style='white-space: nowrap;'>
-							<label for="bytes">Bytes Bar</label>
+						<td>
+							<label for='bytes'>Bytes Bar</label>
 						</td>
-						<td width="1">
-							<input type="checkbox" name="packets" id="packets" <?php print ($_REQUEST["packets"] == "true" || $_REQUEST["packets"] == "on" ? "checked":"");?>>
+						<td>
+							<input type='checkbox' name='packets' id='packets' <?php print (get_request_var('packets') == 'true' || get_request_var('packets') == 'on' ? 'checked':'');?>>
 						</td>
-						<td nowrap style='white-space: nowrap;'>
-							<label for="packets">Packets Bar</label>
+						<td>
+							<label for='packets'>Packets Bar</label>
 						</td>
-						<td width="1">
-							<input type="checkbox" name="flows" id="flows" <?php print ($_REQUEST["flows"] == "true" || $_REQUEST["flows"] == "on" ? "checked":"");?>>
+						<td>
+							<input type='checkbox' name='flows' id='flows' <?php print (get_request_var('flows') == 'true' || get_request_var('flows') == 'on' ? 'checked':'');?>>
 						</td>
-						<td nowrap style='white-space: nowrap;'>
-							<label for="flows">Flows Bar</label>
+						<td>
+							<label for='flows'>Flows Bar</label>
 						</td>
-						<td nowrap style='white-space: nowrap;'>
-							<input type="submit" name="clear" value="Clear" title="Clear Filters">
+						<td>
+							<input type='submit' name='clear' value='Clear' title='Clear Filters'>
 						</td>
 					</tr>
 				</table>
@@ -152,20 +153,21 @@ function flowview_display_report() {
 		flowview_draw_chart('bytes', $rname);
 		flowview_draw_chart('packets', $rname);
 		flowview_draw_chart('flows', $rname);
-	}elseif (isset($_POST['print_report']) && $_POST['print_report'] > 0) {
-		html_start_box("<strong>Report: $rname</strong>", "100%", $colors["header"], "3", "center", "");
+	}elseif (isset_request_var('print_report') && get_nfilter_request_var('print_report') > 0) {
+		html_start_box("Report: $rname", '100%', '', '3', 'center', '');
 	}
 
 	echo "<div id='flowcontent'>";
 	echo $filter;
 	html_end_box();
 	echo "</div>";
+
 	?>
 	<script type='text/javascript'>
 
-	swfobject.embedSWF('open-flash-chart.swf', 'chartbytes', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . $_REQUEST['exclude'] . "&type=bytes&title=$rname");?>', 'id':'chartbytes'});
-	swfobject.embedSWF('open-flash-chart.swf', 'chartpackets', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . $_REQUEST['exclude'] . "&type=packets&title=$rname");?>', 'id':'chartpackets'});
-	swfobject.embedSWF('open-flash-chart.swf', 'chartflows', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . $_REQUEST['exclude'] . "&type=flows&title=$rname");?>', 'id':'chartflows'});
+	swfobject.embedSWF('open-flash-chart.swf', 'chartbytes', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=bytes&title=$rname");?>', 'id':'chartbytes'});
+	swfobject.embedSWF('open-flash-chart.swf', 'chartpackets', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=packets&title=$rname");?>', 'id':'chartpackets'});
+	swfobject.embedSWF('open-flash-chart.swf', 'chartflows', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=flows&title=$rname");?>', 'id':'chartflows'});
 
 	$('#bytes').click(function() {
 		if (!$('#bytes').is(':checked')) {
@@ -208,7 +210,7 @@ function flowview_display_report() {
 		document.view.submit();
 	});
 			
-	if ($('#table').is(':checked') || <?php print (isset($_POST['stat_report']) ? ($_POST['stat_report'] == 99 ? 'true':'false'):'true');?>) {
+	if ($('#table').is(':checked') || <?php print (isset_request_var('stat_report') ? (get_nfilter_request_var('stat_report') == 99 ? 'true':'false'):'true');?>) {
 		$('#flowcontent').show();
 	}else{
 		$('#flowcontent').hide();
@@ -254,11 +256,22 @@ function flowview_display_report() {
         type: 'numeric' 
     }); 
 
-	$().ready(function() {
-		$('#sorttable').tablesorter();
+	$(function() {
+		$('#sorttable').tablesorter({
+			widgets: ['zebra'],
+			widgetZebra: { css: ['even', 'odd'] },
+			headerTemplate: '<div class="textSubHeaderDark">{content} {icon}</div>',
+			cssIconAsc: 'fa-sort-asc',
+			cssIconDesc: 'fa-sort-desc',
+			cssIconNone: 'fa-sort',
+			cssIcon: 'fa'
+		});
+		$('#sorttable').resizable();
 	});
 	</script>
 	<?php
+
+	bottom_footer();
 }
 
 function get_port_name($port_num, $port_proto) {
@@ -269,29 +282,31 @@ function display_tabs() {
 	purgeFlows();
 
 	/* draw the categories tabs on the top of the page */
-	if (isset($_REQUEST['tab'])) {
-		$_SESSION['flowview_current_tab'] = $_REQUEST['tab'];
-	}elseif (isset($_SESSION['flowview_current_tab'])) {
-		/* do nothing */
-	}else{
-		$_SESSION['flowview_current_tab'] = 'filters';
+	$tab = get_nfilter_request_var('tab');
+	if ($tab == '') {
+		if (isset($_SESSION['flowview_current_tab'])) {
+			$tab = $_SESSION['flowview_current_tab'];
+		}else{
+			$tab = 'filters';
+			$_SESSION['flowview_current_tab'] = 'filters';
+		}
 	}
-	$ct = $_SESSION['flowview_current_tab'];
 
 	print "<table cellspacing='0' cellpadding='0' border='0'><tr><td><div class='tabs' style='float:left;'><nav><ul>\n";
-	print "<li><a title='Setup Flows' " . ($ct == 'filters' ? "class='selected'":"") . " href='flowview.php?tab=filters'>Filters</a></li>\n";
+	print "<li><a class='pic " . ($tab == 'filters' ? ' selected':'') . "' title='Flow Filters' href='flowview.php?tab=filters'>Filters</a></li>\n";
+
 	if (api_user_realm_auth('flowview_devices.php')) {
-		print "<li><a title='Manage Listeners' " . ($ct == 'listeners' ? "class='selected'":"") . " href='flowview_devices.php?tab=listeners'>Listeners</a></li>\n";
+		print "<li><a class='pic " . ($tab == 'listeners' ? ' selected':'') . "' title='Manage Listeners' href='flowview_devices.php?tab=listeners'>Listeners</a></li>\n";
 	}
 
 	if (api_user_realm_auth('flowview_schedules.php')) {
-		print "<li><a title='Manage Schedules' " . ($ct == 'sched' ? "class='selected'":"") . " href='flowview_schedules.php?tab=sched'>Schedules</a></li>\n";
+		print "<li><a class='pic " . ($tab == 'sched' ? ' selected':'') . "' title='Manage Schedules' href='flowview_schedules.php?tab=sched'>Schedules</a></li>\n";
 	}
 
 	if (isset($_SESSION['flowview_flows']) && is_array($_SESSION['flowview_flows']) && sizeof($_SESSION['flowview_flows'])) {
 	foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
 		if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
-		print "<li><a title='View Flow' " . ($ct == $sessionid ? "class='selected'":"") . " href='flowview.php?tab=$sessionid'>" . $data['title'] . "</a><a href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'>x</a></li>\n";
+		print "<li><a class='pic " . ($tab == $sessionid ? 'selected':'') . "' title='View Flow' href='flowview.php?action=view&tab=$sessionid'>" . $data['title'] . "</a><a class='pic' href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'><span class='fa fa-remove deviceDown'></span></a></li>\n";
 	}
 	}
 	print "</ul></nav></div></td></tr></table>\n";
@@ -315,10 +330,12 @@ function plugin_flowview_run_schedule($id) {
 
 	$subject = 'Netflow - ' . $schedule['title'];
 
-	$_REQUEST['schedule'] = $id;
-	$_REQUEST['query']    = $schedule['savedquery'];
-	$_REQUEST['action']   = 'loadquery';
+	set_request_var('schedule', $id);
+	set_request_var('query', $schedule['savedquery']);
+	set_request_var('action', 'loadquery');
+
 	include($config['base_path'] . '/plugins/flowview/variables.php');
+
 	$message  = "<body style='margin:10px;'>";
 	$message .= "<style type='text/css'>\n";
 	$message .= file_get_contents($config['base_path'] . '/include/main.css');
@@ -326,6 +343,7 @@ function plugin_flowview_run_schedule($id) {
 	$sessionid = -1;
 	$message .= createfilter($sessionid);
 	$message .= "</body>";
+
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
 }
 
@@ -360,7 +378,7 @@ function createfilter(&$sessionid='') {
 			case 'packets':
 				break;
 			default:
-				$_POST[$item] = $value;
+				set_request_var($item, $value);
 			}
 		}	
 		if (time() < $flowdata['expires']) {
@@ -407,8 +425,8 @@ function createfilter(&$sessionid='') {
 		$time       = time();
 		$filterfile = "$workdir/FlowViewer_filter_" . time();
 
-		$start = strtotime($start_date . ' ' . $start_time);
-		$end   = strtotime($end_date   . ' ' . $end_time);
+		$start = strtotime($date1);
+		$end   = strtotime($date2);
 
 		$flow_cat_command     = "$flowbin/flow-cat -t \"" . date("m/d/Y H:i:s", $start) . '" -T "' . date("m/d/Y H:i:s", $end) . '" ';
 		$flow_cat_command    .= getfolderpath($pathstructure, $device, $start, $end);
@@ -472,8 +490,8 @@ function createfilter(&$sessionid='') {
 
 		/* let's calculate the title and then session id */
 		if ($title == '') {
-			if (isset($_REQUEST["query"]) && $_REQUEST["query"] > 0) {
-				$title = db_fetch_cell("SELECT name FROM plugin_flowview_queries WHERE id=" . $_REQUEST["query"]);
+			if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+				$title = db_fetch_cell('SELECT name FROM plugin_flowview_queries WHERE id=' . get_request_var('query'));
 			}else{
 				$title = "New Flow";
 			}
@@ -506,7 +524,8 @@ function createfilter(&$sessionid='') {
 			$flowdata['expires'] = time()+300;
 			$flowdata['title']   = $title;
 			$sessionid = base64_encode(serialize($flowdata));
-			$_REQUEST['tab'] = $sessionid;
+
+			set_request_var('tab', $sessionid);
 		}
 
 		/* Run the command */
@@ -592,7 +611,7 @@ function parseSummaryReport($output) {
 					if ($i > 0) {
 						echo "</tr>";
 					}
-					echo "<tr bgcolor='" . flowview_altcolor($j) . "' style='border:1px solid #FEFEFE;'>";
+					echo "<tr class='" . flowview_altrow($j) . "' style='border:1px solid #FEFEFE;'>";
 					$j++;
 				}
 				$parts = explode(":", $l);
@@ -606,7 +625,7 @@ function parseSummaryReport($output) {
 			case "inftd":
 				/* Headers have no decimals */
 				if (!substr_count($l, ".")) {
-					echo "<tr bgcolor='" . flowview_altcolor($i) . "'>";
+					echo "<tr class='" . flowview_altrow($i) . "'>";
 					$parts = flowview_explode($l);
 					$k = 0;
 					$l = sizeof($parts);
@@ -619,7 +638,7 @@ function parseSummaryReport($output) {
 					}
 					echo "</tr>";
 				}else{
-					echo "<tr bgcolor='" . flowview_altcolor($i) . "'>";
+					echo "<tr class='" . flowview_altrow($i) . "'>";
 					$parts = flowview_explode($l);
 					$k = 0;
 					$l = sizeof($parts);
@@ -684,9 +703,9 @@ function parsestatoutput($output, $title, $sessionid) {
 	html_start_box("<strong>" . $title . "</strong>", "100%", $colors["header"], "3", "center", "");
 	$o  = ob_get_clean();
 
-	$o .= '<table id="sorttable" width="100%" cellspacing=0 cellpadding=2 border=0 bgcolor="#' . $colors["header"] . '">
+	$o .= '<table id="sorttable" class="cactiTable" width="100%">
 			<thead>
-				<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
+				<tr class="tableHeader" align=center>';
 
 	$clines     = $stat_columns_array[$stat_report][0];
 	$octect_col = $stat_columns_array[$stat_report][1];
@@ -710,7 +729,7 @@ function parsestatoutput($output, $title, $sessionid) {
 
 	$x = 1;
 	foreach ($columns as $column) {
-		$o .= "<th " . ($column == "Bytes" ? "class=\"{sorter: 'bytes'}\"":"") . " align='" . get_column_alignment($column) . "'>$column</th>";
+		$o .= "<th class='tableSubHeaderColumn' " . ($column == "Bytes" ? "class=\"{sorter: 'bytes'} subHeaderColumn\"":"") . " style='text-align:" . get_column_alignment($column) . "'>$column</th>";
 		$x++;
 	}
 	$o .= "</tr></thead><tbody>";
@@ -730,8 +749,8 @@ function parsestatoutput($output, $title, $sessionid) {
 
 	$i = 0;
 
-	if (isset($_REQUEST['exclude'])) {
-		$j = $_REQUEST['exclude'];
+	if (isset_request_var('exclude')) {
+		$j = get_filter_request_var('exclude');
 	}else{
 		$j = 0;
 	}
@@ -751,7 +770,7 @@ function parsestatoutput($output, $title, $sessionid) {
 					continue;
 				}
 
-				$o .= '<tr bgcolor="' . flowview_altcolor($i) . '">';
+				$o .= '<tr class="' . flowview_altrow($i) . '">';
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
@@ -770,7 +789,7 @@ function parsestatoutput($output, $title, $sessionid) {
 						}else{
 							$data_array[$i][$c] = $out2;
 						}
-						$o .= "<td align='" . get_column_alignment($columns[$c]) . "'>$out2</td>";
+						$o .= "<td style='text-align:" . get_column_alignment($columns[$c]) . "'>" . (get_column_alignment($columns[$c]) == 'right' ? (is_numeric($out2) ? number_format($out2):$out2):$out2) . "</td>";
 						$c++;
 					}
 				}
@@ -812,12 +831,12 @@ function plugin_flowview_formatoctet($size, $div = 1024) {
 	return round($size, 2) . ' ' . $tag[$x];
 }
 
-function flowview_altcolor($i) {
+function flowview_altrow($i) {
 	global $colors;
 	if ($i/2 == intval($i/2)) {
-		return '#' . $colors["light"];
+		return 'even';
 	} else {
-		return '#' . $colors["alternate"];
+		return 'odd';
 	}
 }
 
@@ -906,7 +925,7 @@ function parseprintoutput($output, $title, $sessionid) {
 			$out = explode(' ', $out);
 
 			if ($octet_col == '' || $cutoff_octets == '' || $out[$octet_col] > $cutoff_octets-1) {
-				$o .= '<tr align=left bgcolor="' . flowview_altcolor($i) . '">';
+				$o .= '<tr align="left"class="' . flowview_altrow($i) . '">';
 				$c = 0;
 				foreach ($out as $out2) {
 					if ($out2 != '') {
@@ -1285,19 +1304,7 @@ function flowview_check_fields () {
 	if ($stat_report > 0 && $print_report > 0)
 		return "You must select only a Statistics Report or a Printed Report (not both)!";
 
-	if (!ereg("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$", $start_date) && $start_date)
-		return "Invalid start date!<br>Must be in the format (mm/dd/yyyy)";
-
-	if (!ereg("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$", $end_date) && $end_date != '')
-		return "Invalid end date!<br>Must be in the format (mm/dd/yyyy)";
-
-	if (!ereg("^[0-9]{1,2}:[0-9]{2}(:[0-9]{2}){0,1}$", $start_time) && !ereg("^[-]{1,1}[0-9]{1,3}[ ]{0,1}(HOUR|HOURS|DAY|DAYS|MINUTE|MINUTES)$", $start_time))
-		return "Invalid start time!<br>Must be in the format (hh:mm or hh:mm:ss)";
-
-	if (!ereg("^[0-9]{1,2}:[0-9]{2}(:[0-9]{2}){0,1}$", $end_time) && $end_time != 'NOW')
-		return "Invalid end time!<br>Must be in the format (hh:mm or hh:mm:ss)";
-
-	if (strtotime($start_date . ' ' . $start_time) > strtotime($end_date . ' ' . $end_time))
+	if (strtotime($date1) > strtotime($date2))
 		return "Invalid dates, End Date/Time is earlier than Start Date/Time!";
 
 	if ($source_address != '') {
@@ -1649,7 +1656,7 @@ function flowview_get_color($as_array = false) {
  * session values for page refreshes.
  */
 function flowview_updatesess() {
-	$_SESSION['sess_flows_' . $_REQUEST['type']] = $_REQUEST['value'];
+	$_SESSION['sess_flows_' . get_request_var('type')] = get_request_var('value');
 }
 
 /** flowview_viewtable() 
@@ -1660,8 +1667,8 @@ function flowview_updatesess() {
 function flowview_viewtable() {
 	global $config;
 
-	$sessionid  = $_REQUEST["session"];
-	$flowdata  = unserialize(base64_decode($_REQUEST['session']));
+	$sessionid  = get_request_var('session');
+	$flowdata  = unserialize(base64_decode(get_request_var('session')));
 	foreach($flowdata['post'] as $item => $value) {
 		switch ($item) {
 		case 'bytes':
@@ -1669,7 +1676,7 @@ function flowview_viewtable() {
 		case 'packets':
 			break;
 		default:
-			$_POST[$item] = $value;
+			set_request_var($item, $value);
 		}
 	}
 
@@ -1678,7 +1685,7 @@ function flowview_viewtable() {
 
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 
-	$title      = $_REQUEST["title"];
+	$title      = get_request_var('title');
 	$output     = $_SESSION['flowview_flows'][$sessionid]['rawdata'];
 
 	echo parsestatoutput($output, $title, $sessionid);
@@ -1694,13 +1701,13 @@ function flowview_viewtable() {
 function flowview_viewchart() {
 	global $colors, $config;
 
-	include($config['base_path'] . "/plugins/flowview/lib/open-flash-chart-object.php");
-	include($config['base_path'] . "/plugins/flowview/lib/open-flash-chart.php");
+	include($config['base_path'] . '/plugins/flowview/lib/open-flash-chart-object.php');
+	include($config['base_path'] . '/plugins/flowview/lib/open-flash-chart.php');
 
-	$title      = $_REQUEST["title"];
-	$chart_type = "bar";
-	$column     = $_REQUEST["type"];
-	$sessionid  = $_REQUEST["session"];
+	$title      = get_nfilter_request_var('title');
+	$chart_type = 'bar';
+	$column     = get_nfilter_request_var('type');
+	$sessionid  = get_nfilter_request_var('session');
 
 	/* get the chart data from the session */
 	if (isset($_SESSION['flowview_flows'][$sessionid]['data'])) {
@@ -1713,18 +1720,18 @@ function flowview_viewchart() {
 	switch($column) {
 	case 'flows':
 		$unit = ucfirst($column);
-		$suffix = "Total Flows";
+		$suffix = 'Total Flows';
 		$_SESSION['sess_flows_flows'] = 'on';
 
 		break;
 	case 'bytes':
 		$unit = ucfirst($column);
-		$suffix = "Bytes Exchanged";
+		$suffix = 'Bytes Exchanged';
 		$_SESSION['sess_flows_bytes'] = 'on';
 		break;
 	case 'packets':
 		$unit = ucfirst($column);
-		$suffix = "Packets Examined";
+		$suffix = 'Packets Examined';
 		$_SESSION['sess_flows_packets'] = 'on';
 		break;
 	}
@@ -1741,8 +1748,8 @@ function flowview_viewchart() {
 		$legend   = array();
 		$maxvalue = 0;
 
-		if (isset($_REQUEST['exclude']) && $_REQUEST['exclude'] > 0) {
-			for($i = 0; $i < $_REQUEST['exclude']; $i++) {
+		if (isset_request_var('exclude') && get_filter_request_var('exclude') > 0) {
+			for($i = 0; $i < get_request_var('exclude'); $i++) {
 				array_shift($data);
 			}
 		}
@@ -1762,7 +1769,7 @@ function flowview_viewchart() {
 		foreach($data as $row) {
 			$elements[$i] = new bar_value(round($row[$column]/$autorange[0], 3));
 			$elements[$i]->set_colour(flowview_get_color());
-			$elements[$i]->set_tooltip($unit . ": #val# " . $autorange[1]);
+			$elements[$i]->set_tooltip($unit . ': #val# ' . $autorange[1]);
 			if (sizeof($row) == 4) {
 				$legend[] = $row[0];
 			}else{
@@ -1774,8 +1781,8 @@ function flowview_viewchart() {
 		$bar = new bar_glass();
 		$bar->set_values($elements);
 
-		$title = new title($title . " (" . $suffix . ")");
-		$title->set_style("{font-size: 18px; color: #444444; text-align: center;}");
+		$title = new title($title . ' (' . $suffix . ')');
+		$title->set_style('{font-size: 18px; color: #444444; text-align: center;}');
 
 		$x_axis_labels = new x_axis_labels();
 		$x_axis_labels->set_size(10);
@@ -1791,7 +1798,7 @@ function flowview_viewchart() {
 		$y_axis->set_offset(true);
 		$y_axis->set_colours('#909090', '#909090');
 		$y_axis->set_range(0, $maxvalue, $maxvalue/10);
-		$y_axis->set_label_text("#val# " . $autorange[1]);
+		$y_axis->set_label_text('#val# ' . $autorange[1]);
 
 		$chart = new open_flash_chart();
 		$chart->set_title($title);
@@ -1808,7 +1815,7 @@ function flowview_getmax($value) {
 
 	$length  = strlen($value) - 2;
 	if ($length > 0) {
-		$divisor = ("1" . str_repeat("0", $length));
+		$divisor = ('1' . str_repeat('0', $length));
 	}else{
 		$divisor = 1;
 	}
@@ -1821,15 +1828,15 @@ function flowview_getmax($value) {
 
 function flowview_autoscale($value) {
 	if ($value < 10000) {
-		return  array(1, "");
+		return  array(1, '');
 	}elseif ($value < 1000000) {
-		return array(1000, "K");
+		return array(1000, 'K');
 	}elseif ($value < 100000000) {
-		return array(1000000, "M");
+		return array(1000000, 'M');
 	}elseif ($value < 10000000000) {
-		return array(100000000, "G");
+		return array(100000000, 'G');
 	}else{
-		return array(10000000000, "P");
+		return array(10000000000, 'P');
 	}
 }
 

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2014 The Cacti Group                                 |
+ | Copyright (C) 2008-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -25,18 +25,17 @@
 
 chdir('../../');
 
-include("./include/auth.php");
-
+include('./include/auth.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
-$sched_actions = array(2 => "Send Now", 1 => "Delete", 3 => "Disable", 4 => "Enable");
+set_default_action();
 
-$action = "";
-if (isset($_POST['action'])) {
-	$action = $_POST['action'];
-} else if (isset($_GET['action'])) {
-	$action = $_GET['action'];
-}
+$sched_actions = array(
+	2 => 'Send Now', 
+	1 => 'Delete', 
+	3 => 'Disable', 
+	4 => 'Enable'
+);
 
 $sendinterval_arr = array(
 	3600    => 'Every Hour',
@@ -51,62 +50,62 @@ $sendinterval_arr = array(
 );
 
 $schedule_edit = array(
-	"title" => array(
-		"friendly_name" => "Title",
-		"method" => "textbox",
-		"default" => "New Schedule",
-		"description" => "Enter a Report Title for the FlowView Schedule.",
-		"value" => "|arg1:title|",
-		"max_length" => 128,
-		"size" => 60
+	'title' => array(
+		'friendly_name' => 'Title',
+		'method' => 'textbox',
+		'default' => 'New Schedule',
+		'description' => 'Enter a Report Title for the FlowView Schedule.',
+		'value' => '|arg1:title|',
+		'max_length' => 128,
+		'size' => 60
 	),
-	"enabled" => array(
-		"friendly_name" => "Enabled",
-		"method" => "checkbox",
-		"default" => "on",
-		"description" => "Whether or not this Netflow Scan will be sent.",
-		"value" => "|arg1:enabled|",
+	'enabled' => array(
+		'friendly_name' => 'Enabled',
+		'method' => 'checkbox',
+		'default' => 'on',
+		'description' => 'Whether or not this Netflow Scan will be sent.',
+		'value' => '|arg1:enabled|',
 	),
-	"savedquery" => array(
-		"method" => "drop_sql",
-		"friendly_name" => "Filter Name",
-		"description" => "Name of the query to run.",
-		"value" => "|arg1:savedquery|",
-		"sql" => "SELECT id, name FROM plugin_flowview_queries"
+	'savedquery' => array(
+		'method' => 'drop_sql',
+		'friendly_name' => 'Filter Name',
+		'description' => 'Name of the query to run.',
+		'value' => '|arg1:savedquery|',
+		'sql' => 'SELECT id, name FROM plugin_flowview_queries'
 	),
-	"sendinterval" => array(
-		"friendly_name" => "Send Interval",
-		"description" => "How often to send this Netflow Report?",
-		"value" => "|arg1:sendinterval|",
-		"method" => "drop_array",
+	'sendinterval' => array(
+		'friendly_name' => 'Send Interval',
+		'description' => 'How often to send this Netflow Report?',
+		'value' => '|arg1:sendinterval|',
+		'method' => 'drop_array',
 		'default' => '0',
-		"array" => $sendinterval_arr
+		'array' => $sendinterval_arr
 	),
-	"start" => array(
-		"method" => "textbox",
-		"friendly_name" => "Start Time",
-		"description" => "This is the first date / time to send the Netflow Scan email.  All future sendings will be calculated off of this time plus the interval given above.",
-		"value" => "|arg1:start|",
-		"max_length" => '26',
-		"size" => 20,
-		"default" => date("Y-m-d G:i:s", time())
+	'start' => array(
+		'method' => 'textbox',
+		'friendly_name' => 'Start Time',
+		'description' => 'This is the first date / time to send the Netflow Scan email.  All future sendings will be calculated off of this time plus the interval given above.',
+		'value' => '|arg1:start|',
+		'max_length' => '26',
+		'size' => 20,
+		'default' => date('Y-m-d G:i:s', time())
 	),
-	"email" => array(
-		"method" => "textarea",
-		"friendly_name" => "Email Addresses",
-		"description" => "Email addresses (command delimitinated) to send this Netflow Scan to.",
-		"textarea_rows" => 4,
-		"textarea_cols" => 60,
-		"class" => "textAreaNotes",
-		"value" => "|arg1:email|"
+	'email' => array(
+		'method' => 'textarea',
+		'friendly_name' => 'Email Addresses',
+		'description' => 'Email addresses (command delimitinated) to send this Netflow Scan to.',
+		'textarea_rows' => 4,
+		'textarea_cols' => 60,
+		'class' => 'textAreaNotes',
+		'value' => '|arg1:email|'
 	),
-	"id" => array(
-		"method" => "hidden_zero",
-		"value" => "|arg1:id|"
+	'id' => array(
+		'method' => 'hidden_zero',
+		'value' => '|arg1:id|'
 	),
 );
 
-switch ($action) {
+switch (get_request_var('action')) {
 	case 'actions':
 		actions_schedules();
 		break;
@@ -134,137 +133,131 @@ function actions_schedules () {
 	input_validate_input_number(get_request_var_post('drp_action'));
 	/* ==================================================== */
 
-	if (isset($_POST["selected_items"])) {
-		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
-		if ($_POST["drp_action"] == "1") {
-			for ($i=0; $i<count($selected_items); $i++) {
-				/* ================= input validation ================= */
-				input_validate_input_number($selected_items[$i]);
-				/* ==================================================== */
-				db_execute("DELETE FROM plugin_flowview_schedules WHERE id = " . $selected_items[$i]);
-			}
-		}elseif ($_POST["drp_action"] == "3") {
-			for ($i=0; $i<count($selected_items); $i++) {
-				/* ================= input validation ================= */
-				input_validate_input_number($selected_items[$i]);
-				/* ==================================================== */
-				db_execute("UPDATE plugin_flowview_schedules SET enabled='' WHERE id = " . $selected_items[$i]);
-			}
-		}elseif ($_POST["drp_action"] == "4") {
-			for ($i=0; $i<count($selected_items); $i++) {
-				/* ================= input validation ================= */
-				input_validate_input_number($selected_items[$i]);
-				/* ==================================================== */
-				db_execute("UPDATE plugin_flowview_schedules SET enabled='on' WHERE id = " . $selected_items[$i]);
-			}
-		}elseif ($_POST["drp_action"] == "2") {
-			for ($i=0; $i<count($selected_items); $i++) {
-				/* ================= input validation ================= */
-				input_validate_input_number($selected_items[$i]);
-				/* ==================================================== */
-				plugin_flowview_run_schedule($selected_items[$i]);
+	if (isset_request_var('selected_items')) {
+		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
+
+		if ($selected_items != false) {
+			if (get_nfilter_request_var('drp_action') == '1') {
+				for ($i=0; $i<count($selected_items); $i++) {
+					db_execute('DELETE FROM plugin_flowview_schedules WHERE id = ' . $selected_items[$i]);
+				}
+			}elseif (get_nfilter_request_var('drp_action') == '3') {
+				for ($i=0; $i<count($selected_items); $i++) {
+					db_execute("UPDATE plugin_flowview_schedules SET enabled='' WHERE id = " . $selected_items[$i]);
+				}
+			}elseif (get_nfilter_request_var('drp_action') == '4') {
+				for ($i=0; $i<count($selected_items); $i++) {
+					db_execute("UPDATE plugin_flowview_schedules SET enabled='on' WHERE id = " . $selected_items[$i]);
+				}
+			}elseif (get_nfilter_request_var('drp_action') == '2') {
+				for ($i=0; $i<count($selected_items); $i++) {
+					plugin_flowview_run_schedule($selected_items[$i]);
+				}
 			}
 		}
-		header("Location: flowview_schedules.php");
+
+		header('Location: flowview_schedules.php?tab=sched');
 		exit;
 	}
 
 	/* setup some variables */
-	$schedule_list = "";
+	$schedule_list = '';
 
 	/* loop through each of the devices selected on the previous page and get more info about them */
 	while (list($var,$val) = each($_POST)) {
-		if (ereg("^chk_([0-9]+)$", $var, $matches)) {
+		if (preg_match('/^chk_([0-9]+)$/', $var, $matches)) {
 			/* ================= input validation ================= */
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$schedule_list .= "<li>" . db_fetch_cell("SELECT name FROM plugin_flowview_queries AS pfq
+			$schedule_list .= '<li>' . db_fetch_cell('SELECT name FROM plugin_flowview_queries AS pfq
 				INNER JOIN plugin_flowview_schedules AS pfs 
 				ON pfq.id=pfs.savedquery
-				WHERE pfs.id=" . $matches[1]) . "</li>";
+				WHERE pfs.id=' . $matches[1]) . '</li>';
 			$schedule_array[] = $matches[1];
 		}
 	}
 
 	general_header();
 
-	html_start_box("<strong>" . $sched_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
+	form_start('flowview_schedules.php');
 
-	print "<form action='flowview_schedules.php' method='post'>\n";
+	html_start_box($sched_actions[get_nfilter_request_var('drp_action')], '60%', '', '3', 'center', '');
 
-	if ($_POST["drp_action"] == "1") { /* Delete */
-		print "	<tr>
-				<td colspan='2' class='textArea'>
-					<p>To delete the following Schedule(s), press the 'Continue' button.</p>
-					<p><ul>$schedule_list</ul></p>
-				</td>
-				</tr>";
-	}elseif ($_POST["drp_action"] == "2") { /* Send Now */
-		print "	<tr>
-				<td colspan='2' class='textArea'>
-					<p>To send the following Schedule(s), press the 'Continue' button.</p>
-					<p><ul>$schedule_list</ul></p>
-				</td>
-				</tr>";
-	}elseif ($_POST["drp_action"] == "3") { /* Disable */
-		print "	<tr>
-				<td colspan='2' class='textArea'>
-					<p>To Disable the following Schedule(s), press the 'Continue' button.</p>
-					<p><ul>$schedule_list</ul></p>
-				</td>
-				</tr>";
-	}elseif ($_POST["drp_action"] == "4") { /* Enable */
-		print "	<tr>
-				<td colspan='2' class='textArea'>
-					<p>To Enable the following Schedule(s), press the 'Continue' button.</p>
-					<p><ul>$schedule_list</ul></p>
-				</td>
-				</tr>";
+	if (get_nfilter_request_var('drp_action') == '1') { /* Delete */
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>Click 'Continue' to delete the following Schedule(s).</p>
+				<p><ul>$schedule_list</ul></p>
+			</td>
+		</tr>";
+	}elseif (get_nfilter_request_var('drp_action') == '2') { /* Send Now */
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>Click 'Continue' to send the following Schedule(s) now.</p>
+				<p><ul>$schedule_list</ul></p>
+			</td>
+		</tr>";
+	}elseif (get_nfilter_request_var('drp_action') == '3') { /* Disable */
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>Click 'Continue' to Disable the following Schedule(s).</p>
+				<p><ul>$schedule_list</ul></p>
+			</td>
+		</tr>";
+	}elseif (get_nfilter_request_var('drp_action') == '4') { /* Enable */
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>Click 'Continue' to Enable the following Schedule(s).</p>
+				<p><ul>$schedule_list</ul></p>
+			</td>
+		</tr>";
 	}
 
 	if (!isset($schedule_array)) {
 		print "<tr><td><span class='textError'>You must select at least one schedule.</span></td></tr>\n";
-		$save_html = "";
+		$save_html = '';
 	}else{
 		$save_html = "<input type='submit' value='Continue'>";
 	}
 
-	print "	<tr>
-			<td colspan='2' align='right' class='saveRow'>
-				<input type='hidden' name='action' value='actions'>
-				<input type='hidden' name='selected_items' value='" . (isset($schedule_array) ? serialize($schedule_array) : '') . "'>
-				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<input type='button' onClick='javascript:document.location=\"flowview_schedules.php\"' value='Cancel'>
-				$save_html
-			</td>
-		</tr>
-		";
+	print "<tr>
+		<td colspan='2' align='right' class='saveRow'>
+			<input type='hidden' name='action' value='actions'>
+			<input type='hidden' name='selected_items' value='" . (isset($schedule_array) ? serialize($schedule_array) : '') . "'>
+			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>
+			<input type='button' onClick='cactiReturnTo()' value='Cancel'>
+			$save_html
+		</td>
+	</tr>";
 
 	html_end_box();
+
+	form_end();
 
 	bottom_footer();
 }
 
 function save_schedules() {
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_post('id'));
-	input_validate_input_number(get_request_var_post('savedquery'));
-	input_validate_input_number(get_request_var_post('sendinterval'));
+	get_filter_request_var('id');
+	get_filter_request_var('savedquery');
+	get_filter_request_var('sendinterval');
 	/* ==================================================== */
 
-	$save['title']        = sql_sanitize($_POST['title']);
-	$save['savedquery']   = $_POST['savedquery'];
-	$save['sendinterval'] = $_POST['sendinterval'];
-	$save['start'] = sql_sanitize($_POST['start']);
-	$save['email'] = sql_sanitize($_POST['email']);
+	$save['title']        = get_nfilter_request_var('title');
+	$save['savedquery']   = get_nfilter_request_var('savedquery');
+	$save['sendinterval'] = get_nfilter_request_var('sendinterval');
+	$save['start']        = get_nfilter_request_var('start');
+	$save['email']        = get_nfilter_request_var('email');
 
 	$t = time();
-	$d = strtotime($_POST['start']);
+	$d = strtotime(get_nfilter_request_var('start'));
 	$i = $save['sendinterval'];
-	if (isset($_POST['id'])) {
-		$save['id'] = $_POST['id'];
-		$q = db_fetch_row("SELECT * FROM plugin_flowview_schedules WHERE id = " . $save['id']);
+	if (isset_request_var('id')) {
+		$save['id'] = get_request_var('id');
+
+		$q = db_fetch_row('SELECT * FROM plugin_flowview_schedules WHERE id = ' . $save['id']);
 		if (!isset($q['lastsent']) || $save['start'] != $q['start'] || $save['sendinterval'] != $q['sendinterval']) {
 			while ($d < $t) {
 				$d += $i;
@@ -279,165 +272,132 @@ function save_schedules() {
 		$save['lastsent'] = $d - $i;
 	}
 
-	if (isset($_POST["enabled"]))
-		$save["enabled"] = 'on';
+	if (isset_request_var('enabled'))
+		$save['enabled'] = 'on';
 	else
-		$save["enabled"] = 'off';
+		$save['enabled'] = 'off';
 
 	$id = sql_save($save, 'plugin_flowview_schedules', 'id', true);
 
 	if (is_error_message()) {
-		header('Location: flowview_schedules.php?action=edit&id=' . (empty($id) ? $_POST['id'] : $id));
+		header('Location: flowview_schedules.php?tab=sched&header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
 		exit;
 	}
-	header("Location: flowview_schedules.php");
+
+	header('Location: flowview_schedules.php?tab=sched&header=false');
 	exit;
 }
 
 function edit_schedule() {
 	global $config, $schedule_edit, $colors;
 
-	print '<script type="text/javascript" src="' . $config['url_path'] . '/include/jscalendar/calendar.js"></script>
-		<script type="text/javascript" src="' . $config['url_path'] . '/include/jscalendar/lang/calendar-en.js"></script>
-		<script type="text/javascript" src="' . $config['url_path'] . '/include/jscalendar/calendar-setup.js"></script>';
-
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("id"));
+	get_filter_request_var('id');
 	/* ==================================================== */
 
 	$report = array();
-	if (!empty($_GET["id"])) {
-		$report = db_fetch_row("SELECT pfs.*, pfq.name 
+	if (!isempty_request_var('id')) {
+		$report = db_fetch_row('SELECT pfs.*, pfq.name 
 			FROM plugin_flowview_schedules AS pfs 
 			LEFT JOIN plugin_flowview_queries AS pfq
 			ON (pfs.savedquery=pfq.id) 
-			WHERE pfs.id=" . $_GET["id"], FALSE);
+			WHERE pfs.id=' . get_request_var('id'), FALSE);
 
-		$header_label = "[edit: " . $report["name"] . "]";
+		$header_label = '[edit: ' . $report['name'] . ']';
 	}else{
-		$header_label = "[new]";
+		$header_label = '[new]';
 	}
 
-	html_start_box("<strong>Report:</strong> $header_label", "100%", $colors["header"], "3", "center", "");
-	draw_edit_form(array(
-		"config" => array("form_name" => "chk"),
-		"fields" => inject_form_variables($schedule_edit, $report)
+	form_start('flowview_schedules.php', 'chk');
+
+	html_start_box('Report: ' . $header_label, '100%', '', '3', 'center', '');
+
+	draw_edit_form(
+		array(
+			'config' => array('no_form_tag' => true),
+			'fields' => inject_form_variables($schedule_edit, $report)
 		)
 	);
 
 	html_end_box();
-	form_save_button("flowview_schedules.php");
 
-	?>
-	<script type='text/javascript'>
-	// Initialize the calendar
-	calendar=null;
-
-	// This function displays the calendar associated to the input field 'id'
-	function showCalendar2() {
-		var el = document.getElementById('start');
-		if (calendar != null) {
-			// we already have some calendar created
-			calendar.hide();  // so we hide it first.
-		} else {
-			// first-time call, create the calendar.
-			var cal = new Calendar(true, null, selected, closeHandler);
-			cal.weekNumbers = false;  // Do not display the week number
-			cal.showsTime = true;     // Display the time
-			cal.time24 = true;        // Hours have a 24 hours format
-			cal.showsOtherMonths = false;    // Just the current month is displayed
-			calendar = cal;                  // remember it in the global var
-			cal.setRange(1900, 2070);        // min/max year allowed.
-			cal.create();
-		}
-
-		calendar.setDateFormat('%Y-%m-%d %H:%M');    // set the specified date format
-		calendar.parseDate(el.value);                // try to parse the text in field
-		calendar.sel = el;                           // inform it what input field we use
-
-		// Display the calendar below the input field
-		calendar.showAtElement(el, "Br");        // show the calendar
-
-		return true;
-	}
-
-	// This function update the date in the input field when selected
-	function selected(cal, date) {
-		cal.sel.value = date;      // just update the date in the input field.
-	}
-
-	// This function gets called when the end-user clicks on the 'Close' button.
-	// It just hides the calendar without destroying it.
-	function closeHandler(cal) {
-		cal.hide();                        // hide the calendar
-		calendar = null;
-	}
-
-	$('#start').after('&nbsp;<input type="image" src="<?php print $config['url_path'];?>images/calendar.gif" align="absmiddle" title="Start Selector" onclick="return showCalendar(\'start\')">');
-	$('#start').click(function() { showCalendar2(); });
-	</script>
-	<?php
+	form_save_button('flowview_schedules.php?tab=sched');
 }
 
 function show_schedules () {
-	global $sendinterval_arr, $colors, $config, $sched_actions;
+	global $sendinterval_arr, $colors, $config, $sched_actions, $item_rows;
 
+    /* ================= input validation and session storage ================= */
+    $filters = array(
+		'rows' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'pageset' => true,
+			'default' => '-1'
+			),
+		'page' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '1'
+			),
+		'filter' => array(
+			'filter' => FILTER_CALLBACK,
+			'pageset' => true,
+			'default' => '',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_column' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'title',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_direction' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'ASC',
+			'options' => array('options' => 'sanitize_search_string')
+			)
+	);
+
+	validate_store_request_vars($filters, 'sess_fvs');
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("page"));
-	/* ==================================================== */
 
-	/* clean up search string */
-	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
+	if (get_request_var('rows') == '-1') {
+		$rows = read_config_option('num_rows_table');
+	}else{
+		$rows = get_request_var('rows');
 	}
 
-	/* clean up sort_column */
-	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
-	}
-
-	/* clean up sort_direction string */
-	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
-	}
-
-	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear"])) {
-		kill_session_var("sess_schedules_current_page");
-		kill_session_var("sess_schedules_filter");
-		kill_session_var("sess_schedules_sort_column");
-		kill_session_var("sess_schedules_sort_direction");
-
-		unset($_REQUEST["page"]);
-		unset($_REQUEST["filter"]);
-		unset($_REQUEST["sort_column"]);
-		unset($_REQUEST["sort_direction"]);
-	}
-
-	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("page", "sess_schedules_current_page", "1");
-	load_current_session_value("filter", "sess_schedules_filter", "");
-	load_current_session_value("sort_column", "sess_schedules_sort_column", "title");
-	load_current_session_value("sort_direction", "sess_schedules_sort_direction", "ASC");
-
-	html_start_box("<strong>Host Templates</strong>", "100%", $colors["header"], "3", "center", "flowview_schedules.php?action=edit");
+	html_start_box('FlowView Schedules', '100%', '', '3', 'center', 'flowview_schedules.php?action=edit');
 	?>
 	<tr class='even'>
 		<td>
-		<form name="form_schedule" action="flowview_schedules.php">
-			<table cellpadding="2" cellspacing="0">
+		<form name='form_schedule' action='flowview_schedules.php'>
+			<table class='filterTable'>
 				<tr>
-					<td width='55'>
-						Search:
+					<td>
+						Search
 					</td>
 					<td>
-						<input type="text" name="filter" size="40" value="<?php print htmlspecialchars(get_request_var_request("filter"));?>">
+						<input type='text' id='filter' size='25' value='<?php print htmlspecialchars(get_request_var('filter'));?>'>
 					</td>
 					<td>
-						<input type="submit" value="Go" title="Set/Refresh Filters">
+						<?php print __('Schedules');?>
 					</td>
 					<td>
-						<input type="submit" name="clear" value="Clear" title="Clear Filters">
+						<select id='rows' onChange='applyFilter()'>
+							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default');?>
+							<?php
+							if (sizeof($item_rows)) {
+							foreach ($item_rows as $key => $value) {
+								print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . "</option>\n";
+							}
+							}
+							?>
+						</select>
+					</td>
+					<td>
+						<input type='submit' value='Go' title='Set/Refresh Filters'>
+					</td>
+					<td>
+						<input type='submit' name='clear' value='Clear' title='Clear Filters'>
 					</td>
 				</tr>
 			</table>
@@ -448,36 +408,36 @@ function show_schedules () {
 	<?php
 	html_end_box();
 
-	$sql_where = "WHERE (name LIKE '%%" . get_request_var_request("filter") . "%%')";
-	$num_rows  = read_config_option("num_rows_device");
-
-	define("MAX_DISPLAY_PAGES", 21);
+	if (get_request_var('filter') != '') {
+		$sql_where = "WHERE (name LIKE '%" . get_request_var_request('filter') . "%')";
+	}else{
+		$sql_where = '';
+	}
 
 	$sql = "SELECT pfs.*, pfq.name 
 		FROM plugin_flowview_schedules AS pfs
 		LEFT JOIN plugin_flowview_queries AS pfq 
 		ON (pfs.savedquery=pfq.id) 
 		$sql_where
-		ORDER BY " . get_request_var_request("sort_column") . " " . get_request_var_request("sort_direction") . "
-		LIMIT " . ($num_rows*($_REQUEST["page"]-1)) . ", $num_rows";
+		ORDER BY " . get_request_var_request('sort_column') . ' ' . get_request_var_request('sort_direction') . '
+		LIMIT ' . ($rows*(get_request_var('page')-1)) . ", $rows";
 
-	$result     = db_fetch_assoc($sql);
+	$result = db_fetch_assoc($sql);
+
 	$total_rows = db_fetch_cell("SELECT COUNT(*) 
 		FROM plugin_flowview_schedules AS pfs
 		LEFT JOIN plugin_flowview_queries AS pfq 
 		ON (pfs.savedquery=pfq.id) 
 		$sql_where");
 
-	$url_page_select = get_page_list($_REQUEST["page"], MAX_DISPLAY_PAGES, $num_rows, $total_rows, "flowview_schedules.php?");
-
     /* print checkbox form for validation */
-    print "<form name='chk' method='post' action='flowview_schedules.php'>\n";
+	form_start('flowview_schedules.php', 'chk');
 
-	html_start_box("", "100%", $colors["header"], "3", "center", "");
+	html_start_box('', '100%', '', '3', 'center', '');
 
-	$nav = html_nav_bar("flowview_schedules.php", MAX_DISPLAY_PAGES, get_request_var_request("page"), $num_rows, $total_rows, 10, 'Schedules');
+	$nav = html_nav_bar('flowview_schedules.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 5, 'Schedules', 'page', 'main');
 
-	print $nav;
+    print $nav;
 
 	$display_array = array(
 		'title'                 => array('Schedule Title', 'ASC'),
@@ -489,19 +449,19 @@ function show_schedules () {
 		'enabled'               => array('Enabled', 'ASC')
 	);
 
-	html_header_sort_checkbox($display_array, get_request_var_request("sort_column"), get_request_var_request("sort_direction"), false);
+	html_header_sort_checkbox($display_array, get_request_var_request('sort_column'), get_request_var_request('sort_direction'), false);
 
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
-			form_alternate_row('line' . $row["id"], true);
-			form_selectable_cell('<a href="' . htmlspecialchars('flowview_schedules.php?&action=edit&id=' . $row['id']) . '"><strong>' . $row['title'] . '</strong></a>', $row['id']);
+			form_alternate_row('line' . $row['id'], true);
+			form_selectable_cell('<a class="linkEditMain" href="' . htmlspecialchars('flowview_schedules.php?tab=sched&action=edit&id=' . $row['id']) . '">' . $row['title'] . '</a>', $row['id']);
 			form_selectable_cell($row['name'], $row['id']);
 			form_selectable_cell($sendinterval_arr[$row['sendinterval']], $row['id']);
 			form_selectable_cell($row['start'], $row['id']);
-			form_selectable_cell(date("Y-m-d G:i:s", $row['lastsent']+$row['sendinterval']), $row['id']);
+			form_selectable_cell(date('Y-m-d G:i:s', $row['lastsent']+$row['sendinterval']), $row['id']);
 			form_selectable_cell($row['email'], $row['id']);
-			form_selectable_cell(($row['enabled'] == 'on' ? "<font color=green><b>Yes</b></font>":"<font color=red><b>No</b></font>"), $row['id']);
+			form_selectable_cell(($row['enabled'] == 'on' ? "<span class='deviceUp'><b>Yes</b></span>":"<span class='deviceDown'><b>No</b></span>"), $row['id']);
 			form_checkbox_cell($row['name'], $row['id']);
 			form_end_row();
 		}

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2008-2014 The Cacti Group                                 |
+ | Copyright (C) 2008-2016 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -23,17 +23,12 @@
 */
 
 chdir('../../');
-include("./include/auth.php");
+include('./include/auth.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
-$ds_actions = array(1 => "Delete");
+$flow_actions = array(1 => 'Delete');
 
-$action = "";
-if (isset($_POST['action'])) {
-	$action = $_POST['action'];
-} else if (isset($_GET['action'])) {
-	$action = $_GET['action'];
-}
+set_default_action();
 
 $expire_arr = array(
 	2   => '2 Days',
@@ -99,85 +94,87 @@ $compression_arr = array(
 );
 
 $device_edit = array(
-	"name" => array(
-		"method" => "textbox",
-		"friendly_name" => "Device Name",
-		"description" => "Name of the device to be displayed.",
-		"value" => "|arg1:name|",
-		"max_length" => "64",
+	'name' => array(
+		'method' => 'textbox',
+		'friendly_name' => 'Device Name',
+		'description' => 'Name of the device to be displayed.',
+		'value' => '|arg1:name|',
+		'max_length' => '64',
 	),
-	"folder" => array(
-		"method" => "textbox",
-		"friendly_name" => "Directory",
-		"description" => "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.",
-		"value" => "|arg1:folder|",
-		"max_length" => "64",
+	'folder' => array(
+		'method' => 'textbox',
+		'friendly_name' => 'Directory',
+		'description' => 'Directory that this devices flows are in.  This directory must be in the Flow Directory path.
+			Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to
+			to use it will have to be resaved.',
+		'value' => '|arg1:folder|',
+		'max_length' => '64',
 	),
-	"allowfrom" => array(
-		"method" => "textbox",
-		"friendly_name" => "Allowed Host",
-		"description" => "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host.",
-		"value" => "|arg1:allowfrom|",
-		"default" => '0',
-		"max_length" => "64",
-		"size" => "30"
+	'allowfrom' => array(
+		'method' => 'textbox',
+		'friendly_name' => 'Allowed Host',
+		'description' => 'IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host.',
+		'value' => '|arg1:allowfrom|',
+		'default' => '0',
+		'max_length' => '64',
+		'size' => '30'
 	),
-	"port" => array(
-		"method" => "textbox",
-		"friendly_name" => "Port",
-		"description" => "Port this collector will listen on.",
-		"value" => "|arg1:port|",
-		"default" => '2055',
-		"max_length" => "5",
-		"size" => "30"
+	'port' => array(
+		'method' => 'textbox',
+		'friendly_name' => 'Port',
+		'description' => 'Port this collector will listen on.',
+		'value' => '|arg1:port|',
+		'default' => '2055',
+		'max_length' => '5',
+		'size' => '30'
 	),
-	"nesting" => array(
-		"friendly_name" => "Nesting",
-		"description" => "Directory Structure that will be used for the flows for this device.",
-		"value" => "|arg1:nesting|",
-		"method" => "drop_array",
+	'nesting' => array(
+		'friendly_name' => 'Nesting',
+		'description' => 'Directory Structure that will be used for the flows for this device.',
+		'value' => '|arg1:nesting|',
+		'method' => 'drop_array',
 		'default' => '-1',
-		"array" => $nesting_arr
+		'array' => $nesting_arr
 	),
-	"version" => array(
-		"friendly_name" => "Netflow Version",
-		"description" => "Netflow Protocol version used by the device.",
-		"value" => "|arg1:version|",
-		"method" => "drop_array",
+	'version' => array(
+		'friendly_name' => 'Netflow Version',
+		'description' => 'Netflow Protocol version used by the device.',
+		'value' => '|arg1:version|',
+		'method' => 'drop_array',
 		'default' => '5',
-		"array" => $version_arr
+		'array' => $version_arr
 	),
-	"compression" => array(
-		"friendly_name" => "Compression Level",
-		"description" => "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results.",
-		"value" => "|arg1:compression|",
-		"method" => "drop_array",
+	'compression' => array(
+		'friendly_name' => 'Compression Level',
+		'description' => 'Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results.',
+		'value' => '|arg1:compression|',
+		'method' => 'drop_array',
 		'default' => '0',
-		"array" => $compression_arr,
+		'array' => $compression_arr,
 	),
-	"rotation" => array(
-		"friendly_name" => "Rotation",
-		"description" => "How often to create a new Flow File.",
-		"value" => "|arg1:rotation|",
-		"method" => "drop_array",
+	'rotation' => array(
+		'friendly_name' => 'Rotation',
+		'description' => 'How often to create a new Flow File.',
+		'value' => '|arg1:rotation|',
+		'method' => 'drop_array',
 		'default' => '1439',
-		"array" => $rotation_arr
+		'array' => $rotation_arr
 	),
-	"expire" => array(
-		"friendly_name" => "Expiration",
-		"description" => "How long to keep your flow files.",
-		"value" => "|arg1:expire|",
-		"method" => "drop_array",
+	'expire' => array(
+		'friendly_name' => 'Expiration',
+		'description' => 'How long to keep your flow files.',
+		'value' => '|arg1:expire|',
+		'method' => 'drop_array',
 		'default' => '0',
-		"array" => $expire_arr
+		'array' => $expire_arr
 	),
-	"id" => array(
-		"method" => "hidden_zero",
-		"value" => "|arg1:id|"
+	'id' => array(
+		'method' => 'hidden_zero',
+		'value' => '|arg1:id|'
 	),
 );
 
-switch ($action) {
+switch (get_request_var('action')) {
 	case 'actions':
 		actions_devices();
 		break;
@@ -199,35 +196,36 @@ switch ($action) {
 }
 
 function actions_devices () {
-	global $colors, $ds_actions, $config;
-	if (isset($_POST["selected_items"])) {
-		$selected_items = unserialize(stripslashes($_POST["selected_items"]));
-		if ($_POST["drp_action"] == "1") {
+	global $flow_actions, $config;
 
-			for ($i=0; $i<count($selected_items); $i++) {
-				/* ================= input validation ================= */
-				input_validate_input_number($selected_items[$i]);
-				/* ==================================================== */
-				db_execute("DELETE FROM plugin_flowview_devices WHERE id = " . $selected_items[$i]);
+	if (isset_request_var('selected_items')) {
+		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
+
+		if ($selected_items != false) {
+			if (get_nfilter_request_var('drp_action') == '1') {
+				for ($i=0; $i<count($selected_items); $i++) {
+					db_execute('DELETE FROM plugin_flowview_devices WHERE id = ' . $selected_items[$i]);
+				}
 			}
 		}
-		header("Location: flowview_devices.php");
+
+		header('Location: flowview_devices.php?tab=listeners&header=false');
 		exit;
 	}
 
 
 	/* setup some variables */
-	$device_list = "";
+	$device_list = '';
 	$i = 0;
 
 	/* loop through each of the devices selected on the previous page and get more info about them */
 	while (list($var,$val) = each($_POST)) {
-		if (ereg("^chk_([0-9]+)$", $var, $matches)) {
+		if (preg_match('/^chk_([0-9]+)$/', $var, $matches)) {
 			/* ================= input validation ================= */
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$device_list .= "<li>" . db_fetch_cell("select name from plugin_flowview_devices where id=" . $matches[1]) . "</li>";
+			$device_list .= '<li>' . db_fetch_cell('SELECT name FROM plugin_flowview_devices WHERE id=' . $matches[1]) . '</li>';
 			$device_array[$i] = $matches[1];
 		}
 		$i++;
@@ -235,184 +233,178 @@ function actions_devices () {
 
 	general_header();
 
-	html_start_box("<strong>" . $ds_actions{$_POST["drp_action"]} . "</strong>", "60%", $colors["header_panel"], "3", "center", "");
+	form_start('flowview_devices.php');
 
-	print "<form action='flowview_devices.php' method='post'>\n";
+	html_start_box($flow_actions{get_nfilter_request_var('drp_action')}, '60%', '', '3', 'center', '');
 
-	if ($_POST["drp_action"] == "1") { /* Delete */
-		print "	<tr>
-				<td colspan='2' class='textArea' bgcolor='#" . $colors["form_alternate1"]. "'>
-					<p>To delete the following Net-Flow Listeners, press the 'Continue' button below.  After which, you will need to restart your Flow-Capture Service.</p>
-					<p>Also, remember to remove any left over files from your Net-Flow Capture location.</p>
-					<p><ul>$device_list</ul></p>
-				</td>
-				</tr>";
+	if (get_nfilter_request_var('drp_action') == '1') { /* Delete */
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>Click 'Continue' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service.</p>
+				<p>Also, remember to remove any left over files from your Net-Flow Capture location.</p>
+				<p><ul>$device_list</ul></p>
+			</td>
+		</tr>\n";
 	}
 
 	if (!isset($device_array)) {
-		print "<tr><td bgcolor='#" . $colors["form_alternate1"]. "'><span class='textError'>You must select at least one device.</span></td></tr>\n";
-		$save_html = "";
+		print "<tr><td class='even'><span class='textError'>You must select at least one device.</span></td></tr>\n";
+		$save_html = '';
 	}else{
 		$save_html = "<input type='submit' value='Continue'>";
 	}
 
-	print "	<tr>
-			<td colspan='2' align='right' bgcolor='#eaeaea'>
-				<input type='hidden' name='action' value='actions'>
-				<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
-				<input type='hidden' name='drp_action' value='" . $_POST["drp_action"] . "'>
-				<input type='button' onClick='javascript:document.location=\"flowview_devices.php\"' value='Cancel'>
-				$save_html
-			</td>
-		</tr>
-		";
+	print "<tr>
+		<td class='saveRow'>
+			<input type='hidden' name='action' value='actions'>
+			<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
+			<input type='hidden' name='drp_action' value='" . get_filter_request_var('drp_action') . "'>
+			<input type='button' onClick='javascript:document.location=\"flowview_devices.php\"' value='Cancel'>
+			$save_html
+		</td>
+	</tr>\n";
 
 	html_end_box();
+
+	form_end();
 
 	bottom_footer();
 }
 
 function save_devices () {
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_post('id'));
-	input_validate_input_number(get_request_var_post('version'));
-	input_validate_input_number(get_request_var_post('rotation'));
-	input_validate_input_number(get_request_var_post('expire'));
-	input_validate_input_number(get_request_var_post('port'));
-	input_validate_input_number(get_request_var_post('compression'));
+	get_filter_request_var('id');
+	get_filter_request_var('version');
+	get_filter_request_var('rotation');
+	get_filter_request_var('expire');
+	get_filter_request_var('port');
+	get_filter_request_var('compression');
 	/* ==================================================== */
 
-	if (isset($_POST['id'])) {
-		$save['id'] = $_POST['id'];
+	if (isset_request_var('id')) {
+		$save['id'] = get_request_var('id');
 	} else {
 		$save['id'] = '';
 	}
 
-	$save['name']        = sql_sanitize($_POST['name']);
-	$save['folder']      = sql_sanitize($_POST['folder']);
-	$save['allowfrom']   = sql_sanitize($_POST['allowfrom']);
-	$save['port']        = $_POST['port'];
-	$save['nesting']     = sql_sanitize($_POST['nesting']);
-	$save['version']     = $_POST['version'];
-	$save['rotation']    = $_POST['rotation'];
-	$save['expire']      = $_POST['expire'];
-	$save['compression'] = $_POST['compression'];
+	$save['name']        = get_nfilter_request_var('name');
+	$save['folder']      = get_nfilter_request_var('folder');
+	$save['allowfrom']   = get_nfilter_request_var('allowfrom');
+	$save['port']        = get_nfilter_request_var('port');
+	$save['nesting']     = get_nfilter_request_var('nesting');
+	$save['version']     = get_nfilter_request_var('version');
+	$save['rotation']    = get_nfilter_request_var('rotation');
+	$save['expire']      = get_nfilter_request_var('expire');
+	$save['compression'] = get_nfilter_request_var('compression');
 
 	$id = sql_save($save, 'plugin_flowview_devices', 'id', true);
 
 	if (is_error_message()) {
-		header('Location: flowview_devices.php?action=edit&id=' . (empty($id) ? $_POST['id'] : $id));
+		header('Location: flowview_devices.php?tab=listeners&header=false&action=edit&id=' . (empty($id) ? get_request_var('id') : $id));
 		exit;
 	}
-	header("Location: flowview_devices.php");
+
+	header('Location: flowview_devices.php?tab=listeners&header=false');
+
 	exit;
 }
 
 function edit_devices () {
-	global $device_edit, $colors;
+	global $device_edit;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var("id"));
+	get_filter_request_var('id');
 	/* ==================================================== */
 
 	$device = array();
-	if (!empty($_GET["id"])) {
-		$device = db_fetch_row("SELECT * FROM plugin_flowview_devices WHERE id=" . $_GET["id"], FALSE);
-		$header_label = "[edit: " . $device["name"] . "]";
+	if (!isempty_request_var('id')) {
+		$device = db_fetch_row('SELECT * FROM plugin_flowview_devices WHERE id=' . get_request_var('id'), FALSE);
+		$header_label = '[edit: ' . $device['name'] . ']';
 	}else{
-		$header_label = "[new]";
+		$header_label = '[new]';
 	}
 
-	html_start_box("<strong>Device:</strong> $header_label", "100%", $colors["header"], "3", "center", "");
+	form_start('flowview_devices.php', 'chk');
+
+	html_start_box("Device: $header_label", '100%', '', '3', 'center', '');
+
 	draw_edit_form(array(
-		"config" => array("form_name" => "chk"),
-		"fields" => inject_form_variables($device_edit, $device)
+		'config' => array('no_form_tag' => true),
+		'fields' => inject_form_variables($device_edit, $device)
 		)
 	);
 
 	html_end_box();
-	form_save_button("flowview_devices.php");
+
+	form_save_button('flowview_devices.php?tab=listeners');
 }
 
 function show_devices () {
 	global $action, $expire_arr, $rotation_arr, $version_arr, $nesting_arr;
-	global $colors, $config, $ds_actions;
+	global $config, $flow_actions;
 
+    /* ================= input validation and session storage ================= */
+    $filters = array(
+		'page' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '1'
+			),
+		'filter' => array(
+			'filter' => FILTER_CALLBACK,
+			'pageset' => true,
+			'default' => '',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_column' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'name',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_direction' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'ASC',
+			'options' => array('options' => 'sanitize_search_string')
+			)
+	);
+
+	validate_store_request_vars($filters, 'sess_fvd');
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_request("page"));
-	/* ==================================================== */
 
-	/* clean up search string */
-	if (isset($_REQUEST["filter"])) {
-		$_REQUEST["filter"] = sanitize_search_string(get_request_var("filter"));
-	}
+	$sql_where = (get_request_var('filter') != '' ? "name LIKE '%" . get_request_var('filter') . "%'":'');
+	$num_rows  = read_config_option('num_rows_table');
 
-	/* clean up sort_column */
-	if (isset($_REQUEST["sort_column"])) {
-		$_REQUEST["sort_column"] = sanitize_search_string(get_request_var("sort_column"));
-	}
-
-	/* clean up sort_direction string */
-	if (isset($_REQUEST["sort_direction"])) {
-		$_REQUEST["sort_direction"] = sanitize_search_string(get_request_var("sort_direction"));
-	}
-
-	/* if the user pushed the 'clear' button */
-	if (isset($_REQUEST["clear_x"])) {
-		kill_session_var("sess_flowview_current_page");
-		kill_session_var("sess_flowview_filter");
-		kill_session_var("sess_flowview_sort_column");
-		kill_session_var("sess_flowview_sort_direction");
-
-		unset($_REQUEST["page"]);
-		unset($_REQUEST["filter"]);
-		unset($_REQUEST["sort_column"]);
-		unset($_REQUEST["sort_direction"]);
-	}
-
-	/* remember these search fields in session vars so we don't have to keep passing them around */
-	load_current_session_value("page", "sess_flowview_current_page", "1");
-	load_current_session_value("filter", "sess_flowview_filter", "");
-	load_current_session_value("sort_column", "sess_flowview_sort_column", "name");
-	load_current_session_value("sort_direction", "sess_flowview_sort_direction", "ASC");
-
-	$sql_where = (strlen($_REQUEST["filter"]) ? "name LIKE '%" . $_REQUEST["filter"] . "%'":"");
-	$num_rows  = read_config_option("num_rows_device");
-
-	$sql    = "SELECT * 
+	$sql = "SELECT * 
 		FROM plugin_flowview_devices 
 		$sql_where
-		ORDER BY " . get_request_var_request("sort_column") . " " . get_request_var_request("sort_direction") .
-		" LIMIT " . ($num_rows*(get_request_var_request("page")-1) . "," . $num_rows);
+		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction') .
+		' LIMIT ' . ($num_rows*(get_request_var('page')-1) . ',' . $num_rows);
 
 	$result = db_fetch_assoc($sql);
 
-	define("MAX_DISPLAY_PAGES", 21);
-
 	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices $sql_where");
-	html_start_box("<strong>FlowView Listeners</strong>", "100%", $colors["header"], "4", "center", "flowview_devices.php?action=edit");
+	html_start_box('FlowView Listeners', '100%', '', '4', 'center', 'flowview_devices.php?action=edit');
 
 	?>
 	<tr class='even'>
 		<td>
-		<form name="listeners" action="flowview_devices.php">
-			<table cellpadding="2" cellspacing="0">
+		<form name='listeners' action='flowview_devices.php'>
+			<table class='fitlerTable'>
 				<tr>
-					<td width="55">
-						Search:
+					<td>
+						Search
 					</td>
 					<td>
-						<input type="text" name="filter" size="40" value="<?php print htmlspecialchars(get_request_var_request("filter"));?>">
+						<input type='text' id='filter' size='40' value='<?php print htmlspecialchars(get_request_var('filter'));?>'>
 					</td>
 					<td>
-						<input type="submit" value="Go" title="Set/Refresh Filters">
+						<input id='refresh' type='button' value='Go' title='Set/Refresh Filters'>
 					</td>
 					<td>
-						<input type="submit" name="clear" value="Clear" title="Clear Filters">
+						<input id='clear' type='button' name='clear' value='Clear' title='Clear Filters'>
 					</td>
 				</tr>
 			</table>
-		<input type='hidden' name='page' value='1'>
+		<input type='hidden' name='page' value='<?php print get_request_var('page');?>'>
 		</form>
 		</td>
 	</tr>
@@ -423,9 +415,9 @@ function show_devices () {
 	/* print checkbox form for validation */
 	print "<form name='chk' method='post' action='flowview_devices.php'>\n";
 
-	html_start_box("", "100%", $colors["header"], "4", "center", "");
+	html_start_box('', '100%', '', '4', 'center', '');
 
-	$nav = html_nav_bar("flowview_devices.php", MAX_DISPLAY_PAGES, get_request_var_request("page"), $num_rows, $total_rows, 10, 'Listeners');
+	$nav = html_nav_bar('flowview_devices.php', MAX_DISPLAY_PAGES, get_request_var('page'), $num_rows, $total_rows, 10, 'Listeners', 'page', 'main');
 
 	print $nav;
 
@@ -441,14 +433,14 @@ function show_devices () {
 		'expire'      => array('Expire', 'ASC')
 	);
 
-	html_header_sort_checkbox($display_array, get_request_var_request("sort_column"), get_request_var_request("sort_direction"), false);
+	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	$c=0;
 	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
-			form_alternate_row('line' . $row["id"], true);
-			form_selectable_cell('<a href="flowview_devices.php?&action=edit&id=' . $row['id'] . '"><strong>' . $row['name'] . '</strong></a>', $row['id']);
+			form_alternate_row('line' . $row['id'], true);
+			form_selectable_cell('<a class="linkEditMain" href="flowview_devices.php?&tab=listeners&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a>', $row['id']);
 			form_selectable_cell($row['folder'], $row['id']);
 			form_selectable_cell($nesting_arr[$row['nesting']], $row['id']);
 			form_selectable_cell($row['allowfrom'], $row['id']);
@@ -467,6 +459,6 @@ function show_devices () {
 
 	html_end_box(false);
 
-	draw_actions_dropdown($ds_actions);
+	draw_actions_dropdown($flow_actions);
 }
 
