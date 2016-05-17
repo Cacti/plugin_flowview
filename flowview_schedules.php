@@ -156,7 +156,7 @@ function actions_schedules () {
 			}
 		}
 
-		header('Location: flowview_schedules.php?tab=sched');
+		header('Location: flowview_schedules.php?tab=sched&header=false');
 		exit;
 	}
 
@@ -170,10 +170,10 @@ function actions_schedules () {
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$schedule_list .= '<li>' . db_fetch_cell('SELECT name FROM plugin_flowview_queries AS pfq
+			$schedule_list .= '<li>' . db_fetch_cell_prepared('SELECT name FROM plugin_flowview_queries AS pfq
 				INNER JOIN plugin_flowview_schedules AS pfs 
 				ON pfq.id=pfs.savedquery
-				WHERE pfs.id=' . $matches[1]) . '</li>';
+				WHERE pfs.id = ?', array($matches[1])) . '</li>';
 			$schedule_array[] = $matches[1];
 		}
 	}
@@ -320,6 +320,35 @@ function edit_schedule() {
 	);
 
 	html_end_box();
+
+	?>
+	<script type='text/javascript'>
+	var startOpen = false;
+
+	$(function() {
+		$('#start').after("<i id='startDate' class='calendar fa fa-calendar' title='Start Date Selector'></i>");
+		$('#startDate').click(function() {
+			if (startOpen) {
+				startOpen = false;
+				$('#start').datetimepicker('hide');
+			}else{
+				startOpen = true;
+				$('#start').datetimepicker('show');
+			}
+		});
+
+		$('#start').datetimepicker({
+			minuteGrid: 10,
+			stepMinute: 1,
+			showAnim: 'slideDown',
+			numberOfMonths: 1,
+			timeFormat: 'HH:mm',
+			dateFormat: 'yy-mm-dd',
+			showButtonPanel: false
+		});
+	});
+	</script>
+	<?php
 
 	form_save_button('flowview_schedules.php?tab=sched');
 }

@@ -87,8 +87,10 @@ function flowview_gettimespan() {
 
 function flowview_delete_filter() {
 	db_execute('DELETE FROM plugin_flowview_queries WHERE id=' . get_request_var_request('query'));
+	db_execute('DELETE FROM plugin_flowview_schedules WHERE savedquery=' . get_request_var_request('query'));
+
 	raise_message('flow_deleted');
-	header('Location: flowview.php?tab=filters');
+	header('Location: flowview.php?tab=filters&header=false');
 	exit;
 }
 
@@ -151,7 +153,7 @@ function flowview_display_form() {
 
 	form_start('flowview.php', 'flowview');
 
-	html_start_box('Flow Filter Constraints', '100%', '', '3', 'center', '');
+	html_start_box('Flow Filter Constraints  <span id="text"></span>', '100%', '', '3', 'center', '');
 
 	?>
 	<tr class='even center'>
@@ -461,7 +463,6 @@ function flowview_display_form() {
 	});
 
 	$('#date1, #date2').change(function() {
-		console.log($('#predefined_timespan option').length);
 		if ($('#predefined_timespan option').length == 28) {
 			$('#predefined_timespan').prepend("<option value='0' selected='selected'>Custom</option>");
 			$('#predefined_timespan').val('0');
@@ -586,6 +587,7 @@ function flowview_display_form() {
 			$('#action').attr('value', 'save');
 			$.post('flowview.php', $('#flowview').serialize(), function(data) {
 				if (data!='error') {
+					$('#text').show().text('Filter Saved').fadeOut(2000);
 					$('#query').append("<option value='"+data+"'>"+$('#new_query').val()+"</option>");
 					$('#query').attr('value', data);
 				}
@@ -606,18 +608,21 @@ function flowview_display_form() {
 				$.post('flowview.php', $('#flowview').serialize(), function(data) {
 					if (data!='error') {
 						loadPageNoHeader('flowview.php?tab=filters&header=false&action=loadquery&query='+data);
+						$('#text').show().text('Filter Settings Saved').fadeOut(2000);
 					}
 				});
 				$('#fdialog').dialog('close');
 			});
 		}else{
 			$('#action').attr('value', 'save');
-			$.post('flowview.php', $('#flowview').serialize());
+			$.post('flowview.php', $('#flowview').serialize(), function(data) {
+				$('#text').show().text('Filter Updated').fadeOut(2000);
+			});
 		}
 	});
 
 	$('#delete').click(function() {
-		loadPageNoHeader('flowview.php?action=delete&query='+$('#query').val());
+		loadPageNoHeader('flowview.php?header=false&action=delete&query='+$('#query').val());
 	});
 
 	$('#defaults').click(function() {
