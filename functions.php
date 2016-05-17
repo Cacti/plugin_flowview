@@ -36,8 +36,17 @@ function flowview_display_report() {
 			case 'flows':
 			case 'packets':
 				break;
+			case 'exclude':
+				if (isset_request_var('exclude')) {
+					get_filter_request_var('exclude');
+					break;
+				}else{
+					set_request_var($item, $value);
+					break;
+				}
 			default:
 				set_request_var($item, $value);
+				break;
 			}
 		}
 		set_request_var('action', 'view');
@@ -49,10 +58,13 @@ function flowview_display_report() {
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	$rname = '';
-	if ($stat_report > 0)
+	if ($stat_report > 0) {
 		$rname = $stat_report_array[$stat_report];
-	if ($print_report > 0)
+	}
+
+	if ($print_report > 0) {
 		$rname = $print_report_array[$print_report];
+	}
 
 	$current = '';
 	$error = flowview_check_fields();
@@ -138,7 +150,7 @@ function flowview_display_report() {
 							<label for='flows'>Flows Bar</label>
 						</td>
 						<td>
-							<input type='submit' name='clear' value='Clear' title='Clear Filters'>
+							<input type='button' id='clear' value='Clear' title='Clear Filters'>
 						</td>
 					</tr>
 				</table>
@@ -206,8 +218,12 @@ function flowview_display_report() {
 		}
 	});
 
+	$('#clear').click(function() {
+		loadPageNoHeader('flowview.php?header=false&action=view&clear=true&tab='+$('#tab').val());
+	});
+
 	$('#exclude').change(function() {
-		document.view.submit();
+		loadPageNoHeader('flowview.php?header=false&action=view&exclude='+$('#exclude').val()+'&tab='+$('#tab').val());
 	});
 			
 	if ($('#table').is(':checked') || <?php print (isset_request_var('stat_report') ? (get_nfilter_request_var('stat_report') == 99 ? 'true':'false'):'true');?>) {
@@ -377,10 +393,20 @@ function createfilter(&$sessionid='') {
 			case 'flows':
 			case 'packets':
 				break;
+			case 'exclude':
+				if (isset_request_var('exclude')) {
+					get_filter_request_var('exclude');
+					break;
+				}else{
+					set_request_var($item, $value);
+					break;
+				}
 			default:
 				set_request_var($item, $value);
+				break;
 			}
 		}	
+
 		if (time() < $flowdata['expires']) {
 			$output = $_SESSION['flowview_flows'][$sessionid]['rawdata'];
 		}
@@ -754,6 +780,7 @@ function parsestatoutput($output, $title, $sessionid) {
 	}else{
 		$j = 0;
 	}
+
 	$r = 0;
 	$data_array = array();
 	foreach ($output as $out) {
