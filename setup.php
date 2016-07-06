@@ -140,7 +140,7 @@ function flowview_page_bottom() {
 			</tr>
 			<tr>
 				<td></td>
-				<td align='right'>
+				<td class='right'>
 					<input id='qcancel' type='button' value='Cancel'>
 					<input id='qsave' type='button' value='Save'>
 				</td>
@@ -280,7 +280,6 @@ function flowview_setup_table () {
 	$data['columns'][] = array('name' => 'cutoffoctets', 'type' => 'varchar(8)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'resolve', 'type' => 'varchar(2)', 'NULL' => false);
 	$data['primary']   = 'id';
-	$data['keys'][]    = array('name' => 'name', 'columns' => 'name');
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - List of Saved Flow Queries';
 	api_plugin_db_table_create ('flowview', 'plugin_flowview_queries', $data);
