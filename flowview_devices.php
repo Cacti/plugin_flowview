@@ -382,6 +382,7 @@ function show_devices () {
 	$result = db_fetch_assoc($sql);
 
 	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices $sql_where");
+
 	html_start_box('FlowView Listeners', '100%', '', '4', 'center', 'flowview_devices.php?action=edit');
 
 	?>
@@ -412,14 +413,13 @@ function show_devices () {
 
 	html_end_box();
 
-	/* print checkbox form for validation */
-	print "<form name='chk' method='post' action='flowview_devices.php'>\n";
-
-	html_start_box('', '100%', '', '4', 'center', '');
-
 	$nav = html_nav_bar('flowview_devices.php', MAX_DISPLAY_PAGES, get_request_var('page'), $num_rows, $total_rows, 10, 'Listeners', 'page', 'main');
 
+	form_start('flowview_devices.php', 'chk');
+
 	print $nav;
+
+	html_start_box('', '100%', '', '4', 'center', '');
 
 	$display_array = array(
 		'name'        => array('Name', 'ASC'),
@@ -435,8 +435,6 @@ function show_devices () {
 
 	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
-	$c=0;
-	$i=0;
 	if (count($result)) {
 		foreach ($result as $row) {
 			form_alternate_row('line' . $row['id'], true);
@@ -453,12 +451,17 @@ function show_devices () {
 			form_end_row();
 		}
 	} else {
-		form_alternate_row();
-		print '<td colspan=10><center>No Devices</center></td></tr>';
+		print "<tr class='even'><td colspan=10><center>No Devices</center></td></tr>\n";
 	}
 
 	html_end_box(false);
 
+	if (count($result)) {
+		print $nav;
+	}
+
 	draw_actions_dropdown($flow_actions);
+
+	form_end();
 }
 

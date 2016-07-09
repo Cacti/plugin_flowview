@@ -412,7 +412,7 @@ function show_schedules () {
 					</td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
-							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default');?>
+							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default');?></option>
 							<?php
 							if (sizeof($item_rows)) {
 							foreach ($item_rows as $key => $value) {
@@ -459,14 +459,13 @@ function show_schedules () {
 		ON (pfs.savedquery=pfq.id) 
 		$sql_where");
 
-    /* print checkbox form for validation */
-	form_start('flowview_schedules.php', 'chk');
-
-	html_start_box('', '100%', '', '3', 'center', '');
-
 	$nav = html_nav_bar('flowview_schedules.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 5, 'Schedules', 'page', 'main');
 
+	form_start('flowview_schedules.php', 'chk');
+
     print $nav;
+
+	html_start_box('', '100%', '', '3', 'center', '');
 
 	$display_array = array(
 		'title'                 => array('Schedule Title', 'ASC'),
@@ -498,6 +497,12 @@ function show_schedules () {
 
 	html_end_box(false);
 
+	if (count($result)) {
+		print $nav;
+	}
+
 	draw_actions_dropdown($sched_actions);
+
+	form_end();
 }
 
