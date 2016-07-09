@@ -308,7 +308,7 @@ function display_tabs() {
 		}
 	}
 
-	print "<table cellspacing='0' cellpadding='0' border='0'><tr><td><div class='tabs' style='float:left;'><nav><ul>\n";
+	print "<div class='tabs' style='float:left;'><nav><ul>\n";
 	print "<li><a class='pic " . ($tab == 'filters' ? ' selected':'') . "' title='Flow Filters' href='flowview.php?tab=filters'>Filters</a></li>\n";
 
 	if (api_user_realm_auth('flowview_devices.php')) {
@@ -320,12 +320,13 @@ function display_tabs() {
 	}
 
 	if (isset($_SESSION['flowview_flows']) && is_array($_SESSION['flowview_flows']) && sizeof($_SESSION['flowview_flows'])) {
-	foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
-		if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
-		print "<li><a class='pic " . ($tab == $sessionid ? 'selected':'') . "' title='View Flow' href='flowview.php?action=view&tab=$sessionid'>" . $data['title'] . "</a><a class='pic' href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'><span class='fa fa-remove deviceDown'></span></a></li>\n";
+		foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
+			if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
+			print "<li><a class='pic " . ($tab == $sessionid ? 'selected':'') . "' title='View Flow' href='flowview.php?action=view&tab=$sessionid'>" . $data['title'] . "</a><a class='pic' href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'><span class='fa fa-remove deviceDown'></span></a></li>\n";
+		}
 	}
-	}
-	print "</ul></nav></div></td></tr></table>\n";
+
+	print "</ul></nav></div>\n";
 }
 
 function plugin_flowview_run_schedule($id) {
