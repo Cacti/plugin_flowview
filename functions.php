@@ -644,7 +644,7 @@ function parseSummaryReport($output) {
 				$parts = explode(":", $l);
 				$header = trim($parts[0]);
 				$value  = trim($parts[1]);
-				echo "<td><strong>" . $header . "</strong></td><td>" . number_format($value) . "</td>"; 
+				echo "<td><strong>" . $header . "</strong></td><td>" . number_format_i18n($value) . "</td>"; 
 				break;
 			case "inippsd":
 			case "inppfd":
@@ -817,7 +817,7 @@ function parsestatoutput($output, $title, $sessionid) {
 						}else{
 							$data_array[$i][$c] = $out2;
 						}
-						$o .= "<td style='text-align:" . get_column_alignment($columns[$c]) . "'>" . (get_column_alignment($columns[$c]) == 'right' ? (is_numeric($out2) ? number_format($out2):$out2):$out2) . "</td>";
+						$o .= "<td style='text-align:" . get_column_alignment($columns[$c]) . "'>" . (get_column_alignment($columns[$c]) == 'right' ? (is_numeric($out2) ? number_format_i18n($out2):$out2):$out2) . "</td>";
 						$c++;
 					}
 				}
