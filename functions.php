@@ -1340,7 +1340,7 @@ function flowview_check_fields () {
 		foreach ($a as $source_a) {
 			$s = explode('/',$source_a);
 			$source_ip = $s[0];
-			if (!ereg("^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$", $source_ip)) {
+			if (!preg_match("/^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $source_ip)) {
 				return "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')";
 			}
 			$subs = explode('.', $source_ip);
@@ -1349,8 +1349,8 @@ function flowview_check_fields () {
 			}
 			if (isset($s[1])) {
 				$subnet = $s[1];
-				if (!ereg("^[0-9]{1,3}$", $subnet)) {
-					if (!ereg("^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$", $subnet)) {
+				if (!preg_match("/^[0-9]{1,3}$/", $subnet)) {
+					if (!preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $subnet)) {
 						return "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
 					}
 					$subs = explode('.', $subnet);
@@ -1371,7 +1371,7 @@ function flowview_check_fields () {
 		foreach ($a as $dest_a) {
 			$s = explode('/',$dest_a);
 			$dest_ip = $s[0];
-			if (!ereg("^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$", $dest_ip)) {
+			if (!preg_match("/^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $dest_ip)) {
 				return "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')";
 			}
 			$subs = explode('.', $dest_ip);
@@ -1380,8 +1380,8 @@ function flowview_check_fields () {
 			}
 			if (isset($s[1])) {
 				$subnet = $s[1];
-				if (!ereg("^[0-9]{1,3}$", $subnet)) {
-					if (!ereg("^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$", $subnet)) {
+				if (!preg_match("/^[0-9]{1,3}$/", $subnet)) {
+					if (!preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $subnet)) {
 						return "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
 					}
 					$subs = explode('.', $subnet);
@@ -1478,7 +1478,7 @@ function flowview_check_fields () {
 		$tcp_flags = str_replace(' ', '', $tcp_flags);
 		$tcp_flag = explode(',', $tcp_flags);
 		foreach ($tcp_flag as $t) {
-			if (!ereg("^[-]{0,1}((0x[0-9a-zA-Z]{1,3})|([0-9a-zA-Z]{1,3}))(/[0-9a-zA-Z]{1,3}){0,1}$", $t)) {
+			if (!preg_match("/^[-]{0,1}((0x[0-9a-zA-Z]{1,3})|([0-9a-zA-Z]{1,3}))(/[0-9a-zA-Z]{1,3}){0,1}$/", $t)) {
 					return "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)";
 			}
 		}
