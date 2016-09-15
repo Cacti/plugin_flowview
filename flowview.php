@@ -157,7 +157,7 @@ function flowview_display_form() {
 
 	?>
 	<tr class='even center'>
-		<td style='text-align:center';>
+		<td style='text-align:center'>
 			<table class='filterTable' width='100%'>
 				<tr>
 					<td>
