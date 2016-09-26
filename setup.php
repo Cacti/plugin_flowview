@@ -54,10 +54,6 @@ function plugin_flowview_upgrade () {
 	return false;
 }
 
-function flowview_version () {
-	return plugin_flowview_version();
-}
-
 function flowview_check_upgrade () {
 	$current = plugin_flowview_version ();
 	$current = $current['version'];
@@ -78,15 +74,9 @@ function flowview_check_upgrade () {
 }
 
 function plugin_flowview_version () {
-	return array(
-		'name'     => 'flowview',
-		'version'  => '2.0',
-		'longname' => 'FlowView',
-		'author'   => 'Jimmy Conner',
-		'homepage' => 'http://cactiusers.org',
-		'email'    => 'jimmy@sqmail.org',
-		'url'      => 'http://cactiusers.org/cacti/versions.php'
-	);
+	global $config;
+	$info = parse_ini_file($config['base_path'] . '/plugins/flowview/INFO', true);
+	return $info['info'];
 }
 
 function flowview_config_arrays () {
