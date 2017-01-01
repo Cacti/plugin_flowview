@@ -23,7 +23,7 @@
 */
 
 function flowview_display_report() {
-	global $config, $colors;
+	global $config;
 
 	general_header();
 
@@ -102,7 +102,7 @@ function flowview_display_report() {
 	display_tabs();
 
 	if (isset_request_var('stat_report') && get_nfilter_request_var('stat_report') != 99) {
-		html_start_box("Report: $rname", '100%', '', '3', 'center', '');
+		html_start_box(__('Report: %s', $rname), '100%', '', '3', 'center', '');
 		?>
 		<tr class='even'>
 			<td>
@@ -110,47 +110,47 @@ function flowview_display_report() {
 				<table class='filterTable'>
 					<tr>
 						<td>
-							Exclude
+							<?php print __('Exclude');?>
 						</td>
 						<td>
 							<select name='exclude' id='exclude'>
-								<option value='0'<?php echo (get_request_var('exclude') == 0 ? ' selected':'');?>>None</option>
-								<option value='1'<?php echo (get_request_var('exclude') == 1 ? ' selected':'');?>>Top Sample</option>
-								<option value='2'<?php echo (get_request_var('exclude') == 2 ? ' selected':'');?>>Top 2 Samples</option>
-								<option value='3'<?php echo (get_request_var('exclude') == 3 ? ' selected':'');?>>Top 3 Samples</option>
-								<option value='4'<?php echo (get_request_var('exclude') == 4 ? ' selected':'');?>>Top 4 Samples</option>
-								<option value='5'<?php echo (get_request_var('exclude') == 5 ? ' selected':'');?>>Top 5 Samples</option>
+								<option value='0'<?php echo (get_request_var('exclude') == 0 ? ' selected':'');?>><?php print __('None');?></option>
+								<option value='1'<?php echo (get_request_var('exclude') == 1 ? ' selected':'');?>><?php print __('Top Sample');?></option>
+								<option value='2'<?php echo (get_request_var('exclude') == 2 ? ' selected':'');?>><?php print __('Top 2 Samples');?></option>
+								<option value='3'<?php echo (get_request_var('exclude') == 3 ? ' selected':'');?>><?php print __('Top 3 Samples');?></option>
+								<option value='4'<?php echo (get_request_var('exclude') == 4 ? ' selected':'');?>><?php print __('Top 4 Samples');?></option>
+								<option value='5'<?php echo (get_request_var('exclude') == 5 ? ' selected':'');?>><?php print __('Top 5 Samples');?></option>
 							</select>
 						</td>
 						<td>
-							Show/Hide
+							<?php print __('Show/Hide');?>
 						</td>
 						<td>
 							<input type='checkbox' name='table' id='table' <?php print (get_request_var('table') == 'true' || get_request_var('table') == 'on' ? 'checked':'');?>>
 						</td>
 						<td>
-							<label for='table'>Table</label>
+							<label for='table'><?php print __('Table');?></label>
 						</td>
 						<td>
 							<input type='checkbox' name='bytes' id='bytes' <?php print (get_request_var('bytes') == 'true' || get_request_var('bytes') == 'on' ? 'checked':'');?>>
 						</td>
 						<td>
-							<label for='bytes'>Bytes Bar</label>
+							<label for='bytes'><?php print __('Bytes Bar');?></label>
 						</td>
 						<td>
 							<input type='checkbox' name='packets' id='packets' <?php print (get_request_var('packets') == 'true' || get_request_var('packets') == 'on' ? 'checked':'');?>>
 						</td>
 						<td>
-							<label for='packets'>Packets Bar</label>
+							<label for='packets'><?php print __('Packets Bar');?></label>
 						</td>
 						<td>
 							<input type='checkbox' name='flows' id='flows' <?php print (get_request_var('flows') == 'true' || get_request_var('flows') == 'on' ? 'checked':'');?>>
 						</td>
 						<td>
-							<label for='flows'>Flows Bar</label>
+							<label for='flows'><?php print __('Flows Bar');?></label>
 						</td>
 						<td>
-							<input type='button' id='clear' value='Clear' title='Clear Filters'>
+							<input type='button' id='clear' value='<?php print __('Clear');?>' title='<?php print __('Clear Filters');?>'>
 						</td>
 					</tr>
 				</table>
@@ -309,19 +309,19 @@ function display_tabs() {
 	}
 
 	print "<div class='tabs' style='float:left;'><nav><ul>\n";
-	print "<li><a class='pic " . ($tab == 'filters' ? ' selected':'') . "' title='Flow Filters' href='flowview.php?tab=filters'>Filters</a></li>\n";
+	print "<li><a class='pic " . ($tab == 'filters' ? ' selected':'') . "' title='" . __('Flow Filters') . "' href='flowview.php?tab=filters'>" . __('Filters') . "</a></li>\n";
 
 	if (api_user_realm_auth('flowview_devices.php')) {
-		print "<li><a class='pic " . ($tab == 'listeners' ? ' selected':'') . "' title='Manage Listeners' href='flowview_devices.php?tab=listeners'>Listeners</a></li>\n";
+		print "<li><a class='pic " . ($tab == 'listeners' ? ' selected':'') . "' title='" . __('Manage Listeners') . "' href='flowview_devices.php?tab=listeners'>" . __('Listeners') . "</a></li>\n";
 	}
 
 	if (api_user_realm_auth('flowview_schedules.php')) {
-		print "<li><a class='pic " . ($tab == 'sched' ? ' selected':'') . "' title='Manage Schedules' href='flowview_schedules.php?tab=sched'>Schedules</a></li>\n";
+		print "<li><a class='pic " . ($tab == 'sched' ? ' selected':'') . "' title='" . __('Manage Schedules') . "' href='flowview_schedules.php?tab=sched'>" . __('Schedules') . "</a></li>\n";
 	}
 
 	if (isset($_SESSION['flowview_flows']) && is_array($_SESSION['flowview_flows']) && sizeof($_SESSION['flowview_flows'])) {
 		foreach($_SESSION['flowview_flows'] as $sessionid => $data) {
-			if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = "Unknown";
+			if (!isset($data['title'])) $_SESSION['flowview_flows'][$sessionid]['title'] = $data['title'] = __('Unknown');
 			print "<li><a class='pic " . ($tab == $sessionid ? 'selected':'') . "' title='View Flow' href='flowview.php?action=view&tab=$sessionid'>" . $data['title'] . "</a><a class='pic' href='flowview.php?action=killsession&session=$sessionid' title='Remove Flow Cache'><span class='fa fa-remove deviceDown'></span></a></li>\n";
 		}
 	}
@@ -337,7 +337,7 @@ function plugin_flowview_run_schedule($id) {
 
 	$fromname = read_config_option('settings_from_name');
 	if (strlen($fromname) < 1) {
-		$fromname = 'Cacti Flowview';
+		$fromname = __('Cacti Flowview');
 	}
 
 	$from = read_config_option('settings_from_email');
@@ -345,7 +345,7 @@ function plugin_flowview_run_schedule($id) {
 		$from = 'cacti@cactiusers.org';
 	}
 
-	$subject = 'Netflow - ' . $schedule['title'];
+	$subject = __('Netflow - %', $schedule['title']);
 
 	set_request_var('schedule', $id);
 	set_request_var('query', $schedule['savedquery']);
@@ -520,7 +520,7 @@ function createfilter(&$sessionid='') {
 			if (isset_request_var('query') && get_filter_request_var('query') > 0) {
 				$title = db_fetch_cell('SELECT name FROM plugin_flowview_queries WHERE id=' . get_request_var('query'));
 			}else{
-				$title = "New Flow";
+				$title = __('New Flow');
 			}
 		}
 
@@ -578,18 +578,18 @@ function createfilter(&$sessionid='') {
 
 function get_column_alignment($column) {
 	switch($column) {
-	case "Bytes":
-	case "Packets":
-	case "Flows":
-		return "right";
+	case __('Bytes'):
+	case __('Packets'):
+	case __('Flows'):
+		return 'right';
 		break;
 	default:
-		return "left";
+		return 'left';
 	}
 }
 
 function parseSummaryReport($output) {
-	global $config, $colors;
+	global $config;
 
 	$output = explode("\n", $output);
 
@@ -598,42 +598,42 @@ function parseSummaryReport($output) {
 	$inppfd    = false;
 	$inopfd    = false;
 	$inftd     = false;
-	$section   = "insummary";
+	$section   = 'insummary';
 	$i = 0; $j = 0;
 
 	/* do some output buffering */
 	ob_start();
 
-	html_start_box("<strong>Summary Statistics</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box(__('Summary Statistics'), '100%', '', '3', 'center', '');
 	if (sizeof($output)) {
 		foreach($output as $l) {
 			$l = trim($l);
-			if (substr($l,0,1) == "#" || strlen($l) == 0) continue;
+			if (substr($l,0,1) == '#' || strlen($l) == 0) continue;
 
-			if (substr_count($l, "IP packet size distribution")) {
+			if (substr_count($l, 'IP packet size distribution')) {
 				html_end_box(false);
-				html_start_box("<strong>IP Packet Size Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
-				$section = "inippsd";
+				html_start_box(__('IP Packet Size Distribution (%)'), '100%', '', '3', 'center', '');
+				$section = 'inippsd';
 				continue;
-			}elseif (substr_count($l, "Packets per flow distribution")) {
+			}elseif (substr_count($l, 'Packets per flow distribution')) {
 				html_end_box(false);
-				html_start_box("<strong>Packets per Flow Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
-				$section = "inppfd";
+				html_start_box(__('Packets per Flow Distribution (%)'), '100%', '', '3', 'center', '');
+				$section = 'inppfd';
 				continue;
-			}elseif (substr_count($l, "Octets per flow distribution")) {
+			}elseif (substr_count($l, 'Octets per flow distribution')) {
 				html_end_box(false);
-				html_start_box("<strong>Octets per Flow Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
-				$section = "inopfd";
+				html_start_box(__('Octets per Flow Distribution (%)'), '100%', '', '3', 'center', '');
+				$section = 'inopfd';
 				continue;
-			}elseif (substr_count($l, "Flow time distribution")) {
+			}elseif (substr_count($l, 'Flow time distribution')) {
 				html_end_box(false);
-				html_start_box("<strong>Flow Time Distribution (%)</strong>", "100%", $colors["header"], "3", "center", "");
-				$section = "inftd";
+				html_start_box(__('Flow Time Distribution (%)'), '100%', '', '3', 'center', '');
+				$section = 'inftd';
 				continue;
 			}
 
 			switch($section) {
-			case "insummary":
+			case 'insummary':
 				if ($i % 2 == 0) {
 					if ($i > 0) {
 						echo "</tr>";
@@ -641,17 +641,20 @@ function parseSummaryReport($output) {
 					echo "<tr class='" . flowview_altrow($j) . "' style='border:1px solid #FEFEFE;'>";
 					$j++;
 				}
-				$parts = explode(":", $l);
+
+				$parts  = explode(':', $l);
 				$header = trim($parts[0]);
 				$value  = trim($parts[1]);
-				echo "<td><strong>" . $header . "</strong></td><td>" . number_format_i18n($value) . "</td>"; 
+
+				echo '<td>' . $header . '</td><td>' . number_format_i18n($value) . '</td>'; 
+
 				break;
-			case "inippsd":
-			case "inppfd":
-			case "inopfd":
-			case "inftd":
+			case 'inippsd':
+			case 'inppfd':
+			case 'inopfd':
+			case 'inftd':
 				/* Headers have no decimals */
-				if (!substr_count($l, ".")) {
+				if (!substr_count($l, '.')) {
 					echo "<tr class='" . flowview_altrow($i) . "'>";
 					$parts = flowview_explode($l);
 					$k = 0;
@@ -676,7 +679,7 @@ function parseSummaryReport($output) {
 						}
 						$k++;
 					}
-					echo "</tr>";
+					echo '</tr>';
 				}
 				break;
 			}
@@ -693,7 +696,7 @@ function flowview_explode($string) {
 
 	if (!strlen($string)) return array();
 
-	$array=explode(" ", $string);
+	$array=explode(' ', $string);
 	foreach($array as $e) {
 		if ($e != '') {
 			$newa[] = $e;
@@ -704,15 +707,15 @@ function flowview_explode($string) {
 }
 
 function removeWhiteSpace($string) {
-	$string = str_replace("\t", " ", $string);
-	while (substr_count("  ",$string)) {
-		$string = str_replace("  ", " ", $string);
+	$string = str_replace("\t", ' ', $string);
+	while (substr_count('  ',$string)) {
+		$string = str_replace('  ', ' ', $string);
 	}
 	return $string;
 }
 
 function parsestatoutput($output, $title, $sessionid) {
-	global $config, $colors;
+	global $config;
 
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
@@ -727,7 +730,7 @@ function parsestatoutput($output, $title, $sessionid) {
 
 	/* cheasy way to get output */
 	ob_start();
-	html_start_box("<strong>" . $title . "</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box($title, '100%', '', '3', 'center', '');
 	$o  = ob_get_clean();
 
 	$o .= '<table id="sorttable" class="cactiTable" width="100%">
@@ -759,7 +762,7 @@ function parsestatoutput($output, $title, $sessionid) {
 		$o .= "<th class='tableSubHeaderColumn' " . ($column == "Bytes" ? "class=\"{sorter: 'bytes'} subHeaderColumn\"":"") . " style='text-align:" . get_column_alignment($column) . "'>$column</th>";
 		$x++;
 	}
-	$o .= "</tr></thead><tbody>";
+	$o .= '</tr></thead><tbody>';
 	$cut = 1;
 
 	$dns = '';
@@ -860,7 +863,6 @@ function plugin_flowview_formatoctet($size, $div = 1024) {
 }
 
 function flowview_altrow($i) {
-	global $colors;
 	if ($i/2 == intval($i/2)) {
 		return 'even';
 	} else {
@@ -870,7 +872,8 @@ function flowview_altrow($i) {
 
 
 function parseprintoutput($output, $title, $sessionid) {
-	global $config, $colors;
+	global $config;
+
 	include($config['base_path'] . '/plugins/flowview/variables.php');
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
@@ -881,11 +884,11 @@ function parseprintoutput($output, $title, $sessionid) {
 
 	/* cheasy way to get output */
 	ob_start();
-	html_start_box("<strong>" . $title . "</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box($title, "100%", '', "3", "center", "");
 	$o  = ob_get_clean();
 
-	$o = '<table width="100%" cellspacing=0 cellpadding=2 border=0 bgcolor="#' . $colors["header"] . '">
-		<tr bgcolor="#' . $colors["header_panel"] . '" class="textHeaderDark" align=center>';
+	$o = '<table width="100%" cellspacing=0 cellpadding=2 border=0>
+		<tr class="textHeaderDark" align=center>';
 
 	$clines     = $print_columns_array[$print_report][0];
 	$octect_col = $print_columns_array[$print_report][1];
@@ -1479,7 +1482,7 @@ function flowview_check_fields () {
 		$tcp_flag = explode(',', $tcp_flags);
 		foreach ($tcp_flag as $t) {
 			if (!preg_match("/^[-]{0,1}((0x[0-9a-zA-Z]{1,3})|([0-9a-zA-Z]{1,3}))(/[0-9a-zA-Z]{1,3}){0,1}$/", $t)) {
-					return "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)";
+					return __("Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)");
 			}
 		}
 	}
@@ -1495,11 +1498,11 @@ function flowview_check_fields () {
 }
 
 function flowview_draw_chart($type, $title) {
-	global $colors, $config;
+	global $config;
 	static $chartid = 0;
 
 	echo "<div id='wrapper" . $type . "' style='display:none;'>";
-	html_start_box("<strong>FlowView Chart for " . $title . " Type is " . ucfirst($type) . "</strong>", "100%", $colors["header"], "3", "center", "");
+	html_start_box(__('FlowView Chart for %s Type is %s', $title, ucfirst($type)), '100%', '', '3', 'center', '');
 	echo "<tr style='background-color:#F9F9F9;'><td align='center'>";
 	echo "<div id='chart$type'></div>";
 	echo "</td></tr>";
@@ -1526,10 +1529,10 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 		$suffix = substr($ip,$slashpos);
 		$ip = substr($ip, 0,$slashpos);
 	}else{
-		$suffix = "";
+		$suffix = '';
 	}
 
-	if (read_config_option("flowview_dns_method") == 1) {
+	if (read_config_option('flowview_dns_method') == 1) {
 		/* random transaction number (for routers etc to get the reply back) */
 		$data = rand(10, 99);
 
@@ -1540,10 +1543,10 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 		$data .= "\1\0\0\1\0\0\0\0\0\0";
 
 		/* split IP into octets */
-		$octets = explode(".", $ip);
+		$octets = explode('.', $ip);
 
 		/* perform a quick error check */
-		if (count($octets) != 4) return "ERROR";
+		if (count($octets) != 4) return 'ERROR';
 
 		/* needs a byte to indicate the length of each segment of the request */
 		for ($x=3; $x>=0; $x--) {
@@ -1555,7 +1558,7 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 			case 3: // 3 byte long segment
 				$data .= "\3"; break;
 			default: // segment is too big, invalid IP
-				return "ERROR";
+				return 'ERROR';
 			}
 
 			/* and the segment itself */
@@ -1727,7 +1730,7 @@ function flowview_viewtable() {
  *  from the chart page to operate corectly.
  */
 function flowview_viewchart() {
-	global $colors, $config;
+	global $config;
 
 	include($config['base_path'] . '/plugins/flowview/lib/open-flash-chart-object.php');
 	include($config['base_path'] . '/plugins/flowview/lib/open-flash-chart.php');

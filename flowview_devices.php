@@ -26,49 +26,49 @@ chdir('../../');
 include('./include/auth.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
-$flow_actions = array(1 => 'Delete');
+$flow_actions = array(1 => __('Delete'));
 
 set_default_action();
 
 $expire_arr = array(
-	2   => '2 Days',
-	5   => '5 Days',
-	7   => '1 Week',
-	14  => '2 Weeks',
-	30  => '1 Month',
-	61  => '2 Months',
-	92  => '3 Months',
-	183 => '6 Months',
-	365 => '1 Year',
+	2   => __('%d Days', 2),
+	5   => __('%d Days', 5),
+	7   => __('%d Week', 1),
+	14  => __('%d Weeks', 2),
+	30  => __('%d Month', 1),
+	61  => __('%d Months', 2),
+	92  => __('%d Months', 3),
+	183 => __('%d Months', 6),
+	365 => __('%d Year', 1),
 );
 
 $rotation_arr = array(
-	1439 => '1 Minute',
-	287 => '5 Minutes',
-	144 => '10 Minutes',
-	95 => '15 Minutes',
+	1439 => __('%d Minute', 1),
+	287  => __('%d Minutes', 5),
+	144  => __('%d Minutes', 10),
+	95   => __('%d Minutes', 15),
 );
 
 $version_arr = array(
-	'1'    => 'NetFlow version 1',
-	'5'    => 'NetFlow version 5',
-	'6'    => 'NetFlow version 6',
-	'7'    => 'NetFlow version 7',
-	'8.1'  => 'NetFlow AS Aggregation',
-	'8.2'  => 'NetFlow Proto Port Aggregation',
-	'8.3'  => 'NetFlow Source Prefix Aggregation',
-	'8.4'  => 'NetFlow Destination Prefix Aggregation',
-	'8.5'  => 'NetFlow Prefix Aggregation',
-	'8.6'  => 'NetFlow Destination',
-	'8.7'  => 'NetFlow Source Destination',
-	'8.8'  => 'NetFlow Full Flow',
-	'8.9'  => 'NetFlow ToS AS Aggregation',
-	'8.10' => 'NetFlow ToS Proto Port Aggregation',
-	'8.11' => 'NetFlow ToS Source Prefix Aggregation',
-	'8.12' => 'NetFlow ToS Destination Prefix Aggregation',
-	'8.13' => 'NetFlow ToS Prefix Aggregation',
-	'8.14' => 'NetFlow ToS Prefix Port Aggregation',
-	'1005' => 'Flow-Tools tagged version 5',
+	'1'    => __('NetFlow version 1'),
+	'5'    => __('NetFlow version 5'),
+	'6'    => __('NetFlow version 6'),
+	'7'    => __('NetFlow version 7'),
+	'8.1'  => __('NetFlow AS Aggregation'),
+	'8.2'  => __('NetFlow Proto Port Aggregation'),
+	'8.3'  => __('NetFlow Source Prefix Aggregation'),
+	'8.4'  => __('NetFlow Destination Prefix Aggregation'),
+	'8.5'  => __('NetFlow Prefix Aggregation'),
+	'8.6'  => __('NetFlow Destination'),
+	'8.7'  => __('NetFlow Source Destination'),
+	'8.8'  => __('NetFlow Full Flow'),
+	'8.9'  => __('NetFlow ToS AS Aggregation'),
+	'8.10' => __('NetFlow ToS Proto Port Aggregation'),
+	'8.11' => __('NetFlow ToS Source Prefix Aggregation'),
+	'8.12' => __('NetFlow ToS Destination Prefix Aggregation'),
+	'8.13' => __('NetFlow ToS Prefix Aggregation'),
+	'8.14' => __('NetFlow ToS Prefix Port Aggregation'),
+	'1005' => __('Flow-Tools tagged version 5'),
 );
 
 $nesting_arr = array(
@@ -81,7 +81,7 @@ $nesting_arr = array(
 );
 
 $compression_arr = array(
-	0 => '0 (Disabled)',
+	0 => __('0 (Disabled)'),
 	1 => '1',
 	2 => '2',
 	3 => '3',
@@ -90,30 +90,28 @@ $compression_arr = array(
 	6 => '6',
 	7 => '7',
 	8 => '8',
-	9 => '9 (Highest)'
+	9 => __('9 (Highest)')
 );
 
 $device_edit = array(
 	'name' => array(
 		'method' => 'textbox',
-		'friendly_name' => 'Device Name',
-		'description' => 'Name of the device to be displayed.',
+		'friendly_name' => __('Device Name'),
+		'description' => __('Name of the device to be displayed.'),
 		'value' => '|arg1:name|',
 		'max_length' => '64',
 	),
 	'folder' => array(
 		'method' => 'textbox',
-		'friendly_name' => 'Directory',
-		'description' => 'Directory that this devices flows are in.  This directory must be in the Flow Directory path.
-			Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to
-			to use it will have to be resaved.',
+		'friendly_name' => __('Directory'),
+		'description' => __('Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved.'),
 		'value' => '|arg1:folder|',
 		'max_length' => '64',
 	),
 	'allowfrom' => array(
 		'method' => 'textbox',
-		'friendly_name' => 'Allowed Host',
-		'description' => 'IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host.',
+		'friendly_name' => __('Allowed Host'),
+		'description' => __('IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host.'),
 		'value' => '|arg1:allowfrom|',
 		'default' => '0',
 		'max_length' => '64',
@@ -121,48 +119,48 @@ $device_edit = array(
 	),
 	'port' => array(
 		'method' => 'textbox',
-		'friendly_name' => 'Port',
-		'description' => 'Port this collector will listen on.',
+		'friendly_name' => __('Port'),
+		'description' => __('Port this collector will listen on.'),
 		'value' => '|arg1:port|',
 		'default' => '2055',
 		'max_length' => '5',
 		'size' => '30'
 	),
 	'nesting' => array(
-		'friendly_name' => 'Nesting',
-		'description' => 'Directory Structure that will be used for the flows for this device.',
+		'friendly_name' => __('Nesting'),
+		'description' => __('Directory Structure that will be used for the flows for this device.'),
 		'value' => '|arg1:nesting|',
 		'method' => 'drop_array',
 		'default' => '-1',
 		'array' => $nesting_arr
 	),
 	'version' => array(
-		'friendly_name' => 'Netflow Version',
-		'description' => 'Netflow Protocol version used by the device.',
+		'friendly_name' => __('Netflow Version'),
+		'description' => __('Netflow Protocol version used by the device.'),
 		'value' => '|arg1:version|',
 		'method' => 'drop_array',
 		'default' => '5',
 		'array' => $version_arr
 	),
 	'compression' => array(
-		'friendly_name' => 'Compression Level',
-		'description' => 'Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results.',
+		'friendly_name' => __('Compression Level'),
+		'description' => __('Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results.'),
 		'value' => '|arg1:compression|',
 		'method' => 'drop_array',
 		'default' => '0',
 		'array' => $compression_arr,
 	),
 	'rotation' => array(
-		'friendly_name' => 'Rotation',
-		'description' => 'How often to create a new Flow File.',
+		'friendly_name' => __('Rotation'),
+		'description' => __('How often to create a new Flow File.'),
 		'value' => '|arg1:rotation|',
 		'method' => 'drop_array',
 		'default' => '1439',
 		'array' => $rotation_arr
 	),
 	'expire' => array(
-		'friendly_name' => 'Expiration',
-		'description' => 'How long to keep your flow files.',
+		'friendly_name' => __('Expiration'),
+		'description' => __('How long to keep your flow files.'),
 		'value' => '|arg1:expire|',
 		'method' => 'drop_array',
 		'default' => '0',
@@ -240,18 +238,18 @@ function actions_devices () {
 	if (get_nfilter_request_var('drp_action') == '1') { /* Delete */
 		print "<tr>
 			<td colspan='2' class='textArea'>
-				<p>Click 'Continue' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service.</p>
-				<p>Also, remember to remove any left over files from your Net-Flow Capture location.</p>
+				<p>" . __('Click \'Continue\' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service.') . "</p>
+				<p>" . __('Also, remember to remove any left over files from your Net-Flow Capture location.') . "</p>
 				<p><ul>$device_list</ul></p>
 			</td>
 		</tr>\n";
 	}
 
 	if (!isset($device_array)) {
-		print "<tr><td class='even'><span class='textError'>You must select at least one device.</span></td></tr>\n";
+		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one device.') . "</span></td></tr>\n";
 		$save_html = '';
 	}else{
-		$save_html = "<input type='submit' value='Continue'>";
+		$save_html = "<input type='submit' value='" . __('Continue') . "'>";
 	}
 
 	print "<tr>
@@ -259,7 +257,7 @@ function actions_devices () {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_filter_request_var('drp_action') . "'>
-			<input type='button' onClick='javascript:document.location=\"flowview_devices.php\"' value='Cancel'>
+			<input type='button' onClick='javascript:document.location=\"flowview_devices.php\"' value='" . __('Cancel') . "'>
 			$save_html
 		</td>
 	</tr>\n";
@@ -326,7 +324,7 @@ function edit_devices () {
 
 	form_start('flowview_devices.php', 'chk');
 
-	html_start_box("Device: $header_label", '100%', '', '3', 'center', '');
+	html_start_box(__("Device: %s", $header_label), '100%', '', '3', 'center', '');
 
 	draw_edit_form(array(
 		'config' => array('no_form_tag' => true),
@@ -383,7 +381,7 @@ function show_devices () {
 
 	$total_rows = db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices $sql_where");
 
-	html_start_box('FlowView Listeners', '100%', '', '4', 'center', 'flowview_devices.php?action=edit');
+	html_start_box(__('FlowView Listeners'), '100%', '', '4', 'center', 'flowview_devices.php?action=edit');
 
 	?>
 	<tr class='even'>
@@ -392,16 +390,16 @@ function show_devices () {
 			<table class='fitlerTable'>
 				<tr>
 					<td>
-						Search
+						<?php print __('Search');?>
 					</td>
 					<td>
 						<input type='text' id='filter' size='40' value='<?php print htmlspecialchars(get_request_var('filter'));?>'>
 					</td>
 					<td>
-						<input id='refresh' type='button' value='Go' title='Set/Refresh Filters'>
+						<input id='refresh' type='button' value='Go' title='<?php print __('Set/Refresh Filters');?>'>
 					</td>
 					<td>
-						<input id='clear' type='button' name='clear' value='Clear' title='Clear Filters'>
+						<input id='clear' type='button' name='clear' value='<?php print __('Clear');?>' title='<?php print __('Clear Filters');?>'>
 					</td>
 				</tr>
 			</table>
@@ -413,7 +411,7 @@ function show_devices () {
 
 	html_end_box();
 
-	$nav = html_nav_bar('flowview_devices.php', MAX_DISPLAY_PAGES, get_request_var('page'), $num_rows, $total_rows, 10, 'Listeners', 'page', 'main');
+	$nav = html_nav_bar('flowview_devices.php', MAX_DISPLAY_PAGES, get_request_var('page'), $num_rows, $total_rows, 10, __('Listeners'), 'page', 'main');
 
 	form_start('flowview_devices.php', 'chk');
 
@@ -422,15 +420,15 @@ function show_devices () {
 	html_start_box('', '100%', '', '4', 'center', '');
 
 	$display_array = array(
-		'name'        => array('Name', 'ASC'),
-		'folder'      => array('Directory', 'ASC'),
-		'nexting'     => array('Nesting', 'ASC'),
-		'allowfrom'   => array('Allowed From', 'ASC'),
-		'port'        => array('Port', 'ASC'),
-		'version'     => array('Version', 'ASC'),
-		'compression' => array('Compression', 'ASC'),
-		'rotation'    => array('Rotation', 'ASC'),
-		'expire'      => array('Expire', 'ASC')
+		'name'        => array(__('Name'), 'ASC'),
+		'folder'      => array(__('Directory'), 'ASC'),
+		'nexting'     => array(__('Nesting'), 'ASC'),
+		'allowfrom'   => array(__('Allowed From'), 'ASC'),
+		'port'        => array(__('Port'), 'ASC'),
+		'version'     => array(__('Version'), 'ASC'),
+		'compression' => array(__('Compression'), 'ASC'),
+		'rotation'    => array(__('Rotation'), 'ASC'),
+		'expire'      => array(__('Expire'), 'ASC')
 	);
 
 	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
@@ -451,7 +449,7 @@ function show_devices () {
 			form_end_row();
 		}
 	} else {
-		print "<tr class='even'><td colspan=10><center>No Devices</center></td></tr>\n";
+		print "<tr class='even'><td colspan=10><center>" . __('No Devices') . "</center></td></tr>\n";
 	}
 
 	html_end_box(false);

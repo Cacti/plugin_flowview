@@ -23,47 +23,47 @@
 */
 
 $stat_report_array = array(
-	0  => 'Statistics Reports',
-	99 => 'Summary',
-	5  => 'UDP/TCP Destination Port',
-	6  => 'UDP/TCP Source Port',
-	7  => 'UDP/TCP Port',
-	8  => 'Destination IP',
-	9  => 'Source IP',
-	10 => 'Source/Destination IP',
-	11 => 'Source or Destination IP',
-	12 => 'IP Protocol',
-	17 => 'Input Interface',
-	18 => 'Output Interface',
-	23 => 'Input/Output Interface',
-	19 => 'Source AS',
-	20 => 'Destination AS',
-	21 => 'Source/Destination AS',
-	22 => 'IP ToS',
-	24 => 'Source Prefix',
-	25 => 'Destination Prefix',
-	26 => 'Source/Destination Prefix'
+	0  => __('Statistics Reports'),
+	99 => __('Summary'),
+	5  => __('UDP/TCP Destination Port'),
+	6  => __('UDP/TCP Source Port'),
+	7  => __('UDP/TCP Port'),
+	8  => __('Destination IP'),
+	9  => __('Source IP'),
+	10 => __('Source/Destination IP'),
+	11 => __('Source or Destination IP'),
+	12 => __('IP Protocol'),
+	17 => __('Input Interface'),
+	18 => __('Output Interface'),
+	23 => __('Input/Output Interface'),
+	19 => __('Source AS'),
+	20 => __('Destination AS'),
+	21 => __('Source/Destination AS'),
+	22 => __('IP ToS'),
+	24 => __('Source Prefix'),
+	25 => __('Destination Prefix'),
+	26 => __('Source/Destination Prefix')
 );
 
 $print_report_array = array(
-	 0  => 'Print Reports',
-	 1  => 'Flow Times',
-	 4  => 'AS Numbers',
-	 5  => '132 Columns',
-	 9  => '1 Line with Tags',
-	 10 => 'AS Aggregation',
-	 11 => 'Protocol Port Aggregation',
-	 12 => 'Source Prefix Aggregation',
-	 13 => 'Destination Prefix Aggregation',
-	 14 => 'Prefix Aggregation',
-	 24 => 'Full (Catalyst)'
+	 0  => __('Print Reports'),
+	 1  => __('Flow Times'),
+	 4  => __('AS Numbers'),
+	 5  => __('132 Columns'),
+	 9  => __('1 Line with Tags'),
+	 10 => __('AS Aggregation'),
+	 11 => __('Protocol Port Aggregation'),
+	 12 => __('Source Prefix Aggregation'),
+	 13 => __('Destination Prefix Aggregation'),
+	 14 => __('Prefix Aggregation'),
+	 24 => __('Full (Catalyst)')
 );
 
 $flow_select_array = array(
-	  1 => 'Any Part in Specified Time Span',
-	  2 => 'End Time in Specified Time Span',
-	  3 => 'Start Time in Specified Time Span',
-	  4 => 'Entirely in Specified Time Span'
+	  1 => __('Any Part in Specified Time Span'),
+	  2 => __('End Time in Specified Time Span'),
+	  3 => __('Start Time in Specified Time Span'),
+	  4 => __('Entirely in Specified Time Span')
 );
 
 $ip_protocols_array = array(
@@ -132,8 +132,8 @@ $ip_protocols_array = array(
 );
 
 $resolve_addresses_array = array (
-	'Y' => 'Yes',
-	'N' => 'No'
+	'Y' => __('Yes'),
+	'N' => __('No')
 );
 
 $devices_arr = db_fetch_assoc('SELECT folder, name FROM plugin_flowview_devices ORDER BY name');
@@ -163,7 +163,7 @@ $query_name_field = array(
 	'default' => 0,
 	'description' => '',
 	'value' => (isset_request_var('query') ? get_filter_request_var('query') : 0),
-	'none_value' => 'None',
+	'none_value' => __('None'),
 	'on_change' => 'applyFilter()',
 	'sql' => 'SELECT id, name FROM plugin_flowview_queries ORDER BY name'
 );
@@ -175,7 +175,7 @@ $device_name_field = array(
 	'default' => 0,
 	'description' => '',
 	'value' => (isset_request_var('device_name') ? get_nfilter_request_var('device_name') : $ddevice),
-	'none_value' => 'None',
+	'none_value' => __('None'),
 	'array' => $devices
 );
 
@@ -186,15 +186,15 @@ $cutoff_lines_field = array(
 	'description' => '',
 	'value' => (isset_request_var('cutoff_lines') ? get_nfilter_request_var('cutoff_lines') : 0),
 	'array' => array(
-		'999999' => 'All',
-		'5'  => 'Top 5', 
-		'10'  => 'Top 10', 
-		'20'  => 'Top 20', 
-		'30'  => 'Top 30', 
-		'40'  => 'Top 40', 
-		'50'  => 'Top 50', 
-		'100' => 'Top 100', 
-		'200' => 'Top 200')
+		'999999' => __('All'),
+		'5'   => __('Top %d', 5), 
+		'10'  => __('Top %d', 10), 
+		'20'  => __('Top %d', 20), 
+		'30'  => __('Top %d', 30), 
+		'40'  => __('Top %d', 40), 
+		'50'  => __('Top %d', 50), 
+		'100' => __('Top %d', 100), 
+		'200' => __('Top %d', 200))
 );
 
 $cutoff_octets_field = array(
@@ -204,20 +204,20 @@ $cutoff_octets_field = array(
 	'description' => '',
 	'value' => (isset_request_var('cutoff_octets') ? get_nfilter_request_var('cutoff_octets'):''),
 	'array' => array(
-		'0'         => 'No Limit', 
-		'1024'      => '1K   Bytes', 
-		'10240'     => '10K  Bytes',
-		'20480'     => '20K  Bytes',
-		'102400'    => '100K Bytes',
-		'512000'    => '500K Bytes',
-		'1024000'   => '1M   Bytes',
-		'10240000'  => '10M  Bytes',
-		'20480000'  => '20M  Bytes',
-		'51200000'  => '50M  Bytes',
-		'102400000' => '100M Bytes',
-		'204800000' => '200M Bytes',
-		'512000000' => '500M Bytes',
-		'1024000000'=> '1G   Bytes')
+		'0'         => __('No Limit'), 
+		'1024'      => __('%s Bytes', '1K'), 
+		'10240'     => __('%s Bytes', '10K'),
+		'20480'     => __('%s Bytes', '20K'),
+		'102400'    => __('%s Bytes', '100K'),
+		'512000'    => __('%s Bytes', '500K'),
+		'1024000'   => __('%s Bytes', '1M'),
+		'10240000'  => __('%s Bytes', '10M'),
+		'20480000'  => __('%s Bytes', '20M'),
+		'51200000'  => __('%s Bytes', '50M'),
+		'102400000' => __('%s Bytes', '100M'),
+		'204800000' => __('%s Bytes', '200M'),
+		'512000000' => __('%s Bytes', '500M'),
+		'1024000000'=> __('%s Bytes', '1G'))
 );
 
 $ip_protocol_field = array(
