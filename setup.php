@@ -68,7 +68,7 @@ function flowview_check_upgrade () {
 	db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
 
 	/* Set the new version */
-	db_execute("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', '$current')");
+	db_execute_prepared("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', ?)", array($current));
 
 	db_execute('ALTER TABLE plugin_flowview_devices ENGINE=InnoDB');
 }

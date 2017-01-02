@@ -166,7 +166,7 @@ function flowview_display_report() {
 		flowview_draw_chart('packets', $rname);
 		flowview_draw_chart('flows', $rname);
 	}elseif (isset_request_var('print_report') && get_nfilter_request_var('print_report') > 0) {
-		html_start_box("Report: $rname", '100%', '', '3', 'center', '');
+		html_start_box(__('Report: %s', $rname), '100%', '', '3', 'center', '');
 	}
 
 	echo "<div id='flowcontent'>";
@@ -332,8 +332,15 @@ function display_tabs() {
 function plugin_flowview_run_schedule($id) {
 	global $config;
 
-	$schedule = db_fetch_row("SELECT * FROM plugin_flowview_schedules WHERE id=$id");
-	$query    = db_fetch_row("SELECT * FROM plugin_flowview_queries WHERE id=" . $schedule['savedquery']);
+	$schedule = db_fetch_row_prepared('SELECT * 
+		FROM plugin_flowview_schedules 
+		WHERE id = ?', 
+		array($id));
+
+	$query    = db_fetch_row_prepared('SELECT * 
+		FROM plugin_flowview_queries 
+		WHERE id = ?', 
+		array($schedule['savedquery']));
 
 	$fromname = read_config_option('settings_from_name');
 	if (strlen($fromname) < 1) {
@@ -356,10 +363,10 @@ function plugin_flowview_run_schedule($id) {
 	$message  = "<body style='margin:10px;'>";
 	$message .= "<style type='text/css'>\n";
 	$message .= file_get_contents($config['base_path'] . '/include/main.css');
-	$message .= "</style>";
+	$message .= '</style>';
 	$sessionid = -1;
 	$message .= createfilter($sessionid);
-	$message .= "</body>";
+	$message .= '</body>';
 
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
 }
@@ -441,7 +448,10 @@ function createfilter(&$sessionid='') {
 		/* determine the location for the netflow reports */
 		$pathstructure = '';
 		if ($device != '') {
-			$pathstructure = db_fetch_cell("SELECT nesting FROM plugin_flowview_devices WHERE folder = '$device'");
+			$pathstructure = db_fetch_cell_prepared('SELECT nesting 
+				FROM plugin_flowview_devices 
+				WHERE folder = ?', 
+				array($device));
 		}
 
 		if ($pathstructure == '') {
@@ -455,7 +465,7 @@ function createfilter(&$sessionid='') {
 		$start = strtotime($date1);
 		$end   = strtotime($date2);
 
-		$flow_cat_command     = "$flowbin/flow-cat -t \"" . date("m/d/Y H:i:s", $start) . '" -T "' . date("m/d/Y H:i:s", $end) . '" ';
+		$flow_cat_command     = "$flowbin/flow-cat -t \"" . date('m/d/Y H:i:s', $start) . '" -T "' . date('m/d/Y H:i:s', $end) . '" ';
 		$flow_cat_command    .= getfolderpath($pathstructure, $device, $start, $end);
 		$flownfilter_command  = "$flowbin/flow-nfilter -f $filterfile -FFlowViewer_filter";
 
@@ -884,7 +894,7 @@ function parseprintoutput($output, $title, $sessionid) {
 
 	/* cheasy way to get output */
 	ob_start();
-	html_start_box($title, "100%", '', "3", "center", "");
+	html_start_box($title, '100%', '', '3', 'center', '');
 	$o  = ob_get_clean();
 
 	$o = '<table width="100%" cellspacing=0 cellpadding=2 border=0>
@@ -1002,7 +1012,10 @@ function flowview_translate_port($port, $is_hex) {
 		$port = hexdec($port);
 	}
 
-	$service = db_fetch_cell("SELECT service FROM plugin_flowview_ports WHERE port=$port LIMIT 1");
+	$service = db_fetch_cell_prepared('SELECT service 
+		FROM plugin_flowview_ports 
+		WHERE port = ? 
+		LIMIT 1', array($port));
 
 	if ($service != '') {
 		return "$service ($port)";
@@ -1283,10 +1296,10 @@ function getfolderpath($n, $device, $start, $end) {
  	}
 
 	while ($start < $end) {
-		$y = date("Y", $start);
-		$m = date("m", $start);
-		$d = date("d", $start);
-		$h = date("G", $start);
+		$y = date('Y', $start);
+		$m = date('m', $start);
+		$d = date('d', $start);
+		$h = date('G', $start);
 		$folderpath .= $dir;
 		switch ($n) {
 			case -2:
@@ -1330,39 +1343,39 @@ function flowview_check_fields () {
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	if ($stat_report == 0 && $print_report == 0)
-		return "You must select a Statistics Report or Printed Report!";
+		return __('You must select a Statistics Report or Printed Report!');
 
 	if ($stat_report > 0 && $print_report > 0)
-		return "You must select only a Statistics Report or a Printed Report (not both)!";
+		return __('You must select only a Statistics Report or a Printed Report (not both)!');
 
 	if (strtotime($date1) > strtotime($date2))
-		return "Invalid dates, End Date/Time is earlier than Start Date/Time!";
+		return __('Invalid dates, End Date/Time is earlier than Start Date/Time!');
 
 	if ($source_address != '') {
 		$a = explode(',',$source_address);
 		foreach ($a as $source_a) {
 			$s = explode('/',$source_a);
 			$source_ip = $s[0];
-			if (!preg_match("/^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $source_ip)) {
-				return "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')";
+			if (!preg_match('/^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $source_ip)) {
+				return __('Invalid IP for the Source Address!<br>(Must be in the form of \'192.168.0.1\')');
 			}
 			$subs = explode('.', $source_ip);
 			if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
-				return "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')";
+				return __('Invalid IP for the Source Address!<br>(Must be in the form of \'192.168.0.1\')');
 			}
 			if (isset($s[1])) {
 				$subnet = $s[1];
-				if (!preg_match("/^[0-9]{1,3}$/", $subnet)) {
-					if (!preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $subnet)) {
-						return "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
+				if (!preg_match('/^[0-9]{1,3}$/', $subnet)) {
+					if (!preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $subnet)) {
+						return __('Invalid subnet for the Source Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')');
 					}
 					$subs = explode('.', $subnet);
 					if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
-						return "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
+						return __('Invalid subnet for the Source Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')');
 					}
 				} else {
 					if ($subnet < 0 || $subnet > 32) {
-						return "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
+						return __('Invalid subnet for the Source Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')');
 					}
 				}
 			}
@@ -1374,26 +1387,26 @@ function flowview_check_fields () {
 		foreach ($a as $dest_a) {
 			$s = explode('/',$dest_a);
 			$dest_ip = $s[0];
-			if (!preg_match("/^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $dest_ip)) {
-				return "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')";
+			if (!preg_match('/^[-]{0,1}[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $dest_ip)) {
+				return __('Invalid IP for the Destination Address!<br>(Must be in the form of \'192.168.0.1\')');
 			}
 			$subs = explode('.', $dest_ip);
 			if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
-				return "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')";
+				return __('Invalid IP for the Destination Address!<br>(Must be in the form of \'192.168.0.1\')');
 			}
 			if (isset($s[1])) {
 				$subnet = $s[1];
-				if (!preg_match("/^[0-9]{1,3}$/", $subnet)) {
-					if (!preg_match("/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $subnet)) {
-						return "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
+				if (!preg_match('/^[0-9]{1,3}$/', $subnet)) {
+					if (!preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $subnet)) {
+						return __('Invalid subnet for the Destination Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')');
 					}
 					$subs = explode('.', $subnet);
 					if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
-						return "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
+						return __('Invalid subnet for the Destination Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')');
 					}
 				} else {
 					if ($subnet < 0 || $subnet > 32) {
-						return "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')";
+						return __('Invalid subnet for the Destination Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')');
 					}
 				}
 			}
@@ -1407,7 +1420,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 999 || !is_numeric($s))
-					return "Invalid value for Source Interface!";
+					return __('Invalid value for Source Interface!');
 		}
 	}
 
@@ -1418,7 +1431,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 65535 || $s < 0 || !is_numeric($s))
-					return "Invalid value for Source Port! (0 - 65535)";
+					return __('Invalid value for Source Port! (0 - 65535)');
 		}
 	}
 
@@ -1429,7 +1442,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 65535 || $s < 0 || !is_numeric($s))
-					return "Invalid value for Source AS! (0 - 65535)";
+					return __('Invalid value for Source AS! (0 - 65535)');
 		}
 	}
 
@@ -1440,7 +1453,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 999 || !is_numeric($s))
-					return "Invalid value for Destination Interface!";
+					return __('Invalid value for Destination Interface!');
 		}
 	}
 
@@ -1451,7 +1464,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 65535 || $s < 0 || !is_numeric($s))
-					return "Invalid value for Destination Port! (0 - 65535)";
+					return __('Invalid value for Destination Port! (0 - 65535)');
 		}
 	}
 
@@ -1462,7 +1475,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 65535 || $s < 0 || !is_numeric($s))
-					return "Invalid value for Destination AS! (0 - 65535)";
+					return __('Invalid value for Destination AS! (0 - 65535)');
 		}
 	}
 
@@ -1473,7 +1486,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 255 || $s < 0 || !is_numeric($s))
-					return "Invalid value for Portocol! (1 - 255)";
+					return __('Invalid value for Portocol! (1 - 255)');
 		}
 	}
 
@@ -1482,18 +1495,18 @@ function flowview_check_fields () {
 		$tcp_flag = explode(',', $tcp_flags);
 		foreach ($tcp_flag as $t) {
 			if (!preg_match("/^[-]{0,1}((0x[0-9a-zA-Z]{1,3})|([0-9a-zA-Z]{1,3}))(/[0-9a-zA-Z]{1,3}){0,1}$/", $t)) {
-					return __("Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)");
+					return __('Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)');
 			}
 		}
 	}
 	if ($cutoff_octets != '' && ($cutoff_octets < 0 || $cutoff_octets > 99999999999999999 || !is_numeric($cutoff_octets)))
-		return "Invalid value for Cutoff Octets!";
+		return __('Invalid value for Cutoff Octets!');
 
 	if ($cutoff_lines != '' && ($cutoff_lines < 0 || $cutoff_lines > 999999 || !is_numeric($cutoff_lines)))
-		return "Invalid value for Cutoff Lines!";
+		return __('Invalid value for Cutoff Lines!');
 
 	if ($sort_field != '' && ($sort_field < 0 || $sort_field > 99 || !is_numeric($sort_field)))
-		return "Invalid value for Sort Field!";
+		return __('Invalid value for Sort Field!');
 
 }
 
@@ -1517,7 +1530,10 @@ function flowview_draw_chart($type, $title) {
 */
 function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 	// First check to see if its in the cache
-	$cache = db_fetch_assoc("SELECT * from plugin_flowview_dnscache where ip='$ip'");
+	$cache = db_fetch_assoc_prepared('SELECT * 
+		FROM plugin_flowview_dnscache 
+		WHERE ip = ?', 
+		array($ip));
 
 	if (isset($cache[0]['host']))
 		return $cache[0]['host'];
@@ -1586,23 +1602,30 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 		/* close the socket */
 		@fclose($handle);
 
-		if ($info["timed_out"]) {
-			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
+		if ($info['timed_out']) {
+			db_execute_prepared('INSERT INTO plugin_flowview_dnscache 
+				(ip, host, time) 
+				VALUES (?, ?, ?)', array($ip, $ip, $time - 3540));
+
 			return $ip . $suffix;
 		}
 
 		/* more error handling */
-		if ($response == "") {
-			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
+		if ($response == '') {
+			db_execute_prepared('INSERT INTO plugin_flowview_dnscache 
+				(ip, host, time) 
+				VALUES (?, ?, ?)', 
+				array($ip, $ip, $time - 3540));
+
 			return $ip;
 		}
 
 		/* parse the response and find the response type */
-		$type = @unpack("s", substr($response, $requestsize+2));
+		$type = @unpack('s', substr($response, $requestsize+2));
 
 		if ($type[1] == 0x0C00) {
 			/* set up our variables */
-			$host = "";
+			$host = '';
 			$len = 0;
 
 			/* set our pointer at the beginning of the hostname uses the request
@@ -1613,25 +1636,33 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 			/* reconstruct the hostname */
 			do {
 				/* get segment size */
-				$len = unpack("c", substr($response, $position));
+				$len = unpack('c', substr($response, $position));
 
 				/* null terminated string, so length 0 = finished */
 				if ($len[1] == 0) {
 					$hostname = flowview_strip_dns(substr($host, 0, strlen($host) -1));
 					/* return the hostname, without the trailing '.' */
-					db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '" . $hostname . "', '$time')");
+					db_execute_prepared('INSERT INTO plugin_flowview_dnscache 
+						(ip, host, time) 
+						VALUES (?, ?, ?)', 
+						array($ip, $hostname, $time));
+
 					return $hostname . $suffix;
 				}
 
 				/* add the next segment to our host */
-				$host .= substr($response, $position+1, $len[1]) . ".";
+				$host .= substr($response, $position+1, $len[1]) . '.';
 
 				/* move pointer on to the next segment */
 				$position += $len[1] + 1;
 			} while ($len != 0);
 
 			/* error - return the hostname we constructed (without the . on the end) */
-			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
+			db_execute_prepared('INSERT INTO plugin_flowview_dnscache 
+				(ip, host, time) 
+				VALUES (?, ?, ?)', 
+				array($ip, $ip, $time - 3540));
+
 			return $ip . $suffix;
 		}
 	}else{
@@ -1643,24 +1674,32 @@ function flowview_get_dns_from_ip($ip, $dns, $timeout = 1000) {
 		}
 
 		if ($dns_name != $ip) {
-			db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$dns_name', '" . ($time - 3540) . "')");
+			db_execute_prepared('INSERT INTO plugin_flowview_dnscache 
+				(ip, host, time) 
+				VALUES (?, ?, ?)', 
+				array($ip, $dns_name, $time - 3540));
+
 			return $dns_name . $suffix;
 		}
 	}
 
 	/* error - return the hostname */
-	db_execute("insert into plugin_flowview_dnscache (ip, host, time) values ('$ip', '$ip', '" . ($time - 3540) . "')");
+	db_execute_prepared('INSERT INTO plugin_flowview_dnscache 
+		(ip, host, time) 
+		VALUES (?, ?, ?)', 
+		array($ip, $ip, $time - 3540));
+
 	return $ip . $suffix;
 }
 
 function flowview_strip_dns($value) {
-	$strip = read_config_option("flowview_strip_dns");
+	$strip = read_config_option('flowview_strip_dns');
 
 	if (strlen($strip)) {
-		$strips = explode(",", $strip);
+		$strips = explode(',', $strip);
 
 		foreach($strips as $s) {
-			$value = trim(str_replace($s, "", $value), ".");
+			$value = trim(str_replace($s, '', $value), '.');
 		}
 	}
 
@@ -1669,7 +1708,7 @@ function flowview_strip_dns($value) {
 
 function flowview_get_color($as_array = false) {
 	static $position = 0;
-	$pallette = array("#F23C2E", "#32599A", "#F18A47", "#AC9509", "#DAAC10");
+	$pallette = array('#F23C2E', '#32599A', '#F18A47', '#AC9509', '#DAAC10');
 
 	if ($as_array) {
 		$position = 0;
@@ -1871,4 +1910,3 @@ function flowview_autoscale($value) {
 	}
 }
 
-?>
