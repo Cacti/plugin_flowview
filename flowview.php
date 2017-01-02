@@ -726,8 +726,8 @@ function flowview_display_form() {
 			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
 			defsort = 3;
 		} else if (choose == 26) {
-			stat.options[stat.options.length] = new Option('<?php print __('Source Prefix');?>');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Destination Prefix');?>');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Source Prefix');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Destination Prefix');?>', '2');
 			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '3');
 			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '4');
 			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '5');
