@@ -39,13 +39,13 @@ $sched_actions = array(
 
 $sendinterval_arr = array(
 	3600    => __('Every Hour'),
-	7200    => __('Every 2 Hours'),
-	14400   => __('Every 4 Hours'),
-	21600   => __('Every 6 Hours'),
-	43200   => __('Every 12 Hours'),
+	7200    => __('Every %d Hours', 2),
+	14400   => __('Every %d Hours', 4),
+	21600   => __('Every %d Hours', 6),
+	43200   => __('Every %d Hours', 12),
 	86400   => __('Every Day'),
 	432000  => __('Every Week'),
-	864000  => __('Every 2 Weeks'),
+	864000  => __('Every %d Weeks, 2'),
 	1728000 => __('Every Month'),
 );
 
@@ -63,7 +63,7 @@ $schedule_edit = array(
 		'friendly_name' => __('Enabled'),
 		'method' => 'checkbox',
 		'default' => 'on',
-		'description' => __('Whether or not this Netflow Scan will be sent.'),
+		'description' => __('Whether or not this NetFlow Scan will be sent.'),
 		'value' => '|arg1:enabled|',
 	),
 	'savedquery' => array(
@@ -75,7 +75,7 @@ $schedule_edit = array(
 	),
 	'sendinterval' => array(
 		'friendly_name' => __('Send Interval'),
-		'description' => __('How often to send this Netflow Report?'),
+		'description' => __('How often to send this NetFlow Report?'),
 		'value' => '|arg1:sendinterval|',
 		'method' => 'drop_array',
 		'default' => '0',
@@ -84,7 +84,7 @@ $schedule_edit = array(
 	'start' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('Start Time'),
-		'description' => __('This is the first date / time to send the Netflow Scan email.  All future sendings will be calculated off of this time plus the interval given above.'),
+		'description' => __('This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above.'),
 		'value' => '|arg1:start|',
 		'max_length' => '26',
 		'size' => 20,
@@ -93,7 +93,7 @@ $schedule_edit = array(
 	'email' => array(
 		'method' => 'textarea',
 		'friendly_name' => __('Email Addresses'),
-		'description' => __('Email addresses (command delimitinated) to send this Netflow Scan to.'),
+		'description' => __('Email addresses (command delimited) to send this NetFlow Scan to.'),
 		'textarea_rows' => 4,
 		'textarea_cols' => 60,
 		'class' => 'textAreaNotes',

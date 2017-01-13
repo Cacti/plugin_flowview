@@ -135,8 +135,8 @@ $device_edit = array(
 		'array' => $nesting_arr
 	),
 	'version' => array(
-		'friendly_name' => __('Netflow Version'),
-		'description' => __('Netflow Protocol version used by the device.'),
+		'friendly_name' => __('NetFlow Version'),
+		'description' => __('NetFlow Protocol version used by the device.'),
 		'value' => '|arg1:version|',
 		'method' => 'drop_array',
 		'default' => '5',
@@ -239,7 +239,7 @@ function actions_devices () {
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service.') . "</p>
-				<p>" . __('Also, remember to remove any left over files from your Net-Flow Capture location.') . "</p>
+				<p>" . __('Also, remember to remove any leftover files from your Net-Flow Capture location.') . "</p>
 				<p><ul>$device_list</ul></p>
 			</td>
 		</tr>\n";

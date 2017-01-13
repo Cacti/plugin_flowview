@@ -1486,7 +1486,7 @@ function flowview_check_fields () {
 			if (substr($s, 0,1) == '-')
 				$s = substr($s, 1);
 			if ($s > 255 || $s < 0 || !is_numeric($s))
-					return __('Invalid value for Portocol! (1 - 255)');
+					return __('Invalid value for Protocol! (1 - 255)');
 		}
 	}
 
