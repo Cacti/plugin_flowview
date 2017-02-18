@@ -31,7 +31,7 @@ Optional:
 If you don't already have flows coming to the cacti box and being stored with flow-capture
 you may follow the steps below to have cacti do this.
 
-Next copy the 'flow-caputure' file in the flowview plugin directory to '/etc/init.d/'
+Next copy the 'flow-capture' file in the flowview plugin directory to '/etc/init.d/'
 or the appropriate location.  You have to edit this file to set the cacti base path.
 This file also supercedes whatever the operating system installed.
 
