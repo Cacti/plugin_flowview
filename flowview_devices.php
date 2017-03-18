@@ -369,13 +369,16 @@ function show_devices () {
 	/* ================= input validation ================= */
 
 	$sql_where = (get_request_var('filter') != '' ? "name LIKE '%" . get_request_var('filter') . "%'":'');
-	$num_rows  = read_config_option('num_rows_table');
+	$rows      = read_config_option('num_rows_table');
+
+	$sql_order = get_order_string();
+	$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
 
 	$sql = "SELECT * 
 		FROM plugin_flowview_devices 
 		$sql_where
-		ORDER BY " . get_request_var('sort_column') . ' ' . get_request_var('sort_direction') .
-		' LIMIT ' . ($num_rows*(get_request_var('page')-1) . ',' . $num_rows);
+		$sql_order
+		$sql_limit";
 
 	$result = db_fetch_assoc($sql);
 

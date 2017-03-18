@@ -443,13 +443,16 @@ function show_schedules () {
 		$sql_where = '';
 	}
 
+	$sql_order = get_order_string();
+	$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
+
 	$sql = "SELECT pfs.*, pfq.name 
 		FROM plugin_flowview_schedules AS pfs
 		LEFT JOIN plugin_flowview_queries AS pfq 
 		ON (pfs.savedquery=pfq.id) 
 		$sql_where
-		ORDER BY " . get_request_var_request('sort_column') . ' ' . get_request_var_request('sort_direction') . '
-		LIMIT ' . ($rows*(get_request_var('page')-1)) . ", $rows";
+		$sql_order
+		$sql_limit";
 
 	$result = db_fetch_assoc($sql);
 
