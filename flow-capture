@@ -5,11 +5,14 @@
 # chkconfig: 2345 95 00
 */
 
-$cacti_base = '/usr/share/cacti/site';
+/* we are not talking to the browser */
+$no_http_headers = true;
+
+$cacti_base = '/var/www/html/cacti';
 
 include_once($cacti_base . '/include/global.php');
 
-$tools_path = read_config_option("path_flowtools");
+$tools_path = read_config_option('path_flowtools');
 
 if (isset($_SERVER['argv'][1])) {
 	switch (strtolower($_SERVER['argv'][1])) {
@@ -32,7 +35,7 @@ function start() {
 	global $tools_path, $cacti_base;;
 
 	echo "NOTE: Starting Flow Tools\n";
-	$devices = db_fetch_assoc("SELECT * FROM plugin_flowview_devices");
+	$devices = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
 	if (!empty($devices)) {
 		$path = db_fetch_cell("SELECT value FROM `settings` WHERE name = 'path_flows_dir'");
 		if ($path == '')
