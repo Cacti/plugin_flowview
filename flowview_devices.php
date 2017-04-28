@@ -414,7 +414,7 @@ function show_devices () {
 
 	html_end_box();
 
-	$nav = html_nav_bar('flowview_devices.php', MAX_DISPLAY_PAGES, get_request_var('page'), $num_rows, $total_rows, 10, __('Listeners'), 'page', 'main');
+	$nav = html_nav_bar('flowview_devices.php', MAX_DISPLAY_PAGES, get_request_var('page'), $total_rows, $total_rows, 10, __('Listeners'), 'page', 'main');
 
 	form_start('flowview_devices.php', 'chk');
 
