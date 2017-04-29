@@ -52,6 +52,7 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 * issue: Not supporting Protocols correctly and Prefix/Suffix
 * issue: Some W3C Validation Changes
 * issue: Table plugin_flowview_devices wrong engine
+* issue: Correcting issues with the flow-capture script
 
 --- 1.1 ---
 * issue: FlowView Settings were hidden for some reason

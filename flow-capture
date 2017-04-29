@@ -38,11 +38,13 @@ function start() {
 	$devices = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
 	if (!empty($devices)) {
 		$path = db_fetch_cell("SELECT value FROM `settings` WHERE name = 'path_flows_dir'");
-		if ($path == '')
+		if ($path == '') {
 			return;
-		if (substr($path, -1) == '/') {
-			$path = substr($path, 0, -1);
 		}
+
+		/* removing trailing slash and anything else */
+		$path = rtrim($path, "/ \n\t");
+
 		foreach ($devices as $device) {
 			$port   = $device['port'];
 			$folder = $device['folder'];
@@ -52,10 +54,12 @@ function start() {
 			$comp   = $device['compression'];
 			$rotate = $device['rotation'];
 			$expire = $device['expire'] * ($rotate + 1);
+
 			if (!is_dir("$path/$folder")) {
 				echo "NOTE: Making directory '$path/$folder'\n";
-				mkdir("$path/$folder");
+				mkdir("$path/$folder", 0777, true);
 			}
+
 			if (is_dir("$path/$folder")) {
 				echo "NOTE: Launching flow-capture as '$tools_path/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest'\n";
 				shell_exec($tools_path . "/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest");
