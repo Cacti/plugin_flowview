@@ -107,9 +107,9 @@ function flowview_show_tab() {
 
 	if (api_user_realm_auth('flowview.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'flowview')) {
-			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="' . __('FlowView') . '" align="absmiddle" border="0"></a>';
+			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="' . __('FlowView') . '"></a>';
 		}else{
-			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="' . __('FlowView') . '" align="absmiddle" border="0"></a>';
+			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="' . __('FlowView') . '"></a>';
 		}
 	}
 }
