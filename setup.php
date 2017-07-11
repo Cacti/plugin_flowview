@@ -32,8 +32,8 @@ function plugin_flowview_install () {
 	api_plugin_register_hook('flowview', 'page_head',             'flowview_page_head',            'setup.php');
 	api_plugin_register_hook('flowview', 'page_bottom',           'flowview_page_bottom',          'setup.php');
 
-	api_plugin_register_realm('flowview', 'flowview.php', 'Plugin -> Flow Viewer', 1);
-	api_plugin_register_realm('flowview', 'flowview_devices.php,flowview_schedules.php', 'Plugin -> Flow Admin', 1);
+	api_plugin_register_realm('flowview', 'flowview.php', __('Plugin -> Flow Viewer', 'flowview'), 1);
+	api_plugin_register_realm('flowview', 'flowview_devices.php,flowview_schedules.php', __('Plugin -> Flow Admin', 'flowview'), 1);
 
 	flowview_setup_table();
 }
@@ -82,23 +82,95 @@ function plugin_flowview_version () {
 function flowview_config_arrays () {
 	global $menu, $messages;
 
-	$messages['flow_deleted'] = array('message' => __('The Filter has been Deleted'), 'type' => 'info');
-	$messages['flow_updated'] = array('message' => __('The Filter has been Updated'), 'type' => 'info');
+	$messages['flow_deleted'] = array('message' => __('The Filter has been Deleted', 'flowview'), 'type' => 'info');
+	$messages['flow_updated'] = array('message' => __('The Filter has been Updated', 'flowview'), 'type' => 'info');
 }
 
 function flowview_draw_navigation_text ($nav) {
-	$nav['flowview.php:'] = array('title' => __('Flow Viewer'), 'mapping' => '', 'url' => 'flowview.php', 'level' => '0');
-	$nav['flowview.php:view'] = array('title' => __('(view)'), 'mapping' => 'flowview.php:', 'url' => 'flowview.php', 'level' => '1');
-	$nav['flowview.php:save'] = array('title' => __('(save)'), 'mapping' => 'flowview.php:', 'url' => 'flowview.php', 'level' => '1');
-	$nav['flowview.php:loadquery'] = array('title' => __('Flow Viewer'), 'mapping' => 'flowview.php:', 'url' => 'flowview.php', 'level' => '1');
-	$nav['flowview_devices.php:'] = array('title' => __('Listeners'), 'mapping' => 'flowview.php:', 'url' => 'flowview_devices.php', 'level' => '1');
-	$nav['flowview_devices.php:edit'] = array('title' => __('(edit)'), 'mapping' => 'flowview.php:,flowview_devices.php:', 'url' => 'flowview_devices.php', 'level' => '2');
-	$nav['flowview_devices.php:save'] = array('title' => __('(save)'), 'mapping' => 'flowview.php:', 'url' => 'flowview_devices.php', 'level' => '2');
-	$nav['flowview_devices.php:actions'] = array('title' => __('(actions)'), 'mapping' => 'flowview.php:', 'url' => 'flowview_devices.php', 'level' => '2');
-	$nav['flowview_schedules.php:'] = array('title' => __('Schedules'), 'mapping' => 'flowview.php:', 'url' => 'flowview_schedules.php', 'level' => '1');
-	$nav['flowview_schedules.php:edit'] = array('title' => __('(edit)'), 'mapping' => 'flowview.php:,flowview_schedules.php:', 'url' => 'flowview_schedules.php', 'level' => '2');
-	$nav['flowview_schedules.php:save'] = array('title' => __('(save)'), 'mapping' => 'flowview.php:', 'url' => 'flowview_schedules.php', 'level' => '2');
-	$nav['flowview_schedules.php:actions'] = array('title' => __('(actions)'), 'mapping' => 'flowview.php:', 'url' => 'flowview_schedules.php', 'level' => '2');
+	$nav['flowview.php:'] = array(
+		'title' => __('Flow Viewer', 'flowview'),
+		'mapping' => '',
+		'url' => 'flowview.php',
+		'level' => '0'
+	);
+
+	$nav['flowview.php:view'] = array(
+		'title' => __('(view)', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview.php',
+		'level' => '1'
+	);
+
+	$nav['flowview.php:save'] = array(
+		'title' => __('(save)', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview.php',
+		'level' => '1'
+	);
+
+	$nav['flowview.php:loadquery'] = array(
+		'title' => __('Flow Viewer', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview.php',
+		'level' => '1'
+	);
+
+	$nav['flowview_devices.php:'] = array(
+		'title' => __('Listeners', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview_devices.php',
+		'level' => '1'
+	);
+
+	$nav['flowview_devices.php:edit'] = array(
+		'title' => __('(edit)', 'flowview'),
+		'mapping' => 'flowview.php:,flowview_devices.php:',
+		'url' => 'flowview_devices.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_devices.php:save'] = array(
+		'title' => __('(save)', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview_devices.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_devices.php:actions'] = array(
+		'title' => __('(actions)', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview_devices.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_schedules.php:'] = array(
+		'title' => __('Schedules', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview_schedules.php',
+		'level' => '1'
+	);
+
+	$nav['flowview_schedules.php:edit'] = array(
+		'title' => __('(edit)', 'flowview'),
+		'mapping' => 'flowview.php:,flowview_schedules.php:',
+		'url' => 'flowview_schedules.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_schedules.php:save'] = array(
+		'title' => __('(save)', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview_schedules.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_schedules.php:actions'] = array(
+		'title' => __('(actions)', 'flowview'),
+		'mapping' => 'flowview.php:',
+		'url' => 'flowview_schedules.php',
+		'level' => '2'
+	);
+
 	return $nav;
 }
 
@@ -107,9 +179,9 @@ function flowview_show_tab() {
 
 	if (api_user_realm_auth('flowview.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'flowview')) {
-			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="' . __('FlowView') . '"></a>';
+			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="' . __('FlowView', 'flowview') . '"></a>';
 		}else{
-			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="' . __('FlowView') . '"></a>';
+			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="' . __('FlowView', 'flowview') . '"></a>';
 		}
 	}
 }
@@ -122,21 +194,23 @@ function flowview_page_head() {
 }
 
 function flowview_page_bottom() {
-	print "	<div id='fdialog' style='text-align:center;display:none;'>
-		<table>
-			<tr>
-				<td style='white-space:nowrap'>Filter Name</td>
-				<td><input type='text' size='40' name='squery' id='squery' value='" . __('New Query') . "'></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td class='right'>
-					<input id='qcancel' type='button' value='" . __('Cancel') . "'>
-					<input id='qsave' type='button' value='" . __('Save') . "'>
-				</td>
-			</tr>
-		</table>
-	</div>\n";
+	if (basename(get_current_page()) == 'flowview.php') {
+		print "	<div id='fdialog' style='text-align:center;display:none;'>
+			<table>
+				<tr>
+					<td style='white-space:nowrap'>" . __('Filter Name', 'flowview') . "</td>
+					<td><input type='text' size='40' name='squery' id='squery' value='" . __esc('New Query', 'flowview') . "'></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class='right'>
+						<input id='qcancel' type='button' value='" . __esc('Cancel', 'flowview') . "'>
+						<input id='qsave' type='button' value='" . __esc('Save', 'flowview') . "'>
+					</td>
+				</tr>
+			</table>
+		</div>\n";
+	}
 }
 
 function flowview_config_settings () {
@@ -144,53 +218,57 @@ function flowview_config_settings () {
 
 	$temp = array(
 		'flowview_header' => array(
-			'friendly_name' => __('Flow Viewer'),
+			'friendly_name' => __('Flow Viewer', 'flowview'),
 			'method' => 'spacer',
 		),
 		'path_flowtools' => array(
-			'friendly_name' => __('Flow Tools Binary Path'),
-			'description' => __('The path to your flow-cat, flow-filter, and flow-stat binary.'),
+			'friendly_name' => __('Flow Tools Binary Path', 'flowview'),
+			'description' => __('The path to your flow-cat, flow-filter, and flow-stat binary.', 'flowview'),
 			'method' => 'dirpath',
 			'max_length' => 255,
 			'default' => '/usr/bin'
 		),
 		'path_flowtools_workdir' => array(
-			'friendly_name' => __('Flow Tools Work Directory'),
-			'description' => __('This is the path to a temporary directory to do work.'),
+			'friendly_name' => __('Flow Tools Work Directory', 'flowview'),
+			'description' => __('This is the path to a temporary directory to do work.', 'flowview'),
 			'method' => 'dirpath',
 			'max_length' => 255,
 			'default' => '/tmp'
 		),
 		'path_flows_dir' => array(
-			'friendly_name' => __('Flows Directory'),
-			'description' => __('This is the path to base the path of your flow folder structure.'),
+			'friendly_name' => __('Flows Directory', 'flowview'),
+			'description' => __('This is the path to base the path of your flow folder structure.', 'flowview'),
 			'method' => 'dirpath',
 			'max_length' => 255,
 			'default' => '/var/netflow/flows/completed'
 		),
 		'flowview_dns_method' => array(
-			'friendly_name' => __('Hostname Resolution'),
-			'description' => __('The method by which you wish to resolve hostnames.'),
+			'friendly_name' => __('Hostname Resolution', 'flowview'),
+			'description' => __('The method by which you wish to resolve hostnames.', 'flowview'),
 			'method' => 'drop_array',
-			'array' => array(0 => 'Use Local Server', 1 => 'Use DNS Server Below', 2 => "Don't Resolve DNS"),
+			'array' => array(
+				0 => __('Use Local Server', 'flowview'),
+				1 => __('Use DNS Server Below', 'flowview'),
+				2 => __('Don\'t Resolve DNS', 'flowview')
+			),
 			'default' => 0
 		),
 		'flowview_dns' => array(
-			'friendly_name' => __('Alternate DNS Server'),
-			'description' => __('This is the DNS Server used to resolve names.'),
+			'friendly_name' => __('Alternate DNS Server', 'flowview'),
+			'description' => __('This is the DNS Server used to resolve names.', 'flowview'),
 			'method' => 'textbox',
 			'max_length' => 255,
 		),
 		'flowview_strip_dns' => array(
-			'friendly_name' => __('Strip Domain Names'),
-			'description' => __('A comma delimited list of domains names to strip from the domain.'),
+			'friendly_name' => __('Strip Domain Names', 'flowview'),
+			'description' => __('A comma delimited list of domains names to strip from the domain.', 'flowview'),
 			'method' => 'textbox',
 			'max_length' => 255,
 			'size' => 80
 		),
 	);
 
-	$tabs['misc'] = 'Misc';
+	$tabs['misc'] = __('Misc', 'flowview');
 
 	if (isset($settings['misc']))
 		$settings['misc'] = array_merge($settings['misc'], $temp);
@@ -202,7 +280,7 @@ function flowview_poller_bottom () {
 	global $config;
 	include_once($config['library_path'] . '/database.php');
 	$time = time() - 3600;
-	db_execute("delete from plugin_flowview_dnscache where time > 0 and time < $time");
+	db_execute("DELETE FROM plugin_flowview_dnscache WHERE time > 0 AND time < $time");
 
 	$t = time();
 	$schedules = db_fetch_assoc("SELECT * FROM plugin_flowview_schedules WHERE enabled='on' AND ($t - sendinterval > lastsent)");
@@ -308,3 +386,4 @@ function flowview_setup_table () {
 		}
 	}
 }
+

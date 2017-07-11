@@ -153,7 +153,7 @@ function flowview_display_form() {
 
 	form_start('flowview.php', 'flowview');
 
-	html_start_box(__('Flow Filter Constraints') . '  <span id="text"></span>', '100%', '', '3', 'center', '');
+	html_start_box(__('Flow Filter Constraints', 'flowview') . '  <span id="text"></span>', '100%', '', '3', 'center', '');
 
 	?>
 	<tr class='even center'>
@@ -161,13 +161,13 @@ function flowview_display_form() {
 			<table class='filterTable' width='100%'>
 				<tr>
 					<td>
-						<?php print __('Filter');?>
+						<?php print __('Filter', 'flowview');?>
 					</td>
 					<td>
 						<?php draw_edit_control('query', $query_name_field);?>
 					</td>
 					<td>
-						<?php print __('Listener');?>
+						<?php print __('Listener', 'flowview');?>
 					</td>
 					<td>
 						<?php draw_edit_control('device_name', $device_name_field);?>
@@ -175,13 +175,13 @@ function flowview_display_form() {
 				</tr>
 				<tr>
 					<td>
-                        <?php print __('Presets');?>
+                        <?php print __('Presets', 'flowview');?>
 					</td>
 					<td>
 						<select id='predefined_timespan' name='predefined_timespan' onChange='applyTimespan()'>
 							<?php
 							if ($timespan == 0) {
-								$graph_timespans[GT_CUSTOM] = __('Custom');
+								$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
 								$start_val = 0;
 								$end_val = sizeof($graph_timespans);
 							} else {
@@ -203,18 +203,18 @@ function flowview_display_form() {
 					</td>
 
 					<td>
-						<?php print __('Start Date');?>
+						<?php print __('Start Date', 'flowview');?>
 					</td>
 					<td class='nowrap'>
 						<input type='text' size='15' id='date1' value='<?php echo $date1; ?>'>
-						<i id='startDate' class='calendar fa fa-calendar' title='<?php print __('Start Date Selector');?>'></i>
+						<i id='startDate' class='calendar fa fa-calendar' title='<?php print __esc('Start Date Selector', 'flowview');?>'></i>
 					</td>
 					<td>
-						<?php print __('End Date');?>
+						<?php print __('End Date', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='15' id='date2' value='<?php echo $date2;?>'>
-						<i id='endDate' class='calendar fa fa-calendar' title='<?php print __('End Date Selector');?>'></i>
+						<i id='endDate' class='calendar fa fa-calendar' title='<?php print __esc('End Date Selector', 'flowview');?>'></i>
 					</td>
 				</tr>
 				<tr>
@@ -222,48 +222,48 @@ function flowview_display_form() {
 				</tr>
 				<tr>
 					<td>
-						<?php print __('Protocols');?>
+						<?php print __('Protocols', 'flowview');?>
 					</td>
 					<td>
 						<?php draw_edit_control('protocols', $ip_protocol_field);?>
 					</td>
 					<td>
-						<?php print __('TCP Flags');?>
+						<?php print __('TCP Flags', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='10' name='tcp_flags' value='<?php echo $tcp_flags;?>'>
 					</td>
 					<td>
-						<?php print __('TOS Fields');?>
+						<?php print __('TOS Fields', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='10' name='tos_fields' value='<?php echo $tos_fields;?>'>
 					</td>
 					<td colspan=2>
-						<?php print __('(e.g., -0x0b/0x0F)');?>
+						<?php print __('(e.g., -0x0b/0x0F)', 'flowview');?>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<?php print __('Source IP');?>
+						<?php print __('Source IP', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='19' name='source_address' value='<?php echo $source_address;?>'>
 					</td>
 					<td>
-						<?php print __('Source Port(s)');?>
+						<?php print __('Source Port(s)', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='20' name='source_port' value='<?php echo $source_port;?>'>
 					</td>
 					<td>
-						<?php print __('Source Interface');?>
+						<?php print __('Source Interface', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='2' name='source_if' value='<?php echo $source_if;?>'>
 					</td>
 					<td>
-						<?php print __('Source AS');?>
+						<?php print __('Source AS', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='6' name='source_as' value='<?php echo $source_as;?>'>
@@ -271,24 +271,24 @@ function flowview_display_form() {
 				</tr>
 				<tr>
 					<td>
-						<?php print __('Dest IP');?>
+						<?php print __('Dest IP', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='19' name='dest_address' value='<?php echo $dest_address; ?>'></td>
 					<td>
-						<?php print __('Dest Port(s)');?>
+						<?php print __('Dest Port(s)', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='20' name='dest_port' value='<?php echo $dest_port; ?>'>
 					</td>
 					<td>
-						<?php print __('Dest Interface');?>
+						<?php print __('Dest Interface', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='2' name='dest_if' value='<?php echo $dest_if; ?>'>
 					</td>
 					<td>
-						<?php print __('Dest AS');?>
+						<?php print __('Dest AS', 'flowview');?>
 					</td>
 					<td>
 						<input type='text' size='6' name='dest_as' value='<?php echo $dest_as; ?>'>
@@ -298,7 +298,7 @@ function flowview_display_form() {
 				<tr>
 					<td colspan='9'>
 						<hr size='2'>
-						<center><strong><?php print __('Note:');?></strong><?php print __(' Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)');?></center>
+						<center><strong><?php print __('Note:', 'flowview');?></strong><?php print __(' Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)', 'flowview');?></center>
 						<hr size='2'>
 					</td>
 				</tr>
@@ -307,26 +307,26 @@ function flowview_display_form() {
 	</tr>
 	<?php html_end_box(false);?>
 
-	<?php html_start_box(__('Report Parameters'), '100%', '', '3', 'center', '');?>
+	<?php html_start_box(__('Report Parameters', 'flowview'), '100%', '', '3', 'center', '');?>
 	<tr class='even'>
 		<td>
 			<table class='filterTable'>
 				<tr id='rsettings'>
-					<td><?php print __('Statistics:');?></td>
+					<td><?php print __('Statistics:', 'flowview');?></td>
 					<td><?php draw_edit_control('stat_report', $stat_report_field);?></td>
-					<td><?php print __('Printed:');?></td>
+					<td><?php print __('Printed:', 'flowview');?></td>
 					<td><?php draw_edit_control('print_report', $print_report_field);?></td>
-					<td><?php print __('Include if:');?></td>
+					<td><?php print __('Include if:', 'flowview');?></td>
 					<td><?php draw_edit_control('flow_select', $flow_select_field);?></td>
-					<td><?php print __('Resolve Addresses:');?></td>
+					<td><?php print __('Resolve Addresses:', 'flowview');?></td>
 					<td><?php draw_edit_control('resolve_addresses', $resolve_addresses_field);?></td>
 				</tr>
 				<tr id='rlimits'>
-					<td class='sortfield'><?php print __('Sort Field:');?></td>
+					<td class='sortfield'><?php print __('Sort Field:', 'flowview');?></td>
 					<td class='sortfield'><select id='sort_field' name='sort_field'></select></td>
-					<td><?php print __('Max Flows:');?></td>
+					<td><?php print __('Max Flows:', 'flowview');?></td>
 					<td><?php draw_edit_control('cutoff_lines', $cutoff_lines_field);?></td>
-					<td><?php print __('Minimum Bytes:');?></td>
+					<td><?php print __('Minimum Bytes:', 'flowview');?></td>
 					<td><?php draw_edit_control('cutoff_octets', $cutoff_octets_field);?></td>
 				</tr>
 			</table>
@@ -341,11 +341,11 @@ function flowview_display_form() {
 			<input type='hidden' id='new_query' name='new_query' value=''>
 			<input type='hidden' id='changed' name='changed' value='0'>
 			<center>
-				<input id='view' type='button' name='view' value='<?php print __('View');?>'>
-				<input id='defaults' type='button' value='<?php print __('Defaults');?>'>
-				<input id='save' type='button' name='save' value='<?php print __('Save');?>'>
-				<input id='saveas' type='button' name='saveas' value='<?php print __('Save As');?>'>
-				<input id='delete' type='button' name='delete' value='<?php print __('Delete');?>'>
+				<input id='view' type='button' name='view' value='<?php print __('View', 'flowview');?>'>
+				<input id='defaults' type='button' value='<?php print __('Defaults', 'flowview');?>'>
+				<input id='save' type='button' name='save' value='<?php print __('Save', 'flowview');?>'>
+				<input id='saveas' type='button' name='saveas' value='<?php print __('Save As', 'flowview');?>'>
+				<input id='delete' type='button' name='delete' value='<?php print __('Delete', 'flowview');?>'>
 			</center>
 		</td>
 	</tr>
@@ -464,7 +464,7 @@ function flowview_display_form() {
 
 	$('#date1, #date2').change(function() {
 		if ($('#predefined_timespan option').length == 28) {
-			$('#predefined_timespan').prepend("<option value='0' selected='selected'>Custom</option>");
+			$('#predefined_timespan').prepend("<option value='0' selected='selected'><?php print __('Custom', 'flowview');?></option>");
 			$('#predefined_timespan').val('0');
 			<?php if (get_selected_theme() != 'classic') {?>
 			$('#predefined_timespan').selectmenu('refresh');
@@ -519,7 +519,7 @@ function flowview_display_form() {
 		if ($('#query').val() == 0) {
 			$('#delete').hide();
 		}else{
-			$('#save').attr('value', '<?php print __('Update');?>');
+			$('#save').attr('value', '<?php print __('Update', 'flowview');?>');
 			$('#saveas').show();
 		}
 		<?php }else{ ?>
@@ -560,7 +560,7 @@ function flowview_display_form() {
 
 		$('#fdialog').dialog({
 			autoOpen: false,
-			width: 380,
+			width: 400,
 			height: 120,
 			resizable: false,
 			modal: true
@@ -587,7 +587,7 @@ function flowview_display_form() {
 			$('#action').attr('value', 'save');
 			$.post('flowview.php', $('#flowview').serialize(), function(data) {
 				if (data!='error') {
-					$('#text').show().text('<?php print __('Filter Saved');?>').fadeOut(2000);
+					$('#text').show().text('<?php print __('Filter Saved', 'flowview');?>').fadeOut(2000);
 					$('#query').append("<option value='"+data+"'>"+$('#new_query').val()+"</option>");
 					$('#query').attr('value', data);
 				}
@@ -608,7 +608,7 @@ function flowview_display_form() {
 				$.post('flowview.php', $('#flowview').serialize(), function(data) {
 					if (data!='error') {
 						loadPageNoHeader('flowview.php?tab=filters&header=false&action=loadquery&query='+data);
-						$('#text').show().text('Filter Settings Saved').fadeOut(2000);
+						$('#text').show().text('<?php print __('Filter Settings Saved');?>').fadeOut(2000);
 					}
 				});
 				$('#fdialog').dialog('close');
@@ -616,7 +616,7 @@ function flowview_display_form() {
 		}else{
 			$('#action').attr('value', 'save');
 			$.post('flowview.php', $('#flowview').serialize(), function(data) {
-				$('#text').show().text('<?php print __('Filter Updated');?>').fadeOut(2000);
+				$('#text').show().text('<?php print __('Filter Updated', 'flowview');?>').fadeOut(2000);
 			});
 		}
 	});
@@ -663,74 +663,74 @@ function flowview_display_form() {
 		stat.options.length = 0;
 		defsort = 1;
 		if (choose == 10) {
-			stat.options[stat.options.length] = new Option('<?php print __('Source IP');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Destination IP');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '5');
+			stat.options[stat.options.length] = new Option('<?php print __('Source IP', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Destination IP', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
 			defsort = 4;
 		} else if (choose == 5 || choose == 6 || choose == 7) {
-			stat.options[stat.options.length] = new Option('<?php print __('Port');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Port', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
 			defsort = 3;
 		} else if (choose == 8 || choose == 9 || choose == 11) {
-			stat.options[stat.options.length] = new Option('<?php print __('IP');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('IP', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
 			defsort = 3;
 		} else if (choose == 12) {
-			stat.options[stat.options.length] = new Option('<?php print __('Protocol');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Protocol', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
 			defsort = 3;
 		} else if (choose == 17 || choose == 18) {
-			stat.options[stat.options.length] = new Option('<?php print __('Interface');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Interface', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
 			defsort = 3;
 		} else if (choose == 23) {
-			stat.options[stat.options.length] = new Option('<?php print __('Input Interface');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Output Interface');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '5');
+			stat.options[stat.options.length] = new Option('<?php print __('Input Interface', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Output Interface', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
 			defsort = 4;
 		} else if (choose == 19 || choose == 20) {
-			stat.options[stat.options.length] = new Option('<?php print __('AS');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('AS', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
 			defsort = 3;
 		} else if (choose == 21) {
-			stat.options[stat.options.length] = new Option('<?php print __('Source AS');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Destination AS');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '5');
+			stat.options[stat.options.length] = new Option('<?php print __('Source AS', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Destination AS', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
 			defsort = 4;
 		} else if (choose == 22) {
-			stat.options[stat.options.length] = new Option('<?php print __('TOS');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('TOS', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
 			defsort = 3;
 		} else if (choose == 24 || choose == 25) {
-			stat.options[stat.options.length] = new Option('<?php print __('Prefix');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Prefix', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
 			defsort = 3;
 		} else if (choose == 26) {
-			stat.options[stat.options.length] = new Option('<?php print __('Source Prefix');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Destination Prefix');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets');?>', '5');
+			stat.options[stat.options.length] = new Option('<?php print __('Source Prefix', 'flowview');?>', '1');
+			stat.options[stat.options.length] = new Option('<?php print __('Destination Prefix', 'flowview');?>', '2');
+			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
+			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
+			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
 			defsort = 4;
 		} else {
 

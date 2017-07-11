@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 08:20-0500\n"
+"POT-Creation-Date: 2017-07-10 21:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -404,24 +404,24 @@ msgstr ""
 msgid "ENCAP"
 msgstr ""
 
-#: ../arrays.php:135 ../flowview_schedules.php:492
+#: ../arrays.php:135 ../flowview_schedules.php:522
 msgid "Yes"
 msgstr ""
 
-#: ../arrays.php:136 ../flowview_schedules.php:492
+#: ../arrays.php:136 ../flowview_schedules.php:522
 msgid "No"
 msgstr ""
 
-#: ../arrays.php:166 ../arrays.php:178 ../functions.php:117
+#: ../arrays.php:166 ../arrays.php:177 ../functions.php:117
 msgid "None"
 msgstr ""
 
-#: ../arrays.php:189
+#: ../arrays.php:188
 msgid "All"
 msgstr ""
 
-#: ../arrays.php:190 ../arrays.php:191 ../arrays.php:192 ../arrays.php:193
-#: ../arrays.php:194 ../arrays.php:195 ../arrays.php:196 ../arrays.php:197
+#: ../arrays.php:189 ../arrays.php:190 ../arrays.php:191 ../arrays.php:192
+#: ../arrays.php:193 ../arrays.php:194 ../arrays.php:195 ../arrays.php:196
 #, php-format
 msgid "Top %d"
 msgstr ""
@@ -438,29 +438,12 @@ msgstr ""
 msgid "%s Bytes"
 msgstr ""
 
-#: ../arrays.php:270 ../arrays.php:271 ../arrays.php:272 ../flowview.php:673
-#: ../flowview_devices.php:122 ../flowview_devices.php:427
-msgid "Port"
-msgstr ""
-
-#: ../arrays.php:270 ../arrays.php:271 ../arrays.php:272 ../arrays.php:273
-#: ../arrays.php:274 ../arrays.php:275 ../arrays.php:276 ../arrays.php:277
-#: ../arrays.php:278 ../arrays.php:279 ../arrays.php:280 ../arrays.php:281
-#: ../arrays.php:282 ../arrays.php:283 ../arrays.php:284 ../arrays.php:285
-#: ../arrays.php:286 ../arrays.php:287 ../flowview.php:668 ../flowview.php:674
-#: ../flowview.php:680 ../flowview.php:686 ../flowview.php:692
-#: ../flowview.php:699 ../flowview.php:705 ../flowview.php:712
-#: ../flowview.php:718 ../flowview.php:724 ../flowview.php:731
-#: ../functions.php:593
-msgid "Flows"
-msgstr ""
-
-#: ../arrays.php:270 ../arrays.php:271 ../arrays.php:272 ../arrays.php:273
-#: ../arrays.php:274 ../arrays.php:275 ../arrays.php:276 ../arrays.php:277
-#: ../arrays.php:278 ../arrays.php:279 ../arrays.php:280 ../arrays.php:281
-#: ../arrays.php:282 ../arrays.php:283 ../arrays.php:284 ../arrays.php:285
-#: ../arrays.php:286 ../arrays.php:287 ../arrays.php:291 ../arrays.php:292
-#: ../arrays.php:293 ../flowview.php:669 ../flowview.php:675
+#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../arrays.php:274
+#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:277 ../arrays.php:278
+#: ../arrays.php:279 ../arrays.php:280 ../arrays.php:281 ../arrays.php:282
+#: ../arrays.php:283 ../arrays.php:284 ../arrays.php:285 ../arrays.php:286
+#: ../arrays.php:287 ../arrays.php:288 ../arrays.php:292 ../arrays.php:293
+#: ../arrays.php:294 ../flowview.php:669 ../flowview.php:675
 #: ../flowview.php:681 ../flowview.php:687 ../flowview.php:693
 #: ../flowview.php:700 ../flowview.php:706 ../flowview.php:713
 #: ../flowview.php:719 ../flowview.php:725 ../flowview.php:732
@@ -468,12 +451,24 @@ msgstr ""
 msgid "Bytes"
 msgstr ""
 
-#: ../arrays.php:270 ../arrays.php:271 ../arrays.php:272 ../arrays.php:273
-#: ../arrays.php:274 ../arrays.php:275 ../arrays.php:276 ../arrays.php:277
-#: ../arrays.php:278 ../arrays.php:279 ../arrays.php:280 ../arrays.php:281
-#: ../arrays.php:282 ../arrays.php:283 ../arrays.php:284 ../arrays.php:285
-#: ../arrays.php:286 ../arrays.php:287 ../arrays.php:291 ../arrays.php:292
-#: ../arrays.php:293 ../flowview.php:670 ../flowview.php:676
+#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../arrays.php:274
+#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:277 ../arrays.php:278
+#: ../arrays.php:279 ../arrays.php:280 ../arrays.php:281 ../arrays.php:282
+#: ../arrays.php:283 ../arrays.php:284 ../arrays.php:285 ../arrays.php:286
+#: ../arrays.php:287 ../arrays.php:288 ../flowview.php:668 ../flowview.php:674
+#: ../flowview.php:680 ../flowview.php:686 ../flowview.php:692
+#: ../flowview.php:699 ../flowview.php:705 ../flowview.php:712
+#: ../flowview.php:718 ../flowview.php:724 ../flowview.php:731
+#: ../functions.php:593
+msgid "Flows"
+msgstr ""
+
+#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../arrays.php:274
+#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:277 ../arrays.php:278
+#: ../arrays.php:279 ../arrays.php:280 ../arrays.php:281 ../arrays.php:282
+#: ../arrays.php:283 ../arrays.php:284 ../arrays.php:285 ../arrays.php:286
+#: ../arrays.php:287 ../arrays.php:288 ../arrays.php:292 ../arrays.php:293
+#: ../arrays.php:294 ../flowview.php:670 ../flowview.php:676
 #: ../flowview.php:682 ../flowview.php:688 ../flowview.php:694
 #: ../flowview.php:701 ../flowview.php:707 ../flowview.php:714
 #: ../flowview.php:720 ../flowview.php:726 ../flowview.php:733
@@ -481,94 +476,99 @@ msgstr ""
 msgid "Packets"
 msgstr ""
 
-#: ../arrays.php:273 ../arrays.php:275 ../arrays.php:291 ../arrays.php:292
-#: ../arrays.php:293 ../flowview.php:274
+#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../flowview.php:673
+#: ../flowview_devices.php:124 ../flowview_devices.php:454
+msgid "Port"
+msgstr ""
+
+#: ../arrays.php:274 ../arrays.php:276 ../arrays.php:292 ../arrays.php:293
+#: ../arrays.php:294 ../flowview.php:274
 msgid "Dest IP"
 msgstr ""
 
-#: ../arrays.php:274 ../arrays.php:275 ../arrays.php:291 ../arrays.php:292
-#: ../arrays.php:293
+#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:292 ../arrays.php:293
+#: ../arrays.php:294
 msgid "Src IP"
 msgstr ""
 
-#: ../arrays.php:276
+#: ../arrays.php:277
 msgid "Src/Dest IP"
 msgstr ""
 
-#: ../arrays.php:277 ../arrays.php:291 ../arrays.php:292 ../arrays.php:293
+#: ../arrays.php:278 ../arrays.php:292 ../arrays.php:293 ../arrays.php:294
 #: ../flowview.php:685
 msgid "Protocol"
 msgstr ""
 
-#: ../arrays.php:278 ../arrays.php:284
+#: ../arrays.php:279 ../arrays.php:285
 msgid "Input IF"
 msgstr ""
 
-#: ../arrays.php:279 ../arrays.php:284
+#: ../arrays.php:280 ../arrays.php:285
 msgid "Output IF"
 msgstr ""
 
-#: ../arrays.php:280 ../arrays.php:282 ../arrays.php:292
+#: ../arrays.php:281 ../arrays.php:283 ../arrays.php:293
 msgid "Src AS"
 msgstr ""
 
-#: ../arrays.php:281 ../arrays.php:282 ../arrays.php:292 ../flowview.php:291
+#: ../arrays.php:282 ../arrays.php:283 ../arrays.php:293 ../flowview.php:291
 msgid "Dest AS"
 msgstr ""
 
-#: ../arrays.php:283 ../flowview.php:717
+#: ../arrays.php:284 ../flowview.php:717
 msgid "TOS"
 msgstr ""
 
-#: ../arrays.php:285 ../arrays.php:287
+#: ../arrays.php:286 ../arrays.php:288
 msgid "Src Prefix"
 msgstr ""
 
-#: ../arrays.php:286 ../arrays.php:287
+#: ../arrays.php:287 ../arrays.php:288
 msgid "Dest Prefix"
 msgstr ""
 
-#: ../arrays.php:291 ../arrays.php:293
-msgid "Src IF"
-msgstr ""
-
-#: ../arrays.php:291 ../arrays.php:293
-msgid "Dest IF"
-msgstr ""
-
-#: ../arrays.php:291 ../arrays.php:293
-msgid "Src Port"
-msgstr ""
-
-#: ../arrays.php:291 ../arrays.php:293
-msgid "Dest Port"
-msgstr ""
-
-#: ../arrays.php:291 ../arrays.php:293 ../flowview_schedules.php:86
-msgid "Start Time"
-msgstr ""
-
-#: ../arrays.php:291 ../arrays.php:293
-msgid "End Time"
-msgstr ""
-
-#: ../arrays.php:291
+#: ../arrays.php:292
 msgid "Active"
 msgstr ""
 
-#: ../arrays.php:291
+#: ../arrays.php:292
 msgid "B/Pk"
 msgstr ""
 
-#: ../arrays.php:291
-msgid "Ts"
+#: ../arrays.php:292 ../arrays.php:294
+msgid "Dest IF"
 msgstr ""
 
-#: ../arrays.php:291
+#: ../arrays.php:292 ../arrays.php:294
+msgid "Dest Port"
+msgstr ""
+
+#: ../arrays.php:292 ../arrays.php:294
+msgid "End Time"
+msgstr ""
+
+#: ../arrays.php:292
 msgid "Fl"
 msgstr ""
 
-#: ../arrays.php:293
+#: ../arrays.php:292 ../arrays.php:294
+msgid "Src IF"
+msgstr ""
+
+#: ../arrays.php:292 ../arrays.php:294
+msgid "Src Port"
+msgstr ""
+
+#: ../arrays.php:292 ../arrays.php:294 ../flowview_schedules.php:85
+msgid "Start Time"
+msgstr ""
+
+#: ../arrays.php:292
+msgid "Ts"
+msgstr ""
+
+#: ../arrays.php:294
 msgid "Flags"
 msgstr ""
 
@@ -588,11 +588,11 @@ msgstr ""
 msgid "Presets"
 msgstr ""
 
-#: ../flowview.php:184
+#: ../flowview.php:184 ../flowview.php:467
 msgid "Custom"
 msgstr ""
 
-#: ../flowview.php:206 ../flowview_schedules.php:474
+#: ../flowview.php:206 ../flowview_schedules.php:504
 msgid "Start Date"
 msgstr ""
 
@@ -641,14 +641,14 @@ msgid "Dest Interface"
 msgstr ""
 
 #: ../flowview.php:301
-msgid "Note:"
-msgstr ""
-
-#: ../flowview.php:301
 msgid ""
 " Multiple field entries, separated by commas, are permitted in the fields "
 "above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean "
 "any Port but 80)"
+msgstr ""
+
+#: ../flowview.php:301
+msgid "Note:"
 msgstr ""
 
 #: ../flowview.php:310
@@ -691,7 +691,7 @@ msgstr ""
 msgid "Defaults"
 msgstr ""
 
-#: ../flowview.php:346 ../setup.php:135
+#: ../flowview.php:346 ../setup.php:208
 msgid "Save"
 msgstr ""
 
@@ -699,7 +699,7 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-#: ../flowview.php:348 ../flowview_schedules.php:35 ../flowview_devices.php:29
+#: ../flowview.php:348 ../flowview_devices.php:30 ../flowview_schedules.php:34
 msgid "Delete"
 msgstr ""
 
@@ -709,6 +709,10 @@ msgstr ""
 
 #: ../flowview.php:590
 msgid "Filter Saved"
+msgstr ""
+
+#: ../flowview.php:611
+msgid "Filter Settings Saved"
 msgstr ""
 
 #: ../flowview.php:619
@@ -731,7 +735,443 @@ msgstr ""
 msgid "Prefix"
 msgstr ""
 
-#: ../functions.php:105 ../functions.php:169 ../flowview_schedules.php:313
+#: ../flowview_devices.php:36 ../flowview_devices.php:37
+#, php-format
+msgid "%d Days"
+msgstr ""
+
+#: ../flowview_devices.php:38
+#, php-format
+msgid "%d Week"
+msgstr ""
+
+#: ../flowview_devices.php:39
+#, php-format
+msgid "%d Weeks"
+msgstr ""
+
+#: ../flowview_devices.php:40
+#, php-format
+msgid "%d Month"
+msgstr ""
+
+#: ../flowview_devices.php:41 ../flowview_devices.php:42
+#: ../flowview_devices.php:43
+#, php-format
+msgid "%d Months"
+msgstr ""
+
+#: ../flowview_devices.php:44
+#, php-format
+msgid "%d Year"
+msgstr ""
+
+#: ../flowview_devices.php:48
+#, php-format
+msgid "%d Minute"
+msgstr ""
+
+#: ../flowview_devices.php:49 ../flowview_devices.php:50
+#: ../flowview_devices.php:51
+#, php-format
+msgid "%d Minutes"
+msgstr ""
+
+#: ../flowview_devices.php:55
+msgid "NetFlow version 1"
+msgstr ""
+
+#: ../flowview_devices.php:56
+msgid "NetFlow version 5"
+msgstr ""
+
+#: ../flowview_devices.php:57
+msgid "NetFlow version 6"
+msgstr ""
+
+#: ../flowview_devices.php:58
+msgid "NetFlow version 7"
+msgstr ""
+
+#: ../flowview_devices.php:59
+msgid "NetFlow AS Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:60
+msgid "NetFlow Proto Port Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:61
+msgid "NetFlow Source Prefix Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:62
+msgid "NetFlow Destination Prefix Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:63
+msgid "NetFlow Prefix Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:64
+msgid "NetFlow Destination"
+msgstr ""
+
+#: ../flowview_devices.php:65
+msgid "NetFlow Source Destination"
+msgstr ""
+
+#: ../flowview_devices.php:66
+msgid "NetFlow Full Flow"
+msgstr ""
+
+#: ../flowview_devices.php:67
+msgid "NetFlow ToS AS Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:68
+msgid "NetFlow ToS Proto Port Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:69
+msgid "NetFlow ToS Source Prefix Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:70
+msgid "NetFlow ToS Destination Prefix Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:71
+msgid "NetFlow ToS Prefix Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:72
+msgid "NetFlow ToS Prefix Port Aggregation"
+msgstr ""
+
+#: ../flowview_devices.php:73
+msgid "Flow-Tools tagged version 5"
+msgstr ""
+
+#: ../flowview_devices.php:86
+msgid "0 (Disabled)"
+msgstr ""
+
+#: ../flowview_devices.php:95
+msgid "9 (Highest)"
+msgstr ""
+
+#: ../flowview_devices.php:101
+msgid "Device Name"
+msgstr ""
+
+#: ../flowview_devices.php:102
+msgid "Name of the device to be displayed."
+msgstr ""
+
+#: ../flowview_devices.php:108 ../flowview_devices.php:451
+msgid "Directory"
+msgstr ""
+
+#: ../flowview_devices.php:109
+msgid ""
+"Directory that this devices flows are in.  This directory must be in the "
+"Flow Directory path.  Do not put the full path here.  Also, not that if you "
+"change the path, all the predefined filer setup to to use it will have to be "
+"resaved."
+msgstr ""
+
+#: ../flowview_devices.php:115
+msgid "Allowed Host"
+msgstr ""
+
+#: ../flowview_devices.php:116
+msgid ""
+"IP Address of the device that is allowed to send to this flow collector.  "
+"Leave as 0 for any host."
+msgstr ""
+
+#: ../flowview_devices.php:125
+msgid "Port this collector will listen on."
+msgstr ""
+
+#: ../flowview_devices.php:132 ../flowview_devices.php:452
+msgid "Nesting"
+msgstr ""
+
+#: ../flowview_devices.php:133
+msgid "Directory Structure that will be used for the flows for this device."
+msgstr ""
+
+#: ../flowview_devices.php:140
+msgid "NetFlow Version"
+msgstr ""
+
+#: ../flowview_devices.php:141
+msgid "NetFlow Protocol version used by the device."
+msgstr ""
+
+#: ../flowview_devices.php:148
+msgid "Compression Level"
+msgstr ""
+
+#: ../flowview_devices.php:149
+msgid ""
+"Compression level of flow files.  Higher compression saves space but uses "
+"more CPU to store and retrieve results."
+msgstr ""
+
+#: ../flowview_devices.php:156 ../flowview_devices.php:457
+msgid "Rotation"
+msgstr ""
+
+#: ../flowview_devices.php:157
+msgid "How often to create a new Flow File."
+msgstr ""
+
+#: ../flowview_devices.php:164
+msgid "Expiration"
+msgstr ""
+
+#: ../flowview_devices.php:165
+msgid "How long to keep your flow files."
+msgstr ""
+
+#: ../flowview_devices.php:243
+msgid ""
+"Click 'Continue' to delete the following Net-Flow Listeners.  After which, "
+"you will need to restart your Flow-Capture Service."
+msgstr ""
+
+#: ../flowview_devices.php:244
+msgid ""
+"Also, remember to remove any leftover files from your Net-Flow Capture "
+"location."
+msgstr ""
+
+#: ../flowview_devices.php:251
+msgid "You must select at least one device."
+msgstr ""
+
+#: ../flowview_devices.php:254 ../flowview_schedules.php:220
+msgid "Continue"
+msgstr ""
+
+#: ../flowview_devices.php:262 ../flowview_schedules.php:228 ../setup.php:207
+msgid "Cancel"
+msgstr ""
+
+#: ../flowview_devices.php:322
+#, php-format
+msgid "Device [edit: %s]"
+msgstr ""
+
+#: ../flowview_devices.php:324
+msgid "Device [new]"
+msgstr ""
+
+#: ../flowview_devices.php:389
+msgid "FlowView Listeners"
+msgstr ""
+
+#: ../flowview_devices.php:398 ../flowview_schedules.php:405
+msgid "Search"
+msgstr ""
+
+#: ../flowview_devices.php:404 ../flowview_schedules.php:426
+msgid "Go"
+msgstr ""
+
+#: ../flowview_devices.php:404 ../flowview_schedules.php:426
+msgid "Set/Refresh Filters"
+msgstr ""
+
+#: ../flowview_devices.php:407 ../flowview_schedules.php:429
+#: ../functions.php:153
+msgid "Clear"
+msgstr ""
+
+#: ../flowview_devices.php:407 ../flowview_schedules.php:429
+#: ../functions.php:153
+msgid "Clear Filters"
+msgstr ""
+
+#: ../flowview_devices.php:441 ../functions.php:315 ../setup.php:119
+msgid "Listeners"
+msgstr ""
+
+#: ../flowview_devices.php:450
+msgid "Name"
+msgstr ""
+
+#: ../flowview_devices.php:453
+msgid "Allowed From"
+msgstr ""
+
+#: ../flowview_devices.php:455
+msgid "Version"
+msgstr ""
+
+#: ../flowview_devices.php:456
+msgid "Compression"
+msgstr ""
+
+#: ../flowview_devices.php:458
+msgid "Expire"
+msgstr ""
+
+#: ../flowview_devices.php:479
+msgid "No Devices"
+msgstr ""
+
+#: ../flowview_schedules.php:33
+msgid "Send Now"
+msgstr ""
+
+#: ../flowview_schedules.php:35
+msgid "Disable"
+msgstr ""
+
+#: ../flowview_schedules.php:36
+msgid "Enable"
+msgstr ""
+
+#: ../flowview_schedules.php:40
+msgid "Every Hour"
+msgstr ""
+
+#: ../flowview_schedules.php:41 ../flowview_schedules.php:42
+#: ../flowview_schedules.php:43 ../flowview_schedules.php:44
+#, php-format
+msgid "Every %d Hours"
+msgstr ""
+
+#: ../flowview_schedules.php:45
+msgid "Every Day"
+msgstr ""
+
+#: ../flowview_schedules.php:46
+msgid "Every Week"
+msgstr ""
+
+#: ../flowview_schedules.php:47
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr ""
+
+#: ../flowview_schedules.php:48
+msgid "Every Month"
+msgstr ""
+
+#: ../flowview_schedules.php:53
+msgid "Title"
+msgstr ""
+
+#: ../flowview_schedules.php:55
+msgid "New Schedule"
+msgstr ""
+
+#: ../flowview_schedules.php:56
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr ""
+
+#: ../flowview_schedules.php:62 ../flowview_schedules.php:507
+msgid "Enabled"
+msgstr ""
+
+#: ../flowview_schedules.php:65
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr ""
+
+#: ../flowview_schedules.php:70 ../flowview_schedules.php:502 ../setup.php:201
+msgid "Filter Name"
+msgstr ""
+
+#: ../flowview_schedules.php:71
+msgid "Name of the query to run."
+msgstr ""
+
+#: ../flowview_schedules.php:76
+msgid "Send Interval"
+msgstr ""
+
+#: ../flowview_schedules.php:77
+msgid "How often to send this NetFlow Report?"
+msgstr ""
+
+#: ../flowview_schedules.php:86
+msgid ""
+"This is the first date / time to send the NetFlow Scan email.  All future "
+"Emails will be calculated off of this time plus the interval given above."
+msgstr ""
+
+#: ../flowview_schedules.php:94
+msgid "Email Addresses"
+msgstr ""
+
+#: ../flowview_schedules.php:95
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr ""
+
+#: ../flowview_schedules.php:189
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr ""
+
+#: ../flowview_schedules.php:196
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr ""
+
+#: ../flowview_schedules.php:203
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr ""
+
+#: ../flowview_schedules.php:210
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr ""
+
+#: ../flowview_schedules.php:217
+msgid "You must select at least one schedule."
+msgstr ""
+
+#: ../flowview_schedules.php:306
+#, php-format
+msgid "Report: [edit: %s]"
+msgstr ""
+
+#: ../flowview_schedules.php:308
+msgid "Report: [new]"
+msgstr ""
+
+#: ../flowview_schedules.php:397
+msgid "FlowView Schedules"
+msgstr ""
+
+#: ../flowview_schedules.php:411 ../flowview_schedules.php:492
+#: ../functions.php:319 ../setup.php:147
+msgid "Schedules"
+msgstr ""
+
+#: ../flowview_schedules.php:415
+msgid "Default"
+msgstr ""
+
+#: ../flowview_schedules.php:501
+msgid "Schedule Title"
+msgstr ""
+
+#: ../flowview_schedules.php:503
+msgid "Interval"
+msgstr ""
+
+#: ../flowview_schedules.php:505
+msgid "Next Send"
+msgstr ""
+
+#: ../flowview_schedules.php:506
+msgid "Email"
+msgstr ""
+
+#: ../functions.php:105 ../functions.php:169
 #, php-format
 msgid "Report: %s"
 msgstr ""
@@ -780,39 +1220,20 @@ msgstr ""
 msgid "Flows Bar"
 msgstr ""
 
-#: ../functions.php:153 ../flowview_schedules.php:429
-#: ../flowview_devices.php:402
-msgid "Clear"
-msgstr ""
-
-#: ../functions.php:153 ../flowview_schedules.php:429
-#: ../flowview_devices.php:402
-msgid "Clear Filters"
+#: ../functions.php:312
+msgid "Filters"
 msgstr ""
 
 #: ../functions.php:312
 msgid "Flow Filters"
 msgstr ""
 
-#: ../functions.php:312
-msgid "Filters"
-msgstr ""
-
 #: ../functions.php:315
 msgid "Manage Listeners"
 msgstr ""
 
-#: ../functions.php:315 ../setup.php:94 ../flowview_devices.php:414
-msgid "Listeners"
-msgstr ""
-
 #: ../functions.php:319
 msgid "Manage Schedules"
-msgstr ""
-
-#: ../functions.php:319 ../flowview_schedules.php:411
-#: ../flowview_schedules.php:462 ../setup.php:98
-msgid "Schedules"
 msgstr ""
 
 #: ../functions.php:324
@@ -936,157 +1357,12 @@ msgstr ""
 msgid "FlowView Chart for %s Type is %s"
 msgstr ""
 
-#: ../flowview_schedules.php:34
-msgid "Send Now"
+#: ../setup.php:35
+msgid "Plugin -> Flow Viewer"
 msgstr ""
 
-#: ../flowview_schedules.php:36
-msgid "Disable"
-msgstr ""
-
-#: ../flowview_schedules.php:37
-msgid "Enable"
-msgstr ""
-
-#: ../flowview_schedules.php:41
-msgid "Every Hour"
-msgstr ""
-
-#: ../flowview_schedules.php:42 ../flowview_schedules.php:43
-#: ../flowview_schedules.php:44 ../flowview_schedules.php:45
-#, php-format
-msgid "Every %d Hours"
-msgstr ""
-
-#: ../flowview_schedules.php:46
-msgid "Every Day"
-msgstr ""
-
-#: ../flowview_schedules.php:47
-msgid "Every Week"
-msgstr ""
-
-#: ../flowview_schedules.php:48
-#, php-format
-msgid "Every %d Weeks, 2"
-msgstr ""
-
-#: ../flowview_schedules.php:49
-msgid "Every Month"
-msgstr ""
-
-#: ../flowview_schedules.php:54
-msgid "Title"
-msgstr ""
-
-#: ../flowview_schedules.php:56
-msgid "New Schedule"
-msgstr ""
-
-#: ../flowview_schedules.php:57
-msgid "Enter a Report Title for the FlowView Schedule."
-msgstr ""
-
-#: ../flowview_schedules.php:63 ../flowview_schedules.php:477
-msgid "Enabled"
-msgstr ""
-
-#: ../flowview_schedules.php:66
-msgid "Whether or not this NetFlow Scan will be sent."
-msgstr ""
-
-#: ../flowview_schedules.php:71 ../flowview_schedules.php:472
-msgid "Filter Name"
-msgstr ""
-
-#: ../flowview_schedules.php:72
-msgid "Name of the query to run."
-msgstr ""
-
-#: ../flowview_schedules.php:77
-msgid "Send Interval"
-msgstr ""
-
-#: ../flowview_schedules.php:78
-msgid "How often to send this NetFlow Report?"
-msgstr ""
-
-#: ../flowview_schedules.php:87
-msgid ""
-"This is the first date / time to send the NetFlow Scan email.  All future "
-"Emails will be calculated off of this time plus the interval given above."
-msgstr ""
-
-#: ../flowview_schedules.php:95
-msgid "Email Addresses"
-msgstr ""
-
-#: ../flowview_schedules.php:96
-msgid "Email addresses (command delimited) to send this NetFlow Scan to."
-msgstr ""
-
-#: ../flowview_schedules.php:190
-msgid "Click 'Continue' to delete the following Schedule(s)."
-msgstr ""
-
-#: ../flowview_schedules.php:197
-msgid "Click 'Continue' to send the following Schedule(s) now."
-msgstr ""
-
-#: ../flowview_schedules.php:204
-msgid "Click 'Continue' to Disable the following Schedule(s)."
-msgstr ""
-
-#: ../flowview_schedules.php:211
-msgid "Click 'Continue' to Enable the following Schedule(s)."
-msgstr ""
-
-#: ../flowview_schedules.php:218
-msgid "You must select at least one schedule."
-msgstr ""
-
-#: ../flowview_schedules.php:221 ../flowview_devices.php:252
-msgid "Continue"
-msgstr ""
-
-#: ../flowview_schedules.php:229 ../setup.php:134 ../flowview_devices.php:260
-msgid "Cancel"
-msgstr ""
-
-#: ../flowview_schedules.php:397
-msgid "FlowView Schedules"
-msgstr ""
-
-#: ../flowview_schedules.php:405 ../flowview_devices.php:393
-msgid "Search"
-msgstr ""
-
-#: ../flowview_schedules.php:415
-msgid "Default"
-msgstr ""
-
-#: ../flowview_schedules.php:426
-msgid "Go"
-msgstr ""
-
-#: ../flowview_schedules.php:426 ../flowview_devices.php:399
-msgid "Set/Refresh Filters"
-msgstr ""
-
-#: ../flowview_schedules.php:471
-msgid "Schedule Title"
-msgstr ""
-
-#: ../flowview_schedules.php:473
-msgid "Interval"
-msgstr ""
-
-#: ../flowview_schedules.php:475
-msgid "Next Send"
-msgstr ""
-
-#: ../flowview_schedules.php:476
-msgid "Email"
+#: ../setup.php:36
+msgid "Plugin -> Flow Admin"
 msgstr ""
 
 #: ../setup.php:85
@@ -1097,329 +1373,94 @@ msgstr ""
 msgid "The Filter has been Updated"
 msgstr ""
 
-#: ../setup.php:90 ../setup.php:93 ../setup.php:147
+#: ../setup.php:91 ../setup.php:112 ../setup.php:221
 msgid "Flow Viewer"
 msgstr ""
 
-#: ../setup.php:91
+#: ../setup.php:98
 msgid "(view)"
 msgstr ""
 
-#: ../setup.php:92 ../setup.php:96 ../setup.php:100
+#: ../setup.php:105 ../setup.php:133 ../setup.php:161
 msgid "(save)"
 msgstr ""
 
-#: ../setup.php:95 ../setup.php:99
+#: ../setup.php:126 ../setup.php:154
 msgid "(edit)"
 msgstr ""
 
-#: ../setup.php:97 ../setup.php:101
+#: ../setup.php:140 ../setup.php:168
 msgid "(actions)"
 msgstr ""
 
-#: ../setup.php:110 ../setup.php:112
+#: ../setup.php:182 ../setup.php:184
 msgid "FlowView"
 msgstr ""
 
-#: ../setup.php:129
+#: ../setup.php:202
 msgid "New Query"
 msgstr ""
 
-#: ../setup.php:151
+#: ../setup.php:225
 msgid "Flow Tools Binary Path"
 msgstr ""
 
-#: ../setup.php:152
+#: ../setup.php:226
 msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
 msgstr ""
 
-#: ../setup.php:158
+#: ../setup.php:232
 msgid "Flow Tools Work Directory"
 msgstr ""
 
-#: ../setup.php:159
+#: ../setup.php:233
 msgid "This is the path to a temporary directory to do work."
 msgstr ""
 
-#: ../setup.php:165
+#: ../setup.php:239
 msgid "Flows Directory"
 msgstr ""
 
-#: ../setup.php:166
+#: ../setup.php:240
 msgid "This is the path to base the path of your flow folder structure."
 msgstr ""
 
-#: ../setup.php:172
+#: ../setup.php:246
 msgid "Hostname Resolution"
 msgstr ""
 
-#: ../setup.php:173
+#: ../setup.php:247
 msgid "The method by which you wish to resolve hostnames."
 msgstr ""
 
-#: ../setup.php:179
+#: ../setup.php:250
+msgid "Use Local Server"
+msgstr ""
+
+#: ../setup.php:251
+msgid "Use DNS Server Below"
+msgstr ""
+
+#: ../setup.php:252
+msgid "Don't Resolve DNS"
+msgstr ""
+
+#: ../setup.php:257
 msgid "Alternate DNS Server"
 msgstr ""
 
-#: ../setup.php:180
+#: ../setup.php:258
 msgid "This is the DNS Server used to resolve names."
 msgstr ""
 
-#: ../setup.php:185
+#: ../setup.php:263
 msgid "Strip Domain Names"
 msgstr ""
 
-#: ../setup.php:186
+#: ../setup.php:264
 msgid "A comma delimited list of domains names to strip from the domain."
 msgstr ""
 
-#: ../flowview_devices.php:34 ../flowview_devices.php:35
-#, php-format
-msgid "%d Days"
-msgstr ""
-
-#: ../flowview_devices.php:36
-#, php-format
-msgid "%d Week"
-msgstr ""
-
-#: ../flowview_devices.php:37
-#, php-format
-msgid "%d Weeks"
-msgstr ""
-
-#: ../flowview_devices.php:38
-#, php-format
-msgid "%d Month"
-msgstr ""
-
-#: ../flowview_devices.php:39 ../flowview_devices.php:40
-#: ../flowview_devices.php:41
-#, php-format
-msgid "%d Months"
-msgstr ""
-
-#: ../flowview_devices.php:42
-#, php-format
-msgid "%d Year"
-msgstr ""
-
-#: ../flowview_devices.php:46
-#, php-format
-msgid "%d Minute"
-msgstr ""
-
-#: ../flowview_devices.php:47 ../flowview_devices.php:48
-#: ../flowview_devices.php:49
-#, php-format
-msgid "%d Minutes"
-msgstr ""
-
-#: ../flowview_devices.php:53
-msgid "NetFlow version 1"
-msgstr ""
-
-#: ../flowview_devices.php:54
-msgid "NetFlow version 5"
-msgstr ""
-
-#: ../flowview_devices.php:55
-msgid "NetFlow version 6"
-msgstr ""
-
-#: ../flowview_devices.php:56
-msgid "NetFlow version 7"
-msgstr ""
-
-#: ../flowview_devices.php:57
-msgid "NetFlow AS Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:58
-msgid "NetFlow Proto Port Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:59
-msgid "NetFlow Source Prefix Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:60
-msgid "NetFlow Destination Prefix Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:61
-msgid "NetFlow Prefix Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:62
-msgid "NetFlow Destination"
-msgstr ""
-
-#: ../flowview_devices.php:63
-msgid "NetFlow Source Destination"
-msgstr ""
-
-#: ../flowview_devices.php:64
-msgid "NetFlow Full Flow"
-msgstr ""
-
-#: ../flowview_devices.php:65
-msgid "NetFlow ToS AS Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:66
-msgid "NetFlow ToS Proto Port Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:67
-msgid "NetFlow ToS Source Prefix Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:68
-msgid "NetFlow ToS Destination Prefix Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:69
-msgid "NetFlow ToS Prefix Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:70
-msgid "NetFlow ToS Prefix Port Aggregation"
-msgstr ""
-
-#: ../flowview_devices.php:71
-msgid "Flow-Tools tagged version 5"
-msgstr ""
-
-#: ../flowview_devices.php:84
-msgid "0 (Disabled)"
-msgstr ""
-
-#: ../flowview_devices.php:93
-msgid "9 (Highest)"
-msgstr ""
-
-#: ../flowview_devices.php:99
-msgid "Device Name"
-msgstr ""
-
-#: ../flowview_devices.php:100
-msgid "Name of the device to be displayed."
-msgstr ""
-
-#: ../flowview_devices.php:106 ../flowview_devices.php:424
-msgid "Directory"
-msgstr ""
-
-#: ../flowview_devices.php:107
-msgid ""
-"Directory that this devices flows are in.  This directory must be in the "
-"Flow Directory path.  Do not put the full path here.  Also, not that if you "
-"change the path, all the predefined filer setup to to use it will have to be "
-"resaved."
-msgstr ""
-
-#: ../flowview_devices.php:113
-msgid "Allowed Host"
-msgstr ""
-
-#: ../flowview_devices.php:114
-msgid ""
-"IP Address of the device that is allowed to send to this flow collector.  "
-"Leave as 0 for any host."
-msgstr ""
-
-#: ../flowview_devices.php:123
-msgid "Port this collector will listen on."
-msgstr ""
-
-#: ../flowview_devices.php:130 ../flowview_devices.php:425
-msgid "Nesting"
-msgstr ""
-
-#: ../flowview_devices.php:131
-msgid "Directory Structure that will be used for the flows for this device."
-msgstr ""
-
-#: ../flowview_devices.php:138
-msgid "NetFlow Version"
-msgstr ""
-
-#: ../flowview_devices.php:139
-msgid "NetFlow Protocol version used by the device."
-msgstr ""
-
-#: ../flowview_devices.php:146
-msgid "Compression Level"
-msgstr ""
-
-#: ../flowview_devices.php:147
-msgid ""
-"Compression level of flow files.  Higher compression saves space but uses "
-"more CPU to store and retrieve results."
-msgstr ""
-
-#: ../flowview_devices.php:154 ../flowview_devices.php:430
-msgid "Rotation"
-msgstr ""
-
-#: ../flowview_devices.php:155
-msgid "How often to create a new Flow File."
-msgstr ""
-
-#: ../flowview_devices.php:162
-msgid "Expiration"
-msgstr ""
-
-#: ../flowview_devices.php:163
-msgid "How long to keep your flow files."
-msgstr ""
-
-#: ../flowview_devices.php:241
-msgid ""
-"Click 'Continue' to delete the following Net-Flow Listeners.  After which, "
-"you will need to restart your Flow-Capture Service."
-msgstr ""
-
-#: ../flowview_devices.php:242
-msgid ""
-"Also, remember to remove any leftover files from your Net-Flow Capture "
-"location."
-msgstr ""
-
-#: ../flowview_devices.php:249
-msgid "You must select at least one device."
-msgstr ""
-
-#: ../flowview_devices.php:327
-#, php-format
-msgid "Device: %s"
-msgstr ""
-
-#: ../flowview_devices.php:384
-msgid "FlowView Listeners"
-msgstr ""
-
-#: ../flowview_devices.php:423
-msgid "Name"
-msgstr ""
-
-#: ../flowview_devices.php:426
-msgid "Allowed From"
-msgstr ""
-
-#: ../flowview_devices.php:428
-msgid "Version"
-msgstr ""
-
-#: ../flowview_devices.php:429
-msgid "Compression"
-msgstr ""
-
-#: ../flowview_devices.php:431
-msgid "Expire"
-msgstr ""
-
-#: ../flowview_devices.php:452
-msgid "No Devices"
+#: ../setup.php:271
+msgid "Misc"
 msgstr ""

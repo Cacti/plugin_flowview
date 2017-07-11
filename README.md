@@ -53,6 +53,7 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 * issue: Some W3C Validation Changes
 * issue: Table plugin_flowview_devices wrong engine
 * issue: Correcting issues with the flow-capture script
+* issue: Update text domains for i18n
 
 --- 1.1 ---
 * issue: FlowView Settings were hidden for some reason
