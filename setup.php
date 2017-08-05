@@ -22,7 +22,7 @@
  +-------------------------------------------------------------------------+
 */
 
-function plugin_flowview_install () {
+function plugin_flowview_install() {
 	api_plugin_register_hook('flowview', 'config_arrays',         'flowview_config_arrays',        'setup.php');
 	api_plugin_register_hook('flowview', 'draw_navigation_text',  'flowview_draw_navigation_text', 'setup.php');
 	api_plugin_register_hook('flowview', 'config_settings',       'flowview_config_settings',      'setup.php');
@@ -38,24 +38,24 @@ function plugin_flowview_install () {
 	flowview_setup_table();
 }
 
-function plugin_flowview_uninstall () {
+function plugin_flowview_uninstall() {
 	// Do any extra Uninstall stuff here
 }
 
-function plugin_flowview_check_config () {
+function plugin_flowview_check_config() {
 	// Here we will check to ensure everything is configured
-	flowview_check_upgrade ();
+	plugin_flowview_check_upgrade();
 	return true;
 }
 
-function plugin_flowview_upgrade () {
+function plugin_flowview_upgrade() {
 	// Here we will upgrade to the newest version
-	flowview_check_upgrade ();
+	plugin_flowview_check_upgrade();
 	return false;
 }
 
-function flowview_check_upgrade () {
-	$current = plugin_flowview_version ();
+function plugin_flowview_check_upgrade() {
+	$current = plugin_flowview_version();
 	$current = $current['version'];
 	$old = read_config_option('plugin_flowview_version');
 	if ($current != $old) {
@@ -73,20 +73,20 @@ function flowview_check_upgrade () {
 	db_execute('ALTER TABLE plugin_flowview_devices ENGINE=InnoDB');
 }
 
-function plugin_flowview_version () {
+function plugin_flowview_version() {
 	global $config;
 	$info = parse_ini_file($config['base_path'] . '/plugins/flowview/INFO', true);
 	return $info['info'];
 }
 
-function flowview_config_arrays () {
+function flowview_config_arrays() {
 	global $menu, $messages;
 
 	$messages['flow_deleted'] = array('message' => __('The Filter has been Deleted', 'flowview'), 'type' => 'info');
 	$messages['flow_updated'] = array('message' => __('The Filter has been Updated', 'flowview'), 'type' => 'info');
 }
 
-function flowview_draw_navigation_text ($nav) {
+function flowview_draw_navigation_text($nav) {
 	$nav['flowview.php:'] = array(
 		'title' => __('Flow Viewer', 'flowview'),
 		'mapping' => '',
@@ -213,7 +213,7 @@ function flowview_page_bottom() {
 	}
 }
 
-function flowview_config_settings () {
+function flowview_config_settings() {
 	global $settings, $tabs;
 
 	$temp = array(
@@ -276,7 +276,7 @@ function flowview_config_settings () {
 		$settings['misc']=$temp;
 }
 
-function flowview_poller_bottom () {
+function flowview_poller_bottom() {
 	global $config;
 	include_once($config['library_path'] . '/database.php');
 	$time = time() - 3600;
@@ -293,7 +293,7 @@ function flowview_poller_bottom () {
 	}
 }
 
-function flowview_setup_table () {
+function flowview_setup_table() {
 	global $config;
 
 	$data = array();
@@ -303,7 +303,7 @@ function flowview_setup_table () {
 	$data['keys'][]    = array('name' => 'ip', 'columns' => 'ip');
 	$data['type']      = 'MEMORY';
 	$data['comment']   = 'Plugin Flowview - DNS Cache to help speed things up';
-	api_plugin_db_table_create ('flowview', 'plugin_flowview_dnscache', $data);
+	api_plugin_db_table_create('flowview', 'plugin_flowview_dnscache', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
@@ -320,7 +320,7 @@ function flowview_setup_table () {
 	$data['keys'][]    = array('name' => 'folder', 'columns' => 'folder');
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - List of Devices to collect flows from';
-	api_plugin_db_table_create ('flowview', 'plugin_flowview_devices', $data);
+	api_plugin_db_table_create('flowview', 'plugin_flowview_devices', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
@@ -350,7 +350,7 @@ function flowview_setup_table () {
 	$data['primary']   = 'id';
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - List of Saved Flow Queries';
-	api_plugin_db_table_create ('flowview', 'plugin_flowview_queries', $data);
+	api_plugin_db_table_create('flowview', 'plugin_flowview_queries', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
@@ -365,7 +365,7 @@ function flowview_setup_table () {
 	$data['keys'][]    = array('name' => 'savedquery', 'columns' => 'savedquery');
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - Scheduling for running and emails of saved queries';
-	api_plugin_db_table_create ('flowview', 'plugin_flowview_schedules', $data);
+	api_plugin_db_table_create('flowview', 'plugin_flowview_schedules', $data);
 
 	$data = array();
 	$data['columns'][] = array('name' => 'id',         'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
@@ -376,7 +376,7 @@ function flowview_setup_table () {
 	$data['primary']   = 'id';
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - Database of well known Ports';
-	api_plugin_db_table_create ('flowview', 'plugin_flowview_ports', $data);
+	api_plugin_db_table_create('flowview', 'plugin_flowview_ports', $data);
 
 	$inserts = file($config['base_path'] . '/plugins/flowview/plugin_flowview_ports.sql');
 	if (sizeof($inserts)) {
