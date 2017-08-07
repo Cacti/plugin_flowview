@@ -42,6 +42,9 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 
 # Changelog
 
+--- 2.1 ---
+* issue: Prepare for sunrise theme in 1.1.17
+
 --- 2.0 ---
 * feature: Support for Cacti 1.0
 * feature: Support for Ugroup Plugin

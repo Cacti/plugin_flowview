@@ -125,28 +125,20 @@ function flowview_display_report() {
 						<td>
 							<?php print __('Show/Hide', 'flowview');?>
 						</td>
-						<td>
+						<td class='nowrap'>
 							<input type='checkbox' name='table' id='table' <?php print (get_request_var('table') == 'true' || get_request_var('table') == 'on' ? 'checked':'');?>>
-						</td>
-						<td>
 							<label for='table'><?php print __('Table', 'flowview');?></label>
 						</td>
-						<td>
+						<td class='nowrap'>
 							<input type='checkbox' name='bytes' id='bytes' <?php print (get_request_var('bytes') == 'true' || get_request_var('bytes') == 'on' ? 'checked':'');?>>
-						</td>
-						<td>
 							<label for='bytes'><?php print __('Bytes Bar', 'flowview');?></label>
 						</td>
-						<td>
+						<td class='nowrap'>
 							<input type='checkbox' name='packets' id='packets' <?php print (get_request_var('packets') == 'true' || get_request_var('packets') == 'on' ? 'checked':'');?>>
-						</td>
-						<td>
 							<label for='packets'><?php print __('Packets Bar', 'flowview');?></label>
 						</td>
-						<td>
+						<td class='nowrap'>
 							<input type='checkbox' name='flows' id='flows' <?php print (get_request_var('flows') == 'true' || get_request_var('flows') == 'on' ? 'checked':'');?>>
-						</td>
-						<td>
 							<label for='flows'><?php print __('Flows Bar', 'flowview');?></label>
 						</td>
 						<td>

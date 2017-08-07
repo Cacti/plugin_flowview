@@ -55,22 +55,41 @@ function plugin_flowview_upgrade() {
 }
 
 function plugin_flowview_check_upgrade() {
-	$current = plugin_flowview_version();
-	$current = $current['version'];
-	$old = read_config_option('plugin_flowview_version');
-	if ($current != $old) {
-		flowview_setup_table();
-	}else{
+	$files = array('plugins.php', 'flowview.php', 'index.php');
+	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
 		return;
 	}
 
-	/* update titles for those that don't have them */
-	db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
+	$info    = plugin_flowview_version();
+	$current = $info['version'];
+	$old     = read_config_option('plugin_flowview_version');
 
-	/* Set the new version */
-	db_execute_prepared("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', ?)", array($current));
+	if ($current != $old) {
+		$bad_titles = db_fetch_cell('SELECT COUNT(*)
+			FROM plugin_flowview_schedules
+			WHERE title=""');
 
-	db_execute('ALTER TABLE plugin_flowview_devices ENGINE=InnoDB');
+		if ($bad_titles) {
+			/* update titles for those that don't have them */
+			db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
+
+			/* Set the new version */
+			db_execute_prepared("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', ?)", array($current));
+
+			db_execute('ALTER TABLE plugin_flowview_devices ENGINE=InnoDB');
+		}
+
+		db_execute("UPDATE plugin_config
+			SET version='$current'
+			WHERE directory='flowview'");
+
+		db_execute("UPDATE plugin_config SET
+			version='" . $info['version']  . "',
+			name='"    . $info['longname'] . "',
+			author='"  . $info['author']   . "',
+			webpage='" . $info['homepage'] . "'
+			WHERE directory='" . $info['name'] . "' ");
+	}
 }
 
 function plugin_flowview_version() {
@@ -84,6 +103,8 @@ function flowview_config_arrays() {
 
 	$messages['flow_deleted'] = array('message' => __('The Filter has been Deleted', 'flowview'), 'type' => 'info');
 	$messages['flow_updated'] = array('message' => __('The Filter has been Updated', 'flowview'), 'type' => 'info');
+
+	plugin_flowview_check_upgrade();
 }
 
 function flowview_draw_navigation_text($nav) {
