@@ -766,7 +766,7 @@ function parsestatoutput($output, $title, $sessionid) {
 
 	$x = 1;
 	foreach ($columns as $column) {
-		$o .= "<th class='subHeaderColumn" . ($column == 'Bytes' ? ' {sorter: "bytes"}':'') . "' style='text-align:" . get_column_alignment($column) . "'>$column</th>";
+		$o .= "<th class='subHeaderColumn" . (preg_match('/(Bytes|Flows|Packets)/i', $column) ? ' {sorter: "bytes"}':'') . "' style='text-align:" . get_column_alignment($column) . "'>$column</th>";
 		$x++;
 	}
 	$o .= '</tr></thead><tbody>';
@@ -919,7 +919,7 @@ function parseprintoutput($output, $title, $sessionid) {
 	}
 
 	foreach ($columns as $column) {
-		$o .= "<th class='subHeaderColumn" . ($column == 'Bytes' ? ' {sorter: "bytes"}':'') . "' style='text-align:" . get_column_alignment($column) . "'>$column</th>";
+		$o .= "<th class='subHeaderColumn" . (preg_match('/(Bytes|Flows|Packets)/i', $column) ? ' {sorter: "bytes"}':'') . "' style='text-align:" . get_column_alignment($column) . "'>$column</th>";
 	}
 
 	$o .= '</tr></thead><tbody>';
