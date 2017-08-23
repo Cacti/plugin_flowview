@@ -23,7 +23,7 @@
 */
 
 $stat_report_array = array(
-	0  => __('Statistics Reports', 'flowview'),
+	0  => __('Select a Statistic Report', 'flowview'),
 	99 => __('Summary', 'flowview'),
 	5  => __('UDP/TCP Destination Port', 'flowview'),
 	6  => __('UDP/TCP Source Port', 'flowview'),
@@ -46,7 +46,7 @@ $stat_report_array = array(
 );
 
 $print_report_array = array(
-	 0  => __('Print Reports', 'flowview'),
+	 0  => __('Select a Print Report', 'flowview'),
 	 1  => __('Flow Times', 'flowview'),
 	 4  => __('AS Numbers', 'flowview'),
 	 5  => __('132 Columns', 'flowview'),

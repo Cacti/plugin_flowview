@@ -28,6 +28,8 @@ include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
 set_default_action();
 
+flowview_request_vars();
+
 ini_set('max_execution_time', 240);
 ini_set('memory_limit', '512M');
 
@@ -58,8 +60,9 @@ case 'view':
 	break;
 default:
 	general_header();
-	display_output_messages();
+
 	flowview_display_form();
+
 	bottom_footer();
 }
 
@@ -86,10 +89,16 @@ function flowview_gettimespan() {
 }
 
 function flowview_delete_filter() {
-	db_execute('DELETE FROM plugin_flowview_queries WHERE id=' . get_request_var_request('query'));
-	db_execute('DELETE FROM plugin_flowview_schedules WHERE savedquery=' . get_request_var_request('query'));
+	db_execute_prepared('DELETE FROM plugin_flowview_queries
+		WHERE id = ?',
+		array(get_filter_request_var('query')));
+
+	db_execute_prepared('DELETE FROM plugin_flowview_schedules
+		WHERE savedquery = ?',
+		array(get_filter_request_var('query')));
 
 	raise_message('flow_deleted');
+
 	header('Location: flowview.php?tab=filters&header=false');
 	exit;
 }
@@ -98,6 +107,7 @@ function flowview_delete_session() {
 	if (isset($_SESSION['flowview_flows'][get_request_var('session')])) {
 		unset($_SESSION['flowview_flows'][get_request_var('session')]);
 	}
+
 	header('Location: flowview.php?tab=filters');
 	exit;
 }
@@ -143,6 +153,115 @@ function flowview_save_filter() {
 	}
 }
 
+function flowview_request_vars() {
+	if (isset_request_var('stat_report') && get_filter_request_var('stat_report') > 0) {
+		set_request_var('print_report', 0);
+	} elseif (isset_request_var('print_report') && get_filter_request_var('print_report') > 0) {
+		set_request_var('stat_report', 0);
+	}
+
+    /* ================= input validation and session storage ================= */
+    $filters = array(
+		'flow_select' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '1'
+			),
+		'stat_report' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '10'
+			),
+		'print_report' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '0'
+			),
+		'sort_field' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '3'
+			),
+		'cutoff_lines' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '20'
+			),
+		'cutoff_octets' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '0'
+			),
+		'device_name' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string'),
+			'default' => '0'
+			),
+		'predefined_timespan' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => read_user_setting('default_timespan')
+			),
+		'date1' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'date2' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'protocols' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '6',
+			),
+		'flow_select' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'tcp_flags' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'tos_fields' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'source_address' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'source_port' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'source_if' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'source_as' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'desc_address' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'dest_port' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'dest_if' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'dest_as' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'resolve_addresses' => array(
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => array('options' => array('regexp' => '(Y|N)')),
+			'default' => 'true'
+			)
+	);
+
+	validate_store_request_vars($filters, 'sess_flowv');
+	/* ================= input validation ================= */
+}
+
 function flowview_display_form() {
 	global $config, $graph_timespans;
 
@@ -180,20 +299,11 @@ function flowview_display_form() {
 					<td>
 						<select id='predefined_timespan' name='predefined_timespan' onChange='applyTimespan()'>
 							<?php
-							if ($timespan == 0) {
-								$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
-								$start_val = 0;
-								$end_val = sizeof($graph_timespans);
-							} else {
-								if (isset($graph_timespans[GT_CUSTOM])) {
-									asort($graph_timespans);
-									array_shift($graph_timespans);
-								}
-   								$start_val = 1;
-								$end_val = sizeof($graph_timespans)+1;
-							}
+							$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
+							$start_val = 0;
+							$end_val = sizeof($graph_timespans);
 
-							if (sizeof($graph_timespans) > 0) {
+							if (sizeof($graph_timespans)) {
 								for ($value=$start_val; $value < $end_val; $value++) {
 									print "<option value='$value'"; if ($timespan == $value) { print ' selected'; } print '>' . title_trim($graph_timespans[$value], 40) . "</option>\n";
 								}
@@ -349,6 +459,24 @@ function flowview_display_form() {
 			</center>
 		</td>
 	</tr>
+	<tr style='display:none;'>
+		<td>
+			<div id='fdialog' style='text-align:center;display:none;padding:2px;'>
+				<table>
+					<tr>
+						<td style='padding:3px;' class='nowrap'><?php print __('Filter Name', 'flowview');?></td>
+						<td style='padding:3px;'><input type='text' size='40' name='squery' id='squery' value='<?php print __esc('New Query', 'flowview');?>'></td>
+					</tr>
+					<tr style='padding:3px;'>
+						<td style='padding:3px;' colspan='2' class='right'>
+							<input id='qcancel' type='button' value='<?php print __esc('Cancel', 'flowview');?>'>
+							<input id='qsave' type='button' value='<?php print __esc('Save', 'flowview');?>'>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
 	<?php
 
 	html_end_box();
@@ -399,6 +527,8 @@ function flowview_display_form() {
 			$('#save').prop('disabled', false);
 			$('#saveas').prop('disabled', false);
 		}
+
+		$('#print_report').selectmenu('refresh', true);
 	}
 
 	function printSelect() {
@@ -442,6 +572,8 @@ function flowview_display_form() {
 			$('#save').prop('disabled', false);
 			$('#saveas').prop('disabled', false);
 		}
+
+		$('#stat_report').selectmenu('refresh', true);
 	}
 
 	$('#device_name').change(function () {
@@ -549,10 +681,12 @@ function flowview_display_form() {
 
 		$('#stat_report').change(function() {
 			statSelect();
+			$('#print_report').selectmenu('refresh');
 		});
 
 		$('#print_report').change(function() {
 			printSelect();
+			$('#stat_report').selectmenu('refresh');
 		});
 
 		statSelect();
@@ -576,7 +710,6 @@ function flowview_display_form() {
 	});
 
 	$('#saveas').click(function() {
-		console.log('This is saveas');
 		$('#squery').attr('value', $('#query>option:selected').text()+' (New)');
 		$('#fdialog').dialog('open');
 		$('#qcancel').click(function() {
@@ -659,87 +792,100 @@ function flowview_display_form() {
 	}
 
 	function setStatOption(choose) {
-		stat = document.flowview.sort_field;
-		stat.options.length = 0;
+		$('#sort_field').empty();
+
 		defsort = 1;
 		if (choose == 10) {
-			stat.options[stat.options.length] = new Option('<?php print __('Source IP', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Destination IP', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Source IP', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Destination IP', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 5, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 4;
 		} else if (choose == 5 || choose == 6 || choose == 7) {
-			stat.options[stat.options.length] = new Option('<?php print __('Port', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Port', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 3;
 		} else if (choose == 8 || choose == 9 || choose == 11) {
-			stat.options[stat.options.length] = new Option('<?php print __('IP', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('IP', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 3;
 		} else if (choose == 12) {
-			stat.options[stat.options.length] = new Option('<?php print __('Protocol', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Protocol', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 3;
 		} else if (choose == 17 || choose == 18) {
-			stat.options[stat.options.length] = new Option('<?php print __('Interface', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Interface', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 3;
 		} else if (choose == 23) {
-			stat.options[stat.options.length] = new Option('<?php print __('Input Interface', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Output Interface', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Input Interface', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Output Interface', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 5, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 4;
 		} else if (choose == 19 || choose == 20) {
-			stat.options[stat.options.length] = new Option('<?php print __('AS', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('AS', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 3;
 		} else if (choose == 21) {
-			stat.options[stat.options.length] = new Option('<?php print __('Source AS', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Destination AS', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Source AS', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Destination AS', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 5, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 4;
 		} else if (choose == 22) {
-			stat.options[stat.options.length] = new Option('<?php print __('TOS', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('TOS', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 3;
 		} else if (choose == 24 || choose == 25) {
-			stat.options[stat.options.length] = new Option('<?php print __('Prefix', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '4');
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Prefix', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Packets', 'flowview');?>'}));
+
 			defsort = 3;
 		} else if (choose == 26) {
-			stat.options[stat.options.length] = new Option('<?php print __('Source Prefix', 'flowview');?>', '1');
-			stat.options[stat.options.length] = new Option('<?php print __('Destination Prefix', 'flowview');?>', '2');
-			stat.options[stat.options.length] = new Option('<?php print __('Flows', 'flowview');?>', '3');
-			stat.options[stat.options.length] = new Option('<?php print __('Bytes', 'flowview');?>', '4');
-			stat.options[stat.options.length] = new Option('<?php print __('Packets', 'flowview');?>', '5');
-			defsort = 4;
-		} else {
+			$('#sort_field').append($('<option>', { value: 1, text: '<?php print __('Source Prefix', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 2, text: '<?php print __('Destination Prefix', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 3, text: '<?php print __('Flows', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 4, text: '<?php print __('Bytes', 'flowview');?>'}));
+			$('#sort_field').append($('<option>', { value: 5, text: '<?php print __('Packets', 'flowview');?>'}));
 
+			defsort = 4;
 		}
 
-		if (statreport == choose) {
-			stat.value = sortfield;
-		} else {
-			stat.value = defsort;
+		if (choose != '0' && choose != '99') {
+			if (statreport == choose) {
+				$('#sort_field').val(sortfield).selectmenu('refresh');
+			} else {
+				$('#sort_field').val(defsort).selectmenu('refresh');
+			}
+
+			$('#print_report').val('0').selectmenu('refresh');
 		}
 	}
 

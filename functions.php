@@ -101,7 +101,7 @@ function flowview_display_report() {
 
 	display_tabs();
 
-	if (isset_request_var('stat_report') && get_nfilter_request_var('stat_report') != 99) {
+	if (isset_request_var('stat_report') && get_request_var('stat_report') > 0 && get_nfilter_request_var('stat_report') != 99) {
 		html_start_box(__('Report: %s', $rname, 'flowview'), '100%', '', '3', 'center', '');
 		?>
 		<tr class='even'>
@@ -157,21 +157,26 @@ function flowview_display_report() {
 		flowview_draw_chart('bytes', $rname);
 		flowview_draw_chart('packets', $rname);
 		flowview_draw_chart('flows', $rname);
-	}elseif (isset_request_var('print_report') && get_nfilter_request_var('print_report') > 0) {
+
+		echo "<div id='flowcontent'>";
+		echo $filter;
+		echo "</div>";
+		html_end_box();
+	}elseif (isset_request_var('print_report') && get_request_var('print_report') > 0) {
 		html_start_box(__('Report: %s', $rname, 'flowview'), '100%', '', '3', 'center', '');
+		echo $filter;
+		html_end_box();
 	}
 
-	echo "<div id='flowcontent'>";
-	echo $filter;
-	html_end_box();
-	echo "</div>";
 
 	?>
 	<script type='text/javascript'>
 
-	swfobject.embedSWF('open-flash-chart.swf', 'chartbytes', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=bytes&title=$rname");?>', 'id':'chartbytes'});
-	swfobject.embedSWF('open-flash-chart.swf', 'chartpackets', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=packets&title=$rname");?>', 'id':'chartpackets'});
-	swfobject.embedSWF('open-flash-chart.swf', 'chartflows', '98%', '275', '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=flows&title=$rname");?>', 'id':'chartflows'});
+	height = $(window).height() - 200;
+
+	swfobject.embedSWF('open-flash-chart.swf', 'chartbytes', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=bytes&title=$rname");?>', 'id':'chartbytes'});
+	swfobject.embedSWF('open-flash-chart.swf', 'chartpackets', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=packets&title=$rname");?>', 'id':'chartpackets'});
+	swfobject.embedSWF('open-flash-chart.swf', 'chartflows', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=flows&title=$rname");?>', 'id':'chartflows'});
 
 	$('#bytes').click(function() {
 		if (!$('#bytes').is(':checked')) {
@@ -614,22 +619,22 @@ function parseSummaryReport($output) {
 
 			if (substr_count($l, 'IP packet size distribution')) {
 				html_end_box(false);
-				html_start_box(__('IP Packet Size Distribution (%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('IP Packet Size Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
 				$section = 'inippsd';
 				continue;
 			}elseif (substr_count($l, 'Packets per flow distribution')) {
 				html_end_box(false);
-				html_start_box(__('Packets per Flow Distribution (%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('Packets per Flow Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
 				$section = 'inppfd';
 				continue;
 			}elseif (substr_count($l, 'Octets per flow distribution')) {
 				html_end_box(false);
-				html_start_box(__('Octets per Flow Distribution (%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('Octets per Flow Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
 				$section = 'inopfd';
 				continue;
 			}elseif (substr_count($l, 'Flow time distribution')) {
 				html_end_box(false);
-				html_start_box(__('Flow Time Distribution (%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('Flow Time Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
 				$section = 'inftd';
 				continue;
 			}
@@ -640,7 +645,7 @@ function parseSummaryReport($output) {
 					if ($i > 0) {
 						echo "</tr>";
 					}
-					echo "<tr class='" . flowview_altrow($j) . "' style='border:1px solid #FEFEFE;'>";
+					echo "<tr class='" . flowview_altrow($j) . "'>";
 					$j++;
 				}
 
@@ -735,7 +740,7 @@ function parsestatoutput($output, $title, $sessionid) {
 	html_start_box($title, '100%', '', '3', 'center', '');
 	$o  = ob_get_clean();
 
-	$o .= '<table id="sorttable" class="cactiTable" width="100%">
+	$o .= '<table id="sorttable" width="100%">
 			<thead>
 				<tr class="tableHeader" align=center>';
 
@@ -761,7 +766,7 @@ function parsestatoutput($output, $title, $sessionid) {
 
 	$x = 1;
 	foreach ($columns as $column) {
-		$o .= "<th class='tableSubHeaderColumn' " . ($column == "Bytes" ? "class=\"{sorter: 'bytes'} subHeaderColumn\"":"") . " style='text-align:" . get_column_alignment($column) . "'>$column</th>";
+		$o .= "<th class='subHeaderColumn" . ($column == 'Bytes' ? ' {sorter: "bytes"}':'') . "' style='text-align:" . get_column_alignment($column) . "'>$column</th>";
 		$x++;
 	}
 	$o .= '</tr></thead><tbody>';
@@ -885,20 +890,17 @@ function parseprintoutput($output, $title, $sessionid) {
 	$output = explode("\n", $output);
 
 	/* cheasy way to get output */
-	ob_start();
-	html_start_box($title, '100%', '', '3', 'center', '');
-	$o  = ob_get_clean();
-
-	$o = '<table width="100%" cellspacing=0 cellpadding=2 border=0>
-		<tr class="textHeaderDark" align=center>';
+	$o = '<table id="sorttable" width="100%">
+			<thead>
+				<tr class="tableHeader" align=center>';
 
 	$clines     = $print_columns_array[$print_report][0];
-	$octect_col = $print_columns_array[$print_report][1];
+	$octet_col  = $print_columns_array[$print_report][1];
 	$proto_hex  = $print_columns_array[$print_report][3];
 	$proto_col  = $print_columns_array[$print_report][4];
 
 	$ip_col     = $print_columns_array[$print_report][2];
-	$ip_col     = explode(',',$ip_col);
+	$ip_col     = explode(',', $ip_col);
 	$ports_col  = explode(',', $print_columns_array[$print_report][6]);
 	$ports_hex  = $print_columns_array[$print_report][5];
 
@@ -917,9 +919,10 @@ function parseprintoutput($output, $title, $sessionid) {
 	}
 
 	foreach ($columns as $column) {
-		$o .= "<th align='" . get_column_alignment($column) . "'>$column</th>";
+		$o .= "<th class='subHeaderColumn" . ($column == 'Bytes' ? ' {sorter: "bytes"}':'') . "' style='text-align:" . get_column_alignment($column) . "'>$column</th>";
 	}
-	$o .= "</tr>\n";
+
+	$o .= '</tr></thead><tbody>';
 	$cut = 1;
 
 	$dns = '';
@@ -995,7 +998,7 @@ function parseprintoutput($output, $title, $sessionid) {
 		$_SESSION['flowview_flows'][$sessionid]['data'] = $data_array;
 	}
 
-	$o .= '</table>';
+	$o .= '</tbody></table>';
 	return $o;
 }
 
@@ -1508,7 +1511,7 @@ function flowview_draw_chart($type, $title) {
 
 	echo "<div id='wrapper" . $type . "' style='display:none;'>";
 	html_start_box(__('FlowView Chart for %s Type is %s', $title, ucfirst($type), 'flowview'), '100%', '', '3', 'center', '');
-	echo "<tr style='background-color:#F9F9F9;'><td align='center'>";
+	echo "<tr><td align='center'>";
 	echo "<div id='chart$type'></div>";
 	echo "</td></tr>";
 	html_end_box(false);
@@ -1867,7 +1870,7 @@ function flowview_viewchart() {
 		$chart->add_element($bar);
 		$chart->set_x_axis($x_axis);
 		$chart->add_y_axis($y_axis);
-		$chart->set_bg_colour('#FEFEFE');
+		$chart->set_bg_colour('#F0F0F0');
 		echo $chart->toString();
 	}
 }

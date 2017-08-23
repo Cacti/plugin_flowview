@@ -30,7 +30,6 @@ function plugin_flowview_install() {
 	api_plugin_register_hook('flowview', 'top_header_tabs',       'flowview_show_tab',             'setup.php');
 	api_plugin_register_hook('flowview', 'top_graph_header_tabs', 'flowview_show_tab',             'setup.php');
 	api_plugin_register_hook('flowview', 'page_head',             'flowview_page_head',            'setup.php');
-	api_plugin_register_hook('flowview', 'page_bottom',           'flowview_page_bottom',          'setup.php');
 
 	api_plugin_register_realm('flowview', 'flowview.php', __('Plugin -> Flow Viewer', 'flowview'), 1);
 	api_plugin_register_realm('flowview', 'flowview_devices.php,flowview_schedules.php', __('Plugin -> Flow Admin', 'flowview'), 1);
@@ -211,26 +210,6 @@ function flowview_page_head() {
 	global $config, $colors;
 	if (substr_count($_SERVER['REQUEST_URI'], 'flowview')) {
 		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
-	}
-}
-
-function flowview_page_bottom() {
-	if (basename(get_current_page()) == 'flowview.php') {
-		print "	<div id='fdialog' style='text-align:center;display:none;'>
-			<table>
-				<tr>
-					<td style='white-space:nowrap'>" . __('Filter Name', 'flowview') . "</td>
-					<td><input type='text' size='40' name='squery' id='squery' value='" . __esc('New Query', 'flowview') . "'></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td class='right'>
-						<input id='qcancel' type='button' value='" . __esc('Cancel', 'flowview') . "'>
-						<input id='qsave' type='button' value='" . __esc('Save', 'flowview') . "'>
-					</td>
-				</tr>
-			</table>
-		</div>\n";
 	}
 }
 
