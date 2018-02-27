@@ -1,0 +1,1571 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: flowview on cacti 1.1.34\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-22 03:28+0800\n"
+"PO-Revision-Date: 2018-02-22 13:59+0800\n"
+"Last-Translator: \n"
+"Language-Team: sfqas <sfqas@163.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+
+#: ../arrays.php:26
+msgid "Statistics Reports"
+msgstr "统计报告"
+
+#: ../arrays.php:27
+msgid "Summary"
+msgstr "概要"
+
+#: ../arrays.php:28
+msgid "UDP/TCP Destination Port"
+msgstr "UDP / TCP目标端口"
+
+#: ../arrays.php:29
+msgid "UDP/TCP Source Port"
+msgstr "UDP / TCP源端口"
+
+#: ../arrays.php:30
+msgid "UDP/TCP Port"
+msgstr "UDP / TCP端口"
+
+#: ../arrays.php:31
+#: ../flowview.php:667
+msgid "Destination IP"
+msgstr "目标IP"
+
+#: ../arrays.php:32
+#: ../flowview.php:248
+#: ../flowview.php:666
+msgid "Source IP"
+msgstr "来源IP"
+
+#: ../arrays.php:33
+msgid "Source/Destination IP"
+msgstr "源/目标IP"
+
+#: ../arrays.php:34
+msgid "Source or Destination IP"
+msgstr "源或目标IP"
+
+#: ../arrays.php:35
+msgid "IP Protocol"
+msgstr "IP协议"
+
+#: ../arrays.php:36
+#: ../flowview.php:697
+msgid "Input Interface"
+msgstr "输入接口"
+
+#: ../arrays.php:37
+#: ../flowview.php:698
+msgid "Output Interface"
+msgstr "输出接口"
+
+#: ../arrays.php:38
+msgid "Input/Output Interface"
+msgstr "输入/输出接口"
+
+#: ../arrays.php:39
+#: ../flowview.php:266
+#: ../flowview.php:710
+msgid "Source AS"
+msgstr "来源AS"
+
+#: ../arrays.php:40
+#: ../flowview.php:711
+msgid "Destination AS"
+msgstr "目标AS"
+
+#: ../arrays.php:41
+msgid "Source/Destination AS"
+msgstr "来源/目标AS"
+
+#: ../arrays.php:42
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: ../arrays.php:43
+#: ../flowview.php:729
+msgid "Source Prefix"
+msgstr "来源前缀"
+
+#: ../arrays.php:44
+#: ../flowview.php:730
+msgid "Destination Prefix"
+msgstr "目标前缀"
+
+#: ../arrays.php:45
+msgid "Source/Destination Prefix"
+msgstr "来源/目标前缀"
+
+#: ../arrays.php:49
+msgid "Print Reports"
+msgstr "打印报告"
+
+#: ../arrays.php:50
+msgid "Flow Times"
+msgstr "流动时间"
+
+#: ../arrays.php:51
+msgid "AS Numbers"
+msgstr "AS编号"
+
+#: ../arrays.php:52
+msgid "132 Columns"
+msgstr "132列"
+
+#: ../arrays.php:53
+msgid "1 Line with Tags"
+msgstr "1行标签"
+
+#: ../arrays.php:54
+msgid "AS Aggregation"
+msgstr "AS聚合"
+
+#: ../arrays.php:55
+msgid "Protocol Port Aggregation"
+msgstr "协议端口聚合"
+
+#: ../arrays.php:56
+msgid "Source Prefix Aggregation"
+msgstr "来源前缀聚合"
+
+#: ../arrays.php:57
+msgid "Destination Prefix Aggregation"
+msgstr "目标前缀聚合"
+
+#: ../arrays.php:58
+msgid "Prefix Aggregation"
+msgstr "前缀聚合"
+
+#: ../arrays.php:59
+msgid "Full (Catalyst)"
+msgstr "全（催化剂）"
+
+#: ../arrays.php:63
+msgid "Any Part in Specified Time Span"
+msgstr "指定时间范围内的任何部分"
+
+#: ../arrays.php:64
+msgid "End Time in Specified Time Span"
+msgstr "在指定的时间范围内结束时间"
+
+#: ../arrays.php:65
+msgid "Start Time in Specified Time Span"
+msgstr "在指定的时间范围内开始时间"
+
+#: ../arrays.php:66
+msgid "Entirely in Specified Time Span"
+msgstr "在指定的时间范围内全部"
+
+#: ../arrays.php:70
+msgid "Select One"
+msgstr "选择一个"
+
+#: ../arrays.php:71
+msgid "TCP"
+msgstr "TCP"
+
+#: ../arrays.php:72
+msgid "UDP"
+msgstr "UDP"
+
+#: ../arrays.php:73
+msgid "ICMP"
+msgstr "ICMP"
+
+#: ../arrays.php:74
+msgid "IGMP"
+msgstr "ICMP"
+
+#: ../arrays.php:75
+msgid "GGP"
+msgstr "ICMP"
+
+#: ../arrays.php:76
+msgid "IPENCAP"
+msgstr "ICMP"
+
+#: ../arrays.php:77
+msgid "ST"
+msgstr "ICMP"
+
+#: ../arrays.php:78
+msgid "CBT"
+msgstr "ICMP"
+
+#: ../arrays.php:79
+msgid "EGP"
+msgstr "ICMP"
+
+#: ../arrays.php:80
+msgid "IGP"
+msgstr "ICMP"
+
+#: ../arrays.php:81
+msgid "BBN-RCC-MON"
+msgstr "ICMP"
+
+#: ../arrays.php:82
+msgid "NVP-II"
+msgstr "NVP-II"
+
+#: ../arrays.php:83
+msgid "PUP"
+msgstr "PUP"
+
+#: ../arrays.php:84
+msgid "ARGUS"
+msgstr "ARGUS"
+
+#: ../arrays.php:85
+msgid "EMCON"
+msgstr "EMCON"
+
+#: ../arrays.php:86
+msgid "XNET"
+msgstr "XNET"
+
+#: ../arrays.php:87
+msgid "CHAOS"
+msgstr "XNET"
+
+#: ../arrays.php:88
+msgid "MUX"
+msgstr "MUX"
+
+#: ../arrays.php:89
+msgid "DCN-MEAS"
+msgstr "MUX"
+
+#: ../arrays.php:90
+msgid "HMP"
+msgstr "HMP"
+
+#: ../arrays.php:91
+msgid "PRM"
+msgstr "HMP"
+
+#: ../arrays.php:92
+msgid "XNS-IDP"
+msgstr "HMP"
+
+#: ../arrays.php:93
+msgid "TRUNK-1"
+msgstr "TRUNK-1"
+
+#: ../arrays.php:94
+msgid "TRUNK-2"
+msgstr "TRUNK-1"
+
+#: ../arrays.php:95
+msgid "LEAF-1"
+msgstr "LEAF-1"
+
+#: ../arrays.php:96
+msgid "LEAF-2"
+msgstr "LEAF-1"
+
+#: ../arrays.php:97
+msgid "RDP"
+msgstr "RDP"
+
+#: ../arrays.php:98
+msgid "IRTP"
+msgstr "RDP"
+
+#: ../arrays.php:99
+msgid "ISO-TP4"
+msgstr "RDP"
+
+#: ../arrays.php:100
+msgid "NETBLT"
+msgstr "RDP"
+
+#: ../arrays.php:101
+msgid "MFE-NSP"
+msgstr "RDP"
+
+#: ../arrays.php:102
+msgid "MERIT-INP"
+msgstr "RDP"
+
+#: ../arrays.php:103
+msgid "DCCP"
+msgstr "RDP"
+
+#: ../arrays.php:104
+msgid "3PC"
+msgstr "RDP"
+
+#: ../arrays.php:105
+msgid "IDPR"
+msgstr "RDP"
+
+#: ../arrays.php:106
+msgid "XTP"
+msgstr "RDP"
+
+#: ../arrays.php:107
+msgid "DDP"
+msgstr "RDP"
+
+#: ../arrays.php:108
+msgid "IDPR-CMTP"
+msgstr "IDPR-CMTP"
+
+#: ../arrays.php:109
+msgid "TP++"
+msgstr "IDPR-CMTP"
+
+#: ../arrays.php:110
+msgid "IL"
+msgstr "IL"
+
+#: ../arrays.php:111
+msgid "IPv6"
+msgstr "IPv6"
+
+#: ../arrays.php:112
+msgid "SDRP"
+msgstr "SDRP"
+
+#: ../arrays.php:113
+msgid "IPv6-Route"
+msgstr "IPv6-Route"
+
+#: ../arrays.php:114
+msgid "IPv6-Frag"
+msgstr "IPv6-Frag"
+
+#: ../arrays.php:115
+msgid "IDRP"
+msgstr "IDRP"
+
+#: ../arrays.php:116
+msgid "RSVP"
+msgstr "RSVP"
+
+#: ../arrays.php:117
+msgid "GRE"
+msgstr "GRE"
+
+#: ../arrays.php:118
+msgid "DSR"
+msgstr "DSR"
+
+#: ../arrays.php:119
+msgid "BNA"
+msgstr "BNA"
+
+#: ../arrays.php:120
+msgid "IPSEC-ESP"
+msgstr "IPSEC-ESP"
+
+#: ../arrays.php:121
+msgid "IPSEC-AH"
+msgstr "IPSEC-AH"
+
+#: ../arrays.php:122
+msgid "IPv6-ICMP"
+msgstr "IPv6-ICMP"
+
+#: ../arrays.php:123
+msgid "IPv6-NoNxt"
+msgstr "IPv6-ICMP"
+
+#: ../arrays.php:124
+msgid "IPv6-Opts"
+msgstr "IPv6-ICMP"
+
+#: ../arrays.php:125
+msgid "RSPF"
+msgstr "RSPF"
+
+#: ../arrays.php:126
+msgid "VMTP"
+msgstr "VMTP"
+
+#: ../arrays.php:127
+msgid "EIGRP"
+msgstr "EIGRP"
+
+#: ../arrays.php:128
+msgid "OSPF"
+msgstr "OSPF"
+
+#: ../arrays.php:129
+msgid "MTP"
+msgstr "MTP"
+
+#: ../arrays.php:130
+msgid "IPIP"
+msgstr "IPIP"
+
+#: ../arrays.php:131
+msgid "ENCAP"
+msgstr "ENCAP"
+
+#: ../arrays.php:135
+#: ../flowview_schedules.php:495
+msgid "Yes"
+msgstr "是"
+
+#: ../arrays.php:136
+#: ../flowview_schedules.php:495
+msgid "No"
+msgstr "不"
+
+#: ../arrays.php:166
+#: ../arrays.php:178
+#: ../functions.php:117
+msgid "None"
+msgstr "没有"
+
+#: ../arrays.php:189
+msgid "All"
+msgstr "所有"
+
+#: ../arrays.php:190
+#: ../arrays.php:191
+#: ../arrays.php:192
+#: ../arrays.php:193
+#: ../arrays.php:194
+#: ../arrays.php:195
+#: ../arrays.php:196
+#: ../arrays.php:197
+#, php-format
+msgid "Top %d"
+msgstr "靠前的 %d"
+
+#: ../arrays.php:207
+msgid "No Limit"
+msgstr "没有限制"
+
+#: ../arrays.php:208
+#: ../arrays.php:209
+#: ../arrays.php:210
+#: ../arrays.php:211
+#: ../arrays.php:212
+#: ../arrays.php:213
+#: ../arrays.php:214
+#: ../arrays.php:215
+#: ../arrays.php:216
+#: ../arrays.php:217
+#: ../arrays.php:218
+#: ../arrays.php:219
+#: ../arrays.php:220
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Bytes"
+
+#: ../arrays.php:270
+#: ../arrays.php:271
+#: ../arrays.php:272
+#: ../flowview.php:673
+#: ../flowview_devices.php:122
+#: ../flowview_devices.php:430
+msgid "Port"
+msgstr "port"
+
+#: ../arrays.php:270
+#: ../arrays.php:271
+#: ../arrays.php:272
+#: ../arrays.php:273
+#: ../arrays.php:274
+#: ../arrays.php:275
+#: ../arrays.php:276
+#: ../arrays.php:277
+#: ../arrays.php:278
+#: ../arrays.php:279
+#: ../arrays.php:280
+#: ../arrays.php:281
+#: ../arrays.php:282
+#: ../arrays.php:283
+#: ../arrays.php:284
+#: ../arrays.php:285
+#: ../arrays.php:286
+#: ../arrays.php:287
+#: ../flowview.php:668
+#: ../flowview.php:674
+#: ../flowview.php:680
+#: ../flowview.php:686
+#: ../flowview.php:692
+#: ../flowview.php:699
+#: ../flowview.php:705
+#: ../flowview.php:712
+#: ../flowview.php:718
+#: ../flowview.php:724
+#: ../flowview.php:731
+#: ../functions.php:593
+msgid "Flows"
+msgstr "流"
+
+#: ../arrays.php:270
+#: ../arrays.php:271
+#: ../arrays.php:272
+#: ../arrays.php:273
+#: ../arrays.php:274
+#: ../arrays.php:275
+#: ../arrays.php:276
+#: ../arrays.php:277
+#: ../arrays.php:278
+#: ../arrays.php:279
+#: ../arrays.php:280
+#: ../arrays.php:281
+#: ../arrays.php:282
+#: ../arrays.php:283
+#: ../arrays.php:284
+#: ../arrays.php:285
+#: ../arrays.php:286
+#: ../arrays.php:287
+#: ../arrays.php:291
+#: ../arrays.php:292
+#: ../arrays.php:293
+#: ../flowview.php:669
+#: ../flowview.php:675
+#: ../flowview.php:681
+#: ../flowview.php:687
+#: ../flowview.php:693
+#: ../flowview.php:700
+#: ../flowview.php:706
+#: ../flowview.php:713
+#: ../flowview.php:719
+#: ../flowview.php:725
+#: ../flowview.php:732
+#: ../functions.php:591
+msgid "Bytes"
+msgstr "Bytes"
+
+#: ../arrays.php:270
+#: ../arrays.php:271
+#: ../arrays.php:272
+#: ../arrays.php:273
+#: ../arrays.php:274
+#: ../arrays.php:275
+#: ../arrays.php:276
+#: ../arrays.php:277
+#: ../arrays.php:278
+#: ../arrays.php:279
+#: ../arrays.php:280
+#: ../arrays.php:281
+#: ../arrays.php:282
+#: ../arrays.php:283
+#: ../arrays.php:284
+#: ../arrays.php:285
+#: ../arrays.php:286
+#: ../arrays.php:287
+#: ../arrays.php:291
+#: ../arrays.php:292
+#: ../arrays.php:293
+#: ../flowview.php:670
+#: ../flowview.php:676
+#: ../flowview.php:682
+#: ../flowview.php:688
+#: ../flowview.php:694
+#: ../flowview.php:701
+#: ../flowview.php:707
+#: ../flowview.php:714
+#: ../flowview.php:720
+#: ../flowview.php:726
+#: ../flowview.php:733
+#: ../functions.php:592
+msgid "Packets"
+msgstr "包"
+
+#: ../arrays.php:273
+#: ../arrays.php:275
+#: ../arrays.php:291
+#: ../arrays.php:292
+#: ../arrays.php:293
+#: ../flowview.php:274
+msgid "Dest IP"
+msgstr "目标IP"
+
+#: ../arrays.php:274
+#: ../arrays.php:275
+#: ../arrays.php:291
+#: ../arrays.php:292
+#: ../arrays.php:293
+msgid "Src IP"
+msgstr "源IP"
+
+#: ../arrays.php:276
+msgid "Src/Dest IP"
+msgstr "源/目标IP"
+
+#: ../arrays.php:277
+#: ../arrays.php:291
+#: ../arrays.php:292
+#: ../arrays.php:293
+#: ../flowview.php:685
+msgid "Protocol"
+msgstr "协议"
+
+#: ../arrays.php:278
+#: ../arrays.php:284
+msgid "Input IF"
+msgstr "输入接口"
+
+#: ../arrays.php:279
+#: ../arrays.php:284
+msgid "Output IF"
+msgstr "输出接口"
+
+#: ../arrays.php:280
+#: ../arrays.php:282
+#: ../arrays.php:292
+msgid "Src AS"
+msgstr "源AS"
+
+#: ../arrays.php:281
+#: ../arrays.php:282
+#: ../arrays.php:292
+#: ../flowview.php:291
+msgid "Dest AS"
+msgstr "目标AS"
+
+#: ../arrays.php:283
+#: ../flowview.php:717
+msgid "TOS"
+msgstr "TOS"
+
+#: ../arrays.php:285
+#: ../arrays.php:287
+msgid "Src Prefix"
+msgstr "源前缀"
+
+#: ../arrays.php:286
+#: ../arrays.php:287
+msgid "Dest Prefix"
+msgstr "目标前缀"
+
+#: ../arrays.php:291
+#: ../arrays.php:293
+msgid "Src IF"
+msgstr "源接口"
+
+#: ../arrays.php:291
+#: ../arrays.php:293
+msgid "Dest IF"
+msgstr "目标接口"
+
+#: ../arrays.php:291
+#: ../arrays.php:293
+msgid "Src Port"
+msgstr "源端口"
+
+#: ../arrays.php:291
+#: ../arrays.php:293
+msgid "Dest Port"
+msgstr "目标端口"
+
+#: ../arrays.php:291
+#: ../arrays.php:293
+#: ../flowview_schedules.php:86
+msgid "Start Time"
+msgstr "开始时间"
+
+#: ../arrays.php:291
+#: ../arrays.php:293
+msgid "End Time"
+msgstr "结束时间"
+
+#: ../arrays.php:291
+msgid "Active"
+msgstr "活跃"
+
+#: ../arrays.php:291
+msgid "B/Pk"
+msgstr "B/Pk"
+
+#: ../arrays.php:291
+msgid "Ts"
+msgstr "Ts"
+
+#: ../arrays.php:291
+msgid "Fl"
+msgstr "Fl"
+
+#: ../arrays.php:293
+msgid "Flags"
+msgstr "标志"
+
+#: ../flowview.php:156
+msgid "Flow Filter Constraints"
+msgstr "流量过滤器限制"
+
+#: ../flowview.php:164
+msgid "Filter"
+msgstr "过滤"
+
+#: ../flowview.php:170
+msgid "Listener"
+msgstr "监听"
+
+#: ../flowview.php:178
+msgid "Presets"
+msgstr "预置"
+
+#: ../flowview.php:184
+msgid "Custom"
+msgstr "自定义"
+
+#: ../flowview.php:206
+#: ../flowview_schedules.php:477
+msgid "Start Date"
+msgstr "开始日期"
+
+#: ../flowview.php:210
+#: ../flowview_schedules.php:329
+msgid "Start Date Selector"
+msgstr "开始日期选择器"
+
+#: ../flowview.php:213
+msgid "End Date"
+msgstr "结束日期"
+
+#: ../flowview.php:217
+msgid "End Date Selector"
+msgstr "结束日期选择器"
+
+#: ../flowview.php:225
+msgid "Protocols"
+msgstr "协议"
+
+#: ../flowview.php:231
+msgid "TCP Flags"
+msgstr "TCP标志"
+
+#: ../flowview.php:237
+msgid "TOS Fields"
+msgstr "TOS字段"
+
+#: ../flowview.php:243
+msgid "(e.g., -0x0b/0x0F)"
+msgstr "(e.g., -0x0b/0x0F)"
+
+#: ../flowview.php:254
+msgid "Source Port(s)"
+msgstr "源端口"
+
+#: ../flowview.php:260
+msgid "Source Interface"
+msgstr "源接口"
+
+#: ../flowview.php:279
+msgid "Dest Port(s)"
+msgstr "目标端口"
+
+#: ../flowview.php:285
+msgid "Dest Interface"
+msgstr "目标接口"
+
+#: ../flowview.php:301
+msgid "Note:"
+msgstr "注意："
+
+#: ../flowview.php:301
+msgid " Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+msgstr "在上面的字段中允许使用逗号分隔的多个字段条目。 减号（ - ）将取消一个条目（例如，端口为-80，意味着除80之外的任何端口）"
+
+#: ../flowview.php:310
+msgid "Report Parameters"
+msgstr "报告参数"
+
+#: ../flowview.php:315
+msgid "Statistics:"
+msgstr "统计："
+
+#: ../flowview.php:317
+msgid "Printed:"
+msgstr "打印："
+
+#: ../flowview.php:319
+msgid "Include if:"
+msgstr "包含接口："
+
+#: ../flowview.php:321
+msgid "Resolve Addresses:"
+msgstr "解析地址："
+
+#: ../flowview.php:325
+msgid "Sort Field:"
+msgstr "排序字段："
+
+#: ../flowview.php:327
+msgid "Max Flows:"
+msgstr "最大流量："
+
+#: ../flowview.php:329
+msgid "Minimum Bytes:"
+msgstr "最小字节数："
+
+#: ../flowview.php:344
+msgid "View"
+msgstr "显示"
+
+#: ../flowview.php:345
+msgid "Defaults"
+msgstr "默认"
+
+#: ../flowview.php:346
+#: ../setup.php:135
+msgid "Save"
+msgstr "保存"
+
+#: ../flowview.php:347
+msgid "Save As"
+msgstr "另存为"
+
+#: ../flowview.php:348
+#: ../flowview_devices.php:29
+#: ../flowview_schedules.php:35
+msgid "Delete"
+msgstr "删除"
+
+#: ../flowview.php:522
+msgid "Update"
+msgstr "更新"
+
+#: ../flowview.php:590
+msgid "Filter Saved"
+msgstr "过滤器已保存"
+
+#: ../flowview.php:619
+msgid "Filter Updated"
+msgstr "过滤器更新"
+
+#: ../flowview.php:679
+msgid "IP"
+msgstr "IP"
+
+#: ../flowview.php:691
+msgid "Interface"
+msgstr "接口"
+
+#: ../flowview.php:704
+msgid "AS"
+msgstr "AS"
+
+#: ../flowview.php:723
+msgid "Prefix"
+msgstr "前缀"
+
+#: ../flowview_devices.php:34
+#: ../flowview_devices.php:35
+#, php-format
+msgid "%d Days"
+msgstr "%d 天"
+
+#: ../flowview_devices.php:36
+#, php-format
+msgid "%d Week"
+msgstr "%d 周"
+
+#: ../flowview_devices.php:37
+#, php-format
+msgid "%d Weeks"
+msgstr "%d 周"
+
+#: ../flowview_devices.php:38
+#, php-format
+msgid "%d Month"
+msgstr "%d 月"
+
+#: ../flowview_devices.php:39
+#: ../flowview_devices.php:40
+#: ../flowview_devices.php:41
+#, php-format
+msgid "%d Months"
+msgstr "%d 月"
+
+#: ../flowview_devices.php:42
+#, php-format
+msgid "%d Year"
+msgstr "%d 年"
+
+#: ../flowview_devices.php:46
+#, php-format
+msgid "%d Minute"
+msgstr "%d  分钟"
+
+#: ../flowview_devices.php:47
+#: ../flowview_devices.php:48
+#: ../flowview_devices.php:49
+#, php-format
+msgid "%d Minutes"
+msgstr "%d 分钟"
+
+#: ../flowview_devices.php:53
+msgid "NetFlow version 1"
+msgstr "NetFlow版本1"
+
+#: ../flowview_devices.php:54
+msgid "NetFlow version 5"
+msgstr "NetFlow版本5"
+
+#: ../flowview_devices.php:55
+msgid "NetFlow version 6"
+msgstr "NetFlow版本6"
+
+#: ../flowview_devices.php:56
+msgid "NetFlow version 7"
+msgstr "NetFlow版本7"
+
+#: ../flowview_devices.php:57
+msgid "NetFlow AS Aggregation"
+msgstr "NetFlow AS聚合"
+
+#: ../flowview_devices.php:58
+msgid "NetFlow Proto Port Aggregation"
+msgstr "NetFlow原型端口聚合"
+
+#: ../flowview_devices.php:59
+msgid "NetFlow Source Prefix Aggregation"
+msgstr "NetFlow源前缀聚合"
+
+#: ../flowview_devices.php:60
+msgid "NetFlow Destination Prefix Aggregation"
+msgstr "NetFlow目标前缀聚合"
+
+#: ../flowview_devices.php:61
+msgid "NetFlow Prefix Aggregation"
+msgstr "NetFlow前缀聚合"
+
+#: ../flowview_devices.php:62
+msgid "NetFlow Destination"
+msgstr "NetFlow目标"
+
+#: ../flowview_devices.php:63
+msgid "NetFlow Source Destination"
+msgstr "NetFlow源目标"
+
+#: ../flowview_devices.php:64
+msgid "NetFlow Full Flow"
+msgstr "NetFlow Full Flow"
+
+#: ../flowview_devices.php:65
+msgid "NetFlow ToS AS Aggregation"
+msgstr "NetFlow ToS AS聚合"
+
+#: ../flowview_devices.php:66
+msgid "NetFlow ToS Proto Port Aggregation"
+msgstr "NetFlow ToS原型端口聚合"
+
+#: ../flowview_devices.php:67
+msgid "NetFlow ToS Source Prefix Aggregation"
+msgstr "NetFlow ToS源前缀聚合"
+
+#: ../flowview_devices.php:68
+msgid "NetFlow ToS Destination Prefix Aggregation"
+msgstr "NetFlow ToS目标前缀聚合"
+
+#: ../flowview_devices.php:69
+msgid "NetFlow ToS Prefix Aggregation"
+msgstr "NetFlow ToS前缀聚合"
+
+#: ../flowview_devices.php:70
+msgid "NetFlow ToS Prefix Port Aggregation"
+msgstr "NetFlow ToS前缀端口聚合"
+
+#: ../flowview_devices.php:71
+msgid "Flow-Tools tagged version 5"
+msgstr "流量工具标签版本5"
+
+#: ../flowview_devices.php:84
+msgid "0 (Disabled)"
+msgstr "0（禁用）"
+
+#: ../flowview_devices.php:93
+msgid "9 (Highest)"
+msgstr "9（最高）"
+
+#: ../flowview_devices.php:99
+msgid "Device Name"
+msgstr "设备名称"
+
+#: ../flowview_devices.php:100
+msgid "Name of the device to be displayed."
+msgstr "要显示的设备的名称。"
+
+#: ../flowview_devices.php:106
+#: ../flowview_devices.php:427
+msgid "Directory"
+msgstr "目录"
+
+#: ../flowview_devices.php:107
+msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+msgstr "此设备流入的目录位于此目录中。此目录必须位于Flow Directory路径中。 不要把完整的路径放在这里。 此外，不是如果你改变路径，所有预定义的文件管理器设置为使用它将不得不重新保存。"
+
+#: ../flowview_devices.php:113
+msgid "Allowed Host"
+msgstr "允许的主机"
+
+#: ../flowview_devices.php:114
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
+msgstr "允许发送到此流收集器的设备的IP地址。 任何主机都保留为0。"
+
+#: ../flowview_devices.php:123
+msgid "Port this collector will listen on."
+msgstr "这个收集器的端口将监听。"
+
+#: ../flowview_devices.php:130
+#: ../flowview_devices.php:428
+msgid "Nesting"
+msgstr "嵌套"
+
+#: ../flowview_devices.php:131
+msgid "Directory Structure that will be used for the flows for this device."
+msgstr "目录结构将用于此设备的流程。"
+
+#: ../flowview_devices.php:138
+msgid "NetFlow Version"
+msgstr "NetFlow版本"
+
+#: ../flowview_devices.php:139
+msgid "NetFlow Protocol version used by the device."
+msgstr "设备使用的NetFlow协议版本。"
+
+#: ../flowview_devices.php:146
+msgid "Compression Level"
+msgstr "压缩级别"
+
+#: ../flowview_devices.php:147
+msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+msgstr "流文件的压缩级别。 较高的压缩率可节省空间，但会使用更多CPU来存储和检索结果。"
+
+#: ../flowview_devices.php:154
+#: ../flowview_devices.php:433
+msgid "Rotation"
+msgstr "轮流"
+
+#: ../flowview_devices.php:155
+msgid "How often to create a new Flow File."
+msgstr "多久创建一个新的Flow File。"
+
+#: ../flowview_devices.php:162
+msgid "Expiration"
+msgstr "到期"
+
+#: ../flowview_devices.php:163
+msgid "How long to keep your flow files."
+msgstr "保存流文件需要多长时间。"
+
+#: ../flowview_devices.php:241
+msgid "Click 'Continue' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service."
+msgstr "点击'继续'删除以下Net-Flow监听器。 之后，您将需要重新启动Flow-Capture服务。"
+
+#: ../flowview_devices.php:242
+msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
+msgstr "另外，请记住从Net-Flow Capture位置删除任何剩余的文件。"
+
+#: ../flowview_devices.php:249
+msgid "You must select at least one device."
+msgstr "您必须至少选择一个设备。"
+
+#: ../flowview_devices.php:252
+#: ../flowview_schedules.php:221
+msgid "Continue"
+msgstr "继续"
+
+#: ../flowview_devices.php:260
+#: ../flowview_schedules.php:229
+#: ../setup.php:134
+msgid "Cancel"
+msgstr "取消"
+
+#: ../flowview_devices.php:327
+#, php-format
+msgid "Device: %s"
+msgstr "设备: %s"
+
+#: ../flowview_devices.php:387
+msgid "FlowView Listeners"
+msgstr "FlowView监听器"
+
+#: ../flowview_devices.php:396
+#: ../flowview_schedules.php:405
+msgid "Search"
+msgstr "搜索"
+
+#: ../flowview_devices.php:402
+#: ../flowview_schedules.php:426
+msgid "Set/Refresh Filters"
+msgstr "设置/刷新过滤器"
+
+#: ../flowview_devices.php:405
+#: ../flowview_schedules.php:429
+#: ../functions.php:153
+msgid "Clear"
+msgstr "清除"
+
+#: ../flowview_devices.php:405
+#: ../flowview_schedules.php:429
+#: ../functions.php:153
+msgid "Clear Filters"
+msgstr "清除过滤器"
+
+#: ../flowview_devices.php:417
+#: ../functions.php:315
+#: ../setup.php:94
+msgid "Listeners"
+msgstr "监听器"
+
+#: ../flowview_devices.php:426
+msgid "Name"
+msgstr "名称"
+
+#: ../flowview_devices.php:429
+msgid "Allowed From"
+msgstr "允许来自"
+
+#: ../flowview_devices.php:431
+msgid "Version"
+msgstr "版本"
+
+#: ../flowview_devices.php:432
+msgid "Compression"
+msgstr "压缩"
+
+#: ../flowview_devices.php:434
+msgid "Expire"
+msgstr "到期"
+
+#: ../flowview_devices.php:455
+msgid "No Devices"
+msgstr "没有设备"
+
+#: ../flowview_schedules.php:34
+msgid "Send Now"
+msgstr "现在发送"
+
+#: ../flowview_schedules.php:36
+msgid "Disable"
+msgstr "禁用"
+
+#: ../flowview_schedules.php:37
+msgid "Enable"
+msgstr "启用"
+
+#: ../flowview_schedules.php:41
+msgid "Every Hour"
+msgstr "每隔一小时"
+
+#: ../flowview_schedules.php:42
+#: ../flowview_schedules.php:43
+#: ../flowview_schedules.php:44
+#: ../flowview_schedules.php:45
+#, php-format
+msgid "Every %d Hours"
+msgstr "每隔%d小时"
+
+#: ../flowview_schedules.php:46
+msgid "Every Day"
+msgstr "每天"
+
+#: ../flowview_schedules.php:47
+msgid "Every Week"
+msgstr "每周"
+
+#: ../flowview_schedules.php:48
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "每%d周, 2"
+
+#: ../flowview_schedules.php:49
+msgid "Every Month"
+msgstr "每个月"
+
+#: ../flowview_schedules.php:54
+msgid "Title"
+msgstr "标题"
+
+#: ../flowview_schedules.php:56
+msgid "New Schedule"
+msgstr "新的时间表"
+
+#: ../flowview_schedules.php:57
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "输入FlowView计划的报告标题。"
+
+#: ../flowview_schedules.php:63
+#: ../flowview_schedules.php:480
+msgid "Enabled"
+msgstr "启用"
+
+#: ../flowview_schedules.php:66
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "是否发送此NetFlow扫描。"
+
+#: ../flowview_schedules.php:71
+#: ../flowview_schedules.php:475
+msgid "Filter Name"
+msgstr "过滤器名称"
+
+#: ../flowview_schedules.php:72
+msgid "Name of the query to run."
+msgstr "要运行的查询的名称。"
+
+#: ../flowview_schedules.php:77
+msgid "Send Interval"
+msgstr "发送间隔"
+
+#: ../flowview_schedules.php:78
+msgid "How often to send this NetFlow Report?"
+msgstr "多久发送一次这个NetFlow报告？"
+
+#: ../flowview_schedules.php:87
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "这是发送NetFlow扫描电子邮件的第一个日期/时间。 所有未来的电子邮件将从这段时间计算加上上面给出的时间间隔。"
+
+#: ../flowview_schedules.php:95
+msgid "Email Addresses"
+msgstr "电子邮件地址"
+
+#: ../flowview_schedules.php:96
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "将此NetFlow扫描发送到的电子邮件地址（命令分隔）。"
+
+#: ../flowview_schedules.php:190
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "点击“继续”删除下列时间表。"
+
+#: ../flowview_schedules.php:197
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "点击“继续”立即发送以下时间表。"
+
+#: ../flowview_schedules.php:204
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "点击“继续”以禁用以下计划"
+
+#: ../flowview_schedules.php:211
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "点击“继续”以启用以下计划"
+
+#: ../flowview_schedules.php:218
+msgid "You must select at least one schedule."
+msgstr "您必须至少选择一个时间表。"
+
+#: ../flowview_schedules.php:313
+#: ../functions.php:105
+#: ../functions.php:169
+#, php-format
+msgid "Report: %s"
+msgstr "报告： %s"
+
+#: ../flowview_schedules.php:397
+msgid "FlowView Schedules"
+msgstr "FlowView时间表"
+
+#: ../flowview_schedules.php:411
+#: ../flowview_schedules.php:465
+#: ../functions.php:319
+#: ../setup.php:98
+msgid "Schedules"
+msgstr "时间表"
+
+#: ../flowview_schedules.php:415
+msgid "Default"
+msgstr "默认"
+
+#: ../flowview_schedules.php:426
+msgid "Go"
+msgstr "启动"
+
+#: ../flowview_schedules.php:474
+msgid "Schedule Title"
+msgstr "日程表标题"
+
+#: ../flowview_schedules.php:476
+msgid "Interval"
+msgstr "间隔"
+
+#: ../flowview_schedules.php:478
+msgid "Next Send"
+msgstr "下一步发送"
+
+#: ../flowview_schedules.php:479
+msgid "Email"
+msgstr "电子邮件"
+
+#: ../functions.php:113
+msgid "Exclude"
+msgstr "排除"
+
+#: ../functions.php:118
+msgid "Top Sample"
+msgstr "顶部样本"
+
+#: ../functions.php:119
+msgid "Top 2 Samples"
+msgstr "顶部样本2"
+
+#: ../functions.php:120
+msgid "Top 3 Samples"
+msgstr "顶部样本3"
+
+#: ../functions.php:121
+msgid "Top 4 Samples"
+msgstr "顶部样本4"
+
+#: ../functions.php:122
+msgid "Top 5 Samples"
+msgstr "顶部样本5"
+
+#: ../functions.php:126
+msgid "Show/Hide"
+msgstr "显示隐藏"
+
+#: ../functions.php:132
+msgid "Table"
+msgstr "表"
+
+#: ../functions.php:138
+msgid "Bytes Bar"
+msgstr "Bytes Bar"
+
+#: ../functions.php:144
+msgid "Packets Bar"
+msgstr "Packets Bar"
+
+#: ../functions.php:150
+msgid "Flows Bar"
+msgstr "Flows Bar"
+
+#: ../functions.php:312
+msgid "Flow Filters"
+msgstr "流量过滤器"
+
+#: ../functions.php:312
+msgid "Filters"
+msgstr "过滤器"
+
+#: ../functions.php:315
+msgid "Manage Listeners"
+msgstr "管理侦听器"
+
+#: ../functions.php:319
+msgid "Manage Schedules"
+msgstr "管理时间表"
+
+#: ../functions.php:324
+msgid "Unknown"
+msgstr "未知"
+
+#: ../functions.php:347
+msgid "Cacti Flowview"
+msgstr "Cacti Flowview"
+
+#: ../functions.php:355
+msgid "Netflow - %"
+msgstr "Netflow - %"
+
+#: ../functions.php:533
+msgid "New Flow"
+msgstr "新的流量"
+
+#: ../functions.php:617
+msgid "Summary Statistics"
+msgstr "摘要统计"
+
+#: ../functions.php:625
+msgid "IP Packet Size Distribution (%)"
+msgstr "IP数据包大小分布（％）"
+
+#: ../functions.php:630
+msgid "Packets per Flow Distribution (%)"
+msgstr "每流量分组数（％）"
+
+#: ../functions.php:635
+msgid "Octets per Flow Distribution (%)"
+msgstr "每个流量分配的八位组（％）"
+
+#: ../functions.php:640
+msgid "Flow Time Distribution (%)"
+msgstr "流量时间分布（％）"
+
+#: ../functions.php:1346
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "您必须选择一份统计报告或打印报告！"
+
+#: ../functions.php:1349
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "您只能选择一份统计报告或一份打印报告（不是两种）！"
+
+#: ../functions.php:1352
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "日期无效，结束日期/时间早于开始日期/时间！"
+
+#: ../functions.php:1360
+#: ../functions.php:1364
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "源地址IP地址无效<br> <br>（必须采用'192.168.0.1'的形式）"
+
+#: ../functions.php:1370
+#: ../functions.php:1374
+#: ../functions.php:1378
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "无效的源地址子网（<br>）（必须采用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
+
+#: ../functions.php:1391
+#: ../functions.php:1395
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "目标地址IP地址无效<br> <br>（必须采用'192.168.0.1'的形式）"
+
+#: ../functions.php:1401
+#: ../functions.php:1405
+#: ../functions.php:1409
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "目标地址！<br>无效子网（必须采用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
+
+#: ../functions.php:1423
+msgid "Invalid value for Source Interface!"
+msgstr "源接口的值无效！"
+
+#: ../functions.php:1434
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "源端口的值无效！ （0 - 65535）"
+
+#: ../functions.php:1445
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "源AS的值无效！ （0 - 65535）"
+
+#: ../functions.php:1456
+msgid "Invalid value for Destination Interface!"
+msgstr "目标接口的值无效！"
+
+#: ../functions.php:1467
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "目标端口的值无效！ （0 - 65535）"
+
+#: ../functions.php:1478
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "目标AS的值无效！ （0 - 65535）"
+
+#: ../functions.php:1489
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Protocol的值无效！ （1 - 255）"
+
+#: ../functions.php:1498
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "TCP标志的值无效！ （例如：0x1b或0x1b / SA或SA / SA）"
+
+#: ../functions.php:1503
+msgid "Invalid value for Cutoff Octets!"
+msgstr "截止字节的值无效！"
+
+#: ../functions.php:1506
+msgid "Invalid value for Cutoff Lines!"
+msgstr "截止线的值无效！"
+
+#: ../functions.php:1509
+msgid "Invalid value for Sort Field!"
+msgstr "排序字段的值无效！"
+
+#: ../functions.php:1518
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "FlowView图表 %s 类型是 %s"
+
+#: ../setup.php:85
+msgid "The Filter has been Deleted"
+msgstr "过滤器已被删除"
+
+#: ../setup.php:86
+msgid "The Filter has been Updated"
+msgstr "过滤器已更新"
+
+#: ../setup.php:90
+#: ../setup.php:93
+#: ../setup.php:147
+msgid "Flow Viewer"
+msgstr "流量查看器"
+
+#: ../setup.php:91
+msgid "(view)"
+msgstr "（视图）"
+
+#: ../setup.php:92
+#: ../setup.php:96
+#: ../setup.php:100
+msgid "(save)"
+msgstr "（保存）"
+
+#: ../setup.php:95
+#: ../setup.php:99
+msgid "(edit)"
+msgstr "（编辑）"
+
+#: ../setup.php:97
+#: ../setup.php:101
+msgid "(actions)"
+msgstr "（动作）"
+
+#: ../setup.php:110
+#: ../setup.php:112
+msgid "FlowView"
+msgstr "FlowView"
+
+#: ../setup.php:129
+msgid "New Query"
+msgstr "新查询"
+
+#: ../setup.php:151
+msgid "Flow Tools Binary Path"
+msgstr "流量工具执行文件路径"
+
+#: ../setup.php:152
+msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+msgstr "流程猫，流量过滤器和流量统计二进制文件的路径。"
+
+#: ../setup.php:158
+msgid "Flow Tools Work Directory"
+msgstr "流量工具工作目录"
+
+#: ../setup.php:159
+msgid "This is the path to a temporary directory to do work."
+msgstr "这是临时目录执行工作的路径。"
+
+#: ../setup.php:165
+msgid "Flows Directory"
+msgstr "流量目录"
+
+#: ../setup.php:166
+msgid "This is the path to base the path of your flow folder structure."
+msgstr "这是基于流文件夹结构路径的路径。"
+
+#: ../setup.php:172
+msgid "Hostname Resolution"
+msgstr "主机名解析"
+
+#: ../setup.php:173
+msgid "The method by which you wish to resolve hostnames."
+msgstr "您希望解析主机名的方法。"
+
+#: ../setup.php:179
+msgid "Alternate DNS Server"
+msgstr "备用DNS服务器"
+
+#: ../setup.php:180
+msgid "This is the DNS Server used to resolve names."
+msgstr "这是用于解析名称的DNS服务器。"
+
+#: ../setup.php:185
+msgid "Strip Domain Names"
+msgstr "剥离域名"
+
+#: ../setup.php:186
+msgid "A comma delimited list of domains names to strip from the domain."
+msgstr "逗号分隔的域名清单，以从域中剥离。"
+
