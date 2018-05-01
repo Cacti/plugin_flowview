@@ -178,68 +178,70 @@ function flowview_display_report() {
 	swfobject.embedSWF('open-flash-chart.swf', 'chartpackets', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=packets&title=$rname");?>', 'id':'chartpackets'});
 	swfobject.embedSWF('open-flash-chart.swf', 'chartflows', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config["url_path"] . "plugins/flowview/flowview.php?session=" . $sessionid . "&action=chartdata&exclude=" . get_request_var('exclude') . "&type=flows&title=$rname");?>', 'id':'chartflows'});
 
-	$('#bytes').click(function() {
-		if (!$('#bytes').is(':checked')) {
-			$('#wrapperbytes').hide();
-			$.get('flowview.php?action=updatesess&type=bytes&value=');
+	$(function() {
+		$('#bytes').click(function() {
+			if (!$('#bytes').is(':checked')) {
+				$('#wrapperbytes').hide();
+				$.get('flowview.php?action=updatesess&type=bytes&value=');
+			}else{
+				$('#wrapperbytes').show();
+			}
+		});
+
+		$('#packets').click(function() {
+			if (!$('#packets').is(':checked')) {
+				$('#wrapperpackets').hide();
+				$.get('flowview.php?action=updatesess&type=packets&value=');
+			}else{
+				$('#wrapperpackets').show();
+			}
+		});
+
+		$('#flows').click(function() {
+			if (!$('#flows').is(':checked')) {
+				$('#wrapperflows').hide();
+				$.get('flowview.php?action=updatesess&type=flows&value=');
+			}else{
+				$('#wrapperflows').show();
+			}
+		});
+
+		$('#table').click(function() {
+			if (!$('#table').is(':checked')) {
+				$('#flowcontent').hide();
+				$.get('flowview.php?action=updatesess&type=table&value=');
+			}else{
+				$.get('flowview.php?action=updatesess&type=table&value=on');
+				$('#flowcontent').show();
+			}
+		});
+
+		$('#clear').click(function() {
+			loadPageNoHeader('flowview.php?header=false&action=view&clear=true&tab='+$('#tab').val());
+		});
+
+		$('#exclude').change(function() {
+			loadPageNoHeader('flowview.php?header=false&action=view&exclude='+$('#exclude').val()+'&tab='+$('#tab').val());
+		});
+
+		if ($('#table').is(':checked') || <?php print (isset_request_var('stat_report') ? (get_nfilter_request_var('stat_report') == 99 ? 'true':'false'):'true');?>) {
+			$('#flowcontent').show();
 		}else{
+			$('#flowcontent').hide();
+		}
+
+		if ($('#bytes').is(':checked')) {
 			$('#wrapperbytes').show();
 		}
-	});
 
-	$('#packets').click(function() {
-		if (!$('#packets').is(':checked')) {
-			$('#wrapperpackets').hide();
-			$.get('flowview.php?action=updatesess&type=packets&value=');
-		}else{
+		if ($('#packets').is(':checked')) {
 			$('#wrapperpackets').show();
 		}
-	});
 
-	$('#flows').click(function() {
-		if (!$('#flows').is(':checked')) {
-			$('#wrapperflows').hide();
-			$.get('flowview.php?action=updatesess&type=flows&value=');
-		}else{
+		if ($('#flows').is(':checked')) {
 			$('#wrapperflows').show();
 		}
 	});
-
-	$('#table').click(function() {
-		if (!$('#table').is(':checked')) {
-			$('#flowcontent').hide();
-			$.get('flowview.php?action=updatesess&type=table&value=');
-		}else{
-			$.get('flowview.php?action=updatesess&type=table&value=on');
-			$('#flowcontent').show();
-		}
-	});
-
-	$('#clear').click(function() {
-		loadPageNoHeader('flowview.php?header=false&action=view&clear=true&tab='+$('#tab').val());
-	});
-
-	$('#exclude').change(function() {
-		loadPageNoHeader('flowview.php?header=false&action=view&exclude='+$('#exclude').val()+'&tab='+$('#tab').val());
-	});
-
-	if ($('#table').is(':checked') || <?php print (isset_request_var('stat_report') ? (get_nfilter_request_var('stat_report') == 99 ? 'true':'false'):'true');?>) {
-		$('#flowcontent').show();
-	}else{
-		$('#flowcontent').hide();
-	}
-
-	if ($('#bytes').is(':checked')) {
-		$('#wrapperbytes').show();
-	}
-
-	if ($('#packets').is(':checked')) {
-		$('#wrapperpackets').show();
-	}
-
-	if ($('#flows').is(':checked')) {
-		$('#wrapperflows').show();
-	}
 
     $.tablesorter.addParser({
         id: 'bytes',
