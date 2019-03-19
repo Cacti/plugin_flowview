@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 21:44-0400\n"
+"POT-Creation-Date: 2019-03-19 09:50+0000\n"
 "PO-Revision-Date: 2019-03-18 21:27-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,776 +17,767 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: ../arrays.php:26
+#: arrays.php:26
 #, fuzzy
-msgid "Statistics Reports"
+msgid "Select a Statistic Report"
 msgstr "통계 보고서"
 
-#: ../arrays.php:27
+#: arrays.php:27
 #, fuzzy
 msgid "Summary"
 msgstr "요약"
 
-#: ../arrays.php:28
+#: arrays.php:28
 #, fuzzy
 msgid "UDP/TCP Destination Port"
 msgstr "UDP / TCP 대상 포트"
 
-#: ../arrays.php:29
+#: arrays.php:29
 #, fuzzy
 msgid "UDP/TCP Source Port"
 msgstr "UDP / TCP 소스 포트"
 
-#: ../arrays.php:30
+#: arrays.php:30
 #, fuzzy
 msgid "UDP/TCP Port"
 msgstr "UDP / TCP 포트"
 
-#: ../arrays.php:31 ../flowview.php:667
+#: arrays.php:31 flowview.php:800
 #, fuzzy
 msgid "Destination IP"
 msgstr "대상 IP"
 
-#: ../arrays.php:32 ../flowview.php:248 ../flowview.php:666
+#: arrays.php:32 flowview.php:358 flowview.php:799
 #, fuzzy
 msgid "Source IP"
 msgstr "소스 IP"
 
-#: ../arrays.php:33
+#: arrays.php:33
 #, fuzzy
 msgid "Source/Destination IP"
 msgstr "출발지 / 도착지 IP"
 
-#: ../arrays.php:34
+#: arrays.php:34
 #, fuzzy
 msgid "Source or Destination IP"
 msgstr "출발지 또는 목적지 IP"
 
-#: ../arrays.php:35
+#: arrays.php:35
 #, fuzzy
 msgid "IP Protocol"
 msgstr "IP 프로토콜"
 
-#: ../arrays.php:36 ../flowview.php:697
+#: arrays.php:36 flowview.php:835
 #, fuzzy
 msgid "Input Interface"
 msgstr "입력 인터페이스"
 
-#: ../arrays.php:37 ../flowview.php:698
+#: arrays.php:37 flowview.php:836
 #, fuzzy
 msgid "Output Interface"
 msgstr "출력 인터페이스"
 
-#: ../arrays.php:38
+#: arrays.php:38
 #, fuzzy
 msgid "Input/Output Interface"
 msgstr "입력 / 출력 인터페이스"
 
-#: ../arrays.php:39 ../flowview.php:266 ../flowview.php:710
+#: arrays.php:39 flowview.php:376 flowview.php:850
 #, fuzzy
 msgid "Source AS"
 msgstr "데이터 원본"
 
-#: ../arrays.php:40 ../flowview.php:711
+#: arrays.php:40 flowview.php:851
 #, fuzzy
 msgid "Destination AS"
 msgstr "목적지 AS"
 
-#: ../arrays.php:41
+#: arrays.php:41
 #, fuzzy
 msgid "Source/Destination AS"
 msgstr "출발지 / 도착지 AS"
 
-#: ../arrays.php:42
+#: arrays.php:42
 #, fuzzy
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: ../arrays.php:43 ../flowview.php:729
+#: arrays.php:43 flowview.php:872
 #, fuzzy
 msgid "Source Prefix"
 msgstr "소스 접두사"
 
-#: ../arrays.php:44 ../flowview.php:730
+#: arrays.php:44 flowview.php:873
 #, fuzzy
 msgid "Destination Prefix"
 msgstr "목적지 접두사"
 
-#: ../arrays.php:45
+#: arrays.php:45
 #, fuzzy
 msgid "Source/Destination Prefix"
 msgstr "출발지 / 목적지 접두사"
 
-#: ../arrays.php:49
+#: arrays.php:49
 #, fuzzy
-msgid "Print Reports"
+msgid "Select a Print Report"
 msgstr "보고서 인쇄"
 
-#: ../arrays.php:50
+#: arrays.php:50
 #, fuzzy
 msgid "Flow Times"
 msgstr "흐름 시간"
 
-#: ../arrays.php:51
+#: arrays.php:51
 #, fuzzy
 msgid "AS Numbers"
 msgstr "AS 번호"
 
-#: ../arrays.php:52
+#: arrays.php:52
 #, fuzzy
 msgid "132 Columns"
 msgstr "132 열"
 
-#: ../arrays.php:53
+#: arrays.php:53
 #, fuzzy
 msgid "1 Line with Tags"
 msgstr "태그가있는 행 1 개"
 
-#: ../arrays.php:54
+#: arrays.php:54
 #, fuzzy
 msgid "AS Aggregation"
 msgstr "AS 집계"
 
-#: ../arrays.php:55
+#: arrays.php:55
 #, fuzzy
 msgid "Protocol Port Aggregation"
 msgstr "프로토콜 포트 집계"
 
-#: ../arrays.php:56
+#: arrays.php:56
 #, fuzzy
 msgid "Source Prefix Aggregation"
 msgstr "원본 접두사 집계"
 
-#: ../arrays.php:57
+#: arrays.php:57
 #, fuzzy
 msgid "Destination Prefix Aggregation"
 msgstr "대상 접두사 집계"
 
-#: ../arrays.php:58
+#: arrays.php:58
 #, fuzzy
 msgid "Prefix Aggregation"
 msgstr "접두어 집계"
 
-#: ../arrays.php:59
+#: arrays.php:59
 #, fuzzy
 msgid "Full (Catalyst)"
 msgstr "가득 차있는 (촉매)"
 
-#: ../arrays.php:63
+#: arrays.php:63
 #, fuzzy
 msgid "Any Part in Specified Time Span"
 msgstr "지정된 시간 범위의 모든 부품"
 
-#: ../arrays.php:64
+#: arrays.php:64
 #, fuzzy
 msgid "End Time in Specified Time Span"
 msgstr "지정된 시간 범위의 종료 시간"
 
-#: ../arrays.php:65
+#: arrays.php:65
 #, fuzzy
 msgid "Start Time in Specified Time Span"
 msgstr "지정된 시간 간격으로 시작 시간"
 
-#: ../arrays.php:66
+#: arrays.php:66
 #, fuzzy
 msgid "Entirely in Specified Time Span"
 msgstr "지정된 시간 범위 전체"
 
-#: ../arrays.php:70
+#: arrays.php:70
 #, fuzzy
 msgid "Select One"
 msgstr "하나를 고르시 오"
 
-#: ../arrays.php:71
+#: arrays.php:71
 #, fuzzy
 msgid "TCP"
 msgstr "TCP"
 
-#: ../arrays.php:72
+#: arrays.php:72
 #, fuzzy
 msgid "UDP"
 msgstr "UDP"
 
-#: ../arrays.php:73
+#: arrays.php:73
 #, fuzzy
 msgid "ICMP"
 msgstr "ICMP"
 
-#: ../arrays.php:74
+#: arrays.php:74
 #, fuzzy
 msgid "IGMP"
 msgstr "IGMP"
 
-#: ../arrays.php:75
+#: arrays.php:75
 #, fuzzy
 msgid "GGP"
 msgstr "GGP"
 
-#: ../arrays.php:76
+#: arrays.php:76
 #, fuzzy
 msgid "IPENCAP"
 msgstr "IPENCAP"
 
-#: ../arrays.php:77
+#: arrays.php:77
 #, fuzzy
 msgid "ST"
 msgstr "성"
 
-#: ../arrays.php:78
+#: arrays.php:78
 #, fuzzy
 msgid "CBT"
 msgstr "CBT"
 
-#: ../arrays.php:79
+#: arrays.php:79
 #, fuzzy
 msgid "EGP"
 msgstr "EGP"
 
-#: ../arrays.php:80
+#: arrays.php:80
 #, fuzzy
 msgid "IGP"
 msgstr "IGP"
 
-#: ../arrays.php:81
+#: arrays.php:81
 #, fuzzy
 msgid "BBN-RCC-MON"
 msgstr "BBN-RCC-MON"
 
-#: ../arrays.php:82
+#: arrays.php:82
 #, fuzzy
 msgid "NVP-II"
 msgstr "NVP-II"
 
-#: ../arrays.php:83
+#: arrays.php:83
 #, fuzzy
 msgid "PUP"
 msgstr "새끼"
 
-#: ../arrays.php:84
+#: arrays.php:84
 #, fuzzy
 msgid "ARGUS"
 msgstr "아르고스"
 
-#: ../arrays.php:85
+#: arrays.php:85
 #, fuzzy
 msgid "EMCON"
 msgstr "EMCON"
 
-#: ../arrays.php:86
+#: arrays.php:86
 #, fuzzy
 msgid "XNET"
 msgstr "XNET"
 
-#: ../arrays.php:87
+#: arrays.php:87
 #, fuzzy
 msgid "CHAOS"
 msgstr "혼돈"
 
-#: ../arrays.php:88
+#: arrays.php:88
 #, fuzzy
 msgid "MUX"
 msgstr "MUX"
 
-#: ../arrays.php:89
+#: arrays.php:89
 #, fuzzy
 msgid "DCN-MEAS"
 msgstr "DCN-MEAS"
 
-#: ../arrays.php:90
+#: arrays.php:90
 #, fuzzy
 msgid "HMP"
 msgstr "HMP"
 
-#: ../arrays.php:91
+#: arrays.php:91
 #, fuzzy
 msgid "PRM"
 msgstr "PRM"
 
-#: ../arrays.php:92
+#: arrays.php:92
 #, fuzzy
 msgid "XNS-IDP"
 msgstr "XNS-IDP"
 
-#: ../arrays.php:93
+#: arrays.php:93
 #, fuzzy
 msgid "TRUNK-1"
 msgstr "TRUNK-1"
 
-#: ../arrays.php:94
+#: arrays.php:94
 #, fuzzy
 msgid "TRUNK-2"
 msgstr "TRUNK-2"
 
-#: ../arrays.php:95
+#: arrays.php:95
 #, fuzzy
 msgid "LEAF-1"
 msgstr "잎 - 1"
 
-#: ../arrays.php:96
+#: arrays.php:96
 #, fuzzy
 msgid "LEAF-2"
 msgstr "잎 - 2"
 
-#: ../arrays.php:97
+#: arrays.php:97
 #, fuzzy
 msgid "RDP"
 msgstr "RDP"
 
-#: ../arrays.php:98
+#: arrays.php:98
 #, fuzzy
 msgid "IRTP"
 msgstr "IRTP"
 
-#: ../arrays.php:99
+#: arrays.php:99
 #, fuzzy
 msgid "ISO-TP4"
 msgstr "ISO-TP4"
 
-#: ../arrays.php:100
+#: arrays.php:100
 #, fuzzy
 msgid "NETBLT"
 msgstr "NETBLT"
 
-#: ../arrays.php:101
+#: arrays.php:101
 #, fuzzy
 msgid "MFE-NSP"
 msgstr "MFE-NSP"
 
-#: ../arrays.php:102
+#: arrays.php:102
 #, fuzzy
 msgid "MERIT-INP"
 msgstr "MERIT-INP"
 
-#: ../arrays.php:103
+#: arrays.php:103
 #, fuzzy
 msgid "DCCP"
 msgstr "DCCP"
 
-#: ../arrays.php:104
+#: arrays.php:104
 #, fuzzy
 msgid "3PC"
 msgstr "3PC"
 
-#: ../arrays.php:105
+#: arrays.php:105
 #, fuzzy
 msgid "IDPR"
 msgstr "IDPR"
 
-#: ../arrays.php:106
+#: arrays.php:106
 #, fuzzy
 msgid "XTP"
 msgstr "XTP"
 
-#: ../arrays.php:107
+#: arrays.php:107
 #, fuzzy
 msgid "DDP"
 msgstr "DDP"
 
-#: ../arrays.php:108
+#: arrays.php:108
 #, fuzzy
 msgid "IDPR-CMTP"
 msgstr "IDPR-CMTP"
 
-#: ../arrays.php:109
+#: arrays.php:109
 #, fuzzy
 msgid "TP++"
 msgstr "TP ++"
 
-#: ../arrays.php:110
+#: arrays.php:110
 #, fuzzy
 msgid "IL"
 msgstr "IL"
 
-#: ../arrays.php:111
+#: arrays.php:111
 #, fuzzy
 msgid "IPv6"
 msgstr "IPv6"
 
-#: ../arrays.php:112
+#: arrays.php:112
 #, fuzzy
 msgid "SDRP"
 msgstr "SDRP"
 
-#: ../arrays.php:113
+#: arrays.php:113
 #, fuzzy
 msgid "IPv6-Route"
 msgstr "IPv6-Route"
 
-#: ../arrays.php:114
+#: arrays.php:114
 #, fuzzy
 msgid "IPv6-Frag"
 msgstr "IPv6-Frag"
 
-#: ../arrays.php:115
+#: arrays.php:115
 #, fuzzy
 msgid "IDRP"
 msgstr "IDRP"
 
-#: ../arrays.php:116
+#: arrays.php:116
 #, fuzzy
 msgid "RSVP"
 msgstr "초대"
 
-#: ../arrays.php:117
+#: arrays.php:117
 #, fuzzy
 msgid "GRE"
 msgstr "GRE"
 
-#: ../arrays.php:118
+#: arrays.php:118
 #, fuzzy
 msgid "DSR"
 msgstr "DSR"
 
-#: ../arrays.php:119
+#: arrays.php:119
 #, fuzzy
 msgid "BNA"
 msgstr "BNA"
 
-#: ../arrays.php:120
+#: arrays.php:120
 #, fuzzy
 msgid "IPSEC-ESP"
 msgstr "IPSEC-ESP"
 
-#: ../arrays.php:121
+#: arrays.php:121
 #, fuzzy
 msgid "IPSEC-AH"
 msgstr "IPSEC-AH"
 
-#: ../arrays.php:122
+#: arrays.php:122
 #, fuzzy
 msgid "IPv6-ICMP"
 msgstr "IPv6-ICMP"
 
-#: ../arrays.php:123
+#: arrays.php:123
 #, fuzzy
 msgid "IPv6-NoNxt"
 msgstr "IPv6-NoNxt"
 
-#: ../arrays.php:124
+#: arrays.php:124
 #, fuzzy
 msgid "IPv6-Opts"
 msgstr "IPv6 옵션"
 
-#: ../arrays.php:125
+#: arrays.php:125
 #, fuzzy
 msgid "RSPF"
 msgstr "RSPF"
 
-#: ../arrays.php:126
+#: arrays.php:126
 #, fuzzy
 msgid "VMTP"
 msgstr "VMTP"
 
-#: ../arrays.php:127
+#: arrays.php:127
 #, fuzzy
 msgid "EIGRP"
 msgstr "EIGRP"
 
-#: ../arrays.php:128
+#: arrays.php:128
 #, fuzzy
 msgid "OSPF"
 msgstr "OSPF"
 
-#: ../arrays.php:129
+#: arrays.php:129
 #, fuzzy
 msgid "MTP"
 msgstr "MTP"
 
-#: ../arrays.php:130
+#: arrays.php:130
 #, fuzzy
 msgid "IPIP"
 msgstr "IPIP"
 
-#: ../arrays.php:131
+#: arrays.php:131
 #, fuzzy
 msgid "ENCAP"
 msgstr "ENCAP"
 
-#: ../arrays.php:135 ../flowview_schedules.php:522
+#: arrays.php:135 flowview_schedules.php:522
 #, fuzzy
 msgid "Yes"
 msgstr "예"
 
-#: ../arrays.php:136 ../flowview_schedules.php:522
+#: arrays.php:136 flowview_schedules.php:522
 #, fuzzy
 msgid "No"
 msgstr "아니오"
 
-#: ../arrays.php:166 ../arrays.php:177 ../functions.php:117
+#: arrays.php:166 arrays.php:177 functions.php:117
 #, fuzzy
 msgid "None"
 msgstr "없음"
 
-#: ../arrays.php:188
+#: arrays.php:188
 #, fuzzy
 msgid "All"
 msgstr "모두"
 
-#: ../arrays.php:189 ../arrays.php:190 ../arrays.php:191 ../arrays.php:192
-#: ../arrays.php:193 ../arrays.php:194 ../arrays.php:195 ../arrays.php:196
+#: arrays.php:189 arrays.php:190 arrays.php:191 arrays.php:192 arrays.php:193
+#: arrays.php:194 arrays.php:195 arrays.php:196
 #, fuzzy, php-format
 msgid "Top %d"
 msgstr "상위 % d"
 
-#: ../arrays.php:207
+#: arrays.php:207
 #, fuzzy
 msgid "No Limit"
 msgstr "제한 없음"
 
-#: ../arrays.php:208 ../arrays.php:209 ../arrays.php:210 ../arrays.php:211
-#: ../arrays.php:212 ../arrays.php:213 ../arrays.php:214 ../arrays.php:215
-#: ../arrays.php:216 ../arrays.php:217 ../arrays.php:218 ../arrays.php:219
-#: ../arrays.php:220
+#: arrays.php:208 arrays.php:209 arrays.php:210 arrays.php:211 arrays.php:212
+#: arrays.php:213 arrays.php:214 arrays.php:215 arrays.php:216 arrays.php:217
+#: arrays.php:218 arrays.php:219 arrays.php:220
 #, fuzzy, php-format
 msgid "%s Bytes"
 msgstr "%s 바이트"
 
-#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../arrays.php:274
-#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:277 ../arrays.php:278
-#: ../arrays.php:279 ../arrays.php:280 ../arrays.php:281 ../arrays.php:282
-#: ../arrays.php:283 ../arrays.php:284 ../arrays.php:285 ../arrays.php:286
-#: ../arrays.php:287 ../arrays.php:288 ../arrays.php:292 ../arrays.php:293
-#: ../arrays.php:294 ../flowview.php:669 ../flowview.php:675
-#: ../flowview.php:681 ../flowview.php:687 ../flowview.php:693
-#: ../flowview.php:700 ../flowview.php:706 ../flowview.php:713
-#: ../flowview.php:719 ../flowview.php:725 ../flowview.php:732
-#: ../functions.php:591
+#: arrays.php:271 arrays.php:272 arrays.php:273 arrays.php:274 arrays.php:275
+#: arrays.php:276 arrays.php:277 arrays.php:278 arrays.php:279 arrays.php:280
+#: arrays.php:281 arrays.php:282 arrays.php:283 arrays.php:284 arrays.php:285
+#: arrays.php:286 arrays.php:287 arrays.php:288 arrays.php:292 arrays.php:293
+#: arrays.php:294 flowview.php:802 flowview.php:809 flowview.php:816
+#: flowview.php:823 flowview.php:830 flowview.php:838 flowview.php:845
+#: flowview.php:853 flowview.php:860 flowview.php:867 flowview.php:875
+#: functions.php:590
 #, fuzzy
 msgid "Bytes"
 msgstr "바이트"
 
-#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../arrays.php:274
-#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:277 ../arrays.php:278
-#: ../arrays.php:279 ../arrays.php:280 ../arrays.php:281 ../arrays.php:282
-#: ../arrays.php:283 ../arrays.php:284 ../arrays.php:285 ../arrays.php:286
-#: ../arrays.php:287 ../arrays.php:288 ../flowview.php:668 ../flowview.php:674
-#: ../flowview.php:680 ../flowview.php:686 ../flowview.php:692
-#: ../flowview.php:699 ../flowview.php:705 ../flowview.php:712
-#: ../flowview.php:718 ../flowview.php:724 ../flowview.php:731
-#: ../functions.php:593
+#: arrays.php:271 arrays.php:272 arrays.php:273 arrays.php:274 arrays.php:275
+#: arrays.php:276 arrays.php:277 arrays.php:278 arrays.php:279 arrays.php:280
+#: arrays.php:281 arrays.php:282 arrays.php:283 arrays.php:284 arrays.php:285
+#: arrays.php:286 arrays.php:287 arrays.php:288 flowview.php:801
+#: flowview.php:808 flowview.php:815 flowview.php:822 flowview.php:829
+#: flowview.php:837 flowview.php:844 flowview.php:852 flowview.php:859
+#: flowview.php:866 flowview.php:874 functions.php:592
 #, fuzzy
 msgid "Flows"
 msgstr "흐름"
 
-#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../arrays.php:274
-#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:277 ../arrays.php:278
-#: ../arrays.php:279 ../arrays.php:280 ../arrays.php:281 ../arrays.php:282
-#: ../arrays.php:283 ../arrays.php:284 ../arrays.php:285 ../arrays.php:286
-#: ../arrays.php:287 ../arrays.php:288 ../arrays.php:292 ../arrays.php:293
-#: ../arrays.php:294 ../flowview.php:670 ../flowview.php:676
-#: ../flowview.php:682 ../flowview.php:688 ../flowview.php:694
-#: ../flowview.php:701 ../flowview.php:707 ../flowview.php:714
-#: ../flowview.php:720 ../flowview.php:726 ../flowview.php:733
-#: ../functions.php:592
+#: arrays.php:271 arrays.php:272 arrays.php:273 arrays.php:274 arrays.php:275
+#: arrays.php:276 arrays.php:277 arrays.php:278 arrays.php:279 arrays.php:280
+#: arrays.php:281 arrays.php:282 arrays.php:283 arrays.php:284 arrays.php:285
+#: arrays.php:286 arrays.php:287 arrays.php:288 arrays.php:292 arrays.php:293
+#: arrays.php:294 flowview.php:803 flowview.php:810 flowview.php:817
+#: flowview.php:824 flowview.php:831 flowview.php:839 flowview.php:846
+#: flowview.php:854 flowview.php:861 flowview.php:868 flowview.php:876
+#: functions.php:591
 #, fuzzy
 msgid "Packets"
 msgstr "패킷"
 
-#: ../arrays.php:271 ../arrays.php:272 ../arrays.php:273 ../flowview.php:673
-#: ../flowview_devices.php:124 ../flowview_devices.php:454
+#: arrays.php:271 arrays.php:272 arrays.php:273 flowview.php:807
+#: flowview_devices.php:124 flowview_devices.php:454
 #, fuzzy
 msgid "Port"
 msgstr "포트"
 
-#: ../arrays.php:274 ../arrays.php:276 ../arrays.php:292 ../arrays.php:293
-#: ../arrays.php:294 ../flowview.php:274
+#: arrays.php:274 arrays.php:276 arrays.php:292 arrays.php:293 arrays.php:294
+#: flowview.php:384
 #, fuzzy
 msgid "Dest IP"
 msgstr "목적지 IP"
 
-#: ../arrays.php:275 ../arrays.php:276 ../arrays.php:292 ../arrays.php:293
-#: ../arrays.php:294
+#: arrays.php:275 arrays.php:276 arrays.php:292 arrays.php:293 arrays.php:294
 #, fuzzy
 msgid "Src IP"
 msgstr "SIP IP"
 
-#: ../arrays.php:277
+#: arrays.php:277
 #, fuzzy
 msgid "Src/Dest IP"
 msgstr "Src / Dest IP"
 
-#: ../arrays.php:278 ../arrays.php:292 ../arrays.php:293 ../arrays.php:294
-#: ../flowview.php:685
+#: arrays.php:278 arrays.php:292 arrays.php:293 arrays.php:294 flowview.php:821
 #, fuzzy
 msgid "Protocol"
 msgstr "프로토콜"
 
-#: ../arrays.php:279 ../arrays.php:285
+#: arrays.php:279 arrays.php:285
 #, fuzzy
 msgid "Input IF"
 msgstr "입력 필드"
 
-#: ../arrays.php:280 ../arrays.php:285
+#: arrays.php:280 arrays.php:285
 #, fuzzy
 msgid "Output IF"
 msgstr "출력 IF"
 
-#: ../arrays.php:281 ../arrays.php:283 ../arrays.php:293
+#: arrays.php:281 arrays.php:283 arrays.php:293
 #, fuzzy
 msgid "Src AS"
 msgstr "Src 그대로"
 
-#: ../arrays.php:282 ../arrays.php:283 ../arrays.php:293 ../flowview.php:291
+#: arrays.php:282 arrays.php:283 arrays.php:293 flowview.php:401
 #, fuzzy
 msgid "Dest AS"
 msgstr "목적지"
 
-#: ../arrays.php:284 ../flowview.php:717
+#: arrays.php:284 flowview.php:858
 #, fuzzy
 msgid "TOS"
 msgstr "이용약관"
 
-#: ../arrays.php:286 ../arrays.php:288
+#: arrays.php:286 arrays.php:288
 #, fuzzy
 msgid "Src Prefix"
 msgstr "Src 접두사"
 
-#: ../arrays.php:287 ../arrays.php:288
+#: arrays.php:287 arrays.php:288
 #, fuzzy
 msgid "Dest Prefix"
 msgstr "목적지 접두어"
 
-#: ../arrays.php:292
+#: arrays.php:292
 #, fuzzy
 msgid "Active"
 msgstr "활성화"
 
-#: ../arrays.php:292
+#: arrays.php:292
 #, fuzzy
 msgid "B/Pk"
 msgstr "B / Pk"
 
-#: ../arrays.php:292 ../arrays.php:294
+#: arrays.php:292 arrays.php:294
 #, fuzzy
 msgid "Dest IF"
 msgstr "목적지 IF"
 
-#: ../arrays.php:292 ../arrays.php:294
+#: arrays.php:292 arrays.php:294
 #, fuzzy
 msgid "Dest Port"
 msgstr "목적지 항구"
 
-#: ../arrays.php:292 ../arrays.php:294
+#: arrays.php:292 arrays.php:294
 #, fuzzy
 msgid "End Time"
 msgstr "종료"
 
-#: ../arrays.php:292
+#: arrays.php:292
 #, fuzzy
 msgid "Fl"
 msgstr "Fl"
 
-#: ../arrays.php:292 ../arrays.php:294
+#: arrays.php:292 arrays.php:294
 #, fuzzy
 msgid "Src IF"
 msgstr "Src IF"
 
-#: ../arrays.php:292 ../arrays.php:294
+#: arrays.php:292 arrays.php:294
 #, fuzzy
 msgid "Src Port"
 msgstr "Src 포트"
 
-#: ../arrays.php:292 ../arrays.php:294 ../flowview_schedules.php:85
+#: arrays.php:292 arrays.php:294 flowview_schedules.php:85
 #, fuzzy
 msgid "Start Time"
 msgstr "시작 시간"
 
-#: ../arrays.php:292
+#: arrays.php:292
 #, fuzzy
 msgid "Ts"
 msgstr "Ts"
 
-#: ../arrays.php:294
+#: arrays.php:294
 #, fuzzy
 msgid "Flags"
 msgstr "플래그"
 
-#: ../flowview.php:156
+#: flowview.php:275
 #, fuzzy
 msgid "Flow Filter Constraints"
 msgstr "플로우 필터 제약"
 
-#: ../flowview.php:164
+#: flowview.php:283
 #, fuzzy
 msgid "Filter"
 msgstr "필터"
 
-#: ../flowview.php:170
+#: flowview.php:289
 #, fuzzy
 msgid "Listener"
 msgstr "경청자"
 
-#: ../flowview.php:178
+#: flowview.php:297
 #, fuzzy
 msgid "Presets"
 msgstr "사전 설정"
 
-#: ../flowview.php:184 ../flowview.php:467
+#: flowview.php:302 flowview.php:599
 #, fuzzy
 msgid "Custom"
 msgstr "사용자 정의"
 
-#: ../flowview.php:206 ../flowview_schedules.php:504
+#: flowview.php:316 flowview_schedules.php:504
 #, fuzzy
 msgid "Start Date"
 msgstr "시작일"
 
-#: ../flowview.php:210 ../flowview_schedules.php:329
+#: flowview.php:320 flowview_schedules.php:329
 #, fuzzy
 msgid "Start Date Selector"
 msgstr "시작 날짜 선택기"
 
-#: ../flowview.php:213
+#: flowview.php:323
 #, fuzzy
 msgid "End Date"
 msgstr "종료일"
 
-#: ../flowview.php:217
+#: flowview.php:327
 #, fuzzy
 msgid "End Date Selector"
 msgstr "종료일 선택기"
 
-#: ../flowview.php:225
+#: flowview.php:335
 #, fuzzy
 msgid "Protocols"
 msgstr "프로토콜"
 
-#: ../flowview.php:231
+#: flowview.php:341
 #, fuzzy
 msgid "TCP Flags"
 msgstr "TCP 플래그"
 
-#: ../flowview.php:237
+#: flowview.php:347
 #, fuzzy
 msgid "TOS Fields"
 msgstr "서비스 약관"
 
-#: ../flowview.php:243
+#: flowview.php:353
 #, fuzzy
 msgid "(e.g., -0x0b/0x0F)"
 msgstr "(예 : -0x0b / 0x0F)"
 
-#: ../flowview.php:254
+#: flowview.php:364
 #, fuzzy
 msgid "Source Port(s)"
 msgstr "소스 포트"
 
-#: ../flowview.php:260
+#: flowview.php:370
 #, fuzzy
 msgid "Source Interface"
 msgstr "소스 인터페이스"
 
-#: ../flowview.php:279
+#: flowview.php:389
 #, fuzzy
 msgid "Dest Port(s)"
 msgstr "목적지 항구 (들)"
 
-#: ../flowview.php:285
+#: flowview.php:395
 #, fuzzy
 msgid "Dest Interface"
 msgstr "목적지 인터페이스"
 
-#: ../flowview.php:301
+#: flowview.php:411
 #, fuzzy
 msgid ""
 " Multiple field entries, separated by commas, are permitted in the fields "
@@ -796,279 +787,292 @@ msgstr ""
 "위 필드에는 쉼표로 구분 된 여러 필드 항목이 허용됩니다. 마이너스 기호 (-)는 "
 "항목을 무효화합니다 (예 : 포트의 경우 -80, 포트는 80이지만 포트의 경우 80)"
 
-#: ../flowview.php:301
+#: flowview.php:411
 #, fuzzy
 msgid "Note:"
 msgstr "주의:"
 
-#: ../flowview.php:310
+#: flowview.php:420
 #, fuzzy
 msgid "Report Parameters"
 msgstr "보고서 매개 변수"
 
-#: ../flowview.php:315
+#: flowview.php:425
 #, fuzzy
 msgid "Statistics:"
 msgstr "통계"
 
-#: ../flowview.php:317
+#: flowview.php:427
 #, fuzzy
 msgid "Printed:"
 msgstr "인쇄 :"
 
-#: ../flowview.php:319
+#: flowview.php:429
 #, fuzzy
 msgid "Include if:"
 msgstr "다음 경우에 포함하십시오."
 
-#: ../flowview.php:321
+#: flowview.php:431
 #, fuzzy
 msgid "Resolve Addresses:"
 msgstr "주소 해결 :"
 
-#: ../flowview.php:325
+#: flowview.php:435
 #, fuzzy
 msgid "Sort Field:"
 msgstr "필드 정렬 :"
 
-#: ../flowview.php:327
+#: flowview.php:437
 #, fuzzy
 msgid "Max Flows:"
 msgstr "최대 흐름 수 :"
 
-#: ../flowview.php:329
+#: flowview.php:439
 #, fuzzy
 msgid "Minimum Bytes:"
 msgstr "최소 바이트 수 :"
 
-#: ../flowview.php:344
+#: flowview.php:454
 #, fuzzy
 msgid "View"
 msgstr "보기"
 
-#: ../flowview.php:345
+#: flowview.php:455
 #, fuzzy
 msgid "Defaults"
 msgstr "기본값"
 
-#: ../flowview.php:346 ../setup.php:208
+#: flowview.php:456 flowview.php:473
 #, fuzzy
 msgid "Save"
 msgstr "저장"
 
-#: ../flowview.php:347
+#: flowview.php:457
 #, fuzzy
 msgid "Save As"
 msgstr "다른 이름으로 저장"
 
-#: ../flowview.php:348 ../flowview_devices.php:30 ../flowview_schedules.php:34
+#: flowview.php:458 flowview_devices.php:30 flowview_schedules.php:34
 #, fuzzy
 msgid "Delete"
 msgstr "삭제"
 
-#: ../flowview.php:522
+#: flowview.php:467 flowview_schedules.php:70 flowview_schedules.php:502
+#, fuzzy
+msgid "Filter Name"
+msgstr "이름 필터"
+
+#: flowview.php:468
+#, fuzzy
+msgid "New Query"
+msgstr "새 쿼리"
+
+#: flowview.php:472 flowview_devices.php:262 flowview_schedules.php:228
+#, fuzzy
+msgid "Cancel"
+msgstr "취소"
+
+#: flowview.php:654
 #, fuzzy
 msgid "Update"
 msgstr "업데이트"
 
-#: ../flowview.php:590
+#: flowview.php:723
 #, fuzzy
 msgid "Filter Saved"
 msgstr "저장된 필터"
 
-#: ../flowview.php:611
+#: flowview.php:744
 #, fuzzy
 msgid "Filter Settings Saved"
 msgstr "저장된 필터 설정"
 
-#: ../flowview.php:619
+#: flowview.php:752
 #, fuzzy
 msgid "Filter Updated"
 msgstr "업데이트 된 필터"
 
-#: ../flowview.php:679
+#: flowview.php:814
 #, fuzzy
 msgid "IP"
 msgstr "IP"
 
-#: ../flowview.php:691
+#: flowview.php:828
 #, fuzzy
 msgid "Interface"
 msgstr "인터페이스"
 
-#: ../flowview.php:704
+#: flowview.php:843
 #, fuzzy
 msgid "AS"
 msgstr "같이"
 
-#: ../flowview.php:723
+#: flowview.php:865
 #, fuzzy
 msgid "Prefix"
 msgstr "접두사"
 
-#: ../flowview_devices.php:36 ../flowview_devices.php:37
+#: flowview_devices.php:36 flowview_devices.php:37
 #, fuzzy, php-format
 msgid "%d Days"
 msgstr "%d일"
 
-#: ../flowview_devices.php:38
+#: flowview_devices.php:38
 #, fuzzy, php-format
 msgid "%d Week"
 msgstr "% d주의"
 
-#: ../flowview_devices.php:39
+#: flowview_devices.php:39
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "% d 주"
 
-#: ../flowview_devices.php:40
+#: flowview_devices.php:40
 #, fuzzy, php-format
 msgid "%d Month"
 msgstr "% d 개월"
 
-#: ../flowview_devices.php:41 ../flowview_devices.php:42
-#: ../flowview_devices.php:43
+#: flowview_devices.php:41 flowview_devices.php:42 flowview_devices.php:43
 #, fuzzy, php-format
 msgid "%d Months"
 msgstr "개월 % d 개월"
 
-#: ../flowview_devices.php:44
+#: flowview_devices.php:44
 #, fuzzy, php-format
 msgid "%d Year"
 msgstr "% d 년"
 
-#: ../flowview_devices.php:48
+#: flowview_devices.php:48
 #, fuzzy, php-format
 msgid "%d Minute"
 msgstr "% d 분"
 
-#: ../flowview_devices.php:49 ../flowview_devices.php:50
-#: ../flowview_devices.php:51
+#: flowview_devices.php:49 flowview_devices.php:50 flowview_devices.php:51
 #, fuzzy, php-format
 msgid "%d Minutes"
 msgstr "%d 분"
 
-#: ../flowview_devices.php:55
+#: flowview_devices.php:55
 #, fuzzy
 msgid "NetFlow version 1"
 msgstr "NetFlow 버전 1"
 
-#: ../flowview_devices.php:56
+#: flowview_devices.php:56
 #, fuzzy
 msgid "NetFlow version 5"
 msgstr "NetFlow 버전 5"
 
-#: ../flowview_devices.php:57
+#: flowview_devices.php:57
 #, fuzzy
 msgid "NetFlow version 6"
 msgstr "NetFlow 버전 6"
 
-#: ../flowview_devices.php:58
+#: flowview_devices.php:58
 #, fuzzy
 msgid "NetFlow version 7"
 msgstr "NetFlow 버전 7"
 
-#: ../flowview_devices.php:59
+#: flowview_devices.php:59
 #, fuzzy
 msgid "NetFlow AS Aggregation"
 msgstr "NetFlow AS 집계"
 
-#: ../flowview_devices.php:60
+#: flowview_devices.php:60
 #, fuzzy
 msgid "NetFlow Proto Port Aggregation"
 msgstr "NetFlow 프로토 포트 통합"
 
-#: ../flowview_devices.php:61
+#: flowview_devices.php:61
 #, fuzzy
 msgid "NetFlow Source Prefix Aggregation"
 msgstr "NetFlow 소스 접두사 집계"
 
-#: ../flowview_devices.php:62
+#: flowview_devices.php:62
 #, fuzzy
 msgid "NetFlow Destination Prefix Aggregation"
 msgstr "NetFlow 대상 접두사 집계"
 
-#: ../flowview_devices.php:63
+#: flowview_devices.php:63
 #, fuzzy
 msgid "NetFlow Prefix Aggregation"
 msgstr "NetFlow 접두사 집계"
 
-#: ../flowview_devices.php:64
+#: flowview_devices.php:64
 #, fuzzy
 msgid "NetFlow Destination"
 msgstr "NetFlow 목적지"
 
-#: ../flowview_devices.php:65
+#: flowview_devices.php:65
 #, fuzzy
 msgid "NetFlow Source Destination"
 msgstr "NetFlow 소스 대상"
 
-#: ../flowview_devices.php:66
+#: flowview_devices.php:66
 #, fuzzy
 msgid "NetFlow Full Flow"
 msgstr "NetFlow 전체 흐름"
 
-#: ../flowview_devices.php:67
+#: flowview_devices.php:67
 #, fuzzy
 msgid "NetFlow ToS AS Aggregation"
 msgstr "NetFlow ToS AS 집계"
 
-#: ../flowview_devices.php:68
+#: flowview_devices.php:68
 #, fuzzy
 msgid "NetFlow ToS Proto Port Aggregation"
 msgstr "NetFlow ToS 프로토 포트 결합"
 
-#: ../flowview_devices.php:69
+#: flowview_devices.php:69
 #, fuzzy
 msgid "NetFlow ToS Source Prefix Aggregation"
 msgstr "NetFlow ToS 소스 접두어 집계"
 
-#: ../flowview_devices.php:70
+#: flowview_devices.php:70
 #, fuzzy
 msgid "NetFlow ToS Destination Prefix Aggregation"
 msgstr "NetFlow ToS 대상 접두사 집계"
 
-#: ../flowview_devices.php:71
+#: flowview_devices.php:71
 #, fuzzy
 msgid "NetFlow ToS Prefix Aggregation"
 msgstr "NetFlow ToS 접두어 집계"
 
-#: ../flowview_devices.php:72
+#: flowview_devices.php:72
 #, fuzzy
 msgid "NetFlow ToS Prefix Port Aggregation"
 msgstr "NetFlow ToS 프리픽스 포트 집합"
 
-#: ../flowview_devices.php:73
+#: flowview_devices.php:73
 #, fuzzy
 msgid "Flow-Tools tagged version 5"
 msgstr "Flow-Tools 태그 버전 5"
 
-#: ../flowview_devices.php:86
+#: flowview_devices.php:86
 #, fuzzy
 msgid "0 (Disabled)"
 msgstr "0 (사용 안 함)"
 
-#: ../flowview_devices.php:95
+#: flowview_devices.php:95
 #, fuzzy
 msgid "9 (Highest)"
 msgstr "9 (최고)"
 
-#: ../flowview_devices.php:101
+#: flowview_devices.php:101
 #, fuzzy
 msgid "Device Name"
 msgstr "장치 이름"
 
-#: ../flowview_devices.php:102
+#: flowview_devices.php:102
 #, fuzzy
 msgid "Name of the device to be displayed."
 msgstr "표시 할 장치의 이름."
 
-#: ../flowview_devices.php:108 ../flowview_devices.php:451
+#: flowview_devices.php:108 flowview_devices.php:451
 #, fuzzy
 msgid "Directory"
 msgstr "디렉토리"
 
-#: ../flowview_devices.php:109
+#: flowview_devices.php:109
 #, fuzzy
 msgid ""
 "Directory that this devices flows are in.  This directory must be in the "
@@ -1080,12 +1084,12 @@ msgstr ""
 "어야합니다. 전체 경로를 여기에 두지 마십시오. 또한 경로를 변경하면 사전 정의 "
 "된 파일러 설정을 다시 사용하여 경로를 다시 설정해야합니다."
 
-#: ../flowview_devices.php:115
+#: flowview_devices.php:115
 #, fuzzy
 msgid "Allowed Host"
 msgstr "허용 된 호스트"
 
-#: ../flowview_devices.php:116
+#: flowview_devices.php:116
 #, fuzzy
 msgid ""
 "IP Address of the device that is allowed to send to this flow collector.  "
@@ -1094,37 +1098,37 @@ msgstr ""
 "이 플로우 콜렉터로 전송할 수있는 장치의 IP 주소. 모든 호스트에 대해 0으로 두"
 "십시오."
 
-#: ../flowview_devices.php:125
+#: flowview_devices.php:125
 #, fuzzy
 msgid "Port this collector will listen on."
 msgstr "이 컬렉터가 듣는 포트."
 
-#: ../flowview_devices.php:132 ../flowview_devices.php:452
+#: flowview_devices.php:132 flowview_devices.php:452
 #, fuzzy
 msgid "Nesting"
 msgstr "중첩"
 
-#: ../flowview_devices.php:133
+#: flowview_devices.php:133
 #, fuzzy
 msgid "Directory Structure that will be used for the flows for this device."
 msgstr "이 장치의 흐름에 사용할 디렉토리 구조입니다."
 
-#: ../flowview_devices.php:140
+#: flowview_devices.php:140
 #, fuzzy
 msgid "NetFlow Version"
 msgstr "NetFlow 버전"
 
-#: ../flowview_devices.php:141
+#: flowview_devices.php:141
 #, fuzzy
 msgid "NetFlow Protocol version used by the device."
 msgstr "NetFlow 장치에서 사용하는 프로토콜 버전입니다."
 
-#: ../flowview_devices.php:148
+#: flowview_devices.php:148
 #, fuzzy
 msgid "Compression Level"
 msgstr "압축 수준"
 
-#: ../flowview_devices.php:149
+#: flowview_devices.php:149
 #, fuzzy
 msgid ""
 "Compression level of flow files.  Higher compression saves space but uses "
@@ -1133,27 +1137,27 @@ msgstr ""
 "흐름 파일의 압축 수준. 압축률을 높이면 공간이 절약되지만 결과를 저장하고 검색"
 "하는 데 더 많은 CPU가 사용됩니다."
 
-#: ../flowview_devices.php:156 ../flowview_devices.php:457
+#: flowview_devices.php:156 flowview_devices.php:457
 #, fuzzy
 msgid "Rotation"
 msgstr "회전"
 
-#: ../flowview_devices.php:157
+#: flowview_devices.php:157
 #, fuzzy
 msgid "How often to create a new Flow File."
 msgstr "새 Flow File 생성 빈도."
 
-#: ../flowview_devices.php:164
+#: flowview_devices.php:164
 #, fuzzy
 msgid "Expiration"
 msgstr "만료"
 
-#: ../flowview_devices.php:165
+#: flowview_devices.php:165
 #, fuzzy
 msgid "How long to keep your flow files."
 msgstr "흐름 파일을 보관하는 기간."
 
-#: ../flowview_devices.php:243
+#: flowview_devices.php:243
 #, fuzzy
 msgid ""
 "Click 'Continue' to delete the following Net-Flow Listeners.  After which, "
@@ -1162,197 +1166,185 @@ msgstr ""
 "다음 Net-Flow Listener를 삭제하려면 '계속'을 클릭하십시오. 그 후에 Flow-"
 "Capture Service를 다시 시작해야합니다."
 
-#: ../flowview_devices.php:244
+#: flowview_devices.php:244
 #, fuzzy
 msgid ""
 "Also, remember to remove any leftover files from your Net-Flow Capture "
 "location."
 msgstr "또한 Net-Flow Capture 위치에서 남은 파일을 제거해야합니다."
 
-#: ../flowview_devices.php:251
+#: flowview_devices.php:251
 #, fuzzy
 msgid "You must select at least one device."
 msgstr "하나 이상의 장치를 선택해야합니다."
 
-#: ../flowview_devices.php:254 ../flowview_schedules.php:220
+#: flowview_devices.php:254 flowview_schedules.php:220
 #, fuzzy
 msgid "Continue"
 msgstr "계속"
 
-#: ../flowview_devices.php:262 ../flowview_schedules.php:228 ../setup.php:207
-#, fuzzy
-msgid "Cancel"
-msgstr "취소"
-
-#: ../flowview_devices.php:322
+#: flowview_devices.php:322
 #, fuzzy, php-format
 msgid "Device [edit: %s]"
 msgstr "장치 [편집 :  %s]"
 
-#: ../flowview_devices.php:324
+#: flowview_devices.php:324
 #, fuzzy
 msgid "Device [new]"
 msgstr "기기 [신품]"
 
-#: ../flowview_devices.php:389
+#: flowview_devices.php:389
 #, fuzzy
 msgid "FlowView Listeners"
 msgstr "FlowView Listener"
 
-#: ../flowview_devices.php:398 ../flowview_schedules.php:405
+#: flowview_devices.php:398 flowview_schedules.php:405
 #, fuzzy
 msgid "Search"
 msgstr "검색"
 
-#: ../flowview_devices.php:404 ../flowview_schedules.php:426
+#: flowview_devices.php:404 flowview_schedules.php:426
 #, fuzzy
 msgid "Go"
 msgstr "가기"
 
-#: ../flowview_devices.php:404 ../flowview_schedules.php:426
+#: flowview_devices.php:404 flowview_schedules.php:426
 #, fuzzy
 msgid "Set/Refresh Filters"
 msgstr "필터 설정 / 새로 고침"
 
-#: ../flowview_devices.php:407 ../flowview_schedules.php:429
-#: ../functions.php:153
+#: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
 #, fuzzy
 msgid "Clear"
 msgstr "지우기"
 
-#: ../flowview_devices.php:407 ../flowview_schedules.php:429
-#: ../functions.php:153
+#: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
 #, fuzzy
 msgid "Clear Filters"
 msgstr "필터 지우기"
 
-#: ../flowview_devices.php:441 ../functions.php:315 ../setup.php:119
+#: flowview_devices.php:441 functions.php:314 setup.php:139
 #, fuzzy
 msgid "Listeners"
 msgstr "청취자"
 
-#: ../flowview_devices.php:450
+#: flowview_devices.php:450
 #, fuzzy
 msgid "Name"
 msgstr "이름"
 
-#: ../flowview_devices.php:453
+#: flowview_devices.php:453
 #, fuzzy
 msgid "Allowed From"
 msgstr "허용에서"
 
-#: ../flowview_devices.php:455
+#: flowview_devices.php:455
 #, fuzzy
 msgid "Version"
 msgstr "버전"
 
-#: ../flowview_devices.php:456
+#: flowview_devices.php:456
 #, fuzzy
 msgid "Compression"
 msgstr "압축"
 
-#: ../flowview_devices.php:458
+#: flowview_devices.php:458
 #, fuzzy
 msgid "Expire"
 msgstr "만료"
 
-#: ../flowview_devices.php:479
+#: flowview_devices.php:479
 #, fuzzy
 msgid "No Devices"
 msgstr "장치"
 
-#: ../flowview_schedules.php:33
+#: flowview_schedules.php:33
 #, fuzzy
 msgid "Send Now"
 msgstr "보내기"
 
-#: ../flowview_schedules.php:35
+#: flowview_schedules.php:35
 #, fuzzy
 msgid "Disable"
 msgstr "비활성화"
 
-#: ../flowview_schedules.php:36
+#: flowview_schedules.php:36
 #, fuzzy
 msgid "Enable"
 msgstr "활성화"
 
-#: ../flowview_schedules.php:40
+#: flowview_schedules.php:40
 #, fuzzy
 msgid "Every Hour"
 msgstr "매시간"
 
-#: ../flowview_schedules.php:41 ../flowview_schedules.php:42
-#: ../flowview_schedules.php:43 ../flowview_schedules.php:44
+#: flowview_schedules.php:41 flowview_schedules.php:42
+#: flowview_schedules.php:43 flowview_schedules.php:44
 #, fuzzy, php-format
 msgid "Every %d Hours"
 msgstr "% d 시간마다"
 
-#: ../flowview_schedules.php:45
+#: flowview_schedules.php:45
 #, fuzzy
 msgid "Every Day"
 msgstr "매일"
 
-#: ../flowview_schedules.php:46
+#: flowview_schedules.php:46
 #, fuzzy
 msgid "Every Week"
 msgstr "매주"
 
-#: ../flowview_schedules.php:47
+#: flowview_schedules.php:47
 #, fuzzy, php-format
 msgid "Every %d Weeks, 2"
 msgstr "매주 % d 주, 2"
 
-#: ../flowview_schedules.php:48
+#: flowview_schedules.php:48
 #, fuzzy
 msgid "Every Month"
 msgstr "매 달"
 
-#: ../flowview_schedules.php:53
+#: flowview_schedules.php:53
 #, fuzzy
 msgid "Title"
 msgstr "제목"
 
-#: ../flowview_schedules.php:55
+#: flowview_schedules.php:55
 #, fuzzy
 msgid "New Schedule"
 msgstr "새로운 스케줄"
 
-#: ../flowview_schedules.php:56
+#: flowview_schedules.php:56
 #, fuzzy
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "FlowView 일정에 대한 보고서 제목을 입력하십시오."
 
-#: ../flowview_schedules.php:62 ../flowview_schedules.php:507
+#: flowview_schedules.php:62 flowview_schedules.php:507
 #, fuzzy
 msgid "Enabled"
 msgstr "활성화"
 
-#: ../flowview_schedules.php:65
+#: flowview_schedules.php:65
 #, fuzzy
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "이 NetFlow 스캔을 보낼지 여부."
 
-#: ../flowview_schedules.php:70 ../flowview_schedules.php:502 ../setup.php:201
-#, fuzzy
-msgid "Filter Name"
-msgstr "이름 필터"
-
-#: ../flowview_schedules.php:71
+#: flowview_schedules.php:71
 #, fuzzy
 msgid "Name of the query to run."
 msgstr "실행할 쿼리 이름입니다."
 
-#: ../flowview_schedules.php:76
+#: flowview_schedules.php:76
 #, fuzzy
 msgid "Send Interval"
 msgstr "전송 간격"
 
-#: ../flowview_schedules.php:77
+#: flowview_schedules.php:77
 #, fuzzy
 msgid "How often to send this NetFlow Report?"
 msgstr "얼마나 자주이 NetFlow 보고서를 보내시겠습니까?"
 
-#: ../flowview_schedules.php:86
+#: flowview_schedules.php:86
 #, fuzzy
 msgid ""
 "This is the first date / time to send the NetFlow Scan email.  All future "
@@ -1361,236 +1353,236 @@ msgstr ""
 "NetFlow Scan 전자 메일을 보내는 첫 번째 날짜 / 시간입니다. 이후의 모든 전자 "
 "메일은이 시간과 위에 주어진 간격으로 계산됩니다."
 
-#: ../flowview_schedules.php:94
+#: flowview_schedules.php:94
 #, fuzzy
 msgid "Email Addresses"
 msgstr "이메일 주소"
 
-#: ../flowview_schedules.php:95
+#: flowview_schedules.php:95
 #, fuzzy
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "이 NetFlow Scan을 보낼 전자 메일 주소 (명령 구분)입니다."
 
-#: ../flowview_schedules.php:189
+#: flowview_schedules.php:189
 #, fuzzy
 msgid "Click 'Continue' to delete the following Schedule(s)."
 msgstr "다음 일정을 삭제하려면 '계속'을 클릭하십시오."
 
-#: ../flowview_schedules.php:196
+#: flowview_schedules.php:196
 #, fuzzy
 msgid "Click 'Continue' to send the following Schedule(s) now."
 msgstr "다음 일정을 보내려면 '계속'을 클릭하십시오."
 
-#: ../flowview_schedules.php:203
+#: flowview_schedules.php:203
 #, fuzzy
 msgid "Click 'Continue' to Disable the following Schedule(s)."
 msgstr "다음 일정을 사용하지 않으려면 '계속'을 클릭하십시오."
 
-#: ../flowview_schedules.php:210
+#: flowview_schedules.php:210
 #, fuzzy
 msgid "Click 'Continue' to Enable the following Schedule(s)."
 msgstr "다음 일정을 사용하려면 '계속'을 클릭하십시오."
 
-#: ../flowview_schedules.php:217
+#: flowview_schedules.php:217
 #, fuzzy
 msgid "You must select at least one schedule."
 msgstr "하나 이상의 일정을 선택해야합니다."
 
-#: ../flowview_schedules.php:306
+#: flowview_schedules.php:306
 #, fuzzy, php-format
 msgid "Report: [edit: %s]"
 msgstr "보고서 : [편집 :  %s]"
 
-#: ../flowview_schedules.php:308
+#: flowview_schedules.php:308
 #, fuzzy
 msgid "Report: [new]"
 msgstr "신고 : [new]"
 
-#: ../flowview_schedules.php:397
+#: flowview_schedules.php:397
 #, fuzzy
 msgid "FlowView Schedules"
 msgstr "FlowView 일정"
 
-#: ../flowview_schedules.php:411 ../flowview_schedules.php:492
-#: ../functions.php:319 ../setup.php:147
+#: flowview_schedules.php:411 flowview_schedules.php:492 functions.php:318
+#: setup.php:167
 #, fuzzy
 msgid "Schedules"
 msgstr "스케쥴"
 
-#: ../flowview_schedules.php:415
+#: flowview_schedules.php:415
 #, fuzzy
 msgid "Default"
 msgstr "기본값"
 
-#: ../flowview_schedules.php:501
+#: flowview_schedules.php:501
 #, fuzzy
 msgid "Schedule Title"
 msgstr "스케쥴 제목"
 
-#: ../flowview_schedules.php:503
+#: flowview_schedules.php:503
 #, fuzzy
 msgid "Interval"
 msgstr "간격"
 
-#: ../flowview_schedules.php:505
+#: flowview_schedules.php:505
 #, fuzzy
 msgid "Next Send"
 msgstr "다음 보내기"
 
-#: ../flowview_schedules.php:506
+#: flowview_schedules.php:506
 #, fuzzy
 msgid "Email"
 msgstr "이메일"
 
-#: ../functions.php:105 ../functions.php:169
+#: functions.php:105 functions.php:166
 #, fuzzy, php-format
 msgid "Report: %s"
 msgstr "보고서 :  %s"
 
-#: ../functions.php:113
+#: functions.php:113
 #, fuzzy
 msgid "Exclude"
 msgstr "제외"
 
-#: ../functions.php:118
+#: functions.php:118
 #, fuzzy
 msgid "Top Sample"
 msgstr "상위 샘플"
 
-#: ../functions.php:119
+#: functions.php:119
 #, fuzzy
 msgid "Top 2 Samples"
 msgstr "상위 2 개 샘플"
 
-#: ../functions.php:120
+#: functions.php:120
 #, fuzzy
 msgid "Top 3 Samples"
 msgstr "상위 3 개 샘플"
 
-#: ../functions.php:121
+#: functions.php:121
 #, fuzzy
 msgid "Top 4 Samples"
 msgstr "상위 4 개 샘플"
 
-#: ../functions.php:122
+#: functions.php:122
 #, fuzzy
 msgid "Top 5 Samples"
 msgstr "상위 5 개 샘플"
 
-#: ../functions.php:126
+#: functions.php:126
 #, fuzzy
 msgid "Show/Hide"
 msgstr "표시 / 숨기기"
 
-#: ../functions.php:132
+#: functions.php:130
 #, fuzzy
 msgid "Table"
 msgstr "표"
 
-#: ../functions.php:138
+#: functions.php:134
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "바이트 바"
 
-#: ../functions.php:144
+#: functions.php:138
 #, fuzzy
 msgid "Packets Bar"
 msgstr "패킷 모음"
 
-#: ../functions.php:150
+#: functions.php:142
 #, fuzzy
 msgid "Flows Bar"
 msgstr "흐름 표시 줄"
 
-#: ../functions.php:312
+#: functions.php:311
 #, fuzzy
 msgid "Filters"
 msgstr "필터"
 
-#: ../functions.php:312
+#: functions.php:311
 #, fuzzy
 msgid "Flow Filters"
 msgstr "플로우 필터"
 
-#: ../functions.php:315
+#: functions.php:314
 #, fuzzy
 msgid "Manage Listeners"
 msgstr "리스너 관리"
 
-#: ../functions.php:319
+#: functions.php:318
 #, fuzzy
 msgid "Manage Schedules"
 msgstr "일정 관리"
 
-#: ../functions.php:324
+#: functions.php:323
 #, fuzzy
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../functions.php:347
+#: functions.php:346
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "선인장 Flowview"
 
-#: ../functions.php:355
+#: functions.php:354
 #, fuzzy
 msgid "Netflow - %"
 msgstr "Netflow - %"
 
-#: ../functions.php:533
+#: functions.php:532
 #, fuzzy
 msgid "New Flow"
 msgstr "새로운 흐름"
 
-#: ../functions.php:617
+#: functions.php:616
 #, fuzzy
 msgid "Summary Statistics"
 msgstr "요약 통계"
 
-#: ../functions.php:625
-#, fuzzy
-msgid "IP Packet Size Distribution (%)"
+#: functions.php:624
+#, fuzzy, php-format
+msgid "IP Packet Size Distribution (%%)"
 msgstr "IP 패킷 크기 분포 (%)"
 
-#: ../functions.php:630
-#, fuzzy
-msgid "Packets per Flow Distribution (%)"
+#: functions.php:629
+#, fuzzy, php-format
+msgid "Packets per Flow Distribution (%%)"
 msgstr "흐름 분포 (%) 당 패킷"
 
-#: ../functions.php:635
-#, fuzzy
-msgid "Octets per Flow Distribution (%)"
+#: functions.php:634
+#, fuzzy, php-format
+msgid "Octets per Flow Distribution (%%)"
 msgstr "유량 분포 당 옥텟 (%)"
 
-#: ../functions.php:640
-#, fuzzy
-msgid "Flow Time Distribution (%)"
+#: functions.php:639
+#, fuzzy, php-format
+msgid "Flow Time Distribution (%%)"
 msgstr "유동 시간 분포 (%)"
 
-#: ../functions.php:1346
+#: functions.php:1343
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "통계 보고서 또는 인쇄 된 보고서를 선택해야합니다!"
 
-#: ../functions.php:1349
+#: functions.php:1346
 #, fuzzy
 msgid ""
 "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "통계 보고서 또는 인쇄 보고서 만 선택해야합니다 (두 가지가 아닌)."
 
-#: ../functions.php:1352
+#: functions.php:1349
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr ""
 "날짜가 잘못되었습니다. 종료 날짜 / 시간이 시작 날짜 / 시간보다 빠릅니다!"
 
-#: ../functions.php:1360 ../functions.php:1364
+#: functions.php:1357 functions.php:1361
 #, fuzzy
 msgid ""
 "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "소스 주소의 IP가 잘못되었습니다! <br> ( '192.168.0.1'형식이어야 함)"
 
-#: ../functions.php:1370 ../functions.php:1374 ../functions.php:1378
+#: functions.php:1367 functions.php:1371 functions.php:1375
 #, fuzzy
 msgid ""
 "Invalid subnet for the Source Address!<br>(Must be in the form of "
@@ -1599,14 +1591,14 @@ msgstr ""
 "소스 주소에 대한 서브넷이 잘못되었습니다! <br> "
 "( '192.168.0.1/255.255.255.0'또는 '192.168.0.1/24'형식이어야 함)"
 
-#: ../functions.php:1391 ../functions.php:1395
+#: functions.php:1388 functions.php:1392
 #, fuzzy
 msgid ""
 "Invalid IP for the Destination Address!<br>(Must be in the form of "
 "'192.168.0.1')"
 msgstr "도착 IP 주소가 잘못되었습니다! <br> ( '192.168.0.1'형식이어야 함)"
 
-#: ../functions.php:1401 ../functions.php:1405 ../functions.php:1409
+#: functions.php:1398 functions.php:1402 functions.php:1406
 #, fuzzy
 msgid ""
 "Invalid subnet for the Destination Address!<br>(Must be in the form of "
@@ -1615,198 +1607,193 @@ msgstr ""
 "대상 주소에 대한 서브넷이 잘못되었습니다! <br> "
 "( '192.168.0.1/255.255.255.0'또는 '192.168.0.1/24'형식이어야 함)"
 
-#: ../functions.php:1423
+#: functions.php:1420
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "원본 인터페이스에 대한 값이 잘못되었습니다!"
 
-#: ../functions.php:1434
+#: functions.php:1431
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "원본 포트 값이 잘못되었습니다! (0 - 65535)"
 
-#: ../functions.php:1445
+#: functions.php:1442
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "원본 AS 값이 잘못되었습니다. (0 - 65535)"
 
-#: ../functions.php:1456
+#: functions.php:1453
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "대상 인터페이스에 대한 값이 잘못되었습니다!"
 
-#: ../functions.php:1467
+#: functions.php:1464
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "대상 포트에 대한 값이 잘못되었습니다! (0 - 65535)"
 
-#: ../functions.php:1478
+#: functions.php:1475
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Destination AS! 값이 잘못되었습니다. (0 - 65535)"
 
-#: ../functions.php:1489
+#: functions.php:1486
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "프로토콜 값이 잘못되었습니다! (1 - 255)"
 
-#: ../functions.php:1498
+#: functions.php:1495
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr ""
 "TCP 플래그의 값이 잘못되었습니다! (예 : 0x1b 또는 0x1b / SA 또는 SA / SA)"
 
-#: ../functions.php:1503
+#: functions.php:1500
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Cutoff Octets에 대한 값이 잘못되었습니다!"
 
-#: ../functions.php:1506
+#: functions.php:1503
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "컷오프 라인 값이 잘못되었습니다!"
 
-#: ../functions.php:1509
+#: functions.php:1506
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "Sort Field! 값이 잘못되었습니다!"
 
-#: ../functions.php:1518
+#: functions.php:1515
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "%s 유형의 FlowView 차트는  %s입니다."
 
-#: ../setup.php:35
+#: setup.php:34
 #, fuzzy
 msgid "Plugin -> Flow Viewer"
 msgstr "플러그인 -> 플로우 뷰어"
 
-#: ../setup.php:36
+#: setup.php:35
 #, fuzzy
 msgid "Plugin -> Flow Admin"
 msgstr "플러그인 -> Flow Admin"
 
-#: ../setup.php:85
+#: setup.php:103
 #, fuzzy
 msgid "The Filter has been Deleted"
 msgstr "필터가 삭제되었습니다."
 
-#: ../setup.php:86
+#: setup.php:104
 #, fuzzy
 msgid "The Filter has been Updated"
 msgstr "필터가 업데이트되었습니다."
 
-#: ../setup.php:91 ../setup.php:112 ../setup.php:221
+#: setup.php:111 setup.php:132 setup.php:221
 #, fuzzy
 msgid "Flow Viewer"
 msgstr "플로우 뷰어"
 
-#: ../setup.php:98
+#: setup.php:118
 #, fuzzy
 msgid "(view)"
 msgstr "보기"
 
-#: ../setup.php:105 ../setup.php:133 ../setup.php:161
+#: setup.php:125 setup.php:153 setup.php:181
 #, fuzzy
 msgid "(save)"
 msgstr "저장"
 
-#: ../setup.php:126 ../setup.php:154
+#: setup.php:146 setup.php:174
 #, fuzzy
 msgid "(edit)"
 msgstr "(편집)"
 
-#: ../setup.php:140 ../setup.php:168
+#: setup.php:160 setup.php:188
 #, fuzzy
 msgid "(actions)"
 msgstr "작업"
 
-#: ../setup.php:182 ../setup.php:184
+#: setup.php:202 setup.php:204
 #, fuzzy
 msgid "FlowView"
 msgstr "FlowView"
 
-#: ../setup.php:202
-#, fuzzy
-msgid "New Query"
-msgstr "새 쿼리"
-
-#: ../setup.php:225
+#: setup.php:225
 #, fuzzy
 msgid "Flow Tools Binary Path"
 msgstr "흐름 도구 이진 경로"
 
-#: ../setup.php:226
+#: setup.php:226
 #, fuzzy
 msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
 msgstr "flow-cat, flow-filter 및 flow-stat 바이너리의 경로."
 
-#: ../setup.php:232
+#: setup.php:232
 #, fuzzy
 msgid "Flow Tools Work Directory"
 msgstr "흐름 도구 작업 디렉토리"
 
-#: ../setup.php:233
+#: setup.php:233
 #, fuzzy
 msgid "This is the path to a temporary directory to do work."
 msgstr "이것은 작업을 수행 할 임시 디렉토리의 경로입니다."
 
-#: ../setup.php:239
+#: setup.php:239
 #, fuzzy
 msgid "Flows Directory"
 msgstr "흐름 디렉토리"
 
-#: ../setup.php:240
+#: setup.php:240
 #, fuzzy
 msgid "This is the path to base the path of your flow folder structure."
 msgstr "이것은 흐름 폴더 구조의 경로를 구성하는 경로입니다."
 
-#: ../setup.php:246
+#: setup.php:246
 #, fuzzy
 msgid "Hostname Resolution"
 msgstr "호스트 이름 해석"
 
-#: ../setup.php:247
+#: setup.php:247
 #, fuzzy
 msgid "The method by which you wish to resolve hostnames."
 msgstr "호스트 이름을 확인하려는 방법."
 
-#: ../setup.php:250
+#: setup.php:250
 #, fuzzy
 msgid "Use Local Server"
 msgstr "로컬 서버 사용"
 
-#: ../setup.php:251
+#: setup.php:251
 #, fuzzy
 msgid "Use DNS Server Below"
 msgstr "아래의 DNS 서버 사용"
 
-#: ../setup.php:252
+#: setup.php:252
 #, fuzzy
 msgid "Don't Resolve DNS"
 msgstr "DNS를 해결하지 마십시오."
 
-#: ../setup.php:257
+#: setup.php:257
 #, fuzzy
 msgid "Alternate DNS Server"
 msgstr "대체 DNS 서버"
 
-#: ../setup.php:258
+#: setup.php:258
 #, fuzzy
 msgid "This is the DNS Server used to resolve names."
 msgstr "이름을 확인하는 데 사용되는 DNS 서버입니다."
 
-#: ../setup.php:263
+#: setup.php:263
 #, fuzzy
 msgid "Strip Domain Names"
 msgstr "도메인 이름 제거"
 
-#: ../setup.php:264
+#: setup.php:264
 #, fuzzy
 msgid "A comma delimited list of domains names to strip from the domain."
 msgstr "도메인에서 제거 할 쉼표로 구분 된 도메인 이름 목록입니다."
 
-#: ../setup.php:271
+#: setup.php:271
 #, fuzzy
 msgid "Misc"
 msgstr "기타"
