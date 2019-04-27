@@ -6,21 +6,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: flowview on cacti 1.1.34\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-03-18 19:54-0400\n"
-"Last-Translator: \n"
-"Language-Team: sfqas <sfqas@163.com>\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2019-04-27 02:12+0000\n"
+"Last-Translator: whsir <wh@whsir.com>\n"
+"Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/"
+"cacti/flowview/zh-CN/>\n"
+"Language: zh-CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 #: arrays.php:26
 #, fuzzy
 msgid "Select a Statistic Report"
-msgstr "统计报告"
+msgstr "选择一个统计报告"
 
 #: arrays.php:27
 msgid "Summary"
@@ -101,7 +103,7 @@ msgstr "来源/目标前缀"
 #: arrays.php:49
 #, fuzzy
 msgid "Select a Print Report"
-msgstr "打印报告"
+msgstr "选择报告打印"
 
 #: arrays.php:50
 msgid "Flow Times"
@@ -416,8 +418,9 @@ msgid "No"
 msgstr "不"
 
 #: arrays.php:166 arrays.php:177 functions.php:117
+#, fuzzy
 msgid "None"
-msgstr "没有"
+msgstr "无"
 
 #: arrays.php:188
 msgid "All"
@@ -696,6 +699,7 @@ msgid "Save As"
 msgstr "另存为"
 
 #: flowview.php:458 flowview_devices.php:30 flowview_schedules.php:34
+#, fuzzy
 msgid "Delete"
 msgstr "删除"
 
@@ -708,6 +712,7 @@ msgid "New Query"
 msgstr "新查询"
 
 #: flowview.php:472 flowview_devices.php:262 flowview_schedules.php:228
+#, fuzzy
 msgid "Cancel"
 msgstr "取消"
 
@@ -722,7 +727,7 @@ msgstr "过滤器已保存"
 #: flowview.php:744
 #, fuzzy
 msgid "Filter Settings Saved"
-msgstr "过滤器设置保存"
+msgstr "过滤器设置已保存"
 
 #: flowview.php:752
 msgid "Filter Updated"
@@ -984,24 +989,29 @@ msgid "FlowView Listeners"
 msgstr "FlowView监听器"
 
 #: flowview_devices.php:398 flowview_schedules.php:405
+#, fuzzy
 msgid "Search"
 msgstr "搜索"
 
 #: flowview_devices.php:404 flowview_schedules.php:426
+#, fuzzy
 msgid "Go"
-msgstr "启动"
+msgstr "Go"
 
 #: flowview_devices.php:404 flowview_schedules.php:426
+#, fuzzy
 msgid "Set/Refresh Filters"
 msgstr "设置/刷新过滤器"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
+#, fuzzy
 msgid "Clear"
 msgstr "清除"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
+#, fuzzy
 msgid "Clear Filters"
-msgstr "清除过滤器"
+msgstr "清除过滤"
 
 #: flowview_devices.php:441 functions.php:314 setup.php:139
 msgid "Listeners"
@@ -1141,12 +1151,12 @@ msgstr "您必须至少选择一个时间表。"
 #: flowview_schedules.php:306
 #, fuzzy, php-format
 msgid "Report: [edit: %s]"
-msgstr "报告： %s"
+msgstr "报告：[编辑：％s]"
 
 #: flowview_schedules.php:308
 #, fuzzy
 msgid "Report: [new]"
-msgstr "报告项目[新报告：%s]"
+msgstr "报告：[新]"
 
 #: flowview_schedules.php:397
 msgid "FlowView Schedules"
@@ -1270,12 +1280,12 @@ msgstr "IP数据包大小分布（％）"
 #: functions.php:629
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
-msgstr "每流量分组数（％）"
+msgstr "每个流量分配的数据包（%%）"
 
 #: functions.php:634
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
-msgstr "每个流量分配的八位组（％）"
+msgstr "每流量分布的八位字节（%%）"
 
 #: functions.php:639
 #, fuzzy, php-format
@@ -1374,7 +1384,7 @@ msgstr "FlowView图表 %s 类型是 %s"
 #: setup.php:34
 #, fuzzy
 msgid "Plugin -> Flow Viewer"
-msgstr "流量查看器"
+msgstr "插件 - &gt;流程查看器"
 
 #: setup.php:35
 #, fuzzy
@@ -1453,7 +1463,7 @@ msgstr "使用本地服务器"
 #: setup.php:251
 #, fuzzy
 msgid "Use DNS Server Below"
-msgstr "备用DNS服务器"
+msgstr "使用备用DNS服务器"
 
 #: setup.php:252
 #, fuzzy
@@ -1479,4 +1489,4 @@ msgstr "逗号分隔的域名清单，以从域中剥离。"
 #: setup.php:271
 #, fuzzy
 msgid "Misc"
-msgstr "杂项"
+msgstr "其他"
