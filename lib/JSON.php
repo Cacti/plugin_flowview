@@ -112,8 +112,7 @@ define('SERVICES_JSON_SUPPRESS_ERRORS', 32);
  * $value = $json->decode($input);
  * </code>
  */
-class Services_JSON
-{
+class Services_JSON {
    /**
     * constructs a new JSON instance
     *
@@ -130,8 +129,7 @@ class Services_JSON
     *                                   bubble up with an error, so all return values
     *                                   from encode() should be checked with isError()
     */
-    function Services_JSON($use = 0)
-    {
+    function __construct($use = 0) {
         $this->use = $use;
     }
 
@@ -146,8 +144,7 @@ class Services_JSON
     * @return   string  UTF-8 character
     * @access   private
     */
-    function utf162utf8($utf16)
-    {
+    function utf162utf8($utf16) {
         // oh please oh please oh please oh please oh please
         if(function_exists('mb_convert_encoding')) {
             return mb_convert_encoding($utf16, 'UTF-8', 'UTF-16');
@@ -190,8 +187,7 @@ class Services_JSON
     * @return   string  UTF-16 character
     * @access   private
     */
-    function utf82utf16($utf8)
-    {
+    function utf82utf16($utf8) {
         // oh please oh please oh please oh please oh please
         if(function_exists('mb_convert_encoding')) {
             return mb_convert_encoding($utf8, 'UTF-16', 'UTF-8');
@@ -234,8 +230,7 @@ class Services_JSON
     * @return   mixed   JSON string representation of input var or an error if a problem occurs
     * @access   public
     */
-    function encode($var)
-    {
+    function encode($var) {
         switch (gettype($var)) {
             case 'boolean':
                 return $var ? 'true' : 'false';
@@ -431,8 +426,7 @@ class Services_JSON
     * @return   string  JSON-formatted name-value pair, like '"name":value'
     * @access   private
     */
-    function name_value($name, $value)
-    {
+    function name_value($name, $value) {
         $encoded_value = $this->encode($value);
 
         if(Services_JSON::isError($encoded_value)) {
@@ -450,20 +444,18 @@ class Services_JSON
     * @return   string  string value stripped of comments and whitespace
     * @access   private
     */
-    function reduce_string($str)
-    {
+    function reduce_string($str) {
         $str = preg_replace(array(
+            // eliminate single line comments in '// ...' form
+            '#^\s*//(.+)$#m',
 
-                // eliminate single line comments in '// ...' form
-                '#^\s*//(.+)$#m',
+            // eliminate multi-line comments in '/* ... */' form, at start of string
+            '#^\s*/\*(.+)\*/#Us',
 
-                // eliminate multi-line comments in '/* ... */' form, at start of string
-                '#^\s*/\*(.+)\*/#Us',
+            // eliminate multi-line comments in '/* ... */' form, at end of string
+            '#/\*(.+)\*/\s*$#Us'
 
-                // eliminate multi-line comments in '/* ... */' form, at end of string
-                '#/\*(.+)\*/\s*$#Us'
-
-            ), '', $str);
+        ), '', $str);
 
         // eliminate extraneous space
         return trim($str);
@@ -481,8 +473,7 @@ class Services_JSON
     *                   in ASCII or UTF-8 format!
     * @access   public
     */
-    function decode($str)
-    {
+    function decode($str) {
         $str = $this->reduce_string($str);
 
         switch (strtolower($str)) {
@@ -666,7 +657,7 @@ class Services_JSON
                                 // element in an associative array,
                                 // for now
                                 $parts = array();
-                                
+
                                 if (preg_match('/^\s*(["\'].*[^\\\]["\'])\s*:\s*(\S.*),?$/Uis', $slice, $parts)) {
                                     // "name":value pair
                                     $key = $this->decode($parts[1]);
@@ -763,12 +754,10 @@ class Services_JSON
     /**
      * @todo Ultimately, this should just call PEAR::isError()
      */
-    function isError($data, $code = null)
-    {
+    function isError($data, $code = null) {
         if (class_exists('pear')) {
             return PEAR::isError($data, $code);
-        } elseif (is_object($data) && (get_class($data) == 'services_json_error' ||
-                                 is_subclass_of($data, 'services_json_error'))) {
+        } elseif (is_object($data) && (get_class($data) == 'services_json_error' || is_subclass_of($data, 'services_json_error'))) {
             return true;
         }
 
@@ -777,30 +766,18 @@ class Services_JSON
 }
 
 if (class_exists('PEAR_Error')) {
-
-    class Services_JSON_Error extends PEAR_Error
-    {
-        function Services_JSON_Error($message = 'unknown error', $code = null,
-                                     $mode = null, $options = null, $userinfo = null)
-        {
+    class Services_JSON_Error extends PEAR_Error {
+        function __construct($message = 'unknown error', $code = null, $mode = null, $options = null, $userinfo = null) {
             parent::PEAR_Error($message, $code, $mode, $options, $userinfo);
         }
     }
-
 } else {
-
     /**
      * @todo Ultimately, this class shall be descended from PEAR_Error
      */
-    class Services_JSON_Error
-    {
-        function Services_JSON_Error($message = 'unknown error', $code = null,
-                                     $mode = null, $options = null, $userinfo = null)
-        {
-
+    class Services_JSON_Error {
+        function __construct($message = 'unknown error', $code = null, $mode = null, $options = null, $userinfo = null) {
         }
     }
-
 }
-    
-?>
+
