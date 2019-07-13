@@ -6,16 +6,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-03-18 21:32-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: pl_PL\n"
+"PO-Revision-Date: 2019-07-13 04:14+0000\n"
+"Last-Translator: Jaroslaw Kłopotek <jkl@interduo.pl>\n"
+"Language-Team: Polish <http://translate.cacti.net/projects/cacti/flowview/"
+"pl-PL/>\n"
+"Language: pl-PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 #: arrays.php:26
 #, fuzzy
@@ -513,7 +516,6 @@ msgid "No"
 msgstr "Nie"
 
 #: arrays.php:166 arrays.php:177 functions.php:117
-#, fuzzy
 msgid "None"
 msgstr "Brak"
 
@@ -834,9 +836,8 @@ msgid "Minimum Bytes:"
 msgstr "Minimalne bajty:"
 
 #: flowview.php:454
-#, fuzzy
 msgid "View"
-msgstr "Zobacz"
+msgstr "Podgląd"
 
 #: flowview.php:455
 #, fuzzy
@@ -844,7 +845,6 @@ msgid "Defaults"
 msgstr "Domyślne"
 
 #: flowview.php:456 flowview.php:473
-#, fuzzy
 msgid "Save"
 msgstr "Zapisz"
 
@@ -854,7 +854,6 @@ msgid "Save As"
 msgstr "Zapisz jako"
 
 #: flowview.php:458 flowview_devices.php:30 flowview_schedules.php:34
-#, fuzzy
 msgid "Delete"
 msgstr "Usuń"
 
@@ -869,7 +868,6 @@ msgid "New Query"
 msgstr "Nowe zapytanie"
 
 #: flowview.php:472 flowview_devices.php:262 flowview_schedules.php:228
-#, fuzzy
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -929,19 +927,19 @@ msgid "%d Weeks"
 msgstr "%d tygodni"
 
 #: flowview_devices.php:40
-#, fuzzy, php-format
+#, php-format
 msgid "%d Month"
-msgstr "%d Miesiąc"
+msgstr "%d miesiąc"
 
 #: flowview_devices.php:41 flowview_devices.php:42 flowview_devices.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "%d Months"
-msgstr "%d Miesiące"
+msgstr "%d miesiące"
 
 #: flowview_devices.php:44
-#, fuzzy, php-format
+#, php-format
 msgid "%d Year"
-msgstr "%d Rok"
+msgstr "%d rok"
 
 #: flowview_devices.php:48
 #, fuzzy, php-format
@@ -1205,7 +1203,6 @@ msgid "FlowView Listeners"
 msgstr "FlowView Listeners"
 
 #: flowview_devices.php:398 flowview_schedules.php:405
-#, fuzzy
 msgid "Search"
 msgstr "Szukaj"
 
@@ -1286,7 +1283,7 @@ msgstr "Co godzine"
 
 #: flowview_schedules.php:41 flowview_schedules.php:42
 #: flowview_schedules.php:43 flowview_schedules.php:44
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Hours"
 msgstr "Co %d godzin"
 
@@ -1525,7 +1522,6 @@ msgid "Manage Schedules"
 msgstr "Harmonogramy zarządzania"
 
 #: functions.php:323
-#, fuzzy
 msgid "Unknown"
 msgstr "Nieznany"
 
