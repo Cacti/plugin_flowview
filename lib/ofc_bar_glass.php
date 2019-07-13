@@ -22,13 +22,12 @@ class bar_on_show {
 	}
 }
 
-class bar_value
-{
+class bar_value {
 	/**
 	 * @param $top as integer. The Y value of the top of the bar
 	 * @param OPTIONAL $bottom as integer. The Y value of the bottom of the bar, defaults to Y min.
 	 */
-	function bar_value($top, $bottom=null) {
+	function __construct($top, $bottom=null) {
 		$this->top = $top;
 
 		if( isset( $bottom))

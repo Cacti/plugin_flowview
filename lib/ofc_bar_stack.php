@@ -25,7 +25,7 @@ class bar_stack extends bar_base {
 }
 
 class bar_stack_value {
-	function bar_stack_value($val, $colour) {
+	function __construct($val, $colour) {
 		$this->val = $val;
 		$this->colour = $colour;
 	}
@@ -36,10 +36,11 @@ class bar_stack_value {
 }
 
 class bar_stack_key {
-	function bar_stack_key($colour, $text, $font_size) {
+	function __construct($colour, $text, $font_size) {
 		$this->colour = $colour;
 		$this->text = $text;
 		$tmp = 'font-size';
 		$this->$tmp = $font_size;
 	}
 }
+
