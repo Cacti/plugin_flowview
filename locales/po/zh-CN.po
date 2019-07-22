@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flowview on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-07-13 04:14+0000\n"
+"PO-Revision-Date: 2019-07-21 21:28-0400\n"
 "Last-Translator: tomcat <luis_126@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/"
 "cacti/flowview/zh-CN/>\n"
-"Language: zh-CN\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: arrays.php:26
 #, fuzzy
@@ -418,9 +418,8 @@ msgid "No"
 msgstr "不"
 
 #: arrays.php:166 arrays.php:177 functions.php:117
-#, fuzzy
 msgid "None"
-msgstr "无"
+msgstr "没有"
 
 #: arrays.php:188
 msgid "All"
@@ -699,7 +698,6 @@ msgid "Save As"
 msgstr "另存为"
 
 #: flowview.php:458 flowview_devices.php:30 flowview_schedules.php:34
-#, fuzzy
 msgid "Delete"
 msgstr "删除"
 
@@ -712,7 +710,6 @@ msgid "New Query"
 msgstr "新查询"
 
 #: flowview.php:472 flowview_devices.php:262 flowview_schedules.php:228
-#, fuzzy
 msgid "Cancel"
 msgstr "取消"
 
@@ -725,9 +722,8 @@ msgid "Filter Saved"
 msgstr "过滤器已保存"
 
 #: flowview.php:744
-#, fuzzy
 msgid "Filter Settings Saved"
-msgstr "过滤器设置已保存"
+msgstr "过滤器设置保存"
 
 #: flowview.php:752
 msgid "Filter Updated"
@@ -975,12 +971,11 @@ msgid "Continue"
 msgstr "继续"
 
 #: flowview_devices.php:322
-#, fuzzy, php-format
+#, php-format
 msgid "Device [edit: %s]"
 msgstr "设备 [编辑: %s]"
 
 #: flowview_devices.php:324
-#, fuzzy
 msgid "Device [new]"
 msgstr "设备 [新建]"
 
@@ -997,7 +992,6 @@ msgid "Go"
 msgstr "Go"
 
 #: flowview_devices.php:404 flowview_schedules.php:426
-#, fuzzy
 msgid "Set/Refresh Filters"
 msgstr "设置/刷新过滤器"
 
@@ -1006,9 +1000,8 @@ msgid "Clear"
 msgstr "清除"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
-#, fuzzy
 msgid "Clear Filters"
-msgstr "清除过滤"
+msgstr "清除过滤器"
 
 #: flowview_devices.php:441 functions.php:314 setup.php:139
 msgid "Listeners"
@@ -1277,12 +1270,12 @@ msgstr "IP数据包大小分布（％）"
 #: functions.php:629
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
-msgstr "每个流量分配的数据包（%%）"
+msgstr "每流量分组数（％）"
 
 #: functions.php:634
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
-msgstr "每流量分布的八位字节（%%）"
+msgstr "每个流量分配的八位组（％）"
 
 #: functions.php:639
 #, fuzzy, php-format
@@ -1484,6 +1477,5 @@ msgid "A comma delimited list of domains names to strip from the domain."
 msgstr "逗号分隔的域名清单，以从域中剥离。"
 
 #: setup.php:271
-#, fuzzy
 msgid "Misc"
-msgstr "其他"
+msgstr "杂项"

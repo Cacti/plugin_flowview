@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-05-29 15:13+0000\n"
+"PO-Revision-Date: 2019-07-21 21:24-0400\n"
 "Last-Translator: Olivier VOGEL <olivier.vogel@st.com>\n"
 "Language-Team: French <http://translate.cacti.net/projects/cacti/flowview/fr-"
 "FR/>\n"
-"Language: fr-FR\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: arrays.php:26
 #, fuzzy
@@ -25,7 +25,6 @@ msgid "Select a Statistic Report"
 msgstr "Rapports statistiques"
 
 #: arrays.php:27
-#, fuzzy
 msgid "Summary"
 msgstr "Résumé"
 
@@ -50,7 +49,6 @@ msgid "Destination IP"
 msgstr "Destination IP"
 
 #: arrays.php:32 flowview.php:358 flowview.php:799
-#, fuzzy
 msgid "Source IP"
 msgstr "IP source"
 
@@ -196,7 +194,6 @@ msgid "Entirely in Specified Time Span"
 msgstr "Entièrement dans un intervalle de temps spécifié"
 
 #: arrays.php:70
-#, fuzzy
 msgid "Select One"
 msgstr "Sélectionnez-en un"
 
@@ -206,7 +203,6 @@ msgid "TCP"
 msgstr "TCP"
 
 #: arrays.php:72
-#, fuzzy
 msgid "UDP"
 msgstr "UDP"
 
@@ -426,7 +422,6 @@ msgid "IDRP"
 msgstr "IDRP"
 
 #: arrays.php:116
-#, fuzzy
 msgid "RSVP"
 msgstr "RSVP"
 
@@ -506,33 +501,28 @@ msgid "ENCAP"
 msgstr "ENCAP"
 
 #: arrays.php:135 flowview_schedules.php:522
-#, fuzzy
 msgid "Yes"
 msgstr "Oui"
 
 #: arrays.php:136 flowview_schedules.php:522
-#, fuzzy
 msgid "No"
 msgstr "Non"
 
 #: arrays.php:166 arrays.php:177 functions.php:117
-#, fuzzy
 msgid "None"
 msgstr "Aucun"
 
 #: arrays.php:188
-#, fuzzy
 msgid "All"
 msgstr "Tout"
 
 #: arrays.php:189 arrays.php:190 arrays.php:191 arrays.php:192 arrays.php:193
 #: arrays.php:194 arrays.php:195 arrays.php:196
-#, fuzzy, php-format
+#, php-format
 msgid "Top %d"
-msgstr "Haut %d"
+msgstr "Top %d"
 
 #: arrays.php:207
-#, fuzzy
 msgid "No Limit"
 msgstr "Aucune limite"
 
@@ -551,7 +541,6 @@ msgstr "octets %s Octets"
 #: flowview.php:823 flowview.php:830 flowview.php:838 flowview.php:845
 #: flowview.php:853 flowview.php:860 flowview.php:867 flowview.php:875
 #: functions.php:590
-#, fuzzy
 msgid "Bytes"
 msgstr "Octets"
 
@@ -580,7 +569,6 @@ msgstr "Paquets"
 
 #: arrays.php:271 arrays.php:272 arrays.php:273 flowview.php:807
 #: flowview_devices.php:124 flowview_devices.php:454
-#, fuzzy
 msgid "Port"
 msgstr "Port"
 
@@ -626,7 +614,6 @@ msgid "Dest AS"
 msgstr "Dest AS"
 
 #: arrays.php:284 flowview.php:858
-#, fuzzy
 msgid "TOS"
 msgstr "CGU"
 
@@ -641,7 +628,6 @@ msgid "Dest Prefix"
 msgstr "Préfixe de destination"
 
 #: arrays.php:292
-#, fuzzy
 msgid "Active"
 msgstr "Actif"
 
@@ -661,7 +647,6 @@ msgid "Dest Port"
 msgstr "Port de destination"
 
 #: arrays.php:292 arrays.php:294
-#, fuzzy
 msgid "End Time"
 msgstr "Heure de fin"
 
@@ -681,7 +666,6 @@ msgid "Src Port"
 msgstr "Port Src"
 
 #: arrays.php:292 arrays.php:294 flowview_schedules.php:85
-#, fuzzy
 msgid "Start Time"
 msgstr "Heure de début"
 
@@ -691,7 +675,6 @@ msgid "Ts"
 msgstr "Ts"
 
 #: arrays.php:294
-#, fuzzy
 msgid "Flags"
 msgstr "Drapeaux"
 
@@ -701,47 +684,38 @@ msgid "Flow Filter Constraints"
 msgstr "Contraintes du filtre d'écoulement"
 
 #: flowview.php:283
-#, fuzzy
 msgid "Filter"
 msgstr "Filtre"
 
 #: flowview.php:289
-#, fuzzy
 msgid "Listener"
 msgstr "Auditeur"
 
 #: flowview.php:297
-#, fuzzy
 msgid "Presets"
 msgstr "Préréglages"
 
 #: flowview.php:302 flowview.php:599
-#, fuzzy
 msgid "Custom"
 msgstr "Personnalisé"
 
 #: flowview.php:316 flowview_schedules.php:504
-#, fuzzy
 msgid "Start Date"
 msgstr "Date de début"
 
 #: flowview.php:320 flowview_schedules.php:329
-#, fuzzy
 msgid "Start Date Selector"
 msgstr "Sélecteur de date de démarrage"
 
 #: flowview.php:323
-#, fuzzy
 msgid "End Date"
 msgstr "Date de fin"
 
 #: flowview.php:327
-#, fuzzy
 msgid "End Date Selector"
 msgstr "Sélecteur de date de fin"
 
 #: flowview.php:335
-#, fuzzy
 msgid "Protocols"
 msgstr "Protocoles"
 
@@ -792,12 +766,10 @@ msgstr ""
 "Port, signifie n'importe quel port sauf 80)."
 
 #: flowview.php:411
-#, fuzzy
 msgid "Note:"
 msgstr "Note :"
 
 #: flowview.php:420
-#, fuzzy
 msgid "Report Parameters"
 msgstr "Paramètres du rapport"
 
@@ -837,22 +809,18 @@ msgid "Minimum Bytes:"
 msgstr "Octets minimum :"
 
 #: flowview.php:454
-#, fuzzy
 msgid "View"
 msgstr "Voir"
 
 #: flowview.php:455
-#, fuzzy
 msgid "Defaults"
 msgstr "Défaut"
 
 #: flowview.php:456 flowview.php:473
-#, fuzzy
 msgid "Save"
 msgstr "Sauvegarder"
 
 #: flowview.php:457
-#, fuzzy
 msgid "Save As"
 msgstr "Enregistrer sous"
 
@@ -861,7 +829,6 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: flowview.php:467 flowview_schedules.php:70 flowview_schedules.php:502
-#, fuzzy
 msgid "Filter Name"
 msgstr "Nom du filtre"
 
@@ -875,7 +842,6 @@ msgid "Cancel"
 msgstr "Abandonner"
 
 #: flowview.php:654
-#, fuzzy
 msgid "Update"
 msgstr "Mettre à jour"
 
@@ -895,59 +861,55 @@ msgid "Filter Updated"
 msgstr "Filtre mis à jour"
 
 #: flowview.php:814
-#, fuzzy
 msgid "IP"
 msgstr "IP"
 
 #: flowview.php:828
-#, fuzzy
 msgid "Interface"
 msgstr "Interface"
 
 #: flowview.php:843
-#, fuzzy
 msgid "AS"
 msgstr "AS"
 
 #: flowview.php:865
-#, fuzzy
 msgid "Prefix"
 msgstr "Préfixe"
 
 #: flowview_devices.php:36 flowview_devices.php:37
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days"
 msgstr "%d Jours"
 
 #: flowview_devices.php:38
-#, fuzzy, php-format
+#, php-format
 msgid "%d Week"
 msgstr "%d semaine"
 
 #: flowview_devices.php:39
-#, fuzzy, php-format
+#, php-format
 msgid "%d Weeks"
 msgstr "%d semaines"
 
 #: flowview_devices.php:40
-#, fuzzy, php-format
+#, php-format
 msgid "%d Month"
 msgstr "%d mois"
 
 #: flowview_devices.php:41 flowview_devices.php:42 flowview_devices.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "%d Months"
 msgstr "%d mois"
 
 #: flowview_devices.php:44
-#, fuzzy, php-format
+#, php-format
 msgid "%d Year"
 msgstr "%d année"
 
 #: flowview_devices.php:48
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minute"
-msgstr "d Minute %d Minute"
+msgstr "%d Minute"
 
 #: flowview_devices.php:49 flowview_devices.php:50 flowview_devices.php:51
 #, fuzzy, php-format
@@ -1060,7 +1022,6 @@ msgid "9 (Highest)"
 msgstr "9 (le plus élevé)"
 
 #: flowview_devices.php:101
-#, fuzzy
 msgid "Device Name"
 msgstr "Nom de l'appareil"
 
@@ -1070,7 +1031,6 @@ msgid "Name of the device to be displayed."
 msgstr "Nom de l'appareil à afficher."
 
 #: flowview_devices.php:108 flowview_devices.php:451
-#, fuzzy
 msgid "Directory"
 msgstr "Répertoire"
 
@@ -1146,7 +1106,7 @@ msgstr ""
 #: flowview_devices.php:156 flowview_devices.php:457
 #, fuzzy
 msgid "Rotation"
-msgstr "Rotation"
+msgstr "Type Rotation"
 
 #: flowview_devices.php:157
 #, fuzzy
@@ -1154,7 +1114,6 @@ msgid "How often to create a new Flow File."
 msgstr "Combien de fois faut-il créer un nouveau fichier de déroulement ?"
 
 #: flowview_devices.php:164
-#, fuzzy
 msgid "Expiration"
 msgstr "Expiration"
 
@@ -1210,7 +1169,6 @@ msgid "Search"
 msgstr "Rechercher"
 
 #: flowview_devices.php:404 flowview_schedules.php:426
-#, fuzzy
 msgid "Go"
 msgstr "Go"
 
@@ -1220,22 +1178,18 @@ msgid "Set/Refresh Filters"
 msgstr "Définir/Rafraîchir les filtres"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
-#, fuzzy
 msgid "Clear"
 msgstr "Effacer"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
-#, fuzzy
 msgid "Clear Filters"
 msgstr "Supprimer les filtres"
 
 #: flowview_devices.php:441 functions.php:314 setup.php:139
-#, fuzzy
 msgid "Listeners"
 msgstr "Auditeurs"
 
 #: flowview_devices.php:450
-#, fuzzy
 msgid "Name"
 msgstr "Nom"
 
@@ -1245,17 +1199,14 @@ msgid "Allowed From"
 msgstr "Autorisé du"
 
 #: flowview_devices.php:455
-#, fuzzy
 msgid "Version"
 msgstr "Version"
 
 #: flowview_devices.php:456
-#, fuzzy
 msgid "Compression"
 msgstr "Compression"
 
 #: flowview_devices.php:458
-#, fuzzy
 msgid "Expire"
 msgstr "Expire"
 
@@ -1265,22 +1216,18 @@ msgid "No Devices"
 msgstr "Équipements"
 
 #: flowview_schedules.php:33
-#, fuzzy
 msgid "Send Now"
 msgstr "Envoyer maintenant"
 
 #: flowview_schedules.php:35
-#, fuzzy
 msgid "Disable"
 msgstr "Désactiver"
 
 #: flowview_schedules.php:36
-#, fuzzy
 msgid "Enable"
 msgstr "Activer"
 
 #: flowview_schedules.php:40
-#, fuzzy
 msgid "Every Hour"
 msgstr "Toutes les heures"
 
@@ -1291,12 +1238,10 @@ msgid "Every %d Hours"
 msgstr "Toutes les %d Heures"
 
 #: flowview_schedules.php:45
-#, fuzzy
 msgid "Every Day"
 msgstr "Tous les jours"
 
 #: flowview_schedules.php:46
-#, fuzzy
 msgid "Every Week"
 msgstr "Chaque semaine"
 
@@ -1306,17 +1251,14 @@ msgid "Every %d Weeks, 2"
 msgstr "Toutes les %d Semaines, 2"
 
 #: flowview_schedules.php:48
-#, fuzzy
 msgid "Every Month"
 msgstr "Chaque mois"
 
 #: flowview_schedules.php:53
-#, fuzzy
 msgid "Title"
 msgstr "Titre"
 
 #: flowview_schedules.php:55
-#, fuzzy
 msgid "New Schedule"
 msgstr "Nouveau Programme"
 
@@ -1326,7 +1268,6 @@ msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "Saisissez un titre de rapport pour la planification FlowView."
 
 #: flowview_schedules.php:62 flowview_schedules.php:507
-#, fuzzy
 msgid "Enabled"
 msgstr "Activé"
 
@@ -1361,7 +1302,6 @@ msgstr ""
 "l'intervalle indiqué ci-dessus."
 
 #: flowview_schedules.php:94
-#, fuzzy
 msgid "Email Addresses"
 msgstr "Adresse courriel"
 
@@ -1414,7 +1354,6 @@ msgstr "Horaires FlowView"
 
 #: flowview_schedules.php:411 flowview_schedules.php:492 functions.php:318
 #: setup.php:167
-#, fuzzy
 msgid "Schedules"
 msgstr "Planifications"
 
@@ -1423,17 +1362,14 @@ msgid "Default"
 msgstr "Défaut"
 
 #: flowview_schedules.php:501
-#, fuzzy
 msgid "Schedule Title"
 msgstr "Titre de la planification"
 
 #: flowview_schedules.php:503
-#, fuzzy
 msgid "Interval"
 msgstr "Intervalle"
 
 #: flowview_schedules.php:505
-#, fuzzy
 msgid "Next Send"
 msgstr "Prochain envoi"
 
@@ -1448,7 +1384,6 @@ msgid "Report: %s"
 msgstr "Rapport : %s"
 
 #: functions.php:113
-#, fuzzy
 msgid "Exclude"
 msgstr "Exclure"
 
@@ -1478,12 +1413,10 @@ msgid "Top 5 Samples"
 msgstr "Top 5 des échantillons"
 
 #: functions.php:126
-#, fuzzy
 msgid "Show/Hide"
 msgstr "Afficher / Masquer"
 
 #: functions.php:130
-#, fuzzy
 msgid "Table"
 msgstr "Tableau"
 
@@ -1503,7 +1436,6 @@ msgid "Flows Bar"
 msgstr "Barre d'écoulement"
 
 #: functions.php:311
-#, fuzzy
 msgid "Filters"
 msgstr "Filtres"
 
@@ -1523,7 +1455,6 @@ msgid "Manage Schedules"
 msgstr "Gérer les horaires"
 
 #: functions.php:323
-#, fuzzy
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -1812,6 +1743,5 @@ msgstr ""
 "domaine."
 
 #: setup.php:271
-#, fuzzy
 msgid "Misc"
 msgstr "Divers"

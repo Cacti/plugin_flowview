@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-03-18 21:27-0400\n"
+"PO-Revision-Date: 2019-07-21 21:25-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: arrays.php:26
 #, fuzzy
@@ -23,7 +23,6 @@ msgid "Select a Statistic Report"
 msgstr "통계 보고서"
 
 #: arrays.php:27
-#, fuzzy
 msgid "Summary"
 msgstr "요약"
 
@@ -198,12 +197,10 @@ msgid "Select One"
 msgstr "하나를 고르시 오"
 
 #: arrays.php:71
-#, fuzzy
 msgid "TCP"
 msgstr "TCP"
 
 #: arrays.php:72
-#, fuzzy
 msgid "UDP"
 msgstr "UDP"
 
@@ -423,7 +420,6 @@ msgid "IDRP"
 msgstr "IDRP"
 
 #: arrays.php:116
-#, fuzzy
 msgid "RSVP"
 msgstr "초대"
 
@@ -503,22 +499,18 @@ msgid "ENCAP"
 msgstr "ENCAP"
 
 #: arrays.php:135 flowview_schedules.php:522
-#, fuzzy
 msgid "Yes"
 msgstr "예"
 
 #: arrays.php:136 flowview_schedules.php:522
-#, fuzzy
 msgid "No"
 msgstr "아니오"
 
 #: arrays.php:166 arrays.php:177 functions.php:117
-#, fuzzy
 msgid "None"
 msgstr "없음"
 
 #: arrays.php:188
-#, fuzzy
 msgid "All"
 msgstr "모두"
 
@@ -548,7 +540,6 @@ msgstr "%s 바이트"
 #: flowview.php:823 flowview.php:830 flowview.php:838 flowview.php:845
 #: flowview.php:853 flowview.php:860 flowview.php:867 flowview.php:875
 #: functions.php:590
-#, fuzzy
 msgid "Bytes"
 msgstr "바이트"
 
@@ -577,7 +568,6 @@ msgstr "패킷"
 
 #: arrays.php:271 arrays.php:272 arrays.php:273 flowview.php:807
 #: flowview_devices.php:124 flowview_devices.php:454
-#, fuzzy
 msgid "Port"
 msgstr "포트"
 
@@ -598,7 +588,6 @@ msgid "Src/Dest IP"
 msgstr "Src / Dest IP"
 
 #: arrays.php:278 arrays.php:292 arrays.php:293 arrays.php:294 flowview.php:821
-#, fuzzy
 msgid "Protocol"
 msgstr "프로토콜"
 
@@ -623,7 +612,6 @@ msgid "Dest AS"
 msgstr "목적지"
 
 #: arrays.php:284 flowview.php:858
-#, fuzzy
 msgid "TOS"
 msgstr "이용약관"
 
@@ -638,7 +626,6 @@ msgid "Dest Prefix"
 msgstr "목적지 접두어"
 
 #: arrays.php:292
-#, fuzzy
 msgid "Active"
 msgstr "활성화"
 
@@ -658,9 +645,8 @@ msgid "Dest Port"
 msgstr "목적지 항구"
 
 #: arrays.php:292 arrays.php:294
-#, fuzzy
 msgid "End Time"
-msgstr "종료"
+msgstr "종료시간"
 
 #: arrays.php:292
 #, fuzzy
@@ -678,7 +664,6 @@ msgid "Src Port"
 msgstr "Src 포트"
 
 #: arrays.php:292 arrays.php:294 flowview_schedules.php:85
-#, fuzzy
 msgid "Start Time"
 msgstr "시작 시간"
 
@@ -688,7 +673,6 @@ msgid "Ts"
 msgstr "Ts"
 
 #: arrays.php:294
-#, fuzzy
 msgid "Flags"
 msgstr "플래그"
 
@@ -698,7 +682,6 @@ msgid "Flow Filter Constraints"
 msgstr "플로우 필터 제약"
 
 #: flowview.php:283
-#, fuzzy
 msgid "Filter"
 msgstr "필터"
 
@@ -708,17 +691,14 @@ msgid "Listener"
 msgstr "경청자"
 
 #: flowview.php:297
-#, fuzzy
 msgid "Presets"
 msgstr "사전 설정"
 
 #: flowview.php:302 flowview.php:599
-#, fuzzy
 msgid "Custom"
 msgstr "사용자 정의"
 
 #: flowview.php:316 flowview_schedules.php:504
-#, fuzzy
 msgid "Start Date"
 msgstr "시작일"
 
@@ -728,7 +708,6 @@ msgid "Start Date Selector"
 msgstr "시작 날짜 선택기"
 
 #: flowview.php:323
-#, fuzzy
 msgid "End Date"
 msgstr "종료일"
 
@@ -738,7 +717,6 @@ msgid "End Date Selector"
 msgstr "종료일 선택기"
 
 #: flowview.php:335
-#, fuzzy
 msgid "Protocols"
 msgstr "프로토콜"
 
@@ -788,14 +766,12 @@ msgstr ""
 "항목을 무효화합니다 (예 : 포트의 경우 -80, 포트는 80이지만 포트의 경우 80)"
 
 #: flowview.php:411
-#, fuzzy
 msgid "Note:"
 msgstr "주의:"
 
 #: flowview.php:420
-#, fuzzy
 msgid "Report Parameters"
-msgstr "보고서 매개 변수"
+msgstr "보고서 Parameters"
 
 #: flowview.php:425
 #, fuzzy
@@ -833,32 +809,26 @@ msgid "Minimum Bytes:"
 msgstr "최소 바이트 수 :"
 
 #: flowview.php:454
-#, fuzzy
 msgid "View"
 msgstr "보기"
 
 #: flowview.php:455
-#, fuzzy
 msgid "Defaults"
 msgstr "기본값"
 
 #: flowview.php:456 flowview.php:473
-#, fuzzy
 msgid "Save"
 msgstr "저장"
 
 #: flowview.php:457
-#, fuzzy
 msgid "Save As"
 msgstr "다른 이름으로 저장"
 
 #: flowview.php:458 flowview_devices.php:30 flowview_schedules.php:34
-#, fuzzy
 msgid "Delete"
 msgstr "삭제"
 
 #: flowview.php:467 flowview_schedules.php:70 flowview_schedules.php:502
-#, fuzzy
 msgid "Filter Name"
 msgstr "이름 필터"
 
@@ -868,12 +838,10 @@ msgid "New Query"
 msgstr "새 쿼리"
 
 #: flowview.php:472 flowview_devices.php:262 flowview_schedules.php:228
-#, fuzzy
 msgid "Cancel"
 msgstr "취소"
 
 #: flowview.php:654
-#, fuzzy
 msgid "Update"
 msgstr "업데이트"
 
@@ -893,12 +861,10 @@ msgid "Filter Updated"
 msgstr "업데이트 된 필터"
 
 #: flowview.php:814
-#, fuzzy
 msgid "IP"
 msgstr "IP"
 
 #: flowview.php:828
-#, fuzzy
 msgid "Interface"
 msgstr "인터페이스"
 
@@ -908,12 +874,11 @@ msgid "AS"
 msgstr "같이"
 
 #: flowview.php:865
-#, fuzzy
 msgid "Prefix"
 msgstr "접두사"
 
 #: flowview_devices.php:36 flowview_devices.php:37
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days"
 msgstr "%d일"
 
@@ -1068,7 +1033,6 @@ msgid "Name of the device to be displayed."
 msgstr "표시 할 장치의 이름."
 
 #: flowview_devices.php:108 flowview_devices.php:451
-#, fuzzy
 msgid "Directory"
 msgstr "디렉토리"
 
@@ -1138,7 +1102,6 @@ msgstr ""
 "하는 데 더 많은 CPU가 사용됩니다."
 
 #: flowview_devices.php:156 flowview_devices.php:457
-#, fuzzy
 msgid "Rotation"
 msgstr "회전"
 
@@ -1148,7 +1111,6 @@ msgid "How often to create a new Flow File."
 msgstr "새 Flow File 생성 빈도."
 
 #: flowview_devices.php:164
-#, fuzzy
 msgid "Expiration"
 msgstr "만료"
 
@@ -1179,7 +1141,6 @@ msgid "You must select at least one device."
 msgstr "하나 이상의 장치를 선택해야합니다."
 
 #: flowview_devices.php:254 flowview_schedules.php:220
-#, fuzzy
 msgid "Continue"
 msgstr "계속"
 
@@ -1199,12 +1160,10 @@ msgid "FlowView Listeners"
 msgstr "FlowView Listener"
 
 #: flowview_devices.php:398 flowview_schedules.php:405
-#, fuzzy
 msgid "Search"
 msgstr "검색"
 
 #: flowview_devices.php:404 flowview_schedules.php:426
-#, fuzzy
 msgid "Go"
 msgstr "가기"
 
@@ -1214,12 +1173,10 @@ msgid "Set/Refresh Filters"
 msgstr "필터 설정 / 새로 고침"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
-#, fuzzy
 msgid "Clear"
 msgstr "지우기"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
-#, fuzzy
 msgid "Clear Filters"
 msgstr "필터 지우기"
 
@@ -1229,7 +1186,6 @@ msgid "Listeners"
 msgstr "청취자"
 
 #: flowview_devices.php:450
-#, fuzzy
 msgid "Name"
 msgstr "이름"
 
@@ -1239,17 +1195,14 @@ msgid "Allowed From"
 msgstr "허용에서"
 
 #: flowview_devices.php:455
-#, fuzzy
 msgid "Version"
 msgstr "버전"
 
 #: flowview_devices.php:456
-#, fuzzy
 msgid "Compression"
-msgstr "압축"
+msgstr "컴프레션"
 
 #: flowview_devices.php:458
-#, fuzzy
 msgid "Expire"
 msgstr "만료"
 
@@ -1259,22 +1212,18 @@ msgid "No Devices"
 msgstr "장치"
 
 #: flowview_schedules.php:33
-#, fuzzy
 msgid "Send Now"
 msgstr "보내기"
 
 #: flowview_schedules.php:35
-#, fuzzy
 msgid "Disable"
 msgstr "비활성화"
 
 #: flowview_schedules.php:36
-#, fuzzy
 msgid "Enable"
 msgstr "활성화"
 
 #: flowview_schedules.php:40
-#, fuzzy
 msgid "Every Hour"
 msgstr "매시간"
 
@@ -1305,7 +1254,6 @@ msgid "Every Month"
 msgstr "매 달"
 
 #: flowview_schedules.php:53
-#, fuzzy
 msgid "Title"
 msgstr "제목"
 
@@ -1320,7 +1268,6 @@ msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "FlowView 일정에 대한 보고서 제목을 입력하십시오."
 
 #: flowview_schedules.php:62 flowview_schedules.php:507
-#, fuzzy
 msgid "Enabled"
 msgstr "활성화"
 
@@ -1354,7 +1301,6 @@ msgstr ""
 "메일은이 시간과 위에 주어진 간격으로 계산됩니다."
 
 #: flowview_schedules.php:94
-#, fuzzy
 msgid "Email Addresses"
 msgstr "이메일 주소"
 
@@ -1405,17 +1351,14 @@ msgstr "FlowView 일정"
 
 #: flowview_schedules.php:411 flowview_schedules.php:492 functions.php:318
 #: setup.php:167
-#, fuzzy
 msgid "Schedules"
 msgstr "스케쥴"
 
 #: flowview_schedules.php:415
-#, fuzzy
 msgid "Default"
 msgstr "기본값"
 
 #: flowview_schedules.php:501
-#, fuzzy
 msgid "Schedule Title"
 msgstr "스케쥴 제목"
 
@@ -1430,7 +1373,6 @@ msgid "Next Send"
 msgstr "다음 보내기"
 
 #: flowview_schedules.php:506
-#, fuzzy
 msgid "Email"
 msgstr "이메일"
 
@@ -1440,7 +1382,6 @@ msgid "Report: %s"
 msgstr "보고서 :  %s"
 
 #: functions.php:113
-#, fuzzy
 msgid "Exclude"
 msgstr "제외"
 
@@ -1475,9 +1416,8 @@ msgid "Show/Hide"
 msgstr "표시 / 숨기기"
 
 #: functions.php:130
-#, fuzzy
 msgid "Table"
-msgstr "표"
+msgstr "테이블"
 
 #: functions.php:134
 #, fuzzy
@@ -1495,7 +1435,6 @@ msgid "Flows Bar"
 msgstr "흐름 표시 줄"
 
 #: functions.php:311
-#, fuzzy
 msgid "Filters"
 msgstr "필터"
 
@@ -1515,7 +1454,6 @@ msgid "Manage Schedules"
 msgstr "일정 관리"
 
 #: functions.php:323
-#, fuzzy
 msgid "Unknown"
 msgstr "알 수 없음"
 
@@ -1794,6 +1732,5 @@ msgid "A comma delimited list of domains names to strip from the domain."
 msgstr "도메인에서 제거 할 쉼표로 구분 된 도메인 이름 목록입니다."
 
 #: setup.php:271
-#, fuzzy
 msgid "Misc"
 msgstr "기타"

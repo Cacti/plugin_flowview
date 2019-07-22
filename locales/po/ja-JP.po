@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-03-18 21:23-0400\n"
+"PO-Revision-Date: 2019-07-21 21:25-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: arrays.php:26
 #, fuzzy
@@ -23,7 +23,6 @@ msgid "Select a Statistic Report"
 msgstr "統計レポート"
 
 #: arrays.php:27
-#, fuzzy
 msgid "Summary"
 msgstr "概要"
 
@@ -43,12 +42,10 @@ msgid "UDP/TCP Port"
 msgstr "UDP / TCPポート"
 
 #: arrays.php:31 flowview.php:800
-#, fuzzy
 msgid "Destination IP"
 msgstr "宛先IP"
 
 #: arrays.php:32 flowview.php:358 flowview.php:799
-#, fuzzy
 msgid "Source IP"
 msgstr "送信元IP"
 
@@ -193,12 +190,10 @@ msgid "Entirely in Specified Time Span"
 msgstr "指定された期間内"
 
 #: arrays.php:70
-#, fuzzy
 msgid "Select One"
-msgstr "一つ選択してください"
+msgstr "1つ選んでください"
 
 #: arrays.php:71
-#, fuzzy
 msgid "TCP"
 msgstr "TCP"
 
@@ -208,7 +203,6 @@ msgid "UDP"
 msgstr "UDP"
 
 #: arrays.php:73
-#, fuzzy
 msgid "ICMP"
 msgstr "ICMP"
 
@@ -398,7 +392,6 @@ msgid "IL"
 msgstr "イリノイ州"
 
 #: arrays.php:111
-#, fuzzy
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -423,7 +416,6 @@ msgid "IDRP"
 msgstr "IDRP"
 
 #: arrays.php:116
-#, fuzzy
 msgid "RSVP"
 msgstr "予約"
 
@@ -503,22 +495,18 @@ msgid "ENCAP"
 msgstr "ENCAP"
 
 #: arrays.php:135 flowview_schedules.php:522
-#, fuzzy
 msgid "Yes"
 msgstr "はい"
 
 #: arrays.php:136 flowview_schedules.php:522
-#, fuzzy
 msgid "No"
 msgstr "いいえ"
 
 #: arrays.php:166 arrays.php:177 functions.php:117
-#, fuzzy
 msgid "None"
 msgstr "なし"
 
 #: arrays.php:188
-#, fuzzy
 msgid "All"
 msgstr "すべて"
 
@@ -548,7 +536,6 @@ msgstr "％sバイト"
 #: flowview.php:823 flowview.php:830 flowview.php:838 flowview.php:845
 #: flowview.php:853 flowview.php:860 flowview.php:867 flowview.php:875
 #: functions.php:590
-#, fuzzy
 msgid "Bytes"
 msgstr "Bytes"
 
@@ -577,7 +564,6 @@ msgstr "パケット"
 
 #: arrays.php:271 arrays.php:272 arrays.php:273 flowview.php:807
 #: flowview_devices.php:124 flowview_devices.php:454
-#, fuzzy
 msgid "Port"
 msgstr "ポート"
 
@@ -623,9 +609,8 @@ msgid "Dest AS"
 msgstr "Dest AS"
 
 #: arrays.php:284 flowview.php:858
-#, fuzzy
 msgid "TOS"
-msgstr "TOS"
+msgstr "利用規約"
 
 #: arrays.php:286 arrays.php:288
 #, fuzzy
@@ -638,7 +623,6 @@ msgid "Dest Prefix"
 msgstr "宛先プレフィックス"
 
 #: arrays.php:292
-#, fuzzy
 msgid "Active"
 msgstr "操作"
 
@@ -658,7 +642,6 @@ msgid "Dest Port"
 msgstr "宛先ポート"
 
 #: arrays.php:292 arrays.php:294
-#, fuzzy
 msgid "End Time"
 msgstr "終了時間"
 
@@ -678,7 +661,6 @@ msgid "Src Port"
 msgstr "送信元ポート"
 
 #: arrays.php:292 arrays.php:294 flowview_schedules.php:85
-#, fuzzy
 msgid "Start Time"
 msgstr "開始時間"
 
@@ -688,7 +670,6 @@ msgid "Ts"
 msgstr "Ts"
 
 #: arrays.php:294
-#, fuzzy
 msgid "Flags"
 msgstr "フラグ"
 
@@ -698,7 +679,6 @@ msgid "Flow Filter Constraints"
 msgstr "フローフィルタの制約"
 
 #: flowview.php:283
-#, fuzzy
 msgid "Filter"
 msgstr "フィルター"
 
@@ -708,17 +688,14 @@ msgid "Listener"
 msgstr "リスナー"
 
 #: flowview.php:297
-#, fuzzy
 msgid "Presets"
 msgstr "プリセット"
 
 #: flowview.php:302 flowview.php:599
-#, fuzzy
 msgid "Custom"
 msgstr "カスタム"
 
 #: flowview.php:316 flowview_schedules.php:504
-#, fuzzy
 msgid "Start Date"
 msgstr "開始日"
 
@@ -728,7 +705,6 @@ msgid "Start Date Selector"
 msgstr "開始日セレクタ"
 
 #: flowview.php:323
-#, fuzzy
 msgid "End Date"
 msgstr "終了日"
 
@@ -789,7 +765,6 @@ msgstr ""
 "Portを意味します）。"
 
 #: flowview.php:411
-#, fuzzy
 msgid "Note:"
 msgstr "メモ："
 
@@ -834,47 +809,38 @@ msgid "Minimum Bytes:"
 msgstr "最小バイト数"
 
 #: flowview.php:454
-#, fuzzy
 msgid "View"
 msgstr "表示"
 
 #: flowview.php:455
-#, fuzzy
 msgid "Defaults"
 msgstr "デフォルト"
 
 #: flowview.php:456 flowview.php:473
-#, fuzzy
 msgid "Save"
 msgstr "保存"
 
 #: flowview.php:457
-#, fuzzy
 msgid "Save As"
 msgstr "保存する"
 
 #: flowview.php:458 flowview_devices.php:30 flowview_schedules.php:34
-#, fuzzy
 msgid "Delete"
 msgstr "削除"
 
 #: flowview.php:467 flowview_schedules.php:70 flowview_schedules.php:502
-#, fuzzy
 msgid "Filter Name"
 msgstr "絞り込み検索名"
 
 #: flowview.php:468
-#, fuzzy
 msgid "New Query"
 msgstr "新しいクエリ"
 
 #: flowview.php:472 flowview_devices.php:262 flowview_schedules.php:228
-#, fuzzy
 msgid "Cancel"
 msgstr "取り消し"
 
 #: flowview.php:654
-#, fuzzy
 msgid "Update"
 msgstr "更新"
 
@@ -894,12 +860,10 @@ msgid "Filter Updated"
 msgstr "フィルタ更新"
 
 #: flowview.php:814
-#, fuzzy
 msgid "IP"
 msgstr "IP"
 
 #: flowview.php:828
-#, fuzzy
 msgid "Interface"
 msgstr "インタフェース"
 
@@ -909,7 +873,6 @@ msgid "AS"
 msgstr "として"
 
 #: flowview.php:865
-#, fuzzy
 msgid "Prefix"
 msgstr "接頭語"
 
@@ -1059,7 +1022,6 @@ msgid "9 (Highest)"
 msgstr "9（最高）"
 
 #: flowview_devices.php:101
-#, fuzzy
 msgid "Device Name"
 msgstr "デバイス名"
 
@@ -1069,7 +1031,6 @@ msgid "Name of the device to be displayed."
 msgstr "表示されるデバイスの名前"
 
 #: flowview_devices.php:108 flowview_devices.php:451
-#, fuzzy
 msgid "Directory"
 msgstr "ディレクトリ"
 
@@ -1140,7 +1101,6 @@ msgstr ""
 "存と取得に使用されるCPUが増えます。"
 
 #: flowview_devices.php:156 flowview_devices.php:457
-#, fuzzy
 msgid "Rotation"
 msgstr "ローテーション"
 
@@ -1150,7 +1110,6 @@ msgid "How often to create a new Flow File."
 msgstr "新しいフローファイルを作成する頻度。"
 
 #: flowview_devices.php:164
-#, fuzzy
 msgid "Expiration"
 msgstr "有効期限"
 
@@ -1181,7 +1140,6 @@ msgid "You must select at least one device."
 msgstr "少なくとも1つのデバイスを選択する必要があります。"
 
 #: flowview_devices.php:254 flowview_schedules.php:220
-#, fuzzy
 msgid "Continue"
 msgstr "続ける"
 
@@ -1201,12 +1159,10 @@ msgid "FlowView Listeners"
 msgstr "FlowViewリスナー"
 
 #: flowview_devices.php:398 flowview_schedules.php:405
-#, fuzzy
 msgid "Search"
 msgstr "検索"
 
 #: flowview_devices.php:404 flowview_schedules.php:426
-#, fuzzy
 msgid "Go"
 msgstr "Go"
 
@@ -1216,12 +1172,10 @@ msgid "Set/Refresh Filters"
 msgstr "フィルタの設定/更新"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
-#, fuzzy
 msgid "Clear"
 msgstr "クリア"
 
 #: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
-#, fuzzy
 msgid "Clear Filters"
 msgstr "絞り込み条件を解除する"
 
@@ -1231,7 +1185,6 @@ msgid "Listeners"
 msgstr "リスナー"
 
 #: flowview_devices.php:450
-#, fuzzy
 msgid "Name"
 msgstr "名前"
 
@@ -1241,17 +1194,14 @@ msgid "Allowed From"
 msgstr "から許可されて"
 
 #: flowview_devices.php:455
-#, fuzzy
 msgid "Version"
 msgstr "バージョン"
 
 #: flowview_devices.php:456
-#, fuzzy
 msgid "Compression"
 msgstr "圧縮"
 
 #: flowview_devices.php:458
-#, fuzzy
 msgid "Expire"
 msgstr "有効期限"
 
@@ -1261,17 +1211,14 @@ msgid "No Devices"
 msgstr "デバイス"
 
 #: flowview_schedules.php:33
-#, fuzzy
 msgid "Send Now"
 msgstr "今すぐ送信します。"
 
 #: flowview_schedules.php:35
-#, fuzzy
 msgid "Disable"
 msgstr "無効"
 
 #: flowview_schedules.php:36
-#, fuzzy
 msgid "Enable"
 msgstr "有効"
 
@@ -1307,12 +1254,10 @@ msgid "Every Month"
 msgstr "毎月"
 
 #: flowview_schedules.php:53
-#, fuzzy
 msgid "Title"
 msgstr "題名"
 
 #: flowview_schedules.php:55
-#, fuzzy
 msgid "New Schedule"
 msgstr "新規スケジュール追加"
 
@@ -1322,7 +1267,6 @@ msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "FlowViewスケジュールのレポートタイトルを入力してください。"
 
 #: flowview_schedules.php:62 flowview_schedules.php:507
-#, fuzzy
 msgid "Enabled"
 msgstr "有効"
 
@@ -1356,7 +1300,6 @@ msgstr ""
 "は、この時間に上記の間隔を加えて計算されます。"
 
 #: flowview_schedules.php:94
-#, fuzzy
 msgid "Email Addresses"
 msgstr "E メールアドレス"
 
@@ -1407,12 +1350,10 @@ msgstr "FlowViewスケジュール"
 
 #: flowview_schedules.php:411 flowview_schedules.php:492 functions.php:318
 #: setup.php:167
-#, fuzzy
 msgid "Schedules"
 msgstr "スケジュール"
 
 #: flowview_schedules.php:415
-#, fuzzy
 msgid "Default"
 msgstr "デフォルト"
 
@@ -1422,7 +1363,6 @@ msgid "Schedule Title"
 msgstr "スケジュールタイトル"
 
 #: flowview_schedules.php:503
-#, fuzzy
 msgid "Interval"
 msgstr "間隔"
 
@@ -1432,7 +1372,6 @@ msgid "Next Send"
 msgstr "次に送る"
 
 #: flowview_schedules.php:506
-#, fuzzy
 msgid "Email"
 msgstr "メールアドレス"
 
@@ -1442,7 +1381,6 @@ msgid "Report: %s"
 msgstr "報告：％s"
 
 #: functions.php:113
-#, fuzzy
 msgid "Exclude"
 msgstr "除外する"
 
@@ -1472,12 +1410,10 @@ msgid "Top 5 Samples"
 msgstr "上位5サンプル"
 
 #: functions.php:126
-#, fuzzy
 msgid "Show/Hide"
-msgstr "子テーマ属性の表示/非表示"
+msgstr "表示/非表示"
 
 #: functions.php:130
-#, fuzzy
 msgid "Table"
 msgstr "テーブル"
 
@@ -1497,9 +1433,8 @@ msgid "Flows Bar"
 msgstr "フローバー"
 
 #: functions.php:311
-#, fuzzy
 msgid "Filters"
-msgstr "ログのフィルター"
+msgstr "フィルター"
 
 #: functions.php:311
 #, fuzzy
@@ -1512,12 +1447,10 @@ msgid "Manage Listeners"
 msgstr "リスナーを管理する"
 
 #: functions.php:318
-#, fuzzy
 msgid "Manage Schedules"
 msgstr "スケジュールの管理"
 
 #: functions.php:323
-#, fuzzy
 msgid "Unknown"
 msgstr "不明"
 
@@ -1532,9 +1465,8 @@ msgid "Netflow - %"
 msgstr "Netflow  - ％"
 
 #: functions.php:532
-#, fuzzy
 msgid "New Flow"
-msgstr "新しい流れ"
+msgstr "新しいフォロー"
 
 #: functions.php:616
 #, fuzzy
@@ -1799,6 +1731,5 @@ msgid "A comma delimited list of domains names to strip from the domain."
 msgstr "ドメインから削除するドメイン名のカンマ区切りリスト。"
 
 #: setup.php:271
-#, fuzzy
 msgid "Misc"
 msgstr "その他"
