@@ -247,7 +247,7 @@ function flowview_display_report() {
 			is: function(s) {
 				return false;
 			},
-        
+
 			format: function(s) {
 				if (s.indexOf('MB') > 0) {
 					loc=s.indexOf('MB');
@@ -361,7 +361,7 @@ function plugin_flowview_run_schedule($id) {
 
 	$message  = "<body style='margin:10px;'>";
 	$message .= "<style type='text/css'>\n";
-	$message .= file_get_contents($config['base_path'] . '/include/main.css');
+	$message .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
 	$message .= '</style>';
 	$sessionid = -1;
 	$message .= createfilter($sessionid);

@@ -44,6 +44,7 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 
 --- develop ---
 
+* issue#27: Deprecated functions and legacy path causing issues with schedules
 * issue#28: Flowview filters not searchable using some international characters
 
 --- 2.1 ---
