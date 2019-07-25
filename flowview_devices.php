@@ -350,10 +350,9 @@ function show_devices () {
 			'default' => '1'
 			),
 		'filter' => array(
-			'filter' => FILTER_CALLBACK,
+			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
-			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
+			'default' => ''
 			),
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
@@ -370,7 +369,7 @@ function show_devices () {
 	validate_store_request_vars($filters, 'sess_fvd');
 	/* ================= input validation ================= */
 
-	$sql_where = (get_request_var('filter') != '' ? "name LIKE '%" . get_request_var('filter') . "%'":'');
+	$sql_where = (get_request_var('filter') != '' ? 'WHERE name LIKE ' . db_qstr('%' . get_request_var('filter') . '%'):'');
 	$rows      = read_config_option('num_rows_table');
 
 	$sql_order = get_order_string();
@@ -398,7 +397,7 @@ function show_devices () {
 						<?php print __('Search', 'flowview');?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='40' value='<?php print htmlspecialchars(get_request_var('filter'));?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter');?>'>
 					</td>
 					<td>
 						<input id='refresh' type='submit' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>

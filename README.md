@@ -42,13 +42,19 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 
 # Changelog
 
+--- develop ---
+
+* issue#28: Flowview filters not searchable using some international characters
+
 --- 2.1 ---
+
 * issue: Prepare for sunrise theme in 1.1.17
 * issue: Clean up the filter logic to preserve values
 * issue: Make the graph size auto-detect screen size
 * issue: Make reports sort properly
 
 --- 2.0 ---
+
 * feature: Support for Cacti 1.0
 * feature: Support for Ugroup Plugin
 * feature: Use either the OS' DNS or Alternate
@@ -63,10 +69,12 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 * issue: Update text domains for i18n
 
 --- 1.1 ---
+
 * issue: FlowView Settings were hidden for some reason
 * issue: flow-capture script incomplete
 
 --- 1.0 ---
+
 * compat: Making compatible with 0.8.7g
 * feature: Allow sending emails on demand
 * feature: Add SaveAs, Delete, Update to UI
@@ -80,11 +88,13 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 * issue: Rename 'Devices' to 'Listeners'
 
 --- 0.6 ---
+
 * compat: Now only PA 2.0 compatible
 * issue: Fix for IE and saving Queries
 * issue: Fix for Error when no devices
 
 --- 0.5 ---
+
 * feature: Add flow-tools replacement startup script to allow launching of multiple processes based upon devices added
 * feature: Add Saved Queries
 * feature: Change Sort field to be drop downs with column names
@@ -92,16 +102,19 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 * issue: Fix issue with start and stop times close to midnight not loading the proper days data
 
 --- 0.4 ---
+
 * issue: Minor fix for when using flow path "/"
 * issue: Fix Cacti 0.8.7 Compatibility
 
 --- 0.3 ---
+
 * feature: Add time support for relative times (NOW, -1 HOUR, -2 DAYS, -10 MINTUES) Must leave Date blank for these to work properly
 * feature: Add device name to path if present
 
 --- 0.2 ---
+
 * feature: Add DNS Support
 
 --- 0.1 ---
-* Initial release
 
+* Initial release

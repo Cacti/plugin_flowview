@@ -368,10 +368,9 @@ function show_schedules () {
 			'default' => '1'
 			),
 		'filter' => array(
-			'filter' => FILTER_CALLBACK,
+			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
-			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
+			'default' => ''
 			),
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
@@ -405,7 +404,7 @@ function show_schedules () {
 						<?php print __('Search', 'flowview');?>
 					</td>
 					<td>
-						<input type='text' id='filter' size='25' value='<?php print htmlspecialchars(get_request_var('filter'));?>'>
+						<input type='text' id='filter' size='25' value='<?php print html_escape_request_var('filter');?>'>
 					</td>
 					<td>
 						<?php print __('Schedules', 'flowview');?>
@@ -465,7 +464,7 @@ function show_schedules () {
 	html_end_box();
 
 	if (get_request_var('filter') != '') {
-		$sql_where = "WHERE (name LIKE '%" . get_request_var_request('filter') . "%')";
+		$sql_where = 'WHERE name LIKE ' . db_qstr('%' . get_request_var_request('filter') . '%');
 	}else{
 		$sql_where = '';
 	}
