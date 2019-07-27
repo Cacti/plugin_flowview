@@ -88,6 +88,8 @@ function plugin_flowview_check_upgrade() {
 			author='"  . $info['author']   . "',
 			webpage='" . $info['homepage'] . "'
 			WHERE directory='" . $info['name'] . "' ");
+
+		flowview_setup_table();
 	}
 }
 
