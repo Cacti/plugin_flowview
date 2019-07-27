@@ -639,8 +639,10 @@ function find_good_title($title) {
 	while ($i < 40) {
 		$title_exists = db_fetch_cell_prepared('SELECT COUNT(*)
 			FROM plugin_flowview_session_cache
-			WHERE title = ?',
-			array($title));
+			WHERE title = ?
+			AND user_id = ?
+			AND sessionid = ?',
+			array($title, $_SESSION['sess_user_id'], session_id()));
 
 		if ($title_exists) {
 			$title = $otitle . ' (' . $i . ')';
