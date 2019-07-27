@@ -9,7 +9,7 @@ class s_star extends star {
 	 * it just makes the code easier to read.
 	 */
 	function __construct($colour, $size) {
-		parent::star();
+		parent::__construct();
 		$this->colour($colour)->size($size);
 	}
 }
@@ -20,7 +20,7 @@ class s_box extends anchor {
 	 * it just makes the code easier to read.
 	 */
 	function __construct($colour, $size) {
-		parent::anchor();
+		parent::__construct();
 		$this->colour($colour)->size($size)->rotation(45)->sides(4);
 	}
 }
@@ -31,7 +31,7 @@ class s_hollow_dot extends hollow_dot {
 	 * it just makes the code easier to read.
 	 */
 	function __construct($colour, $size) {
-		parent::hollow_dot();
+		parent::__construct();
 		$this->colour($colour)->size($size);
 	}
 }

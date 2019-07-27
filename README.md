@@ -42,10 +42,11 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 
 # Changelog
 
---- develop ---
+--- 2.2 ---
 
 * issue#27: Deprecated functions and legacy path causing issues with schedules
 * issue#28: Flowview filters not searchable using some international characters
+* feature: Major rework of logic and code, make OpenFlashCharts work a little longer
 
 --- 2.1 ---
 

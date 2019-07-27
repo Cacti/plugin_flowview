@@ -5,7 +5,7 @@ include_once 'ofc_bar_base.php';
 class bar_stack extends bar_base {
 	function __construct() {
 		$this->type      = "bar_stack";
-		parent::bar_base();
+		parent::__construct();
 	}
 
 	function append_stack($v) {

@@ -143,7 +143,7 @@ if (!empty($devices_arr)) {
 	foreach ($devices_arr as $d) {
 		$devices[$d['folder']] = $d['name'];
 	}
-}else{
+} else {
 	$ddevice = 0;
 }
 
@@ -173,7 +173,7 @@ $device_name_field = array(
 	'method' => 'drop_array',
 	'default' => 0,
 	'description' => '',
-	'value' => (isset_request_var('device_name') ? get_nfilter_request_var('device_name') : $ddevice),
+	'value' => (isset_request_var('device') ? get_nfilter_request_var('device') : $ddevice),
 	'none_value' => __('None', 'flowview'),
 	'array' => $devices
 );
@@ -183,7 +183,7 @@ $cutoff_lines_field = array(
 	'method' => 'drop_array',
 	'default' => 20,
 	'description' => '',
-	'value' => (isset_request_var('cutoff_lines') ? get_nfilter_request_var('cutoff_lines') : 0),
+	'value' => (isset_request_var('cutofflines') ? get_nfilter_request_var('cutofflines') : 0),
 	'array' => array(
 		'999999' => __('All', 'flowview'),
 		'5'   => __('Top %d', 5, 'flowview'),
@@ -202,7 +202,7 @@ $cutoff_octets_field = array(
 	'method' => 'drop_array',
 	'default' => 0,
 	'description' => '',
-	'value' => (isset_request_var('cutoff_octets') ? get_nfilter_request_var('cutoff_octets'):''),
+	'value' => (isset_request_var('cutoffoctets') ? get_nfilter_request_var('cutoffoctets'):''),
 	'array' => array(
 		'0'         => __('No Limit', 'flowview'),
 		'1024'      => __('%s Bytes', '1K', 'flowview'),
@@ -232,11 +232,11 @@ $ip_protocol_field = array(
 
 $stat_report_field = array(
 	'friendly_name' => '',
-	'name' => 'stat_report',
+	'name' => 'statistics',
 	'method' => 'drop_array',
 	'default' => 10,
 	'description' => '',
-	'value' => (isset_request_var('stat_report') ? get_nfilter_request_var('stat_report') : 10),
+	'value' => (isset_request_var('statistics') ? get_nfilter_request_var('statistics') : 10),
 	'array' => $stat_report_array
 );
 
@@ -254,7 +254,7 @@ $print_report_field = array(
 	'method' => 'drop_array',
 	'default' => 0,
 	'description' => '',
-	'value' => (isset_request_var('print_report') ? get_nfilter_request_var('print_report') : 0),
+	'value' => (isset_request_var('printed') ? get_nfilter_request_var('printed') : 0),
 	'array' => $print_report_array
 );
 
@@ -263,35 +263,166 @@ $resolve_addresses_field = array(
 	'method' => 'drop_array',
 	'default' => 'Y',
 	'description' => '',
-	'value' => (isset_request_var('resolve_addresses') ? get_nfilter_request_var('resolve_addresses') : 'Y'),
+	'value' => (isset_request_var('resolve') ? get_nfilter_request_var('resolve') : 'Y'),
 	'array' => $resolve_addresses_array
 );
 
 $stat_columns_array = array(
-	5  => array(1, 2, '-1',  '-1', '0',  __('Port', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	6  => array(1, 2, '-1',  '-1', '0',  __('Port', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	7  => array(1, 2, '-1',  '-1', '0',  __('Port', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	8  => array(1, 2, 0,     '-1', '-1', __('Dest IP', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	9  => array(1, 2, 0,     '-1', '-1', __('Src IP', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	10 => array(1, 3, '0,1', '-1', '-1', __('Src IP', 'flowview'), __('Dest IP', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	11 => array(1, 2, 0,     '-1', '-1', __('Src/Dest IP', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	12 => array(1, 2, '-1',  '0',  '-1', __('Protocol', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	17 => array(1, 2, '-1',  '-1', '-1', __('Input IF', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	18 => array(1, 2, '-1',  '-1', '-1', __('Output IF', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	19 => array(1, 2, '-1',  '-1', '-1', __('Src AS', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	20 => array(1, 2, '-1',  '-1', '-1', __('Dest AS', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	21 => array(1, 3, '-1',  '-1', '-1', __('Src AS', 'flowview'), __('Dest AS', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	22 => array(1, 2, '-1',  '-1', '-1', __('TOS', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	23 => array(1, 3, '-1',  '-1', '-1', __('Input IF', 'flowview'), __('Output IF', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	24 => array(1, 2, '0',   '-1', '-1', __('Src Prefix', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	25 => array(1, 2, '0',   '-1', '-1', __('Dest Prefix', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	26 => array(1, 3, '0,1', '-1', '-1', __('Src Prefix', 'flowview'), __('Dest Prefix', 'flowview'), __('Flows', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
+	5  => array(1, 2, '-1', '-1', '0',
+		__('Port', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	6  => array(1, 2, '-1', '-1', '0',
+		__('Port', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	7  => array(1, 2, '-1', '-1', '0',
+		__('Port', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	8  => array(1, 2, 0, '-1', '-1',
+		__('Dest IP', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	9  => array(1, 2, 0, '-1', '-1',
+		__('Src IP', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	10 => array(1, 3, '0,1', '-1', '-1',
+		__('Src IP', 'flowview'),
+		__('Dest IP', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	11 => array(1, 2, 0, '-1', '-1',
+		__('Src/Dest IP', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	12 => array(1, 2, '-1', '0', '-1',
+		__('Protocol', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	17 => array(1, 2, '-1', '-1', '-1',
+		__('Input IF', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	18 => array(1, 2, '-1', '-1', '-1',
+		__('Output IF', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	19 => array(1, 2, '-1', '-1', '-1',
+		__('Src AS', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	20 => array(1, 2, '-1', '-1', '-1',
+		__('Dest AS', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	21 => array(1, 3, '-1', '-1', '-1',
+		__('Src AS', 'flowview'),
+		__('Dest AS', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	22 => array(1, 2, '-1', '-1', '-1',
+		__('TOS', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	23 => array(1, 3, '-1', '-1', '-1',
+		__('Input IF', 'flowview'),
+		__('Output IF', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	24 => array(1, 2, '0',   '-1', '-1',
+		__('Src Prefix', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	25 => array(1, 2, '0',   '-1', '-1',
+		__('Dest Prefix', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	26 => array(1, 3, '0,1', '-1', '-1',
+		__('Src Prefix', 'flowview'),
+		__('Dest Prefix', 'flowview'),
+		__('Flows', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
 );
 
 $print_columns_array = array(
-	1  => array(2, 8, '1,3', '1', '4', '1', '5,6', __('Src IF', 'flowview'), __('Src IP', 'flowview'), __('Dest IF', 'flowview'), __('Dest IP', 'flowview'), __('Protocol', 'flowview'), __('Src Port', 'flowview'), __('Dest Port', 'flowview'), __('Packets', 'flowview'), __('Bytes', 'flowview'), __('Start Time', 'flowview'), __('End Time', 'flowview'), __('Active', 'flowview'), __('B/Pk', 'flowview'), __('Ts', 'flowview'), __('Fl', 'flowview')),
-	4  => array(1, 5, '', '0', '2', '0', '', __('Src IP', 'flowview'), __('Dest IP', 'flowview'), __('Protocol', 'flowview'), __('Src AS', 'flowview'), __('Dest AS', 'flowview'), __('Bytes', 'flowview'), __('Packets', 'flowview')),
-	5  => array(1, 11, '3,6', '0', '8', '0', '4,7', __('Start Time', 'flowview'), __('End Time', 'flowview'), __('Src IF', 'flowview'), __('Src IP', 'flowview'), __('Src Port', 'flowview'), __('Dest IF', 'flowview'), __('Dest IP', 'flowview'), __('Dest Port', 'flowview'), __('Protocol', 'flowview'), __('Flags', 'flowview'), __('Packets', 'flowview'), __('Bytes', 'flowview')),
+	1  => array(2, 8, '1,3', '1', '4', '1', '5,6',
+		__('Src IF', 'flowview'),
+		__('Src IP', 'flowview'),
+		__('Dest IF', 'flowview'),
+		__('Dest IP', 'flowview'),
+		__('Protocol', 'flowview'),
+		__('Src Port', 'flowview'),
+		__('Dest Port', 'flowview'),
+		__('Packets', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Start Time', 'flowview'),
+		__('End Time', 'flowview'),
+		__('Active', 'flowview'),
+		__('B/Pk', 'flowview'),
+		__('Ts', 'flowview'),
+		__('Fl', 'flowview')
+	),
+	4  => array(1, 5, '', '0', '2', '0', '',
+		__('Src IP', 'flowview'),
+		__('Dest IP', 'flowview'),
+		__('Protocol', 'flowview'),
+		__('Src AS', 'flowview'),
+		__('Dest AS', 'flowview'),
+		__('Bytes', 'flowview'),
+		__('Packets', 'flowview')
+	),
+	5  => array(1, 11, '3,6', '0', '8', '0', '4,7',
+		__('Start Time', 'flowview'),
+		__('End Time', 'flowview'),
+		__('Src IF', 'flowview'),
+		__('Src IP', 'flowview'),
+		__('Src Port', 'flowview'),
+		__('Dest IF', 'flowview'),
+		__('Dest IP', 'flowview'),
+		__('Dest Port', 'flowview'),
+		__('Protocol', 'flowview'),
+		__('Flags', 'flowview'),
+		__('Packets', 'flowview'),
+		__('Bytes', 'flowview')
+	)
 );
 
 

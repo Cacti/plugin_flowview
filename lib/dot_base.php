@@ -102,7 +102,7 @@ class dot_base {
  */
 class hollow_dot extends dot_base {
 	function __construct($value=null) {
-		parent::dot_base( 'hollow-dot', $value);
+		parent::__construct('hollow-dot', $value);
 	}
 }
 
@@ -114,7 +114,7 @@ class star extends dot_base {
 	 * The constructor, takes an optional $value
 	 */
 	function __construct($value=null) {
-		parent::dot_base( 'star', $value);
+		parent::__construct('star', $value);
 	}
 
 	/**
@@ -141,7 +141,7 @@ class bow extends dot_base {
 	 * The constructor, takes an optional $value
 	 */
 	function __construct($value=null) {
-		parent::dot_base('bow', $value);
+		parent::__construct('bow', $value);
 	}
 
 	/**
@@ -162,7 +162,7 @@ class anchor extends dot_base {
 	 * The constructor, takes an optional $value
 	 */
 	function __construct($value=null) {
-		parent::dot_base( 'anchor', $value);
+		parent::__construct( 'anchor', $value);
 	}
 
 	/**
@@ -191,7 +191,7 @@ class dot extends dot_base {
 	 * The constructor, takes an optional $value
 	 */
 	function __construct($value=null) {
-		parent::dot_base('dot', $value);
+		parent::__construct('dot', $value);
 	}
 }
 
@@ -203,7 +203,7 @@ class solid_dot extends dot_base {
 	 * The constructor, takes an optional $value
 	 */
 	function __construct($value=null) {
-		parent::dot_base( 'solid-dot', $value);
+		parent::__construct( 'solid-dot', $value);
 	}
 }
 

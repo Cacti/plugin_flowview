@@ -208,9 +208,8 @@ function flowview_show_tab() {
 
 function flowview_page_head() {
 	global $config, $colors;
-	if (substr_count($_SERVER['REQUEST_URI'], 'flowview')) {
-		print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
-	}
+
+	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
 }
 
 function flowview_config_settings() {
@@ -377,6 +376,22 @@ function flowview_setup_table() {
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Plugin Flowview - Database of well known Ports';
 	api_plugin_db_table_create('flowview', 'plugin_flowview_ports', $data);
+
+	$data = array();
+	$data['columns'][] = array('name' => 'id',           'type' => 'int(12)', 'NULL' => false, 'auto_increment' => true);
+	$data['columns'][] = array('name' => 'user_id',      'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'sessionid',    'type' => 'varchar(32)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'params',       'type' => 'varchar(2048)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'command',      'type' => 'varchar(2048)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'title',        'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'data',         'type' => 'longblob', 'default' => '');
+	$data['columns'][] = array('name' => 'last_updated', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP');
+	$data['primary']   = 'id';
+	$data['keys'][]    = array('name' => 'user_id',   'columns' => 'user_id');
+	$data['keys'][]    = array('name' => 'sessionid', 'columns' => 'sessionid');
+	$data['type']      = 'InnoDB';
+	$data['comment']   = 'Plugin Flowview - Session Data Cache';
+	api_plugin_db_table_create('flowview', 'plugin_flowview_session_cache', $data);
 
 	$inserts = file($config['base_path'] . '/plugins/flowview/plugin_flowview_ports.sql');
 	if (sizeof($inserts)) {
