@@ -34,7 +34,7 @@ $dir = dirname(__FILE__);
 chdir($dir);
 
 ini_set('max_execution_time', 0);
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '-1');
 
 if (strpos($dir, 'plugins') !== false) {
 	chdir('../../');

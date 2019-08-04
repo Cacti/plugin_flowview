@@ -50,13 +50,7 @@ $print_report_array = array(
 	 1  => __('Flow Times', 'flowview'),
 	 4  => __('AS Numbers', 'flowview'),
 	 5  => __('132 Columns', 'flowview'),
-	 9  => __('1 Line with Tags', 'flowview'),
-	 10 => __('AS Aggregation', 'flowview'),
-	 11 => __('Protocol Port Aggregation', 'flowview'),
-	 12 => __('Source Prefix Aggregation', 'flowview'),
-	 13 => __('Destination Prefix Aggregation', 'flowview'),
-	 14 => __('Prefix Aggregation', 'flowview'),
-	 24 => __('Full (Catalyst)', 'flowview')
+	 6  => __('Show IP Accounting Emulation', 'flowview')
 );
 
 $flow_select_array = array(
@@ -422,7 +416,195 @@ $print_columns_array = array(
 		__('Flags', 'flowview'),
 		__('Packets', 'flowview'),
 		__('Bytes', 'flowview')
+	),
+	6  => array(1, 11, '3,6', '0', '8', '0', '4,7',
+		__('Source', 'flowview'),
+		__('Destination', 'flowview'),
+		__('Packets', 'flowview'),
+		__('Bytes', 'flowview')
 	)
 );
 
+$print_array = array(
+	1 => array(
+		'clines' => 2,
+		'ports_hex' => true,
+		'if_hex' => true,
+		'db_columns' => 'src_if, src_addr, src_domain, src_rdomain, dst_if, dst_addr, dst_domain, dst_rdomain, protocol, src_port, src_rport, dst_port, dst_rport, packets, bytes, start_time, end_time, active, bytes_ppacket, Ts, Fl',
+		'spec' => array(
+			array(
+				'column' => 'SIf',
+				'description' => __('Src IF', 'flowview'),
+			),
+			array(
+				'column' => 'SrcIPaddress',
+				'description' => __('Src IP', 'flowview'),
+			),
+			array(
+				'column' => 'DIf',
+				'description' => __('Dest IF', 'flowview'),
+			),
+			array(
+				'column' => 'DstIPaddress',
+				'description' => __('Dest IP', 'flowview'),
+			),
+			array(
+				'column' => 'Pr',
+				'description' => __('Protocol', 'flowview'),
+			),
+			array(
+				'column' => 'SrcP',
+				'description' => __('Src Port', 'flowview'),
+			),
+			array(
+				'column' => 'DstP',
+				'description' => __('Dest Port', 'flowview'),
+			),
+			array(
+				'column' => 'Pkts',
+				'description' => __('Packets', 'flowview'),
+			),
+			array(
+				'column' => 'Octets',
+				'description' => __('Bytes', 'flowview'),
+			),
+			array(
+				'column' => 'StartTime',
+				'description' => __('Start Time', 'flowview'),
+			),
+			array(
+				'column' => 'EndTime',
+				'description' => __('End Time', 'flowview'),
+			),
+			array(
+				'column' => 'Active',
+				'description' => __('Active', 'flowview'),
+			),
+			array(
+				'column' => 'B/Pk',
+				'description' => __('B/Pk', 'flowview'),
+			),
+			array(
+				'column' => 'Ts',
+				'description' => __('Ts', 'flowview'),
+			),
+			array(
+				'column' => 'Fl',
+				'description' => __('Fl', 'flowview')
+			)
+		)
+	),
+	4  => array(
+		'clines' => 1,
+		'db_columns' => 'src_mask, src_addr, src_domain, src_rdomain, dst_mask, dst_addr, dst_domain, dst_rdomain, protocol, src_as, dst_as, bytes, packets',
+		'spec' => array(
+			array(
+				'column' => 'srcIP',
+				'description' => __('Src IP', 'flowview'),
+			),
+			array(
+				'column' => 'dstIP',
+				'description' => __('Dest IP', 'flowview'),
+			),
+			array(
+				'column' => 'prot',
+				'description' => __('Protocol', 'flowview'),
+			),
+			array(
+				'column' => 'srcAS',
+				'description' => __('Src AS', 'flowview'),
+			),
+			array(
+				'column' => 'dstAS',
+				'description' => __('Dest AS', 'flowview'),
+			),
+			array(
+				'column' => 'octets',
+				'description' => __('Bytes', 'flowview'),
+			),
+			array(
+				'column' => 'packets',
+				'description' => __('Packets', 'flowview')
+			)
+		)
+	),
+	5 => array(
+		'clines' => 1,
+		'ports_hex' => false,
+		'if_hex' => false,
+		'db_columns' => 'start_time, end_time, src_if, src_addr, src_domain, src_rdomain, src_port, src_rport, dst_if, dst_addr, dst_domain, dst_rdomain, dst_port, dst_rport, protocol, flags, packets, bytes',
+		'spec' => array(
+			array(
+				'column' => 'Start',
+				'description' => __('Start Time', 'flowview'),
+			),
+			array(
+				'column' => 'End' ,
+				'description'=> __('End Time', 'flowview'),
+			),
+			array(
+				'column' => 'Sif',
+				'description' => __('Src IF', 'flowview'),
+			),
+			array(
+				'column' => 'SrcIPaddress',
+				'description' => __('Src IP', 'flowview'),
+			),
+			array(
+				'column' => 'SrcP',
+				'description' => __('Src Port', 'flowview'),
+			),
+			array(
+				'column' => 'DIf',
+				'description' => __('Dest IF', 'flowview'),
+			),
+			array(
+				'column' => 'DstIPaddress',
+				'description' => __('Dest IP', 'flowview'),
+			),
+			array(
+				'column' => 'DstP',
+				'description' => __('Dest Port', 'flowview'),
+			),
+			array(
+				'column' => 'P',
+				'description' => __('Protocol', 'flowview'),
+			),
+			array(
+				'column' => 'Fl',
+				'description' => __('Flags', 'flowview'),
+			),
+			array(
+				'column' => 'Pkts',
+				'description' => __('Packets', 'flowview'),
+			),
+			array(
+				'column' => 'Octets',
+				'description' => __('Bytes', 'flowview')
+			)
+		)
+	),
+	6 => array(
+		'clines' => 1,
+		'db_columns' => 'src_addr, src_domain, src_rdomain, dst_addr, dst_domain, dst_rdomain, packets, bytes',
+		'spec' => array(
+			array(
+				'column' => 'Source',
+				'description' => __('Source', 'flowview'),
+			),
+			array(
+				'column' => 'Destination',
+				'description' => __('Destination', 'flowview'),
+			),
+			array(
+				'column' => 'Packets',
+				'description' => __('Packets', 'flowview'),
+			),
+			array(
+				'column' => 'Bytes',
+				'description' => __('Bytes', 'flowview')
+			)
+		)
+	)
+);
 

@@ -32,7 +32,7 @@ set_default_action();
 flowview_request_vars();
 
 ini_set('max_execution_time', 240);
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '-1');
 
 switch(get_request_var('action')) {
 case 'save':
@@ -65,7 +65,11 @@ case 'view':
 default:
 	general_header();
 
-	load_session_for_page();
+	if (get_filter_request_var('query') > 0) {
+		load_session_for_filter();
+	} else {
+		load_session_for_page();
+	}
 
 	flowview_display_form();
 
@@ -83,7 +87,6 @@ function load_session_for_filter() {
 			foreach($q as $column => $value) {
 				switch($column) {
 					case 'name':
-						set_request_var('query', $value);
 						break;
 					case 'timespan':
 						set_request_var('predefined_timespan', $q['timespan']);
@@ -311,6 +314,14 @@ function flowview_delete_session() {
 		AND sessionid = ?
 		AND id = ?',
 		array($_SESSION['sess_user_id'], session_id(), $sessionid));
+
+	db_execute_prepared('DELETE FROM plugin_flowview_session_cache_details
+		WHERE cache_id = ?',
+		array($sessionid));
+
+	db_execute_prepared('DELETE FROM plugin_flowview_session_cache_flow_stats
+		WHERE cache_id = ?',
+		array($sessionid));
 
 	if (isset($_SESSION['flowview_flows'][$sessionid])) {
 		unset($_SESSION['flowview_flows'][$sessionid]);
@@ -615,7 +626,8 @@ function flowview_display_form() {
 				<tr>
 					<td colspan='9'>
 						<hr size='2'>
-						<center><strong><?php print __('Note:', 'flowview');?></strong><?php print __(' Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)', 'flowview');?></center>
+						<center><strong><?php print __('Note:', 'flowview');?></strong> <?php print __('Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)', 'flowview');?></center>
+						<center><strong><?php print __('Note:', 'flowview');?></strong> <?php print __('Printed Reports presently can run very long as they are currently inserting all data into in range into MySQL/MariaDB cache tables.', 'flowview');?></center>
 						<hr size='2'>
 					</td>
 				</tr>
@@ -714,9 +726,11 @@ function flowview_display_form() {
 		if (statval > 0) {
 			$('#printed').attr('value', 0);
 			$('#printed').prop('disabled', true);
+			$('#printed').addClass('ui-state-disabled');
 			$('#rlimits').children('.sortfield').show();
 		} else {
 			$('#printed').prop('disabled', false);
+			$('#printed').removeClass('ui-state-disabled');
 		}
 
 		if (statval == 99 || statval < 1) {
@@ -729,13 +743,21 @@ function flowview_display_form() {
 			$('#view').prop('disabled', true);
 			$('#save').prop('disabled', true);
 			$('#saveas').prop('disabled', true);
+			$('#view').addClass('ui-state-disabled');
+			$('#save').addClass('ui-state-disabled');
+			$('#saveas').addClass('ui-state-disabled');
 		} else {
 			$('#view').prop('disabled', false);
 			$('#save').prop('disabled', false);
 			$('#saveas').prop('disabled', false);
+			$('#view').removeClass('ui-state-disabled');
+			$('#save').removeClass('ui-state-disabled');
+			$('#saveas').removeClass('ui-state-disabled');
 		}
 
-		$('#printed').selectmenu('refresh', true);
+		if ($('#printed').selectmenu('instance')) {
+			$('#printed').selectmenu('refresh', true);
+		}
 	}
 
 	function printSelect() {
@@ -760,6 +782,7 @@ function flowview_display_form() {
 			statSelect();
 			return;
 		}
+
 		if (statval == 4 || statval == 5) {
 			$('#cutofflines').prop('disabled', false);
 			$('#cutoffoctets').prop('disabled', false);
@@ -774,10 +797,16 @@ function flowview_display_form() {
 			$('#view').prop('disabled', true);
 			$('#save').prop('disabled', true);
 			$('#saveas').prop('disabled', true);
+			$('#view').addClass('ui-state-disabled', true);
+			$('#save').addClass('ui-state-disabled', true);
+			$('#saveas').addClass('ui-state-disabled', true);
 		} else {
 			$('#view').prop('disabled', false);
 			$('#save').prop('disabled', false);
 			$('#saveas').prop('disabled', false);
+			$('#view').removeClass('ui-state-disabled', true);
+			$('#save').removeClass('ui-state-disabled', true);
+			$('#saveas').removeClass('ui-state-disabled', true);
 		}
 
 		$('#statistics').selectmenu('refresh', true);
@@ -788,15 +817,21 @@ function flowview_display_form() {
 		if ($(this).val() == 0) {
 			$('#view').prop('disabled', true);
 			$('#save').prop('disabled', true);
+			$('#view').addClass('ui-state-disabled', true);
+			$('#save').addClass('ui-state-disabled', true);
 		} else {
 			$('#view').prop('disabled', false);
 			$('#save').prop('disabled', false);
+			$('#view').removeClass('ui-state-disabled', true);
+			$('#save').removeClass('ui-state-disabled', true);
 		}
 		<?php } else { ?>
 		if ($(this).val() == 0) {
 			$('#view').prop('disabled', true);
+			$('#view').addClass('ui-state-disabled', true);
 		} else {
 			$('#view').prop('disabled', false);
+			$('#view').removeClass('ui-state-disabled', true);
 		}
 		<?php } ?>
 	});
@@ -863,7 +898,7 @@ function flowview_display_form() {
 		$('#save').hide();
 		<?php } ?>
 
-		$('#flowview').change(function() {
+		$('#chk').change(function() {
 			$('#changed').attr('value', '1');
 		});
 
@@ -871,15 +906,21 @@ function flowview_display_form() {
 		if ($('#device').val() == 0) {
 			$('#view').prop('disabled', true);
 			$('#save').prop('disabled', true);
+			$('#view').addClass('ui-state-disabled');
+			$('#save').addClass('ui-state-disabled');
 		} else {
 			$('#view').prop('disabled', false);
 			$('#save').prop('disabled', false);
+			$('#view').removeClass('ui-state-disabled');
+			$('#save').removeClass('ui-state-disabled');
 		}
 		<?php } else { ?>
 		if ($('#device').val() == 0) {
 			$('#view').prop('disabled', true);
+			$('#view').addClass('ui-state-disabled');
 		} else {
 			$('#view').prop('disabled', false);
+			$('#view').removeClass('ui-state-disabled');
 		}
 		<?php } ?>
 
@@ -906,6 +947,8 @@ function flowview_display_form() {
 	});
 
 	$('#view').click(function() {
+		$('#view').prop('disabled', true);
+		$('#view').addClass('ui-state-disabled');
 		$('#action').attr('value', 'view');
 		$.post('flowview.php', $('input, select, textarea').serializeForm(), function(data) {
 			$('#main').html(data);
@@ -922,7 +965,7 @@ function flowview_display_form() {
 		$('#qsave').click(function() {
 			$('#new_query').attr('value', $('#squery').val());
 			$('#action').attr('value', 'save');
-			$.post('flowview.php', $('#flowview').serialize(), function(data) {
+			$.post('flowview.php', $('#chk').serializeForm, function(data) {
 				if (data!='error') {
 					$('#text').show().text('<?php print __('Filter Saved', 'flowview');?>').fadeOut(2000);
 					$('#query').append("<option value='"+data+"'>"+$('#new_query').val()+"</option>");
@@ -942,7 +985,7 @@ function flowview_display_form() {
 			$('#qsave').click(function() {
 				$('#new_query').attr('value', $('#squery').val());
 				$('#action').attr('value', 'save');
-				$.post('flowview.php', $('#flowview').serialize(), function(data) {
+				$.post('flowview.php', $('#chk').serializeForm(), function(data) {
 					if (data!='error') {
 						loadPageNoHeader('flowview.php?tab=filters&header=false&action=loadquery&query='+data);
 						$('#text').show().text('<?php print __('Filter Settings Saved');?>').fadeOut(2000);
@@ -952,7 +995,7 @@ function flowview_display_form() {
 			});
 		} else {
 			$('#action').attr('value', 'save');
-			$.post('flowview.php', $('#flowview').serialize(), function(data) {
+			$.post('flowview.php', $('#chk').serializeForm(), function(data) {
 				$('#text').show().text('<?php print __('Filter Updated', 'flowview');?>').fadeOut(2000);
 			});
 		}

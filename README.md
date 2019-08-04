@@ -1,5 +1,10 @@
 # flowview
 
+## Current Branch is Unstable
+
+I'm going through a pretty big rewrite of flowview at this time.  Therefore, please consider this branch unstable.  If you are looking for a stable branch, please checkout the last tag.  This upcoming change will remove the 
+dependency on flow-tools and leverage a partitioned database for storage and reporting.
+
 This plugin allows you to see reports based off the data in your Netflow flows.
 
 # Features
