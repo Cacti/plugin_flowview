@@ -68,6 +68,12 @@ function plugin_flowview_check_upgrade() {
 			FROM plugin_flowview_schedules
 			WHERE title=""');
 
+		if (!db_column_exists('plugin_flowview_devices', 'cmethod')) {
+			db_execute('ALTER TABLE plugin_flowview_devices ADD COLUMN cmethod int unsigned default "0" AFTER name');
+
+			db_execute('UPDATE plugin_flowview_devices SET cmethod=1');
+		}
+
 		if ($bad_titles) {
 			/* update titles for those that don't have them */
 			db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
@@ -295,6 +301,7 @@ function flowview_setup_table() {
 	$data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(64)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'cmethod', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'folder', 'type' => 'varchar(64)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'allowfrom', 'type' => 'varchar(32)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false);
