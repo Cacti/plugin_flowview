@@ -1,10 +1,34 @@
 <?php
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2007-2019 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDTool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
 
+chdir(__DIR__);
 include('../../include/cli_check.php');
 include_once('./functions.php');
 
 $debug     = false;
 $shortopts = 'VvHh';
+$lversion  = array();
 
 $longopts = array(
 	'listener-id::',
@@ -42,31 +66,12 @@ foreach($options as $arg => $value) {
 }
 
 $templates = array();
-
-$fieldname = array(
-	'22' => 'start',
-	'21' => 'end',
-	'8'  => 'srcaddr',
-	'12' => 'dstaddr',
-	'15' => 'nexthop',
-	'10' => 'input',
-	'14' => 'output',
-	'2'  => 'dpkts',
-	'1'  => 'doctets',
-	'7'  => 'srcport',
-	'11' => 'dstport',
-	'6'  => 'flags',
-	'4'  => 'prot',
-	'5'  => 'tos',
-	'16' => 'src_as',
-	'17' => 'dst_as',
-	'9'  => 'src_prefix',
-	'13' => 'dst_prefix'
-);
+$start     = 0;
 
 $allfields = array(
 	1  =>  array('name' => 'octetDeltaCount',                  'pack' => ''),
 	2  =>  array('name' => 'packetDeltaCount',                 'pack' => ''),
+	3  =>  array('name' => 'deltaFlowCount',                   'pack' => ''),
 	4  =>  array('name' => 'protocolIdentifier',               'pack' => 'C'),
 	5  =>  array('name' => 'ipClassOfService',                 'pack' => 'C'),
 	6  =>  array('name' => 'tcpControlBits',                   'pack' => 'C'),
@@ -110,6 +115,10 @@ $allfields = array(
 	45 =>  array('name' => 'destinationIPv4Prefix',            'pack' => ''),
 	46 =>  array('name' => 'mplsTopLabelType',                 'pack' => ''),
 	47 =>  array('name' => 'mplsTopLabelIPv4Address',          'pack' => 'C4'),
+	48 =>  array('name' => 'samplerId',                        'pack' => ''),
+	49 =>  array('name' => 'samplerMode',                      'pack' => ''),
+	50 =>  array('name' => 'samplerRandomInterval',            'pack' => ''),
+	51 =>  array('name' => 'classId',                          'pack' => ''),
 	52 =>  array('name' => 'minimumTTL',                       'pack' => ''),
 	53 =>  array('name' => 'maximumTTL',                       'pack' => ''),
 	54 =>  array('name' => 'fragmentIdentification',           'pack' => ''),
@@ -273,15 +282,6 @@ $allfields = array(
 	238 => array('name' => 'tcpWindowScale',                   'pack' => '')
 );
 
-$fieldvalue = array(
-	'8'  => 'C4',
-	'12' => 'C4',
-	'15' => 'C4',
-	'6'  => 'C',
-	'4'  => 'C',
-	'5'  => 'C',
-);
-
 $lens = array(
 	1 => 'C',
 	2 => 'n',
@@ -305,13 +305,27 @@ if (cacti_sizeof($listener)) {
 		    die("$errstr ($errno)");
 		}
 
+
 		while (true) {
 			$p = stream_socket_recvfrom($socket, 1500, 0, $peer);
+			if ($start > 0) {
+				$end = microtime(true);
+				debug('-----------------------------------------------');
+				debug(sprintf('Flow: Sleep Time: %0.2f', $end - $start));
+			}
+
+			$start = microtime(true);
 
 			if ($p !== false ) {
 				$version = unpack('n', substr($p, 0, 2));
 
-				debug("Packet: $peer v" . $version[1] . " - Len: " . strlen($p));
+				if (isset($lversion[$peer]) && $version[1] != $lversion[$peer]) {
+					$templates = array();
+					$lversion[$peer] = $version[1];
+					debug('Flow: Detecting version change');
+				}
+
+				debug("Flow: Packet from: $peer v" . $version[1] . " - Len: " . strlen($p));
 
 				if ($version[1] == 5) {
 					process_fv5($p, $peer);
@@ -320,6 +334,12 @@ if (cacti_sizeof($listener)) {
 				} elseif ($version[1] == 10) {
 					process_fv10($p, $peer);
 				}
+
+				$end = microtime(true);
+
+				debug(sprintf('Flow: Cycle Time: %0.2f', $end - $start));
+
+				$start = microtime(true);
 			} else {
 				break;
 			}
@@ -330,23 +350,24 @@ if (cacti_sizeof($listener)) {
 exit(0);
 
 function process_fv5($p, $peer) {
-	global $partition, $listener_id;
-	static $last_table = '';
+	global $listener_id;
 
-	$v5_header_len = 24;
-	$v5_flowrec_len = 48;
+	$header_len  = 24;
+	$flowrec_len = 48;
 
 	$header = unpack('nversion/ncount/Nsysuptime/Nunix_secs/Nunix_nsecs/Nflow_sequence/Cengine_type/Cengine_id/nsample_int', substr($p, 0, 24));
 	$count = $header['count'];
 	$flows = 1;
 	$sql   = array();
 
+	debug('Flow: Processing v5 Data, Len: ' . $count);
+
 	for ($i = 0; $i < $count; $i++) {
-		$flowrec = substr($p, $v5_header_len + ($i * $v5_flowrec_len), $v5_flowrec_len);
+		$flowrec = substr($p, $header_len + ($i * $flowrec_len), $flowrec_len);
 
 		$data = unpack('C4src_addr/C4dst_addr/C4nexthop/nsrc_if/ndst_if/NdPkts/NdOctets/NFirst/NLast/nsrc_port/ndst_port/Cblank/Cflags/Cprotocol/Ctos/nsrc_as/ndst_as/Csrc_prefix/Cdst_prefix', $flowrec);
 
-		$cap_time = $header['unix_secs'] + ($header['unix_nsecs'] / 1000000);
+		$flowtime = $header['unix_secs'] + ($header['unix_nsecs'] / 1000000);
 
 		$src_addr = $data['src_addr1'] . '.' . $data['src_addr2'] . '.' . $data['src_addr3'] . '.' . $data['src_addr4'];
 		$dst_addr = $data['dst_addr1'] . '.' . $data['dst_addr2'] . '.' . $data['dst_addr3'] . '.' . $data['dst_addr4'];
@@ -358,24 +379,10 @@ function process_fv5($p, $peer) {
 		$retime = ($data['Last'] - $header['sysuptime']) / 1000;
 		$remsec = substr($data['Last'] - $header['sysuptime'], -3);
 
-		$start_time = date('Y-m-d H:i:s', $cap_time + $rstime) . '.' . $rsmsec;
-		$end_time   = date('Y-m-d H:i:s', $cap_time + $retime) . '.' . $remsec;
+		$start_time = date('Y-m-d H:i:s', $flowtime + $rstime) . '.' . $rsmsec;
+		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
 
-		if ($partition == 0) {
-			$suffix = date('Y', $cap_time) . substr('000' . date('z', $cap_time), -3);
-		} else {
-			$suffix = date('Y', $cap_time) . substr('000' . date('z', $cap_time), -3) . date('H', $cap_time);
-		}
-
-		$table  = 'plugin_flowview_raw_' . $suffix;
-
-		if ($table != $last_table) {
-			if (!db_table_exists($table)) {
-                create_raw_partition($table);
-			}
-		}
-
-		$sql_prefix = 'INSERT IGNORE INTO ' . $table . ' (listener_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags) VALUES ';
+		$sql_prefix = get_sql_prefix($flowtime);
 
 		$src_domain  = flowview_get_dns_from_ip($src_addr, 100);
 		$src_rdomain = flowview_get_rdomain_from_domain($src_domain, $src_addr);
@@ -428,12 +435,9 @@ function process_fv5($p, $peer) {
 	}
 
 	if (sizeof($sql)) {
-		debug('Inserting ' . $count . ' records into table ' . $table);
-
+		debug('Flow: Writing Records: ' . sizeof($sql));
 		db_execute($sql_prefix . implode(' ,', $sql));
 	}
-
-	$last_table = $table;
 }
 
 function debug($string) {
@@ -445,164 +449,207 @@ function debug($string) {
 }
 
 function process_fv9($p, $peer) {
-	global $templates, $fieldname, $fieldvalue, $lens;
-
-	$version = unpack('n', substr($p, 0, 2));
-	$header_len  = 20;
-	$flowrec_len = 128;
+	global $templates, $allfields, $lens;
 
 	if (!isset($templates[$peer])) {
 		$templates[$peer] = array();
 	}
 
-	$header   = unpack('nversion/ncount/Nsysuptime/Nunix_seconds/Nseq_num/Nsource_id', substr($p, 0, $header_len));
-	$count    = $header['count'];
-	$i        = $header_len;
-	$flowtime = $header['unix_seconds'];
-	$uptime   = $header['sysuptime'];
+	$header_len = 20;
+	$header     = unpack('nversion/ncount/Nsysuptime/Nunix_seconds/Nseq_num/Nsource_id', substr($p, 0, $header_len));
+	$records    = $header['count'];
+	$i          = $header_len;
+	$flowtime   = $header['unix_seconds'];
+	$sysuptime  = $header['sysuptime'];
+	$j          = 0;
+	$flow_data  = false;
+	$sql        = array();
+	$sql_prefix = get_sql_prefix($flowtime);
 
-	while ($i < $count) {
-		$fsheader = substr($p, $i, 4);
-		$fsheader = unpack('nflowset_id/nflowset_length', $fsheader);
-		$h = $i + 4;
+	debug('Flow: Processing v9 Data, Records: ' . $records);
 
-		if ($header['flowset_id'] == 0) {
-			// Template Set
+	while ($j < $records) {
+		$header = substr($p, $i, 4);
+		$header = unpack('nflowset_id/nflowset_length', $header);
+		$h      = $i + 4;
+		$fslen  = $header['flowset_length'];
+		$fsid   = $header['flowset_id'];
 
-			$theader = substr($p, $h, 4);
-			$theader = unpack('ntemplate_id/nfieldcount', $theader);
-			$tid     = $theader['template_id'];
-			$fcount  = $theader['fieldcount'];
-			$h += 4;
+		// Template Set
+		if ($fsid == 0) {
+			$k = 4;
 
-			if (!isset($templates[$peer][$tid])) {
-				$templates[$peer][$tid] = array();
+			if ($fslen > 0) {
+				debug('Flow: Template Found');
+				debug('Flow: Template Len: ' . $fslen);
 
-				for ($a = 0; $a < $fcount; $a++) {
-					$field = substr($p, $h, 4);
-					$field = unpack('nfield_id/nfield_len', $field);
-					$tf    = array();
-					$tf['field_id'] = $field['field_id'];
-					$tf['length']   = $field['field_len'];
+				while ($k < $fslen) {
+					$theader = substr($p, $h, 4);
+					$theader = unpack('ntemplate_id/nfieldcount', $theader);
+					$tid     = $theader['template_id'];
+					$fcount  = $theader['fieldcount'];
+					$h += 4;
+					$k += 4;
 
-					if (($field['field_id'] & 32768)) {
-						$tf['field_id']   = $field['field_id'] & ~32768;
-						$tf['enterprise'] = 1;
+					debug('Flow: Template Id: ' . $tid . ' with ' . $fcount . ' fields');
 
-						$entnum = substr($p, $h, 4);
-						$entnum = unpack('Nentnum', $entnum);
+					$templates[$peer][$tid] = array();
 
-						$tf['enterprise_number'] = $entnum['entnum'];
-						$h += 4;
-					} else {
-						$tf['enterprise'] = 0;
-					}
+					for ($a = 0; $a < $fcount; $a++) {
+						$field = substr($p, $h, 4);
+						$field = unpack('nfield_id/nfield_len', $field);
+						$tf    = array();
+						$tf['field_id'] = $field['field_id'];
+						$tf['length']   = $field['field_len'];
 
-					if (isset($fieldname[$tf['field_id']])) {
-						$tf['name'] = $fieldname[$tf['field_id']];
-						if (isset($fieldvalue[$tf['field_id']])) {
-							$tf['unpack'] = $fieldvalue[$tf['field_id']];
+						if (($field['field_id'] & 32768)) {
+							$tf['field_id']   = $field['field_id'] & ~32768;
+							$tf['enterprise'] = 1;
+
+							$entnum = substr($p, $h, 4);
+							$entnum = unpack('Nentnum', $entnum);
+
+							$tf['enterprise_number'] = $entnum['entnum'];
+							$h += 4;
 						} else {
+							$tf['enterprise'] = 0;
+						}
+
+						if (isset($allfields[$tf['field_id']])) {
+							$tf['name'] = $allfields[$tf['field_id']]['name'];
+							if ($allfields[$tf['field_id']]['pack'] != '') {
+								$tf['unpack'] = $allfields[$tf['field_id']]['pack'];
+							} else {
+								$tf['unpack'] = $lens[$tf['length']];
+							}
+						} else {
+							$tf['name'] = 'Unknown';
 							$tf['unpack'] = $lens[$tf['length']];
 						}
-					} else {
-						$tf['name'] = 'Unknown';
-						$tf['unpack'] = $lens[$tf['length']];
-					}
 
-					$templates[$peer][$tid][] = $tf;
-					$h += 4;
+						$templates[$peer][$tid][] = $tf;
+						$h += 4;
+						$k += 4;
+					}
 				}
 
-				print "Template Output Start" . PHP_EOL;
-				print_r($templates);
-				print "Template Output End" . PHP_EOL;
+				debug('Flow: Templates Captured');
+				//print_r($templates);
+
+				$i += $fslen;
+				$j++;
+			} else {
+				$i += $fslen;
+				$j++;
+			}
+		}
+
+		// Option Set
+		if ($fsid == 1) {
+			debug('Flow: Options Found');
+
+			$i += $fslen;
+			$j++;
+		}
+
+		// Flow Data Set
+		if ($fsid > 255) {
+			if (sizeof($templates[$peer])) {
+				debug('Flow: Data Found, Processing');
+			} else {
+				debug('Flow: Data Found, Awaiting Templates');
 			}
 
-			$i += $header['flowset_length'];
-		}
-
-		if ($header['flowset_id'] == 1) {
-			// Option Set
-			$i = $i + $header['flowset_length'];
-		}
-
-		if ($header['flowset_id'] > 255) {
-			// Data Set
-			$tid = $header['flowset_id'];
+			$tid = $fsid;
+			$k   = 4;
 
 			if (isset($templates[$peer][$tid])) {
-				$data = array();
-				$h = $i + 4;
-
-				foreach ($templates[$peer][$tid] as $t) {
-					$id = $t['field_id'];
-					$field = substr($p, $h, $t['length']);
-					$field = unpack($t['unpack'], $field);
-
-					if ($t['unpack'] == 'C4') {
-						$field = implode('.', $field);
-					} elseif ($t['unpack'] == 'n8') {
-						$ofield = '';
-
-						foreach($field as $v) {
-							$ofield .= ($ofield != '' ? ':':'') . substr('0000' . dechex($v), -4);
-						}
-
-						$field = strtoupper($ofield);
-					} elseif ($t['unpack'] == 'C6') {
-						$ofield = '';
-
-						foreach($field as $v) {
-							$ofield .= ($ofield != '' ? ':':'') . substr('00' . dechex($v), -2);
-						}
-
-						$field = strtoupper($ofield);
-					} elseif (count($field) > 1) {
-						$c = 0;
-						$d = 1;
-
-						for ($b = count($field); $b > 0; $b--) {
-							$c += $field[$b] * $d;
-							$d = $d * 256;
-						}
-						$field = $c;
-					} else {
-						$field = $field[1];
-					}
-
-					$h += $t['length'];
-					$data[$id] = $field;
-				}
-
-				print "Data Output Start" . PHP_EOL;
-				print_r($data);
-				print "Data Output End" . PHP_EOL;
-				processv10($data);
+				debug('Flow: Template Found: ' . $tid);
 			}
 
-			$i += $header['flowset_length'];
+			while ($k < $fslen) {
+				if (isset($templates[$peer][$tid])) {
+					$data = array();
+
+					foreach ($templates[$peer][$tid] as $t) {
+						$id = $t['field_id'];
+						$field = substr($p, $h, $t['length']);
+						$field = unpack($t['unpack'], $field);
+
+						if ($t['unpack'] == 'C4') {
+							$field = implode('.', $field);
+						} elseif ($t['unpack'] == 'n8') {
+							$ofield = '';
+
+							foreach($field as $v) {
+								$ofield .= ($ofield != '' ? ':':'') . substr('0000' . dechex($v), -4);
+							}
+
+							$field = strtoupper($ofield);
+						} elseif ($t['unpack'] == 'C6') {
+							$ofield = '';
+
+							foreach($field as $v) {
+								$ofield .= ($ofield != '' ? ':':'') . substr('00' . dechex($v), -2);
+							}
+
+							$field = strtoupper($ofield);
+						} elseif (count($field) > 1) {
+							$c = 0;
+							$d = 1;
+
+							for ($b = count($field); $b > 0; $b--) {
+								$c += $field[$b] * $d;
+								$d = $d * 256;
+							}
+							$field = $c;
+						} else {
+							$field = $field[1];
+						}
+
+						$h += $t['length'];
+						$k += $t['length'];
+						$data[$id] = $field;
+					}
+
+					$remaining = $fslen - $k;
+
+					debug('Flow: Processed, Remaining: ' . $remaining);
+
+					$result = false;
+					$result = process_v9_v10($data, $peer, $flowtime, $sysuptime);
+
+					if ($result !== false) {
+						$sql[] = $result;
+					} else {
+						debug('Bad Record');
+						//print_r($data);
+					}
+
+					if ($remaining <= 4) {
+						$j = $records;
+						break;
+					}
+				} else {
+					$j = $records;
+					break;
+				}
+			}
 		}
+
+		$i += $fslen;
+		$j++;
+	}
+
+	if (sizeof($sql)) {
+		debug('Flow: Writing Records: ' . sizeof($sql));
+		db_execute($sql_prefix . implode(', ', $sql));
 	}
 }
 
-function process_fv10($p, $peer) {
-	global $templates, $fieldname, $fieldvalue, $lens, $allfields, $partition;
+function get_sql_prefix($flowtime) {
+	global $partition;
 	static $last_table = '';
-
-	$version = unpack('n', substr($p, 0, 2));
-	$header_len  = 16;
-	$flowrec_len = 48;
-
-	if (!isset($templates[$peer])) {
-		$templates[$peer] = array();
-	}
-
-	$header   = unpack('nversion/ncount/Nexporttime/Nseq_num/Ndomainid', substr($p, 0, $header_len));
-	$count    = $header['count'];
-	$i        = $header_len;
-	$flowtime = $header['exporttime'];
-	$sql      = array();
 
 	if ($partition == 0) {
 		$suffix = date('Y', $flowtime) . substr('000' . date('z', $flowtime), -3);
@@ -618,15 +665,38 @@ function process_fv10($p, $peer) {
 		}
 	}
 
-	$sql_prefix = 'INSERT IGNORE INTO ' . $table . ' (listener_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags) VALUES ';
+	$last_table = $table;
+
+	return 'INSERT IGNORE INTO ' . $table . ' (listener_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags) VALUES ';
+}
+
+function process_fv10($p, $peer) {
+	global $templates, $allfields, $lens;
+
+	if (!isset($templates[$peer])) {
+		$templates[$peer] = array();
+	}
+
+	$header_len = 16;
+	$header     = unpack('nversion/ncount/Nexporttime/Nseq_num/Ndomainid', substr($p, 0, $header_len));
+	$count      = $header['count'];
+	$i          = $header_len;
+	$flowtime   = $header['exporttime'];
+	$sql        = array();
+	$sql_prefix = get_sql_prefix($flowtime);
+
+	debug('Flow: Processing v10/IPFIX Data, Len: ' . $count);
 
 	while ($i < $count) {
 		$header = substr($p, $i, 4);
 		$header = unpack('nflowset_id/nflowset_length', $header);
-		$h = $i + 4;
+		$h      = $i + 4;
+		$fsid   = $header['flowset_id'];
+		$fslen  = $header['flowset_length'];
 
-		if ($header['flowset_id'] == 2) {
-			// Template Set
+		// Template Set
+		if ($fsid == 2) {
+			debug('Flow: Template Found');
 
 			$theader = substr($p, $h, 4);
 			$theader = unpack('ntemplate_id/nfieldcount', $theader);
@@ -671,28 +741,36 @@ function process_fv10($p, $peer) {
 					$h += 4;
 				}
 
-				debug('Template Captured');
+				debug('Flow: Template Captured');
 				//print_r($templates);
 			}
 
-			$i += $header['flowset_length'];
+			$i += $fslen;
 
-			debug('Flowset 2: Total bytes:' . $count . ', Current bytes:' . $i);
+			debug('Flow: Flowset 2: Total bytes:' . $count . ', Current bytes:' . $i);
 		}
 
-		if ($header['flowset_id'] == 3) {
-			// Option Set
-			$i = $i + $header['flowset_length'];
+		// Option Set
+		if ($fsid == 3) {
+			debug('Flow: Options Found');
 
-			debug('Flowset 3: Total bytes:' . $count . ', Current bytes:' . $i);
+			$i += $fslen;
+
+			debug('Flow: Flowset 3: Total bytes:' . $count . ', Current bytes:' . $i);
 		}
 
-		if ($header['flowset_id'] > 255) {
-			// Data Set
-			$tid = $header['flowset_id'];
+		// Data Set
+		if ($fsid > 255) {
+			if (sizeof($templates[$peer])) {
+				debug('Flow: Data Found, Processing');
+			} else {
+				debug('Flow: Data Found, Awaiting Templates');
+			}
+
+			$tid = $fsid;
 
 			if (isset($templates[$peer][$tid])) {
-				while ($h < $header['flowset_length']) {
+				while ($h < $fslen) {
 					$data = array();
 
 					foreach ($templates[$peer][$tid] as $t) {
@@ -735,7 +813,7 @@ function process_fv10($p, $peer) {
 						$data[$id] = $field;
 					}
 
-					$result = processv10($data, $peer, $flowtime);
+					$result = process_v9_v10($data, $peer, $flowtime);
 
 					if ($result !== false) {
 						$sql[] = $result;
@@ -746,17 +824,17 @@ function process_fv10($p, $peer) {
 				}
 			}
 
-			$i += $header['flowset_length'];
+			$i += $fslen;
 		}
 	}
 
 	if (sizeof($sql)) {
-		debug('Writing ' . sizeof($sql) . ' Flow Records.');
+		debug('Flow: Writing Records: ' . sizeof($sql));
 		db_execute($sql_prefix . implode(', ', $sql));
 	}
 }
 
-function processv10($data, $peer, $flowtime) {
+function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 	global $listener_id, $partition;
 
 	$fieldname = array(
@@ -821,19 +899,26 @@ function processv10($data, $peer, $flowtime) {
 		$nexthop = $data[$fieldname['nexthop']];
 	}
 
-	$cap_time = $flowtime;
-
 	if (isset($data[$fieldname['sysuptime']])) {
 		$rstime = ($data[$fieldname['start_time']] - $data[$fieldname['sysuptime']]) / 1000;
 		$rsmsec = substr($data[$fieldname['start_time']] - $data[$fieldname['sysuptime']], -3);
 		$retime = ($data[$fieldname['end_time']] - $data[$fieldname['sysuptime']]) / 1000;
 		$remsec = substr($data[$fieldname['end_time']] - $data[$fieldname['sysuptime']], -3);
 
-		$start_time = date('Y-m-d H:i:s', $cap_time + $rstime) . '.' . $rsmsec;
-		$end_time   = date('Y-m-d H:i:s', $cap_time + $retime) . '.' . $remsec;
+		$start_time = date('Y-m-d H:i:s', $flowtime + $rstime) . '.' . $rsmsec;
+		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
+		$sysuptime = $data[$fieldname['sysuptime']];
+	} elseif ($sysuptime > 0) {
+		$rstime = ($data[$fieldname['start_time']] - $sysuptime) / 1000;
+		$rsmsec = substr($data[$fieldname['start_time']] - $sysuptime, -3);
+		$retime = ($data[$fieldname['end_time']] - $sysuptime) / 1000;
+		$remsec = substr($data[$fieldname['end_time']] - $sysuptime, -3);
+
+		$start_time = date('Y-m-d H:i:s', $flowtime + $rstime) . '.' . $rsmsec;
+		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
 	} else {
-		$start_time = date('Y-m-d H:i:s', $cap_time);
-		$end_time   = date('Y-m-d H:i:s', $cap_time);
+		$start_time = date('Y-m-d H:i:s', $flowtime);
+		$end_time   = date('Y-m-d H:i:s', $flowtime);
 	}
 
 	$src_domain  = flowview_get_dns_from_ip($src_addr, 100);
@@ -853,7 +938,7 @@ function processv10($data, $peer, $flowtime) {
 		check_set($data, $fieldname['engine_id'])         . ', ' .
 		check_set($data, $fieldname['sampling_interval']) . ', ' .
 		db_qstr($peer)                                    . ', ' .
-		check_set($data, $fieldname['sysuptime'])         . ', ' .
+		$sysuptime                                        . ', ' .
 
 		'INET6_ATON("' . $src_addr . '")'                 . ', ' .
 		db_qstr($src_domain)                              . ', ' .
