@@ -27,9 +27,9 @@ include('../../include/cli_check.php');
 include_once('./functions.php');
 
 $debug     = false;
-$shortopts = 'VvHh';
 $lversion  = array();
 
+$shortopts = 'VvHh';
 $longopts = array(
 	'listener-id::',
 	'debug',

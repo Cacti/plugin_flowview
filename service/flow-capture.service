@@ -1,0 +1,16 @@
+[Unit]
+Description=Flow Capture Service for Cacti
+After=network.target mariadb.service
+ 
+[Service]
+User=root
+TimeoutStartSec=0
+Type=forking
+KillMode=process
+WorkingDirectory=/tmp
+ExecStart=/usr/bin/php -q /var/www/html/cacti/plugins/flowview/service/flow-capture --systemd
+Restart=always
+RestartSec=2
+ 
+[Install]
+WantedBy=multi-user.target

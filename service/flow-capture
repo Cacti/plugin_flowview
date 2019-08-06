@@ -1,0 +1,116 @@
+#!/usr/bin/php
+<?php
+/*
+# description: Start Flow-Capture
+# chkconfig: 2345 95 00
+*/
+
+$cacti_base = '/var/www/html/cacti';
+
+include_once($cacti_base . '/include/cli_check.php');
+include_once($cacti_base . '/lib/poller.php');
+
+$tools_path = read_config_option('path_flowtools');
+
+$shortopts = 'VvHh';
+$longopts = array(
+	'systemd',
+	'version',
+	'help',
+);
+
+$options = getopt($shortopts, $longopts);
+
+if (isset($options['systemd'])) {
+	start();
+} else {
+	if (isset($_SERVER['argv'][1])) {
+		switch (strtolower($_SERVER['argv'][1])) {
+		case 'start':
+			start();
+			break;
+		case 'stop':
+			stop();
+			break;
+		case 'restart':
+			restart();
+			break;
+		default:
+			print 'Usage: /etc/init.d/flow-capture {start|stop|restart}' . PHP_EOL;
+			break;
+		}
+	}
+}
+
+function start() {
+	global $tools_path, $cacti_base, $systemd;
+
+	print 'NOTE: Starting Flow Tools' . PHP_EOL;
+
+	$devices = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
+	$legacy  = db_fetch_cell('SELECT COUNT(*) FROM plugin_flowview_devices WHERE cmethod = 1');
+
+	if (!empty($devices)) {
+		$path = read_config_option('path_flows_dir');
+		if ($path == '' && $legacy) {
+			print 'FATAL: Legacy flow-tools collectors defined without a flowtools path.' . PHP_EOL;
+			return false;
+		}
+
+		/* removing trailing slash and anything else */
+		$path = rtrim($path, "/ \n\t");
+
+		foreach ($devices as $device) {
+			if ($device['cmethod'] == 0) {
+				$php_binary = read_config_option('path_php_binary');
+				print "NOTE: Launching cacti-capture as '" . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id'] . "'" . PHP_EOL;
+
+				if ($systemd) {
+					shell_exec($php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id']);
+				} else {
+					exec_background($php_binary, ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id']);
+				}
+			} else {
+				$port   = $device['port'];
+				$folder = $device['folder'];
+				$nest   = $device['nesting'];
+				$v      = $device['version'];
+				$from   = $device['allowfrom'];
+				$comp   = $device['compression'];
+				$rotate = $device['rotation'];
+				$expire = $device['expire'] * ($rotate + 1);
+
+				if (!is_dir("$path/$folder")) {
+					print "NOTE: Making directory '$path/$folder'" . PHP_EOL;
+					mkdir("$path/$folder", 0777, true);
+				}
+
+				if (is_dir("$path/$folder")) {
+					print "NOTE: Launching flow-capture as '$tools_path/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest'" . PHP_EOL;
+					shell_exec($tools_path . "/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest");
+				}
+			}
+		}
+	} else {
+		print 'WARNING: No flows configured' . PHP_EOL;
+	}			
+}
+
+function stop() {
+	global $tools_path, $cacti_base;
+
+	print 'NOTE: Stopping Flow Tools' . PHP_EOL;
+
+	$devices    = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
+	$php_binary = read_config_option('path_php_binary');
+
+	if (sizeof($devices)) {
+		shell_exec('killall --quiet ' . $tools_path . '/flow-capture');
+		shell_exec('killall --quiet ' . $php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php');
+	}			
+}
+
+function restart() {
+	stop();
+	start();
+}
