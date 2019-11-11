@@ -22,10 +22,28 @@
  +-------------------------------------------------------------------------+
 */
 
-function flowview_display_report() {
+function flowview_gettimespan() {
 	global $config;
 
-	general_header();
+	$timespan = get_filter_request_var('predefined_timespan');
+	$date1    = get_nfilter_request_var('date1');
+	$date2    = get_nfilter_request_var('date2');
+	$span     = array();
+
+	if ($timespan > 0) {
+		get_timespan($span, time(), $timespan, read_user_setting('first_weekdayid'));
+	} else {
+		$span['current_value_date1'] = $date1;
+		$span['current_value_date2'] = $date2;
+		$span['begin_now']           = strtotime($date1);
+		$span['end_now']             = strtotime($date2);
+	}
+
+	print json_encode($span);
+}
+
+function flowview_display_report() {
+	global $config, $graph_timeshifts, $graph_timespans;
 
 	$sessionid = get_sessionid();
 
@@ -75,21 +93,10 @@ function flowview_display_report() {
 		$rname = $print_report_array[get_request_var('printed')];
 	}
 
-	$current = '';
-	$error = flowview_check_fields();
-	if ($error != '') {
-		display_tabs();
-		print "<font class='textError'>$error</font>";
-		html_end_box();
-		return;
-	}
-
 	// Load session history
 	flowview_report_session();
 
 	$filter = createFilter($sessionid);
-
-	display_tabs();
 
 	if (isset_request_var('statistics') && get_request_var('statistics') > 0 && get_nfilter_request_var('statistics') != 99) {
 		html_start_box(__('Report: %s', $rname, 'flowview'), '100%', '', '3', 'center', '');
@@ -99,6 +106,25 @@ function flowview_display_report() {
 			<form id='view' name='view' action='flowview.php' method='post'>
 				<table class='filterTable'>
 					<tr>
+						<td>
+							<?php print __('Filter', 'flowview');?>
+						</td>
+						<td>
+							<select name='query' id='query'>
+								<option value='-1'><?php print __('Select a Filter', 'flowview');?></option>
+								<?php
+								$queries = db_fetch_assoc('SELECT id, name
+									FROM plugin_flowview_queries
+									ORDER BY name');
+
+								if (cacti_sizeof($queries)) {
+									foreach($queries as $q) {
+										print "<option value='" . $q['id'] . "'" . (get_request_var('query') == $q['id'] ? ' selected':'') . ">" . html_escape($q['name']) . "</option>";
+									}
+								}
+								?>
+							</select>
+						</td>
 						<td>
 							<?php print __('Exclude', 'flowview');?>
 						</td>
@@ -115,6 +141,82 @@ function flowview_display_report() {
 						<td class='nowrap'>
 							<input type='checkbox' name='domains' id='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
 							<label for='domains'><?php print __('Domains Only', 'flowview');?></label>
+						</td>
+						<td>
+							<span>
+								<input type='button' id='go' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Apply Filter', 'flowview');?>'>
+								<input type='button' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filter', 'flowview');?>'>
+								<input type='button' id='edit' value='<?php print __esc('Edit', 'flowview');?>' title='<?php print __esc('Edit Current Filter', 'flowview');?>'>
+							</span>
+						</td>
+					</tr>
+				</table>
+				<table class='filterTable'>
+					<tr>
+						<td>
+							<?php print __('Timespan', 'flowview');?>
+						</td>
+						<td>
+							<select id='predefined_timespan' onChange='applyTimespan()'>
+								<?php
+								if (isset_request_var('custom') && get_request_var('custom') == true) {
+									$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
+									set_request_var('predefined_timespan', GT_CUSTOM);
+									$start_val = 0;
+									$end_val = sizeof($graph_timespans);
+								} else {
+									if (isset($graph_timespans[GT_CUSTOM])) {
+										asort($graph_timespans);
+										array_shift($graph_timespans);
+									}
+									$start_val = 1;
+									$end_val = sizeof($graph_timespans)+1;
+								}
+
+								if (cacti_sizeof($graph_timespans)) {
+									for ($value=$start_val; $value < $end_val; $value++) {
+										print "<option value='$value'"; if (get_request_var('predefined_timespan') == $value) { print ' selected'; } print '>' . title_trim($graph_timespans[$value], 40) . "</option>\n";
+									}
+								}
+								?>
+							</select>
+						</td>
+						<td>
+							<?php print __('From', 'flowview');?>
+						</td>
+						<td>
+							<input type='text' id='date1' size='15' value='<?php print get_request_var('date1');?>'>
+						</td>
+						<td>
+							<i title='<?php print __esc('Start Date Selector', 'flowview');?>' class='calendar fa fa-calendar-alt' id='startDate'></i>
+						</td>
+						<td>
+							<?php print __('To', 'flowview');?>
+						</td>
+						<td>
+							<input type='text' id='date2' size='15' value='<?php print get_request_var('date2');?>'>
+						</td>
+						<td>
+							<i title='<?php print __esc('End Date Selector', 'flowview');?>' class='calendar fa fa-calendar-alt' id='endDate'></i>
+						</td>
+						<td>
+							<i title='<?php print __esc('Shift Time Backward', 'flowview');?>' onclick='timeshiftFilterLeft()' class='shiftArrow fa fa-backward'></i>
+						</td>
+						<td>
+							<select id='predefined_timeshift' title='<?php print __esc('Define Shifting Interval', 'flowview');?>'>
+								<?php
+								$start_val = 1;
+								$end_val = sizeof($graph_timeshifts) + 1;
+								if (cacti_sizeof($graph_timeshifts)) {
+									for ($shift_value=$start_val; $shift_value < $end_val; $shift_value++) {
+										print "<option value='$shift_value'"; if (get_request_var('predefined_timeshift') == $shift_value) { print ' selected'; } print '>' . title_trim($graph_timeshifts[$shift_value], 40) . '</option>';
+									}
+								}
+								?>
+							</select>
+						</td>
+						<td>
+							<i title='<?php print __esc('Shift Time Forward', 'flowview');?>' onclick='timeshiftFilterRight()' class='shiftArrow fa fa-forward'></i>
 						</td>
 					</tr>
 				</table>
@@ -138,9 +240,6 @@ function flowview_display_report() {
 						<td class='nowrap'>
 							<input type='checkbox' name='flows' id='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'');?>>
 							<label for='flows'><?php print __('Flows Bar', 'flowview');?></label>
-						</td>
-						<td>
-							<input type='button' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
 						</td>
 					</tr>
 				</table>
@@ -167,17 +266,15 @@ function flowview_display_report() {
 	?>
 	<script type='text/javascript'>
 
-	height = $(window).height() - 200;
+	var height = $(window).height() - 200;
+	var date1Open = false;
+	var date2Open = false;
 
 	if (height < 300 || height > 400) {
 		height = 400;
 	}
 
 	$(function() {
-		swfobject.embedSWF('open-flash-chart.swf', 'chartbytes', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config['url_path'] . 'plugins/flowview/flowview.php?tab=tab_' . $sessionid . '&action=chartdata&exclude=' . get_request_var('exclude') . '&type=bytes&title=' . $rname);?>', 'id':'chartbytes'});
-		swfobject.embedSWF('open-flash-chart.swf', 'chartpackets', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config['url_path'] . 'plugins/flowview/flowview.php?tab=tab_' . $sessionid . '&action=chartdata&exclude=' . get_request_var('exclude') . '&type=packets&title=' . $rname);?>', 'id':'chartpackets'});
-		swfobject.embedSWF('open-flash-chart.swf', 'chartflows', '98%', height, '9.0.0', 'expressInstall.swf', {'data-file':'<?php print urlencode($config['url_path'] . 'plugins/flowview/flowview.php?tab=tab_' . $sessionid . '&action=chartdata&exclude=' . get_request_var('exclude') . '&type=flows&title=' . $rname);?>', 'id':'chartflows'});
-
 		$('#bytes').unbind('click').click(function() {
 			updateSession();
 
@@ -208,8 +305,8 @@ function flowview_display_report() {
 			}
 		});
 
-		$('#domains').unbind('click').click(function() {
-			loadPageNoHeader(urlPath+'plugins/flowview/flowview.php?action=view&tab=tab_'+$('#tab').val()+'&domains='+$('#domains').is(':checked')+'&header=false');
+		$('#domains, #query, #go, #exclude').unbind('change').change(function() {
+			applyFilter();
 		});
 
 		$('#table').unbind('click').click(function() {
@@ -223,11 +320,7 @@ function flowview_display_report() {
 		});
 
 		$('#clear').unbind('click').click(function() {
-			loadPageNoHeader('flowview.php?header=false&action=view&clear=true&tab=tab_'+$('#tab').val());
-		});
-
-		$('#exclude').unbind('click').change(function() {
-			loadPageNoHeader('flowview.php?header=false&action=view&exclude='+$('#exclude').val()+'&tab=tab_'+$('#tab').val());
+			clearFilter();
 		});
 
 		if ($('#table').is('checked')) {
@@ -250,16 +343,6 @@ function flowview_display_report() {
 
 		if ($('#flows').is(':checked')) {
 			$('#wrapperflows').show();
-		}
-
-		function updateSession() {
-			$.get('flowview.php' +
-				'?action=updatesess' +
-				'&domains=' + $('#domains').is(':checked') +
-				'&table='   + $('#table').is(':checked') +
-				'&bytes='   + $('#bytes').is(':checked') +
-				'&packets=' + $('#packets').is(':checked') +
-				'&flows='   + $('#flows').is(':checked'));
 		}
 
 		$.tablesorter.addParser({
@@ -301,59 +384,106 @@ function flowview_display_report() {
 			cssIconNone: 'fa-sort',
 			cssIcon: 'fa'
 		});
+
+		$('#startDate').click(function() {
+			if (date1Open) {
+				date1Open = false;
+				$('#date1').datetimepicker('hide');
+			} else {
+				date1Open = true;
+				$('#date1').datetimepicker('show');
+			}
+		});
+
+		$('#endDate').click(function() {
+			if (date2Open) {
+				date2Open = false;
+				$('#date2').datetimepicker('hide');
+			} else {
+				date2Open = true;
+				$('#date2').datetimepicker('show');
+			}
+		});
+
+		$('#date1').datetimepicker({
+			minuteGrid: 10,
+			stepMinute: 1,
+			showAnim: 'slideDown',
+			numberOfMonths: 1,
+			timeFormat: 'HH:mm',
+			dateFormat: 'yy-mm-dd',
+			showButtonPanel: false
+		});
+
+		$('#date2').datetimepicker({
+			minuteGrid: 10,
+			stepMinute: 1,
+			showAnim: 'slideDown',
+			numberOfMonths: 1,
+			timeFormat: 'HH:mm',
+			dateFormat: 'yy-mm-dd',
+			showButtonPanel: false
+		});
+
+		$('#fdialog').dialog({
+			autoOpen: false,
+			width: 400,
+			height: 120,
+			resizable: false,
+			modal: true
+		});
 	});
+
+	function updateSession() {
+		$.get(urlPath + 'plugins/flowview/flowview.php' +
+			'?action=updatesess' +
+			'&query='   + $('#query').val() +
+			'&domains=' + $('#domains').is(':checked') +
+			'&table='   + $('#table').is(':checked') +
+			'&bytes='   + $('#bytes').is(':checked') +
+			'&packets=' + $('#packets').is(':checked') +
+			'&flows='   + $('#flows').is(':checked'));
+	}
+
+	function applyTimespan() {
+		$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
+			'?action=gettimespan' +
+			'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
+			$('#date1').val(data['current_value_date1']);
+			$('#date2').val(data['current_value_date2']);
+		});
+	}
+
+	function applyFilter() {
+		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
+			'?action=view' +
+			'&domains='  + $('#domains').is(':checked') +
+			'&timespan=' + $('#predefined_timespan').val() +
+			'&date1='    + $('#date1').val() +
+			'&date2='    + $('#date2').val() +
+			'&query='    + $('#query').val() +
+			'&header=false');
+	}
+
+	function clearFilter() {
+		loadPageNoHeader('flowview.php?header=false&clear=true');
+	}
+
+	$('#date1, #date2').change(function() {
+		$('#predefined_timespan').val('0');
+		<?php if (get_selected_theme() != 'classic') {?>
+		$('#predefined_timespan').selectmenu('refresh');
+		<?php }?>
+	});
+
 	</script>
+
 	<?php
 
 	bottom_footer();
 }
 
 function get_port_name($port_num, $port_proto) {
-}
-
-function display_tabs() {
-	/* purge old flows if they exist */
-	purgeFlows();
-
-	/* draw the categories tabs on the top of the page */
-	$tab = get_nfilter_request_var('tab');
-	$sessionid = '';
-
-	if ($tab == '') {
-		if (isset($_SESSION['flowview_current_tab'])) {
-			$tab = $_SESSION['flowview_current_tab'];
-			$sessionid = str_replace('tab_', '', $tab);
-		} else {
-			$tab = 'filters';
-			$_SESSION['flowview_current_tab'] = 'filters';
-		}
-	} elseif (strpos(get_nfilter_request_var('tab'), 'tab_') !== false) {
-		$sessionid = str_replace('tab_', '', get_nfilter_request_var('tab'));
-	}
-
-	print "<div class='tabs' style='float:left;'><nav><ul>";
-	print "<li><a class='pic " . ($tab == 'filters' ? ' selected':'') . "' title='" . __esc('Flow Filters', 'flowview') . "' href='flowview.php?tab=filters'>" . __('Filters', 'flowview') . "</a></li>";
-
-	if (api_user_realm_auth('flowview_devices.php')) {
-		print "<li><a class='pic " . ($tab == 'listeners' ? ' selected':'') . "' title='" . __esc('Manage Listeners', 'flowview') . "' href='flowview_devices.php?tab=listeners'>" . __('Listeners', 'flowview') . "</a></li>";
-	}
-
-	if (api_user_realm_auth('flowview_schedules.php')) {
-		print "<li><a class='pic " . ($tab == 'sched' ? ' selected':'') . "' title='" . __esc('Manage Schedules', 'flowview') . "' href='flowview_schedules.php?tab=sched'>" . __('Schedules', 'flowview') . "</a></li>";
-	}
-
-	$tabs = db_fetch_assoc_prepared('SELECT id, title
-		FROM plugin_flowview_session_cache
-		WHERE user_id = ? AND sessionid = ?',
-		array($_SESSION['sess_user_id'], session_id()));
-
-	if (cacti_sizeof($tabs)) {
-		foreach($tabs as $tab) {
-			print "<li><a class='pic " . ($tab['id'] == $sessionid ? 'selected':'') . "' title='View Flow' href='flowview.php?action=view&tab=tab_" . $tab['id'] . "'>" . $tab['title'] . "</a><a class='pic' href='flowview.php?action=killsession&tab=tab_" . $tab['id'] . "' title='Remove Flow Cache'><span class='fa fa-times deviceDown'></span></a></li>";
-		}
-	}
-
-	print "</ul></nav></div>";
 }
 
 function plugin_flowview_run_schedule($id) {
@@ -434,200 +564,150 @@ function purgeFlows() {
  *  This function creates the NetFlow Report for the UI.  It presents this in a table
  *  format and returns as a test string to the calling function.
  */
-function createFilter(&$sessionid = '') {
+function createFilter() {
 	global $config;
 
-	$output = '';
-	$title  = '';
-
-	if (is_numeric($sessionid)) {
-		$data = db_fetch_row_prepared('SELECT data, params, title
-			FROM plugin_flowview_session_cache
-			WHERE id = ?
-			AND user_id = ?
-			AND sessionid = ?',
-			array($sessionid, $_SESSION['sess_user_id'], session_id()));
-
-		if (cacti_sizeof($data)) {
-			db_execute_prepared('UPDATE plugin_flowview_session_cache
-				SET last_updated=NOW()
-				WHERE id = ?',
-				array($sessionid));
-
-			$output = $data['data'];
-			$title  = $data['title'];
-
-			$params = json_decode($data['params'], true);
-			foreach($params AS $variable => $value) {
-				switch ($variable) {
-				case 'bytes':
-				case 'flows':
-				case 'packets':
-					break;
-				case 'exclude':
-					if (isset_request_var('exclude')) {
-						get_filter_request_var('exclude');
-						break;
-					} else {
-						set_request_var($variable, $value);
-						break;
-					}
-				default:
-					set_request_var($variable, $value);
-					break;
-				}
-			}
-		}
-	}
-
-	if ($output == '') {
-		/* initialize the return string */
-		$filter  = '';
-
-		/* get the flow report tool binary location */
-		$flowbin = read_config_option('path_flowtools');
-		if ($flowbin == '') {
-			$flowbin = '/usr/bin';
-		}
-		if (substr($flowbin, -1 , 1) == '/') {
-			$flowbin = substr($flowbin, 0, -1);
-		}
-
-		/* get working directory for temporary output */
-		$workdir = read_config_option('path_flowtools_workdir');
-		if ($workdir == '') {
-			$workdir = '/tmp';
-		}
-
-		if (substr($workdir, -1 , 1) == '/') {
-			$workdir = substr($workdir, 0, -1);
-		}
-
-		/* determine the location for the netflow reports */
-		$pathstructure = '';
-		if (get_request_var('device') != '') {
-			$pathstructure = db_fetch_cell_prepared('SELECT nesting
-				FROM plugin_flowview_devices
-				WHERE folder = ?',
-				array(get_request_var('device')));
-		}
-
-		if ($pathstructure == '') {
-			$pathstructure = 0;
-		}
-
-		/* construct the report command */
-		$time       = time();
-		$filterfile = "$workdir/FlowViewer_filter_" . time();
-
-		$start = strtotime(get_request_var('date1'));
-		$end   = strtotime(get_request_var('date2'));
-
-		$flow_cat_command     = "$flowbin/flow-cat -t \"" . date('m/d/Y H:i:s', $start) . '" -T "' . date('m/d/Y H:i:s', $end) . '" ';
-		$flow_cat_command    .= getfolderpath($pathstructure, get_request_var('device'), $start, $end);
-		$flownfilter_command  = "$flowbin/flow-nfilter -f $filterfile -FFlowViewer_filter";
-
-		$flowstat             = $flowbin . '/flow-stat';
-		$flowstat_command     = '';
-		$flow_command         = "$flow_cat_command | $flownfilter_command";
-
-		if (get_request_var('statistics') != 0) {
-			if (get_request_var('statistics') == 99) {
-				$flowstat_command = "$flowbin/flow-stat -S" . get_request_var('sortfield');
-			} else {
-				$flowstat_command = "$flowbin/flow-stat -f" . get_request_var('statistics') . " -S" . (get_request_var('sortfield')-1);
-			}
-			$flow_command .= " | $flowstat_command";
-		}
-
-		if (get_request_var('printed') != 0) {
-			$flow_command .= " | $flowbin/flow-print -f" . get_request_var('printed');
-		}
-
-		/* Check to see if the flowtools binaries exists */
-		if (!is_file("$flowbin/flow-cat")) {
-			return "Can not find the '<strong>flow-cat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
-		}
-
-		if (!is_file("$flowbin/flow-nfilter")) {
-			return "Can not find the '<strong>flow-nfilter</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
-		}
-
-		if (!is_file("$flowbin/flow-stat")) {
-			return "Can not find the '<strong>flow-stat</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
-		}
-
-		if (!is_file("$flowbin/flow-print")) {
-			return "Can not find the '<strong>flow-print</strong>' binary at '<strong>$flowbin</strong>', please check your <a href='" . htmlspecialchars($config['url_path'] . "settings.php?tab=path") . "'>Flowtools Path Setting</a>!";
-		}
-
-		// Create Filters
-		$filter .= flowview_create_ip_filter(get_request_var('sourceip'), 'source');
-		$filter .= flowview_create_if_filter(get_request_var('sourceinterface'), 'source');
-		$filter .= flowview_create_port_filter(get_request_var('sourceport'), 'source');
-		$filter .= flowview_create_as_filter(get_request_var('sourceas'), 'source');
-		$filter .= flowview_create_ip_filter(get_request_var('destip'), 'dest');
-		$filter .= flowview_create_if_filter(get_request_var('destinterface'), 'dest');
-		$filter .= flowview_create_port_filter(get_request_var('destport'), 'dest');
-		$filter .= flowview_create_as_filter(get_request_var('dest_as'), 'dest');
-		$filter .= flowview_create_protocol_filter(get_request_var('protocols'));
-		$filter .= flowview_create_tcp_flag_filter(get_request_var('tcpflags'));
-		$filter .= flowview_create_tos_field_filter(get_request_var('tosfields'));
-		$filter .= flowview_create_time_filter(get_request_var('date1'), get_request_var('date2'));
-		$filter .= flowview_create_flowview_filter();
-
-		/* Write filters to file */
-		$f = @fopen($filterfile, 'w');
-		if (!$f) {
-			clearstatcache();
-			if (!is_dir($workdir)) {
-				return "<strong>Flow Tools Work directory ($workdir) does not exist!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
-			}
-
-			return "<strong>Flow Tools Work directory ($workdir) is not writable!, please check your <a href='" . $config['url_path'] . "settings.php?tab=path'>Settings</a></strong>";
-		}
-
-		@fputs($f, $filter);
-		@fclose($f);
-
-		/* let's calculate the title and then session id */
-		if ($title == '') {
-			if (isset_request_var('query') && get_filter_request_var('query') > 0) {
-				$title = db_fetch_cell('SELECT name FROM plugin_flowview_queries WHERE id=' . get_request_var('query'));
-			} else {
-				$title = __('New Flow', 'flowview');
-			}
-		}
-
-		/* Run the command */
-		$output = shell_exec($flow_command);
-
-		if ($sessionid == -1) {
-			$save['id']           = 0;
-			$save['user_id']      = $_SESSION['sess_user_id'];
-			$save['sessionid']    = session_id();
-			$save['command']      = $flow_command;
-			$save['params']       = get_json_params();
-			$save['filter']       = file_get_contents($filterfile);
-			$save['title']        = find_good_title($title);
-			$save['data']         = $output;
-			$save['last_updated'] = date('Y-m-d H:i:s');
-
-			$sessionid = sql_save($save, 'plugin_flowview_session_cache', 'id', true);
-
-			set_request_var('tab', 'tab_' . $sessionid);
-		}
-
-		unlink($filterfile);
-	}
+	$output    = '';
+	$title     = '';
+	$sql_where = '';
+	$histogram = false;
+	$time      = time();
+	$start     = strtotime(get_request_var('date1'));
+	$end       = strtotime(get_request_var('date2'));
 
 	if (get_request_var('statistics') != 0) {
-		$output = parsestatoutput($output, $title, $sessionid);
-	} elseif (get_request_var('printed') != 0) {
-		$output = parseprintoutput(get_request_var('printed'), $output, $title, $sessionid);
+		$histogram = true;
 	}
 
-	return $output;
+	/* source ip filter */
+	if (get_request_var('sourceip') != '') {
+		$sql_where = get_ip_filter($sql_where, get_request_var('sourceip'), 'src_addr');
+	}
+
+	/* source interface filter */
+	if (get_request_var('sourceinterface') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('sourceinterface'), 'src_if');
+	}
+
+	/* source port filter */
+	if (get_request_var('sourceport') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('sourceport'), 'src_port');
+	}
+
+	/* source as filter */
+	if (get_request_var('sourceas') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('sourceas'), 'src_as');
+	}
+
+	/* destination ip filter */
+	if (get_request_var('destip') != '') {
+		$sql_where = get_ip_filter($sql_where, get_request_var('destip'), 'dest_sddr');
+	}
+
+	/* destination interface filter */
+	if (get_request_var('destinterface') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('destinterface'), 'dest_if');
+	}
+
+	/* destination port filter */
+	if (get_request_var('destport') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dest_port');
+	}
+
+	/* destination as filter */
+	if (get_request_var('destas') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('destas'), 'dest_as');
+	}
+
+	/* protocols filter */
+	if (get_request_var('protocols') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('protocols'), 'protocol');
+	}
+
+	/* tcp flags filter */
+	if (get_request_var('tcpflags') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('tcpflags'), 'flags');
+	}
+
+	/* tos filter */
+	if (get_request_var('tosfields') != '') {
+		$sql_where = get_numeric_filter($sql_where, get_request_var('tosfields'), 'tos');
+	}
+
+	/* date time range */
+	$sql_where = get_date_filter($sql_where, get_request_var('date1'), get_request_var('date2'), get_request_var('includeif'));
+
+	/* let's calculate the title and then session id */
+	if ($title == '') {
+		if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+			$title = db_fetch_cell('SELECT name FROM plugin_flowview_queries WHERE id=' . get_request_var('query'));
+		} else {
+			$title = __('New Flow', 'flowview');
+		}
+	}
+
+	/* Run the query */
+	return run_flow_query($sql_where, $start, $end);
+}
+
+function get_numeric_filter($sql_where, $value, $column) {
+	$values = array();
+	$parts  = explode(',', $value);
+	foreach($parts as $part) {
+		$part = trim($part);
+
+		if (is_numeric($part)) {
+			$values[] = $part;
+		}
+	}
+
+	return ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
+}
+
+function get_ip_filter($sql_where, $value, $column) {
+	$values = array();
+	$parts  = explode(',', $value);
+
+	foreach($parts as $part) {
+		$part = trim($part);
+
+		if (strpos('/', $part) !== false) {
+		} else {
+		}
+	}
+
+	return ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
+}
+
+function get_date_filter($sql_where, $date1, $date2, $range_type) {
+	switch($range_type) {
+		case 1: // Any part in specified time span
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') .
+				'(`start_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '") OR
+				(`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
+			break;
+		case 2: // End Time in Specified Time Span
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
+			break;
+		case 3: // Start Time in Specified Time Span
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(`start_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
+			break;
+		case 4: // Entirety in Specitifed Time Span
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') .
+				'(`start_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '") AND
+				(`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
+			break;
+		default:
+			cacti_log('ERROR: get_date_filter range type not recognized', false, 'FLOWVIEW');
+			break;
+	}
+
+	return $sql_where;
+}
+
+function run_flow_query($sql_query, $start, $end) {
+	cacti_log($sql_query);
+	return false;
 }
 
 function get_json_params() {
@@ -2427,6 +2507,7 @@ function create_raw_partition($table) {
 function import_flows() {
 	$flow_directory = read_config_option('path_flows_dir');
 	$listeners      = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
+	$last_date      = time();
 
 	if (file_exists($flow_directory)) {
 		foreach($listeners as $l) {
@@ -2449,6 +2530,9 @@ function import_flows() {
 				}
 			}
 		}
+
+		set_config_option('flowview_legacy_import_completed', 'true');
+		set_config_option('flowview_last', $last_date);
 	} else {
 		print 'Flow directory does not exist.' . PHP_EOL;
 	}
@@ -2596,5 +2680,30 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 			db_execute($sql_prefix . implode(', ', $sql));
 		}
 	}
+}
+
+function get_tables_range($begin, $end = null) {
+	$tables    = array();
+	$partition = read_config_option('flowview_partition');
+
+	if ($end == null) {
+		$end = time();
+	}
+
+	$current = $begin;
+
+	while ($current < $end) {
+		if ($partition == 0) {
+			$suffix = date('Y', $current) . substr('000' . date('z', $current), -3);
+			$current += 86400;
+		} else {
+			$suffix = date('Y', $current) . substr('000' . date('z', $current), -3) . date('H', $current);
+			$current += 3600;
+		}
+
+		$tables[]  = 'plugin_flowview_raw_' . $suffix;
+	}
+
+	return $tables;
 }
 

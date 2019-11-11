@@ -23,7 +23,6 @@
 */
 
 $stat_report_array = array(
-	0  => __('Select a Statistic Report', 'flowview'),
 	99 => __('Summary', 'flowview'),
 	5  => __('UDP/TCP Destination Port', 'flowview'),
 	6  => __('UDP/TCP Source Port', 'flowview'),
@@ -54,10 +53,10 @@ $print_report_array = array(
 );
 
 $flow_select_array = array(
-	  1 => __('Any Part in Specified Time Span', 'flowview'),
-	  2 => __('End Time in Specified Time Span', 'flowview'),
-	  3 => __('Start Time in Specified Time Span', 'flowview'),
-	  4 => __('Entirely in Specified Time Span', 'flowview')
+	  1 => __('Any Part in Range', 'flowview'),
+	  2 => __('End Time in Range', 'flowview'),
+	  3 => __('Start Time in Range', 'flowview'),
+	  4 => __('Entirely in Range', 'flowview')
 );
 
 $ip_protocols_array = array(
@@ -125,255 +124,119 @@ $ip_protocols_array = array(
 	98 => __('ENCAP', 'flowview'),
 );
 
-$resolve_addresses_array = array (
-	'Y' => __('Yes', 'flowview'),
-	'N' => __('No', 'flowview')
-);
-
-$devices_arr = db_fetch_assoc('SELECT folder, name FROM plugin_flowview_devices ORDER BY name');
-$devices = array();
-if (!empty($devices_arr)) {
-	$ddevice = $devices_arr[0]['folder'];
-	foreach ($devices_arr as $d) {
-		$devices[$d['folder']] = $d['name'];
-	}
-} else {
-	$ddevice = 0;
-}
-
-$query_newname_field = array(
-	'friendly_name' => '',
-	'name' => 'queryname',
-	'method' => 'textbox',
-	'max_length' => 255,
-	'default' => '',
-	'description' => '',
-	'value' => (isset_request_var('queryname') ? get_nfilter_request_var('queryname') : '')
-);
-
-$query_name_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_sql',
-	'default' => 0,
-	'description' => '',
-	'value' => (isset_request_var('query') ? get_filter_request_var('query') : 0),
-	'none_value' => __('None', 'flowview'),
-	'on_change' => 'applyFilter()',
-	'sql' => 'SELECT id, name FROM plugin_flowview_queries ORDER BY name'
-);
-
-$device_name_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_array',
-	'default' => 0,
-	'description' => '',
-	'value' => (isset_request_var('device') ? get_nfilter_request_var('device') : $ddevice),
-	'none_value' => __('None', 'flowview'),
-	'array' => $devices
-);
-
-$cutoff_lines_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_array',
-	'default' => 20,
-	'description' => '',
-	'value' => (isset_request_var('cutofflines') ? get_nfilter_request_var('cutofflines') : 0),
-	'array' => array(
-		'999999' => __('All', 'flowview'),
-		'5'   => __('Top %d', 5, 'flowview'),
-		'10'  => __('Top %d', 10, 'flowview'),
-		'20'  => __('Top %d', 20, 'flowview'),
-		'30'  => __('Top %d', 30, 'flowview'),
-		'40'  => __('Top %d', 40, 'flowview'),
-		'50'  => __('Top %d', 50, 'flowview'),
-		'100' => __('Top %d', 100, 'flowview'),
-		'200' => __('Top %d', 200, 'flowview')
-	)
-);
-
-$cutoff_octets_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_array',
-	'default' => 0,
-	'description' => '',
-	'value' => (isset_request_var('cutoffoctets') ? get_nfilter_request_var('cutoffoctets'):''),
-	'array' => array(
-		'0'         => __('No Limit', 'flowview'),
-		'1024'      => __('%s Bytes', '1K', 'flowview'),
-		'10240'     => __('%s Bytes', '10K', 'flowview'),
-		'20480'     => __('%s Bytes', '20K', 'flowview'),
-		'102400'    => __('%s Bytes', '100K', 'flowview'),
-		'512000'    => __('%s Bytes', '500K', 'flowview'),
-		'1024000'   => __('%s Bytes', '1M', 'flowview'),
-		'10240000'  => __('%s Bytes', '10M', 'flowview'),
-		'20480000'  => __('%s Bytes', '20M', 'flowview'),
-		'51200000'  => __('%s Bytes', '50M', 'flowview'),
-		'102400000' => __('%s Bytes', '100M', 'flowview'),
-		'204800000' => __('%s Bytes', '200M', 'flowview'),
-		'512000000' => __('%s Bytes', '500M', 'flowview'),
-		'1024000000'=> __('%s Bytes', '1G', 'flowview')
-	)
-);
-
-$ip_protocol_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_array',
-	'default' => 0,
-	'description' => '',
-	'value' => (isset_request_var('protocols') ? get_nfilter_request_var('protocols') : ''),
-	'array' => $ip_protocols_array
-);
-
-$stat_report_field = array(
-	'friendly_name' => '',
-	'name' => 'statistics',
-	'method' => 'drop_array',
-	'default' => 10,
-	'description' => '',
-	'value' => (isset_request_var('statistics') ? get_nfilter_request_var('statistics') : 10),
-	'array' => $stat_report_array
-);
-
-$flow_select_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_array',
-	'default' => 1,
-	'description' => '',
-	'value' => (isset_request_var('flow_select') ? get_nfilter_request_var('flow_select') : 1),
-	'array' => $flow_select_array
-);
-
-$print_report_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_array',
-	'default' => 0,
-	'description' => '',
-	'value' => (isset_request_var('printed') ? get_nfilter_request_var('printed') : 0),
-	'array' => $print_report_array
-);
-
-$resolve_addresses_field = array(
-	'friendly_name' => '',
-	'method' => 'drop_array',
-	'default' => 'Y',
-	'description' => '',
-	'value' => (isset_request_var('resolve') ? get_nfilter_request_var('resolve') : 'Y'),
-	'array' => $resolve_addresses_array
-);
-
 $stat_columns_array = array(
-	5  => array(1, 2, '-1', '-1', '0',
+	5  => array(
 		__('Port', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	6  => array(1, 2, '-1', '-1', '0',
+	6  => array(
 		__('Port', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	7  => array(1, 2, '-1', '-1', '0',
+	7  => array(
 		__('Port', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	8  => array(1, 2, 0, '-1', '-1',
+	8  => array(
 		__('Dest IP', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	9  => array(1, 2, 0, '-1', '-1',
+	9  => array(
 		__('Src IP', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	10 => array(1, 3, '0,1', '-1', '-1',
+	10 => array(
 		__('Src IP', 'flowview'),
 		__('Dest IP', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	11 => array(1, 2, 0, '-1', '-1',
+	11 => array(
 		__('Src/Dest IP', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	12 => array(1, 2, '-1', '0', '-1',
+	12 => array(
 		__('Protocol', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	17 => array(1, 2, '-1', '-1', '-1',
+	17 => array(
 		__('Input IF', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	18 => array(1, 2, '-1', '-1', '-1',
+	18 => array(
 		__('Output IF', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	19 => array(1, 2, '-1', '-1', '-1',
+	19 => array(
 		__('Src AS', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	20 => array(1, 2, '-1', '-1', '-1',
+	20 => array(
 		__('Dest AS', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	21 => array(1, 3, '-1', '-1', '-1',
+	21 => array(
 		__('Src AS', 'flowview'),
 		__('Dest AS', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	22 => array(1, 2, '-1', '-1', '-1',
+	22 => array(
 		__('TOS', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	23 => array(1, 3, '-1', '-1', '-1',
+	23 => array(
 		__('Input IF', 'flowview'),
 		__('Output IF', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	24 => array(1, 2, '0',   '-1', '-1',
+	24 => array(
 		__('Src Prefix', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	25 => array(1, 2, '0',   '-1', '-1',
+	25 => array(
 		__('Dest Prefix', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	26 => array(1, 3, '0,1', '-1', '-1',
+	26 => array(
 		__('Src Prefix', 'flowview'),
 		__('Dest Prefix', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
-	),
+	)
 );
 
 $print_columns_array = array(
@@ -606,5 +469,214 @@ $print_array = array(
 			)
 		)
 	)
+);
+
+$filter_edit = array(
+	'spacer0' => array(
+		'method' => 'spacer',
+		'collapsible' => true,
+		'friendly_name' => __('General Filters', 'flowview'),
+	),
+	'query' => array(
+		'friendly_name' => __('Filter', 'flowview'),
+		'description' => __('The Saved Filter to display.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:query|',
+		'default' => __('New Filter', 'flowview'),
+		'size' => 50,
+		'max_length' => 64
+	),
+	'device' => array(
+		'friendly_name' => __('Listener', 'flowview'),
+		'description' => __('The Listener to use for the Filter.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:device|',
+		'array' => $devices,
+		'default' => '0',
+		'none_value' => __('None', 'flowview'),
+	),
+	'predefined_timespan' => array(
+		'friendly_name' => __('Presets', 'flowview'),
+		'description' => __('If this Filter is based upon a pre-defined Timespan, select it here.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:timespan|',
+		'array' => $graph_timespans,
+		'default' => '0',
+	),
+	'spacer1' => array(
+		'method' => 'spacer',
+		'collapsible' => true,
+		'friendly_name' => __('Detailed Filter Criteria', 'flowview'),
+	),
+	'statistics' => array(
+		'friendly_name' => __('Report Type', 'flowview'),
+		'description' => __('The Report Type to use by default for this Filter when creating a Report.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:statistics|',
+		'array' => $stat_report_array,
+		'default' => '10',
+		'none_value' => __('None', 'flowview'),
+	),
+	'includeif' => array(
+		'friendly_name' => __('Range Rules', 'flowview'),
+		'description' => __('Constrain the Filter Data by these time filter rules.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:includeif|',
+		'default' => '1',
+		'array' => $flow_select_array
+	),
+	'resolve' => array(
+		'friendly_name' => __('Resolve IP\'s', 'flowview'),
+		'description' => __('Resolve IP Addresses to Domain Names.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:resolve|',
+		'default' => 'Y',
+		'array' => array(
+			'Y' => __('Yes', 'flowview'),
+			'N' => __('No', 'flowview')
+		)
+	),
+	'sortfield' => array(
+		'friendly_name' => __('Sort Field', 'flowview'),
+		'description' => __('The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports.', 'flowview'),
+		'value' => '|arg1:sortfield|',
+		'method' => 'drop_array',
+		'default' => '10',
+		'array' => array()
+	),
+	'cutofflines' => array(
+		'friendly_name' => __('Maximum Rows', 'flowview'),
+		'description' => __('The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:cutofflines|',
+		'default' => '20',
+		'array' => array(
+			'999999' => __('All', 'flowview'),
+			'5'   => __('Top %d', 5, 'flowview'),
+			'10'  => __('Top %d', 10, 'flowview'),
+			'20'  => __('Top %d', 20, 'flowview'),
+			'30'  => __('Top %d', 30, 'flowview'),
+			'40'  => __('Top %d', 40, 'flowview'),
+			'50'  => __('Top %d', 50, 'flowview'),
+			'100' => __('Top %d', 100, 'flowview'),
+			'200' => __('Top %d', 200, 'flowview')
+		)
+	),
+	'cutoffoctets' => array(
+		'friendly_name' => __('Minimum Bytes', 'flowview'),
+		'description' => __('The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:cutoffoctets|',
+		'default' => '0',
+		'array' => array(
+			'0'         => __('No Limit', 'flowview'),
+			'1024'      => __('%s Bytes', '1K', 'flowview'),
+			'10240'     => __('%s Bytes', '10K', 'flowview'),
+			'20480'     => __('%s Bytes', '20K', 'flowview'),
+			'102400'    => __('%s Bytes', '100K', 'flowview'),
+			'512000'    => __('%s Bytes', '500K', 'flowview'),
+			'1024000'   => __('%s Bytes', '1M', 'flowview'),
+			'10240000'  => __('%s Bytes', '10M', 'flowview'),
+			'20480000'  => __('%s Bytes', '20M', 'flowview'),
+			'51200000'  => __('%s Bytes', '50M', 'flowview'),
+			'102400000' => __('%s Bytes', '100M', 'flowview'),
+			'204800000' => __('%s Bytes', '200M', 'flowview'),
+			'512000000' => __('%s Bytes', '500M', 'flowview'),
+			'1024000000'=> __('%s Bytes', '1G', 'flowview')
+		)
+	),
+	'spacer2' => array(
+		'method' => 'spacer',
+		'collapsible' => true,
+		'friendly_name' => __('Protocol Filters', 'flowview'),
+	),
+	'protocols' => array(
+		'friendly_name' => __('Protocol', 'flowview'),
+		'description' => __('Select the Specific Protocol for the Filter.', 'flowview'),
+		'method' => 'drop_array',
+		'value' => '|arg1:protocols|',
+		'default' => '0',
+		'array' => $ip_protocols_array
+	),
+	'tcpflags' => array(
+		'friendly_name' => __('TCP Flags', 'flowview'),
+		'description' => __('The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:tcpflags|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'tosfields' => array(
+		'friendly_name' => __('TOS Fields', 'flowview'),
+		'description' => __('The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:tosfields|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'sourceip' => array(
+		'friendly_name' => __('Source IP', 'flowview'),
+		'description' => __('Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:sourceip|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'sourceport' => array(
+		'friendly_name' => __('Source Ports', 'flowview'),
+		'description' => __('Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:sourceport|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'sourceinterface' => array(
+		'friendly_name' => __('Source Interface', 'flowview'),
+		'description' => __('Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:sourceinterface|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'destas' => array(
+		'friendly_name' => __('Dest AS', 'flowview'),
+		'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS\'s', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:destas|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'destip' => array(
+		'friendly_name' => __('Dest IP', 'flowview'),
+		'description' => __('Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:destip|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'destport' => array(
+		'friendly_name' => __('Dest Ports', 'flowview'),
+		'description' => __('Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:destport|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'destinterface' => array(
+		'friendly_name' => __('Dest Interface', 'flowview'),
+		'description' => __('Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:destinterface|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'destas' => array(
+		'friendly_name' => __('Dest AS', 'flowview'),
+		'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS\'s', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:destas|',
+		'max_length' => '20',
+		'size' => '14'
+	),
 );
 

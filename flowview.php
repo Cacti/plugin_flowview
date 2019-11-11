@@ -59,8 +59,8 @@ case 'updatesess':
 case 'gettimespan':
 	flowview_gettimespan();
 	break;
-case 'view':
-	flowview_display_report();
+case 'edit':
+	flowview_display_form();
 	break;
 default:
 	general_header();
@@ -70,14 +70,15 @@ default:
 	} else {
 		load_session_for_page();
 	}
+cacti_log('sifh');
 
-	flowview_display_form();
+	flowview_display_report();
 
 	bottom_footer();
 }
 
 function load_session_for_filter() {
-	if (isset_request_var('query') && get_filter_request_var('query') > 0 && get_request_var('action') == 'loadquery') {
+	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
 		$q = db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
 			WHERE id = ?',
@@ -89,16 +90,18 @@ function load_session_for_filter() {
 					case 'name':
 						break;
 					case 'timespan':
-						set_request_var('predefined_timespan', $q['timespan']);
+						if (!isset_request_var('predefined_timespan')) {
+							set_request_var('predefined_timespan', $q['timespan']);
 
-						if ($q['timespan'] == 0) {
-							set_request_var('date1', strtoupper($q['startdate']));
-							set_request_var('date2', strtoupper($q['enddate']));
-						} else {
-							$span = array();
-							get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
-							set_request_var('date1', $span['current_value_date1']);
-							set_request_var('date2', $span['current_value_date2']);
+							if ($q['timespan'] == 0) {
+								set_request_var('date1', strtoupper($q['startdate']));
+								set_request_var('date2', strtoupper($q['enddate']));
+							} else {
+								$span = array();
+								get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
+								set_request_var('date1', $span['current_value_date1']);
+								set_request_var('date2', $span['current_value_date2']);
+							}
 						}
 
 						break;
@@ -269,26 +272,6 @@ function load_session_for_page() {
 		set_request_var('date1', $date1);
 		set_request_var('date2', $date2);
 	}
-}
-
-function flowview_gettimespan() {
-	global $config;
-
-	$timespan = get_filter_request_var('predefined_timespan');
-	$date1    = get_nfilter_request_var('date1');
-	$date2    = get_nfilter_request_var('date2');
-	$span     = array();
-
-	if ($timespan > 0) {
-		get_timespan($span, time(), $timespan, read_user_setting('first_weekdayid'));
-	} else {
-		$span['current_value_date1'] = $date1;
-		$span['current_value_date2'] = $date2;
-		$span['begin_now']           = strtotime($date1);
-		$span['end_now']             = strtotime($date2);
-	}
-
-	print json_encode($span);
 }
 
 function flowview_delete_filter() {
@@ -486,186 +469,258 @@ function flowview_display_form() {
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
-	display_tabs();
+	$devices_arr = db_fetch_assoc('SELECT folder, name FROM plugin_flowview_devices ORDER BY name');
+	$devices = array();
+	if (!empty($devices_arr)) {
+		$ddevice = $devices_arr[0]['folder'];
+		foreach ($devices_arr as $d) {
+			$devices[$d['folder']] = $d['name'];
+		}
+	} else {
+		$ddevice = 0;
+	}
+
+	$filter = array(
+		'spacer0' => array(
+			'method' => 'spacer',
+			'collapsible' => true,
+			'friendly_name' => __('General Filters', 'flowview'),
+		),
+		'query' => array(
+			'friendly_name' => __('Filter', 'flowview'),
+			'description' => __('The Saved Filter to display.', 'flowview'),
+			'method' => 'drop_sql',
+			'value' => (isset_request_var('query') ? get_filter_request_var('query') : 0),
+			'sql' => 'SELECT id, name FROM plugin_flowview_queries ORDER BY name',
+			'default' => 0,
+			'none_value' => __('None', 'flowview'),
+		),
+		'device' => array(
+			'friendly_name' => __('Listener', 'flowview'),
+			'description' => __('The Listener to use for the Filter.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => (isset_request_var('device') ? get_nfilter_request_var('device') : $ddevice),
+			'array' => $devices,
+			'default' => '0',
+			'none_value' => __('None', 'flowview'),
+		),
+		'predefined_timespan' => array(
+			'friendly_name' => __('Presets', 'flowview'),
+			'description' => __('If this Filter is based upon a pre-defined Timespan, select it here.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => get_request_var('predefined_timespan'),
+			'array' => $graph_timespans,
+			'default' => '0',
+		),
+		'date1' => array(
+			'friendly_name' => __('Start Date', 'flowview'),
+			'description' => __('The Date and Time to Start the Filter on.', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('date1'),
+			'max_length' => '10',
+			'size' => '14'
+		),
+		'date2' => array(
+			'friendly_name' => __('End Date', 'flowview'),
+			'description' => __('The Date and Time to End the Filter on.', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('date2'),
+			'max_length' => '10',
+			'size' => '14'
+		),
+		'spacer1' => array(
+			'method' => 'spacer',
+			'collapsible' => true,
+			'friendly_name' => __('Detailed Filter Criteria', 'flowview'),
+		),
+		'statistics' => array(
+			'friendly_name' => __('Filter Type', 'flowview'),
+			'description' => __('The Filter Type to display by default for this Filter.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => isset_request_var('statistics'),
+			'array' => $stat_report_array,
+			'default' => '10',
+			'none_value' => __('None', 'flowview'),
+		),
+		'includeif' => array(
+			'friendly_name' => __('Range Rules', 'flowview'),
+			'description' => __('Constrain the Filter Data by these time filter rules.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => get_request_var('includeif'),
+			'default' => '1',
+			'array' => $flow_select_array
+		),
+		'resolve' => array(
+			'friendly_name' => __('Resolve IP\'s', 'flowview'),
+			'description' => __('Resolve IP Addresses to Domain Names.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => get_request_var('resolve'),
+			'default' => 'Y',
+			'array' => array(
+				'Y' => __('Yes', 'flowview'),
+				'N' => __('No', 'flowview')
+			)
+		),
+		'sortfield' => array(
+			'friendly_name' => __('Sort Field', 'flowview'),
+			'description' => __('The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports.', 'flowview'),
+			'value' => get_request_var('sortfield'),
+			'method' => 'drop_array',
+			'default' => '0',
+			'array' => array()
+		),
+		'cutofflines' => array(
+			'friendly_name' => __('Maximum Rows', 'flowview'),
+			'description' => __('The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => get_request_var('cutofflines'),
+			'default' => '20',
+			'array' => array(
+				'999999' => __('All', 'flowview'),
+				'5'   => __('Top %d', 5, 'flowview'),
+				'10'  => __('Top %d', 10, 'flowview'),
+				'20'  => __('Top %d', 20, 'flowview'),
+				'30'  => __('Top %d', 30, 'flowview'),
+				'40'  => __('Top %d', 40, 'flowview'),
+				'50'  => __('Top %d', 50, 'flowview'),
+				'100' => __('Top %d', 100, 'flowview'),
+				'200' => __('Top %d', 200, 'flowview')
+			)
+		),
+		'cutoffoctets' => array(
+			'friendly_name' => __('Minimum Bytes', 'flowview'),
+			'description' => __('The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => get_request_var('cutoffoctets'),
+			'default' => '0',
+			'array' => array(
+				'0'         => __('No Limit', 'flowview'),
+				'1024'      => __('%s Bytes', '1K', 'flowview'),
+				'10240'     => __('%s Bytes', '10K', 'flowview'),
+				'20480'     => __('%s Bytes', '20K', 'flowview'),
+				'102400'    => __('%s Bytes', '100K', 'flowview'),
+				'512000'    => __('%s Bytes', '500K', 'flowview'),
+				'1024000'   => __('%s Bytes', '1M', 'flowview'),
+				'10240000'  => __('%s Bytes', '10M', 'flowview'),
+				'20480000'  => __('%s Bytes', '20M', 'flowview'),
+				'51200000'  => __('%s Bytes', '50M', 'flowview'),
+				'102400000' => __('%s Bytes', '100M', 'flowview'),
+				'204800000' => __('%s Bytes', '200M', 'flowview'),
+				'512000000' => __('%s Bytes', '500M', 'flowview'),
+				'1024000000'=> __('%s Bytes', '1G', 'flowview')
+			)
+		),
+		'spacer2' => array(
+			'method' => 'spacer',
+			'collapsible' => true,
+			'friendly_name' => __('Protocol Filters', 'flowview'),
+		),
+		'protocols' => array(
+			'friendly_name' => __('Protocol', 'flowview'),
+			'description' => __('Select the Specific Protocol for the Filter.', 'flowview'),
+			'method' => 'drop_array',
+			'value' => get_request_var('protocols'),
+			'default' => '0',
+			'array' => $ip_protocols_array
+		),
+		'tcpflags' => array(
+			'friendly_name' => __('TCP Flags', 'flowview'),
+			'description' => __('The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('tcpflags'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'tosfields' => array(
+			'friendly_name' => __('TOS Fields', 'flowview'),
+			'description' => __('The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('tosfields'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'sourceip' => array(
+			'friendly_name' => __('Source IP', 'flowview'),
+			'description' => __('Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format.', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('sourceip'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'sourceport' => array(
+			'friendly_name' => __('Source Ports', 'flowview'),
+			'description' => __('Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports.', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('sourceport'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'sourceinterface' => array(
+			'friendly_name' => __('Source Interface', 'flowview'),
+			'description' => __('Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('sourceinterface'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'destas' => array(
+			'friendly_name' => __('Dest AS', 'flowview'),
+			'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS\'s', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('destas'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'destip' => array(
+			'friendly_name' => __('Dest IP', 'flowview'),
+			'description' => __('Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format.', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('destip'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'destport' => array(
+			'friendly_name' => __('Dest Ports', 'flowview'),
+			'description' => __('Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports.', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('destport'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'destinterface' => array(
+			'friendly_name' => __('Dest Interface', 'flowview'),
+			'description' => __('Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces.', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('destinterface'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+		'destas' => array(
+			'friendly_name' => __('Dest AS', 'flowview'),
+			'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS\'s', 'flowview'),
+			'method' => 'textbox',
+			'value' => get_request_var('destas'),
+			'max_length' => '20',
+			'size' => '14'
+		),
+	);
+
+	html_start_box('Filters', '100%', true, '3', 'center', '');
 
 	form_start('flowview.php', 'chk');
 
-	html_start_box(__('Flow Filter Constraints', 'flowview') . '  <span id="text"></span>', '100%', '', '3', 'center', '');
+	draw_edit_form(
+		array(
+			'config' => array('no_form_tag' => true),
+			'fields' => $filter
+        )
+	);
+
+	form_end();
 
 	?>
-	<tr class='even center'>
-		<td style='text-align:center'>
-			<table class='filterTable' width='100%'>
-				<tr>
-					<td>
-						<?php print __('Filter', 'flowview');?>
-					</td>
-					<td>
-						<?php draw_edit_control('query', $query_name_field);?>
-					</td>
-					<td>
-						<?php print __('Listener', 'flowview');?>
-					</td>
-					<td>
-						<?php draw_edit_control('device', $device_name_field);?>
-					</td>
-				</tr>
-				<tr>
-					<td>
-                        <?php print __('Presets', 'flowview');?>
-					</td>
-					<td>
-						<select id='predefined_timespan' name='predefined_timespan' onChange='applyTimespan()'>
-							<?php
-							$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
-							$start_val = 0;
-							$end_val = sizeof($graph_timespans);
-
-							if (cacti_sizeof($graph_timespans)) {
-								for ($value=$start_val; $value < $end_val; $value++) {
-									print "<option value='$value'"; if (get_request_var('predefined_timespan') == $value) { print ' selected'; } print '>' . title_trim($graph_timespans[$value], 40) . "</option>\n";
-								}
-							}
-							?>
-						</select>
-					</td>
-
-					<td>
-						<?php print __('Start Date', 'flowview');?>
-					</td>
-					<td class='nowrap'>
-						<input type='text' size='15' id='date1' name='date1' value='<?php print get_request_var('date1'); ?>'>
-						<i id='startDate' class='calendar fa fa-calendar' title='<?php print __esc('Start Date Selector', 'flowview');?>'></i>
-					</td>
-					<td>
-						<?php print __('End Date', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='15' id='date2' name='date2' value='<?php print get_request_var('date2');?>'>
-						<i id='endDate' class='calendar fa fa-calendar' title='<?php print __esc('End Date Selector', 'flowview');?>'></i>
-					</td>
-				</tr>
-				<tr>
-					<td colspan='9'><hr size='2'></td>
-				</tr>
-				<tr>
-					<td>
-						<?php print __('Protocols', 'flowview');?>
-					</td>
-					<td>
-						<?php draw_edit_control('protocols', $ip_protocol_field);?>
-					</td>
-					<td>
-						<?php print __('TCP Flags', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='10' name='tcpflags' value='<?php print html_escape_request_var('tcpflags');?>'>
-					</td>
-					<td>
-						<?php print __('TOS Fields', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='10' name='tosfields' value='<?php print html_escape_request_var('tosfields');?>'>
-					</td>
-					<td colspan=2>
-						<?php print __('(e.g., -0x0b/0x0F)', 'flowview');?>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<?php print __('Source IP', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='19' name='sourceip' value='<?php print html_escape_request_var('sourceip');?>'>
-					</td>
-					<td>
-						<?php print __('Source Port(s)', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='20' name='sourceport' value='<?php print html_escape_request_var('sourceport');?>'>
-					</td>
-					<td>
-						<?php print __('Source Interface', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='2' name='sourceinterface' value='<?php print html_escape_request_var('sourceinterface');?>'>
-					</td>
-					<td>
-						<?php print __('Source AS', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='6' name='sourceas' value='<?php print html_escape_request_var('sourceas');?>'>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<?php print __('Dest IP', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='19' name='destip' value='<?php print html_escape_request_var('destip'); ?>'></td>
-					<td>
-						<?php print __('Dest Port(s)', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='20' name='destport' value='<?php print html_escape_request_var('destport'); ?>'>
-					</td>
-					<td>
-						<?php print __('Dest Interface', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='2' name='destinterface' value='<?php print html_escape_request_var('destinterface'); ?>'>
-					</td>
-					<td>
-						<?php print __('Dest AS', 'flowview');?>
-					</td>
-					<td>
-						<input type='text' size='6' name='destas' value='<?php print html_escape_request_var('destas'); ?>'>
-						<input type='hidden' name='header' value='false'>
-					</td>
-				</tr>
-				<tr>
-					<td colspan='9'>
-						<hr size='2'>
-						<center><strong><?php print __('Note:', 'flowview');?></strong> <?php print __('Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)', 'flowview');?></center>
-						<center><strong><?php print __('Note:', 'flowview');?></strong> <?php print __('Printed Reports presently can run very long as they are currently inserting all data into in range into MySQL/MariaDB cache tables.', 'flowview');?></center>
-						<hr size='2'>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<?php html_end_box(false);?>
-
-	<?php html_start_box(__('Report Parameters', 'flowview'), '100%', '', '3', 'center', '');?>
-	<tr class='even'>
+	</tr><tr>
 		<td>
-			<table class='filterTable'>
-				<tr id='rsettings'>
-					<td><?php print __('Statistics:', 'flowview');?></td>
-					<td><?php draw_edit_control('statistics', $stat_report_field);?></td>
-					<td><?php print __('Printed:', 'flowview');?></td>
-					<td><?php draw_edit_control('printed', $print_report_field);?></td>
-					<td><?php print __('Include if:', 'flowview');?></td>
-					<td><?php draw_edit_control('includeif', $flow_select_field);?></td>
-					<td><?php print __('Resolve Addresses:', 'flowview');?></td>
-					<td><?php draw_edit_control('resolve', $resolve_addresses_field);?></td>
-				</tr>
-				<tr id='rlimits'>
-					<td class='sortfield'><?php print __('Sort Field:', 'flowview');?></td>
-					<td class='sortfield'><select id='sortfield' name='sortfield'></select></td>
-					<td><?php print __('Max Flows:', 'flowview');?></td>
-					<td><?php draw_edit_control('cutofflines', $cutoff_lines_field);?></td>
-					<td><?php print __('Minimum Bytes:', 'flowview');?></td>
-					<td><?php draw_edit_control('cutoffoctets', $cutoff_octets_field);?></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan='9'><hr size='2'></td>
-	</tr>
-	<tr>
-		<td colspan='9'>
 			<input type='hidden' id='action' name='action' value='view'>
 			<input type='hidden' id='new_query' name='new_query' value=''>
 			<input type='hidden' id='changed' name='changed' value='0'>
@@ -678,7 +733,19 @@ function flowview_display_form() {
 			</center>
 		</td>
 	</tr>
-	<tr style='display:none;'>
+	<?php
+
+	html_end_box();
+
+	html_start_box(__('Filter Data', 'flowview'), '100%', true, '3', 'center', '');
+	html_end_box();
+
+	$note1 = __('Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)', 'flowview');
+
+	$note2 = __('Printed Reports presently can run very long as they are currently inserting all data into in range into MySQL/MariaDB cache tables.', 'flowview');
+
+	?>
+	<div style='display:none;'>
 		<td>
 			<div id='fdialog' style='text-align:center;display:none;padding:2px;'>
 				<table>
@@ -695,21 +762,14 @@ function flowview_display_form() {
 				</table>
 			</div>
 		</td>
-	</tr>
-	<?php
-
-	html_end_box();
-
-	form_end();
-
-	?>
+	</div>
 	<script type='text/javascript'>
 
 	var date1Open = false;
 	var date2Open = false;
 
 	function applyTimespan() {
-		$.getJSON('flowview.php?action=gettimespan&timespan='+$('#predefined_timespan').val(), function(data) {
+		$.getJSON('flowview.php?action=gettimespan&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
 			$('#date1').val(data['current_value_date1']);
 			$('#date2').val(data['current_value_date2']);
 		});

@@ -32,7 +32,7 @@ function plugin_flowview_install() {
 	api_plugin_register_hook('flowview', 'page_head',             'flowview_page_head',            'setup.php');
 
 	api_plugin_register_realm('flowview', 'flowview.php', __('Plugin -> Flow Viewer', 'flowview'), 1);
-	api_plugin_register_realm('flowview', 'flowview_devices.php,flowview_schedules.php', __('Plugin -> Flow Admin', 'flowview'), 1);
+	api_plugin_register_realm('flowview', 'flowview_devices.php,flowview_schedules.php,flowview_filters.php', __('Plugin -> Flow Admin', 'flowview'), 1);
 
 	flowview_setup_table();
 }
@@ -84,6 +84,11 @@ function plugin_flowview_check_upgrade() {
 			db_execute('ALTER TABLE plugin_flowview_devices ENGINE=InnoDB');
 		}
 
+		db_execute("UPDATE plugin_realms
+			SET file='flowview_devices.php,flowview_schedules.php,flowview_filters.php'
+			WHERE plugin='flowview'
+			AND file LIKE '%devices%'");
+
 		db_execute("UPDATE plugin_config
 			SET version='$current'
 			WHERE directory='flowview'");
@@ -106,10 +111,23 @@ function plugin_flowview_version() {
 }
 
 function flowview_config_arrays() {
-	global $menu, $messages;
+	global $menu, $menu_glyphs, $messages;
 
 	$messages['flow_deleted'] = array('message' => __('The Filter has been Deleted', 'flowview'), 'type' => 'info');
 	$messages['flow_updated'] = array('message' => __('The Filter has been Updated', 'flowview'), 'type' => 'info');
+
+	$menu2 = array ();
+	foreach ($menu as $temp => $temp2 ) {
+		$menu2[$temp] = $temp2;
+		if ($temp == __('Import/Export')) {
+			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_filters.php'] = __('Filters', 'flowview');
+			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_devices.php'] = __('Listeners', 'flowview');
+			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_schedules.php'] = __('Schedules', 'flowview');
+		}
+	}
+	$menu = $menu2;
+
+	$menu_glyphs[__('FlowView', 'flowview')] = 'fas fa-crosshairs';
 
 	plugin_flowview_check_upgrade();
 }
@@ -145,57 +163,85 @@ function flowview_draw_navigation_text($nav) {
 
 	$nav['flowview_devices.php:'] = array(
 		'title' => __('Listeners', 'flowview'),
-		'mapping' => 'flowview.php:',
+		'mapping' => 'index.php:',
 		'url' => 'flowview_devices.php',
 		'level' => '1'
 	);
 
 	$nav['flowview_devices.php:edit'] = array(
 		'title' => __('(edit)', 'flowview'),
-		'mapping' => 'flowview.php:,flowview_devices.php:',
+		'mapping' => 'index.php:,flowview_devices.php:',
 		'url' => 'flowview_devices.php',
 		'level' => '2'
 	);
 
 	$nav['flowview_devices.php:save'] = array(
 		'title' => __('(save)', 'flowview'),
-		'mapping' => 'flowview.php:',
+		'mapping' => 'index.php:',
 		'url' => 'flowview_devices.php',
 		'level' => '2'
 	);
 
 	$nav['flowview_devices.php:actions'] = array(
 		'title' => __('(actions)', 'flowview'),
-		'mapping' => 'flowview.php:',
+		'mapping' => 'index.php:',
 		'url' => 'flowview_devices.php',
 		'level' => '2'
 	);
 
 	$nav['flowview_schedules.php:'] = array(
 		'title' => __('Schedules', 'flowview'),
-		'mapping' => 'flowview.php:',
+		'mapping' => 'index.php:',
 		'url' => 'flowview_schedules.php',
 		'level' => '1'
 	);
 
 	$nav['flowview_schedules.php:edit'] = array(
 		'title' => __('(edit)', 'flowview'),
-		'mapping' => 'flowview.php:,flowview_schedules.php:',
+		'mapping' => 'index.php:,flowview_schedules.php:',
 		'url' => 'flowview_schedules.php',
 		'level' => '2'
 	);
 
 	$nav['flowview_schedules.php:save'] = array(
 		'title' => __('(save)', 'flowview'),
-		'mapping' => 'flowview.php:',
+		'mapping' => 'index.php:',
 		'url' => 'flowview_schedules.php',
 		'level' => '2'
 	);
 
 	$nav['flowview_schedules.php:actions'] = array(
 		'title' => __('(actions)', 'flowview'),
-		'mapping' => 'flowview.php:',
+		'mapping' => 'index.php:',
 		'url' => 'flowview_schedules.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_filters.php:'] = array(
+		'title' => __('Filters', 'flowview'),
+		'mapping' => 'index.php:',
+		'url' => 'flowview_filters.php',
+		'level' => '1'
+	);
+
+	$nav['flowview_filters.php:edit'] = array(
+		'title' => __('(edit)', 'flowview'),
+		'mapping' => 'index.php:,flowview_filters.php:',
+		'url' => 'flowview_filters.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_filters.php:save'] = array(
+		'title' => __('(save)', 'flowview'),
+		'mapping' => 'index.php:',
+		'url' => 'flowview_filters.php',
+		'level' => '2'
+	);
+
+	$nav['flowview_filters.php:actions'] = array(
+		'title' => __('(actions)', 'flowview'),
+		'mapping' => 'index.php:',
+		'url' => 'flowview_filters.php',
 		'level' => '2'
 	);
 
@@ -249,6 +295,23 @@ function flowview_config_settings() {
 			'max_length' => 255,
 			'default' => '/var/netflow/flows/completed'
 		),
+		'flowview_retention' => array(
+			'friendly_name' => __('Data Retention Policy', 'flowview'),
+			'description' => __('The amount of time Cacti will maintain the partitioned Flow tables.', 'flowview'),
+			'method' => 'drop_array',
+			'array' => array(
+				7   => __('%d Week', 1, 'flowview'),
+				14  => __('%d Weeks', 2, 'flowview'),
+				21  => __('%d Weeks', 3, 'flowview'),
+				30  => __('%d Month', 1, 'flowview'),
+				60  => __('%d Months', 2, 'flowview'),
+				90  => __('%d Months', 3, 'flowview'),
+				120 => __('%d Months', 4, 'flowview'),
+				183 => __('%d Months', 6, 'flowview'),
+				365 => __('%d Year', 1, 'flowview')
+			),
+			'default' => 30
+		),
 		'flowview_partition' => array(
 			'friendly_name' => __('Database Partitioning Scheme', 'flowview'),
 			'description' => __('Depending on the number of flows per minute, you may require more tables per day.', 'flowview'),
@@ -271,19 +334,25 @@ function flowview_config_settings() {
 
 function flowview_poller_bottom() {
 	global $config;
-	include_once($config['library_path'] . '/database.php');
+
+	include_once($config['base_path'] . '/lib/poller.php');
+
 	$time = time() - 86400;
-	db_execute("DELETE FROM plugin_flowview_dnscache WHERE time > 0 AND time < $time");
+
+	db_execute("DELETE FROM plugin_flowview_dnscache
+		WHERE time > 0
+		AND time < $time");
 
 	$t = time();
-	$schedules = db_fetch_assoc("SELECT * FROM plugin_flowview_schedules WHERE enabled='on' AND ($t - sendinterval > lastsent)");
-	if (!empty($schedules)) {
-		$command_string = trim(read_config_option('path_php_binary'));
-		if (trim($command_string) == '')
-			$command_string = 'php';
-		$extra_args = ' -q ' . $config['base_path'] . '/plugins/flowview/flowview_process.php';
-		exec_background($command_string, $extra_args);
+
+	$command_string = trim(read_config_option('path_php_binary'));
+
+	if (trim($command_string) == '') {
+		$command_string = 'php';
 	}
+
+	$extra_args = ' -q ' . $config['base_path'] . '/plugins/flowview/flowview_process.php';
+	exec_background($command_string, $extra_args);
 }
 
 function flowview_setup_table() {

@@ -197,14 +197,12 @@ switch (get_request_var('action')) {
 		save_devices ();
 		break;
 	case 'edit':
-		general_header();
-		display_tabs ();
+		top_header();
 		edit_devices();
 		bottom_footer();
 		break;
 	default:
-		general_header();
-		display_tabs ();
+		top_header();
 		show_devices ();
 		bottom_footer();
 		break;
@@ -360,6 +358,8 @@ function edit_devices () {
 		$('#cmethod').change(function() {
 			changeMethod();
 		});
+
+		changeMethod();
 	});
 
 	function changeMethod() {
@@ -437,7 +437,7 @@ function show_devices () {
 	<tr class='even'>
 		<td>
 		<form id='listeners' action='flowview_devices.php'>
-			<table class='fitlerTable'>
+			<table class='filterTable'>
 				<tr>
 					<td>
 						<?php print __('Search', 'flowview');?>
@@ -493,7 +493,7 @@ function show_devices () {
 
 	$display_array = array(
 		'name'        => array(__('Name', 'flowview'), 'ASC'),
-		'method'      => array(__('Method', 'flowview'), 'ASC'),
+		'cmethod'     => array(__('Method', 'flowview'), 'ASC'),
 		'allowfrom'   => array(__('Allowed From', 'flowview'), 'ASC'),
 		'port'        => array(__('Port', 'flowview'), 'ASC'),
 		'folder'      => array(__('Directory', 'flowview'), 'ASC'),
@@ -510,7 +510,7 @@ function show_devices () {
 		foreach ($result as $row) {
 			form_alternate_row('line' . $row['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="flowview_devices.php?&tab=listeners&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a>', $row['id']);
-			form_selectable_cell($row['method'] == 0 ? __('Cacti', 'flowview'):__('Legacy', 'flowview'), $row['id']);
+			form_selectable_cell($row['cmethod'] == 0 ? __('Cacti', 'flowview'):__('Legacy', 'flowview'), $row['id']);
 			form_selectable_cell($row['allowfrom'], $row['id']);
 			form_selectable_cell($row['port'], $row['id']);
 			form_selectable_cell($row['folder'], $row['id']);
