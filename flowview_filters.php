@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007-2019 The Cacti Group                                 |
+ | Copyright (C) 2004-2020 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -58,9 +58,16 @@ switch (get_request_var('action')) {
 		save_filter();
 		break;
 	case 'edit':
-		top_header();
+		if (!isset_request_var('embed')) {
+			top_header();
+		}
+
 		edit_filter();
-		bottom_footer();
+
+		if (!isset_request_var('embed')) {
+			bottom_footer();
+		}
+
 		break;
 	default:
 		top_header();
@@ -175,48 +182,53 @@ function actions_filters() {
 function save_filter() {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
-	get_filter_request_var('savedquery');
-	get_filter_request_var('sendinterval');
+	get_filter_request_var('device_id');
+	get_filter_request_var('timespan');
+	get_filter_request_var('statistics');
+	get_filter_request_var('printed');
+	get_filter_request_var('includeif');
+	get_filter_request_var('sortfield');
 	/* ==================================================== */
 
-	$save['title']        = get_nfilter_request_var('title');
-	$save['savedquery']   = get_nfilter_request_var('savedquery');
-	$save['sendinterval'] = get_nfilter_request_var('sendinterval');
-	$save['start']        = get_nfilter_request_var('start');
-	$save['email']        = get_nfilter_request_var('email');
+	$save['id']              = get_nfilter_request_var('id');
+	$save['name']            = get_nfilter_request_var('name');
+	$save['device_id']       = get_nfilter_request_var('device_id');
 
-	$t = time();
-	$d = strtotime(get_nfilter_request_var('start'));
-	$i = $save['sendinterval'];
-	if (isset_request_var('id')) {
-		$save['id'] = get_request_var('id');
+	$save['timespan']        = get_nfilter_request_var('timespan');
+	$save['startdate']       = get_nfilter_request_var('date1');
+	$save['enddate']         = get_nfilter_request_var('date2');
 
-		$q = db_fetch_row('SELECT * FROM plugin_flowview_queries WHERE id = ' . $save['id']);
-		if (!isset($q['lastsent']) || $save['start'] != $q['start'] || $save['sendinterval'] != $q['sendinterval']) {
-			while ($d < $t) {
-				$d += $i;
-			}
-			$save['lastsent'] = $d - $i;
-		}
-	} else {
-		$save['id'] = '';
-		while ($d < $t) {
-			$d += $i;
-		}
-		$save['lastsent'] = $d - $i;
-	}
+	$save['tosfields']       = get_nfilter_request_var('tosfields');
+	$save['tcpflags']        = get_nfilter_request_var('tcpflags');
+	$save['protocols']       = implode(', ', get_nfilter_request_var('protocols'));
 
-	if (isset_request_var('enabled'))
-		$save['enabled'] = 'on';
-	else
-		$save['enabled'] = 'off';
+	$save['sourceip']        = get_nfilter_request_var('sourceip');
+	$save['sourceport']      = get_nfilter_request_var('sourceport');
+	$save['sourceinterface'] = get_nfilter_request_var('sourceinterface');
+	$save['sourceas']        = get_nfilter_request_var('sourceas');
+
+	$save['destip']          = get_nfilter_request_var('destip');
+	$save['destport']        = get_nfilter_request_var('destport');
+	$save['destinterface']   = get_nfilter_request_var('destinterface');
+	$save['destas']          = get_nfilter_request_var('destas');
+
+	$save['statistics']      = get_nfilter_request_var('statistics');
+	$save['printed']         = get_nfilter_request_var('printed');
+	$save['includeif']       = get_nfilter_request_var('includeif');
+	$save['sortfield']       = get_nfilter_request_var('sortfield');
+	$save['cutofflines']     = get_nfilter_request_var('cutofflines');
+	$save['cutoffoctets']    = get_nfilter_request_var('cutoffoctets');
+	$save['resolve']         = get_nfilter_request_var('resolve');
 
 	$id = sql_save($save, 'plugin_flowview_queries', 'id', true);
 
 	if (is_error_message()) {
+		raise_message(2);
 		header('Location: flowview_filters.php?tab=sched&header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
 		exit;
 	}
+
+	raise_message(1);
 
 	header('Location: flowview_filters.php?tab=sched&header=false');
 	exit;
@@ -249,13 +261,31 @@ function edit_filter() {
 
 	get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
 
-	$filter_edit['date1']['value'] = $span['current_value_date1'];
-	$filter_edit['date2']['value'] = $span['current_value_date2'];
+	$filter_edit['date1'] = array(
+		'value'  => $span['current_value_date1'],
+		'method' => 'hidden'
+	);
+
+	$filter_edit['date2'] = array(
+		'value'  => $span['current_value_date2'],
+		'method' => 'hidden'
+	);
 
 	if (sizeof($report)) {
-		$filter_edit['sortfield']['array'] = $stat_columns_array[$report['sortfield']];
+		if ($report['statistics'] > 0) {
+			$filter_edit['sortfield']['array'] = $stat_columns_array[$report['statistics']];
+		} else {
+			$filter_edit['sortfield']['array'] = $print_columns_array[$report['printed']];
+		}
 	} else {
 		$filter_edit['sortfield']['array'] = $stat_columns_array[10];
+	}
+
+	if (isset_request_var('embed')) {
+		$filter_edit['embed'] = array(
+			'value'  => 1,
+			'method' => 'hidden'
+		);
 	}
 
 	draw_edit_form(
@@ -267,11 +297,21 @@ function edit_filter() {
 
 	html_end_box();
 
-	form_save_button('flowview_filters.php?tab=sched');
+	form_save_button('flowview_filters.php');
+
+	?>
+	<script type='text/javascript'>
+	$(function() {
+		$('#protocols').multiselect();
+	});
+	</script>
+	<?php
 }
 
 function show_filters() {
-	global $sendinterval_arr, $colors, $config, $sched_actions, $item_rows;
+	global $sendinterval_arr, $colors, $config, $sched_actions, $graph_timespans, $item_rows;
+
+	include('./plugins/flowview/arrays.php');
 
     /* ================= input validation and session storage ================= */
     $filters = array(
@@ -291,7 +331,7 @@ function show_filters() {
 			),
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
-			'default' => 'title',
+			'default' => 'fq.name',
 			'options' => array('options' => 'sanitize_search_string')
 			),
 		'sort_direction' => array(
@@ -381,7 +421,7 @@ function show_filters() {
 	html_end_box();
 
 	if (get_request_var('filter') != '') {
-		$sql_where = 'WHERE name LIKE ' . db_qstr('%' . get_request_var_request('filter') . '%');
+		$sql_where = 'WHERE fq.name LIKE ' . db_qstr('%' . get_request_var_request('filter') . '%');
 	}else{
 		$sql_where = '';
 	}
@@ -389,16 +429,20 @@ function show_filters() {
 	$sql_order = get_order_string();
 	$sql_limit = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
 
-	$sql = "SELECT *
-		FROM plugin_flowview_queries
+	$sql = "SELECT fq.*, fd.name AS device
+		FROM plugin_flowview_queries AS fq
+		INNER JOIN plugin_flowview_devices AS fd
+		ON fq.device_id = fd.id
 		$sql_where
 		$sql_order
 		$sql_limit";
 
-	$result = db_fetch_assoc($sql);
+	$filters = db_fetch_assoc($sql);
 
 	$total_rows = db_fetch_cell("SELECT COUNT(*)
-		FROM plugin_flowview_queries
+		FROM plugin_flowview_queries AS fq
+		INNER JOIN plugin_flowview_devices AS fd
+		ON fq.device_id = fd.id
 		$sql_where");
 
 	$nav = html_nav_bar('flowview_filters.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 5, __('Filters', 'flowview'), 'page', 'main');
@@ -410,35 +454,66 @@ function show_filters() {
 	html_start_box('', '100%', '', '3', 'center', '');
 
 	$display_array = array(
-		'name'                 => array(__('Filter Name', 'flowview'), 'ASC'),
-		'sendinterval'          => array(__('Interval', 'flowview'), 'ASC'),
-		'start'                 => array(__('Start Date', 'flowview'), 'ASC'),
-		'lastsent+sendinterval' => array(__('Next Send', 'flowview'), 'ASC'),
-		'email'                 => array(__('Email', 'flowview'), 'ASC'),
-		'enabled'               => array(__('Enabled', 'flowview'), 'ASC')
+		'name' => array(
+			'display' => __('Filter Name', 'flowview'),
+			'align' => 'left',
+			'sort' => 'ASC'
+		),
+		'device' => array(
+			'display' => __('Listener', 'flowview'),
+			'align' => 'left',
+			'sort' => 'ASC'
+		),
+		'nosort0' => array(
+			'display' => __('Report Type', 'flowview'),
+			'align' => 'left',
+			'sort' => 'ASC'
+		),
+		'id' => array(
+			'display' => __('ID', 'flowview'),
+			'align' => 'right',
+			'sort' => 'ASC'
+		),
+		'sortfield' => array(
+			'display' => __('Sort Field', 'flowview'),
+			'align' => 'right',
+			'sort' => 'ASC'
+		),
+		'nosort1' => array(
+			'display' => __('Resolution', 'flowview'),
+			'align' => 'right',
+			'sort' => 'ASC'
+		)
 	);
 
 	html_header_sort_checkbox($display_array, get_request_var_request('sort_column'), get_request_var_request('sort_direction'), false);
 
-	$i=0;
-	if (count($result)) {
-		foreach ($result as $row) {
-			form_alternate_row('line' . $row['id'], true);
-			form_selectable_cell('<a class="linkEditMain" href="' . htmlspecialchars('flowview_filters.php?tab=sched&action=edit&id=' . $row['id']) . '">' . $row['title'] . '</a>', $row['id']);
-			form_selectable_cell($row['name'], $row['id']);
-			form_selectable_cell($sendinterval_arr[$row['sendinterval']], $row['id']);
-			form_selectable_cell($row['start'], $row['id']);
-			form_selectable_cell(date('Y-m-d G:i:s', $row['lastsent']+$row['sendinterval']), $row['id']);
-			form_selectable_cell($row['email'], $row['id']);
-			form_selectable_cell(($row['enabled'] == 'on' ? "<span class='deviceUp'><b>" . __('Yes', 'flowview') . "</b></span>":"<span class='deviceDown'><b>" . __('No', 'flowview') . "</b></span>"), $row['id']);
-			form_checkbox_cell($row['name'], $row['id']);
+	if (cacti_sizeof($filters)) {
+		foreach ($filters as $filter) {
+			form_alternate_row('line' . $filter['id'], true);
+			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_filters.php?action=edit&id=' . $filter['id']) . '">' . html_escape($filter['name']) . '</a>', $filter['id']);
+			form_selectable_cell($filter['device'], $filter['id']);
+
+			if ($filter['statistics'] > 0) {
+				$type = $stat_report_array[$filter['statistics']];
+				$sort = $stat_columns_array[$filter['statistics']][$filter['sortfield']];
+			} else {
+				$type = $print_report_array[$filter['printed']];
+				$sort = $print_columns_array[$filter['printed']][$filter['sortfield']];
+			}
+
+			form_selectable_cell($type, $filter['id']);
+			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
+			form_selectable_cell($sort, $filter['id'], '', 'right');
+			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');
+			form_checkbox_cell($filter['name'], $filter['id']);
 			form_end_row();
 		}
 	}
 
 	html_end_box(false);
 
-	if (count($result)) {
+	if (cacti_sizeof($filters)) {
 		print $nav;
 	}
 

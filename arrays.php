@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007-2019 The Cacti Group                                 |
+ | Copyright (C) 2004-2020 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -60,7 +60,7 @@ $flow_select_array = array(
 );
 
 $ip_protocols_array = array(
-	'' => __('Select One', 'flowview'),
+	0  => __('All', 'flowview'),
 	6  => __('TCP', 'flowview'),
 	17 => __('UDP', 'flowview'),
 	1  => __('ICMP', 'flowview'),
@@ -240,7 +240,7 @@ $stat_columns_array = array(
 );
 
 $print_columns_array = array(
-	1  => array(2, 8, '1,3', '1', '4', '1', '5,6',
+	1  => array(
 		__('Src IF', 'flowview'),
 		__('Src IP', 'flowview'),
 		__('Dest IF', 'flowview'),
@@ -257,7 +257,7 @@ $print_columns_array = array(
 		__('Ts', 'flowview'),
 		__('Fl', 'flowview')
 	),
-	4  => array(1, 5, '', '0', '2', '0', '',
+	4  => array(
 		__('Src IP', 'flowview'),
 		__('Dest IP', 'flowview'),
 		__('Protocol', 'flowview'),
@@ -266,7 +266,7 @@ $print_columns_array = array(
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
 	),
-	5  => array(1, 11, '3,6', '0', '8', '0', '4,7',
+	5  => array(
 		__('Start Time', 'flowview'),
 		__('End Time', 'flowview'),
 		__('Src IF', 'flowview'),
@@ -280,7 +280,7 @@ $print_columns_array = array(
 		__('Packets', 'flowview'),
 		__('Bytes', 'flowview')
 	),
-	6  => array(1, 11, '3,6', '0', '8', '0', '4,7',
+	6  => array(
 		__('Source', 'flowview'),
 		__('Destination', 'flowview'),
 		__('Packets', 'flowview'),
@@ -471,29 +471,36 @@ $print_array = array(
 	)
 );
 
+$devices = array_rekey(
+	db_fetch_assoc('SELECT id, name
+		FROM plugin_flowview_devices
+		ORDER BY name'),
+	'id', 'name'
+);
+
 $filter_edit = array(
 	'spacer0' => array(
 		'method' => 'spacer',
 		'collapsible' => true,
 		'friendly_name' => __('General Filters', 'flowview'),
 	),
-	'query' => array(
+	'name' => array(
 		'friendly_name' => __('Filter', 'flowview'),
 		'description' => __('The Saved Filter to display.', 'flowview'),
 		'method' => 'textbox',
-		'value' => '|arg1:query|',
+		'value' => '|arg1:name|',
 		'default' => __('New Filter', 'flowview'),
 		'size' => 50,
 		'max_length' => 64
 	),
-	'device' => array(
+	'device_id' => array(
 		'friendly_name' => __('Listener', 'flowview'),
 		'description' => __('The Listener to use for the Filter.', 'flowview'),
 		'method' => 'drop_array',
-		'value' => '|arg1:device|',
+		'value' => '|arg1:device_id|',
 		'array' => $devices,
 		'default' => '0',
-		'none_value' => __('None', 'flowview'),
+		'none_value' => __('All', 'flowview'),
 	),
 	'predefined_timespan' => array(
 		'friendly_name' => __('Presets', 'flowview'),
@@ -591,9 +598,9 @@ $filter_edit = array(
 		'friendly_name' => __('Protocol Filters', 'flowview'),
 	),
 	'protocols' => array(
-		'friendly_name' => __('Protocol', 'flowview'),
+		'friendly_name' => __('Protocols', 'flowview'),
 		'description' => __('Select the Specific Protocol for the Filter.', 'flowview'),
-		'method' => 'drop_array',
+		'method' => 'drop_multi',
 		'value' => '|arg1:protocols|',
 		'default' => '0',
 		'array' => $ip_protocols_array
@@ -638,8 +645,8 @@ $filter_edit = array(
 		'max_length' => '20',
 		'size' => '14'
 	),
-	'destas' => array(
-		'friendly_name' => __('Dest AS', 'flowview'),
+	'sourceas' => array(
+		'friendly_name' => __('Source AS', 'flowview'),
 		'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS\'s', 'flowview'),
 		'method' => 'textbox',
 		'value' => '|arg1:destas|',
@@ -678,5 +685,10 @@ $filter_edit = array(
 		'max_length' => '20',
 		'size' => '14'
 	),
+	'id' => array(
+		'method' => 'hidden',
+		'value' => '|arg1:id|'
+	)
 );
+
 

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007-2019 The Cacti Group                                 |
+ | Copyright (C) 2004-2020 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -99,7 +99,7 @@ function flowview_display_report() {
 	$filter = createFilter($sessionid);
 
 	if (isset_request_var('statistics') && get_request_var('statistics') > 0 && get_nfilter_request_var('statistics') != 99) {
-		html_start_box(__('Report: %s', $rname, 'flowview'), '100%', '', '3', 'center', '');
+		html_start_box(__esc('Report: %s', $rname, 'flowview'), '100%', '', '3', 'center', '');
 		?>
 		<tr class='even'>
 			<td>
@@ -321,6 +321,25 @@ function flowview_display_report() {
 
 		$('#clear').unbind('click').click(function() {
 			clearFilter();
+		});
+
+		$('#edit').unbind('click').click(function() {
+			$.get(urlPath + '/plugins/flowview/flowview_filters.php' +
+				'?id='+$('#query').val() +
+				'&action=edit&embed=true', function(data) {
+
+				if ($('#filter').length == 0) {
+					$('body').append('<div id="filter"></div>');
+				}
+
+				$('#filter').html(data);
+
+				applySkin();
+
+				$('#filter').dialog({
+					'minWidth': 600
+				});
+			});
 		});
 
 		if ($('#table').is('checked')) {

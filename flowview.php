@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007-2019 The Cacti Group                                 |
+ | Copyright (C) 2004-2020 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -663,9 +663,9 @@ function flowview_display_form() {
 			'max_length' => '20',
 			'size' => '14'
 		),
-		'destas' => array(
-			'friendly_name' => __('Dest AS', 'flowview'),
-			'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS\'s', 'flowview'),
+		'sourceas' => array(
+			'friendly_name' => __('Source AS', 'flowview'),
+			'description' => __('Filter on the select Source AS for in the Filter.  This can be a comma delimited list of Source AS\'s', 'flowview'),
 			'method' => 'textbox',
 			'value' => get_request_var('destas'),
 			'max_length' => '20',

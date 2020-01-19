@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007-2019 The Cacti Group                                 |
+ | Copyright (C) 2004-2020 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -277,9 +277,13 @@ function save_schedules() {
 	$id = sql_save($save, 'plugin_flowview_schedules', 'id', true);
 
 	if (is_error_message()) {
+		raise_message(2);
+
 		header('Location: flowview_schedules.php?tab=sched&header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
 		exit;
 	}
+
+	raise_message(1);
 
 	header('Location: flowview_schedules.php?tab=sched&header=false');
 	exit;
@@ -301,7 +305,7 @@ function edit_schedule() {
 			WHERE pfs.id = ?',
 			array(get_request_var('id')));
 
-		$header_label = __('Report: [edit: %s]', $report['name'], 'flowview');
+		$header_label = __esc('Report: [edit: %s]', $report['name'], 'flowview');
 	}else{
 		$header_label = __('Report: [new]', 'flowview');
 	}
@@ -348,7 +352,7 @@ function edit_schedule() {
 	</script>
 	<?php
 
-	form_save_button('flowview_schedules.php?tab=sched');
+	form_save_button('flowview_schedules.php');
 }
 
 function show_schedules () {
@@ -510,11 +514,11 @@ function show_schedules () {
 	if (count($result)) {
 		foreach ($result as $row) {
 			form_alternate_row('line' . $row['id'], true);
-			form_selectable_cell('<a class="linkEditMain" href="' . htmlspecialchars('flowview_schedules.php?tab=sched&action=edit&id=' . $row['id']) . '">' . $row['title'] . '</a>', $row['id']);
+			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_schedules.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['title']) . '</a>', $row['id']);
 			form_selectable_cell($row['name'], $row['id']);
 			form_selectable_cell($sendinterval_arr[$row['sendinterval']], $row['id']);
-			form_selectable_cell($row['start'], $row['id']);
-			form_selectable_cell(date('Y-m-d G:i:s', $row['lastsent']+$row['sendinterval']), $row['id']);
+			form_selectable_cell(substr($row['start'], 5), $row['id']);
+			form_selectable_cell(date('m-d H:i', $row['lastsent']+$row['sendinterval']), $row['id']);
 			form_selectable_cell($row['email'], $row['id']);
 			form_selectable_cell(($row['enabled'] == 'on' ? "<span class='deviceUp'><b>" . __('Yes', 'flowview') . "</b></span>":"<span class='deviceDown'><b>" . __('No', 'flowview') . "</b></span>"), $row['id']);
 			form_checkbox_cell($row['name'], $row['id']);

@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2007-2019 The Cacti Group                                 |
+ | Copyright (C) 2004-2020 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -32,69 +32,6 @@ $flow_actions = array(
 
 set_default_action();
 
-$expire_arr = array(
-	2   => __('%d Days', 2, 'flowview'),
-	5   => __('%d Days', 5, 'flowview'),
-	7   => __('%d Week', 1, 'flowview'),
-	14  => __('%d Weeks', 2, 'flowview'),
-	30  => __('%d Month', 1, 'flowview'),
-	61  => __('%d Months', 2, 'flowview'),
-	92  => __('%d Months', 3, 'flowview'),
-	183 => __('%d Months', 6, 'flowview'),
-	365 => __('%d Year', 1, 'flowview'),
-);
-
-$rotation_arr = array(
-	1439 => __('%d Minute', 1, 'flowview'),
-	287  => __('%d Minutes', 5, 'flowview'),
-	144  => __('%d Minutes', 10, 'flowview'),
-	95   => __('%d Minutes', 15, 'flowview'),
-);
-
-$version_arr = array(
-	'1'    => __('NetFlow version 1', 'flowview'),
-	'5'    => __('NetFlow version 5', 'flowview'),
-	'6'    => __('NetFlow version 6', 'flowview'),
-	'7'    => __('NetFlow version 7', 'flowview'),
-	'8.1'  => __('NetFlow AS Aggregation', 'flowview'),
-	'8.2'  => __('NetFlow Proto Port Aggregation', 'flowview'),
-	'8.3'  => __('NetFlow Source Prefix Aggregation', 'flowview'),
-	'8.4'  => __('NetFlow Destination Prefix Aggregation', 'flowview'),
-	'8.5'  => __('NetFlow Prefix Aggregation', 'flowview'),
-	'8.6'  => __('NetFlow Destination', 'flowview'),
-	'8.7'  => __('NetFlow Source Destination', 'flowview'),
-	'8.8'  => __('NetFlow Full Flow', 'flowview'),
-	'8.9'  => __('NetFlow ToS AS Aggregation', 'flowview'),
-	'8.10' => __('NetFlow ToS Proto Port Aggregation', 'flowview'),
-	'8.11' => __('NetFlow ToS Source Prefix Aggregation', 'flowview'),
-	'8.12' => __('NetFlow ToS Destination Prefix Aggregation', 'flowview'),
-	'8.13' => __('NetFlow ToS Prefix Aggregation', 'flowview'),
-	'8.14' => __('NetFlow ToS Prefix Port Aggregation', 'flowview'),
-	'1005' => __('Flow-Tools tagged version 5', 'flowview'),
-);
-
-$nesting_arr = array(
-	-2 => '/YYYY-MM/YYYY-MM-DD',
-	-1 => '/YYYY-MM-DD',
-	0  => '/',
-	1  => '/YYYY',
-	2  => '/YYYY/YYYY-MM',
-	3  => '/YYYY/YYYY-MM/YYYY-MM-DD'
-);
-
-$compression_arr = array(
-	0 => __('0 (Disabled)', 'flowview'),
-	1 => '1',
-	2 => '2',
-	3 => '3',
-	4 => '4',
-	5 => '5',
-	6 => '6',
-	7 => '7',
-	8 => '8',
-	9 => __('9 (Highest)', 'flowview')
-);
-
 $device_edit = array(
 	'name' => array(
 		'method' => 'textbox',
@@ -106,13 +43,9 @@ $device_edit = array(
 	'cmethod' => array(
 		'friendly_name' => __('Collection Medhod', 'flowview'),
 		'description' => __('There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti\'s own PHP based flow stream server.', 'flowview'),
-		'value' => '|arg1:cmethod|',
-		'method' => 'drop_array',
-		'default' => '0',
-		'array' => array(
-			0 => __('Cacti', 'flowview'),
-			1 => __('Legacy', 'flowview')
-		)
+		'value' => '1',
+		'method' => 'hidden',
+		'default' => '1'
 	),
 	'allowfrom' => array(
 		'method' => 'textbox',
@@ -132,61 +65,10 @@ $device_edit = array(
 		'max_length' => '5',
 		'size' => '30'
 	),
-	'spacer1' => array(
-		'method' => 'spacer',
-		'friendly_name' => __('Flow-Tools Required Fields', 'flowview'),
-	),
-	'folder' => array(
-		'method' => 'textbox',
-		'friendly_name' => __('Directory', 'flowview'),
-		'description' => __('Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved.', 'flowview'),
-		'value' => '|arg1:folder|',
-		'max_length' => '64',
-	),
-	'nesting' => array(
-		'friendly_name' => __('Nesting', 'flowview'),
-		'description' => __('Directory Structure that will be used for the flows for this device.', 'flowview'),
-		'value' => '|arg1:nesting|',
-		'method' => 'drop_array',
-		'default' => '-1',
-		'array' => $nesting_arr
-	),
-	'version' => array(
-		'friendly_name' => __('NetFlow Version', 'flowview'),
-		'description' => __('NetFlow Protocol version used by the device.', 'flowview'),
-		'value' => '|arg1:version|',
-		'method' => 'drop_array',
-		'default' => '5',
-		'array' => $version_arr
-	),
-	'compression' => array(
-		'friendly_name' => __('Compression Level', 'flowview'),
-		'description' => __('Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results.', 'flowview'),
-		'value' => '|arg1:compression|',
-		'method' => 'drop_array',
-		'default' => '0',
-		'array' => $compression_arr,
-	),
-	'rotation' => array(
-		'friendly_name' => __('Rotation', 'flowview'),
-		'description' => __('How often to create a new Flow File.', 'flowview'),
-		'value' => '|arg1:rotation|',
-		'method' => 'drop_array',
-		'default' => '1439',
-		'array' => $rotation_arr
-	),
-	'expire' => array(
-		'friendly_name' => __('Expiration', 'flowview'),
-		'description' => __('How long to keep your flow files.', 'flowview'),
-		'value' => '|arg1:expire|',
-		'method' => 'drop_array',
-		'default' => '0',
-		'array' => $expire_arr
-	),
 	'id' => array(
 		'method' => 'hidden_zero',
 		'value' => '|arg1:id|'
-	),
+	)
 );
 
 switch (get_request_var('action')) {
@@ -263,7 +145,7 @@ function actions_devices () {
 	if (!isset($device_array)) {
 		print "<tr><td class='even'><span class='textError'>" . __('You must select at least one device.', 'flowview') . "</span></td></tr>\n";
 		$save_html = '';
-	}else{
+	} else {
 		$save_html = "<input type='submit' value='" . __esc('Continue', 'flowview') . "'>";
 	}
 
@@ -287,11 +169,6 @@ function actions_devices () {
 function save_devices () {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
-	get_filter_request_var('version');
-	get_filter_request_var('rotation');
-	get_filter_request_var('expire');
-	get_filter_request_var('port');
-	get_filter_request_var('compression');
 	/* ==================================================== */
 
 	if (isset_request_var('id')) {
@@ -302,24 +179,21 @@ function save_devices () {
 
 	$save['name']        = get_nfilter_request_var('name');
 	$save['cmethod']     = get_nfilter_request_var('cmethod');
-	$save['folder']      = get_nfilter_request_var('folder');
 	$save['allowfrom']   = get_nfilter_request_var('allowfrom');
 	$save['port']        = get_nfilter_request_var('port');
-	$save['nesting']     = get_nfilter_request_var('nesting');
-	$save['version']     = get_nfilter_request_var('version');
-	$save['rotation']    = get_nfilter_request_var('rotation');
-	$save['expire']      = get_nfilter_request_var('expire');
-	$save['compression'] = get_nfilter_request_var('compression');
 
 	$id = sql_save($save, 'plugin_flowview_devices', 'id', true);
 
 	if (is_error_message()) {
+		raise_message(2);
+
 		header('Location: flowview_devices.php?tab=listeners&header=false&action=edit&id=' . (empty($id) ? get_request_var('id') : $id));
 		exit;
 	}
 
-	header('Location: flowview_devices.php?tab=listeners&header=false');
+	raise_message(1);
 
+	header('Location: flowview_devices.php?tab=listeners&header=false');
 	exit;
 }
 
@@ -332,9 +206,9 @@ function edit_devices () {
 
 	$device = array();
 	if (!isempty_request_var('id')) {
-		$device = db_fetch_row('SELECT * FROM plugin_flowview_devices WHERE id=' . get_request_var('id'), FALSE);
-		$header_label = __('Device [edit: %s]', $device['name'], 'flowview');
-	}else{
+		$device = db_fetch_row('SELECT * FROM plugin_flowview_devices WHERE id=' . get_request_var('id'), false);
+		$header_label = __esc('Device [edit: %s]', $device['name'], 'flowview');
+	} else {
 		$header_label = __('Device [new]', 'flowview');
 	}
 
@@ -351,38 +225,6 @@ function edit_devices () {
 	html_end_box();
 
 	form_save_button('flowview_devices.php?tab=listeners');
-
-	?>
-	<script type='text/javascript'>
-	$(function() {
-		$('#cmethod').change(function() {
-			changeMethod();
-		});
-
-		changeMethod();
-	});
-
-	function changeMethod() {
-		if ($('#cmethod').val() == 0) {
-			$('#row_spacer1').hide();
-			$('#row_folder').hide();
-			$('#row_nesting').hide();
-			$('#row_version').hide();
-			$('#row_compression').hide();
-			$('#row_rotation').hide();
-			$('#row_expire').hide();
-		} else {
-			$('#row_spacer1').show();
-			$('#row_folder').show();
-			$('#row_nesting').show();
-			$('#row_version').show();
-			$('#row_compression').show();
-			$('#row_rotation').show();
-			$('#row_expire').show();
-		}
-	}
-	</script>
-	<?php
 }
 
 function show_devices () {
@@ -496,34 +338,29 @@ function show_devices () {
 		'cmethod'     => array(__('Method', 'flowview'), 'ASC'),
 		'allowfrom'   => array(__('Allowed From', 'flowview'), 'ASC'),
 		'port'        => array(__('Port', 'flowview'), 'ASC'),
-		'folder'      => array(__('Directory', 'flowview'), 'ASC'),
-		'nesting'     => array(__('Nesting', 'flowview'), 'ASC'),
-		'version'     => array(__('Version', 'flowview'), 'ASC'),
-		'compression' => array(__('Compression', 'flowview'), 'ASC'),
-		'rotation'    => array(__('Rotation', 'flowview'), 'ASC'),
-		'expire'      => array(__('Expire', 'flowview'), 'ASC')
+		'nosort0'     => array(__('Status', 'flowview'), 'ASC'),
+		'nosort1'     => array(__('Observed Listen', 'flowview'), 'ASC'),
 	);
 
 	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	if (count($result)) {
 		foreach ($result as $row) {
+			$status = shell_exec("netstat -anp | grep ':" . $row['port'] . " '");
+			$parts = preg_split('/[\s]+/', trim($status));
+
 			form_alternate_row('line' . $row['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="flowview_devices.php?&tab=listeners&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a>', $row['id']);
-			form_selectable_cell($row['cmethod'] == 0 ? __('Cacti', 'flowview'):__('Legacy', 'flowview'), $row['id']);
+			form_selectable_cell(__('Cacti', 'flowview'), $row['id']);
 			form_selectable_cell($row['allowfrom'], $row['id']);
 			form_selectable_cell($row['port'], $row['id']);
-			form_selectable_cell($row['folder'], $row['id']);
-			form_selectable_cell($nesting_arr[$row['nesting']], $row['id']);
-			form_selectable_cell($version_arr[$row['version']], $row['id']);
-			form_selectable_cell($row['compression'], $row['id']);
-			form_selectable_cell($rotation_arr[$row['rotation']], $row['id']);
-			form_selectable_cell($expire_arr[$row['expire']], $row['id']);
+			form_selectable_cell($status != '' ? __('Up'):__('Down'), $row['id']);
+			form_selectable_cell(isset($parts[3]) ? $parts[3]:'-', $row['id']);
 			form_checkbox_cell($row['name'], $row['id']);
 			form_end_row();
 		}
 	} else {
-		print "<tr class='even'><td colspan=10><center>" . __('No Devices', 'flowview') . "</center></td></tr>\n";
+		print "<tr class='even'><td colspan=10><center>" . __('No Flowview Listeners', 'flowview') . "</center></td></tr>\n";
 	}
 
 	html_end_box(false);

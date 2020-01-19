@@ -8,29 +8,62 @@ Fully customizable reports
 
 # Installation
 
-Required:
+## Required:
 
 First, make sure you have the plugin architecture installed.
 
-Then, Install just like any other plugin, just copy it into the plugin directory, and Use Console -> Plugin Mangement to Install and Enable.
+Then, Install just like any other plugin, just copy it into the plugin directory,
+and Use Console -> Plugin Mangement to Install and Enable.
 
-Then, you must install flow-tools.  Generally, flow-tools is available through yum, apt-get, emerge, etc.  Locate the path for your flow-tools (typically /usr/bin), and decide on a location for your flow data (in many cases /var/flow, or any other location).
+This version of the flowview plugin no longer requires flowtools or 
+OpenFlashCharts.  In fact the entire import and reporting process is 
+handled through php and uses JavaScript based charting already available in 
+Cacti.
 
-Once you have done all of this, goto Console->Settings->Misc and setup this information in the FlowView section.
+After installing, you should set your partitioning and retention settings from 
+Console > Configuration > Settings > Misc.  There is a flowview section there 
+that you can customize.
 
-Next you have to setup your Cacti server as a FlowView sink from your various sources.  Then, from FlowView -> Listeners, you must add the various listeners for all your flow-capture sources.
+Next you have to setup your Cacti server as a FlowView sink from your various 
+sources.  Then, from FlowView -> Listeners, you must add the various listeners 
+for all your flow-capture sources.  It's critical that you specify the correct 
+port, and if there is to be any filtering, having a value other than 0 for
+the allowed devices.
 
-Optional:
+You must then setup the init.d or systemd service to receive captured data
+and transfer into the Cacti database.  Check the README.md in the service
+folder to describe this process.  Any time you add a new listener, you must
+restart this service.
 
-If you don't already have flows coming to the cacti box and being stored with flow-capture you may follow the steps below to have cacti do this.
+## Automatic Flow Version Detection:
 
-Next copy the 'flow-capture' file in the flowview plugin directory to '/etc/init.d/' or the appropriate location.  You have to edit this file to set the cacti base path.  This file also supercedes whatever the operating system installed.
+The new Cacti based flow-capture script will auto-detect either V5, V9 or V10
+flows automatically.  So, can dynamically switch these streams versions without
+issue.  However, we recommend you have one receiver per flow source, and that
+you feed multiple streams to the same receiver port.  The flow-capture script
+also detects IPv4 and IPv6 addresses automatically.
 
-Finally, start the 'flow-capture' process using '/etc/init.d/flow-capture start'.
+## Automatic Domain Resolution:
 
-You may also want to insure that 'flow-capture' is a startup service using your operating systems default process.
+The flow-capture script will receive the flow data, and attempt to resolve
+the domain names of the flows.  In the case that an IP Address does not
+properly resolve to a domain, Cacti automatically queries IANA to find the
+owner and assigned as 'assumed' domain for those flows.  If your Cacti
+server can not reach IANA, then those IP's will simply not be resolved.
 
-Also, remember that when using the Cacti 'flow-capture' init binary, that when you make changes to the various listeners, you must subsequently 'restart' the 'flow-capture' binary.
+## Upgrading from Prior Versions
+
+Since the current release does not leverage flow-capture, you will need
+to migrate your existing flow data into the Cacti database.  Before you
+perform this migration, ensure that your Cacti system, has enough space
+to handle all the flow data.  You should check the size of your existing
+flows, and then verify that you have enough space to handle the data
+inside of a MySQL database.
+
+Once you have done this, simply run the 'import_flows.php' script and
+all your legacy flow data will be imported.  Remember, it's important
+that you define your partitioning scheme ahead of time, especially if
+you have large quantities of flow data streaming into the Cacti server.
 
 # Possible Bugs?
 
