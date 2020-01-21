@@ -65,11 +65,11 @@ $schedule_edit = array(
 		'description' => __('Whether or not this NetFlow Scan will be sent.', 'flowview'),
 		'value' => '|arg1:enabled|',
 	),
-	'savedquery' => array(
+	'query_id' => array(
 		'method' => 'drop_sql',
 		'friendly_name' => __('Filter Name', 'flowview'),
 		'description' => __('Name of the query to run.', 'flowview'),
-		'value' => '|arg1:savedquery|',
+		'value' => '|arg1:query_id|',
 		'sql' => 'SELECT id, name FROM plugin_flowview_queries'
 	),
 	'sendinterval' => array(
@@ -169,7 +169,7 @@ function actions_schedules () {
 
 			$schedule_list .= '<li>' . db_fetch_cell_prepared('SELECT name FROM plugin_flowview_queries AS pfq
 				INNER JOIN plugin_flowview_schedules AS pfs
-				ON pfq.id=pfs.savedquery
+				ON pfq.id=pfs.query_id
 				WHERE pfs.id = ?', array($matches[1])) . '</li>';
 			$schedule_array[] = $matches[1];
 		}
@@ -238,12 +238,12 @@ function actions_schedules () {
 function save_schedules() {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
-	get_filter_request_var('savedquery');
+	get_filter_request_var('query_id');
 	get_filter_request_var('sendinterval');
 	/* ==================================================== */
 
 	$save['title']        = get_nfilter_request_var('title');
-	$save['savedquery']   = get_nfilter_request_var('savedquery');
+	$save['query_id']     = get_nfilter_request_var('query_id');
 	$save['sendinterval'] = get_nfilter_request_var('sendinterval');
 	$save['start']        = get_nfilter_request_var('start');
 	$save['email']        = get_nfilter_request_var('email');
@@ -301,7 +301,7 @@ function edit_schedule() {
 		$report = db_fetch_row_prepared('SELECT pfs.*, pfq.name
 			FROM plugin_flowview_schedules AS pfs
 			LEFT JOIN plugin_flowview_queries AS pfq
-			ON (pfs.savedquery=pfq.id)
+			ON (pfs.query_id=pfq.id)
 			WHERE pfs.id = ?',
 			array(get_request_var('id')));
 
@@ -386,7 +386,7 @@ function show_schedules () {
 			)
 	);
 
-	validate_store_request_vars($filters, 'sess_fvs');
+	validate_store_request_vars($filters, 'sess_fvschd');
 	/* ================= input validation ================= */
 
 	if (get_request_var('rows') == '-1') {
@@ -477,7 +477,7 @@ function show_schedules () {
 	$sql = "SELECT pfs.*, pfq.name
 		FROM plugin_flowview_schedules AS pfs
 		LEFT JOIN plugin_flowview_queries AS pfq
-		ON (pfs.savedquery=pfq.id)
+		ON (pfs.query_id=pfq.id)
 		$sql_where
 		$sql_order
 		$sql_limit";
@@ -487,7 +487,7 @@ function show_schedules () {
 	$total_rows = db_fetch_cell("SELECT COUNT(*)
 		FROM plugin_flowview_schedules AS pfs
 		LEFT JOIN plugin_flowview_queries AS pfq
-		ON (pfs.savedquery=pfq.id)
+		ON (pfs.query_id=pfq.id)
 		$sql_where");
 
 	$nav = html_nav_bar('flowview_schedules.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 5, __('Schedules', 'flowview'), 'page', 'main');

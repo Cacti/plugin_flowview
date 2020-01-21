@@ -22,6 +22,296 @@
  +-------------------------------------------------------------------------+
 */
 
+function sort_filter() {
+	global $config, $filter_edit, $graph_timespans;
+
+	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
+	if (isset_request_var('printed') && get_filter_request_var('printed') > 0) {
+		foreach($print_columns_array[get_request_var('printed')] as $key => $value) {
+			print "<option value='$key'" . (get_request_var('printed') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
+		}
+	} elseif (get_filter_request_var('statistics') > 0) {
+		foreach($stat_columns_array[get_request_var('statistics')] as $key => $value) {
+			print "<option value='$key'" . (get_request_var('statistics') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
+		}
+	} else {
+		print "<option value='0'>" . __('Select a Report Type First', 'flowview') . '</option>';
+	}
+}
+
+function edit_filter($return_page = 'flowview_filters.php') {
+	global $config, $filter_edit, $graph_timespans;
+
+	/* ================= input validation ================= */
+	get_filter_request_var('id');
+	/* ==================================================== */
+
+	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
+	$report = array();
+	if (!isempty_request_var('id')) {
+		$report = db_fetch_row_prepared('SELECT *
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('id')));
+
+		$header_label = __esc('Filter: [edit: %s]', $report['name'], 'flowview');
+	} else {
+		$header_label = __('Filter: [new]', 'flowview');
+	}
+
+	if (cacti_sizeof($report)) {
+		$found = true;
+	} else {
+		$found = false;
+	}
+
+	if (isset_request_var('rtype')) {
+		if (get_filter_request_var('rtype') == 0) {
+			if (isset_request_var('statistics')) {
+				$report['statistics'] = get_filter_request_var('statistics');
+				$report['printed']    = 0;
+			}
+		} else {
+			if (isset_request_var('printed')) {
+				$report['printed']    = get_filter_request_var('printed');
+				$report['statistics'] = 0;
+			}
+		}
+
+		$report['rtype'] = get_filter_request_var('rtype');
+	}
+
+	form_start($return_page, 'chk');
+
+	html_start_box($header_label, '100%', '', '3', 'center', '');
+
+	get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
+
+	$filter_edit['date1'] = array(
+		'value'  => $span['current_value_date1'],
+		'method' => 'hidden'
+	);
+
+	$filter_edit['date2'] = array(
+		'value'  => $span['current_value_date2'],
+		'method' => 'hidden'
+	);
+
+	if ($found) {
+		if (cacti_sizeof($report)) {
+			if ($report['statistics'] > 0) {
+				$filter_edit['sortfield']['array'] = $stat_columns_array[$report['statistics']];
+			} else {
+				$filter_edit['sortfield']['array'] = $print_columns_array[$report['printed']];
+			}
+		} else {
+			$filter_edit['sortfield']['array'] = $stat_columns_array[10];
+		}
+	}
+
+	if (isset_request_var('embed')) {
+		$filter_edit['embed'] = array(
+			'value'  => 1,
+			'method' => 'hidden'
+		);
+	}
+
+	draw_edit_form(
+		array(
+			'config' => array('no_form_tag' => true),
+			'fields' => inject_form_variables($filter_edit, $report)
+		)
+	);
+
+	html_end_box();
+
+	form_save_button($return_page);
+
+	?>
+	<script type='text/javascript'>
+	var date1Open = false;
+	var date2Open = false;
+	var returnPage = '<?php print $return_page;?>';
+
+	function applyTimespan() {
+		$.getJSON(returnPage+'?action=gettimespan&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
+			$('#date1').val(data['current_value_date1']);
+			$('#date2').val(data['current_value_date2']);
+		});
+	}
+
+	function applyFilter() {
+		strURL = returnPage +
+			'?header=false' +
+			'&action=sort_filter' +
+			'&rtype=' + $('#rtype').val() +
+			'&statistics=' + $('#statistics').val() +
+			'&printed=' + $('#printed').val();
+
+		$.get(strURL, function(data) {
+			$('#sortfield').html(data).selectmenu('refresh');
+			if ($('#statistics').val() == 99) {
+				$('#row_sortfield').hide();
+			} else {
+				$('#row_sortfield').show();
+			}
+		});
+	}
+
+	$('#date1, #date2').change(function() {
+		$('#predefined_timespan').val('0');
+		<?php if (get_selected_theme() != 'classic') {?>
+		$('#predefined_timespan').selectmenu('refresh');
+		<?php }?>
+	});
+
+	$(function() {
+		$('#startDate').click(function() {
+			if (date1Open) {
+				date1Open = false;
+				$('#date1').datetimepicker('hide');
+			} else {
+				date1Open = true;
+				$('#date1').datetimepicker('show');
+			}
+		});
+
+		$('#endDate').click(function() {
+			if (date2Open) {
+				date2Open = false;
+				$('#date2').datetimepicker('hide');
+			} else {
+				date2Open = true;
+				$('#date2').datetimepicker('show');
+			}
+		});
+
+		$('#date1').datetimepicker({
+			minuteGrid: 10,
+			stepMinute: 1,
+			showAnim: 'slideDown',
+			numberOfMonths: 1,
+			timeFormat: 'HH:mm',
+			dateFormat: 'yy-mm-dd',
+			showButtonPanel: false
+		});
+
+		$('#date2').datetimepicker({
+			minuteGrid: 10,
+			stepMinute: 1,
+			showAnim: 'slideDown',
+			numberOfMonths: 1,
+			timeFormat: 'HH:mm',
+			dateFormat: 'yy-mm-dd',
+			showButtonPanel: false
+		});
+
+		$('#protocols').multiselect();
+
+		function changeRType() {
+			if ($('#rtype').val() == 0) {
+				$('#printed').val(0);
+				$('#row_printed').hide();
+				$('#row_statistics').show();
+			} else {
+				$('#statistics').val(0);
+				$('#row_statistics').hide();
+				$('#row_printed').show();
+			}
+		}
+
+		$('#statistics, #printed').change(function() {
+			applyFilter();
+		});
+
+		$('#rtype').change(function() {
+			changeRType();
+			applyFilter();
+		});
+
+		changeRType();
+	});
+	</script>
+	<?php
+}
+
+function save_filter($return = 'flowview_filters.php') {
+	/* ================= input validation ================= */
+	get_filter_request_var('id');
+	get_filter_request_var('device_id');
+	get_filter_request_var('timespan');
+	get_filter_request_var('statistics');
+	get_filter_request_var('printed');
+	get_filter_request_var('includeif');
+	get_filter_request_var('sortfield');
+	/* ==================================================== */
+
+	$save['id']              = get_nfilter_request_var('id');
+	$save['name']            = get_nfilter_request_var('name');
+	$save['device_id']       = get_nfilter_request_var('device_id');
+
+	$save['timespan']        = get_nfilter_request_var('timespan');
+	$save['startdate']       = get_nfilter_request_var('date1');
+	$save['enddate']         = get_nfilter_request_var('date2');
+
+	$save['tosfields']       = get_nfilter_request_var('tosfields');
+	$save['tcpflags']        = get_nfilter_request_var('tcpflags');
+	$save['protocols']       = implode(', ', get_nfilter_request_var('protocols'));
+
+	$save['sourceip']        = get_nfilter_request_var('sourceip');
+	$save['sourceport']      = get_nfilter_request_var('sourceport');
+	$save['sourceinterface'] = get_nfilter_request_var('sourceinterface');
+	$save['sourceas']        = get_nfilter_request_var('sourceas');
+
+	$save['destip']          = get_nfilter_request_var('destip');
+	$save['destport']        = get_nfilter_request_var('destport');
+	$save['destinterface']   = get_nfilter_request_var('destinterface');
+	$save['destas']          = get_nfilter_request_var('destas');
+
+	$save['statistics']      = get_nfilter_request_var('statistics');
+	$save['printed']         = get_nfilter_request_var('printed');
+	$save['includeif']       = get_nfilter_request_var('includeif');
+	$save['sortfield']       = get_nfilter_request_var('sortfield');
+	$save['cutofflines']     = get_nfilter_request_var('cutofflines');
+	$save['cutoffoctets']    = get_nfilter_request_var('cutoffoctets');
+	$save['resolve']         = get_nfilter_request_var('resolve');
+
+	$id = sql_save($save, 'plugin_flowview_queries', 'id', true);
+
+	if (is_error_message()) {
+		raise_message(2);
+
+		if ($header) {
+			header('Location: flowview_filters.php?tab=sched&header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
+		} else {
+			print $id;
+		}
+		exit;
+	}
+
+	raise_message(1);
+
+	header('Location: ' . $return . '?id=' . $id . '&header=false');
+	exit;
+}
+
+function flowview_delete_filter() {
+	db_execute_prepared('DELETE FROM plugin_flowview_queries
+		WHERE id = ?',
+		array(get_filter_request_var('query')));
+
+	db_execute_prepared('DELETE FROM plugin_flowview_schedules
+		WHERE query_id = ?',
+		array(get_filter_request_var('query')));
+
+	raise_message('flow_deleted');
+
+	header('Location: flowview.php?header=false');
+	exit;
+}
+
 function flowview_gettimespan() {
 	global $config;
 
@@ -42,228 +332,167 @@ function flowview_gettimespan() {
 	print json_encode($span);
 }
 
-function flowview_display_report() {
+function flowview_display_filter() {
 	global $config, $graph_timeshifts, $graph_timespans;
 
-	$sessionid = get_sessionid();
-
-	if ($sessionid > 0) {
-		$params = db_fetch_cell_prepared('SELECT params
-			FROM plugin_flowview_session_cache
-			WHERE id = ?', array($sessionid));
-
-		$params = json_decode($params, true);
-
-		foreach($params as $variable => $value) {
-			switch ($variable) {
-			case 'bytes':
-			case 'flows':
-			case 'packets':
-				break;
-			case 'exclude':
-				if (isset_request_var('exclude')) {
-					get_filter_request_var('exclude');
-					break;
-				} else {
-					set_request_var($variable, $value);
-					break;
-				}
-			default:
-				set_request_var($variable, $value);
-				break;
-			}
-		}
-		set_request_var('action', 'view');
-	} elseif (isset_request_var('query') && get_filter_request_var('query') > 0) {
-		load_session_for_filter();
-		$sessionid = -1;
+	if (get_filter_request_var('query') > 0) {
+		$name = db_fetch_cell_prepared('SELECT name
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('query')));
 	} else {
-		load_session_for_page();
-		$sessionid = -1;
+		$name = __('Undefined Query', 'flowview');
 	}
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
-
-	$rname = '';
-	if (get_request_var('statistics') > 0) {
-		$rname = $stat_report_array[get_request_var('statistics')];
-	}
-
-	if (get_request_var('printed') > 0) {
-		$rname = $print_report_array[get_request_var('printed')];
-	}
-
-	// Load session history
-	flowview_report_session();
-
-	$filter = createFilter($sessionid);
-
-	if (isset_request_var('statistics') && get_request_var('statistics') > 0 && get_nfilter_request_var('statistics') != 99) {
-		html_start_box(__esc('Report: %s', $rname, 'flowview'), '100%', '', '3', 'center', '');
-		?>
-		<tr class='even'>
-			<td>
-			<form id='view' name='view' action='flowview.php' method='post'>
-				<table class='filterTable'>
-					<tr>
-						<td>
-							<?php print __('Filter', 'flowview');?>
-						</td>
-						<td>
-							<select name='query' id='query'>
-								<option value='-1'><?php print __('Select a Filter', 'flowview');?></option>
-								<?php
-								$queries = db_fetch_assoc('SELECT id, name
-									FROM plugin_flowview_queries
-									ORDER BY name');
-
-								if (cacti_sizeof($queries)) {
-									foreach($queries as $q) {
-										print "<option value='" . $q['id'] . "'" . (get_request_var('query') == $q['id'] ? ' selected':'') . ">" . html_escape($q['name']) . "</option>";
-									}
-								}
-								?>
-							</select>
-						</td>
-						<td>
-							<?php print __('Exclude', 'flowview');?>
-						</td>
-						<td>
-							<select name='exclude' id='exclude'>
-								<option value='0'<?php print (get_request_var('exclude') == 0 ? ' selected':'');?>><?php print __('None', 'flowview');?></option>
-								<option value='1'<?php print (get_request_var('exclude') == 1 ? ' selected':'');?>><?php print __('Top Sample', 'flowview');?></option>
-								<option value='2'<?php print (get_request_var('exclude') == 2 ? ' selected':'');?>><?php print __('Top 2 Samples', 'flowview');?></option>
-								<option value='3'<?php print (get_request_var('exclude') == 3 ? ' selected':'');?>><?php print __('Top 3 Samples', 'flowview');?></option>
-								<option value='4'<?php print (get_request_var('exclude') == 4 ? ' selected':'');?>><?php print __('Top 4 Samples', 'flowview');?></option>
-								<option value='5'<?php print (get_request_var('exclude') == 5 ? ' selected':'');?>><?php print __('Top 5 Samples', 'flowview');?></option>
-							</select>
-						</td>
-						<td class='nowrap'>
-							<input type='checkbox' name='domains' id='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
-							<label for='domains'><?php print __('Domains Only', 'flowview');?></label>
-						</td>
-						<td>
-							<span>
-								<input type='button' id='go' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Apply Filter', 'flowview');?>'>
-								<input type='button' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filter', 'flowview');?>'>
-								<input type='button' id='edit' value='<?php print __esc('Edit', 'flowview');?>' title='<?php print __esc('Edit Current Filter', 'flowview');?>'>
-							</span>
-						</td>
-					</tr>
-				</table>
-				<table class='filterTable'>
-					<tr>
-						<td>
-							<?php print __('Timespan', 'flowview');?>
-						</td>
-						<td>
-							<select id='predefined_timespan' onChange='applyTimespan()'>
-								<?php
-								if (isset_request_var('custom') && get_request_var('custom') == true) {
-									$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
-									set_request_var('predefined_timespan', GT_CUSTOM);
-									$start_val = 0;
-									$end_val = sizeof($graph_timespans);
-								} else {
-									if (isset($graph_timespans[GT_CUSTOM])) {
-										asort($graph_timespans);
-										array_shift($graph_timespans);
-									}
-									$start_val = 1;
-									$end_val = sizeof($graph_timespans)+1;
-								}
-
-								if (cacti_sizeof($graph_timespans)) {
-									for ($value=$start_val; $value < $end_val; $value++) {
-										print "<option value='$value'"; if (get_request_var('predefined_timespan') == $value) { print ' selected'; } print '>' . title_trim($graph_timespans[$value], 40) . "</option>\n";
-									}
-								}
-								?>
-							</select>
-						</td>
-						<td>
-							<?php print __('From', 'flowview');?>
-						</td>
-						<td>
-							<input type='text' id='date1' size='15' value='<?php print get_request_var('date1');?>'>
-						</td>
-						<td>
-							<i title='<?php print __esc('Start Date Selector', 'flowview');?>' class='calendar fa fa-calendar-alt' id='startDate'></i>
-						</td>
-						<td>
-							<?php print __('To', 'flowview');?>
-						</td>
-						<td>
-							<input type='text' id='date2' size='15' value='<?php print get_request_var('date2');?>'>
-						</td>
-						<td>
-							<i title='<?php print __esc('End Date Selector', 'flowview');?>' class='calendar fa fa-calendar-alt' id='endDate'></i>
-						</td>
-						<td>
-							<i title='<?php print __esc('Shift Time Backward', 'flowview');?>' onclick='timeshiftFilterLeft()' class='shiftArrow fa fa-backward'></i>
-						</td>
-						<td>
-							<select id='predefined_timeshift' title='<?php print __esc('Define Shifting Interval', 'flowview');?>'>
-								<?php
-								$start_val = 1;
-								$end_val = sizeof($graph_timeshifts) + 1;
-								if (cacti_sizeof($graph_timeshifts)) {
-									for ($shift_value=$start_val; $shift_value < $end_val; $shift_value++) {
-										print "<option value='$shift_value'"; if (get_request_var('predefined_timeshift') == $shift_value) { print ' selected'; } print '>' . title_trim($graph_timeshifts[$shift_value], 40) . '</option>';
-									}
-								}
-								?>
-							</select>
-						</td>
-						<td>
-							<i title='<?php print __esc('Shift Time Forward', 'flowview');?>' onclick='timeshiftFilterRight()' class='shiftArrow fa fa-forward'></i>
-						</td>
-					</tr>
-				</table>
-				<table class='filterTable'>
-					<tr>
-						<td>
-							<?php print __('Show/Hide', 'flowview');?>
-						</td>
-						<td class='nowrap'>
-							<input type='checkbox' name='table' id='table' <?php print (get_request_var('table') == 'true' ? 'checked':'');?>>
-							<label for='table'><?php print __('Table', 'flowview');?></label>
-						</td>
-						<td class='nowrap'>
-							<input type='checkbox' name='bytes' id='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'');?>>
-							<label for='bytes'><?php print __('Bytes Bar', 'flowview');?></label>
-						</td>
-						<td class='nowrap'>
-							<input type='checkbox' name='packets' id='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'');?>>
-							<label for='packets'><?php print __('Packets Bar', 'flowview');?></label>
-						</td>
-						<td class='nowrap'>
-							<input type='checkbox' name='flows' id='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'');?>>
-							<label for='flows'><?php print __('Flows Bar', 'flowview');?></label>
-						</td>
-					</tr>
-				</table>
-				<input type='hidden' name='page' value='1'>
-				<input type='hidden' name='tab'  id='tab' value='<?php print $sessionid;?>'>
-			</form>
-			</td>
-		</tr>
-		<?php
-		html_end_box();
-
-		flowview_draw_table($filter, $rname);
-		flowview_draw_chart('bytes', $rname);
-		flowview_draw_chart('packets', $rname);
-		flowview_draw_chart('flows', $rname);
-	} elseif (get_request_var('statistics') == 99) {
-		flowview_draw_statistics($filter, $rname);
-	} elseif (isset_request_var('printed') && get_request_var('printed') > 0) {
-		html_start_box(__('Report: %s', $rname, 'flowview'), '100%', '', '3', 'center', '');
-		print $filter;
-		html_end_box();
-	}
+	html_start_box(__esc('Report: %s', $name, 'flowview'), '100%', '', '3', 'center', '');
 
 	?>
+	<tr class='even'>
+		<td>
+		<form id='view' name='view' action='flowview.php' method='post'>
+			<table class='filterTable'>
+				<tr>
+					<td>
+						<?php print __('Filter', 'flowview');?>
+					</td>
+					<td>
+						<select name='query' id='query'>
+							<option value='-1'><?php print __('Select a Filter', 'flowview');?></option>
+							<?php
+							$queries = db_fetch_assoc('SELECT id, name
+								FROM plugin_flowview_queries
+								ORDER BY name');
+
+							if (cacti_sizeof($queries)) {
+								foreach($queries as $q) {
+									print "<option value='" . $q['id'] . "'" . (get_request_var('query') == $q['id'] ? ' selected':'') . '>' . html_escape($q['name']) . '</option>';
+								}
+							}
+							?>
+						</select>
+					</td>
+					<td>
+						<?php print __('Exclude', 'flowview');?>
+					</td>
+					<td>
+						<select name='exclude' id='exclude'>
+							<option value='0'<?php print (get_request_var('exclude') == 0 ? ' selected':'');?>><?php print __('None', 'flowview');?></option>
+							<option value='1'<?php print (get_request_var('exclude') == 1 ? ' selected':'');?>><?php print __('Top Sample', 'flowview');?></option>
+							<option value='2'<?php print (get_request_var('exclude') == 2 ? ' selected':'');?>><?php print __('Top 2 Samples', 'flowview');?></option>
+							<option value='3'<?php print (get_request_var('exclude') == 3 ? ' selected':'');?>><?php print __('Top 3 Samples', 'flowview');?></option>
+							<option value='4'<?php print (get_request_var('exclude') == 4 ? ' selected':'');?>><?php print __('Top 4 Samples', 'flowview');?></option>
+							<option value='5'<?php print (get_request_var('exclude') == 5 ? ' selected':'');?>><?php print __('Top 5 Samples', 'flowview');?></option>
+						</select>
+					</td>
+					<td class='nowrap'>
+						<input type='checkbox' name='domains' id='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
+						<label for='domains'><?php print __('Domains Only', 'flowview');?></label>
+					</td>
+					<td>
+						<span>
+							<input type='button' id='go' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Apply Filter', 'flowview');?>'>
+							<input type='button' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filter', 'flowview');?>'>
+							<input type='button' id='edit' value='<?php print __esc('Edit', 'flowview');?>' title='<?php print __esc('Edit Current Filter', 'flowview');?>'>
+						</span>
+					</td>
+				</tr>
+			</table>
+			<table class='filterTable'>
+				<tr>
+					<td>
+						<?php print __('Timespan', 'flowview');?>
+					</td>
+					<td>
+						<select id='predefined_timespan' onChange='applyTimespan()'>
+							<?php
+							if (isset_request_var('custom') && get_request_var('custom') == true) {
+								$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
+								set_request_var('predefined_timespan', GT_CUSTOM);
+								$start_val = 0;
+								$end_val = sizeof($graph_timespans);
+							} else {
+								if (isset($graph_timespans[GT_CUSTOM])) {
+									asort($graph_timespans);
+									array_shift($graph_timespans);
+								}
+								$start_val = 1;
+								$end_val = sizeof($graph_timespans)+1;
+							}
+
+							if (cacti_sizeof($graph_timespans)) {
+								for ($value=$start_val; $value < $end_val; $value++) {
+									print "<option value='$value'" . (get_request_var('predefined_timespan') == $value ? ' selected':'') . '>' . title_trim($graph_timespans[$value], 40) . '</option>';
+								}
+							}
+							?>
+						</select>
+					</td>
+					<td>
+						<?php print __('From', 'flowview');?>
+					</td>
+					<td>
+						<input type='text' id='date1' size='15' value='<?php print html_escape_request_var('date1');?>'>
+					</td>
+					<td>
+						<i title='<?php print __esc('Start Date Selector', 'flowview');?>' class='calendar fa fa-calendar-alt' id='startDate'></i>
+					</td>
+					<td>
+						<?php print __('To', 'flowview');?>
+					</td>
+					<td>
+						<input type='text' id='date2' size='15' value='<?php print html_escape_request_var('date2');?>'>
+					</td>
+					<td>
+						<i title='<?php print __esc('End Date Selector', 'flowview');?>' class='calendar fa fa-calendar-alt' id='endDate'></i>
+					</td>
+					<td>
+						<i title='<?php print __esc('Shift Time Backward', 'flowview');?>' onclick='timeshiftFilterLeft()' class='shiftArrow fa fa-backward'></i>
+					</td>
+					<td>
+						<select id='predefined_timeshift' title='<?php print __esc('Define Shifting Interval', 'flowview');?>'>
+							<?php
+							$start_val = 1;
+							$end_val = sizeof($graph_timeshifts) + 1;
+							if (cacti_sizeof($graph_timeshifts)) {
+								for ($shift_value=$start_val; $shift_value < $end_val; $shift_value++) {
+									print "<option value='$shift_value'" . (get_request_var('predefined_timeshift') == $shift_value ? ' selected':'') . '>' . title_trim($graph_timeshifts[$shift_value], 40) . '</option>';
+								}
+							}
+							?>
+						</select>
+					</td>
+					<td>
+						<i title='<?php print __esc('Shift Time Forward', 'flowview');?>' onclick='timeshiftFilterRight()' class='shiftArrow fa fa-forward'></i>
+					</td>
+				</tr>
+			</table>
+			<table class='filterTable'>
+				<tr>
+					<td>
+						<?php print __('Show/Hide', 'flowview');?>
+					</td>
+					<td class='nowrap'>
+						<input type='checkbox' name='table' id='table' <?php print (get_request_var('table') == 'true' ? 'checked':'');?>>
+						<label for='table'><?php print __('Table', 'flowview');?></label>
+					</td>
+					<td class='nowrap'>
+						<input type='checkbox' name='bytes' id='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'');?>>
+						<label for='bytes'><?php print __('Bytes Bar', 'flowview');?></label>
+					</td>
+					<td class='nowrap'>
+						<input type='checkbox' name='packets' id='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'');?>>
+						<label for='packets'><?php print __('Packets Bar', 'flowview');?></label>
+					</td>
+					<td class='nowrap'>
+						<input type='checkbox' name='flows' id='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'');?>>
+						<label for='flows'><?php print __('Flows Bar', 'flowview');?></label>
+					</td>
+				</tr>
+			</table>
+			<input type='hidden' name='page' value='1'>
+		</form>
+		</td>
+	</tr>
 	<script type='text/javascript'>
 
 	var height = $(window).height() - 200;
@@ -305,18 +534,12 @@ function flowview_display_report() {
 			}
 		});
 
-		$('#domains, #query, #go, #exclude').unbind('change').change(function() {
+		$('#domains, #query, #exclude').unbind('change').change(function() {
 			applyFilter();
 		});
 
-		$('#table').unbind('click').click(function() {
-			updateSession();
-
-			if (!$('#table').is(':checked')) {
-				$('#flowcontent').hide();
-			} else {
-				$('#flowcontent').show();
-			}
+		$('#go').unbind('click').click(function() {
+			applyFilter();
 		});
 
 		$('#clear').unbind('click').click(function() {
@@ -324,8 +547,9 @@ function flowview_display_report() {
 		});
 
 		$('#edit').unbind('click').click(function() {
-			$.get(urlPath + '/plugins/flowview/flowview_filters.php' +
-				'?id='+$('#query').val() +
+			$.get(urlPath + '/plugins/flowview/flowview.php' +
+				'?action=edit' +
+				'&id='+$('#query').val() +
 				'&action=edit&embed=true', function(data) {
 
 				if ($('#filter').length == 0) {
@@ -340,6 +564,16 @@ function flowview_display_report() {
 					'minWidth': 600
 				});
 			});
+		});
+
+		$('#table').unbind('click').click(function() {
+			updateSession();
+
+			if (!$('#table').is(':checked')) {
+				$('#flowcontent').hide();
+			} else {
+				$('#flowcontent').show();
+			}
 		});
 
 		if ($('#table').is('checked')) {
@@ -496,10 +730,9 @@ function flowview_display_report() {
 	});
 
 	</script>
-
 	<?php
 
-	bottom_footer();
+	html_end_box();
 }
 
 function get_port_name($port_num, $port_proto) {
@@ -513,10 +746,10 @@ function plugin_flowview_run_schedule($id) {
 		WHERE id = ?',
 		array($id));
 
-	$query    = db_fetch_row_prepared('SELECT *
+	$query = db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
-		array($schedule['savedquery']));
+		array($schedule['query_id']));
 
 	$fromname = read_config_option('settings_from_name');
 	if (strlen($fromname) < 1) {
@@ -531,7 +764,7 @@ function plugin_flowview_run_schedule($id) {
 	$subject = __('Netflow - %', $schedule['title'], 'flowview');
 
 	set_request_var('schedule', $id);
-	set_request_var('query', $schedule['savedquery']);
+	set_request_var('query', $schedule['query_id']);
 	set_request_var('action', 'loadquery');
 
 	$message  = "<body style='margin:10px;'>";
@@ -539,43 +772,10 @@ function plugin_flowview_run_schedule($id) {
 	$message .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
 	$message .= '</style>';
 	$sessionid = -1;
-	$message .= createFilter($sessionid);
+	$message .= load_data_for_filter();
 	$message .= '</body>';
 
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
-}
-
-function purgeFlows() {
-	$time = time();
-
-	$expired = db_fetch_cell_prepared('SELECT GROUP_CONCAT(id)
-		FROM plugin_flowview_session_cache
-		WHERE user_id = ?
-        AND UNIX_TIMESTAMP(last_updated) < ?',
-        array($_SESSION['sess_user_id'], $time-900));
-
-	if ($expired != '') {
-		$each = explode(',', $expired);
-		foreach($each as $id) {
-			unset($_SESSION['flowview_flows'][$id]);
-		}
-
-		// Remove database session data
-		db_execute("DELETE FROM plugin_flowview_session_cache
-			WHERE id IN($expired)");
-
-		db_execute("DELETE FROM plugin_flowview_session_cache_details
-			WHERE cache_id IN($expired)");
-
-		db_execute("DELETE FROM plugin_flowview_session_cache_flow_stats
-			WHERE cache_id IN($expired)");
-	}
-
-	// Reset auto-increment if applicable
-	$rows = db_fetch_cell('SELECT count(*) FROM plugin_flowview_session_cache');
-	if ($rows == 0) {
-		db_execute('ALTER IGNORE TABLE plugin_flowview_session_cache AUTO_INCREMENT = 1');
-	}
 }
 
 /** creatfilter($sessionid)
@@ -583,7 +783,7 @@ function purgeFlows() {
  *  This function creates the NetFlow Report for the UI.  It presents this in a table
  *  format and returns as a test string to the calling function.
  */
-function createFilter() {
+function load_data_for_filter() {
 	global $config;
 
 	$output    = '';
@@ -666,7 +866,11 @@ function createFilter() {
 	}
 
 	/* Run the query */
-	return run_flow_query($sql_where, $start, $end);
+	$data = run_flow_query(get_request_var('query'), $title, $sql_where, $start, $end);
+
+	$_SESSION['sess_flowdata'] = $data;
+
+	return $data;
 }
 
 function get_numeric_filter($sql_where, $value, $column) {
@@ -702,8 +906,8 @@ function get_date_filter($sql_where, $date1, $date2, $range_type) {
 	switch($range_type) {
 		case 1: // Any part in specified time span
 			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') .
-				'(`start_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '") OR
-				(`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
+				'(`start_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '" OR
+				`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
 			break;
 		case 2: // End Time in Specified Time Span
 			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
@@ -713,8 +917,8 @@ function get_date_filter($sql_where, $date1, $date2, $range_type) {
 			break;
 		case 4: // Entirety in Specitifed Time Span
 			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') .
-				'(`start_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '") AND
-				(`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
+				'(`start_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '" AND
+				`end_time` BETWEEN "' . $date1 . '" AND "' . $date2 . '")';
 			break;
 		default:
 			cacti_log('ERROR: get_date_filter range type not recognized', false, 'FLOWVIEW');
@@ -724,8 +928,306 @@ function get_date_filter($sql_where, $date1, $date2, $range_type) {
 	return $sql_where;
 }
 
-function run_flow_query($sql_query, $start, $end) {
-	cacti_log($sql_query);
+function get_tables_for_query($start, $end) {
+	global $config, $graph_timespans;
+
+	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
+	$part_type  = read_config_option('flowview_partition');
+	$inc_tables = array();
+
+	if ($part_type == 0) {
+		$start_part = date('Y', $start) . substr('000' . date('z', $start), -3) . '00';
+		$end_part   = date('Y', $end)   . substr('000' . date('z', $end), -3)   . '00';
+	} else {
+		$start_part = date('Y', $start) . substr('000' . date('z', $start), -3) . date('H', $start);
+		$end_part   = date('Y', $end)   . substr('000' . date('z', $end), -3)   . date('H', $end);
+	}
+
+	$tables = db_fetch_assoc('SELECT TABLE_NAME AS `table`
+		FROM information_schema.TABLES
+		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
+
+	if (sizeof($tables)) {
+		foreach($tables as $t) {
+			$parts = explode('_', $t['table']);
+			$partition = trim($parts[3]);
+
+			// Normalize the partition to hour zero
+			if (strlen($partition) == '7') {
+				$partition .= '00';
+			}
+
+			if ($partition >= $start_part && $partition <= $end_part) {
+				$inc_tables[] = $t['table'];
+			}
+		}
+	}
+
+	return $inc_tables;
+}
+
+function run_flow_query($query_id, $title, $sql_where, $start, $end) {
+	global $config, $graph_timespans;
+
+	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
+	$data = db_fetch_row_prepared('SELECT * FROM plugin_flowview_queries WHERE id = ?', array($query_id));
+
+	$sql_limit = 'LIMIT ' . $data['cutofflines'];
+	$sql       = '';
+
+	if (cacti_sizeof($data)) {
+		if ($data['statistics'] > 0) {
+			switch($data['statistics']) {
+				case 99:
+					break;
+				case 2:
+					$sql_query = 'SELECT src_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_rdomain';
+					$sql_inner_groupby = 'GROUP BY src_rdomain';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 3:
+					$sql_query = 'SELECT dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY dst_rdomain';
+					$sql_inner_groupby = 'GROUP BY dst_rdomain';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 4:
+					$sql_query = 'SELECT src_rdomain, dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_rdomain, dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_rdomain, dst_rdomain';
+					$sql_inner_groupby = 'GROUP BY src_rdomain, dst_rdomain';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+				case 5:
+					$sql_query = 'SELECT port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT dst_port AS port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY port';
+					$sql_inner_groupby = 'GROUP BY port';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 6:
+					$sql_query = 'SELECT port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_port AS port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY port';
+					$sql_inner_groupby = 'GROUP BY port';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 7:
+					$sql_query = 'SELECT src_port, dst_port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_port, dst_port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_port, dst_port';
+					$sql_inner_groupby = 'GROUP BY src_port, dst_port';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+				case 8:
+					$sql_query = 'SELECT INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, dst_domain';
+					$sql_inner = 'SELECT dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, dst_domain';
+
+					$sql_groupby       = 'GROUP BY INET6_NTOA(dst_addr)';
+					$sql_inner_groupby = 'GROUP BY dst_addr';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 9:
+					$sql_query = 'SELECT src_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain';
+					$sql_inner = 'SELECT src_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain';
+
+					$sql_groupby       = 'GROUP BY src_addr';
+					$sql_inner_groupby = 'GROUP BY src_addr';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 10:
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+
+					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr)';
+					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+				case 11:
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+
+					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr)';
+					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+				case 12:
+					$sql_query = 'SELECT protocol, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT protocol, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY protocol';
+					$sql_inner_groupby = 'GROUP BY protocol';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 17:
+					$sql_query = 'SELECT src_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_if';
+					$sql_inner_groupby = 'GROUP BY src_if';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 18:
+					$sql_query = 'SELECT dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY dst_if';
+					$sql_inner_groupby = 'GROUP BY dst_if';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 23:
+					$sql_query = 'SELECT src_if, dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_if, dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_if, dst_if';
+					$sql_inner_groupby = 'GROUP BY src_if, dst_if';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+				case 19:
+					$sql_query = 'SELECT src_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_as';
+					$sql_inner_groupby = 'GROUP BY src_as';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 20:
+					$sql_query = 'SELECT dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY dst_as';
+					$sql_inner_groupby = 'GROUP BY dst_as';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 21:
+					$sql_query = 'SELECT src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_as, dst_as';
+					$sql_inner_groupby = 'GROUP BY src_as, dst_as';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+				case 22:
+					$sql_query = 'SELECT tos, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT tos, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY tos';
+					$sql_inner_groupby = 'GROUP BY tos';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 24:
+					$sql_query = 'SELECT src_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_prefix';
+					$sql_inner_groupby = 'GROUP BY src_prefix';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 25:
+					$sql_query = 'SELECT dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY dst_prefix';
+					$sql_inner_groupby = 'GROUP BY dst_prefix';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
+					break;
+				case 26:
+					$sql_query = 'SELECT src_prefix, dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_inner = 'SELECT src_prefix, dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY src_prefix, dst_prefix';
+					$sql_inner_groupby = 'GROUP BY src_prefix, dst_prefix';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+			}
+		} else {
+			switch($data['printed']) {
+				case '1':
+					$sql_query = 'SELECT src_if, INET6_NTOA(src_addr) AS src_addr, dst_if, INET6_NTOA(dst_addr) AS dst_addr, protocol, src_port, dst_port, tos, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_if, src_addr, dst_if, dst_addr, protocol, src_port, dst_port, tos, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+
+					$sql_groupby       = 'GROUP BY src_if, INET6_NTOA(src_addr), dst_if, INET6_NTOA(dst_addr), protocol, src_port, dst_port, tos, flags';
+					$sql_inner_groupby = 'GROUP BY src_if, src_addr, dst_if, dst_addr, protocol, src_port, dst_port, tos, flags';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 8 ? ' DESC':' ASC');
+					break;
+				case '4':
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, protocol, src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, protocol, src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+
+					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr), protocol, src_as, dst_as';
+					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr, protocol, src_as, dst_as';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 4 ? ' DESC':' ASC');
+					break;
+				case '5':
+					$sql_query = 'SELECT start_time, end_time, src_if, INET6_NTOA(src_addr) AS src_addr, src_port, dst_if, INET6_NTOA(dst_addr) AS dst_addr, dst_port, protocol, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_inner = 'SELECT start_time, end_time, src_if, src_addr, src_port, dst_if, dst_addr, dst_port, protocol, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+
+					$sql_groupby       = 'GROUP BY start_time, end_time, src_if, INET6_NTOA(src_addr), src_port, dst_if, INET6_NTOA(dst_addr), dst_port, protocol, flags';
+					$sql_inner_groupby = 'GROUP BY start_time, end_time, src_if, src_addr, src_port, dst_if, dst_addr, dst_port, protocol, flags';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 9 ? ' DESC':' ASC');
+					break;
+				case '6':
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+
+					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr)';
+					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr';
+
+					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
+					break;
+			}
+		}
+
+		$tables = get_tables_for_query($start, $end);
+
+		$sql = '';
+
+		if (sizeof($tables)) {
+			foreach($tables as $t) {
+				$sql .= ($sql != '' ? ' UNION ':'') . "$sql_inner FROM $t $sql_where $sql_inner_groupby";
+			}
+		}
+
+		$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_order $sql_limit";
+	}
+
+	cacti_log($sql);
+
 	return false;
 }
 
@@ -748,29 +1250,6 @@ function get_json_params() {
 	}
 
 	return json_encode($arr);
-}
-
-function find_good_title($title) {
-	$i = 1;
-	$otitle = $title;
-
-	while ($i < 40) {
-		$title_exists = db_fetch_cell_prepared('SELECT COUNT(*)
-			FROM plugin_flowview_session_cache
-			WHERE title = ?
-			AND user_id = ?
-			AND sessionid = ?',
-			array($title, $_SESSION['sess_user_id'], session_id()));
-
-		if ($title_exists) {
-			$title = $otitle . ' (' . $i . ')';
-			$i++;
-		} else {
-			break;
-		}
-	}
-
-	return $title;
 }
 
 function get_column_alignment($column) {
@@ -916,7 +1395,7 @@ function removeWhiteSpace($string) {
 }
 
 function parsestatoutput($output, $title, $sessionid) {
-	global $config;
+	global $config, $graph_timespans;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
@@ -1036,8 +1515,10 @@ function parsestatoutput($output, $title, $sessionid) {
 }
 
 function plugin_flowview_get_protocol ($prot, $prot_hex) {
-	global $config;
+	global $config, $graph_timespans;
+
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
 	$prot = ltrim($prot,'0');
 	$prot = ($prot_hex ? hexdec($prot):$prot);
 
@@ -1063,196 +1544,6 @@ function flowview_altrow($i) {
 		return 'odd';
 	}
 }
-
-
-function parseprintoutput($report, $output, $title, $sessionid) {
-	global $config;
-	static $domains = array();
-
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
-
-	if (!isset($print_array[$report])) {
-		return "<table><tr><td><font size=+1><pre>$output</pre></font></td></tr></table>";
-	}
-
-	$output = explode("\n", $output);
-
-	$sql_prefix = 'INSERT INTO plugin_flowview_session_cache_details (cache_id, report_id, ' . $print_array[$report]['db_columns'] . ') VALUES ';
-
-	$clines     = $print_array[$report]['clines'];
-	$columns    = $print_array[$report]['spec'];
-
-	if ($sessionid != -1) {
-		$_SESSION['flowview_flows'][$sessionid]['columns'] = $columns;
-	}
-
-	$dns1 = read_config_option('settings_dns_primary');
-	$dns2 = read_config_option('settings_dns_secondary');
-
-	if (get_request_var('resolve') == 'Y') {
-		$resolve = true;
-	} else {
-		$resolve = false;
-	}
-
-	$prefix     = '(' . $sessionid . ', ' . $report;
-	$firstline  = true;
-	$cfirst     = false;
-
-	$sql = array();
-	$i   = 0;
-
-	foreach ($output as $out) {
-		if ($clines > 1 && $out != '' && substr($out, 0, 1) != ' ') {
-			$cfirst = true;
-			$outf   = trim($out);
-			continue;
-		} elseif (trim($out) == '') {
-			// Empty line
-			continue;
-		} elseif ($clines > 1 && $cfirst == true) {
-			$out    = $outf . ' ' . trim($out);
-			$cfirst = false;
-		} else {
-			$out = trim($out);
-		}
-
-		$time = time();
-
-		if (substr($out, 0, 1) != '#' && $firstline == false) {
-			$out = preg_split('/[\s]+/', $out);
-			$str = $prefix;
-			foreach($out as $index => $value) {
-				switch($print_array[$report]['spec'][$index]['column']) {
-					case 'SIf':
-					case 'DIf':
-						if ($print_array[$report]['if_hex']) {
-							$str .= ', ' . hexdec($value);
-						} else {
-							$str .= ', ' . $value;
-						}
-
-						break;
-					case 'srcIP':
-					case 'dstIP':
-						$parts = explode('/', $value);
-
-						if (isset($parts[1])) {
-							$str .= ', ' . $parts[1];
-							$value = $parts[0];
-						} else {
-							$str .= ', 0';
-						}
-					case 'Source':
-					case 'Destination':
-					case 'SrcIPaddress':
-					case 'DstIPaddress':
-						$str .= ', ' . db_qstr($value);
-
-						if ($resolve) {
-							$domain = flowview_get_dns_from_ip($value, 100);
-
-							$str .= ', ' . db_qstr($domain);
-
-							if ($domain != '' && strpos($domain, '.') !== false) {
-								$parts = explode('.', $domain);
-								$size  = sizeof($parts);
-								$str .= ', ' . db_qstr($parts[$size - 2] . '.' . $parts[$size - 1]);
-							} else {
-								$str .= ', ' . db_qstr('');
-							}
-						} else {
-							$str .= ', ' . db_qstr('');
-							$str .= ', ' . db_qstr('');
-						}
-
-						break;
-					case 'SrcP':
-					case 'DstP':
-						if ($print_array[$report]['ports_hex']) {
-							$str .= ', ' . hexdec($value);
-							$str .= ', ' . db_qstr(flowview_translate_port($value, true, false));
-						} else {
-							$str .= ', ' . $value;
-							$str .= ', ' . db_qstr(flowview_translate_port($value, false, false));
-						}
-						break;
-					case 'Start':     // Start time of flow 0727.13:19:03.263
-					case 'End':       // End time of flow   0727.13:19:03.263
-					case 'StartTime': // Start time of flow 0727.13:19:03.263
-					case 'EndTime':   // End time of flow   0727.13:19:03.263
-						$parts = explode('.', $value);
-						$month_day = date('md');
-
-						$year = date('Y');
-
-						if ($parts[0] > $month_day) {
-							$year--;
-						}
-
-						$month = substr($parts[0], 0, 2);
-						$day   = substr($parts[0], 2, 2);
-						$hms   = $parts[1];
-						$ms    = $parts[2];
-
-						$date =
-							$year   .  '-' .
-							$month  .  '-' .
-							$day    .  ' ' .
-							$hms    .  '.' .
-							$ms;
-
-						$str .= ', ' . db_qstr($date);
-
-						break;
-					case 'Ts':        // Type of service
-					case 'Fl':        // Flags
-						$str .= ', ' . hexdec($value);
-						break;
-					case 'srcAS':
-					case 'dstAS':
-					case 'prot':
-					case 'flows':
-					case 'Pkts':
-					case 'Octets':
-					case 'Packets':
-					case 'Bytes':
-					case 'P':         // Protocol
-					case 'Pr':        // Protocol
-					case 'Active':    // Milliseconds active
-					case 'B/Pk':      // Bytes per Packet
-						$str .= ', ' . $value;
-						break;
-					default:
-						$str .= ', ' . db_qstr($value);
-						break;
-				}
-			}
-
-			$str .= ')';
-
-			$sql[] = $str;
-
-			if ($i > 1000) {
-				if (!db_execute($sql_prefix . implode(', ', $sql))) {
-					cacti_log($sql_prefix . substr(implode(', ', $sql), 0, 1000));
-				}
-
-				$sql = array();
-				$i = 0;
-			} else {
-				$i++;
-			}
-		}
-
-		$firstline = false;
-	}
-
-	if ($i > 0) {
-		db_execute($sql_prefix . implode(', ', $sql));
-	}
-}
-
 
 function flowview_get_rdomain_from_domain($domain) {
 	$str = '';
@@ -1697,7 +1988,7 @@ function getfolderpath($n, $device, $start, $end) {
 }
 
 function flowview_check_fields () {
-	global $config;
+	global $config, $graph_timespans;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
@@ -1926,7 +2217,7 @@ function flowview_check_fields () {
 	}
 }
 
-function flowview_draw_table(&$output, $rname) {
+function flowview_draw_table(&$output) {
 	print "<div>";
 	print "<div id='flowcontent' style='display:none'>";
 	print $output;
@@ -1934,7 +2225,7 @@ function flowview_draw_table(&$output, $rname) {
 	print "</div>";
 }
 
-function flowview_draw_statistics(&$output, $rname) {
+function flowview_draw_statistics(&$output) {
 	print "<div>";
 	print "<div id='data'>";
 	print $output;
@@ -2231,29 +2522,57 @@ function get_sessionid() {
 function flowview_viewtable() {
 	global $config;
 
-	$sessionid  = get_sessionid();
-
 	$data = db_fetch_row_prepared('SELECT *
-		FROM plugin_flowview_session_cache
-		WHERE id = ?
-		AND user_id = ?',
-		array($sessionid, $_SESSION['sess_user_id']));
+		FROM plugin_flowview_queries
+		WHERE id = ?',
+		array(get_filter_request_var('query')));
+
+    /* ================= input validation and session storage ================= */
+    $filters = array(
+		'rows' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'pageset' => true,
+			'default' => '-1'
+			),
+		'page' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '1'
+			),
+		'timespan' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '1'
+			),
+		'date1' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'true',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'date2' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'true',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'domains' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'true',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_column' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'fq.name',
+			'options' => array('options' => 'sanitize_search_string')
+			),
+		'sort_direction' => array(
+			'filter' => FILTER_CALLBACK,
+			'default' => 'ASC',
+			'options' => array('options' => 'sanitize_search_string')
+			)
+	);
+
+	validate_store_request_vars($filters, 'sess_fv');
+	/* ================= input validation ================= */
 
 	if (cacti_sizeof($data)) {
-		$output = $data['data'];
-		$title  = $data['title'];
-		$params = json_decode($data['params'], true);
-
-		foreach($params as $item => $value) {
-			switch ($item) {
-			case 'bytes':
-			case 'flows':
-			case 'packets':
-				break;
-			default:
-				set_request_var($item, $value);
-			}
-		}
 	}
 
 	print parsestatoutput($output, $title, $sessionid);
@@ -2269,17 +2588,13 @@ function flowview_viewtable() {
 function flowview_viewchart() {
 	global $config;
 
-	include($config['base_path'] . '/plugins/flowview/lib/open-flash-chart-object.php');
-	include($config['base_path'] . '/plugins/flowview/lib/open-flash-chart.php');
-
-	$sessionid  = get_sessionid();
-
-	flowview_report_session();
-
 	// Load up the data array
-	$data       = createFilter($sessionid);
+	if (isset($_SESSION['sess_flowdata'])) {
+		$data = $_SESSION['sess_flowdata'];
+	} else {
+		$data = array();
+	}
 
-	$title      = get_nfilter_request_var('title');
 	$chart_type = 'bar';
 	$column     = get_nfilter_request_var('type');
 

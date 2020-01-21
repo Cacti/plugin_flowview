@@ -82,7 +82,16 @@ function plugin_flowview_check_upgrade() {
 				DROP COLUMN expire,
 				DROP COLUMN compression'
 			);
+
 		}
+
+		if (db_column_exists('plugin_flowview_schedules', 'savedquery')) {
+			db_execute('ALTER TABLE plugin_flowview_schedules CHANGE COLUMN savedquery query_id INT unsigned NOT NULL default "0"');
+		}
+
+		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache');
+		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache_flow_stats');
+		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache_details');
 
 		if ($bad_titles) {
 			/* update titles for those that don't have them */
@@ -407,9 +416,9 @@ function flowview_setup_table() {
 	$data['columns'][]  = array('name' => 'lastsent', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false);
 	$data['columns'][]  = array('name' => 'start', 'type' => 'datetime', 'NULL' => false);
 	$data['columns'][]  = array('name' => 'email', 'type' => 'text', 'NULL' => false);
-	$data['columns'][]  = array('name' => 'savedquery', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false);
+	$data['columns'][]  = array('name' => 'query_id', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false);
 	$data['primary']    = 'id';
-	$data['keys'][]     = array('name' => 'savedquery', 'columns' => 'savedquery');
+	$data['keys'][]     = array('name' => 'query_id', 'columns' => 'query_id');
 	$data['type']       = 'InnoDB';
 	$data['row_format'] = 'Dynamic';
 	$data['comment']    = 'Plugin Flowview - Scheduling for running and emails of saved queries';
@@ -426,100 +435,6 @@ function flowview_setup_table() {
 	$data['row_format'] = 'Dynamic';
 	$data['comment']    = 'Plugin Flowview - Database of well known Ports';
 	api_plugin_db_table_create('flowview', 'plugin_flowview_ports', $data);
-
-	$data = array();
-	$data['columns'][]  = array('name' => 'id', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][]  = array('name' => 'user_id', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'sessionid', 'type' => 'varchar(32)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'params', 'type' => 'varchar(2048)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'command', 'type' => 'varchar(2048)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'filter', 'type' => 'varchar(4096)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'title', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'data', 'type' => 'longblob', 'default' => '');
-	$data['columns'][]  = array('name' => 'saved', 'type' => 'int(1)', 'unisigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'created', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP');
-	$data['columns'][]  = array('name' => 'last_updated', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP');
-	$data['primary']    = 'id';
-	$data['keys'][]     = array('name' => 'user_id', 'columns' => 'user_id');
-	$data['keys'][]     = array('name' => 'sessionid', 'columns' => 'sessionid');
-	$data['type']       = 'InnoDB';
-	$data['row_format'] = 'Dynamic';
-	$data['comment']    = 'Plugin Flowview - Session Data Cache';
-	api_plugin_db_table_create('flowview', 'plugin_flowview_session_cache', $data);
-
-	$data = array();
-	$data['columns'][]  = array('name' => 'cache_id', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false);
-	$data['columns'][]  = array('name' => 'name', 'type' => 'varchar(60)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'type', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'value', 'type' => 'bigint', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['primary']    = 'cache_id`,`name`,`type';
-	$data['keys'][]     = array('name' => 'type', 'columns' => 'type');
-	$data['type']       = 'InnoDB';
-	$data['row_format'] = 'Dynamic';
-	$data['comment']    = 'Plugin Flowview - Summary Flow Statistics';
-	api_plugin_db_table_create('flowview', 'plugin_flowview_session_cache_flow_stats', $data);
-
-	$data = array();
-	// Auto increment sequence
-	$data['columns'][]  = array('name' => 'sequence', 'type' => 'bigint(20)', 'unsigned' => true, 'auto_increment' => true);
-
-	// Report information
-	$data['columns'][]  = array('name' => 'cache_id', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false);
-	$data['columns'][]  = array('name' => 'report_id', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false);
-
-	// Source Details
-	$data['columns'][]  = array('name' => 'src_addr', 'type' => 'varchar(15)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'src_addr_ipv6', 'type' => 'varchar(48)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'src_domain', 'type' => 'varchar(256)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'src_rdomain', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'src_as', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'src_if', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'src_mask', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'src_mask_ipv6', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'src_prefix', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'src_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'src_rport', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-
-	// Destination Details
-	$data['columns'][]  = array('name' => 'dst_addr', 'type' => 'varchar(15)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'dst_addr_ipv6', 'type' => 'varchar(48)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'dst_domain', 'type' => 'varchar(256)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'dst_rdomain', 'type' => 'varchar(40)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'dst_as', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'dst_if', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'dst_mask', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'dst_mask_ipv6', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'dst_prefix', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-	$data['columns'][]  = array('name' => 'dst_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'dst_rport', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-
-	// Generic Infromation for Combo Reports
-	$data['columns'][]  = array('name' => 'nexthop', 'type' => 'varchar(48)', 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'protocol', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'rport', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
-
-	// Timing for flow reports
-	$data['columns'][]  = array('name' => 'start_time', 'type' => 'timestamp(6)', 'NULL' => false, 'default' => '1000-01-01');
-	$data['columns'][]  = array('name' => 'end_time', 'type' => 'timestamp(6)', 'NULL' => false, 'default' => '1000-01-01');
-
-	// Key Performance Data
-	$data['columns'][]  = array('name' => 'flows', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'packets', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'bytes', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-
-	// Generic Stats for Print Reports
-	$data['columns'][]  = array('name' => 'bytes_ppacket', 'type' => 'double', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'active', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'tos', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-	$data['columns'][]  = array('name' => 'flags', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
-
-	$data['primary']    = 'sequence';
-	$data['keys'][]     = array('name' => 'cache_id_report_id', 'columns' => 'cache_id`,`report_id');
-	$data['type']       = 'InnoDB';
-	$data['row_format'] = 'Dynamic';
-	$data['comment']    = 'Plugin Flowview - Details Report Data';
-	api_plugin_db_table_create('flowview', 'plugin_flowview_session_cache_details', $data);
 
 	$inserts = file($config['base_path'] . '/plugins/flowview/plugin_flowview_ports.sql');
 	if (sizeof($inserts)) {

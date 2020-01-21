@@ -38,24 +38,15 @@ $sched_actions = array(
 	4 => __('Enable', 'flowview')
 );
 
-$sendinterval_arr = array(
-	3600    => __('Every Hour', 'flowview'),
-	7200    => __('Every %d Hours', 2, 'flowview'),
-	14400   => __('Every %d Hours', 4, 'flowview'),
-	21600   => __('Every %d Hours', 6, 'flowview'),
-	43200   => __('Every %d Hours', 12, 'flowview'),
-	86400   => __('Every Day', 'flowview'),
-	432000  => __('Every Week', 'flowview'),
-	864000  => __('Every %d Weeks, 2', 'flowview'),
-	1728000 => __('Every Month', 'flowview'),
-);
-
 switch (get_request_var('action')) {
 	case 'actions':
 		actions_filters();
 		break;
 	case 'save':
 		save_filter();
+		break;
+	case 'sort_filter':
+		sort_filter();
 		break;
 	case 'edit':
 		if (!isset_request_var('embed')) {
@@ -77,7 +68,7 @@ switch (get_request_var('action')) {
 }
 
 function actions_filters() {
-	global $colors, $sched_actions, $config;
+	global $sched_actions, $config;
 
 	/* ================= input validation ================= */
 	input_validate_input_number(get_request_var_post('drp_action'));
@@ -179,137 +170,8 @@ function actions_filters() {
 	bottom_footer();
 }
 
-function save_filter() {
-	/* ================= input validation ================= */
-	get_filter_request_var('id');
-	get_filter_request_var('device_id');
-	get_filter_request_var('timespan');
-	get_filter_request_var('statistics');
-	get_filter_request_var('printed');
-	get_filter_request_var('includeif');
-	get_filter_request_var('sortfield');
-	/* ==================================================== */
-
-	$save['id']              = get_nfilter_request_var('id');
-	$save['name']            = get_nfilter_request_var('name');
-	$save['device_id']       = get_nfilter_request_var('device_id');
-
-	$save['timespan']        = get_nfilter_request_var('timespan');
-	$save['startdate']       = get_nfilter_request_var('date1');
-	$save['enddate']         = get_nfilter_request_var('date2');
-
-	$save['tosfields']       = get_nfilter_request_var('tosfields');
-	$save['tcpflags']        = get_nfilter_request_var('tcpflags');
-	$save['protocols']       = implode(', ', get_nfilter_request_var('protocols'));
-
-	$save['sourceip']        = get_nfilter_request_var('sourceip');
-	$save['sourceport']      = get_nfilter_request_var('sourceport');
-	$save['sourceinterface'] = get_nfilter_request_var('sourceinterface');
-	$save['sourceas']        = get_nfilter_request_var('sourceas');
-
-	$save['destip']          = get_nfilter_request_var('destip');
-	$save['destport']        = get_nfilter_request_var('destport');
-	$save['destinterface']   = get_nfilter_request_var('destinterface');
-	$save['destas']          = get_nfilter_request_var('destas');
-
-	$save['statistics']      = get_nfilter_request_var('statistics');
-	$save['printed']         = get_nfilter_request_var('printed');
-	$save['includeif']       = get_nfilter_request_var('includeif');
-	$save['sortfield']       = get_nfilter_request_var('sortfield');
-	$save['cutofflines']     = get_nfilter_request_var('cutofflines');
-	$save['cutoffoctets']    = get_nfilter_request_var('cutoffoctets');
-	$save['resolve']         = get_nfilter_request_var('resolve');
-
-	$id = sql_save($save, 'plugin_flowview_queries', 'id', true);
-
-	if (is_error_message()) {
-		raise_message(2);
-		header('Location: flowview_filters.php?tab=sched&header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
-		exit;
-	}
-
-	raise_message(1);
-
-	header('Location: flowview_filters.php?tab=sched&header=false');
-	exit;
-}
-
-function edit_filter() {
-	global $config, $filter_edit, $colors, $graph_timespans;
-
-	/* ================= input validation ================= */
-	get_filter_request_var('id');
-	/* ==================================================== */
-
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
-
-	$report = array();
-	if (!isempty_request_var('id')) {
-		$report = db_fetch_row_prepared('SELECT *
-			FROM plugin_flowview_queries
-			WHERE id = ?',
-			array(get_request_var('id')));
-
-		$header_label = __('Filter: [edit: %s]', $report['name'], 'flowview');
-	}else{
-		$header_label = __('Filter: [new]', 'flowview');
-	}
-
-	form_start('flowview_filters.php', 'chk');
-
-	html_start_box($header_label, '100%', '', '3', 'center', '');
-
-	get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
-
-	$filter_edit['date1'] = array(
-		'value'  => $span['current_value_date1'],
-		'method' => 'hidden'
-	);
-
-	$filter_edit['date2'] = array(
-		'value'  => $span['current_value_date2'],
-		'method' => 'hidden'
-	);
-
-	if (sizeof($report)) {
-		if ($report['statistics'] > 0) {
-			$filter_edit['sortfield']['array'] = $stat_columns_array[$report['statistics']];
-		} else {
-			$filter_edit['sortfield']['array'] = $print_columns_array[$report['printed']];
-		}
-	} else {
-		$filter_edit['sortfield']['array'] = $stat_columns_array[10];
-	}
-
-	if (isset_request_var('embed')) {
-		$filter_edit['embed'] = array(
-			'value'  => 1,
-			'method' => 'hidden'
-		);
-	}
-
-	draw_edit_form(
-		array(
-			'config' => array('no_form_tag' => true),
-			'fields' => inject_form_variables($filter_edit, $report)
-		)
-	);
-
-	html_end_box();
-
-	form_save_button('flowview_filters.php');
-
-	?>
-	<script type='text/javascript'>
-	$(function() {
-		$('#protocols').multiselect();
-	});
-	</script>
-	<?php
-}
-
 function show_filters() {
-	global $sendinterval_arr, $colors, $config, $sched_actions, $graph_timespans, $item_rows;
+	global $config, $sched_actions, $graph_timespans, $item_rows;
 
 	include('./plugins/flowview/arrays.php');
 
@@ -341,7 +203,7 @@ function show_filters() {
 			)
 	);
 
-	validate_store_request_vars($filters, 'sess_fvs');
+	validate_store_request_vars($filters, 'sess_fvf');
 	/* ================= input validation ================= */
 
 	if (get_request_var('rows') == '-1') {
