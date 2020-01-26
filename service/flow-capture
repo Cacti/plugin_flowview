@@ -45,24 +45,18 @@ if (isset($options['systemd'])) {
 function start() {
 	global $tools_path, $cacti_base, $systemd;
 
-	print 'NOTE: Starting Flow Tools' . PHP_EOL;
+	print 'NOTE: Starting Flow Collection' . PHP_EOL;
 
 	$devices = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
 	$legacy  = db_fetch_cell('SELECT COUNT(*) FROM plugin_flowview_devices WHERE cmethod = 1');
 
 	if (!empty($devices)) {
-		$path = read_config_option('path_flows_dir');
-		if ($path == '' && $legacy) {
-			print 'FATAL: Legacy flow-tools collectors defined without a flowtools path.' . PHP_EOL;
-			return false;
-		}
-
 		/* removing trailing slash and anything else */
 		$path = rtrim($path, "/ \n\t");
 
 		foreach ($devices as $device) {
 			$php_binary = read_config_option('path_php_binary');
-			print "NOTE: Launching cacti-capture as '" . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id'] . "'" . PHP_EOL;
+			print "NOTE: Launching cacti-flow-capture as '" . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id'] . "'" . PHP_EOL;
 
 			if ($systemd) {
 				shell_exec($php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id']);
@@ -71,14 +65,14 @@ function start() {
 			}
 		}
 	} else {
-		print 'WARNING: No flows configured' . PHP_EOL;
+		print 'NOTE: No Flow Capture Listeners configured' . PHP_EOL;
 	}			
 }
 
 function stop() {
 	global $tools_path, $cacti_base;
 
-	print 'NOTE: Stopping Flow Tools' . PHP_EOL;
+	print 'NOTE: Stopping Flow Collection' . PHP_EOL;
 
 	$devices    = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
 	$php_binary = read_config_option('path_php_binary');
