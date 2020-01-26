@@ -29,7 +29,6 @@ include_once($config['base_path'] . '/lib/time.php');
 
 set_default_action();
 
-flowview_request_vars();
 
 ini_set('max_execution_time', 240);
 ini_set('memory_limit', '-1');
@@ -47,14 +46,13 @@ switch(get_request_var('action')) {
 	case 'chartdata':
 		flowview_viewchart();
 		break;
-	case 'tabledata':
-		flowview_viewtable();
-		break;
 	case 'gettimespan':
 		flowview_gettimespan();
 		break;
 	default:
 		general_header();
+
+		flowview_request_vars();
 
 		flowview_display_filter();
 
@@ -63,7 +61,7 @@ switch(get_request_var('action')) {
 
 			$data = load_data_for_filter();
 
-			if (get_request_var('statistics') > 0 && get_request_var('statistics') != 99) {
+			if (get_request_var('statistics') != 99) {
 				flowview_draw_table($data);
 				flowview_draw_chart('bytes', $title);
 				flowview_draw_chart('packets', $title);
@@ -79,7 +77,20 @@ switch(get_request_var('action')) {
 exit;
 
 function load_session_for_filter() {
-	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+	if ((isset_request_var('query') && get_filter_request_var('query') > 0)) {
+		// Handle Report Column
+		if (isset_request_var('report')) {
+			if (get_nfilter_request_var('report') != '0' && trim(get_nfilter_request_var('report'), 'sp') != '0') {
+				if (substr(get_nfilter_request_var('report'), 0, 1) == 's') {
+					set_request_var('statistics', trim(get_nfilter_request_var('report'), 'sp'));
+					set_request_var('printed', 0);
+				} else {
+					set_request_var('printed', trim(get_nfilter_request_var('report'), 'sp'));
+					set_request_var('statistics', 0);
+				}
+			}
+		}
+
 		$q = db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
 			WHERE id = ?',
@@ -106,27 +117,71 @@ function load_session_for_filter() {
 						}
 
 						break;
+					case 'statistics':
+						if ($value > 0) {
+							if (!isset_request_var('report') || trim(get_nfilter_request_var('report'), 'sp') == '0') {
+								set_request_var('report', 's' . $value);
+								set_request_var('statistics', $value);
+								set_request_var('printed', 0);
+							} elseif (trim(get_nfilter_request_var('report'), 'sp') != '0') {
+								$value = trim(get_nfilter_request_var('report'), 'sp');
+								if (substr(get_request_var('report'), 0, 1) == 's') {
+									set_request_var('report', 's' . $value);
+									set_request_var('statistics', $value);
+								} else {
+									set_request_var('report', 'p' . $value);
+									set_request_var('printed', $value);
+								}
+							}
+						}
+
+						break;
+					case 'printed':
+						if ($value > 0) {
+							if (!isset_request_var('report') || trim(get_nfilter_request_var('report'), 'sp') == '0') {
+								set_request_var('report', 'p' . $value);
+								set_request_var('printed', $value);
+								set_request_var('statistics', 0);
+							} elseif (trim(get_nfilter_request_var('report'), 'sp') != '0') {
+								$value = trim(get_nfilter_request_var('report'), 'sp');
+								if (substr(get_request_var('report'), 0, 1) == 's') {
+									set_request_var('report', 's' . $value);
+									set_request_var('statistics', $value);
+									set_request_var('printed', 0);
+								} else {
+									set_request_var('report', 'p' . $value);
+									set_request_var('printed', $value);
+									set_request_var('statistics', 0);
+								}
+							}
+						}
+
+						break;
 					default:
-						set_request_var($column, $value);
+						// cacti_log('The column is : ' . $column . ', Value is: ' . $value);
+						if (!isset_request_var($column)) {
+							if ($column == 'protocols' && $value != '') {
+								set_request_var($column, explode(',', $value));
+							} else {
+								set_request_var($column, $value);
+							}
+						} elseif ($value != '' && isempty_request_var($column)) {
+							set_request_var($column, $value);
+						}
+
 						break;
 				}
 			}
 		}
+	} elseif (isset_request_var('report')) {
+		set_request_var('printed', 0);
+		set_request_var('statistics', 0);
 	}
-
-	// load/validate request variables
-	flowview_request_vars();
 
 	return isset($q['name']) ? $q['name']:'';
 }
 
 function flowview_request_vars() {
-	if (isset_request_var('statistics') && get_filter_request_var('statistics') > 0) {
-		set_request_var('printed', 0);
-	} elseif (isset_request_var('printed') && get_filter_request_var('printed') > 0) {
-		set_request_var('statistics', 0);
-	}
-
     /* ================= input validation and session storage ================= */
     $filters = array(
 		'includeif' => array(
@@ -135,7 +190,7 @@ function flowview_request_vars() {
 		),
 		'statistics' => array(
 			'filter' => FILTER_VALIDATE_INT,
-			'default' => '10'
+			'default' => '0'
 		),
 		'printed' => array(
 			'filter' => FILTER_VALIDATE_INT,
@@ -144,6 +199,16 @@ function flowview_request_vars() {
 		'sortfield' => array(
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '3'
+		),
+		'sortvalue' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string'),
+			'default' => 0
+		),
+		'report' => array(
+			'filter' => FILTER_CALLBACK,
+			'options' => array('options' => 'sanitize_search_string'),
+			'default' => 0
 		),
 		'cutofflines' => array(
 			'filter' => FILTER_VALIDATE_INT,
@@ -178,7 +243,7 @@ function flowview_request_vars() {
 		),
 		'protocols' => array(
 			'filter' => FILTER_VALIDATE_IS_NUMERIC_ARRAY,
-			'default' => '6'
+			'default' => array()
 		),
 		'includeif' => array(
 			'filter' => FILTER_VALIDATE_INT,
@@ -253,7 +318,7 @@ function flowview_request_vars() {
 		),
 		'resolve' => array(
 			'filter' => FILTER_VALIDATE_REGEXP,
-			'options' => array('options' => array('regexp' => '(Y|N)')),
+			'options' => array('options' => array('regexp' => '(Y|N|true|false)')),
 			'default' => 'true'
 		)
 	);
