@@ -2706,9 +2706,27 @@ function flowview_get_owner_from_arin($host) {
 		if ($parts[1] >= 16 && $parts[1] <= 31) {
 			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
 		}
-	} elseif ($parts[0] == '192') {
+	} elseif ($parts[0] . '.' . $parts[1] == '192.168') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '192.0.0') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] . '.' . $parts[1] == '168.254') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] . '.' . $parts[1] == '198.18') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] . '.' . $parts[1] == '198.19') {
 		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
 	} elseif ($parts[0] == '10') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] == '127') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '198.51.100') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '203.0.113') {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] >= 224 && $parts[0] <= 239) {
+		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+	} elseif ($parts[0] >= 240 && $parts[0] <= 255) {
 		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
 	} elseif ($curlgood == false) {
 		return 'ip-' . str_replace('.', '-', $host) . '.unknown.net';
