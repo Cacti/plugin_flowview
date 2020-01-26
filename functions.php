@@ -40,7 +40,7 @@ function sort_filter() {
 	}
 }
 
-function edit_filter($return_page = 'flowview_filters.php') {
+function edit_filter() {
 	global $config, $filter_edit, $graph_timespans;
 
 	/* ================= input validation ================= */
@@ -48,6 +48,12 @@ function edit_filter($return_page = 'flowview_filters.php') {
 	/* ==================================================== */
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
+	if (isset_request_var('return')) {
+		$page = get_nfilter_request_var('return');
+	} else {
+		$page = 'flowview_filters.php';
+	}
 
 	$report = array();
 	if (!isempty_request_var('id')) {
@@ -83,7 +89,7 @@ function edit_filter($return_page = 'flowview_filters.php') {
 		$report['rtype'] = get_filter_request_var('rtype');
 	}
 
-	form_start($return_page, 'chk');
+	form_start($page, 'chk');
 
 	html_start_box($header_label, '100%', '', '3', 'center', '');
 
@@ -111,9 +117,9 @@ function edit_filter($return_page = 'flowview_filters.php') {
 		}
 	}
 
-	if (isset_request_var('embed')) {
-		$filter_edit['embed'] = array(
-			'value'  => 1,
+	if (isset_request_var('return')) {
+		$filter_edit['return'] = array(
+			'value'  => get_nfilter_request_var('return'),
 			'method' => 'hidden'
 		);
 	}
@@ -127,13 +133,13 @@ function edit_filter($return_page = 'flowview_filters.php') {
 
 	html_end_box();
 
-	form_save_button($return_page);
+	form_save_button($page);
 
 	?>
 	<script type='text/javascript'>
 	var date1Open = false;
 	var date2Open = false;
-	var returnPage = '<?php print $return_page;?>';
+	var returnPage = '<?php print $page;?>';
 
 	function applyTimespan() {
 		$.getJSON(returnPage+'?action=gettimespan&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
@@ -237,7 +243,7 @@ function edit_filter($return_page = 'flowview_filters.php') {
 	<?php
 }
 
-function save_filter($return = 'flowview_filters.php') {
+function save_filter() {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
 	get_filter_request_var('device_id');
@@ -283,17 +289,21 @@ function save_filter($return = 'flowview_filters.php') {
 	if (is_error_message()) {
 		raise_message(2);
 
-		if ($header) {
+		if (!isset_request_var('return')) {
 			header('Location: flowview_filters.php?tab=sched&header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
 		} else {
-			print $id;
+			header('Location: ' . html_escape(get_nfilter_request_var('return') . '?query=' . (empty($id) ? get_filter_request_var('id') : $id)));
 		}
 		exit;
 	}
 
 	raise_message(1);
 
-	header('Location: ' . $return . '?id=' . $id . '&header=false');
+	if (!isset_request_var('return')) {
+		header('Location: flowview_filters.php?id=' . $id . '&header=false');
+	} else {
+		header('Location: ' . html_escape(get_nfilter_request_var('return') . '?query=' . (empty($id) ? get_filter_request_var('id') : $id)));
+	}
 	exit;
 }
 
@@ -335,16 +345,26 @@ function flowview_gettimespan() {
 function flowview_display_filter() {
 	global $config, $graph_timeshifts, $graph_timespans;
 
+	include($config['base_path'] . '/plugins/flowview/arrays.php');
+
+	$title  = __esc('Undefined Query', 'flowview');
+
 	if (get_filter_request_var('query') > 0) {
-		$name = db_fetch_cell_prepared('SELECT name
+		$row = db_fetch_row_prepared('SELECT name, statistics, printed
 			FROM plugin_flowview_queries
 			WHERE id = ?',
 			array(get_request_var('query')));
-	} else {
-		$name = __('Undefined Query', 'flowview');
+
+		if (cacti_sizeof($row)) {
+			if ($row['statistics'] > 0) {
+				$title = __esc('Statistical Report: %s', $stat_report_array[$row['statistics']]);
+			} elseif ($row['printed'] > 0) {
+				$title = __esc('Printed Report: %s', $print_report_array[$row['statistics']]);
+			}
+		}
 	}
 
-	html_start_box(__esc('Report: %s', $name, 'flowview'), '100%', '', '3', 'center', '');
+	html_start_box($title, '100%', '', '3', 'center', '');
 
 	?>
 	<tr class='even'>
@@ -547,23 +567,12 @@ function flowview_display_filter() {
 		});
 
 		$('#edit').unbind('click').click(function() {
-			$.get(urlPath + '/plugins/flowview/flowview.php' +
-				'?action=edit' +
-				'&id='+$('#query').val() +
-				'&action=edit&embed=true', function(data) {
+			strURL = urlPath + '/plugins/flowview/flowview_filters.php' +
+				'?action=edit&header=false' +
+				($('#query').val() > 0 ? '&id='+$('#query').val():'') +
+				'&return=flowview.php';
 
-				if ($('#filter').length == 0) {
-					$('body').append('<div id="filter"></div>');
-				}
-
-				$('#filter').html(data);
-
-				applySkin();
-
-				$('#filter').dialog({
-					'minWidth': 600
-				});
-			});
+			loadPageNoHeader(strURL);
 		});
 
 		$('#table').unbind('click').click(function() {
@@ -772,7 +781,12 @@ function plugin_flowview_run_schedule($id) {
 	$message .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
 	$message .= '</style>';
 	$sessionid = -1;
-	$message .= load_data_for_filter();
+
+	$data = load_data_for_filter();
+	if ($data !== false) {
+		$message .= $data['table'];
+	}
+
 	$message .= '</body>';
 
 	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
@@ -783,7 +797,7 @@ function plugin_flowview_run_schedule($id) {
  *  This function creates the NetFlow Report for the UI.  It presents this in a table
  *  format and returns as a test string to the calling function.
  */
-function load_data_for_filter() {
+function load_data_for_filter($session = false) {
 	global $config;
 
 	$output    = '';
@@ -793,6 +807,10 @@ function load_data_for_filter() {
 	$time      = time();
 	$start     = strtotime(get_request_var('date1'));
 	$end       = strtotime(get_request_var('date2'));
+
+	if ($session && isset($_SESSION['sess_flowdata'])) {
+		return $_SESSION['sess_flowdata'];
+	}
 
 	if (get_request_var('statistics') != 0) {
 		$histogram = true;
@@ -839,7 +857,7 @@ function load_data_for_filter() {
 	}
 
 	/* protocols filter */
-	if (get_request_var('protocols') != '') {
+	if (get_request_var('protocols') != '' && get_request_var('protocols') != '0') {
 		$sql_where = get_numeric_filter($sql_where, get_request_var('protocols'), 'protocol');
 	}
 
@@ -983,8 +1001,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 				case 99:
 					break;
 				case 2:
-					$sql_query = 'SELECT src_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_rdomain, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_rdomain, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_rdomain';
 					$sql_inner_groupby = 'GROUP BY src_rdomain';
@@ -992,8 +1010,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 3:
-					$sql_query = 'SELECT dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT dst_rdomain, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT dst_rdomain, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY dst_rdomain';
 					$sql_inner_groupby = 'GROUP BY dst_rdomain';
@@ -1001,8 +1019,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 4:
-					$sql_query = 'SELECT src_rdomain, dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_rdomain, dst_rdomain, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_rdomain, dst_rdomain, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_rdomain, dst_rdomain, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_rdomain, dst_rdomain';
 					$sql_inner_groupby = 'GROUP BY src_rdomain, dst_rdomain';
@@ -1010,26 +1028,26 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
 					break;
 				case 5:
-					$sql_query = 'SELECT port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT dst_port AS port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT dst_port, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT dst_port, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
-					$sql_groupby       = 'GROUP BY port';
-					$sql_inner_groupby = 'GROUP BY port';
+					$sql_groupby       = 'GROUP BY dst_port';
+					$sql_inner_groupby = 'GROUP BY dst_port';
 
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 6:
-					$sql_query = 'SELECT port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_port AS port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_port, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_port, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
-					$sql_groupby       = 'GROUP BY port';
-					$sql_inner_groupby = 'GROUP BY port';
+					$sql_groupby       = 'GROUP BY src_port';
+					$sql_inner_groupby = 'GROUP BY src_port';
 
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 7:
-					$sql_query = 'SELECT src_port, dst_port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_port, dst_port, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_port, dst_port, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_port, dst_port, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_port, dst_port';
 					$sql_inner_groupby = 'GROUP BY src_port, dst_port';
@@ -1037,8 +1055,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
 					break;
 				case 8:
-					$sql_query = 'SELECT INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, dst_domain';
-					$sql_inner = 'SELECT dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, dst_domain';
+					$sql_query = 'SELECT INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, dst_domain';
+					$sql_inner = 'SELECT dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, dst_domain';
 
 					$sql_groupby       = 'GROUP BY INET6_NTOA(dst_addr)';
 					$sql_inner_groupby = 'GROUP BY dst_addr';
@@ -1046,17 +1064,17 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 9:
-					$sql_query = 'SELECT src_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain';
-					$sql_inner = 'SELECT src_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain';
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain';
+					$sql_inner = 'SELECT src_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain';
 
-					$sql_groupby       = 'GROUP BY src_addr';
+					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr)';
 					$sql_inner_groupby = 'GROUP BY src_addr';
 
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 10:
-					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
-					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
 
 					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr)';
 					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr';
@@ -1064,8 +1082,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
 					break;
 				case 11:
-					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
-					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
 
 					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr)';
 					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr';
@@ -1073,8 +1091,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
 					break;
 				case 12:
-					$sql_query = 'SELECT protocol, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT protocol, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT protocol, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT protocol, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY protocol';
 					$sql_inner_groupby = 'GROUP BY protocol';
@@ -1082,8 +1100,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 17:
-					$sql_query = 'SELECT src_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_if, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_if, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_if';
 					$sql_inner_groupby = 'GROUP BY src_if';
@@ -1091,8 +1109,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 18:
-					$sql_query = 'SELECT dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT dst_if, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT dst_if, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY dst_if';
 					$sql_inner_groupby = 'GROUP BY dst_if';
@@ -1100,8 +1118,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 23:
-					$sql_query = 'SELECT src_if, dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_if, dst_if, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_if, dst_if, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_if, dst_if, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_if, dst_if';
 					$sql_inner_groupby = 'GROUP BY src_if, dst_if';
@@ -1109,8 +1127,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
 					break;
 				case 19:
-					$sql_query = 'SELECT src_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_as';
 					$sql_inner_groupby = 'GROUP BY src_as';
@@ -1118,8 +1136,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 20:
-					$sql_query = 'SELECT dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT dst_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT dst_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY dst_as';
 					$sql_inner_groupby = 'GROUP BY dst_as';
@@ -1127,8 +1145,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 21:
-					$sql_query = 'SELECT src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_as, dst_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_as, dst_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_as, dst_as';
 					$sql_inner_groupby = 'GROUP BY src_as, dst_as';
@@ -1136,8 +1154,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
 					break;
 				case 22:
-					$sql_query = 'SELECT tos, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT tos, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT tos, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT tos, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY tos';
 					$sql_inner_groupby = 'GROUP BY tos';
@@ -1145,8 +1163,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 24:
-					$sql_query = 'SELECT src_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_prefix, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_prefix, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_prefix';
 					$sql_inner_groupby = 'GROUP BY src_prefix';
@@ -1154,8 +1172,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 25:
-					$sql_query = 'SELECT dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT dst_prefix, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT dst_prefix, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY dst_prefix';
 					$sql_inner_groupby = 'GROUP BY dst_prefix';
@@ -1163,8 +1181,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 0 ? ' DESC':' ASC');
 					break;
 				case 26:
-					$sql_query = 'SELECT src_prefix, dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
-					$sql_inner = 'SELECT src_prefix, dst_prefix, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT src_prefix, dst_prefix, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
+					$sql_inner = 'SELECT src_prefix, dst_prefix, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY src_prefix, dst_prefix';
 					$sql_inner_groupby = 'GROUP BY src_prefix, dst_prefix';
@@ -1175,8 +1193,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 		} else {
 			switch($data['printed']) {
 				case '1':
-					$sql_query = 'SELECT src_if, INET6_NTOA(src_addr) AS src_addr, dst_if, INET6_NTOA(dst_addr) AS dst_addr, protocol, src_port, dst_port, tos, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
-					$sql_inner = 'SELECT src_if, src_addr, dst_if, dst_addr, protocol, src_port, dst_port, tos, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_query = 'SELECT src_if, INET6_NTOA(src_addr) AS src_addr, dst_if, INET6_NTOA(dst_addr) AS dst_addr, protocol, src_port, dst_port, tos, flags, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_if, src_addr, dst_if, dst_addr, protocol, src_port, dst_port, tos, flags, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
 
 					$sql_groupby       = 'GROUP BY src_if, INET6_NTOA(src_addr), dst_if, INET6_NTOA(dst_addr), protocol, src_port, dst_port, tos, flags';
 					$sql_inner_groupby = 'GROUP BY src_if, src_addr, dst_if, dst_addr, protocol, src_port, dst_port, tos, flags';
@@ -1184,8 +1202,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 8 ? ' DESC':' ASC');
 					break;
 				case '4':
-					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, protocol, src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
-					$sql_inner = 'SELECT src_addr, dst_addr, protocol, src_as, dst_as, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes';
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, protocol, src_as, dst_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, protocol, src_as, dst_as, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
 
 					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr), protocol, src_as, dst_as';
 					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr, protocol, src_as, dst_as';
@@ -1193,8 +1211,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 4 ? ' DESC':' ASC');
 					break;
 				case '5':
-					$sql_query = 'SELECT start_time, end_time, src_if, INET6_NTOA(src_addr) AS src_addr, src_port, dst_if, INET6_NTOA(dst_addr) AS dst_addr, dst_port, protocol, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
-					$sql_inner = 'SELECT start_time, end_time, src_if, src_addr, src_port, dst_if, dst_addr, dst_port, protocol, flags, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_query = 'SELECT start_time, end_time, src_if, INET6_NTOA(src_addr) AS src_addr, src_port, dst_if, INET6_NTOA(dst_addr) AS dst_addr, dst_port, protocol, flags, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
+					$sql_inner = 'SELECT start_time, end_time, src_if, src_addr, src_port, dst_if, dst_addr, dst_port, protocol, flags, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
 
 					$sql_groupby       = 'GROUP BY start_time, end_time, src_if, INET6_NTOA(src_addr), src_port, dst_if, INET6_NTOA(dst_addr), dst_port, protocol, flags';
 					$sql_inner_groupby = 'GROUP BY start_time, end_time, src_if, src_addr, src_port, dst_if, dst_addr, dst_port, protocol, flags';
@@ -1202,8 +1220,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 9 ? ' DESC':' ASC');
 					break;
 				case '6':
-					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
-					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(packets) AS packets, SUM(bytes) AS bytes, src_domain, dst_domain';
+					$sql_query = 'SELECT INET6_NTOA(src_addr) AS src_addr, INET6_NTOA(dst_addr) AS dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
+					$sql_inner = 'SELECT src_addr, dst_addr, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets, src_domain, dst_domain';
 
 					$sql_groupby       = 'GROUP BY INET6_NTOA(src_addr), INET6_NTOA(dst_addr)';
 					$sql_inner_groupby = 'GROUP BY src_addr, dst_addr';
@@ -1224,9 +1242,178 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 		}
 
 		$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_order $sql_limit";
-	}
 
-	cacti_log($sql);
+		$results = db_fetch_assoc($sql);
+
+		$output = $data;
+		$output['data'] = $results;
+
+		$i = 0;
+		$table = '';
+		if (cacti_sizeof($results)) {
+			$table .= '<table id="sorttable" class="cactiTable"><thead>';
+
+			foreach($results as $r) {
+				if ($i == 0) {
+					$table .= '<tr class="tableHeader">';
+
+					if (isset($r['src_domain'])) {
+						$table .= '<th class="left">' . __('Source Domain', 'flowview') . '</th>';
+					}
+
+					if (isset($r['src_rdomain'])) {
+						$table .= '<th class="left">' . __('Source Domain', 'flowview') . '</th>';
+					}
+
+					if (isset($r['dst_domain'])) {
+						$table .= '<th class="left">' . __('Dest Domain', 'flowview') . '</th>';
+					}
+
+					if (isset($r['dst_rdomain'])) {
+						$table .= '<th class="left">' . __('Dest Domain', 'flowview') . '</th>';
+					}
+
+					if (isset($r['src_addr'])) {
+						$table .= '<th class="left">' . __('Source IP', 'flowview') . '</th>';
+					}
+
+					if (isset($r['dst_addr'])) {
+						$table .= '<th class="left">' . __('Dest IP', 'flowview') . '</th>';
+					}
+
+					if (isset($r['src_port'])) {
+						$table .= '<th class="left">' . __('Source Port', 'flowview') . '</th>';
+					}
+
+					if (isset($r['dst_port'])) {
+						$table .= '<th class="left">' . __('Dest Port', 'flowview') . '</th>';
+					}
+
+					if (isset($r['src_if'])) {
+						$table .= '<th class="right">' . __('Source IF', 'flowview') . '</th>';
+					}
+
+					if (isset($r['dst_if'])) {
+						$table .= '<th class="right">' . __('Dest IF', 'flowview') . '</th>';
+					}
+
+					if (isset($r['src_as'])) {
+						$table .= '<th class="right">' . __('Source AS', 'flowview') . '</th>';
+					}
+
+					if (isset($r['dst_as'])) {
+						$table .= '<th class="right">' . __('Desi AS', 'flowview') . '</th>';
+					}
+
+					if (isset($r['tos'])) {
+						$table .= '<th class="right">' . __('Type of Service', 'flowview') . '</th>';
+					}
+
+					if (isset($r['flags'])) {
+						$table .= '<th class="right">' . __('Flags', 'flowview') . '</th>';
+					}
+
+					if (isset($r['flows'])) {
+						$table .= '<th class="right">' . __('Flows', 'flowview') . '</th>';
+					}
+
+					if (isset($r['bytes'])) {
+						$table .= '<th class="right">' . __('Bytes', 'flowview') . '</th>';
+					}
+
+					if (isset($r['packets'])) {
+						$table .= '<th class="right">' . __('Packets', 'flowview') . '</th>';
+					}
+
+					$table .= '<th class="right">' . __('Bytes/Packet') . '</th>';
+
+					$table .= '</tr></thead><tbody>';
+				}
+
+				$table .= '<tr class="selectable tableRow">';
+
+				if (isset($r['src_domain'])) {
+					$table .= '<td class="left">' . html_escape($r['src_domain']) . '</td>';
+				}
+
+				if (isset($r['src_rdomain'])) {
+					$table .= '<td class="left">' . html_escape($r['src_rdomain']) . '</td>';
+				}
+
+				if (isset($r['dst_domain'])) {
+					$table .= '<td class="left">' . html_escape($r['dst_domain']) . '</td>';
+				}
+
+				if (isset($r['dst_rdomain'])) {
+					$table .= '<td class="left">' . html_escape($r['dst_rdomain']) . '</td>';
+				}
+
+				if (isset($r['src_addr'])) {
+					$table .= '<td class="left">' . html_escape($r['src_addr']) . '</td>';
+				}
+
+				if (isset($r['dst_addr'])) {
+					$table .= '<td class="left">' . html_escape($r['dst_addr']) . '</td>';
+				}
+
+				if (isset($r['src_port'])) {
+					$table .= '<td class="left">' . html_escape($r['src_port']) . '</td>';
+				}
+
+				if (isset($r['dst_port'])) {
+					$table .= '<td class="left">' . html_escape($r['dst_port']) . '</td>';
+				}
+
+				if (isset($r['src_if'])) {
+					$table .= '<td class="right">' . html_escape($r['src_if']) . '</td>';
+				}
+
+				if (isset($r['dst_if'])) {
+					$table .= '<td class="right">' . html_escape($r['dst_if']) . '</td>';
+				}
+
+				if (isset($r['src_as'])) {
+					$table .= '<td class="right">' . html_escape($r['src_as']) . '</td>';
+				}
+
+				if (isset($r['dst_as'])) {
+					$table .= '<td class="right">' . html_escape($r['dst_as']) . '</td>';
+				}
+
+				if (isset($r['tos'])) {
+					$table .= '<td class="right">' . html_escape($r['tos']) . '</td>';
+				}
+
+				if (isset($r['flags'])) {
+					$table .= '<td class="right">' . html_escape($r['flags']) . '</td>';
+				}
+
+				if (isset($r['flows'])) {
+					$table .= '<td class="right">' . number_format_i18n($r['flows'], 0) . '</td>';
+				}
+
+				if (isset($r['bytes'])) {
+					$table .= '<td class="right">' . number_format_i18n($r['bytes'], 0) . '</td>';
+				}
+
+				if (isset($r['packets'])) {
+					$table .= '<td class="right">' . number_format_i18n($r['packets'], 0) . '</td>';
+				}
+
+				$table .= '<td class="right">' . number_format_i18n($r['bytes']/$r['packets'], 0) . '</td>';
+
+				$table .= '</tr>';
+
+				$i++;
+			}
+
+			$table .= '</tbody></table>';
+		}
+
+		$output['table'] = $table;
+
+		return $output;
+	}
 
 	return false;
 }
@@ -2220,7 +2407,9 @@ function flowview_check_fields () {
 function flowview_draw_table(&$output) {
 	print "<div>";
 	print "<div id='flowcontent' style='display:none'>";
-	print $output;
+	if ($output !== false) {
+		print $output['table'];
+	}
 	print "</div>";
 	print "</div>";
 }

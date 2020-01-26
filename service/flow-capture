@@ -61,34 +61,13 @@ function start() {
 		$path = rtrim($path, "/ \n\t");
 
 		foreach ($devices as $device) {
-			if ($device['cmethod'] == 0) {
-				$php_binary = read_config_option('path_php_binary');
-				print "NOTE: Launching cacti-capture as '" . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id'] . "'" . PHP_EOL;
+			$php_binary = read_config_option('path_php_binary');
+			print "NOTE: Launching cacti-capture as '" . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id'] . "'" . PHP_EOL;
 
-				if ($systemd) {
-					shell_exec($php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id']);
-				} else {
-					exec_background($php_binary, ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id']);
-				}
+			if ($systemd) {
+				shell_exec($php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id']);
 			} else {
-				$port   = $device['port'];
-				$folder = $device['folder'];
-				$nest   = $device['nesting'];
-				$v      = $device['version'];
-				$from   = $device['allowfrom'];
-				$comp   = $device['compression'];
-				$rotate = $device['rotation'];
-				$expire = $device['expire'] * ($rotate + 1);
-
-				if (!is_dir("$path/$folder")) {
-					print "NOTE: Making directory '$path/$folder'" . PHP_EOL;
-					mkdir("$path/$folder", 0777, true);
-				}
-
-				if (is_dir("$path/$folder")) {
-					print "NOTE: Launching flow-capture as '$tools_path/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest'" . PHP_EOL;
-					shell_exec($tools_path . "/flow-capture -w $path/$folder 0/$from/$port -S5 -V$v -z $comp -n $rotate -e $expire -N $nest");
-				}
+				exec_background($php_binary, ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id']);
 			}
 		}
 	} else {

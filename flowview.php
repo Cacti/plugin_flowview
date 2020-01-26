@@ -36,13 +36,13 @@ ini_set('memory_limit', '-1');
 
 switch(get_request_var('action')) {
 	case 'save':
-		save_filter('flowview.php');
+		save_filter();
 		break;
 	case 'sort_filter':
 		sort_filter();
 		break;
-	case 'edit':
-		edit_filter('flowview.php');
+	case 'updatesess':
+		flowview_request_vars();
 		break;
 	case 'chartdata':
 		flowview_viewchart();
@@ -173,7 +173,7 @@ function flowview_request_vars() {
 			'default' => ''
 		),
 		'protocols' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
+			'filter' => FILTER_VALIDATE_IS_NUMERIC_ARRAY,
 			'default' => '6'
 		),
 		'includeif' => array(
@@ -226,6 +226,26 @@ function flowview_request_vars() {
 			'filter' => FILTER_VALIDATE_REGEXP,
 			'options' => array('options' => array('regexp' => '(true|false)')),
 			'default' => 'true'
+		),
+		'table' => array(
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => array('options' => array('regexp' => '(true|false)')),
+			'default' => 'true'
+		),
+		'bytes' => array(
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => array('options' => array('regexp' => '(true|false)')),
+			'default' => 'false'
+		),
+		'packets' => array(
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => array('options' => array('regexp' => '(true|false)')),
+			'default' => 'false'
+		),
+		'flows' => array(
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => array('options' => array('regexp' => '(true|false)')),
+			'default' => 'false'
 		),
 		'resolve' => array(
 			'filter' => FILTER_VALIDATE_REGEXP,

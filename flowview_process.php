@@ -101,44 +101,6 @@ $listeners = db_fetch_assoc('SELECT *
 	FROM plugin_flowview_devices
 	WHERE cmethod = 1');
 
-$initial_import_completed = read_config_option('flowview_legacy_import_completed');
-if (cacti_sizeof($listeners)) {
-	if ($initial_import_completed == 'true') {
-		$last_date      = read_config_option('flowview_last_import');
-		$flow_directory = read_config_option('path_flows_dir');
-		set_config_option('flowview_last_import', time());
-
-		if (file_exists($flow_directory)) {
-			foreach($listeners as $l) {
-				$dir_iterator = new RecursiveDirectoryIterator($flow_directory . '/' . $l['folder']);
-				$iterator = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
-
-				foreach($iterator as $file) {
-					if (strpos($file, 'ft-') !== false && filemtime($file) >= $last_date) {
-						$rfile = str_replace(rtrim($flow_directory, '/') . '/', '', $file);
-
-						$parts = explode('/', $rfile);
-
-						$listener_id = $l['id'];
-
-						$fstart = microtime(true);
-						debug("Processing file: $rfile");
-						flowview_load_flow_file_into_database($file, $listener_id);
-						$fend = microtime(true);
-						debug('File: ' . $rfile . ', Total time ' . round($fend - $fstart, 2));
-					}
-                }
-            }
-		} else {
-			print 'ERROR: Flow directory does not exist.' . PHP_EOL;
-			exit(1);
-		}
-	} else {
-		cacti_log('WARNING: Legacy flows must be imported into MySQL before current flow data can be imported', false, 'FLOWVIEW');
-		exit(1);
-	}
-}
-
 $tables = get_tables_range($last);
 $records = 0;
 

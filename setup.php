@@ -93,6 +93,8 @@ function plugin_flowview_check_upgrade() {
 		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache_flow_stats');
 		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache_details');
 
+		db_execute('ALTER TABLE plugin_flowview_queries MODIFY COLUMN protocols varchar(32) default ""');
+
 		if ($bad_titles) {
 			/* update titles for those that don't have them */
 			db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
@@ -281,8 +283,6 @@ function flowview_show_tab() {
 
 function flowview_page_head() {
 	global $config, $colors;
-
-	print "\t<script type='text/javascript' src='" . $config['url_path'] . "plugins/flowview/js/swfobject.js'></script>\n";
 }
 
 function flowview_config_settings() {
@@ -386,7 +386,7 @@ function flowview_setup_table() {
 	$data['columns'][]  = array('name' => 'enddate', 'type' => 'varchar(32)', 'NULL' => false);
 	$data['columns'][]  = array('name' => 'tosfields', 'type' => 'varchar(32)', 'NULL' => false);
 	$data['columns'][]  = array('name' => 'tcpflags', 'type' => 'varchar(32)', 'NULL' => false);
-	$data['columns'][]  = array('name' => 'protocols', 'type' => 'varchar(8)', 'NULL' => false);
+	$data['columns'][]  = array('name' => 'protocols', 'type' => 'varchar(32)', 'NULL' => true);
 	$data['columns'][]  = array('name' => 'sourceip', 'type' => 'varchar(255)', 'NULL' => false);
 	$data['columns'][]  = array('name' => 'sourceport', 'type' => 'varchar(255)', 'NULL' => false);
 	$data['columns'][]  = array('name' => 'sourceinterface', 'type' => 'varchar(64)', 'NULL' => false);
