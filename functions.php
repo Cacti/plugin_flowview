@@ -540,24 +540,11 @@ function flowview_display_filter() {
 					<td>
 						<select id='predefined_timespan' onChange='applyTimespan()'>
 							<?php
-							if (isset_request_var('custom') && get_request_var('custom') == true) {
-								$graph_timespans[GT_CUSTOM] = __('Custom', 'flowview');
-								set_request_var('predefined_timespan', GT_CUSTOM);
-								$start_val = 0;
-								$end_val = sizeof($graph_timespans);
-							} else {
-								if (isset($graph_timespans[GT_CUSTOM])) {
-									asort($graph_timespans);
-									array_shift($graph_timespans);
-								}
-								$start_val = 1;
-								$end_val = sizeof($graph_timespans)+1;
-							}
-
 							if (cacti_sizeof($graph_timespans)) {
-								for ($value=$start_val; $value < $end_val; $value++) {
-									print "<option value='$value'" . (get_request_var('predefined_timespan') == $value ? ' selected':'') . '>' . $graph_timespans[$value] . '</option>';
+								foreach($graph_timespans as $key => $value) {
+									print "<option value='$key'" . (get_request_var('predefined_timespan') == $key ? ' selected':'') . '>' . $value . '</option>';
 								}
+								print "<option value='0'" . (get_request_var('predefined_timespan') == '0' ? ' selected':'') . '>' . __('Custom', 'flowview') . '</option>';
 							}
 							?>
 						</select>
@@ -815,7 +802,7 @@ function flowview_display_filter() {
 
 		$('td').tooltip();
 
-		applyTimespan();
+		initTimespan();
 	});
 
 	function updateSession() {
@@ -829,13 +816,27 @@ function flowview_display_filter() {
 			'&flows='   + $('#flows').is(':checked'));
 	}
 
+	function initTimespan() {
+		if ($('#predefined_timespan').val() != '0') {
+			$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
+				'?action=gettimespan' +
+				'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
+				$('#date1').val(data['current_value_date1']);
+				$('#date2').val(data['current_value_date2']);
+			});
+		}
+	}
+
 	function applyTimespan() {
-		$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
-			'?action=gettimespan' +
-			'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
-			$('#date1').val(data['current_value_date1']);
-			$('#date2').val(data['current_value_date2']);
-		});
+		if ($('#predefined_timespan').val() != '0') {
+			$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
+				'?action=gettimespan' +
+				'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
+				$('#date1').val(data['current_value_date1']);
+				$('#date2').val(data['current_value_date2']);
+				applyFilter();
+			});
+		}
 	}
 
 	function applyFilter(reset) {

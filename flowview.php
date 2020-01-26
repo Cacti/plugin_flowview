@@ -29,7 +29,6 @@ include_once($config['base_path'] . '/lib/time.php');
 
 set_default_action();
 
-
 ini_set('max_execution_time', 240);
 ini_set('memory_limit', '-1');
 
@@ -47,6 +46,7 @@ switch(get_request_var('action')) {
 		flowview_viewchart();
 		break;
 	case 'gettimespan':
+		flowview_request_vars();
 		flowview_gettimespan();
 		break;
 	default:
