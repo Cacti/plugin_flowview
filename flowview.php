@@ -162,6 +162,10 @@ function flowview_request_vars() {
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => read_user_setting('default_timespan')
 		),
+		'exclude' => array(
+			'filter' => FILTER_VALIDATE_INT,
+			'default' => '0'
+		),
 		'date1' => array(
 			'filter' => FILTER_CALLBACK,
 			'options' => array('options' => 'sanitize_search_string'),

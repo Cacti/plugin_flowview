@@ -238,6 +238,8 @@ function edit_filter() {
 		});
 
 		changeRType();
+
+		applyTimespan();
 	});
 	</script>
 	<?php
@@ -347,7 +349,7 @@ function flowview_display_filter() {
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
-	$title  = __esc('Undefined Query', 'flowview');
+	$title  = __esc('Undefined Filter', 'flowview');
 
 	if (get_filter_request_var('query') > 0) {
 		$row = db_fetch_row_prepared('SELECT name, statistics, printed
@@ -362,6 +364,8 @@ function flowview_display_filter() {
 				$title = __esc('Printed Report: %s', $print_report_array[$row['statistics']]);
 			}
 		}
+	} else {
+		raise_message('flowmessage', __('Select a Filter to display data', 'flowview'), MESSAGE_LEVEL_INFO);
 	}
 
 	html_start_box($title, '100%', '', '3', 'center', '');
@@ -694,6 +698,8 @@ function flowview_display_filter() {
 			resizable: false,
 			modal: true
 		});
+
+		applyTimespan();
 	});
 
 	function updateSession() {
@@ -721,6 +727,7 @@ function flowview_display_filter() {
 			'?action=view' +
 			'&domains='  + $('#domains').is(':checked') +
 			'&timespan=' + $('#predefined_timespan').val() +
+			'&exclude='  + $('#exclude').val() +
 			'&date1='    + $('#date1').val() +
 			'&date2='    + $('#date2').val() +
 			'&query='    + $('#query').val() +
@@ -992,7 +999,11 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 	$data = db_fetch_row_prepared('SELECT * FROM plugin_flowview_queries WHERE id = ?', array($query_id));
 
-	$sql_limit = 'LIMIT ' . $data['cutofflines'];
+	if (get_request_var('exclude') > 0) {
+		$sql_limit = 'LIMIT ' . get_request_var('exclude') .  ',' . $data['cutofflines'];
+	} else {
+		$sql_limit = 'LIMIT ' . $data['cutofflines'];
+	}
 	$sql       = '';
 
 	if (cacti_sizeof($data)) {
