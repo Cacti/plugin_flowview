@@ -165,7 +165,7 @@ function load_session_for_filter() {
 							} else {
 								set_request_var($column, $value);
 							}
-						} elseif ($value != '' && isempty_request_var($column)) {
+						} elseif ($value != '' && get_nfilter_request_var($column) == '') {
 							set_request_var($column, $value);
 						}
 
@@ -198,7 +198,7 @@ function flowview_request_vars() {
 		),
 		'sortfield' => array(
 			'filter' => FILTER_VALIDATE_INT,
-			'default' => '3'
+			'default' => ''
 		),
 		'sortvalue' => array(
 			'filter' => FILTER_CALLBACK,

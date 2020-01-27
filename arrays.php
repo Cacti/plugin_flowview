@@ -223,8 +223,7 @@ $stat_columns_array = array(
 		__('Packets', 'flowview')
 	),
 	11 => array(
-		__('Source IP', 'flowview'),
-		__('Destination IP', 'flowview'),
+		__('IP Address', 'flowview'),
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
