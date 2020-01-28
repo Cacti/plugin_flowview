@@ -283,6 +283,14 @@ function flowview_show_tab() {
 
 function flowview_page_head() {
 	global $config, $colors;
+
+	$theme = get_selected_theme();
+
+	if (file_exists($config['base_path'] . '/plugins/flowview/themes/' . $theme . '.css')) {
+		print '<link href="' . $config['url_path'] . 'plugins/flowview/themes/' . $theme . '.css" type="text/css" rel="stylesheet">' . PHP_EOL;
+	} else {
+		print '<link href="' . $config['url_path'] . 'plugins/flowview/themes/default.css" type="text/css" rel="stylesheet">' . PHP_EOL;
+	}
 }
 
 function flowview_config_settings() {

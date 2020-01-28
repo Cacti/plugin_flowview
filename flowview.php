@@ -43,7 +43,7 @@ switch(get_request_var('action')) {
 		flowview_request_vars();
 		break;
 	case 'chartdata':
-		flowview_viewchart();
+		flowview_get_chartdata();
 		break;
 	case 'gettimespan':
 		flowview_request_vars();
@@ -54,21 +54,19 @@ switch(get_request_var('action')) {
 
 		flowview_request_vars();
 
-		flowview_display_filter();
+		$title = load_session_for_filter();
 
-		if (get_filter_request_var('query') > 0) {
-			$title = load_session_for_filter();
+		$data = load_data_for_filter();
 
-			$data = load_data_for_filter();
+		flowview_display_filter($data);
 
-			if (get_request_var('statistics') != 99) {
-				flowview_draw_table($data);
-				flowview_draw_chart('bytes', $title);
-				flowview_draw_chart('packets', $title);
-				flowview_draw_chart('flows', $title);
-			} else {
-				flowview_show_summary($data);
-			}
+		if (get_request_var('statistics') != 99) {
+			flowview_draw_table($data);
+			flowview_draw_chart('bytes', $title);
+			flowview_draw_chart('packets', $title);
+			flowview_draw_chart('flows', $title);
+		} else {
+			flowview_show_summary($data);
 		}
 
 		bottom_footer();

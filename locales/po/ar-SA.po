@@ -6,1243 +6,781 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-19 09:50+0000\n"
-"PO-Revision-Date: 2019-07-21 21:22-0400\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2020-01-27 21:27-0500\n"
+"PO-Revision-Date: 2019-03-18 19:54-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar_SA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.1\n"
 
-#: arrays.php:26
+#: arrays.php:26 arrays.php:60 functions.php:445
 #, fuzzy
-msgid "Select a Statistic Report"
-msgstr "تقارير الاحصائيات"
+msgid "Select a Report"
+msgstr "تقارير الطباعة"
 
 #: arrays.php:27
+#, fuzzy
 msgid "Summary"
 msgstr "ملخص"
 
-#: arrays.php:28
+#: arrays.php:29
+#, fuzzy
+msgid "Source Root Domain"
+msgstr "المصدر أو الوجهة IP"
+
+#: arrays.php:30
+#, fuzzy
+msgid "Destination Root Domain"
+msgstr "عنوان الانترنت المطلوب"
+
+#: arrays.php:31
+#, fuzzy
+msgid "Source/Destination Root Domain"
+msgstr "المصدر / الوجهة IP"
+
+#: arrays.php:33
 #, fuzzy
 msgid "UDP/TCP Destination Port"
 msgstr "منفذ الوجهة UDP / TCP"
 
-#: arrays.php:29
+#: arrays.php:34
 #, fuzzy
 msgid "UDP/TCP Source Port"
 msgstr "منفذ مصدر UDP / TCP"
 
-#: arrays.php:30
+#: arrays.php:35
 #, fuzzy
 msgid "UDP/TCP Port"
 msgstr "منفذ UDP / TCP"
 
-#: arrays.php:31 flowview.php:800
-#, fuzzy
-msgid "Destination IP"
-msgstr "عنوان الانترنت المطلوب"
-
-#: arrays.php:32 flowview.php:358 flowview.php:799
+#: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:305 arrays.php:321
+#: arrays.php:333 arrays.php:492 functions.php:1916
 #, fuzzy
 msgid "Source IP"
 msgstr "IP المصدر"
 
-#: arrays.php:33
+#: arrays.php:38 arrays.php:207 arrays.php:307 arrays.php:322 arrays.php:336
+#, fuzzy
+msgid "Destination IP"
+msgstr "عنوان الانترنت المطلوب"
+
+#: arrays.php:39
 #, fuzzy
 msgid "Source/Destination IP"
 msgstr "المصدر / الوجهة IP"
 
-#: arrays.php:34
+#: arrays.php:40
 #, fuzzy
 msgid "Source or Destination IP"
 msgstr "المصدر أو الوجهة IP"
 
-#: arrays.php:35
+#: arrays.php:42
 #, fuzzy
 msgid "IP Protocol"
 msgstr "بروتوكول IP"
 
-#: arrays.php:36 flowview.php:835
+#: arrays.php:44
 #, fuzzy
 msgid "Input Interface"
 msgstr "واجهة الإدخال"
 
-#: arrays.php:37 flowview.php:836
+#: arrays.php:45
 #, fuzzy
 msgid "Output Interface"
 msgstr "واجهة الانتاج"
 
-#: arrays.php:38
+#: arrays.php:46
 #, fuzzy
 msgid "Input/Output Interface"
 msgstr "الإدخال / الإخراج واجهة"
 
-#: arrays.php:39 flowview.php:376 flowview.php:850
+#: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:324 arrays.php:516
+#: functions.php:1940
 #, fuzzy
 msgid "Source AS"
 msgstr "مصدر AS"
 
-#: arrays.php:40 flowview.php:851
+#: arrays.php:49 arrays.php:256 arrays.php:263 arrays.php:325
 #, fuzzy
 msgid "Destination AS"
 msgstr "الوجهة AS"
 
-#: arrays.php:41
+#: arrays.php:50
 #, fuzzy
 msgid "Source/Destination AS"
 msgstr "المصدر / الوجهة AS"
 
-#: arrays.php:42
+#: arrays.php:52
 #, fuzzy
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:43 flowview.php:872
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:1948
 #, fuzzy
 msgid "Source Prefix"
 msgstr "بادئة المصدر"
 
-#: arrays.php:44 flowview.php:873
+#: arrays.php:55 arrays.php:288
 #, fuzzy
 msgid "Destination Prefix"
 msgstr "بادئة الوجهة"
 
-#: arrays.php:45
+#: arrays.php:56
 #, fuzzy
 msgid "Source/Destination Prefix"
 msgstr "بادئة المصدر / الوجهة"
 
-#: arrays.php:49
-#, fuzzy
-msgid "Select a Print Report"
-msgstr "تقارير الطباعة"
-
-#: arrays.php:50
+#: arrays.php:61
 #, fuzzy
 msgid "Flow Times"
 msgstr "تدفق مرات"
 
-#: arrays.php:51
+#: arrays.php:62
 #, fuzzy
 msgid "AS Numbers"
 msgstr "كما أرقام"
 
-#: arrays.php:52
+#: arrays.php:63
 #, fuzzy
 msgid "132 Columns"
 msgstr "132 عمود"
 
-#: arrays.php:53
-#, fuzzy
-msgid "1 Line with Tags"
-msgstr "1 خط مع العلامات"
-
-#: arrays.php:54
-#, fuzzy
-msgid "AS Aggregation"
-msgstr "كما التجميع"
-
-#: arrays.php:55
-#, fuzzy
-msgid "Protocol Port Aggregation"
-msgstr "بروتوكول ميناء التجميع"
-
-#: arrays.php:56
-#, fuzzy
-msgid "Source Prefix Aggregation"
-msgstr "تجميع بادئة المصدر"
-
-#: arrays.php:57
-#, fuzzy
-msgid "Destination Prefix Aggregation"
-msgstr "تجميع بادئة الوجهة"
-
-#: arrays.php:58
-#, fuzzy
-msgid "Prefix Aggregation"
-msgstr "تجميع البادئة"
-
-#: arrays.php:59
-#, fuzzy
-msgid "Full (Catalyst)"
-msgstr "كامل (محفز)"
-
-#: arrays.php:63
-#, fuzzy
-msgid "Any Part in Specified Time Span"
-msgstr "أي جزء في فترة زمنية محددة"
-
 #: arrays.php:64
-#, fuzzy
-msgid "End Time in Specified Time Span"
-msgstr "وقت الانتهاء في فترة زمنية محددة"
+msgid "Show IP Accounting Emulation"
+msgstr ""
 
-#: arrays.php:65
-#, fuzzy
-msgid "Start Time in Specified Time Span"
-msgstr "وقت البدء في فترة زمنية محددة"
+#: arrays.php:68
+msgid "Any Part in Range"
+msgstr ""
 
-#: arrays.php:66
+#: arrays.php:69
 #, fuzzy
-msgid "Entirely in Specified Time Span"
-msgstr "تماما في فترة زمنية محددة"
+msgid "End Time in Range"
+msgstr "وقت النهاية"
 
 #: arrays.php:70
 #, fuzzy
-msgid "Select One"
-msgstr "اختيار واحد"
+msgid "Start Time in Range"
+msgstr "وقت البدء"
 
 #: arrays.php:71
-#, fuzzy
-msgid "TCP"
-msgstr "TCP"
-
-#: arrays.php:72
-#, fuzzy
-msgid "UDP"
-msgstr "UDP"
-
-#: arrays.php:73
-#, fuzzy
-msgid "ICMP"
-msgstr "ICMP"
-
-#: arrays.php:74
-#, fuzzy
-msgid "IGMP"
-msgstr "IGMP"
+msgid "Entirely in Range"
+msgstr ""
 
 #: arrays.php:75
-#, fuzzy
-msgid "GGP"
-msgstr "GGP"
+msgid "Return All Lines"
+msgstr ""
 
-#: arrays.php:76
-#, fuzzy
-msgid "IPENCAP"
-msgstr "IPENCAP"
-
-#: arrays.php:77
-#, fuzzy
-msgid "ST"
-msgstr "ST"
-
-#: arrays.php:78
-#, fuzzy
-msgid "CBT"
-msgstr "CBT"
-
-#: arrays.php:79
-#, fuzzy
-msgid "EGP"
-msgstr "جنيه"
-
-#: arrays.php:80
-#, fuzzy
-msgid "IGP"
-msgstr "IGP"
-
-#: arrays.php:81
-#, fuzzy
-msgid "BBN-RCC-MON"
-msgstr "BBN-RCC-MON"
-
-#: arrays.php:82
-#, fuzzy
-msgid "NVP-II"
-msgstr "NVP-II"
-
-#: arrays.php:83
-#, fuzzy
-msgid "PUP"
-msgstr "حزب الوحدة الشعبية"
-
-#: arrays.php:84
-#, fuzzy
-msgid "ARGUS"
-msgstr "ARGUS"
-
-#: arrays.php:85
-#, fuzzy
-msgid "EMCON"
-msgstr "EMCON"
-
-#: arrays.php:86
-#, fuzzy
-msgid "XNET"
-msgstr "XNET"
-
-#: arrays.php:87
-#, fuzzy
-msgid "CHAOS"
-msgstr "CHAOS"
-
-#: arrays.php:88
-#, fuzzy
-msgid "MUX"
-msgstr "MUX"
-
-#: arrays.php:89
-#, fuzzy
-msgid "DCN-MEAS"
-msgstr "DCN-MEAS"
-
-#: arrays.php:90
-#, fuzzy
-msgid "HMP"
-msgstr "HMP"
-
-#: arrays.php:91
-#, fuzzy
-msgid "PRM"
-msgstr "PRM"
-
-#: arrays.php:92
-#, fuzzy
-msgid "XNS-IDP"
-msgstr "XNS-IDP"
-
-#: arrays.php:93
-#, fuzzy
-msgid "TRUNK-1"
-msgstr "TRUNK-1"
-
-#: arrays.php:94
-#, fuzzy
-msgid "TRUNK-2"
-msgstr "TRUNK-2"
-
-#: arrays.php:95
-#, fuzzy
-msgid "LEAF-1"
-msgstr "LEAF-1"
-
-#: arrays.php:96
-#, fuzzy
-msgid "LEAF-2"
-msgstr "LEAF-2"
-
-#: arrays.php:97
-#, fuzzy
-msgid "RDP"
-msgstr "RDP"
-
-#: arrays.php:98
-#, fuzzy
-msgid "IRTP"
-msgstr "IRTP"
-
-#: arrays.php:99
-#, fuzzy
-msgid "ISO-TP4"
-msgstr "ISO-TP4"
-
-#: arrays.php:100
-#, fuzzy
-msgid "NETBLT"
-msgstr "NETBLT"
-
-#: arrays.php:101
-#, fuzzy
-msgid "MFE-NSP"
-msgstr "MFE-NSP"
-
-#: arrays.php:102
-#, fuzzy
-msgid "MERIT-INP"
-msgstr "MERIT-INP"
-
-#: arrays.php:103
-#, fuzzy
-msgid "DCCP"
-msgstr "DCCP"
-
-#: arrays.php:104
-#, fuzzy
-msgid "3PC"
-msgstr "3PC"
-
-#: arrays.php:105
-#, fuzzy
-msgid "IDPR"
-msgstr "IDPR"
-
-#: arrays.php:106
-#, fuzzy
-msgid "XTP"
-msgstr "XTP"
-
-#: arrays.php:107
-#, fuzzy
-msgid "DDP"
-msgstr "DDP"
-
-#: arrays.php:108
-#, fuzzy
-msgid "IDPR-CMTP"
-msgstr "IDPR-CMTP"
-
-#: arrays.php:109
-#, fuzzy
-msgid "TP++"
-msgstr "TP ++"
-
-#: arrays.php:110
-#, fuzzy
-msgid "IL"
-msgstr "انا"
-
-#: arrays.php:111
-#, fuzzy
-msgid "IPv6"
-msgstr "الإصدار IPv6"
-
-#: arrays.php:112
-#, fuzzy
-msgid "SDRP"
-msgstr "SDRP"
-
-#: arrays.php:113
-#, fuzzy
-msgid "IPv6-Route"
-msgstr "الإصدار IPv6-الطريق"
-
-#: arrays.php:114
-#, fuzzy
-msgid "IPv6-Frag"
-msgstr "الإصدار IPv6-فرج"
-
-#: arrays.php:115
-#, fuzzy
-msgid "IDRP"
-msgstr "IDRP"
-
-#: arrays.php:116
-#, fuzzy
-msgid "RSVP"
-msgstr "من فضلك، أرسل رد"
-
-#: arrays.php:117
-#, fuzzy
-msgid "GRE"
-msgstr "GRE"
-
-#: arrays.php:118
-#, fuzzy
-msgid "DSR"
-msgstr "DSR"
-
-#: arrays.php:119
-#, fuzzy
-msgid "BNA"
-msgstr "BNA"
-
-#: arrays.php:120
-#, fuzzy
-msgid "IPSEC-ESP"
-msgstr "IPSEC-ESP"
-
-#: arrays.php:121
-#, fuzzy
-msgid "IPSEC-AH"
-msgstr "IPSEC-AH"
-
-#: arrays.php:122
-#, fuzzy
-msgid "IPv6-ICMP"
-msgstr "الإصدار IPv6، ICMP"
-
-#: arrays.php:123
-#, fuzzy
-msgid "IPv6-NoNxt"
-msgstr "الإصدار IPv6-NoNxt"
-
-#: arrays.php:124
-#, fuzzy
-msgid "IPv6-Opts"
-msgstr "الإصدار IPv6، الأراضي الفلسطينية المحتلة"
-
-#: arrays.php:125
-#, fuzzy
-msgid "RSPF"
-msgstr "RSPF"
-
-#: arrays.php:126
-#, fuzzy
-msgid "VMTP"
-msgstr "VMTP"
-
-#: arrays.php:127
-#, fuzzy
-msgid "EIGRP"
-msgstr "EIGRP"
-
-#: arrays.php:128
-#, fuzzy
-msgid "OSPF"
-msgstr "OSPF"
-
-#: arrays.php:129
-#, fuzzy
-msgid "MTP"
-msgstr "MTP"
-
-#: arrays.php:130
-#, fuzzy
-msgid "IPIP"
-msgstr "IPIP"
-
-#: arrays.php:131
-#, fuzzy
-msgid "ENCAP"
-msgstr "ENCAP"
-
-#: arrays.php:135 flowview_schedules.php:522
-msgid "Yes"
-msgstr "نعم"
-
-#: arrays.php:136 flowview_schedules.php:522
-msgid "No"
-msgstr "لا"
-
-#: arrays.php:166 arrays.php:177 functions.php:117
-#, fuzzy
-msgid "None"
-msgstr "لا شيء"
-
-#: arrays.php:188
-msgid "All"
-msgstr "الكل"
-
-#: arrays.php:189 arrays.php:190 arrays.php:191 arrays.php:192 arrays.php:193
-#: arrays.php:194 arrays.php:195 arrays.php:196
+#: arrays.php:76 arrays.php:77 arrays.php:78 arrays.php:79 arrays.php:80
+#: arrays.php:81 arrays.php:82 arrays.php:83
 #, fuzzy, php-format
 msgid "Top %d"
 msgstr "أعلى٪ د"
 
-#: arrays.php:207
+#: arrays.php:87
 #, fuzzy
 msgid "No Limit"
 msgstr "لا حدود"
 
-#: arrays.php:208 arrays.php:209 arrays.php:210 arrays.php:211 arrays.php:212
-#: arrays.php:213 arrays.php:214 arrays.php:215 arrays.php:216 arrays.php:217
-#: arrays.php:218 arrays.php:219 arrays.php:220
+#: arrays.php:88 arrays.php:89 arrays.php:90 arrays.php:91 arrays.php:92
+#: arrays.php:93 arrays.php:94 arrays.php:95 arrays.php:96 arrays.php:97
+#: arrays.php:98 arrays.php:99 arrays.php:100
 #, fuzzy, php-format
 msgid "%s Bytes"
 msgstr "٪ s بايت"
 
-#: arrays.php:271 arrays.php:272 arrays.php:273 arrays.php:274 arrays.php:275
-#: arrays.php:276 arrays.php:277 arrays.php:278 arrays.php:279 arrays.php:280
-#: arrays.php:281 arrays.php:282 arrays.php:283 arrays.php:284 arrays.php:285
-#: arrays.php:286 arrays.php:287 arrays.php:288 arrays.php:292 arrays.php:293
-#: arrays.php:294 flowview.php:802 flowview.php:809 flowview.php:816
-#: flowview.php:823 flowview.php:830 flowview.php:838 flowview.php:845
-#: flowview.php:853 flowview.php:860 flowview.php:867 flowview.php:875
-#: functions.php:590
+#: arrays.php:104 arrays.php:380
 #, fuzzy
-msgid "Bytes"
-msgstr "بايت"
+msgid "All"
+msgstr "الكل"
 
-#: arrays.php:271 arrays.php:272 arrays.php:273 arrays.php:274 arrays.php:275
-#: arrays.php:276 arrays.php:277 arrays.php:278 arrays.php:279 arrays.php:280
-#: arrays.php:281 arrays.php:282 arrays.php:283 arrays.php:284 arrays.php:285
-#: arrays.php:286 arrays.php:287 arrays.php:288 flowview.php:801
-#: flowview.php:808 flowview.php:815 flowview.php:822 flowview.php:829
-#: flowview.php:837 flowview.php:844 flowview.php:852 flowview.php:859
-#: flowview.php:866 flowview.php:874 functions.php:592
+#: arrays.php:170 arrays.php:182
+#, fuzzy
+msgid "Source Domain"
+msgstr "منفذ المصدر (المنافذ)"
+
+#: arrays.php:171 arrays.php:177 arrays.php:184 arrays.php:190 arrays.php:196
+#: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
+#: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
+#: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
+#: arrays.php:296 functions.php:909 functions.php:1968 functions.php:2138
 #, fuzzy
 msgid "Flows"
 msgstr "يطفو"
 
-#: arrays.php:271 arrays.php:272 arrays.php:273 arrays.php:274 arrays.php:275
-#: arrays.php:276 arrays.php:277 arrays.php:278 arrays.php:279 arrays.php:280
-#: arrays.php:281 arrays.php:282 arrays.php:283 arrays.php:284 arrays.php:285
-#: arrays.php:286 arrays.php:287 arrays.php:288 arrays.php:292 arrays.php:293
-#: arrays.php:294 flowview.php:803 flowview.php:810 flowview.php:817
-#: flowview.php:824 flowview.php:831 flowview.php:839 flowview.php:846
-#: flowview.php:854 flowview.php:861 flowview.php:868 flowview.php:876
-#: functions.php:591
+#: arrays.php:172 arrays.php:178 arrays.php:185 arrays.php:191 arrays.php:197
+#: arrays.php:203 arrays.php:209 arrays.php:215 arrays.php:222 arrays.php:228
+#: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
+#: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
+#: arrays.php:297 arrays.php:312 arrays.php:326 arrays.php:341 arrays.php:347
+#: functions.php:862 functions.php:1972 functions.php:2136
+#, fuzzy
+msgid "Bytes"
+msgstr "بايت"
+
+#: arrays.php:173 arrays.php:179 arrays.php:186 arrays.php:192 arrays.php:198
+#: arrays.php:204 arrays.php:210 arrays.php:216 arrays.php:223 arrays.php:229
+#: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
+#: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
+#: arrays.php:298 arrays.php:311 arrays.php:327 arrays.php:340 arrays.php:346
+#: functions.php:956 functions.php:1976 functions.php:2137
 #, fuzzy
 msgid "Packets"
 msgstr "الحزم"
 
-#: arrays.php:271 arrays.php:272 arrays.php:273 flowview.php:807
-#: flowview_devices.php:124 flowview_devices.php:454
+#: arrays.php:176 arrays.php:183
+#, fuzzy
+msgid "Destination Domain"
+msgstr "عنوان الانترنت المطلوب"
+
+#: arrays.php:189 arrays.php:195 arrays.php:201 flowview_devices.php:61
+#: flowview_devices.php:340
+#, fuzzy
 msgid "Port"
 msgstr "منفذ"
 
-#: arrays.php:274 arrays.php:276 arrays.php:292 arrays.php:293 arrays.php:294
-#: flowview.php:384
+#: arrays.php:220 arrays.php:524 functions.php:1920
 #, fuzzy
 msgid "Dest IP"
 msgstr "Dest IP"
 
-#: arrays.php:275 arrays.php:276 arrays.php:292 arrays.php:293 arrays.php:294
+#: arrays.php:226 functions.php:1912
 #, fuzzy
-msgid "Src IP"
-msgstr "Src IP"
+msgid "IP Address"
+msgstr "عناوين البريد الإلكتروني"
 
-#: arrays.php:277
+#: arrays.php:232 arrays.php:308 arrays.php:323 arrays.php:338
+#: functions.php:1956
 #, fuzzy
-msgid "Src/Dest IP"
-msgstr "Src / Dest IP"
-
-#: arrays.php:278 arrays.php:292 arrays.php:293 arrays.php:294 flowview.php:821
 msgid "Protocol"
 msgstr "بروتوكول"
 
-#: arrays.php:279 arrays.php:285
+#: arrays.php:238 arrays.php:275
 #, fuzzy
 msgid "Input IF"
 msgstr "الإدخال إذا"
 
-#: arrays.php:280 arrays.php:285
+#: arrays.php:244 arrays.php:276
 #, fuzzy
 msgid "Output IF"
 msgstr "الإخراج إذا"
 
-#: arrays.php:281 arrays.php:283 arrays.php:293
-#, fuzzy
-msgid "Src AS"
-msgstr "Src AS"
-
-#: arrays.php:282 arrays.php:283 arrays.php:293 flowview.php:401
-#, fuzzy
-msgid "Dest AS"
-msgstr "Dest AS"
-
-#: arrays.php:284 flowview.php:858
+#: arrays.php:269
 #, fuzzy
 msgid "TOS"
 msgstr "TOS"
 
-#: arrays.php:286 arrays.php:288
+#: arrays.php:295
 #, fuzzy
-msgid "Src Prefix"
-msgstr "بادئة Src"
+msgid "Destingation Prefix"
+msgstr "بادئة الوجهة"
 
-#: arrays.php:287 arrays.php:288
+#: arrays.php:304 arrays.php:332 functions.php:1932
 #, fuzzy
-msgid "Dest Prefix"
-msgstr "البادئة"
+msgid "Source IF"
+msgstr "IP المصدر"
 
-#: arrays.php:292
-msgid "Active"
-msgstr "نشط"
-
-#: arrays.php:292
+#: arrays.php:306 arrays.php:335
 #, fuzzy
-msgid "B/Pk"
-msgstr "B / كيه"
+msgid "Destination IF"
+msgstr "عنوان الانترنت المطلوب"
 
-#: arrays.php:292 arrays.php:294
+#: arrays.php:309 arrays.php:334 functions.php:1924
 #, fuzzy
-msgid "Dest IF"
-msgstr "Dest IF"
+msgid "Source Port"
+msgstr "منفذ المصدر (المنافذ)"
 
-#: arrays.php:292 arrays.php:294
+#: arrays.php:310 arrays.php:337
 #, fuzzy
-msgid "Dest Port"
-msgstr "ميناء ميناء"
+msgid "Destination Port"
+msgstr "عنوان الانترنت المطلوب"
 
-#: arrays.php:292 arrays.php:294
+#: arrays.php:313 arrays.php:330 flowview_schedules.php:85 functions.php:1880
+#, fuzzy
+msgid "Start Time"
+msgstr "وقت البدء"
+
+#: arrays.php:314 arrays.php:331 functions.php:1884
 #, fuzzy
 msgid "End Time"
 msgstr "وقت النهاية"
 
-#: arrays.php:292
+#: arrays.php:315
 #, fuzzy
-msgid "Fl"
-msgstr "فلوريدا"
+msgid "Active"
+msgstr "نشط"
 
-#: arrays.php:292 arrays.php:294
+#: arrays.php:316
 #, fuzzy
-msgid "Src IF"
-msgstr "Src IF"
+msgid "B/Pk"
+msgstr "B / كيه"
 
-#: arrays.php:292 arrays.php:294
-#, fuzzy
-msgid "Src Port"
-msgstr "Src بورت"
-
-#: arrays.php:292 arrays.php:294 flowview_schedules.php:85
-msgid "Start Time"
-msgstr "وقت البدء"
-
-#: arrays.php:292
+#: arrays.php:317
 #, fuzzy
 msgid "Ts"
 msgstr "الخبر"
 
-#: arrays.php:294
+#: arrays.php:318
+#, fuzzy
+msgid "Fl"
+msgstr "فلوريدا"
+
+#: arrays.php:339 functions.php:1964
 #, fuzzy
 msgid "Flags"
 msgstr "أعلام"
 
-#: flowview.php:275
+#: arrays.php:344
 #, fuzzy
-msgid "Flow Filter Constraints"
-msgstr "قيود مرشح التدفق"
+msgid "Source"
+msgstr "IP المصدر"
 
-#: flowview.php:283
+#: arrays.php:345
+#, fuzzy
+msgid "Destination"
+msgstr "عنوان الانترنت المطلوب"
+
+#: arrays.php:362
+#, fuzzy
+msgid "General Filters"
+msgstr "مرشحات واضحة"
+
+#: arrays.php:365 functions.php:389
+#, fuzzy
 msgid "Filter"
 msgstr "فلتر"
 
-#: flowview.php:289
+#: arrays.php:366
+msgid "The Saved Filter to display."
+msgstr ""
+
+#: arrays.php:369
+#, fuzzy
+msgid "New Filter"
+msgstr "فلتر"
+
+#: arrays.php:374 flowview_filters.php:325
 #, fuzzy
 msgid "Listener"
 msgstr "مستمع"
 
-#: flowview.php:297
+#: arrays.php:375
+msgid "The Listener to use for the Filter."
+msgstr ""
+
+#: arrays.php:383
 #, fuzzy
 msgid "Presets"
 msgstr "المسبقة"
 
-#: flowview.php:302 flowview.php:599
-msgid "Custom"
-msgstr "مخصص"
+#: arrays.php:384
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr ""
 
-#: flowview.php:316 flowview_schedules.php:504
-msgid "Start Date"
-msgstr "تاريخ البداية"
+#: arrays.php:393
+msgid "Detailed Filter Criteria"
+msgstr ""
 
-#: flowview.php:320 flowview_schedules.php:329
+#: arrays.php:396 flowview_filters.php:330
 #, fuzzy
-msgid "Start Date Selector"
-msgstr "تاريخ البدء محدد"
+msgid "Report Type"
+msgstr "تقرير: [جديد]"
 
-#: flowview.php:323
-msgid "End Date"
-msgstr "تاريخ النهاية"
+#: arrays.php:397
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr ""
 
-#: flowview.php:327
+#: arrays.php:400
 #, fuzzy
-msgid "End Date Selector"
-msgstr "تاريخ الانتهاء محدد"
+msgid "Printed"
+msgstr "المطبوعة:"
 
-#: flowview.php:335
+#: arrays.php:400
+#, fuzzy
+msgid "Statistical"
+msgstr "الإحصائيات"
+
+#: arrays.php:404
+#, fuzzy
+msgid "Statistical Report"
+msgstr "تقارير الاحصائيات"
+
+#: arrays.php:405
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr ""
+
+#: arrays.php:412
+#, fuzzy
+msgid "Printed Report"
+msgstr "تقارير الطباعة"
+
+#: arrays.php:413
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr ""
+
+#: arrays.php:420
+#, fuzzy
+msgid "Range Rules"
+msgstr "إدارة الجداول"
+
+#: arrays.php:421
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr ""
+
+#: arrays.php:428
+#, fuzzy
+msgid "Resolve IP's"
+msgstr "حل العناوين:"
+
+#: arrays.php:429
+#, fuzzy
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "حل العناوين:"
+
+#: arrays.php:434 flowview_schedules.php:523
+#, fuzzy
+msgid "Yes"
+msgstr "نعم"
+
+#: arrays.php:435 flowview_schedules.php:523
+#, fuzzy
+msgid "No"
+msgstr "لا"
+
+#: arrays.php:439 flowview_filters.php:340 functions.php:470
+#, fuzzy
+msgid "Sort Field"
+msgstr "فرز الحقل:"
+
+#: arrays.php:440
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr ""
+
+#: arrays.php:447
+msgid "Maximum Rows"
+msgstr ""
+
+#: arrays.php:448
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr ""
+
+#: arrays.php:455
+#, fuzzy
+msgid "Minimum Bytes"
+msgstr "البايت الأدنى:"
+
+#: arrays.php:456
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr ""
+
+#: arrays.php:465
+#, fuzzy
+msgid "Protocol Filters"
+msgstr "بروتوكولات"
+
+#: arrays.php:468
+#, fuzzy
 msgid "Protocols"
 msgstr "بروتوكولات"
 
-#: flowview.php:341
+#: arrays.php:469
+msgid "Select the Specific Protocol for the Filter."
+msgstr ""
+
+#: arrays.php:476
 #, fuzzy
 msgid "TCP Flags"
 msgstr "أعلام TCP"
 
-#: flowview.php:347
+#: arrays.php:477
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr ""
+
+#: arrays.php:484
 #, fuzzy
 msgid "TOS Fields"
 msgstr "حقول TOS"
 
-#: flowview.php:353
-#, fuzzy
-msgid "(e.g., -0x0b/0x0F)"
-msgstr "(على سبيل المثال ، -0x0b / 0x0F)"
+#: arrays.php:485
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr ""
 
-#: flowview.php:364
+#: arrays.php:493
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr ""
+
+#: arrays.php:500
 #, fuzzy
-msgid "Source Port(s)"
+msgid "Source Ports"
 msgstr "منفذ المصدر (المنافذ)"
 
-#: flowview.php:370
+#: arrays.php:501
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr ""
+
+#: arrays.php:508
 #, fuzzy
 msgid "Source Interface"
 msgstr "واجهة المصدر"
 
-#: flowview.php:389
-#, fuzzy
-msgid "Dest Port(s)"
-msgstr "ميناء (ق)"
+#: arrays.php:509
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr ""
 
-#: flowview.php:395
+#: arrays.php:517
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr ""
+
+#: arrays.php:525
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr ""
+
+#: arrays.php:532
+#, fuzzy
+msgid "Dest Ports"
+msgstr "ميناء ميناء"
+
+#: arrays.php:533
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr ""
+
+#: arrays.php:540
 #, fuzzy
 msgid "Dest Interface"
 msgstr "واجهة السد"
 
-#: flowview.php:411
-#, fuzzy
-msgid ""
-" Multiple field entries, separated by commas, are permitted in the fields "
-"above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean "
-"any Port but 80)"
+#: arrays.php:541
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr ""
-"يُسمح بإدخال حقول متعددة ، مفصولة بفواصل ، في الحقول أعلاه. علامة الطرح (-) "
-"ستنفي إدخالًا (على سبيل المثال -80 لـ Port ، يعني أي منفذ إلا 80)"
 
-#: flowview.php:411
+#: arrays.php:548 functions.php:1944
 #, fuzzy
-msgid "Note:"
-msgstr "ملحوظة:"
+msgid "Dest AS"
+msgstr "Dest AS"
 
-#: flowview.php:420
+#: arrays.php:549
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr ""
+
+#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:34
 #, fuzzy
-msgid "Report Parameters"
-msgstr "معلمات التقرير"
-
-#: flowview.php:425
-#, fuzzy
-msgid "Statistics:"
-msgstr "الإحصائيات"
-
-#: flowview.php:427
-#, fuzzy
-msgid "Printed:"
-msgstr "المطبوعة:"
-
-#: flowview.php:429
-#, fuzzy
-msgid "Include if:"
-msgstr "تشمل إذا:"
-
-#: flowview.php:431
-#, fuzzy
-msgid "Resolve Addresses:"
-msgstr "حل العناوين:"
-
-#: flowview.php:435
-#, fuzzy
-msgid "Sort Field:"
-msgstr "فرز الحقل:"
-
-#: flowview.php:437
-#, fuzzy
-msgid "Max Flows:"
-msgstr "ماكس التدفقات:"
-
-#: flowview.php:439
-#, fuzzy
-msgid "Minimum Bytes:"
-msgstr "البايت الأدنى:"
-
-#: flowview.php:454
-msgid "View"
-msgstr "عرض"
-
-#: flowview.php:455
-#, fuzzy
-msgid "Defaults"
-msgstr "التخلف"
-
-#: flowview.php:456 flowview.php:473
-msgid "Save"
-msgstr "حفظ"
-
-#: flowview.php:457
-#, fuzzy
-msgid "Save As"
-msgstr "حفظ باسم"
-
-#: flowview.php:458 flowview_devices.php:30 flowview_schedules.php:34
 msgid "Delete"
 msgstr "حذف"
 
-#: flowview.php:467 flowview_schedules.php:70 flowview_schedules.php:502
-#, fuzzy
-msgid "Filter Name"
-msgstr "اسم المرشح"
-
-#: flowview.php:468
-#, fuzzy
-msgid "New Query"
-msgstr "استعلام جديد"
-
-#: flowview.php:472 flowview_devices.php:262 flowview_schedules.php:228
-msgid "Cancel"
-msgstr "إلغاء"
-
-#: flowview.php:654
-msgid "Update"
-msgstr "تحديث"
-
-#: flowview.php:723
-#, fuzzy
-msgid "Filter Saved"
-msgstr "تم حفظ الفلتر"
-
-#: flowview.php:744
-#, fuzzy
-msgid "Filter Settings Saved"
-msgstr "تصفية الإعدادات المحفوظة"
-
-#: flowview.php:752
-#, fuzzy
-msgid "Filter Updated"
-msgstr "تم تحديث الفلتر"
-
-#: flowview.php:814
-msgid "IP"
-msgstr "الآيبي"
-
-#: flowview.php:828
-#, fuzzy
-msgid "Interface"
-msgstr "جهة تعامل"
-
-#: flowview.php:843
-#, fuzzy
-msgid "AS"
-msgstr "مثل"
-
-#: flowview.php:865
-#, fuzzy
-msgid "Prefix"
-msgstr "اختصار"
-
-#: flowview_devices.php:36 flowview_devices.php:37
-#, fuzzy, php-format
-msgid "%d Days"
-msgstr "٪ أيام"
-
 #: flowview_devices.php:38
-#, fuzzy, php-format
-msgid "%d Week"
-msgstr "٪ د الأسبوع"
-
-#: flowview_devices.php:39
-#, fuzzy, php-format
-msgid "%d Weeks"
-msgstr "٪ د أسابيع"
-
-#: flowview_devices.php:40
-#, fuzzy, php-format
-msgid "%d Month"
-msgstr "٪ د الشهر"
-
-#: flowview_devices.php:41 flowview_devices.php:42 flowview_devices.php:43
-#, fuzzy, php-format
-msgid "%d Months"
-msgstr "٪ د أشهر"
-
-#: flowview_devices.php:44
-#, fuzzy, php-format
-msgid "%d Year"
-msgstr "٪ د السنة"
-
-#: flowview_devices.php:48
-#, fuzzy, php-format
-msgid "%d Minute"
-msgstr "٪ د دقيقة"
-
-#: flowview_devices.php:49 flowview_devices.php:50 flowview_devices.php:51
-#, fuzzy, php-format
-msgid "%d Minutes"
-msgstr "٪ د دقائق"
-
-#: flowview_devices.php:55
-#, fuzzy
-msgid "NetFlow version 1"
-msgstr "الإصدار 1 من NetFlow"
-
-#: flowview_devices.php:56
-#, fuzzy
-msgid "NetFlow version 5"
-msgstr "الإصدار 5 من NetFlow"
-
-#: flowview_devices.php:57
-#, fuzzy
-msgid "NetFlow version 6"
-msgstr "NetFlow الإصدار 6"
-
-#: flowview_devices.php:58
-#, fuzzy
-msgid "NetFlow version 7"
-msgstr "NetFlow الإصدار 7"
-
-#: flowview_devices.php:59
-#, fuzzy
-msgid "NetFlow AS Aggregation"
-msgstr "تجميع NetFlow"
-
-#: flowview_devices.php:60
-#, fuzzy
-msgid "NetFlow Proto Port Aggregation"
-msgstr "تجميع NetFlow Proto Port"
-
-#: flowview_devices.php:61
-#, fuzzy
-msgid "NetFlow Source Prefix Aggregation"
-msgstr "تجميع بادئة مصدر NetFlow"
-
-#: flowview_devices.php:62
-#, fuzzy
-msgid "NetFlow Destination Prefix Aggregation"
-msgstr "تجميع بادئة NetFlow"
-
-#: flowview_devices.php:63
-#, fuzzy
-msgid "NetFlow Prefix Aggregation"
-msgstr "تجميع بادئة NetFlow"
-
-#: flowview_devices.php:64
-#, fuzzy
-msgid "NetFlow Destination"
-msgstr "نيتفلو الوجهة"
-
-#: flowview_devices.php:65
-#, fuzzy
-msgid "NetFlow Source Destination"
-msgstr "مصدر NetFlow الوجهة"
-
-#: flowview_devices.php:66
-#, fuzzy
-msgid "NetFlow Full Flow"
-msgstr "NetFlow التدفق الكامل"
-
-#: flowview_devices.php:67
-#, fuzzy
-msgid "NetFlow ToS AS Aggregation"
-msgstr "NetFlow ToS AS التجميع"
-
-#: flowview_devices.php:68
-#, fuzzy
-msgid "NetFlow ToS Proto Port Aggregation"
-msgstr "NetFlow ToS Proto Port Aggregation"
-
-#: flowview_devices.php:69
-#, fuzzy
-msgid "NetFlow ToS Source Prefix Aggregation"
-msgstr "NetFlow ToS تجميع بادئة المصدر"
-
-#: flowview_devices.php:70
-#, fuzzy
-msgid "NetFlow ToS Destination Prefix Aggregation"
-msgstr "تجميع بادئة NetFlow لـ ToS"
-
-#: flowview_devices.php:71
-#, fuzzy
-msgid "NetFlow ToS Prefix Aggregation"
-msgstr "تجميع NetFlow للبادئة"
-
-#: flowview_devices.php:72
-#, fuzzy
-msgid "NetFlow ToS Prefix Port Aggregation"
-msgstr "تجميع منفذ بادئة NetFlow"
-
-#: flowview_devices.php:73
-#, fuzzy
-msgid "Flow-Tools tagged version 5"
-msgstr "أدوات التدفق الموسومة الإصدار 5"
-
-#: flowview_devices.php:86
-#, fuzzy
-msgid "0 (Disabled)"
-msgstr "0 (معطل)"
-
-#: flowview_devices.php:95
-#, fuzzy
-msgid "9 (Highest)"
-msgstr "9 (الأعلى)"
-
-#: flowview_devices.php:101
 #, fuzzy
 msgid "Device Name"
 msgstr "اسم الجهاز"
 
-#: flowview_devices.php:102
+#: flowview_devices.php:39
 #, fuzzy
 msgid "Name of the device to be displayed."
 msgstr "اسم الجهاز ليتم عرضها."
 
-#: flowview_devices.php:108 flowview_devices.php:451
-msgid "Directory"
-msgstr "الدليل"
-
-#: flowview_devices.php:109
-#, fuzzy
-msgid ""
-"Directory that this devices flows are in.  This directory must be in the "
-"Flow Directory path.  Do not put the full path here.  Also, not that if you "
-"change the path, all the predefined filer setup to to use it will have to be "
-"resaved."
+#: flowview_devices.php:44
+msgid "Collection Medhod"
 msgstr ""
-"دليل تدفق هذه الأجهزة. يجب أن يكون هذا الدليل في مسار دليل التدفق. لا تضع "
-"المسار الكامل هنا. وأيضًا ، إذا لم تقم بتغيير المسار ، فسيتم إعادة حفظ جميع "
-"إعدادات إعداد الملفات المحددة مسبقًا لاستخدامه."
 
-#: flowview_devices.php:115
+#: flowview_devices.php:45
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr ""
+
+#: flowview_devices.php:52
 #, fuzzy
 msgid "Allowed Host"
 msgstr "المضيف المسموح به"
 
-#: flowview_devices.php:116
+#: flowview_devices.php:53
 #, fuzzy
-msgid ""
-"IP Address of the device that is allowed to send to this flow collector.  "
-"Leave as 0 for any host."
-msgstr ""
-"عنوان IP للجهاز المسموح له بالإرسال إلى أداة تجميع التدفق هذه. اترك القيمة 0 "
-"لأي مضيف."
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
+msgstr "عنوان IP للجهاز المسموح له بالإرسال إلى أداة تجميع التدفق هذه. اترك القيمة 0 لأي مضيف."
 
-#: flowview_devices.php:125
+#: flowview_devices.php:62
 #, fuzzy
 msgid "Port this collector will listen on."
 msgstr "ميناء هذا جامع سوف يستمع على."
 
-#: flowview_devices.php:132 flowview_devices.php:452
+#: flowview_devices.php:138
 #, fuzzy
-msgid "Nesting"
-msgstr "التعشيش"
+msgid "Click 'Continue' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service."
+msgstr "انقر فوق \"متابعة\" لحذف مستمعي Net-Flow التاليين. بعد ذلك ، ستحتاج إلى إعادة تشغيل خدمة Flow-Capture Service."
 
-#: flowview_devices.php:133
+#: flowview_devices.php:139
 #, fuzzy
-msgid "Directory Structure that will be used for the flows for this device."
-msgstr "بنية الدليل التي سيتم استخدامها للتدفقات لهذا الجهاز."
-
-#: flowview_devices.php:140
-#, fuzzy
-msgid "NetFlow Version"
-msgstr "نسخة NetFlow"
-
-#: flowview_devices.php:141
-#, fuzzy
-msgid "NetFlow Protocol version used by the device."
-msgstr "إصدار بروتوكول NetFlow المستخدم من قبل الجهاز."
-
-#: flowview_devices.php:148
-#, fuzzy
-msgid "Compression Level"
-msgstr "مستوى الضغط"
-
-#: flowview_devices.php:149
-#, fuzzy
-msgid ""
-"Compression level of flow files.  Higher compression saves space but uses "
-"more CPU to store and retrieve results."
-msgstr ""
-"مستوى ضغط ملفات التدفق. ضغط أعلى يوفر مساحة ولكنه يستخدم المزيد من وحدة "
-"المعالجة المركزية لتخزين واسترجاع النتائج."
-
-#: flowview_devices.php:156 flowview_devices.php:457
-#, fuzzy
-msgid "Rotation"
-msgstr "دوران"
-
-#: flowview_devices.php:157
-#, fuzzy
-msgid "How often to create a new Flow File."
-msgstr "عدد مرات إنشاء ملف التدفق الجديد."
-
-#: flowview_devices.php:164
-msgid "Expiration"
-msgstr "تاريخ الانتهاء"
-
-#: flowview_devices.php:165
-#, fuzzy
-msgid "How long to keep your flow files."
-msgstr "كم من الوقت للحفاظ على تدفق الملفات الخاصة بك."
-
-#: flowview_devices.php:243
-#, fuzzy
-msgid ""
-"Click 'Continue' to delete the following Net-Flow Listeners.  After which, "
-"you will need to restart your Flow-Capture Service."
-msgstr ""
-"انقر فوق \"متابعة\" لحذف مستمعي Net-Flow التاليين. بعد ذلك ، ستحتاج إلى "
-"إعادة تشغيل خدمة Flow-Capture Service."
-
-#: flowview_devices.php:244
-#, fuzzy
-msgid ""
-"Also, remember to remove any leftover files from your Net-Flow Capture "
-"location."
+msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
 msgstr "وتذكر أيضًا إزالة أي ملفات متبقية من موقع Net-Flow Capture."
 
-#: flowview_devices.php:251
+#: flowview_devices.php:146
 #, fuzzy
 msgid "You must select at least one device."
 msgstr "يجب عليك اختيار جهاز واحد على الأقل."
 
-#: flowview_devices.php:254 flowview_schedules.php:220
+#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:218
+#, fuzzy
 msgid "Continue"
 msgstr "إستمرار"
 
-#: flowview_devices.php:322
+#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:226
+#, fuzzy
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: flowview_devices.php:210
 #, fuzzy, php-format
 msgid "Device [edit: %s]"
 msgstr "الجهاز [عدل:٪ s]"
 
-#: flowview_devices.php:324
+#: flowview_devices.php:212
 #, fuzzy
 msgid "Device [new]"
 msgstr "الجهاز [جديد]"
 
-#: flowview_devices.php:389
+#: flowview_devices.php:276
 #, fuzzy
 msgid "FlowView Listeners"
 msgstr "مستمع FlowView"
 
-#: flowview_devices.php:398 flowview_schedules.php:405
+#: flowview_devices.php:285 flowview_filters.php:223 flowview_schedules.php:406
+#, fuzzy
 msgid "Search"
 msgstr "بحث"
 
-#: flowview_devices.php:404 flowview_schedules.php:426
+#: flowview_devices.php:291 flowview_filters.php:244 flowview_schedules.php:427
+#: functions.php:426
+#, fuzzy
 msgid "Go"
 msgstr "أذهب"
 
-#: flowview_devices.php:404 flowview_schedules.php:426
+#: flowview_devices.php:291 flowview_filters.php:244 flowview_schedules.php:427
 #, fuzzy
 msgid "Set/Refresh Filters"
 msgstr "ضبط / تحديث المرشحات"
 
-#: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
+#: flowview_devices.php:294 flowview_filters.php:247 flowview_schedules.php:430
+#: functions.php:427
+#, fuzzy
 msgid "Clear"
 msgstr "واضح"
 
-#: flowview_devices.php:407 flowview_schedules.php:429 functions.php:145
+#: flowview_devices.php:294 flowview_filters.php:247 flowview_schedules.php:430
 #, fuzzy
 msgid "Clear Filters"
 msgstr "مرشحات واضحة"
 
-#: flowview_devices.php:441 functions.php:314 setup.php:139
+#: flowview_devices.php:328 setup.php:145 setup.php:186
 #, fuzzy
 msgid "Listeners"
 msgstr "المستمعين"
 
-#: flowview_devices.php:450
+#: flowview_devices.php:337
+#, fuzzy
 msgid "Name"
 msgstr "الاسم"
 
-#: flowview_devices.php:453
+#: flowview_devices.php:338
+msgid "Method"
+msgstr ""
+
+#: flowview_devices.php:339
 #, fuzzy
 msgid "Allowed From"
 msgstr "مسموح من"
 
-#: flowview_devices.php:455
-msgid "Version"
-msgstr "الإصدار"
+#: flowview_devices.php:341
+msgid "Status"
+msgstr ""
 
-#: flowview_devices.php:456
+#: flowview_devices.php:342
+msgid "Observed Listen"
+msgstr ""
+
+#: flowview_devices.php:354
+msgid "Cacti"
+msgstr ""
+
+#: flowview_devices.php:357
+msgid "Down"
+msgstr ""
+
+#: flowview_devices.php:357
+msgid "Up"
+msgstr ""
+
+#: flowview_devices.php:363
 #, fuzzy
-msgid "Compression"
-msgstr "ضغط"
+msgid "No Flowview Listeners"
+msgstr "مستمع FlowView"
 
-#: flowview_devices.php:458
-#, fuzzy
-msgid "Expire"
-msgstr "تنقضي"
-
-#: flowview_devices.php:479
-#, fuzzy
-msgid "No Devices"
-msgstr "لا يوجد أجهزة"
-
-#: flowview_schedules.php:33
+#: flowview_filters.php:35 flowview_schedules.php:33
 #, fuzzy
 msgid "Send Now"
 msgstr "ارسل الان"
 
-#: flowview_schedules.php:35
+#: flowview_filters.php:37 flowview_schedules.php:35
+#, fuzzy
 msgid "Disable"
 msgstr "تعطيل"
 
-#: flowview_schedules.php:36
+#: flowview_filters.php:38 flowview_schedules.php:36
+#, fuzzy
 msgid "Enable"
 msgstr "تفعيل"
+
+#: flowview_filters.php:129
+#, fuzzy
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "انقر فوق \"متابعة\" لحذف الجدول (الجداول) التالي."
+
+#: flowview_filters.php:136
+#, fuzzy
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "انقر فوق \"متابعة\" لتعطيل الجدول (الجداول) التالي."
+
+#: flowview_filters.php:143
+#, fuzzy
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "انقر فوق \"متابعة\" لتمكين الجدول (الجداول) التالي."
+
+#: flowview_filters.php:150
+#, fuzzy
+msgid "You must select at least one Filter."
+msgstr "يجب عليك اختيار جهاز واحد على الأقل."
+
+#: flowview_filters.php:215
+#, fuzzy
+msgid "FlowView Filters"
+msgstr "مرشحات التدفق"
+
+#: flowview_filters.php:229 flowview_filters.php:310 setup.php:144
+#: setup.php:242
+#, fuzzy
+msgid "Filters"
+msgstr "التصفيات"
+
+#: flowview_filters.php:233 flowview_schedules.php:416
+#, fuzzy
+msgid "Default"
+msgstr "الافتراضي"
+
+#: flowview_filters.php:320 flowview_schedules.php:70
+#: flowview_schedules.php:503
+#, fuzzy
+msgid "Filter Name"
+msgstr "اسم المرشح"
+
+#: flowview_filters.php:335
+#, fuzzy
+msgid "ID"
+msgstr "IDPR"
+
+#: flowview_filters.php:345
+#, fuzzy
+msgid "Resolution"
+msgstr "اسم المضيف القرار"
 
 #: flowview_schedules.php:40
 #, fuzzy
@@ -1276,6 +814,7 @@ msgid "Every Month"
 msgstr "كل شهر"
 
 #: flowview_schedules.php:53
+#, fuzzy
 msgid "Title"
 msgstr "العنوان"
 
@@ -1289,7 +828,8 @@ msgstr "جدول جديد"
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "أدخل عنوان التقرير لجدول FlowView."
 
-#: flowview_schedules.php:62 flowview_schedules.php:507
+#: flowview_schedules.php:62 flowview_schedules.php:508
+#, fuzzy
 msgid "Enabled"
 msgstr "مفعل"
 
@@ -1315,13 +855,8 @@ msgstr "كم مرة ترسل تقرير NetFlow هذا؟"
 
 #: flowview_schedules.php:86
 #, fuzzy
-msgid ""
-"This is the first date / time to send the NetFlow Scan email.  All future "
-"Emails will be calculated off of this time plus the interval given above."
-msgstr ""
-"هذا هو التاريخ / الوقت الأول لإرسال البريد الإلكتروني إلى NetFlow Scan. سيتم "
-"حساب جميع رسائل البريد الإلكتروني المستقبلية في هذا الوقت بالإضافة إلى "
-"الفاصل الزمني المذكور أعلاه."
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "هذا هو التاريخ / الوقت الأول لإرسال البريد الإلكتروني إلى NetFlow Scan. سيتم حساب جميع رسائل البريد الإلكتروني المستقبلية في هذا الوقت بالإضافة إلى الفاصل الزمني المذكور أعلاه."
 
 #: flowview_schedules.php:94
 #, fuzzy
@@ -1333,304 +868,550 @@ msgstr "عناوين البريد الإلكتروني"
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "عناوين البريد الإلكتروني (تم تحديد الأمر) لإرسال مسح NetFlow إلى."
 
-#: flowview_schedules.php:189
+#: flowview_schedules.php:187
 #, fuzzy
 msgid "Click 'Continue' to delete the following Schedule(s)."
 msgstr "انقر فوق \"متابعة\" لحذف الجدول (الجداول) التالي."
 
-#: flowview_schedules.php:196
+#: flowview_schedules.php:194
 #, fuzzy
 msgid "Click 'Continue' to send the following Schedule(s) now."
 msgstr "انقر فوق \"متابعة\" لإرسال الجدول (الجداول) التالي الآن."
 
-#: flowview_schedules.php:203
+#: flowview_schedules.php:201
 #, fuzzy
 msgid "Click 'Continue' to Disable the following Schedule(s)."
 msgstr "انقر فوق \"متابعة\" لتعطيل الجدول (الجداول) التالي."
 
-#: flowview_schedules.php:210
+#: flowview_schedules.php:208
 #, fuzzy
 msgid "Click 'Continue' to Enable the following Schedule(s)."
 msgstr "انقر فوق \"متابعة\" لتمكين الجدول (الجداول) التالي."
 
-#: flowview_schedules.php:217
+#: flowview_schedules.php:215
 #, fuzzy
 msgid "You must select at least one schedule."
 msgstr "يجب عليك تحديد جدول واحد على الأقل."
 
-#: flowview_schedules.php:306
+#: flowview_schedules.php:308
 #, fuzzy, php-format
 msgid "Report: [edit: %s]"
 msgstr "تقرير: [عدل:٪ s]"
 
-#: flowview_schedules.php:308
+#: flowview_schedules.php:310
 #, fuzzy
 msgid "Report: [new]"
 msgstr "تقرير: [جديد]"
 
-#: flowview_schedules.php:397
+#: flowview_schedules.php:331 functions.php:559
+#, fuzzy
+msgid "Start Date Selector"
+msgstr "تاريخ البدء محدد"
+
+#: flowview_schedules.php:398
 #, fuzzy
 msgid "FlowView Schedules"
 msgstr "جداول FlowView"
 
-#: flowview_schedules.php:411 flowview_schedules.php:492 functions.php:318
-#: setup.php:167
+#: flowview_schedules.php:412 flowview_schedules.php:493 setup.php:146
+#: setup.php:214
 #, fuzzy
 msgid "Schedules"
 msgstr "جداول"
 
-#: flowview_schedules.php:415
-msgid "Default"
-msgstr "الافتراضي"
-
-#: flowview_schedules.php:501
+#: flowview_schedules.php:502
 #, fuzzy
 msgid "Schedule Title"
 msgstr "عنوان الجدول"
 
-#: flowview_schedules.php:503
+#: flowview_schedules.php:504
+#, fuzzy
 msgid "Interval"
 msgstr "الفترة"
 
 #: flowview_schedules.php:505
 #, fuzzy
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+#: flowview_schedules.php:506
+#, fuzzy
 msgid "Next Send"
 msgstr "إرسال التالي"
 
-#: flowview_schedules.php:506
+#: flowview_schedules.php:507
+#, fuzzy
 msgid "Email"
 msgstr "البريد الإلكتروني"
 
-#: functions.php:105 functions.php:166
-#, fuzzy, php-format
-msgid "Report: %s"
-msgstr "تقرير:٪ s"
+#: functions.php:39
+#, fuzzy
+msgid "Select a Report Type First"
+msgstr "تقارير الطباعة"
 
-#: functions.php:113
+#: functions.php:65
+#, fuzzy, php-format
+msgid "Filter: [edit: %s]"
+msgstr "تقرير: [عدل:٪ s]"
+
+#: functions.php:67
+#, fuzzy
+msgid "Filter: [new]"
+msgstr "تقرير: [جديد]"
+
+#: functions.php:361
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr ""
+
+#: functions.php:371
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specififed below ]"
+msgstr ""
+
+#: functions.php:373
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specififed below ]"
+msgstr ""
+
+#: functions.php:377
+#, fuzzy
+msgid "Select a Filter to display data"
+msgstr "تقارير الطباعة"
+
+#: functions.php:393
+#, fuzzy
+msgid "Select a Filter"
+msgstr "تقارير الطباعة"
+
+#: functions.php:408
+#, fuzzy
 msgid "Exclude"
 msgstr "استبعد"
 
-#: functions.php:118
+#: functions.php:412
+#, fuzzy
+msgid "None"
+msgstr "لا شيء"
+
+#: functions.php:413
 #, fuzzy
 msgid "Top Sample"
 msgstr "أعلى عينة"
 
-#: functions.php:119
+#: functions.php:414
 #, fuzzy
 msgid "Top 2 Samples"
 msgstr "أعلى 2 عينات"
 
-#: functions.php:120
+#: functions.php:415
 #, fuzzy
 msgid "Top 3 Samples"
 msgstr "أعلى 3 عينات"
 
-#: functions.php:121
+#: functions.php:416
 #, fuzzy
 msgid "Top 4 Samples"
 msgstr "أعلى 4 عينات"
 
-#: functions.php:122
+#: functions.php:417
 #, fuzzy
 msgid "Top 5 Samples"
 msgstr "أعلى 5 عينات"
 
-#: functions.php:126
+#: functions.php:420
+msgid "Show only Domains on Charts Below"
+msgstr ""
+
+#: functions.php:422
+msgid "Domains Only"
+msgstr ""
+
+#: functions.php:426
+#, fuzzy
+msgid "Apply Filter"
+msgstr "مرشحات التدفق"
+
+#: functions.php:427
+#, fuzzy
+msgid "Clear Filter"
+msgstr "مرشحات واضحة"
+
+#: functions.php:428
+msgid "Edit"
+msgstr ""
+
+#: functions.php:428
+msgid "Edit Current Filter"
+msgstr ""
+
+#: functions.php:429
+#, fuzzy
+msgid "Save"
+msgstr "حفظ"
+
+#: functions.php:429
+msgid "Save Overrides to Selected Filter"
+msgstr ""
+
+#: functions.php:437
+#, fuzzy
+msgid "Report"
+msgstr "تقرير:٪ s"
+
+#: functions.php:448
+#, fuzzy, php-format
+msgid "Statistical: %s"
+msgstr "الإحصائيات"
+
+#: functions.php:454
+#, fuzzy, php-format
+msgid "Printed: %s"
+msgstr "المطبوعة:"
+
+#: functions.php:458 functions.php:475
+#, fuzzy
+msgid "Select a Filter First"
+msgstr "تقارير الطباعة"
+
+#: functions.php:506
+msgid "Lines"
+msgstr ""
+
+#: functions.php:520
+msgid "Octets"
+msgstr ""
+
+#: functions.php:538
+msgid "Timespan"
+msgstr ""
+
+#: functions.php:547
+#, fuzzy
+msgid "Custom"
+msgstr "مخصص"
+
+#: functions.php:553
+msgid "From"
+msgstr ""
+
+#: functions.php:562
+msgid "To"
+msgstr ""
+
+#: functions.php:568
+#, fuzzy
+msgid "End Date Selector"
+msgstr "تاريخ الانتهاء محدد"
+
+#: functions.php:571
+msgid "Shift Time Backward"
+msgstr ""
+
+#: functions.php:574
+msgid "Define Shifting Interval"
+msgstr ""
+
+#: functions.php:587
+msgid "Shift Time Forward"
+msgstr ""
+
+#: functions.php:594
 #, fuzzy
 msgid "Show/Hide"
 msgstr "اظهر المخفي"
 
-#: functions.php:130
+#: functions.php:598
+#, fuzzy
 msgid "Table"
 msgstr "جدول"
 
-#: functions.php:134
+#: functions.php:602
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "بايت بايت"
 
-#: functions.php:138
+#: functions.php:606
 #, fuzzy
 msgid "Packets Bar"
 msgstr "شريط الحزم"
 
-#: functions.php:142
+#: functions.php:610
 #, fuzzy
 msgid "Flows Bar"
 msgstr "شريط التدفقات"
 
-#: functions.php:311
-msgid "Filters"
-msgstr "التصفيات"
+#: functions.php:1088
+#, php-format
+msgid "Client/Private (%s)"
+msgstr ""
 
-#: functions.php:311
-#, fuzzy
-msgid "Flow Filters"
-msgstr "مرشحات التدفق"
+#: functions.php:1090
+msgid "icmp (0)"
+msgstr ""
 
-#: functions.php:314
-#, fuzzy
-msgid "Manage Listeners"
-msgstr "إدارة المستمعين"
-
-#: functions.php:318
-#, fuzzy
-msgid "Manage Schedules"
-msgstr "إدارة الجداول"
-
-#: functions.php:323
-msgid "Unknown"
+#: functions.php:1101
+#, fuzzy, php-format
+msgid "Unknown (%s)"
 msgstr "غير معروف"
 
-#: functions.php:346
+#: functions.php:1121
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "الصبار Flowview"
 
-#: functions.php:354
+#: functions.php:1129
 #, fuzzy
 msgid "Netflow - %"
 msgstr "صافي التدفق - ٪"
 
-#: functions.php:532
+#: functions.php:1238
 #, fuzzy
 msgid "New Flow"
 msgstr "تدفق جديد"
 
-#: functions.php:616
+#: functions.php:1888
+#, fuzzy
+msgid "Source DNS"
+msgstr "مصدر AS"
+
+#: functions.php:1892
+#, fuzzy
+msgid "Source Root DNS"
+msgstr "مصدر AS"
+
+#: functions.php:1896
+#, fuzzy
+msgid "Dest DNS"
+msgstr "Dest AS"
+
+#: functions.php:1900
+#, fuzzy
+msgid "Dest Root DNS"
+msgstr "ميناء ميناء"
+
+#: functions.php:1904
+#, fuzzy
+msgid "DNS"
+msgstr "DSR"
+
+#: functions.php:1908
+msgid "Root DNS"
+msgstr ""
+
+#: functions.php:1928
+#, fuzzy
+msgid "Dest Port"
+msgstr "ميناء ميناء"
+
+#: functions.php:1936
+#, fuzzy
+msgid "Dest IF"
+msgstr "Dest IF"
+
+#: functions.php:1952
+#, fuzzy
+msgid "Dest Prefix"
+msgstr "البادئة"
+
+#: functions.php:1960
+msgid "Type of Service"
+msgstr ""
+
+#: functions.php:1979
+#, fuzzy
+msgid "Bytes/Packet"
+msgstr "الحزم"
+
+#: functions.php:2109
+msgid "-- unresolved --"
+msgstr ""
+
+#: functions.php:2215
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr ""
+
+#: functions.php:2226
+msgid "Low Delay"
+msgstr ""
+
+#: functions.php:2227
+msgid "Throughput"
+msgstr ""
+
+#: functions.php:2228
+msgid "Reliability"
+msgstr ""
+
+#: functions.php:2229
+msgid "Mincost"
+msgstr ""
+
+#: functions.php:2233
+msgid "Net Control"
+msgstr ""
+
+#: functions.php:2234
+msgid "Internet Control"
+msgstr ""
+
+#: functions.php:2235
+msgid "Critic ECP"
+msgstr ""
+
+#: functions.php:2236
+msgid "Flash Override"
+msgstr ""
+
+#: functions.php:2237
+msgid "Flash"
+msgstr ""
+
+#: functions.php:2238
+msgid "Immediate"
+msgstr ""
+
+#: functions.php:2239
+msgid "Priority"
+msgstr ""
+
+#: functions.php:2240
+msgid "Routine"
+msgstr ""
+
+#: functions.php:2280
 #, fuzzy
 msgid "Summary Statistics"
 msgstr "احصائيات ملخصة"
 
-#: functions.php:624
+#: functions.php:2291
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "توزيع حجم حزمة IP (٪)"
 
-#: functions.php:629
+#: functions.php:2296
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "الحزم لكل توزيع التدفق (٪)"
 
-#: functions.php:634
+#: functions.php:2301
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "الثمانيات لكل توزيع التدفق (٪)"
 
-#: functions.php:639
+#: functions.php:2306
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "توزيع وقت التدفق (٪)"
 
-#: functions.php:1343
+#: functions.php:2489
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "يجب عليك تحديد تقرير إحصائي أو تقرير مطبوع!"
 
-#: functions.php:1346
+#: functions.php:2493
 #, fuzzy
-msgid ""
-"You must select only a Statistics Report or a Printed Report (not both)!"
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "يجب عليك فقط تحديد تقرير إحصائي أو تقرير مطبوع (وليس كلاهما)!"
 
-#: functions.php:1349
+#: functions.php:2497
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "تواريخ غير صالحة ، تاريخ / وقت الانتهاء أقدم من تاريخ / وقت البدء!"
 
-#: functions.php:1357 functions.php:1361
+#: functions.php:2508 functions.php:2513
 #, fuzzy
-msgid ""
-"Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr ""
-"عنوان IP غير صالح لعنوان المصدر! <br> (يجب أن يكون في شكل \"192.168.0.1\")"
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "عنوان IP غير صالح لعنوان المصدر! <br> (يجب أن يكون في شكل \"192.168.0.1\")"
 
-#: functions.php:1367 functions.php:1371 functions.php:1375
+#: functions.php:2520 functions.php:2524 functions.php:2528
 #, fuzzy
-msgid ""
-"Invalid subnet for the Source Address!<br>(Must be in the form of "
-"'192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr ""
-"شبكة فرعية غير صالحة لعنوان المصدر! <br> (يجب أن يكون في شكل "
-"\"192.168.0.1/255.255.255.0\" أو \"192.168.0.1/24\")"
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "شبكة فرعية غير صالحة لعنوان المصدر! <br> (يجب أن يكون في شكل \"192.168.0.1/255.255.255.0\" أو \"192.168.0.1/24\")"
 
-#: functions.php:1388 functions.php:1392
+#: functions.php:2542 functions.php:2546
 #, fuzzy
-msgid ""
-"Invalid IP for the Destination Address!<br>(Must be in the form of "
-"'192.168.0.1')"
-msgstr ""
-"عنوان IP غير صالح لعنوان الوجهة! <br> (يجب أن يكون في شكل \"192.168.0.1\")"
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "عنوان IP غير صالح لعنوان الوجهة! <br> (يجب أن يكون في شكل \"192.168.0.1\")"
 
-#: functions.php:1398 functions.php:1402 functions.php:1406
+#: functions.php:2552 functions.php:2556 functions.php:2560
 #, fuzzy
-msgid ""
-"Invalid subnet for the Destination Address!<br>(Must be in the form of "
-"'192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr ""
-"شبكة فرعية غير صالحة لعنوان الوجهة! <br> (يجب أن يكون في شكل "
-"\"192.168.0.1/255.255.255.0\" أو \"192.168.0.1/24\")"
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "شبكة فرعية غير صالحة لعنوان الوجهة! <br> (يجب أن يكون في شكل \"192.168.0.1/255.255.255.0\" أو \"192.168.0.1/24\")"
 
-#: functions.php:1420
+#: functions.php:2578
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "قيمة غير صالحة للواجهة المصدر!"
 
-#: functions.php:1431
+#: functions.php:2594
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "قيمة غير صالحة لمصدر المصدر! (0 - 65535)"
 
-#: functions.php:1442
+#: functions.php:2610
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "قيمة غير صالحة للمصدر AS! (0 - 65535)"
 
-#: functions.php:1453
+#: functions.php:2626
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "قيمة غير صالحة لواجهة الوجهة!"
 
-#: functions.php:1464
+#: functions.php:2642
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "قيمة غير صالحة لمنفذ الوجهة (0 - 65535)"
 
-#: functions.php:1475
+#: functions.php:2658
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "قيمة غير صالحة لـ Destination AS! (0 - 65535)"
 
-#: functions.php:1486
+#: functions.php:2674
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "قيمة غير صالحة للبروتوكول! (1 - 255)"
 
-#: functions.php:1495
+#: functions.php:2686
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
-msgstr ""
-"قيمة غير صالحة لعلم TCP! (على سبيل المثال: 0x1b أو 0x1b / SA أو SA / SA)"
+msgstr "قيمة غير صالحة لعلم TCP! (على سبيل المثال: 0x1b أو 0x1b / SA أو SA / SA)"
 
-#: functions.php:1500
+#: functions.php:2695
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "قيمة غير صالحة لثمانية قطع!"
 
-#: functions.php:1503
+#: functions.php:2702
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "قيمة غير صالحة لخطوط القطع!"
 
-#: functions.php:1506
+#: functions.php:2709
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "قيمة غير صالحة لـ Sort Field!"
 
-#: functions.php:1515
+#: functions.php:2736
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "مخطط FlowView لـ٪ s النوع هو٪ s"
+
+#: functions.php:3039
+#, fuzzy
+msgid "Total Flows"
+msgstr "ماكس التدفقات:"
+
+#: functions.php:3044
+msgid "Bytes Exchanged"
+msgstr ""
+
+#: functions.php:3048
+#, fuzzy
+msgid "Packets Examined"
+msgstr "شريط الحزم"
 
 #: setup.php:34
 #, fuzzy
@@ -1642,122 +1423,721 @@ msgstr "البرنامج المساعد -> تدفق عارض"
 msgid "Plugin -> Flow Admin"
 msgstr "البرنامج المساعد -> إدارة التدفق"
 
-#: setup.php:103
+#: setup.php:137
 #, fuzzy
 msgid "The Filter has been Deleted"
 msgstr "تم حذف المرشح"
 
-#: setup.php:104
+#: setup.php:138
 #, fuzzy
 msgid "The Filter has been Updated"
 msgstr "تم تحديث الفلتر"
 
-#: setup.php:111 setup.php:132 setup.php:221
-#, fuzzy
-msgid "Flow Viewer"
-msgstr "عارض التدفق"
+#: setup.php:143
+msgid "Import/Export"
+msgstr ""
 
-#: setup.php:118
-#, fuzzy
-msgid "(view)"
-msgstr "عرض"
-
-#: setup.php:125 setup.php:153 setup.php:181
-#, fuzzy
-msgid "(save)"
-msgstr "حفظ"
-
-#: setup.php:146 setup.php:174
-#, fuzzy
-msgid "(edit)"
-msgstr "(تعديل)"
-
-#: setup.php:160 setup.php:188
-#, fuzzy
-msgid "(actions)"
-msgstr "أفعال"
-
-#: setup.php:202 setup.php:204
+#: setup.php:144 setup.php:145 setup.php:146 setup.php:151 setup.php:277
+#: setup.php:279
 #, fuzzy
 msgid "FlowView"
 msgstr "FlowView"
 
-#: setup.php:225
+#: setup.php:158 setup.php:179 setup.php:301
 #, fuzzy
-msgid "Flow Tools Binary Path"
-msgstr "أدوات التدفق المسار الثنائي"
+msgid "Flow Viewer"
+msgstr "عارض التدفق"
 
-#: setup.php:226
+#: setup.php:165
 #, fuzzy
-msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-msgstr "المسار إلى تدفق القط ، ومرشح التدفق ، وثنائي تدفق التدفق."
+msgid "(view)"
+msgstr "عرض"
 
-#: setup.php:232
+#: setup.php:172 setup.php:200 setup.php:228 setup.php:256
 #, fuzzy
-msgid "Flow Tools Work Directory"
-msgstr "أدوات العمل دليل التدفق"
+msgid "(save)"
+msgstr "حفظ"
 
-#: setup.php:233
+#: setup.php:193 setup.php:221 setup.php:249
 #, fuzzy
-msgid "This is the path to a temporary directory to do work."
-msgstr "هذا هو المسار إلى دليل مؤقت للقيام بالعمل."
+msgid "(edit)"
+msgstr "(تعديل)"
 
-#: setup.php:239
+#: setup.php:207 setup.php:235 setup.php:263
 #, fuzzy
-msgid "Flows Directory"
-msgstr "دليل التدفقات"
+msgid "(actions)"
+msgstr "أفعال"
 
-#: setup.php:240
-#, fuzzy
-msgid "This is the path to base the path of your flow folder structure."
-msgstr "هذا هو المسار لتأسيس مسار بنية مجلد التدفق."
+#: setup.php:305
+msgid "Data Retention Policy"
+msgstr ""
 
-#: setup.php:246
-#, fuzzy
-msgid "Hostname Resolution"
-msgstr "اسم المضيف القرار"
+#: setup.php:306
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr ""
 
-#: setup.php:247
-#, fuzzy
-msgid "The method by which you wish to resolve hostnames."
-msgstr "الطريقة التي ترغب في حل أسماء المضيفين بها."
+#: setup.php:309
+#, fuzzy, php-format
+msgid "%d Week"
+msgstr "٪ د الأسبوع"
 
-#: setup.php:250
-#, fuzzy
-msgid "Use Local Server"
-msgstr "استخدام خادم محلي"
+#: setup.php:310 setup.php:311
+#, fuzzy, php-format
+msgid "%d Weeks"
+msgstr "٪ د أسابيع"
 
-#: setup.php:251
-#, fuzzy
-msgid "Use DNS Server Below"
-msgstr "استخدام خادم DNS أدناه"
+#: setup.php:312
+#, fuzzy, php-format
+msgid "%d Month"
+msgstr "٪ د الشهر"
 
-#: setup.php:252
-#, fuzzy
-msgid "Don't Resolve DNS"
-msgstr "لا تحل DNS"
+#: setup.php:313 setup.php:314 setup.php:315 setup.php:316
+#, fuzzy, php-format
+msgid "%d Months"
+msgstr "٪ د أشهر"
 
-#: setup.php:257
-#, fuzzy
-msgid "Alternate DNS Server"
-msgstr "خادم DNS البديل"
+#: setup.php:317
+#, fuzzy, php-format
+msgid "%d Year"
+msgstr "٪ د السنة"
 
-#: setup.php:258
-#, fuzzy
-msgid "This is the DNS Server used to resolve names."
-msgstr "هذا هو خادم DNS المستخدم لحل الأسماء."
+#: setup.php:322
+msgid "Database Partitioning Scheme"
+msgstr ""
 
-#: setup.php:263
-#, fuzzy
-msgid "Strip Domain Names"
-msgstr "أسماء المجال قطاع"
+#: setup.php:323
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr ""
 
-#: setup.php:264
-#, fuzzy
-msgid "A comma delimited list of domains names to strip from the domain."
-msgstr "قائمة محددة بفواصل لأسماء النطاقات التي سيتم تجريدها من المجال."
+#: setup.php:326
+msgid "Daily"
+msgstr ""
 
-#: setup.php:271
+#: setup.php:327
+msgid "Hourly"
+msgstr ""
+
+#: setup.php:333
 #, fuzzy
 msgid "Misc"
 msgstr "متفرقات"
+
+#, fuzzy
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "قائمة محددة بفواصل لأسماء النطاقات التي سيتم تجريدها من المجال."
+
+#, fuzzy
+#~ msgid "Strip Domain Names"
+#~ msgstr "أسماء المجال قطاع"
+
+#, fuzzy
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "هذا هو خادم DNS المستخدم لحل الأسماء."
+
+#, fuzzy
+#~ msgid "Alternate DNS Server"
+#~ msgstr "خادم DNS البديل"
+
+#, fuzzy
+#~ msgid "Don't Resolve DNS"
+#~ msgstr "لا تحل DNS"
+
+#, fuzzy
+#~ msgid "Use DNS Server Below"
+#~ msgstr "استخدام خادم DNS أدناه"
+
+#, fuzzy
+#~ msgid "Use Local Server"
+#~ msgstr "استخدام خادم محلي"
+
+#, fuzzy
+#~ msgid "The method by which you wish to resolve hostnames."
+#~ msgstr "الطريقة التي ترغب في حل أسماء المضيفين بها."
+
+#, fuzzy
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "هذا هو المسار لتأسيس مسار بنية مجلد التدفق."
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "دليل التدفقات"
+
+#, fuzzy
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "هذا هو المسار إلى دليل مؤقت للقيام بالعمل."
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "أدوات العمل دليل التدفق"
+
+#, fuzzy
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "المسار إلى تدفق القط ، ومرشح التدفق ، وثنائي تدفق التدفق."
+
+#, fuzzy
+#~ msgid "Flow Tools Binary Path"
+#~ msgstr "أدوات التدفق المسار الثنائي"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "إدارة المستمعين"
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "لا يوجد أجهزة"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "تنقضي"
+
+#, fuzzy
+#~ msgid "Compression"
+#~ msgstr "ضغط"
+
+#, fuzzy
+#~ msgid "Version"
+#~ msgstr "الإصدار"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "كم من الوقت للحفاظ على تدفق الملفات الخاصة بك."
+
+#, fuzzy
+#~ msgid "Expiration"
+#~ msgstr "تاريخ الانتهاء"
+
+#, fuzzy
+#~ msgid "How often to create a new Flow File."
+#~ msgstr "عدد مرات إنشاء ملف التدفق الجديد."
+
+#, fuzzy
+#~ msgid "Rotation"
+#~ msgstr "دوران"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "مستوى ضغط ملفات التدفق. ضغط أعلى يوفر مساحة ولكنه يستخدم المزيد من وحدة المعالجة المركزية لتخزين واسترجاع النتائج."
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "مستوى الضغط"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "إصدار بروتوكول NetFlow المستخدم من قبل الجهاز."
+
+#, fuzzy
+#~ msgid "NetFlow Version"
+#~ msgstr "نسخة NetFlow"
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "بنية الدليل التي سيتم استخدامها للتدفقات لهذا الجهاز."
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "التعشيش"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "دليل تدفق هذه الأجهزة. يجب أن يكون هذا الدليل في مسار دليل التدفق. لا تضع المسار الكامل هنا. وأيضًا ، إذا لم تقم بتغيير المسار ، فسيتم إعادة حفظ جميع إعدادات إعداد الملفات المحددة مسبقًا لاستخدامه."
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "الدليل"
+
+#, fuzzy
+#~ msgid "9 (Highest)"
+#~ msgstr "9 (الأعلى)"
+
+#, fuzzy
+#~ msgid "0 (Disabled)"
+#~ msgstr "0 (معطل)"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "أدوات التدفق الموسومة الإصدار 5"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "تجميع منفذ بادئة NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "تجميع NetFlow للبادئة"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "تجميع بادئة NetFlow لـ ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "NetFlow ToS تجميع بادئة المصدر"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "NetFlow ToS Proto Port Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "NetFlow ToS AS التجميع"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "NetFlow التدفق الكامل"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "مصدر NetFlow الوجهة"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "نيتفلو الوجهة"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "تجميع بادئة NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "تجميع بادئة NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "تجميع بادئة مصدر NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "تجميع NetFlow Proto Port"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "تجميع NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "NetFlow الإصدار 7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "NetFlow الإصدار 6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "الإصدار 5 من NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "الإصدار 1 من NetFlow"
+
+#, fuzzy
+#~ msgid "%d Minutes"
+#~ msgstr "٪ د دقائق"
+
+#, fuzzy
+#~ msgid "%d Minute"
+#~ msgstr "٪ د دقيقة"
+
+#, fuzzy
+#~ msgid "%d Days"
+#~ msgstr "٪ أيام"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "تشمل إذا:"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "معلمات التقرير"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "ملحوظة:"
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "ميناء (ق)"
+
+#, fuzzy
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "(على سبيل المثال ، -0x0b / 0x0F)"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "قيود مرشح التدفق"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "اختيار واحد"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "تماما في فترة زمنية محددة"
+
+#, fuzzy
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "وقت البدء في فترة زمنية محددة"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "وقت الانتهاء في فترة زمنية محددة"
+
+#, fuzzy
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "أي جزء في فترة زمنية محددة"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "كامل (محفز)"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "تجميع البادئة"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "تجميع بادئة الوجهة"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "تجميع بادئة المصدر"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "بروتوكول ميناء التجميع"
+
+#, fuzzy
+#~ msgid "AS Aggregation"
+#~ msgstr "كما التجميع"
+
+#, fuzzy
+#~ msgid "1 Line with Tags"
+#~ msgstr "1 خط مع العلامات"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "اختصار"
+
+#, fuzzy
+#~ msgid "AS"
+#~ msgstr "مثل"
+
+#, fuzzy
+#~ msgid "Interface"
+#~ msgstr "جهة تعامل"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "الآيبي"
+
+#, fuzzy
+#~ msgid "Filter Updated"
+#~ msgstr "تم تحديث الفلتر"
+
+#, fuzzy
+#~ msgid "Filter Settings Saved"
+#~ msgstr "تصفية الإعدادات المحفوظة"
+
+#, fuzzy
+#~ msgid "Filter Saved"
+#~ msgstr "تم حفظ الفلتر"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "تحديث"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "استعلام جديد"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr "يُسمح بإدخال حقول متعددة ، مفصولة بفواصل ، في الحقول أعلاه. علامة الطرح (-) ستنفي إدخالًا (على سبيل المثال -80 لـ Port ، يعني أي منفذ إلا 80)"
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "اسم المرشح"
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr "حفظ باسم"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "التخلف"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "عرض"
+
+#, fuzzy
+#~ msgid "Filter Type"
+#~ msgstr "اسم المرشح"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "تاريخ النهاية"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "Src بورت"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "Src IF"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "بادئة Src"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "Src AS"
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "Src / Dest IP"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "Src IP"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "ENCAP"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "MTP"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "OSPF"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "EIGRP"
+
+#, fuzzy
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "RSPF"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "الإصدار IPv6، الأراضي الفلسطينية المحتلة"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "الإصدار IPv6-NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "الإصدار IPv6، ICMP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-AH"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ESP"
+
+#, fuzzy
+#~ msgid "BNA"
+#~ msgstr "BNA"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "GRE"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "من فضلك، أرسل رد"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "الإصدار IPv6-فرج"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "الإصدار IPv6-الطريق"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "SDRP"
+
+#, fuzzy
+#~ msgid "IPv6"
+#~ msgstr "الإصدار IPv6"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "انا"
+
+#, fuzzy
+#~ msgid "TP++"
+#~ msgstr "TP ++"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "DDP"
+
+#, fuzzy
+#~ msgid "XTP"
+#~ msgstr "XTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "3PC"
+#~ msgstr "3PC"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "MERIT-INP"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "MFE-NSP"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "NETBLT"
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "ISO-TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "RDP"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "LEAF-2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "LEAF-1"
+
+#, fuzzy
+#~ msgid "TRUNK-2"
+#~ msgstr "TRUNK-2"
+
+#, fuzzy
+#~ msgid "TRUNK-1"
+#~ msgstr "TRUNK-1"
+
+#, fuzzy
+#~ msgid "XNS-IDP"
+#~ msgstr "XNS-IDP"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "PRM"
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "HMP"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "DCN-MEAS"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "CHAOS"
+#~ msgstr "CHAOS"
+
+#, fuzzy
+#~ msgid "XNET"
+#~ msgstr "XNET"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "حزب الوحدة الشعبية"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP-II"
+
+#, fuzzy
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "BBN-RCC-MON"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "IGP"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "جنيه"
+
+#, fuzzy
+#~ msgid "CBT"
+#~ msgstr "CBT"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "ST"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "IPENCAP"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "GGP"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "ICMP"
+
+#, fuzzy
+#~ msgid "UDP"
+#~ msgstr "UDP"
+
+#, fuzzy
+#~ msgid "TCP"
+#~ msgstr "TCP"
