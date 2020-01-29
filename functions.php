@@ -1204,7 +1204,7 @@ function load_data_for_filter($session = false) {
 
 	/* destination port filter */
 	if (get_request_var('destport') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dest_port');
+		$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dst_port');
 	}
 
 	/* destination as filter */
