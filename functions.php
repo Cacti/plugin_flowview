@@ -1367,7 +1367,7 @@ function flowview_get_chartdata() {
 
 		$output = $_SESSION['sess_flowdata'];
 
-		if (sizeof($output['data']) && $report > 0 && $report < 99) {
+		if (cacti_sizeof($output['data']) && $report > 0 && $report < 99) {
 			$columns  = array_keys($output['data'][0]);
 			$category = get_category_columns($report, $domains);
 
@@ -1497,6 +1497,10 @@ function get_category_columns($statistics, $domain) {
 
 function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 	global $config, $graph_timespans;
+
+	if (!intval($query_id)) {
+		return false;
+	}
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
