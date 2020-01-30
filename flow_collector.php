@@ -393,7 +393,11 @@ function process_fv5($p, $peer) {
 		$src_rport  = flowview_translate_port($data['src_port'], false, false);
 		$dst_rport  = flowview_translate_port($data['dst_port'], false, false);
 
-		$pps = round($data['dOctets'] / $data['dPkts'], 3);
+		if ($data['dPkts'] > 0) {
+			$pps = round($data['dOctets'] / $data['dPkts'], 3);
+		} else {
+			$pps = 0;
+		}
 
 		$sql[] = '(' .
 			$listener_id           . ', ' .
@@ -434,7 +438,7 @@ function process_fv5($p, $peer) {
 			$data['flags']         . ')';
 	}
 
-	if (sizeof($sql)) {
+	if (cacti_sizeof($sql)) {
 		debug('Flow: Writing Records: ' . sizeof($sql));
 		db_execute($sql_prefix . implode(' ,', $sql));
 	}
@@ -554,7 +558,7 @@ function process_fv9($p, $peer) {
 
 		// Flow Data Set
 		if ($fsid > 255) {
-			if (sizeof($templates[$peer])) {
+			if (cacti_sizeof($templates[$peer])) {
 				debug('Flow: Data Found, Processing');
 			} else {
 				debug('Flow: Data Found, Awaiting Templates');
@@ -641,7 +645,7 @@ function process_fv9($p, $peer) {
 		$j++;
 	}
 
-	if (sizeof($sql)) {
+	if (cacti_sizeof($sql)) {
 		debug('Flow: Writing Records: ' . sizeof($sql));
 		db_execute($sql_prefix . implode(', ', $sql));
 	}
@@ -761,7 +765,7 @@ function process_fv10($p, $peer) {
 
 		// Data Set
 		if ($fsid > 255) {
-			if (sizeof($templates[$peer])) {
+			if (cacti_sizeof($templates[$peer])) {
 				debug('Flow: Data Found, Processing');
 			} else {
 				debug('Flow: Data Found, Awaiting Templates');
@@ -828,7 +832,7 @@ function process_fv10($p, $peer) {
 		}
 	}
 
-	if (sizeof($sql)) {
+	if (cacti_sizeof($sql)) {
 		debug('Flow: Writing Records: ' . sizeof($sql));
 		db_execute($sql_prefix . implode(', ', $sql));
 	}

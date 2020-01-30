@@ -10,8 +10,6 @@ $cacti_base = '/var/www/html/cacti';
 include_once($cacti_base . '/include/cli_check.php');
 include_once($cacti_base . '/lib/poller.php');
 
-$tools_path = read_config_option('path_flowtools');
-
 $shortopts = 'VvHh';
 $longopts = array(
 	'systemd',
@@ -43,7 +41,7 @@ if (isset($options['systemd'])) {
 }
 
 function start() {
-	global $tools_path, $cacti_base, $systemd;
+	global $cacti_base, $systemd;
 
 	print 'NOTE: Starting Flow Collection' . PHP_EOL;
 
@@ -51,9 +49,6 @@ function start() {
 	$legacy  = db_fetch_cell('SELECT COUNT(*) FROM plugin_flowview_devices WHERE cmethod = 1');
 
 	if (!empty($devices)) {
-		/* removing trailing slash and anything else */
-		$path = rtrim($path, "/ \n\t");
-
 		foreach ($devices as $device) {
 			$php_binary = read_config_option('path_php_binary');
 			print "NOTE: Launching cacti-flow-capture as '" . $cacti_base . '/plugins/flowview/flow_collector.php --listener-id=' . $device['id'] . "'" . PHP_EOL;
@@ -70,7 +65,7 @@ function start() {
 }
 
 function stop() {
-	global $tools_path, $cacti_base;
+	global $cacti_base;
 
 	print 'NOTE: Stopping Flow Collection' . PHP_EOL;
 
@@ -78,7 +73,6 @@ function stop() {
 	$php_binary = read_config_option('path_php_binary');
 
 	if (sizeof($devices)) {
-		shell_exec('killall --quiet ' . $tools_path . '/flow-capture');
 		shell_exec('killall --quiet ' . $php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php');
 	}			
 }
