@@ -881,26 +881,52 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 
 	if (isset($data[$fieldname['src_addr_ipv6']])) {
 		$src_addr   = $data[$fieldname['src_addr_ipv6']];
-		$src_prefix = $data[$fieldname['src_prefix_ipv6']];
+
+		if (isset($data[$fieldname['src_prefix_ipv6']])) {
+			$src_prefix = $data[$fieldname['src_prefix_ipv6']];
+		} else {
+			$src_prefix = 0;
+		}
 	} elseif (isset($data[$fieldname['src_addr']])) {
 		$src_addr   = $data[$fieldname['src_addr']];
-		$src_prefix = $data[$fieldname['src_prefix']];
+
+		if (isset($data[$fieldname['src_prefix']])) {
+			$src_prefix = $data[$fieldname['src_prefix']];
+		} else {
+			$src_prefix = 0;
+		}
 	} else {
+		cacti_log('The Source Address is not set');
 		return false;
 	}
 
 	if (isset($data[$fieldname['dst_addr_ipv6']])) {
 		$dst_addr   = $data[$fieldname['dst_addr_ipv6']];
-		$dst_prefix = $data[$fieldname['dst_prefix_ipv6']];
-	} else {
+
+		if (isset($data[$fieldname['dst_prefix_ipv6']])) {
+			$dst_prefix = $data[$fieldname['dst_prefix_ipv6']];
+		} else {
+			$dst_prefix = 0;
+		}
+	} elseif (isset($data[$fieldname['dst_addr']])) {
 		$dst_addr   = $data[$fieldname['dst_addr']];
-		$dst_prefix = $data[$fieldname['dst_prefix']];
+
+		if (isset($data[$fieldname['dst_prefix']])) {
+			$dst_prefix = $data[$fieldname['dst_prefix']];
+		} else {
+			$dst_prefix = 0;
+		}
+	} else {
+		cacti_log('The Destination Address is not set');
+		return false;
 	}
 
 	if (isset($data[$fieldname['nexthop_ipv6']])) {
 		$nexthop = $data[$fieldname['nexthop_ipv6']];
-	} else {
+	} elseif (isset($data[$fieldname['nexthop']])) {
 		$nexthop = $data[$fieldname['nexthop']];
+	} else {
+		$nexthop = '';
 	}
 
 	if (isset($data[$fieldname['sysuptime']])) {
