@@ -3492,7 +3492,13 @@ function get_tables_range($begin, $end = null) {
 			$current += 3600;
 		}
 
-		$tables[]  = 'plugin_flowview_raw_' . $suffix;
+		$table = 'plugin_flowview_raw_' . $suffix;
+
+		if (!db_table_exists($table)) {
+			create_raw_partition($table)
+		}
+
+		$tables[]  = $table;
 	}
 
 	return $tables;
