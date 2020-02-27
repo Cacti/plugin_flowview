@@ -10,9 +10,13 @@ Fully customizable reports
 
 ## Required:
 
-First, make sure you have the plugin architecture installed.
+Before you start, with this version of Flowview, you have to ensure that you
+are at MariaDB 10.0.12+.  Cacti has been shown to support MariaDB upto 14.x. MySQL 5.6+
+is required, and it has been reported that Cacti work with MySQL 8.x, but this MySQL
+release was a major paradigm shift for Oracle.  So, if you go there, be prepared for
+some extra love/hate in your relashionship, but many of the changes are very welcome.
 
-Then, Install just like any other plugin, just copy it into the plugin directory,
+Then, Install flowview just like any other plugin, just copy it into the plugin directory,
 and Use Console -> Plugin Mangement to Install and Enable.
 
 This version of the flowview plugin no longer requires flowtools or 
