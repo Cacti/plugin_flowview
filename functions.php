@@ -3131,9 +3131,9 @@ function flowview_viewchart() {
 
 function flowview_get_owner_from_arin($host) {
 	static $curlgood = true;
-
+	if(filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {    
 	$parts = explode('.', $host);
-
+	
 	if ($parts[0] == '172') {
 		if ($parts[1] >= 16 && $parts[1] <= 31) {
 			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
@@ -3153,17 +3153,34 @@ function flowview_get_owner_from_arin($host) {
 	} elseif ($parts[0] == '127') {
 		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
 	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '198.51.100') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		return 'ip-' . str_replace('.', '-', $host) . '.testnet2.private.net';
 	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '203.0.113') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		return 'ip-' . str_replace('.', '-', $host) . '.testnet3.private.net';
 	} elseif ($parts[0] >= 224 && $parts[0] <= 239) {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		return 'ip-' . str_replace('.', '-', $host) . '.mcast.net';
 	} elseif ($parts[0] >= 240 && $parts[0] <= 255) {
 		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
 	} elseif ($curlgood == false) {
 		return 'ip-' . str_replace('.', '-', $host) . '.unknown.net';
 	}
-
+	}
+	else { 
+		if(filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+		
+		$parts = explode(':', $host);
+		
+		if ($parts[0] >= 'FF00' ) {
+		 return 'ip-' . str_replace('.', '-', $host) . '.mcast.net';
+		}
+		elseif ($parts[0] . ':' . $parts[1] . ':' . $parts[2] . ':' . $parts[3] == 'FE80:0000:0000:0000') {
+			return 'ip-' . str_replace('.', '-', $host) . '.linklocal.net';
+		}
+		elseif ($parts[0] >= 'FC00') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		}
+	}
+	}
+	
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, 'http://whois.arin.net/rest/ip/' . $host);
 	curl_setopt($ch, CURLOPT_HEADER, false);
