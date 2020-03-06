@@ -305,7 +305,6 @@ if (cacti_sizeof($listener)) {
 		    die("$errstr ($errno)");
 		}
 
-
 		while (true) {
 			$p = stream_socket_recvfrom($socket, 1500, 0, $peer);
 			if ($start > 0) {
@@ -326,6 +325,9 @@ if (cacti_sizeof($listener)) {
 				}
 
 				debug("Flow: Packet from: $peer v" . $version[1] . " - Len: " . strlen($p));
+
+				// Ensure the database connection is still good
+				database_check_connect();
 
 				if ($version[1] == 5) {
 					process_fv5($p, $peer);
@@ -348,6 +350,40 @@ if (cacti_sizeof($listener)) {
 }
 
 exit(0);
+
+function database_check_connect() {
+	global $config;
+
+	$database_type     = 'mysql';
+	$database_default  = 'cacti';
+	$database_hostname = 'localhost';
+	$database_username = 'cactiuser';
+	$database_password = 'cactiuser';
+	$database_port     = '3306';
+	$database_retries  = 5;
+	$database_ssl      = false;
+	$database_ssl_key  = '';
+	$database_ssl_cert = '';
+	$database_ssl_ca   = '';
+
+	include_once($config['include_path'] . '/config.php');
+
+	$version = db_fetch_cell('SELECT version FROM cacti', '', false);
+
+	if (empty($version)) {
+		db_close();
+
+		while(true) {
+			$db_conn = db_connect_real($database_hostname, $database_username, $database_password, $database_default, $database_type, $database_port, $database_retries, $database_ssl, $database_ssl_key, $database_ssl_cert, $database_ssl_ca);
+
+			if (!is_object($db_conn)) {
+				sleep(1);
+			} else {
+				break;
+			}
+		}
+	}
+}
 
 function process_fv5($p, $peer) {
 	global $listener_id;
