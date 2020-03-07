@@ -365,7 +365,7 @@ function flowview_setup_table() {
 	global $config;
 
 	$data = array();
-	$data['columns'][]  = array('name' => 'ip', 'type' => 'varchar(32)', 'NULL' => false, 'default' => '');
+	$data['columns'][]  = array('name' => 'ip', 'type' => 'varchar(45)', 'NULL' => false, 'default' => '');
 	$data['columns'][]  = array('name' => 'host', 'type' => 'varchar(255)', 'NULL' => false, 'default' => '');
 	$data['columns'][]  = array('name' => 'time', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 	$data['keys'][]     = array('name' => 'ip', 'columns' => 'ip');
