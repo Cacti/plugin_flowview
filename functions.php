@@ -486,7 +486,7 @@ function flowview_display_filter($data) {
 									WHERE id = ?',
 									array(get_request_var('query')));
 
-								if (sizeof($report)) {
+								if (cacti_sizeof($report)) {
 									if ($report['statistics'] > 0) {
 										$columns = $stat_columns_array[$report['statistics']];
 									} elseif ($report['printed'] > 0) {
@@ -1284,7 +1284,7 @@ function get_ip_filter($sql_where, $value, $column) {
 			}
 		}
 
-		if (sizeof($values)) {
+		if (cacti_sizeof($values)) {
 			return ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
 		}
 	}
@@ -1337,7 +1337,7 @@ function get_tables_for_query($start, $end) {
 		FROM information_schema.TABLES
 		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
 
-	if (sizeof($tables)) {
+	if (cacti_sizeof($tables)) {
 		foreach($tables as $t) {
 			$parts = explode('_', $t['table']);
 			$partition = trim($parts[3]);
@@ -1851,7 +1851,7 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 		$sql = '';
 
-		if (sizeof($tables)) {
+		if (cacti_sizeof($tables)) {
 			foreach($tables as $t) {
 				if (isset($sql_inner1)) {
 					$sql .= ($sql != '' ? ' UNION ':'') . "$sql_inner1 FROM $t $sql_where $sql_inner_groupby1";
@@ -3131,56 +3131,49 @@ function flowview_viewchart() {
 
 function flowview_get_owner_from_arin($host) {
 	static $curlgood = true;
-	if(filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {    
-	$parts = explode('.', $host);
-	
-	if ($parts[0] == '172') {
-		if ($parts[1] >= 16 && $parts[1] <= 31) {
+
+	if (filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+		$parts = explode('.', $host);
+
+		if ($parts[0] == '172' && $parts[1] >= 16 && $parts[1] <= 31) {
 			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] . '.' . $parts[1] == '192.168') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '192.0.0') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] . '.' . $parts[1] == '168.254') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] . '.' . $parts[1] == '198.18') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] . '.' . $parts[1] == '198.19') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] == '10') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] == '127') {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '198.51.100') {
+			return 'ip-' . str_replace('.', '-', $host) . '.testnet2.private.net';
+		} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '203.0.113') {
+			return 'ip-' . str_replace('.', '-', $host) . '.testnet3.private.net';
+		} elseif ($parts[0] >= 224 && $parts[0] <= 239) {
+			return 'ip-' . str_replace('.', '-', $host) . '.mcast.net';
+		} elseif ($parts[0] >= 240 && $parts[0] <= 255) {
+			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
+		} elseif ($curlgood == false) {
+			return 'ip-' . str_replace('.', '-', $host) . '.unknown.net';
 		}
-	} elseif ($parts[0] . '.' . $parts[1] == '192.168') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '192.0.0') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($parts[0] . '.' . $parts[1] == '168.254') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($parts[0] . '.' . $parts[1] == '198.18') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($parts[0] . '.' . $parts[1] == '198.19') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($parts[0] == '10') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($parts[0] == '127') {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '198.51.100') {
-		return 'ip-' . str_replace('.', '-', $host) . '.testnet2.private.net';
-	} elseif ($parts[0] . '.' . $parts[1] . '.' . $parts[2] == '203.0.113') {
-		return 'ip-' . str_replace('.', '-', $host) . '.testnet3.private.net';
-	} elseif ($parts[0] >= 224 && $parts[0] <= 239) {
-		return 'ip-' . str_replace('.', '-', $host) . '.mcast.net';
-	} elseif ($parts[0] >= 240 && $parts[0] <= 255) {
-		return 'ip-' . str_replace('.', '-', $host) . '.private.net';
-	} elseif ($curlgood == false) {
-		return 'ip-' . str_replace('.', '-', $host) . '.unknown.net';
-	}
-	}
-	else { 
-		if(filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-		
+	} elseif (filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
 		$parts = explode(':', $host);
-		
+
 		if ($parts[0] >= 'FF00' ) {
-		 return 'ip-' . str_replace('.', '-', $host) . '.mcast.net';
-		}
-		elseif ($parts[0] . ':' . $parts[1] . ':' . $parts[2] . ':' . $parts[3] == 'FE80:0000:0000:0000') {
+			return 'ip-' . str_replace('.', '-', $host) . '.mcast.net';
+		} elseif ($parts[0] . ':' . $parts[1] . ':' . $parts[2] . ':' . $parts[3] == 'FE80:0000:0000:0000') {
 			return 'ip-' . str_replace('.', '-', $host) . '.linklocal.net';
-		}
-		elseif ($parts[0] >= 'FC00') {
+		} elseif ($parts[0] >= 'FC00') {
 			return 'ip-' . str_replace('.', '-', $host) . '.private.net';
 		}
 	}
-	}
-	
+
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, 'http://whois.arin.net/rest/ip/' . $host);
 	curl_setopt($ch, CURLOPT_HEADER, false);
