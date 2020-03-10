@@ -366,7 +366,7 @@ function database_check_connect() {
 	$database_ssl_cert = '';
 	$database_ssl_ca   = '';
 
-	include_once($config['include_path'] . '/config.php');
+	include($config['include_path'] . '/config.php');
 
 	$version = db_fetch_cell('SELECT version FROM cacti', '', false);
 
