@@ -30,9 +30,11 @@ ini_set('max_execution_time', 0);
 ini_set('memory_limit', '-1');
 
 $debug = false;
+$maint = false;
 
 $shortopts = 'VvHh';
 $longopts = array(
+	'maint',
 	'debug',
 	'version',
 	'help',
@@ -42,6 +44,10 @@ $options = getopt($shortopts, $longopts);
 
 foreach($options as $arg => $value) {
 	switch($arg) {
+		case 'maint':
+			$maint = true;
+
+			break;
 		case 'debug':
 			$debug = true;
 
@@ -78,6 +84,11 @@ if (empty($last)) {
 	set_config_option('flowview_last_change', time());
 }
 
+// Maintenance is at midnight
+if (date('z', $last) != date('z', time())) {
+	$maint = true;
+}
+
 $schedules = db_fetch_assoc("SELECT *
 	FROM plugin_flowview_schedules
 	WHERE enabled = 'on'
@@ -109,6 +120,60 @@ foreach($tables as $table) {
 		FROM $table
 		WHERE end_time >= ?",
 		array(date('Y-m-d H:i:s', $last)));
+}
+
+if ($maint) {
+	debug('Performing Table Maintenance');
+
+	// 0 - Daily, 1 - Hourly
+	$partition_mode = read_config_option('flowview_partition');
+
+	$retention_days = read_config_option('flowview_retention');
+	$today_day      = date('z');
+	$today_year     = date('Y');
+
+	if ($today_day - $retention_days < 0) {
+		$retention_year = $today_year - 1;
+		$min_day        = 365 + $today_day - $retention_days;
+		if ($partition_mode == 0) {
+			$min_day        = substr('000' . $min_day, -3);
+		} else {
+			$min_day        = substr('000' . $min_day . '00', -5);
+		}
+	} else {
+		$retention_year = $today_year;
+		$min_day        = $today_day - $retention_days;
+		if ($partition_mode == 0) {
+			$min_day        = substr('000' . $min_day, -3);
+		} else {
+			$min_day        = substr('000' . $min_day . '00', -5);
+		}
+	}
+
+	$remove_lessthan = $retention_year . $min_day;
+
+	debug('Removing partitioned tables with suffix less than ' . $remove_lessthan);
+
+	$tables = db_fetch_assoc("SELECT TABLE_NAME
+		FROM INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_NAME LIKE 'plugin_flowview_raw_%'
+		ORDER BY TABLE_NAME");
+
+	$dropped = 0;
+
+	if (cacti_sizeof($tables)) {
+		foreach($tables as $t) {
+			$date_part = str_replace('plugin_flowview_raw_', '', $t['TABLE_NAME']);
+
+			if ($date_part <  $remove_lessthan) {
+				$dropped++;
+				debug("Removing partitioned table 'plugin_flowview_raw_" . $date_part . "'");
+				db_execute('DROP TABLE plugin_flowview_raw_' . $date_part);
+			}
+		}
+	}
+
+	debug('Total number of partition tables dropped is ' . $dropped);
 }
 
 $end = microtime(true);
@@ -153,6 +218,7 @@ function display_help() {
 	print "the Cacti database." . PHP_EOL . PHP_EOL;
 
 	print "Options:" . PHP_EOL;
+	print "    --maint Force table maintenance immediately." . PHP_EOL . PHP_EOL;
 	print "    --debug Provide some debug output during collection." . PHP_EOL . PHP_EOL;
 }
 

@@ -79,6 +79,18 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 
 # Changelog
 
+--- develop ---
+
+* issue: Partition tables were not being pruned.
+* issue: Make the flow_collector.php resilient to loss of the database server.
+* feature: New database design.  Support for v5, v9, IPFIX flows transparently
+* feature: Remove Open Flash Charts and use C3 Charts instead
+* feature: Reworked user interface
+* feature: Units files for systemd systems for flow-capture service
+* feature: Remove use of Flow Tools
+* feature: Support IPv4 and IPv6
+* feature: Support daily and hourly partitioning
+
 --- 2.1 ---
 * issue: Prepare for sunrise theme in 1.1.17
 * issue: Clean up the filter logic to preserve values
