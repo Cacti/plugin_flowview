@@ -56,7 +56,7 @@ switch(get_request_var('action')) {
 
 		$title = load_session_for_filter();
 
-		$data = load_data_for_filter();
+		$data  = load_data_for_filter();
 
 		flowview_display_filter($data);
 

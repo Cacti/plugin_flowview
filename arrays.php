@@ -296,6 +296,9 @@ $stat_columns_array = array(
 		__('Flows', 'flowview'),
 		__('Bytes', 'flowview'),
 		__('Packets', 'flowview')
+	),
+	99 => array(
+		__('N/A', 'flowview')
 	)
 );
 

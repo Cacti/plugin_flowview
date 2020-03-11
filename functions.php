@@ -349,8 +349,8 @@ function flowview_gettimespan() {
 	print json_encode($span);
 }
 
-function flowview_show_summary() {
-print 'Puke';
+function flowview_show_summary(&$data) {
+	print $data['table'];
 }
 
 function flowview_display_filter($data) {
@@ -509,8 +509,12 @@ function flowview_display_filter($data) {
 						<select id='cutofflines' onChange='applyFilter(false)'>
 							<?php
 							if (cacti_sizeof($cutoff_lines)) {
-								foreach($cutoff_lines as $key => $value) {
-									print "<option value='" . $key . "'" . (get_request_var('cutofflines') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
+								if (get_request_var('report') != 's99') {
+									foreach($cutoff_lines as $key => $value) {
+										print "<option value='" . $key . "'" . (get_request_var('cutofflines') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
+									}
+								} else {
+									print "<option value='20' selected>" . __('N/A', 'flowview') . '</option>';
 								}
 							}
 							?>
@@ -1045,7 +1049,7 @@ function flowview_display_filter($data) {
 			'&domains='      + $('#domains').is(':checked') +
 			'&timespan='     + $('#predefined_timespan').val() +
 			'&report='       + report +
-			'&sortfield='    + $('#sortfield').val() +
+			'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
 			'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
 			'&cutofflines='  + $('#cutofflines').val() +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
@@ -1377,7 +1381,7 @@ function flowview_get_chartdata() {
 					if ($domains != 'false' && strpos($c, 'domain')) {
 						$p = explode('.', $row[$c]);
 						$p = array_reverse($p);
-						$string = $p[1] . '.' . $p[0];
+						$string = (isset($p[1]) ? $p[1]:'') . '.' . $p[0];
 						$catstring .= ($catstring != '' ? ' / ':'') . $string;
 					} else {
 						$catstring .= ($catstring != '' ? ' / ':'') . $row[$c];
@@ -1553,11 +1557,15 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 	if (cacti_sizeof($data)) {
 		if ($data['statistics'] > 0) {
-			if (isset($stat_columns_array[$data['statistics']][$data['sortfield']])) {
+			if ($data['statistics'] == 99) {
+				$sortvalue = '';
+			} elseif (isset($stat_columns_array[$data['statistics']][$data['sortfield']])) {
 				$sortvalue = $stat_columns_array[$data['statistics']][$data['sortfield']];
 			}
 
-			if (!isset($sortvalue)) {
+			if ($data['statistics'] == 99) {
+				$data['sortfield'] = '';
+			} elseif (!isset($sortvalue)) {
 				$data['sortfield'] = array_search('Bytes', $stat_columns_array[$data['statistics']]);
 			} elseif (array_search($sortvalue, $stat_columns_array[$data['statistics']]) === false) {
 				$data['sortfield'] = array_search('Bytes', $stat_columns_array[$data['statistics']]);
@@ -1565,6 +1573,49 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 			switch($data['statistics']) {
 				case 99:
+					$sql_array = array(
+						array('name' => 'p0To32',       'min' => 0,    'max' => 32,   'title' => __('%d - %d Bytes', 0, 32, 'flowview')),
+						array('name' => 'p32To64',      'min' => 32,   'max' => 64,   'title' => __('%d - %d Bytes', 32, 64, 'flowview')),
+						array('name' => 'p64To96',      'min' => 64,   'max' => 96,   'title' => __('%d - %d Bytes', 64, 96, 'flowview')),
+						array('name' => 'p96To128',     'min' => 96,   'max' => 128,  'title' => __('%d - %d Bytes', 96, 128, 'flowview')),
+						array('name' => 'p128To160',    'min' => 128,  'max' => 160,  'title' => __('%d - %d Bytes', 128, 160, 'flowview')),
+						array('name' => 'p160To192',    'min' => 160,  'max' => 192,  'title' => __('%d - %d Bytes', 160, 192, 'flowview')),
+						array('name' => 'p192To224',    'min' => 192,  'max' => 224,  'title' => __('%d - %d Bytes', 192, 224, 'flowview')),
+						array('name' => 'p224To256',    'min' => 224,  'max' => 256,  'title' => __('%d - %d Bytes', 224, 256, 'flowview')),
+						array('name' => 'p256To288',    'min' => 256,  'max' => 288,  'title' => __('%d - %d Bytes', 256, 288, 'flowview')),
+						array('name' => 'p288To320',    'min' => 288,  'max' => 320,  'title' => __('%d - %d Bytes', 288, 320, 'flowview')),
+						array('name' => 'p320To352',    'min' => 320,  'max' => 352,  'title' => __('%d - %d Bytes', 320, 352, 'flowview')),
+						array('name' => 'p352To384',    'min' => 352,  'max' => 384,  'title' => __('%d - %d Bytes', 352, 384, 'flowview')),
+						array('name' => 'p384To416',    'min' => 384,  'max' => 416,  'title' => __('%d - %d Bytes', 384, 416, 'flowview')),
+						array('name' => 'p416To448',    'min' => 416,  'max' => 448,  'title' => __('%d - %d Bytes', 416, 448, 'flowview')),
+						array('name' => 'p448To480',    'min' => 448,  'max' => 480,  'title' => __('%d - %d Bytes', 448, 480, 'flowview')),
+						array('name' => 'p480To512',    'min' => 480,  'max' => 512,  'title' => __('%d - %d Bytes', 480, 512, 'flowview')),
+						array('name' => 'p512To544',    'min' => 512,  'max' => 544,  'title' => __('%d - %d Bytes', 512, 544, 'flowview')),
+						array('name' => 'p544To576',    'min' => 544,  'max' => 576,  'title' => __('%d - %d Bytes', 544, 576, 'flowview')),
+						array('name' => 'p576To1024',   'min' => 576,  'max' => 1024, 'title' => __('%d - %d Bytes', 576, 1024, 'flowview')),
+						array('name' => 'p1024To1536',  'min' => 1024, 'max' => 1536, 'title' => __('%d - %d Bytes', 1024, 1536, 'flowview')),
+						array('name' => 'p1536To2048',  'min' => 1536, 'max' => 2048, 'title' => __('%d - %d Bytes', 1536, 2048, 'flowview')),
+						array('name' => 'p2048To2560',  'min' => 2048, 'max' => 2560, 'title' => __('%d - %d Bytes', 2048, 2560, 'flowview')),
+						array('name' => 'p2560To3072',  'min' => 2560, 'max' => 3072, 'title' => __('%d - %d Bytes', 2560, 3072, 'flowview')),
+						array('name' => 'p3072To3568',  'min' => 3072, 'max' => 3568, 'title' => __('%d - %d Bytes', 3072, 3568, 'flowview')),
+						array('name' => 'p3568To4096',  'min' => 3568, 'max' => 4096, 'title' => __('%d - %d Bytes', 3568, 4096, 'flowview')),
+						array('name' => 'p4096To4608',  'min' => 4096, 'max' => 4608, 'title' => __('%d - %d Bytes', 4096, 4680, 'flowview')),
+						array('name' => 'p4608ToInfin', 'min' => 4680, 'max' => -1,   'title' => __esc('> %d Bytes', 4680, 'flowview'))
+					);
+
+					$sql_query = $sql_inner = '';
+
+					foreach($sql_array as $el) {
+						$sql_query .= ($sql_query != '' ? ', ':'SELECT ') . 'SUM(' . $el['name'] . ') AS ' . $el['name'];
+						$sql_inner .= ($sql_inner != '' ? ', ':'SELECT ') .
+							'SUM(CASE WHEN bytes_ppacket BETWEEN ' .
+							$el['min'] . ' AND ' . $el['max'] . ' THEN bytes_ppacket ELSE 0 END) AS ' . $el['name'];
+					}
+
+					$sql_groupby       = '';
+					$sql_inner_groupby = '';
+					$sql_order         = '';
+
 					break;
 				case 2:
 					$sql_query = 'SELECT src_rdomain, SUM(flows) AS flows, SUM(bytes) AS bytes, SUM(packets) AS packets';
@@ -1866,14 +1917,18 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 		//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
 
-		$results = db_fetch_assoc($sql);
+		if ($data['statistics'] == 99) {
+			$results = db_fetch_row($sql);
+		} else {
+			$results = db_fetch_assoc($sql);
+		}
 
 		$output = $data;
 		$output['data'] = $results;
 
 		$i = 0;
 		$table = '';
-		if (cacti_sizeof($results)) {
+		if (cacti_sizeof($results) && $data['statistics'] != 99) {
 			$table .= '<table id="sorttable" class="cactiTable"><thead>';
 
 			foreach($results as $r) {
@@ -2095,6 +2150,50 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 			}
 
 			$table .= '</tbody></table>';
+		} elseif ($data['statistics'] == 99) {
+			$total = 0;
+			$i = 0;
+			foreach($sql_array as $c) {
+				$total += $results[$c['name']];
+			}
+
+			$table .= '<table class="cactiTable"><tbody>';
+			$table .= '<tr class="tableHeader right">';
+
+			for ($i = 0; $i < 14; $i++) {
+				$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';
+			}
+
+			$table .= '</tr>';
+			$table .= '<tr>';
+
+			for ($i = 0; $i < 14; $i++) {
+				$name   = $sql_array[$i]['name'];
+				$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
+			}
+
+			$table .= '</tr></tbody></table>';
+
+			$table .= '<table class="cactiTable"><tbody>';
+			$table .= '</br>';
+			$table .= '<tr class="tableHeader right">';
+
+			for ($i = 14; $i < 27; $i++) {
+				$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';
+			}
+
+			$table .= '<th></th>';
+			$table .= '</tr>';
+
+			$table .= '<tr>';
+
+			for ($i = 14; $i < 27; $i++) {
+				$name   = $sql_array[$i]['name'];
+				$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
+			}
+
+			$table .= '<td style="width:7.14%"></td>';
+			$table .= '</tr></tbody></table>';
 		}
 
 		$output['table'] = $table;
@@ -2484,7 +2583,7 @@ function flowview_translate_port($port, $is_hex, $detail = true) {
 	}
 }
 
-function flowview_check_fields () {
+function flowview_check_fields() {
 	global $config, $graph_timespans;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
