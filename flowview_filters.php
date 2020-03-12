@@ -212,7 +212,14 @@ function show_filters() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('FlowView Filters', 'flowview'), '100%', '', '3', 'center', 'flowview_filters.php?action=edit');
+	$listeners = db_fetch_cell('SELECT COUNT(*) FROM plugin_flowview_devices');
+
+	if ($listeners) {
+		html_start_box(__('FlowView Filters', 'flowview'), '100%', '', '3', 'center', 'flowview_filters.php?action=edit');
+	} else {
+		html_start_box(__('FlowView Filters [ Add Devices before Filters ]', 'flowview'), '100%', '', '3', 'center', '');
+	}
+
 	?>
 	<tr class='even'>
 		<td>
