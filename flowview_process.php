@@ -108,10 +108,6 @@ if (count($schedules)) {
 $total = db_fetch_cell('SELECT COUNT(*)
 	FROM plugin_flowview_devices');
 
-$listeners = db_fetch_assoc('SELECT *
-	FROM plugin_flowview_devices
-	WHERE cmethod = 1');
-
 $tables = get_tables_range($last);
 $records = 0;
 
@@ -179,14 +175,12 @@ if ($maint) {
 $end = microtime(true);
 
 $cacti_stats = sprintf(
-	'time:%01.4f ' .
-	'listeners:%s ' .
-	'legacy:%s ' .
-	'newrecs:%s ' .
-	'schedules:%s',
+	'Time:%01.4f ' .
+	'Listeners:%s ' .
+	'Newrecs:%s ' .
+	'Schedules:%s',
 	round($end-$start,2),
 	sizeof($total),
-	sizeof($listeners),
 	$records,
 	sizeof($schedules)
 );
