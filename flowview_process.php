@@ -188,7 +188,7 @@ $cacti_stats = sprintf(
 set_config_option('flowview_stats', $cacti_stats);
 
 /* log to the logfile */
-cacti_log('FLOWVIEW STATS: ' . $cacti_stats , TRUE, 'SYSTEM');
+cacti_log('FLOWVIEW STATS: ' . $cacti_stats , true, 'SYSTEM');
 
 function debug($string) {
 	global $debug;

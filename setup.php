@@ -141,8 +141,8 @@ function flowview_config_arrays() {
 	foreach ($menu as $temp => $temp2 ) {
 		$menu2[$temp] = $temp2;
 		if ($temp == __('Import/Export')) {
-			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_filters.php'] = __('Filters', 'flowview');
-			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_devices.php'] = __('Listeners', 'flowview');
+			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_devices.php']   = __('Listeners', 'flowview');
+			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_filters.php']   = __('Filters', 'flowview');
 			$menu2[__('FlowView', 'flowview')]['plugins/flowview/flowview_schedules.php'] = __('Schedules', 'flowview');
 		}
 	}

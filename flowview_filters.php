@@ -82,15 +82,15 @@ function actions_filters() {
 				for ($i=0; $i<count($selected_items); $i++) {
 					db_execute('DELETE FROM plugin_flowview_queries WHERE id = ' . $selected_items[$i]);
 				}
-			}elseif (get_nfilter_request_var('drp_action') == '3') {
+			} elseif (get_nfilter_request_var('drp_action') == '3') {
 				for ($i=0; $i<count($selected_items); $i++) {
 					db_execute("UPDATE plugin_flowview_queries SET enabled='' WHERE id = " . $selected_items[$i]);
 				}
-			}elseif (get_nfilter_request_var('drp_action') == '4') {
+			} elseif (get_nfilter_request_var('drp_action') == '4') {
 				for ($i=0; $i<count($selected_items); $i++) {
 					db_execute("UPDATE plugin_flowview_queries SET enabled='on' WHERE id = " . $selected_items[$i]);
 				}
-			}elseif (get_nfilter_request_var('drp_action') == '2') {
+			} elseif (get_nfilter_request_var('drp_action') == '2') {
 				for ($i=0; $i<count($selected_items); $i++) {
 					plugin_flowview_run_schedule($selected_items[$i]);
 				}
@@ -130,14 +130,14 @@ function actions_filters() {
 				<ul>$filter_list</ul>
 			</td>
 		</tr>";
-	}elseif (get_nfilter_request_var('drp_action') == '3') { /* Disable */
+	} elseif (get_nfilter_request_var('drp_action') == '3') { /* Disable */
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to Disable the following Filters(s) and all matching Filter.', 'flowview') . "</p>
 				<ul>$filter_list</ul>
 			</td>
 		</tr>";
-	}elseif (get_nfilter_request_var('drp_action') == '4') { /* Enable */
+	} elseif (get_nfilter_request_var('drp_action') == '4') { /* Enable */
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to Enable the following Filters(s).', 'flowview') . "</p>
@@ -149,7 +149,7 @@ function actions_filters() {
 	if (!isset($filter_array)) {
 		print "<tr><td><span class='textError'>" . __('You must select at least one Filter.', 'flowview') . "</span></td></tr>\n";
 		$save_html = '';
-	}else{
+	} else {
 		$save_html = "<input type='submit' value='" . __esc('Continue', 'flowview') . "'>";
 	}
 
@@ -208,7 +208,7 @@ function show_filters() {
 
 	if (get_request_var('rows') == '-1') {
 		$rows = read_config_option('num_rows_table');
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
@@ -239,7 +239,7 @@ function show_filters() {
 						<select id='rows'>
 							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default', 'flowview');?></option>
 							<?php
-							if (sizeof($item_rows)) {
+							if (cacti_sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
 									print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . "</option>\n";
 								}
@@ -291,7 +291,7 @@ function show_filters() {
 
 	if (get_request_var('filter') != '') {
 		$sql_where = 'WHERE fq.name LIKE ' . db_qstr('%' . get_request_var_request('filter') . '%');
-	}else{
+	} else {
 		$sql_where = '';
 	}
 

@@ -138,15 +138,15 @@ function actions_schedules () {
 				for ($i=0; $i<count($selected_items); $i++) {
 					db_execute('DELETE FROM plugin_flowview_schedules WHERE id = ' . $selected_items[$i]);
 				}
-			}elseif (get_nfilter_request_var('drp_action') == '3') {
+			} elseif (get_nfilter_request_var('drp_action') == '3') {
 				for ($i=0; $i<count($selected_items); $i++) {
 					db_execute("UPDATE plugin_flowview_schedules SET enabled='' WHERE id = " . $selected_items[$i]);
 				}
-			}elseif (get_nfilter_request_var('drp_action') == '4') {
+			} elseif (get_nfilter_request_var('drp_action') == '4') {
 				for ($i=0; $i<count($selected_items); $i++) {
 					db_execute("UPDATE plugin_flowview_schedules SET enabled='on' WHERE id = " . $selected_items[$i]);
 				}
-			}elseif (get_nfilter_request_var('drp_action') == '2') {
+			} elseif (get_nfilter_request_var('drp_action') == '2') {
 				for ($i=0; $i<count($selected_items); $i++) {
 					plugin_flowview_run_schedule($selected_items[$i]);
 				}
@@ -188,21 +188,21 @@ function actions_schedules () {
 				<ul>$schedule_list</ul>
 			</td>
 		</tr>";
-	}elseif (get_nfilter_request_var('drp_action') == '2') { /* Send Now */
+	} elseif (get_nfilter_request_var('drp_action') == '2') { /* Send Now */
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to send the following Schedule(s) now.', 'flowview') . "</p>
 				<ul>$schedule_list</ul>
 			</td>
 		</tr>";
-	}elseif (get_nfilter_request_var('drp_action') == '3') { /* Disable */
+	} elseif (get_nfilter_request_var('drp_action') == '3') { /* Disable */
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to Disable the following Schedule(s).', 'flowview') . "</p>
 				<ul>$schedule_list</ul>
 			</td>
 		</tr>";
-	}elseif (get_nfilter_request_var('drp_action') == '4') { /* Enable */
+	} elseif (get_nfilter_request_var('drp_action') == '4') { /* Enable */
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to Enable the following Schedule(s).', 'flowview') . "</p>
@@ -214,7 +214,7 @@ function actions_schedules () {
 	if (!isset($schedule_array)) {
 		print "<tr><td><span class='textError'>" . __('You must select at least one schedule.', 'flowview') . "</span></td></tr>\n";
 		$save_html = '';
-	}else{
+	} else {
 		$save_html = "<input type='submit' value='" . __esc('Continue', 'flowview') . "'>";
 	}
 
@@ -306,7 +306,7 @@ function edit_schedule() {
 			array(get_request_var('id')));
 
 		$header_label = __esc('Report: [edit: %s]', $report['name'], 'flowview');
-	}else{
+	} else {
 		$header_label = __('Report: [new]', 'flowview');
 	}
 
@@ -333,7 +333,7 @@ function edit_schedule() {
 			if (startOpen) {
 				startOpen = false;
 				$('#start').datetimepicker('hide');
-			}else{
+			} else {
 				startOpen = true;
 				$('#start').datetimepicker('show');
 			}
@@ -391,11 +391,18 @@ function show_schedules () {
 
 	if (get_request_var('rows') == '-1') {
 		$rows = read_config_option('num_rows_table');
-	}else{
+	} else {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('FlowView Schedules', 'flowview'), '100%', '', '3', 'center', 'flowview_schedules.php?action=edit');
+	$listeners = db_fetch_cell('SELECT COUNT(*) FROM plugin_flowview_devices');
+
+	if ($listeners) {
+		html_start_box(__('FlowView Schedules', 'flowview'), '100%', '', '3', 'center', 'flowview_schedules.php?action=edit');
+	} else {
+		html_start_box(__('FlowView Schedules [ Add Devices before Schedules ]', 'flowview'), '100%', '', '3', 'center', '');
+	}
+
 	?>
 	<tr class='even'>
 		<td>
@@ -415,7 +422,7 @@ function show_schedules () {
 						<select id='rows'>
 							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default', 'flowview');?></option>
 							<?php
-							if (sizeof($item_rows)) {
+							if (cacti_sizeof($item_rows)) {
 								foreach ($item_rows as $key => $value) {
 									print "<option value='" . $key . "'"; if (get_request_var('rows') == $key) { print ' selected'; } print '>' . $value . "</option>\n";
 								}
@@ -467,7 +474,7 @@ function show_schedules () {
 
 	if (get_request_var('filter') != '') {
 		$sql_where = 'WHERE name LIKE ' . db_qstr('%' . get_request_var_request('filter') . '%');
-	}else{
+	} else {
 		$sql_where = '';
 	}
 
@@ -511,7 +518,7 @@ function show_schedules () {
 	html_header_sort_checkbox($display_array, get_request_var_request('sort_column'), get_request_var_request('sort_direction'), false);
 
 	$i=0;
-	if (count($result)) {
+	if (cacti_sizeof($result)) {
 		foreach ($result as $row) {
 			form_alternate_row('line' . $row['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_schedules.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['title']) . '</a>', $row['id']);
@@ -528,7 +535,7 @@ function show_schedules () {
 
 	html_end_box(false);
 
-	if (count($result)) {
+	if (cacti_sizeof($result)) {
 		print $nav;
 	}
 
