@@ -77,7 +77,7 @@ $allfields = array(
 	6  =>  array('name' => 'tcpControlBits',                   'pack' => 'C'),
 	7  =>  array('name' => 'sourceTransportPort',              'pack' => ''),
 	8  =>  array('name' => 'sourceIPv4Address',                'pack' => 'C4'),
-	9  =>  array('name' => 'sourceIPv4PrefixLength',           'pack' => ''),
+	9  =>  array('name' => 'sourceIPv4PrefixLength',           'pack' => 'C'),
 	10 =>  array('name' => 'ingressInterface',                 'pack' => ''),
 	11 =>  array('name' => 'destinationTransportPort',         'pack' => ''),
 	12 =>  array('name' => 'destinationIPv4Address',           'pack' => 'C4'),
@@ -287,7 +287,8 @@ $lens = array(
 	2  => 'n',
 	4  => 'N',
 	8  => 'N2',
-	12 => 'N3'
+	12 => 'N3',
+	16 => 'N4'
 );
 
 $partition = read_config_option('flowview_partition');
