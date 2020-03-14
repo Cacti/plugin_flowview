@@ -283,10 +283,10 @@ $allfields = array(
 );
 
 $lens = array(
-	1 => 'C',
-	2 => 'n',
-	4 => 'N',
-	8 => 'N2',
+	1  => 'C',
+	2  => 'n',
+	4  => 'N',
+	8  => 'N2',
 	12 => 'N3'
 );
 
@@ -560,10 +560,14 @@ function process_fv9($p, $peer) {
 							if ($allfields[$tf['field_id']]['pack'] != '') {
 								$tf['unpack'] = $allfields[$tf['field_id']]['pack'];
 							} else {
+								cacti_log('WARNING: Assuming field name:' . $tf['name'] . ', id: ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW');
+
 								$tf['unpack'] = $lens[$tf['length']];
 							}
 						} else {
-							$tf['name'] = 'Unknown';
+							cacti_log('WARNING: Unknown field id ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW');
+
+							$tf['name']   = 'Unknown';
 							$tf['unpack'] = $lens[$tf['length']];
 						}
 
