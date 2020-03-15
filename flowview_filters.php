@@ -248,10 +248,10 @@ function show_filters() {
 						</select>
 					</td>
 					<td>
-						<input type='submit' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
+						<input type='submit' id='go' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
 					</td>
 					<td>
-						<input type='button' name='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
+						<input type='button' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
 					</td>
 				</tr>
 			</table>
@@ -300,7 +300,7 @@ function show_filters() {
 
 	$sql = "SELECT fq.*, fd.name AS device
 		FROM plugin_flowview_queries AS fq
-		INNER JOIN plugin_flowview_devices AS fd
+		LEFT JOIN plugin_flowview_devices AS fd
 		ON fq.device_id = fd.id
 		$sql_where
 		$sql_order
@@ -310,7 +310,7 @@ function show_filters() {
 
 	$total_rows = db_fetch_cell("SELECT COUNT(*)
 		FROM plugin_flowview_queries AS fq
-		INNER JOIN plugin_flowview_devices AS fd
+		LEFT JOIN plugin_flowview_devices AS fd
 		ON fq.device_id = fd.id
 		$sql_where");
 
@@ -361,7 +361,12 @@ function show_filters() {
 		foreach ($filters as $filter) {
 			form_alternate_row('line' . $filter['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_filters.php?action=edit&id=' . $filter['id']) . '">' . html_escape($filter['name']) . '</a>', $filter['id']);
-			form_selectable_cell($filter['device'], $filter['id']);
+
+			if (empty($filter['device'])) {
+				form_selectable_cell(__('All', 'flowview'), $filter['id']);
+			} else {
+				form_selectable_cell($filter['device'], $filter['id']);
+			}
 
 			if ($filter['statistics'] > 0) {
 				$type = $stat_report_array[$filter['statistics']];
