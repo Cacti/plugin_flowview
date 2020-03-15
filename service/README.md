@@ -28,7 +28,7 @@ This will start the service.
 
 * Then, edit the file and ensure that the path to the flow-capture script is accurate
 
-* Then, run 'systemtl enable flow-capture'
+* Then, run 'systemctl enable flow-capture'
 
 * Lastly, run:
 
