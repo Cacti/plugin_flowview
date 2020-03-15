@@ -95,6 +95,10 @@ function plugin_flowview_check_upgrade() {
 
 		db_execute('ALTER TABLE plugin_flowview_queries MODIFY COLUMN protocols varchar(32) default ""');
 
+		if (!db_column_exists('plugin_flowview_queries', 'device_id')) {
+			db_execute('ALTER TABLE plugin_flowview_queries ADD COLUMN device_id int unsigned NOT NULL default "0" AFTER name');
+		}
+
 		if ($bad_titles) {
 			/* update titles for those that don't have them */
 			db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
