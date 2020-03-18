@@ -373,8 +373,6 @@ function flowview_display_filter($data) {
 				$title = __esc('Printed Report: %s [ Including overrides as specififed below ]', $print_report_array[$row['statistics']]);
 			}
 		}
-	} else {
-		raise_message('flowmessage', __('Select a Filter to display data', 'flowview'), MESSAGE_LEVEL_INFO);
 	}
 
 	html_start_box($title, '100%', '', '3', 'center', '');
