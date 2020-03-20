@@ -154,6 +154,11 @@ function flowview_config_arrays() {
 
 	$menu_glyphs[__('FlowView', 'flowview')] = 'fas fa-crosshairs';
 
+	if (function_exists('auth_augment_roles')) {
+		auth_augment_roles(__('Normal User'), array('flowview.php'));
+		auth_augment_roles(__('System Administration'), array('flowview_devices.php','flowview_schedules.php','flowview_filters.php'));
+	}
+
 	plugin_flowview_check_upgrade();
 }
 
