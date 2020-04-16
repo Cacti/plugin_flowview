@@ -81,6 +81,7 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 
 --- develop ---
 
+* issue#43: NaN and Division by Zero errors
 * issue: Partition tables were not being pruned.
 * issue: Make the flow_collector.php resilient to loss of the database server.
 * feature: New database design.  Support for v5, v9, IPFIX flows transparently

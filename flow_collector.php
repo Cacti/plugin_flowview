@@ -26,6 +26,8 @@ chdir(__DIR__);
 include('../../include/cli_check.php');
 include_once('./functions.php');
 
+ini_set('max_execution_time', '-1');
+
 $debug     = false;
 $lversion  = array();
 
@@ -1016,7 +1018,11 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 	$src_rport  = flowview_translate_port($data[$fieldname['src_port']], false, false);
 	$dst_rport  = flowview_translate_port($data[$fieldname['dst_port']], false, false);
 
-	$pps = round($data[$fieldname['dOctets']] / $data[$fieldname['dPkts']], 3);
+	if($data[$fieldname['dPkts']] > 0) {
+		$pps = round($data[$fieldname['dOctets']] / $data[$fieldname['dPkts']], 3);
+	} else {
+		$pps = 0;
+	}
 
 	$sql = '(' .
 		$listener_id                                      . ', ' .
