@@ -479,7 +479,7 @@ function process_fv5($p, $peer) {
 	}
 
 	if (cacti_sizeof($sql)) {
-		debug('Flow: Writing Records: ' . sizeof($sql));
+		debug('Flow: Writing Records: ' . cacti_sizeof($sql));
 		db_execute($sql_prefix . implode(' ,', $sql));
 	}
 }
@@ -704,7 +704,7 @@ function process_fv9($p, $peer) {
 	}
 
 	if (cacti_sizeof($sql)) {
-		debug('Flow: Writing Records: ' . sizeof($sql));
+		debug('Flow: Writing Records: ' . cacti_sizeof($sql));
 		db_execute($sql_prefix . implode(', ', $sql));
 	}
 }
@@ -891,7 +891,7 @@ function process_fv10($p, $peer) {
 	}
 
 	if (cacti_sizeof($sql)) {
-		debug('Flow: Writing Records: ' . sizeof($sql));
+		debug('Flow: Writing Records: ' . cacti_sizeof($sql));
 		db_execute($sql_prefix . implode(', ', $sql));
 	}
 }
@@ -1018,7 +1018,7 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 	$src_rport  = flowview_translate_port($data[$fieldname['src_port']], false, false);
 	$dst_rport  = flowview_translate_port($data[$fieldname['dst_port']], false, false);
 
-	if($data[$fieldname['dPkts']] > 0) {
+	if ($data[$fieldname['dPkts']] > 0) {
 		$pps = round($data[$fieldname['dOctets']] / $data[$fieldname['dPkts']], 3);
 	} else {
 		$pps = 0;

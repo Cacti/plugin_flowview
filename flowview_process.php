@@ -180,9 +180,9 @@ $cacti_stats = sprintf(
 	'Newrecs:%s ' .
 	'Schedules:%s',
 	round($end-$start,2),
-	sizeof($total),
+	cacti_sizeof($total),
 	$records,
-	sizeof($schedules)
+	cacti_sizeof($schedules)
 );
 
 set_config_option('flowview_stats', $cacti_stats);

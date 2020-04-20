@@ -267,7 +267,7 @@ function save_filter() {
 	$save['tosfields']       = get_nfilter_request_var('tosfields');
 	$save['tcpflags']        = get_nfilter_request_var('tcpflags');
 
-	if (is_array(get_nfilter_request_var('protocols')) && sizeof(get_nfilter_request_var('protocols'))) {
+	if (is_array(get_nfilter_request_var('protocols')) && cacti_sizeof(get_nfilter_request_var('protocols'))) {
 		$save['protocols']   = implode(', ', get_nfilter_request_var('protocols'));
 	} else {
 		$save['protocols']   = '';
@@ -576,7 +576,7 @@ function flowview_display_filter($data) {
 						<select id='predefined_timeshift' title='<?php print __esc('Define Shifting Interval', 'flowview');?>'>
 							<?php
 							$start_val = 1;
-							$end_val = sizeof($graph_timeshifts) + 1;
+							$end_val = cacti_sizeof($graph_timeshifts) + 1;
 							if (cacti_sizeof($graph_timeshifts)) {
 								for ($shift_value=$start_val; $shift_value < $end_val; $shift_value++) {
 									print "<option value='$shift_value'" . (get_request_var('predefined_timeshift') == $shift_value ? ' selected':'') . '>' . title_trim($graph_timeshifts[$shift_value], 40) . '</option>';
@@ -2435,7 +2435,7 @@ function parseSummaryReport($output) {
 					print "<tr class='" . flowview_altrow($i) . "'>";
 					$parts = flowview_explode($l);
 					$k = 0;
-					$l = sizeof($parts);
+					$l = cacti_sizeof($parts);
 					foreach($parts as $p) {
 						print "<td class='right'><strong>" . $p . "</strong></td>";
 						if ($l < 15 && $k == 10) {
@@ -2448,7 +2448,7 @@ function parseSummaryReport($output) {
 					print "<tr class='" . flowview_altrow($i) . "'>";
 					$parts = flowview_explode($l);
 					$k = 0;
-					$l = sizeof($parts);
+					$l = cacti_sizeof($parts);
 					foreach($parts as $p) {
 						print "<td class='right'>" . ($p*100) . "</td>";
 						if ($l < 15 && $k == 10) {
@@ -2530,7 +2530,7 @@ function flowview_get_rdomain_from_domain($domain) {
 
 	if ($domain != '' && strpos($domain, '.') !== false) {
 		$parts = explode('.', $domain);
-		$size  = sizeof($parts);
+		$size  = cacti_sizeof($parts);
 		$str .= $parts[$size - 2] . '.' . $parts[$size - 1];
 	}
 
@@ -3052,7 +3052,7 @@ function flowview_get_color($as_array = false) {
 		$position = 0;
 		return $pallette;
 	} else {
-		$color = $pallette[$position % sizeof($pallette)];
+		$color = $pallette[$position % cacti_sizeof($pallette)];
 		$position++;
 		return $color;
 	}
@@ -3302,7 +3302,7 @@ function flowview_get_domain($host, $domain = 'false') {
 		return $host;
 	} else {
 		$parts = explode('.', $host);
-		$size  = sizeof($parts);
+		$size  = cacti_sizeof($parts);
 		return $parts[$size - 2] . '.' . $parts[$size - 1];
 	}
 }
@@ -3477,7 +3477,7 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 
 			$cd = explode(',', $row);
 
-			if (!$dflows_check && sizeof($cd) == 24) {
+			if (!$dflows_check && cacti_sizeof($cd) == 24) {
 				$dflows_exists = true;
 				$dflows_check = true;
 			} else {

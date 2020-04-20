@@ -284,7 +284,7 @@ function flowview_show_tab() {
 	if (api_user_realm_auth('flowview.php')) {
 		if (substr_count($_SERVER['REQUEST_URI'], 'flowview')) {
 			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows_down.gif" alt="' . __('FlowView', 'flowview') . '"></a>';
-		}else{
+		} else {
 			print '<a href="' . htmlspecialchars($config['url_path'] . 'plugins/flowview/flowview.php') . '"><img src="' . $config['url_path'] . 'plugins/flowview/images/tab_flows.gif" alt="' . __('FlowView', 'flowview') . '"></a>';
 		}
 	}
@@ -454,7 +454,7 @@ function flowview_setup_table() {
 	api_plugin_db_table_create('flowview', 'plugin_flowview_ports', $data);
 
 	$inserts = file($config['base_path'] . '/plugins/flowview/plugin_flowview_ports.sql');
-	if (sizeof($inserts)) {
+	if (cacti_sizeof($inserts)) {
 		db_execute('TRUNCATE plugin_flowview_ports');
 		foreach($inserts as $i) {
 			db_execute($i);

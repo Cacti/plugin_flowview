@@ -7,7 +7,7 @@ include_once($config['base_path'] . '/lib/time.php');
 
 $tables = db_fetch_assoc('SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME LIKE "plugin_flowview_raw%"');
 
-if (sizeof($tables)) {
+if (cacti_sizeof($tables)) {
 	foreach($tables as $table) {
 		print "Checking Table: " . $table['TABLE_NAME'] . PHP_EOL;
 
@@ -16,8 +16,8 @@ if (sizeof($tables)) {
 			WHERE INET6_NTOA(src_addr) LIKE "192.%"
 			AND INET6_NTOA(src_addr) NOT LIKE "192.168.%"');
 
-		if (sizeof($src_ips)) {
-			print "There are " . sizeof($src_ips) . " Source DNS records to fix" . PHP_EOL;
+		if (cacti_sizeof($src_ips)) {
+			print "There are " . cacti_sizeof($src_ips) . " Source DNS records to fix" . PHP_EOL;
 
 			foreach($src_ips as $ip) {
 				$dns = flowview_get_dns_from_ip($ip['src_addr']);
@@ -37,8 +37,8 @@ if (sizeof($tables)) {
 			WHERE INET6_NTOA(dst_addr) LIKE "192.%"
 			AND INET6_NTOA(dst_addr) NOT LIKE "192.168.%"');
 
-		if (sizeof($dst_ips)) {
-			print "There are " . sizeof($src_ips) . " Destination DNS records to fix" . PHP_EOL;
+		if (cacti_sizeof($dst_ips)) {
+			print "There are " . cacti_sizeof($src_ips) . " Destination DNS records to fix" . PHP_EOL;
 
 			foreach($dst_ips as $ip) {
 				$dns = flowview_get_dns_from_ip($ip['dst_addr']);

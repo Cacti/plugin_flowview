@@ -72,7 +72,7 @@ function stop() {
 	$devices    = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
 	$php_binary = read_config_option('path_php_binary');
 
-	if (sizeof($devices)) {
+	if (cacti_sizeof($devices)) {
 		shell_exec('killall --quiet ' . $php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php');
 	}			
 }
