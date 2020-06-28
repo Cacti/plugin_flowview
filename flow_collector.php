@@ -867,7 +867,7 @@ function process_fv10($p, $peer) {
 								$d = $d * 256;
 							}
 							$field = $c;
-						} else {
+						} elseif (isset($field[1])) {
 							$field = $field[1];
 						}
 
