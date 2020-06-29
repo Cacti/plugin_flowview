@@ -1021,8 +1021,17 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 	$dst_domain  = flowview_get_dns_from_ip($dst_addr, 100);
 	$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain, $dst_addr);
 
-	$src_rport  = flowview_translate_port($data[$fieldname['src_port']], false, false);
-	$dst_rport  = flowview_translate_port($data[$fieldname['dst_port']], false, false);
+	if (isset($data[$fieldname['src_port']])) {
+		$src_rport = flowview_translate_port($data[$fieldname['src_port']], false, false);
+	} else {
+		$src_rport = 0;
+	}
+
+	if (isset($data[$fieldname['dst_port']])) {
+		$dst_rport = flowview_translate_port($data[$fieldname['dst_port']], false, false);
+	} else {
+		$dst_rport = 0;
+	}
 
 	if ($data[$fieldname['dPkts']] > 0) {
 		$pps = round($data[$fieldname['dOctets']] / $data[$fieldname['dPkts']], 3);
