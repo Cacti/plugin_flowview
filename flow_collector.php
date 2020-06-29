@@ -680,7 +680,10 @@ function process_fv9($p, $peer) {
 					debug('Flow: Processed, Remaining: ' . $remaining);
 
 					$result = false;
-					$result = process_v9_v10($data, $peer, $flowtime, $sysuptime);
+
+					if (cacti_sizeof($data)) {
+						$result = process_v9_v10($data, $peer, $flowtime, $sysuptime);
+					}
 
 					if ($result !== false) {
 						$sql[] = $result;
@@ -876,7 +879,9 @@ function process_fv10($p, $peer) {
 						$data[$id] = $field;
 					}
 
-					$result = process_v9_v10($data, $peer, $flowtime);
+					if (cacti_sizeof($data)) {
+						$result = process_v9_v10($data, $peer, $flowtime);
+					}
 
 					if ($result !== false) {
 						$sql[] = $result;
