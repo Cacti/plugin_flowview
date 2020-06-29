@@ -1163,74 +1163,13 @@ function load_data_for_filter($session = false) {
 	$sql_where = '';
 	$histogram = false;
 	$time      = time();
+	$data      = array();
 	$start     = strtotime(get_request_var('date1'));
 	$end       = strtotime(get_request_var('date2'));
 
 	if ($session && isset($_SESSION['sess_flowdata'])) {
 		return $_SESSION['sess_flowdata'];
 	}
-
-	if (get_request_var('statistics') != 0) {
-		$histogram = true;
-	}
-
-	/* source ip filter */
-	if (get_request_var('sourceip') != '') {
-		$sql_where = get_ip_filter($sql_where, get_request_var('sourceip'), 'src_addr');
-	}
-
-	/* source interface filter */
-	if (get_request_var('sourceinterface') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('sourceinterface'), 'src_if');
-	}
-
-	/* source port filter */
-	if (get_request_var('sourceport') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('sourceport'), 'src_port');
-	}
-
-	/* source as filter */
-	if (get_request_var('sourceas') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('sourceas'), 'src_as');
-	}
-
-	/* destination ip filter */
-	if (get_request_var('destip') != '') {
-		$sql_where = get_ip_filter($sql_where, get_request_var('destip'), 'dest_sddr');
-	}
-
-	/* destination interface filter */
-	if (get_request_var('destinterface') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('destinterface'), 'dest_if');
-	}
-
-	/* destination port filter */
-	if (get_request_var('destport') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dst_port');
-	}
-
-	/* destination as filter */
-	if (get_request_var('destas') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('destas'), 'dest_as');
-	}
-
-	/* protocols filter */
-	if (get_request_var('protocols') != '' && get_request_var('protocols') != '0') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('protocols'), 'protocol');
-	}
-
-	/* tcp flags filter */
-	if (get_request_var('tcpflags') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('tcpflags'), 'flags');
-	}
-
-	/* tos filter */
-	if (get_request_var('tosfields') != '') {
-		$sql_where = get_numeric_filter($sql_where, get_request_var('tosfields'), 'tos');
-	}
-
-	/* date time range */
-	$sql_where = get_date_filter($sql_where, get_request_var('date1'), get_request_var('date2'), get_request_var('includeif'));
 
 	/* let's calculate the title and then session id */
 	if ($title == '') {
@@ -1241,10 +1180,76 @@ function load_data_for_filter($session = false) {
 		}
 	}
 
-	/* Run the query */
-	$data = run_flow_query(get_request_var('query'), $title, $sql_where, $start, $end);
+	if (get_request_var('query') > 0) {
+		if (get_request_var('statistics') != 0) {
+			$histogram = true;
+		}
 
-	$_SESSION['sess_flowdata'] = $data;
+		/* source ip filter */
+		if (get_request_var('sourceip') != '') {
+			$sql_where = get_ip_filter($sql_where, get_request_var('sourceip'), 'src_addr');
+		}
+
+		/* source interface filter */
+		if (get_request_var('sourceinterface') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('sourceinterface'), 'src_if');
+		}
+
+		/* source port filter */
+		if (get_request_var('sourceport') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('sourceport'), 'src_port');
+		}
+
+		/* source as filter */
+		if (get_request_var('sourceas') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('sourceas'), 'src_as');
+		}
+
+		/* destination ip filter */
+		if (get_request_var('destip') != '') {
+			$sql_where = get_ip_filter($sql_where, get_request_var('destip'), 'dest_sddr');
+		}
+
+		/* destination interface filter */
+		if (get_request_var('destinterface') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('destinterface'), 'dest_if');
+		}
+
+		/* destination port filter */
+		if (get_request_var('destport') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dst_port');
+		}
+
+		/* destination as filter */
+		if (get_request_var('destas') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('destas'), 'dest_as');
+		}
+
+		/* protocols filter */
+		if (get_request_var('protocols') != '' && get_request_var('protocols') != '0') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('protocols'), 'protocol');
+		}
+
+		/* tcp flags filter */
+		if (get_request_var('tcpflags') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('tcpflags'), 'flags');
+		}
+
+		/* tos filter */
+		if (get_request_var('tosfields') != '') {
+			$sql_where = get_numeric_filter($sql_where, get_request_var('tosfields'), 'tos');
+		}
+
+		/* date time range */
+		$sql_where = get_date_filter($sql_where, get_request_var('date1'), get_request_var('date2'), get_request_var('includeif'));
+
+		/* Run the query */
+		$data = run_flow_query(get_request_var('query'), $title, $sql_where, $start, $end);
+
+		$_SESSION['sess_flowdata'] = $data;
+	} else {
+		$data['id'] = 0;
+	}
 
 	return $data;
 }
@@ -2816,7 +2821,7 @@ function flowview_check_fields() {
 function flowview_draw_table(&$output) {
 	print "<div>";
 	print "<div id='flowcontent' style='display:none'>";
-	if ($output !== false) {
+	if ($output !== false && isset($output['table'])) {
 		print $output['table'];
 	}
 	print "</div>";
