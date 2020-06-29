@@ -1896,9 +1896,9 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 			}
 		}
 
-		$tables = get_tables_for_query($start, $end);
-
-		$sql = '';
+		$tables  = get_tables_for_query($start, $end);
+		$sql     = '';
+		$results = array();
 
 		if (cacti_sizeof($tables)) {
 			foreach($tables as $t) {
@@ -1909,295 +1909,297 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql .= ($sql != '' ? ' UNION ':'') . "$sql_inner FROM $t $sql_where $sql_inner_groupby";
 				}
 			}
+
+			$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_having $sql_order $sql_limit";
+
+			//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
+
+			if ($data['statistics'] == 99) {
+				$results = db_fetch_row($sql);
+			} else {
+				$results = db_fetch_assoc($sql);
+			}
 		}
 
-		$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_having $sql_order $sql_limit";
-
-		//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
-
-		if ($data['statistics'] == 99) {
-			$results = db_fetch_row($sql);
-		} else {
-			$results = db_fetch_assoc($sql);
-		}
-
-		$output = $data;
+		$output         = $data;
 		$output['data'] = $results;
 
 		$i = 0;
 		$table = '';
-		if (cacti_sizeof($results) && $data['statistics'] != 99) {
-			$table .= '<table id="sorttable" class="cactiTable"><thead>';
+		if (cacti_sizeof($results)) {
+			if ($data['statistics'] != 99) {
+				$table .= '<table id="sorttable" class="cactiTable"><thead>';
 
-			foreach($results as $r) {
-				if ($i == 0) {
-					$table .= '<tr class="tableHeader">';
+				foreach($results as $r) {
+					if ($i == 0) {
+						$table .= '<tr class="tableHeader">';
+
+						if (isset($r['start_time'])) {
+							$table .= '<th class="left">' . __('Start Time', 'flowview') . '</th>';
+						}
+
+						if (isset($r['end_time'])) {
+							$table .= '<th class="left">' . __('End Time', 'flowview') . '</th>';
+						}
+
+						if (isset($r['src_domain'])) {
+							$table .= '<th class="left">' . __('Source DNS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['src_rdomain'])) {
+							$table .= '<th class="left">' . __('Source Root DNS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['dst_domain'])) {
+							$table .= '<th class="left">' . __('Dest DNS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['dst_rdomain'])) {
+							$table .= '<th class="left">' . __('Dest Root DNS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['domain'])) {
+							$table .= '<th class="left">' . __('DNS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['rdomain'])) {
+							$table .= '<th class="left">' . __('Root DNS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['ip_addr'])) {
+							$table .= '<th class="left">' . __('IP Address', 'flowview') . '</th>';
+						}
+
+						if (isset($r['src_addr'])) {
+							$table .= '<th class="left">' . __('Source IP', 'flowview') . '</th>';
+						}
+
+						if (isset($r['dst_addr'])) {
+							$table .= '<th class="left">' . __('Dest IP', 'flowview') . '</th>';
+						}
+
+						if (isset($r['src_port'])) {
+							$table .= '<th class="left nowrap">' . __('Source Port', 'flowview') . '</th>';
+						}
+
+						if (isset($r['dst_port'])) {
+							$table .= '<th class="left nowrap">' . __('Dest Port', 'flowview') . '</th>';
+						}
+
+						if (isset($r['src_if'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Source IF', 'flowview') . '</th>';
+						}
+
+						if (isset($r['dst_if'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Dest IF', 'flowview') . '</th>';
+						}
+
+						if (isset($r['src_as'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Source AS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['dst_as'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Dest AS', 'flowview') . '</th>';
+						}
+
+						if (isset($r['src_prefix'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Source Prefix', 'flowview') . '</th>';
+						}
+
+						if (isset($r['dst_prefix'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Dest Prefix', 'flowview') . '</th>';
+						}
+
+						if (isset($r['protocol'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Protocol', 'flowview') . '</th>';
+						}
+
+						if (isset($r['tos'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Type of Service', 'flowview') . '</th>';
+						}
+
+						if (isset($r['flags'])) {
+							$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Flags', 'flowview') . '</th>';
+						}
+
+						if (isset($r['flows'])) {
+							$table .= '<th class="right">' . __('Flows', 'flowview') . '</th>';
+						}
+
+						if (isset($r['bytes'])) {
+							$table .= '<th class="right">' . __('Bytes', 'flowview') . '</th>';
+						}
+
+						if (isset($r['packets'])) {
+							$table .= '<th class="right">' . __('Packets', 'flowview') . '</th>';
+						}
+
+						$table .= '<th class="right">' . __('Bytes/Packet') . '</th>';
+
+						$table .= '</tr></thead><tbody>';
+					}
+
+					$table .= '<tr class="selectable tableRow">';
 
 					if (isset($r['start_time'])) {
-						$table .= '<th class="left">' . __('Start Time', 'flowview') . '</th>';
+						$table .= '<td class="left nowrap">' . substr($r['start_time'], 0, 19) . '</td>';
 					}
 
 					if (isset($r['end_time'])) {
-						$table .= '<th class="left">' . __('End Time', 'flowview') . '</th>';
+						$table .= '<td class="left nowrap">' . substr($r['end_time'], 0, 19) . '</td>';
 					}
 
 					if (isset($r['src_domain'])) {
-						$table .= '<th class="left">' . __('Source DNS', 'flowview') . '</th>';
+						$table .= '<td class="left">' . display_domain($r['src_domain']) . '</td>';
 					}
 
 					if (isset($r['src_rdomain'])) {
-						$table .= '<th class="left">' . __('Source Root DNS', 'flowview') . '</th>';
+						$table .= '<td class="left">' . display_domain($r['src_rdomain']) . '</td>';
 					}
 
 					if (isset($r['dst_domain'])) {
-						$table .= '<th class="left">' . __('Dest DNS', 'flowview') . '</th>';
+						$table .= '<td class="left">' . display_domain($r['dst_domain']) . '</td>';
 					}
 
 					if (isset($r['dst_rdomain'])) {
-						$table .= '<th class="left">' . __('Dest Root DNS', 'flowview') . '</th>';
+						$table .= '<td class="left">' . display_domain($r['dst_rdomain']) . '</td>';
 					}
 
 					if (isset($r['domain'])) {
-						$table .= '<th class="left">' . __('DNS', 'flowview') . '</th>';
+						$table .= '<td class="left">' . display_domain($r['domain']) . '</td>';
 					}
 
 					if (isset($r['rdomain'])) {
-						$table .= '<th class="left">' . __('Root DNS', 'flowview') . '</th>';
+						$table .= '<td class="left">' . display_domain($r['rdomain']) . '</td>';
 					}
 
 					if (isset($r['ip_addr'])) {
-						$table .= '<th class="left">' . __('IP Address', 'flowview') . '</th>';
+						$table .= '<td class="left">' . html_escape($r['ip_addr']) . '</td>';
 					}
 
 					if (isset($r['src_addr'])) {
-						$table .= '<th class="left">' . __('Source IP', 'flowview') . '</th>';
+						$table .= '<td class="left">' . html_escape($r['src_addr']) . '</td>';
 					}
 
 					if (isset($r['dst_addr'])) {
-						$table .= '<th class="left">' . __('Dest IP', 'flowview') . '</th>';
+						$table .= '<td class="left">' . html_escape($r['dst_addr']) . '</td>';
 					}
 
 					if (isset($r['src_port'])) {
-						$table .= '<th class="left nowrap">' . __('Source Port', 'flowview') . '</th>';
+						$table .= '<td class="left nowrap">' . get_port_name($r['src_port'], $r['protocol']) . '</td>';
 					}
 
 					if (isset($r['dst_port'])) {
-						$table .= '<th class="left nowrap">' . __('Dest Port', 'flowview') . '</th>';
+						$table .= '<td class="left nowrap">' . get_port_name($r['dst_port'], $r['protocol']) . '</td>';
 					}
 
 					if (isset($r['src_if'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Source IF', 'flowview') . '</th>';
+						$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['src_if']) . '</td>';
 					}
 
 					if (isset($r['dst_if'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Dest IF', 'flowview') . '</th>';
+						$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['dst_if']) . '</td>';
 					}
 
 					if (isset($r['src_as'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Source AS', 'flowview') . '</th>';
+						$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['src_as']) . '</td>';
 					}
 
 					if (isset($r['dst_as'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Dest AS', 'flowview') . '</th>';
+						$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['dst_as']) . '</td>';
 					}
 
 					if (isset($r['src_prefix'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Source Prefix', 'flowview') . '</th>';
+						$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['src_prefix']) . '</td>';
 					}
 
 					if (isset($r['dst_prefix'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Dest Prefix', 'flowview') . '</th>';
+						$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['dst_prefix']) . '</td>';
 					}
 
 					if (isset($r['protocol'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Protocol', 'flowview') . '</th>';
+						$table .= '<td class="left">' . plugin_flowview_get_protocol($r['protocol'], false) . '</td>';
 					}
 
 					if (isset($r['tos'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Type of Service', 'flowview') . '</th>';
+						$table .= parse_type_of_service($r['tos']);
 					}
 
 					if (isset($r['flags'])) {
-						$table .= '<th class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . __('Flags', 'flowview') . '</th>';
+						$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['flags']) . '</td>';
 					}
 
 					if (isset($r['flows'])) {
-						$table .= '<th class="right">' . __('Flows', 'flowview') . '</th>';
+						$table .= '<td class="right">' . number_format_i18n($r['flows'], 0) . '</td>';
 					}
 
 					if (isset($r['bytes'])) {
-						$table .= '<th class="right">' . __('Bytes', 'flowview') . '</th>';
+						$table .= '<td class="right">' . number_format_i18n($r['bytes'], 0) . '</td>';
 					}
 
 					if (isset($r['packets'])) {
-						$table .= '<th class="right">' . __('Packets', 'flowview') . '</th>';
+						$table .= '<td class="right">' . number_format_i18n($r['packets'], 0) . '</td>';
 					}
 
-					$table .= '<th class="right">' . __('Bytes/Packet') . '</th>';
+					$table .= '<td class="right">' . number_format_i18n($r['bytes']/$r['packets'], 0) . '</td>';
 
-					$table .= '</tr></thead><tbody>';
+					$table .= '</tr>';
+
+					$i++;
 				}
 
-				$table .= '<tr class="selectable tableRow">';
-
-				if (isset($r['start_time'])) {
-					$table .= '<td class="left nowrap">' . substr($r['start_time'], 0, 19) . '</td>';
+				$table .= '</tbody></table>';
+			} elseif ($data['statistics'] == 99) {
+				$total = 0;
+				$i = 0;
+				foreach($sql_array as $c) {
+					$total += $results[$c['name']];
 				}
 
-				if (isset($r['end_time'])) {
-					$table .= '<td class="left nowrap">' . substr($r['end_time'], 0, 19) . '</td>';
-				}
+				$table .= '<table class="cactiTable"><tbody>';
+				$table .= '<tr class="tableHeader right">';
 
-				if (isset($r['src_domain'])) {
-					$table .= '<td class="left">' . display_domain($r['src_domain']) . '</td>';
+				for ($i = 0; $i < 14; $i++) {
+					$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';
 				}
-
-				if (isset($r['src_rdomain'])) {
-					$table .= '<td class="left">' . display_domain($r['src_rdomain']) . '</td>';
-				}
-
-				if (isset($r['dst_domain'])) {
-					$table .= '<td class="left">' . display_domain($r['dst_domain']) . '</td>';
-				}
-
-				if (isset($r['dst_rdomain'])) {
-					$table .= '<td class="left">' . display_domain($r['dst_rdomain']) . '</td>';
-				}
-
-				if (isset($r['domain'])) {
-					$table .= '<td class="left">' . display_domain($r['domain']) . '</td>';
-				}
-
-				if (isset($r['rdomain'])) {
-					$table .= '<td class="left">' . display_domain($r['rdomain']) . '</td>';
-				}
-
-				if (isset($r['ip_addr'])) {
-					$table .= '<td class="left">' . html_escape($r['ip_addr']) . '</td>';
-				}
-
-				if (isset($r['src_addr'])) {
-					$table .= '<td class="left">' . html_escape($r['src_addr']) . '</td>';
-				}
-
-				if (isset($r['dst_addr'])) {
-					$table .= '<td class="left">' . html_escape($r['dst_addr']) . '</td>';
-				}
-
-				if (isset($r['src_port'])) {
-					$table .= '<td class="left nowrap">' . get_port_name($r['src_port'], $r['protocol']) . '</td>';
-				}
-
-				if (isset($r['dst_port'])) {
-					$table .= '<td class="left nowrap">' . get_port_name($r['dst_port'], $r['protocol']) . '</td>';
-				}
-
-				if (isset($r['src_if'])) {
-					$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['src_if']) . '</td>';
-				}
-
-				if (isset($r['dst_if'])) {
-					$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['dst_if']) . '</td>';
-				}
-
-				if (isset($r['src_as'])) {
-					$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['src_as']) . '</td>';
-				}
-
-				if (isset($r['dst_as'])) {
-					$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['dst_as']) . '</td>';
-				}
-
-				if (isset($r['src_prefix'])) {
-					$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['src_prefix']) . '</td>';
-				}
-
-				if (isset($r['dst_prefix'])) {
-					$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['dst_prefix']) . '</td>';
-				}
-
-				if (isset($r['protocol'])) {
-					$table .= '<td class="left">' . plugin_flowview_get_protocol($r['protocol'], false) . '</td>';
-				}
-
-				if (isset($r['tos'])) {
-					$table .= parse_type_of_service($r['tos']);
-				}
-
-				if (isset($r['flags'])) {
-					$table .= '<td class="' . ($data['statistics'] > 0 ? 'left':'right') . '">' . html_escape($r['flags']) . '</td>';
-				}
-
-				if (isset($r['flows'])) {
-					$table .= '<td class="right">' . number_format_i18n($r['flows'], 0) . '</td>';
-				}
-
-				if (isset($r['bytes'])) {
-					$table .= '<td class="right">' . number_format_i18n($r['bytes'], 0) . '</td>';
-				}
-
-				if (isset($r['packets'])) {
-					$table .= '<td class="right">' . number_format_i18n($r['packets'], 0) . '</td>';
-				}
-
-				$table .= '<td class="right">' . number_format_i18n($r['bytes']/$r['packets'], 0) . '</td>';
 
 				$table .= '</tr>';
+				$table .= '<tr>';
 
-				$i++;
+				for ($i = 0; $i < 14; $i++) {
+					$name   = $sql_array[$i]['name'];
+					$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
+				}
+
+				$table .= '</tr></tbody></table>';
+
+				$table .= '<table class="cactiTable"><tbody>';
+				$table .= '</br>';
+				$table .= '<tr class="tableHeader right">';
+
+				for ($i = 14; $i < 27; $i++) {
+					$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';
+				}
+
+				$table .= '<th></th>';
+				$table .= '</tr>';
+
+				$table .= '<tr>';
+
+				for ($i = 14; $i < 27; $i++) {
+					$name   = $sql_array[$i]['name'];
+					$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
+				}
+
+				$table .= '<td style="width:7.14%"></td>';
+				$table .= '</tr></tbody></table>';
 			}
 
-			$table .= '</tbody></table>';
-		} elseif ($data['statistics'] == 99) {
-			$total = 0;
-			$i = 0;
-			foreach($sql_array as $c) {
-				$total += $results[$c['name']];
-			}
+			$output['table'] = $table;
+			$output['title'] = $title;
 
-			$table .= '<table class="cactiTable"><tbody>';
-			$table .= '<tr class="tableHeader right">';
-
-			for ($i = 0; $i < 14; $i++) {
-				$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';
-			}
-
-			$table .= '</tr>';
-			$table .= '<tr>';
-
-			for ($i = 0; $i < 14; $i++) {
-				$name   = $sql_array[$i]['name'];
-				$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
-			}
-
-			$table .= '</tr></tbody></table>';
-
-			$table .= '<table class="cactiTable"><tbody>';
-			$table .= '</br>';
-			$table .= '<tr class="tableHeader right">';
-
-			for ($i = 14; $i < 27; $i++) {
-				$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';
-			}
-
-			$table .= '<th></th>';
-			$table .= '</tr>';
-
-			$table .= '<tr>';
-
-			for ($i = 14; $i < 27; $i++) {
-				$name   = $sql_array[$i]['name'];
-				$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
-			}
-
-			$table .= '<td style="width:7.14%"></td>';
-			$table .= '</tr></tbody></table>';
+			return $output;
 		}
-
-		$output['table'] = $table;
-		$output['title'] = $title;
-
-		return $output;
 	}
 
 	return false;
