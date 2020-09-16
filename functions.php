@@ -2173,7 +2173,12 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 				for ($i = 0; $i < 14; $i++) {
 					$name   = $sql_array[$i]['name'];
-					$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
+
+					if ($total > 0) {
+						$table .= '<td class="right" style="width:7.14%">' . number_format_i18n(($results[$name] / $total) * 100, 2) . ' %</td>';
+					} else {
+						$table .= '<td class="right" style="width:7.14%">' . __('N/A', 'flowview') . '</td>';
+					}
 				}
 
 				$table .= '</tr></tbody></table>';

@@ -92,6 +92,7 @@ Got any ideas or complaints, please see the Cacti forums or GitHub for a resolut
 * feature: Remove use of Flow Tools
 * feature: Support IPv4 and IPv6
 * feature: Support daily and hourly partitioning
+* issue#53: Division by zero errors viewing tables
 
 --- 2.1 ---
 * issue: Prepare for sunrise theme in 1.1.17
