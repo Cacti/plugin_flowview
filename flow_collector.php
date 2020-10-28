@@ -1003,10 +1003,17 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
 		$sysuptime = $data[$fieldname['sysuptime']];
 	} elseif ($sysuptime > 0) {
-		$rstime = ($data[$fieldname['start_time']] - $sysuptime) / 1000;
-		$rsmsec = substr($data[$fieldname['start_time']] - $sysuptime, -3);
-		$retime = ($data[$fieldname['end_time']] - $sysuptime) / 1000;
-		$remsec = substr($data[$fieldname['end_time']] - $sysuptime, -3);
+		$rsmsec = $rstime = $remsec = $rstime = 0;
+
+		if (isset($data[$fieldname['start_time']])) {
+			$rstime = ($data[$fieldname['start_time']] - $sysuptime) / 1000;
+			$rsmsec = substr($data[$fieldname['start_time']] - $sysuptime, -3);
+		}
+
+		if (isset($data[$fieldname['end_time']])) {
+			$retime = ($data[$fieldname['end_time']] - $sysuptime) / 1000;
+			$remsec = substr($data[$fieldname['end_time']] - $sysuptime, -3);
+		}
 
 		$start_time = date('Y-m-d H:i:s', $flowtime + $rstime) . '.' . $rsmsec;
 		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
