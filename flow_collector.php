@@ -1003,7 +1003,7 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
 		$sysuptime = $data[$fieldname['sysuptime']];
 	} elseif ($sysuptime > 0) {
-		$rsmsec = $rstime = $remsec = $rstime = 0;
+		$rsmsec = $rstime = $remsec = $retime = 0;
 
 		if (isset($data[$fieldname['start_time']])) {
 			$rstime = ($data[$fieldname['start_time']] - $sysuptime) / 1000;
