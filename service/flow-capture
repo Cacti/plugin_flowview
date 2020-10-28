@@ -73,7 +73,7 @@ function stop() {
 	$php_binary = read_config_option('path_php_binary');
 
 	if (cacti_sizeof($devices)) {
-		shell_exec('killall --quiet ' . $php_binary . ' -q ' . $cacti_base . '/plugins/flowview/flow_collector.php');
+		shell_exec('ps ax | grep -v \'grep\' | grep \'flow_collector.php\' | awk \'{ print $1 }\' | xargs kill');
 	}			
 }
 
