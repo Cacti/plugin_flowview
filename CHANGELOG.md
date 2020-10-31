@@ -19,6 +19,7 @@
 * issue#47: flowData not showing data
 * issue#49: Flowview IPFIX throwing errors
 * issue#50: Flowview errors cause it to become automatically disabled
+* issue#51: FlowView Throws Errors When No Filters Exist
 * issue#52: init.d script kills poller
 * issue#53: Division by zero errors viewing tables
 * issue: Partition tables were not being pruned.

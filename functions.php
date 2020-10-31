@@ -829,7 +829,7 @@ function flowview_display_filter($data) {
 					$.getJSON('flowview.php?action=chartdata&type=bytes' +
 						'&domains=' + $('#domains').is(':checked') +
 						'&report='  + $('#report').val() +
-						'&query=<?php print $data['id'];?>', function(data) {
+						'&query=<?php print isset($data['id']) ? $data['id']:0;?>', function(data) {
 
 						var chartBytes = c3.generate({
 							bindto: '#chartbytes',
@@ -1570,6 +1570,9 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 			$data['printed']    = trim(get_nfilter_request_var('report'), 'sp');
 			$data['statistics'] = 0;
 		}
+	} else {
+		$data['statistics'] = 0;
+		$data['printed']    = 0;
 	}
 
 	// Handle Sort Field Override
@@ -1853,7 +1856,7 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 					$sql_order         = 'ORDER BY ' . ($data['sortfield'] + 1) . ($data['sortfield'] > 1 ? ' DESC':' ASC');
 					break;
 			}
-		} else {
+		} elseif ($data['printed'] > 0) {
 			if (isset($print_columns_array[$data['statistics']][$data['sortfield']])) {
 				$sortname = $print_columns_array[$data['statistics']][$data['sortfield']];
 			}
@@ -1938,7 +1941,7 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 			$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_having $sql_order $sql_limit";
 
-			//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
+			cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
 
 			if ($data['statistics'] == 99) {
 				$results = db_fetch_row($sql);
