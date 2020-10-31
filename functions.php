@@ -29,11 +29,11 @@ function sort_filter() {
 
 	if (isset_request_var('printed') && get_filter_request_var('printed') > 0) {
 		foreach($print_columns_array[get_request_var('printed')] as $key => $value) {
-			print "<option value='$key'" . (get_request_var('printed') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
+			print "<option value='$key'" . (get_request_var('sortfield') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
 		}
 	} elseif (get_filter_request_var('statistics') > 0) {
 		foreach($stat_columns_array[get_request_var('statistics')] as $key => $value) {
-			print "<option value='$key'" . (get_request_var('statistics') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
+			print "<option value='$key'" . (get_request_var('sortfield') == $key ? ' selected':'') . '>' . html_escape($value) . '</option>';
 		}
 	} else {
 		print "<option value='0'>" . __('Select a Report Type First', 'flowview') . '</option>';
@@ -1941,7 +1941,7 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 			$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_having $sql_order $sql_limit";
 
-			cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
+			//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
 
 			if ($data['statistics'] == 99) {
 				$results = db_fetch_row($sql);
