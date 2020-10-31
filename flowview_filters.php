@@ -71,7 +71,7 @@ function actions_filters() {
 	global $sched_actions, $config;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_post('drp_action'));
+	get_filter_request_var('drp_action');
 	/* ==================================================== */
 
 	if (isset_request_var('selected_items')) {
@@ -97,7 +97,7 @@ function actions_filters() {
 			}
 		}
 
-		header('Location: flowview_filters.php?tab=sched&header=false');
+		header('Location: flowview_filters.php?header=false');
 		exit;
 	}
 
@@ -290,7 +290,7 @@ function show_filters() {
 	html_end_box();
 
 	if (get_request_var('filter') != '') {
-		$sql_where = 'WHERE fq.name LIKE ' . db_qstr('%' . get_request_var_request('filter') . '%');
+		$sql_where = 'WHERE fq.name LIKE ' . db_qstr('%' . get_request_var('filter') . '%');
 	} else {
 		$sql_where = '';
 	}
@@ -313,14 +313,6 @@ function show_filters() {
 		LEFT JOIN plugin_flowview_devices AS fd
 		ON fq.device_id = fd.id
 		$sql_where");
-
-	$nav = html_nav_bar('flowview_filters.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 5, __('Filters', 'flowview'), 'page', 'main');
-
-	form_start('flowview_filters.php', 'chk');
-
-    print $nav;
-
-	html_start_box('', '100%', '', '3', 'center', '');
 
 	$display_array = array(
 		'name' => array(
@@ -355,7 +347,15 @@ function show_filters() {
 		)
 	);
 
-	html_header_sort_checkbox($display_array, get_request_var_request('sort_column'), get_request_var_request('sort_direction'), false);
+	$nav = html_nav_bar('flowview_filters.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, cacti_sizeof($display_array), __('Filters', 'flowview'), 'page', 'main');
+
+	form_start('flowview_filters.php', 'chk');
+
+    print $nav;
+
+	html_start_box('', '100%', '', '3', 'center', '');
+
+	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	if (cacti_sizeof($filters)) {
 		foreach ($filters as $filter) {
@@ -381,6 +381,7 @@ function show_filters() {
 			form_selectable_cell($sort, $filter['id'], '', 'right');
 			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');
 			form_checkbox_cell($filter['name'], $filter['id']);
+
 			form_end_row();
 		}
 	}

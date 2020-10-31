@@ -63,7 +63,7 @@ foreach($options as $arg => $value) {
 
 			break;
 		default:
-			print "ERROR: Invalid options" . PHP_EOL;
+			print 'ERROR: Invalid options' . PHP_EOL;
 			exit(1);
 
 			break;
@@ -96,9 +96,9 @@ $schedules = db_fetch_assoc("SELECT *
 
 if (count($schedules)) {
 	foreach ($schedules as $s) {
-		db_execute_prepared("UPDATE plugin_flowview_schedules
+		db_execute_prepared('UPDATE plugin_flowview_schedules
 			SET lastsent = ?
-			WHERE id = ?",
+			WHERE id = ?',
 			array($r, $s['id']));
 
 		plugin_flowview_run_schedule($s['id']);
@@ -131,18 +131,20 @@ if ($maint) {
 	if ($today_day - $retention_days < 0) {
 		$retention_year = $today_year - 1;
 		$min_day        = 365 + $today_day - $retention_days;
+
 		if ($partition_mode == 0) {
-			$min_day        = substr('000' . $min_day, -3);
+			$min_day = substr('000' . $min_day, -3);
 		} else {
-			$min_day        = substr('000' . $min_day . '00', -5);
+			$min_day = substr('000' . $min_day . '00', -5);
 		}
 	} else {
 		$retention_year = $today_year;
 		$min_day        = $today_day - $retention_days;
+
 		if ($partition_mode == 0) {
-			$min_day        = substr('000' . $min_day, -3);
+			$min_day = substr('000' . $min_day, -3);
 		} else {
-			$min_day        = substr('000' . $min_day . '00', -5);
+			$min_day = substr('000' . $min_day . '00', -5);
 		}
 	}
 
@@ -206,13 +208,13 @@ function display_version() {
 function display_help() {
 	display_version();
 
-	print PHP_EOL . "usage: flowview_process.php [--debug]" . PHP_EOL . PHP_EOL;
+	print PHP_EOL . 'usage: flowview_process.php [--debug]' . PHP_EOL . PHP_EOL;
 
-	print "Cacti poller processes reports and imports latest legacy data into" . PHP_EOL;
-	print "the Cacti database." . PHP_EOL . PHP_EOL;
+	print 'Cacti poller processes reports and imports latest legacy data into' . PHP_EOL;
+	print 'the Cacti database.' . PHP_EOL . PHP_EOL;
 
-	print "Options:" . PHP_EOL;
-	print "    --maint Force table maintenance immediately." . PHP_EOL . PHP_EOL;
-	print "    --debug Provide some debug output during collection." . PHP_EOL . PHP_EOL;
+	print 'Options:' . PHP_EOL;
+	print '    --maint Force table maintenance immediately.' . PHP_EOL . PHP_EOL;
+	print '    --debug Provide some debug output during collection.' . PHP_EOL . PHP_EOL;
 }
 

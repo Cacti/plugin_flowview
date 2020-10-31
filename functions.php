@@ -1118,36 +1118,57 @@ function plugin_flowview_run_schedule($id) {
 		WHERE id = ?',
 		array($schedule['query_id']));
 
+	$fromemail = read_config_option('settings_from_email');
+	if ($fromemail == '') {
+		$fromemail = 'cacti@cactiusers.org';
+	}
+
 	$fromname = read_config_option('settings_from_name');
-	if (strlen($fromname) < 1) {
+	if ($fromname == '') {
 		$fromname = __('Cacti Flowview', 'flowview');
 	}
 
-	$from = read_config_option('settings_from_email');
-	if (strlen($from) < 1) {
-		$from = 'cacti@cactiusers.org';
-	}
+	$from[0] = $fromemail;
+	$from[1] = $fromname;
 
-	$subject = __('Netflow - %', $schedule['title'], 'flowview');
+	$subject = __('Netflow - %s', $schedule['title'], 'flowview');
+	$date2   = time();
+	$date1   = $date2 - $schedule['sendinterval'];
 
 	set_request_var('schedule', $id);
 	set_request_var('query', $schedule['query_id']);
-	set_request_var('action', 'loadquery');
+	set_request_var('date1', date('Y-m-d H:i:s', $date1));
+	set_request_var('date2', date('Y-m-d H:i:s', $date2));
 
-	$message  = "<body style='margin:10px;'>";
-	$message .= "<style type='text/css'>\n";
-	$message .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
-	$message .= '</style>';
-	$sessionid = -1;
+	$body  = "<body style='margin:10px;'>" . PHP_EOL;
+	$body .= "<style type='text/css'>" . PHP_EOL;
+	$body .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
+	$body .= '</style>' . PHP_EOL;
+
+	$body .= '<center>' . PHP_EOL;
+	$body .= '<h1>' . html_escape($schedule['title']) . '</h1>' . PHP_EOL;
+	$body .= '<h2>From ' . get_request_var('date1') . ' to ' . get_request_var('date2') . '</h2>' . PHP_EOL;
+	$body .= '<h2>Using Query \'' . html_escape($query['name']) . '\'</h2>' . PHP_EOL;
+	$body .= '</center>' . PHP_EOL;
 
 	$data = load_data_for_filter();
 	if ($data !== false) {
-		$message .= $data['table'];
+		$body .= $data['table'];
 	}
 
-	$message .= '</body>';
+	$body .= '</body>' . PHP_EOL;
 
-	send_mail($schedule['email'], $from, $subject, $message, ' ', '', $fromname);
+	$body_text = strip_tags(str_replace('<br>', "\n", $body));
+
+	$version = db_fetch_cell("SELECT version
+		FROM plugin_config
+		WHERE directory='flowview'");
+
+    $headers['X-Mailer']   = 'Cacti-FlowView-v' . $version;
+    $headers['User-Agent'] = 'Cacti-FlowView-v' . $version;
+	$headers['X-Priority'] = '1';
+
+	mailer($from, $schedule['email'], '', '', '', $subject, $body, $body_text, '', $headers);
 }
 
 /** creatfilter($sessionid)
@@ -3112,14 +3133,6 @@ function flowview_report_session() {
 
 	validate_store_request_vars($filters, 'sess_fvw');
 	/* ================= input validation ================= */
-}
-
-function get_sessionid() {
-	if (isset_request_var('tab') && strpos(get_nfilter_request_var('tab'), 'tab_') !== false) {
-		return str_replace('tab_', '', get_nfilter_request_var('tab'));
-	}
-
-	return -1;
 }
 
 /** flowview_viewchart()

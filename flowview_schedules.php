@@ -127,7 +127,7 @@ function actions_schedules () {
 	global $colors, $sched_actions, $config;
 
 	/* ================= input validation ================= */
-	input_validate_input_number(get_request_var_post('drp_action'));
+	get_filter_request_var('drp_action');
 	/* ==================================================== */
 
 	if (isset_request_var('selected_items')) {
@@ -153,7 +153,7 @@ function actions_schedules () {
 			}
 		}
 
-		header('Location: flowview_schedules.php?tab=sched&header=false');
+		header('Location: flowview_schedules.php?header=false');
 		exit;
 	}
 
@@ -279,13 +279,13 @@ function save_schedules() {
 	if (is_error_message()) {
 		raise_message(2);
 
-		header('Location: flowview_schedules.php?tab=sched&header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
+		header('Location: flowview_schedules.php?header=false&action=edit&id=' . (empty($id) ? get_filter_request_var('id') : $id));
 		exit;
 	}
 
 	raise_message(1);
 
-	header('Location: flowview_schedules.php?tab=sched&header=false');
+	header('Location: flowview_schedules.php?header=false');
 	exit;
 }
 
@@ -364,26 +364,26 @@ function show_schedules () {
 			'filter' => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-			),
+		),
 		'page' => array(
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-			),
+		),
 		'filter' => array(
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-			),
+		),
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'title',
 			'options' => array('options' => 'sanitize_search_string')
-			),
+		),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'ASC',
 			'options' => array('options' => 'sanitize_search_string')
-			)
+		)
 	);
 
 	validate_store_request_vars($filters, 'sess_fvschd');
@@ -473,7 +473,7 @@ function show_schedules () {
 	html_end_box();
 
 	if (get_request_var('filter') != '') {
-		$sql_where = 'WHERE name LIKE ' . db_qstr('%' . get_request_var_request('filter') . '%');
+		$sql_where = 'WHERE name LIKE ' . db_qstr('%' . get_request_var('filter') . '%');
 	} else {
 		$sql_where = '';
 	}
@@ -497,7 +497,38 @@ function show_schedules () {
 		ON (pfs.query_id=pfq.id)
 		$sql_where");
 
-	$nav = html_nav_bar('flowview_schedules.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, 5, __('Schedules', 'flowview'), 'page', 'main');
+	$display_array = array(
+		'title' => array(
+			'display' => __('Schedule Title', 'flowview'),
+			'sort' => 'ASC'
+		),
+		'name' => array(
+			'display' => __('Filter Name', 'flowview'),
+			'sort' => 'ASC'
+		),
+		'sendinterval' => array(
+			'display' => __('Interval', 'flowview'),
+			'sort' => 'ASC'
+		),
+		'start' => array(
+			'display' => __('Start Date', 'flowview'),
+			'sort' => 'ASC'
+		),
+		'lastsent+sendinterval' => array(
+			'display' => __('Next Send', 'flowview'),
+			'sort' => 'ASC'
+		),
+		'email' => array(
+			'display' => __('Email', 'flowview'),
+			'sort' => 'ASC'
+		),
+		'enabled' => array(
+			'display' => __('Enabled', 'flowview'),
+			'sort' => 'ASC'
+		)
+	);
+
+	$nav = html_nav_bar('flowview_schedules.php?filter=' . get_request_var('filter'), MAX_DISPLAY_PAGES, get_request_var('page'), $rows, $total_rows, cacti_sizeof($display_array) + 1, __('Schedules', 'flowview'), 'page', 'main');
 
 	form_start('flowview_schedules.php', 'chk');
 
@@ -505,17 +536,7 @@ function show_schedules () {
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	$display_array = array(
-		'title'                 => array(__('Schedule Title', 'flowview'), 'ASC'),
-		'name'                  => array(__('Filter Name', 'flowview'), 'ASC'),
-		'sendinterval'          => array(__('Interval', 'flowview'), 'ASC'),
-		'start'                 => array(__('Start Date', 'flowview'), 'ASC'),
-		'lastsent+sendinterval' => array(__('Next Send', 'flowview'), 'ASC'),
-		'email'                 => array(__('Email', 'flowview'), 'ASC'),
-		'enabled'               => array(__('Enabled', 'flowview'), 'ASC')
-	);
-
-	html_header_sort_checkbox($display_array, get_request_var_request('sort_column'), get_request_var_request('sort_direction'), false);
+	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	$i=0;
 	if (cacti_sizeof($result)) {

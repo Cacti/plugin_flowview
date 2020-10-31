@@ -104,7 +104,7 @@ function actions_devices () {
 			}
 		}
 
-		header('Location: flowview_devices.php?tab=listeners&header=false');
+		header('Location: flowview_devices.php?header=false');
 		exit;
 	}
 
@@ -187,13 +187,13 @@ function save_devices () {
 	if (is_error_message()) {
 		raise_message(2);
 
-		header('Location: flowview_devices.php?tab=listeners&header=false&action=edit&id=' . (empty($id) ? get_request_var('id') : $id));
+		header('Location: flowview_devices.php?header=false&action=edit&id=' . (empty($id) ? get_request_var('id') : $id));
 		exit;
 	}
 
 	raise_message(1);
 
-	header('Location: flowview_devices.php?tab=listeners&header=false');
+	header('Location: flowview_devices.php?header=false');
 	exit;
 }
 
@@ -224,7 +224,7 @@ function edit_devices () {
 
 	html_end_box();
 
-	form_save_button('flowview_devices.php?tab=listeners');
+	form_save_button('flowview_devices.php');
 }
 
 function show_devices () {
@@ -350,7 +350,7 @@ function show_devices () {
 			$parts = preg_split('/[\s]+/', trim($status));
 
 			form_alternate_row('line' . $row['id'], true);
-			form_selectable_cell('<a class="linkEditMain" href="flowview_devices.php?&tab=listeners&action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a>', $row['id']);
+			form_selectable_cell('<a class="linkEditMain" href="flowview_devices.php?action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a>', $row['id']);
 			form_selectable_cell(__('Cacti', 'flowview'), $row['id']);
 			form_selectable_cell($row['allowfrom'], $row['id']);
 			form_selectable_cell($row['port'], $row['id']);
@@ -360,7 +360,7 @@ function show_devices () {
 			form_end_row();
 		}
 	} else {
-		print "<tr class='even'><td colspan=10><center>" . __('No Flowview Listeners', 'flowview') . "</center></td></tr>\n";
+		print "<tr class='even'><td colspan=10><center>" . __('No Flowview Listeners', 'flowview') . '</center></td></tr>';
 	}
 
 	html_end_box(false);
