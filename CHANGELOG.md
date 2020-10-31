@@ -22,6 +22,7 @@
 * issue#51: FlowView Throws Errors When No Filters Exist
 * issue#52: init.d script kills poller
 * issue#53: Division by zero errors viewing tables
+* issue#55: Netflow V9 Errors on CACTI
 * issue: Partition tables were not being pruned.
 * issue: Make the flow_collector.php resilient to loss of the database server.
 * feature: New database design.  Support for v5, v9, IPFIX flows transparently
