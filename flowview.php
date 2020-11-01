@@ -195,7 +195,7 @@ function flowview_request_vars() {
 			'default' => '0'
 		),
 		'sortfield' => array(
-			'filter' => FILTER_VALIDATE_INT,
+			'filter' => FILTER_DEFAULT,
 			'default' => ''
 		),
 		'sortvalue' => array(
@@ -323,5 +323,7 @@ function flowview_request_vars() {
 
 	validate_store_request_vars($filters, 'sess_fv');
 	/* ================= input validation ================= */
+
+	cacti_session_close();
 }
 

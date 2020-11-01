@@ -145,6 +145,7 @@ function edit_filter() {
 		$.getJSON(returnPage+'?action=gettimespan&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
 			$('#date1').val(data['current_value_date1']);
 			$('#date2').val(data['current_value_date2']);
+			Pace.stop();
 		});
 	}
 
@@ -163,6 +164,7 @@ function edit_filter() {
 			} else {
 				$('#row_sortfield').show();
 			}
+			Pace.stop();
 		});
 	}
 
@@ -869,6 +871,8 @@ function flowview_display_filter($data) {
 								}
 							}
 						});
+
+						Pace.stop();
 					});
 
 					break;
@@ -916,6 +920,8 @@ function flowview_display_filter($data) {
 								}
 							}
 						});
+
+						Pace.stop();
 					});
 
 					break;
@@ -963,9 +969,10 @@ function flowview_display_filter($data) {
 								}
 							}
 						});
+
+						Pace.stop();
 					});
 
-					break;
 					break;
 			}
 		});
@@ -1019,6 +1026,8 @@ function flowview_display_filter($data) {
 				'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
 				$('#date1').val(data['current_value_date1']);
 				$('#date2').val(data['current_value_date2']);
+
+				Pace.stop();
 			});
 		}
 	}
@@ -1031,6 +1040,8 @@ function flowview_display_filter($data) {
 				$('#date1').val(data['current_value_date1']);
 				$('#date2').val(data['current_value_date2']);
 				applyFilter();
+
+				Pace.stop();
 			});
 		}
 	}
@@ -1135,11 +1146,6 @@ function plugin_flowview_run_schedule($id) {
 	$date2   = time();
 	$date1   = $date2 - $schedule['sendinterval'];
 
-	set_request_var('schedule', $id);
-	set_request_var('query', $schedule['query_id']);
-	set_request_var('date1', date('Y-m-d H:i:s', $date1));
-	set_request_var('date2', date('Y-m-d H:i:s', $date2));
-
 	$body  = "<body style='margin:10px;'>" . PHP_EOL;
 	$body .= "<style type='text/css'>" . PHP_EOL;
 	$body .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
@@ -1147,11 +1153,11 @@ function plugin_flowview_run_schedule($id) {
 
 	$body .= '<center>' . PHP_EOL;
 	$body .= '<h1>' . html_escape($schedule['title']) . '</h1>' . PHP_EOL;
-	$body .= '<h2>From ' . get_request_var('date1') . ' to ' . get_request_var('date2') . '</h2>' . PHP_EOL;
+	$body .= '<h2>From ' . date('Y-m-d H:i:s', $date1) . ' to ' . date('Y-m-d H:i:s', $date2) . '</h2>' . PHP_EOL;
 	$body .= '<h2>Using Query \'' . html_escape($query['name']) . '\'</h2>' . PHP_EOL;
 	$body .= '</center>' . PHP_EOL;
 
-	$data = load_data_for_filter();
+	$data = load_data_for_filter($schedule['query_id'], $date1, $date2);
 	if ($data !== false) {
 		$body .= $data['table'];
 	}
@@ -1176,7 +1182,7 @@ function plugin_flowview_run_schedule($id) {
  *  This function creates the NetFlow Report for the UI.  It presents this in a table
  *  format and returns as a test string to the calling function.
  */
-function load_data_for_filter($session = false) {
+function load_data_for_filter($id = 0, $start = false, $end = false) {
 	global $config;
 
 	$output    = '';
@@ -1185,89 +1191,111 @@ function load_data_for_filter($session = false) {
 	$histogram = false;
 	$time      = time();
 	$data      = array();
-	$start     = strtotime(get_request_var('date1'));
-	$end       = strtotime(get_request_var('date2'));
 
-	if ($session && isset($_SESSION['sess_flowdata'])) {
-		return $_SESSION['sess_flowdata'];
+	if ($id > 0) {
+		$query_id = $id;
+		$session  = false;
+	} elseif (isset_request_var('query')) {
+		$query_id = get_request_var('query');
+		$start    = strtotime(get_request_var('date1'));
+		$end      = strtotime(get_request_var('date2'));
+		$key      = md5($query_id . '_' . $start . '_' . $end);
+		$session  = true;
+	} else {
+		return false;
+	}
+
+	$key = md5($query_id . '_' . $start . '_' . $end);
+
+	if ($session && isset($_SESSION['sess_flowdata'][$key])) {
+		return $_SESSION['sess_flowdata'][$key];
 	}
 
 	/* let's calculate the title and then session id */
 	if ($title == '') {
 		if (isset_request_var('query') && get_filter_request_var('query') > 0) {
-			$title = db_fetch_cell('SELECT name FROM plugin_flowview_queries WHERE id=' . get_request_var('query'));
+			$title = db_fetch_cell_prepared('SELECT name
+				FROM plugin_flowview_queries
+				WHERE id = ?',
+				array($query_id));
 		} else {
 			$title = __('New Flow', 'flowview');
 		}
 	}
 
-	if (get_request_var('query') > 0) {
-		if (get_request_var('statistics') != 0) {
-			$histogram = true;
-		}
+	if ($query_id > 0) {
+		if ($session) {
+			if (get_request_var('statistics') != 0) {
+				$histogram = true;
+			}
 
-		/* source ip filter */
-		if (get_request_var('sourceip') != '') {
-			$sql_where = get_ip_filter($sql_where, get_request_var('sourceip'), 'src_addr');
-		}
+			/* source ip filter */
+			if (get_request_var('sourceip') != '') {
+				$sql_where = get_ip_filter($sql_where, get_request_var('sourceip'), 'src_addr');
+			}
 
-		/* source interface filter */
-		if (get_request_var('sourceinterface') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('sourceinterface'), 'src_if');
-		}
+			/* source interface filter */
+			if (get_request_var('sourceinterface') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('sourceinterface'), 'src_if');
+			}
 
-		/* source port filter */
-		if (get_request_var('sourceport') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('sourceport'), 'src_port');
-		}
+			/* source port filter */
+			if (get_request_var('sourceport') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('sourceport'), 'src_port');
+			}
 
-		/* source as filter */
-		if (get_request_var('sourceas') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('sourceas'), 'src_as');
-		}
+			/* source as filter */
+			if (get_request_var('sourceas') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('sourceas'), 'src_as');
+			}
 
-		/* destination ip filter */
-		if (get_request_var('destip') != '') {
-			$sql_where = get_ip_filter($sql_where, get_request_var('destip'), 'dest_sddr');
-		}
+			/* destination ip filter */
+			if (get_request_var('destip') != '') {
+				$sql_where = get_ip_filter($sql_where, get_request_var('destip'), 'dst_addr');
+			}
 
-		/* destination interface filter */
-		if (get_request_var('destinterface') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('destinterface'), 'dest_if');
-		}
+			/* destination interface filter */
+			if (get_request_var('destinterface') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('destinterface'), 'dst_if');
+			}
 
-		/* destination port filter */
-		if (get_request_var('destport') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dst_port');
-		}
+			/* destination port filter */
+			if (get_request_var('destport') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dst_port');
+			}
 
-		/* destination as filter */
-		if (get_request_var('destas') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('destas'), 'dest_as');
-		}
+			/* destination as filter */
+			if (get_request_var('destas') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('destas'), 'dst_as');
+			}
 
-		/* protocols filter */
-		if (get_request_var('protocols') != '' && get_request_var('protocols') != '0') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('protocols'), 'protocol');
-		}
+			/* protocols filter */
+			if (get_request_var('protocols') != '' && get_request_var('protocols') != '0') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('protocols'), 'protocol');
+			}
 
-		/* tcp flags filter */
-		if (get_request_var('tcpflags') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('tcpflags'), 'flags');
-		}
+			/* tcp flags filter */
+			if (get_request_var('tcpflags') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('tcpflags'), 'flags');
+			}
 
-		/* tos filter */
-		if (get_request_var('tosfields') != '') {
-			$sql_where = get_numeric_filter($sql_where, get_request_var('tosfields'), 'tos');
-		}
+			/* tos filter */
+			if (get_request_var('tosfields') != '') {
+				$sql_where = get_numeric_filter($sql_where, get_request_var('tosfields'), 'tos');
+			}
 
-		/* date time range */
-		$sql_where = get_date_filter($sql_where, get_request_var('date1'), get_request_var('date2'), get_request_var('includeif'));
+			/* date time range */
+			$sql_where = get_date_filter($sql_where, get_request_var('date1'), get_request_var('date2'), get_request_var('includeif'));
+		} else {
+			$sql_where = '';
+		}
 
 		/* Run the query */
-		$data = run_flow_query(get_request_var('query'), $title, $sql_where, $start, $end);
+		$data = run_flow_query($query_id, $title, $sql_where, $start, $end);
 
-		$_SESSION['sess_flowdata'] = $data;
+		if ($session) {
+			$_SESSION['sess_flowdata'][$key] = $data;
+		}
 	} else {
 		$data['id'] = 0;
 	}
@@ -1300,20 +1328,31 @@ function get_numeric_filter($sql_where, $value, $column) {
 }
 
 function get_ip_filter($sql_where, $value, $column) {
+return $sql_where;
 	if ($value != '') {
 		$values = array();
 		$parts  = explode(',', $value);
+		$i      = 0;
+
+		$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(';
 
 		foreach($parts as $part) {
 			$part = trim($part);
 
-			if (strpos('/', $part) !== false) {
+			if (strpos($part, '/') !== false) {
+				$pp = explode('/', $part);
+				$sql_where .= ($i == 0 ? '':' OR ') . "$column & INET6_ATON('" . $pp[0] . "')";
 			} else {
+				$sql_where .= ($i == 0 ? '':' OR ') . "$column = INET6_ATON('$part')";
 			}
+
+			$i++;
 		}
 
+		$sql_where .= ')';
+
 		if (cacti_sizeof($values)) {
-			return ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
+	//		return ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
 		}
 	}
 
@@ -1570,9 +1609,8 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 			$data['printed']    = trim(get_nfilter_request_var('report'), 'sp');
 			$data['statistics'] = 0;
 		}
-	} else {
-		$data['statistics'] = 0;
-		$data['printed']    = 0;
+	} elseif (!sizeof($data)) {
+		return false;
 	}
 
 	// Handle Sort Field Override
@@ -1941,7 +1979,7 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 			$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_having $sql_order $sql_limit";
 
-			//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
+			cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
 
 			if ($data['statistics'] == 99) {
 				$results = db_fetch_row($sql);

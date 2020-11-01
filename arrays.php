@@ -494,10 +494,10 @@ $filter_edit = array(
 	'sourceip' => array(
 		'friendly_name' => __('Source IP', 'flowview'),
 		'description' => __('Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24).', 'flowview'),
-		'method' => 'textbox',
+		'method' => 'textarea',
 		'value' => '|arg1:sourceip|',
-		'max_length' => '20',
-		'size' => '14'
+		'textarea_rows' => '2',
+		'textarea_cols' => '80'
 	),
 	'sourceport' => array(
 		'friendly_name' => __('Source Ports', 'flowview'),
@@ -519,17 +519,17 @@ $filter_edit = array(
 		'friendly_name' => __('Source AS', 'flowview'),
 		'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS\'s', 'flowview'),
 		'method' => 'textbox',
-		'value' => '|arg1:destas|',
+		'value' => '|arg1:sourceas|',
 		'max_length' => '20',
 		'size' => '14'
 	),
 	'destip' => array(
 		'friendly_name' => __('Dest IP', 'flowview'),
 		'description' => __('Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24).', 'flowview'),
-		'method' => 'textbox',
+		'method' => 'textarea',
 		'value' => '|arg1:destip|',
-		'max_length' => '20',
-		'size' => '14'
+		'textarea_rows' => '2',
+		'textarea_cols' => '80'
 	),
 	'destport' => array(
 		'friendly_name' => __('Dest Ports', 'flowview'),
