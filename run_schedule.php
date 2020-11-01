@@ -112,14 +112,6 @@ if (!$force) {
 	unregister_process('flowsched', $id, 0);
 }
 
-function debug($string) {
-	global $debug;
-
-	if ($debug) {
-		print 'DEBUG: ' . trim($string) . PHP_EOL;
-	}
-}
-
 function display_version() {
 	$version = get_cacti_cli_version();
 	print "Cacti FlowView Schedule Poller, Version $version, " . COPYRIGHT_YEARS . PHP_EOL;

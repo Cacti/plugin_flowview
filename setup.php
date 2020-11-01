@@ -89,6 +89,10 @@ function plugin_flowview_check_upgrade() {
 			db_execute('ALTER TABLE plugin_flowview_schedules CHANGE COLUMN savedquery query_id INT unsigned NOT NULL default "0"');
 		}
 
+		if (!db_column_exists('plugin_flowview_schedules', 'format_file')) {
+			db_execute('ALTER TABLE plugin_flowview_schedules ADD COLUMN format_file VARCHAR(128) DEFAULT "" AFTER email');
+		}
+
 		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache');
 		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache_flow_stats');
 		db_execute('DROP TABLE IF EXISTS plugin_flowview_session_cache_details');
@@ -305,10 +309,20 @@ function flowview_page_head() {
 function flowview_config_settings() {
 	global $settings, $tabs;
 
+	$formats = reports_get_format_files();
+
 	$temp = array(
 		'flowview_header' => array(
 			'friendly_name' => __('Flow Viewer', 'flowview'),
 			'method' => 'spacer',
+			'collapsible' => 'true'
+		),
+		'flowview_format_file' => array(
+			'friendly_name' => __('Format File to Use', 'monitor'),
+			'method' => 'drop_array',
+			'default' => 'default.format',
+			'description' => __('Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the \'formats\' directory.', 'monitor'),
+			'array' => $formats
 		),
 		'flowview_retention' => array(
 			'friendly_name' => __('Data Retention Policy', 'flowview'),
@@ -433,6 +447,7 @@ function flowview_setup_table() {
 	$data['columns'][]  = array('name' => 'lastsent', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false);
 	$data['columns'][]  = array('name' => 'start', 'type' => 'datetime', 'NULL' => false);
 	$data['columns'][]  = array('name' => 'email', 'type' => 'text', 'NULL' => false);
+	$data['columns'][]  = array('name' => 'format_file', 'type' => 'varchar(128)', 'NULL' => true, 'default' => '');
 	$data['columns'][]  = array('name' => 'query_id', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false);
 	$data['primary']    = 'id';
 	$data['keys'][]     = array('name' => 'query_id', 'columns' => 'query_id');

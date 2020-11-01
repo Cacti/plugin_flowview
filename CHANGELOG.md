@@ -1,5 +1,9 @@
 # Changelog
 
+--- 3.1 ---
+
+* feature: Support Cacti Format Files in FlowView
+
 --- 3.0 ---
 
 * issue#31: In systemctl status : CMDPHP: ERROR: A DB Exec Failed!, Error: Unknown column 'INF' in 'field list'

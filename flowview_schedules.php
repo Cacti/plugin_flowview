@@ -25,6 +25,7 @@
 chdir('../../');
 
 include('./include/auth.php');
+include_once('./lib/time.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 
 set_default_action();
@@ -47,6 +48,8 @@ $sendinterval_arr = array(
 	864000  => __('Every %d Weeks, 2', 'flowview'),
 	1728000 => __('Every Month', 'flowview'),
 );
+
+$formats = reports_get_format_files();
 
 $schedule_edit = array(
 	'title' => array(
@@ -98,6 +101,14 @@ $schedule_edit = array(
 		'class' => 'textAreaNotes',
 		'value' => '|arg1:email|'
 	),
+	'format_file' => array(
+		'friendly_name' => __('Format File to Use', 'monitor'),
+		'method' => 'drop_array',
+		'default' => read_config_option('flowview_format_file'),
+		'description' => __('Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the \'formats\' directory.', 'monitor'),
+		'array' => $formats,
+		'value' => '|arg1:format_file|'
+	),
 	'id' => array(
 		'method' => 'hidden_zero',
 		'value' => '|arg1:id|'
@@ -135,21 +146,38 @@ function actions_schedules () {
 
 		if ($selected_items != false) {
 			if (get_nfilter_request_var('drp_action') == '1') {
-				for ($i=0; $i<count($selected_items); $i++) {
-					db_execute('DELETE FROM plugin_flowview_schedules WHERE id = ' . $selected_items[$i]);
+				foreach($selected_items as $item) {
+					db_execute_prepared('DELETE FROM plugin_flowview_schedules
+						WHERE id = ?', array($item));
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '3') {
-				for ($i=0; $i<count($selected_items); $i++) {
-					db_execute("UPDATE plugin_flowview_schedules SET enabled='' WHERE id = " . $selected_items[$i]);
+				foreach($selected_items as $item) {
+					db_execute_prepared('UPDATE plugin_flowview_schedules
+						SET enabled = ""
+						WHERE id = ?',
+						array($item));
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '4') {
-				for ($i=0; $i<count($selected_items); $i++) {
-					db_execute("UPDATE plugin_flowview_schedules SET enabled='on' WHERE id = " . $selected_items[$i]);
+				foreach($selected_items as $item) {
+					db_execute_prepared('UPDATE plugin_flowview_schedules
+						SET enabled = "on"
+						WHERE id = ?',
+						array($item));
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '2') {
-				for ($i=0; $i<count($selected_items); $i++) {
-					plugin_flowview_run_schedule($selected_items[$i]);
+				$php = read_config_option('path_php_binary');
+				foreach($selected_items as $item) {
+					$title = db_fetch_cell_prepared('SELECT title
+						FROM plugin_flowview_schedules
+						WHERE id = ?',
+						array($item));
+
+					exec_background($php, ' -q ' . $config['base_path'] . '/plugins/flowview/run_schedule.php --force --schedule=' . $item);
+
+					raise_message('report_send_' . $item, __('Sent Scheduled Report %s in Background.', $title, 'flowview'), MESSAGE_LEVEL_INFO);
 				}
+
+				raise_message('report_send_finish', __('Reports will arrive once Complete.', 'flowview'), MESSAGE_LEVEL_INFO);
 			}
 		}
 
@@ -247,6 +275,7 @@ function save_schedules() {
 	$save['sendinterval'] = get_nfilter_request_var('sendinterval');
 	$save['start']        = get_nfilter_request_var('start');
 	$save['email']        = get_nfilter_request_var('email');
+	$save['format_file']  = get_nfilter_request_var('format_file');
 
 	$t = time();
 	$d = strtotime(get_nfilter_request_var('start'));

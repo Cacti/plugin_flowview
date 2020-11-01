@@ -1216,12 +1216,7 @@ function plugin_flowview_run_schedule($id) {
 
 	$subject = __('Netflow - %s', $schedule['title'], 'flowview');
 
-	$body  = "<html><body style='margin:10px;'>" . PHP_EOL;
-	$body .= "<style type='text/css'>" . PHP_EOL;
-	$body .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
-	$body .= '</style>' . PHP_EOL;
-
-	$body .= '<center>' . PHP_EOL;
+	$body  = '<center>' . PHP_EOL;
 	$body .= '<h1>' . html_escape($schedule['title']) . '</h1>' . PHP_EOL;
 	$body .= '<h2>From ' . date('Y-m-d H:i:s', $start) . ' to ' . date('Y-m-d H:i:s', $end) . '</h2>' . PHP_EOL;
 	$body .= '<h2>Using Query \'' . html_escape($query['name']) . '\'</h2>' . PHP_EOL;
@@ -1232,9 +1227,30 @@ function plugin_flowview_run_schedule($id) {
 		$body .= $data['table'];
 	}
 
-	$body .= '</body></html>' . PHP_EOL;
+	$report_tag = '';
+	$theme      = 'modern';
+	$output     = '';
+	$format     = $schedule['format_file'] != '' ? $schedule['format_file']:'default';
 
-	$body_text = strip_tags(str_replace('<br>', "\n", $body));
+	flowview_debug('Loading Format File');
+
+	$format_ok = reports_load_format_file($format, $output, $report_tag, $theme);
+
+	flowview_debug('Format File Loaded, Format is ' . ($format_ok ? 'Ok':'Not Ok') . ', Report Tag is ' . $report_tag);
+
+	if ($format_ok) {
+		if ($report_tag) {
+			$output = str_replace('<REPORT>', $body, $output);
+		} else {
+			$output = $output . PHP_EOL . $body;
+		}
+	} else {
+		$output = $body;
+	}
+
+	flowview_debug('HTML Processed');
+
+	$body_text = strip_tags(str_replace('<br>', "\n", $output));
 
 	$version = db_fetch_cell("SELECT version
 		FROM plugin_config
@@ -1244,7 +1260,15 @@ function plugin_flowview_run_schedule($id) {
     $headers['User-Agent'] = 'Cacti-FlowView-v' . $version;
 	$headers['X-Priority'] = '1';
 
-	mailer($from, $schedule['email'], '', '', '', $subject, $body, $body_text, '', $headers);
+	mailer($from, $schedule['email'], '', '', '', $subject, $output, $body_text, '', $headers);
+}
+
+function flowview_debug($string) {
+	global $debug;
+
+	if ($debug) {
+		print 'DEBUG: ' . trim($string) . PHP_EOL;
+	}
 }
 
 function get_flowview_session_key($id, $start, $end) {
@@ -2137,11 +2161,13 @@ function run_flow_query($session, $query_id, $start, $end) {
 		$table = '';
 		if (cacti_sizeof($results)) {
 			if ($data['statistics'] != 99) {
-				$table .= '<table id="sorttable" class="cactiTable"><thead>';
+				//$table .= '<table id="sorttable" class="cactiTable"><thead>';
+				$table .= '<table><thead>';
 
 				foreach($results as $r) {
 					if ($i == 0) {
-						$table .= '<tr class="tableHeader">';
+						//$table .= '<tr class="tableHeader">';
+						$table .= '<tr>';
 
 						if (isset($r['start_time'])) {
 							$table .= '<th class="left">' . __('Start Time', 'flowview') . '</th>';
@@ -2248,7 +2274,8 @@ function run_flow_query($session, $query_id, $start, $end) {
 						$table .= '</tr></thead><tbody>';
 					}
 
-					$table .= '<tr class="selectable tableRow">';
+					//$table .= '<tr class="selectable tableRow">';
+					$table .= '<tr>';
 
 					if (isset($r['start_time'])) {
 						$table .= '<td class="left nowrap">' . substr($r['start_time'], 0, 19) . '</td>';
@@ -2365,8 +2392,10 @@ function run_flow_query($session, $query_id, $start, $end) {
 					$total += $results[$c['name']];
 				}
 
-				$table .= '<table class="cactiTable"><tbody>';
-				$table .= '<tr class="tableHeader right">';
+				//$table .= '<table class="cactiTable"><tbody>';
+				$table .= '<table><tbody>';
+				//$table .= '<tr class="tableHeader right">';
+				$table .= '<tr class="right">';
 
 				for ($i = 0; $i < 14; $i++) {
 					$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';

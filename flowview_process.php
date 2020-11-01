@@ -98,7 +98,7 @@ $schedules = db_fetch_assoc("SELECT *
 if (count($schedules)) {
 	$php = read_config_option('path_php_binary');
 	foreach ($schedules as $s) {
-		debug('Running Schedule ' . $s['id']);
+		flowview_debug('Running Schedule ' . $s['id']);
 		exec_background($php, ' -q ' . $config['base_path'] . '/plugins/flowview/run_schedule.php --schedule=' . $s['id']);
 	}
 }
@@ -117,7 +117,7 @@ foreach($tables as $table) {
 }
 
 if ($maint) {
-	debug('Performing Table Maintenance');
+	flowview_debug('Performing Table Maintenance');
 
 	// 0 - Daily, 1 - Hourly
 	$partition_mode = read_config_option('flowview_partition');
@@ -148,7 +148,7 @@ if ($maint) {
 
 	$remove_lessthan = $retention_year . $min_day;
 
-	debug('Removing partitioned tables with suffix less than ' . $remove_lessthan);
+	flowview_debug('Removing partitioned tables with suffix less than ' . $remove_lessthan);
 
 	$tables = db_fetch_assoc("SELECT TABLE_NAME
 		FROM INFORMATION_SCHEMA.TABLES
@@ -163,13 +163,13 @@ if ($maint) {
 
 			if ($date_part <  $remove_lessthan) {
 				$dropped++;
-				debug("Removing partitioned table 'plugin_flowview_raw_" . $date_part . "'");
+				flowview_debug("Removing partitioned table 'plugin_flowview_raw_" . $date_part . "'");
 				db_execute('DROP TABLE plugin_flowview_raw_' . $date_part);
 			}
 		}
 	}
 
-	debug('Total number of partition tables dropped is ' . $dropped);
+	flowview_debug('Total number of partition tables dropped is ' . $dropped);
 }
 
 $end = microtime(true);
@@ -189,14 +189,6 @@ set_config_option('flowview_stats', $cacti_stats);
 
 /* log to the logfile */
 cacti_log('FLOWVIEW STATS: ' . $cacti_stats , true, 'SYSTEM');
-
-function debug($string) {
-	global $debug;
-
-	if ($debug) {
-		print 'DEBUG: ' . trim($string) . PHP_EOL;
-	}
-}
 
 function display_version() {
 	$version = get_cacti_cli_version();
