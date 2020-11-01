@@ -2,6 +2,7 @@
 
 --- 3.1 ---
 
+* issue: Results Cache not working
 * feature: Support Cacti Format Files in FlowView
 
 --- 3.0 ---

@@ -2161,13 +2161,11 @@ function run_flow_query($session, $query_id, $start, $end) {
 		$table = '';
 		if (cacti_sizeof($results)) {
 			if ($data['statistics'] != 99) {
-				//$table .= '<table id="sorttable" class="cactiTable"><thead>';
-				$table .= '<table><thead>';
+				$table .= '<table id="sorttable" class="cactiTable"><thead>';
 
 				foreach($results as $r) {
 					if ($i == 0) {
-						//$table .= '<tr class="tableHeader">';
-						$table .= '<tr>';
+						$table .= '<tr class="tableHeader">';
 
 						if (isset($r['start_time'])) {
 							$table .= '<th class="left">' . __('Start Time', 'flowview') . '</th>';
@@ -2274,8 +2272,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 						$table .= '</tr></thead><tbody>';
 					}
 
-					//$table .= '<tr class="selectable tableRow">';
-					$table .= '<tr>';
+					$table .= '<tr class="selectable tableRow">';
 
 					if (isset($r['start_time'])) {
 						$table .= '<td class="left nowrap">' . substr($r['start_time'], 0, 19) . '</td>';
@@ -2392,10 +2389,8 @@ function run_flow_query($session, $query_id, $start, $end) {
 					$total += $results[$c['name']];
 				}
 
-				//$table .= '<table class="cactiTable"><tbody>';
-				$table .= '<table><tbody>';
-				//$table .= '<tr class="tableHeader right">';
-				$table .= '<tr class="right">';
+				$table .= '<table class="cactiTable"><tbody>';
+				$table .= '<tr class="tableHeader right">';
 
 				for ($i = 0; $i < 14; $i++) {
 					$table .= '<th class="right">' . $sql_array[$i]['title'] . '</th>';
