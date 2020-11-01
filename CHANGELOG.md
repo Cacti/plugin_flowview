@@ -35,6 +35,7 @@
 * feature: Support IPv4 and IPv6
 * feature: Support daily and hourly partitioning
 * feature: Run Schedules in Background
+* feature: Allow Saving of some Filter Information from Flowview
 
 --- 2.1 ---
 * issue: Prepare for sunrise theme in 1.1.17

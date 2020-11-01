@@ -36,6 +36,9 @@ switch(get_request_var('action')) {
 	case 'save':
 		save_filter();
 		break;
+	case 'savefilter':
+		save_filter_form();
+		break;
 	case 'sort_filter':
 		sort_filter();
 		break;
@@ -183,20 +186,8 @@ function load_session_for_filter() {
 function flowview_request_vars() {
     /* ================= input validation and session storage ================= */
     $filters = array(
-		'includeif' => array(
-			'filter' => FILTER_VALIDATE_INT,
-			'default' => '1'
-		),
-		'statistics' => array(
-			'filter' => FILTER_VALIDATE_INT,
-			'default' => '0'
-		),
-		'printed' => array(
-			'filter' => FILTER_VALIDATE_INT,
-			'default' => '0'
-		),
 		'sortfield' => array(
-			'filter' => FILTER_DEFAULT,
+			'filter' => FILTER_VALIDATE_INT,
 			'default' => ''
 		),
 		'sortvalue' => array(
@@ -217,11 +208,6 @@ function flowview_request_vars() {
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1000000'
 		),
-		'device' => array(
-			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
-			'default' => '0'
-		),
 		'predefined_timespan' => array(
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => read_user_setting('default_timespan')
@@ -238,56 +224,6 @@ function flowview_request_vars() {
 		'date2' => array(
 			'filter' => FILTER_CALLBACK,
 			'options' => array('options' => 'sanitize_search_string'),
-			'default' => ''
-		),
-		'protocols' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_ARRAY,
-			'default' => array()
-		),
-		'includeif' => array(
-			'filter' => FILTER_VALIDATE_INT,
-			'default' => ''
-		),
-		'tcpflags' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
-			'default' => ''
-		),
-		'tosfields' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
-			'default' => ''
-		),
-		'sourceip' => array(
-			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
-			'default' => ''
-		),
-		'sourceport' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
-			'default' => ''
-		),
-		'sourceinterface' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
-			'default' => ''
-		),
-		'sourceas' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
-			'default' => ''
-		),
-		'destip' => array(
-			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
-			'default' => ''
-		),
-		'destport' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
-			'default' => ''
-		),
-		'destinterface' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
-			'default' => ''
-		),
-		'destas' => array(
-			'filter' => FILTER_VALIDATE_IS_NUMERIC_LIST,
 			'default' => ''
 		),
 		'domains' => array(
@@ -314,11 +250,6 @@ function flowview_request_vars() {
 			'filter' => FILTER_VALIDATE_REGEXP,
 			'options' => array('options' => array('regexp' => '(true|false)')),
 			'default' => 'false'
-		),
-		'resolve' => array(
-			'filter' => FILTER_VALIDATE_REGEXP,
-			'options' => array('options' => array('regexp' => '(Y|N|true|false)')),
-			'default' => 'true'
 		)
 	);
 

@@ -145,7 +145,6 @@ function edit_filter() {
 		$.getJSON(returnPage+'?action=gettimespan&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
 			$('#date1').val(data['current_value_date1']);
 			$('#date2').val(data['current_value_date2']);
-			Pace.stop();
 		});
 	}
 
@@ -245,6 +244,31 @@ function edit_filter() {
 	});
 	</script>
 	<?php
+}
+
+function save_filter_form() {
+	/* ================= input validation ================= */
+	get_filter_request_var('timespan');
+	get_filter_request_var('sortfield');
+	get_filter_request_var('cutofflines');
+	get_filter_request_var('cutoffoctets');
+	get_filter_request_var('query');
+	/* ==================================================== */
+
+	db_execute_prepared('UPDATE plugin_flowview_queries
+		SET timespan = ?,
+		sortfield = ?,
+		cutofflines = ?,
+		cutoffoctets = ?
+		WHERE id = ?',
+		array(
+			get_request_var('timespan'),
+			get_request_var('sortfield'),
+			get_request_var('cutofflines'),
+			get_request_var('cutoffoctets'),
+			get_request_var('query')
+		)
+	);
 }
 
 function save_filter() {
@@ -629,7 +653,7 @@ function flowview_display_filter($data) {
 	}
 
 	$(function() {
-		$('#bytes').unbind('click').click(function() {
+		$('#bytes').off('click').on('click', function() {
 			updateSession();
 
 			if (!$('#bytes').is(':checked')) {
@@ -639,7 +663,7 @@ function flowview_display_filter($data) {
 			}
 		});
 
-		$('#packets').unbind('click').click(function() {
+		$('#packets').off('click').on('click', function() {
 			updateSession();
 
 			if (!$('#packets').is(':checked')) {
@@ -649,7 +673,7 @@ function flowview_display_filter($data) {
 			}
 		});
 
-		$('#flows').unbind('click').click(function() {
+		$('#flows').off('click').on('click', function() {
 			updateSession();
 
 			if (!$('#flows').is(':checked')) {
@@ -659,23 +683,27 @@ function flowview_display_filter($data) {
 			}
 		});
 
-		$('#query').unbind('change').change(function() {
+		$('#query').off('change').on('change', function() {
 			applyFilter(true);
 		});
 
-		$('#domains, #exclude').unbind('change').change(function() {
+		$('#domains, #exclude').off('change').on('change', function() {
 			applyFilter(false);
 		});
 
-		$('#go').unbind('click').click(function() {
+		$('#go').off('click').on('click', function() {
 			applyFilter(false);
 		});
 
-		$('#clear').unbind('click').click(function() {
+		$('#clear').off('click').on('click', function() {
 			clearFilter();
 		});
 
-		$('#edit').unbind('click').click(function() {
+		$('#save').off('click').on('click', function() {
+			saveFilter();
+		});
+
+		$('#edit').off('click').on('click', function() {
 			strURL = urlPath + '/plugins/flowview/flowview_filters.php' +
 				'?action=edit&header=false' +
 				($('#query').val() > 0 ? '&id='+$('#query').val():'') +
@@ -696,7 +724,7 @@ function flowview_display_filter($data) {
 			}
 		}
 
-		$('#table').unbind('click').click(function() {
+		$('#table').off('click').on('click', function() {
 			updateSession();
 
 			if (!$('#table').is(':checked')) {
@@ -832,6 +860,7 @@ function flowview_display_filter($data) {
 				case 'chartbytes':
 					$.getJSON('flowview.php?action=chartdata&type=bytes' +
 						'&domains='      + $('#domains').is(':checked') +
+						'&query='        + $('#query').val()  +
 						'&report='       + $('#report').val() +
 						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
 						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
@@ -839,8 +868,7 @@ function flowview_display_filter($data) {
 						'&cutoffoctets=' + $('#cutoffoctets').val() +
 						'&exclude='      + $('#exclude').val() +
 						'&date1='        + $('#date1').val()  +
-						'&date2='        + $('#date2').val()  +
-						'&query='        + $('#query').val(), function(data) {
+						'&date2='        + $('#date2').val(), function(data) {
 
 						var chartBytes = c3.generate({
 							bindto: '#chartbytes',
@@ -888,6 +916,7 @@ function flowview_display_filter($data) {
 				case 'chartflows':
 					$.getJSON('flowview.php?action=chartdata&type=flows' +
 						'&domains='      + $('#domains').is(':checked') +
+						'&query='        + $('#query').val()  +
 						'&report='       + $('#report').val() +
 						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
 						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
@@ -895,8 +924,7 @@ function flowview_display_filter($data) {
 						'&cutoffoctets=' + $('#cutoffoctets').val() +
 						'&exclude='      + $('#exclude').val() +
 						'&date1='        + $('#date1').val()   +
-						'&date2='        + $('#date2').val()   +
-						'&query='        + $('#query').val(), function(data) {
+						'&date2='        + $('#date2').val(), function(data) {
 
 						var chartFlows = c3.generate({
 							bindto: '#chartflows',
@@ -944,6 +972,7 @@ function flowview_display_filter($data) {
 				case 'chartpackets':
 					$.getJSON('flowview.php?action=chartdata&type=packets' +
 						'&domains='      + $('#domains').is(':checked') +
+						'&query='        + $('#query').val()  +
 						'&report='       + $('#report').val() +
 						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
 						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
@@ -951,8 +980,7 @@ function flowview_display_filter($data) {
 						'&cutoffoctets=' + $('#cutoffoctets').val() +
 						'&exclude='      + $('#exclude').val() +
 						'&date1='        + $('#date1').val()   +
-						'&date2='        + $('#date2').val()   +
-						'&query='        + $('#query').val(), function(data) {
+						'&date2='        + $('#date2').val(), function(data) {
 
 						var chartPackets = c3.generate({
 							bindto: '#chartpackets',
@@ -1031,6 +1059,23 @@ function flowview_display_filter($data) {
 		return num.toFixed(2) + ' ' + suffix;
 	}
 
+	function saveFilter() {
+		$.get(urlPath + 'plugins/flowview/flowview.php' +
+			'?action=savefilter' +
+			'&query='        + $('#query').val() +
+			'&domains='      + $('#domains').is(':checked') +
+			'&query='        + $('#query').val() +
+			'&timespan='     + $('#predefined_timespan').val() +
+			'&report='       + report +
+			'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
+			'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+			'&cutofflines='  + $('#cutofflines').val() +
+			'&cutoffoctets=' + $('#cutoffoctets').val() +
+			'&exclude='      + $('#exclude').val(), function() {
+			Pace.stop();
+		});
+	}
+
 	function updateSession() {
 		$.get(urlPath + 'plugins/flowview/flowview.php' +
 			'?action=updatesess' +
@@ -1050,8 +1095,6 @@ function flowview_display_filter($data) {
 				'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
 				$('#date1').val(data['current_value_date1']);
 				$('#date2').val(data['current_value_date2']);
-
-				Pace.stop();
 			});
 		}
 	}
@@ -1065,8 +1108,6 @@ function flowview_display_filter($data) {
 				$('#date1').val(data['current_value_date1']);
 				$('#date2').val(data['current_value_date2']);
 				applyFilter();
-
-				Pace.stop();
 			});
 		}
 	}
@@ -1081,6 +1122,7 @@ function flowview_display_filter($data) {
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
 			'?action=view'   +
 			'&domains='      + $('#domains').is(':checked') +
+			'&query='        + $('#query').val() +
 			'&timespan='     + $('#predefined_timespan').val() +
 			'&report='       + report +
 			'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
@@ -1090,7 +1132,6 @@ function flowview_display_filter($data) {
 			'&exclude='      + $('#exclude').val() +
 			'&date1='        + $('#date1').val() +
 			'&date2='        + $('#date2').val() +
-			'&query='        + $('#query').val() +
 			'&header=false');
 	}
 
@@ -1644,6 +1685,61 @@ function run_flow_query($session, $query_id, $start, $end) {
 		$sql_having = 'HAVING bytes < ' . $data['cutoffoctets'];
 	} else {
 		$sql_having = '';
+	}
+
+	/* source ip filter */
+	if ($data['sourceip'] != '') {
+		$sql_where = get_ip_filter($sql_where, $data['sourceip'], 'src_addr');
+	}
+
+	/* source interface filter */
+	if ($data['sourceinterface'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['sourceinterface'], 'src_if');
+	}
+
+	/* source port filter */
+	if ($data['sourceport'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['sourceport'], 'src_port');
+	}
+
+	/* source as filter */
+	if ($data['sourceas'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['sourceas'], 'src_as');
+	}
+
+	/* destination ip filter */
+	if ($data['destip'] != '') {
+		$sql_where = get_ip_filter($sql_where, $data['destip'], 'dst_addr');
+	}
+
+	/* destination interface filter */
+	if ($data['destinterface'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['destinterface'], 'dst_if');
+	}
+
+	/* destination port filter */
+	if ($data['destport'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['destport'], 'dst_port');
+	}
+
+	/* destination as filter */
+	if ($data['destas'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['destas'], 'dst_as');
+	}
+
+	/* protocols filter */
+	if ($data['protocols'] != '' && $data['protocols'] != '0') {
+		$sql_where = get_numeric_filter($sql_where, $data['protocols'], 'protocol');
+	}
+
+	/* tcp flags filter */
+	if ($data['tcpflags'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['tcpflags'], 'flags');
+	}
+
+	/* tos filter */
+	if ($data['tosfields'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $data['tosfields'], 'tos');
 	}
 
 	// Handle Report Override
