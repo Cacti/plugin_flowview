@@ -43,6 +43,7 @@ switch(get_request_var('action')) {
 		flowview_request_vars();
 		break;
 	case 'chartdata':
+		flowview_request_vars();
 		flowview_get_chartdata();
 		break;
 	case 'gettimespan':

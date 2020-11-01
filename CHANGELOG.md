@@ -1,6 +1,6 @@
 # Changelog
 
---- develop ---
+--- 3.0 ---
 
 * issue#31: In systemctl status : CMDPHP: ERROR: A DB Exec Failed!, Error: Unknown column 'INF' in 'field list'
 * issue#32: Netflow v9 - Netflow source not providing either prefix or nexthop information
@@ -17,6 +17,7 @@
 * issue#45: FlowView tab missing
 * issue#46: Schedules dont work
 * issue#47: flowData not showing data
+* issue#48: Missing Code in ip_filter function
 * issue#49: Flowview IPFIX throwing errors
 * issue#50: Flowview errors cause it to become automatically disabled
 * issue#51: FlowView Throws Errors When No Filters Exist
@@ -33,6 +34,7 @@
 * feature: Remove use of Flow Tools
 * feature: Support IPv4 and IPv6
 * feature: Support daily and hourly partitioning
+* feature: Run Schedules in Background
 
 --- 2.1 ---
 * issue: Prepare for sunrise theme in 1.1.17

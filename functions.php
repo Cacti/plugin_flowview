@@ -818,7 +818,9 @@ function flowview_display_filter($data) {
 
 		$('td').tooltip();
 
-		initTimespan();
+		if ($('#date1').val() == '') {
+			initTimespan();
+		}
 
 		// Setup the charts
 		var charts = [ 'chartbytes', 'chartpackets', 'chartflows' ];
@@ -829,9 +831,16 @@ function flowview_display_filter($data) {
 			switch(value) {
 				case 'chartbytes':
 					$.getJSON('flowview.php?action=chartdata&type=bytes' +
-						'&domains=' + $('#domains').is(':checked') +
-						'&report='  + $('#report').val() +
-						'&query=<?php print isset($data['id']) ? $data['id']:0;?>', function(data) {
+						'&domains='      + $('#domains').is(':checked') +
+						'&report='       + $('#report').val() +
+						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
+						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+						'&cutofflines='  + $('#cutofflines').val() +
+						'&cutoffoctets=' + $('#cutoffoctets').val() +
+						'&exclude='      + $('#exclude').val() +
+						'&date1='        + $('#date1').val()  +
+						'&date2='        + $('#date2').val()  +
+						'&query='        + $('#query').val(), function(data) {
 
 						var chartBytes = c3.generate({
 							bindto: '#chartbytes',
@@ -878,9 +887,16 @@ function flowview_display_filter($data) {
 					break;
 				case 'chartflows':
 					$.getJSON('flowview.php?action=chartdata&type=flows' +
-						'&domains=' + $('#domains').is(':checked') +
-						'&report='  + $('#report').val() +
-						'&query=<?php print $data['id'];?>', function(data) {
+						'&domains='      + $('#domains').is(':checked') +
+						'&report='       + $('#report').val() +
+						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
+						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+						'&cutofflines='  + $('#cutofflines').val()  +
+						'&cutoffoctets=' + $('#cutoffoctets').val() +
+						'&exclude='      + $('#exclude').val() +
+						'&date1='        + $('#date1').val()   +
+						'&date2='        + $('#date2').val()   +
+						'&query='        + $('#query').val(), function(data) {
 
 						var chartFlows = c3.generate({
 							bindto: '#chartflows',
@@ -927,9 +943,16 @@ function flowview_display_filter($data) {
 					break;
 				case 'chartpackets':
 					$.getJSON('flowview.php?action=chartdata&type=packets' +
-						'&domains=' + $('#domains').is(':checked') +
-						'&report='  + $('#report').val() +
-						'&query=<?php print $data['id'];?>', function(data) {
+						'&domains='      + $('#domains').is(':checked') +
+						'&report='       + $('#report').val() +
+						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
+						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+						'&cutofflines='  + $('#cutofflines').val()  +
+						'&cutoffoctets=' + $('#cutoffoctets').val() +
+						'&exclude='      + $('#exclude').val() +
+						'&date1='        + $('#date1').val()   +
+						'&date2='        + $('#date2').val()   +
+						'&query='        + $('#query').val(), function(data) {
 
 						var chartPackets = c3.generate({
 							bindto: '#chartpackets',
@@ -1023,6 +1046,7 @@ function flowview_display_filter($data) {
 		if ($('#predefined_timespan').val() != '0') {
 			$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
 				'?action=gettimespan' +
+				'&init=true' +
 				'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
 				$('#date1').val(data['current_value_date1']);
 				$('#date2').val(data['current_value_date2']);
@@ -1036,6 +1060,7 @@ function flowview_display_filter($data) {
 		if ($('#predefined_timespan').val() != '0') {
 			$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
 				'?action=gettimespan' +
+				'&init=apply' +
 				'&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
 				$('#date1').val(data['current_value_date1']);
 				$('#date2').val(data['current_value_date2']);
@@ -1129,6 +1154,12 @@ function plugin_flowview_run_schedule($id) {
 		WHERE id = ?',
 		array($schedule['query_id']));
 
+	// Get the timespan from the query
+	get_timespan($span, time(), $query['timespan'], read_user_setting('first_weekdayid'));
+
+	$start = $span['begin_now'];
+	$end   = $span['end_now'];
+
 	$fromemail = read_config_option('settings_from_email');
 	if ($fromemail == '') {
 		$fromemail = 'cacti@cactiusers.org';
@@ -1143,26 +1174,24 @@ function plugin_flowview_run_schedule($id) {
 	$from[1] = $fromname;
 
 	$subject = __('Netflow - %s', $schedule['title'], 'flowview');
-	$date2   = time();
-	$date1   = $date2 - $schedule['sendinterval'];
 
-	$body  = "<body style='margin:10px;'>" . PHP_EOL;
+	$body  = "<html><body style='margin:10px;'>" . PHP_EOL;
 	$body .= "<style type='text/css'>" . PHP_EOL;
 	$body .= file_get_contents($config['base_path'] . '/include/themes/modern/main.css');
 	$body .= '</style>' . PHP_EOL;
 
 	$body .= '<center>' . PHP_EOL;
 	$body .= '<h1>' . html_escape($schedule['title']) . '</h1>' . PHP_EOL;
-	$body .= '<h2>From ' . date('Y-m-d H:i:s', $date1) . ' to ' . date('Y-m-d H:i:s', $date2) . '</h2>' . PHP_EOL;
+	$body .= '<h2>From ' . date('Y-m-d H:i:s', $start) . ' to ' . date('Y-m-d H:i:s', $end) . '</h2>' . PHP_EOL;
 	$body .= '<h2>Using Query \'' . html_escape($query['name']) . '\'</h2>' . PHP_EOL;
 	$body .= '</center>' . PHP_EOL;
 
-	$data = load_data_for_filter($schedule['query_id'], $date1, $date2);
+	$data = load_data_for_filter($schedule['query_id'], $start, $end);
 	if ($data !== false) {
 		$body .= $data['table'];
 	}
 
-	$body .= '</body>' . PHP_EOL;
+	$body .= '</body></html>' . PHP_EOL;
 
 	$body_text = strip_tags(str_replace('<br>', "\n", $body));
 
@@ -1177,10 +1206,48 @@ function plugin_flowview_run_schedule($id) {
 	mailer($from, $schedule['email'], '', '', '', $subject, $body, $body_text, '', $headers);
 }
 
-/** creatfilter($sessionid)
+function get_flowview_session_key($id, $start, $end) {
+	if (isset_request_var('sortfield')) {
+		$key = $id . '_' . $start . '_' . $end . '_' .
+			get_request_var('report')        . '_' .
+			get_request_var('sortfield')     . '_' .
+			get_request_var('cutofflines')   . '_' .
+			get_request_var('cutoffoctets')  . '_' .
+			get_request_var('exclude');
+
+		return md5($key);
+	} else {
+		return md5($id . '_' . $start . '_' . $end);
+	}
+}
+
+/** purge_flowview_session()
  *
- *  This function creates the NetFlow Report for the UI.  It presents this in a table
- *  format and returns as a test string to the calling function.
+ *  This function removes expired sessions from the users session
+ *
+ */
+function purge_flowview_sessions() {
+	$now = time();
+	$i   = 0;
+
+	if (isset($_SESSION['sess_flowdata'])) {
+		foreach($_SESSION['sess_flowdata'] as $key => $data) {
+			if ($now > $data['timeout']) {
+				//cacti_log('Purging Session:' . $key);
+				unset($_SESSION['sess_flowdata'][$key]);
+			}
+
+			$i++;
+		}
+	}
+
+	//cacti_log('There are currently ' . $i . ' sessions cached.');
+}
+
+/** load_data_for_filter($id, $start, $end)
+ *
+ *  This function will run the query against the database of pull it from a saved session.
+ *
  */
 function load_data_for_filter($id = 0, $start = false, $end = false) {
 	global $config;
@@ -1188,114 +1255,24 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
 	$output    = '';
 	$title     = '';
 	$sql_where = '';
-	$histogram = false;
 	$time      = time();
 	$data      = array();
 
 	if ($id > 0) {
-		$query_id = $id;
-		$session  = false;
-	} elseif (isset_request_var('query')) {
-		$query_id = get_request_var('query');
-		$start    = strtotime(get_request_var('date1'));
-		$end      = strtotime(get_request_var('date2'));
-		$key      = md5($query_id . '_' . $start . '_' . $end);
-		$session  = true;
+		$session = false;
+	} elseif (isset_request_var('query') && get_request_var('query') > 0) {
+		$id      = get_request_var('query');
+		$start   = strtotime(get_request_var('date1'));
+		$end     = strtotime(get_request_var('date2'));
+		$session = true;
+
+		purge_flowview_sessions();
 	} else {
 		return false;
 	}
 
-	$key = md5($query_id . '_' . $start . '_' . $end);
-
-	if ($session && isset($_SESSION['sess_flowdata'][$key])) {
-		return $_SESSION['sess_flowdata'][$key];
-	}
-
-	/* let's calculate the title and then session id */
-	if ($title == '') {
-		if (isset_request_var('query') && get_filter_request_var('query') > 0) {
-			$title = db_fetch_cell_prepared('SELECT name
-				FROM plugin_flowview_queries
-				WHERE id = ?',
-				array($query_id));
-		} else {
-			$title = __('New Flow', 'flowview');
-		}
-	}
-
-	if ($query_id > 0) {
-		if ($session) {
-			if (get_request_var('statistics') != 0) {
-				$histogram = true;
-			}
-
-			/* source ip filter */
-			if (get_request_var('sourceip') != '') {
-				$sql_where = get_ip_filter($sql_where, get_request_var('sourceip'), 'src_addr');
-			}
-
-			/* source interface filter */
-			if (get_request_var('sourceinterface') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('sourceinterface'), 'src_if');
-			}
-
-			/* source port filter */
-			if (get_request_var('sourceport') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('sourceport'), 'src_port');
-			}
-
-			/* source as filter */
-			if (get_request_var('sourceas') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('sourceas'), 'src_as');
-			}
-
-			/* destination ip filter */
-			if (get_request_var('destip') != '') {
-				$sql_where = get_ip_filter($sql_where, get_request_var('destip'), 'dst_addr');
-			}
-
-			/* destination interface filter */
-			if (get_request_var('destinterface') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('destinterface'), 'dst_if');
-			}
-
-			/* destination port filter */
-			if (get_request_var('destport') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('destport'), 'dst_port');
-			}
-
-			/* destination as filter */
-			if (get_request_var('destas') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('destas'), 'dst_as');
-			}
-
-			/* protocols filter */
-			if (get_request_var('protocols') != '' && get_request_var('protocols') != '0') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('protocols'), 'protocol');
-			}
-
-			/* tcp flags filter */
-			if (get_request_var('tcpflags') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('tcpflags'), 'flags');
-			}
-
-			/* tos filter */
-			if (get_request_var('tosfields') != '') {
-				$sql_where = get_numeric_filter($sql_where, get_request_var('tosfields'), 'tos');
-			}
-
-			/* date time range */
-			$sql_where = get_date_filter($sql_where, get_request_var('date1'), get_request_var('date2'), get_request_var('includeif'));
-		} else {
-			$sql_where = '';
-		}
-
-		/* Run the query */
-		$data = run_flow_query($query_id, $title, $sql_where, $start, $end);
-
-		if ($session) {
-			$_SESSION['sess_flowdata'][$key] = $data;
-		}
+	if ($id > 0) {
+		$data = run_flow_query($session, $id, $start, $end);
 	} else {
 		$data['id'] = 0;
 	}
@@ -1303,6 +1280,11 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
 	return $data;
 }
 
+/** get_numeric_filter($sql_where, $value, $column)
+ *
+ *  This function constructs a $sql_where from numeric data
+ *
+ */
 function get_numeric_filter($sql_where, $value, $column) {
 	$values = array();
 
@@ -1327,8 +1309,12 @@ function get_numeric_filter($sql_where, $value, $column) {
 	return $sql_where;
 }
 
+/** get_ip_filter($sql_where, $value, $column)
+ *
+ *  This function constructs a $sql_where from ip ranges
+ *
+ */
 function get_ip_filter($sql_where, $value, $column) {
-return $sql_where;
 	if ($value != '') {
 		$values = array();
 		$parts  = explode(',', $value);
@@ -1340,8 +1326,19 @@ return $sql_where;
 			$part = trim($part);
 
 			if (strpos($part, '/') !== false) {
-				$pp = explode('/', $part);
-				$sql_where .= ($i == 0 ? '':' OR ') . "$column & INET6_ATON('" . $pp[0] . "')";
+				// Split to $addr['subnet'], $addr['ip']
+				$addr = cacti_pton($part);
+
+				if (isset($addr['subnet'])) {
+					// Example looking for IP's in the network to the right: 192.168.11.0/24
+					// src_addr & inet6_aton('255.255.255.0') = inet6_aton('192.168.11.0')
+					$subnet  = inet_ntop($addr['subnet']);
+					$network = inet_ntop($addr['subnet'] & $addr['ip']);
+
+					$sql_where .= ($i == 0 ? '':' OR ') . "$column & INET6_ATON('" . $subnet . "') = INET6_ATON('" . $network . "')";
+				} else {
+					raise_message('subnet_filter', __('Subnet Filter: %s is not a value CIDR format', $part, 'flowview'), MESSAGE_LEVEL_ERROR);
+				}
 			} else {
 				$sql_where .= ($i == 0 ? '':' OR ') . "$column = INET6_ATON('$part')";
 			}
@@ -1350,16 +1347,20 @@ return $sql_where;
 		}
 
 		$sql_where .= ')';
-
-		if (cacti_sizeof($values)) {
-	//		return ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
-		}
 	}
 
 	return $sql_where;
 }
 
-function get_date_filter($sql_where, $date1, $date2, $range_type) {
+/** get_date_filter($sql_where, $value, $column)
+ *
+ *  This function constructs a $sql_where a date range and range type
+ *
+ */
+function get_date_filter($sql_where, $start, $end, $range_type = 1) {
+	$date1 = date('Y-m-d H:i:s', $start);
+	$date2 = date('Y-m-d H:i:s', $end);
+
 	switch($range_type) {
 		case 1: // Any part in specified time span
 			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') .
@@ -1384,6 +1385,11 @@ function get_date_filter($sql_where, $date1, $date2, $range_type) {
 	return $sql_where;
 }
 
+/** get_tables_for_query($start, $end)
+ *
+ *  This function creates an array of tables for a query
+ *
+ */
 function get_tables_for_query($start, $end) {
 	global $config, $graph_timespans;
 
@@ -1423,16 +1429,23 @@ function get_tables_for_query($start, $end) {
 	return $inc_tables;
 }
 
+/** flowview_get_chartdata()
+ *
+ *  This function returns chart data from the session
+ *
+ */
 function flowview_get_chartdata() {
 	$query_id = get_filter_request_var('query');
 	$type     = get_nfilter_request_var('type');
 	$domains  = get_nfilter_request_var('domains');
 	$report   = get_nfilter_request_var('report');
+	$start    = strtotime(get_nfilter_request_var('date1'));
+	$end      = strtotime(get_nfilter_request_var('date2'));
 
 	if (substr($report, 0, 1) == 's') {
 		$report = trim(get_nfilter_request_var('report'), 'sp');
 
-		$output = $_SESSION['sess_flowdata'];
+		$output = run_flow_query(true, $query_id, $start, $end);
 
 		if (cacti_sizeof($output['data']) && $report > 0 && $report < 99) {
 			$columns  = array_keys($output['data'][0]);
@@ -1470,6 +1483,11 @@ function flowview_get_chartdata() {
 	exit;
 }
 
+/** get_category_columns($statistics, $domain)
+ *
+ *  This function helps construct the columns required for a query
+ *
+ */
 function get_category_columns($statistics, $domain) {
 	$category = array();
 
@@ -1562,11 +1580,26 @@ function get_category_columns($statistics, $domain) {
 	return $category;
 }
 
-function run_flow_query($query_id, $title, $sql_where, $start, $end) {
+/** run_flow_query($session, $query_id, $start, $end)
+ *
+ *  This function either retries a query from the cache or runs
+ *  the flow query in the case where the session does not exist
+ *  or a Schedule is being run.
+ *
+ */
+function run_flow_query($session, $query_id, $start, $end) {
 	global $config, $graph_timespans;
 
-	if (!intval($query_id)) {
+	if (empty($query_id)) {
 		return false;
+	}
+
+	$key       = get_flowview_session_key($query_id, $start, $end);
+	$time      = time();
+	$sql_where = '';
+
+	if ($session && isset($_SESSION['sess_flowdata'][$key])) {
+		return $_SESSION['sess_flowdata'][$key]['data'];
 	}
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
@@ -1575,6 +1608,19 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		array($query_id));
+
+	$title = db_fetch_cell_prepared('SELECT name
+		FROM plugin_flowview_queries
+		WHERE id = ?',
+		array($query_id));
+
+	if (isset_request_var('includeif') && get_request_var('includeif') > 0) {
+		$sql_where = get_date_filter($sql_where, $start, $end, get_request_var('includeif'));
+	} elseif ($data['includeif'] > 0) {
+		$sql_where = get_date_filter($sql_where, $start, $end, $data['includeif']);
+	} else {
+		$sql_where = get_date_filter($sql_where, $start, $end);
+	}
 
 	// Handle Limit Override
 	if (isset_request_var('cutofflines') && get_request_var('cutofflines') != 999999) {
@@ -1979,7 +2025,7 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 			$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_having $sql_order $sql_limit";
 
-			cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
+			//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
 
 			if ($data['statistics'] == 99) {
 				$results = db_fetch_row($sql);
@@ -2269,6 +2315,11 @@ function run_flow_query($query_id, $title, $sql_where, $start, $end) {
 
 			$output['table'] = $table;
 			$output['title'] = $title;
+
+			if ($session) {
+				$_SESSION['sess_flowdata'][$key]['data']    = $output;
+				$_SESSION['sess_flowdata'][$key]['timeout'] = $time + 600;
+			}
 
 			return $output;
 		}
@@ -3463,8 +3514,13 @@ function create_raw_partition($table) {
 	$data['primary']   = 'sequence';
 	$data['keys'][]    = array('name' => 'listener_id', 'columns' => 'listener_id');
 	$data['unique_keys'][]    = array('name' => 'keycol', 'columns' => 'listener_id`,`src_addr`,`src_port`,`dst_addr`,`dst_port', 'unique' => true);
-	$data['type']      = 'InnoDB';
-	$data['comment']   = 'Plugin Flowview - Details Report Data';
+
+	$data['type']       = 'InnoDB';
+	$data['collate']    = 'utf8mb4_unicode_ci';
+	$data['charset']    = 'utf8mb4';
+	$data['row_format'] = 'Dynamic';
+	$data['comment']    = 'Plugin Flowview - Details Report Data';
+
 	api_plugin_db_table_create('flowview', $table, $data);
 }
 

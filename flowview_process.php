@@ -24,6 +24,7 @@
 
 chdir(dirname(__FILE__) . '/../../');
 include('./include/cli_check.php');
+include_once('./lib/poller.php');
 include_once('./plugins/flowview/functions.php');
 
 ini_set('max_execution_time', 0);
@@ -95,13 +96,10 @@ $schedules = db_fetch_assoc("SELECT *
 	AND ($t - sendinterval > lastsent)");
 
 if (count($schedules)) {
+	$php = read_config_option('path_php_binary');
 	foreach ($schedules as $s) {
-		db_execute_prepared('UPDATE plugin_flowview_schedules
-			SET lastsent = ?
-			WHERE id = ?',
-			array($r, $s['id']));
-
-		plugin_flowview_run_schedule($s['id']);
+		debug('Running Schedule ' . $s['id']);
+		exec_background($php, ' -q ' . $config['base_path'] . '/plugins/flowview/run_schedule.php --schedule=' . $s['id']);
 	}
 }
 
