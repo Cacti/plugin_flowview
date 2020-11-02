@@ -1667,6 +1667,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 		return $_SESSION['sess_flowdata'][$key]['data'];
 	}
 
+	// Close session to allow offpage navigation
+	cacti_session_close();
+
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	$data = db_fetch_row_prepared('SELECT *
@@ -2437,8 +2440,12 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$output['title'] = $title;
 
 			if ($session) {
+				cacti_session_start();
+
 				$_SESSION['sess_flowdata'][$key]['data']    = $output;
 				$_SESSION['sess_flowdata'][$key]['timeout'] = $time + 600;
+
+				cacti_session_close();
 			}
 
 			return $output;
