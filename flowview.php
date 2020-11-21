@@ -53,6 +53,8 @@ switch(get_request_var('action')) {
 		flowview_request_vars();
 		flowview_gettimespan();
 		break;
+	case 'query':
+		load_session_for_filter();
 	default:
 		general_header();
 
@@ -253,7 +255,7 @@ function flowview_request_vars() {
 		)
 	);
 
-	validate_store_request_vars($filters, 'sess_fv');
+	validate_store_request_vars($filters, 'sess_fv_' . get_filter_request_var('query'));
 	/* ================= input validation ================= */
 }
 

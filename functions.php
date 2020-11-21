@@ -684,7 +684,7 @@ function flowview_display_filter($data) {
 		});
 
 		$('#query').off('change').on('change', function() {
-			applyFilter(true);
+			changeQuery(true);
 		});
 
 		$('#domains, #exclude').off('change').on('change', function() {
@@ -862,8 +862,8 @@ function flowview_display_filter($data) {
 						'&domains='      + $('#domains').is(':checked') +
 						'&query='        + $('#query').val()  +
 						'&report='       + $('#report').val() +
-						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
-						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+						'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
+						'&sortvalue='    + ($('#sortfield').val() != null ? $('#sortfield option:selected').html():'Bytes') +
 						'&cutofflines='  + $('#cutofflines').val() +
 						'&cutoffoctets=' + $('#cutoffoctets').val() +
 						'&exclude='      + $('#exclude').val() +
@@ -918,8 +918,8 @@ function flowview_display_filter($data) {
 						'&domains='      + $('#domains').is(':checked') +
 						'&query='        + $('#query').val()  +
 						'&report='       + $('#report').val() +
-						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
-						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+						'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
+						'&sortvalue='    + ($('#sortfield').val() != null ? $('#sortfield option:selected').html():'Bytes') +
 						'&cutofflines='  + $('#cutofflines').val()  +
 						'&cutoffoctets=' + $('#cutoffoctets').val() +
 						'&exclude='      + $('#exclude').val() +
@@ -974,8 +974,8 @@ function flowview_display_filter($data) {
 						'&domains='      + $('#domains').is(':checked') +
 						'&query='        + $('#query').val()  +
 						'&report='       + $('#report').val() +
-						'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
-						'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+						'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
+						'&sortvalue='    + ($('#sortfield').val() != null ? $('#sortfield option:selected').html():'Bytes') +
 						'&cutofflines='  + $('#cutofflines').val()  +
 						'&cutoffoctets=' + $('#cutoffoctets').val() +
 						'&exclude='      + $('#exclude').val() +
@@ -1067,8 +1067,8 @@ function flowview_display_filter($data) {
 			'&query='        + $('#query').val() +
 			'&timespan='     + $('#predefined_timespan').val() +
 			'&report='       + report +
-			'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
-			'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
+			'&sortvalue='    + ($('#sortfield').val() != null ? $('#sortfield option:selected').html():'Bytes') +
 			'&cutofflines='  + $('#cutofflines').val() +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
 			'&exclude='      + $('#exclude').val(), function() {
@@ -1112,6 +1112,17 @@ function flowview_display_filter($data) {
 		}
 	}
 
+	function changeQuery() {
+		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
+			'?action=query' +
+			'&domains='      + $('#domains').is(':checked') +
+			'&query='        + $('#query').val() +
+			'&timespan='     + $('#predefined_timespan').val() +
+			'&date1='        + $('#date1').val() +
+			'&date2='        + $('#date2').val() +
+			'&header=false');
+	}
+
 	function applyFilter(reset) {
 		if (reset) {
 			var report = 0;
@@ -1125,8 +1136,8 @@ function flowview_display_filter($data) {
 			'&query='        + $('#query').val() +
 			'&timespan='     + $('#predefined_timespan').val() +
 			'&report='       + report +
-			'&sortfield='    + ($('#sortfield').val() != '' ? $('#sortfield').val():'') +
-			'&sortvalue='    + ($('#sortfield').val() != '' ? $('#sortfield option:selected').html():'Bytes') +
+			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
+			'&sortvalue='    + ($('#sortfield').val() != null ? $('#sortfield option:selected').html():'Bytes') +
 			'&cutofflines='  + $('#cutofflines').val() +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
 			'&exclude='      + $('#exclude').val() +
