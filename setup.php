@@ -307,7 +307,9 @@ function flowview_page_head() {
 }
 
 function flowview_config_settings() {
-	global $settings, $tabs;
+	global $config, $settings, $tabs;
+
+	include_once($config['base_path'] . '/lib/reports.php');
 
 	$formats = reports_get_format_files();
 
