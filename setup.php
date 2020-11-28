@@ -109,11 +109,18 @@ function plugin_flowview_check_upgrade() {
 
 		if (cacti_sizeof($raw_tables)) {
 			foreach($raw_tables as $t) {
-				cacti_log('NOTE: Updating unique key for ' . $t['TABLE_NAME'], false, 'FLOWVIEW');
+				$good = db_fetch_row("SHOW INDEXES
+					FROM `" . $r['TABLE_NAME'] . "`
+					WHERE Key_name='keycol'
+					AND Column_name='end_time';");
 
-				db_execute('ALTER TABLE ' . $t['TABLE_NAME'] . '
-					DROP INDEX `keycol`,
-					ADD UNIQUE INDEX `keycol` (`listener_id`,`src_addr`,`src_port`,`dst_addr`,`dst_port`, `start_time`, `end_time`)');
+				if (!cacti_sizeof($good)) {
+					cacti_log('NOTE: Updating unique key for ' . $t['TABLE_NAME'], false, 'FLOWVIEW');
+
+					db_execute('ALTER TABLE ' . $t['TABLE_NAME'] . '
+						DROP INDEX `keycol`,
+						ADD UNIQUE INDEX `keycol` (`listener_id`,`src_addr`,`src_port`,`dst_addr`,`dst_port`, `start_time`, `end_time`)');
+				}
 			}
 		}
 
