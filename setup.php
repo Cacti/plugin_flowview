@@ -61,7 +61,10 @@ function plugin_flowview_check_upgrade() {
 
 	$info    = plugin_flowview_version();
 	$current = $info['version'];
-	$old     = read_config_option('plugin_flowview_version');
+
+	$old = db_fetch_cell('SELECT version
+		FROM plugin_config
+		WHERE directory="flowview"');
 
 	if ($current != $old) {
 		$bad_titles = db_fetch_cell('SELECT COUNT(*)

@@ -1,5 +1,9 @@
 # Changelog
 
+--- develop ---
+
+* issue: Upgrade was running repeatedly due upgrade using legacy variable
+
 --- 3.2 ---
 
 * issue: Flowview raw table has invalid unique key that blocks the insert of data
