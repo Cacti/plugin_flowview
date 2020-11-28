@@ -3651,7 +3651,7 @@ function create_raw_partition($table) {
 
 	$data['primary']   = 'sequence';
 	$data['keys'][]    = array('name' => 'listener_id', 'columns' => 'listener_id');
-	$data['unique_keys'][]    = array('name' => 'keycol', 'columns' => 'listener_id`,`src_addr`,`src_port`,`dst_addr`,`dst_port', 'unique' => true);
+	$data['unique_keys'][]    = array('name' => 'keycol', 'columns' => 'listener_id`,`src_addr`,`src_port`,`dst_addr`,`dst_port,`start_time`,`end_time', 'unique' => true);
 
 	$data['type']       = 'InnoDB';
 	$data['collate']    = 'utf8mb4_unicode_ci';

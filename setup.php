@@ -103,6 +103,20 @@ function plugin_flowview_check_upgrade() {
 			db_execute('ALTER TABLE plugin_flowview_queries ADD COLUMN device_id int unsigned NOT NULL default "0" AFTER name');
 		}
 
+		$raw_tables = db_fetch_assoc('SELECT TABLE_NAME
+			FROM information_schema.TABLES
+			WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
+
+		if (cacti_sizeof($raw_tables)) {
+			foreach($raw_tables as $t) {
+				cacti_log('NOTE: Updating unique key for ' . $t['TABLE_NAME'], false, 'FLOWVIEW');
+
+				db_execute('ALTER TABLE ' . $t['TABLE_NAME'] . '
+					DROP INDEX `keycol`,
+					ADD UNIQUE INDEX `keycol` (`listener_id`,`src_addr`,`src_port`,`dst_addr`,`dst_port`, `start_time`, `end_time`)');
+			}
+		}
+
 		if ($bad_titles) {
 			/* update titles for those that don't have them */
 			db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");

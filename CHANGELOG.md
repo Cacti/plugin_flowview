@@ -1,5 +1,9 @@
 # Changelog
 
+--- 3.2 ---
+
+* issue: Flowview raw table has invalid unique key that blocks the insert of data
+
 --- 3.1 ---
 
 * issue#58: Flowview cannot enable in Cacti
