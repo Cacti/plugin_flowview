@@ -110,7 +110,7 @@ function plugin_flowview_check_upgrade() {
 		if (cacti_sizeof($raw_tables)) {
 			foreach($raw_tables as $t) {
 				$good = db_fetch_row("SHOW INDEXES
-					FROM `" . $r['TABLE_NAME'] . "`
+					FROM `" . $t['TABLE_NAME'] . "`
 					WHERE Key_name='keycol'
 					AND Column_name='end_time';");
 
