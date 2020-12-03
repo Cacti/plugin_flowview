@@ -1306,7 +1306,7 @@ function purge_flowview_sessions() {
 	$now = time();
 	$i   = 0;
 
-	if (isset($_SESSION['sess_flowdata'])) {
+	if (isset($_SESSION['sess_flowdata']) && cacti_sizeof($_SESSION['sess_flowdata'])) {
 		foreach($_SESSION['sess_flowdata'] as $key => $data) {
 			if ($now > $data['timeout']) {
 				//cacti_log('Purging Session:' . $key);
