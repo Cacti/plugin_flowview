@@ -1330,7 +1330,6 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
 
 	$output    = '';
 	$title     = '';
-	$sql_where = '';
 	$time      = time();
 	$data      = array();
 
@@ -1364,6 +1363,8 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
 function get_numeric_filter($sql_where, $value, $column) {
 	$values = array();
 
+	$sql_where = trim($sql_where);
+
 	if (is_array($value)) {
 		$value = implode(',', $value);
 	}
@@ -1391,6 +1392,8 @@ function get_numeric_filter($sql_where, $value, $column) {
  *
  */
 function get_ip_filter($sql_where, $value, $column) {
+	$sql_where = trim($sql_where);
+
 	if ($value != '') {
 		$values = array();
 		$parts  = explode(',', $value);
@@ -1434,6 +1437,8 @@ function get_ip_filter($sql_where, $value, $column) {
  *
  */
 function get_date_filter($sql_where, $start, $end, $range_type = 1) {
+	$sql_where = trim($sql_where);
+
 	$date1 = date('Y-m-d H:i:s', $start);
 	$date2 = date('Y-m-d H:i:s', $end);
 
