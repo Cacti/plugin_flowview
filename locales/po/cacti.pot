@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-11-01 13:08-0500\n"
+"POT-Creation-Date: 2020-12-12 20:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:445
+#: arrays.php:26 arrays.php:60 functions.php:469
 msgid "Select a Report"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgid "UDP/TCP Port"
 msgstr ""
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2087
+#: arrays.php:336 arrays.php:495 functions.php:2226
 msgid "Source IP"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "Input/Output Interface"
 msgstr ""
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2111
+#: functions.php:2250
 msgid "Source AS"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "IP ToS"
 msgstr ""
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2119
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
 msgid "Source Prefix"
 msgstr ""
 
@@ -176,7 +176,7 @@ msgstr ""
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:931 functions.php:2139 functions.php:2364
+#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
 msgid "Flows"
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr ""
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:875 functions.php:2143 functions.php:2362
+#: functions.php:903 functions.php:2282 functions.php:2505
 msgid "Bytes"
 msgstr ""
 
@@ -194,7 +194,7 @@ msgstr ""
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:987 functions.php:2147 functions.php:2363
+#: functions.php:1015 functions.php:2286 functions.php:2506
 msgid "Packets"
 msgstr ""
 
@@ -207,16 +207,16 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: arrays.php:220 arrays.php:527 functions.php:2091
+#: arrays.php:220 arrays.php:527 functions.php:2230
 msgid "Dest IP"
 msgstr ""
 
-#: arrays.php:226 functions.php:2083
+#: arrays.php:226 functions.php:2222
 msgid "IP Address"
 msgstr ""
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2127
+#: functions.php:2266
 msgid "Protocol"
 msgstr ""
 
@@ -236,11 +236,11 @@ msgstr ""
 msgid "Destingation Prefix"
 msgstr ""
 
-#: arrays.php:301 functions.php:517 functions.php:2288
+#: arrays.php:301 functions.php:541 functions.php:2427
 msgid "N/A"
 msgstr ""
 
-#: arrays.php:307 arrays.php:335 functions.php:2103
+#: arrays.php:307 arrays.php:335 functions.php:2242
 msgid "Source IF"
 msgstr ""
 
@@ -248,7 +248,7 @@ msgstr ""
 msgid "Destination IF"
 msgstr ""
 
-#: arrays.php:312 arrays.php:337 functions.php:2095
+#: arrays.php:312 arrays.php:337 functions.php:2234
 msgid "Source Port"
 msgstr ""
 
@@ -256,11 +256,11 @@ msgstr ""
 msgid "Destination Port"
 msgstr ""
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:85 functions.php:2051
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
 msgid "Start Time"
 msgstr ""
 
-#: arrays.php:317 arrays.php:334 functions.php:2055
+#: arrays.php:317 arrays.php:334 functions.php:2194
 msgid "End Time"
 msgstr ""
 
@@ -280,7 +280,7 @@ msgstr ""
 msgid "Fl"
 msgstr ""
 
-#: arrays.php:342 functions.php:2135
+#: arrays.php:342 functions.php:2274
 msgid "Flags"
 msgstr ""
 
@@ -296,7 +296,7 @@ msgstr ""
 msgid "General Filters"
 msgstr ""
 
-#: arrays.php:368 functions.php:389
+#: arrays.php:368 functions.php:413
 msgid "Filter"
 msgstr ""
 
@@ -376,15 +376,15 @@ msgstr ""
 msgid "Resolve IP Addresses to Domain Names."
 msgstr ""
 
-#: arrays.php:437 flowview_schedules.php:551
+#: arrays.php:437 flowview_schedules.php:580
 msgid "Yes"
 msgstr ""
 
-#: arrays.php:438 flowview_schedules.php:551
+#: arrays.php:438 flowview_schedules.php:580
 msgid "No"
 msgstr ""
 
-#: arrays.php:442 flowview_filters.php:339 functions.php:470
+#: arrays.php:442 flowview_filters.php:339 functions.php:494
 msgid "Sort Field"
 msgstr ""
 
@@ -480,7 +480,7 @@ msgstr ""
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr ""
 
-#: arrays.php:551 functions.php:2115
+#: arrays.php:551 functions.php:2254
 msgid "Dest AS"
 msgstr ""
 
@@ -488,7 +488,7 @@ msgstr ""
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
 msgstr ""
 
-#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:34
+#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:35
 msgid "Delete"
 msgstr ""
 
@@ -532,11 +532,11 @@ msgstr ""
 msgid "You must select at least one device."
 msgstr ""
 
-#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:218
+#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:246
 msgid "Continue"
 msgstr ""
 
-#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:226
+#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:254
 msgid "Cancel"
 msgstr ""
 
@@ -553,29 +553,29 @@ msgstr ""
 msgid "FlowView Listeners"
 msgstr ""
 
-#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:413
+#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:442
 msgid "Search"
 msgstr ""
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
-#: functions.php:426
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
+#: functions.php:450
 msgid "Go"
 msgstr ""
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
 msgid "Set/Refresh Filters"
 msgstr ""
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
-#: functions.php:427
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
+#: functions.php:451
 msgid "Clear"
 msgstr ""
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
 msgid "Clear Filters"
 msgstr ""
 
-#: flowview_devices.php:328 setup.php:148 setup.php:195
+#: flowview_devices.php:328 setup.php:181 setup.php:228
 msgid "Listeners"
 msgstr ""
 
@@ -615,15 +615,15 @@ msgstr ""
 msgid "No Flowview Listeners"
 msgstr ""
 
-#: flowview_filters.php:35 flowview_schedules.php:33
+#: flowview_filters.php:35 flowview_schedules.php:34
 msgid "Send Now"
 msgstr ""
 
-#: flowview_filters.php:37 flowview_schedules.php:35
+#: flowview_filters.php:37 flowview_schedules.php:36
 msgid "Disable"
 msgstr ""
 
-#: flowview_filters.php:38 flowview_schedules.php:36
+#: flowview_filters.php:38 flowview_schedules.php:37
 msgid "Enable"
 msgstr ""
 
@@ -651,17 +651,17 @@ msgstr ""
 msgid "FlowView Filters [ Add Devices before Filters ]"
 msgstr ""
 
-#: flowview_filters.php:236 flowview_filters.php:350 setup.php:149
-#: setup.php:251
+#: flowview_filters.php:236 flowview_filters.php:350 setup.php:182
+#: setup.php:284
 msgid "Filters"
 msgstr ""
 
-#: flowview_filters.php:240 flowview_schedules.php:423
+#: flowview_filters.php:240 flowview_schedules.php:452
 msgid "Default"
 msgstr ""
 
-#: flowview_filters.php:319 flowview_schedules.php:70
-#: flowview_schedules.php:506
+#: flowview_filters.php:319 flowview_schedules.php:73
+#: flowview_schedules.php:535
 msgid "Filter Name"
 msgstr ""
 
@@ -673,140 +673,157 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
-#: flowview_schedules.php:40
+#: flowview_schedules.php:41
 msgid "Every Hour"
 msgstr ""
 
-#: flowview_schedules.php:41 flowview_schedules.php:42
-#: flowview_schedules.php:43 flowview_schedules.php:44
+#: flowview_schedules.php:42 flowview_schedules.php:43
+#: flowview_schedules.php:44 flowview_schedules.php:45
 #, php-format
 msgid "Every %d Hours"
 msgstr ""
 
-#: flowview_schedules.php:45
+#: flowview_schedules.php:46
 msgid "Every Day"
 msgstr ""
 
-#: flowview_schedules.php:46
+#: flowview_schedules.php:47
 msgid "Every Week"
 msgstr ""
 
-#: flowview_schedules.php:47
+#: flowview_schedules.php:48
 #, php-format
 msgid "Every %d Weeks, 2"
 msgstr ""
 
-#: flowview_schedules.php:48
+#: flowview_schedules.php:49
 msgid "Every Month"
 msgstr ""
 
-#: flowview_schedules.php:53
+#: flowview_schedules.php:56
 msgid "Title"
 msgstr ""
 
-#: flowview_schedules.php:55
+#: flowview_schedules.php:58
 msgid "New Schedule"
 msgstr ""
 
-#: flowview_schedules.php:56
+#: flowview_schedules.php:59
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr ""
 
-#: flowview_schedules.php:62 flowview_schedules.php:526
+#: flowview_schedules.php:65 flowview_schedules.php:555
 msgid "Enabled"
 msgstr ""
 
-#: flowview_schedules.php:65
+#: flowview_schedules.php:68
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr ""
 
-#: flowview_schedules.php:71
+#: flowview_schedules.php:74
 msgid "Name of the query to run."
 msgstr ""
 
-#: flowview_schedules.php:76
+#: flowview_schedules.php:79
 msgid "Send Interval"
 msgstr ""
 
-#: flowview_schedules.php:77
+#: flowview_schedules.php:80
 msgid "How often to send this NetFlow Report?"
 msgstr ""
 
-#: flowview_schedules.php:86
+#: flowview_schedules.php:89
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr ""
 
-#: flowview_schedules.php:94
+#: flowview_schedules.php:97
 msgid "Email Addresses"
 msgstr ""
 
-#: flowview_schedules.php:95
+#: flowview_schedules.php:98
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr ""
 
-#: flowview_schedules.php:187
-msgid "Click 'Continue' to delete the following Schedule(s)."
+#: flowview_schedules.php:105 setup.php:352
+msgid "Format File to Use"
 msgstr ""
 
-#: flowview_schedules.php:194
-msgid "Click 'Continue' to send the following Schedule(s) now."
+#: flowview_schedules.php:108 setup.php:355
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
 msgstr ""
 
-#: flowview_schedules.php:201
-msgid "Click 'Continue' to Disable the following Schedule(s)."
+#: flowview_schedules.php:177
+#, php-format
+msgid "Sent Scheduled Report %s in Background."
 msgstr ""
 
-#: flowview_schedules.php:208
-msgid "Click 'Continue' to Enable the following Schedule(s)."
+#: flowview_schedules.php:180
+msgid "Reports will arrive once Complete."
 msgstr ""
 
 #: flowview_schedules.php:215
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr ""
+
+#: flowview_schedules.php:222
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr ""
+
+#: flowview_schedules.php:229
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr ""
+
+#: flowview_schedules.php:236
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr ""
+
+#: flowview_schedules.php:243
 msgid "You must select at least one schedule."
 msgstr ""
 
-#: flowview_schedules.php:308
+#: flowview_schedules.php:337
 #, php-format
 msgid "Report: [edit: %s]"
 msgstr ""
 
-#: flowview_schedules.php:310
+#: flowview_schedules.php:339
 msgid "Report: [new]"
 msgstr ""
 
-#: flowview_schedules.php:331 functions.php:563
+#: flowview_schedules.php:360 functions.php:587
 msgid "Start Date Selector"
 msgstr ""
 
-#: flowview_schedules.php:401
+#: flowview_schedules.php:430
 msgid "FlowView Schedules"
 msgstr ""
 
-#: flowview_schedules.php:403
+#: flowview_schedules.php:432
 msgid "FlowView Schedules [ Add Devices before Schedules ]"
 msgstr ""
 
-#: flowview_schedules.php:419 flowview_schedules.php:531 setup.php:150
-#: setup.php:223
+#: flowview_schedules.php:448 flowview_schedules.php:560 setup.php:183
+#: setup.php:256
 msgid "Schedules"
 msgstr ""
 
-#: flowview_schedules.php:502
+#: flowview_schedules.php:531
 msgid "Schedule Title"
 msgstr ""
 
-#: flowview_schedules.php:510
+#: flowview_schedules.php:539
 msgid "Interval"
 msgstr ""
 
-#: flowview_schedules.php:514
+#: flowview_schedules.php:543
 msgid "Start Date"
 msgstr ""
 
-#: flowview_schedules.php:518
+#: flowview_schedules.php:547
 msgid "Next Send"
 msgstr ""
 
-#: flowview_schedules.php:522
+#: flowview_schedules.php:551
 msgid "Email"
 msgstr ""
 
@@ -823,417 +840,417 @@ msgstr ""
 msgid "Filter: [new]"
 msgstr ""
 
-#: functions.php:363
+#: functions.php:387
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr ""
 
-#: functions.php:373
+#: functions.php:397
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specififed below ]"
 msgstr ""
 
-#: functions.php:375
+#: functions.php:399
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specififed below ]"
 msgstr ""
 
-#: functions.php:393
+#: functions.php:417
 msgid "Select a Filter"
 msgstr ""
 
-#: functions.php:408
+#: functions.php:432
 msgid "Exclude"
 msgstr ""
 
-#: functions.php:412
+#: functions.php:436
 msgid "None"
 msgstr ""
 
-#: functions.php:413
+#: functions.php:437
 msgid "Top Sample"
 msgstr ""
 
-#: functions.php:414
+#: functions.php:438
 msgid "Top 2 Samples"
 msgstr ""
 
-#: functions.php:415
+#: functions.php:439
 msgid "Top 3 Samples"
 msgstr ""
 
-#: functions.php:416
+#: functions.php:440
 msgid "Top 4 Samples"
 msgstr ""
 
-#: functions.php:417
+#: functions.php:441
 msgid "Top 5 Samples"
 msgstr ""
 
-#: functions.php:420
+#: functions.php:444
 msgid "Show only Domains on Charts Below"
 msgstr ""
 
-#: functions.php:422
+#: functions.php:446
 msgid "Domains Only"
 msgstr ""
 
-#: functions.php:426
+#: functions.php:450
 msgid "Apply Filter"
 msgstr ""
 
-#: functions.php:427
+#: functions.php:451
 msgid "Clear Filter"
 msgstr ""
 
-#: functions.php:428
+#: functions.php:452
 msgid "Edit"
 msgstr ""
 
-#: functions.php:428
+#: functions.php:452
 msgid "Edit Current Filter"
 msgstr ""
 
-#: functions.php:429
+#: functions.php:453
 msgid "Save"
 msgstr ""
 
-#: functions.php:429
+#: functions.php:453
 msgid "Save Overrides to Selected Filter"
 msgstr ""
 
-#: functions.php:437
+#: functions.php:461
 msgid "Report"
 msgstr ""
 
-#: functions.php:448
+#: functions.php:472
 #, php-format
 msgid "Statistical: %s"
 msgstr ""
 
-#: functions.php:454
+#: functions.php:478
 #, php-format
 msgid "Printed: %s"
 msgstr ""
 
-#: functions.php:458 functions.php:475
+#: functions.php:482 functions.php:499
 msgid "Select a Filter First"
 msgstr ""
 
-#: functions.php:506
+#: functions.php:530
 msgid "Lines"
 msgstr ""
 
-#: functions.php:524
+#: functions.php:548
 msgid "Octets"
 msgstr ""
 
-#: functions.php:542
+#: functions.php:566
 msgid "Timespan"
 msgstr ""
 
-#: functions.php:551
+#: functions.php:575
 msgid "Custom"
 msgstr ""
 
-#: functions.php:557
+#: functions.php:581
 msgid "From"
 msgstr ""
 
-#: functions.php:566
+#: functions.php:590
 msgid "To"
 msgstr ""
 
-#: functions.php:572
+#: functions.php:596
 msgid "End Date Selector"
 msgstr ""
 
-#: functions.php:575
+#: functions.php:599
 msgid "Shift Time Backward"
 msgstr ""
 
-#: functions.php:578
+#: functions.php:602
 msgid "Define Shifting Interval"
 msgstr ""
 
-#: functions.php:591
+#: functions.php:615
 msgid "Shift Time Forward"
 msgstr ""
 
-#: functions.php:598
+#: functions.php:622
 msgid "Show/Hide"
 msgstr ""
 
-#: functions.php:602
+#: functions.php:626
 msgid "Table"
 msgstr ""
 
-#: functions.php:606
+#: functions.php:630
 msgid "Bytes Bar"
 msgstr ""
 
-#: functions.php:610
+#: functions.php:634
 msgid "Packets Bar"
 msgstr ""
 
-#: functions.php:614
+#: functions.php:638
 msgid "Flows Bar"
 msgstr ""
 
-#: functions.php:1126
+#: functions.php:1178
 #, php-format
 msgid "Client/Private (%s)"
 msgstr ""
 
-#: functions.php:1128
+#: functions.php:1180
 msgid "icmp (0)"
 msgstr ""
 
-#: functions.php:1139
+#: functions.php:1191
 #, php-format
 msgid "Unknown (%s)"
 msgstr ""
 
-#: functions.php:1170
+#: functions.php:1222
 msgid "Cacti Flowview"
 msgstr ""
 
-#: functions.php:1176
+#: functions.php:1228
 #, php-format
 msgid "Netflow - %s"
 msgstr ""
 
-#: functions.php:1340
+#: functions.php:1419
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr ""
 
-#: functions.php:1688 functions.php:1689 functions.php:1690 functions.php:1691
-#: functions.php:1692 functions.php:1693 functions.php:1694 functions.php:1695
-#: functions.php:1696 functions.php:1697 functions.php:1698 functions.php:1699
-#: functions.php:1700 functions.php:1701 functions.php:1702 functions.php:1703
-#: functions.php:1704 functions.php:1705 functions.php:1706 functions.php:1707
-#: functions.php:1708 functions.php:1709 functions.php:1710 functions.php:1711
-#: functions.php:1712 functions.php:1713
+#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
+#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
+#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
+#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
+#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
+#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
+#: functions.php:1851 functions.php:1852
 #, php-format
 msgid "%d - %d Bytes"
 msgstr ""
 
-#: functions.php:1714
+#: functions.php:1853
 #, php-format
 msgid "> %d Bytes"
 msgstr ""
 
-#: functions.php:2059
+#: functions.php:2198
 msgid "Source DNS"
 msgstr ""
 
-#: functions.php:2063
+#: functions.php:2202
 msgid "Source Root DNS"
 msgstr ""
 
-#: functions.php:2067
+#: functions.php:2206
 msgid "Dest DNS"
 msgstr ""
 
-#: functions.php:2071
+#: functions.php:2210
 msgid "Dest Root DNS"
 msgstr ""
 
-#: functions.php:2075
+#: functions.php:2214
 msgid "DNS"
 msgstr ""
 
-#: functions.php:2079
+#: functions.php:2218
 msgid "Root DNS"
 msgstr ""
 
-#: functions.php:2099
+#: functions.php:2238
 msgid "Dest Port"
 msgstr ""
 
-#: functions.php:2107
+#: functions.php:2246
 msgid "Dest IF"
 msgstr ""
 
-#: functions.php:2123
+#: functions.php:2262
 msgid "Dest Prefix"
 msgstr ""
 
-#: functions.php:2131
+#: functions.php:2270
 msgid "Type of Service"
 msgstr ""
 
-#: functions.php:2150
+#: functions.php:2289
 msgid "Bytes/Packet"
 msgstr ""
 
-#: functions.php:2335
+#: functions.php:2478
 msgid "-- unresolved --"
 msgstr ""
 
-#: functions.php:2441
+#: functions.php:2584
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr ""
 
-#: functions.php:2452
+#: functions.php:2595
 msgid "Low Delay"
 msgstr ""
 
-#: functions.php:2453
+#: functions.php:2596
 msgid "Throughput"
 msgstr ""
 
-#: functions.php:2454
+#: functions.php:2597
 msgid "Reliability"
 msgstr ""
 
-#: functions.php:2455
+#: functions.php:2598
 msgid "Mincost"
 msgstr ""
 
-#: functions.php:2459
+#: functions.php:2602
 msgid "Net Control"
 msgstr ""
 
-#: functions.php:2460
+#: functions.php:2603
 msgid "Internet Control"
 msgstr ""
 
-#: functions.php:2461
+#: functions.php:2604
 msgid "Critic ECP"
 msgstr ""
 
-#: functions.php:2462
+#: functions.php:2605
 msgid "Flash Override"
 msgstr ""
 
-#: functions.php:2463
+#: functions.php:2606
 msgid "Flash"
 msgstr ""
 
-#: functions.php:2464
+#: functions.php:2607
 msgid "Immediate"
 msgstr ""
 
-#: functions.php:2465
+#: functions.php:2608
 msgid "Priority"
 msgstr ""
 
-#: functions.php:2466
+#: functions.php:2609
 msgid "Routine"
 msgstr ""
 
-#: functions.php:2506
+#: functions.php:2649
 msgid "Summary Statistics"
 msgstr ""
 
-#: functions.php:2517
+#: functions.php:2660
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr ""
 
-#: functions.php:2522
+#: functions.php:2665
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr ""
 
-#: functions.php:2527
+#: functions.php:2670
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr ""
 
-#: functions.php:2532
+#: functions.php:2675
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr ""
 
-#: functions.php:2715
+#: functions.php:2858
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr ""
 
-#: functions.php:2719
+#: functions.php:2862
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr ""
 
-#: functions.php:2723
+#: functions.php:2866
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr ""
 
-#: functions.php:2734 functions.php:2739
+#: functions.php:2877 functions.php:2882
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr ""
 
-#: functions.php:2746 functions.php:2750 functions.php:2754
+#: functions.php:2889 functions.php:2893 functions.php:2897
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr ""
 
-#: functions.php:2768 functions.php:2772
+#: functions.php:2911 functions.php:2915
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr ""
 
-#: functions.php:2778 functions.php:2782 functions.php:2786
+#: functions.php:2921 functions.php:2925 functions.php:2929
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr ""
 
-#: functions.php:2804
+#: functions.php:2947
 msgid "Invalid value for Source Interface!"
 msgstr ""
 
-#: functions.php:2820
+#: functions.php:2963
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr ""
 
-#: functions.php:2836
+#: functions.php:2979
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr ""
 
-#: functions.php:2852
+#: functions.php:2995
 msgid "Invalid value for Destination Interface!"
 msgstr ""
 
-#: functions.php:2868
+#: functions.php:3011
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr ""
 
-#: functions.php:2884
+#: functions.php:3027
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr ""
 
-#: functions.php:2900
+#: functions.php:3043
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr ""
 
-#: functions.php:2912
+#: functions.php:3055
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr ""
 
-#: functions.php:2921
+#: functions.php:3064
 msgid "Invalid value for Cutoff Octets!"
 msgstr ""
 
-#: functions.php:2928
+#: functions.php:3071
 msgid "Invalid value for Cutoff Lines!"
 msgstr ""
 
-#: functions.php:2935
+#: functions.php:3078
 msgid "Invalid value for Sort Field!"
 msgstr ""
 
-#: functions.php:2962
+#: functions.php:3105
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr ""
 
-#: functions.php:3257
+#: functions.php:3400
 msgid "Total Flows"
 msgstr ""
 
-#: functions.php:3262
+#: functions.php:3405
 msgid "Bytes Exchanged"
 msgstr ""
 
-#: functions.php:3266
+#: functions.php:3409
 msgid "Packets Examined"
 msgstr ""
 
@@ -1245,100 +1262,100 @@ msgstr ""
 msgid "Plugin -> Flow Admin"
 msgstr ""
 
-#: setup.php:141
+#: setup.php:174
 msgid "The Filter has been Deleted"
 msgstr ""
 
-#: setup.php:142
+#: setup.php:175
 msgid "The Filter has been Updated"
 msgstr ""
 
-#: setup.php:147
+#: setup.php:180
 msgid "Import/Export"
 msgstr ""
 
-#: setup.php:148 setup.php:149 setup.php:150 setup.php:155 setup.php:286
-#: setup.php:288
+#: setup.php:181 setup.php:182 setup.php:183 setup.php:188 setup.php:319
+#: setup.php:321
 msgid "FlowView"
 msgstr ""
 
-#: setup.php:158
+#: setup.php:191
 msgid "Normal User"
 msgstr ""
 
-#: setup.php:159
+#: setup.php:192
 msgid "System Administration"
 msgstr ""
 
-#: setup.php:167 setup.php:188 setup.php:310
+#: setup.php:200 setup.php:221 setup.php:347
 msgid "Flow Viewer"
 msgstr ""
 
-#: setup.php:174
+#: setup.php:207
 msgid "(view)"
 msgstr ""
 
-#: setup.php:181 setup.php:209 setup.php:237 setup.php:265
+#: setup.php:214 setup.php:242 setup.php:270 setup.php:298
 msgid "(save)"
 msgstr ""
 
-#: setup.php:202 setup.php:230 setup.php:258
+#: setup.php:235 setup.php:263 setup.php:291
 msgid "(edit)"
 msgstr ""
 
-#: setup.php:216 setup.php:244 setup.php:272
+#: setup.php:249 setup.php:277 setup.php:305
 msgid "(actions)"
 msgstr ""
 
-#: setup.php:314
+#: setup.php:359
 msgid "Data Retention Policy"
 msgstr ""
 
-#: setup.php:315
+#: setup.php:360
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
 msgstr ""
 
-#: setup.php:318
+#: setup.php:363
 #, php-format
 msgid "%d Week"
 msgstr ""
 
-#: setup.php:319 setup.php:320
+#: setup.php:364 setup.php:365
 #, php-format
 msgid "%d Weeks"
 msgstr ""
 
-#: setup.php:321
+#: setup.php:366
 #, php-format
 msgid "%d Month"
 msgstr ""
 
-#: setup.php:322 setup.php:323 setup.php:324 setup.php:325
+#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
 #, php-format
 msgid "%d Months"
 msgstr ""
 
-#: setup.php:326
+#: setup.php:371
 #, php-format
 msgid "%d Year"
 msgstr ""
 
-#: setup.php:331
+#: setup.php:376
 msgid "Database Partitioning Scheme"
 msgstr ""
 
-#: setup.php:332
+#: setup.php:377
 msgid "Depending on the number of flows per minute, you may require more tables per day."
 msgstr ""
 
-#: setup.php:335
+#: setup.php:380
 msgid "Daily"
 msgstr ""
 
-#: setup.php:336
+#: setup.php:381
 msgid "Hourly"
 msgstr ""
 
-#: setup.php:342
+#: setup.php:387
 msgid "Misc"
 msgstr ""

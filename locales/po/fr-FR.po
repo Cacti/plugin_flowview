@@ -7,24 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-11-01 13:08-0500\n"
-"PO-Revision-Date: 2019-05-29 15:13+0000\n"
+"POT-Creation-Date: 2020-12-12 20:20-0500\n"
+"PO-Revision-Date: 2020-12-12 20:23-0500\n"
 "Last-Translator: Olivier VOGEL <olivier.vogel@st.com>\n"
 "Language-Team: French <http://translate.cacti.net/projects/cacti/flowview/fr-FR/>\n"
-"Language: fr-FR\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:445
+#: arrays.php:26 arrays.php:60 functions.php:469
 #, fuzzy
 msgid "Select a Report"
 msgstr "Imprimer les rapports"
 
 #: arrays.php:27
-#, fuzzy
 msgid "Summary"
 msgstr "Résumé"
 
@@ -59,8 +58,7 @@ msgid "UDP/TCP Port"
 msgstr "Port UDP/TCP"
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2087
-#, fuzzy
+#: arrays.php:336 arrays.php:495 functions.php:2226
 msgid "Source IP"
 msgstr "IP source"
 
@@ -100,15 +98,15 @@ msgid "Input/Output Interface"
 msgstr "Interface d'entrée/sortie"
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2111
+#: functions.php:2250
 #, fuzzy
 msgid "Source AS"
-msgstr "Script/source utilisé pour collecter les données de cette source de donnée."
+msgstr "Pas de source"
 
 #: arrays.php:49 arrays.php:256 arrays.php:263 arrays.php:328
 #, fuzzy
 msgid "Destination AS"
-msgstr "Branche de destintation :"
+msgstr "Branche de destination :"
 
 #: arrays.php:50
 #, fuzzy
@@ -120,7 +118,7 @@ msgstr "Source/Destination AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2119
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
 #, fuzzy
 msgid "Source Prefix"
 msgstr "Préfixe source"
@@ -151,12 +149,14 @@ msgid "132 Columns"
 msgstr "132 Colonnes"
 
 #: arrays.php:64
+#, fuzzy
 msgid "Show IP Accounting Emulation"
-msgstr ""
+msgstr "Afficher l'émulation de la comptabilité IP"
 
 #: arrays.php:68
+#, fuzzy
 msgid "Any Part in Range"
-msgstr ""
+msgstr "Toute pièce de la gamme"
 
 #: arrays.php:69
 #, fuzzy
@@ -169,21 +169,22 @@ msgid "Start Time in Range"
 msgstr "Heure de début"
 
 #: arrays.php:71
+#, fuzzy
 msgid "Entirely in Range"
-msgstr ""
+msgstr "Entièrement à portée"
 
 #: arrays.php:75
+#, fuzzy
 msgid "Return All Lines"
-msgstr ""
+msgstr "Renvoyer toutes les lignes"
 
 #: arrays.php:76 arrays.php:77 arrays.php:78 arrays.php:79 arrays.php:80
 #: arrays.php:81 arrays.php:82 arrays.php:83
-#, fuzzy, php-format
+#, php-format
 msgid "Top %d"
-msgstr "Haut %d"
+msgstr "Top %d"
 
 #: arrays.php:87
-#, fuzzy
 msgid "No Limit"
 msgstr "Aucune limite"
 
@@ -195,7 +196,6 @@ msgid "%s Bytes"
 msgstr "octets %s Octets"
 
 #: arrays.php:104 arrays.php:383 flowview_filters.php:366
-#, fuzzy
 msgid "All"
 msgstr "Tout"
 
@@ -208,8 +208,7 @@ msgstr "Port(s) source(s)"
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:931 functions.php:2139 functions.php:2364
-#, fuzzy
+#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
 msgid "Flows"
 msgstr "Flux"
 
@@ -218,17 +217,16 @@ msgstr "Flux"
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:875 functions.php:2143 functions.php:2362
-#, fuzzy
+#: functions.php:903 functions.php:2282 functions.php:2505
 msgid "Bytes"
-msgstr "Octets"
+msgstr "Bytes"
 
 #: arrays.php:173 arrays.php:179 arrays.php:186 arrays.php:192 arrays.php:198
 #: arrays.php:204 arrays.php:210 arrays.php:216 arrays.php:223 arrays.php:229
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:987 functions.php:2147 functions.php:2363
+#: functions.php:1015 functions.php:2286 functions.php:2506
 #, fuzzy
 msgid "Packets"
 msgstr "Paquets"
@@ -240,25 +238,22 @@ msgstr "Destination IP"
 
 #: arrays.php:189 arrays.php:195 arrays.php:201 flowview_devices.php:61
 #: flowview_devices.php:340
-#, fuzzy
 msgid "Port"
 msgstr "Port"
 
-#: arrays.php:220 arrays.php:527 functions.php:2091
+#: arrays.php:220 arrays.php:527 functions.php:2230
 #, fuzzy
 msgid "Dest IP"
 msgstr "Dest IP"
 
-#: arrays.php:226 functions.php:2083
-#, fuzzy
+#: arrays.php:226 functions.php:2222
 msgid "IP Address"
-msgstr "Adresse courriel"
+msgstr "Adresse IP"
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2127
-#, fuzzy
+#: functions.php:2266
 msgid "Protocol"
-msgstr "Version du protocole supporté par le serveur."
+msgstr "Protocole"
 
 #: arrays.php:238 arrays.php:275
 #, fuzzy
@@ -268,10 +263,9 @@ msgstr "Type d'entrée"
 #: arrays.php:244 arrays.php:276
 #, fuzzy
 msgid "Output IF"
-msgstr "Sortie vers le navigateur (via Cacti)"
+msgstr "Champ de sortie"
 
 #: arrays.php:269
-#, fuzzy
 msgid "TOS"
 msgstr "CGU"
 
@@ -280,22 +274,21 @@ msgstr "CGU"
 msgid "Destingation Prefix"
 msgstr "Préfixe de destination"
 
-#: arrays.php:301 functions.php:517 functions.php:2288
-#, fuzzy
+#: arrays.php:301 functions.php:541 functions.php:2427
 msgid "N/A"
-msgstr "AANB"
+msgstr "N/A"
 
-#: arrays.php:307 arrays.php:335 functions.php:2103
+#: arrays.php:307 arrays.php:335 functions.php:2242
 #, fuzzy
 msgid "Source IF"
-msgstr "IP source"
+msgstr "Pas de source"
 
 #: arrays.php:309 arrays.php:338
 #, fuzzy
 msgid "Destination IF"
-msgstr "Destination IP"
+msgstr "Branche de destination :"
 
-#: arrays.php:312 arrays.php:337 functions.php:2095
+#: arrays.php:312 arrays.php:337 functions.php:2234
 #, fuzzy
 msgid "Source Port"
 msgstr "Port(s) source(s)"
@@ -305,18 +298,15 @@ msgstr "Port(s) source(s)"
 msgid "Destination Port"
 msgstr "Destination IP"
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:85 functions.php:2051
-#, fuzzy
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
 msgid "Start Time"
 msgstr "Heure de début"
 
-#: arrays.php:317 arrays.php:334 functions.php:2055
-#, fuzzy
+#: arrays.php:317 arrays.php:334 functions.php:2194
 msgid "End Time"
 msgstr "Heure de fin"
 
 #: arrays.php:318
-#, fuzzy
 msgid "Active"
 msgstr "Actif"
 
@@ -335,34 +325,31 @@ msgstr "Ts"
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:342 functions.php:2135
-#, fuzzy
+#: arrays.php:342 functions.php:2274
 msgid "Flags"
 msgstr "Drapeaux"
 
 #: arrays.php:347
-#, fuzzy
 msgid "Source"
-msgstr "IP source"
+msgstr "Source"
 
 #: arrays.php:348
-#, fuzzy
 msgid "Destination"
-msgstr "Destination IP"
+msgstr "Destination"
 
 #: arrays.php:365
 #, fuzzy
 msgid "General Filters"
 msgstr "Supprimer les filtres"
 
-#: arrays.php:368 functions.php:389
-#, fuzzy
+#: arrays.php:368 functions.php:413
 msgid "Filter"
 msgstr "Filtre"
 
 #: arrays.php:369
+#, fuzzy
 msgid "The Saved Filter to display."
-msgstr ""
+msgstr "Le filtre enregistré à afficher."
 
 #: arrays.php:372
 #, fuzzy
@@ -370,45 +357,44 @@ msgid "New Filter"
 msgstr "Filtre"
 
 #: arrays.php:377 flowview_filters.php:324
-#, fuzzy
 msgid "Listener"
 msgstr "Auditeur"
 
 #: arrays.php:378
+#, fuzzy
 msgid "The Listener to use for the Filter."
-msgstr ""
+msgstr "L'auditeur à utiliser pour le filtre."
 
 #: arrays.php:386
-#, fuzzy
 msgid "Presets"
 msgstr "Préréglages"
 
 #: arrays.php:387
+#, fuzzy
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr ""
+msgstr "Si ce filtre est basé sur une période prédéfinie, sélectionnez-le ici."
 
 #: arrays.php:396
+#, fuzzy
 msgid "Detailed Filter Criteria"
-msgstr ""
+msgstr "Critères de filtrage détaillés"
 
 #: arrays.php:399 flowview_filters.php:329
-#, fuzzy
 msgid "Report Type"
-msgstr "Rapport : [nouveau]"
+msgstr "Type de rapport"
 
 #: arrays.php:400
+#, fuzzy
 msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "Type de rapport à utiliser par défaut pour ce filtre lors de la création d'un rapport."
 
 #: arrays.php:403
-#, fuzzy
 msgid "Printed"
-msgstr "Imprimé :"
+msgstr "Imprimé"
 
 #: arrays.php:403
-#, fuzzy
 msgid "Statistical"
-msgstr "Statistiques"
+msgstr "Statistique"
 
 #: arrays.php:407
 #, fuzzy
@@ -416,8 +402,9 @@ msgid "Statistical Report"
 msgstr "Rapports statistiques"
 
 #: arrays.php:408
+#, fuzzy
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "Le type de rapport d'affichage à utiliser par défaut pour ce filtre lors de la création d'un rapport."
 
 #: arrays.php:415
 #, fuzzy
@@ -425,8 +412,9 @@ msgid "Printed Report"
 msgstr "Imprimer les rapports"
 
 #: arrays.php:416
+#, fuzzy
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr ""
+msgstr "Type de rapport imprimé à utiliser par défaut pour ce filtre lors de la création d'un rapport imprimé."
 
 #: arrays.php:423
 #, fuzzy
@@ -434,8 +422,9 @@ msgid "Range Rules"
 msgstr "Gérer les horaires"
 
 #: arrays.php:424
+#, fuzzy
 msgid "Constrain the Filter Data by these time filter rules."
-msgstr ""
+msgstr "Contraignez les données de filtre par ces règles de filtre temporel."
 
 #: arrays.php:431
 #, fuzzy
@@ -447,32 +436,32 @@ msgstr "Résoudre les adresses :"
 msgid "Resolve IP Addresses to Domain Names."
 msgstr "Résoudre les adresses :"
 
-#: arrays.php:437 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:437 flowview_schedules.php:580
 msgid "Yes"
 msgstr "Oui"
 
-#: arrays.php:438 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:438 flowview_schedules.php:580
 msgid "No"
 msgstr "Non"
 
-#: arrays.php:442 flowview_filters.php:339 functions.php:470
+#: arrays.php:442 flowview_filters.php:339 functions.php:494
 #, fuzzy
 msgid "Sort Field"
 msgstr "Zone de tri :"
 
 #: arrays.php:443
+#, fuzzy
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "Le champ de tri par défaut pour le filtre. Ce paramètre sera appliqué à tous les rapports programmés."
 
 #: arrays.php:450
 msgid "Maximum Rows"
-msgstr ""
+msgstr "Lignes maximum"
 
 #: arrays.php:451
+#, fuzzy
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "Nombre maximal de lignes à fournir dans le filtre. Ce paramètre sera appliqué à tous les rapports programmés."
 
 #: arrays.php:458
 #, fuzzy
@@ -480,8 +469,9 @@ msgid "Minimum Bytes"
 msgstr "Octets minimum :"
 
 #: arrays.php:459
+#, fuzzy
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr ""
+msgstr "Nombre total minimal d'octets à prendre en compte pour le filtre. Tous les totaux de flux inférieurs à ce nombre d'octets seront ignorés."
 
 #: arrays.php:468
 #, fuzzy
@@ -489,13 +479,13 @@ msgid "Protocol Filters"
 msgstr "Protocoles"
 
 #: arrays.php:471
-#, fuzzy
 msgid "Protocols"
 msgstr "Protocoles"
 
 #: arrays.php:472
+#, fuzzy
 msgid "Select the Specific Protocol for the Filter."
-msgstr ""
+msgstr "Sélectionnez le protocole spécifique pour le filtre."
 
 #: arrays.php:479
 #, fuzzy
@@ -503,8 +493,9 @@ msgid "TCP Flags"
 msgstr "Drapeaux TCP"
 
 #: arrays.php:480
+#, fuzzy
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr ""
+msgstr "Les indicateurs TCP à rechercher dans le filtre. Cela peut être une liste délimitée par des virgules d'indicateurs TCP"
 
 #: arrays.php:487
 #, fuzzy
@@ -512,12 +503,14 @@ msgid "TOS Fields"
 msgstr "Champs PEF"
 
 #: arrays.php:488
+#, fuzzy
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr ""
+msgstr "Les champs TOS à rechercher dans le filtre. Cela peut être une liste de champs TOS séparés par des virgules"
 
 #: arrays.php:496
+#, fuzzy
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "Filtrez sur l'adresse IP source sélectionnée dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
 
 #: arrays.php:503
 #, fuzzy
@@ -525,8 +518,9 @@ msgid "Source Ports"
 msgstr "Port(s) source(s)"
 
 #: arrays.php:504
+#, fuzzy
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr ""
+msgstr "Filtrez sur les ports source sélectionnés pour dans le filtre. Cela peut être une liste de ports sources séparés par des virgules."
 
 #: arrays.php:511
 #, fuzzy
@@ -534,16 +528,19 @@ msgid "Source Interface"
 msgstr "Interface source"
 
 #: arrays.php:512
+#, fuzzy
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr ""
+msgstr "Filtrez sur l'interface source pour sélectionner dans le filtre. Cela peut être une liste d'interfaces source séparées par des virgules"
 
 #: arrays.php:520
+#, fuzzy
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr ""
+msgstr "Filtrer sur la destination AS sélectionnée pour dans le filtre. Cela peut être une liste délimitée par des virgules des AS source"
 
 #: arrays.php:528
+#, fuzzy
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "Filtrez sur l'adresse IP de destination sélectionnée pour dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
 
 #: arrays.php:535
 #, fuzzy
@@ -551,8 +548,9 @@ msgid "Dest Ports"
 msgstr "Port de destination"
 
 #: arrays.php:536
+#, fuzzy
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr ""
+msgstr "Filtrez sur les ports de destination sélectionnés pour dans le filtre. Cela peut être une liste de ports de Destimation séparés par des virgules."
 
 #: arrays.php:543
 #, fuzzy
@@ -560,26 +558,27 @@ msgid "Dest Interface"
 msgstr "Interface Dest"
 
 #: arrays.php:544
+#, fuzzy
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr ""
+msgstr "Filtrez sur l'interface de destination sélectionnée pour dans le filtre. Cela peut être une liste d'interfaces de Destimation séparées par des virgules."
 
-#: arrays.php:551 functions.php:2115
+#: arrays.php:551 functions.php:2254
 #, fuzzy
 msgid "Dest AS"
 msgstr "Dest AS"
 
 #: arrays.php:552
+#, fuzzy
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr ""
+msgstr "Filtrer sur la destination AS sélectionnée pour dans le filtre. Cela peut être une liste délimitée par des virgules de Destimation AS"
 
-#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:34
+#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:35
 msgid "Delete"
 msgstr "Supprimer"
 
 #: flowview_devices.php:38
-#, fuzzy
 msgid "Device Name"
-msgstr "Nom de l'appareil"
+msgstr "Nom de l'équipement"
 
 #: flowview_devices.php:39
 #, fuzzy
@@ -587,12 +586,14 @@ msgid "Name of the device to be displayed."
 msgstr "Nom de l'appareil à afficher."
 
 #: flowview_devices.php:44
+#, fuzzy
 msgid "Collection Medhod"
-msgstr ""
+msgstr "Collection Medhod"
 
 #: flowview_devices.php:45
+#, fuzzy
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr ""
+msgstr "Il existe deux méthodes de collecte de support, la première utilise les anciens binaires des outils de flux et la seconde exploite le propre serveur de flux de flux PHP de Cacti."
 
 #: flowview_devices.php:52
 #, fuzzy
@@ -620,72 +621,64 @@ msgid "Also, remember to remove any leftover files from your Net-Flow Capture lo
 msgstr "N'oubliez pas non plus de supprimer tous les fichiers restants de votre emplacement Net-Flow Capture."
 
 #: flowview_devices.php:146
-#, fuzzy
 msgid "You must select at least one device."
 msgstr "Vous devez sélectionner au moins un appareil."
 
-#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:218
+#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:246
 msgid "Continue"
 msgstr "Continuer"
 
-#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:226
+#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:254
 msgid "Cancel"
 msgstr "Abandonner"
 
 #: flowview_devices.php:210
-#, fuzzy, php-format
+#, php-format
 msgid "Device [edit: %s]"
-msgstr "Périphérique[modifier : %s]"
+msgstr "Equipement [editer : %s]"
 
 #: flowview_devices.php:212
-#, fuzzy
 msgid "Device [new]"
-msgstr "Périphérique[nouveau]"
+msgstr "Equipement [nouveau]"
 
 #: flowview_devices.php:276
 #, fuzzy
 msgid "FlowView Listeners"
 msgstr "Écouteuses FlowView"
 
-#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:413
+#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:442
 msgid "Search"
 msgstr "Rechercher"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
-#: functions.php:426
-#, fuzzy
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
+#: functions.php:450
 msgid "Go"
-msgstr "Go"
+msgstr "Aller"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
-#, fuzzy
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
 msgid "Set/Refresh Filters"
 msgstr "Définir/Rafraîchir les filtres"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
-#: functions.php:427
-#, fuzzy
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
+#: functions.php:451
 msgid "Clear"
 msgstr "Effacer"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
-#, fuzzy
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
 msgid "Clear Filters"
 msgstr "Supprimer les filtres"
 
-#: flowview_devices.php:328 setup.php:148 setup.php:195
-#, fuzzy
+#: flowview_devices.php:328 setup.php:181 setup.php:228
 msgid "Listeners"
 msgstr "Auditeurs"
 
 #: flowview_devices.php:337
-#, fuzzy
 msgid "Name"
 msgstr "Nom"
 
 #: flowview_devices.php:338
 msgid "Method"
-msgstr ""
+msgstr "Méthode"
 
 #: flowview_devices.php:339
 #, fuzzy
@@ -694,41 +687,39 @@ msgstr "Autorisé du"
 
 #: flowview_devices.php:341
 msgid "Status"
-msgstr ""
+msgstr "État"
 
 #: flowview_devices.php:342
+#, fuzzy
 msgid "Observed Listen"
-msgstr ""
+msgstr "Écoute observée"
 
 #: flowview_devices.php:354
 msgid "Cacti"
-msgstr ""
+msgstr "Cactus"
 
 #: flowview_devices.php:357
 msgid "Down"
-msgstr ""
+msgstr "Down"
 
 #: flowview_devices.php:357
 msgid "Up"
-msgstr ""
+msgstr "Up"
 
 #: flowview_devices.php:363
 #, fuzzy
 msgid "No Flowview Listeners"
 msgstr "Écouteuses FlowView"
 
-#: flowview_filters.php:35 flowview_schedules.php:33
-#, fuzzy
+#: flowview_filters.php:35 flowview_schedules.php:34
 msgid "Send Now"
 msgstr "Envoyer maintenant"
 
-#: flowview_filters.php:37 flowview_schedules.php:35
-#, fuzzy
+#: flowview_filters.php:37 flowview_schedules.php:36
 msgid "Disable"
 msgstr "Désactiver"
 
-#: flowview_filters.php:38 flowview_schedules.php:36
-#, fuzzy
+#: flowview_filters.php:38 flowview_schedules.php:37
 msgid "Enable"
 msgstr "Activer"
 
@@ -758,200 +749,201 @@ msgid "FlowView Filters"
 msgstr "Filtres d'écoulement"
 
 #: flowview_filters.php:220
-msgid "FlowView Filters [ Add Devices before Filters ]"
-msgstr ""
-
-#: flowview_filters.php:236 flowview_filters.php:350 setup.php:149
-#: setup.php:251
 #, fuzzy
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "Filtres FlowView [Ajouter des appareils avant les filtres]"
+
+#: flowview_filters.php:236 flowview_filters.php:350 setup.php:182
+#: setup.php:284
 msgid "Filters"
 msgstr "Filtres"
 
-#: flowview_filters.php:240 flowview_schedules.php:423
+#: flowview_filters.php:240 flowview_schedules.php:452
 msgid "Default"
 msgstr "Défaut"
 
-#: flowview_filters.php:319 flowview_schedules.php:70
-#: flowview_schedules.php:506
-#, fuzzy
+#: flowview_filters.php:319 flowview_schedules.php:73
+#: flowview_schedules.php:535
 msgid "Filter Name"
 msgstr "Nom du filtre"
 
 #: flowview_filters.php:334
-#, fuzzy
 msgid "ID"
-msgstr "IDPR"
+msgstr "ID"
 
 #: flowview_filters.php:344
-#, fuzzy
 msgid "Resolution"
-msgstr "Résolution du nom d'hôte"
+msgstr "Résolution"
 
-#: flowview_schedules.php:40
-#, fuzzy
+#: flowview_schedules.php:41
 msgid "Every Hour"
 msgstr "Toutes les heures"
 
-#: flowview_schedules.php:41 flowview_schedules.php:42
-#: flowview_schedules.php:43 flowview_schedules.php:44
-#, fuzzy, php-format
+#: flowview_schedules.php:42 flowview_schedules.php:43
+#: flowview_schedules.php:44 flowview_schedules.php:45
+#, php-format
 msgid "Every %d Hours"
-msgstr "Toutes les %d Heures"
+msgstr "Toutes les %d heures"
 
-#: flowview_schedules.php:45
-#, fuzzy
+#: flowview_schedules.php:46
 msgid "Every Day"
 msgstr "Tous les jours"
 
-#: flowview_schedules.php:46
-#, fuzzy
+#: flowview_schedules.php:47
 msgid "Every Week"
 msgstr "Chaque semaine"
 
-#: flowview_schedules.php:47
+#: flowview_schedules.php:48
 #, fuzzy, php-format
 msgid "Every %d Weeks, 2"
 msgstr "Toutes les %d Semaines, 2"
 
-#: flowview_schedules.php:48
-#, fuzzy
+#: flowview_schedules.php:49
 msgid "Every Month"
 msgstr "Chaque mois"
 
-#: flowview_schedules.php:53
-#, fuzzy
+#: flowview_schedules.php:56
 msgid "Title"
 msgstr "Titre"
 
-#: flowview_schedules.php:55
-#, fuzzy
+#: flowview_schedules.php:58
 msgid "New Schedule"
 msgstr "Nouveau Programme"
 
-#: flowview_schedules.php:56
+#: flowview_schedules.php:59
 #, fuzzy
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "Saisissez un titre de rapport pour la planification FlowView."
 
-#: flowview_schedules.php:62 flowview_schedules.php:526
-#, fuzzy
+#: flowview_schedules.php:65 flowview_schedules.php:555
 msgid "Enabled"
 msgstr "Activé"
 
-#: flowview_schedules.php:65
+#: flowview_schedules.php:68
 #, fuzzy
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "Si ce NetFlow Scan sera envoyé ou non."
 
-#: flowview_schedules.php:71
+#: flowview_schedules.php:74
 #, fuzzy
 msgid "Name of the query to run."
 msgstr "Nom de la requête à exécuter."
 
-#: flowview_schedules.php:76
+#: flowview_schedules.php:79
 #, fuzzy
 msgid "Send Interval"
 msgstr "Envoyer Intervalle"
 
-#: flowview_schedules.php:77
+#: flowview_schedules.php:80
 #, fuzzy
 msgid "How often to send this NetFlow Report?"
 msgstr "A quelle fréquence envoyer ce rapport NetFlow ?"
 
-#: flowview_schedules.php:86
+#: flowview_schedules.php:89
 #, fuzzy
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr "Il s'agit de la première date et heure d'envoi de l'e-mail NetFlow Scan.  Tous les futurs courriels seront calculés à partir de ce temps plus l'intervalle indiqué ci-dessus."
 
-#: flowview_schedules.php:94
-#, fuzzy
+#: flowview_schedules.php:97
 msgid "Email Addresses"
 msgstr "Adresse courriel"
 
-#: flowview_schedules.php:95
+#: flowview_schedules.php:98
 #, fuzzy
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "Adresses électroniques (délimitées par des commandes) auxquelles envoyer ce NetFlow Scan."
 
-#: flowview_schedules.php:187
+#: flowview_schedules.php:105 setup.php:352
+msgid "Format File to Use"
+msgstr "Format de fichier à utiliser"
+
+#: flowview_schedules.php:108 setup.php:355
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Choisissez l'habillage html personnalisé et le fichier CSS à utiliser.  Ce fichier contient à la fois du html et du CSS pour envelopper votre rapport.  S'il contient plus que du CSS, vous devez placer une balise spéciale <REPORT> à l'intérieur du fichier.  Cette balise de format sera remplacée par le contenu du rapport.  Ces fichiers se trouvent dans le répertoire 'formats'."
+
+#: flowview_schedules.php:177
+#, fuzzy, php-format
+msgid "Sent Scheduled Report %s in Background."
+msgstr "Rapport programmé envoyé %s en arrière-plan."
+
+#: flowview_schedules.php:180
+#, fuzzy
+msgid "Reports will arrive once Complete."
+msgstr "Les rapports arriveront une fois terminés."
+
+#: flowview_schedules.php:215
 #, fuzzy
 msgid "Click 'Continue' to delete the following Schedule(s)."
 msgstr "Cliquez sur'Continuer' pour supprimer la ou les annexes suivantes."
 
-#: flowview_schedules.php:194
+#: flowview_schedules.php:222
 #, fuzzy
 msgid "Click 'Continue' to send the following Schedule(s) now."
 msgstr "Cliquez sur'Continuer' pour envoyer les horaires suivants maintenant."
 
-#: flowview_schedules.php:201
+#: flowview_schedules.php:229
 #, fuzzy
 msgid "Click 'Continue' to Disable the following Schedule(s)."
 msgstr "Cliquez sur'Continuer' pour désactiver les horaires suivants."
 
-#: flowview_schedules.php:208
+#: flowview_schedules.php:236
 #, fuzzy
 msgid "Click 'Continue' to Enable the following Schedule(s)."
 msgstr "Cliquez sur'Continuer' pour activer la (les) annexe(s) suivante(s)."
 
-#: flowview_schedules.php:215
+#: flowview_schedules.php:243
 #, fuzzy
 msgid "You must select at least one schedule."
 msgstr "Vous devez sélectionner au moins un horaire."
 
-#: flowview_schedules.php:308
+#: flowview_schedules.php:337
 #, fuzzy, php-format
 msgid "Report: [edit: %s]"
 msgstr "Rapport : [Modifier : %s]"
 
-#: flowview_schedules.php:310
+#: flowview_schedules.php:339
 #, fuzzy
 msgid "Report: [new]"
 msgstr "Rapport : [nouveau]"
 
-#: flowview_schedules.php:331 functions.php:563
-#, fuzzy
+#: flowview_schedules.php:360 functions.php:587
 msgid "Start Date Selector"
-msgstr "Sélecteur de date de démarrage"
+msgstr "Sélecteur de date de début"
 
-#: flowview_schedules.php:401
+#: flowview_schedules.php:430
 #, fuzzy
 msgid "FlowView Schedules"
 msgstr "Horaires FlowView"
 
-#: flowview_schedules.php:403
-msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr ""
-
-#: flowview_schedules.php:419 flowview_schedules.php:531 setup.php:150
-#: setup.php:223
+#: flowview_schedules.php:432
 #, fuzzy
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "Horaires FlowView [Ajouter des appareils avant les horaires]"
+
+#: flowview_schedules.php:448 flowview_schedules.php:560 setup.php:183
+#: setup.php:256
 msgid "Schedules"
 msgstr "Planifications"
 
-#: flowview_schedules.php:502
-#, fuzzy
+#: flowview_schedules.php:531
 msgid "Schedule Title"
 msgstr "Titre de la planification"
 
-#: flowview_schedules.php:510
-#, fuzzy
+#: flowview_schedules.php:539
 msgid "Interval"
 msgstr "Intervalle"
 
-#: flowview_schedules.php:514
-#, fuzzy
+#: flowview_schedules.php:543
 msgid "Start Date"
 msgstr "Date de début"
 
-#: flowview_schedules.php:518
-#, fuzzy
+#: flowview_schedules.php:547
 msgid "Next Send"
 msgstr "Prochain envoi"
 
-#: flowview_schedules.php:522
-#, fuzzy
+#: flowview_schedules.php:551
 msgid "Email"
-msgstr "e-mail"
+msgstr "E-mail"
 
 #: functions.php:39
 #, fuzzy
@@ -968,467 +960,472 @@ msgstr "Rapport : [Modifier : %s]"
 msgid "Filter: [new]"
 msgstr "Rapport : [nouveau]"
 
-#: functions.php:363
+#: functions.php:387
+#, fuzzy
 msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr ""
+msgstr "Filtre non défini [Sélectionner le filtre pour obtenir les détails]"
 
-#: functions.php:373
-#, php-format
+#: functions.php:397
+#, fuzzy, php-format
 msgid "Statistical Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "Rapport statistique: %s [y compris les remplacements spécifiés ci-dessous]"
 
-#: functions.php:375
-#, php-format
+#: functions.php:399
+#, fuzzy, php-format
 msgid "Printed Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "Rapport imprimé: %s [y compris les remplacements spécifiés ci-dessous]"
 
-#: functions.php:393
+#: functions.php:417
 #, fuzzy
 msgid "Select a Filter"
 msgstr "Imprimer les rapports"
 
-#: functions.php:408
-#, fuzzy
+#: functions.php:432
 msgid "Exclude"
 msgstr "Exclure"
 
-#: functions.php:412
-#, fuzzy
+#: functions.php:436
 msgid "None"
 msgstr "Aucun"
 
-#: functions.php:413
+#: functions.php:437
 #, fuzzy
 msgid "Top Sample"
 msgstr "Échantillon supérieur"
 
-#: functions.php:414
+#: functions.php:438
 #, fuzzy
 msgid "Top 2 Samples"
 msgstr "Les 2 premiers échantillons"
 
-#: functions.php:415
+#: functions.php:439
 #, fuzzy
 msgid "Top 3 Samples"
 msgstr "Les 3 premiers échantillons"
 
-#: functions.php:416
+#: functions.php:440
 #, fuzzy
 msgid "Top 4 Samples"
 msgstr "Top 4 Échantillons"
 
-#: functions.php:417
+#: functions.php:441
 #, fuzzy
 msgid "Top 5 Samples"
 msgstr "Top 5 des échantillons"
 
-#: functions.php:420
+#: functions.php:444
+#, fuzzy
 msgid "Show only Domains on Charts Below"
-msgstr ""
+msgstr "Afficher uniquement les domaines sur les graphiques ci-dessous"
 
-#: functions.php:422
+#: functions.php:446
+#, fuzzy
 msgid "Domains Only"
-msgstr ""
+msgstr "Domaines uniquement"
 
-#: functions.php:426
-#, fuzzy
+#: functions.php:450
 msgid "Apply Filter"
-msgstr "Filtres d'écoulement"
+msgstr "Appliquer le Filtre"
 
-#: functions.php:427
-#, fuzzy
+#: functions.php:451
 msgid "Clear Filter"
-msgstr "Supprimer les filtres"
+msgstr "Effacer le filtre"
 
-#: functions.php:428
+#: functions.php:452
 msgid "Edit"
-msgstr ""
+msgstr "Editer"
 
-#: functions.php:428
-msgid "Edit Current Filter"
-msgstr ""
-
-#: functions.php:429
+#: functions.php:452
 #, fuzzy
+msgid "Edit Current Filter"
+msgstr "Modifier le filtre actuel"
+
+#: functions.php:453
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: functions.php:429
-msgid "Save Overrides to Selected Filter"
-msgstr ""
-
-#: functions.php:437
+#: functions.php:453
 #, fuzzy
-msgid "Report"
-msgstr "Rapport : %s"
+msgid "Save Overrides to Selected Filter"
+msgstr "Enregistrer les remplacements dans le filtre sélectionné"
 
-#: functions.php:448
+#: functions.php:461
+msgid "Report"
+msgstr "Rapport"
+
+#: functions.php:472
 #, fuzzy, php-format
 msgid "Statistical: %s"
 msgstr "Statistiques"
 
-#: functions.php:454
+#: functions.php:478
 #, fuzzy, php-format
 msgid "Printed: %s"
 msgstr "Imprimé :"
 
-#: functions.php:458 functions.php:475
+#: functions.php:482 functions.php:499
 #, fuzzy
 msgid "Select a Filter First"
 msgstr "Imprimer les rapports"
 
-#: functions.php:506
+#: functions.php:530
 msgid "Lines"
-msgstr ""
+msgstr "Lignes"
 
-#: functions.php:524
-msgid "Octets"
-msgstr ""
-
-#: functions.php:542
-msgid "Timespan"
-msgstr ""
-
-#: functions.php:551
+#: functions.php:548
 #, fuzzy
+msgid "Octets"
+msgstr "Octets"
+
+#: functions.php:566
+msgid "Timespan"
+msgstr "Durée"
+
+#: functions.php:575
 msgid "Custom"
 msgstr "Personnalisé"
 
-#: functions.php:557
+#: functions.php:581
 msgid "From"
-msgstr ""
+msgstr "De"
 
-#: functions.php:566
+#: functions.php:590
 msgid "To"
-msgstr ""
+msgstr "À"
 
-#: functions.php:572
-#, fuzzy
+#: functions.php:596
 msgid "End Date Selector"
 msgstr "Sélecteur de date de fin"
 
-#: functions.php:575
+#: functions.php:599
 msgid "Shift Time Backward"
-msgstr ""
+msgstr "Reculer dans le temps"
 
-#: functions.php:578
+#: functions.php:602
 msgid "Define Shifting Interval"
-msgstr ""
+msgstr "Définir l'intervalle de temps"
 
-#: functions.php:591
+#: functions.php:615
 msgid "Shift Time Forward"
-msgstr ""
+msgstr "Avancer dans le temps"
 
-#: functions.php:598
-#, fuzzy
+#: functions.php:622
 msgid "Show/Hide"
 msgstr "Afficher / Masquer"
 
-#: functions.php:602
-#, fuzzy
+#: functions.php:626
 msgid "Table"
 msgstr "Tableau"
 
-#: functions.php:606
+#: functions.php:630
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "Barre d'octets"
 
-#: functions.php:610
+#: functions.php:634
 #, fuzzy
 msgid "Packets Bar"
 msgstr "Barre de paquets"
 
-#: functions.php:614
+#: functions.php:638
 #, fuzzy
 msgid "Flows Bar"
 msgstr "Barre d'écoulement"
 
-#: functions.php:1126
-#, php-format
+#: functions.php:1178
+#, fuzzy, php-format
 msgid "Client/Private (%s)"
-msgstr ""
+msgstr "Client / Privé (%s)"
 
-#: functions.php:1128
+#: functions.php:1180
+#, fuzzy
 msgid "icmp (0)"
-msgstr ""
+msgstr "icmp (0)"
 
-#: functions.php:1139
+#: functions.php:1191
 #, fuzzy, php-format
 msgid "Unknown (%s)"
 msgstr "Inconnu"
 
-#: functions.php:1170
+#: functions.php:1222
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "Cacti Flowview"
 
-#: functions.php:1176
+#: functions.php:1228
 #, fuzzy, php-format
 msgid "Netflow - %s"
 msgstr "Flux net - % en"
 
-#: functions.php:1340
-#, php-format
+#: functions.php:1419
+#, fuzzy, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr ""
+msgstr "Filtre de sous-réseau: %s n'est pas un format CIDR de valeur"
 
-#: functions.php:1688 functions.php:1689 functions.php:1690 functions.php:1691
-#: functions.php:1692 functions.php:1693 functions.php:1694 functions.php:1695
-#: functions.php:1696 functions.php:1697 functions.php:1698 functions.php:1699
-#: functions.php:1700 functions.php:1701 functions.php:1702 functions.php:1703
-#: functions.php:1704 functions.php:1705 functions.php:1706 functions.php:1707
-#: functions.php:1708 functions.php:1709 functions.php:1710 functions.php:1711
-#: functions.php:1712 functions.php:1713
+#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
+#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
+#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
+#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
+#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
+#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
+#: functions.php:1851 functions.php:1852
 #, fuzzy, php-format
 msgid "%d - %d Bytes"
 msgstr "octets %s Octets"
 
-#: functions.php:1714
+#: functions.php:1853
 #, fuzzy, php-format
 msgid "> %d Bytes"
 msgstr "octets %s Octets"
 
-#: functions.php:2059
+#: functions.php:2198
 #, fuzzy
 msgid "Source DNS"
 msgstr "Script/source utilisé pour collecter les données de cette source de donnée."
 
-#: functions.php:2063
+#: functions.php:2202
 #, fuzzy
 msgid "Source Root DNS"
 msgstr "Script/source utilisé pour collecter les données de cette source de donnée."
 
-#: functions.php:2067
+#: functions.php:2206
 #, fuzzy
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php:2071
+#: functions.php:2210
 #, fuzzy
 msgid "Dest Root DNS"
 msgstr "Port de destination"
 
-#: functions.php:2075
-#, fuzzy
+#: functions.php:2214
 msgid "DNS"
-msgstr "RQV"
+msgstr "DNS"
 
-#: functions.php:2079
+#: functions.php:2218
+#, fuzzy
 msgid "Root DNS"
-msgstr ""
+msgstr "DNS racine"
 
-#: functions.php:2099
+#: functions.php:2238
 #, fuzzy
 msgid "Dest Port"
 msgstr "Port de destination"
 
-#: functions.php:2107
+#: functions.php:2246
 #, fuzzy
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php:2123
+#: functions.php:2262
 #, fuzzy
 msgid "Dest Prefix"
 msgstr "Préfixe de destination"
 
-#: functions.php:2131
+#: functions.php:2270
 msgid "Type of Service"
-msgstr ""
+msgstr "Type de Service"
 
-#: functions.php:2150
+#: functions.php:2289
 #, fuzzy
 msgid "Bytes/Packet"
 msgstr "Paquets"
 
-#: functions.php:2335
+#: functions.php:2478
+#, fuzzy
 msgid "-- unresolved --"
-msgstr ""
+msgstr "- non résolu -"
 
-#: functions.php:2441
-#, php-format
+#: functions.php:2584
+#, fuzzy, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr ""
+msgstr "Booléen: %s, numérique: %s, hexadécimal: %s"
 
-#: functions.php:2452
+#: functions.php:2595
+#, fuzzy
 msgid "Low Delay"
-msgstr ""
+msgstr "Faible délai"
 
-#: functions.php:2453
+#: functions.php:2596
 msgid "Throughput"
-msgstr ""
+msgstr "élevé"
 
-#: functions.php:2454
+#: functions.php:2597
 msgid "Reliability"
-msgstr ""
+msgstr "Fiabilité "
 
-#: functions.php:2455
+#: functions.php:2598
+#, fuzzy
 msgid "Mincost"
-msgstr ""
+msgstr "Mincost"
 
-#: functions.php:2459
+#: functions.php:2602
+#, fuzzy
 msgid "Net Control"
-msgstr ""
+msgstr "Contrôle net"
 
-#: functions.php:2460
+#: functions.php:2603
+#, fuzzy
 msgid "Internet Control"
-msgstr ""
+msgstr "Contrôle Internet"
 
-#: functions.php:2461
+#: functions.php:2604
+#, fuzzy
 msgid "Critic ECP"
-msgstr ""
+msgstr "Critique ECP"
 
-#: functions.php:2462
+#: functions.php:2605
+#, fuzzy
 msgid "Flash Override"
-msgstr ""
+msgstr "Remplacement Flash"
 
-#: functions.php:2463
+#: functions.php:2606
 msgid "Flash"
-msgstr ""
+msgstr "Flash"
 
-#: functions.php:2464
+#: functions.php:2607
 msgid "Immediate"
-msgstr ""
+msgstr "Immédiat"
 
-#: functions.php:2465
+#: functions.php:2608
 msgid "Priority"
-msgstr ""
+msgstr "Priorité"
 
-#: functions.php:2466
+#: functions.php:2609
 msgid "Routine"
-msgstr ""
+msgstr "Emploi du temps"
 
-#: functions.php:2506
+#: functions.php:2649
 #, fuzzy
 msgid "Summary Statistics"
 msgstr "Statistiques sommaires"
 
-#: functions.php:2517
+#: functions.php:2660
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Répartition de la taille des paquets IP (%)"
 
-#: functions.php:2522
+#: functions.php:2665
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Paquets par distribution de débit (%)"
 
-#: functions.php:2527
+#: functions.php:2670
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Octets par répartition de débit (%)"
 
-#: functions.php:2532
+#: functions.php:2675
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Distribution du temps d'écoulement (%)"
 
-#: functions.php:2715
+#: functions.php:2858
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Vous devez sélectionner un rapport statistique ou un rapport imprimé !"
 
-#: functions.php:2719
+#: functions.php:2862
 #, fuzzy
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Vous ne devez sélectionner qu'un rapport statistique ou un rapport imprimé (pas les deux) !"
 
-#: functions.php:2723
+#: functions.php:2866
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Dates non valables, la date et l'heure de fin sont antérieures à la date et à l'heure de début !"
 
-#: functions.php:2734 functions.php:2739
+#: functions.php:2877 functions.php:2882
 #, fuzzy
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP invalide pour l'adresse source!<br>(Doit être sous la forme de'192.168.0.1')"
 
-#: functions.php:2746 functions.php:2750 functions.php:2754
+#: functions.php:2889 functions.php:2893 functions.php:2897
 #, fuzzy
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Sous-réseau invalide pour l'adresse source!<br>(Doit être sous la forme de'192.168.0.1/255.255.255.255.0' ou'192.168.0.1/24')"
 
-#: functions.php:2768 functions.php:2772
+#: functions.php:2911 functions.php:2915
 #, fuzzy
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP invalide pour l'adresse de destination!<br>(Doit être sous la forme de'192.168.0.1')"
 
-#: functions.php:2778 functions.php:2782 functions.php:2786
+#: functions.php:2921 functions.php:2925 functions.php:2929
 #, fuzzy
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Sous-réseau invalide pour l'adresse de destination!<br>(Doit être sous la forme de'192.168.0.1/255.255.255.255.0' ou'192.168.0.1/24')"
 
-#: functions.php:2804
+#: functions.php:2947
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "Valeur incorrecte pour l'interface source !"
 
-#: functions.php:2820
+#: functions.php:2963
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Valeur incorrecte pour le port source ! (0 - 65535)"
 
-#: functions.php:2836
+#: functions.php:2979
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Valeur incorrecte pour Source AS ! (0 - 65535)"
 
-#: functions.php:2852
+#: functions.php:2995
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "Valeur incorrecte pour l'interface de destination !"
 
-#: functions.php:2868
+#: functions.php:3011
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Valeur incorrecte pour le port de destination ! (0 - 65535)"
 
-#: functions.php:2884
+#: functions.php:3027
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Valeur incorrecte pour Destination AS ! (0 - 65535)"
 
-#: functions.php:2900
+#: functions.php:3043
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Valeur incorrecte pour le protocole ! (1 - 255)"
 
-#: functions.php:2912
+#: functions.php:3055
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Valeur incorrecte pour TCP Flag ! (ex : 0x1b ou 0x1b/SA ou SA/SA)"
 
-#: functions.php:2921
+#: functions.php:3064
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Valeur incorrecte pour les octets de coupure !"
 
-#: functions.php:2928
+#: functions.php:3071
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Valeur incorrecte pour les lignes de coupure !"
 
-#: functions.php:2935
+#: functions.php:3078
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "Valeur incorrecte pour la zone de tri !"
 
-#: functions.php:2962
+#: functions.php:3105
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "Diagramme FlowView pour %s Type est %s"
 
-#: functions.php:3257
+#: functions.php:3400
 #, fuzzy
 msgid "Total Flows"
 msgstr "Max Flows :"
 
-#: functions.php:3262
+#: functions.php:3405
+#, fuzzy
 msgid "Bytes Exchanged"
-msgstr ""
+msgstr "Octets échangés"
 
-#: functions.php:3266
+#: functions.php:3409
 #, fuzzy
 msgid "Packets Examined"
 msgstr "Barre de paquets"
@@ -1443,733 +1440,734 @@ msgstr "Plugin -> Flow Viewer"
 msgid "Plugin -> Flow Admin"
 msgstr "Plugin -> Flow Admin"
 
-#: setup.php:141
+#: setup.php:174
 #, fuzzy
 msgid "The Filter has been Deleted"
 msgstr "Le filtre a été supprimé"
 
-#: setup.php:142
+#: setup.php:175
 #, fuzzy
 msgid "The Filter has been Updated"
 msgstr "Le filtre a été mis à jour"
 
-#: setup.php:147
+#: setup.php:180
 msgid "Import/Export"
-msgstr ""
+msgstr "Importer/Exporter"
 
-#: setup.php:148 setup.php:149 setup.php:150 setup.php:155 setup.php:286
-#: setup.php:288
+#: setup.php:181 setup.php:182 setup.php:183 setup.php:188 setup.php:319
+#: setup.php:321
 #, fuzzy
 msgid "FlowView"
 msgstr "FlowView"
 
-#: setup.php:158
+#: setup.php:191
 msgid "Normal User"
-msgstr ""
+msgstr "Utilisateur normal"
 
-#: setup.php:159
+#: setup.php:192
 msgid "System Administration"
-msgstr ""
+msgstr "Gestion du système"
 
-#: setup.php:167 setup.php:188 setup.php:310
+#: setup.php:200 setup.php:221 setup.php:347
 #, fuzzy
 msgid "Flow Viewer"
 msgstr "Visualiseur d'écoulement"
 
-#: setup.php:174
-#, fuzzy
+#: setup.php:207
 msgid "(view)"
-msgstr "Voir"
+msgstr "(Examiner)"
 
-#: setup.php:181 setup.php:209 setup.php:237 setup.php:265
+#: setup.php:214 setup.php:242 setup.php:270 setup.php:298
 #, fuzzy
 msgid "(save)"
 msgstr "Sauvegarder"
 
-#: setup.php:202 setup.php:230 setup.php:258
-#, fuzzy
+#: setup.php:235 setup.php:263 setup.php:291
 msgid "(edit)"
-msgstr "(Editer)"
+msgstr "Éditer"
 
-#: setup.php:216 setup.php:244 setup.php:272
+#: setup.php:249 setup.php:277 setup.php:305
 #, fuzzy
 msgid "(actions)"
 msgstr "Actions"
 
-#: setup.php:314
+#: setup.php:359
+#, fuzzy
 msgid "Data Retention Policy"
-msgstr ""
+msgstr "Politique de conservation des données"
 
-#: setup.php:315
+#: setup.php:360
+#, fuzzy
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr ""
+msgstr "Durée pendant laquelle Cacti conservera les tables de flux partitionnées."
 
-#: setup.php:318
-#, fuzzy, php-format
+#: setup.php:363
+#, php-format
 msgid "%d Week"
 msgstr "%d semaine"
 
-#: setup.php:319 setup.php:320
-#, fuzzy, php-format
+#: setup.php:364 setup.php:365
+#, php-format
 msgid "%d Weeks"
 msgstr "%d semaines"
 
-#: setup.php:321
-#, fuzzy, php-format
+#: setup.php:366
+#, php-format
 msgid "%d Month"
 msgstr "%d mois"
 
-#: setup.php:322 setup.php:323 setup.php:324 setup.php:325
-#, fuzzy, php-format
+#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
+#, php-format
 msgid "%d Months"
 msgstr "%d mois"
 
-#: setup.php:326
-#, fuzzy, php-format
+#: setup.php:371
+#, php-format
 msgid "%d Year"
 msgstr "%d année"
 
-#: setup.php:331
-msgid "Database Partitioning Scheme"
-msgstr ""
-
-#: setup.php:332
-msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr ""
-
-#: setup.php:335
-msgid "Daily"
-msgstr ""
-
-#: setup.php:336
-msgid "Hourly"
-msgstr ""
-
-#: setup.php:342
+#: setup.php:376
 #, fuzzy
+msgid "Database Partitioning Scheme"
+msgstr "Schéma de partitionnement de la base de données"
+
+#: setup.php:377
+#, fuzzy
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Selon le nombre de flux par minute, vous pouvez avoir besoin de plus de tables par jour."
+
+#: setup.php:380
+msgid "Daily"
+msgstr "Quotidien"
+
+#: setup.php:381
+msgid "Hourly"
+msgstr "Toutes les heures"
+
+#: setup.php:387
 msgid "Misc"
 msgstr "Divers"
 
 #, fuzzy
-#~ msgid "TCP"
-#~ msgstr "TCP"
-
-#, fuzzy
-#~ msgid "UDP"
-#~ msgstr "UDP"
-
-#, fuzzy
-#~ msgid "ICMP"
-#~ msgstr "CIPD"
-
-#, fuzzy
-#~ msgid "IGMP"
-#~ msgstr "IGMP"
-
-#, fuzzy
-#~ msgid "GGP"
-#~ msgstr "BPO"
-
-#, fuzzy
-#~ msgid "IPENCAP"
-#~ msgstr "IPENCAP"
-
-#, fuzzy
-#~ msgid "ST"
-#~ msgstr "ST"
-
-#, fuzzy
-#~ msgid "CBT"
-#~ msgstr "CBT"
-
-#, fuzzy
-#~ msgid "EGP"
-#~ msgstr "EGP"
-
-#, fuzzy
-#~ msgid "IGP"
-#~ msgstr "IGP"
-
-#, fuzzy
-#~ msgid "BBN-RCC-MON"
-#~ msgstr "BBN-RCC-MON"
-
-#, fuzzy
-#~ msgid "NVP-II"
-#~ msgstr "NVP-II"
-
-#, fuzzy
-#~ msgid "PUP"
-#~ msgstr "PUP"
-
-#, fuzzy
-#~ msgid "ARGUS"
-#~ msgstr "ARGUS"
-
-#, fuzzy
-#~ msgid "EMCON"
-#~ msgstr "EMCON"
-
-#, fuzzy
-#~ msgid "XNET"
-#~ msgstr "XNET"
-
-#, fuzzy
-#~ msgid "CHAOS"
-#~ msgstr "CHAOS"
-
-#, fuzzy
-#~ msgid "MUX"
-#~ msgstr "MUX"
-
-#, fuzzy
-#~ msgid "DCN-MEAS"
-#~ msgstr "DCN-MEAS"
-
-#, fuzzy
-#~ msgid "HMP"
-#~ msgstr "PGH"
-
-#, fuzzy
-#~ msgid "PRM"
-#~ msgstr "PMR"
-
-#, fuzzy
-#~ msgid "XNS-IDP"
-#~ msgstr "XNS-IDP"
-
-#, fuzzy
-#~ msgid "TRUNK-1"
-#~ msgstr "TRUNK-1"
-
-#, fuzzy
-#~ msgid "TRUNK-2"
-#~ msgstr "TRUNK-2"
-
-#, fuzzy
-#~ msgid "LEAF-1"
-#~ msgstr "LEAF-1"
-
-#, fuzzy
-#~ msgid "LEAF-2"
-#~ msgstr "LEAF-2"
-
-#, fuzzy
-#~ msgid "RDP"
-#~ msgstr "PDR"
-
-#, fuzzy
-#~ msgid "IRTP"
-#~ msgstr "IRTP"
-
-#, fuzzy
-#~ msgid "ISO-TP4"
-#~ msgstr "ISO-TP4"
-
-#, fuzzy
-#~ msgid "NETBLT"
-#~ msgstr "NETBLT"
-
-#, fuzzy
-#~ msgid "MFE-NSP"
-#~ msgstr "EMF-PSN"
-
-#, fuzzy
-#~ msgid "MERIT-INP"
-#~ msgstr "MERIT-INP"
-
-#, fuzzy
-#~ msgid "DCCP"
-#~ msgstr "DCCP"
-
-#, fuzzy
-#~ msgid "3PC"
-#~ msgstr "3PC"
-
-#, fuzzy
-#~ msgid "IDPR"
-#~ msgstr "IDPR"
-
-#, fuzzy
-#~ msgid "XTP"
-#~ msgstr "XTP"
-
-#, fuzzy
-#~ msgid "DDP"
-#~ msgstr "PDD"
-
-#, fuzzy
-#~ msgid "IDPR-CMTP"
-#~ msgstr "IDPR-CMTP"
-
-#, fuzzy
-#~ msgid "TP++"
-#~ msgstr "TP+++"
-
-#, fuzzy
-#~ msgid "IL"
-#~ msgstr "VA"
-
-#, fuzzy
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#, fuzzy
-#~ msgid "SDRP"
-#~ msgstr "PRSD"
-
-#, fuzzy
-#~ msgid "IPv6-Route"
-#~ msgstr "IPv6-Route"
-
-#, fuzzy
-#~ msgid "IPv6-Frag"
-#~ msgstr "IPv6-Frag"
-
-#, fuzzy
-#~ msgid "IDRP"
-#~ msgstr "IDRP"
-
-#, fuzzy
-#~ msgid "RSVP"
-#~ msgstr "RSVP"
-
-#, fuzzy
-#~ msgid "GRE"
-#~ msgstr "GRE"
-
-#, fuzzy
-#~ msgid "IPSEC-ESP"
-#~ msgstr "IPSEC-ESP"
-
-#, fuzzy
-#~ msgid "IPSEC-AH"
-#~ msgstr "IPSEC-AH"
-
-#, fuzzy
-#~ msgid "IPv6-ICMP"
-#~ msgstr "IPv6-ICMP"
-
-#, fuzzy
-#~ msgid "IPv6-NoNxt"
-#~ msgstr "IPv6-NoNxt"
-
-#, fuzzy
-#~ msgid "IPv6-Opts"
-#~ msgstr "IPv6-Options"
-
-#, fuzzy
-#~ msgid "RSPF"
-#~ msgstr "CPRS"
-
-#, fuzzy
-#~ msgid "VMTP"
-#~ msgstr "VMTP"
-
-#, fuzzy
-#~ msgid "EIGRP"
-#~ msgstr "GIERP"
-
-#, fuzzy
-#~ msgid "OSPF"
-#~ msgstr "OSPF"
-
-#, fuzzy
-#~ msgid "MTP"
-#~ msgstr "PMT"
-
-#, fuzzy
-#~ msgid "IPIP"
-#~ msgstr "IPIP"
-
-#, fuzzy
-#~ msgid "ENCAP"
-#~ msgstr "ENCAP"
-
-#, fuzzy
-#~ msgid "Src IP"
-#~ msgstr "Src IP"
-
-#, fuzzy
-#~ msgid "Src/Dest IP"
-#~ msgstr "Src/Dest IP"
-
-#, fuzzy
-#~ msgid "Src AS"
-#~ msgstr "Src AS"
-
-#, fuzzy
-#~ msgid "Src Prefix"
-#~ msgstr "Préfixe Src"
-
-#, fuzzy
-#~ msgid "Src IF"
-#~ msgstr "Src IF"
-
-#, fuzzy
-#~ msgid "Src Port"
-#~ msgstr "Port Src"
-
-#, fuzzy
-#~ msgid "End Date"
-#~ msgstr "Date de fin"
-
-#, fuzzy
-#~ msgid "Filter Type"
-#~ msgstr "Nom du filtre"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "Voir"
-
-#, fuzzy
-#~ msgid "Defaults"
-#~ msgstr "Défaut"
-
-#, fuzzy
-#~ msgid "Save As"
-#~ msgstr "Enregistrer sous"
-
-#, fuzzy
-#~ msgid "Filter Data"
-#~ msgstr "Nom du filtre"
-
-#, fuzzy
-#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
-#~ msgstr " Les entrées multiples, séparées par des virgules, sont permises dans les champs ci-dessus. Un signe moins (-) annule une entrée (par exemple -80 pour Port, signifie n'importe quel port sauf 80)."
-
-#, fuzzy
-#~ msgid "New Query"
-#~ msgstr "Nouvelle requête"
-
-#, fuzzy
-#~ msgid "Update"
-#~ msgstr "Mettre à jour"
-
-#, fuzzy
-#~ msgid "Filter Saved"
-#~ msgstr "Filtre sauvegardé"
-
-#, fuzzy
-#~ msgid "Filter Settings Saved"
-#~ msgstr "Paramètres du filtre enregistrés"
-
-#, fuzzy
-#~ msgid "Filter Updated"
-#~ msgstr "Filtre mis à jour"
-
-#, fuzzy
-#~ msgid "IP"
-#~ msgstr "IP"
-
-#, fuzzy
-#~ msgid "Interface"
-#~ msgstr "Interface"
-
-#, fuzzy
-#~ msgid "AS"
-#~ msgstr "AS"
-
-#, fuzzy
-#~ msgid "Prefix"
-#~ msgstr "Préfixe"
-
-#, fuzzy
-#~ msgid "1 Line with Tags"
-#~ msgstr "1 Ligne avec les Tags"
-
-#, fuzzy
-#~ msgid "AS Aggregation"
-#~ msgstr "AS Agrégation"
-
-#, fuzzy
-#~ msgid "Protocol Port Aggregation"
-#~ msgstr "Agrégation des ports de protocole"
-
-#, fuzzy
-#~ msgid "Source Prefix Aggregation"
-#~ msgstr "Agrégation du préfixe source"
-
-#, fuzzy
-#~ msgid "Destination Prefix Aggregation"
-#~ msgstr "Agrégation des préfixes de destination"
-
-#, fuzzy
-#~ msgid "Prefix Aggregation"
-#~ msgstr "Agrégation des préfixes"
-
-#, fuzzy
-#~ msgid "Full (Catalyst)"
-#~ msgstr "Complet (Catalyseur)"
-
-#, fuzzy
-#~ msgid "Any Part in Specified Time Span"
-#~ msgstr "N'importe quelle partie d'une période de temps spécifiée"
-
-#, fuzzy
-#~ msgid "End Time in Specified Time Span"
-#~ msgstr "Heure de fin dans l'intervalle de temps spécifié"
-
-#, fuzzy
-#~ msgid "Start Time in Specified Time Span"
-#~ msgstr "Heure de début dans l'intervalle de temps spécifié"
-
-#, fuzzy
-#~ msgid "Entirely in Specified Time Span"
-#~ msgstr "Entièrement dans un intervalle de temps spécifié"
-
-#, fuzzy
-#~ msgid "Select One"
-#~ msgstr "Sélectionnez-en un"
-
-#, fuzzy
-#~ msgid "Flow Filter Constraints"
-#~ msgstr "Contraintes du filtre d'écoulement"
-
-#, fuzzy
-#~ msgid "(e.g., -0x0b/0x0F)"
-#~ msgstr "(par ex. -0x0b/0x0F)"
-
-#, fuzzy
-#~ msgid "Dest Port(s)"
-#~ msgstr "Port(s) de destination"
-
-#, fuzzy
-#~ msgid "Note:"
-#~ msgstr "Note :"
-
-#, fuzzy
-#~ msgid "Report Parameters"
-#~ msgstr "Paramètres du rapport"
-
-#, fuzzy
-#~ msgid "Include if:"
-#~ msgstr "Inclure si :"
-
-#, fuzzy
-#~ msgid "%d Days"
-#~ msgstr "%d Jours"
-
-#, fuzzy
-#~ msgid "%d Minute"
-#~ msgstr "d Minute %d Minute"
-
-#, fuzzy
-#~ msgid "%d Minutes"
-#~ msgstr "%d minutes"
-
-#, fuzzy
-#~ msgid "NetFlow version 1"
-#~ msgstr "NetFlow version 1"
-
-#, fuzzy
-#~ msgid "NetFlow version 5"
-#~ msgstr "NetFlow version 5"
-
-#, fuzzy
-#~ msgid "NetFlow version 6"
-#~ msgstr "NetFlow version 6"
-
-#, fuzzy
-#~ msgid "NetFlow version 7"
-#~ msgstr "NetFlow version 7"
-
-#, fuzzy
-#~ msgid "NetFlow AS Aggregation"
-#~ msgstr "NetFlow AS Agrégation"
-
-#, fuzzy
-#~ msgid "NetFlow Proto Port Aggregation"
-#~ msgstr "Agrégation de ports Proto NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Source Prefix Aggregation"
-#~ msgstr "Agrégation de préfixes de source NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Destination Prefix Aggregation"
-#~ msgstr "Agrégation des préfixes de destination NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Prefix Aggregation"
-#~ msgstr "Agrégation des préfixes NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Destination"
-#~ msgstr "Destination NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Source Destination"
-#~ msgstr "Destination de la source NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Full Flow"
-#~ msgstr "NetFlow Full Flow"
-
-#, fuzzy
-#~ msgid "NetFlow ToS AS Aggregation"
-#~ msgstr "NetFlow ToS AS Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Proto Port Aggregation"
-#~ msgstr "NetFlow ToS ProtoS Proto Port Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Source Prefix Aggregation"
-#~ msgstr "Agrégation du préfixe source NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Destination Prefix Aggregation"
-#~ msgstr "Agrégation des préfixes de destination NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Aggregation"
-#~ msgstr "Agrégation de préfixes NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Port Aggregation"
-#~ msgstr "NetFlow ToS Préfixe NetFlow ToS Agrégation de ports"
-
-#, fuzzy
-#~ msgid "Flow-Tools tagged version 5"
-#~ msgstr "Flow-Tools version 5 étiquetée"
-
-#, fuzzy
-#~ msgid "0 (Disabled)"
-#~ msgstr "0 (Désactivé)"
-
-#, fuzzy
-#~ msgid "9 (Highest)"
-#~ msgstr "9 (le plus élevé)"
-
-#, fuzzy
-#~ msgid "Directory"
-#~ msgstr "Répertoire"
-
-#, fuzzy
-#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
-#~ msgstr "Répertoire dans lequel se trouvent les flux de ces périphériques.  Ce répertoire doit se trouver dans le chemin Flow Directory.  Ne mettez pas le chemin complet ici.  Aussi, non pas que si vous changez le chemin d'accès, tous les réglages prédéfinis du filer pour l'utiliser devront être sauvegardés à nouveau."
-
-#, fuzzy
-#~ msgid "Nesting"
-#~ msgstr "Nidification"
-
-#, fuzzy
-#~ msgid "Directory Structure that will be used for the flows for this device."
-#~ msgstr "Structure de répertoire qui sera utilisée pour les flux de cet appareil."
-
-#, fuzzy
-#~ msgid "NetFlow Version"
-#~ msgstr "Version NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Protocol version used by the device."
-#~ msgstr "NetFlow Version de protocole utilisée par l'appareil."
-
-#, fuzzy
-#~ msgid "Compression Level"
-#~ msgstr "Niveau de compression"
-
-#, fuzzy
-#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
-#~ msgstr "Niveau de compression des fichiers de flux.  Une compression plus élevée permet d'économiser de l'espace, mais utilise plus de CPU pour stocker et récupérer les résultats."
-
-#, fuzzy
-#~ msgid "Rotation"
-#~ msgstr "Rotation"
-
-#, fuzzy
-#~ msgid "How often to create a new Flow File."
-#~ msgstr "Combien de fois faut-il créer un nouveau fichier de déroulement ?"
-
-#, fuzzy
-#~ msgid "Expiration"
-#~ msgstr "Expiration"
-
-#, fuzzy
-#~ msgid "How long to keep your flow files."
-#~ msgstr "Combien de temps pour conserver vos fichiers de flux."
-
-#, fuzzy
-#~ msgid "Version"
-#~ msgstr "Version"
-
-#, fuzzy
-#~ msgid "Compression"
-#~ msgstr "Compression"
-
-#, fuzzy
-#~ msgid "Expire"
-#~ msgstr "Expire"
-
-#, fuzzy
-#~ msgid "No Devices"
-#~ msgstr "Équipements"
-
-#, fuzzy
-#~ msgid "Manage Listeners"
-#~ msgstr "Gérer les auditeurs"
-
-#, fuzzy
-#~ msgid "Flow Tools Binary Path"
-#~ msgstr "Outils d'écoulement Chemin binaire"
-
-#, fuzzy
-#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-#~ msgstr "Le chemin vers votre flow-cat, flow-filter, et flow-stat binaire."
-
-#, fuzzy
-#~ msgid "Flow Tools Work Directory"
-#~ msgstr "Répertoire de travail des outils de flux"
-
-#, fuzzy
-#~ msgid "This is the path to a temporary directory to do work."
-#~ msgstr "C'est le chemin vers un répertoire temporaire pour faire le travail."
-
-#, fuzzy
-#~ msgid "Flows Directory"
-#~ msgstr "Répertoire des flux"
-
-#, fuzzy
-#~ msgid "This is the path to base the path of your flow folder structure."
-#~ msgstr "C'est le chemin d'accès pour baser le chemin de votre structure de dossier de flux."
-
-#, fuzzy
-#~ msgid "The method by which you wish to resolve hostnames."
-#~ msgstr "La méthode par laquelle vous souhaitez résoudre les noms d'hôtes."
-
-#, fuzzy
-#~ msgid "Use Local Server"
-#~ msgstr "Utiliser le serveur local"
-
-#, fuzzy
-#~ msgid "Use DNS Server Below"
-#~ msgstr "Utiliser le serveur DNS ci-dessous"
-
-#, fuzzy
-#~ msgid "Don't Resolve DNS"
-#~ msgstr "Ne résolvez pas les DNS"
-
-#, fuzzy
-#~ msgid "Alternate DNS Server"
-#~ msgstr "Serveur DNS alternatif"
-
-#, fuzzy
-#~ msgid "This is the DNS Server used to resolve names."
-#~ msgstr "C'est le serveur DNS utilisé pour résoudre les noms."
-
-#, fuzzy
-#~ msgid "Strip Domain Names"
-#~ msgstr "Noms de domaine en bandelettes"
-
-#, fuzzy
-#~ msgid "A comma delimited list of domains names to strip from the domain."
-#~ msgstr "Une liste délimitée par des virgules de noms de domaine à supprimer du domaine."
+#~ msgid "Select a Filter to display data"
+#~ msgstr "Imprimer les rapports"
 
 #, fuzzy
 #~ msgid "New Flow"
 #~ msgstr "Nouveau flux"
 
 #, fuzzy
-#~ msgid "Select a Filter to display data"
-#~ msgstr "Imprimer les rapports"
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "Une liste délimitée par des virgules de noms de domaine à supprimer du domaine."
+
+#, fuzzy
+#~ msgid "Strip Domain Names"
+#~ msgstr "Noms de domaine en bandelettes"
+
+#, fuzzy
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "C'est le serveur DNS utilisé pour résoudre les noms."
+
+#, fuzzy
+#~ msgid "Alternate DNS Server"
+#~ msgstr "Serveur DNS alternatif"
+
+#, fuzzy
+#~ msgid "Don't Resolve DNS"
+#~ msgstr "Ne résolvez pas les DNS"
+
+#, fuzzy
+#~ msgid "Use DNS Server Below"
+#~ msgstr "Utiliser le serveur DNS ci-dessous"
+
+#, fuzzy
+#~ msgid "Use Local Server"
+#~ msgstr "Utiliser le serveur local"
+
+#, fuzzy
+#~ msgid "The method by which you wish to resolve hostnames."
+#~ msgstr "La méthode par laquelle vous souhaitez résoudre les noms d'hôtes."
+
+#, fuzzy
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "C'est le chemin d'accès pour baser le chemin de votre structure de dossier de flux."
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "Répertoire des flux"
+
+#, fuzzy
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "C'est le chemin vers un répertoire temporaire pour faire le travail."
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "Répertoire de travail des outils de flux"
+
+#, fuzzy
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "Le chemin vers votre flow-cat, flow-filter, et flow-stat binaire."
+
+#, fuzzy
+#~ msgid "Flow Tools Binary Path"
+#~ msgstr "Outils d'écoulement Chemin binaire"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "Gérer les auditeurs"
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "Équipements"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "Expire"
+
+#, fuzzy
+#~ msgid "Compression"
+#~ msgstr "Compression"
+
+#, fuzzy
+#~ msgid "Version"
+#~ msgstr "Version"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "Combien de temps pour conserver vos fichiers de flux."
+
+#, fuzzy
+#~ msgid "Expiration"
+#~ msgstr "Expiration"
+
+#, fuzzy
+#~ msgid "How often to create a new Flow File."
+#~ msgstr "Combien de fois faut-il créer un nouveau fichier de déroulement ?"
+
+#, fuzzy
+#~ msgid "Rotation"
+#~ msgstr "Rotation"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "Niveau de compression des fichiers de flux.  Une compression plus élevée permet d'économiser de l'espace, mais utilise plus de CPU pour stocker et récupérer les résultats."
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "Niveau de compression"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "NetFlow Version de protocole utilisée par l'appareil."
+
+#, fuzzy
+#~ msgid "NetFlow Version"
+#~ msgstr "Version NetFlow"
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "Structure de répertoire qui sera utilisée pour les flux de cet appareil."
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "Nidification"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "Répertoire dans lequel se trouvent les flux de ces périphériques.  Ce répertoire doit se trouver dans le chemin Flow Directory.  Ne mettez pas le chemin complet ici.  Aussi, non pas que si vous changez le chemin d'accès, tous les réglages prédéfinis du filer pour l'utiliser devront être sauvegardés à nouveau."
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "Répertoire"
+
+#, fuzzy
+#~ msgid "9 (Highest)"
+#~ msgstr "9 (le plus élevé)"
+
+#, fuzzy
+#~ msgid "0 (Disabled)"
+#~ msgstr "0 (Désactivé)"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "Flow-Tools version 5 étiquetée"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "NetFlow ToS Préfixe NetFlow ToS Agrégation de ports"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "Agrégation de préfixes NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "Agrégation des préfixes de destination NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "Agrégation du préfixe source NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "NetFlow ToS ProtoS Proto Port Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "NetFlow ToS AS Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "NetFlow Full Flow"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "Destination de la source NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "Destination NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "Agrégation des préfixes NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "Agrégation des préfixes de destination NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "Agrégation de préfixes de source NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "Agrégation de ports Proto NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "NetFlow AS Agrégation"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "NetFlow version 7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "NetFlow version 6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "NetFlow version 5"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "NetFlow version 1"
+
+#, fuzzy
+#~ msgid "%d Minutes"
+#~ msgstr "%d minutes"
+
+#, fuzzy
+#~ msgid "%d Minute"
+#~ msgstr "d Minute %d Minute"
+
+#, fuzzy
+#~ msgid "%d Days"
+#~ msgstr "%d Jours"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "Inclure si :"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "Paramètres du rapport"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "Note :"
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "Port(s) de destination"
+
+#, fuzzy
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "(par ex. -0x0b/0x0F)"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "Contraintes du filtre d'écoulement"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "Sélectionnez-en un"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "Entièrement dans un intervalle de temps spécifié"
+
+#, fuzzy
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "Heure de début dans l'intervalle de temps spécifié"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "Heure de fin dans l'intervalle de temps spécifié"
+
+#, fuzzy
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "N'importe quelle partie d'une période de temps spécifiée"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "Complet (Catalyseur)"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "Agrégation des préfixes"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "Agrégation des préfixes de destination"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "Agrégation du préfixe source"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "Agrégation des ports de protocole"
+
+#, fuzzy
+#~ msgid "AS Aggregation"
+#~ msgstr "AS Agrégation"
+
+#, fuzzy
+#~ msgid "1 Line with Tags"
+#~ msgstr "1 Ligne avec les Tags"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "Préfixe"
+
+#, fuzzy
+#~ msgid "AS"
+#~ msgstr "AS"
+
+#, fuzzy
+#~ msgid "Interface"
+#~ msgstr "Interface"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "IP"
+
+#, fuzzy
+#~ msgid "Filter Updated"
+#~ msgstr "Filtre mis à jour"
+
+#, fuzzy
+#~ msgid "Filter Settings Saved"
+#~ msgstr "Paramètres du filtre enregistrés"
+
+#, fuzzy
+#~ msgid "Filter Saved"
+#~ msgstr "Filtre sauvegardé"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Mettre à jour"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "Nouvelle requête"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr " Les entrées multiples, séparées par des virgules, sont permises dans les champs ci-dessus. Un signe moins (-) annule une entrée (par exemple -80 pour Port, signifie n'importe quel port sauf 80)."
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "Nom du filtre"
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr "Enregistrer sous"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "Défaut"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Voir"
+
+#, fuzzy
+#~ msgid "Filter Type"
+#~ msgstr "Nom du filtre"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "Date de fin"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "Port Src"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "Src IF"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "Préfixe Src"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "Src AS"
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "Src/Dest IP"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "Src IP"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "ENCAP"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "PMT"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "OSPF"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "GIERP"
+
+#, fuzzy
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "CPRS"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "IPv6-Options"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "IPv6-NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "IPv6-ICMP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-AH"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ESP"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "GRE"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "RSVP"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "IPv6-Frag"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "IPv6-Route"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "PRSD"
+
+#, fuzzy
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "VA"
+
+#, fuzzy
+#~ msgid "TP++"
+#~ msgstr "TP+++"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "PDD"
+
+#, fuzzy
+#~ msgid "XTP"
+#~ msgstr "XTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "3PC"
+#~ msgstr "3PC"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "MERIT-INP"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "EMF-PSN"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "NETBLT"
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "ISO-TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "PDR"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "LEAF-2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "LEAF-1"
+
+#, fuzzy
+#~ msgid "TRUNK-2"
+#~ msgstr "TRUNK-2"
+
+#, fuzzy
+#~ msgid "TRUNK-1"
+#~ msgstr "TRUNK-1"
+
+#, fuzzy
+#~ msgid "XNS-IDP"
+#~ msgstr "XNS-IDP"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "PMR"
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "PGH"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "DCN-MEAS"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "CHAOS"
+#~ msgstr "CHAOS"
+
+#, fuzzy
+#~ msgid "XNET"
+#~ msgstr "XNET"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "PUP"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP-II"
+
+#, fuzzy
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "BBN-RCC-MON"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "IGP"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "EGP"
+
+#, fuzzy
+#~ msgid "CBT"
+#~ msgstr "CBT"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "ST"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "IPENCAP"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "BPO"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "CIPD"
+
+#, fuzzy
+#~ msgid "UDP"
+#~ msgstr "UDP"
+
+#, fuzzy
+#~ msgid "TCP"
+#~ msgstr "TCP"

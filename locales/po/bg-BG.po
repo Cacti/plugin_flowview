@@ -7,23 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-11-01 13:08-0500\n"
-"PO-Revision-Date: 2019-03-18 19:54-0400\n"
+"POT-Creation-Date: 2020-12-12 20:20-0500\n"
+"PO-Revision-Date: 2020-12-12 20:22-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: bg_BG\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:445
+#: arrays.php:26 arrays.php:60 functions.php:469
 #, fuzzy
 msgid "Select a Report"
 msgstr "Отпечатване на отчети"
 
 #: arrays.php:27
-#, fuzzy
 msgid "Summary"
 msgstr "Резюме"
 
@@ -58,7 +57,7 @@ msgid "UDP/TCP Port"
 msgstr "UDP / TCP порт"
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2087
+#: arrays.php:336 arrays.php:495 functions.php:2226
 #, fuzzy
 msgid "Source IP"
 msgstr "Източник IP"
@@ -99,10 +98,10 @@ msgid "Input/Output Interface"
 msgstr "Входно / изходен интерфейс"
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2111
+#: functions.php:2250
 #, fuzzy
 msgid "Source AS"
-msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
+msgstr "Източник на данни"
 
 #: arrays.php:49 arrays.php:256 arrays.php:263 arrays.php:328
 #, fuzzy
@@ -119,7 +118,7 @@ msgstr "Източник / местоназначение AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2119
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
 #, fuzzy
 msgid "Source Prefix"
 msgstr "Префикс на източника"
@@ -150,12 +149,14 @@ msgid "132 Columns"
 msgstr "132 Колони"
 
 #: arrays.php:64
+#, fuzzy
 msgid "Show IP Accounting Emulation"
-msgstr ""
+msgstr "Показване на емулация на IP счетоводство"
 
 #: arrays.php:68
+#, fuzzy
 msgid "Any Part in Range"
-msgstr ""
+msgstr "Всяка част в обхвата"
 
 #: arrays.php:69
 #, fuzzy
@@ -168,12 +169,14 @@ msgid "Start Time in Range"
 msgstr "Начален час"
 
 #: arrays.php:71
+#, fuzzy
 msgid "Entirely in Range"
-msgstr ""
+msgstr "Изцяло в обхват"
 
 #: arrays.php:75
+#, fuzzy
 msgid "Return All Lines"
-msgstr ""
+msgstr "Върнете всички линии"
 
 #: arrays.php:76 arrays.php:77 arrays.php:78 arrays.php:79 arrays.php:80
 #: arrays.php:81 arrays.php:82 arrays.php:83
@@ -194,7 +197,6 @@ msgid "%s Bytes"
 msgstr "%s байта"
 
 #: arrays.php:104 arrays.php:383 flowview_filters.php:366
-#, fuzzy
 msgid "All"
 msgstr "Всички"
 
@@ -207,7 +209,7 @@ msgstr "Порт (и) на източника"
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:931 functions.php:2139 functions.php:2364
+#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
 #, fuzzy
 msgid "Flows"
 msgstr "потоци"
@@ -217,7 +219,7 @@ msgstr "потоци"
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:875 functions.php:2143 functions.php:2362
+#: functions.php:903 functions.php:2282 functions.php:2505
 #, fuzzy
 msgid "Bytes"
 msgstr "Bytes"
@@ -227,7 +229,7 @@ msgstr "Bytes"
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:987 functions.php:2147 functions.php:2363
+#: functions.php:1015 functions.php:2286 functions.php:2506
 #, fuzzy
 msgid "Packets"
 msgstr "Пакети"
@@ -239,23 +241,20 @@ msgstr "Целеви IP адрес"
 
 #: arrays.php:189 arrays.php:195 arrays.php:201 flowview_devices.php:61
 #: flowview_devices.php:340
-#, fuzzy
 msgid "Port"
 msgstr "Порт"
 
-#: arrays.php:220 arrays.php:527 functions.php:2091
+#: arrays.php:220 arrays.php:527 functions.php:2230
 #, fuzzy
 msgid "Dest IP"
 msgstr "Целеви IP адрес"
 
-#: arrays.php:226 functions.php:2083
-#, fuzzy
+#: arrays.php:226 functions.php:2222
 msgid "IP Address"
-msgstr "Имейл адреси"
+msgstr "IP Адрес"
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2127
-#, fuzzy
+#: functions.php:2266
 msgid "Protocol"
 msgstr "Протокол"
 
@@ -267,10 +266,9 @@ msgstr "Въвеждане на IF"
 #: arrays.php:244 arrays.php:276
 #, fuzzy
 msgid "Output IF"
-msgstr "Изход IF"
+msgstr "Формат на изходните данни"
 
 #: arrays.php:269
-#, fuzzy
 msgid "TOS"
 msgstr "Усложия за ползуване"
 
@@ -279,22 +277,21 @@ msgstr "Усложия за ползуване"
 msgid "Destingation Prefix"
 msgstr "Целеви префикс"
 
-#: arrays.php:301 functions.php:517 functions.php:2288
-#, fuzzy
+#: arrays.php:301 functions.php:541 functions.php:2427
 msgid "N/A"
-msgstr "БТА"
+msgstr "Няма"
 
-#: arrays.php:307 arrays.php:335 functions.php:2103
+#: arrays.php:307 arrays.php:335 functions.php:2242
 #, fuzzy
 msgid "Source IF"
-msgstr "Източник IP"
+msgstr "Източник на данни"
 
 #: arrays.php:309 arrays.php:338
 #, fuzzy
 msgid "Destination IF"
 msgstr "Целеви IP адрес"
 
-#: arrays.php:312 arrays.php:337 functions.php:2095
+#: arrays.php:312 arrays.php:337 functions.php:2234
 #, fuzzy
 msgid "Source Port"
 msgstr "Порт (и) на източника"
@@ -304,18 +301,15 @@ msgstr "Порт (и) на източника"
 msgid "Destination Port"
 msgstr "Целеви IP адрес"
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:85 functions.php:2051
-#, fuzzy
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
 msgid "Start Time"
 msgstr "Начален час"
 
-#: arrays.php:317 arrays.php:334 functions.php:2055
-#, fuzzy
+#: arrays.php:317 arrays.php:334 functions.php:2194
 msgid "End Time"
 msgstr "Краен час"
 
 #: arrays.php:318
-#, fuzzy
 msgid "Active"
 msgstr "Активен"
 
@@ -334,34 +328,31 @@ msgstr "Ц."
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:342 functions.php:2135
-#, fuzzy
+#: arrays.php:342 functions.php:2274
 msgid "Flags"
 msgstr "Знамена"
 
 #: arrays.php:347
-#, fuzzy
 msgid "Source"
-msgstr "Източник IP"
+msgstr "Източник"
 
 #: arrays.php:348
-#, fuzzy
 msgid "Destination"
-msgstr "Целеви IP адрес"
+msgstr "Дестинация"
 
 #: arrays.php:365
 #, fuzzy
 msgid "General Filters"
 msgstr "Изчистване на филтрите"
 
-#: arrays.php:368 functions.php:389
-#, fuzzy
+#: arrays.php:368 functions.php:413
 msgid "Filter"
 msgstr "Филтър"
 
 #: arrays.php:369
+#, fuzzy
 msgid "The Saved Filter to display."
-msgstr ""
+msgstr "Записаният филтър за показване."
 
 #: arrays.php:372
 #, fuzzy
@@ -369,26 +360,27 @@ msgid "New Filter"
 msgstr "Филтър"
 
 #: arrays.php:377 flowview_filters.php:324
-#, fuzzy
 msgid "Listener"
 msgstr "Слушател"
 
 #: arrays.php:378
+#, fuzzy
 msgid "The Listener to use for the Filter."
-msgstr ""
+msgstr "Слушателят, който да се използва за филтъра."
 
 #: arrays.php:386
-#, fuzzy
 msgid "Presets"
-msgstr "пресети"
+msgstr "Предварително"
 
 #: arrays.php:387
+#, fuzzy
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr ""
+msgstr "Ако този филтър се основава на предварително определен период от време, изберете го тук."
 
 #: arrays.php:396
+#, fuzzy
 msgid "Detailed Filter Criteria"
-msgstr ""
+msgstr "Подробни критерии за филтриране"
 
 #: arrays.php:399 flowview_filters.php:329
 #, fuzzy
@@ -396,8 +388,9 @@ msgid "Report Type"
 msgstr "Доклад: [нов]"
 
 #: arrays.php:400
+#, fuzzy
 msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "Типът отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
 
 #: arrays.php:403
 #, fuzzy
@@ -415,8 +408,9 @@ msgid "Statistical Report"
 msgstr "Статистически доклади"
 
 #: arrays.php:408
+#, fuzzy
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "Показване на типа отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
 
 #: arrays.php:415
 #, fuzzy
@@ -424,8 +418,9 @@ msgid "Printed Report"
 msgstr "Отпечатване на отчети"
 
 #: arrays.php:416
+#, fuzzy
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr ""
+msgstr "Типът отпечатан отчет, който да се използва по подразбиране за този филтър при създаване на отпечатан отчет."
 
 #: arrays.php:423
 #, fuzzy
@@ -433,8 +428,9 @@ msgid "Range Rules"
 msgstr "Управление на графиците"
 
 #: arrays.php:424
+#, fuzzy
 msgid "Constrain the Filter Data by these time filter rules."
-msgstr ""
+msgstr "Ограничете данните за филтриране чрез тези правила за филтриране на времето."
 
 #: arrays.php:431
 #, fuzzy
@@ -446,32 +442,33 @@ msgstr "Разрешаване на адреси:"
 msgid "Resolve IP Addresses to Domain Names."
 msgstr "Разрешаване на адреси:"
 
-#: arrays.php:437 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:437 flowview_schedules.php:580
 msgid "Yes"
 msgstr "Да"
 
-#: arrays.php:438 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:438 flowview_schedules.php:580
 msgid "No"
 msgstr "Не"
 
-#: arrays.php:442 flowview_filters.php:339 functions.php:470
+#: arrays.php:442 flowview_filters.php:339 functions.php:494
 #, fuzzy
 msgid "Sort Field"
 msgstr "Сортиране на полето:"
 
 #: arrays.php:443
+#, fuzzy
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "Полето за сортиране по подразбиране за филтъра. Тази настройка ще се прилага за всички планирани отчети."
 
 #: arrays.php:450
+#, fuzzy
 msgid "Maximum Rows"
-msgstr ""
+msgstr "Максимални редове"
 
 #: arrays.php:451
+#, fuzzy
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "Максималните редове, които трябва да се предоставят във филтъра. Тази настройка ще се прилага за всички планирани отчети."
 
 #: arrays.php:458
 #, fuzzy
@@ -479,8 +476,9 @@ msgid "Minimum Bytes"
 msgstr "Минимални байтове:"
 
 #: arrays.php:459
+#, fuzzy
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr ""
+msgstr "Минималният общ байт, който трябва да се вземе предвид за филтъра. Общите потоци, които са по-малки от толкова много байта, ще бъдат игнорирани."
 
 #: arrays.php:468
 #, fuzzy
@@ -493,8 +491,9 @@ msgid "Protocols"
 msgstr "протоколи"
 
 #: arrays.php:472
+#, fuzzy
 msgid "Select the Specific Protocol for the Filter."
-msgstr ""
+msgstr "Изберете специфичния протокол за филтъра."
 
 #: arrays.php:479
 #, fuzzy
@@ -502,8 +501,9 @@ msgid "TCP Flags"
 msgstr "TCP знамена"
 
 #: arrays.php:480
+#, fuzzy
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr ""
+msgstr "TCP флаговете, които да търсите във филтъра. Това може да бъде списък с TCP флагове, разделен със запетая"
 
 #: arrays.php:487
 #, fuzzy
@@ -511,12 +511,14 @@ msgid "TOS Fields"
 msgstr "Полета на TOS"
 
 #: arrays.php:488
+#, fuzzy
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr ""
+msgstr "Полетата на TOS, които да търсите във филтъра. Това може да бъде списък с TOS полета, разделен със запетая"
 
 #: arrays.php:496
+#, fuzzy
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "Филтрирайте върху избрания IP адрес на източника във филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
 
 #: arrays.php:503
 #, fuzzy
@@ -524,8 +526,9 @@ msgid "Source Ports"
 msgstr "Порт (и) на източника"
 
 #: arrays.php:504
+#, fuzzy
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr ""
+msgstr "Филтрирайте върху избраните портове източник за във филтъра. Това може да бъде списък с портове източници, разделен със запетая."
 
 #: arrays.php:511
 #, fuzzy
@@ -533,16 +536,19 @@ msgid "Source Interface"
 msgstr "Изходен интерфейс"
 
 #: arrays.php:512
+#, fuzzy
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr ""
+msgstr "Филтрирайте върху избрания интерфейс на източника за във филтъра. Това може да бъде списък с интерфейси с източник, разделен със запетая"
 
 #: arrays.php:520
+#, fuzzy
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr ""
+msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с източници на AS, разделен със запетая"
 
 #: arrays.php:528
+#, fuzzy
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "Филтрирайте върху избрания IP адрес на дестинация във Филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
 
 #: arrays.php:535
 #, fuzzy
@@ -550,8 +556,9 @@ msgid "Dest Ports"
 msgstr "Пристанищен порт"
 
 #: arrays.php:536
+#, fuzzy
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr ""
+msgstr "Филтрирайте върху избраните пристанищни портове за във филтъра Това може да бъде списък с разделителни портове, разделен със запетая."
 
 #: arrays.php:543
 #, fuzzy
@@ -559,27 +566,27 @@ msgid "Dest Interface"
 msgstr "Интерфейс за достъп"
 
 #: arrays.php:544
+#, fuzzy
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr ""
+msgstr "Филтрирайте върху избрания интерфейс за дестинация във във Филтъра. Това може да бъде списък с интерфейси за дестимиране, разделен със запетая."
 
-#: arrays.php:551 functions.php:2115
+#: arrays.php:551 functions.php:2254
 #, fuzzy
 msgid "Dest AS"
 msgstr "Dest AS"
 
 #: arrays.php:552
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr ""
-
-#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:34
 #, fuzzy
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с разделители със запетая на AS за оценка"
+
+#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:35
 msgid "Delete"
 msgstr "Изтрий"
 
 #: flowview_devices.php:38
-#, fuzzy
 msgid "Device Name"
-msgstr "Име на устройството"
+msgstr "Име на устройство"
 
 #: flowview_devices.php:39
 #, fuzzy
@@ -587,12 +594,14 @@ msgid "Name of the device to be displayed."
 msgstr "Име на устройството, което ще се показва."
 
 #: flowview_devices.php:44
+#, fuzzy
 msgid "Collection Medhod"
-msgstr ""
+msgstr "Колекция Medhod"
 
 #: flowview_devices.php:45
+#, fuzzy
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr ""
+msgstr "Има два метода за събиране на поддръжка, първият използва старите двоични файлове на поточни инструменти, а вторият използва собствения PHP базиран сървър на потока на потока."
 
 #: flowview_devices.php:52
 #, fuzzy
@@ -624,13 +633,11 @@ msgstr "Също така не забравяйте да премахнете в
 msgid "You must select at least one device."
 msgstr "Трябва да изберете поне едно устройство."
 
-#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:218
-#, fuzzy
+#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:246
 msgid "Continue"
 msgstr "Продължи"
 
-#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:226
-#, fuzzy
+#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:254
 msgid "Cancel"
 msgstr "Отказ"
 
@@ -649,46 +656,42 @@ msgstr "Устройство [ново]"
 msgid "FlowView Listeners"
 msgstr "Слушатели на FlowView"
 
-#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:413
-#, fuzzy
+#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:442
 msgid "Search"
 msgstr "Търсене"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
-#: functions.php:426
-#, fuzzy
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
+#: functions.php:450
 msgid "Go"
 msgstr "Търси"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
 #, fuzzy
 msgid "Set/Refresh Filters"
 msgstr "Задаване / опресняване на филтрите"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
-#: functions.php:427
-#, fuzzy
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
+#: functions.php:451
 msgid "Clear"
 msgstr "Изчисти"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
 #, fuzzy
 msgid "Clear Filters"
 msgstr "Изчистване на филтрите"
 
-#: flowview_devices.php:328 setup.php:148 setup.php:195
+#: flowview_devices.php:328 setup.php:181 setup.php:228
 #, fuzzy
 msgid "Listeners"
 msgstr "Слушатели"
 
 #: flowview_devices.php:337
-#, fuzzy
 msgid "Name"
 msgstr "Име"
 
 #: flowview_devices.php:338
 msgid "Method"
-msgstr ""
+msgstr "Метод"
 
 #: flowview_devices.php:339
 #, fuzzy
@@ -697,41 +700,39 @@ msgstr "Разрешено от"
 
 #: flowview_devices.php:341
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: flowview_devices.php:342
+#, fuzzy
 msgid "Observed Listen"
-msgstr ""
+msgstr "Наблюдавано Слушай"
 
 #: flowview_devices.php:354
 msgid "Cacti"
-msgstr ""
+msgstr "Кактусови"
 
 #: flowview_devices.php:357
 msgid "Down"
-msgstr ""
+msgstr "Надолу"
 
 #: flowview_devices.php:357
 msgid "Up"
-msgstr ""
+msgstr "Нагоре"
 
 #: flowview_devices.php:363
 #, fuzzy
 msgid "No Flowview Listeners"
 msgstr "Слушатели на FlowView"
 
-#: flowview_filters.php:35 flowview_schedules.php:33
-#, fuzzy
+#: flowview_filters.php:35 flowview_schedules.php:34
 msgid "Send Now"
 msgstr "Изпрати"
 
-#: flowview_filters.php:37 flowview_schedules.php:35
-#, fuzzy
+#: flowview_filters.php:37 flowview_schedules.php:36
 msgid "Disable"
 msgstr "Изключи"
 
-#: flowview_filters.php:38 flowview_schedules.php:36
-#, fuzzy
+#: flowview_filters.php:38 flowview_schedules.php:37
 msgid "Enable"
 msgstr "Включи"
 
@@ -761,199 +762,212 @@ msgid "FlowView Filters"
 msgstr "Поточни филтри"
 
 #: flowview_filters.php:220
-msgid "FlowView Filters [ Add Devices before Filters ]"
-msgstr ""
-
-#: flowview_filters.php:236 flowview_filters.php:350 setup.php:149
-#: setup.php:251
 #, fuzzy
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "FlowView филтри [Добавяне на устройства преди филтри]"
+
+#: flowview_filters.php:236 flowview_filters.php:350 setup.php:182
+#: setup.php:284
 msgid "Filters"
 msgstr "Филтри"
 
-#: flowview_filters.php:240 flowview_schedules.php:423
-#, fuzzy
+#: flowview_filters.php:240 flowview_schedules.php:452
 msgid "Default"
 msgstr "По подразбиране"
 
-#: flowview_filters.php:319 flowview_schedules.php:70
-#: flowview_schedules.php:506
+#: flowview_filters.php:319 flowview_schedules.php:73
+#: flowview_schedules.php:535
 #, fuzzy
 msgid "Filter Name"
 msgstr "Име на филтъра"
 
 #: flowview_filters.php:334
-#, fuzzy
 msgid "ID"
-msgstr "IDPR"
+msgstr "ID"
 
 #: flowview_filters.php:344
 #, fuzzy
 msgid "Resolution"
 msgstr "Резолюция на име на хост"
 
-#: flowview_schedules.php:40
+#: flowview_schedules.php:41
 #, fuzzy
 msgid "Every Hour"
 msgstr "Всеки час"
 
-#: flowview_schedules.php:41 flowview_schedules.php:42
-#: flowview_schedules.php:43 flowview_schedules.php:44
+#: flowview_schedules.php:42 flowview_schedules.php:43
+#: flowview_schedules.php:44 flowview_schedules.php:45
 #, fuzzy, php-format
 msgid "Every %d Hours"
 msgstr "Всеки% d часа"
 
-#: flowview_schedules.php:45
+#: flowview_schedules.php:46
 #, fuzzy
 msgid "Every Day"
 msgstr "Всеки ден"
 
-#: flowview_schedules.php:46
+#: flowview_schedules.php:47
 #, fuzzy
 msgid "Every Week"
 msgstr "Всяка седмица"
 
-#: flowview_schedules.php:47
+#: flowview_schedules.php:48
 #, fuzzy, php-format
 msgid "Every %d Weeks, 2"
 msgstr "Всеки% d седмици, 2"
 
-#: flowview_schedules.php:48
+#: flowview_schedules.php:49
 #, fuzzy
 msgid "Every Month"
 msgstr "Всеки месец"
 
-#: flowview_schedules.php:53
-#, fuzzy
+#: flowview_schedules.php:56
 msgid "Title"
 msgstr "Заглавие"
 
-#: flowview_schedules.php:55
+#: flowview_schedules.php:58
 #, fuzzy
 msgid "New Schedule"
 msgstr "Нов график"
 
-#: flowview_schedules.php:56
+#: flowview_schedules.php:59
 #, fuzzy
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "Въведете заглавие на отчета за графика на потока."
 
-#: flowview_schedules.php:62 flowview_schedules.php:526
-#, fuzzy
+#: flowview_schedules.php:65 flowview_schedules.php:555
 msgid "Enabled"
 msgstr "Разрешен"
 
-#: flowview_schedules.php:65
+#: flowview_schedules.php:68
 #, fuzzy
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "Дали това NetFlow сканиране ще бъде изпратено."
 
-#: flowview_schedules.php:71
+#: flowview_schedules.php:74
 #, fuzzy
 msgid "Name of the query to run."
 msgstr "Име на заявката за изпълнение."
 
-#: flowview_schedules.php:76
+#: flowview_schedules.php:79
 #, fuzzy
 msgid "Send Interval"
 msgstr "Изпращане на интервал"
 
-#: flowview_schedules.php:77
+#: flowview_schedules.php:80
 #, fuzzy
 msgid "How often to send this NetFlow Report?"
 msgstr "Колко често да изпращате този отчет за NetFlow?"
 
-#: flowview_schedules.php:86
+#: flowview_schedules.php:89
 #, fuzzy
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr "Това е първата дата / час за изпращане на имейла в NetFlow Scan. Всички бъдещи имейли ще бъдат изчислени извън този час плюс посочения по-горе интервал."
 
-#: flowview_schedules.php:94
-#, fuzzy
+#: flowview_schedules.php:97
 msgid "Email Addresses"
-msgstr "Имейл адреси"
+msgstr "Джибути"
 
-#: flowview_schedules.php:95
+#: flowview_schedules.php:98
 #, fuzzy
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "Имейл адреси (разделени с команда) за изпращане на това сканиране от NetFlow."
 
-#: flowview_schedules.php:187
+#: flowview_schedules.php:105 setup.php:352
+#, fuzzy
+msgid "Format File to Use"
+msgstr "Форматирайте файла, който да използвате"
+
+#: flowview_schedules.php:108 setup.php:355
+#, fuzzy
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Изберете персонализираната HTML обвивка и CSS файла, които да използвате. Този файл съдържа както html, така и CSS, за да обгърне отчета ви. Ако съдържа повече от просто CSS, трябва да поставите специален<REPORT> етикет във файла. Този таг на формата ще бъде заменен от съдържанието на отчета. Тези файлове се намират в директорията „формати“."
+
+#: flowview_schedules.php:177
+#, fuzzy, php-format
+msgid "Sent Scheduled Report %s in Background."
+msgstr "Изпратен планиран отчет %s във фонов режим."
+
+#: flowview_schedules.php:180
+#, fuzzy
+msgid "Reports will arrive once Complete."
+msgstr "Докладите ще пристигнат след попълване."
+
+#: flowview_schedules.php:215
 #, fuzzy
 msgid "Click 'Continue' to delete the following Schedule(s)."
 msgstr "Кликнете върху „Напред“, за да изтриете следните графици."
 
-#: flowview_schedules.php:194
+#: flowview_schedules.php:222
 #, fuzzy
 msgid "Click 'Continue' to send the following Schedule(s) now."
 msgstr "Кликнете върху „Напред“, за да изпратите сегашното График (и)."
 
-#: flowview_schedules.php:201
+#: flowview_schedules.php:229
 #, fuzzy
 msgid "Click 'Continue' to Disable the following Schedule(s)."
 msgstr "Кликнете върху „Напред“, за да деактивирате следните графици."
 
-#: flowview_schedules.php:208
+#: flowview_schedules.php:236
 #, fuzzy
 msgid "Click 'Continue' to Enable the following Schedule(s)."
 msgstr "Кликнете върху „Напред“, за да активирате следните графици."
 
-#: flowview_schedules.php:215
+#: flowview_schedules.php:243
 #, fuzzy
 msgid "You must select at least one schedule."
 msgstr "Трябва да изберете поне един график."
 
-#: flowview_schedules.php:308
+#: flowview_schedules.php:337
 #, fuzzy, php-format
 msgid "Report: [edit: %s]"
 msgstr "Отчет: [редактиране: %s]"
 
-#: flowview_schedules.php:310
+#: flowview_schedules.php:339
 #, fuzzy
 msgid "Report: [new]"
 msgstr "Доклад: [нов]"
 
-#: flowview_schedules.php:331 functions.php:563
+#: flowview_schedules.php:360 functions.php:587
 #, fuzzy
 msgid "Start Date Selector"
 msgstr "Стартирайте Селектора за дата"
 
-#: flowview_schedules.php:401
+#: flowview_schedules.php:430
 #, fuzzy
 msgid "FlowView Schedules"
 msgstr "Разписания за FlowView"
 
-#: flowview_schedules.php:403
+#: flowview_schedules.php:432
+#, fuzzy
 msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr ""
+msgstr "FlowView Schedules [Добавяне на устройства преди графици]"
 
-#: flowview_schedules.php:419 flowview_schedules.php:531 setup.php:150
-#: setup.php:223
+#: flowview_schedules.php:448 flowview_schedules.php:560 setup.php:183
+#: setup.php:256
 #, fuzzy
 msgid "Schedules"
 msgstr "Списъци"
 
-#: flowview_schedules.php:502
+#: flowview_schedules.php:531
 #, fuzzy
 msgid "Schedule Title"
 msgstr "Заглавие на графика"
 
-#: flowview_schedules.php:510
-#, fuzzy
+#: flowview_schedules.php:539
 msgid "Interval"
 msgstr "Интервал"
 
-#: flowview_schedules.php:514
-#, fuzzy
+#: flowview_schedules.php:543
 msgid "Start Date"
 msgstr "Начална Дата"
 
-#: flowview_schedules.php:518
+#: flowview_schedules.php:547
 #, fuzzy
 msgid "Next Send"
 msgstr "Следваща Изпращане"
 
-#: flowview_schedules.php:522
-#, fuzzy
+#: flowview_schedules.php:551
 msgid "Email"
 msgstr "Имейл"
 
@@ -972,467 +986,484 @@ msgstr "Отчет: [редактиране: %s]"
 msgid "Filter: [new]"
 msgstr "Доклад: [нов]"
 
-#: functions.php:363
+#: functions.php:387
+#, fuzzy
 msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr ""
+msgstr "Недефиниран филтър [Изберете филтър, за да получите подробности]"
 
-#: functions.php:373
-#, php-format
+#: functions.php:397
+#, fuzzy, php-format
 msgid "Statistical Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "Статистически доклад: %s [Включително замествания, както е посочено по-долу]"
 
-#: functions.php:375
-#, php-format
+#: functions.php:399
+#, fuzzy, php-format
 msgid "Printed Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "Отпечатан отчет: %s [Включително замествания, както е посочено по-долу]"
 
-#: functions.php:393
+#: functions.php:417
 #, fuzzy
 msgid "Select a Filter"
 msgstr "Отпечатване на отчети"
 
-#: functions.php:408
-#, fuzzy
+#: functions.php:432
 msgid "Exclude"
 msgstr "Изключване"
 
-#: functions.php:412
-#, fuzzy
+#: functions.php:436
 msgid "None"
 msgstr "Няма"
 
-#: functions.php:413
+#: functions.php:437
 #, fuzzy
 msgid "Top Sample"
 msgstr "Нагоре Проба"
 
-#: functions.php:414
+#: functions.php:438
 #, fuzzy
 msgid "Top 2 Samples"
 msgstr "Топ 2 проби"
 
-#: functions.php:415
+#: functions.php:439
 #, fuzzy
 msgid "Top 3 Samples"
 msgstr "Топ 3 проби"
 
-#: functions.php:416
+#: functions.php:440
 #, fuzzy
 msgid "Top 4 Samples"
 msgstr "Топ 4 проби"
 
-#: functions.php:417
+#: functions.php:441
 #, fuzzy
 msgid "Top 5 Samples"
 msgstr "Топ 5 проби"
 
-#: functions.php:420
-msgid "Show only Domains on Charts Below"
-msgstr ""
-
-#: functions.php:422
-msgid "Domains Only"
-msgstr ""
-
-#: functions.php:426
+#: functions.php:444
 #, fuzzy
-msgid "Apply Filter"
-msgstr "Поточни филтри"
+msgid "Show only Domains on Charts Below"
+msgstr "Показване само на домейни в диаграмите отдолу"
 
-#: functions.php:427
+#: functions.php:446
+#, fuzzy
+msgid "Domains Only"
+msgstr "Само домейни"
+
+#: functions.php:450
+msgid "Apply Filter"
+msgstr "Прилагане на стил"
+
+#: functions.php:451
 #, fuzzy
 msgid "Clear Filter"
 msgstr "Изчистване на филтрите"
 
-#: functions.php:428
+#: functions.php:452
 msgid "Edit"
-msgstr ""
+msgstr "Редактирай"
 
-#: functions.php:428
-msgid "Edit Current Filter"
-msgstr ""
-
-#: functions.php:429
+#: functions.php:452
 #, fuzzy
+msgid "Edit Current Filter"
+msgstr "Редактиране на текущия филтър"
+
+#: functions.php:453
 msgid "Save"
 msgstr "Запази"
 
-#: functions.php:429
-msgid "Save Overrides to Selected Filter"
-msgstr ""
-
-#: functions.php:437
+#: functions.php:453
 #, fuzzy
-msgid "Report"
-msgstr "Отчет: %s"
+msgid "Save Overrides to Selected Filter"
+msgstr "Запазване на замените в избрания филтър"
 
-#: functions.php:448
+#: functions.php:461
+msgid "Report"
+msgstr "Отчет"
+
+#: functions.php:472
 #, fuzzy, php-format
 msgid "Statistical: %s"
 msgstr "Статистика"
 
-#: functions.php:454
+#: functions.php:478
 #, fuzzy, php-format
 msgid "Printed: %s"
 msgstr "Отпечатано:"
 
-#: functions.php:458 functions.php:475
+#: functions.php:482 functions.php:499
 #, fuzzy
 msgid "Select a Filter First"
 msgstr "Отпечатване на отчети"
 
-#: functions.php:506
+#: functions.php:530
 msgid "Lines"
-msgstr ""
+msgstr "Редове"
 
-#: functions.php:524
-msgid "Octets"
-msgstr ""
-
-#: functions.php:542
-msgid "Timespan"
-msgstr ""
-
-#: functions.php:551
+#: functions.php:548
 #, fuzzy
+msgid "Octets"
+msgstr "Октети"
+
+#: functions.php:566
+msgid "Timespan"
+msgstr "Време"
+
+#: functions.php:575
 msgid "Custom"
 msgstr "Персонализиране"
 
-#: functions.php:557
+#: functions.php:581
 msgid "From"
-msgstr ""
+msgstr "От"
 
-#: functions.php:566
+#: functions.php:590
 msgid "To"
-msgstr ""
+msgstr "Дo"
 
-#: functions.php:572
+#: functions.php:596
 #, fuzzy
 msgid "End Date Selector"
 msgstr "Селектор за крайна дата"
 
-#: functions.php:575
-msgid "Shift Time Backward"
-msgstr ""
-
-#: functions.php:578
-msgid "Define Shifting Interval"
-msgstr ""
-
-#: functions.php:591
-msgid "Shift Time Forward"
-msgstr ""
-
-#: functions.php:598
+#: functions.php:599
 #, fuzzy
-msgid "Show/Hide"
-msgstr "Покажи скрий"
+msgid "Shift Time Backward"
+msgstr "Преместване на времето назад"
 
 #: functions.php:602
 #, fuzzy
+msgid "Define Shifting Interval"
+msgstr "Определете интервала за превключване"
+
+#: functions.php:615
+#, fuzzy
+msgid "Shift Time Forward"
+msgstr "Преместване на времето напред"
+
+#: functions.php:622
+msgid "Show/Hide"
+msgstr "Покажи/Скрий"
+
+#: functions.php:626
 msgid "Table"
 msgstr "Таблица"
 
-#: functions.php:606
+#: functions.php:630
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "Бар за байтове"
 
-#: functions.php:610
+#: functions.php:634
 #, fuzzy
 msgid "Packets Bar"
 msgstr "Пакет бар"
 
-#: functions.php:614
+#: functions.php:638
 #, fuzzy
 msgid "Flows Bar"
 msgstr "Бар за потоци"
 
-#: functions.php:1126
-#, php-format
+#: functions.php:1178
+#, fuzzy, php-format
 msgid "Client/Private (%s)"
-msgstr ""
+msgstr "Клиент / частен (%s)"
 
-#: functions.php:1128
+#: functions.php:1180
+#, fuzzy
 msgid "icmp (0)"
-msgstr ""
+msgstr "icmp (0)"
 
-#: functions.php:1139
+#: functions.php:1191
 #, fuzzy, php-format
 msgid "Unknown (%s)"
 msgstr "알려지지 않음"
 
-#: functions.php:1170
+#: functions.php:1222
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "Cacti Flowview"
 
-#: functions.php:1176
+#: functions.php:1228
 #, fuzzy, php-format
 msgid "Netflow - %s"
 msgstr "Netflow -%"
 
-#: functions.php:1340
-#, php-format
+#: functions.php:1419
+#, fuzzy, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr ""
+msgstr "Филтър на подмрежата: %s не е стойностен формат CIDR"
 
-#: functions.php:1688 functions.php:1689 functions.php:1690 functions.php:1691
-#: functions.php:1692 functions.php:1693 functions.php:1694 functions.php:1695
-#: functions.php:1696 functions.php:1697 functions.php:1698 functions.php:1699
-#: functions.php:1700 functions.php:1701 functions.php:1702 functions.php:1703
-#: functions.php:1704 functions.php:1705 functions.php:1706 functions.php:1707
-#: functions.php:1708 functions.php:1709 functions.php:1710 functions.php:1711
-#: functions.php:1712 functions.php:1713
+#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
+#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
+#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
+#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
+#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
+#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
+#: functions.php:1851 functions.php:1852
 #, fuzzy, php-format
 msgid "%d - %d Bytes"
 msgstr "%s байта"
 
-#: functions.php:1714
+#: functions.php:1853
 #, fuzzy, php-format
 msgid "> %d Bytes"
 msgstr "%s байта"
 
-#: functions.php:2059
+#: functions.php:2198
 #, fuzzy
 msgid "Source DNS"
 msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
 
-#: functions.php:2063
+#: functions.php:2202
 #, fuzzy
 msgid "Source Root DNS"
 msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
 
-#: functions.php:2067
+#: functions.php:2206
 #, fuzzy
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php:2071
+#: functions.php:2210
 #, fuzzy
 msgid "Dest Root DNS"
 msgstr "Пристанищен порт"
 
-#: functions.php:2075
+#: functions.php:2214
 #, fuzzy
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php:2079
+#: functions.php:2218
+#, fuzzy
 msgid "Root DNS"
-msgstr ""
+msgstr "Корен DNS"
 
-#: functions.php:2099
+#: functions.php:2238
 #, fuzzy
 msgid "Dest Port"
 msgstr "Пристанищен порт"
 
-#: functions.php:2107
+#: functions.php:2246
 #, fuzzy
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php:2123
+#: functions.php:2262
 #, fuzzy
 msgid "Dest Prefix"
 msgstr "Преден префикс"
 
-#: functions.php:2131
+#: functions.php:2270
+#, fuzzy
 msgid "Type of Service"
-msgstr ""
+msgstr "Вид на услугата"
 
-#: functions.php:2150
+#: functions.php:2289
 #, fuzzy
 msgid "Bytes/Packet"
 msgstr "Пакети"
 
-#: functions.php:2335
+#: functions.php:2478
+#, fuzzy
 msgid "-- unresolved --"
-msgstr ""
+msgstr "- нерешен -"
 
-#: functions.php:2441
-#, php-format
+#: functions.php:2584
+#, fuzzy, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr ""
+msgstr "Булево: %s, Числово: %s, Шестнадесетично: %s"
 
-#: functions.php:2452
+#: functions.php:2595
+#, fuzzy
 msgid "Low Delay"
-msgstr ""
+msgstr "Ниско забавяне"
 
-#: functions.php:2453
+#: functions.php:2596
+#, fuzzy
 msgid "Throughput"
-msgstr ""
+msgstr "Пропускателна способност"
 
-#: functions.php:2454
+#: functions.php:2597
+#, fuzzy
 msgid "Reliability"
-msgstr ""
+msgstr "Надеждност"
 
-#: functions.php:2455
+#: functions.php:2598
+#, fuzzy
 msgid "Mincost"
-msgstr ""
+msgstr "Минкост"
 
-#: functions.php:2459
+#: functions.php:2602
+#, fuzzy
 msgid "Net Control"
-msgstr ""
+msgstr "Контрол на мрежата"
 
-#: functions.php:2460
+#: functions.php:2603
+#, fuzzy
 msgid "Internet Control"
-msgstr ""
+msgstr "Интернет контрол"
 
-#: functions.php:2461
+#: functions.php:2604
+#, fuzzy
 msgid "Critic ECP"
-msgstr ""
+msgstr "Критичен ECP"
 
-#: functions.php:2462
+#: functions.php:2605
+#, fuzzy
 msgid "Flash Override"
-msgstr ""
+msgstr "Замяна на Flash"
 
-#: functions.php:2463
+#: functions.php:2606
+#, fuzzy
 msgid "Flash"
-msgstr ""
+msgstr "Flash"
 
-#: functions.php:2464
+#: functions.php:2607
+#, fuzzy
 msgid "Immediate"
-msgstr ""
+msgstr "Незабавно"
 
-#: functions.php:2465
+#: functions.php:2608
 msgid "Priority"
-msgstr ""
+msgstr "Приоритет"
 
-#: functions.php:2466
+#: functions.php:2609
+#, fuzzy
 msgid "Routine"
-msgstr ""
+msgstr "Рутинна"
 
-#: functions.php:2506
+#: functions.php:2649
 #, fuzzy
 msgid "Summary Statistics"
 msgstr "Обобщена статистика"
 
-#: functions.php:2517
+#: functions.php:2660
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Разпределение на размера на пакета за IP (%)"
 
-#: functions.php:2522
+#: functions.php:2665
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Разпределение на пакети за потока (%)"
 
-#: functions.php:2527
+#: functions.php:2670
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Октети за разпределение на потока (%)"
 
-#: functions.php:2532
+#: functions.php:2675
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Разпределение на времето на потока (%)"
 
-#: functions.php:2715
+#: functions.php:2858
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Трябва да изберете статистически отчет или отпечатан отчет!"
 
-#: functions.php:2719
+#: functions.php:2862
 #, fuzzy
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Трябва да изберете само статистически отчет или отпечатан отчет (не и двете)!"
 
-#: functions.php:2723
+#: functions.php:2866
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Невалидни дати, Крайна дата / час е по-ранна от началната дата / час!"
 
-#: functions.php:2734 functions.php:2739
+#: functions.php:2877 functions.php:2882
 #, fuzzy
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Невалиден IP адрес за източника! <br> (Трябва да е под формата на „192.168.0.1“)"
 
-#: functions.php:2746 functions.php:2750 functions.php:2754
+#: functions.php:2889 functions.php:2893 functions.php:2897
 #, fuzzy
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Невалидна подмрежа за изходния адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
 
-#: functions.php:2768 functions.php:2772
+#: functions.php:2911 functions.php:2915
 #, fuzzy
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Невалиден IP адрес за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1“)"
 
-#: functions.php:2778 functions.php:2782 functions.php:2786
+#: functions.php:2921 functions.php:2925 functions.php:2929
 #, fuzzy
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Невалидна подмрежа за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
 
-#: functions.php:2804
+#: functions.php:2947
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "Невалидна стойност за изходния интерфейс!"
 
-#: functions.php:2820
+#: functions.php:2963
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Невалидна стойност за изходния порт! (0 - 65535)"
 
-#: functions.php:2836
+#: functions.php:2979
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Невалидна стойност за Source AS! (0 - 65535)"
 
-#: functions.php:2852
+#: functions.php:2995
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "Невалидна стойност за целевия интерфейс!"
 
-#: functions.php:2868
+#: functions.php:3011
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Невалидна стойност за целевия порт! (0 - 65535)"
 
-#: functions.php:2884
+#: functions.php:3027
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Невалидна стойност за Destination AS! (0 - 65535)"
 
-#: functions.php:2900
+#: functions.php:3043
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Невалидна стойност за протокол! (1 - 255)"
 
-#: functions.php:2912
+#: functions.php:3055
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Невалидна стойност за TCP флаг! (напр .: 0x1b или 0x1b / SA или SA / SA)"
 
-#: functions.php:2921
+#: functions.php:3064
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Невалидна стойност за Octoff Octoff!"
 
-#: functions.php:2928
+#: functions.php:3071
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Невалидна стойност за Линиите за изключване!"
 
-#: functions.php:2935
+#: functions.php:3078
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "Невалидна стойност за полето за сортиране!"
 
-#: functions.php:2962
+#: functions.php:3105
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "Диаграма за преглеждане на потока за %s Тип е %s"
 
-#: functions.php:3257
+#: functions.php:3400
 #, fuzzy
 msgid "Total Flows"
 msgstr "Максимални потоци:"
 
-#: functions.php:3262
+#: functions.php:3405
+#, fuzzy
 msgid "Bytes Exchanged"
-msgstr ""
+msgstr "Разменени байтове"
 
-#: functions.php:3266
+#: functions.php:3409
 #, fuzzy
 msgid "Packets Examined"
 msgstr "Пакет бар"
@@ -1447,733 +1478,737 @@ msgstr "Приставката -> Преглед на потока"
 msgid "Plugin -> Flow Admin"
 msgstr "Плъгин -> Администратор на поток"
 
-#: setup.php:141
+#: setup.php:174
 #, fuzzy
 msgid "The Filter has been Deleted"
 msgstr "Филтърът е изтрит"
 
-#: setup.php:142
+#: setup.php:175
 #, fuzzy
 msgid "The Filter has been Updated"
 msgstr "Филтърът е актуализиран"
 
-#: setup.php:147
+#: setup.php:180
 msgid "Import/Export"
-msgstr ""
+msgstr "Импорт/Експорт"
 
-#: setup.php:148 setup.php:149 setup.php:150 setup.php:155 setup.php:286
-#: setup.php:288
+#: setup.php:181 setup.php:182 setup.php:183 setup.php:188 setup.php:319
+#: setup.php:321
 #, fuzzy
 msgid "FlowView"
 msgstr "FlowView"
 
-#: setup.php:158
+#: setup.php:191
+#, fuzzy
 msgid "Normal User"
-msgstr ""
+msgstr "Нормален потребител"
 
-#: setup.php:159
+#: setup.php:192
 msgid "System Administration"
-msgstr ""
+msgstr "Системна администрация"
 
-#: setup.php:167 setup.php:188 setup.php:310
+#: setup.php:200 setup.php:221 setup.php:347
 #, fuzzy
 msgid "Flow Viewer"
 msgstr "Преглед на потока"
 
-#: setup.php:174
+#: setup.php:207
 #, fuzzy
 msgid "(view)"
 msgstr "Преглед"
 
-#: setup.php:181 setup.php:209 setup.php:237 setup.php:265
+#: setup.php:214 setup.php:242 setup.php:270 setup.php:298
 #, fuzzy
 msgid "(save)"
 msgstr "Запази"
 
-#: setup.php:202 setup.php:230 setup.php:258
-#, fuzzy
+#: setup.php:235 setup.php:263 setup.php:291
 msgid "(edit)"
-msgstr "(Редактирай)"
+msgstr "Редактиране..."
 
-#: setup.php:216 setup.php:244 setup.php:272
+#: setup.php:249 setup.php:277 setup.php:305
 #, fuzzy
 msgid "(actions)"
 msgstr "Действия"
 
-#: setup.php:314
+#: setup.php:359
+#, fuzzy
 msgid "Data Retention Policy"
-msgstr ""
+msgstr "Политика за задържане на данни"
 
-#: setup.php:315
+#: setup.php:360
+#, fuzzy
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr ""
+msgstr "Времето, през което кактусите ще поддържат разделените таблици на потока."
 
-#: setup.php:318
+#: setup.php:363
 #, fuzzy, php-format
 msgid "%d Week"
 msgstr "% d Седмица"
 
-#: setup.php:319 setup.php:320
+#: setup.php:364 setup.php:365
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "% d седмици"
 
-#: setup.php:321
+#: setup.php:366
 #, fuzzy, php-format
 msgid "%d Month"
 msgstr "% d Месец"
 
-#: setup.php:322 setup.php:323 setup.php:324 setup.php:325
+#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
 #, fuzzy, php-format
 msgid "%d Months"
 msgstr "% d Месеци"
 
-#: setup.php:326
+#: setup.php:371
 #, fuzzy, php-format
 msgid "%d Year"
 msgstr "% d Година"
 
-#: setup.php:331
-msgid "Database Partitioning Scheme"
-msgstr ""
-
-#: setup.php:332
-msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr ""
-
-#: setup.php:335
-msgid "Daily"
-msgstr ""
-
-#: setup.php:336
-msgid "Hourly"
-msgstr ""
-
-#: setup.php:342
+#: setup.php:376
 #, fuzzy
+msgid "Database Partitioning Scheme"
+msgstr "Схема за разделяне на база данни"
+
+#: setup.php:377
+#, fuzzy
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "В зависимост от броя на потоците в минута може да се наложи повече таблици на ден."
+
+#: setup.php:380
+msgid "Daily"
+msgstr "Ежедневно"
+
+#: setup.php:381
+#, fuzzy
+msgid "Hourly"
+msgstr "Почасово"
+
+#: setup.php:387
 msgid "Misc"
 msgstr "Разни"
 
 #, fuzzy
-#~ msgid "TCP"
-#~ msgstr "TCP"
-
-#, fuzzy
-#~ msgid "UDP"
-#~ msgstr "UDP"
-
-#, fuzzy
-#~ msgid "ICMP"
-#~ msgstr "ICMP"
-
-#, fuzzy
-#~ msgid "IGMP"
-#~ msgstr "IGMP"
-
-#, fuzzy
-#~ msgid "GGP"
-#~ msgstr "GGP"
-
-#, fuzzy
-#~ msgid "IPENCAP"
-#~ msgstr "IPENCAP"
-
-#, fuzzy
-#~ msgid "ST"
-#~ msgstr "ST"
-
-#, fuzzy
-#~ msgid "CBT"
-#~ msgstr "Пенис"
-
-#, fuzzy
-#~ msgid "EGP"
-#~ msgstr "EGP"
-
-#, fuzzy
-#~ msgid "IGP"
-#~ msgstr "IGP"
-
-#, fuzzy
-#~ msgid "BBN-RCC-MON"
-#~ msgstr "BBN-RCC-MON"
-
-#, fuzzy
-#~ msgid "NVP-II"
-#~ msgstr "NVP-II"
-
-#, fuzzy
-#~ msgid "PUP"
-#~ msgstr "ПУП"
-
-#, fuzzy
-#~ msgid "ARGUS"
-#~ msgstr "ARGUS"
-
-#, fuzzy
-#~ msgid "EMCON"
-#~ msgstr "EMCON"
-
-#, fuzzy
-#~ msgid "XNET"
-#~ msgstr "XNET"
-
-#, fuzzy
-#~ msgid "CHAOS"
-#~ msgstr "CHAOS"
-
-#, fuzzy
-#~ msgid "MUX"
-#~ msgstr "MUX"
-
-#, fuzzy
-#~ msgid "DCN-MEAS"
-#~ msgstr "DCN-MEAS"
-
-#, fuzzy
-#~ msgid "HMP"
-#~ msgstr "HMP"
-
-#, fuzzy
-#~ msgid "PRM"
-#~ msgstr "Лица с намалена подвижност"
-
-#, fuzzy
-#~ msgid "XNS-IDP"
-#~ msgstr "XNS-IDP"
-
-#, fuzzy
-#~ msgid "TRUNK-1"
-#~ msgstr "Багажника-1"
-
-#, fuzzy
-#~ msgid "TRUNK-2"
-#~ msgstr "Багажника-2"
-
-#, fuzzy
-#~ msgid "LEAF-1"
-#~ msgstr "КРИЛОТО-1"
-
-#, fuzzy
-#~ msgid "LEAF-2"
-#~ msgstr "КРИЛОТО-2"
-
-#, fuzzy
-#~ msgid "RDP"
-#~ msgstr "ПРСР"
-
-#, fuzzy
-#~ msgid "IRTP"
-#~ msgstr "IRTP"
-
-#, fuzzy
-#~ msgid "ISO-TP4"
-#~ msgstr "ISO-TP4"
-
-#, fuzzy
-#~ msgid "NETBLT"
-#~ msgstr "NETBLT"
-
-#, fuzzy
-#~ msgid "MFE-NSP"
-#~ msgstr "MFE-НСП"
-
-#, fuzzy
-#~ msgid "MERIT-INP"
-#~ msgstr "Заслугите INP"
-
-#, fuzzy
-#~ msgid "DCCP"
-#~ msgstr "DCCP"
-
-#, fuzzy
-#~ msgid "3PC"
-#~ msgstr "3PC"
-
-#, fuzzy
-#~ msgid "IDPR"
-#~ msgstr "IDPR"
-
-#, fuzzy
-#~ msgid "XTP"
-#~ msgstr "XTP"
-
-#, fuzzy
-#~ msgid "DDP"
-#~ msgstr "DDP"
-
-#, fuzzy
-#~ msgid "IDPR-CMTP"
-#~ msgstr "IDPR-CMTP"
-
-#, fuzzy
-#~ msgid "TP++"
-#~ msgstr "TP ++"
-
-#, fuzzy
-#~ msgid "IL"
-#~ msgstr "I Л"
-
-#, fuzzy
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#, fuzzy
-#~ msgid "SDRP"
-#~ msgstr "SDRP"
-
-#, fuzzy
-#~ msgid "IPv6-Route"
-#~ msgstr "IPv6-Route"
-
-#, fuzzy
-#~ msgid "IPv6-Frag"
-#~ msgstr "IPv6-Frag"
-
-#, fuzzy
-#~ msgid "IDRP"
-#~ msgstr "IDRP"
-
-#, fuzzy
-#~ msgid "RSVP"
-#~ msgstr "Регистрация"
-
-#, fuzzy
-#~ msgid "GRE"
-#~ msgstr "GRE"
-
-#, fuzzy
-#~ msgid "IPSEC-ESP"
-#~ msgstr "IPSEC-ESP"
-
-#, fuzzy
-#~ msgid "IPSEC-AH"
-#~ msgstr "IPSEC-AH"
-
-#, fuzzy
-#~ msgid "IPv6-ICMP"
-#~ msgstr "IPv6-ICMP"
-
-#, fuzzy
-#~ msgid "IPv6-NoNxt"
-#~ msgstr "IPv6-NoNxt"
-
-#, fuzzy
-#~ msgid "IPv6-Opts"
-#~ msgstr "IPv6-избира"
-
-#, fuzzy
-#~ msgid "RSPF"
-#~ msgstr "RSPF"
-
-#, fuzzy
-#~ msgid "VMTP"
-#~ msgstr "VMTP"
-
-#, fuzzy
-#~ msgid "EIGRP"
-#~ msgstr "EIGRP"
-
-#, fuzzy
-#~ msgid "OSPF"
-#~ msgstr "OSPF"
-
-#, fuzzy
-#~ msgid "MTP"
-#~ msgstr "МТР"
-
-#, fuzzy
-#~ msgid "IPIP"
-#~ msgstr "IPIP"
-
-#, fuzzy
-#~ msgid "ENCAP"
-#~ msgstr "ENCAP"
-
-#, fuzzy
-#~ msgid "Src IP"
-#~ msgstr "Src IP"
-
-#, fuzzy
-#~ msgid "Src/Dest IP"
-#~ msgstr "Src / IP адрес"
-
-#, fuzzy
-#~ msgid "Src AS"
-#~ msgstr "Src AS"
-
-#, fuzzy
-#~ msgid "Src Prefix"
-#~ msgstr "Src Prefix"
-
-#, fuzzy
-#~ msgid "Src IF"
-#~ msgstr "Src IF"
-
-#, fuzzy
-#~ msgid "Src Port"
-#~ msgstr "Порт Src"
-
-#, fuzzy
-#~ msgid "End Date"
-#~ msgstr "Крайна дата"
-
-#, fuzzy
-#~ msgid "Filter Type"
-#~ msgstr "Име на филтъра"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "Преглед"
-
-#, fuzzy
-#~ msgid "Defaults"
-#~ msgstr "По подразбиране"
-
-#, fuzzy
-#~ msgid "Save As"
-#~ msgstr "Запис като"
-
-#, fuzzy
-#~ msgid "Filter Data"
-#~ msgstr "Име на филтъра"
-
-#, fuzzy
-#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
-#~ msgstr "В полетата по-горе са разрешени няколко полета, разделени със запетаи. Знакът минус (-) ще отхвърли запис (напр. -80 за пристанище, означава всеки порт, но 80)"
-
-#, fuzzy
-#~ msgid "New Query"
-#~ msgstr "Нова заявка"
-
-#, fuzzy
-#~ msgid "Update"
-#~ msgstr "Обновяване"
-
-#, fuzzy
-#~ msgid "Filter Saved"
-#~ msgstr "Филтърът е запазен"
-
-#, fuzzy
-#~ msgid "Filter Settings Saved"
-#~ msgstr "Настройките на филтъра са запазени"
-
-#, fuzzy
-#~ msgid "Filter Updated"
-#~ msgstr "Филтърът е актуализиран"
-
-#, fuzzy
-#~ msgid "IP"
-#~ msgstr "IP адрес"
-
-#, fuzzy
-#~ msgid "Interface"
-#~ msgstr "интерфейс"
-
-#, fuzzy
-#~ msgid "AS"
-#~ msgstr "КАТО"
-
-#, fuzzy
-#~ msgid "Prefix"
-#~ msgstr "Префикс"
-
-#, fuzzy
-#~ msgid "1 Line with Tags"
-#~ msgstr "1 ред с маркери"
-
-#, fuzzy
-#~ msgid "AS Aggregation"
-#~ msgstr "AS Aggregation"
-
-#, fuzzy
-#~ msgid "Protocol Port Aggregation"
-#~ msgstr "Протокол Агрегиране на портове"
-
-#, fuzzy
-#~ msgid "Source Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на източника"
-
-#, fuzzy
-#~ msgid "Destination Prefix Aggregation"
-#~ msgstr "Агрегация на целевия префикс"
-
-#, fuzzy
-#~ msgid "Prefix Aggregation"
-#~ msgstr "Агрегация на префикса"
-
-#, fuzzy
-#~ msgid "Full (Catalyst)"
-#~ msgstr "Пълно (катализатор)"
-
-#, fuzzy
-#~ msgid "Any Part in Specified Time Span"
-#~ msgstr "Всяка част в определен период от време"
-
-#, fuzzy
-#~ msgid "End Time in Specified Time Span"
-#~ msgstr "Крайно време в определен период от време"
-
-#, fuzzy
-#~ msgid "Start Time in Specified Time Span"
-#~ msgstr "Начално време в определен период от време"
-
-#, fuzzy
-#~ msgid "Entirely in Specified Time Span"
-#~ msgstr "Изцяло в определен период от време"
-
-#, fuzzy
-#~ msgid "Select One"
-#~ msgstr "Избери един"
-
-#, fuzzy
-#~ msgid "Flow Filter Constraints"
-#~ msgstr "Ограничения на филтъра на потока"
-
-#, fuzzy
-#~ msgid "(e.g., -0x0b/0x0F)"
-#~ msgstr "(напр. -0x0b / 0x0F)"
-
-#, fuzzy
-#~ msgid "Dest Port(s)"
-#~ msgstr "Порт (и) за търсене"
-
-#, fuzzy
-#~ msgid "Note:"
-#~ msgstr "Бележка:"
-
-#, fuzzy
-#~ msgid "Report Parameters"
-#~ msgstr "Параметри на отчета"
-
-#, fuzzy
-#~ msgid "Include if:"
-#~ msgstr "Включете, ако:"
-
-#, fuzzy
-#~ msgid "%d Days"
-#~ msgstr "% d дни"
-
-#, fuzzy
-#~ msgid "%d Minute"
-#~ msgstr "% d Минута"
-
-#, fuzzy
-#~ msgid "%d Minutes"
-#~ msgstr "% d Минути"
-
-#, fuzzy
-#~ msgid "NetFlow version 1"
-#~ msgstr "NetFlow версия 1"
-
-#, fuzzy
-#~ msgid "NetFlow version 5"
-#~ msgstr "NetFlow версия 5"
-
-#, fuzzy
-#~ msgid "NetFlow version 6"
-#~ msgstr "NetFlow версия 6"
-
-#, fuzzy
-#~ msgid "NetFlow version 7"
-#~ msgstr "NetFlow версия 7"
-
-#, fuzzy
-#~ msgid "NetFlow AS Aggregation"
-#~ msgstr "Агрегиране на NetFlow AS"
-
-#, fuzzy
-#~ msgid "NetFlow Proto Port Aggregation"
-#~ msgstr "NetFlow Proto Port Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow Source Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на източника на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Destination Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс за дестинация на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Destination"
-#~ msgstr "Дестинация на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Source Destination"
-#~ msgstr "Целева цел на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Full Flow"
-#~ msgstr "NetFlow Full Flow"
-
-#, fuzzy
-#~ msgid "NetFlow ToS AS Aggregation"
-#~ msgstr "Агрегиране на NetFlow ToS AS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Proto Port Aggregation"
-#~ msgstr "NetFlow ToS Proto Port Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Source Prefix Aggregation"
-#~ msgstr "Агрегиране на NetFlow ToS Source Prefix Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Destination Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на целеви префикс на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Port Aggregation"
-#~ msgstr "Агрегиране на пристанището на NetFlow ToS"
-
-#, fuzzy
-#~ msgid "Flow-Tools tagged version 5"
-#~ msgstr "Инструменти за потоци, маркирани версия 5"
-
-#, fuzzy
-#~ msgid "0 (Disabled)"
-#~ msgstr "0 (забранено)"
-
-#, fuzzy
-#~ msgid "9 (Highest)"
-#~ msgstr "9 (най-висока)"
-
-#, fuzzy
-#~ msgid "Directory"
-#~ msgstr "Папка"
-
-#, fuzzy
-#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
-#~ msgstr "Директорията, в която текат тези устройства. Тази директория трябва да бъде в пътя на директорията на потока. Не поставяйте пълния път тук. Също така, не че ако промените пътя, всички предварително дефинирани настройки на филтъра, за да го използвате, ще трябва да бъдат презаписани."
-
-#, fuzzy
-#~ msgid "Nesting"
-#~ msgstr "Разполагане"
-
-#, fuzzy
-#~ msgid "Directory Structure that will be used for the flows for this device."
-#~ msgstr "Структура на указателя, която ще се използва за потоците за това устройство."
-
-#, fuzzy
-#~ msgid "NetFlow Version"
-#~ msgstr "NetFlow версия"
-
-#, fuzzy
-#~ msgid "NetFlow Protocol version used by the device."
-#~ msgstr "Версия NetFlow протокол, използвана от устройството."
-
-#, fuzzy
-#~ msgid "Compression Level"
-#~ msgstr "Ниво на компресия"
-
-#, fuzzy
-#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
-#~ msgstr "Ниво на компресиране на поточни файлове. По-високата компресия спестява място, но използва повече CPU за съхраняване и извличане на резултати."
-
-#, fuzzy
-#~ msgid "Rotation"
-#~ msgstr "Завъртане"
-
-#, fuzzy
-#~ msgid "How often to create a new Flow File."
-#~ msgstr "Колко често да се създава нов поточен файл."
-
-#, fuzzy
-#~ msgid "Expiration"
-#~ msgstr "Краен срок"
-
-#, fuzzy
-#~ msgid "How long to keep your flow files."
-#~ msgstr "Колко дълго трябва да поддържате поточните си файлове."
-
-#, fuzzy
-#~ msgid "Version"
-#~ msgstr "Версия"
-
-#, fuzzy
-#~ msgid "Compression"
-#~ msgstr "компресия"
-
-#, fuzzy
-#~ msgid "Expire"
-#~ msgstr "Изтича"
-
-#, fuzzy
-#~ msgid "No Devices"
-#~ msgstr "Устройства"
-
-#, fuzzy
-#~ msgid "Manage Listeners"
-#~ msgstr "Управление на слушателите"
-
-#, fuzzy
-#~ msgid "Flow Tools Binary Path"
-#~ msgstr "Двоичен път на инструментите за поток"
-
-#, fuzzy
-#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-#~ msgstr "Пътят към вашата поточна котка, филтър за потока и двоичен поток."
-
-#, fuzzy
-#~ msgid "Flow Tools Work Directory"
-#~ msgstr "Работна директория за поточни инструменти"
-
-#, fuzzy
-#~ msgid "This is the path to a temporary directory to do work."
-#~ msgstr "Това е пътят към временна директория за работа."
-
-#, fuzzy
-#~ msgid "Flows Directory"
-#~ msgstr "Директория на потоците"
-
-#, fuzzy
-#~ msgid "This is the path to base the path of your flow folder structure."
-#~ msgstr "Това е пътят към базата на пътя на структурата на поточната ви папка."
-
-#, fuzzy
-#~ msgid "The method by which you wish to resolve hostnames."
-#~ msgstr "Методът, чрез който искате да разрешите имената на хостове."
-
-#, fuzzy
-#~ msgid "Use Local Server"
-#~ msgstr "Използвайте локален сървър"
-
-#, fuzzy
-#~ msgid "Use DNS Server Below"
-#~ msgstr "Използвайте DNS сървър по-долу"
-
-#, fuzzy
-#~ msgid "Don't Resolve DNS"
-#~ msgstr "Не разрешавайте DNS"
-
-#, fuzzy
-#~ msgid "Alternate DNS Server"
-#~ msgstr "Алтернативен DNS сървър"
-
-#, fuzzy
-#~ msgid "This is the DNS Server used to resolve names."
-#~ msgstr "Това е DNS сървърът, използван за разрешаване на имена."
-
-#, fuzzy
-#~ msgid "Strip Domain Names"
-#~ msgstr "Изолирайте домейн имената"
-
-#, fuzzy
-#~ msgid "A comma delimited list of domains names to strip from the domain."
-#~ msgstr "Списък с имена на домейни, разделени със запетая, за премахване от домейна."
+#~ msgid "Select a Filter to display data"
+#~ msgstr "Отпечатване на отчети"
 
 #, fuzzy
 #~ msgid "New Flow"
 #~ msgstr "Нов поток"
 
 #, fuzzy
-#~ msgid "Select a Filter to display data"
-#~ msgstr "Отпечатване на отчети"
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "Списък с имена на домейни, разделени със запетая, за премахване от домейна."
+
+#, fuzzy
+#~ msgid "Strip Domain Names"
+#~ msgstr "Изолирайте домейн имената"
+
+#, fuzzy
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "Това е DNS сървърът, използван за разрешаване на имена."
+
+#, fuzzy
+#~ msgid "Alternate DNS Server"
+#~ msgstr "Алтернативен DNS сървър"
+
+#, fuzzy
+#~ msgid "Don't Resolve DNS"
+#~ msgstr "Не разрешавайте DNS"
+
+#, fuzzy
+#~ msgid "Use DNS Server Below"
+#~ msgstr "Използвайте DNS сървър по-долу"
+
+#, fuzzy
+#~ msgid "Use Local Server"
+#~ msgstr "Използвайте локален сървър"
+
+#, fuzzy
+#~ msgid "The method by which you wish to resolve hostnames."
+#~ msgstr "Методът, чрез който искате да разрешите имената на хостове."
+
+#, fuzzy
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "Това е пътят към базата на пътя на структурата на поточната ви папка."
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "Директория на потоците"
+
+#, fuzzy
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "Това е пътят към временна директория за работа."
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "Работна директория за поточни инструменти"
+
+#, fuzzy
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "Пътят към вашата поточна котка, филтър за потока и двоичен поток."
+
+#, fuzzy
+#~ msgid "Flow Tools Binary Path"
+#~ msgstr "Двоичен път на инструментите за поток"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "Управление на слушателите"
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "Устройства"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "Изтича"
+
+#, fuzzy
+#~ msgid "Compression"
+#~ msgstr "компресия"
+
+#, fuzzy
+#~ msgid "Version"
+#~ msgstr "Версия"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "Колко дълго трябва да поддържате поточните си файлове."
+
+#, fuzzy
+#~ msgid "Expiration"
+#~ msgstr "Краен срок"
+
+#, fuzzy
+#~ msgid "How often to create a new Flow File."
+#~ msgstr "Колко често да се създава нов поточен файл."
+
+#, fuzzy
+#~ msgid "Rotation"
+#~ msgstr "Завъртане"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "Ниво на компресиране на поточни файлове. По-високата компресия спестява място, но използва повече CPU за съхраняване и извличане на резултати."
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "Ниво на компресия"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "Версия NetFlow протокол, използвана от устройството."
+
+#, fuzzy
+#~ msgid "NetFlow Version"
+#~ msgstr "NetFlow версия"
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "Структура на указателя, която ще се използва за потоците за това устройство."
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "Разполагане"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "Директорията, в която текат тези устройства. Тази директория трябва да бъде в пътя на директорията на потока. Не поставяйте пълния път тук. Също така, не че ако промените пътя, всички предварително дефинирани настройки на филтъра, за да го използвате, ще трябва да бъдат презаписани."
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "Папка"
+
+#, fuzzy
+#~ msgid "9 (Highest)"
+#~ msgstr "9 (най-висока)"
+
+#, fuzzy
+#~ msgid "0 (Disabled)"
+#~ msgstr "0 (забранено)"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "Инструменти за потоци, маркирани версия 5"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "Агрегиране на пристанището на NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на целеви префикс на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "Агрегиране на NetFlow ToS Source Prefix Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "NetFlow ToS Proto Port Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "Агрегиране на NetFlow ToS AS"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "NetFlow Full Flow"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "Целева цел на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "Дестинация на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс за дестинация на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на източника на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "NetFlow Proto Port Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "Агрегиране на NetFlow AS"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "NetFlow версия 7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "NetFlow версия 6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "NetFlow версия 5"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "NetFlow версия 1"
+
+#, fuzzy
+#~ msgid "%d Minutes"
+#~ msgstr "% d Минути"
+
+#, fuzzy
+#~ msgid "%d Minute"
+#~ msgstr "% d Минута"
+
+#, fuzzy
+#~ msgid "%d Days"
+#~ msgstr "% d дни"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "Включете, ако:"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "Параметри на отчета"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "Бележка:"
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "Порт (и) за търсене"
+
+#, fuzzy
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "(напр. -0x0b / 0x0F)"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "Ограничения на филтъра на потока"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "Избери един"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "Изцяло в определен период от време"
+
+#, fuzzy
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "Начално време в определен период от време"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "Крайно време в определен период от време"
+
+#, fuzzy
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "Всяка част в определен период от време"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "Пълно (катализатор)"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "Агрегация на префикса"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "Агрегация на целевия префикс"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на източника"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "Протокол Агрегиране на портове"
+
+#, fuzzy
+#~ msgid "AS Aggregation"
+#~ msgstr "AS Aggregation"
+
+#, fuzzy
+#~ msgid "1 Line with Tags"
+#~ msgstr "1 ред с маркери"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "Префикс"
+
+#, fuzzy
+#~ msgid "AS"
+#~ msgstr "КАТО"
+
+#, fuzzy
+#~ msgid "Interface"
+#~ msgstr "интерфейс"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "IP адрес"
+
+#, fuzzy
+#~ msgid "Filter Updated"
+#~ msgstr "Филтърът е актуализиран"
+
+#, fuzzy
+#~ msgid "Filter Settings Saved"
+#~ msgstr "Настройките на филтъра са запазени"
+
+#, fuzzy
+#~ msgid "Filter Saved"
+#~ msgstr "Филтърът е запазен"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Обновяване"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "Нова заявка"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr "В полетата по-горе са разрешени няколко полета, разделени със запетаи. Знакът минус (-) ще отхвърли запис (напр. -80 за пристанище, означава всеки порт, но 80)"
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "Име на филтъра"
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr "Запис като"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "По подразбиране"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Преглед"
+
+#, fuzzy
+#~ msgid "Filter Type"
+#~ msgstr "Име на филтъра"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "Крайна дата"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "Порт Src"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "Src IF"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "Src Prefix"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "Src AS"
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "Src / IP адрес"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "Src IP"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "ENCAP"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "МТР"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "OSPF"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "EIGRP"
+
+#, fuzzy
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "RSPF"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "IPv6-избира"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "IPv6-NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "IPv6-ICMP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-AH"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ESP"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "GRE"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "Регистрация"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "IPv6-Frag"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "IPv6-Route"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "SDRP"
+
+#, fuzzy
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "I Л"
+
+#, fuzzy
+#~ msgid "TP++"
+#~ msgstr "TP ++"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "DDP"
+
+#, fuzzy
+#~ msgid "XTP"
+#~ msgstr "XTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "3PC"
+#~ msgstr "3PC"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "Заслугите INP"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "MFE-НСП"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "NETBLT"
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "ISO-TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "ПРСР"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "КРИЛОТО-2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "КРИЛОТО-1"
+
+#, fuzzy
+#~ msgid "TRUNK-2"
+#~ msgstr "Багажника-2"
+
+#, fuzzy
+#~ msgid "TRUNK-1"
+#~ msgstr "Багажника-1"
+
+#, fuzzy
+#~ msgid "XNS-IDP"
+#~ msgstr "XNS-IDP"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "Лица с намалена подвижност"
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "HMP"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "DCN-MEAS"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "CHAOS"
+#~ msgstr "CHAOS"
+
+#, fuzzy
+#~ msgid "XNET"
+#~ msgstr "XNET"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "ПУП"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP-II"
+
+#, fuzzy
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "BBN-RCC-MON"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "IGP"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "EGP"
+
+#, fuzzy
+#~ msgid "CBT"
+#~ msgstr "Пенис"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "ST"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "IPENCAP"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "GGP"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "ICMP"
+
+#, fuzzy
+#~ msgid "UDP"
+#~ msgstr "UDP"
+
+#, fuzzy
+#~ msgid "TCP"
+#~ msgstr "TCP"

@@ -7,23 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-11-01 13:08-0500\n"
-"PO-Revision-Date: 2019-03-18 21:23-0400\n"
+"POT-Creation-Date: 2020-12-12 20:20-0500\n"
+"PO-Revision-Date: 2020-12-12 20:26-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:445
+#: arrays.php:26 arrays.php:60 functions.php:469
 #, fuzzy
 msgid "Select a Report"
 msgstr "印刷レポート"
 
 #: arrays.php:27
-#, fuzzy
 msgid "Summary"
 msgstr "概要"
 
@@ -58,13 +57,11 @@ msgid "UDP/TCP Port"
 msgstr "UDP / TCPポート"
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2087
-#, fuzzy
+#: arrays.php:336 arrays.php:495 functions.php:2226
 msgid "Source IP"
 msgstr "送信元IP"
 
 #: arrays.php:38 arrays.php:207 arrays.php:310 arrays.php:325 arrays.php:339
-#, fuzzy
 msgid "Destination IP"
 msgstr "宛先IP"
 
@@ -99,10 +96,10 @@ msgid "Input/Output Interface"
 msgstr "入出力インターフェース"
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2111
+#: functions.php:2250
 #, fuzzy
 msgid "Source AS"
-msgstr "データソース"
+msgstr "ソースなし"
 
 #: arrays.php:49 arrays.php:256 arrays.php:263 arrays.php:328
 #, fuzzy
@@ -119,7 +116,7 @@ msgstr "送信元/宛先AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2119
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
 #, fuzzy
 msgid "Source Prefix"
 msgstr "ソースプレフィックス"
@@ -150,12 +147,14 @@ msgid "132 Columns"
 msgstr "132列"
 
 #: arrays.php:64
+#, fuzzy
 msgid "Show IP Accounting Emulation"
-msgstr ""
+msgstr "IPアカウンティングエミュレーションを表示する"
 
 #: arrays.php:68
+#, fuzzy
 msgid "Any Part in Range"
-msgstr ""
+msgstr "範囲内の任意のパーツ"
 
 #: arrays.php:69
 #, fuzzy
@@ -168,12 +167,14 @@ msgid "Start Time in Range"
 msgstr "開始時間"
 
 #: arrays.php:71
+#, fuzzy
 msgid "Entirely in Range"
-msgstr ""
+msgstr "完全に範囲内"
 
 #: arrays.php:75
+#, fuzzy
 msgid "Return All Lines"
-msgstr ""
+msgstr "すべての行を返す"
 
 #: arrays.php:76 arrays.php:77 arrays.php:78 arrays.php:79 arrays.php:80
 #: arrays.php:81 arrays.php:82 arrays.php:83
@@ -194,7 +195,6 @@ msgid "%s Bytes"
 msgstr "％sバイト"
 
 #: arrays.php:104 arrays.php:383 flowview_filters.php:366
-#, fuzzy
 msgid "All"
 msgstr "すべて"
 
@@ -207,7 +207,7 @@ msgstr "送信元ポート"
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:931 functions.php:2139 functions.php:2364
+#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
 #, fuzzy
 msgid "Flows"
 msgstr "流れ"
@@ -217,18 +217,16 @@ msgstr "流れ"
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:875 functions.php:2143 functions.php:2362
-#, fuzzy
+#: functions.php:903 functions.php:2282 functions.php:2505
 msgid "Bytes"
-msgstr "Bytes"
+msgstr "バイト"
 
 #: arrays.php:173 arrays.php:179 arrays.php:186 arrays.php:192 arrays.php:198
 #: arrays.php:204 arrays.php:210 arrays.php:216 arrays.php:223 arrays.php:229
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:987 functions.php:2147 functions.php:2363
-#, fuzzy
+#: functions.php:1015 functions.php:2286 functions.php:2506
 msgid "Packets"
 msgstr "パケット"
 
@@ -239,25 +237,22 @@ msgstr "宛先IP"
 
 #: arrays.php:189 arrays.php:195 arrays.php:201 flowview_devices.php:61
 #: flowview_devices.php:340
-#, fuzzy
 msgid "Port"
 msgstr "ポート"
 
-#: arrays.php:220 arrays.php:527 functions.php:2091
+#: arrays.php:220 arrays.php:527 functions.php:2230
 #, fuzzy
 msgid "Dest IP"
 msgstr "宛先IP"
 
-#: arrays.php:226 functions.php:2083
-#, fuzzy
+#: arrays.php:226 functions.php:2222
 msgid "IP Address"
-msgstr "E メールアドレス"
+msgstr "IPアドレス"
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2127
-#, fuzzy
+#: functions.php:2266
 msgid "Protocol"
-msgstr "サーバーがサポートするプロトコルのバージョンです。"
+msgstr "プロトコル"
 
 #: arrays.php:238 arrays.php:275
 #, fuzzy
@@ -270,52 +265,45 @@ msgid "Output IF"
 msgstr "SNMP 出力の種類 (ドロップダウン)"
 
 #: arrays.php:269
-#, fuzzy
 msgid "TOS"
-msgstr "TOS"
+msgstr "利用規約"
 
 #: arrays.php:295
 #, fuzzy
 msgid "Destingation Prefix"
 msgstr "宛先プレフィックス"
 
-#: arrays.php:301 functions.php:517 functions.php:2288
-#, fuzzy
+#: arrays.php:301 functions.php:541 functions.php:2427
 msgid "N/A"
-msgstr "BNA"
+msgstr "該当なし"
 
-#: arrays.php:307 arrays.php:335 functions.php:2103
+#: arrays.php:307 arrays.php:335 functions.php:2242
 #, fuzzy
 msgid "Source IF"
-msgstr "送信元IP"
+msgstr "ソースなし"
 
 #: arrays.php:309 arrays.php:338
 #, fuzzy
 msgid "Destination IF"
 msgstr "宛先IP"
 
-#: arrays.php:312 arrays.php:337 functions.php:2095
-#, fuzzy
+#: arrays.php:312 arrays.php:337 functions.php:2234
 msgid "Source Port"
-msgstr "送信元ポート"
+msgstr "ソースポート"
 
 #: arrays.php:313 arrays.php:340
-#, fuzzy
 msgid "Destination Port"
-msgstr "宛先IP"
+msgstr "宛先ポート"
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:85 functions.php:2051
-#, fuzzy
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
 msgid "Start Time"
 msgstr "開始時間"
 
-#: arrays.php:317 arrays.php:334 functions.php:2055
-#, fuzzy
+#: arrays.php:317 arrays.php:334 functions.php:2194
 msgid "End Time"
 msgstr "終了時間"
 
 #: arrays.php:318
-#, fuzzy
 msgid "Active"
 msgstr "操作"
 
@@ -334,39 +322,35 @@ msgstr "Ts"
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:342 functions.php:2135
-#, fuzzy
+#: arrays.php:342 functions.php:2274
 msgid "Flags"
 msgstr "フラグ"
 
 #: arrays.php:347
-#, fuzzy
 msgid "Source"
-msgstr "送信元IP"
+msgstr "ソース"
 
 #: arrays.php:348
-#, fuzzy
 msgid "Destination"
-msgstr "宛先IP"
+msgstr "目的地"
 
 #: arrays.php:365
 #, fuzzy
 msgid "General Filters"
 msgstr "絞り込み条件を解除する"
 
-#: arrays.php:368 functions.php:389
-#, fuzzy
+#: arrays.php:368 functions.php:413
 msgid "Filter"
 msgstr "フィルター"
 
 #: arrays.php:369
+#, fuzzy
 msgid "The Saved Filter to display."
-msgstr ""
+msgstr "表示する保存済みフィルター。"
 
 #: arrays.php:372
-#, fuzzy
 msgid "New Filter"
-msgstr "フィルター"
+msgstr "新規フィルタ"
 
 #: arrays.php:377 flowview_filters.php:324
 #, fuzzy
@@ -374,30 +358,32 @@ msgid "Listener"
 msgstr "リスナー"
 
 #: arrays.php:378
+#, fuzzy
 msgid "The Listener to use for the Filter."
-msgstr ""
+msgstr "フィルタに使用するリスナー。"
 
 #: arrays.php:386
-#, fuzzy
 msgid "Presets"
 msgstr "プリセット"
 
 #: arrays.php:387
+#, fuzzy
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr ""
+msgstr "このフィルターが事前定義されたタイムスパンに基づいている場合は、ここで選択します。"
 
 #: arrays.php:396
+#, fuzzy
 msgid "Detailed Filter Criteria"
-msgstr ""
+msgstr "詳細なフィルター基準"
 
 #: arrays.php:399 flowview_filters.php:329
-#, fuzzy
 msgid "Report Type"
-msgstr "報告：[新]"
+msgstr "レポートのタイプ"
 
 #: arrays.php:400
+#, fuzzy
 msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "レポートの作成時にこのフィルターにデフォルトで使用するレポートタイプ。"
 
 #: arrays.php:403
 #, fuzzy
@@ -415,8 +401,9 @@ msgid "Statistical Report"
 msgstr "統計レポート"
 
 #: arrays.php:408
+#, fuzzy
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "レポートの作成時にこのフィルターにデフォルトで使用するレポートタイプの表示。"
 
 #: arrays.php:415
 #, fuzzy
@@ -424,8 +411,9 @@ msgid "Printed Report"
 msgstr "印刷レポート"
 
 #: arrays.php:416
+#, fuzzy
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr ""
+msgstr "印刷レポートを作成するときにこのフィルターにデフォルトで使用する印刷レポートタイプ。"
 
 #: arrays.php:423
 #, fuzzy
@@ -433,8 +421,9 @@ msgid "Range Rules"
 msgstr "スケジュールの管理"
 
 #: arrays.php:424
+#, fuzzy
 msgid "Constrain the Filter Data by these time filter rules."
-msgstr ""
+msgstr "これらの時間フィルター規則によってフィルターデータを制約します。"
 
 #: arrays.php:431
 #, fuzzy
@@ -446,32 +435,33 @@ msgstr "アドレス解決："
 msgid "Resolve IP Addresses to Domain Names."
 msgstr "アドレス解決："
 
-#: arrays.php:437 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:437 flowview_schedules.php:580
 msgid "Yes"
 msgstr "はい"
 
-#: arrays.php:438 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:438 flowview_schedules.php:580
 msgid "No"
 msgstr "いいえ"
 
-#: arrays.php:442 flowview_filters.php:339 functions.php:470
+#: arrays.php:442 flowview_filters.php:339 functions.php:494
 #, fuzzy
 msgid "Sort Field"
 msgstr "ソートフィールド："
 
 #: arrays.php:443
+#, fuzzy
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "フィルタのデフォルトのソートフィールド。この設定は、スケジュールされたレポートに適用されます。"
 
 #: arrays.php:450
+#, fuzzy
 msgid "Maximum Rows"
-msgstr ""
+msgstr "最大行数"
 
 #: arrays.php:451
+#, fuzzy
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "フィルタで提供する最大行。この設定は、スケジュールされたレポートに適用されます。"
 
 #: arrays.php:458
 #, fuzzy
@@ -479,8 +469,9 @@ msgid "Minimum Bytes"
 msgstr "最小バイト数"
 
 #: arrays.php:459
+#, fuzzy
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr ""
+msgstr "フィルタで考慮すべき最小合計バイト数。このバイト数より少ないフローの合計は無視されます。"
 
 #: arrays.php:468
 #, fuzzy
@@ -488,13 +479,13 @@ msgid "Protocol Filters"
 msgstr "プロトコル"
 
 #: arrays.php:471
-#, fuzzy
 msgid "Protocols"
 msgstr "プロトコル"
 
 #: arrays.php:472
+#, fuzzy
 msgid "Select the Specific Protocol for the Filter."
-msgstr ""
+msgstr "フィルタの特定のプロトコルを選択します。"
 
 #: arrays.php:479
 #, fuzzy
@@ -502,8 +493,9 @@ msgid "TCP Flags"
 msgstr "TCPフラグ"
 
 #: arrays.php:480
+#, fuzzy
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr ""
+msgstr "フィルタで検索するTCPフラグ。これは、TCPフラグのコンマ区切りリストにすることができます"
 
 #: arrays.php:487
 #, fuzzy
@@ -511,21 +503,23 @@ msgid "TOS Fields"
 msgstr "TOSフィールド"
 
 #: arrays.php:488
+#, fuzzy
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr ""
+msgstr "フィルタで検索するTOSフィールド。これは、TOSフィールドのコンマ区切りリストにすることができます"
 
 #: arrays.php:496
+#, fuzzy
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "フィルタで選択したソースIPでフィルタリングします。これは、IPv4またはIPv6アドレスのコンマ区切りリスト、またはCIDR形式（例：192.168.1.0/24）のIPv4またはIPv6アドレス範囲のコンマ区切りリストにすることができます。"
 
 #: arrays.php:503
-#, fuzzy
 msgid "Source Ports"
 msgstr "送信元ポート"
 
 #: arrays.php:504
+#, fuzzy
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr ""
+msgstr "フィルタで選択した送信元ポートでフィルタリングします。これは、送信元ポートのコンマ区切りのリストにすることができます。"
 
 #: arrays.php:511
 #, fuzzy
@@ -533,16 +527,19 @@ msgid "Source Interface"
 msgstr "ソースインタフェース"
 
 #: arrays.php:512
+#, fuzzy
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr ""
+msgstr "フィルタで選択したソースインターフェイスでフィルタします。これは、ソースインターフェイスのカンマ区切りのリストにすることができます"
 
 #: arrays.php:520
+#, fuzzy
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr ""
+msgstr "フィルタで選択した宛先ASでフィルタリングします。これは、ソースASのコンマ区切りリストにすることができます"
 
 #: arrays.php:528
+#, fuzzy
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "フィルタで選択した宛先IPでフィルタリングします。これは、IPv4またはIPv6アドレスのコンマ区切りリスト、またはCIDR形式（例：192.168.1.0/24）のIPv4またはIPv6アドレス範囲のコンマ区切りリストにすることができます。"
 
 #: arrays.php:535
 #, fuzzy
@@ -550,8 +547,9 @@ msgid "Dest Ports"
 msgstr "宛先ポート"
 
 #: arrays.php:536
+#, fuzzy
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr ""
+msgstr "フィルタで選択した宛先ポートでフィルタリングします。これは、推定ポートのコンマ区切りリストにすることができます。"
 
 #: arrays.php:543
 #, fuzzy
@@ -559,25 +557,25 @@ msgid "Dest Interface"
 msgstr "宛先インターフェース"
 
 #: arrays.php:544
+#, fuzzy
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr ""
+msgstr "フィルタで選択した宛先インターフェイスでフィルタします。これは、推定インターフェースのコンマ区切りリストにすることができます。"
 
-#: arrays.php:551 functions.php:2115
+#: arrays.php:551 functions.php:2254
 #, fuzzy
 msgid "Dest AS"
 msgstr "Dest AS"
 
 #: arrays.php:552
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr ""
-
-#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:34
 #, fuzzy
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "フィルタで選択した宛先ASでフィルタリングします。これは、DestimationASのコンマ区切りリストにすることができます"
+
+#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:35
 msgid "Delete"
 msgstr "削除"
 
 #: flowview_devices.php:38
-#, fuzzy
 msgid "Device Name"
 msgstr "デバイス名"
 
@@ -587,12 +585,14 @@ msgid "Name of the device to be displayed."
 msgstr "表示されるデバイスの名前"
 
 #: flowview_devices.php:44
+#, fuzzy
 msgid "Collection Medhod"
-msgstr ""
+msgstr "コレクションメドホッド"
 
 #: flowview_devices.php:45
+#, fuzzy
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr ""
+msgstr "2つのサポート収集方法があります。1つはレガシーフローツールバイナリを利用し、もう1つはCacti独自のPHPベースのフローストリームサーバーを利用します。"
 
 #: flowview_devices.php:52
 #, fuzzy
@@ -624,13 +624,11 @@ msgstr "また、残りのファイルは必ずNet-Flow Captureの場所から�
 msgid "You must select at least one device."
 msgstr "少なくとも1つのデバイスを選択する必要があります。"
 
-#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:218
-#, fuzzy
+#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:246
 msgid "Continue"
 msgstr "続ける"
 
-#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:226
-#, fuzzy
+#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:254
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -649,46 +647,41 @@ msgstr "端末[新規]"
 msgid "FlowView Listeners"
 msgstr "FlowViewリスナー"
 
-#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:413
-#, fuzzy
+#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:442
 msgid "Search"
 msgstr "検索"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
-#: functions.php:426
-#, fuzzy
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
+#: functions.php:450
 msgid "Go"
 msgstr "Go"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
 #, fuzzy
 msgid "Set/Refresh Filters"
 msgstr "フィルタの設定/更新"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
-#: functions.php:427
-#, fuzzy
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
+#: functions.php:451
 msgid "Clear"
 msgstr "クリア"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
-#, fuzzy
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
 msgid "Clear Filters"
 msgstr "絞り込み条件を解除する"
 
-#: flowview_devices.php:328 setup.php:148 setup.php:195
+#: flowview_devices.php:328 setup.php:181 setup.php:228
 #, fuzzy
 msgid "Listeners"
 msgstr "リスナー"
 
 #: flowview_devices.php:337
-#, fuzzy
 msgid "Name"
 msgstr "名前"
 
 #: flowview_devices.php:338
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 #: flowview_devices.php:339
 #, fuzzy
@@ -697,41 +690,39 @@ msgstr "から許可されて"
 
 #: flowview_devices.php:341
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 #: flowview_devices.php:342
+#, fuzzy
 msgid "Observed Listen"
-msgstr ""
+msgstr "観察された聞く"
 
 #: flowview_devices.php:354
 msgid "Cacti"
-msgstr ""
+msgstr "サボテン"
 
 #: flowview_devices.php:357
 msgid "Down"
-msgstr ""
+msgstr "下"
 
 #: flowview_devices.php:357
 msgid "Up"
-msgstr ""
+msgstr "上"
 
 #: flowview_devices.php:363
 #, fuzzy
 msgid "No Flowview Listeners"
 msgstr "FlowViewリスナー"
 
-#: flowview_filters.php:35 flowview_schedules.php:33
-#, fuzzy
+#: flowview_filters.php:35 flowview_schedules.php:34
 msgid "Send Now"
 msgstr "今すぐ送信します。"
 
-#: flowview_filters.php:37 flowview_schedules.php:35
-#, fuzzy
+#: flowview_filters.php:37 flowview_schedules.php:36
 msgid "Disable"
 msgstr "無効"
 
-#: flowview_filters.php:38 flowview_schedules.php:36
-#, fuzzy
+#: flowview_filters.php:38 flowview_schedules.php:37
 msgid "Enable"
 msgstr "有効"
 
@@ -761,199 +752,205 @@ msgid "FlowView Filters"
 msgstr "フローフィルター"
 
 #: flowview_filters.php:220
+#, fuzzy
 msgid "FlowView Filters [ Add Devices before Filters ]"
-msgstr ""
+msgstr "FlowViewフィルター[フィルターの前にデバイスを追加]"
 
-#: flowview_filters.php:236 flowview_filters.php:350 setup.php:149
-#: setup.php:251
-#, fuzzy
+#: flowview_filters.php:236 flowview_filters.php:350 setup.php:182
+#: setup.php:284
 msgid "Filters"
-msgstr "ログのフィルター"
+msgstr "フィルター"
 
-#: flowview_filters.php:240 flowview_schedules.php:423
-#, fuzzy
+#: flowview_filters.php:240 flowview_schedules.php:452
 msgid "Default"
 msgstr "デフォルト"
 
-#: flowview_filters.php:319 flowview_schedules.php:70
-#: flowview_schedules.php:506
-#, fuzzy
+#: flowview_filters.php:319 flowview_schedules.php:73
+#: flowview_schedules.php:535
 msgid "Filter Name"
 msgstr "絞り込み検索名"
 
 #: flowview_filters.php:334
-#, fuzzy
 msgid "ID"
-msgstr "IDPR"
+msgstr "ID"
 
 #: flowview_filters.php:344
-#, fuzzy
 msgid "Resolution"
-msgstr "ホスト名解決"
+msgstr "解像度"
 
-#: flowview_schedules.php:40
+#: flowview_schedules.php:41
 #, fuzzy
 msgid "Every Hour"
 msgstr "毎時"
 
-#: flowview_schedules.php:41 flowview_schedules.php:42
-#: flowview_schedules.php:43 flowview_schedules.php:44
+#: flowview_schedules.php:42 flowview_schedules.php:43
+#: flowview_schedules.php:44 flowview_schedules.php:45
 #, fuzzy, php-format
 msgid "Every %d Hours"
 msgstr "％d時間ごと"
 
-#: flowview_schedules.php:45
-#, fuzzy
+#: flowview_schedules.php:46
 msgid "Every Day"
 msgstr "毎日"
 
-#: flowview_schedules.php:46
-#, fuzzy
+#: flowview_schedules.php:47
 msgid "Every Week"
 msgstr "毎週"
 
-#: flowview_schedules.php:47
+#: flowview_schedules.php:48
 #, fuzzy, php-format
 msgid "Every %d Weeks, 2"
 msgstr "％d週ごと、2"
 
-#: flowview_schedules.php:48
-#, fuzzy
+#: flowview_schedules.php:49
 msgid "Every Month"
 msgstr "毎月"
 
-#: flowview_schedules.php:53
-#, fuzzy
+#: flowview_schedules.php:56
 msgid "Title"
 msgstr "題名"
 
-#: flowview_schedules.php:55
-#, fuzzy
+#: flowview_schedules.php:58
 msgid "New Schedule"
 msgstr "新規スケジュール追加"
 
-#: flowview_schedules.php:56
+#: flowview_schedules.php:59
 #, fuzzy
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "FlowViewスケジュールのレポートタイトルを入力してください。"
 
-#: flowview_schedules.php:62 flowview_schedules.php:526
-#, fuzzy
+#: flowview_schedules.php:65 flowview_schedules.php:555
 msgid "Enabled"
 msgstr "有効"
 
-#: flowview_schedules.php:65
+#: flowview_schedules.php:68
 #, fuzzy
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "このNetFlowスキャンが送信されるかどうか。"
 
-#: flowview_schedules.php:71
+#: flowview_schedules.php:74
 #, fuzzy
 msgid "Name of the query to run."
 msgstr "実行するクエリの名前"
 
-#: flowview_schedules.php:76
+#: flowview_schedules.php:79
 #, fuzzy
 msgid "Send Interval"
 msgstr "送信間隔"
 
-#: flowview_schedules.php:77
+#: flowview_schedules.php:80
 #, fuzzy
 msgid "How often to send this NetFlow Report?"
 msgstr "このNetFlowレポートを送信する頻度"
 
-#: flowview_schedules.php:86
+#: flowview_schedules.php:89
 #, fuzzy
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr "これは、NetFlowスキャンEメールを送信する最初の日時です。今後のすべてのEメールは、この時間に上記の間隔を加えて計算されます。"
 
-#: flowview_schedules.php:94
-#, fuzzy
+#: flowview_schedules.php:97
 msgid "Email Addresses"
 msgstr "E メールアドレス"
 
-#: flowview_schedules.php:95
+#: flowview_schedules.php:98
 #, fuzzy
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "このNetFlowスキャンを送信する電子メールアドレス（コマンド区切り）。"
 
-#: flowview_schedules.php:187
+#: flowview_schedules.php:105 setup.php:352
+#, fuzzy
+msgid "Format File to Use"
+msgstr "使用するファイルのフォーマット"
+
+#: flowview_schedules.php:108 setup.php:355
+#, fuzzy
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "使用するカスタムhtmlラッパーとCSSファイルを選択します。このファイルには、レポートをラップアラウンドするためのhtmlとCSSの両方が含まれています。単なるCSS以外のものが含まれている場合は、特別なものを配置する必要があります<REPORT>ファイル内のタグ。このフォーマットタグは、レポートの内容に置き換えられます。これらのファイルは「formats」ディレクトリにあります。"
+
+#: flowview_schedules.php:177
+#, fuzzy, php-format
+msgid "Sent Scheduled Report %s in Background."
+msgstr "スケジュールされたレポート%sをバックグラウンドで送信しました。"
+
+#: flowview_schedules.php:180
+#, fuzzy
+msgid "Reports will arrive once Complete."
+msgstr "完了するとレポートが届きます。"
+
+#: flowview_schedules.php:215
 #, fuzzy
 msgid "Click 'Continue' to delete the following Schedule(s)."
 msgstr "次のスケジュールを削除するには、[続行]をクリックしてください。"
 
-#: flowview_schedules.php:194
+#: flowview_schedules.php:222
 #, fuzzy
 msgid "Click 'Continue' to send the following Schedule(s) now."
 msgstr "次のスケジュールを今すぐ送信するには、[続行]をクリックしてください。"
 
-#: flowview_schedules.php:201
+#: flowview_schedules.php:229
 #, fuzzy
 msgid "Click 'Continue' to Disable the following Schedule(s)."
 msgstr "次のスケジュールを無効にするには、[続行]をクリックします。"
 
-#: flowview_schedules.php:208
+#: flowview_schedules.php:236
 #, fuzzy
 msgid "Click 'Continue' to Enable the following Schedule(s)."
 msgstr "次のスケジュールを有効にするには、[続行]をクリックします。"
 
-#: flowview_schedules.php:215
+#: flowview_schedules.php:243
 #, fuzzy
 msgid "You must select at least one schedule."
 msgstr "少なくとも1つのスケジュールを選択する必要があります。"
 
-#: flowview_schedules.php:308
+#: flowview_schedules.php:337
 #, fuzzy, php-format
 msgid "Report: [edit: %s]"
 msgstr "報告：[編集：％s]"
 
-#: flowview_schedules.php:310
+#: flowview_schedules.php:339
 #, fuzzy
 msgid "Report: [new]"
 msgstr "報告：[新]"
 
-#: flowview_schedules.php:331 functions.php:563
+#: flowview_schedules.php:360 functions.php:587
 #, fuzzy
 msgid "Start Date Selector"
 msgstr "開始日セレクタ"
 
-#: flowview_schedules.php:401
+#: flowview_schedules.php:430
 #, fuzzy
 msgid "FlowView Schedules"
 msgstr "FlowViewスケジュール"
 
-#: flowview_schedules.php:403
-msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr ""
-
-#: flowview_schedules.php:419 flowview_schedules.php:531 setup.php:150
-#: setup.php:223
+#: flowview_schedules.php:432
 #, fuzzy
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "FlowViewスケジュール[スケジュールの前にデバイスを追加]"
+
+#: flowview_schedules.php:448 flowview_schedules.php:560 setup.php:183
+#: setup.php:256
 msgid "Schedules"
 msgstr "スケジュール"
 
-#: flowview_schedules.php:502
+#: flowview_schedules.php:531
 #, fuzzy
 msgid "Schedule Title"
 msgstr "スケジュールタイトル"
 
-#: flowview_schedules.php:510
-#, fuzzy
+#: flowview_schedules.php:539
 msgid "Interval"
 msgstr "間隔"
 
-#: flowview_schedules.php:514
-#, fuzzy
+#: flowview_schedules.php:543
 msgid "Start Date"
 msgstr "開始日"
 
-#: flowview_schedules.php:518
+#: flowview_schedules.php:547
 #, fuzzy
 msgid "Next Send"
 msgstr "次に送る"
 
-#: flowview_schedules.php:522
-#, fuzzy
+#: flowview_schedules.php:551
 msgid "Email"
 msgstr "メールアドレス"
 
@@ -972,467 +969,480 @@ msgstr "報告：[編集：％s]"
 msgid "Filter: [new]"
 msgstr "報告：[新]"
 
-#: functions.php:363
+#: functions.php:387
+#, fuzzy
 msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr ""
+msgstr "未定義のフィルター[詳細を取得するにはフィルターを選択]"
 
-#: functions.php:373
-#, php-format
+#: functions.php:397
+#, fuzzy, php-format
 msgid "Statistical Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "統計レポート：%s [以下に指定されているオーバーライドを含む]"
 
-#: functions.php:375
-#, php-format
+#: functions.php:399
+#, fuzzy, php-format
 msgid "Printed Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "印刷されたレポート：%s [以下に指定されているオーバーライドを含む]"
 
-#: functions.php:393
+#: functions.php:417
 #, fuzzy
 msgid "Select a Filter"
 msgstr "印刷レポート"
 
-#: functions.php:408
-#, fuzzy
+#: functions.php:432
 msgid "Exclude"
 msgstr "除外する"
 
-#: functions.php:412
-#, fuzzy
+#: functions.php:436
 msgid "None"
 msgstr "なし"
 
-#: functions.php:413
+#: functions.php:437
 #, fuzzy
 msgid "Top Sample"
 msgstr "トップサンプル"
 
-#: functions.php:414
+#: functions.php:438
 #, fuzzy
 msgid "Top 2 Samples"
 msgstr "上位2サンプル"
 
-#: functions.php:415
+#: functions.php:439
 #, fuzzy
 msgid "Top 3 Samples"
 msgstr "上位3サンプル"
 
-#: functions.php:416
+#: functions.php:440
 #, fuzzy
 msgid "Top 4 Samples"
 msgstr "上位4サンプル"
 
-#: functions.php:417
+#: functions.php:441
 #, fuzzy
 msgid "Top 5 Samples"
 msgstr "上位5サンプル"
 
-#: functions.php:420
+#: functions.php:444
+#, fuzzy
 msgid "Show only Domains on Charts Below"
-msgstr ""
+msgstr "下のグラフにドメインのみを表示"
 
-#: functions.php:422
+#: functions.php:446
+#, fuzzy
 msgid "Domains Only"
-msgstr ""
+msgstr "ドメインのみ"
 
-#: functions.php:426
-#, fuzzy
+#: functions.php:450
 msgid "Apply Filter"
-msgstr "フローフィルター"
+msgstr "絞り込む"
 
-#: functions.php:427
-#, fuzzy
+#: functions.php:451
 msgid "Clear Filter"
-msgstr "絞り込み条件を解除する"
+msgstr "フィルターをクリア"
 
-#: functions.php:428
+#: functions.php:452
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
-#: functions.php:428
-msgid "Edit Current Filter"
-msgstr ""
-
-#: functions.php:429
+#: functions.php:452
 #, fuzzy
+msgid "Edit Current Filter"
+msgstr "現在のフィルターを編集する"
+
+#: functions.php:453
 msgid "Save"
 msgstr "保存"
 
-#: functions.php:429
-msgid "Save Overrides to Selected Filter"
-msgstr ""
-
-#: functions.php:437
+#: functions.php:453
 #, fuzzy
-msgid "Report"
-msgstr "報告：％s"
+msgid "Save Overrides to Selected Filter"
+msgstr "オーバーライドを選択したフィルターに保存"
 
-#: functions.php:448
+#: functions.php:461
+msgid "Report"
+msgstr "レポート"
+
+#: functions.php:472
 #, fuzzy, php-format
 msgid "Statistical: %s"
 msgstr "統計"
 
-#: functions.php:454
+#: functions.php:478
 #, fuzzy, php-format
 msgid "Printed: %s"
 msgstr "印刷された"
 
-#: functions.php:458 functions.php:475
+#: functions.php:482 functions.php:499
 #, fuzzy
 msgid "Select a Filter First"
 msgstr "印刷レポート"
 
-#: functions.php:506
+#: functions.php:530
 msgid "Lines"
-msgstr ""
+msgstr "直線"
 
-#: functions.php:524
-msgid "Octets"
-msgstr ""
-
-#: functions.php:542
-msgid "Timespan"
-msgstr ""
-
-#: functions.php:551
+#: functions.php:548
 #, fuzzy
+msgid "Octets"
+msgstr "オクテット"
+
+#: functions.php:566
+msgid "Timespan"
+msgstr "スパン"
+
+#: functions.php:575
 msgid "Custom"
 msgstr "カスタム"
 
-#: functions.php:557
+#: functions.php:581
 msgid "From"
-msgstr ""
+msgstr "から"
 
-#: functions.php:566
+#: functions.php:590
 msgid "To"
-msgstr ""
+msgstr "まで"
 
-#: functions.php:572
+#: functions.php:596
 #, fuzzy
 msgid "End Date Selector"
 msgstr "終了日セレクタ"
 
-#: functions.php:575
-msgid "Shift Time Backward"
-msgstr ""
-
-#: functions.php:578
-msgid "Define Shifting Interval"
-msgstr ""
-
-#: functions.php:591
-msgid "Shift Time Forward"
-msgstr ""
-
-#: functions.php:598
+#: functions.php:599
 #, fuzzy
-msgid "Show/Hide"
-msgstr "子テーマ属性の表示/非表示"
+msgid "Shift Time Backward"
+msgstr "時間を後方にシフト"
 
 #: functions.php:602
 #, fuzzy
+msgid "Define Shifting Interval"
+msgstr "シフト間隔を定義する"
+
+#: functions.php:615
+#, fuzzy
+msgid "Shift Time Forward"
+msgstr "時間を前にシフト"
+
+#: functions.php:622
+msgid "Show/Hide"
+msgstr "表示/非表示"
+
+#: functions.php:626
 msgid "Table"
 msgstr "テーブル"
 
-#: functions.php:606
+#: functions.php:630
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "バイトバー"
 
-#: functions.php:610
+#: functions.php:634
 #, fuzzy
 msgid "Packets Bar"
 msgstr "パケットバー"
 
-#: functions.php:614
+#: functions.php:638
 #, fuzzy
 msgid "Flows Bar"
 msgstr "フローバー"
 
-#: functions.php:1126
-#, php-format
+#: functions.php:1178
+#, fuzzy, php-format
 msgid "Client/Private (%s)"
-msgstr ""
+msgstr "クライアント/プライベート（%s）"
 
-#: functions.php:1128
+#: functions.php:1180
+#, fuzzy
 msgid "icmp (0)"
-msgstr ""
+msgstr "icmp（0）"
 
-#: functions.php:1139
+#: functions.php:1191
 #, fuzzy, php-format
 msgid "Unknown (%s)"
 msgstr "不明"
 
-#: functions.php:1170
+#: functions.php:1222
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "サボテンFlowview"
 
-#: functions.php:1176
+#: functions.php:1228
 #, fuzzy, php-format
 msgid "Netflow - %s"
 msgstr "Netflow  - ％"
 
-#: functions.php:1340
-#, php-format
+#: functions.php:1419
+#, fuzzy, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr ""
+msgstr "サブネットフィルター：%sは値CIDR形式ではありません"
 
-#: functions.php:1688 functions.php:1689 functions.php:1690 functions.php:1691
-#: functions.php:1692 functions.php:1693 functions.php:1694 functions.php:1695
-#: functions.php:1696 functions.php:1697 functions.php:1698 functions.php:1699
-#: functions.php:1700 functions.php:1701 functions.php:1702 functions.php:1703
-#: functions.php:1704 functions.php:1705 functions.php:1706 functions.php:1707
-#: functions.php:1708 functions.php:1709 functions.php:1710 functions.php:1711
-#: functions.php:1712 functions.php:1713
+#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
+#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
+#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
+#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
+#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
+#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
+#: functions.php:1851 functions.php:1852
 #, fuzzy, php-format
 msgid "%d - %d Bytes"
 msgstr "％sバイト"
 
-#: functions.php:1714
+#: functions.php:1853
 #, fuzzy, php-format
 msgid "> %d Bytes"
 msgstr "％sバイト"
 
-#: functions.php:2059
+#: functions.php:2198
 #, fuzzy
 msgid "Source DNS"
 msgstr "データソース"
 
-#: functions.php:2063
+#: functions.php:2202
 #, fuzzy
 msgid "Source Root DNS"
 msgstr "データソース"
 
-#: functions.php:2067
+#: functions.php:2206
 #, fuzzy
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php:2071
+#: functions.php:2210
 #, fuzzy
 msgid "Dest Root DNS"
 msgstr "宛先ポート"
 
-#: functions.php:2075
+#: functions.php:2214
 #, fuzzy
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php:2079
+#: functions.php:2218
+#, fuzzy
 msgid "Root DNS"
-msgstr ""
+msgstr "ルートDNS"
 
-#: functions.php:2099
+#: functions.php:2238
 #, fuzzy
 msgid "Dest Port"
 msgstr "宛先ポート"
 
-#: functions.php:2107
+#: functions.php:2246
 #, fuzzy
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php:2123
+#: functions.php:2262
 #, fuzzy
 msgid "Dest Prefix"
 msgstr "宛先プレフィックス"
 
-#: functions.php:2131
+#: functions.php:2270
+#, fuzzy
 msgid "Type of Service"
-msgstr ""
+msgstr "サービスの種類"
 
-#: functions.php:2150
+#: functions.php:2289
 #, fuzzy
 msgid "Bytes/Packet"
 msgstr "パケット"
 
-#: functions.php:2335
-msgid "-- unresolved --"
-msgstr ""
-
-#: functions.php:2441
-#, php-format
-msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr ""
-
-#: functions.php:2452
-msgid "Low Delay"
-msgstr ""
-
-#: functions.php:2453
-msgid "Throughput"
-msgstr ""
-
-#: functions.php:2454
-msgid "Reliability"
-msgstr ""
-
-#: functions.php:2455
-msgid "Mincost"
-msgstr ""
-
-#: functions.php:2459
-msgid "Net Control"
-msgstr ""
-
-#: functions.php:2460
-msgid "Internet Control"
-msgstr ""
-
-#: functions.php:2461
-msgid "Critic ECP"
-msgstr ""
-
-#: functions.php:2462
-msgid "Flash Override"
-msgstr ""
-
-#: functions.php:2463
-msgid "Flash"
-msgstr ""
-
-#: functions.php:2464
-msgid "Immediate"
-msgstr ""
-
-#: functions.php:2465
-msgid "Priority"
-msgstr ""
-
-#: functions.php:2466
-msgid "Routine"
-msgstr ""
-
-#: functions.php:2506
+#: functions.php:2478
 #, fuzzy
-msgid "Summary Statistics"
-msgstr "要約統計"
+msgid "-- unresolved --"
+msgstr "-未解決-"
 
-#: functions.php:2517
+#: functions.php:2584
+#, fuzzy, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "ブール値：%s、数値：%s、16進数：%s"
+
+#: functions.php:2595
+#, fuzzy
+msgid "Low Delay"
+msgstr "低遅延"
+
+#: functions.php:2596
+#, fuzzy
+msgid "Throughput"
+msgstr "スループット"
+
+#: functions.php:2597
+#, fuzzy
+msgid "Reliability"
+msgstr "信頼性"
+
+#: functions.php:2598
+#, fuzzy
+msgid "Mincost"
+msgstr "最小コスト"
+
+#: functions.php:2602
+#, fuzzy
+msgid "Net Control"
+msgstr "ネットコントロール"
+
+#: functions.php:2603
+#, fuzzy
+msgid "Internet Control"
+msgstr "インターネット制御"
+
+#: functions.php:2604
+#, fuzzy
+msgid "Critic ECP"
+msgstr "評論家ECP"
+
+#: functions.php:2605
+#, fuzzy
+msgid "Flash Override"
+msgstr "フラッシュオーバーライド"
+
+#: functions.php:2606
+msgid "Flash"
+msgstr "フラッシュ"
+
+#: functions.php:2607
+msgid "Immediate"
+msgstr "即時"
+
+#: functions.php:2608
+msgid "Priority"
+msgstr "優先"
+
+#: functions.php:2609
+#, fuzzy
+msgid "Routine"
+msgstr "ルーチン"
+
+#: functions.php:2649
+msgid "Summary Statistics"
+msgstr "要約統計量"
+
+#: functions.php:2660
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "IPパケットサイズ分布（％）"
 
-#: functions.php:2522
+#: functions.php:2665
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "フロー分布あたりのパケット数（％）"
 
-#: functions.php:2527
+#: functions.php:2670
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "フロー分布ごとのオクテット（％）"
 
-#: functions.php:2532
+#: functions.php:2675
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "流動時間分布（％）"
 
-#: functions.php:2715
+#: functions.php:2858
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "統計レポートまたは印刷レポートを選択してください。"
 
-#: functions.php:2719
+#: functions.php:2862
 #, fuzzy
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "統計レポートまたは印刷レポートのみを選択してください（両方ではありません）。"
 
-#: functions.php:2723
+#: functions.php:2866
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "日付が無効です。終了日/時刻が開始日/時刻より前です。"
 
-#: functions.php:2734 functions.php:2739
+#: functions.php:2877 functions.php:2882
 #, fuzzy
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "送信元アドレスのIPが無効です。 <br> （ '192.168.0.1'の形式でなければなりません）"
 
-#: functions.php:2746 functions.php:2750 functions.php:2754
+#: functions.php:2889 functions.php:2893 functions.php:2897
 #, fuzzy
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "送信元アドレスのサブネットが無効です。 <br> （ '192.168.0.1/255.255.255.0'または '192.168.0.1/24'の形式にしてください）"
 
-#: functions.php:2768 functions.php:2772
+#: functions.php:2911 functions.php:2915
 #, fuzzy
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "宛先アドレスのIPが無効です。 <br> （ '192.168.0.1'の形式でなければなりません）"
 
-#: functions.php:2778 functions.php:2782 functions.php:2786
+#: functions.php:2921 functions.php:2925 functions.php:2929
 #, fuzzy
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "宛先アドレスに無効なサブネットです。 <br> （ '192.168.0.1/255.255.255.0'または '192.168.0.1/24'の形式にしてください）"
 
-#: functions.php:2804
+#: functions.php:2947
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "ソースインタフェースの値が無効です。"
 
-#: functions.php:2820
+#: functions.php:2963
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "送信元ポートの値が無効です。 （0  -  65535）"
 
-#: functions.php:2836
+#: functions.php:2979
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Source ASの値が無効です。 （0  -  65535）"
 
-#: functions.php:2852
+#: functions.php:2995
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "宛先インタフェースの値が無効です。"
 
-#: functions.php:2868
+#: functions.php:3011
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "宛先ポートの値が無効です。 （0  -  65535）"
 
-#: functions.php:2884
+#: functions.php:3027
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "宛先ASの値が無効です。 （0  -  65535）"
 
-#: functions.php:2900
+#: functions.php:3043
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "プロトコルの値が無効です。 （1〜255）"
 
-#: functions.php:2912
+#: functions.php:3055
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "TCPフラグの値が無効です。 （例：0x1b、0x1b / SA、SA / SA）"
 
-#: functions.php:2921
+#: functions.php:3064
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "カットオフオクテットの値が無効です。"
 
-#: functions.php:2928
+#: functions.php:3071
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "カットオフラインの値が無効です。"
 
-#: functions.php:2935
+#: functions.php:3078
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "ソートフィールドの値が無効です。"
 
-#: functions.php:2962
+#: functions.php:3105
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "％sタイプのFlowViewチャートは％sです"
 
-#: functions.php:3257
+#: functions.php:3400
 #, fuzzy
 msgid "Total Flows"
 msgstr "最大流量："
 
-#: functions.php:3262
+#: functions.php:3405
+#, fuzzy
 msgid "Bytes Exchanged"
-msgstr ""
+msgstr "交換されたバイト"
 
-#: functions.php:3266
+#: functions.php:3409
 #, fuzzy
 msgid "Packets Examined"
 msgstr "パケットバー"
@@ -1447,733 +1457,735 @@ msgstr "プラグイン - >フロービューア"
 msgid "Plugin -> Flow Admin"
 msgstr "プラグイン - > Flow Admin"
 
-#: setup.php:141
+#: setup.php:174
 #, fuzzy
 msgid "The Filter has been Deleted"
 msgstr "フィルタは削除されました"
 
-#: setup.php:142
+#: setup.php:175
 #, fuzzy
 msgid "The Filter has been Updated"
 msgstr "フィルタが更新されました"
 
-#: setup.php:147
+#: setup.php:180
 msgid "Import/Export"
-msgstr ""
+msgstr "インポート/エクスポート"
 
-#: setup.php:148 setup.php:149 setup.php:150 setup.php:155 setup.php:286
-#: setup.php:288
+#: setup.php:181 setup.php:182 setup.php:183 setup.php:188 setup.php:319
+#: setup.php:321
 #, fuzzy
 msgid "FlowView"
 msgstr "FlowView"
 
-#: setup.php:158
+#: setup.php:191
+#, fuzzy
 msgid "Normal User"
-msgstr ""
+msgstr "通常のユーザー"
 
-#: setup.php:159
+#: setup.php:192
 msgid "System Administration"
-msgstr ""
+msgstr "2. システム管理"
 
-#: setup.php:167 setup.php:188 setup.php:310
+#: setup.php:200 setup.php:221 setup.php:347
 #, fuzzy
 msgid "Flow Viewer"
 msgstr "フロービューア"
 
-#: setup.php:174
-#, fuzzy
+#: setup.php:207
 msgid "(view)"
-msgstr "表示"
+msgstr "(表示)"
 
-#: setup.php:181 setup.php:209 setup.php:237 setup.php:265
+#: setup.php:214 setup.php:242 setup.php:270 setup.php:298
 #, fuzzy
 msgid "(save)"
 msgstr "保存"
 
-#: setup.php:202 setup.php:230 setup.php:258
-#, fuzzy
+#: setup.php:235 setup.php:263 setup.php:291
 msgid "(edit)"
 msgstr "(編集)"
 
-#: setup.php:216 setup.php:244 setup.php:272
+#: setup.php:249 setup.php:277 setup.php:305
 #, fuzzy
 msgid "(actions)"
-msgstr "操作"
+msgstr "(操作)"
 
-#: setup.php:314
+#: setup.php:359
+#, fuzzy
 msgid "Data Retention Policy"
-msgstr ""
+msgstr "データ保持ポリシー"
 
-#: setup.php:315
+#: setup.php:360
+#, fuzzy
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr ""
+msgstr "Cactiがパーティション化されたフローテーブルを維持する時間。"
 
-#: setup.php:318
+#: setup.php:363
 #, fuzzy, php-format
 msgid "%d Week"
 msgstr "％d週"
 
-#: setup.php:319 setup.php:320
+#: setup.php:364 setup.php:365
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "％d週"
 
-#: setup.php:321
+#: setup.php:366
 #, fuzzy, php-format
 msgid "%d Month"
 msgstr "％d月"
 
-#: setup.php:322 setup.php:323 setup.php:324 setup.php:325
+#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
 #, fuzzy, php-format
 msgid "%d Months"
 msgstr "％d月"
 
-#: setup.php:326
+#: setup.php:371
 #, fuzzy, php-format
 msgid "%d Year"
 msgstr "％d年"
 
-#: setup.php:331
-msgid "Database Partitioning Scheme"
-msgstr ""
-
-#: setup.php:332
-msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr ""
-
-#: setup.php:335
-msgid "Daily"
-msgstr ""
-
-#: setup.php:336
-msgid "Hourly"
-msgstr ""
-
-#: setup.php:342
+#: setup.php:376
 #, fuzzy
+msgid "Database Partitioning Scheme"
+msgstr "データベース分割スキーム"
+
+#: setup.php:377
+#, fuzzy
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "1分あたりのフロー数によっては、1日あたりより多くのテーブルが必要になる場合があります。"
+
+#: setup.php:380
+msgid "Daily"
+msgstr "毎日"
+
+#: setup.php:381
+msgid "Hourly"
+msgstr "一時間ごと"
+
+#: setup.php:387
 msgid "Misc"
 msgstr "その他"
 
 #, fuzzy
-#~ msgid "TCP"
-#~ msgstr "TCP"
-
-#, fuzzy
-#~ msgid "UDP"
-#~ msgstr "UDP"
-
-#, fuzzy
-#~ msgid "ICMP"
-#~ msgstr "ICMP"
-
-#, fuzzy
-#~ msgid "IGMP"
-#~ msgstr "IGMP"
-
-#, fuzzy
-#~ msgid "GGP"
-#~ msgstr "GGP"
-
-#, fuzzy
-#~ msgid "IPENCAP"
-#~ msgstr "IPENCAP"
-
-#, fuzzy
-#~ msgid "ST"
-#~ msgstr "ST"
-
-#, fuzzy
-#~ msgid "CBT"
-#~ msgstr "CBT"
-
-#, fuzzy
-#~ msgid "EGP"
-#~ msgstr "EGP"
-
-#, fuzzy
-#~ msgid "IGP"
-#~ msgstr "IGP"
-
-#, fuzzy
-#~ msgid "BBN-RCC-MON"
-#~ msgstr "BBN-RCC-MON"
-
-#, fuzzy
-#~ msgid "NVP-II"
-#~ msgstr "NVP-II"
-
-#, fuzzy
-#~ msgid "PUP"
-#~ msgstr "子犬"
-
-#, fuzzy
-#~ msgid "ARGUS"
-#~ msgstr "ARGUS"
-
-#, fuzzy
-#~ msgid "EMCON"
-#~ msgstr "EMCON"
-
-#, fuzzy
-#~ msgid "XNET"
-#~ msgstr "XNET"
-
-#, fuzzy
-#~ msgid "CHAOS"
-#~ msgstr "混沌"
-
-#, fuzzy
-#~ msgid "MUX"
-#~ msgstr "MUX"
-
-#, fuzzy
-#~ msgid "DCN-MEAS"
-#~ msgstr "DCN-MEAS"
-
-#, fuzzy
-#~ msgid "HMP"
-#~ msgstr "HMP"
-
-#, fuzzy
-#~ msgid "PRM"
-#~ msgstr "PRM"
-
-#, fuzzy
-#~ msgid "XNS-IDP"
-#~ msgstr "XNS-IDP"
-
-#, fuzzy
-#~ msgid "TRUNK-1"
-#~ msgstr "トランク-1"
-
-#, fuzzy
-#~ msgid "TRUNK-2"
-#~ msgstr "トランク-2"
-
-#, fuzzy
-#~ msgid "LEAF-1"
-#~ msgstr "リーフ-1"
-
-#, fuzzy
-#~ msgid "LEAF-2"
-#~ msgstr "リーフ-2"
-
-#, fuzzy
-#~ msgid "RDP"
-#~ msgstr "RDP"
-
-#, fuzzy
-#~ msgid "IRTP"
-#~ msgstr "IRTP"
-
-#, fuzzy
-#~ msgid "ISO-TP4"
-#~ msgstr "ISO-TP4"
-
-#, fuzzy
-#~ msgid "NETBLT"
-#~ msgstr "NETBLT"
-
-#, fuzzy
-#~ msgid "MFE-NSP"
-#~ msgstr "MFE-NSP"
-
-#, fuzzy
-#~ msgid "MERIT-INP"
-#~ msgstr "メリットイン"
-
-#, fuzzy
-#~ msgid "DCCP"
-#~ msgstr "DCCP"
-
-#, fuzzy
-#~ msgid "3PC"
-#~ msgstr "3PC"
-
-#, fuzzy
-#~ msgid "IDPR"
-#~ msgstr "IDPR"
-
-#, fuzzy
-#~ msgid "XTP"
-#~ msgstr "XTP"
-
-#, fuzzy
-#~ msgid "DDP"
-#~ msgstr "DDP"
-
-#, fuzzy
-#~ msgid "IDPR-CMTP"
-#~ msgstr "IDPR-CMTP"
-
-#, fuzzy
-#~ msgid "TP++"
-#~ msgstr "TP ++"
-
-#, fuzzy
-#~ msgid "IL"
-#~ msgstr "イリノイ州"
-
-#, fuzzy
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#, fuzzy
-#~ msgid "SDRP"
-#~ msgstr "SDRP"
-
-#, fuzzy
-#~ msgid "IPv6-Route"
-#~ msgstr "IPv6ルート"
-
-#, fuzzy
-#~ msgid "IPv6-Frag"
-#~ msgstr "IPv6-Frag"
-
-#, fuzzy
-#~ msgid "IDRP"
-#~ msgstr "IDRP"
-
-#, fuzzy
-#~ msgid "RSVP"
-#~ msgstr "予約"
-
-#, fuzzy
-#~ msgid "GRE"
-#~ msgstr "GRE"
-
-#, fuzzy
-#~ msgid "IPSEC-ESP"
-#~ msgstr "IPSEC-ESP"
-
-#, fuzzy
-#~ msgid "IPSEC-AH"
-#~ msgstr "IPSEC-AH"
-
-#, fuzzy
-#~ msgid "IPv6-ICMP"
-#~ msgstr "IPv6-ICMP"
-
-#, fuzzy
-#~ msgid "IPv6-NoNxt"
-#~ msgstr "IPv6-NoNxt"
-
-#, fuzzy
-#~ msgid "IPv6-Opts"
-#~ msgstr "IPv6オプト"
-
-#, fuzzy
-#~ msgid "RSPF"
-#~ msgstr "RSPF"
-
-#, fuzzy
-#~ msgid "VMTP"
-#~ msgstr "VMTP"
-
-#, fuzzy
-#~ msgid "EIGRP"
-#~ msgstr "EIGRP"
-
-#, fuzzy
-#~ msgid "OSPF"
-#~ msgstr "OSPF"
-
-#, fuzzy
-#~ msgid "MTP"
-#~ msgstr "MTP"
-
-#, fuzzy
-#~ msgid "IPIP"
-#~ msgstr "IPIP"
-
-#, fuzzy
-#~ msgid "ENCAP"
-#~ msgstr "ENCAP"
-
-#, fuzzy
-#~ msgid "Src IP"
-#~ msgstr "送信元IP"
-
-#, fuzzy
-#~ msgid "Src/Dest IP"
-#~ msgstr "送信元/宛先IP"
-
-#, fuzzy
-#~ msgid "Src AS"
-#~ msgstr "Src AS"
-
-#, fuzzy
-#~ msgid "Src Prefix"
-#~ msgstr "Srcプレフィックス"
-
-#, fuzzy
-#~ msgid "Src IF"
-#~ msgstr "Src IF"
-
-#, fuzzy
-#~ msgid "Src Port"
-#~ msgstr "送信元ポート"
-
-#, fuzzy
-#~ msgid "End Date"
-#~ msgstr "終了日"
-
-#, fuzzy
-#~ msgid "Filter Type"
-#~ msgstr "絞り込み検索名"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "表示"
-
-#, fuzzy
-#~ msgid "Defaults"
-#~ msgstr "デフォルト"
-
-#, fuzzy
-#~ msgid "Save As"
-#~ msgstr "保存する"
-
-#, fuzzy
-#~ msgid "Filter Data"
-#~ msgstr "絞り込み検索名"
-
-#, fuzzy
-#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
-#~ msgstr "上記のフィールドでは、カンマで区切って複数のフィールドを入力できます。マイナス記号（ - ）はエントリを無効にします（例：Portの場合は-80、80以外の場合はPortを意味します）。"
-
-#, fuzzy
-#~ msgid "New Query"
-#~ msgstr "新しいクエリ"
-
-#, fuzzy
-#~ msgid "Update"
-#~ msgstr "更新"
-
-#, fuzzy
-#~ msgid "Filter Saved"
-#~ msgstr "保存したフィルタ"
-
-#, fuzzy
-#~ msgid "Filter Settings Saved"
-#~ msgstr "保存したフィルタ設定"
-
-#, fuzzy
-#~ msgid "Filter Updated"
-#~ msgstr "フィルタ更新"
-
-#, fuzzy
-#~ msgid "IP"
-#~ msgstr "IP"
-
-#, fuzzy
-#~ msgid "Interface"
-#~ msgstr "インタフェース"
-
-#, fuzzy
-#~ msgid "AS"
-#~ msgstr "として"
-
-#, fuzzy
-#~ msgid "Prefix"
-#~ msgstr "接頭語"
-
-#, fuzzy
-#~ msgid "1 Line with Tags"
-#~ msgstr "タグ付き1行"
-
-#, fuzzy
-#~ msgid "AS Aggregation"
-#~ msgstr "AS集計"
-
-#, fuzzy
-#~ msgid "Protocol Port Aggregation"
-#~ msgstr "プロトコルポート集約"
-
-#, fuzzy
-#~ msgid "Source Prefix Aggregation"
-#~ msgstr "ソースプレフィックス集約"
-
-#, fuzzy
-#~ msgid "Destination Prefix Aggregation"
-#~ msgstr "宛先プレフィクス集約"
-
-#, fuzzy
-#~ msgid "Prefix Aggregation"
-#~ msgstr "プレフィックス集計"
-
-#, fuzzy
-#~ msgid "Full (Catalyst)"
-#~ msgstr "フル（Catalyst）"
-
-#, fuzzy
-#~ msgid "Any Part in Specified Time Span"
-#~ msgstr "指定期間内の任意の部分"
-
-#, fuzzy
-#~ msgid "End Time in Specified Time Span"
-#~ msgstr "指定された期間内の終了時刻"
-
-#, fuzzy
-#~ msgid "Start Time in Specified Time Span"
-#~ msgstr "指定された期間内の開始時刻"
-
-#, fuzzy
-#~ msgid "Entirely in Specified Time Span"
-#~ msgstr "指定された期間内"
-
-#, fuzzy
-#~ msgid "Select One"
-#~ msgstr "一つ選択してください"
-
-#, fuzzy
-#~ msgid "Flow Filter Constraints"
-#~ msgstr "フローフィルタの制約"
-
-#, fuzzy
-#~ msgid "(e.g., -0x0b/0x0F)"
-#~ msgstr "（例：-0x0b / 0x0F）"
-
-#, fuzzy
-#~ msgid "Dest Port(s)"
-#~ msgstr "宛先ポート"
-
-#, fuzzy
-#~ msgid "Note:"
-#~ msgstr "メモ："
-
-#, fuzzy
-#~ msgid "Report Parameters"
-#~ msgstr "レポートパラメータ"
-
-#, fuzzy
-#~ msgid "Include if:"
-#~ msgstr "次の場合に含めます。"
-
-#, fuzzy
-#~ msgid "%d Days"
-#~ msgstr "％d日"
-
-#, fuzzy
-#~ msgid "%d Minute"
-#~ msgstr "％d分"
-
-#, fuzzy
-#~ msgid "%d Minutes"
-#~ msgstr "%d 分"
-
-#, fuzzy
-#~ msgid "NetFlow version 1"
-#~ msgstr "NetFlowバージョン1"
-
-#, fuzzy
-#~ msgid "NetFlow version 5"
-#~ msgstr "NetFlowバージョン5"
-
-#, fuzzy
-#~ msgid "NetFlow version 6"
-#~ msgstr "NetFlowバージョン6"
-
-#, fuzzy
-#~ msgid "NetFlow version 7"
-#~ msgstr "NetFlowバージョン7"
-
-#, fuzzy
-#~ msgid "NetFlow AS Aggregation"
-#~ msgstr "NetFlow ASアグリゲーション"
-
-#, fuzzy
-#~ msgid "NetFlow Proto Port Aggregation"
-#~ msgstr "NetFlowプロトポート集約"
-
-#, fuzzy
-#~ msgid "NetFlow Source Prefix Aggregation"
-#~ msgstr "NetFlow送信元プレフィクス集約"
-
-#, fuzzy
-#~ msgid "NetFlow Destination Prefix Aggregation"
-#~ msgstr "NetFlow宛先プレフィクス集約"
-
-#, fuzzy
-#~ msgid "NetFlow Prefix Aggregation"
-#~ msgstr "NetFlowプレフィックス集約"
-
-#, fuzzy
-#~ msgid "NetFlow Destination"
-#~ msgstr "NetFlowの宛先"
-
-#, fuzzy
-#~ msgid "NetFlow Source Destination"
-#~ msgstr "NetFlowの送信元の宛先"
-
-#, fuzzy
-#~ msgid "NetFlow Full Flow"
-#~ msgstr "NetFlowフルフロー"
-
-#, fuzzy
-#~ msgid "NetFlow ToS AS Aggregation"
-#~ msgstr "NetFlow ToS AS集約"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Proto Port Aggregation"
-#~ msgstr "NetFlow ToSプロトポート集約"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Source Prefix Aggregation"
-#~ msgstr "NetFlow ToSソースプレフィクス集約"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Destination Prefix Aggregation"
-#~ msgstr "NetFlow ToS宛先プレフィクス集約"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Aggregation"
-#~ msgstr "NetFlow ToSプレフィックス集約"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Port Aggregation"
-#~ msgstr "NetFlow ToSプレフィクスポート集約"
-
-#, fuzzy
-#~ msgid "Flow-Tools tagged version 5"
-#~ msgstr "Flow-Toolsタグ付きバージョン5"
-
-#, fuzzy
-#~ msgid "0 (Disabled)"
-#~ msgstr "0（無効）"
-
-#, fuzzy
-#~ msgid "9 (Highest)"
-#~ msgstr "9（最高）"
-
-#, fuzzy
-#~ msgid "Directory"
-#~ msgstr "ディレクトリ"
-
-#, fuzzy
-#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
-#~ msgstr "このデバイスが流れるディレクトリ。このディレクトリはFlow Directoryパスになければなりません。ここに絶対パスを置かないでください。また、パスを変更した場合は、それを使用するように設定されたすべての事前定義ファイラーを保存する必要があります。"
-
-#, fuzzy
-#~ msgid "Nesting"
-#~ msgstr "ネスティング"
-
-#, fuzzy
-#~ msgid "Directory Structure that will be used for the flows for this device."
-#~ msgstr "このデバイスのフローに使用されるディレクトリ構造。"
-
-#, fuzzy
-#~ msgid "NetFlow Version"
-#~ msgstr "NetFlowバージョン"
-
-#, fuzzy
-#~ msgid "NetFlow Protocol version used by the device."
-#~ msgstr "デバイスで使用されているNetFlowプロトコルバージョン。"
-
-#, fuzzy
-#~ msgid "Compression Level"
-#~ msgstr "圧縮レベル"
-
-#, fuzzy
-#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
-#~ msgstr "フローファイルの圧縮レベル。圧縮率が高いとスペースが節約されますが、結果の保存と取得に使用されるCPUが増えます。"
-
-#, fuzzy
-#~ msgid "Rotation"
-#~ msgstr "ローテーション"
-
-#, fuzzy
-#~ msgid "How often to create a new Flow File."
-#~ msgstr "新しいフローファイルを作成する頻度。"
-
-#, fuzzy
-#~ msgid "Expiration"
-#~ msgstr "有効期限"
-
-#, fuzzy
-#~ msgid "How long to keep your flow files."
-#~ msgstr "フローファイルを保存する期間"
-
-#, fuzzy
-#~ msgid "Version"
-#~ msgstr "バージョン"
-
-#, fuzzy
-#~ msgid "Compression"
-#~ msgstr "圧縮"
-
-#, fuzzy
-#~ msgid "Expire"
-#~ msgstr "有効期限"
-
-#, fuzzy
-#~ msgid "No Devices"
-#~ msgstr "デバイス"
-
-#, fuzzy
-#~ msgid "Manage Listeners"
-#~ msgstr "リスナーを管理する"
-
-#, fuzzy
-#~ msgid "Flow Tools Binary Path"
-#~ msgstr "フローツールバイナリパス"
-
-#, fuzzy
-#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-#~ msgstr "flow-cat、flow-filter、およびflow-statバイナリへのパス。"
-
-#, fuzzy
-#~ msgid "Flow Tools Work Directory"
-#~ msgstr "フローツール作業ディレクトリ"
-
-#, fuzzy
-#~ msgid "This is the path to a temporary directory to do work."
-#~ msgstr "これは作業を行うための一時ディレクトリへのパスです。"
-
-#, fuzzy
-#~ msgid "Flows Directory"
-#~ msgstr "フローディレクトリ"
-
-#, fuzzy
-#~ msgid "This is the path to base the path of your flow folder structure."
-#~ msgstr "これは、フローフォルダ構造のパスのベースとなるパスです。"
-
-#, fuzzy
-#~ msgid "The method by which you wish to resolve hostnames."
-#~ msgstr "ホスト名を解決したい方法。"
-
-#, fuzzy
-#~ msgid "Use Local Server"
-#~ msgstr "ローカルサーバーを使用"
-
-#, fuzzy
-#~ msgid "Use DNS Server Below"
-#~ msgstr "下記のDNSサーバーを使用する"
-
-#, fuzzy
-#~ msgid "Don't Resolve DNS"
-#~ msgstr "DNSを解決しない"
-
-#, fuzzy
-#~ msgid "Alternate DNS Server"
-#~ msgstr "代替DNSサーバー"
-
-#, fuzzy
-#~ msgid "This is the DNS Server used to resolve names."
-#~ msgstr "これは名前解決に使用されるDNSサーバーです。"
-
-#, fuzzy
-#~ msgid "Strip Domain Names"
-#~ msgstr "ドメイン名を削除する"
-
-#, fuzzy
-#~ msgid "A comma delimited list of domains names to strip from the domain."
-#~ msgstr "ドメインから削除するドメイン名のカンマ区切りリスト。"
+#~ msgid "Select a Filter to display data"
+#~ msgstr "印刷レポート"
 
 #, fuzzy
 #~ msgid "New Flow"
 #~ msgstr "新しい流れ"
 
 #, fuzzy
-#~ msgid "Select a Filter to display data"
-#~ msgstr "印刷レポート"
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "ドメインから削除するドメイン名のカンマ区切りリスト。"
+
+#, fuzzy
+#~ msgid "Strip Domain Names"
+#~ msgstr "ドメイン名を削除する"
+
+#, fuzzy
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "これは名前解決に使用されるDNSサーバーです。"
+
+#, fuzzy
+#~ msgid "Alternate DNS Server"
+#~ msgstr "代替DNSサーバー"
+
+#, fuzzy
+#~ msgid "Don't Resolve DNS"
+#~ msgstr "DNSを解決しない"
+
+#, fuzzy
+#~ msgid "Use DNS Server Below"
+#~ msgstr "下記のDNSサーバーを使用する"
+
+#, fuzzy
+#~ msgid "Use Local Server"
+#~ msgstr "ローカルサーバーを使用"
+
+#, fuzzy
+#~ msgid "The method by which you wish to resolve hostnames."
+#~ msgstr "ホスト名を解決したい方法。"
+
+#, fuzzy
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "これは、フローフォルダ構造のパスのベースとなるパスです。"
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "フローディレクトリ"
+
+#, fuzzy
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "これは作業を行うための一時ディレクトリへのパスです。"
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "フローツール作業ディレクトリ"
+
+#, fuzzy
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "flow-cat、flow-filter、およびflow-statバイナリへのパス。"
+
+#, fuzzy
+#~ msgid "Flow Tools Binary Path"
+#~ msgstr "フローツールバイナリパス"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "リスナーを管理する"
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "デバイス"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "有効期限"
+
+#, fuzzy
+#~ msgid "Compression"
+#~ msgstr "圧縮"
+
+#, fuzzy
+#~ msgid "Version"
+#~ msgstr "バージョン"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "フローファイルを保存する期間"
+
+#, fuzzy
+#~ msgid "Expiration"
+#~ msgstr "有効期限"
+
+#, fuzzy
+#~ msgid "How often to create a new Flow File."
+#~ msgstr "新しいフローファイルを作成する頻度。"
+
+#, fuzzy
+#~ msgid "Rotation"
+#~ msgstr "ローテーション"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "フローファイルの圧縮レベル。圧縮率が高いとスペースが節約されますが、結果の保存と取得に使用されるCPUが増えます。"
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "圧縮レベル"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "デバイスで使用されているNetFlowプロトコルバージョン。"
+
+#, fuzzy
+#~ msgid "NetFlow Version"
+#~ msgstr "NetFlowバージョン"
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "このデバイスのフローに使用されるディレクトリ構造。"
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "ネスティング"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "このデバイスが流れるディレクトリ。このディレクトリはFlow Directoryパスになければなりません。ここに絶対パスを置かないでください。また、パスを変更した場合は、それを使用するように設定されたすべての事前定義ファイラーを保存する必要があります。"
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "ディレクトリ"
+
+#, fuzzy
+#~ msgid "9 (Highest)"
+#~ msgstr "9（最高）"
+
+#, fuzzy
+#~ msgid "0 (Disabled)"
+#~ msgstr "0（無効）"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "Flow-Toolsタグ付きバージョン5"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "NetFlow ToSプレフィクスポート集約"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "NetFlow ToSプレフィックス集約"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "NetFlow ToS宛先プレフィクス集約"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "NetFlow ToSソースプレフィクス集約"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "NetFlow ToSプロトポート集約"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "NetFlow ToS AS集約"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "NetFlowフルフロー"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "NetFlowの送信元の宛先"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "NetFlowの宛先"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "NetFlowプレフィックス集約"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "NetFlow宛先プレフィクス集約"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "NetFlow送信元プレフィクス集約"
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "NetFlowプロトポート集約"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "NetFlow ASアグリゲーション"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "NetFlowバージョン7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "NetFlowバージョン6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "NetFlowバージョン5"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "NetFlowバージョン1"
+
+#, fuzzy
+#~ msgid "%d Minutes"
+#~ msgstr "%d 分"
+
+#, fuzzy
+#~ msgid "%d Minute"
+#~ msgstr "％d分"
+
+#, fuzzy
+#~ msgid "%d Days"
+#~ msgstr "％d日"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "次の場合に含めます。"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "レポートパラメータ"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "メモ："
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "宛先ポート"
+
+#, fuzzy
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "（例：-0x0b / 0x0F）"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "フローフィルタの制約"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "一つ選択してください"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "指定された期間内"
+
+#, fuzzy
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "指定された期間内の開始時刻"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "指定された期間内の終了時刻"
+
+#, fuzzy
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "指定期間内の任意の部分"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "フル（Catalyst）"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "プレフィックス集計"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "宛先プレフィクス集約"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "ソースプレフィックス集約"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "プロトコルポート集約"
+
+#, fuzzy
+#~ msgid "AS Aggregation"
+#~ msgstr "AS集計"
+
+#, fuzzy
+#~ msgid "1 Line with Tags"
+#~ msgstr "タグ付き1行"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "接頭語"
+
+#, fuzzy
+#~ msgid "AS"
+#~ msgstr "として"
+
+#, fuzzy
+#~ msgid "Interface"
+#~ msgstr "インタフェース"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "IP"
+
+#, fuzzy
+#~ msgid "Filter Updated"
+#~ msgstr "フィルタ更新"
+
+#, fuzzy
+#~ msgid "Filter Settings Saved"
+#~ msgstr "保存したフィルタ設定"
+
+#, fuzzy
+#~ msgid "Filter Saved"
+#~ msgstr "保存したフィルタ"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "更新"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "新しいクエリ"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr "上記のフィールドでは、カンマで区切って複数のフィールドを入力できます。マイナス記号（ - ）はエントリを無効にします（例：Portの場合は-80、80以外の場合はPortを意味します）。"
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "絞り込み検索名"
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr "保存する"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "デフォルト"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "表示"
+
+#, fuzzy
+#~ msgid "Filter Type"
+#~ msgstr "絞り込み検索名"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "終了日"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "送信元ポート"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "Src IF"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "Srcプレフィックス"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "Src AS"
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "送信元/宛先IP"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "送信元IP"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "ENCAP"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "MTP"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "OSPF"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "EIGRP"
+
+#, fuzzy
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "RSPF"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "IPv6オプト"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "IPv6-NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "IPv6-ICMP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-AH"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ESP"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "GRE"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "予約"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "IPv6-Frag"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "IPv6ルート"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "SDRP"
+
+#, fuzzy
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "イリノイ州"
+
+#, fuzzy
+#~ msgid "TP++"
+#~ msgstr "TP ++"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "DDP"
+
+#, fuzzy
+#~ msgid "XTP"
+#~ msgstr "XTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "3PC"
+#~ msgstr "3PC"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "メリットイン"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "MFE-NSP"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "NETBLT"
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "ISO-TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "RDP"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "リーフ-2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "リーフ-1"
+
+#, fuzzy
+#~ msgid "TRUNK-2"
+#~ msgstr "トランク-2"
+
+#, fuzzy
+#~ msgid "TRUNK-1"
+#~ msgstr "トランク-1"
+
+#, fuzzy
+#~ msgid "XNS-IDP"
+#~ msgstr "XNS-IDP"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "PRM"
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "HMP"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "DCN-MEAS"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "CHAOS"
+#~ msgstr "混沌"
+
+#, fuzzy
+#~ msgid "XNET"
+#~ msgstr "XNET"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "子犬"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP-II"
+
+#, fuzzy
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "BBN-RCC-MON"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "IGP"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "EGP"
+
+#, fuzzy
+#~ msgid "CBT"
+#~ msgstr "CBT"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "ST"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "IPENCAP"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "GGP"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "ICMP"
+
+#, fuzzy
+#~ msgid "UDP"
+#~ msgstr "UDP"
+
+#, fuzzy
+#~ msgid "TCP"
+#~ msgstr "TCP"

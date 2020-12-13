@@ -7,23 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-11-01 13:08-0500\n"
-"PO-Revision-Date: 2019-03-18 21:09-0400\n"
+"POT-Creation-Date: 2020-12-12 20:20-0500\n"
+"PO-Revision-Date: 2020-12-12 20:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hi_IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:445
+#: arrays.php:26 arrays.php:60 functions.php:469
 #, fuzzy
 msgid "Select a Report"
 msgstr "प्रिंट रिपोर्ट"
 
 #: arrays.php:27
-#, fuzzy
 msgid "Summary"
 msgstr "सारांश"
 
@@ -58,7 +57,7 @@ msgid "UDP/TCP Port"
 msgstr "यूडीपी / टीसीपी पोर्ट"
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2087
+#: arrays.php:336 arrays.php:495 functions.php:2226
 #, fuzzy
 msgid "Source IP"
 msgstr "स्रोत आईपी"
@@ -99,10 +98,10 @@ msgid "Input/Output Interface"
 msgstr "इनपुट / आउटपुट इंटरफ़ेस"
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2111
+#: functions.php:2250
 #, fuzzy
 msgid "Source AS"
-msgstr "स्रोत ए.एस."
+msgstr "डाटा स्रोत"
 
 #: arrays.php:49 arrays.php:256 arrays.php:263 arrays.php:328
 #, fuzzy
@@ -119,7 +118,7 @@ msgstr "स्रोत / गंतव्य एएस"
 msgid "IP ToS"
 msgstr "आईपी टो"
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2119
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
 #, fuzzy
 msgid "Source Prefix"
 msgstr "स्रोत उपसर्ग"
@@ -150,12 +149,14 @@ msgid "132 Columns"
 msgstr "132 कॉलम"
 
 #: arrays.php:64
+#, fuzzy
 msgid "Show IP Accounting Emulation"
-msgstr ""
+msgstr "आईपी अकाउंटिंग एमुलेशन दिखाएं"
 
 #: arrays.php:68
+#, fuzzy
 msgid "Any Part in Range"
-msgstr ""
+msgstr "रेंज में कोई भी हिस्सा"
 
 #: arrays.php:69
 #, fuzzy
@@ -168,12 +169,14 @@ msgid "Start Time in Range"
 msgstr "प्रारंभ समय"
 
 #: arrays.php:71
+#, fuzzy
 msgid "Entirely in Range"
-msgstr ""
+msgstr "पूरी तरह से रेंज में"
 
 #: arrays.php:75
+#, fuzzy
 msgid "Return All Lines"
-msgstr ""
+msgstr "सभी लाइनें लौटाएं"
 
 #: arrays.php:76 arrays.php:77 arrays.php:78 arrays.php:79 arrays.php:80
 #: arrays.php:81 arrays.php:82 arrays.php:83
@@ -194,7 +197,6 @@ msgid "%s Bytes"
 msgstr "% बाइट्स"
 
 #: arrays.php:104 arrays.php:383 flowview_filters.php:366
-#, fuzzy
 msgid "All"
 msgstr "所有"
 
@@ -207,7 +209,7 @@ msgstr "स्रोत पोर्ट"
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:931 functions.php:2139 functions.php:2364
+#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
 #, fuzzy
 msgid "Flows"
 msgstr "प्रवाह"
@@ -217,7 +219,7 @@ msgstr "प्रवाह"
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:875 functions.php:2143 functions.php:2362
+#: functions.php:903 functions.php:2282 functions.php:2505
 #, fuzzy
 msgid "Bytes"
 msgstr "बाइट्स"
@@ -227,7 +229,7 @@ msgstr "बाइट्स"
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:987 functions.php:2147 functions.php:2363
+#: functions.php:1015 functions.php:2286 functions.php:2506
 #, fuzzy
 msgid "Packets"
 msgstr "पैकेट"
@@ -239,22 +241,20 @@ msgstr "लक्षित अंतरराष्ट्रीय कम्प�
 
 #: arrays.php:189 arrays.php:195 arrays.php:201 flowview_devices.php:61
 #: flowview_devices.php:340
-#, fuzzy
 msgid "Port"
-msgstr "बंदरगाह"
+msgstr "पोर्ट"
 
-#: arrays.php:220 arrays.php:527 functions.php:2091
+#: arrays.php:220 arrays.php:527 functions.php:2230
 #, fuzzy
 msgid "Dest IP"
 msgstr "गंतव्य आईपी"
 
-#: arrays.php:226 functions.php:2083
-#, fuzzy
+#: arrays.php:226 functions.php:2222
 msgid "IP Address"
-msgstr "ईमेल पता"
+msgstr "IP सिरनामा"
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2127
+#: functions.php:2266
 #, fuzzy
 msgid "Protocol"
 msgstr "मसविदा बनाना"
@@ -262,12 +262,12 @@ msgstr "मसविदा बनाना"
 #: arrays.php:238 arrays.php:275
 #, fuzzy
 msgid "Input IF"
-msgstr "इनपुट आई.एफ."
+msgstr "इनपुट पद्धति"
 
 #: arrays.php:244 arrays.php:276
 #, fuzzy
 msgid "Output IF"
-msgstr "आउटपुट IF"
+msgstr "आउटपुट फॉर्मेट"
 
 #: arrays.php:269
 #, fuzzy
@@ -279,22 +279,21 @@ msgstr "टीओएस"
 msgid "Destingation Prefix"
 msgstr "गंतव्य उपसर्ग"
 
-#: arrays.php:301 functions.php:517 functions.php:2288
-#, fuzzy
+#: arrays.php:301 functions.php:541 functions.php:2427
 msgid "N/A"
-msgstr "BNA"
+msgstr "लागू नहीं"
 
-#: arrays.php:307 arrays.php:335 functions.php:2103
+#: arrays.php:307 arrays.php:335 functions.php:2242
 #, fuzzy
 msgid "Source IF"
-msgstr "स्रोत आईपी"
+msgstr "डाटा स्रोत"
 
 #: arrays.php:309 arrays.php:338
 #, fuzzy
 msgid "Destination IF"
 msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
 
-#: arrays.php:312 arrays.php:337 functions.php:2095
+#: arrays.php:312 arrays.php:337 functions.php:2234
 #, fuzzy
 msgid "Source Port"
 msgstr "स्रोत पोर्ट"
@@ -304,18 +303,15 @@ msgstr "स्रोत पोर्ट"
 msgid "Destination Port"
 msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:85 functions.php:2051
-#, fuzzy
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
 msgid "Start Time"
 msgstr "प्रारंभ समय"
 
-#: arrays.php:317 arrays.php:334 functions.php:2055
-#, fuzzy
+#: arrays.php:317 arrays.php:334 functions.php:2194
 msgid "End Time"
 msgstr "अंतिम समय"
 
 #: arrays.php:318
-#, fuzzy
 msgid "Active"
 msgstr "सक्रिय"
 
@@ -334,7 +330,7 @@ msgstr "टी"
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:342 functions.php:2135
+#: arrays.php:342 functions.php:2274
 #, fuzzy
 msgid "Flags"
 msgstr "झंडे"
@@ -345,23 +341,22 @@ msgid "Source"
 msgstr "स्रोत आईपी"
 
 #: arrays.php:348
-#, fuzzy
 msgid "Destination"
-msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
+msgstr "स्थान"
 
 #: arrays.php:365
 #, fuzzy
 msgid "General Filters"
 msgstr "साफ फिल्टर"
 
-#: arrays.php:368 functions.php:389
-#, fuzzy
+#: arrays.php:368 functions.php:413
 msgid "Filter"
 msgstr "छलनी "
 
 #: arrays.php:369
+#, fuzzy
 msgid "The Saved Filter to display."
-msgstr ""
+msgstr "प्रदर्शित करने के लिए सहेजा गया फ़िल्टर।"
 
 #: arrays.php:372
 #, fuzzy
@@ -374,21 +369,23 @@ msgid "Listener"
 msgstr "श्रोता"
 
 #: arrays.php:378
+#, fuzzy
 msgid "The Listener to use for the Filter."
-msgstr ""
+msgstr "फ़िल्टर के लिए उपयोग करने के लिए श्रोता।"
 
 #: arrays.php:386
-#, fuzzy
 msgid "Presets"
 msgstr "प्रीसेट"
 
 #: arrays.php:387
+#, fuzzy
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr ""
+msgstr "यदि यह फ़िल्टर पूर्व-निर्धारित टाइमपैन पर आधारित है, तो इसे यहाँ चुनें।"
 
 #: arrays.php:396
+#, fuzzy
 msgid "Detailed Filter Criteria"
-msgstr ""
+msgstr "विस्तृत फ़िल्टर मानदंड"
 
 #: arrays.php:399 flowview_filters.php:329
 #, fuzzy
@@ -396,8 +393,9 @@ msgid "Report Type"
 msgstr "रिपोर्ट: [नया]"
 
 #: arrays.php:400
+#, fuzzy
 msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए रिपोर्ट प्रकार।"
 
 #: arrays.php:403
 #, fuzzy
@@ -415,8 +413,9 @@ msgid "Statistical Report"
 msgstr "सांख्यिकी रिपोर्ट"
 
 #: arrays.php:408
+#, fuzzy
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए प्रदर्शन रिपोर्ट प्रकार।"
 
 #: arrays.php:415
 #, fuzzy
@@ -424,8 +423,9 @@ msgid "Printed Report"
 msgstr "प्रिंट रिपोर्ट"
 
 #: arrays.php:416
+#, fuzzy
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr ""
+msgstr "मुद्रित रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए मुद्रित रिपोर्ट प्रकार।"
 
 #: arrays.php:423
 #, fuzzy
@@ -433,8 +433,9 @@ msgid "Range Rules"
 msgstr "अनुसूचियां प्रबंधित करें"
 
 #: arrays.php:424
+#, fuzzy
 msgid "Constrain the Filter Data by these time filter rules."
-msgstr ""
+msgstr "इन समय फ़िल्टर नियमों द्वारा फ़िल्टर डेटा को संकुचित करें।"
 
 #: arrays.php:431
 #, fuzzy
@@ -446,32 +447,33 @@ msgstr "पते का समाधान करें:"
 msgid "Resolve IP Addresses to Domain Names."
 msgstr "पते का समाधान करें:"
 
-#: arrays.php:437 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:437 flowview_schedules.php:580
 msgid "Yes"
 msgstr "हाँ"
 
-#: arrays.php:438 flowview_schedules.php:551
-#, fuzzy
+#: arrays.php:438 flowview_schedules.php:580
 msgid "No"
 msgstr "नहीं"
 
-#: arrays.php:442 flowview_filters.php:339 functions.php:470
+#: arrays.php:442 flowview_filters.php:339 functions.php:494
 #, fuzzy
 msgid "Sort Field"
 msgstr "फ़ील्ड को क्रमबद्ध करें:"
 
 #: arrays.php:443
+#, fuzzy
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "फ़िल्टर के लिए डिफ़ॉल्ट सॉर्ट फ़ील्ड। यह सेटिंग किसी भी अनुसूचित रिपोर्ट के लिए लागू की जाएगी।"
 
 #: arrays.php:450
+#, fuzzy
 msgid "Maximum Rows"
-msgstr ""
+msgstr "अधिकतम पंक्तियाँ"
 
 #: arrays.php:451
+#, fuzzy
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "फ़िल्टर में प्रदान करने के लिए अधिकतम पंक्तियाँ। यह सेटिंग किसी भी अनुसूचित रिपोर्ट के लिए लागू की जाएगी।"
 
 #: arrays.php:458
 #, fuzzy
@@ -479,8 +481,9 @@ msgid "Minimum Bytes"
 msgstr "न्यूनतम बाइट्स:"
 
 #: arrays.php:459
+#, fuzzy
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr ""
+msgstr "फ़िल्टर के लिए विचार करने के लिए न्यूनतम कुल बाइट्स। किसी भी प्रवाह योग जो इस कई बाइट्स से कम हैं, को अनदेखा किया जाएगा।"
 
 #: arrays.php:468
 #, fuzzy
@@ -493,8 +496,9 @@ msgid "Protocols"
 msgstr "प्रोटोकॉल"
 
 #: arrays.php:472
+#, fuzzy
 msgid "Select the Specific Protocol for the Filter."
-msgstr ""
+msgstr "फ़िल्टर के लिए विशिष्ट प्रोटोकॉल का चयन करें।"
 
 #: arrays.php:479
 #, fuzzy
@@ -502,8 +506,9 @@ msgid "TCP Flags"
 msgstr "टीसीपी झंडे"
 
 #: arrays.php:480
+#, fuzzy
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr ""
+msgstr "फ़िल्टर में खोजने के लिए टीसीपी झंडे। यह टीसीपी फ्लैग की अल्पविराम सीमांकित सूची हो सकती है"
 
 #: arrays.php:487
 #, fuzzy
@@ -511,12 +516,14 @@ msgid "TOS Fields"
 msgstr "टीओएस फील्ड्स"
 
 #: arrays.php:488
+#, fuzzy
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr ""
+msgstr "टीओएस फ़ील्ड फ़िल्टर में खोज करता है। यह टीओएस फील्ड्स की कॉमा सीमांकित सूची हो सकती है"
 
 #: arrays.php:496
+#, fuzzy
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "फ़िल्टर के लिए चयन करें स्रोत IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
 
 #: arrays.php:503
 #, fuzzy
@@ -524,8 +531,9 @@ msgid "Source Ports"
 msgstr "स्रोत पोर्ट"
 
 #: arrays.php:504
+#, fuzzy
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr ""
+msgstr "फ़िल्टर में सेलेक्ट सोर्स पोर्ट्स पर फ़िल्टर करें। यह स्रोत पोर्ट की अल्पविराम सीमांकित सूची हो सकती है।"
 
 #: arrays.php:511
 #, fuzzy
@@ -533,16 +541,19 @@ msgid "Source Interface"
 msgstr "स्रोत इंटरफ़ेस"
 
 #: arrays.php:512
+#, fuzzy
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr ""
+msgstr "फ़िल्टर में सेलेक्ट सोर्स इंटरफ़ेस पर फ़िल्टर करें। यह स्रोत इंटरफेस की अल्पविराम सीमांकित सूची हो सकती है"
 
 #: arrays.php:520
+#, fuzzy
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr ""
+msgstr "फ़िल्टर में चयनित गंतव्य AS पर फ़िल्टर करें। यह स्रोत AS की अल्पविराम सीमांकित सूची हो सकती है"
 
 #: arrays.php:528
+#, fuzzy
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "फ़िल्टर के लिए चयन गंतव्य IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
 
 #: arrays.php:535
 #, fuzzy
@@ -550,8 +561,9 @@ msgid "Dest Ports"
 msgstr "गंतव्य बंदरगाह"
 
 #: arrays.php:536
+#, fuzzy
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr ""
+msgstr "फ़िल्टर में चयन गंतव्य पोर्ट पर फ़िल्टर करें। यह डेस्टिनेशन पोर्ट्स की अल्पविराम सीमांकित सूची हो सकती है।"
 
 #: arrays.php:543
 #, fuzzy
@@ -559,27 +571,27 @@ msgid "Dest Interface"
 msgstr "गंतव्य इंटरफ़ेस"
 
 #: arrays.php:544
+#, fuzzy
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr ""
+msgstr "फ़िल्टर के लिए चयन गंतव्य इंटरफ़ेस पर फ़िल्टर करें। यह डेस्टिमेशन इंटरफेसेस की अल्पविराम सीमांकित सूची हो सकती है।"
 
-#: arrays.php:551 functions.php:2115
+#: arrays.php:551 functions.php:2254
 #, fuzzy
 msgid "Dest AS"
 msgstr "गंतव्य के रूप में"
 
 #: arrays.php:552
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr ""
-
-#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:34
 #, fuzzy
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "फ़िल्टर में चयनित गंतव्य AS पर फ़िल्टर करें। यह डेस्टिनेशन एएस की कॉमा सीमांकित सूची हो सकती है"
+
+#: flowview_devices.php:30 flowview_filters.php:36 flowview_schedules.php:35
 msgid "Delete"
-msgstr "हटाना"
+msgstr "हटाएं"
 
 #: flowview_devices.php:38
-#, fuzzy
 msgid "Device Name"
-msgstr "यन्त्र का नाम"
+msgstr "उपकरण नामः% 1"
 
 #: flowview_devices.php:39
 #, fuzzy
@@ -587,12 +599,14 @@ msgid "Name of the device to be displayed."
 msgstr "प्रदर्शित होने वाले उपकरण का नाम।"
 
 #: flowview_devices.php:44
+#, fuzzy
 msgid "Collection Medhod"
-msgstr ""
+msgstr "संग्रह मेधाव"
 
 #: flowview_devices.php:45
+#, fuzzy
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr ""
+msgstr "दो समर्थन संग्रह विधियाँ हैं, पहली विरासत प्रवाह-उपकरण बायनेरीज़ का उपयोग करती है और दूसरी कैक्टि के स्वयं के PHP आधारित फ्लो स्ट्रीम सर्वर का लाभ उठाती है।"
 
 #: flowview_devices.php:52
 #, fuzzy
@@ -624,13 +638,11 @@ msgstr "इसके अलावा, अपने नेट-फ्लो कै
 msgid "You must select at least one device."
 msgstr "आपके लिए कम से कम एक डिवाइस चुनना ज़रूरी है।"
 
-#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:218
-#, fuzzy
+#: flowview_devices.php:149 flowview_filters.php:153 flowview_schedules.php:246
 msgid "Continue"
 msgstr "जारी रखें"
 
-#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:226
-#, fuzzy
+#: flowview_devices.php:157 flowview_filters.php:161 flowview_schedules.php:254
 msgid "Cancel"
 msgstr "कैंसिल करें"
 
@@ -649,46 +661,42 @@ msgstr "डिवाइस [नया]"
 msgid "FlowView Listeners"
 msgstr "फ़्लो व्यू श्रोता"
 
-#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:413
-#, fuzzy
+#: flowview_devices.php:285 flowview_filters.php:230 flowview_schedules.php:442
 msgid "Search"
-msgstr "खोज"
+msgstr "खोजें"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
-#: functions.php:426
-#, fuzzy
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
+#: functions.php:450
 msgid "Go"
-msgstr "चले जाओ"
+msgstr "जाएं"
 
-#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:434
+#: flowview_devices.php:291 flowview_filters.php:251 flowview_schedules.php:463
 #, fuzzy
 msgid "Set/Refresh Filters"
 msgstr "सेट / फ़िल्टर ताज़ा करें"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
-#: functions.php:427
-#, fuzzy
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
+#: functions.php:451
 msgid "Clear"
 msgstr "明确"
 
-#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:437
+#: flowview_devices.php:294 flowview_filters.php:254 flowview_schedules.php:466
 #, fuzzy
 msgid "Clear Filters"
 msgstr "साफ फिल्टर"
 
-#: flowview_devices.php:328 setup.php:148 setup.php:195
+#: flowview_devices.php:328 setup.php:181 setup.php:228
 #, fuzzy
 msgid "Listeners"
 msgstr "श्रोताओं"
 
 #: flowview_devices.php:337
-#, fuzzy
 msgid "Name"
 msgstr "नाम"
 
 #: flowview_devices.php:338
 msgid "Method"
-msgstr ""
+msgstr "तरीका"
 
 #: flowview_devices.php:339
 #, fuzzy
@@ -697,41 +705,40 @@ msgstr "से अनुमति है"
 
 #: flowview_devices.php:341
 msgid "Status"
-msgstr ""
+msgstr "ऑर्डर स्थिति"
 
 #: flowview_devices.php:342
+#, fuzzy
 msgid "Observed Listen"
-msgstr ""
+msgstr "सुने हुए अवलोकन"
 
 #: flowview_devices.php:354
+#, fuzzy
 msgid "Cacti"
-msgstr ""
+msgstr "कैक्टस"
 
 #: flowview_devices.php:357
 msgid "Down"
-msgstr ""
+msgstr "नीचे"
 
 #: flowview_devices.php:357
 msgid "Up"
-msgstr ""
+msgstr "ऊपर"
 
 #: flowview_devices.php:363
 #, fuzzy
 msgid "No Flowview Listeners"
 msgstr "फ़्लो व्यू श्रोता"
 
-#: flowview_filters.php:35 flowview_schedules.php:33
-#, fuzzy
+#: flowview_filters.php:35 flowview_schedules.php:34
 msgid "Send Now"
-msgstr "अभी भेजो"
+msgstr "अभी भेजें"
 
-#: flowview_filters.php:37 flowview_schedules.php:35
-#, fuzzy
+#: flowview_filters.php:37 flowview_schedules.php:36
 msgid "Disable"
-msgstr "अक्षम"
+msgstr "अक्षम करें"
 
-#: flowview_filters.php:38 flowview_schedules.php:36
-#, fuzzy
+#: flowview_filters.php:38 flowview_schedules.php:37
 msgid "Enable"
 msgstr "सक्षम करें"
 
@@ -761,199 +768,214 @@ msgid "FlowView Filters"
 msgstr "प्रवाह फिल्टर"
 
 #: flowview_filters.php:220
+#, fuzzy
 msgid "FlowView Filters [ Add Devices before Filters ]"
-msgstr ""
+msgstr "फ़्लो व्यू फ़िल्टर [फ़िल्टर से पहले उपकरण जोड़ें]"
 
-#: flowview_filters.php:236 flowview_filters.php:350 setup.php:149
-#: setup.php:251
+#: flowview_filters.php:236 flowview_filters.php:350 setup.php:182
+#: setup.php:284
 #, fuzzy
 msgid "Filters"
 msgstr "फिल्टर"
 
-#: flowview_filters.php:240 flowview_schedules.php:423
-#, fuzzy
+#: flowview_filters.php:240 flowview_schedules.php:452
 msgid "Default"
-msgstr "चूक"
+msgstr "डिफ़ॉल्ट"
 
-#: flowview_filters.php:319 flowview_schedules.php:70
-#: flowview_schedules.php:506
+#: flowview_filters.php:319 flowview_schedules.php:73
+#: flowview_schedules.php:535
 #, fuzzy
 msgid "Filter Name"
 msgstr "फ़िल्टर का नाम"
 
 #: flowview_filters.php:334
-#, fuzzy
 msgid "ID"
-msgstr "IDPR"
+msgstr "ID"
 
 #: flowview_filters.php:344
 #, fuzzy
 msgid "Resolution"
 msgstr "होस्टनाम रिज़ॉल्यूशन"
 
-#: flowview_schedules.php:40
+#: flowview_schedules.php:41
 #, fuzzy
 msgid "Every Hour"
 msgstr "प्रत्येक घंटे"
 
-#: flowview_schedules.php:41 flowview_schedules.php:42
-#: flowview_schedules.php:43 flowview_schedules.php:44
+#: flowview_schedules.php:42 flowview_schedules.php:43
+#: flowview_schedules.php:44 flowview_schedules.php:45
 #, fuzzy, php-format
 msgid "Every %d Hours"
 msgstr "हर द% ख ड"
 
-#: flowview_schedules.php:45
+#: flowview_schedules.php:46
 #, fuzzy
 msgid "Every Day"
-msgstr "हर दिन"
+msgstr "हर रोज"
 
-#: flowview_schedules.php:46
+#: flowview_schedules.php:47
 #, fuzzy
 msgid "Every Week"
 msgstr "प्रति सप्ताह"
 
-#: flowview_schedules.php:47
+#: flowview_schedules.php:48
 #, fuzzy, php-format
 msgid "Every %d Weeks, 2"
 msgstr "हर% d सप्ताह, 2"
 
-#: flowview_schedules.php:48
+#: flowview_schedules.php:49
 #, fuzzy
 msgid "Every Month"
 msgstr "हर महीने"
 
-#: flowview_schedules.php:53
-#, fuzzy
+#: flowview_schedules.php:56
 msgid "Title"
 msgstr "शीर्षक"
 
-#: flowview_schedules.php:55
+#: flowview_schedules.php:58
 #, fuzzy
 msgid "New Schedule"
 msgstr "नई सारणी"
 
-#: flowview_schedules.php:56
+#: flowview_schedules.php:59
 #, fuzzy
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "फ़्लो व्यू शेड्यूल के लिए एक रिपोर्ट शीर्षक दर्ज करें।"
 
-#: flowview_schedules.php:62 flowview_schedules.php:526
-#, fuzzy
+#: flowview_schedules.php:65 flowview_schedules.php:555
 msgid "Enabled"
 msgstr "सक्षम"
 
-#: flowview_schedules.php:65
+#: flowview_schedules.php:68
 #, fuzzy
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "यह नेटफ्लो स्कैन भेजा जाएगा या नहीं।"
 
-#: flowview_schedules.php:71
+#: flowview_schedules.php:74
 #, fuzzy
 msgid "Name of the query to run."
 msgstr "चलाने के लिए क्वेरी का नाम।"
 
-#: flowview_schedules.php:76
+#: flowview_schedules.php:79
 #, fuzzy
 msgid "Send Interval"
 msgstr "अंतराल भेजें"
 
-#: flowview_schedules.php:77
+#: flowview_schedules.php:80
 #, fuzzy
 msgid "How often to send this NetFlow Report?"
 msgstr "इस नेटफ्लो रिपोर्ट को कितनी बार भेजना है?"
 
-#: flowview_schedules.php:86
+#: flowview_schedules.php:89
 #, fuzzy
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr "यह नेटफ्लो स्कैन ईमेल भेजने की पहली तारीख / समय है। सभी भविष्य के ईमेल इस समय और ऊपर दिए गए अंतराल से गणना की जाएगी।"
 
-#: flowview_schedules.php:94
+#: flowview_schedules.php:97
 #, fuzzy
 msgid "Email Addresses"
 msgstr "ईमेल पता"
 
-#: flowview_schedules.php:95
+#: flowview_schedules.php:98
 #, fuzzy
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "इस NetFlow स्कैन को भेजने के लिए ईमेल पते (कमांड सीमांकित)"
 
-#: flowview_schedules.php:187
+#: flowview_schedules.php:105 setup.php:352
+#, fuzzy
+msgid "Format File to Use"
+msgstr "प्रारूप फ़ाइल का उपयोग करने के लिए"
+
+#: flowview_schedules.php:108 setup.php:355
+#, fuzzy
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "उपयोग करने के लिए कस्टम HTML आवरण और सीएसएस फ़ाइल चुनें। इस फ़ाइल में आपकी रिपोर्ट के चारों ओर html और CSS दोनों हैं। यदि इसमें बस CSS से अधिक है, तो आपको एक विशेष स्थान देने की आवश्यकता है<REPORT> फ़ाइल के अंदर टैग। इस प्रारूप टैग को रिपोर्ट सामग्री द्वारा बदल दिया जाएगा। ये फाइलें 'फॉर्मेट' डायरेक्टरी में स्थित हैं।"
+
+#: flowview_schedules.php:177
+#, fuzzy, php-format
+msgid "Sent Scheduled Report %s in Background."
+msgstr "प्रलेखित रिपोर्ट %s पृष्ठभूमि में।"
+
+#: flowview_schedules.php:180
+#, fuzzy
+msgid "Reports will arrive once Complete."
+msgstr "पूरी होते ही रिपोर्ट आ जाएगी।"
+
+#: flowview_schedules.php:215
 #, fuzzy
 msgid "Click 'Continue' to delete the following Schedule(s)."
 msgstr "निम्न शेड्यूल को हटाने के लिए 'जारी रखें' पर क्लिक करें।"
 
-#: flowview_schedules.php:194
+#: flowview_schedules.php:222
 #, fuzzy
 msgid "Click 'Continue' to send the following Schedule(s) now."
 msgstr "अब निम्नलिखित अनुसूची भेजने के लिए 'जारी रखें' पर क्लिक करें।"
 
-#: flowview_schedules.php:201
+#: flowview_schedules.php:229
 #, fuzzy
 msgid "Click 'Continue' to Disable the following Schedule(s)."
 msgstr "निम्न अनुसूची (ओं) को अक्षम करने के लिए 'जारी रखें' पर क्लिक करें।"
 
-#: flowview_schedules.php:208
+#: flowview_schedules.php:236
 #, fuzzy
 msgid "Click 'Continue' to Enable the following Schedule(s)."
 msgstr "निम्न अनुसूची को सक्षम करने के लिए 'जारी रखें' पर क्लिक करें।"
 
-#: flowview_schedules.php:215
+#: flowview_schedules.php:243
 #, fuzzy
 msgid "You must select at least one schedule."
 msgstr "आपको कम से कम एक शेड्यूल का चयन करना होगा।"
 
-#: flowview_schedules.php:308
+#: flowview_schedules.php:337
 #, fuzzy, php-format
 msgid "Report: [edit: %s]"
 msgstr "रिपोर्ट: [संपादित करें: %s]"
 
-#: flowview_schedules.php:310
+#: flowview_schedules.php:339
 #, fuzzy
 msgid "Report: [new]"
 msgstr "रिपोर्ट: [नया]"
 
-#: flowview_schedules.php:331 functions.php:563
+#: flowview_schedules.php:360 functions.php:587
 #, fuzzy
 msgid "Start Date Selector"
 msgstr "प्रारंभ तिथि चयनकर्ता"
 
-#: flowview_schedules.php:401
+#: flowview_schedules.php:430
 #, fuzzy
 msgid "FlowView Schedules"
 msgstr "फ़्लो व्यू शेड्यूल"
 
-#: flowview_schedules.php:403
+#: flowview_schedules.php:432
+#, fuzzy
 msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr ""
+msgstr "फ़्लो व्यू शेड्यूल [शेड्यूल से पहले डिवाइस जोड़ें]"
 
-#: flowview_schedules.php:419 flowview_schedules.php:531 setup.php:150
-#: setup.php:223
+#: flowview_schedules.php:448 flowview_schedules.php:560 setup.php:183
+#: setup.php:256
 #, fuzzy
 msgid "Schedules"
 msgstr "अनुसूचियों"
 
-#: flowview_schedules.php:502
+#: flowview_schedules.php:531
 #, fuzzy
 msgid "Schedule Title"
 msgstr "अनुसूची शीर्षक"
 
-#: flowview_schedules.php:510
-#, fuzzy
+#: flowview_schedules.php:539
 msgid "Interval"
-msgstr "मध्यान्तर"
+msgstr "अंतराल"
 
-#: flowview_schedules.php:514
-#, fuzzy
+#: flowview_schedules.php:543
 msgid "Start Date"
 msgstr "प्रारंभ दिनांक"
 
-#: flowview_schedules.php:518
+#: flowview_schedules.php:547
 #, fuzzy
 msgid "Next Send"
 msgstr "अगला भेजें"
 
-#: flowview_schedules.php:522
-#, fuzzy
+#: flowview_schedules.php:551
 msgid "Email"
 msgstr "ईमेल"
 
@@ -972,467 +994,488 @@ msgstr "रिपोर्ट: [संपादित करें: %s]"
 msgid "Filter: [new]"
 msgstr "रिपोर्ट: [नया]"
 
-#: functions.php:363
+#: functions.php:387
+#, fuzzy
 msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr ""
+msgstr "अपरिभाषित फ़िल्टर [विवरण प्राप्त करने के लिए फ़िल्टर का चयन करें]"
 
-#: functions.php:373
-#, php-format
+#: functions.php:397
+#, fuzzy, php-format
 msgid "Statistical Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "सांख्यिकीय रिपोर्ट: %s [नीचे बताए अनुसार ओवरराइड्स शामिल हैं]"
 
-#: functions.php:375
-#, php-format
+#: functions.php:399
+#, fuzzy, php-format
 msgid "Printed Report: %s [ Including overrides as specififed below ]"
-msgstr ""
+msgstr "मुद्रित रिपोर्ट: %s [नीचे बताए अनुसार ओवरराइड्स शामिल हैं]"
 
-#: functions.php:393
+#: functions.php:417
 #, fuzzy
 msgid "Select a Filter"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php:408
+#: functions.php:432
 #, fuzzy
 msgid "Exclude"
 msgstr "निकालना"
 
-#: functions.php:412
-#, fuzzy
+#: functions.php:436
 msgid "None"
 msgstr "कोई नहीं"
 
-#: functions.php:413
+#: functions.php:437
 #, fuzzy
 msgid "Top Sample"
 msgstr "शीर्ष नमूना"
 
-#: functions.php:414
+#: functions.php:438
 #, fuzzy
 msgid "Top 2 Samples"
 msgstr "शीर्ष 2 नमूने"
 
-#: functions.php:415
+#: functions.php:439
 #, fuzzy
 msgid "Top 3 Samples"
 msgstr "शीर्ष 3 नमूने"
 
-#: functions.php:416
+#: functions.php:440
 #, fuzzy
 msgid "Top 4 Samples"
 msgstr "शीर्ष 4 नमूने"
 
-#: functions.php:417
+#: functions.php:441
 #, fuzzy
 msgid "Top 5 Samples"
 msgstr "शीर्ष 5 नमूने"
 
-#: functions.php:420
-msgid "Show only Domains on Charts Below"
-msgstr ""
-
-#: functions.php:422
-msgid "Domains Only"
-msgstr ""
-
-#: functions.php:426
+#: functions.php:444
 #, fuzzy
-msgid "Apply Filter"
-msgstr "प्रवाह फिल्टर"
+msgid "Show only Domains on Charts Below"
+msgstr "नीचे दिए गए चार्ट पर केवल डोमेन दिखाएं"
 
-#: functions.php:427
+#: functions.php:446
+#, fuzzy
+msgid "Domains Only"
+msgstr "केवल डोमेन"
+
+#: functions.php:450
+msgid "Apply Filter"
+msgstr "फ़िल्टर्स लागू करें (p) View - >"
+
+#: functions.php:451
 #, fuzzy
 msgid "Clear Filter"
 msgstr "साफ फिल्टर"
 
-#: functions.php:428
+#: functions.php:452
 msgid "Edit"
-msgstr ""
+msgstr "संपादित करें"
 
-#: functions.php:428
-msgid "Edit Current Filter"
-msgstr ""
-
-#: functions.php:429
+#: functions.php:452
 #, fuzzy
+msgid "Edit Current Filter"
+msgstr "वर्तमान फ़िल्टर संपादित करें"
+
+#: functions.php:453
 msgid "Save"
 msgstr "सेव करें"
 
-#: functions.php:429
-msgid "Save Overrides to Selected Filter"
-msgstr ""
-
-#: functions.php:437
+#: functions.php:453
 #, fuzzy
-msgid "Report"
-msgstr "रिपोर्ट: %s"
+msgid "Save Overrides to Selected Filter"
+msgstr "ओवरराइड्स को चयनित फ़िल्टर में सहेजें"
 
-#: functions.php:448
+#: functions.php:461
+msgid "Report"
+msgstr "रिपोर्ट"
+
+#: functions.php:472
 #, fuzzy, php-format
 msgid "Statistical: %s"
 msgstr "सांख्यिकी:"
 
-#: functions.php:454
+#: functions.php:478
 #, fuzzy, php-format
 msgid "Printed: %s"
 msgstr "प्रिंट किया गया:"
 
-#: functions.php:458 functions.php:475
+#: functions.php:482 functions.php:499
 #, fuzzy
 msgid "Select a Filter First"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php:506
-msgid "Lines"
-msgstr ""
-
-#: functions.php:524
-msgid "Octets"
-msgstr ""
-
-#: functions.php:542
-msgid "Timespan"
-msgstr ""
-
-#: functions.php:551
+#: functions.php:530
 #, fuzzy
+msgid "Lines"
+msgstr "पंक्तियां"
+
+#: functions.php:548
+#, fuzzy
+msgid "Octets"
+msgstr "ओक्टेट्स"
+
+#: functions.php:566
+msgid "Timespan"
+msgstr "काल"
+
+#: functions.php:575
 msgid "Custom"
 msgstr "रुचि अनुसरणीय"
 
-#: functions.php:557
+#: functions.php:581
 msgid "From"
-msgstr ""
+msgstr "और से"
 
-#: functions.php:566
+#: functions.php:590
 msgid "To"
-msgstr ""
+msgstr "Til"
 
-#: functions.php:572
+#: functions.php:596
 #, fuzzy
 msgid "End Date Selector"
 msgstr "अंतिम तिथि चयनकर्ता"
 
-#: functions.php:575
+#: functions.php:599
+#, fuzzy
 msgid "Shift Time Backward"
-msgstr ""
+msgstr "शिफ्ट टाइम बैकवर्ड"
 
-#: functions.php:578
+#: functions.php:602
+#, fuzzy
 msgid "Define Shifting Interval"
-msgstr ""
+msgstr "शिफ्टिंग इंटरवल को परिभाषित करें"
 
-#: functions.php:591
+#: functions.php:615
+#, fuzzy
 msgid "Shift Time Forward"
-msgstr ""
+msgstr "शिफ्ट टाइम फॉरवर्ड"
 
-#: functions.php:598
+#: functions.php:622
 #, fuzzy
 msgid "Show/Hide"
 msgstr "छुपा हुआ देखना"
 
-#: functions.php:602
+#: functions.php:626
 #, fuzzy
 msgid "Table"
 msgstr "तालिका"
 
-#: functions.php:606
+#: functions.php:630
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "बाइट्स बार"
 
-#: functions.php:610
+#: functions.php:634
 #, fuzzy
 msgid "Packets Bar"
 msgstr "पैकेट बार"
 
-#: functions.php:614
+#: functions.php:638
 #, fuzzy
 msgid "Flows Bar"
 msgstr "बार बहती है"
 
-#: functions.php:1126
-#, php-format
+#: functions.php:1178
+#, fuzzy, php-format
 msgid "Client/Private (%s)"
-msgstr ""
+msgstr "ग्राहक / निजी (%s)"
 
-#: functions.php:1128
+#: functions.php:1180
+#, fuzzy
 msgid "icmp (0)"
-msgstr ""
+msgstr "icmp (0)"
 
-#: functions.php:1139
+#: functions.php:1191
 #, fuzzy, php-format
 msgid "Unknown (%s)"
 msgstr "अनजान"
 
-#: functions.php:1170
+#: functions.php:1222
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "कैक्टि फ्लोव्यू"
 
-#: functions.php:1176
+#: functions.php:1228
 #, fuzzy, php-format
 msgid "Netflow - %s"
 msgstr "कुल प्रवाह - %"
 
-#: functions.php:1340
-#, php-format
+#: functions.php:1419
+#, fuzzy, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr ""
+msgstr "सबनेट फ़िल्टर: %s मान CIDR प्रारूप नहीं है"
 
-#: functions.php:1688 functions.php:1689 functions.php:1690 functions.php:1691
-#: functions.php:1692 functions.php:1693 functions.php:1694 functions.php:1695
-#: functions.php:1696 functions.php:1697 functions.php:1698 functions.php:1699
-#: functions.php:1700 functions.php:1701 functions.php:1702 functions.php:1703
-#: functions.php:1704 functions.php:1705 functions.php:1706 functions.php:1707
-#: functions.php:1708 functions.php:1709 functions.php:1710 functions.php:1711
-#: functions.php:1712 functions.php:1713
+#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
+#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
+#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
+#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
+#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
+#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
+#: functions.php:1851 functions.php:1852
 #, fuzzy, php-format
 msgid "%d - %d Bytes"
 msgstr "% बाइट्स"
 
-#: functions.php:1714
+#: functions.php:1853
 #, fuzzy, php-format
 msgid "> %d Bytes"
 msgstr "% बाइट्स"
 
-#: functions.php:2059
+#: functions.php:2198
 #, fuzzy
 msgid "Source DNS"
 msgstr "स्रोत ए.एस."
 
-#: functions.php:2063
+#: functions.php:2202
 #, fuzzy
 msgid "Source Root DNS"
 msgstr "स्रोत ए.एस."
 
-#: functions.php:2067
+#: functions.php:2206
 #, fuzzy
 msgid "Dest DNS"
 msgstr "गंतव्य के रूप में"
 
-#: functions.php:2071
+#: functions.php:2210
 #, fuzzy
 msgid "Dest Root DNS"
 msgstr "गंतव्य बंदरगाह"
 
-#: functions.php:2075
+#: functions.php:2214
 #, fuzzy
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php:2079
+#: functions.php:2218
+#, fuzzy
 msgid "Root DNS"
-msgstr ""
+msgstr "रूट डीएनएस"
 
-#: functions.php:2099
+#: functions.php:2238
 #, fuzzy
 msgid "Dest Port"
 msgstr "गंतव्य बंदरगाह"
 
-#: functions.php:2107
+#: functions.php:2246
 #, fuzzy
 msgid "Dest IF"
 msgstr "गंतव्य स्थान"
 
-#: functions.php:2123
+#: functions.php:2262
 #, fuzzy
 msgid "Dest Prefix"
 msgstr "गंतव्य उपसर्ग"
 
-#: functions.php:2131
+#: functions.php:2270
+#, fuzzy
 msgid "Type of Service"
-msgstr ""
+msgstr "सेवा का प्रकार"
 
-#: functions.php:2150
+#: functions.php:2289
 #, fuzzy
 msgid "Bytes/Packet"
 msgstr "पैकेट"
 
-#: functions.php:2335
+#: functions.php:2478
+#, fuzzy
 msgid "-- unresolved --"
-msgstr ""
+msgstr "- अनसुलझे -"
 
-#: functions.php:2441
-#, php-format
+#: functions.php:2584
+#, fuzzy, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr ""
+msgstr "बूलियन: %s, न्यूमेरिक: %s, हेक्स: %s"
 
-#: functions.php:2452
+#: functions.php:2595
+#, fuzzy
 msgid "Low Delay"
-msgstr ""
+msgstr "कम देरी"
 
-#: functions.php:2453
+#: functions.php:2596
+#, fuzzy
 msgid "Throughput"
-msgstr ""
+msgstr "प्रवाह"
 
-#: functions.php:2454
+#: functions.php:2597
+#, fuzzy
 msgid "Reliability"
-msgstr ""
+msgstr "विश्वसनीयता"
 
-#: functions.php:2455
+#: functions.php:2598
+#, fuzzy
 msgid "Mincost"
-msgstr ""
+msgstr "Mincost"
 
-#: functions.php:2459
+#: functions.php:2602
+#, fuzzy
 msgid "Net Control"
-msgstr ""
+msgstr "नेट कंट्रोल"
 
-#: functions.php:2460
+#: functions.php:2603
+#, fuzzy
 msgid "Internet Control"
-msgstr ""
+msgstr "इंटरनेट कंट्रोल"
 
-#: functions.php:2461
+#: functions.php:2604
+#, fuzzy
 msgid "Critic ECP"
-msgstr ""
+msgstr "आलोचक ECP"
 
-#: functions.php:2462
+#: functions.php:2605
+#, fuzzy
 msgid "Flash Override"
-msgstr ""
+msgstr "फ्लैश ओवरराइड"
 
-#: functions.php:2463
+#: functions.php:2606
+#, fuzzy
 msgid "Flash"
-msgstr ""
+msgstr "Chamak"
 
-#: functions.php:2464
+#: functions.php:2607
 msgid "Immediate"
-msgstr ""
+msgstr "तुरंत"
 
-#: functions.php:2465
+#: functions.php:2608
+#, fuzzy
 msgid "Priority"
-msgstr ""
+msgstr "प्राथमिकता"
 
-#: functions.php:2466
+#: functions.php:2609
+#, fuzzy
 msgid "Routine"
-msgstr ""
+msgstr "सामान्य"
 
-#: functions.php:2506
+#: functions.php:2649
 #, fuzzy
 msgid "Summary Statistics"
 msgstr "सारांश आँकड़े"
 
-#: functions.php:2517
+#: functions.php:2660
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "आईपी पैकेट आकार वितरण (%)"
 
-#: functions.php:2522
+#: functions.php:2665
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "पैकेट प्रति प्रवाह वितरण (%)"
 
-#: functions.php:2527
+#: functions.php:2670
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "प्रति प्रवाह वितरण (%)"
 
-#: functions.php:2532
+#: functions.php:2675
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "प्रवाह समय वितरण (%)"
 
-#: functions.php:2715
+#: functions.php:2858
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "आपको एक सांख्यिकी रिपोर्ट या मुद्रित रिपोर्ट का चयन करना होगा!"
 
-#: functions.php:2719
+#: functions.php:2862
 #, fuzzy
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "आपको केवल एक सांख्यिकी रिपोर्ट या मुद्रित रिपोर्ट (दोनों नहीं) का चयन करना होगा!"
 
-#: functions.php:2723
+#: functions.php:2866
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "अमान्य दिनांक, समाप्ति दिनांक / समय प्रारंभ दिनांक / समय से पहले है!"
 
-#: functions.php:2734 functions.php:2739
+#: functions.php:2877 functions.php:2882
 #, fuzzy
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "स्रोत पते के लिए अमान्य IP! <br> ('192.168.0.1' के रूप में होना चाहिए)"
 
-#: functions.php:2746 functions.php:2750 functions.php:2754
+#: functions.php:2889 functions.php:2893 functions.php:2897
 #, fuzzy
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "स्रोत पते के लिए अमान्य सबनेट! <br> ('192.168.0.1/255.255.255.0' या '192.168.0.1/24' के रूप में होना चाहिए)"
 
-#: functions.php:2768 functions.php:2772
+#: functions.php:2911 functions.php:2915
 #, fuzzy
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "गंतव्य पते के लिए अमान्य IP! <br> ('192.168.0.1' के रूप में होना चाहिए)"
 
-#: functions.php:2778 functions.php:2782 functions.php:2786
+#: functions.php:2921 functions.php:2925 functions.php:2929
 #, fuzzy
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "गंतव्य पते के लिए अमान्य सबनेट! <br> ('192.168.0.1/255.255.255.0' या '192.168.0.1/24' के रूप में होना चाहिए)"
 
-#: functions.php:2804
+#: functions.php:2947
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "स्रोत इंटरफ़ेस के लिए अमान्य मान!"
 
-#: functions.php:2820
+#: functions.php:2963
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "स्रोत पोर्ट के लिए अमान्य मान! (0 - 65535)"
 
-#: functions.php:2836
+#: functions.php:2979
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "स्रोत एएस के लिए अमान्य मान! (0 - 65535)"
 
-#: functions.php:2852
+#: functions.php:2995
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "गंतव्य इंटरफ़ेस के लिए अमान्य मान!"
 
-#: functions.php:2868
+#: functions.php:3011
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "गंतव्य पोर्ट के लिए अमान्य मान! (0 - 65535)"
 
-#: functions.php:2884
+#: functions.php:3027
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "गंतव्य के रूप में अमान्य मान! (0 - 65535)"
 
-#: functions.php:2900
+#: functions.php:3043
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "प्रोटोकॉल के लिए अमान्य मान! (1 - 255)"
 
-#: functions.php:2912
+#: functions.php:3055
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "टीसीपी ध्वज के लिए अमान्य मान! (उदा: 0x1b या 0x1b / SA या SA / SA)"
 
-#: functions.php:2921
+#: functions.php:3064
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "कटऑफ ओकटेट्स के लिए अमान्य मान!"
 
-#: functions.php:2928
+#: functions.php:3071
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "कटऑफ लाइन्स के लिए अमान्य मान!"
 
-#: functions.php:2935
+#: functions.php:3078
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "सॉर्ट फ़ील्ड के लिए अमान्य मान!"
 
-#: functions.php:2962
+#: functions.php:3105
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "%s प्रकार के लिए FlowView चार्ट %s है"
 
-#: functions.php:3257
+#: functions.php:3400
 #, fuzzy
 msgid "Total Flows"
 msgstr "अधिकतम प्रवाह:"
 
-#: functions.php:3262
+#: functions.php:3405
+#, fuzzy
 msgid "Bytes Exchanged"
-msgstr ""
+msgstr "बाइट्स का आदान-प्रदान"
 
-#: functions.php:3266
+#: functions.php:3409
 #, fuzzy
 msgid "Packets Examined"
 msgstr "पैकेट बार"
@@ -1447,733 +1490,738 @@ msgstr "प्लगइन -> प्रवाह दर्शक"
 msgid "Plugin -> Flow Admin"
 msgstr "प्लगइन -> प्रवाह व्यवस्थापक"
 
-#: setup.php:141
+#: setup.php:174
 #, fuzzy
 msgid "The Filter has been Deleted"
 msgstr "फ़िल्टर हटा दिया गया है"
 
-#: setup.php:142
+#: setup.php:175
 #, fuzzy
 msgid "The Filter has been Updated"
 msgstr "फ़िल्टर अद्यतन किया गया है"
 
-#: setup.php:147
+#: setup.php:180
 msgid "Import/Export"
-msgstr ""
+msgstr "दरामद करो / बरामद करो"
 
-#: setup.php:148 setup.php:149 setup.php:150 setup.php:155 setup.php:286
-#: setup.php:288
+#: setup.php:181 setup.php:182 setup.php:183 setup.php:188 setup.php:319
+#: setup.php:321
 #, fuzzy
 msgid "FlowView"
 msgstr "FlowView"
 
-#: setup.php:158
+#: setup.php:191
 msgid "Normal User"
-msgstr ""
+msgstr "सामान्य उपयोगकर्ता"
 
-#: setup.php:159
+#: setup.php:192
 msgid "System Administration"
-msgstr ""
+msgstr "तंत्र प्रशासन"
 
-#: setup.php:167 setup.php:188 setup.php:310
+#: setup.php:200 setup.php:221 setup.php:347
 #, fuzzy
 msgid "Flow Viewer"
 msgstr "प्रवाह दर्शक"
 
-#: setup.php:174
+#: setup.php:207
 #, fuzzy
 msgid "(view)"
 msgstr "देखें"
 
-#: setup.php:181 setup.php:209 setup.php:237 setup.php:265
+#: setup.php:214 setup.php:242 setup.php:270 setup.php:298
 #, fuzzy
 msgid "(save)"
 msgstr "सेव करें"
 
-#: setup.php:202 setup.php:230 setup.php:258
+#: setup.php:235 setup.php:263 setup.php:291
 #, fuzzy
 msgid "(edit)"
 msgstr "संपादित करें"
 
-#: setup.php:216 setup.php:244 setup.php:272
+#: setup.php:249 setup.php:277 setup.php:305
 #, fuzzy
 msgid "(actions)"
 msgstr "कार्रवाइयाँ"
 
-#: setup.php:314
+#: setup.php:359
+#, fuzzy
 msgid "Data Retention Policy"
-msgstr ""
+msgstr "डेटा अवधारण नीति"
 
-#: setup.php:315
+#: setup.php:360
+#, fuzzy
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr ""
+msgstr "Cacti विभाजन की समय सारणी को बनाए रखेगा।"
 
-#: setup.php:318
+#: setup.php:363
 #, fuzzy, php-format
 msgid "%d Week"
 msgstr "% d वीक"
 
-#: setup.php:319 setup.php:320
+#: setup.php:364 setup.php:365
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "% द वीक"
 
-#: setup.php:321
+#: setup.php:366
 #, fuzzy, php-format
 msgid "%d Month"
 msgstr "% d महीना"
 
-#: setup.php:322 setup.php:323 setup.php:324 setup.php:325
+#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
 #, fuzzy, php-format
 msgid "%d Months"
 msgstr "% d माह"
 
-#: setup.php:326
+#: setup.php:371
 #, fuzzy, php-format
 msgid "%d Year"
 msgstr "% d वष"
 
-#: setup.php:331
+#: setup.php:376
+#, fuzzy
 msgid "Database Partitioning Scheme"
-msgstr ""
+msgstr "डेटाबेस विभाजन योजना"
 
-#: setup.php:332
+#: setup.php:377
+#, fuzzy
 msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr ""
+msgstr "प्रति मिनट प्रवाह की संख्या के आधार पर, आपको प्रति दिन अधिक तालिकाओं की आवश्यकता हो सकती है।"
 
-#: setup.php:335
+#: setup.php:380
 msgid "Daily"
-msgstr ""
+msgstr "प्रतिदिन"
 
-#: setup.php:336
+#: setup.php:381
+#, fuzzy
 msgid "Hourly"
-msgstr ""
+msgstr "प्रति घंटा"
 
-#: setup.php:342
+#: setup.php:387
 #, fuzzy
 msgid "Misc"
 msgstr "विविध"
 
 #, fuzzy
-#~ msgid "TCP"
-#~ msgstr "टीसीपी"
-
-#, fuzzy
-#~ msgid "UDP"
-#~ msgstr "यूडीपी"
-
-#, fuzzy
-#~ msgid "ICMP"
-#~ msgstr "ICMP"
-
-#, fuzzy
-#~ msgid "IGMP"
-#~ msgstr "IGMP"
-
-#, fuzzy
-#~ msgid "GGP"
-#~ msgstr "GGP"
-
-#, fuzzy
-#~ msgid "IPENCAP"
-#~ msgstr "IPENCAP"
-
-#, fuzzy
-#~ msgid "ST"
-#~ msgstr "अनुसूचित जनजाति"
-
-#, fuzzy
-#~ msgid "CBT"
-#~ msgstr "सीबीटी"
-
-#, fuzzy
-#~ msgid "EGP"
-#~ msgstr "EGP"
-
-#, fuzzy
-#~ msgid "IGP"
-#~ msgstr "आईजीपी"
-
-#, fuzzy
-#~ msgid "BBN-RCC-MON"
-#~ msgstr "बीबीएन-आरसीसी-MON"
-
-#, fuzzy
-#~ msgid "NVP-II"
-#~ msgstr "NVP द्वितीय"
-
-#, fuzzy
-#~ msgid "PUP"
-#~ msgstr "पिल्ला"
-
-#, fuzzy
-#~ msgid "ARGUS"
-#~ msgstr "ARGUS"
-
-#, fuzzy
-#~ msgid "EMCON"
-#~ msgstr "EMCON"
-
-#, fuzzy
-#~ msgid "XNET"
-#~ msgstr "XNET"
-
-#, fuzzy
-#~ msgid "CHAOS"
-#~ msgstr "अराजकता"
-
-#, fuzzy
-#~ msgid "MUX"
-#~ msgstr "MUX"
-
-#, fuzzy
-#~ msgid "DCN-MEAS"
-#~ msgstr "DCN-MEAS"
-
-#, fuzzy
-#~ msgid "HMP"
-#~ msgstr "HMP"
-
-#, fuzzy
-#~ msgid "PRM"
-#~ msgstr "पी आर एम"
-
-#, fuzzy
-#~ msgid "XNS-IDP"
-#~ msgstr "XNS-आईडीपी"
-
-#, fuzzy
-#~ msgid "TRUNK-1"
-#~ msgstr "ट्रंक -1"
-
-#, fuzzy
-#~ msgid "TRUNK-2"
-#~ msgstr "ट्रंक -2"
-
-#, fuzzy
-#~ msgid "LEAF-1"
-#~ msgstr "लीफ -1"
-
-#, fuzzy
-#~ msgid "LEAF-2"
-#~ msgstr "लीफ -2"
-
-#, fuzzy
-#~ msgid "RDP"
-#~ msgstr "आरडीपी"
-
-#, fuzzy
-#~ msgid "IRTP"
-#~ msgstr "IRTP"
-
-#, fuzzy
-#~ msgid "ISO-TP4"
-#~ msgstr "आईएसओ TP4"
-
-#, fuzzy
-#~ msgid "NETBLT"
-#~ msgstr "NETBLT"
-
-#, fuzzy
-#~ msgid "MFE-NSP"
-#~ msgstr "MFE-एनएसपी"
-
-#, fuzzy
-#~ msgid "MERIT-INP"
-#~ msgstr "योग्यता-INP"
-
-#, fuzzy
-#~ msgid "DCCP"
-#~ msgstr "DCCP"
-
-#, fuzzy
-#~ msgid "3PC"
-#~ msgstr "3PC"
-
-#, fuzzy
-#~ msgid "IDPR"
-#~ msgstr "IDPR"
-
-#, fuzzy
-#~ msgid "XTP"
-#~ msgstr "XTP"
-
-#, fuzzy
-#~ msgid "DDP"
-#~ msgstr "डीडीपी"
-
-#, fuzzy
-#~ msgid "IDPR-CMTP"
-#~ msgstr "IDPR-CMTP"
-
-#, fuzzy
-#~ msgid "TP++"
-#~ msgstr "टी.पी. ++"
-
-#, fuzzy
-#~ msgid "IL"
-#~ msgstr "आईएल"
-
-#, fuzzy
-#~ msgid "IPv6"
-#~ msgstr "आईपीवी 6"
-
-#, fuzzy
-#~ msgid "SDRP"
-#~ msgstr "SDRP"
-
-#, fuzzy
-#~ msgid "IPv6-Route"
-#~ msgstr "आईपीवी 6-मार्ग"
-
-#, fuzzy
-#~ msgid "IPv6-Frag"
-#~ msgstr "आईपीवी 6-Frag"
-
-#, fuzzy
-#~ msgid "IDRP"
-#~ msgstr "IDRP"
-
-#, fuzzy
-#~ msgid "RSVP"
-#~ msgstr "RSVP"
-
-#, fuzzy
-#~ msgid "GRE"
-#~ msgstr "जीआरई"
-
-#, fuzzy
-#~ msgid "IPSEC-ESP"
-#~ msgstr "IPSEC-ईएसपी"
-
-#, fuzzy
-#~ msgid "IPSEC-AH"
-#~ msgstr "IPSEC-एएच"
-
-#, fuzzy
-#~ msgid "IPv6-ICMP"
-#~ msgstr "आईपीवी 6-ICMP"
-
-#, fuzzy
-#~ msgid "IPv6-NoNxt"
-#~ msgstr "आईपीवी 6-NoNxt"
-
-#, fuzzy
-#~ msgid "IPv6-Opts"
-#~ msgstr "आईपीवी 6-चुनता है"
-
-#, fuzzy
-#~ msgid "RSPF"
-#~ msgstr "RSPF"
-
-#, fuzzy
-#~ msgid "VMTP"
-#~ msgstr "VMTP"
-
-#, fuzzy
-#~ msgid "EIGRP"
-#~ msgstr "EIGRP"
-
-#, fuzzy
-#~ msgid "OSPF"
-#~ msgstr "ओएसपीएफ"
-
-#, fuzzy
-#~ msgid "MTP"
-#~ msgstr "एमटीपी"
-
-#, fuzzy
-#~ msgid "IPIP"
-#~ msgstr "IPIP"
-
-#, fuzzy
-#~ msgid "ENCAP"
-#~ msgstr "encap"
-
-#, fuzzy
-#~ msgid "Src IP"
-#~ msgstr "Src आईपी"
-
-#, fuzzy
-#~ msgid "Src/Dest IP"
-#~ msgstr "एसआरसी / डेस्ट आईपी"
-
-#, fuzzy
-#~ msgid "Src AS"
-#~ msgstr "सीनियर ए.एस."
-
-#, fuzzy
-#~ msgid "Src Prefix"
-#~ msgstr "सीनियर उपसर्ग"
-
-#, fuzzy
-#~ msgid "Src IF"
-#~ msgstr "Src IF"
-
-#, fuzzy
-#~ msgid "Src Port"
-#~ msgstr "Src पोर्ट"
-
-#, fuzzy
-#~ msgid "End Date"
-#~ msgstr "अंतिम दिनांक"
-
-#, fuzzy
-#~ msgid "Filter Type"
-#~ msgstr "फ़िल्टर का नाम"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "देखें"
-
-#, fuzzy
-#~ msgid "Defaults"
-#~ msgstr "चूक"
-
-#, fuzzy
-#~ msgid "Save As"
-#~ msgstr "के रूप रक्षित करें"
-
-#, fuzzy
-#~ msgid "Filter Data"
-#~ msgstr "फ़िल्टर का नाम"
-
-#, fuzzy
-#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
-#~ msgstr "कई फ़ील्ड प्रविष्टि, अल्पविराम द्वारा अलग किए गए, ऊपर के फ़ील्ड में अनुमत हैं। एक माइनस साइन (-) पोर्ट की एंट्री (जैसे -80 पोर्ट के लिए, किसी भी पोर्ट का मतलब 80 होगा)"
-
-#, fuzzy
-#~ msgid "New Query"
-#~ msgstr "नया प्रश्न"
-
-#, fuzzy
-#~ msgid "Update"
-#~ msgstr "अपडेट करें"
-
-#, fuzzy
-#~ msgid "Filter Saved"
-#~ msgstr "सेव को छान लें"
-
-#, fuzzy
-#~ msgid "Filter Settings Saved"
-#~ msgstr "फ़िल्टर सेटिंग्स सहेजे गए"
-
-#, fuzzy
-#~ msgid "Filter Updated"
-#~ msgstr "अद्यतन फ़िल्टर करें"
-
-#, fuzzy
-#~ msgid "IP"
-#~ msgstr "आईपी"
-
-#, fuzzy
-#~ msgid "Interface"
-#~ msgstr "इंटरफेस"
-
-#, fuzzy
-#~ msgid "AS"
-#~ msgstr "जैसा"
-
-#, fuzzy
-#~ msgid "Prefix"
-#~ msgstr "उपसर्ग"
-
-#, fuzzy
-#~ msgid "1 Line with Tags"
-#~ msgstr "1 टैग के साथ लाइन"
-
-#, fuzzy
-#~ msgid "AS Aggregation"
-#~ msgstr "एएस एकत्रीकरण"
-
-#, fuzzy
-#~ msgid "Protocol Port Aggregation"
-#~ msgstr "प्रोटोकॉल पोर्ट एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "Source Prefix Aggregation"
-#~ msgstr "स्रोत उपसर्ग एकत्रीकरण"
-
-#, fuzzy
-#~ msgid "Destination Prefix Aggregation"
-#~ msgstr "गंतव्य उपसर्ग एकत्रीकरण"
-
-#, fuzzy
-#~ msgid "Prefix Aggregation"
-#~ msgstr "उपसर्ग एकत्रीकरण"
-
-#, fuzzy
-#~ msgid "Full (Catalyst)"
-#~ msgstr "पूर्ण (उत्प्रेरक)"
-
-#, fuzzy
-#~ msgid "Any Part in Specified Time Span"
-#~ msgstr "निर्दिष्ट समय अवधि में कोई भी हिस्सा"
-
-#, fuzzy
-#~ msgid "End Time in Specified Time Span"
-#~ msgstr "निर्दिष्ट समय अवधि में अंत समय"
-
-#, fuzzy
-#~ msgid "Start Time in Specified Time Span"
-#~ msgstr "निर्दिष्ट समय अवधि में समय शुरू करें"
-
-#, fuzzy
-#~ msgid "Entirely in Specified Time Span"
-#~ msgstr "निर्दिष्ट समय अवधि में पूरी तरह से"
-
-#, fuzzy
-#~ msgid "Select One"
-#~ msgstr "एक चुनो"
-
-#, fuzzy
-#~ msgid "Flow Filter Constraints"
-#~ msgstr "फ्लो फ़िल्टर की कमी"
-
-#, fuzzy
-#~ msgid "(e.g., -0x0b/0x0F)"
-#~ msgstr "(उदाहरण, -0x0b / 0x0F)"
-
-#, fuzzy
-#~ msgid "Dest Port(s)"
-#~ msgstr "गंतव्य पोर्ट"
-
-#, fuzzy
-#~ msgid "Note:"
-#~ msgstr "ध्यान दें:"
-
-#, fuzzy
-#~ msgid "Report Parameters"
-#~ msgstr "रिपोर्ट पैरामीटर"
-
-#, fuzzy
-#~ msgid "Include if:"
-#~ msgstr "शामिल करें यदि:"
-
-#, fuzzy
-#~ msgid "%d Days"
-#~ msgstr "% ड डय"
-
-#, fuzzy
-#~ msgid "%d Minute"
-#~ msgstr "% d मिनट"
-
-#, fuzzy
-#~ msgid "%d Minutes"
-#~ msgstr "% d मिनट"
-
-#, fuzzy
-#~ msgid "NetFlow version 1"
-#~ msgstr "नेटफ्लो संस्करण 1"
-
-#, fuzzy
-#~ msgid "NetFlow version 5"
-#~ msgstr "नेटफ्लो संस्करण 5"
-
-#, fuzzy
-#~ msgid "NetFlow version 6"
-#~ msgstr "नेटफ्लो संस्करण 6"
-
-#, fuzzy
-#~ msgid "NetFlow version 7"
-#~ msgstr "नेटफ्लो संस्करण 7"
-
-#, fuzzy
-#~ msgid "NetFlow AS Aggregation"
-#~ msgstr "नेटफ्लो एज़ एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "NetFlow Proto Port Aggregation"
-#~ msgstr "नेटफ्लो प्रोटो पोर्ट एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "NetFlow Source Prefix Aggregation"
-#~ msgstr "नेटफ्लो स्रोत उपसर्ग एकत्रीकरण"
-
-#, fuzzy
-#~ msgid "NetFlow Destination Prefix Aggregation"
-#~ msgstr "नेटफ्लो गंतव्य उपसर्ग एकत्रीकरण"
-
-#, fuzzy
-#~ msgid "NetFlow Prefix Aggregation"
-#~ msgstr "नेटफ्लो प्रीफिक्स एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "NetFlow Destination"
-#~ msgstr "नेटफ्लो गंतव्य"
-
-#, fuzzy
-#~ msgid "NetFlow Source Destination"
-#~ msgstr "नेटफ्लो स्रोत गंतव्य"
-
-#, fuzzy
-#~ msgid "NetFlow Full Flow"
-#~ msgstr "नेटफ्लो पूर्ण प्रवाह"
-
-#, fuzzy
-#~ msgid "NetFlow ToS AS Aggregation"
-#~ msgstr "नेटफ्लो टोस एज़ एग्रीगेशन के रूप में"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Proto Port Aggregation"
-#~ msgstr "नेटफ्लो टोल प्रोटो पोर्ट एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Source Prefix Aggregation"
-#~ msgstr "नेटफ्लो टोस स्रोत उपसर्ग एकत्रीकरण"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Destination Prefix Aggregation"
-#~ msgstr "नेटफ्लो टोस डेस्टिनेशन प्रीफिक्स एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Aggregation"
-#~ msgstr "नेटफ्लो टो प्रीफिक्स एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Port Aggregation"
-#~ msgstr "नेटफ्लो टो प्रीफिक्स पोर्ट एग्रीगेशन"
-
-#, fuzzy
-#~ msgid "Flow-Tools tagged version 5"
-#~ msgstr "फ्लो-टूल्स ने संस्करण 5 को टैग किया"
-
-#, fuzzy
-#~ msgid "0 (Disabled)"
-#~ msgstr "0 (अक्षम)"
-
-#, fuzzy
-#~ msgid "9 (Highest)"
-#~ msgstr "9 (उच्चतम)"
-
-#, fuzzy
-#~ msgid "Directory"
-#~ msgstr "निर्देशिका"
-
-#, fuzzy
-#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
-#~ msgstr "यह उपकरण प्रवाहित निर्देशिका में है। यह निर्देशिका प्रवाह निर्देशिका पथ में होना चाहिए। यहां पूरा रास्ता मत डालो। इसके अलावा, ऐसा नहीं है कि यदि आप पथ बदलते हैं, तो इसका उपयोग करने के लिए सभी पूर्वनिर्धारित फाइलर सेटअप को फिर से शुरू करना होगा।"
-
-#, fuzzy
-#~ msgid "Nesting"
-#~ msgstr "घोंसला करने की क्रिया"
-
-#, fuzzy
-#~ msgid "Directory Structure that will be used for the flows for this device."
-#~ msgstr "निर्देशिका संरचना जिसका उपयोग इस उपकरण के प्रवाह के लिए किया जाएगा।"
-
-#, fuzzy
-#~ msgid "NetFlow Version"
-#~ msgstr "नेटफ्लो संस्करण"
-
-#, fuzzy
-#~ msgid "NetFlow Protocol version used by the device."
-#~ msgstr "डिवाइस द्वारा उपयोग किया गया नेटफ्लो प्रोटोकॉल संस्करण।"
-
-#, fuzzy
-#~ msgid "Compression Level"
-#~ msgstr "संपीड़न स्तर"
-
-#, fuzzy
-#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
-#~ msgstr "प्रवाह फ़ाइलों का संपीड़न स्तर। उच्च संपीड़न स्थान बचाता है, लेकिन परिणामों को संग्रहीत और पुनर्प्राप्त करने के लिए अधिक CPU का उपयोग करता है।"
-
-#, fuzzy
-#~ msgid "Rotation"
-#~ msgstr "रोटेशन"
-
-#, fuzzy
-#~ msgid "How often to create a new Flow File."
-#~ msgstr "एक नई फ़्लो फ़ाइल बनाने के लिए कितनी बार।"
-
-#, fuzzy
-#~ msgid "Expiration"
-#~ msgstr "समय सीमा समाप्ति"
-
-#, fuzzy
-#~ msgid "How long to keep your flow files."
-#~ msgstr "कब तक अपने प्रवाह फ़ाइलों को रखने के लिए।"
-
-#, fuzzy
-#~ msgid "Version"
-#~ msgstr "संस्करण %s"
-
-#, fuzzy
-#~ msgid "Compression"
-#~ msgstr "दबाव"
-
-#, fuzzy
-#~ msgid "Expire"
-#~ msgstr "समय सीमा समाप्त"
-
-#, fuzzy
-#~ msgid "No Devices"
-#~ msgstr "कोई उपकरण नहीं"
-
-#, fuzzy
-#~ msgid "Manage Listeners"
-#~ msgstr "श्रोताओं को प्रबंधित करें"
-
-#, fuzzy
-#~ msgid "Flow Tools Binary Path"
-#~ msgstr "प्रवाह उपकरण बाइनरी पथ"
-
-#, fuzzy
-#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-#~ msgstr "आपके फ़्लो-कैट, फ़्लो-फ़िल्टर और फ़्लो-स्टेट बाइनरी का मार्ग।"
-
-#, fuzzy
-#~ msgid "Flow Tools Work Directory"
-#~ msgstr "फ्लो टूल वर्क डायरेक्टरी"
-
-#, fuzzy
-#~ msgid "This is the path to a temporary directory to do work."
-#~ msgstr "यह काम करने के लिए एक अस्थायी निर्देशिका का मार्ग है।"
-
-#, fuzzy
-#~ msgid "Flows Directory"
-#~ msgstr "प्रवाह निर्देशिका"
-
-#, fuzzy
-#~ msgid "This is the path to base the path of your flow folder structure."
-#~ msgstr "यह आपके प्रवाह फ़ोल्डर संरचना के पथ को आधार बनाने का मार्ग है।"
-
-#, fuzzy
-#~ msgid "The method by which you wish to resolve hostnames."
-#~ msgstr "वह विधि जिससे आप होस्टनाम को हल करना चाहते हैं।"
-
-#, fuzzy
-#~ msgid "Use Local Server"
-#~ msgstr "स्थानीय सर्वर का उपयोग करें"
-
-#, fuzzy
-#~ msgid "Use DNS Server Below"
-#~ msgstr "नीचे DNS सर्वर का उपयोग करें"
-
-#, fuzzy
-#~ msgid "Don't Resolve DNS"
-#~ msgstr "डीएनएस को हल न करें"
-
-#, fuzzy
-#~ msgid "Alternate DNS Server"
-#~ msgstr "वैकल्पिक DNS सर्वर"
-
-#, fuzzy
-#~ msgid "This is the DNS Server used to resolve names."
-#~ msgstr "यह DNS सर्वर है जिसका उपयोग नामों को हल करने के लिए किया जाता है।"
-
-#, fuzzy
-#~ msgid "Strip Domain Names"
-#~ msgstr "स्ट्रिप डोमेन नाम"
-
-#, fuzzy
-#~ msgid "A comma delimited list of domains names to strip from the domain."
-#~ msgstr "डोमेन से पट्टी करने के लिए डोमेन नामों की एक अल्पविराम सीमांकित सूची।"
+#~ msgid "Select a Filter to display data"
+#~ msgstr "प्रिंट रिपोर्ट"
 
 #, fuzzy
 #~ msgid "New Flow"
 #~ msgstr "नया प्रवाह"
 
 #, fuzzy
-#~ msgid "Select a Filter to display data"
-#~ msgstr "प्रिंट रिपोर्ट"
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "डोमेन से पट्टी करने के लिए डोमेन नामों की एक अल्पविराम सीमांकित सूची।"
+
+#, fuzzy
+#~ msgid "Strip Domain Names"
+#~ msgstr "स्ट्रिप डोमेन नाम"
+
+#, fuzzy
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "यह DNS सर्वर है जिसका उपयोग नामों को हल करने के लिए किया जाता है।"
+
+#, fuzzy
+#~ msgid "Alternate DNS Server"
+#~ msgstr "वैकल्पिक DNS सर्वर"
+
+#, fuzzy
+#~ msgid "Don't Resolve DNS"
+#~ msgstr "डीएनएस को हल न करें"
+
+#, fuzzy
+#~ msgid "Use DNS Server Below"
+#~ msgstr "नीचे DNS सर्वर का उपयोग करें"
+
+#, fuzzy
+#~ msgid "Use Local Server"
+#~ msgstr "स्थानीय सर्वर का उपयोग करें"
+
+#, fuzzy
+#~ msgid "The method by which you wish to resolve hostnames."
+#~ msgstr "वह विधि जिससे आप होस्टनाम को हल करना चाहते हैं।"
+
+#, fuzzy
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "यह आपके प्रवाह फ़ोल्डर संरचना के पथ को आधार बनाने का मार्ग है।"
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "प्रवाह निर्देशिका"
+
+#, fuzzy
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "यह काम करने के लिए एक अस्थायी निर्देशिका का मार्ग है।"
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "फ्लो टूल वर्क डायरेक्टरी"
+
+#, fuzzy
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "आपके फ़्लो-कैट, फ़्लो-फ़िल्टर और फ़्लो-स्टेट बाइनरी का मार्ग।"
+
+#, fuzzy
+#~ msgid "Flow Tools Binary Path"
+#~ msgstr "प्रवाह उपकरण बाइनरी पथ"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "श्रोताओं को प्रबंधित करें"
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "कोई उपकरण नहीं"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "समय सीमा समाप्त"
+
+#, fuzzy
+#~ msgid "Compression"
+#~ msgstr "दबाव"
+
+#, fuzzy
+#~ msgid "Version"
+#~ msgstr "संस्करण %s"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "कब तक अपने प्रवाह फ़ाइलों को रखने के लिए।"
+
+#, fuzzy
+#~ msgid "Expiration"
+#~ msgstr "समय सीमा समाप्ति"
+
+#, fuzzy
+#~ msgid "How often to create a new Flow File."
+#~ msgstr "एक नई फ़्लो फ़ाइल बनाने के लिए कितनी बार।"
+
+#, fuzzy
+#~ msgid "Rotation"
+#~ msgstr "रोटेशन"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "प्रवाह फ़ाइलों का संपीड़न स्तर। उच्च संपीड़न स्थान बचाता है, लेकिन परिणामों को संग्रहीत और पुनर्प्राप्त करने के लिए अधिक CPU का उपयोग करता है।"
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "संपीड़न स्तर"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "डिवाइस द्वारा उपयोग किया गया नेटफ्लो प्रोटोकॉल संस्करण।"
+
+#, fuzzy
+#~ msgid "NetFlow Version"
+#~ msgstr "नेटफ्लो संस्करण"
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "निर्देशिका संरचना जिसका उपयोग इस उपकरण के प्रवाह के लिए किया जाएगा।"
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "घोंसला करने की क्रिया"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "यह उपकरण प्रवाहित निर्देशिका में है। यह निर्देशिका प्रवाह निर्देशिका पथ में होना चाहिए। यहां पूरा रास्ता मत डालो। इसके अलावा, ऐसा नहीं है कि यदि आप पथ बदलते हैं, तो इसका उपयोग करने के लिए सभी पूर्वनिर्धारित फाइलर सेटअप को फिर से शुरू करना होगा।"
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "निर्देशिका"
+
+#, fuzzy
+#~ msgid "9 (Highest)"
+#~ msgstr "9 (उच्चतम)"
+
+#, fuzzy
+#~ msgid "0 (Disabled)"
+#~ msgstr "0 (अक्षम)"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "फ्लो-टूल्स ने संस्करण 5 को टैग किया"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "नेटफ्लो टो प्रीफिक्स पोर्ट एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "नेटफ्लो टो प्रीफिक्स एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "नेटफ्लो टोस डेस्टिनेशन प्रीफिक्स एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "नेटफ्लो टोस स्रोत उपसर्ग एकत्रीकरण"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "नेटफ्लो टोल प्रोटो पोर्ट एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "नेटफ्लो टोस एज़ एग्रीगेशन के रूप में"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "नेटफ्लो पूर्ण प्रवाह"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "नेटफ्लो स्रोत गंतव्य"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "नेटफ्लो गंतव्य"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "नेटफ्लो प्रीफिक्स एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "नेटफ्लो गंतव्य उपसर्ग एकत्रीकरण"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "नेटफ्लो स्रोत उपसर्ग एकत्रीकरण"
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "नेटफ्लो प्रोटो पोर्ट एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "नेटफ्लो एज़ एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "नेटफ्लो संस्करण 7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "नेटफ्लो संस्करण 6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "नेटफ्लो संस्करण 5"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "नेटफ्लो संस्करण 1"
+
+#, fuzzy
+#~ msgid "%d Minutes"
+#~ msgstr "% d मिनट"
+
+#, fuzzy
+#~ msgid "%d Minute"
+#~ msgstr "% d मिनट"
+
+#, fuzzy
+#~ msgid "%d Days"
+#~ msgstr "% ड डय"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "शामिल करें यदि:"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "रिपोर्ट पैरामीटर"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "ध्यान दें:"
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "गंतव्य पोर्ट"
+
+#, fuzzy
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "(उदाहरण, -0x0b / 0x0F)"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "फ्लो फ़िल्टर की कमी"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "एक चुनो"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "निर्दिष्ट समय अवधि में पूरी तरह से"
+
+#, fuzzy
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "निर्दिष्ट समय अवधि में समय शुरू करें"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "निर्दिष्ट समय अवधि में अंत समय"
+
+#, fuzzy
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "निर्दिष्ट समय अवधि में कोई भी हिस्सा"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "पूर्ण (उत्प्रेरक)"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "उपसर्ग एकत्रीकरण"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "गंतव्य उपसर्ग एकत्रीकरण"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "स्रोत उपसर्ग एकत्रीकरण"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "प्रोटोकॉल पोर्ट एग्रीगेशन"
+
+#, fuzzy
+#~ msgid "AS Aggregation"
+#~ msgstr "एएस एकत्रीकरण"
+
+#, fuzzy
+#~ msgid "1 Line with Tags"
+#~ msgstr "1 टैग के साथ लाइन"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "उपसर्ग"
+
+#, fuzzy
+#~ msgid "AS"
+#~ msgstr "जैसा"
+
+#, fuzzy
+#~ msgid "Interface"
+#~ msgstr "इंटरफेस"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "आईपी"
+
+#, fuzzy
+#~ msgid "Filter Updated"
+#~ msgstr "अद्यतन फ़िल्टर करें"
+
+#, fuzzy
+#~ msgid "Filter Settings Saved"
+#~ msgstr "फ़िल्टर सेटिंग्स सहेजे गए"
+
+#, fuzzy
+#~ msgid "Filter Saved"
+#~ msgstr "सेव को छान लें"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "अपडेट करें"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "नया प्रश्न"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr "कई फ़ील्ड प्रविष्टि, अल्पविराम द्वारा अलग किए गए, ऊपर के फ़ील्ड में अनुमत हैं। एक माइनस साइन (-) पोर्ट की एंट्री (जैसे -80 पोर्ट के लिए, किसी भी पोर्ट का मतलब 80 होगा)"
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "फ़िल्टर का नाम"
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr "के रूप रक्षित करें"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "चूक"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "देखें"
+
+#, fuzzy
+#~ msgid "Filter Type"
+#~ msgstr "फ़िल्टर का नाम"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "अंतिम दिनांक"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "Src पोर्ट"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "Src IF"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "सीनियर उपसर्ग"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "सीनियर ए.एस."
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "एसआरसी / डेस्ट आईपी"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "Src आईपी"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "encap"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "एमटीपी"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "ओएसपीएफ"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "EIGRP"
+
+#, fuzzy
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "RSPF"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "आईपीवी 6-चुनता है"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "आईपीवी 6-NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "आईपीवी 6-ICMP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-एएच"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ईएसपी"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "जीआरई"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "RSVP"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "आईपीवी 6-Frag"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "आईपीवी 6-मार्ग"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "SDRP"
+
+#, fuzzy
+#~ msgid "IPv6"
+#~ msgstr "आईपीवी 6"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "आईएल"
+
+#, fuzzy
+#~ msgid "TP++"
+#~ msgstr "टी.पी. ++"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "डीडीपी"
+
+#, fuzzy
+#~ msgid "XTP"
+#~ msgstr "XTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "3PC"
+#~ msgstr "3PC"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "योग्यता-INP"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "MFE-एनएसपी"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "NETBLT"
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "आईएसओ TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "आरडीपी"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "लीफ -2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "लीफ -1"
+
+#, fuzzy
+#~ msgid "TRUNK-2"
+#~ msgstr "ट्रंक -2"
+
+#, fuzzy
+#~ msgid "TRUNK-1"
+#~ msgstr "ट्रंक -1"
+
+#, fuzzy
+#~ msgid "XNS-IDP"
+#~ msgstr "XNS-आईडीपी"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "पी आर एम"
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "HMP"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "DCN-MEAS"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "CHAOS"
+#~ msgstr "अराजकता"
+
+#, fuzzy
+#~ msgid "XNET"
+#~ msgstr "XNET"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "पिल्ला"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP द्वितीय"
+
+#, fuzzy
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "बीबीएन-आरसीसी-MON"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "आईजीपी"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "EGP"
+
+#, fuzzy
+#~ msgid "CBT"
+#~ msgstr "सीबीटी"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "अनुसूचित जनजाति"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "IPENCAP"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "GGP"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "ICMP"
+
+#, fuzzy
+#~ msgid "UDP"
+#~ msgstr "यूडीपी"
+
+#, fuzzy
+#~ msgid "TCP"
+#~ msgstr "टीसीपी"
