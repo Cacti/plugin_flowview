@@ -3,6 +3,7 @@
 --- develop ---
 
 * issue#61: IPFIX Errors in Cacti Log
+* issue#62: Problem with ` symbol in SQL queries
 * issue: Upgrade was running repeatedly due upgrade using legacy variable
 
 --- 3.2 ---

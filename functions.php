@@ -3665,6 +3665,25 @@ function create_raw_partition($table) {
 	$data['comment']    = 'Plugin Flowview - Details Report Data';
 
 	api_plugin_db_table_create('flowview', $table, $data);
+
+	// Work around for unicode issues
+	flowview_fix_collate_issues();
+}
+
+function flowview_fix_collate_issues() {
+	$tables = array_rekey(
+		db_fetch_assoc('SELECT TABLE_NAME
+			FROM information_schema.TABLES
+			WHERE TABLE_NAME LIKE "plugin_flowview_raw%"
+			AND TABLE_COLLATION != "utf8_unicode_ci"'),
+		'TABLE_NAME', 'TABLE_NAME'
+	);
+
+	if (cacti_sizeof($tables)) {
+		foreach($tables as $table) {
+			db_execute("ALTER TABLE $table COLLATE=utf8mb4_unicode_ci");
+		}
+	}
 }
 
 function import_flows() {
