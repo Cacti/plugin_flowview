@@ -1040,7 +1040,7 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 		$dst_rport = 0;
 	}
 
-	if ($data[$fieldname['dPkts']] > 0) {
+	if (isset($data[$fieldname['dPkts']]) && $data[$fieldname['dPkts']] > 0) {
 		$pps = round($data[$fieldname['dOctets']] / $data[$fieldname['dPkts']], 3);
 	} else {
 		$pps = 0;

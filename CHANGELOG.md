@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#61: IPFIX Errors in Cacti Log
 * issue: Upgrade was running repeatedly due upgrade using legacy variable
 
 --- 3.2 ---
