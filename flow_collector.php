@@ -755,6 +755,13 @@ function process_fv10($p, $peer) {
 
 	while ($i < $count) {
 		$header = substr($p, $i, 4);
+
+		// Header issues beyond end of length
+		if (strlen($header) != 4) {
+			cacti_log("Flow: Unnatural end of packet at position $i. Bad header length", false, 'FLOWVIEW');
+			break;
+		}
+
 		$header = unpack('nflowset_id/nflowset_length', $header);
 		$h      = $i + 4;
 		$fsid   = $header['flowset_id'];
@@ -960,7 +967,7 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 			$src_prefix = 0;
 		}
 	} else {
-		cacti_log('The Source Address is not set');
+		cacti_log('The Source Address is not set', false, 'FLOWVIEW');
 		return false;
 	}
 
@@ -981,7 +988,7 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 			$dst_prefix = 0;
 		}
 	} else {
-		cacti_log('The Destination Address is not set');
+		cacti_log('The Destination Address is not set', false, 'FLOWVIEW');
 		return false;
 	}
 
