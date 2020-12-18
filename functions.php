@@ -2393,7 +2393,11 @@ function run_flow_query($session, $query_id, $start, $end) {
 						$table .= '<td class="right">' . number_format_i18n($r['packets'], 0) . '</td>';
 					}
 
-					$table .= '<td class="right">' . number_format_i18n($r['bytes']/$r['packets'], 0) . '</td>';
+					if ($r['packets'] > 0) {
+						$table .= '<td class="right">' . number_format_i18n($r['bytes']/$r['packets'], 0) . '</td>';
+					} else {
+						$table .= '<td class="right">0</td>';
+					}
 
 					$table .= '</tr>';
 
