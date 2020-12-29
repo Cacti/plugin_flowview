@@ -1380,7 +1380,7 @@ function get_numeric_filter($sql_where, $value, $column) {
 			}
 		}
 
-		return ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
+		$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '`' . $column . '` IN (' . implode(',', $values) . ')';
 	}
 
 	return $sql_where;
