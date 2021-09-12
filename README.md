@@ -24,6 +24,10 @@ OpenFlashCharts.  In fact the entire import and reporting process is
 handled through php and uses JavaScript based charting already available in 
 Cacti.
 
+Note that additionally, you must install the linux utility `netstat` if it is not 
+already installed.  Netstat will help Cacti determine if the `flow-capture` 
+service in question is actually running.
+
 After installing, you should set your partitioning and retention settings from 
 Console > Configuration > Settings > Misc.  There is a flowview section there 
 that you can customize.
