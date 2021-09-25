@@ -1,10 +1,12 @@
 # Changelog
 
---- develop ---
+--- 3.3 ---
 
 * issue#61: IPFIX Errors in Cacti Log
 * issue#62: Problem with ` symbol in SQL queries
 * issue: Upgrade was running repeatedly due upgrade using legacy variable
+* feature: Update FlowView to use Bulletin Board Charts
+* feature: Minimum Cacti requirement 1.2.17 for Bulletin Board
 
 --- 3.2 ---
 

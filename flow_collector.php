@@ -420,8 +420,8 @@ function process_fv5($p, $peer) {
 		$retime = ($data['Last'] - $header['sysuptime']) / 1000;
 		$remsec = substr($data['Last'] - $header['sysuptime'], -3);
 
-		$start_time = date('Y-m-d H:i:s', $flowtime + $rstime) . '.' . $rsmsec;
-		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
+		$start_time = date('Y-m-d H:i:s.v', $flowtime + $rstime) . '.' . $rsmsec;
+		$end_time   = date('Y-m-d H:i:s.v', $flowtime + $retime) . '.' . $remsec;
 
 		$sql_prefix = get_sql_prefix($flowtime);
 
@@ -1006,8 +1006,8 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 		$retime = ($data[$fieldname['end_time']] - $data[$fieldname['sysuptime']]) / 1000;
 		$remsec = substr($data[$fieldname['end_time']] - $data[$fieldname['sysuptime']], -3);
 
-		$start_time = date('Y-m-d H:i:s', $flowtime + $rstime) . '.' . $rsmsec;
-		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
+		$start_time = date('Y-m-d H:i:s.v', $flowtime + $rstime) . '.' . $rsmsec;
+		$end_time   = date('Y-m-d H:i:s.v', $flowtime + $retime) . '.' . $remsec;
 		$sysuptime = $data[$fieldname['sysuptime']];
 	} elseif ($sysuptime > 0) {
 		$rsmsec = $rstime = $remsec = $retime = 0;
@@ -1022,11 +1022,11 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 			$remsec = substr($data[$fieldname['end_time']] - $sysuptime, -3);
 		}
 
-		$start_time = date('Y-m-d H:i:s', $flowtime + $rstime) . '.' . $rsmsec;
-		$end_time   = date('Y-m-d H:i:s', $flowtime + $retime) . '.' . $remsec;
+		$start_time = date('Y-m-d H:i:s.v', $flowtime + $rstime) . '.' . $rsmsec;
+		$end_time   = date('Y-m-d H:i:s.v', $flowtime + $retime) . '.' . $remsec;
 	} else {
-		$start_time = date('Y-m-d H:i:s', $flowtime);
-		$end_time   = date('Y-m-d H:i:s', $flowtime);
+		$start_time = date('Y-m-d H:i:s.v', $flowtime);
+		$end_time   = date('Y-m-d H:i:s.v', $flowtime);
 	}
 
 	$src_domain  = flowview_get_dns_from_ip($src_addr, 100);

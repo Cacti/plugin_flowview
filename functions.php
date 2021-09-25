@@ -870,7 +870,7 @@ function flowview_display_filter($data) {
 						'&date1='        + $('#date1').val()  +
 						'&date2='        + $('#date2').val(), function(data) {
 
-						var chartBytes = c3.generate({
+						var chartBytes = bb.generate({
 							bindto: '#chartbytes',
 							size: {
 								height: 400,
@@ -926,7 +926,7 @@ function flowview_display_filter($data) {
 						'&date1='        + $('#date1').val()   +
 						'&date2='        + $('#date2').val(), function(data) {
 
-						var chartFlows = c3.generate({
+						var chartFlows = bb.generate({
 							bindto: '#chartflows',
 							size: {
 								height: 400,
@@ -982,7 +982,7 @@ function flowview_display_filter($data) {
 						'&date1='        + $('#date1').val()   +
 						'&date2='        + $('#date2').val(), function(data) {
 
-						var chartPackets = c3.generate({
+						var chartPackets = bb.generate({
 							bindto: '#chartpackets',
 							size: {
 								height: 400,

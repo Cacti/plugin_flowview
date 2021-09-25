@@ -123,7 +123,7 @@ function plugin_flowview_check_upgrade() {
 					if (db_index_exists($t['TABLE_NAME'], 'keycol')) {
 						db_execute('ALTER TABLE ' . $t['TABLE_NAME'] . '
 							DROP INDEX `keycol`,
-							ADD UNIQUE INDEX `keycol` (`listener_id`, `src_addr`, `src_port`, `src_if`,`dst_addr`,`dst_port`, `dst_if`, `start_time`, `end_time`)');
+							ADD UNIQUE INDEX `keycol` (`listener_id`, `src_addr`, `src_port`, `src_if`, `dst_addr`, `dst_port`, `dst_if`, `start_time`, `end_time`)');
 					} else {
 						db_execute('ALTER TABLE ' . $t['TABLE_NAME'] . '
 							ADD UNIQUE INDEX `keycol` (`listener_id`, `src_addr`, `src_port`, `src_if`,`dst_addr`,`dst_port`, `dst_if`, `start_time`, `end_time`)');
