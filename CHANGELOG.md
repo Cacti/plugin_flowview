@@ -1,5 +1,9 @@
 # Changelog
 
+--- develop ---
+
+* issue#71: Flowview no data were displayed
+
 --- 3.3 ---
 
 * issue#61: IPFIX Errors in Cacti Log
