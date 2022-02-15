@@ -130,7 +130,7 @@ function actions_devices () {
 
 	form_start('flowview_devices.php');
 
-	html_start_box($flow_actions{get_nfilter_request_var('drp_action')}, '60%', '', '3', 'center', '');
+	html_start_box($flow_actions[get_nfilter_request_var('drp_action')], '60%', '', '3', 'center', '');
 
 	if (get_nfilter_request_var('drp_action') == '1') { /* Delete */
 		print "<tr>
