@@ -1022,8 +1022,8 @@ function process_v9_v10($data, $peer, $flowtime, $sysuptime = 0) {
 			$remsec = substr($data[$fieldname['end_time']] - $sysuptime, -3);
 		}
 
-		$start_time = date('Y-m-d H:i:s.v', $flowtime + $rstime) . '.' . $rsmsec;
-		$end_time   = date('Y-m-d H:i:s.v', $flowtime + $retime) . '.' . $remsec;
+		$start_time = date('Y-m-d H:i:s.v', intval($flowtime + $rstime)) . '.' . $rsmsec;
+		$end_time   = date('Y-m-d H:i:s.v', intval($flowtime + $retime)) . '.' . $remsec;
 	} else {
 		$start_time = date('Y-m-d H:i:s.v', $flowtime);
 		$end_time   = date('Y-m-d H:i:s.v', $flowtime);
