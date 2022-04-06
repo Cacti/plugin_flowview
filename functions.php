@@ -3249,7 +3249,11 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 				$position += $len[1] + 1;
 			} while ($len != 0);
 
-			$dns_name = flowview_get_owner_from_arin($ip);
+			if (read_config_option('flowview_use_arin') == 'on') {
+				$dns_name = flowview_get_owner_from_arin($ip);
+			} else {
+				$dns_name = $ip;
+			}
 
 			if ($ip != $dns_name) {
 				/* error - return the hostname we constructed (without the . on the end) */
@@ -3269,7 +3273,11 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 				return $ip . $suffix;
 			}
 		} else {
-			$dns_name = flowview_get_owner_from_arin($ip);
+			if (read_config_option('flowview_use_arin') == 'on') {
+				$dns_name = flowview_get_owner_from_arin($ip);
+			} else {
+				$dns_name = $ip;
+			}
 
 			if ($ip != $dns_name) {
 				/* error - return the hostname we constructed (without the . on the end) */
@@ -3297,7 +3305,11 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 
 			return $dns_name . $suffix;
 		} else {
-			$dns_name = flowview_get_owner_from_arin($ip);
+			if (read_config_option('flowview_use_arin') == 'on') {
+				$dns_name = flowview_get_owner_from_arin($ip);
+			} else {
+				$dns_name = $ip;
+			}
 
 			if ($dns_name != $ip) {
 				db_execute_prepared('INSERT INTO plugin_flowview_dnscache

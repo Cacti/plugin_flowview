@@ -3,6 +3,8 @@
 --- develop ---
 
 * issue#71: Flowview no data were displayed
+* issue: Flowview DNS Setting removed by accident
+* feature: Make it optional to query Arin to track Big Tech
 
 --- 3.3 ---
 

@@ -348,6 +348,23 @@ function flowview_config_settings() {
 			'method' => 'spacer',
 			'collapsible' => 'true'
 		),
+		'flowview_dns_method' => array(
+			'friendly_name' => __('Hostname Resolution', 'flowview'),
+			'description' => __('The method by which you wish to resolve hostnames.', 'flowview'),
+			'method' => 'drop_array',
+			'array' => array(
+				0 => __('Use Local Server', 'flowview'),
+				1 => __('Use DNS Server Below', 'flowview'),
+				2 => __('Don\'t Resolve DNS', 'flowview')
+			),
+			'default' => 0
+		),
+		'flowview_use_arin' => array(
+			'friendly_name' => __('Use Arin to Find Unregistered Domains', 'syslog'),
+			'description' => __('Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies.', 'flowview'),
+			'method' => 'checkbox',
+			'default' => 'on'
+		),
 		'flowview_format_file' => array(
 			'friendly_name' => __('Format File to Use', 'monitor'),
 			'method' => 'drop_array',
@@ -386,10 +403,11 @@ function flowview_config_settings() {
 
 	$tabs['misc'] = __('Misc', 'flowview');
 
-	if (isset($settings['misc']))
+	if (isset($settings['misc'])) {
 		$settings['misc'] = array_merge($settings['misc'], $temp);
-	else
-		$settings['misc']=$temp;
+	} else {
+		$settings['misc'] = $temp;
+	}
 }
 
 function flowview_poller_bottom() {
