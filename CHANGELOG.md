@@ -3,6 +3,7 @@
 --- develop ---
 
 * issue#71: Flowview no data were displayed
+* issue#73: Timespan never saved when editing a filter
 * issue: Flowview DNS Setting removed by accident
 * feature: Make it optional to query Arin to track Big Tech
 

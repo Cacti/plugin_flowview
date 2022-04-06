@@ -1064,7 +1064,6 @@ function flowview_display_filter($data) {
 			'?action=savefilter' +
 			'&query='        + $('#query').val() +
 			'&domains='      + $('#domains').is(':checked') +
-			'&query='        + $('#query').val() +
 			'&timespan='     + $('#predefined_timespan').val() +
 			'&report='       + report +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
