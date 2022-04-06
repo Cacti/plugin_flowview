@@ -1113,12 +1113,12 @@ function flowview_display_filter($data) {
 
 	function changeQuery() {
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
-			'?action=query' +
-			'&domains='      + $('#domains').is(':checked') +
-			'&query='        + $('#query').val() +
-			'&timespan='     + $('#predefined_timespan').val() +
-			'&date1='        + $('#date1').val() +
-			'&date2='        + $('#date2').val() +
+			'?action=query'         +
+			'&domains='             + $('#domains').is(':checked') +
+			'&query='               + $('#query').val() +
+			'&predefined_timespan=' + $('#predefined_timespan').val() +
+			'&date1='               + $('#date1').val() +
+			'&date2='               + $('#date2').val() +
 			'&header=false');
 	}
 
@@ -1130,18 +1130,18 @@ function flowview_display_filter($data) {
 		}
 
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
-			'?action=view'   +
-			'&domains='      + $('#domains').is(':checked') +
-			'&query='        + $('#query').val() +
-			'&timespan='     + $('#predefined_timespan').val() +
-			'&report='       + report +
-			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
-			'&sortvalue='    + ($('#sortfield').val() != null ? $('#sortfield option:selected').html():'Bytes') +
-			'&cutofflines='  + $('#cutofflines').val() +
-			'&cutoffoctets=' + $('#cutoffoctets').val() +
-			'&exclude='      + $('#exclude').val() +
-			'&date1='        + $('#date1').val() +
-			'&date2='        + $('#date2').val() +
+			'?action=view'          +
+			'&domains='             + $('#domains').is(':checked') +
+			'&query='               + $('#query').val() +
+			'&predefined_timespan=' + $('#predefined_timespan').val() +
+			'&report='              + report +
+			'&sortfield='           + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
+			'&sortvalue='           + ($('#sortfield').val() != null ? $('#sortfield option:selected').html():'Bytes') +
+			'&cutofflines='         + $('#cutofflines').val() +
+			'&cutoffoctets='        + $('#cutoffoctets').val() +
+			'&exclude='             + $('#exclude').val() +
+			'&date1='               + $('#date1').val() +
+			'&date2='               + $('#date2').val() +
 			'&header=false');
 	}
 
