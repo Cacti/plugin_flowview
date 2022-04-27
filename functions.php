@@ -521,7 +521,7 @@ function flowview_display_filter($data) {
 
 							if (cacti_sizeof($columns)) {
 								foreach($columns as $key => $value) {
-									print "<option value='" . $key . "'" . (get_request_var('sortvalue') == $value ? ' selected':'') . '>' . html_escape($value) . '</option>';
+									print "<option value='" . $key . "'" . (get_request_var('sortvalue') == $value || get_request_var('sortfield') == $value ? ' selected':'') . '>' . html_escape($value) . '</option>';
 								}
 							}
 							?>
@@ -1527,7 +1527,7 @@ function flowview_get_chartdata() {
 
 		$output = run_flow_query(true, $query_id, $start, $end);
 
-		if (cacti_sizeof($output['data']) && $report > 0 && $report < 99) {
+		if ($output !== false && cacti_sizeof($output['data']) && $report > 0 && $report < 99) {
 			$columns  = array_keys($output['data'][0]);
 			$category = get_category_columns($report, $domains);
 
