@@ -1475,7 +1475,7 @@ function get_tables_for_query($start, $end) {
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
-	$part_type  = read_config_option('flowview_partition');
+	$part_type  = read_config_option('flowview_partition', true);
 	$inc_tables = array();
 
 	if ($part_type == 0) {

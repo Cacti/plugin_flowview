@@ -5,6 +5,7 @@
 * issue#71: Flowview no data were displayed
 * issue#73: Timespan never saved when editing a filter
 * issue: Flowview DNS Setting removed by accident
+* issue: When changing the partition type, it does not take from the GUI right away
 * feature: Make it optional to query Arin to track Big Tech
 
 --- 3.3 ---
