@@ -500,8 +500,10 @@ function flowview_display_filter($data) {
 
 							if (trim(get_request_var('report'), 'sp') != '0') {
 								if (substr(get_request_var('report'), 0, 1) == 's') {
-									$columns = $stat_columns_array[trim(get_request_var('report'), 'sp')];
-								} else {
+									if (isset($stat_columns_array[trim(get_request_var('report'), 'sp')])) {
+										$columns = $stat_columns_array[trim(get_request_var('report'), 'sp')];
+									}
+								} elseif (isset($print_columns_array[trim(get_request_var('report'), 'sp')])) {
 									$columns = $print_columns_array[trim(get_request_var('report'), 'sp')];
 								}
 							} elseif (get_request_var('query') > 0) {
