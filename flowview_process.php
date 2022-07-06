@@ -77,12 +77,12 @@ $t = time();
 $r = intval($t / 60) * 60;
 $start = microtime(true);
 
-$last  = read_config_option('flowview_last_change');
+$last = read_config_option('flowview_last_change');
 if (empty($last)) {
-	$last = time() - read_config_option('poller_interval');
+	$last = $t - read_config_option('poller_interval');
 	set_config_option('flowview_last_change', $last);
 } else {
-	set_config_option('flowview_last_change', time());
+	set_config_option('flowview_last_change', $t);
 }
 
 // Maintenance is at midnight
@@ -97,6 +97,7 @@ $schedules = db_fetch_assoc("SELECT *
 
 if (count($schedules)) {
 	$php = read_config_option('path_php_binary');
+
 	foreach ($schedules as $s) {
 		flowview_debug('Running Schedule ' . $s['id']);
 		exec_background($php, ' -q ' . $config['base_path'] . '/plugins/flowview/run_schedule.php --schedule=' . $s['id']);
@@ -106,15 +107,45 @@ if (count($schedules)) {
 $total = db_fetch_cell('SELECT COUNT(*)
 	FROM plugin_flowview_devices');
 
-$tables = get_tables_range($last);
-$records = 0;
+/* determine how many records were inserted */
+$last_sequence = read_config_option('flowview_last_sequence');
+$last_table    = read_config_option('flowview_last_table');
+
+$tables      = get_tables_range($last, $t);
+$records     = 0;
+$sequence    = 0;
+$nlast_table = '';
 
 foreach($tables as $table) {
-	$records += db_fetch_cell_prepared("SELECT COUNT(*)
-		FROM $table
-		WHERE end_time >= ?",
-		array(date('Y-m-d H:i:s', $last)));
+	if (empty($last_sequence)) {
+		$data = db_fetch_row_prepared("SELECT COUNT(*) AS totals, MAX(sequence) AS sequence
+			FROM $table
+			WHERE end_time >= ?",
+			array(date('Y-m-d H:i:s', $last)));
+
+		$nlast_table = $table;
+	} elseif ($last_table == $table) {
+		$data = db_fetch_row_prepared("SELECT COUNT(*) AS totals, MAX(sequence) AS sequence
+			FROM $table
+			WHERE sequence > ?",
+			array($last_sequence));
+
+		$nlast_table = $table;
+	} else {
+		$data = db_fetch_row("SELECT COUNT(*) AS totals, MAX(sequence) AS sequence
+			FROM $table");
+
+		$nlast_table = $table;
+	}
+
+	if (cacti_sizeof($data)) {
+		$sequence = $data['sequence'];
+		$records += $data['totals'];
+	}
 }
+
+set_config_option('flowview_last_sequence', $sequence);
+set_config_option('flowview_last_table', $nlast_table);
 
 if ($maint) {
 	flowview_debug('Performing Table Maintenance');
@@ -175,7 +206,7 @@ if ($maint) {
 $end = microtime(true);
 
 $cacti_stats = sprintf(
-	'Time:%01.4f ' .
+	'Time:%0.2f ' .
 	'Listeners:%s ' .
 	'Newrecs:%s ' .
 	'Schedules:%s',

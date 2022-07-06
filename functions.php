@@ -1472,13 +1472,17 @@ function get_date_filter($sql_where, $start, $end, $range_type = 1) {
  *  This function creates an array of tables for a query
  *
  */
-function get_tables_for_query($start, $end) {
+function get_tables_for_query($start, $end = null) {
 	global $config, $graph_timespans;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	$part_type  = read_config_option('flowview_partition', true);
 	$inc_tables = array();
+
+	if ($end === null) {
+		$end = time();
+	}
 
 	if ($part_type == 0) {
 		$start_part = date('Y', $start) . substr('000' . date('z', $start), -3) . '00';
