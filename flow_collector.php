@@ -565,12 +565,12 @@ function process_fv9($p, $peer) {
 							if ($allfields[$tf['field_id']]['pack'] != '') {
 								$tf['unpack'] = $allfields[$tf['field_id']]['pack'];
 							} else {
-								cacti_log('WARNING: Field length not set for name:' . $tf['name'] . ', id: ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW', POLLER_VERBOSITY_MEDIUM);
+								cacti_log('WARNING: Field length not set for name:' . $tf['name'] . ', id: ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW', POLLER_VERBOSITY_HIGH);
 
 								if (isset($lens[$tf['length']])) {
 									$tf['unpack'] = $lens[$tf['length']];
 								} else {
-									cacti_log('ERROR: Field length defined for length name:' . $tf['name'] . ', id: ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW', POLLER_VERBOSITY_MEDIUM);
+									cacti_log('ERROR: Field length defined for length name:' . $tf['name'] . ', id: ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW', POLLER_VERBOSITY_HIGH);
 									$tf['unpack'] = 'C' . $tf['length'];
 								}
 							}
@@ -581,7 +581,7 @@ function process_fv9($p, $peer) {
 							if (isset($lens[$tf['length']])) {
 								$tf['unpack'] = $lens[$tf['length']];
 							} else {
-								cacti_log('ERROR: Field length defined for length name:' . $tf['name'] . ', id: ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW', POLLER_VERBOSITY_MEDIUM);
+								cacti_log('ERROR: Field length defined for length name:' . $tf['name'] . ', id: ' . $tf['field_id'] . ' has length ' . $tf['length'], false, 'FLOWVIEW', POLLER_VERBOSITY_HIGH);
 								$tf['unpack'] = 'C' . $tf['length'];
 							}
 						}
