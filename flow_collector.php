@@ -332,7 +332,11 @@ if (cacti_sizeof($listener)) {
 				debug("Flow: Packet from: $peer v" . $version[1] . " - Len: " . strlen($p));
 
 				// Ensure the database connection is still good
-				database_check_connect();
+				if (cacti_version_compare(CACTI_VERSION, '1.2.23', '<')) {
+					database_check_connect();
+				} else {
+					db_check_reconnect();
+				}
 
 				if ($version[1] == 5) {
 					process_fv5($p, $peer);
