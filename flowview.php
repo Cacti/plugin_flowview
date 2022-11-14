@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2020 The Cacti Group                                 |
+ | Copyright (C) 2004-2022 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -95,23 +95,23 @@ function load_session_for_filter() {
 			}
 		}
 
-		$q = db_fetch_row_prepared('SELECT *
+		$query = db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
 			WHERE id = ?',
 			array(get_request_var('query')));
 
-		if (cacti_sizeof($q)) {
-			foreach($q as $column => $value) {
+		if (cacti_sizeof($query)) {
+			foreach($query as $column => $value) {
 				switch($column) {
 					case 'name':
 						break;
 					case 'timespan':
 						if (!isset_request_var('predefined_timespan')) {
-							set_request_var('predefined_timespan', $q['timespan']);
+							set_request_var('predefined_timespan', $query['timespan']);
 
-							if ($q['timespan'] == 0) {
-								set_request_var('date1', strtoupper($q['startdate']));
-								set_request_var('date2', strtoupper($q['enddate']));
+							if ($query['timespan'] == 0) {
+								set_request_var('date1', strtoupper($query['startdate']));
+								set_request_var('date2', strtoupper($query['enddate']));
 							} else {
 								$span = array();
 								get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
@@ -182,7 +182,7 @@ function load_session_for_filter() {
 		set_request_var('statistics', 0);
 	}
 
-	return isset($q['name']) ? $q['name']:'';
+	return isset($query['name']) ? $query['name']:'';
 }
 
 function flowview_request_vars() {

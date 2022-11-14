@@ -1,7 +1,8 @@
+#!/usr/bin/env php
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2020 The Cacti Group                                 |
+ | Copyright (C) 2004-2022 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -139,8 +140,12 @@ foreach($tables as $table) {
 	}
 
 	if (cacti_sizeof($data)) {
-		$sequence = $data['sequence'];
+		$sequence = intval($data['sequence']);
 		$records += $data['totals'];
+	}
+
+	if ($sequence == '') {
+		$sequence = 0;
 	}
 }
 
