@@ -1,10 +1,12 @@
 # Cacti Flow Service
 
-The two files in this directory are for init.d and systemd service control files for the flowview plugin services
+The two files in this directory are for init.d and systemd service control files
+for the flowview plugin services
 
 # Features
 
-There are two types of collectors for flowview, one requires only Cacti and the second requires flow-tools binary package.
+There are two types of collectors for flowview, one requires only Cacti and the
+second requires flow-tools binary package.
 
 # Installation
 
@@ -14,11 +16,13 @@ There are two types of collectors for flowview, one requires only Cacti and the 
 
 * Then, run 'chkconfig --add flow-capture
 
-* Then, edit /etc/init.d/flow-capture and ensure the cacti_base variable is set properly
+* Then, edit /etc/init.d/flow-capture and ensure the cacti_base variable is set
+  properly
 
-* Lastly, run: 
-
-	/etc/init.d/flow-capture start 
+* Lastly, run:
+  ```
+  /etc/init.d/flow-capture start
+  ```
 
 This will start the service.
 
@@ -26,17 +30,22 @@ This will start the service.
 
 * First, copy the file flow-capture.service into /lib/systemd/system
 
-* Then, edit the file and ensure that the path to the flow-capture script is accurate
+* Then, edit the file and ensure that the path to the flow-capture script is
+  accurate
 
 * Then, run 'systemctl enable flow-capture'
 
 * Lastly, run:
+  ```
+  systemctl start flow-capture
+  ```
 
-	systemctl start flow-capture
-
-followed by:
-
-	systemctl status flow-capture
+  followed by:
+  ```
+  systemctl status flow-capture
+  ```
 
 To verify that the service is actually running as expected.
 
+-----------------------------------------------
+Copyright (c) 2004-2023 - The Cacti Group, Inc.
