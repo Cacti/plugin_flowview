@@ -1528,7 +1528,7 @@ function flowview_get_chartdata() {
 	$start    = strtotime(get_nfilter_request_var('date1'));
 	$end      = strtotime(get_nfilter_request_var('date2'));
 
-	if (substr($report, 0, 1) == 's') {
+	if (!empty($report) && substr($report, 0, 1) == 's') {
 		$report = trim(get_nfilter_request_var('report'), 'sp');
 
 		$output = run_flow_query(true, $query_id, $start, $end);
