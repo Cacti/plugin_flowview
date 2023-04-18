@@ -1272,7 +1272,7 @@ function plugin_flowview_run_schedule($id) {
     $headers['User-Agent'] = 'Cacti-FlowView-v' . $version;
 	$headers['X-Priority'] = '1';
 
-	mailer($from, $schedule['email'], '', '', '', $subject, $output, $body_text, '', $headers);
+	mailer($from, $schedule['email'], '', '', '', $subject, $output, $body_text, array(), $headers);
 }
 
 function flowview_debug($string) {
