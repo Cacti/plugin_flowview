@@ -394,9 +394,9 @@ function flowview_display_filter($data) {
 
 		if (cacti_sizeof($row)) {
 			if ($row['statistics'] > 0) {
-				$title = __esc('Statistical Report: %s [ Including overrides as specififed below ]', $stat_report_array[$row['statistics']]);
+				$title = __esc('Statistical Report: %s [ Including overrides as specified below ]', $stat_report_array[$row['statistics']]);
 			} elseif ($row['printed'] > 0) {
-				$title = __esc('Printed Report: %s [ Including overrides as specififed below ]', $print_report_array[$row['statistics']]);
+				$title = __esc('Printed Report: %s [ Including overrides as specified below ]', $print_report_array[$row['statistics']]);
 			}
 		}
 	}
@@ -3339,13 +3339,13 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 
 function flowview_get_color($as_array = false) {
 	static $position = 0;
-	$pallette = array('#F23C2E', '#32599A', '#F18A47', '#AC9509', '#DAAC10');
+	$palette = array('#F23C2E', '#32599A', '#F18A47', '#AC9509', '#DAAC10');
 
 	if ($as_array) {
 		$position = 0;
-		return $pallette;
+		return $palette;
 	} else {
-		$color = $pallette[$position % cacti_sizeof($pallette)];
+		$color = $palette[$position % cacti_sizeof($palette)];
 		$position++;
 		return $color;
 	}
@@ -3400,7 +3400,7 @@ function flowview_report_session() {
  *  This function is taken from Slowlog.  Given
  *  a title, chart type and chart data, it will
  *  print the required syntax for the Callback
- *  from the chart page to operate corectly.
+ *  from the chart page to operate correctly.
  */
 function flowview_viewchart() {
 	global $config;
@@ -3413,7 +3413,7 @@ function flowview_viewchart() {
 	}
 
 	// $data['data']  - Array of columns
-	// $data['table'] - String formated html table
+	// $data['table'] - String formatted html table
 
 	$chart_type = 'bar';
 	$column     = get_nfilter_request_var('type');
@@ -3659,7 +3659,7 @@ function create_raw_partition($table) {
 	$data['columns'][] = array('name' => 'dst_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'dst_rport', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 
-	// Generic Infromation for Combo Reports
+	// Generic Information for Combo Reports
 	$data['columns'][] = array('name' => 'nexthop', 'type' => 'varchar(48)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'protocol', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 

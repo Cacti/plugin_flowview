@@ -41,7 +41,7 @@ $device_edit = array(
 		'max_length' => '64',
 	),
 	'cmethod' => array(
-		'friendly_name' => __('Collection Medhod', 'flowview'),
+		'friendly_name' => __('Collection Method', 'flowview'),
 		'description' => __('There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti\'s own PHP based flow stream server.', 'flowview'),
 		'value' => '1',
 		'method' => 'hidden',

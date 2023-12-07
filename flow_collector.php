@@ -1129,7 +1129,7 @@ function display_help() {
 	print "Cacti utility receiving flow data over a socket." . PHP_EOL . PHP_EOL;
 
 	print "Options:" . PHP_EOL;
-	print "    --listener-id=ID  The listner-id to collect for." . PHP_EOL;
+	print "    --listener-id=ID  The listener-id to collect for." . PHP_EOL;
 	print "    --debug           Provide some debug output during collection." . PHP_EOL . PHP_EOL;
 }
 
