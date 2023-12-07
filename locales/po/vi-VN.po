@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-12-12 22:15-0500\n"
+"POT-Creation-Date: 2023-12-06 22:14-0600\n"
 "PO-Revision-Date: 2020-12-12 20:31-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,7 +57,7 @@ msgid "UDP/TCP Port"
 msgstr "Cổng UDP / TCP"
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2226
+#: arrays.php:336 arrays.php:495 functions.php:2231
 #, fuzzy
 msgid "Source IP"
 msgstr "IP nguồn"
@@ -96,7 +96,7 @@ msgid "Input/Output Interface"
 msgstr "Giao diện đầu vào / đầu ra"
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2250
+#: functions.php:2255
 #, fuzzy
 msgid "Source AS"
 msgstr "Không có nguồn"
@@ -116,7 +116,7 @@ msgstr "Nguồn / Đích AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2263
 #, fuzzy
 msgid "Source Prefix"
 msgstr "Tiền tố nguồn"
@@ -206,7 +206,7 @@ msgstr "Cổng nguồn"
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
+#: arrays.php:296 functions.php:961 functions.php:2283 functions.php:2520
 msgid "Flows"
 msgstr "Flows"
 
@@ -215,7 +215,7 @@ msgstr "Flows"
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:903 functions.php:2282 functions.php:2505
+#: functions.php:905 functions.php:2287 functions.php:2518
 msgid "Bytes"
 msgstr "Bytes"
 
@@ -224,7 +224,7 @@ msgstr "Bytes"
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:1015 functions.php:2286 functions.php:2506
+#: functions.php:1017 functions.php:2291 functions.php:2519
 #, fuzzy
 msgid "Packets"
 msgstr "Gói"
@@ -239,17 +239,17 @@ msgstr "Destination IP"
 msgid "Port"
 msgstr "Cổng"
 
-#: arrays.php:220 arrays.php:527 functions.php:2230
+#: arrays.php:220 arrays.php:527 functions.php:2235
 #, fuzzy
 msgid "Dest IP"
 msgstr "Số phận IP"
 
-#: arrays.php:226 functions.php:2222
+#: arrays.php:226 functions.php:2227
 msgid "IP Address"
 msgstr "Địa chỉ IP"
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2266
+#: functions.php:2271
 msgid "Protocol"
 msgstr "Giao thức"
 
@@ -273,11 +273,11 @@ msgstr "ĐKDV"
 msgid "Destingation Prefix"
 msgstr "Tiền tố đích"
 
-#: arrays.php:301 functions.php:541 functions.php:2427
+#: arrays.php:301 functions.php:543 functions.php:2436 functions.php:2460
 msgid "N/A"
 msgstr "N/A"
 
-#: arrays.php:307 arrays.php:335 functions.php:2242
+#: arrays.php:307 arrays.php:335 functions.php:2247
 #, fuzzy
 msgid "Source IF"
 msgstr "Không có nguồn"
@@ -287,7 +287,7 @@ msgstr "Không có nguồn"
 msgid "Destination IF"
 msgstr "Destination IP"
 
-#: arrays.php:312 arrays.php:337 functions.php:2234
+#: arrays.php:312 arrays.php:337 functions.php:2239
 msgid "Source Port"
 msgstr "Cổng Nguồn"
 
@@ -295,11 +295,11 @@ msgstr "Cổng Nguồn"
 msgid "Destination Port"
 msgstr "Cổng Đích đến"
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2195
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
-#: arrays.php:317 arrays.php:334 functions.php:2194
+#: arrays.php:317 arrays.php:334 functions.php:2199
 msgid "End Time"
 msgstr "Thời gian kết thúc"
 
@@ -322,7 +322,7 @@ msgstr "Ts"
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:342 functions.php:2274
+#: arrays.php:342 functions.php:2279
 msgid "Flags"
 msgstr "Cờ"
 
@@ -560,7 +560,7 @@ msgstr "Giao diện Dest"
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr "Lọc trên Giao diện đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân cách bằng dấu phẩy của các Giao diện điểm đến."
 
-#: arrays.php:551 functions.php:2254
+#: arrays.php:551 functions.php:2259
 #, fuzzy
 msgid "Dest AS"
 msgstr "Dest AS"
@@ -585,7 +585,7 @@ msgstr "Tên của thiết bị sẽ được hiển thị."
 
 #: flowview_devices.php:44
 #, fuzzy
-msgid "Collection Medhod"
+msgid "Collection Method"
 msgstr "Bộ sưu tập Medhod"
 
 #: flowview_devices.php:45
@@ -861,12 +861,12 @@ msgstr "Địa chỉ Email"
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "Địa chỉ email (được phân tách bằng lệnh) để gửi NetFlow Scan này tới."
 
-#: flowview_schedules.php:105 setup.php:352
+#: flowview_schedules.php:105 setup.php:369
 #, fuzzy
 msgid "Format File to Use"
 msgstr "Định dạng tệp để sử dụng"
 
-#: flowview_schedules.php:108 setup.php:355
+#: flowview_schedules.php:108 setup.php:372
 #, fuzzy
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
 msgstr "Chọn trình bao bọc html và tệp CSS tùy chỉnh để sử dụng. Tệp này chứa cả html và CSS để bao quanh báo cáo của bạn. Nếu nó chứa nhiều hơn chỉ là CSS, bạn cần phải đặt một<REPORT> thẻ bên trong của tệp. Thẻ định dạng này sẽ được thay thế bằng nội dung báo cáo. Các tệp này nằm trong thư mục 'định dạng'."
@@ -916,7 +916,7 @@ msgstr "Báo cáo: [chỉnh sửa: %s]"
 msgid "Report: [new]"
 msgstr "Báo cáo: [mới]"
 
-#: flowview_schedules.php:360 functions.php:587
+#: flowview_schedules.php:360 functions.php:589
 #, fuzzy
 msgid "Start Date Selector"
 msgstr "Ngày bắt đầu chọn"
@@ -980,12 +980,12 @@ msgstr "Bộ lọc không xác định [Chọn Bộ lọc để nhận chi tiế
 
 #: functions.php:397
 #, fuzzy, php-format
-msgid "Statistical Report: %s [ Including overrides as specififed below ]"
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "Báo cáo Thống kê: %s [Bao gồm các ghi đè như được xác định bên dưới]"
 
 #: functions.php:399
 #, fuzzy, php-format
-msgid "Printed Report: %s [ Including overrides as specififed below ]"
+msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "Báo cáo đã in: %s [Bao gồm các ghi đè như cụ thể bên dưới]"
 
 #: functions.php:417
@@ -1081,371 +1081,371 @@ msgstr "In:"
 msgid "Select a Filter First"
 msgstr "Báo cáo in"
 
-#: functions.php:530
+#: functions.php:532
 msgid "Lines"
 msgstr "Các dòng"
 
-#: functions.php:548
+#: functions.php:550
 #, fuzzy
 msgid "Octets"
 msgstr "Octets"
 
-#: functions.php:566
+#: functions.php:568
 msgid "Timespan"
 msgstr "Thời gian"
 
-#: functions.php:575
+#: functions.php:577
 msgid "Custom"
 msgstr "Tùy chỉnh"
 
-#: functions.php:581
+#: functions.php:583
 msgid "From"
 msgstr "Từ"
 
-#: functions.php:590
+#: functions.php:592
 msgid "To"
 msgstr "Đến"
 
-#: functions.php:596
+#: functions.php:598
 #, fuzzy
 msgid "End Date Selector"
 msgstr "Bộ chọn ngày kết thúc"
 
-#: functions.php:599
+#: functions.php:601
 #, fuzzy
 msgid "Shift Time Backward"
 msgstr "Chuyển thời gian lùi lại"
 
-#: functions.php:602
+#: functions.php:604
 #, fuzzy
 msgid "Define Shifting Interval"
 msgstr "Xác định khoảng thời gian dịch chuyển"
 
-#: functions.php:615
+#: functions.php:617
 #, fuzzy
 msgid "Shift Time Forward"
 msgstr "Chuyển thời gian chuyển tiếp"
 
-#: functions.php:622
+#: functions.php:624
 msgid "Show/Hide"
 msgstr "Hiển thị / ẩn"
 
-#: functions.php:626
+#: functions.php:628
 msgid "Table"
 msgstr "Bảng"
 
-#: functions.php:630
+#: functions.php:632
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "Thanh byte"
 
-#: functions.php:634
+#: functions.php:636
 #, fuzzy
 msgid "Packets Bar"
 msgstr "Gói thanh"
 
-#: functions.php:638
+#: functions.php:640
 #, fuzzy
 msgid "Flows Bar"
 msgstr "Thanh chảy"
 
-#: functions.php:1178
+#: functions.php:1179
 #, fuzzy, php-format
 msgid "Client/Private (%s)"
 msgstr "Khách hàng / Riêng tư (%s)"
 
-#: functions.php:1180
+#: functions.php:1181
 #, fuzzy
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php:1191
+#: functions.php:1192
 #, fuzzy, php-format
 msgid "Unknown (%s)"
 msgstr "Không xác định"
 
-#: functions.php:1222
+#: functions.php:1223
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "Cacti Flowview"
 
-#: functions.php:1228
+#: functions.php:1229
 #, fuzzy, php-format
 msgid "Netflow - %s"
 msgstr "Luồng mạng -%"
 
-#: functions.php:1419
+#: functions.php:1420
 #, fuzzy, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Bộ lọc mạng con: %s không phải là định dạng CIDR giá trị"
 
-#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
-#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
-#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
-#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
-#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
-#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
-#: functions.php:1851 functions.php:1852
+#: functions.php:1832 functions.php:1833 functions.php:1834 functions.php:1835
+#: functions.php:1836 functions.php:1837 functions.php:1838 functions.php:1839
+#: functions.php:1840 functions.php:1841 functions.php:1842 functions.php:1843
+#: functions.php:1844 functions.php:1845 functions.php:1846 functions.php:1847
+#: functions.php:1848 functions.php:1849 functions.php:1850 functions.php:1851
+#: functions.php:1852 functions.php:1853 functions.php:1854 functions.php:1855
+#: functions.php:1856 functions.php:1857
 #, fuzzy, php-format
 msgid "%d - %d Bytes"
 msgstr "%s byte"
 
-#: functions.php:1853
+#: functions.php:1858
 #, fuzzy, php-format
 msgid "> %d Bytes"
 msgstr "%s byte"
 
-#: functions.php:2198
+#: functions.php:2203
 #, fuzzy
 msgid "Source DNS"
 msgstr "Tên Nguồn"
 
-#: functions.php:2202
+#: functions.php:2207
 #, fuzzy
 msgid "Source Root DNS"
 msgstr "Tên Nguồn"
 
-#: functions.php:2206
+#: functions.php:2211
 #, fuzzy
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php:2210
+#: functions.php:2215
 #, fuzzy
 msgid "Dest Root DNS"
 msgstr "Cổng Dest"
 
-#: functions.php:2214
+#: functions.php:2219
 #, fuzzy
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php:2218
+#: functions.php:2223
 #, fuzzy
 msgid "Root DNS"
 msgstr "DNS gốc"
 
-#: functions.php:2238
+#: functions.php:2243
 #, fuzzy
 msgid "Dest Port"
 msgstr "Cổng Dest"
 
-#: functions.php:2246
+#: functions.php:2251
 #, fuzzy
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php:2262
+#: functions.php:2267
 #, fuzzy
 msgid "Dest Prefix"
 msgstr "Tiền tố Dest"
 
-#: functions.php:2270
+#: functions.php:2275
 #, fuzzy
 msgid "Type of Service"
 msgstr "Loại hình dịch vụ"
 
-#: functions.php:2289
+#: functions.php:2294
 #, fuzzy
 msgid "Bytes/Packet"
 msgstr "Gói"
 
-#: functions.php:2478
+#: functions.php:2491
 #, fuzzy
 msgid "-- unresolved --"
 msgstr "- chưa giải quyết -"
 
-#: functions.php:2584
+#: functions.php:2597
 #, fuzzy, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "Boolean: %s, Numeric: %s, Hex: %s"
 
-#: functions.php:2595
+#: functions.php:2608
 #, fuzzy
 msgid "Low Delay"
 msgstr "Độ trễ thấp"
 
-#: functions.php:2596
+#: functions.php:2609
 #, fuzzy
 msgid "Throughput"
 msgstr "Thông lượng"
 
-#: functions.php:2597
+#: functions.php:2610
 msgid "Reliability"
 msgstr "Độ tin cậy"
 
-#: functions.php:2598
+#: functions.php:2611
 #, fuzzy
 msgid "Mincost"
 msgstr "Mincost"
 
-#: functions.php:2602
+#: functions.php:2615
 #, fuzzy
 msgid "Net Control"
 msgstr "Kiểm soát mạng"
 
-#: functions.php:2603
+#: functions.php:2616
 #, fuzzy
 msgid "Internet Control"
 msgstr "Kiểm soát Internet"
 
-#: functions.php:2604
+#: functions.php:2617
 #, fuzzy
 msgid "Critic ECP"
 msgstr "ECP phê bình"
 
-#: functions.php:2605
+#: functions.php:2618
 #, fuzzy
 msgid "Flash Override"
 msgstr "Ghi đè Flash"
 
-#: functions.php:2606
+#: functions.php:2619
 msgid "Flash"
 msgstr "Đèn flash"
 
-#: functions.php:2607
+#: functions.php:2620
 msgid "Immediate"
 msgstr "Khẩn"
 
-#: functions.php:2608
+#: functions.php:2621
 msgid "Priority"
 msgstr "Ưu tiên"
 
-#: functions.php:2609
+#: functions.php:2622
 msgid "Routine"
 msgstr "Quay vòng"
 
-#: functions.php:2649
+#: functions.php:2662
 #, fuzzy
 msgid "Summary Statistics"
 msgstr "Tóm tắt thống kê"
 
-#: functions.php:2660
+#: functions.php:2673
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Phân phối kích thước gói IP (%)"
 
-#: functions.php:2665
+#: functions.php:2678
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Gói trên mỗi phân phối dòng chảy (%)"
 
-#: functions.php:2670
+#: functions.php:2683
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Octets trên mỗi phân phối dòng chảy (%)"
 
-#: functions.php:2675
+#: functions.php:2688
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Phân phối thời gian lưu lượng (%)"
 
-#: functions.php:2858
+#: functions.php:2871
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Bạn phải chọn Báo cáo thống kê hoặc Báo cáo in!"
 
-#: functions.php:2862
+#: functions.php:2875
 #, fuzzy
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Bạn phải chọn chỉ một Báo cáo thống kê hoặc Báo cáo in (không phải cả hai)!"
 
-#: functions.php:2866
+#: functions.php:2879
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Ngày không hợp lệ, Ngày kết thúc / Thời gian sớm hơn Ngày / Giờ bắt đầu!"
 
-#: functions.php:2877 functions.php:2882
+#: functions.php:2890 functions.php:2895
 #, fuzzy
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1')"
 
-#: functions.php:2889 functions.php:2893 functions.php:2897
+#: functions.php:2902 functions.php:2906 functions.php:2910
 #, fuzzy
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Mạng con không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
 
-#: functions.php:2911 functions.php:2915
+#: functions.php:2924 functions.php:2928
 #, fuzzy
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1')"
 
-#: functions.php:2921 functions.php:2925 functions.php:2929
+#: functions.php:2934 functions.php:2938 functions.php:2942
 #, fuzzy
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Mạng con không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
 
-#: functions.php:2947
+#: functions.php:2960
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "Giá trị không hợp lệ cho Giao diện nguồn!"
 
-#: functions.php:2963
+#: functions.php:2976
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Cổng nguồn! (0 - 65535)"
 
-#: functions.php:2979
+#: functions.php:2992
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Nguồn AS! (0 - 65535)"
 
-#: functions.php:2995
+#: functions.php:3008
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "Giá trị không hợp lệ cho Giao diện đích!"
 
-#: functions.php:3011
+#: functions.php:3024
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Cổng đích! (0 - 65535)"
 
-#: functions.php:3027
+#: functions.php:3040
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Đích AS! (0 - 65535)"
 
-#: functions.php:3043
+#: functions.php:3056
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Giá trị không hợp lệ cho Giao thức! (1 - 255)"
 
-#: functions.php:3055
+#: functions.php:3068
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Giá trị không hợp lệ cho Cờ TCP! (ví dụ: 0x1b hoặc 0x1b / SA hoặc SA / SA)"
 
-#: functions.php:3064
+#: functions.php:3077
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Giá trị không hợp lệ cho Octoff Cutoff!"
 
-#: functions.php:3071
+#: functions.php:3084
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Giá trị không hợp lệ cho Cutoff Lines!"
 
-#: functions.php:3078
+#: functions.php:3091
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "Giá trị không hợp lệ cho Trường sắp xếp!"
 
-#: functions.php:3105
+#: functions.php:3118
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "Biểu đồ FlowView cho %s Loại là %s"
 
-#: functions.php:3400
+#: functions.php:3425
 #, fuzzy
 msgid "Total Flows"
 msgstr "Dòng tối đa:"
 
-#: functions.php:3405
+#: functions.php:3430
 #, fuzzy
 msgid "Bytes Exchanged"
 msgstr "Đã trao đổi byte"
 
-#: functions.php:3409
+#: functions.php:3434
 #, fuzzy
 msgid "Packets Examined"
 msgstr "Gói thanh"
@@ -1511,60 +1511,94 @@ msgstr "(chinnhr sửa)"
 msgid "(actions)"
 msgstr "Hành động"
 
-#: setup.php:359
+#: setup.php:352
+#, fuzzy
+#| msgid "Resolution"
+msgid "Hostname Resolution"
+msgstr "Resolution - Độ phân giải"
+
+#: setup.php:353
+#, fuzzy
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Phương pháp mà bạn muốn giải quyết tên máy chủ."
+
+#: setup.php:356
+#, fuzzy
+msgid "Use Local Server"
+msgstr "Sử dụng máy chủ cục bộ"
+
+#: setup.php:357
+#, fuzzy
+msgid "Use DNS Server Below"
+msgstr "Sử dụng máy chủ DNS bên dưới"
+
+#: setup.php:358
+#, fuzzy
+msgid "Don't Resolve DNS"
+msgstr "Không giải quyết DNS"
+
+#: setup.php:363
+msgid "Use Arin to Find Unregistered Domains"
+msgstr ""
+
+#: setup.php:364
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr ""
+
+#: setup.php:376
 #, fuzzy
 msgid "Data Retention Policy"
 msgstr "Chính sách lưu giữ dữ liệu"
 
-#: setup.php:360
+#: setup.php:377
 #, fuzzy
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
 msgstr "Khoảng thời gian Cacti sẽ duy trì các bảng Flow được phân vùng."
 
-#: setup.php:363
+#: setup.php:380
 #, fuzzy, php-format
 msgid "%d Week"
 msgstr "% d tuần"
 
-#: setup.php:364 setup.php:365
+#: setup.php:381 setup.php:382
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "% d tuần"
 
-#: setup.php:366
+#: setup.php:383
 #, fuzzy, php-format
 msgid "%d Month"
 msgstr "% d tháng"
 
-#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
+#: setup.php:384 setup.php:385 setup.php:386 setup.php:387
 #, fuzzy, php-format
 msgid "%d Months"
 msgstr "% d tháng"
 
-#: setup.php:371
+#: setup.php:388
 #, fuzzy, php-format
 msgid "%d Year"
 msgstr "% d Năm"
 
-#: setup.php:376
+#: setup.php:393
 #, fuzzy
 msgid "Database Partitioning Scheme"
 msgstr "Lược đồ phân vùng cơ sở dữ liệu"
 
-#: setup.php:377
+#: setup.php:394
 #, fuzzy
 msgid "Depending on the number of flows per minute, you may require more tables per day."
 msgstr "Tùy thuộc vào số lượng dòng chảy mỗi phút, bạn có thể yêu cầu nhiều bảng hơn mỗi ngày."
 
-#: setup.php:380
+#: setup.php:397
 msgid "Daily"
 msgstr "Hàng ngày"
 
-#: setup.php:381
+#: setup.php:398
 msgid "Hourly"
 msgstr "Hàng Giờ"
 
-#: setup.php:387
+#: setup.php:404
 msgid "Misc"
 msgstr "Linh tinh"
 
@@ -1587,22 +1621,6 @@ msgstr "Linh tinh"
 #, fuzzy
 #~ msgid "Alternate DNS Server"
 #~ msgstr "Máy chủ DNS thay thế"
-
-#, fuzzy
-#~ msgid "Don't Resolve DNS"
-#~ msgstr "Không giải quyết DNS"
-
-#, fuzzy
-#~ msgid "Use DNS Server Below"
-#~ msgstr "Sử dụng máy chủ DNS bên dưới"
-
-#, fuzzy
-#~ msgid "Use Local Server"
-#~ msgstr "Sử dụng máy chủ cục bộ"
-
-#, fuzzy
-#~ msgid "The method by which you wish to resolve hostnames."
-#~ msgstr "Phương pháp mà bạn muốn giải quyết tên máy chủ."
 
 #, fuzzy
 #~ msgid "This is the path to base the path of your flow folder structure."
