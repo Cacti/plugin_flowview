@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2020-12-12 22:15-0500\n"
+"POT-Creation-Date: 2023-12-06 22:14-0600\n"
 "PO-Revision-Date: 2020-12-12 20:26-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,7 +57,7 @@ msgid "UDP/TCP Port"
 msgstr "UDP / TCP 포트"
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2226
+#: arrays.php:336 arrays.php:495 functions.php:2231
 #, fuzzy
 msgid "Source IP"
 msgstr "소스 IP"
@@ -98,7 +98,7 @@ msgid "Input/Output Interface"
 msgstr "입력 / 출력 인터페이스"
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2250
+#: functions.php:2255
 #, fuzzy
 msgid "Source AS"
 msgstr "원본 없음"
@@ -118,7 +118,7 @@ msgstr "출발지 / 도착지 AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2263
 #, fuzzy
 msgid "Source Prefix"
 msgstr "소스 접두사"
@@ -209,7 +209,7 @@ msgstr "소스 포트"
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
+#: arrays.php:296 functions.php:961 functions.php:2283 functions.php:2520
 #, fuzzy
 msgid "Flows"
 msgstr "흐름"
@@ -219,7 +219,7 @@ msgstr "흐름"
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:903 functions.php:2282 functions.php:2505
+#: functions.php:905 functions.php:2287 functions.php:2518
 msgid "Bytes"
 msgstr "바이트"
 
@@ -228,7 +228,7 @@ msgstr "바이트"
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:1015 functions.php:2286 functions.php:2506
+#: functions.php:1017 functions.php:2291 functions.php:2519
 #, fuzzy
 msgid "Packets"
 msgstr "패킷"
@@ -242,17 +242,17 @@ msgstr "목적지 도메인"
 msgid "Port"
 msgstr "포트"
 
-#: arrays.php:220 arrays.php:527 functions.php:2230
+#: arrays.php:220 arrays.php:527 functions.php:2235
 #, fuzzy
 msgid "Dest IP"
 msgstr "목적지 IP"
 
-#: arrays.php:226 functions.php:2222
+#: arrays.php:226 functions.php:2227
 msgid "IP Address"
 msgstr "IP 주소"
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2266
+#: functions.php:2271
 msgid "Protocol"
 msgstr "프로토콜"
 
@@ -275,11 +275,11 @@ msgstr "이용약관"
 msgid "Destingation Prefix"
 msgstr "목적지 접두사"
 
-#: arrays.php:301 functions.php:541 functions.php:2427
+#: arrays.php:301 functions.php:543 functions.php:2436 functions.php:2460
 msgid "N/A"
 msgstr "N/A"
 
-#: arrays.php:307 arrays.php:335 functions.php:2242
+#: arrays.php:307 arrays.php:335 functions.php:2247
 #, fuzzy
 msgid "Source IF"
 msgstr "원본 없음"
@@ -289,7 +289,7 @@ msgstr "원본 없음"
 msgid "Destination IF"
 msgstr "대상 브랜치"
 
-#: arrays.php:312 arrays.php:337 functions.php:2234
+#: arrays.php:312 arrays.php:337 functions.php:2239
 #, fuzzy
 msgid "Source Port"
 msgstr "소스 포트"
@@ -299,11 +299,11 @@ msgstr "소스 포트"
 msgid "Destination Port"
 msgstr "대상 IP"
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2195
 msgid "Start Time"
 msgstr "시작 시간"
 
-#: arrays.php:317 arrays.php:334 functions.php:2194
+#: arrays.php:317 arrays.php:334 functions.php:2199
 msgid "End Time"
 msgstr "종료시간"
 
@@ -326,7 +326,7 @@ msgstr "Ts"
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:342 functions.php:2274
+#: arrays.php:342 functions.php:2279
 msgid "Flags"
 msgstr "플래그"
 
@@ -566,7 +566,7 @@ msgstr "목적지 인터페이스"
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr "필터에서 대상 인터페이스를 선택하여 필터링합니다. 쉼표로 구분 된 대상 인터페이스 목록 일 수 있습니다."
 
-#: arrays.php:551 functions.php:2254
+#: arrays.php:551 functions.php:2259
 #, fuzzy
 msgid "Dest AS"
 msgstr "목적지"
@@ -591,7 +591,7 @@ msgstr "표시 할 장치의 이름."
 
 #: flowview_devices.php:44
 #, fuzzy
-msgid "Collection Medhod"
+msgid "Collection Method"
 msgstr "컬렉션 Medhod"
 
 #: flowview_devices.php:45
@@ -862,12 +862,12 @@ msgstr "이메일 주소"
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "이 NetFlow Scan을 보낼 전자 메일 주소 (명령 구분)입니다."
 
-#: flowview_schedules.php:105 setup.php:352
+#: flowview_schedules.php:105 setup.php:369
 #, fuzzy
 msgid "Format File to Use"
 msgstr "사용할 형식 파일"
 
-#: flowview_schedules.php:108 setup.php:355
+#: flowview_schedules.php:108 setup.php:372
 #, fuzzy
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
 msgstr "사용할 사용자 정의 html 래퍼 및 CSS 파일을 선택합니다. 이 파일에는 보고서를 감싸는 html과 CSS가 모두 포함되어 있습니다. 단순히 CSS 이상을 포함하는 경우 특별한<REPORT> 파일 내부에 태그를 지정합니다. 이 형식 태그는 보고서 내용으로 대체됩니다. 이러한 파일은 'formats'디렉토리에 있습니다."
@@ -917,7 +917,7 @@ msgstr "보고서 : [편집 :  %s]"
 msgid "Report: [new]"
 msgstr "신고 : [new]"
 
-#: flowview_schedules.php:360 functions.php:587
+#: flowview_schedules.php:360 functions.php:589
 #, fuzzy
 msgid "Start Date Selector"
 msgstr "시작 날짜 선택기"
@@ -980,12 +980,12 @@ msgstr "정의되지 않은 필터 [세부 정보를 보려면 필터 선택]"
 
 #: functions.php:397
 #, fuzzy, php-format
-msgid "Statistical Report: %s [ Including overrides as specififed below ]"
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "통계 보고서 : %s [아래에 지정된 재정의 포함]"
 
 #: functions.php:399
 #, fuzzy, php-format
-msgid "Printed Report: %s [ Including overrides as specififed below ]"
+msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "인쇄 된 보고서 : %s [아래에 지정된 재정의 포함]"
 
 #: functions.php:417
@@ -1081,371 +1081,371 @@ msgstr "인쇄 :"
 msgid "Select a Filter First"
 msgstr "보고서 인쇄"
 
-#: functions.php:530
+#: functions.php:532
 msgid "Lines"
 msgstr "줄"
 
-#: functions.php:548
+#: functions.php:550
 #, fuzzy
 msgid "Octets"
 msgstr "옥텟"
 
-#: functions.php:566
+#: functions.php:568
 msgid "Timespan"
 msgstr "시간"
 
-#: functions.php:575
+#: functions.php:577
 msgid "Custom"
 msgstr "사용자 정의"
 
-#: functions.php:581
+#: functions.php:583
 msgid "From"
 msgstr "발신자"
 
-#: functions.php:590
+#: functions.php:592
 msgid "To"
 msgstr "수신"
 
-#: functions.php:596
+#: functions.php:598
 #, fuzzy
 msgid "End Date Selector"
 msgstr "종료일 선택기"
 
-#: functions.php:599
+#: functions.php:601
 #, fuzzy
 msgid "Shift Time Backward"
 msgstr "시간을 뒤로 이동"
 
-#: functions.php:602
+#: functions.php:604
 #, fuzzy
 msgid "Define Shifting Interval"
 msgstr "이동 간격 정의"
 
-#: functions.php:615
+#: functions.php:617
 #, fuzzy
 msgid "Shift Time Forward"
 msgstr "시간을 앞으로 이동"
 
-#: functions.php:622
+#: functions.php:624
 msgid "Show/Hide"
 msgstr "표시/숨기기"
 
-#: functions.php:626
+#: functions.php:628
 msgid "Table"
 msgstr "테이블"
 
-#: functions.php:630
+#: functions.php:632
 #, fuzzy
 msgid "Bytes Bar"
 msgstr "바이트 바"
 
-#: functions.php:634
+#: functions.php:636
 #, fuzzy
 msgid "Packets Bar"
 msgstr "패킷 모음"
 
-#: functions.php:638
+#: functions.php:640
 #, fuzzy
 msgid "Flows Bar"
 msgstr "흐름 표시 줄"
 
-#: functions.php:1178
+#: functions.php:1179
 #, fuzzy, php-format
 msgid "Client/Private (%s)"
 msgstr "클라이언트 / 비공개 (%s)"
 
-#: functions.php:1180
+#: functions.php:1181
 #, fuzzy
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php:1191
+#: functions.php:1192
 #, fuzzy, php-format
 msgid "Unknown (%s)"
 msgstr "알 수 없음"
 
-#: functions.php:1222
+#: functions.php:1223
 #, fuzzy
 msgid "Cacti Flowview"
 msgstr "선인장 Flowview"
 
-#: functions.php:1228
+#: functions.php:1229
 #, fuzzy, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %"
 
-#: functions.php:1419
+#: functions.php:1420
 #, fuzzy, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "서브넷 필터 : %s은 (는) 값 CIDR 형식이 아닙니다."
 
-#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
-#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
-#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
-#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
-#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
-#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
-#: functions.php:1851 functions.php:1852
+#: functions.php:1832 functions.php:1833 functions.php:1834 functions.php:1835
+#: functions.php:1836 functions.php:1837 functions.php:1838 functions.php:1839
+#: functions.php:1840 functions.php:1841 functions.php:1842 functions.php:1843
+#: functions.php:1844 functions.php:1845 functions.php:1846 functions.php:1847
+#: functions.php:1848 functions.php:1849 functions.php:1850 functions.php:1851
+#: functions.php:1852 functions.php:1853 functions.php:1854 functions.php:1855
+#: functions.php:1856 functions.php:1857
 #, fuzzy, php-format
 msgid "%d - %d Bytes"
 msgstr "%s 바이트"
 
-#: functions.php:1853
+#: functions.php:1858
 #, fuzzy, php-format
 msgid "> %d Bytes"
 msgstr "%s 바이트"
 
-#: functions.php:2198
+#: functions.php:2203
 #, fuzzy
 msgid "Source DNS"
 msgstr "데이터 원본"
 
-#: functions.php:2202
+#: functions.php:2207
 #, fuzzy
 msgid "Source Root DNS"
 msgstr "데이터 원본"
 
-#: functions.php:2206
+#: functions.php:2211
 #, fuzzy
 msgid "Dest DNS"
 msgstr "목적지"
 
-#: functions.php:2210
+#: functions.php:2215
 #, fuzzy
 msgid "Dest Root DNS"
 msgstr "목적지 항구"
 
-#: functions.php:2214
+#: functions.php:2219
 #, fuzzy
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php:2218
+#: functions.php:2223
 #, fuzzy
 msgid "Root DNS"
 msgstr "루트 DNS"
 
-#: functions.php:2238
+#: functions.php:2243
 #, fuzzy
 msgid "Dest Port"
 msgstr "목적지 항구"
 
-#: functions.php:2246
+#: functions.php:2251
 #, fuzzy
 msgid "Dest IF"
 msgstr "목적지 IF"
 
-#: functions.php:2262
+#: functions.php:2267
 #, fuzzy
 msgid "Dest Prefix"
 msgstr "목적지 접두어"
 
-#: functions.php:2270
+#: functions.php:2275
 #, fuzzy
 msgid "Type of Service"
 msgstr "서비스 유형"
 
-#: functions.php:2289
+#: functions.php:2294
 #, fuzzy
 msgid "Bytes/Packet"
 msgstr "패킷"
 
-#: functions.php:2478
+#: functions.php:2491
 #, fuzzy
 msgid "-- unresolved --"
 msgstr "-미해결-"
 
-#: functions.php:2584
+#: functions.php:2597
 #, fuzzy, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "부울 : %s, 숫자 : %s, 16 진수 : %s"
 
-#: functions.php:2595
+#: functions.php:2608
 msgid "Low Delay"
 msgstr "낮은 지연"
 
-#: functions.php:2596
+#: functions.php:2609
 #, fuzzy
 msgid "Throughput"
 msgstr "처리량"
 
-#: functions.php:2597
+#: functions.php:2610
 #, fuzzy
 msgid "Reliability"
 msgstr "신뢰할 수 있음"
 
-#: functions.php:2598
+#: functions.php:2611
 #, fuzzy
 msgid "Mincost"
 msgstr "최소 비용"
 
-#: functions.php:2602
+#: functions.php:2615
 #, fuzzy
 msgid "Net Control"
 msgstr "넷 컨트롤"
 
-#: functions.php:2603
+#: functions.php:2616
 #, fuzzy
 msgid "Internet Control"
 msgstr "인터넷 제어"
 
-#: functions.php:2604
+#: functions.php:2617
 #, fuzzy
 msgid "Critic ECP"
 msgstr "비평가 ECP"
 
-#: functions.php:2605
+#: functions.php:2618
 #, fuzzy
 msgid "Flash Override"
 msgstr "플래시 무시"
 
-#: functions.php:2606
+#: functions.php:2619
 msgid "Flash"
 msgstr "플래시"
 
-#: functions.php:2607
+#: functions.php:2620
 msgid "Immediate"
 msgstr "즉시"
 
-#: functions.php:2608
+#: functions.php:2621
 msgid "Priority"
 msgstr "우선순위"
 
-#: functions.php:2609
+#: functions.php:2622
 msgid "Routine"
 msgstr "정기적인"
 
-#: functions.php:2649
+#: functions.php:2662
 #, fuzzy
 msgid "Summary Statistics"
 msgstr "요약 통계"
 
-#: functions.php:2660
+#: functions.php:2673
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "IP 패킷 크기 분포 (%)"
 
-#: functions.php:2665
+#: functions.php:2678
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "흐름 분포 (%) 당 패킷"
 
-#: functions.php:2670
+#: functions.php:2683
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "유량 분포 당 옥텟 (%)"
 
-#: functions.php:2675
+#: functions.php:2688
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "유동 시간 분포 (%)"
 
-#: functions.php:2858
+#: functions.php:2871
 #, fuzzy
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "통계 보고서 또는 인쇄 된 보고서를 선택해야합니다!"
 
-#: functions.php:2862
+#: functions.php:2875
 #, fuzzy
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "통계 보고서 또는 인쇄 보고서 만 선택해야합니다 (두 가지가 아닌)."
 
-#: functions.php:2866
+#: functions.php:2879
 #, fuzzy
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "날짜가 잘못되었습니다. 종료 날짜 / 시간이 시작 날짜 / 시간보다 빠릅니다!"
 
-#: functions.php:2877 functions.php:2882
+#: functions.php:2890 functions.php:2895
 #, fuzzy
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "소스 주소의 IP가 잘못되었습니다! <br> ( '192.168.0.1'형식이어야 함)"
 
-#: functions.php:2889 functions.php:2893 functions.php:2897
+#: functions.php:2902 functions.php:2906 functions.php:2910
 #, fuzzy
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "소스 주소에 대한 서브넷이 잘못되었습니다! <br> ( '192.168.0.1/255.255.255.0'또는 '192.168.0.1/24'형식이어야 함)"
 
-#: functions.php:2911 functions.php:2915
+#: functions.php:2924 functions.php:2928
 #, fuzzy
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "도착 IP 주소가 잘못되었습니다! <br> ( '192.168.0.1'형식이어야 함)"
 
-#: functions.php:2921 functions.php:2925 functions.php:2929
+#: functions.php:2934 functions.php:2938 functions.php:2942
 #, fuzzy
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "대상 주소에 대한 서브넷이 잘못되었습니다! <br> ( '192.168.0.1/255.255.255.0'또는 '192.168.0.1/24'형식이어야 함)"
 
-#: functions.php:2947
+#: functions.php:2960
 #, fuzzy
 msgid "Invalid value for Source Interface!"
 msgstr "원본 인터페이스에 대한 값이 잘못되었습니다!"
 
-#: functions.php:2963
+#: functions.php:2976
 #, fuzzy
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "원본 포트 값이 잘못되었습니다! (0 - 65535)"
 
-#: functions.php:2979
+#: functions.php:2992
 #, fuzzy
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "원본 AS 값이 잘못되었습니다. (0 - 65535)"
 
-#: functions.php:2995
+#: functions.php:3008
 #, fuzzy
 msgid "Invalid value for Destination Interface!"
 msgstr "대상 인터페이스에 대한 값이 잘못되었습니다!"
 
-#: functions.php:3011
+#: functions.php:3024
 #, fuzzy
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "대상 포트에 대한 값이 잘못되었습니다! (0 - 65535)"
 
-#: functions.php:3027
+#: functions.php:3040
 #, fuzzy
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Destination AS! 값이 잘못되었습니다. (0 - 65535)"
 
-#: functions.php:3043
+#: functions.php:3056
 #, fuzzy
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "프로토콜 값이 잘못되었습니다! (1 - 255)"
 
-#: functions.php:3055
+#: functions.php:3068
 #, fuzzy
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "TCP 플래그의 값이 잘못되었습니다! (예 : 0x1b 또는 0x1b / SA 또는 SA / SA)"
 
-#: functions.php:3064
+#: functions.php:3077
 #, fuzzy
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Cutoff Octets에 대한 값이 잘못되었습니다!"
 
-#: functions.php:3071
+#: functions.php:3084
 #, fuzzy
 msgid "Invalid value for Cutoff Lines!"
 msgstr "컷오프 라인 값이 잘못되었습니다!"
 
-#: functions.php:3078
+#: functions.php:3091
 #, fuzzy
 msgid "Invalid value for Sort Field!"
 msgstr "Sort Field! 값이 잘못되었습니다!"
 
-#: functions.php:3105
+#: functions.php:3118
 #, fuzzy, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "%s 유형의 FlowView 차트는  %s입니다."
 
-#: functions.php:3400
+#: functions.php:3425
 #, fuzzy
 msgid "Total Flows"
 msgstr "최대 흐름 수 :"
 
-#: functions.php:3405
+#: functions.php:3430
 #, fuzzy
 msgid "Bytes Exchanged"
 msgstr "교환 된 바이트"
 
-#: functions.php:3409
+#: functions.php:3434
 #, fuzzy
 msgid "Packets Examined"
 msgstr "패킷 모음"
@@ -1512,60 +1512,94 @@ msgstr "(편집)"
 msgid "(actions)"
 msgstr "작업"
 
-#: setup.php:359
+#: setup.php:352
+#, fuzzy
+#| msgid "Resolution"
+msgid "Hostname Resolution"
+msgstr "해상도"
+
+#: setup.php:353
+#, fuzzy
+msgid "The method by which you wish to resolve hostnames."
+msgstr "호스트 이름을 확인하려는 방법."
+
+#: setup.php:356
+#, fuzzy
+msgid "Use Local Server"
+msgstr "로컬 서버 사용"
+
+#: setup.php:357
+#, fuzzy
+msgid "Use DNS Server Below"
+msgstr "아래의 DNS 서버 사용"
+
+#: setup.php:358
+#, fuzzy
+msgid "Don't Resolve DNS"
+msgstr "DNS를 해결하지 마십시오."
+
+#: setup.php:363
+msgid "Use Arin to Find Unregistered Domains"
+msgstr ""
+
+#: setup.php:364
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr ""
+
+#: setup.php:376
 #, fuzzy
 msgid "Data Retention Policy"
 msgstr "데이터 보존 정책"
 
-#: setup.php:360
+#: setup.php:377
 #, fuzzy
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
 msgstr "Cacti가 분할 된 흐름 테이블을 유지하는 시간입니다."
 
-#: setup.php:363
+#: setup.php:380
 #, fuzzy, php-format
 msgid "%d Week"
 msgstr "% d주의"
 
-#: setup.php:364 setup.php:365
+#: setup.php:381 setup.php:382
 #, fuzzy, php-format
 msgid "%d Weeks"
 msgstr "% d 주"
 
-#: setup.php:366
+#: setup.php:383
 #, fuzzy, php-format
 msgid "%d Month"
 msgstr "% d 개월"
 
-#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
+#: setup.php:384 setup.php:385 setup.php:386 setup.php:387
 #, fuzzy, php-format
 msgid "%d Months"
 msgstr "개월 % d 개월"
 
-#: setup.php:371
+#: setup.php:388
 #, fuzzy, php-format
 msgid "%d Year"
 msgstr "% d 년"
 
-#: setup.php:376
+#: setup.php:393
 #, fuzzy
 msgid "Database Partitioning Scheme"
 msgstr "데이터베이스 분할 체계"
 
-#: setup.php:377
+#: setup.php:394
 #, fuzzy
 msgid "Depending on the number of flows per minute, you may require more tables per day."
 msgstr "분당 흐름 수에 따라 하루에 더 많은 테이블이 필요할 수 있습니다."
 
-#: setup.php:380
+#: setup.php:397
 msgid "Daily"
 msgstr "매일"
 
-#: setup.php:381
+#: setup.php:398
 msgid "Hourly"
 msgstr "매시간 마다"
 
-#: setup.php:387
+#: setup.php:404
 msgid "Misc"
 msgstr "기타"
 
@@ -1588,22 +1622,6 @@ msgstr "기타"
 #, fuzzy
 #~ msgid "Alternate DNS Server"
 #~ msgstr "대체 DNS 서버"
-
-#, fuzzy
-#~ msgid "Don't Resolve DNS"
-#~ msgstr "DNS를 해결하지 마십시오."
-
-#, fuzzy
-#~ msgid "Use DNS Server Below"
-#~ msgstr "아래의 DNS 서버 사용"
-
-#, fuzzy
-#~ msgid "Use Local Server"
-#~ msgstr "로컬 서버 사용"
-
-#, fuzzy
-#~ msgid "The method by which you wish to resolve hostnames."
-#~ msgstr "호스트 이름을 확인하려는 방법."
 
 #, fuzzy
 #~ msgid "This is the path to base the path of your flow folder structure."
