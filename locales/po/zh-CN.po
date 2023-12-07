@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: flowview on cacti 1.1.34\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2020-12-12 22:15-0500\nPO-Revision-Date: 2023-11-10 02:07+0000\nLast-Translator: Ben Hsu <48728121@qq.com>\nLanguage-Team: Chinese (Simplified) <http://translate.cacti.net/projects/cacti/flowview/zh_Hans/>\nLanguage: zh-CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 4.8.1\n"
+msgstr ""
+"Project-Id-Version: flowview on cacti 1.1.34\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2023-12-06 22:14-0600\n"
+"PO-Revision-Date: 2023-11-10 02:07+0000\n"
+"Last-Translator: Ben Hsu <48728121@qq.com>\n"
+"Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/cacti/flowview/zh_Hans/>\n"
+"Language: zh-CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.8.1\n"
 
 #: arrays.php:26 arrays.php:60 functions.php:469
 #, fuzzy
@@ -43,7 +55,7 @@ msgid "UDP/TCP Port"
 msgstr "UDP / TCP端口"
 
 #: arrays.php:37 arrays.php:213 arrays.php:219 arrays.php:308 arrays.php:324
-#: arrays.php:336 arrays.php:495 functions.php:2226
+#: arrays.php:336 arrays.php:495 functions.php:2231
 msgid "Source IP"
 msgstr "来源IP"
 
@@ -76,7 +88,7 @@ msgid "Input/Output Interface"
 msgstr "输入/输出接口"
 
 #: arrays.php:48 arrays.php:250 arrays.php:262 arrays.php:327 arrays.php:519
-#: functions.php:2250
+#: functions.php:2255
 msgid "Source AS"
 msgstr "来源AS"
 
@@ -92,7 +104,7 @@ msgstr "来源/目标AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2258
+#: arrays.php:54 arrays.php:282 arrays.php:294 functions.php:2263
 msgid "Source Prefix"
 msgstr "来源前缀"
 
@@ -175,7 +187,7 @@ msgstr "来源域"
 #: arrays.php:202 arrays.php:208 arrays.php:214 arrays.php:221 arrays.php:227
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
-#: arrays.php:296 functions.php:959 functions.php:2278 functions.php:2507
+#: arrays.php:296 functions.php:961 functions.php:2283 functions.php:2520
 msgid "Flows"
 msgstr "流"
 
@@ -184,7 +196,7 @@ msgstr "流"
 #: arrays.php:234 arrays.php:240 arrays.php:246 arrays.php:252 arrays.php:258
 #: arrays.php:265 arrays.php:271 arrays.php:278 arrays.php:284 arrays.php:290
 #: arrays.php:297 arrays.php:315 arrays.php:329 arrays.php:344 arrays.php:350
-#: functions.php:903 functions.php:2282 functions.php:2505
+#: functions.php:905 functions.php:2287 functions.php:2518
 msgid "Bytes"
 msgstr "Bytes"
 
@@ -193,7 +205,7 @@ msgstr "Bytes"
 #: arrays.php:235 arrays.php:241 arrays.php:247 arrays.php:253 arrays.php:259
 #: arrays.php:266 arrays.php:272 arrays.php:279 arrays.php:285 arrays.php:291
 #: arrays.php:298 arrays.php:314 arrays.php:330 arrays.php:343 arrays.php:349
-#: functions.php:1015 functions.php:2286 functions.php:2506
+#: functions.php:1017 functions.php:2291 functions.php:2519
 msgid "Packets"
 msgstr "包"
 
@@ -207,16 +219,16 @@ msgstr "目标IP"
 msgid "Port"
 msgstr "port"
 
-#: arrays.php:220 arrays.php:527 functions.php:2230
+#: arrays.php:220 arrays.php:527 functions.php:2235
 msgid "Dest IP"
 msgstr "目标IP"
 
-#: arrays.php:226 functions.php:2222
+#: arrays.php:226 functions.php:2227
 msgid "IP Address"
 msgstr "IP地址"
 
 #: arrays.php:232 arrays.php:311 arrays.php:326 arrays.php:341
-#: functions.php:2266
+#: functions.php:2271
 msgid "Protocol"
 msgstr "协议"
 
@@ -237,11 +249,11 @@ msgstr "TOS"
 msgid "Destingation Prefix"
 msgstr "目标前缀"
 
-#: arrays.php:301 functions.php:541 functions.php:2427
+#: arrays.php:301 functions.php:543 functions.php:2436 functions.php:2460
 msgid "N/A"
 msgstr "N/A"
 
-#: arrays.php:307 arrays.php:335 functions.php:2242
+#: arrays.php:307 arrays.php:335 functions.php:2247
 #, fuzzy
 msgid "Source IF"
 msgstr "无来源"
@@ -251,7 +263,7 @@ msgstr "无来源"
 msgid "Destination IF"
 msgstr "日志目标"
 
-#: arrays.php:312 arrays.php:337 functions.php:2234
+#: arrays.php:312 arrays.php:337 functions.php:2239
 msgid "Source Port"
 msgstr "源端口"
 
@@ -259,11 +271,11 @@ msgstr "源端口"
 msgid "Destination Port"
 msgstr "目标端口"
 
-#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2190
+#: arrays.php:316 arrays.php:333 flowview_schedules.php:88 functions.php:2195
 msgid "Start Time"
 msgstr "开始时间"
 
-#: arrays.php:317 arrays.php:334 functions.php:2194
+#: arrays.php:317 arrays.php:334 functions.php:2199
 msgid "End Time"
 msgstr "结束时间"
 
@@ -283,7 +295,7 @@ msgstr "Ts"
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:342 functions.php:2274
+#: arrays.php:342 functions.php:2279
 msgid "Flags"
 msgstr "标志"
 
@@ -515,7 +527,7 @@ msgstr "目标接口"
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr "在筛选器中选择的目标接口上进行筛选。这可以是Destimation接口的逗号分隔列表。"
 
-#: arrays.php:551 functions.php:2254
+#: arrays.php:551 functions.php:2259
 msgid "Dest AS"
 msgstr "目标AS"
 
@@ -538,7 +550,7 @@ msgstr "要显示的设备的名称。"
 
 #: flowview_devices.php:44
 #, fuzzy
-msgid "Collection Medhod"
+msgid "Collection Method"
 msgstr "收集方法"
 
 #: flowview_devices.php:45
@@ -790,11 +802,11 @@ msgstr "电子邮件地址"
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "将此NetFlow扫描发送到的电子邮件地址（命令分隔）。"
 
-#: flowview_schedules.php:105 setup.php:352
+#: flowview_schedules.php:105 setup.php:369
 msgid "Format File to Use"
 msgstr "格式化文件以使用"
 
-#: flowview_schedules.php:108 setup.php:355
+#: flowview_schedules.php:108 setup.php:372
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
 msgstr ""
 "择要使用的自定义html包装器和CSS文件. 该文件包含html和CSS.以包装您的报告.如果它包含的不仅仅是CSS.你需要在文件中放置一个特殊的<REPORT>标签.此格式标签将被报告内容替换.\n"
@@ -840,7 +852,7 @@ msgstr "报告：[编辑：％s]"
 msgid "Report: [new]"
 msgstr "报告：[新]"
 
-#: flowview_schedules.php:360 functions.php:587
+#: flowview_schedules.php:360 functions.php:589
 msgid "Start Date Selector"
 msgstr "开始日期选择器"
 
@@ -900,12 +912,12 @@ msgstr "未定义的过滤器[选择过滤器以获取详细信息]"
 
 #: functions.php:397
 #, fuzzy, php-format
-msgid "Statistical Report: %s [ Including overrides as specififed below ]"
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "统计报告：%s [包括以下指定的替代项]"
 
 #: functions.php:399
 #, fuzzy, php-format
-msgid "Printed Report: %s [ Including overrides as specififed below ]"
+msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "印刷报告：%s [包括以下指定的替代项]"
 
 #: functions.php:417
@@ -996,339 +1008,339 @@ msgstr "打印："
 msgid "Select a Filter First"
 msgstr "选择报告打印"
 
-#: functions.php:530
+#: functions.php:532
 #, fuzzy
 msgid "Lines"
 msgstr "日志默认显示最后多少行"
 
-#: functions.php:548
+#: functions.php:550
 #, fuzzy
 msgid "Octets"
 msgstr "八位位组"
 
-#: functions.php:566
+#: functions.php:568
 msgid "Timespan"
 msgstr "时间跨度"
 
-#: functions.php:575
+#: functions.php:577
 msgid "Custom"
 msgstr "自定义"
 
-#: functions.php:581
+#: functions.php:583
 msgid "From"
 msgstr "从"
 
-#: functions.php:590
+#: functions.php:592
 msgid "To"
 msgstr "到"
 
-#: functions.php:596
+#: functions.php:598
 msgid "End Date Selector"
 msgstr "结束日期选择器"
 
-#: functions.php:599
+#: functions.php:601
 msgid "Shift Time Backward"
 msgstr "向后移动时间"
 
-#: functions.php:602
+#: functions.php:604
 msgid "Define Shifting Interval"
 msgstr "定义移动间隔"
 
-#: functions.php:615
+#: functions.php:617
 msgid "Shift Time Forward"
 msgstr "向前移动时间"
 
-#: functions.php:622
+#: functions.php:624
 msgid "Show/Hide"
 msgstr "显示隐藏"
 
-#: functions.php:626
+#: functions.php:628
 msgid "Table"
 msgstr "表"
 
-#: functions.php:630
+#: functions.php:632
 msgid "Bytes Bar"
 msgstr "Bytes Bar"
 
-#: functions.php:634
+#: functions.php:636
 msgid "Packets Bar"
 msgstr "Packets Bar"
 
-#: functions.php:638
+#: functions.php:640
 msgid "Flows Bar"
 msgstr "Flows Bar"
 
-#: functions.php:1178
+#: functions.php:1179
 #, fuzzy, php-format
 msgid "Client/Private (%s)"
 msgstr "客户/私人（%s）"
 
-#: functions.php:1180
+#: functions.php:1181
 #, fuzzy
 msgid "icmp (0)"
 msgstr "icmp（0）"
 
-#: functions.php:1191
+#: functions.php:1192
 #, php-format
 msgid "Unknown (%s)"
 msgstr "未知 (%s)"
 
-#: functions.php:1222
+#: functions.php:1223
 msgid "Cacti Flowview"
 msgstr "Cacti Flowview"
 
-#: functions.php:1228
+#: functions.php:1229
 #, fuzzy, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %"
 
-#: functions.php:1419
+#: functions.php:1420
 #, fuzzy, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "子网筛选器：%s不是值CIDR格式"
 
-#: functions.php:1827 functions.php:1828 functions.php:1829 functions.php:1830
-#: functions.php:1831 functions.php:1832 functions.php:1833 functions.php:1834
-#: functions.php:1835 functions.php:1836 functions.php:1837 functions.php:1838
-#: functions.php:1839 functions.php:1840 functions.php:1841 functions.php:1842
-#: functions.php:1843 functions.php:1844 functions.php:1845 functions.php:1846
-#: functions.php:1847 functions.php:1848 functions.php:1849 functions.php:1850
-#: functions.php:1851 functions.php:1852
+#: functions.php:1832 functions.php:1833 functions.php:1834 functions.php:1835
+#: functions.php:1836 functions.php:1837 functions.php:1838 functions.php:1839
+#: functions.php:1840 functions.php:1841 functions.php:1842 functions.php:1843
+#: functions.php:1844 functions.php:1845 functions.php:1846 functions.php:1847
+#: functions.php:1848 functions.php:1849 functions.php:1850 functions.php:1851
+#: functions.php:1852 functions.php:1853 functions.php:1854 functions.php:1855
+#: functions.php:1856 functions.php:1857
 #, fuzzy, php-format
 msgid "%d - %d Bytes"
 msgstr "%s Bytes"
 
-#: functions.php:1853
+#: functions.php:1858
 #, fuzzy, php-format
 msgid "> %d Bytes"
 msgstr "%d Bytes"
 
-#: functions.php:2198
+#: functions.php:2203
 #, fuzzy
 msgid "Source DNS"
 msgstr "来源AS"
 
-#: functions.php:2202
+#: functions.php:2207
 #, fuzzy
 msgid "Source Root DNS"
 msgstr "来源AS"
 
-#: functions.php:2206
+#: functions.php:2211
 #, fuzzy
 msgid "Dest DNS"
 msgstr "目标AS"
 
-#: functions.php:2210
+#: functions.php:2215
 #, fuzzy
 msgid "Dest Root DNS"
 msgstr "目标端口"
 
-#: functions.php:2214
+#: functions.php:2219
 msgid "DNS"
 msgstr "DNS"
 
-#: functions.php:2218
+#: functions.php:2223
 #, fuzzy
 msgid "Root DNS"
 msgstr "根DNS"
 
-#: functions.php:2238
+#: functions.php:2243
 msgid "Dest Port"
 msgstr "目标端口"
 
-#: functions.php:2246
+#: functions.php:2251
 msgid "Dest IF"
 msgstr "目标接口"
 
-#: functions.php:2262
+#: functions.php:2267
 msgid "Dest Prefix"
 msgstr "目标前缀"
 
-#: functions.php:2270
+#: functions.php:2275
 msgid "Type of Service"
 msgstr "服务类型"
 
-#: functions.php:2289
+#: functions.php:2294
 #, fuzzy
 msgid "Bytes/Packet"
 msgstr "包"
 
-#: functions.php:2478
+#: functions.php:2491
 #, fuzzy
 msgid "-- unresolved --"
 msgstr "-未解决-"
 
-#: functions.php:2584
+#: functions.php:2597
 #, fuzzy, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "布尔值：%s，数字：%s，十六进制：%s"
 
-#: functions.php:2595
+#: functions.php:2608
 msgid "Low Delay"
 msgstr "低延迟"
 
-#: functions.php:2596
+#: functions.php:2609
 msgid "Throughput"
 msgstr "吞吐量"
 
-#: functions.php:2597
+#: functions.php:2610
 #, fuzzy
 msgid "Reliability"
 msgstr "可靠性"
 
-#: functions.php:2598
+#: functions.php:2611
 #, fuzzy
 msgid "Mincost"
 msgstr "最低成本"
 
-#: functions.php:2602
+#: functions.php:2615
 #, fuzzy
 msgid "Net Control"
 msgstr "网络控制"
 
-#: functions.php:2603
+#: functions.php:2616
 #, fuzzy
 msgid "Internet Control"
 msgstr "互联网控制"
 
-#: functions.php:2604
+#: functions.php:2617
 #, fuzzy
 msgid "Critic ECP"
 msgstr "评论家ECP"
 
-#: functions.php:2605
+#: functions.php:2618
 #, fuzzy
 msgid "Flash Override"
 msgstr "闪存覆盖"
 
-#: functions.php:2606
+#: functions.php:2619
 msgid "Flash"
 msgstr "闪"
 
-#: functions.php:2607
+#: functions.php:2620
 msgid "Immediate"
 msgstr "立刻"
 
-#: functions.php:2608
+#: functions.php:2621
 msgid "Priority"
 msgstr "优先级"
 
-#: functions.php:2609
+#: functions.php:2622
 msgid "Routine"
 msgstr "常规"
 
-#: functions.php:2649
+#: functions.php:2662
 msgid "Summary Statistics"
 msgstr "摘要统计"
 
-#: functions.php:2660
+#: functions.php:2673
 #, fuzzy, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "IP数据包大小分布（％）"
 
-#: functions.php:2665
+#: functions.php:2678
 #, fuzzy, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "每个流量分配的数据包（%%）"
 
-#: functions.php:2670
+#: functions.php:2683
 #, fuzzy, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "每流量分布的八位字节（%%）"
 
-#: functions.php:2675
+#: functions.php:2688
 #, fuzzy, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "流量时间分布（％）"
 
-#: functions.php:2858
+#: functions.php:2871
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "您必须选择一份统计报告或打印报告！"
 
-#: functions.php:2862
+#: functions.php:2875
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "您只能选择一份统计报告或一份打印报告（不是两种）！"
 
-#: functions.php:2866
+#: functions.php:2879
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "日期无效，结束日期/时间早于开始日期/时间！"
 
-#: functions.php:2877 functions.php:2882
+#: functions.php:2890 functions.php:2895
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "源地址IP地址无效<br> <br>（必须采用'192.168.0.1'的形式）"
 
-#: functions.php:2889 functions.php:2893 functions.php:2897
+#: functions.php:2902 functions.php:2906 functions.php:2910
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "无效的源地址子网（<br>）（必须采用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
 
-#: functions.php:2911 functions.php:2915
+#: functions.php:2924 functions.php:2928
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "目标地址IP地址无效<br> <br>（必须采用'192.168.0.1'的形式）"
 
-#: functions.php:2921 functions.php:2925 functions.php:2929
+#: functions.php:2934 functions.php:2938 functions.php:2942
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "目标地址！<br>无效子网（必须采用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
 
-#: functions.php:2947
+#: functions.php:2960
 msgid "Invalid value for Source Interface!"
 msgstr "源接口的值无效！"
 
-#: functions.php:2963
+#: functions.php:2976
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "源端口的值无效！ （0 - 65535）"
 
-#: functions.php:2979
+#: functions.php:2992
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "源AS的值无效！ （0 - 65535）"
 
-#: functions.php:2995
+#: functions.php:3008
 msgid "Invalid value for Destination Interface!"
 msgstr "目标接口的值无效！"
 
-#: functions.php:3011
+#: functions.php:3024
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "目标端口的值无效！ （0 - 65535）"
 
-#: functions.php:3027
+#: functions.php:3040
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "目标AS的值无效！ （0 - 65535）"
 
-#: functions.php:3043
+#: functions.php:3056
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Protocol的值无效！ （1 - 255）"
 
-#: functions.php:3055
+#: functions.php:3068
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "TCP标志的值无效！ （例如：0x1b或0x1b / SA或SA / SA）"
 
-#: functions.php:3064
+#: functions.php:3077
 msgid "Invalid value for Cutoff Octets!"
 msgstr "截止字节的值无效！"
 
-#: functions.php:3071
+#: functions.php:3084
 msgid "Invalid value for Cutoff Lines!"
 msgstr "截止线的值无效！"
 
-#: functions.php:3078
+#: functions.php:3091
 msgid "Invalid value for Sort Field!"
 msgstr "排序字段的值无效！"
 
-#: functions.php:3105
+#: functions.php:3118
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "FlowView图表 %s 类型是 %s"
 
-#: functions.php:3400
+#: functions.php:3425
 #, fuzzy
 msgid "Total Flows"
 msgstr "最大流量："
 
-#: functions.php:3405
+#: functions.php:3430
 #, fuzzy
 msgid "Bytes Exchanged"
 msgstr "字节交换"
 
-#: functions.php:3409
+#: functions.php:3434
 #, fuzzy
 msgid "Packets Examined"
 msgstr "Packets Bar"
@@ -1388,60 +1400,93 @@ msgstr "(编辑)"
 msgid "(actions)"
 msgstr "（动作）"
 
-#: setup.php:359
+#: setup.php:352
+#, fuzzy
+#| msgid "Resolution"
+msgid "Hostname Resolution"
+msgstr "分辨率"
+
+#: setup.php:353
+msgid "The method by which you wish to resolve hostnames."
+msgstr "您希望解析主机名的方法。"
+
+#: setup.php:356
+#, fuzzy
+msgid "Use Local Server"
+msgstr "使用本地服务器"
+
+#: setup.php:357
+#, fuzzy
+msgid "Use DNS Server Below"
+msgstr "使用备用DNS服务器"
+
+#: setup.php:358
+#, fuzzy
+msgid "Don't Resolve DNS"
+msgstr "不要解析DNS"
+
+#: setup.php:363
+msgid "Use Arin to Find Unregistered Domains"
+msgstr ""
+
+#: setup.php:364
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr ""
+
+#: setup.php:376
 #, fuzzy
 msgid "Data Retention Policy"
 msgstr "资料保留政策"
 
-#: setup.php:360
+#: setup.php:377
 #, fuzzy
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
 msgstr "仙人掌将维护分区流表的时间。"
 
-#: setup.php:363
+#: setup.php:380
 #, php-format
 msgid "%d Week"
 msgstr "%d 周"
 
-#: setup.php:364 setup.php:365
+#: setup.php:381 setup.php:382
 #, php-format
 msgid "%d Weeks"
 msgstr "%d 周"
 
-#: setup.php:366
+#: setup.php:383
 #, php-format
 msgid "%d Month"
 msgstr "%d 月"
 
-#: setup.php:367 setup.php:368 setup.php:369 setup.php:370
+#: setup.php:384 setup.php:385 setup.php:386 setup.php:387
 #, php-format
 msgid "%d Months"
 msgstr "%d 月"
 
-#: setup.php:371
+#: setup.php:388
 #, php-format
 msgid "%d Year"
 msgstr "%d 年"
 
-#: setup.php:376
+#: setup.php:393
 #, fuzzy
 msgid "Database Partitioning Scheme"
 msgstr "数据库分区方案"
 
-#: setup.php:377
+#: setup.php:394
 #, fuzzy
 msgid "Depending on the number of flows per minute, you may require more tables per day."
 msgstr "根据每分钟的流数，您可能每天需要更多表。"
 
-#: setup.php:380
+#: setup.php:397
 msgid "Daily"
 msgstr "每天"
 
-#: setup.php:381
+#: setup.php:398
 msgid "Hourly"
 msgstr "每小时"
 
-#: setup.php:387
+#: setup.php:404
 msgid "Misc"
 msgstr "杂项"
 
@@ -1459,21 +1504,6 @@ msgstr "杂项"
 
 #~ msgid "Alternate DNS Server"
 #~ msgstr "备用DNS服务器"
-
-#, fuzzy
-#~ msgid "Don't Resolve DNS"
-#~ msgstr "不要解析DNS"
-
-#, fuzzy
-#~ msgid "Use DNS Server Below"
-#~ msgstr "使用备用DNS服务器"
-
-#, fuzzy
-#~ msgid "Use Local Server"
-#~ msgstr "使用本地服务器"
-
-#~ msgid "The method by which you wish to resolve hostnames."
-#~ msgstr "您希望解析主机名的方法。"
 
 #~ msgid "This is the path to base the path of your flow folder structure."
 #~ msgstr "这是基于流文件夹结构路径的路径。"
