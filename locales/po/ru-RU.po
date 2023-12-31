@@ -4,24 +4,11 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2023-12-06 22:14-0600\n"
-"PO-Revision-Date: 2023-10-14 20:07+0000\n"
-"Last-Translator: Vladyslav V. Prodan <akapulko@gmail.com>\n"
-"Language-Team: Russian <http://translate.cacti.net/projects/cacti/flowview/ru/>\n"
-"Language: ru-RU\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2023-12-06 22:14-0600\nPO-Revision-Date: 2023-12-31 23:07+0000\nLast-Translator: Anton Zhuravlev <baka109g@gmail.com>\nLanguage-Team: Russian <http://translate.cacti.net/projects/cacti/flowview/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 4.8.1\n"
 
 #: arrays.php:26 arrays.php:60 functions.php:469
-#, fuzzy
 msgid "Select a Report"
-msgstr "Печать отчетов"
+msgstr "Выбрать отчет"
 
 #: arrays.php:27
 msgid "Summary"
@@ -82,17 +69,14 @@ msgid "IP Protocol"
 msgstr "IP-протокол"
 
 #: arrays.php:44
-#, fuzzy
 msgid "Input Interface"
 msgstr "Входной интерфейс"
 
 #: arrays.php:45
-#, fuzzy
 msgid "Output Interface"
 msgstr "Выходной интерфейс"
 
 #: arrays.php:46
-#, fuzzy
 msgid "Input/Output Interface"
 msgstr "Входной/выходной интерфейс"
 
@@ -190,7 +174,7 @@ msgstr "Без ограничений"
 #: arrays.php:88 arrays.php:89 arrays.php:90 arrays.php:91 arrays.php:92
 #: arrays.php:93 arrays.php:94 arrays.php:95 arrays.php:96 arrays.php:97
 #: arrays.php:98 arrays.php:99 arrays.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "%s Bytes"
 msgstr "%s Байты"
 
@@ -207,7 +191,6 @@ msgstr "Исходный домен"
 #: arrays.php:233 arrays.php:239 arrays.php:245 arrays.php:251 arrays.php:257
 #: arrays.php:264 arrays.php:270 arrays.php:277 arrays.php:283 arrays.php:289
 #: arrays.php:296 functions.php:961 functions.php:2283 functions.php:2520
-#, fuzzy
 msgid "Flows"
 msgstr "Потоки"
 
@@ -240,9 +223,8 @@ msgid "Port"
 msgstr "Порт"
 
 #: arrays.php:220 arrays.php:527 functions.php:2235
-#, fuzzy
 msgid "Dest IP"
-msgstr "Неверный IP-адрес"
+msgstr "IP-адрес назначения"
 
 #: arrays.php:226 functions.php:2227
 msgid "IP Address"
@@ -380,7 +362,6 @@ msgid "Report Type"
 msgstr "Тип отчета"
 
 #: arrays.php:400
-#, fuzzy
 msgid "The Report Type to use by default for this Filter when creating a Report."
 msgstr "Тип отчета, который будет использоваться по умолчанию для этого фильтра при создании отчета."
 
@@ -442,9 +423,8 @@ msgid "No"
 msgstr "Нет"
 
 #: arrays.php:442 flowview_filters.php:339 functions.php:494
-#, fuzzy
 msgid "Sort Field"
-msgstr "Сортировать поле:"
+msgstr "Сортировать поле"
 
 #: arrays.php:443
 #, fuzzy
@@ -485,7 +465,6 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr "Выберите конкретный протокол для фильтра."
 
 #: arrays.php:479
-#, fuzzy
 msgid "TCP Flags"
 msgstr "TCP флаги"
 
@@ -519,7 +498,6 @@ msgid "Filter on the select Source Ports for in the Filter.  This can be a comma
 msgstr "Отфильтруйте выбранные исходные порты для в фильтре. Это может быть список исходных портов, разделенных запятыми."
 
 #: arrays.php:511
-#, fuzzy
 msgid "Source Interface"
 msgstr "Интерфейс источника"
 
@@ -539,9 +517,8 @@ msgid "Filter on the select Destination IP for in the Filter.  This can be a com
 msgstr "Отфильтруйте выбранный IP-адрес назначения в фильтре. Это может быть список адресов IPv4 или IPv6, разделенных запятыми, или список диапазонов адресов IPv4 или IPv6, разделенных запятыми, в формате CIDR (например, 192.168.1.0/24)."
 
 #: arrays.php:535
-#, fuzzy
 msgid "Dest Ports"
-msgstr "Лучший порт"
+msgstr "Порт получателя"
 
 #: arrays.php:536
 #, fuzzy
@@ -549,9 +526,8 @@ msgid "Filter on the select Destination Ports for in the Filter.  This can be a 
 msgstr "Отфильтруйте выбранные порты назначения в фильтре. Это может быть список портов Destimation, разделенных запятыми."
 
 #: arrays.php:543
-#, fuzzy
 msgid "Dest Interface"
-msgstr "Dest Interface"
+msgstr "Интерфейс получателя"
 
 #: arrays.php:544
 #, fuzzy
