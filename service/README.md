@@ -48,4 +48,4 @@ This will start the service.
 To verify that the service is actually running as expected.
 
 -----------------------------------------------
-Copyright (c) 2004-2023 - The Cacti Group, Inc.
+Copyright (c) 2004-2024 - The Cacti Group, Inc.
