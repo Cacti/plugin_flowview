@@ -47,6 +47,9 @@ function edit_filter() {
 	get_filter_request_var('id');
 	/* ==================================================== */
 
+	flowview_determine_config();
+	flowview_connect();
+
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	if (isset_request_var('return')) {
@@ -57,7 +60,7 @@ function edit_filter() {
 
 	$report = array();
 	if (!isempty_request_var('id')) {
-		$report = db_fetch_row_prepared('SELECT *
+		$report = flowview_db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
 			WHERE id = ?',
 			array(get_request_var('id')));
@@ -247,6 +250,8 @@ function edit_filter() {
 }
 
 function save_filter_form() {
+	global $config;
+	
 	/* ================= input validation ================= */
 	get_filter_request_var('timespan');
 	get_filter_request_var('sortfield');
@@ -255,7 +260,10 @@ function save_filter_form() {
 	get_filter_request_var('query');
 	/* ==================================================== */
 
-	db_execute_prepared('UPDATE plugin_flowview_queries
+	flowview_determine_config();
+	flowview_connect();
+
+	flowview_db_execute_prepared('UPDATE plugin_flowview_queries
 		SET timespan = ?,
 		sortfield = ?,
 		cutofflines = ?,
@@ -272,6 +280,8 @@ function save_filter_form() {
 }
 
 function save_filter() {
+	global $config;
+
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
 	get_filter_request_var('device_id');
@@ -281,6 +291,9 @@ function save_filter() {
 	get_filter_request_var('includeif');
 	get_filter_request_var('sortfield');
 	/* ==================================================== */
+
+	flowview_determine_config();
+	flowview_connect();
 
 	$save['id']              = get_nfilter_request_var('id');
 	$save['name']            = get_nfilter_request_var('name');
@@ -317,7 +330,7 @@ function save_filter() {
 	$save['cutoffoctets']    = get_nfilter_request_var('cutoffoctets');
 	$save['resolve']         = get_nfilter_request_var('resolve');
 
-	$id = sql_save($save, 'plugin_flowview_queries', 'id', true);
+	$id = flowview_sql_save($save, 'plugin_flowview_queries', 'id', true);
 
 	if (is_error_message()) {
 		raise_message(2);
@@ -341,11 +354,16 @@ function save_filter() {
 }
 
 function flowview_delete_filter() {
-	db_execute_prepared('DELETE FROM plugin_flowview_queries
+	global $config;
+
+	flowview_determine_config();
+	flowview_connect();
+
+	flowview_db_execute_prepared('DELETE FROM plugin_flowview_queries
 		WHERE id = ?',
 		array(get_filter_request_var('query')));
 
-	db_execute_prepared('DELETE FROM plugin_flowview_schedules
+	flowview_db_execute_prepared('DELETE FROM plugin_flowview_schedules
 		WHERE query_id = ?',
 		array(get_filter_request_var('query')));
 
@@ -379,15 +397,19 @@ function flowview_show_summary(&$data) {
 	print $data['table'];
 }
 
+
 function flowview_display_filter($data) {
 	global $config, $graph_timeshifts, $graph_timespans;
+
+	flowview_determine_config();
+	flowview_connect();
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	$title  = __esc('Undefined Filter [ Select Filter to get Details ]', 'flowview');
 
 	if (get_filter_request_var('query') > 0) {
-		$row = db_fetch_row_prepared('SELECT name, statistics, printed
+		$row = flowview_db_fetch_row_prepared('SELECT name, statistics, printed
 			FROM plugin_flowview_queries
 			WHERE id = ?',
 			array(get_request_var('query')));
@@ -416,7 +438,7 @@ function flowview_display_filter($data) {
 						<select id='query'>
 							<option value='-1'><?php print __('Select a Filter', 'flowview');?></option>
 							<?php
-							$queries = db_fetch_assoc('SELECT id, name
+							$queries = flowview_db_fetch_assoc('SELECT id, name
 								FROM plugin_flowview_queries
 								ORDER BY name');
 
@@ -507,7 +529,7 @@ function flowview_display_filter($data) {
 									$columns = $print_columns_array[trim(get_request_var('report'), 'sp')];
 								}
 							} elseif (get_request_var('query') > 0) {
-								$report = db_fetch_row_prepared('SELECT printed, statistics, sortfield
+								$report = flowview_db_fetch_row_prepared('SELECT printed, statistics, sortfield
 									FROM plugin_flowview_queries
 									WHERE id = ?',
 									array(get_request_var('query')));
@@ -1167,6 +1189,9 @@ function flowview_display_filter($data) {
 function get_port_name($port_num, $port_proto) {
 	global $config, $graph_timespans;
 
+	flowview_determine_config();
+	flowview_connect();
+
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	if (isset($ip_protocols_array[$port_proto])) {
@@ -1180,7 +1205,7 @@ function get_port_name($port_num, $port_proto) {
 	} elseif ($port_num == 0) {
 		return __('icmp (0)', 'flowview');
 	} else {
-		$port_name = db_fetch_cell_prepared('SELECT service
+		$port_name = flowview_db_fetch_cell_prepared('SELECT service
 			FROM plugin_flowview_ports
 			WHERE port = ?
 			AND proto = ?',
@@ -1197,12 +1222,15 @@ function get_port_name($port_num, $port_proto) {
 function plugin_flowview_run_schedule($id) {
 	global $config;
 
-	$schedule = db_fetch_row_prepared('SELECT *
+	flowview_determine_config();
+	flowview_connect();
+
+	$schedule = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_schedules
 		WHERE id = ?',
 		array($id));
 
-	$query = db_fetch_row_prepared('SELECT *
+	$query = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		array($schedule['query_id']));
@@ -1475,6 +1503,9 @@ function get_date_filter($sql_where, $start, $end, $range_type = 1) {
 function get_tables_for_query($start, $end = null) {
 	global $config, $graph_timespans;
 
+	flowview_determine_config();
+	flowview_connect();
+
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	$part_type  = read_config_option('flowview_partition', true);
@@ -1492,7 +1523,7 @@ function get_tables_for_query($start, $end = null) {
 		$end_part   = date('Y', $end)   . substr('000' . date('z', $end), -3)   . date('H', $end);
 	}
 
-	$tables = db_fetch_assoc('SELECT TABLE_NAME AS `table`
+	$tables = flowview_db_fetch_assoc('SELECT TABLE_NAME AS `table`
 		FROM information_schema.TABLES
 		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
 
@@ -1676,6 +1707,9 @@ function get_category_columns($statistics, $domain) {
 function run_flow_query($session, $query_id, $start, $end) {
 	global $config, $graph_timespans;
 
+	flowview_determine_config();
+	flowview_connect();
+
 	if (empty($query_id)) {
 		return false;
 	}
@@ -1693,12 +1727,12 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
-	$data = db_fetch_row_prepared('SELECT *
+	$data = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		array($query_id));
 
-	$title = db_fetch_cell_prepared('SELECT name
+	$title = flowview_db_fetch_cell_prepared('SELECT name
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		array($query_id));
@@ -2170,11 +2204,10 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$sql = "$sql_query FROM ($sql) AS rs $sql_groupby $sql_having $sql_order $sql_limit";
 
 			//cacti_log(str_replace("\n", " ", str_replace("\t", '', $sql)));
-
 			if ($data['statistics'] == 99) {
-				$results = db_fetch_row($sql);
+				$results = flowview_db_fetch_row($sql);
 			} else {
-				$results = db_fetch_assoc($sql);
+				$results = flowview_db_fetch_assoc($sql);
 			}
 		}
 
@@ -2819,6 +2852,11 @@ function flowview_get_rdomain_from_domain($domain) {
 }
 
 function flowview_translate_port($port, $is_hex, $detail = true) {
+	global $config;
+	
+	flowview_determine_config();
+	flowview_connect();
+
 	static $services = array();
 	static $services_detail = array();
 
@@ -2832,7 +2870,7 @@ function flowview_translate_port($port, $is_hex, $detail = true) {
 		return $services[$port];
 	}
 
-	$service = db_fetch_cell_prepared('SELECT service
+	$service = flowview_db_fetch_cell_prepared('SELECT service
 		FROM plugin_flowview_ports
 		WHERE port = ?
 		LIMIT 1', array($port));
@@ -3129,8 +3167,13 @@ function flowview_draw_chart($type, $title) {
   a rapid lookup of a DNS entry for a host so long as you don't have to look far.
 */
 function flowview_get_dns_from_ip($ip, $timeout = 1000) {
+	global $config;
+	
+	flowview_determine_config();
+	flowview_connect();
+
 	// First check to see if its in the cache
-	$cache = db_fetch_row_prepared('SELECT *
+	$cache = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_dnscache
 		WHERE ip = ?',
 		array($ip));
@@ -3239,7 +3282,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 					$hostname = substr($host, 0, strlen($host) -1);
 
 					/* return the hostname, without the trailing '.' */
-					db_execute_prepared('INSERT INTO plugin_flowview_dnscache
+					flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
 						(ip, host, time)
 						VALUES (?, ?, ?)',
 						array($ip, $hostname, $time));
@@ -3262,7 +3305,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 
 			if ($ip != $dns_name) {
 				/* error - return the hostname we constructed (without the . on the end) */
-				db_execute_prepared('INSERT INTO plugin_flowview_dnscache
+				flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
 					(ip, host, time)
 					VALUES (?, ?, ?)',
 					array($ip, $dns_name, $time));
@@ -3270,7 +3313,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 				return $ip . $suffix;
 			} else {
 				/* error - return the hostname we constructed (without the . on the end) */
-				db_execute_prepared('INSERT INTO plugin_flowview_dnscache
+				flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
 					(ip, host, time)
 					VALUES (?, ?, ?)',
 					array($ip, $ip, $time));
@@ -3286,7 +3329,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 
 			if ($ip != $dns_name) {
 				/* error - return the hostname we constructed (without the . on the end) */
-				db_execute_prepared('INSERT INTO plugin_flowview_dnscache
+				flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
 					(ip, host, time)
 					VALUES (?, ?, ?)',
 					array($ip, $dns_name, $time));
@@ -3303,7 +3346,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 		}
 
 		if ($dns_name != $ip) {
-			db_execute_prepared('INSERT INTO plugin_flowview_dnscache
+			flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
 				(ip, host, time)
 				VALUES (?, ?, ?)',
 				array($ip, $dns_name, $time));
@@ -3317,7 +3360,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 			}
 
 			if ($dns_name != $ip) {
-				db_execute_prepared('INSERT INTO plugin_flowview_dnscache
+				flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
 					(ip, host, time)
 					VALUES (?, ?, ?)',
 					array($ip, $dns_name, $time));
@@ -3329,7 +3372,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 	}
 
 	/* error - return the hostname */
-	db_execute_prepared('INSERT INTO plugin_flowview_dnscache
+	flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
 		(ip, host, time)
 		VALUES (?, ?, ?)',
 		array($ip, $ip, $time));
@@ -3623,6 +3666,11 @@ function flowview_autoscale($value) {
 }
 
 function create_raw_partition($table) {
+	global $config;
+	
+	flowview_determine_config();
+	flowview_connect();
+
 	$data = array();
 	// Auto increment sequence
 	$data['columns'][] = array('name' => 'sequence', 'type' => 'bigint(20)', 'unsigned' => true, 'auto_increment' => true);
@@ -3689,15 +3737,20 @@ function create_raw_partition($table) {
 	$data['row_format'] = 'Dynamic';
 	$data['comment']    = 'Plugin Flowview - Details Report Data';
 
-	api_plugin_db_table_create('flowview', $table, $data);
+	flowview_db_table_create( $table, $data);
 
 	// Work around for unicode issues
 	flowview_fix_collate_issues();
 }
 
 function flowview_fix_collate_issues() {
+	global $config;
+	
+	flowview_determine_config();
+	flowview_connect();
+
 	$tables = array_rekey(
-		db_fetch_assoc('SELECT TABLE_NAME
+		flowview_db_fetch_assoc('SELECT TABLE_NAME
 			FROM information_schema.TABLES
 			WHERE TABLE_NAME LIKE "plugin_flowview_raw%"
 			AND TABLE_COLLATION != "utf8_unicode_ci"'),
@@ -3706,14 +3759,19 @@ function flowview_fix_collate_issues() {
 
 	if (cacti_sizeof($tables)) {
 		foreach($tables as $table) {
-			db_execute("ALTER TABLE $table COLLATE=utf8mb4_unicode_ci");
+			flowview_db_execute("ALTER TABLE $table COLLATE=utf8mb4_unicode_ci");
 		}
 	}
 }
 
 function import_flows() {
+	global $config;
+
+	flowview_determine_config();
+	flowview_connect();
+
 	$flow_directory = read_config_option('path_flows_dir');
-	$listeners      = db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
+	$listeners      = flowview_db_fetch_assoc('SELECT * FROM plugin_flowview_devices');
 	$last_date      = time();
 
 	if (file_exists($flow_directory)) {
@@ -3877,14 +3935,14 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 			$i++;
 
 			if ($i > 100) {
-				db_execute($sql_prefix . implode(', ', $sql));
+				flowview_db_execute($sql_prefix . implode(', ', $sql));
 				$i = 0;
 				$sql = array();
 			}
 		}
 
 		if ($i > 0) {
-			db_execute($sql_prefix . implode(', ', $sql));
+			flowview_db_execute($sql_prefix . implode(', ', $sql));
 		}
 	}
 }

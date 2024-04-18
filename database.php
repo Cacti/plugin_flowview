@@ -221,7 +221,8 @@ function flowview_db_table_exists($table, $log = true) {
 
 	preg_match("/([`]{0,1}(?<database>[\w_]+)[`]{0,1}\.){0,1}[`]{0,1}(?<table>[\w_]+)[`]{0,1}/", $table, $matches);
 	if ($matches !== false && array_key_exists('table', $matches)) {
-		$sql = 'SHOW TABLES LIKE \'%' . $matches['table'] . '%\'';
+		$sql = 'SHOW TABLES LIKE \'' . $matches['table'] . '\'';
+
 		return (db_fetch_cell($sql, '', $log, $flowview_cnn) ? true : false);
 	}
 	return false;
