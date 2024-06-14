@@ -631,7 +631,10 @@ function show_devices () {
 			if ($os == 'freebsd') {
 				$status = shell_exec("/usr/bin/sockstat -4 -l | /usr/bin/grep ':" . $row['port'] . " '");
 			} else {
-				$status = shell_exec("netstat -an | grep ':" . $row['port'] . " '");
+				$status = shell_exec("ss -lntu | grep ':" . $row['port'] . " '");
+				if (empty($status)) {
+					$status = shell_exec("netstat -an | grep ':" . $row['port'] . " '");
+				}
 			}
 
 			if (is_string($status)) {
