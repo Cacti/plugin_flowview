@@ -625,7 +625,7 @@ $allfields = array(
 $partition = read_config_option('flowview_partition');
 
 $listener  = flowview_db_fetch_row_prepared('SELECT *
-	FROM plugin_flowview_devices
+	FROM plugin_flowview_device
 	WHERE id = ?',
 	array($listener_id));
 
@@ -671,7 +671,7 @@ if (cacti_sizeof($listener)) {
 
 	flowview_db_execute_prepared("UPDATE `" . $flowviewdb_default . "`.`plugin_flowview_device`
 		SET last_updated = NOW
-		WHERE device_id = ?",
+		WHERE id = ?",
 		array($listener['id']));
 
 	while (true) {
