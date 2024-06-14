@@ -608,7 +608,7 @@ function flowview_setup_table() {
 		id int(11) unsigned NOT NULL AUTO_INCREMENT,
 		service varchar(20) NOT NULL default '',
 		port int(11) unsigned NOT NULL,
-		proto char(4) NOT NULL,
+		proto char(8) NOT NULL,
 		description varchar(255) NOT NULL default '',
 		PRIMARY KEY (`id`))
 		ENGINE=InnoDB,
