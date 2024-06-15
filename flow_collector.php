@@ -625,7 +625,7 @@ $allfields = array(
 $partition = read_config_option('flowview_partition');
 
 $listener  = flowview_db_fetch_row_prepared('SELECT *
-	FROM plugin_flowview_devices
+	FROM plugin_flowview_device
 	WHERE id = ?',
 	array($listener_id));
 
