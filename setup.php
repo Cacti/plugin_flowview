@@ -525,6 +525,7 @@ function flowview_setup_table() {
 		cmethod int(11) unsigned NOT NULL default '0',
 		allowfrom varchar(32) NOT NULL default '0',
 		port int(11) unsigned NOT NULL,
+		last_updated timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 		PRIMARY KEY (id))
 		ENGINE=InnoDB,
 		ROW_FORMAT=DYNAMIC,
