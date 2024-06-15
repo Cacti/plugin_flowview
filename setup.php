@@ -356,12 +356,12 @@ function flowview_config_settings() {
 		)
 	);
 
-	$tabs['misc'] = __('Misc', 'flowview');
+	$tabs['Flowview'] = __('Flowview', 'flowview');
 
-	if (isset($settings['misc'])) {
-		$settings['misc'] = array_merge($settings['misc'], $temp);
+	if (isset($settings['Flowview'])) {
+		$settings['Flowview'] = array_merge($settings['Flowview'], $temp);
 	} else {
-		$settings['misc'] = $temp;
+		$settings['Flowview'] = $temp;
 	}
 }
 
