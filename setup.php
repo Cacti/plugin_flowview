@@ -499,7 +499,7 @@ function flowview_setup_table() {
 		ENGINE=MEMORY,
 		COMMENT='Plugin Flowview - DNS Cache to help speed things up'");
 
-	flowview_db_execute("CREATE TABLE IF NOT EXISTS `" . $flowview_default . "`.`plugin_flowview_arin_information` (
+	flowview_db_execute("CREATE TABLE IF NOT EXISTS `" . $flowviewdb_default . "`.`plugin_flowview_arin_information` (
 		`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 		`cidr` varchar(20) NOT NULL DEFAULT '',
 		`net_range` varchar(64) NOT NULL DEFAULT '',
