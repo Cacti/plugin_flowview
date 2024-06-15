@@ -765,7 +765,7 @@ if (cacti_sizeof($listener)) {
 
 				flowview_db_execute_prepared("UPDATE  `" . $flowviewdb_default . "`.`plugin_flowview_devices`
 					SET last_updated = NOW()
-					WHERE device_id = ?",
+					WHERE id = ?",
 					array($listener['id']));
 			}
 		}
