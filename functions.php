@@ -3978,7 +3978,7 @@ function flowview_get_owner_from_arin($host) {
 	if (function_exists('curl_init')) {
 		$ch = curl_init();
 	} else {
-		cact_log('Unable to query Arin ensure php-curl is installed', true, 'FLOWVIEW');
+		cacti_log('Unable to query Arin ensure php-curl is installed', true, 'FLOWVIEW');
 	}
 
 	curl_setopt($ch, CURLOPT_URL, 'https://whois.arin.net/rest/ip/' . $host);
