@@ -625,7 +625,7 @@ $allfields = array(
 $partition = read_config_option('flowview_partition');
 
 $listener  = flowview_db_fetch_row_prepared('SELECT *
-	FROM plugin_flowview_device
+	FROM plugin_flowview_devices
 	WHERE id = ?',
 	array($listener_id));
 
@@ -669,8 +669,8 @@ if (cacti_sizeof($listener)) {
 	$lversion            = array(); // Track version changes
 	$sstart              = time();
 
-	flowview_db_execute_prepared("UPDATE `" . $flowviewdb_default . "`.`plugin_flowview_device`
-		SET last_updated = NOW
+	flowview_db_execute_prepared("UPDATE `" . $flowviewdb_default . "`.`plugin_flowview_devices`
+		SET last_updated = NOW()
 		WHERE id = ?",
 		array($listener['id']));
 
@@ -763,8 +763,8 @@ if (cacti_sizeof($listener)) {
 
 				heartbeat_process('flowview', 'client_' . $listener['id'], $config['poller_id']);
 
-				flowview_db_execute_prepared("UPDATE INTO `" . $flowviewdb_default . "`.`plugin_flowview_device`
-					SET last_updated = NOW
+				flowview_db_execute_prepared("UPDATE  `" . $flowviewdb_default . "`.`plugin_flowview_device`
+					SET last_updated = NOW()
 					WHERE device_id = ?",
 					array($listener['id']));
 			}
