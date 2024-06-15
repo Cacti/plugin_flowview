@@ -3975,11 +3975,12 @@ function flowview_get_owner_from_arin($host) {
 		return false;
 	}
 
-	$ch = curl_init();
-	if ($ch === false) {
-		cacti_log('Unable to initialize cURL to ARIN ensure you have php-curl installed', true, 'FLOWVIEW');
-		return false;
+	if (function_exists('curl_init')) {
+		$ch = curl_init();
+	} else {
+		cact_log('Unable to query Arin ensure php-curl is installed', true, 'FLOWVIEW');
 	}
+
 	curl_setopt($ch, CURLOPT_URL, 'https://whois.arin.net/rest/ip/' . $host);
 	curl_setopt($ch, CURLOPT_HEADER, false);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept:application/json'));
