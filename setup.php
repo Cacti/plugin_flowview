@@ -693,7 +693,7 @@ function flowview_setup_table() {
 		name varchar(255) NOT NULL,
 		device_id int(11) unsigned NOT NULL,
 		template_id int(11) unsigned NOT NULL DEFAULT '0',
-		ex_addr varchar(46) unsigned NOT NULL DEFAULT '',
+		ex_addr varchar(46) NOT NULL DEFAULT '',
 		timespan int(11) unsigned NOT NULL DEFAULT '0',
 		startdate varchar(32) NOT NULL,
 		enddate varchar(32) NOT NULL,
