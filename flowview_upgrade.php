@@ -343,7 +343,7 @@ function flowview_upgrade($current, $old) {
 
 		if (flowview_db_column_exists('parallel_database_query', 'map_range')) {
 			flowview_db_execute("ALTER TABLE `" . $flowviewdb_default . "`.`parallel_database_query`
-				ADD COLUMN md5sum_tables VARCHAR(32) NOT NULL default '' AFTER md5sum");,
+				ADD COLUMN md5sum_tables VARCHAR(32) NOT NULL default '' AFTER md5sum");
 		}
 
 		if (flowview_db_column_exists('parallel_database_query', 'cached_shards')) {
