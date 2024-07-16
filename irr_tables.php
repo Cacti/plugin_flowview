@@ -79,7 +79,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_as_block` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_aut_num` (
 	`aut_num` varchar(20) NOT NULL DEFAULT '',
@@ -119,7 +119,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_aut_num` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_inetnum` (
 	`inetnum` varchar(40) NOT NULL DEFAULT '',
@@ -149,11 +149,11 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_inetnum` (
 	`present` tinyint(3) unsigned not null default '1',
 	`last_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
 	PRIMARY KEY (`inetnum`,`source`),
-	KEY `inetnum` (`inetnum`))
+	KEY `inetnum` (`inetnum`),
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_mntner` (
 	`mntner` varchar(32) NOT NULL DEFAULT '',
@@ -179,7 +179,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_mntner` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_organisation` (
 	`organisation` varchar(32) NOT NULL DEFAULT '',
@@ -209,7 +209,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_organisatio
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_person` (
 	`person` varchar(96) NOT NULL DEFAULT '',
@@ -232,7 +232,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_person` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_role` (
 	`role` varchar(64) NOT NULL DEFAULT '',
@@ -260,7 +260,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_role` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_domain` (
 	`domain` varchar(64) NOT NULL DEFAULT '',
@@ -288,7 +288,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_domain` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_as_set` (
 	`as_set` varchar(40) NOT NULL DEFAULT '',
@@ -314,7 +314,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_as_set` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_irt` (
 	`irt` varchar(32) NOT NULL DEFAULT '',
@@ -343,7 +343,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_irt` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_route_set` (
 	`route_set` varchar(40) NOT NULL DEFAULT '',
@@ -367,7 +367,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_route_set` 
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_filter_set` (
 	`filter_set` varchar(32) NOT NULL DEFAULT '',
@@ -390,7 +390,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_filter_set`
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_peering_set` (
 	`peering_set` varchar(32) NOT NULL DEFAULT '',
@@ -413,7 +413,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_peering_set
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_inet_rtr` (
 	`inet_rtr` varchar(64) NOT NULL DEFAULT '',
@@ -442,7 +442,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_inet_rtr` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_rtr_set` (
 	`rtr_set` varchar(64) NOT NULL DEFAULT '',
@@ -466,7 +466,7 @@ flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_rtr_set` (
 	KEY `source` (`source`))
 	ENGINE=Aria
 	ROW_FORMAT=Dynamic
-	COMMENT='Contains information from variout internet registries'");
+	COMMENT='Contains information from Various internet registries'");
 
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_poetic_form` (
 	`poetic_form` varchar(64) NOT NULL DEFAULT '',
