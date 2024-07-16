@@ -722,7 +722,7 @@ function flowview_setup_table() {
 		`time` bigint(20) unsigned NOT NULL DEFAULT 0,
 		PRIMARY KEY (`id`),
 		KEY `arin_id` (`arin_id`),
-		UNIQUE KEY `ip` (`ip`)
+		UNIQUE KEY `ip` (`ip`))
 		ENGINE=InnoDB,
 		COMMENT='Plugin Flowview - DNS Cache to help speed things up'");
 
