@@ -4663,7 +4663,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 
 				/* error - return the hostname we constructed (without the . on the end) */
 				flowview_db_execute_prepared('INSERT INTO plugin_flowview_dnscache
-					(ip, host, source, arin_verified, time)
+					(ip, host, source, arin_verified,arin_id,time)
 					VALUES (?, ?, ?, ?, ?, ?)
 					ON DUPLICATE KEY UPDATE
 						time = VALUES(time),
