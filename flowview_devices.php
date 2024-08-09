@@ -506,7 +506,7 @@ function edit_device() {
 			WHERE dt.device_id = ?
 			$sql_where", $sql_params);
 
-		$addrs = db_fetch_assoc_prepared('SELECT DISTINCT ex_addr
+		$addrs = flowview_db_fetch_assoc_prepared('SELECT DISTINCT ex_addr
 			FROM plugin_flowview_device_templates
 			WHERE device_id = ?',
 			array($device['id']));
