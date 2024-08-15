@@ -824,7 +824,7 @@ function flowview_setup_table() {
 		title varchar(128) NOT NULL default '',
 		enabled varchar(3) NOT NULL default 'on',
 		sendinterval bigint(20) unsigned NOT NULL,
-		lastsent bigint(20) unsigned NOT NULL,
+		lastsent bigint(20) unsigned NOT NULL default 0,
 		start datetime NOT NULL,
 		email text NOT NULL,
 		format_file varchar(128) default '',
