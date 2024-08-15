@@ -911,7 +911,7 @@ function flowview_setup_table() {
 		enabled varchar(3) NOT NULL default 'on',
 		sendinterval bigint(20) unsigned NOT NULL,
 		timeout int(10) unsigned not null default 60,
-		lastsent bigint(20) unsigned NOT NULL,
+		lastsent bigint(20) unsigned NOT NULL default 0,
 		start timestamp NOT NULL default '0000-00-00',
 		notification_list int(10) unsigned not null default 0,
 		email text NOT NULL,
