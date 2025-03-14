@@ -715,11 +715,6 @@ if (cacti_sizeof($listener)) {
 		 * a bit of functionality.  So, we will use the native socket
 		 * calls for now.
 		 */
-		if ($listener['allowfrom'] != '0' && $listener['allowfrom'] != '') {
-			$url = "$protocol://{$listener['allowfrom']}:{$listener['port']}";
-		} else {
-			$url = "$protocol://0.0.0.0:{$listener['port']}";
-		}
 
 		if ($protocol == 'udp') {
 			$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
@@ -729,7 +724,7 @@ if (cacti_sizeof($listener)) {
 		}
 
 		if (is_resource($socket) || $socket !== false) {
-			socket_bind($socket, '0.0.0.0', $listener['port']);
+			socket_bind($socket, $listener['bind_address'], $listener['port']);
 
 			if ($protocol == 'tcp') {
 				socket_listen($socket, 1024);
@@ -948,7 +943,7 @@ function is_valid_peer($peer, $range) {
 		}
 
 		return false;
-	} elseif ($range == 0) {
+	} elseif ($range == '0.0.0.0') {
 		return true;
 	} elseif ($peer == $range) {
 		return true;

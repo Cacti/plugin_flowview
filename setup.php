@@ -114,7 +114,7 @@ function plugin_flowview_check_upgrade($force = false) {
 	if ($current != $old || $force) {
 		$php_binary = read_config_option('path_php_binary');
 
-		exec_background($php_binary, $config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
+		exec_background($php_binary, '-q ' .$config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
 
 		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
 	}
@@ -861,7 +861,8 @@ function flowview_setup_table() {
 		name varchar(64) NOT NULL,
 		enabled char(2) NOT NULL default 'on',
 		cmethod int(11) unsigned NOT NULL default '0',
-		allowfrom varchar(32) NOT NULL default '0',
+		bind_address varchar(32) NOT NULL default '0.0.0.0',
+		allowfrom varchar(256) NOT NULL default '0.0.0.0',
 		port int(11) unsigned NOT NULL,
 		protocol char(3) NOT NULL default 'UDP',
 		last_updated timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
