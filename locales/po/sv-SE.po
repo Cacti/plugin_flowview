@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-07-14 20:09-0400\nPO-Revision-Date: 2025-03-18 07:07+0000\nLast-Translator: Daniel Nylander <weblate@danielnylander.se>\nLanguage-Team: Swedish <http://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2024-07-14 20:09-0400\nPO-Revision-Date: 2025-03-18 09:56+0000\nLast-Translator: Daniel Nylander <weblate@danielnylander.se>\nLanguage-Team: Swedish <http://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 4.8.1\n"
 
 #: arrays.php:26 arrays.php:60 functions.php:619
 msgid "Select a Report"
@@ -155,7 +155,7 @@ msgstr "Ingen gräns"
 #: arrays.php:100 arrays.php:101 arrays.php:102
 #, php-format
 msgid "%s Bytes"
-msgstr "%s Bytes"
+msgstr "%s byte"
 
 #: arrays.php:106 arrays.php:567 arrays.php:575 arrays.php:604
 #: flowview_devices.php:465 flowview_devices.php:479 flowview_filters.php:369
@@ -173,7 +173,7 @@ msgstr "Källport (er)"
 #: arrays.php:480 arrays.php:541 functions.php:818 functions.php:866
 #: functions.php:2964 functions.php:3511
 msgid "Flows"
-msgstr "flöden"
+msgstr "Flöden"
 
 #: arrays.php:356 arrays.php:362 arrays.php:369 arrays.php:375 arrays.php:381
 #: arrays.php:387 arrays.php:393 arrays.php:399 arrays.php:406 arrays.php:412
@@ -193,7 +193,7 @@ msgstr "Byte"
 #: arrays.php:542 functions.php:814 functions.php:861 functions.php:2972
 #: functions.php:3510
 msgid "Packets"
-msgstr "paket"
+msgstr "Paket"
 
 #: arrays.php:360 arrays.php:367
 msgid "Destination Domain"
@@ -296,7 +296,7 @@ msgstr "Destination"
 #: arrays.php:553 arrays.php:554 arrays.php:555 arrays.php:556
 #, php-format
 msgid "%d Pixels"
-msgstr "%d pixlar"
+msgstr "%d bildpunkter"
 
 #: arrays.php:586
 msgid "General Filters"
@@ -392,11 +392,11 @@ msgstr "Begränsa filterdata efter dessa tidsfilterregler."
 
 #: arrays.php:668
 msgid "Resolve IP's"
-msgstr "Lösa adresser:"
+msgstr "Slå upp IP"
 
 #: arrays.php:669
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Lösa adresser:"
+msgstr "Slå upp IP-adresser till domännamn."
 
 #: arrays.php:674 flowview_schedules.php:588
 msgid "Yes"
@@ -408,7 +408,7 @@ msgstr "Nej"
 
 #: arrays.php:679 flowview_filters.php:342 functions.php:644
 msgid "Sort Field"
-msgstr "Sorteringsfält:"
+msgstr "Sorteringsfält"
 
 #: arrays.php:680
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -424,7 +424,7 @@ msgstr "Maximala rader som ska anges i filtret. Denna inställning kommer att ti
 
 #: arrays.php:695
 msgid "Minimum Bytes"
-msgstr "Minsta byte:"
+msgstr "Minsta byte"
 
 #: arrays.php:696
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
@@ -895,7 +895,7 @@ msgstr "Organisationsnamn"
 
 #: flowview_databases.php:510
 msgid "AS Name"
-msgstr "Namn:"
+msgstr "AS-namn"
 
 #: flowview_databases.php:515
 msgid "Author"
@@ -1411,7 +1411,7 @@ msgstr "FlowView-lyssnare"
 
 #: flowview_devices.php:742 setup.php:143 setup.php:204
 msgid "Listeners"
-msgstr "lyssnare"
+msgstr "Lyssnare"
 
 #: flowview_devices.php:756
 msgid "Method"
@@ -1519,7 +1519,7 @@ msgstr "Varje timme"
 #: flowview_schedules.php:46 flowview_schedules.php:47
 #, php-format
 msgid "Every %d Hours"
-msgstr "Varje% d timmar"
+msgstr "Varje %d timmar"
 
 #: flowview_schedules.php:48
 msgid "Every Day"
@@ -1532,7 +1532,7 @@ msgstr "Varje vecka"
 #: flowview_schedules.php:50
 #, php-format
 msgid "Every %d Weeks, 2"
-msgstr "Varje% d veckor, 2"
+msgstr "Varje %d veckor, 2"
 
 #: flowview_schedules.php:51
 msgid "Every Month"
@@ -1663,7 +1663,7 @@ msgstr "Nästa Skicka"
 
 #: functions.php:31
 msgid "General"
-msgstr "Allmän"
+msgstr "Allmänt"
 
 #: functions.php:112
 msgid "Select a Report Type First"
@@ -1735,7 +1735,7 @@ msgstr "Rensa filter"
 
 #: functions.php:598
 msgid "Create new Flow Filter"
-msgstr "Hur ofta skapar du en ny flödesfil."
+msgstr "Skapa nytt flödesfilter"
 
 #: functions.php:598
 msgid "New"
@@ -1930,7 +1930,7 @@ msgstr "Byt namn på layout"
 
 #: functions.php:984
 msgid " <new>"
-msgstr "[nytt]"
+msgstr " <ny>"
 
 #: functions.php:1502
 msgid "Filter Settings Saved"
@@ -1967,7 +1967,7 @@ msgstr "Undernätfilter: %s är inte ett värde-CIDR-format"
 #: functions.php:2044 functions.php:2050 functions.php:2056 functions.php:2059
 #: functions.php:2085 functions.php:3482
 msgid "unresolved"
-msgstr "- olöst -"
+msgstr "olöst"
 
 #: functions.php:2394 functions.php:2395 functions.php:2396 functions.php:2397
 #: functions.php:2398 functions.php:2399 functions.php:2400 functions.php:2401
@@ -2027,7 +2027,7 @@ msgstr "Typ av service"
 
 #: functions.php:2975
 msgid "Bytes/Packet"
-msgstr "paket"
+msgstr "Byte/Paket"
 
 #: functions.php:3395
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
@@ -2193,7 +2193,7 @@ msgstr "Stöds inte"
 
 #: functions.php:4534
 msgid "Total Flows"
-msgstr "Maxflöden:"
+msgstr "Totalt antal flöden"
 
 #: functions.php:4539
 msgid "Bytes Exchanged"
@@ -2205,11 +2205,11 @@ msgstr "Packets Bar"
 
 #: setup.php:35
 msgid "Plugin -> Flow Viewer"
-msgstr "Plugin -> Flow Viewer"
+msgstr "Tillägg -> Flödesvisare"
 
 #: setup.php:36
 msgid "Plugin -> Flow Admin"
-msgstr "Plugin -> Flow Admin"
+msgstr "Tillägg -> Flödesadministration"
 
 #: setup.php:43 setup.php:71
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
@@ -2217,7 +2217,7 @@ msgstr "Byt namn på antingen dina config.php.dist- eller config_local.php.dist-
 
 #: setup.php:123
 msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
-msgstr "Observera att Flowview plugins-tabellerna uppgraderas i bakgrunden.  Detta kan ta lite tid. Se Cacti loggen för mer information"
+msgstr "Observera att Flowview tilläggstabellerna uppgraderas i bakgrunden.  Detta kan ta lite tid. Se Cacti-loggen för mer information"
 
 #: setup.php:136
 msgid "The Filter has been Deleted"
@@ -2262,7 +2262,7 @@ msgstr "Spara"
 
 #: setup.php:211 setup.php:239 setup.php:267
 msgid "(edit)"
-msgstr "(Redigera)"
+msgstr "(redigera)"
 
 #: setup.php:225 setup.php:253 setup.php:281
 msgid "(actions)"
@@ -2359,27 +2359,27 @@ msgstr "Den tid Cacti kommer att behålla de partitionerade flödestabellerna."
 #: setup.php:430
 #, php-format
 msgid "%d Week"
-msgstr "%d Vecka"
+msgstr "%d vecka"
 
 #: setup.php:431 setup.php:432
 #, php-format
 msgid "%d Weeks"
-msgstr "%d Veckor"
+msgstr "%d veckor"
 
 #: setup.php:433
 #, php-format
 msgid "%d Month"
-msgstr "%d Månad"
+msgstr "%d månad"
 
 #: setup.php:434 setup.php:435 setup.php:436 setup.php:437
 #, php-format
 msgid "%d Months"
-msgstr "%d Månader"
+msgstr "%d månader"
 
 #: setup.php:438
 #, php-format
 msgid "%d Year"
-msgstr "%d År"
+msgstr "%d år"
 
 #: setup.php:443
 msgid "Database Partitioning Scheme"
@@ -2435,7 +2435,7 @@ msgstr "Inaktiverad"
 #: setup.php:488 setup.php:489 setup.php:490 setup.php:491
 #, php-format
 msgid "%d Threads"
-msgstr "%d Trådar"
+msgstr "%d trådar"
 
 #: setup.php:496
 msgid "Maximum Run Time"
@@ -2448,7 +2448,7 @@ msgstr "Om den parallella frågan inte slutförs under den här tiden avslutar d
 #: setup.php:500
 #, php-format
 msgid "%d Minute"
-msgstr "% d minut"
+msgstr "%d minut"
 
 #: setup.php:501 setup.php:502 setup.php:503 setup.php:504 setup.php:505
 #: setup.php:506
@@ -2472,12 +2472,12 @@ msgstr "%d timmar"
 #: setup.php:517
 #, php-format
 msgid "%d Day"
-msgstr "%d Dag"
+msgstr "%d dygn"
 
 #: setup.php:518
 #, php-format
 msgid "%d Days"
-msgstr "%d Dagar"
+msgstr "%d dygn"
 
 #: setup.php:523
 msgid "MaxScale Sharding"
