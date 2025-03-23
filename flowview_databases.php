@@ -730,7 +730,11 @@ function get_database_sort_type() {
 	static $sort_type = false;
 
 	if ($sort_type == false) {
-		$mysql_info = utilities_get_mysql_info($config['poller_id']);
+		if (function_exists('utilities_get_mysql_info')) {
+			$mysql_info = utilities_get_mysql_info($config['poller_id']);
+		} else {
+			$mysql_info = get_mysql_info($config['poller_id']);
+		}
 
 		if ($mysql_info['database'] == 'MySQL') {
 			$sort_type = 'normal';
