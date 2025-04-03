@@ -2,7 +2,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2024 The Cacti Group                                 |
+ | Copyright (C) 2004-2025 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -576,6 +576,12 @@ function flowview_upgrade($current, $old) {
 					flowview_db_execute('UPDATE ' . $t['TABLE_NAME'] . ' SET ex_addr = SUBSTRING_INDEX(ex_addr, ":", 1)');
 				}
 			}
+
+			flowview_db_execute('ALTER TABLE plugin_flowview_arin_information
+				MODIFY COLUMN comments VARCHAR(512) NOT NULL default ""');
+
+			flowview_db_execute('ALTER TABLE plugin_flowview_queries
+				MODIFY COLUMN protocols VARCHAR(255) NOT NULL default ""');
 		}
 
 		cacti_log('Flowview Database Upgrade Complete', true, 'FLOWVIEW');

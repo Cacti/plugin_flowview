@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2024 The Cacti Group                                 |
+ | Copyright (C) 2004-2025 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -844,7 +844,7 @@ function flowview_setup_table() {
 		`origin` varchar(20) NOT NULL DEFAULT '',
 		`registration` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
 		`last_changed` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-		`comments` varchar(128) NOT NULL DEFAULT '',
+		`comments` varchar(512) NOT NULL DEFAULT '',
 		`self` varchar(128) NOT NULL DEFAULT '',
 		`alternate` varchar(128) NOT NULL DEFAULT '',
 		`json_data` blob NOT NULL DEFAULT '',
@@ -904,7 +904,7 @@ function flowview_setup_table() {
 		enddate varchar(32) NOT NULL,
 		tosfields varchar(32) NOT NULL,
 		tcpflags varchar(32) NOT NULL,
-		protocols varchar(32) DEFAULT NULL,
+		protocols varchar(255) DEFAULT NULL,
 		sourceip varchar(255) NOT NULL,
 		sourceport varchar(255) NOT NULL,
 		sourceinterface varchar(64) NOT NULL,
