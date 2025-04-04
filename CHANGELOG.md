@@ -1,5 +1,11 @@
 # Changelog
 
+--- 5.0 ---
+
+* issue#233: Colum Size Issues and Update Copyrights
+* issue: Fix FreeBSD netstat detection
+* feature: Add bind address option
+
 --- 4.9 ---
 
 * issue#216: Reports dont trigger when flowview is in a separate database
@@ -9,9 +15,7 @@
 * issue#223: Version requested for ORDER BY NATURAL_SORT_KEY(key)
 * issue#229: Access to the wrong database for report_log and reports_queued
 * issue: Unable to install when there is no config.php or config_local.php
-* issue: Fix FreeBSD netstat detection
 * issue: When vendor does not follow the IPFIX specification, use the vendors length value
-* feature: Add bind address option
 * feature: Support for Cacti 1.3
 
 --- 4.8 ---
