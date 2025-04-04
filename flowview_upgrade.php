@@ -70,6 +70,7 @@ if (cacti_sizeof($parms)) {
 	}
 }
 
+
 /* we need to rerun the upgrade, force the current version */
 if ($forcever == '') {
 	$old_version = db_fetch_cell('SELECT version FROM plugin_config WHERE directory = "flowview"');
@@ -105,6 +106,7 @@ function flowview_upgrade($current, $old) {
 	global $config, $info;
 
 	if ($current != $old) {
+
 		api_plugin_register_hook('flowview', 'global_settings_update', 'flowview_global_settings_update', 'setup.php', true);
 
 		api_plugin_register_hook('flowview', 'graph_buttons',            'flowview_graph_button', 'setup.php', true);
@@ -584,8 +586,21 @@ function flowview_upgrade($current, $old) {
 				MODIFY COLUMN protocols VARCHAR(255) NOT NULL default ""');
 		}
 
+		if (!flowview_db_column_exists('plugin_flowview_devices', 'bind_address', false)) {
+			flowview_db_execute("ALTER TABLE `plugin_flowview_devices`
+				ADD COLUMN bind_address VARCHAR(32) NOT NULL default '0.0.0.0' AFTER cmethod");
+		}
+
+		if (flowview_db_column_exists('plugin_flowview_devices', 'allowfrom', false)) {
+			flowview_db_execute("ALTER TABLE plugin_flowview_devices MODIFY COLUMN allowfrom varchar(256) NOT NULL DEFAULT '0.0.0.0'");
+		}
+
+		flowview_db_execute('UPDATE plugin_flowview_devices SET bind_address = "0.0.0.0" WHERE bind_address = "0"');
+		flowview_db_execute('UPDATE plugin_flowview_devices SET allowfrom = "0.0.0.0" WHERE allowfrom = "0"');
+
 		cacti_log('Flowview Database Upgrade Complete', true, 'FLOWVIEW');
 	}
+
 }
 
 /*  display_version - displays version information */

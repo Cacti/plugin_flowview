@@ -54,13 +54,22 @@ $device_edit = array(
 		'method' => 'hidden',
 		'default' => '1'
 	),
+	'bind_address' => array(
+		'method' => 'textbox',
+		'friendly_name' => __('Bind to address', 'flowview'),
+		'description' => __('If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface.', 'flowview'),
+		'value' => '|arg1:bind_address|',
+		'default' => '0.0.0.0',
+		'max_length' => '32',
+		'size' => '30'
+	),
 	'allowfrom' => array(
 		'method' => 'textbox',
 		'friendly_name' => __('Allowed Host Range', 'flowview'),
-		'description' => __('IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma.', 'flowview'),
+		'description' => __('IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma.', 'flowview'),
 		'value' => '|arg1:allowfrom|',
-		'default' => '0',
-		'max_length' => '64',
+		'default' => '0.0.0.0',
+		'max_length' => '256',
 		'size' => '30'
 	),
 	'port' => array(
@@ -279,12 +288,13 @@ function save_device() {
 		$save['id'] = '';
 	}
 
-	$save['name']        = get_nfilter_request_var('name');
-	$save['cmethod']     = get_nfilter_request_var('cmethod');
-	$save['allowfrom']   = get_nfilter_request_var('allowfrom');
-	$save['port']        = get_nfilter_request_var('port');
-	$save['protocol']    = get_nfilter_request_var('protocol');
-	$save['enabled']     = isset_request_var('enabled') ? 'on':'';
+	$save['name']         = get_nfilter_request_var('name');
+	$save['cmethod']      = get_nfilter_request_var('cmethod');
+	$save['bind_address'] = get_filter_request_var('bind_address', FILTER_VALIDATE_IP);
+	$save['allowfrom']    = get_filter_request_var('allowfrom', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([0-9\.\/ ,]+)$/')));
+	$save['port']         = get_filter_request_var('port');
+	$save['protocol']     = get_nfilter_request_var('protocol');
+	$save['enabled']      = isset_request_var('enabled') ? 'on':'';
 
 	$id = flowview_sql_save($save, 'plugin_flowview_devices', 'id', true);
 
@@ -819,6 +829,10 @@ function show_devices () {
 			'display' => __('Method', 'flowview'),
 			'sort' => 'ASC'
 		),
+		'bind_address' => array(
+			'display' => __('Bind address', 'flowview'),
+			'sort' => 'ASC',
+		),
 		'allowfrom' => array(
 			'display' => __('Allowed From', 'flowview'),
 			'sort' => 'ASC',
@@ -874,7 +888,7 @@ function show_devices () {
 	if (cacti_sizeof($result)) {
 		foreach ($result as $row) {
 			if ($os == 'freebsd') {
-				$status = shell_exec("netstat -an | grep ':" . $row['port'] . " '");
+				$status = shell_exec("netstat -an | grep '." . $row['port'] . " '");
 				$column = 3;
 				$scolumn = -1;
 			} else {
@@ -926,13 +940,14 @@ function show_devices () {
 				$row['backlog'] = __('N/A', 'flowview');
 			}
 
-			if ($row['allowfrom'] == 0) {
+			if ($row['allowfrom'] == '0.0.0.0') {
 				$row['allowfrom'] = __('All', 'flowview');
 			}
 
 			form_alternate_row('line' . $row['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="flowview_devices.php?action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a>', $row['id']);
 			form_selectable_cell(__('Cacti', 'flowview'), $row['id']);
+			form_selectable_cell($row['bind_address'], $row['id'], '', 'right');
 			form_selectable_cell($row['allowfrom'], $row['id'], '', 'right');
 			form_selectable_cell($row['port'], $row['id'], '', 'right');
 			form_selectable_cell($row['protocol'], $row['id'], '', 'right');
