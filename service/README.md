@@ -2,7 +2,7 @@
 
 This folder contains files for control plugin flowview services:
 - flow-capture is for Linux OS with init.d
-- flow-capture.sevice is for Linux OS with systemd
+- flow-capture.service is for Linux OS with systemd
 - flow-capture-freebsd and cacti-flow-capture are for FreeBSD system
 
 # Features
