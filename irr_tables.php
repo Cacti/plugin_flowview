@@ -22,6 +22,10 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once('../../include/cli_check.php');
+require_once('./functions.php');
+require_once('./database.php');
+
 $raw_engine = get_set_default_fast_engine();
 
 if ($raw_engine == 'Aria') {

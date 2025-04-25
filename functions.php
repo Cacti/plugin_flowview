@@ -5683,8 +5683,8 @@ function flowview_check_databases($import_only = false, $force = false) {
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept:application/json'));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 40);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 400);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 1200);
 
 	if ($proxy != '') {
 		curl_setopt($ch, CURLOPT_PROXY, $proxy);
@@ -5703,7 +5703,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 
 		$last_serial = read_config_option("flowview_{$source}_serial");
 
-		$url = $ftp_base.'/'.$details['serial'];
+		$url = $ftp_base . '/' . $details['serial'];
 
 		curl_setopt($ch, CURLOPT_URL, $url );
 		$response = curl_exec($ch);
