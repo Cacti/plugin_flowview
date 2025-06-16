@@ -22,7 +22,10 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once(__DIR__ . '/../../include/cli_check.php');
+if (php_sapi() == 'cli') {
+	require_once(__DIR__ . '/../../include/cli_check.php');
+}
+
 require_once('./functions.php');
 require_once('./database.php');
 
