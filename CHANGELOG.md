@@ -4,6 +4,7 @@
 
 * issue#233: Colum Size Issues and Update Copyrights
 * issue: Fix FreeBSD netstat detection
+* issue: Running irr_tables.php from the UI cause plguin to disable
 * feature: Add bind address option
 
 --- 4.9 ---
