@@ -26,8 +26,8 @@ if (php_sapi_name() == 'cli') {
 	require_once(__DIR__ . '/../../include/cli_check.php');
 }
 
-require_once('./functions.php');
-require_once('./database.php');
+require_once(__DIR__ . '/../../lib/functions.php');
+require_once(__DIR__ . '/../../lib/database.php');
 
 $raw_engine = get_set_default_fast_engine();
 
