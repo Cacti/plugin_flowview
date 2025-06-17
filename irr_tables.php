@@ -22,7 +22,7 @@
  +-------------------------------------------------------------------------+
 */
 
-if (php_sapi() == 'cli') {
+if (php_sapi_name() == 'cli') {
 	require_once(__DIR__ . '/../../include/cli_check.php');
 }
 
