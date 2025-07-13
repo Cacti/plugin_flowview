@@ -153,7 +153,7 @@ function actions_filters() {
 		print "<tr><td><span class='textError'>" . __('You must select at least one Filter.', 'flowview') . "</span></td></tr>\n";
 		$save_html = '';
 	} else {
-		$save_html = "<input type='submit' value='" . __esc('Continue', 'flowview') . "'>";
+		$save_html = "<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'flowview') . '</button>';
 	}
 
 	print "<tr>
@@ -161,7 +161,7 @@ function actions_filters() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($filter_array) ? serialize($filter_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>
-			<input type='button' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'flowview') . "'>
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'flowview') . "</button>
 			$save_html
 		</td>
 	</tr>";
@@ -251,10 +251,10 @@ function show_filters() {
 						</select>
 					</td>
 					<td>
-						<input type='submit' id='go' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
-					</td>
-					<td>
-						<input type='button' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
+						<span>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
+						</span>
 					</td>
 				</tr>
 			</table>

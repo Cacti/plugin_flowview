@@ -693,14 +693,14 @@ function flowview_display_filter() {
 					</td>
 					<td>
 						<span>
-							<input type='button' id='go' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Apply Filter', 'flowview');?>'>
-							<input type='button' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filter', 'flowview');?>'>
-							<input type='button' id='new' value='<?php print __esc('New', 'flowview');?>' title='<?php print __esc('Create new Flow Filter', 'flowview');?>'>
-							<input type='button' id='edit' value='<?php print __esc('Edit', 'flowview');?>' title='<?php print __esc('Edit the Flow Filter', 'flowview');?>'>
-							<input type='button' id='save' value='<?php print __esc('Save', 'flowview');?>' title='<?php print __esc('Save the Flow Filter', 'flowview');?>'>
-							<input type='button' id='saveas' value='<?php print __esc('Save As', 'flowview');?>' title='<?php print __esc('Save the existing Flow Filter as new Filter', 'flowview');?>'>
-							<input type='button' id='rename' value='<?php print __esc('Rename', 'flowview');?>' title='<?php print __esc('Rename the Flow Filter', 'flowview');?>'>
-							<input type='button' id='delete' value='<?php print __esc('Delete', 'flowview');?>' title='<?php print __esc('Delete the Flow Filter', 'flowview');?>'>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Apply Filter', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filter', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
+							<button type='button' id='new' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Create new Flow Filter', 'flowview');?>'><?php print __esc('New', 'flowview');?></button>
+							<button type='button' id='edit' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Edit the Flow Filter', 'flowview');?>'><?php print __esc('Edit', 'flowview');?></button>
+							<button type='button' id='save' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Save the Flow Filter', 'flowview');?>'><?php print __esc('Save', 'flowview');?></button>
+							<button type='button' id='saveas' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Save the existing Flow Filter as new Filter', 'flowview');?>'><?php print __esc('Save As', 'flowview');?></button>
+							<button type='button' id='rename' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Rename the Flow Filter', 'flowview');?>'><?php print __esc('Rename', 'flowview');?></button>
+							<button type='button' id='delete' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Delete the Flow Filter', 'flowview');?>'><?php print __esc('Delete', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>
@@ -950,7 +950,7 @@ function flowview_display_filter() {
 					</td>
 					<td>
 						<span>
-							<input type='button' id='export' value='<?php print __esc('Export', 'flowview');?>' title='<?php print __esc('Export Raw Data', 'flowview');?>'>
+							<button type='button' id='export' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Export Raw Data', 'flowview');?>'><?php print __esc('Export', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>
@@ -965,8 +965,8 @@ function flowview_display_filter() {
 					<label for='snewname' style='margin:5px;'><?php print __esc('New Name', 'flowview');?></label>
 					<input id='snewname' type='text' style='margin:5px;' size='35'>
 					<br>
-					<input id='ssave' type='submit' style='float:right;margin:5px;' value='<?php print __esc('Save', 'flowview');?>'>
-					<input id='scancel' type='button' style='float:right;margin:5px;' value='<?php print __esc('Cancel', 'flowview');?>'>
+					<button id='ssave' type='submit' class='ui-button ui-corner-all ui-widget ui-state-active' style='float:right;margin:5px;'><?php print __esc('Save', 'flowview');?>'></button>
+					<button id='scancel' type='button' class='ui-button ui-corner-all ui-widget' style='float:right;margin:5px;'><?php print __esc('Cancel', 'flowview');?>'></button>
 					<input id='snew' type='hidden' value='0'>
 					<input id='srename' type='hidden' value='0'>
 				</form>
@@ -975,8 +975,8 @@ function flowview_display_filter() {
 				<form id='delete_form' style='padding:3px;margin:3px;' method='post' action='#'>
 					<p><?php print __('To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked.', 'flowview');?></p>
 					<br>
-					<input id='dsave' type='submit' style='float:right;margin:5px;' value='<?php print __esc('Continue', 'flowview');?>'>
-					<input id='dcancel' type='button' style='float:right;margin:5px;' value='<?php print __esc('Cancel', 'flowview');?>'>
+					<button id='dsave' type='submit' style='float:right;margin:5px;' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __esc('Continue', 'flowview');?>'></button>
+					<button id='dcancel' type='button' style='float:right;margin:5px;' class='ui-button ui-corner-all ui-widget'><?php print __esc('Cancel', 'flowview');?>'></button>
 				</form>
 			</div>
 		</td>
@@ -1070,7 +1070,8 @@ function flowview_display_filter() {
 			applyFilter(false);
 		});
 
-		$('#go').off('click').on('click', function() {
+		$('#flowview_filter').submit(function(event) {
+			event.preventDefault();
 			applyFilter(false);
 		});
 

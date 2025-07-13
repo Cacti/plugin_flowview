@@ -329,7 +329,7 @@ function actions_schedules() {
 		print "<tr><td><span class='textError'>" . __('You must select at least one schedule.', 'flowview') . "</span></td></tr>\n";
 		$save_html = '';
 	} else {
-		$save_html = "<input type='submit' value='" . __esc('Continue', 'flowview') . "'>";
+		$save_html = "<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'flowview') . "</button>";
 	}
 
 	print "<tr>
@@ -337,7 +337,7 @@ function actions_schedules() {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($schedule_array) ? serialize($schedule_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>
-			<input type='button' onClick='cactiReturnTo()' value='" . __esc('Cancel', 'flowview') . "'>
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'flowview') . "</button>
 			$save_html
 		</td>
 	</tr>";
@@ -572,8 +572,8 @@ function edit_log($header_label, $report) {
 					</td>
 					<td>
 						<span>
-							<input type='submit' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
-							<input type='button' name='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>
@@ -869,8 +869,8 @@ function show_schedules() {
 					</td>
 					<td>
 						<span>
-							<input type='submit' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
-							<input type='button' name='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
+							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>

@@ -946,9 +946,9 @@ function view_db_table($tab, &$tabs) {
 					</td>
 					<td>
 						<span>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='refresh' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='purge' value='<?php print __esc('Purge', 'flowview');?>' title='<?php print __esc('Purge the DNS Cache', 'flowview');?>'>
+							<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active' id='refresh' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button type='button' class='ui-button ui-corner-all ui-widget' id='clear' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
+							<button type='button' class='ui-button ui-corner-all ui-widget' id='purge' title='<?php print __esc('Purge the DNS Cache', 'flowview');?>'></button>
 						</span>
 					</td>
 				</tr>
@@ -1177,7 +1177,8 @@ function form_actions() {
 				</td>
 			</tr>\n";
 
-			$save_html = "<input type='button' class='ui-button ui-corner-all ui-widget' value='" . __esc('Cancel', 'flowview') . "' onClick='cactiReturnTo()'>&nbsp;<input type='submit' class='ui-button ui-corner-all ui-widget' value='" . __esc('Continue', 'flowview') . "' title='" . __n('Delete DNS Entry', 'Delete DNS Entries', cacti_sizeof($dns_array), 'flowview') . "'>";
+			$save_html = "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'flowview') . "</button>
+				<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active' title='" . __n('Delete DNS Entry', 'Delete DNS Entries', cacti_sizeof($dns_array), 'flowview') . "'>" . __esc('Continue', 'flowview') . '</button>';
 		}
 	} else {
 		raise_message(40);
@@ -1314,9 +1315,9 @@ function view_dns_cache() {
 					</td>
 					<td>
 						<span>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='refresh' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='purge' value='<?php print __esc('Purge', 'flowview');?>' title='<?php print __esc('Purge the DNS Cache', 'flowview');?>'>
+							<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active' id='refresh' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button type='button' class='ui-button ui-corner-all ui-widget' id='clear' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
+							<button type='button' class='ui-button ui-corner-all ui-widget' id='purge' title='<?php print __esc('Purge the DNS Cache', 'flowview');?>'><?php print __esc('Purge', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>
@@ -1610,8 +1611,8 @@ function view_routes($tab) {
 					</td>
 					<td>
 						<span>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='refresh' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
-							<input type='button' class='ui-button ui-corner-all ui-widget' id='clear' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
+							<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active' id='refresh' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button type='button' class='ui-button ui-corner-all ui-widget' id='clear' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>

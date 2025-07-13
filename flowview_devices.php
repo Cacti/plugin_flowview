@@ -265,7 +265,7 @@ function actions_devices () {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($device_array) ? serialize($device_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_filter_request_var('drp_action') . "'>
-			<input type='button' onClick='javascript:document.location=\"flowview_devices.php\"' value='" . __esc('Cancel', 'flowview') . "'>
+			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='javascript:document.location=\"flowview_devices.php\"'>" . __esc('Cancel', 'flowview') . "</button>
 			$save_html
 		</td>
 	</tr>\n";
@@ -559,8 +559,8 @@ function edit_device() {
 						</td>
 						<td>
 							<span>
-								<input id='go' type='button' value='<?php print __('Go', 'flowview');?>'>
-								<input id='export' type='button' value='<?php print __('Export', 'flowview');?>'>
+								<button id='go' type='submit' class='ui-button ui-corner-all ui-widget ui-state-active'><?php print __('Go', 'flowview');?></button>
+								<button id='export' type='button' class='ui-button ui-corner-all ui-widget'><?php print __('Export', 'flowview');?></button>
 							</span>
 						</td>
 					</tr>
@@ -776,8 +776,8 @@ function show_devices () {
 					</td>
 					<td>
 						<span>
-							<input id='refresh' type='submit' value='<?php print __esc('Go', 'flowview');?>' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'>
-							<input id='clear' type='button' value='<?php print __esc('Clear', 'flowview');?>' title='<?php print __esc('Clear Filters', 'flowview');?>'>
+							<button id='refresh' type='submit' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
+							<button id='clear' type='button' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>
