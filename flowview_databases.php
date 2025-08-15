@@ -760,7 +760,7 @@ function view_db_table($tab, &$tabs) {
 	$search        = array_map('trim', explode(',', $table_det['search']));
 	$filter        = array_map('trim', explode(',', $table_det['filter']));
 	$rowid         = array_map('trim', explode(',', $table_det['rowid']));
-	$table_name    = "plugin_flowview_irr_$tab";
+	$table_name    = trim("plugin_flowview_irr_$tab");
 	$odisplay_text = array();
 
 	/* create display text for column */
@@ -787,8 +787,12 @@ function view_db_table($tab, &$tabs) {
 			$i++;
 		}
 	} else {
-		print __esc("FATAL: Unknown Database Table %s", $tab);
+		print __esc("FATAL: Unknown Database Table %s", $tab) . PHP_EOL;
 		exit;
+	}
+
+	if (!db_table_exists($table_name)) {
+		print __esc("FATAL: Unknown Database Table %s", $table_name) . PHP_EOL;
 	}
 
 	//print "Default Column: $default_column, Default Direction $default_direction";exit;
