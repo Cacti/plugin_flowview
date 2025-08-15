@@ -65,14 +65,14 @@ function flowview_get_item_details() {
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	$cols  = get_all_columns();
-	$tab   = get_request_var('tab');
+	$tab   = get_nfilter_request_var('tab');
 	$ids   = json_decode(base64_decode(str_replace('line_', '', get_request_var('id'))), true);
 	$table = "plugin_flowview_irr_$tab";
 
 	$sql_where  = '';
 	$sql_params = array();
 
-	if (cacti_sizeof($ids)) {
+	if (cacti_sizeof($ids) && db_table_exists($table)) {
 		foreach($ids as $col => $value) {
 			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . "$col = ?";
 			$sql_params[] = $value;
