@@ -185,6 +185,8 @@ function view_databases() {
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
+	get_filter_request_var('tab', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z_A-Z]+)$/')));
+
 	if (!isset_request_var('tab')) {
 		if (isset($_SESSION['sess_fv_db_tab'])) {
 			set_request_var('tab', $_SESSION['sess_fv_db_tab']);
