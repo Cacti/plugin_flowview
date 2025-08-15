@@ -793,6 +793,7 @@ function view_db_table($tab, &$tabs) {
 
 	if (!db_table_exists($table_name)) {
 		print __esc("FATAL: Unknown Database Table %s", $table_name) . PHP_EOL;
+		exit;
 	}
 
 	//print "Default Column: $default_column, Default Direction $default_direction";exit;
