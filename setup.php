@@ -854,7 +854,7 @@ function flowview_setup_table() {
 		ROW_FORMAT=DYNAMIC
 		COMMENT='Holds ARIN Records Downloaded for Caching'");
 
-	include_once($config['base_path'] . '/plugins/flowview/irr_tables.php');
+	exec($config['base_path'] . '/plugins/flowview/irr_tables.php');
 
 	flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_devices` (
 		id int(11) unsigned NOT NULL AUTO_INCREMENT,

@@ -500,7 +500,7 @@ function flowview_upgrade($current, $old) {
 			flowview_db_execute('DROP TABLE IF EXISTS plugin_flowview_irr_route');
 		}
 
-		include_once($config['base_path'] . '/plugins/flowview/irr_tables.php');
+		exec($config['base_path'] . '/plugins/flowview/irr_tables.php');
 
 		if (flowview_db_column_exists('plugin_flowview_arin_information', 'origin_as', false)) {
 			flowview_db_execute("ALTER TABLE plugin_flowview_arin_information CHANGE COLUMN origin_as origin varchar(20) NOT NULL DEFAULT ''");
