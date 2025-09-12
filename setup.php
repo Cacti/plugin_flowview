@@ -463,43 +463,49 @@ function flowview_config_settings() {
 			),
 			'default' => 0
 		),
+		'flowview_download_irr' => array(
+			'friendly_name' => __('Download the Internet Registry Daily', 'flowview'),
+			'description' => __('If you are interested in the publically available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data.', 'flowview'),
+			'method' => 'checkbox',
+			'default' => ''
+		),
 		'flowview_local_domain' => array(
-			'friendly_name' => __('Local Domain Name', 'monitor'),
+			'friendly_name' => __('Local Domain Name', 'flowview'),
 			'method' => 'textbox',
 			'default' => 'mydomain.net',
-			'description' => __('For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address.', 'monitor'),
+			'description' => __('For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address.', 'flowview'),
 			'max_length' => 30,
 			'size' => 30
 		),
 		'flowview_local_iprange' => array(
-			'friendly_name' => __('Local IP Range', 'monitor'),
+			'friendly_name' => __('Local IP Range', 'flowview'),
 			'method' => 'textbox',
 			'default' => '192.168.1.0/24',
-			'description' => __('Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24', 'monitor'),
+			'description' => __('Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24', 'flowview'),
 			'placeholder' => __('Use CIDR or Non-CIDR', 'flowview'),
 			'max_length' => 30,
 			'size' => 30
 		),
 		'flowview_use_arin' => array(
-			'friendly_name' => __('Use Arin to find Domains and AS Numbers', 'syslog'),
+			'friendly_name' => __('Use Arin to find Domains and AS Numbers', 'flowview'),
 			'description' => __('Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies.', 'flowview'),
 			'method' => 'checkbox',
 			'default' => 'on'
 		),
 		'flowview_whois_provider' => array(
-			'friendly_name' => __('Whois Provider Host', 'monitor'),
+			'friendly_name' => __('Whois Provider Host', 'flowview'),
 			'method' => 'textbox',
 			'default' => 'whois.radb.net',
-			'description' => __('Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path.', 'monitor'),
+			'description' => __('Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path.', 'flowview'),
 			'placeholder' => __('whois.radb.net', 'flowview'),
 			'max_length' => 30,
 			'size' => 30
 		),
 		'flowview_path_whois' => array(
-			'friendly_name' => __('Whois Binary Path', 'monitor'),
+			'friendly_name' => __('Whois Binary Path', 'flowview'),
 			'method' => 'filepath',
 			'default' => '/usr/bin/whois',
-			'description' => __('Please provide the pathname for the \'whois\' binary.  The \'whois\' binary will be used to find AS information supplementing Arin.', 'monitor'),
+			'description' => __('Please provide the pathname for the \'whois\' binary.  The \'whois\' binary will be used to find AS information supplementing Arin.', 'flowview'),
 			'placeholder' => __('Enter binary path', 'flowview'),
 			'max_length' => 30,
 			'size' => 30
@@ -510,10 +516,10 @@ function flowview_config_settings() {
 			'collapsible' => 'true'
 		),
 		'flowview_default_filter' => array(
-			'friendly_name' => __('Default Search Filter for Graph Drilldowns', 'monitor'),
+			'friendly_name' => __('Default Search Filter for Graph Drilldowns', 'flowview'),
 			'method' => 'drop_array',
 			'default' => '',
-			'description' => __('Choose an existing Flowview Search Filter to use for Graph Drilldowns.', 'monitor'),
+			'description' => __('Choose an existing Flowview Search Filter to use for Graph Drilldowns.', 'flowview'),
 			'array' => $queries
 		),
 		'flowview_data_header' => array(
@@ -522,10 +528,10 @@ function flowview_config_settings() {
 			'collapsible' => 'true'
 		),
 		'flowview_format_file' => array(
-			'friendly_name' => __('Format File to Use', 'monitor'),
+			'friendly_name' => __('Format File to Use', 'flowview'),
 			'method' => 'drop_array',
 			'default' => 'default.format',
-			'description' => __('Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the \'formats\' directory.', 'monitor'),
+			'description' => __('Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the \'formats\' directory.', 'flowview'),
 			'array' => $formats
 		),
 		'flowview_retention' => array(
@@ -629,16 +635,16 @@ function flowview_config_settings() {
 			'collapsible' => 'true'
 		),
 		'flowview_use_maxscale' => array(
-			'friendly_name' => __('Leverage MaxScale to Distribute Query Shards', 'syslog'),
+			'friendly_name' => __('Leverage MaxScale to Distribute Query Shards', 'flowview'),
 			'description' => __('If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers.', 'flowview'),
 			'method' => 'checkbox',
 			'default' => ''
 		),
 		'flowview_maxscale_port' => array(
-			'friendly_name' => __('MaxScale Read-Write Split Port', 'monitor'),
+			'friendly_name' => __('MaxScale Read-Write Split Port', 'flowview'),
 			'method' => 'textbox',
 			'default' => '3307',
-			'description' => __('This should be the port of the Read-Write-Split-Service (readwrite) service and router.', 'monitor'),
+			'description' => __('This should be the port of the Read-Write-Split-Service (readwrite) service and router.', 'flowview'),
 			'max_length' => 30,
 			'size' => 30
 		),

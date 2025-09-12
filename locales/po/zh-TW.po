@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2024-07-14 20:09-0400\n"
+"POT-Creation-Date: 2025-09-11 23:08-0400\n"
 "PO-Revision-Date: 2024-07-14 20:40-0400\n"
 "Last-Translator: Linya Huang <linya0405@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <http://translate.cacti.net/projects/cacti/flowview/zh_Hant/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:619
+#: arrays.php:26 arrays.php:60 functions.php:737
 msgid "Select a Report"
 msgstr "打印報告"
 
@@ -50,16 +50,16 @@ msgstr "UDP / TCP源端口"
 msgid "UDP/TCP Port"
 msgstr "UDP / TCP端口"
 
-#: arrays.php:37 arrays.php:397 arrays.php:403 arrays.php:492 arrays.php:508
-#: arrays.php:520 arrays.php:785 functions.php:2912
+#: arrays.php:37 arrays.php:398 arrays.php:404 arrays.php:493 arrays.php:509
+#: arrays.php:521 arrays.php:786 functions.php:3301
 msgid "Source IP"
 msgstr "來源IP"
 
-#: arrays.php:38 arrays.php:391 arrays.php:494 arrays.php:509 arrays.php:523
+#: arrays.php:38 arrays.php:392 arrays.php:495 arrays.php:510 arrays.php:524
 msgid "Destination IP"
 msgstr "目的地IP"
 
-#: arrays.php:39
+#: arrays.php:39 functions.php:3299
 msgid "Source/Destination IP"
 msgstr "來源/目的地IP"
 
@@ -83,12 +83,12 @@ msgstr "輸出接口"
 msgid "Input/Output Interface"
 msgstr "輸入/輸出接口"
 
-#: arrays.php:48 arrays.php:434 arrays.php:446 arrays.php:511 arrays.php:809
-#: functions.php:2936
+#: arrays.php:48 arrays.php:435 arrays.php:447 arrays.php:512 arrays.php:810
+#: functions.php:3326
 msgid "Source AS"
 msgstr "資料來源"
 
-#: arrays.php:49 arrays.php:440 arrays.php:447 arrays.php:512
+#: arrays.php:49 arrays.php:441 arrays.php:448 arrays.php:513
 msgid "Destination AS"
 msgstr "目的地"
 
@@ -100,11 +100,11 @@ msgstr "來源/目的地AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:466 arrays.php:478 functions.php:2944
+#: arrays.php:54 arrays.php:467 arrays.php:479 functions.php:3334
 msgid "Source Prefix"
 msgstr "來源前綴"
 
-#: arrays.php:55 arrays.php:472
+#: arrays.php:55 arrays.php:473
 msgid "Destination Prefix"
 msgstr "目的地前綴"
 
@@ -169,8 +169,9 @@ msgstr "沒有限制"
 msgid "%s Bytes"
 msgstr "％s GBytes"
 
-#: arrays.php:106 arrays.php:567 arrays.php:575 arrays.php:604
-#: flowview_devices.php:465 flowview_devices.php:479 flowview_filters.php:369
+#: arrays.php:106 arrays.php:568 arrays.php:576 arrays.php:605
+#: flowview_devices.php:538 flowview_devices.php:552 flowview_devices.php:944
+#: flowview_filters.php:369 functions.php:670 functions.php:691
 msgid "All"
 msgstr "全部"
 
@@ -179,31 +180,31 @@ msgid "Source Domain"
 msgstr "來源域名"
 
 #: arrays.php:355 arrays.php:361 arrays.php:368 arrays.php:374 arrays.php:380
-#: arrays.php:386 arrays.php:392 arrays.php:398 arrays.php:405 arrays.php:411
-#: arrays.php:417 arrays.php:423 arrays.php:429 arrays.php:435 arrays.php:441
-#: arrays.php:448 arrays.php:454 arrays.php:461 arrays.php:467 arrays.php:473
-#: arrays.php:480 arrays.php:541 functions.php:818 functions.php:866
-#: functions.php:2964 functions.php:3511
+#: arrays.php:387 arrays.php:393 arrays.php:399 arrays.php:406 arrays.php:412
+#: arrays.php:418 arrays.php:424 arrays.php:430 arrays.php:436 arrays.php:442
+#: arrays.php:449 arrays.php:455 arrays.php:462 arrays.php:468 arrays.php:474
+#: arrays.php:481 arrays.php:542 functions.php:967 functions.php:1020
+#: functions.php:3354 functions.php:4519
 msgid "Flows"
 msgstr "資料流"
 
 #: arrays.php:356 arrays.php:362 arrays.php:369 arrays.php:375 arrays.php:381
-#: arrays.php:387 arrays.php:393 arrays.php:399 arrays.php:406 arrays.php:412
-#: arrays.php:418 arrays.php:424 arrays.php:430 arrays.php:436 arrays.php:442
-#: arrays.php:449 arrays.php:455 arrays.php:462 arrays.php:468 arrays.php:474
-#: arrays.php:481 arrays.php:499 arrays.php:513 arrays.php:528 arrays.php:534
-#: arrays.php:543 functions.php:810 functions.php:856 functions.php:2968
-#: functions.php:3509
+#: arrays.php:388 arrays.php:394 arrays.php:400 arrays.php:407 arrays.php:413
+#: arrays.php:419 arrays.php:425 arrays.php:431 arrays.php:437 arrays.php:443
+#: arrays.php:450 arrays.php:456 arrays.php:463 arrays.php:469 arrays.php:475
+#: arrays.php:482 arrays.php:500 arrays.php:514 arrays.php:529 arrays.php:535
+#: arrays.php:544 functions.php:959 functions.php:1010 functions.php:3358
+#: functions.php:4517
 msgid "Bytes"
 msgstr "位元組"
 
 #: arrays.php:357 arrays.php:363 arrays.php:370 arrays.php:376 arrays.php:382
-#: arrays.php:388 arrays.php:394 arrays.php:400 arrays.php:407 arrays.php:413
-#: arrays.php:419 arrays.php:425 arrays.php:431 arrays.php:437 arrays.php:443
-#: arrays.php:450 arrays.php:456 arrays.php:463 arrays.php:469 arrays.php:475
-#: arrays.php:482 arrays.php:498 arrays.php:514 arrays.php:527 arrays.php:533
-#: arrays.php:542 functions.php:814 functions.php:861 functions.php:2972
-#: functions.php:3510
+#: arrays.php:389 arrays.php:395 arrays.php:401 arrays.php:408 arrays.php:414
+#: arrays.php:420 arrays.php:426 arrays.php:432 arrays.php:438 arrays.php:444
+#: arrays.php:451 arrays.php:457 arrays.php:464 arrays.php:470 arrays.php:476
+#: arrays.php:483 arrays.php:499 arrays.php:515 arrays.php:528 arrays.php:534
+#: arrays.php:543 functions.php:963 functions.php:1015 functions.php:3362
+#: functions.php:4518
 msgid "Packets"
 msgstr "封包"
 
@@ -211,1273 +212,1332 @@ msgstr "封包"
 msgid "Destination Domain"
 msgstr "目標域名"
 
-#: arrays.php:373 arrays.php:379 arrays.php:385 flowview_devices.php:66
-#: flowview_devices.php:765
+#: arrays.php:373 arrays.php:379 flowview_devices.php:77
+#: flowview_devices.php:842
 msgid "Port"
 msgstr "端口"
 
-#: arrays.php:404 arrays.php:817 functions.php:2916
-msgid "Dest IP"
-msgstr "目的地IP"
-
-#: arrays.php:410 flowview_databases.php:1388 functions.php:2908
-msgid "IP Address"
-msgstr "IP 位址"
-
-#: arrays.php:416 arrays.php:495 arrays.php:510 arrays.php:525
-#: flowview_devices.php:75 flowview_devices.php:770 functions.php:2952
-msgid "Protocol"
-msgstr "協議"
-
-#: arrays.php:422 arrays.php:459
-msgid "Input IF"
-msgstr "所選數據輸入源沒有輸入字段"
-
-#: arrays.php:428 arrays.php:460
-msgid "Output IF"
-msgstr "輸出字段"
-
-#: arrays.php:453
-msgid "TOS"
-msgstr "服務條款"
-
-#: arrays.php:479
-msgid "Destingation Prefix"
-msgstr "目的地前綴"
-
-#: arrays.php:485 functions.php:699 functions.php:3125 functions.php:3149
-msgid "N/A"
-msgstr "不适用"
-
-#: arrays.php:491 arrays.php:519 functions.php:2928
-msgid "Source IF"
-msgstr "資料來源"
-
-#: arrays.php:493 arrays.php:522
-msgid "Destination IF"
-msgstr "目的地"
-
-#: arrays.php:496 arrays.php:521 arrays.php:539 functions.php:2920
+#: arrays.php:385 arrays.php:497 arrays.php:522 arrays.php:540
+#: functions.php:3310
 msgid "Source Port"
 msgstr "源端口"
 
-#: arrays.php:497 arrays.php:524 arrays.php:540
+#: arrays.php:386 arrays.php:498 arrays.php:525 arrays.php:541
 msgid "Destination Port"
 msgstr "目的 IP"
 
-#: arrays.php:500 arrays.php:517 flowview_schedules.php:96 functions.php:2876
+#: arrays.php:405 arrays.php:818 functions.php:3306
+msgid "Dest IP"
+msgstr "目的地IP"
+
+#: arrays.php:411 flowview_databases.php:1430
+msgid "IP Address"
+msgstr "IP 位址"
+
+#: arrays.php:417 arrays.php:496 arrays.php:511 arrays.php:526
+#: flowview_devices.php:86 flowview_devices.php:847 functions.php:3342
+msgid "Protocol"
+msgstr "協議"
+
+#: arrays.php:423 arrays.php:460 arrays.php:492 arrays.php:520
+#: functions.php:3318
+msgid "Source IF"
+msgstr "資料來源"
+
+#: arrays.php:429 arrays.php:461 arrays.php:494 arrays.php:523
+msgid "Destination IF"
+msgstr "目的地"
+
+#: arrays.php:454
+msgid "TOS"
+msgstr "服務條款"
+
+#: arrays.php:480
+msgid "Destingation Prefix"
+msgstr "目的地前綴"
+
+#: arrays.php:486 flowview_devices.php:925 flowview_devices.php:926
+#: flowview_devices.php:927 flowview_devices.php:937 flowview_devices.php:940
+#: functions.php:828 functions.php:3518 functions.php:3542
+msgid "N/A"
+msgstr "不适用"
+
+#: arrays.php:501 arrays.php:518 functions.php:3266
 msgid "Start Time"
 msgstr "開始時間"
 
-#: arrays.php:501 arrays.php:518 functions.php:2880
+#: arrays.php:502 arrays.php:519 functions.php:3270
 msgid "End Time"
 msgstr "結束時間"
 
-#: arrays.php:502
+#: arrays.php:503
 msgid "Active"
 msgstr "啟用"
 
-#: arrays.php:503
+#: arrays.php:504
 msgid "B/Pk"
 msgstr "B / PK"
 
-#: arrays.php:504
+#: arrays.php:505
 msgid "Ts"
 msgstr "TS"
 
-#: arrays.php:505
+#: arrays.php:506
 msgid "Fl"
 msgstr "FL"
 
-#: arrays.php:526 functions.php:2960
+#: arrays.php:527 functions.php:3350
 msgid "Flags"
 msgstr "標記"
 
-#: arrays.php:531 arrays.php:537 flowview_databases.php:295
-#: flowview_databases.php:869 flowview_databases.php:1244
-#: flowview_databases.php:1399 flowview_databases.php:1536
-#: flowview_databases.php:1706
+#: arrays.php:532 arrays.php:538 flowview_databases.php:308
+#: flowview_databases.php:913 flowview_databases.php:1282
+#: flowview_databases.php:1441 flowview_databases.php:1578
+#: flowview_databases.php:1808
 msgid "Source"
 msgstr "來源"
 
-#: arrays.php:532 arrays.php:538
+#: arrays.php:533 arrays.php:539
 msgid "Destination"
 msgstr "目的地"
 
-#: arrays.php:548 arrays.php:549 arrays.php:550 arrays.php:551 arrays.php:552
-#: arrays.php:553 arrays.php:554 arrays.php:555 arrays.php:556
+#: arrays.php:549 arrays.php:550 arrays.php:551 arrays.php:552 arrays.php:553
+#: arrays.php:554 arrays.php:555 arrays.php:556 arrays.php:557
 #, php-format
 msgid "%d Pixels"
 msgstr "%d圖元"
 
-#: arrays.php:586
+#: arrays.php:587
 msgid "General Filters"
 msgstr "清除過濾器"
 
-#: arrays.php:589 flowview_databases.php:575 functions.php:537
+#: arrays.php:590 flowview_databases.php:588 functions.php:643
 msgid "Filter"
 msgstr "篩選"
 
-#: arrays.php:590
+#: arrays.php:591
 msgid "The Saved Filter to display."
 msgstr "顯示已保存的過濾器。"
 
-#: arrays.php:593
+#: arrays.php:594
 msgid "New Filter"
 msgstr "新篩選器"
 
-#: arrays.php:598 flowview_filters.php:327 functions.php:556
+#: arrays.php:599 flowview_filters.php:327 functions.php:662
 msgid "Listener"
 msgstr "成員"
 
-#: arrays.php:599
+#: arrays.php:600
 msgid "The Listener to use for the Filter."
 msgstr "用於過濾器的偵聽器。"
 
-#: arrays.php:607
+#: arrays.php:608
 msgid "Flow Template ID"
 msgstr "主題 ID"
 
-#: arrays.php:608
+#: arrays.php:609
 msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
 msgstr "僅限 v9 和IPFIX流的流範本ID。 請注意，範本ID可能因製造商而異。"
 
-#: arrays.php:615
+#: arrays.php:616
 msgid "Stream Address"
 msgstr "IP 位址"
 
-#: arrays.php:616
+#: arrays.php:617
 msgid "The Stream IP Address or Hostname from the list of registered streams."
 msgstr "已註冊流清單中的流IP位址或主機名。"
 
-#: arrays.php:623
+#: arrays.php:624
 msgid "Presets"
 msgstr "預設"
 
-#: arrays.php:624
+#: arrays.php:625
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
 msgstr "如果此過濾器基於預定義的時間跨度，請在此處選擇它。"
 
-#: arrays.php:633
+#: arrays.php:634
 msgid "Detailed Filter Criteria"
 msgstr "詳細的過濾條件"
 
-#: arrays.php:636 flowview_filters.php:332
+#: arrays.php:637 flowview_filters.php:332
 msgid "Report Type"
 msgstr "報表類型"
 
-#: arrays.php:637
+#: arrays.php:638
 msgid "The Report Type to use by default for this Filter when creating a Report."
 msgstr "創建報告時默認用於此篩選器的報告類型。"
 
-#: arrays.php:640
+#: arrays.php:641
 msgid "Printed"
 msgstr "已列印"
 
-#: arrays.php:640
+#: arrays.php:641
 msgid "Statistical"
 msgstr "統計"
 
-#: arrays.php:644
+#: arrays.php:645
 msgid "Statistical Report"
 msgstr "統計報告"
 
-#: arrays.php:645
+#: arrays.php:646
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
 msgstr "創建報告時默認用於此篩選器的顯示報告類型。"
 
-#: arrays.php:652
+#: arrays.php:653
 msgid "Printed Report"
 msgstr "打印報告"
 
-#: arrays.php:653
+#: arrays.php:654
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
 msgstr "創建打印報告時默認用於此篩選器的打印報告類型。"
 
-#: arrays.php:660
+#: arrays.php:661
 msgid "Range Rules"
 msgstr "管理計劃"
 
-#: arrays.php:661
+#: arrays.php:662
 msgid "Constrain the Filter Data by these time filter rules."
 msgstr "通過這些時間過濾器規則約束過濾器數據。"
 
-#: arrays.php:668
+#: arrays.php:669
 msgid "Resolve IP's"
 msgstr "解決地址："
 
-#: arrays.php:669
+#: arrays.php:670
 msgid "Resolve IP Addresses to Domain Names."
 msgstr "解決地址："
 
-#: arrays.php:674 flowview_schedules.php:588
+#: arrays.php:675 flowview_schedules.php:1008
 msgid "Yes"
 msgstr "是"
 
-#: arrays.php:675 flowview_schedules.php:588
+#: arrays.php:676 flowview_schedules.php:1008
 msgid "No"
 msgstr "否"
 
-#: arrays.php:679 flowview_filters.php:342 functions.php:644
+#: arrays.php:680 flowview_filters.php:342 functions.php:762
 msgid "Sort Field"
 msgstr "錯誤：新的排序字段不適合。排序字段不會更改。"
 
-#: arrays.php:680
+#: arrays.php:681
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
 msgstr "過濾器的默認排序字段。此設置將應用於所有計劃的報告。"
 
-#: arrays.php:687
+#: arrays.php:688
 msgid "Maximum Rows"
 msgstr "最大行數"
 
-#: arrays.php:688
+#: arrays.php:689
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
 msgstr "過濾器中要提供的最大行數。此設置將應用於所有計劃的報告。"
 
-#: arrays.php:695
+#: arrays.php:696
 msgid "Minimum Bytes"
 msgstr "最小字節數："
 
-#: arrays.php:696
+#: arrays.php:697
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
 msgstr "過濾器要考慮的最小總字節數。小於此字節總數的任何流總數將被忽略。"
 
-#: arrays.php:705
+#: arrays.php:706
 msgid "Charting Options"
 msgstr "圖表選項"
 
-#: arrays.php:708
+#: arrays.php:709
 msgid "Graph Type"
 msgstr "圖表類型"
 
-#: arrays.php:709
+#: arrays.php:710
 msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
 msgstr "默認情況下要顯示的圖形類型。 它們包括 Bar、Pie 和 Treemap。"
 
-#: arrays.php:714
+#: arrays.php:715
 msgid "Bar Chart"
 msgstr "長條圖"
 
-#: arrays.php:715
+#: arrays.php:716
 msgid "Pie Chart"
 msgstr "圓餅圖"
 
-#: arrays.php:716
+#: arrays.php:717
 msgid "Treemap Chart"
 msgstr "樹狀圖"
 
-#: arrays.php:720
+#: arrays.php:721
 msgid "Graph Height"
 msgstr "圖形高度"
 
-#: arrays.php:721
-msgid "The Graph Hight to use by default."
+#: arrays.php:722
+#, fuzzy
+msgid "The Graph Height to use by default."
 msgstr "默認情況下要使用的 Graph Hight。"
 
-#: arrays.php:728
+#: arrays.php:729
 msgid "Table Panel"
 msgstr "表格"
 
-#: arrays.php:729
+#: arrays.php:730
 msgid "Should the Table Panel be displayed by default."
 msgstr "是否應預設顯示表格面板。"
 
-#: arrays.php:735
+#: arrays.php:736
 msgid "Bytes Panel"
 msgstr "Bytes Bar"
 
-#: arrays.php:736
+#: arrays.php:737
 msgid "Should the Bytes Panel be displayed by default."
 msgstr "是否應預設顯示「位元組」面板。"
 
-#: arrays.php:742
+#: arrays.php:743
 msgid "Packets Panel"
 msgstr "數據包吧"
 
-#: arrays.php:743
+#: arrays.php:744
 msgid "Should the Packets Panel be displayed by default."
 msgstr "默認情況下是否應顯示「數據包」面板。"
 
-#: arrays.php:749
+#: arrays.php:750
 msgid "Flows Panel"
 msgstr "流動吧"
 
-#: arrays.php:750
+#: arrays.php:751
 msgid "Should the Flows Panel be displayed by default."
 msgstr "是否應預設顯示「流」面板。"
 
-#: arrays.php:758
+#: arrays.php:759
 msgid "Protocol Filters"
 msgstr "協定"
 
-#: arrays.php:761
+#: arrays.php:762
 msgid "Protocols"
 msgstr "協定"
 
-#: arrays.php:762
+#: arrays.php:763
 msgid "Select the Specific Protocol for the Filter."
 msgstr "選擇過濾器的特定協議。"
 
-#: arrays.php:769
+#: arrays.php:770
 msgid "TCP Flags"
 msgstr "TCP標誌"
 
-#: arrays.php:770
+#: arrays.php:771
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
 msgstr "在過濾器中搜索的TCP標誌。這可以是TCP標誌的逗號分隔列表"
 
-#: arrays.php:777
+#: arrays.php:778
 msgid "TOS Fields"
 msgstr "TOS領域"
 
-#: arrays.php:778
+#: arrays.php:779
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
 msgstr "在過濾器中搜索的TOS字段。這可以是逗號分隔的TOS字段列表"
 
-#: arrays.php:786
+#: arrays.php:787
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "在篩選器中選擇的源IP上進行篩選。這可以是IPv4或IPv6地址的逗號分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址範圍的逗號分隔列表。"
 
-#: arrays.php:793
+#: arrays.php:794
 msgid "Source Ports"
 msgstr "源端口"
 
-#: arrays.php:794
+#: arrays.php:795
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgstr "在“過濾器”中選擇的“源端口”上進行過濾。這可以是逗號分隔的源端口列表。"
 
-#: arrays.php:801
+#: arrays.php:802
 msgid "Source Interface"
 msgstr "源接口"
 
-#: arrays.php:802
+#: arrays.php:803
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
 msgstr "在過濾器中選擇源接口上進行過濾。這可以是源接口的逗號分隔列表"
 
-#: arrays.php:810
+#: arrays.php:811
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
 msgstr "在篩選器中選擇的目標AS上進行篩選。這可以是逗號分隔的來源AS的列表"
 
-#: arrays.php:818
+#: arrays.php:819
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "在篩選器中選擇的目標IP上進行篩選。這可以是IPv4或IPv6地址的逗號分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址範圍的逗號分隔列表。"
 
-#: arrays.php:825
+#: arrays.php:826
 msgid "Dest Ports"
 msgstr "目的通訊埠"
 
-#: arrays.php:826
+#: arrays.php:827
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgstr "在篩選器中選擇的目標端口上進行篩選。這可以是以逗號分隔的“目標端口”列表。"
 
-#: arrays.php:833
+#: arrays.php:834
 msgid "Dest Interface"
 msgstr "Dest接口"
 
-#: arrays.php:834
+#: arrays.php:835
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr "在篩選器中選擇的目標接口上進行篩選。這可以是Destimation接口的逗號分隔列表。"
 
-#: arrays.php:841 functions.php:2940
+#: arrays.php:842 functions.php:3330
 msgid "Dest AS"
 msgstr "目的通訊埠"
 
-#: arrays.php:842
+#: arrays.php:843
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
 msgstr "在篩選器中選擇的目標AS上進行篩選。這可以是Destimation AS的逗號分隔列表"
 
-#: arrays.php:860
+#: arrays.php:861
 msgid "DNS Cache"
 msgstr "DNS 快取"
 
-#: arrays.php:864
+#: arrays.php:865
 msgid "CIDR/Routes"
 msgstr "CIDR/路由"
 
-#: arrays.php:868
+#: arrays.php:869
 msgid "Autonomous Numbers"
 msgstr "數字"
 
-#: arrays.php:876
+#: arrays.php:877
 msgid "AS Blocks"
 msgstr "AS 塊"
 
-#: arrays.php:884
+#: arrays.php:885
 msgid "AS Sets"
 msgstr "AS 集"
 
-#: arrays.php:892
+#: arrays.php:893
 msgid "Route Sets"
 msgstr "路由集"
 
-#: arrays.php:900
+#: arrays.php:901
 msgid "Domains"
 msgstr "網域"
 
-#: arrays.php:908
+#: arrays.php:909
 msgid "Filter Sets"
 msgstr "過濾器組"
 
-#: arrays.php:916
+#: arrays.php:917
 msgid "Peering Sets"
 msgstr "對等互連集"
 
-#: arrays.php:924 flowview_databases.php:245 flowview_databases.php:505
+#: arrays.php:925 flowview_databases.php:258 flowview_databases.php:518
 msgid "Network"
 msgstr "網絡"
 
-#: arrays.php:932
+#: arrays.php:933
 msgid "Internet Routers"
 msgstr "互聯網控制"
 
-#: arrays.php:940
+#: arrays.php:941
 msgid "Incident Response Teams"
 msgstr "事件回應團隊"
 
-#: arrays.php:948
+#: arrays.php:949
 msgid "Auth Agents"
 msgstr "身份驗證代理"
 
-#: arrays.php:956
+#: arrays.php:957
 msgid "Organizations"
 msgstr "主辦單位"
 
-#: arrays.php:964
+#: arrays.php:965
 msgid "Roles"
 msgstr "角色"
 
-#: arrays.php:972
+#: arrays.php:973
 msgid "Persons"
 msgstr "人員"
 
-#: flowview.php:124
+#: flowview.php:125
+msgid "Unable to find Raw Data for to Export"
+msgstr ""
+
+#: flowview.php:205
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr ""
+
+#: flowview.php:210
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr ""
+
+#: flowview.php:240
 #, php-format
 msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
 msgstr "無法刪除流量過濾器「%s」 因為它正在計劃報告中使用。"
 
-#: flowview.php:127
+#: flowview.php:243
 #, php-format
 msgid "Flow Filter '%s' Deleted."
 msgstr "已刪除流量過濾器「%s」。"
 
-#: flowview_databases.php:33 flowview_devices.php:35 flowview_filters.php:39
-#: flowview_schedules.php:37 functions.php:603
+#: flowview_databases.php:34 flowview_devices.php:35 flowview_filters.php:39
+#: flowview_schedules.php:37 functions.php:721
 msgid "Delete"
 msgstr "刪除"
 
-#: flowview_databases.php:50
+#: flowview_databases.php:51
 msgid "DNS Cache has been purged.  It will refill as records come in."
 msgstr "DNS 快取已被清除。 當記錄傳入時，它將重新填充。"
 
-#: flowview_databases.php:92
+#: flowview_databases.php:95
 msgid "Internet Route Registry Details"
 msgstr "Internet Route Registry 詳細資訊"
 
-#: flowview_databases.php:99
+#: flowview_databases.php:116
 msgid "Authorized Agent Details"
 msgstr "授權代理詳細資訊"
 
-#: flowview_databases.php:205
+#: flowview_databases.php:176
+#, fuzzy
+msgid "No Details Found"
+msgstr "未找到 DNS 快取項目"
+
+#: flowview_databases.php:218
 msgid "CIDR/Route"
 msgstr "CIDR/路由"
 
-#: flowview_databases.php:210
+#: flowview_databases.php:223
 msgid "Autonomous Number"
 msgstr "數字"
 
-#: flowview_databases.php:215
+#: flowview_databases.php:228
 msgid "AS Block"
 msgstr "AS 塊"
 
-#: flowview_databases.php:220
+#: flowview_databases.php:233
 msgid "AS Set"
 msgstr "未設定"
 
-#: flowview_databases.php:225
+#: flowview_databases.php:238
 msgid "Route Set"
 msgstr "路由集"
 
-#: flowview_databases.php:230
+#: flowview_databases.php:243
 msgid "Domain"
 msgstr "網域"
 
-#: flowview_databases.php:235
+#: flowview_databases.php:248
 msgid "Filter Set"
 msgstr "過濾器組"
 
-#: flowview_databases.php:240
+#: flowview_databases.php:253
 msgid "Peering Set"
 msgstr "對等互連集"
 
-#: flowview_databases.php:250
+#: flowview_databases.php:263
 msgid "Internet Router"
 msgstr "互聯網控制"
 
-#: flowview_databases.php:255
+#: flowview_databases.php:268
 msgid "Incident Response Team"
 msgstr "事件回應團隊"
 
-#: flowview_databases.php:260
+#: flowview_databases.php:273
 msgid "Auth Agent"
 msgstr "身份驗證代理"
 
-#: flowview_databases.php:265 flowview_databases.php:315
+#: flowview_databases.php:278 flowview_databases.php:328
 msgid "Organization"
 msgstr "組織"
 
-#: flowview_databases.php:270
+#: flowview_databases.php:283
 msgid "Role"
 msgstr "角色"
 
-#: flowview_databases.php:275
+#: flowview_databases.php:288
 msgid "Person"
 msgstr "人員"
 
-#: flowview_databases.php:280
+#: flowview_databases.php:293
 msgid "Router Set"
 msgstr "路由集"
 
-#: flowview_databases.php:285
+#: flowview_databases.php:298
 msgid "Remarks"
 msgstr "備註"
 
-#: flowview_databases.php:290 flowview_databases.php:1718
+#: flowview_databases.php:303 flowview_databases.php:1820
 msgid "Last Modified"
 msgstr "最後修改"
 
-#: flowview_databases.php:300
+#: flowview_databases.php:313
 msgid "Registration Date"
 msgstr "註冊日期"
 
-#: flowview_databases.php:305
+#: flowview_databases.php:318
 msgid "MNT By"
 msgstr "MNT 作者"
 
-#: flowview_databases.php:310
+#: flowview_databases.php:323
 msgid "Admin Contact"
 msgstr "管理員聯繫人"
 
-#: flowview_databases.php:320
+#: flowview_databases.php:333
 msgid "Changes"
 msgstr "修訂與更新"
 
-#: flowview_databases.php:325
+#: flowview_databases.php:338
 msgid "Notify"
 msgstr "通知"
 
-#: flowview_databases.php:330
+#: flowview_databases.php:343
 msgid "Description"
 msgstr "描述"
 
-#: flowview_databases.php:335
+#: flowview_databases.php:348
 msgid "Tech Contact"
 msgstr "技術聯繫人"
 
-#: flowview_databases.php:340
+#: flowview_databases.php:353
 msgid "MNT Lower"
 msgstr "MNT較低"
 
-#: flowview_databases.php:345
+#: flowview_databases.php:358
 msgid "Country"
 msgstr "國家"
 
-#: flowview_databases.php:350
+#: flowview_databases.php:363
 msgid "Abuse Email"
 msgstr "電子郵件"
 
-#: flowview_databases.php:355
+#: flowview_databases.php:368
 msgid "Fax Number"
 msgstr "傳真號碼"
 
-#: flowview_databases.php:360
+#: flowview_databases.php:373
 msgid "Phone"
 msgstr "電話"
 
-#: flowview_databases.php:365 flowview_schedules.php:559
+#: flowview_databases.php:378
 msgid "Email"
 msgstr "電子郵件"
 
-#: flowview_databases.php:370 flowview_devices.php:336 flowview_devices.php:551
+#: flowview_databases.php:383 flowview_devices.php:398 flowview_devices.php:624
 msgid "Address"
 msgstr "地址"
 
-#: flowview_databases.php:375 flowview_devices.php:340 flowview_devices.php:775
+#: flowview_databases.php:388 flowview_devices.php:402 flowview_devices.php:852
 msgid "Status"
 msgstr "狀態"
 
-#: flowview_databases.php:380
+#: flowview_databases.php:393
 msgid "Members By Fef"
 msgstr "成員 by fef"
 
-#: flowview_databases.php:385
+#: flowview_databases.php:398
 msgid "Abuse Contacts"
 msgstr "虐待連絡人"
 
-#: flowview_databases.php:390
+#: flowview_databases.php:403
 msgid "MNT Reference"
 msgstr "MNT 參考"
 
-#: flowview_databases.php:395
+#: flowview_databases.php:408
 msgid "Members"
 msgstr "會員"
 
-#: flowview_databases.php:400
+#: flowview_databases.php:413
 msgid "MNT Notify"
 msgstr "MNT 通知"
 
-#: flowview_databases.php:405
+#: flowview_databases.php:418
 msgid "Authorization"
 msgstr "授權"
 
-#: flowview_databases.php:410
+#: flowview_databases.php:423
 msgid "MNT Routes"
 msgstr "MNT 路線"
 
-#: flowview_databases.php:415
+#: flowview_databases.php:428
 msgid "Member of"
 msgstr "成員 "
 
-#: flowview_databases.php:420
+#: flowview_databases.php:433
 msgid "Updates Email"
 msgstr "更新"
 
-#: flowview_databases.php:425
+#: flowview_databases.php:438
 msgid "NOC Handle"
 msgstr "NOC手柄"
 
-#: flowview_databases.php:430
+#: flowview_databases.php:443
 msgid "Sponsor Org"
 msgstr "贊助機構"
 
-#: flowview_databases.php:435
+#: flowview_databases.php:448
 msgid "MNT Irt"
 msgstr "MNT Irt"
 
-#: flowview_databases.php:440
+#: flowview_databases.php:453
 msgid "MP Members"
 msgstr "數字"
 
-#: flowview_databases.php:445
+#: flowview_databases.php:458
 msgid "Sub Domain"
 msgstr "來源域名"
 
-#: flowview_databases.php:450
+#: flowview_databases.php:463
 msgid "Pingable"
 msgstr "啟用"
 
-#: flowview_databases.php:455
+#: flowview_databases.php:468
 msgid "Alias"
 msgstr "別名"
 
-#: flowview_databases.php:460
+#: flowview_databases.php:473
 msgid "Org Type"
 msgstr "圖表類型"
 
-#: flowview_databases.php:465
+#: flowview_databases.php:478
 msgid "Refer To"
 msgstr "指"
 
-#: flowview_databases.php:470
+#: flowview_databases.php:483
 msgid "MP Peering"
 msgstr "MP 對等互連"
 
-#: flowview_databases.php:475 flowview_devices.php:490
+#: flowview_databases.php:488 flowview_devices.php:563 functions.php:971
 msgid "Export"
 msgstr "匯出"
 
-#: flowview_databases.php:480
+#: flowview_databases.php:493
 msgid "Holes"
 msgstr "孔"
 
-#: flowview_databases.php:485
+#: flowview_databases.php:498
 msgid "MP Default"
 msgstr "預設"
 
-#: flowview_databases.php:490
+#: flowview_databases.php:503
 msgid "Components"
 msgstr "組件"
 
-#: flowview_databases.php:495
+#: flowview_databases.php:508
 msgid "RS Out"
 msgstr "RS 輸出"
 
-#: flowview_databases.php:500
+#: flowview_databases.php:513
 msgid "Organization Name"
 msgstr "組織名稱"
 
-#: flowview_databases.php:510
+#: flowview_databases.php:523
 msgid "AS Name"
 msgstr "名稱： "
 
-#: flowview_databases.php:515
+#: flowview_databases.php:528
 msgid "Author"
 msgstr "作者"
 
-#: flowview_databases.php:520
+#: flowview_databases.php:533
 msgid "IRT Notify"
 msgstr "IRT 通知"
 
-#: flowview_databases.php:525
+#: flowview_databases.php:538
 msgid "Aggr MTD"
 msgstr "Aggr MTD"
 
-#: flowview_databases.php:530
+#: flowview_databases.php:543
 msgid "AS Type"
 msgstr "這個類型"
 
-#: flowview_databases.php:535
+#: flowview_databases.php:548
 msgid "MP Filter"
 msgstr "篩選"
 
-#: flowview_databases.php:540
+#: flowview_databases.php:553
 msgid "Default Route"
 msgstr "預設"
 
-#: flowview_databases.php:545
+#: flowview_databases.php:558
 msgid "Assignment Size"
 msgstr "分配大小"
 
-#: flowview_databases.php:550
+#: flowview_databases.php:563
 msgid "Export Comps"
 msgstr "報告"
 
-#: flowview_databases.php:555
+#: flowview_databases.php:568
 msgid "RS In"
 msgstr "RS 輸入"
 
-#: flowview_databases.php:560
+#: flowview_databases.php:573
 msgid "Net Name"
 msgstr "網絡名稱"
 
-#: flowview_databases.php:565
+#: flowview_databases.php:578
 msgid "DS Rdata"
 msgstr "DS Rdata"
 
-#: flowview_databases.php:570
+#: flowview_databases.php:583
 msgid "Aggr Boundary"
 msgstr "Aggr 邊界"
 
-#: flowview_databases.php:580
+#: flowview_databases.php:593
 msgid "MP Import"
 msgstr "MP 匯入"
 
-#: flowview_databases.php:585
+#: flowview_databases.php:598
 msgid "Language"
 msgstr "語言"
 
-#: flowview_databases.php:590
+#: flowview_databases.php:603
 msgid "RESFful Link"
 msgstr "RESFful 連結"
 
-#: flowview_databases.php:595
+#: flowview_databases.php:608
 msgid "Peer"
 msgstr "對點"
 
-#: flowview_databases.php:600
+#: flowview_databases.php:613
 msgid "Zone Contact"
 msgstr "區域聯繫人"
 
-#: flowview_databases.php:605
+#: flowview_databases.php:618
 msgid "Inject"
 msgstr "注入"
 
-#: flowview_databases.php:610
+#: flowview_databases.php:623
 msgid "MP Peer"
 msgstr "MP 對等體"
 
-#: flowview_databases.php:615
+#: flowview_databases.php:628
 msgid "Referral By"
 msgstr "推薦人"
 
-#: flowview_databases.php:620
+#: flowview_databases.php:633
 msgid "Form"
 msgstr "表單"
 
-#: flowview_databases.php:625
+#: flowview_databases.php:638
 msgid "MNT Domains"
 msgstr "MNT功能變數名稱"
 
-#: flowview_databases.php:630
+#: flowview_databases.php:643
 msgid "Origin AS"
 msgstr "原產地 AS"
 
-#: flowview_databases.php:635
+#: flowview_databases.php:648
 msgid "MP Export"
 msgstr "報告"
 
-#: flowview_databases.php:640
-msgid "Encyption"
+#: flowview_databases.php:653
+#, fuzzy
+msgid "Encryption"
 msgstr "到期日"
 
-#: flowview_databases.php:645
+#: flowview_databases.php:658
 msgid "Geo Feed"
 msgstr "地理源"
 
-#: flowview_databases.php:650
+#: flowview_databases.php:663
 msgid "Geo Index"
 msgstr "地理索引"
 
-#: flowview_databases.php:655
+#: flowview_databases.php:668
 msgid "Interface Addr"
 msgstr "用戶介面"
 
-#: flowview_databases.php:660
+#: flowview_databases.php:673
 msgid "Export Via"
 msgstr "報告"
 
-#: flowview_databases.php:665
+#: flowview_databases.php:678
 msgid "Trouble"
 msgstr "麻煩"
 
-#: flowview_databases.php:670
+#: flowview_databases.php:683
 msgid "Name Servers"
 msgstr "名稱伺服器"
 
-#: flowview_databases.php:675
+#: flowview_databases.php:688
 msgid "Ping Handle"
 msgstr "Ping 手柄"
 
-#: flowview_databases.php:680
+#: flowview_databases.php:693
 msgid "Interface"
 msgstr "界面"
 
-#: flowview_databases.php:685
+#: flowview_databases.php:698
 msgid "Import"
 msgstr "匯入"
 
-#: flowview_databases.php:690
+#: flowview_databases.php:703
 msgid "Signature"
 msgstr "簽名"
 
-#: flowview_databases.php:695
+#: flowview_databases.php:708
 msgid "Geo Location"
 msgstr "地理位置"
 
-#: flowview_databases.php:700
+#: flowview_databases.php:713
 msgid "Local AS"
 msgstr "本地 AS 號碼"
 
-#: flowview_databases.php:705
+#: flowview_databases.php:718
 msgid "Import Via"
 msgstr "導入方式"
 
-#: flowview_databases.php:750
+#: flowview_databases.php:790
 #, php-format
 msgid "FATAL: Unknown Database Table %s"
 msgstr "致命：未知資料庫表 %s"
 
-#: flowview_databases.php:863 flowview_databases.php:1228
-#: flowview_databases.php:1520 flowview_devices.php:699
-#: flowview_filters.php:233 flowview_schedules.php:450
+#: flowview_databases.php:907 flowview_databases.php:1266
+#: flowview_databases.php:1562 flowview_devices.php:772
+#: flowview_filters.php:233 flowview_schedules.php:553
+#: flowview_schedules.php:850
 msgid "Search"
 msgstr "搜尋"
 
-#: flowview_databases.php:873 flowview_databases.php:1238
-#: flowview_databases.php:1248 flowview_databases.php:1530
-#: flowview_databases.php:1540
+#: flowview_databases.php:917 flowview_databases.php:1276
+#: flowview_databases.php:1286 flowview_databases.php:1572
+#: flowview_databases.php:1582
 msgid "Any"
 msgstr "任何"
 
-#: flowview_databases.php:891 flowview_databases.php:1023
-#: flowview_databases.php:1266 flowview_databases.php:1378
-#: flowview_databases.php:1558 flowview_databases.php:1679
+#: flowview_databases.php:935 flowview_databases.php:1060
+#: flowview_databases.php:1304 flowview_databases.php:1420
+#: flowview_databases.php:1600 flowview_databases.php:1781
 msgid "Entries"
 msgstr "留言"
 
-#: flowview_databases.php:895 flowview_databases.php:1270
-#: flowview_databases.php:1562 flowview_filters.php:243
-#: flowview_schedules.php:460
+#: flowview_databases.php:939 flowview_databases.php:1308
+#: flowview_databases.php:1604 flowview_filters.php:243
+#: flowview_schedules.php:563 flowview_schedules.php:860
 msgid "Default"
 msgstr "預設"
 
-#: flowview_databases.php:907 flowview_databases.php:1282
-#: flowview_databases.php:1574 flowview_devices.php:489
-#: flowview_devices.php:706 flowview_filters.php:254 flowview_schedules.php:471
-#: functions.php:596
+#: flowview_databases.php:951 flowview_databases.php:1320
+#: flowview_databases.php:1616 flowview_devices.php:562
+#: flowview_devices.php:779 flowview_filters.php:255 flowview_schedules.php:575
+#: flowview_schedules.php:872 functions.php:714
 msgid "Go"
 msgstr "送出"
 
-#: flowview_databases.php:907 flowview_databases.php:1282
-#: flowview_databases.php:1574 flowview_devices.php:706
-#: flowview_filters.php:254 flowview_schedules.php:471
+#: flowview_databases.php:951 flowview_databases.php:1320
+#: flowview_databases.php:1616 flowview_devices.php:779
+#: flowview_filters.php:255 flowview_schedules.php:575
+#: flowview_schedules.php:872
 msgid "Set/Refresh Filters"
 msgstr "設置/刷新過濾器"
 
-#: flowview_databases.php:908 flowview_databases.php:1283
-#: flowview_databases.php:1575 flowview_devices.php:707
-#: flowview_filters.php:257 flowview_schedules.php:474 functions.php:597
+#: flowview_databases.php:952 flowview_databases.php:1321
+#: flowview_databases.php:1617 flowview_devices.php:780
+#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_schedules.php:873 functions.php:715
 msgid "Clear"
 msgstr "清除"
 
-#: flowview_databases.php:908 flowview_databases.php:1283
-#: flowview_databases.php:1575 flowview_devices.php:707
-#: flowview_filters.php:257 flowview_schedules.php:474
+#: flowview_databases.php:952 flowview_databases.php:1321
+#: flowview_databases.php:1617 flowview_devices.php:780
+#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_schedules.php:873
 msgid "Clear Filters"
 msgstr "清除過濾器"
 
-#: flowview_databases.php:909 flowview_databases.php:1284
-msgid "Purge"
-msgstr "清除"
-
-#: flowview_databases.php:909 flowview_databases.php:1284
+#: flowview_databases.php:953 flowview_databases.php:1322
 msgid "Purge the DNS Cache"
 msgstr "清除 DNS 快取"
 
-#: flowview_databases.php:1064
+#: flowview_databases.php:1101
 msgid "Not Specified"
 msgstr "未指定外掛"
 
-#: flowview_databases.php:1080
+#: flowview_databases.php:1117
 msgid "No Matching Entries Found"
 msgstr "未找到匹配的條目"
 
-#: flowview_databases.php:1140
-msgid "Click 'Continue' to delete the following DNS Cache Entriy."
+#: flowview_databases.php:1177
+#, fuzzy
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
 msgstr[0] "單擊“繼續”以刪除以下計劃。"
 
-#: flowview_databases.php:1145 flowview_devices.php:222
-#: flowview_filters.php:164 flowview_schedules.php:262 functions.php:833
-#: functions.php:843
+#: flowview_databases.php:1182 flowview_devices.php:268
+#: flowview_filters.php:164 flowview_schedules.php:340 functions.php:987
+#: functions.php:997
 msgid "Cancel"
 msgstr "取消"
 
-#: flowview_databases.php:1145 flowview_devices.php:214
-#: flowview_filters.php:156 flowview_schedules.php:254 functions.php:842
+#: flowview_databases.php:1183 flowview_devices.php:260
+#: flowview_filters.php:156 flowview_schedules.php:332 functions.php:996
 msgid "Continue"
 msgstr "繼續"
 
-#: flowview_databases.php:1145
+#: flowview_databases.php:1183
 msgid "Delete DNS Entry"
 msgid_plural "Delete DNS Entries"
 msgstr[0] "刪除DNS條目"
 
-#: flowview_databases.php:1219
+#: flowview_databases.php:1257
 msgid "Flowview DNS Cache Entries"
 msgstr "FlowView計劃"
 
-#: flowview_databases.php:1234 flowview_databases.php:1240
-#: flowview_databases.php:1439
+#: flowview_databases.php:1272 flowview_databases.php:1278
+#: flowview_databases.php:1481
 msgid "Verified"
 msgstr "已驗證"
 
-#: flowview_databases.php:1239 flowview_databases.php:1439
+#: flowview_databases.php:1277 flowview_databases.php:1481
 msgid "Unverified"
 msgstr "未驗證"
 
-#: flowview_databases.php:1390
+#: flowview_databases.php:1322
+msgid "Purge"
+msgstr "清除"
+
+#: flowview_databases.php:1432
 msgid "This is the IP Address of the Cache entry."
 msgstr "這是緩存條目的IP位址。"
 
-#: flowview_databases.php:1393
+#: flowview_databases.php:1435
 msgid "DNS Hostname"
 msgstr "DNS 主機名"
 
-#: flowview_databases.php:1396
+#: flowview_databases.php:1438
 msgid "The DNS Name assigned to the IP Address."
 msgstr "分配給IP位址的 DNS 名稱。"
 
-#: flowview_databases.php:1402
+#: flowview_databases.php:1444
 msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
 msgstr "DNS 主機名的來源。 它可以是 DNS、靜態查找或 ARIN。"
 
-#: flowview_databases.php:1405
+#: flowview_databases.php:1447
 msgid "Arin Verified"
 msgstr "Arin 已核實"
 
-#: flowview_databases.php:1408
+#: flowview_databases.php:1450
 msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
 msgstr "此IP位址的Arin資訊已驗證，或者它是本地域IP位址。"
 
-#: flowview_databases.php:1411
+#: flowview_databases.php:1453
 msgid "CIDR ID"
 msgstr "CIDR ID"
 
-#: flowview_databases.php:1414
+#: flowview_databases.php:1456
 msgid "The Arin primary key.  This is not official Arin information."
 msgstr "Arin 主鍵。 這不是 Arin 的官方資訊。"
 
-#: flowview_databases.php:1417
+#: flowview_databases.php:1459
 msgid "Autonomous System ID"
 msgstr "自治系統ID"
 
-#: flowview_databases.php:1420
+#: flowview_databases.php:1462
 msgid "The Arin Origin AS.  This is official Arin AS information."
 msgstr "Arin 起源 AS。 這是 Arin AS 的官方資訊。"
 
-#: flowview_databases.php:1423
+#: flowview_databases.php:1465
 msgid "Updated Time"
 msgstr "更新時間"
 
-#: flowview_databases.php:1426
+#: flowview_databases.php:1468
 msgid "This is the time that the DNS cache was entered or last updated."
 msgstr "這是輸入或上次更新 DNS 快取的時間。"
 
-#: flowview_databases.php:1447
+#: flowview_databases.php:1489
 msgid "No DNS Cache Entries Found"
 msgstr "未找到 DNS 快取項目"
 
-#: flowview_databases.php:1511
+#: flowview_databases.php:1553
 msgid "Flowview Internet Routes"
 msgstr "FlowView監聽器"
 
-#: flowview_databases.php:1526
+#: flowview_databases.php:1568
 msgid "IP Version"
 msgstr "IP 版本"
 
-#: flowview_databases.php:1531
+#: flowview_databases.php:1573
 msgid "IPv4"
 msgstr "IPv4"
 
-#: flowview_databases.php:1532
+#: flowview_databases.php:1574
 msgid "IPv6"
 msgstr "IPv6"
 
-#: flowview_databases.php:1689
+#: flowview_databases.php:1791
 msgid "Route"
 msgstr "路線"
 
-#: flowview_databases.php:1691
+#: flowview_databases.php:1793
 msgid "This is the published Internet Route."
 msgstr "這是已發佈的 Internet 路由。"
 
-#: flowview_databases.php:1694
+#: flowview_databases.php:1796
 msgid "AS Number"
 msgstr "連接埠"
 
-#: flowview_databases.php:1697
+#: flowview_databases.php:1799
 msgid "The Autonomous System Number for the route."
 msgstr "路由的自治系統編號。"
 
-#: flowview_databases.php:1700
+#: flowview_databases.php:1802
 msgid "Route Description"
 msgstr "路線說明"
 
-#: flowview_databases.php:1703
-msgid "The Descrption logged by the Route Maintainer."
+#: flowview_databases.php:1805
+#, fuzzy
+msgid "The Description logged by the Route Maintainer."
 msgstr "路由維護者記錄的描述。"
 
-#: flowview_databases.php:1709
+#: flowview_databases.php:1811
 msgid "The source database used to publish the route."
 msgstr "用於發佈路由的源資料庫。"
 
-#: flowview_databases.php:1712
+#: flowview_databases.php:1814
 msgid "Maintained By"
 msgstr "維護者"
 
-#: flowview_databases.php:1715
+#: flowview_databases.php:1817
 msgid "The Internet Carrier who is maintaining the route for the customer."
 msgstr "為客戶維護路由的 Internet 運營商。"
 
-#: flowview_databases.php:1721
+#: flowview_databases.php:1823
 msgid "The last time the information on this route was modified."
 msgstr "上次修改此路由的信息的時間。"
 
-#: flowview_databases.php:1742
+#: flowview_databases.php:1850
 msgid "No Matching Routes Found"
 msgstr "未找到匹配的路由"
 
-#: flowview_devices.php:43
+#: flowview_devices.php:36 flowview_filters.php:41 flowview_schedules.php:39
+msgid "Enable"
+msgstr "啟用"
+
+#: flowview_devices.php:37 flowview_filters.php:40 flowview_schedules.php:38
+msgid "Disable"
+msgstr "停用"
+
+#: flowview_devices.php:45
 msgid "Listener Name"
 msgstr "成員"
 
-#: flowview_devices.php:44
+#: flowview_devices.php:46
 msgid "Name of the device to be displayed."
 msgstr "要顯示的設備的名稱。"
 
-#: flowview_devices.php:49
+#: flowview_devices.php:51
 msgid "Collection Method"
 msgstr "收集方法"
 
-#: flowview_devices.php:50
+#: flowview_devices.php:52
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
 msgstr "有兩種支持收集方法，第一種利用舊版流程工具二進製文件，第二種利用Cacti自己的基於PHP的流服務器。"
 
-#: flowview_devices.php:57
-msgid "Allowed Host"
+#: flowview_devices.php:59
+msgid "Bind to address"
+msgstr ""
+
+#: flowview_devices.php:60
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr ""
+
+#: flowview_devices.php:68
+#, fuzzy
+msgid "Allowed Host Range"
 msgstr "允許的主機"
 
-#: flowview_devices.php:58
-msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
-msgstr "允許發送到此流收集器的設備的IP地址。對於任何主機，保留為0。"
+#: flowview_devices.php:69
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr ""
 
-#: flowview_devices.php:67
+#: flowview_devices.php:78
 msgid "Port this collector will listen on."
 msgstr "端口這個收藏家會聽。"
 
-#: flowview_devices.php:76
+#: flowview_devices.php:87
 msgid "The IP Protocol to use for this listener."
 msgstr "用於過濾器的偵聽器。"
 
-#: flowview_devices.php:78
-msgid "TCP Protocol"
-msgstr "IP 通訊協定"
-
-#: flowview_devices.php:78
+#: flowview_devices.php:89
 msgid "UDP Protocol"
 msgstr "IP 通訊協定"
 
-#: flowview_devices.php:152
+#: flowview_devices.php:94 flowview_schedules.php:89 flowview_schedules.php:974
+msgid "Enabled"
+msgstr "啟用"
+
+#: flowview_devices.php:95
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr ""
+
+#: flowview_devices.php:170
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "未找到設備 ID：%s 和範本 ID：%s 的流範本"
 
-#: flowview_devices.php:204
-msgid "Click 'Continue' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service."
+#: flowview_devices.php:236 flowview_devices.php:250
+#, fuzzy
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
 msgstr "單擊“繼續”以刪除以下Net-Flow偵聽器。之後，您需要重新啟動Flow-Capture服務。"
 
-#: flowview_devices.php:211
-msgid "You must select at least one device."
+#: flowview_devices.php:243
+#, fuzzy
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "單擊“繼續”以刪除以下Net-Flow偵聽器。之後，您需要重新啟動Flow-Capture服務。"
+
+#: flowview_devices.php:257
+#, fuzzy
+msgid "You must select at least one Listener."
 msgstr "您必須至少選擇一個設備。"
 
-#: flowview_devices.php:270
+#: flowview_devices.php:312
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
 msgstr "保存成功。 Flowview 偵聽器已保存，服務已重新啟動。"
 
-#: flowview_devices.php:272
+#: flowview_devices.php:314
 msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
 msgstr "保存成功。 Flowview 偵聽器已保存。 但是，服務流捕獲未運行。"
 
-#: flowview_devices.php:291
+#: flowview_devices.php:353
 #, php-format
 msgid "Listener [edit: %s]"
 msgstr "監聽器 [編輯： %s]"
 
-#: flowview_devices.php:295
+#: flowview_devices.php:357
 msgid "Listener [new]"
 msgstr "報告：[新]"
 
-#: flowview_devices.php:332 flowview_devices.php:752
+#: flowview_devices.php:394 flowview_devices.php:825
 msgid "Name"
 msgstr "名稱"
 
-#: flowview_devices.php:344
+#: flowview_devices.php:406
 msgid "Version"
 msgstr "版本"
 
-#: flowview_devices.php:348 functions.php:34
+#: flowview_devices.php:410 functions.php:38
 msgid "Templates"
 msgstr "模板"
 
-#: flowview_devices.php:352 flowview_devices.php:798
+#: flowview_devices.php:414 flowview_devices.php:879
 msgid "Last Updated"
 msgstr "最後更新"
 
-#: flowview_devices.php:354
+#: flowview_devices.php:416
 msgid "Active Streams update every 5 minutes"
 msgstr "活動流每 5 分鐘更新一次"
 
-#: flowview_devices.php:386
+#: flowview_devices.php:459
 msgid "No Inbound Streams Detected"
 msgstr "未檢測到入站流"
 
-#: flowview_devices.php:451
+#: flowview_devices.php:524
 msgid "Listener Detected Templates"
 msgstr "偵聽器檢測到的範本"
 
-#: flowview_devices.php:460
+#: flowview_devices.php:533
 msgid "Ex Addr"
 msgstr "Ex Addr"
 
-#: flowview_devices.php:474
+#: flowview_devices.php:547
 msgid "Template"
 msgstr "模板"
 
-#: flowview_devices.php:555
+#: flowview_devices.php:628
 msgid "Template ID"
 msgstr "主題 ID"
 
-#: flowview_devices.php:559
+#: flowview_devices.php:632
 msgid "Field Name"
 msgstr "字段名稱"
 
-#: flowview_devices.php:563 functions.php:4457
+#: flowview_devices.php:636 functions.php:5449
 msgid "Supported"
 msgstr "不支援您的瀏覽器 ！"
 
-#: flowview_devices.php:567
+#: flowview_devices.php:640
 msgid "Field ID"
 msgstr "欄位 ID"
 
-#: flowview_devices.php:571
+#: flowview_devices.php:644
 msgid "Field Type"
 msgstr "字段類型"
 
-#: flowview_devices.php:575
+#: flowview_devices.php:648
 msgid "Length"
 msgstr "長度"
 
-#: flowview_devices.php:579
+#: flowview_devices.php:652
 msgid "Unpack"
 msgstr "解壓"
 
-#: flowview_devices.php:621
+#: flowview_devices.php:694
 msgid "No Inbound Stream Templates Detected"
 msgstr "未檢測到入站流範本"
 
-#: flowview_devices.php:690
+#: flowview_devices.php:763
 msgid "FlowView Listeners"
 msgstr "FlowView監聽器"
 
-#: flowview_devices.php:742 setup.php:143 setup.php:204
+#: flowview_devices.php:815 setup.php:139 setup.php:200
 msgid "Listeners"
 msgstr "成員"
 
-#: flowview_devices.php:756
+#: flowview_devices.php:829
 msgid "Method"
 msgstr "方法"
 
-#: flowview_devices.php:760
+#: flowview_devices.php:833
+#, fuzzy
+msgid "Bind address"
+msgstr "IP 位址"
+
+#: flowview_devices.php:837
 msgid "Allowed From"
 msgstr "允許來自"
 
-#: flowview_devices.php:780
+#: flowview_devices.php:857
 msgid "Observed Listen"
 msgstr "觀察聽"
 
-#: flowview_devices.php:782
+#: flowview_devices.php:858
 msgid "The port security actually observed on the listeners port."
 msgstr "在偵聽器埠上實際觀察到的埠安全性。"
 
-#: flowview_devices.php:786
+#: flowview_devices.php:862
+msgid "Backlog"
+msgstr ""
+
+#: flowview_devices.php:863
+msgid "The Size of the UDP backlog in bytes."
+msgstr ""
+
+#: flowview_devices.php:867
 msgid "Streams"
 msgstr "流"
 
-#: flowview_devices.php:788
+#: flowview_devices.php:869
 msgid "The number of inbound connections from various sources."
 msgstr "來自各種源的入站連接數。"
 
-#: flowview_devices.php:792
+#: flowview_devices.php:873
 msgid "Stream Versions"
 msgstr "版本"
 
-#: flowview_devices.php:794
+#: flowview_devices.php:875
 msgid "The Traffic Flow versions being observed."
 msgstr "正在觀察的流量流版本。"
 
-#: flowview_devices.php:800
+#: flowview_devices.php:881
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "從收集的所有流中獲取的最長更新時間。 此值每 5 分鐘更新一次。"
 
-#: flowview_devices.php:833
+#: flowview_devices.php:916 flowview_schedules.php:171 functions.php:839
+msgid "None"
+msgstr "無"
+
+#: flowview_devices.php:920
+#, fuzzy
+msgid "No Connections"
+msgstr "地理位置"
+
+#: flowview_devices.php:949
 msgid "Cacti"
 msgstr "仙人掌"
 
-#: flowview_devices.php:846
+#: flowview_devices.php:964
 msgid "No Flowview Listeners"
 msgstr "FlowView監聽器"
-
-#: flowview_filters.php:38 flowview_schedules.php:36
-msgid "Send Now"
-msgstr "立刻寄出"
-
-#: flowview_filters.php:40 flowview_schedules.php:38
-msgid "Disable"
-msgstr "停用"
-
-#: flowview_filters.php:41 flowview_schedules.php:39
-msgid "Enable"
-msgstr "啟用"
 
 #: flowview_filters.php:132
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
@@ -1503,13 +1563,13 @@ msgstr "流量過濾器"
 msgid "FlowView Filters [ Add Devices before Filters ]"
 msgstr "FlowView過濾器[在過濾器之前添加設備]"
 
-#: flowview_filters.php:239 flowview_filters.php:353 setup.php:144
-#: setup.php:260
+#: flowview_filters.php:239 flowview_filters.php:353 setup.php:140
+#: setup.php:256
 msgid "Filters"
 msgstr "篩選"
 
-#: flowview_filters.php:322 flowview_schedules.php:81
-#: flowview_schedules.php:543
+#: flowview_filters.php:322 flowview_schedules.php:97
+#: flowview_schedules.php:949
 msgid "Filter Name"
 msgstr "過濾條件名稱"
 
@@ -1520,6 +1580,10 @@ msgstr "ID"
 #: flowview_filters.php:347
 msgid "Resolution"
 msgstr "解析度"
+
+#: flowview_schedules.php:36
+msgid "Send Now"
+msgstr "立刻寄出"
 
 #: flowview_schedules.php:43
 msgid "Every Hour"
@@ -1548,1550 +1612,1811 @@ msgstr "每 %d 周，2"
 msgid "Every Month"
 msgstr "每個月"
 
-#: flowview_schedules.php:64
+#: flowview_schedules.php:76
+#, fuzzy
+msgid "General Settings"
+msgstr "清除過濾器"
+
+#: flowview_schedules.php:80
 msgid "Title"
 msgstr "標題"
 
-#: flowview_schedules.php:66
+#: flowview_schedules.php:82
 msgid "New Schedule"
 msgstr "新計畫"
 
-#: flowview_schedules.php:67
+#: flowview_schedules.php:83
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "輸入FlowView計劃的報告標題。"
 
-#: flowview_schedules.php:73 flowview_schedules.php:563
-msgid "Enabled"
-msgstr "啟用"
-
-#: flowview_schedules.php:76
+#: flowview_schedules.php:92
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "是否將發送此NetFlow Scan。"
 
-#: flowview_schedules.php:82
+#: flowview_schedules.php:98
 msgid "Name of the query to run."
 msgstr "要運行的查詢的名稱。"
 
-#: flowview_schedules.php:87
+#: flowview_schedules.php:103
+#, fuzzy
+msgid "Send Settings"
+msgstr "AS 集"
+
+#: flowview_schedules.php:107
 msgid "Send Interval"
 msgstr "發送間隔"
 
-#: flowview_schedules.php:88
+#: flowview_schedules.php:108
 msgid "How often to send this NetFlow Report?"
 msgstr "發送此NetFlow報告的頻率如何？"
 
-#: flowview_schedules.php:97
+#: flowview_schedules.php:116
+#, fuzzy
+msgid "Scheduled Base Time"
+msgstr "計畫標題"
+
+#: flowview_schedules.php:117
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr "這是發送NetFlow Scan電子郵件的第一個日期/時間。所有未來的電子郵件將根據此時間加上上面給出的間隔計算出來。"
 
-#: flowview_schedules.php:105
-msgid "Email Addresses"
-msgstr "電子郵件信箱"
-
-#: flowview_schedules.php:106
-msgid "Email addresses (command delimited) to send this NetFlow Scan to."
-msgstr "用於發送此NetFlow Scan的電子郵件地址（命令分隔）。"
-
-#: flowview_schedules.php:113 setup.php:419
-msgid "Format File to Use"
-msgstr "格式化文件以使用"
-
-#: flowview_schedules.php:116 setup.php:422
-msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "選擇要使用的自定義html包裝器和CSS文件。此文件包含用於包裝報表的html和CSS。如果它不僅包含CSS，那麼您需要放置一個特殊的<REPORT>標籤裡面的文件。此格式標記將替換為報告內容。這些文件位於“formats”目錄中。"
-
-#: flowview_schedules.php:185
-#, php-format
-msgid "Sent Scheduled Report %s in Background."
-msgstr "已在後台發送預定報告%s。"
-
-#: flowview_schedules.php:188
-msgid "Reports will arrive once Complete."
-msgstr "一旦完成，報告將到達。"
-
-#: flowview_schedules.php:223
-msgid "Click 'Continue' to delete the following Schedule(s)."
-msgstr "單擊“繼續”以刪除以下計劃。"
-
-#: flowview_schedules.php:230
-msgid "Click 'Continue' to send the following Schedule(s) now."
-msgstr "點擊“繼續”立即發送以下時間表。"
-
-#: flowview_schedules.php:237
-msgid "Click 'Continue' to Disable the following Schedule(s)."
-msgstr "單擊“繼續”以禁用以下計劃。"
-
-#: flowview_schedules.php:244
-msgid "Click 'Continue' to Enable the following Schedule(s)."
-msgstr "單擊“繼續”以啟用以下計劃。"
-
-#: flowview_schedules.php:251
-msgid "You must select at least one schedule."
-msgstr "您必須至少選擇一個計劃。"
-
-#: flowview_schedules.php:345
-#, php-format
-msgid "Report: [edit: %s]"
-msgstr "報告：[編輯：%s]"
-
-#: flowview_schedules.php:347
-msgid "Report: [new]"
-msgstr "報告：[新]"
-
-#: flowview_schedules.php:368 functions.php:745
-msgid "Start Date Selector"
-msgstr "開始日期選擇器"
-
-#: flowview_schedules.php:438
-msgid "FlowView Schedules"
-msgstr "FlowView計劃"
-
-#: flowview_schedules.php:440
-msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr "FlowView時間表[在時間表之前添加設備]"
-
-#: flowview_schedules.php:456 flowview_schedules.php:568 setup.php:145
-#: setup.php:232
-msgid "Schedules"
-msgstr "排程"
-
-#: flowview_schedules.php:539
-msgid "Schedule Title"
-msgstr "計畫標題"
-
-#: flowview_schedules.php:547
-msgid "Interval"
-msgstr "間隔"
-
-#: flowview_schedules.php:551
-msgid "Start Date"
-msgstr "開始日期"
-
-#: flowview_schedules.php:555
-msgid "Next Send"
-msgstr "下一步發送"
-
-#: functions.php:31
-msgid "General"
-msgstr "一般"
-
-#: functions.php:112
-msgid "Select a Report Type First"
-msgstr "打印報告"
-
-#: functions.php:138
-#, php-format
-msgid "Filter: [edit: %s]"
-msgstr "過濾器：[編輯：%s]"
-
-#: functions.php:140
-msgid "Filter: [new]"
-msgstr "報告：[新]"
-
-#: functions.php:511
-msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr "未定義的過濾器[選擇過濾器以獲取詳細信息]"
-
-#: functions.php:521
-#, php-format
-msgid "Statistical Report: %s [ Including overrides as specified below ]"
-msgstr "統計報告：%s [包括以下指定的替代項]"
-
-#: functions.php:523
-#, php-format
-msgid "Printed Report: %s [ Including overrides as specified below ]"
-msgstr "印刷報告：%s [包括以下指定的替代項]"
-
-#: functions.php:541
-msgid "Select a Filter"
-msgstr "打印報告"
-
-#: functions.php:560
-msgid "Select a Listener"
-msgstr "打印報告"
-
-#: functions.php:575
-msgid "Exclude"
-msgstr "排除"
-
-#: functions.php:579
-msgid "None"
-msgstr "無"
-
-#: functions.php:580
-msgid "Top Sample"
-msgstr "熱門樣本"
-
-#: functions.php:585
-#, php-format
-msgid "Top %d Samples"
-msgstr "前 %d 個示例"
-
-#: functions.php:590
-msgid "Show only Domains on Charts Below"
-msgstr "在下面的圖表上僅顯示域"
-
-#: functions.php:592
-msgid "Domains/Hostnames Only"
-msgstr "僅域"
-
-#: functions.php:596
-msgid "Apply Filter"
-msgstr "篩選"
-
-#: functions.php:597
-msgid "Clear Filter"
-msgstr "清除篩選"
-
-#: functions.php:598
-msgid "Create new Flow Filter"
-msgstr "多久創建一個新的Flow文件。"
-
-#: functions.php:598
-msgid "New"
-msgstr "新增"
-
-#: functions.php:599
-msgid "Edit"
-msgstr "編輯"
-
-#: functions.php:599
-msgid "Edit the Flow Filter"
-msgstr "編輯當前過濾器"
-
-#: functions.php:600 functions.php:832
-msgid "Save"
-msgstr "儲存"
-
-#: functions.php:600
-msgid "Save the Flow Filter"
-msgstr "打印報告"
-
-#: functions.php:601
-msgid "Save As"
-msgstr "另存為"
-
-#: functions.php:601
-msgid "Save the existing Flow Filter as new Filter"
-msgstr "打印報告"
-
-#: functions.php:602
-msgid "Rename"
-msgstr "重新命名"
-
-#: functions.php:602
-msgid "Rename the Flow Filter"
-msgstr "重新命名流量篩檢程式"
-
-#: functions.php:603
-msgid "Delete the Flow Filter"
-msgstr "打印報告"
-
-#: functions.php:611
-msgid "Report"
-msgstr "報告"
-
-#: functions.php:622
-#, php-format
-msgid "Statistical: %s"
-msgstr "統計：%s"
-
-#: functions.php:628
-#, php-format
-msgid "Printed: %s"
-msgstr "印刷： %s"
-
-#: functions.php:632 functions.php:649
-msgid "Select a Filter First"
-msgstr "打印報告"
-
-#: functions.php:688
-msgid "Lines"
-msgstr "明細列表"
-
-#: functions.php:706
-msgid "Octets"
-msgstr "八位位組"
-
-#: functions.php:724
-msgid "Timespan"
-msgstr "時間跨度"
-
-#: functions.php:733
-msgid "Custom"
-msgstr "自訂"
-
-#: functions.php:739
-msgid "From"
-msgstr "從"
-
-#: functions.php:748
-msgid "To"
-msgstr "到"
-
-#: functions.php:754
-msgid "End Date Selector"
-msgstr "結束日期選擇器"
-
-#: functions.php:757
-msgid "Shift Time Backward"
-msgstr "轉移時間倒退"
-
-#: functions.php:760
-msgid "Define Shifting Interval"
-msgstr "定義移位間隔"
-
-#: functions.php:773
-msgid "Shift Time Forward"
-msgstr "轉移時間"
-
-#: functions.php:780
-msgid "Graph"
-msgstr "圖表"
-
-#: functions.php:784
-msgid "Bar"
-msgstr "橫條"
-
-#: functions.php:785
-msgid "Pie"
-msgstr "圓餅圖"
-
-#: functions.php:786
-msgid "Treemap"
-msgstr "樹形圖"
-
-#: functions.php:790
-msgid "Height"
-msgstr "高度"
-
-#: functions.php:802
-msgid "Show/Hide"
-msgstr "顯示/隱藏"
-
-#: functions.php:806
-msgid "Table"
-msgstr "表格"
-
-#: functions.php:827
-msgid "Save Flow Filter"
-msgstr "新篩選器"
-
-#: functions.php:829
-msgid "New Name"
-msgstr "新名稱"
-
-#: functions.php:838
-msgid "Delete Flow Filter"
-msgstr "打印報告"
-
-#: functions.php:840
-msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
-msgstr "要刪除此流量過濾器，請按繼續。 如果在計劃報告中使用流量篩檢程式，則該操作將被阻止。"
-
-#: functions.php:857
-#, php-format
-msgid "Top %s Distribution Chart of Bytes"
-msgstr "位元組數的前%s分佈圖"
-
-#: functions.php:858
-#, php-format
-msgid "Top %s Pie Chart of Bytes"
-msgstr "前 %s 個餅圖位元組數"
-
-#: functions.php:859
-#, php-format
-msgid "Top %s Treemap Chart of Bytes"
-msgstr "前 %s 個樹狀圖位元組圖"
-
-#: functions.php:862
-#, php-format
-msgid "Top %s Distribution Chart of Packets"
-msgstr "數據包的前%s分布圖"
-
-#: functions.php:863
-#, php-format
-msgid "Top %s Pie Chart of Packets"
-msgstr "前 %s 個數據包餅圖"
-
-#: functions.php:864
-#, php-format
-msgid "Top %s Treemap Chart of Packets"
-msgstr "Top %s Treemap 數據包圖"
-
-#: functions.php:867
-#, php-format
-msgid "Top %s Distribution Chart of Flows"
-msgstr "流量的前 %s 分布圖"
-
-#: functions.php:868
-#, php-format
-msgid "Top %s Pie Chart of Flows"
-msgstr "前 %s 個餅圖流程圖"
-
-#: functions.php:869
-#, php-format
-msgid "Top %s Treemap Chart of Flows"
-msgstr "前 %s 條狀圖流程圖"
-
-#: functions.php:976
-msgid "Rename Layout"
-msgstr "重新命名佈局"
-
-#: functions.php:984
-msgid " <new>"
-msgstr "[新]"
-
-#: functions.php:1502
-msgid "Filter Settings Saved"
-msgstr "過濾器設置已保存"
-
-#: functions.php:1618
-#, php-format
-msgid "Client/Private (%s)"
-msgstr "客戶/私人（%s）"
-
-#: functions.php:1620
-msgid "icmp (0)"
-msgstr "icmp（0）"
-
-#: functions.php:1631
-#, php-format
-msgid "Unknown (%s)"
-msgstr "未知 （%s）"
-
-#: functions.php:1662
-msgid "Cacti Flowview"
-msgstr "Cacti Flowview"
-
-#: functions.php:1668
-#, php-format
-msgid "Netflow - %s"
-msgstr "Netflow - %s"
-
-#: functions.php:1870
-#, php-format
-msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr "子網篩選器：%s不是值CIDR格式"
-
-#: functions.php:2044 functions.php:2050 functions.php:2056 functions.php:2059
-#: functions.php:2085 functions.php:3482
-msgid "unresolved"
-msgstr "未解决的"
-
-#: functions.php:2394 functions.php:2395 functions.php:2396 functions.php:2397
-#: functions.php:2398 functions.php:2399 functions.php:2400 functions.php:2401
-#: functions.php:2402 functions.php:2403 functions.php:2404 functions.php:2405
-#: functions.php:2406 functions.php:2407 functions.php:2408 functions.php:2409
-#: functions.php:2410 functions.php:2411 functions.php:2412 functions.php:2413
-#: functions.php:2414 functions.php:2415 functions.php:2416 functions.php:2417
-#: functions.php:2418 functions.php:2419
-#, php-format
-msgid "%d - %d Bytes"
-msgstr "%d - %d 位元組"
-
-#: functions.php:2420
-#, fuzzy, php-format
-msgid "> %d Bytes"
-msgstr "％d字節"
-
-#: functions.php:2884
-msgid "Source DNS"
-msgstr "資料來源"
-
-#: functions.php:2888
-msgid "Source Root DNS"
-msgstr "資料來源"
-
-#: functions.php:2892
-msgid "Dest DNS"
-msgstr "Dest AS"
-
-#: functions.php:2896
-msgid "Dest Root DNS"
-msgstr "目的通訊埠"
-
-#: functions.php:2900
-msgid "DNS"
-msgstr "DNS"
-
-#: functions.php:2904
-msgid "Root DNS"
-msgstr "根DNS"
-
-#: functions.php:2924
-msgid "Dest Port"
-msgstr "目的通訊埠"
-
-#: functions.php:2932
-msgid "Dest IF"
-msgstr "目的通訊埠"
-
-#: functions.php:2948
-msgid "Dest Prefix"
-msgstr "Dest前綴"
-
-#: functions.php:2956
-msgid "Type of Service"
-msgstr "服務種類"
-
-#: functions.php:2975
-msgid "Bytes/Packet"
-msgstr "封包"
-
-#: functions.php:3395
-msgid "The Parallel Query Timed Out.  Please contact your administrator"
-msgstr "並行查詢超時。 請與您的管理員聯繫"
-
-#: functions.php:3588
-#, php-format
-msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr "布爾值：%s，數字：%s，十六進制：%s"
-
-#: functions.php:3599
-msgid "Low Delay"
-msgstr "低延遲"
-
-#: functions.php:3600
-msgid "Throughput"
-msgstr "吞吐量"
-
-#: functions.php:3601
-msgid "Reliability"
-msgstr "可靠性"
-
-#: functions.php:3602
-msgid "Mincost"
-msgstr "最低成本"
-
-#: functions.php:3606
-msgid "Net Control"
-msgstr "網絡控制"
-
-#: functions.php:3607
-msgid "Internet Control"
-msgstr "互聯網控制"
-
-#: functions.php:3608
-msgid "Critic ECP"
-msgstr "評論家ECP"
-
-#: functions.php:3609
-msgid "Flash Override"
-msgstr "閃存覆蓋"
-
-#: functions.php:3610
-msgid "Flash"
-msgstr "快閃"
-
-#: functions.php:3611
-msgid "Immediate"
-msgstr "即時"
-
-#: functions.php:3612
-msgid "Priority"
-msgstr "優先度"
-
-#: functions.php:3613
-msgid "Routine"
-msgstr "常規"
-
-#: functions.php:3653
-msgid "Summary Statistics"
-msgstr "摘要統計"
-
-#: functions.php:3664
-#, php-format
-msgid "IP Packet Size Distribution (%%)"
-msgstr "IP數據包大小分佈（％）"
-
-#: functions.php:3669
-#, php-format
-msgid "Packets per Flow Distribution (%%)"
-msgstr "每個流量分配的數據包（％）"
-
-#: functions.php:3674
-#, php-format
-msgid "Octets per Flow Distribution (%%)"
-msgstr "每流量分佈的八位字節（％）"
-
-#: functions.php:3679
-#, php-format
-msgid "Flow Time Distribution (%%)"
-msgstr "流動時間分佈（％）"
-
-#: functions.php:3864
-msgid "You must select a Statistics Report or Printed Report!"
-msgstr "您必須選擇統計報告或打印報告！"
-
-#: functions.php:3868
-msgid "You must select only a Statistics Report or a Printed Report (not both)!"
-msgstr "您必須只選擇統計報告或打印報告（不是兩者）！"
-
-#: functions.php:3872
-msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
-msgstr "日期無效，結束日期/時間早於開始日期/時間！"
-
-#: functions.php:3883 functions.php:3888
-msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr "源地址的IP無效！ <br> （必須採用'192.168.0.1'的形式）"
-
-#: functions.php:3895 functions.php:3901 functions.php:3905
-msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "源地址的子網無效！ <br> （必須採用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
-
-#: functions.php:3919 functions.php:3923
-msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr "目標地址的IP無效！ <br> （必須採用'192.168.0.1'的形式）"
-
-#: functions.php:3929 functions.php:3933 functions.php:3937
-msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "目標地址的子網無效！ <br> （必須採用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
-
-#: functions.php:3955
-msgid "Invalid value for Source Interface!"
-msgstr "源接口的值無效！"
-
-#: functions.php:3971
-msgid "Invalid value for Source Port! (0 - 65535)"
-msgstr "源端口的值無效！ （0  -  65535）"
-
-#: functions.php:3987
-msgid "Invalid value for Source AS! (0 - 65535)"
-msgstr "源AS的值無效！ （0  -  65535）"
-
-#: functions.php:4003
-msgid "Invalid value for Destination Interface!"
-msgstr "目標接口的值無效！"
-
-#: functions.php:4019
-msgid "Invalid value for Destination Port! (0 - 65535)"
-msgstr "目標端口的值無效！ （0  -  65535）"
-
-#: functions.php:4035
-msgid "Invalid value for Destination AS! (0 - 65535)"
-msgstr "目標AS的值無效！ （0  -  65535）"
-
-#: functions.php:4051
-msgid "Invalid value for Protocol! (1 - 255)"
-msgstr "協議的值無效！ （1  -  255）"
-
-#: functions.php:4063
-msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
-msgstr "TCP標誌的值無效！ （例如：0x1b或0x1b / SA或SA / SA）"
-
-#: functions.php:4072
-msgid "Invalid value for Cutoff Octets!"
-msgstr "Cutoff Octets的值無效！"
-
-#: functions.php:4079
-msgid "Invalid value for Cutoff Lines!"
-msgstr "截止線的值無效！"
-
-#: functions.php:4086
-msgid "Invalid value for Sort Field!"
-msgstr "排序字段的值無效！"
-
-#: functions.php:4113
-#, php-format
-msgid "FlowView Chart for %s Type is %s"
-msgstr "%s類型的 FlowView 圖表是%s"
-
-#: functions.php:4459
-msgid "Not Supported"
-msgstr "僅在“https”站點中受支持"
-
-#: functions.php:4534
-msgid "Total Flows"
-msgstr "最大流量："
-
-#: functions.php:4539
-msgid "Bytes Exchanged"
-msgstr "字節交換"
-
-#: functions.php:4543
-msgid "Packets Examined"
-msgstr "數據包吧"
-
-#: setup.php:35
-msgid "Plugin -> Flow Viewer"
-msgstr "插件 - >流程查看器"
-
-#: setup.php:36
-msgid "Plugin -> Flow Admin"
-msgstr "插件 - > Flow Admin"
-
-#: setup.php:43 setup.php:71
-msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
-msgstr "請重命名 flowview 目錄中的 config.php.dist 或 config_local.php.dist 檔，並在安裝之前更改資料庫設置。"
-
-#: setup.php:123
-msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
-msgstr "請注意，Flowview 外掛程式表正在後台進行升級。 這可能需要一些時間。檢查仙人掌日誌以獲取更多資訊"
-
-#: setup.php:136
-msgid "The Filter has been Deleted"
-msgstr "過濾器已被刪除"
-
-#: setup.php:137
-msgid "The Filter has been Updated"
-msgstr "過濾器已更新"
-
-#: setup.php:142
-msgid "Import/Export"
-msgstr "匯入/匯出"
-
-#: setup.php:143 setup.php:144 setup.php:145 setup.php:146 setup.php:151
-#: setup.php:295 setup.php:297
-msgid "FlowView"
-msgstr "FlowView"
-
-#: setup.php:146
-msgid "Databases"
-msgstr "資料庫"
-
-#: setup.php:154
-msgid "Normal User"
-msgstr "普通用戶"
-
-#: setup.php:155
-msgid "System Administration"
-msgstr "系統管理"
-
-#: setup.php:176 setup.php:197
-msgid "Flow Viewer"
-msgstr "流查看器"
-
-#: setup.php:183
-msgid "Dashboard"
-msgstr "控制台"
-
-#: setup.php:190 setup.php:218 setup.php:246 setup.php:274
-msgid "(save)"
-msgstr "儲存"
-
-#: setup.php:211 setup.php:239 setup.php:267
-msgid "(edit)"
-msgstr "(編輯)"
-
-#: setup.php:225 setup.php:253 setup.php:281
-msgid "(actions)"
-msgstr "動作"
-
-#: setup.php:357
-msgid "Name Resolution"
-msgstr "解析度"
-
-#: setup.php:362
-msgid "Hostname Resolution"
-msgstr "解析度"
-
-#: setup.php:363
-msgid "The method by which you wish to resolve hostnames."
-msgstr "您希望解析主機名的方法。"
-
-#: setup.php:366
-msgid "Use Local Server"
-msgstr "使用本地服務器"
-
-#: setup.php:367
-msgid "Use DNS Servers under Mail/Reporting/DNS"
-msgstr "使用下面的DNS服務器"
-
-#: setup.php:368
-msgid "Don't Resolve DNS"
-msgstr "不要解析DNS"
-
-#: setup.php:373
-msgid "Local Domain Name"
-msgstr "剝離域名"
-
-#: setup.php:376
-msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
-msgstr "對於本地網路上無法在本地解析的 IPv4 位址，請將此後綴追加到生成的 IP 位址。"
-
-#: setup.php:381
-msgid "Local IP Range"
-msgstr "本地IP範圍"
-
-#: setup.php:384
-msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For examle: 192.168.11.0 or 192.168.11.0/24"
-msgstr "為可能未在 DNS 中註冊的主機提供本地網路的 IPv4 IP 位址範圍。 這些主機將映射到上面的本地域名。 這更適合家庭使用者。 您可以使用 CIDR 格式或非 CIDR 格式。 檢查：192.168.11.0 或 192.168.11.0/24"
-
-#: setup.php:385
-msgid "Use CIDR or Non-CIDR"
-msgstr "使用 CIDR 或非 CIDR"
-
-#: setup.php:390
-msgid "Use Arin to find Domains and AS Numbers"
-msgstr "使用 Arin 查找未註冊的功能變數名稱"
-
-#: setup.php:391
-msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
-msgstr "許多大型科技數據收集服務喜歡掩蓋他們對域名的擁有權，以混淆他們正在收集您的個人信息的事實。 如果您擔心這一點並且您的 Cacti 安裝可以存取 Internet，您可以使用 Arin 從那些大型科技公司那裡移除面具。"
-
-#: setup.php:396
-msgid "Whois Provider Host"
-msgstr "Whois 提供商託管"
-
-#: setup.php:399
-msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
-msgstr "請提供主機名以解決 whois 調用。 如果不為 null，則系統路徑中必須具有 whois 二進位檔。"
-
-#: setup.php:400
-msgid "whois.radb.net"
-msgstr "whois.radb.net"
-
-#: setup.php:405
-msgid "Whois Binary Path"
-msgstr "Flow Tools二進制路徑"
-
-#: setup.php:408
-msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
-msgstr "請提供「whois」二進位文件的路徑名。 “whois”二進位檔將用於查找補充 Arin 的 AS 資訊。"
-
-#: setup.php:409
-msgid "Enter binary path"
-msgstr "輸入二進位路徑"
-
-#: setup.php:414
-msgid "Data Retention and Report Generation"
-msgstr "數據保留和報告生成"
-
-#: setup.php:426
-msgid "Data Retention Policy"
-msgstr "資料保留政策"
-
-#: setup.php:427
-msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr "仙人掌將維護分區流表的時間。"
-
-#: setup.php:430
-#, fuzzy, php-format
-msgid "%d Week"
-msgstr "％d週"
-
-#: setup.php:431 setup.php:432
-#, fuzzy, php-format
-msgid "%d Weeks"
-msgstr "最後％d週"
-
-#: setup.php:433
-#, php-format
-msgid "%d Month"
-msgstr "%d月"
-
-#: setup.php:434 setup.php:435 setup.php:436 setup.php:437
-#, fuzzy, php-format
-msgid "%d Months"
-msgstr "最後％d個月"
-
-#: setup.php:438
-#, php-format
-msgid "%d Year"
-msgstr "%d年"
-
-#: setup.php:443
-msgid "Database Partitioning Scheme"
-msgstr "數據庫分區方案"
-
-#: setup.php:444
-msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr "根據每分鐘的流數，您可能每天需要更多表。"
-
-#: setup.php:447
-msgid "Daily"
-msgstr "每日"
-
-#: setup.php:448
-msgid "Hourly"
-msgstr "每小時"
-
-#: setup.php:453
-msgid "Storage Engine for Raw Tables"
-msgstr "原始表的儲存引擎"
-
-#: setup.php:454
-msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
-msgstr "Aria Engine 非常適合除 Live raw 表以外的所有內容。 Live raw 表將始終為 InnoDB。 任您挑選。"
-
-#: setup.php:457
-msgid "Aria (Fast, Crash Safe)"
-msgstr "Aria（快速、碰撞安全）"
-
-#: setup.php:458
-msgid "InnoDB (Slow, High Concurrency)"
-msgstr "InnoDB（慢速、高併發）"
-
-#: setup.php:463
-msgid "Parallel Queries"
-msgstr "並行查詢"
-
-#: setup.php:468
-msgid "Max Concurrent Threads"
-msgstr "最大併發線程數"
-
-#: setup.php:469
-msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
-msgstr "為運行 FlowView 查詢而調度的最大線程數。 請注意，每個資料庫分區最多可以有1個線程，並且應注意不要因運行過多的併發線程而使資料庫伺服器過載。"
-
-#: setup.php:472
-msgid "Disabled"
-msgstr "停用"
-
-#: setup.php:473 setup.php:474 setup.php:475 setup.php:476 setup.php:477
-#: setup.php:478 setup.php:479 setup.php:480 setup.php:481 setup.php:482
-#: setup.php:483 setup.php:484 setup.php:485 setup.php:486 setup.php:487
-#: setup.php:488 setup.php:489 setup.php:490 setup.php:491
-#, fuzzy, php-format
-msgid "%d Threads"
-msgstr "％d個主題"
-
-#: setup.php:496
-msgid "Maximum Run Time"
-msgstr "最大行數"
-
-#: setup.php:497
-msgid "If the Parallel Query does not finish in this time, exit."
-msgstr "如果並行查詢在此時間內未完成，請退出。"
-
-#: setup.php:500
+#: flowview_schedules.php:124
+msgid "Max Allowed Runtime"
+msgstr ""
+
+#: flowview_schedules.php:125
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr ""
+
+#: flowview_schedules.php:130 setup.php:609
 #, php-format
 msgid "%d Minute"
 msgstr "%d 分鐘"
 
-#: setup.php:501 setup.php:502 setup.php:503 setup.php:504 setup.php:505
-#: setup.php:506
+#: flowview_schedules.php:131 flowview_schedules.php:132
+#: flowview_schedules.php:133 flowview_schedules.php:134
+#: flowview_schedules.php:135 flowview_schedules.php:136
+#: flowview_schedules.php:137 flowview_schedules.php:138
+#: flowview_schedules.php:139 setup.php:610 setup.php:611 setup.php:612
+#: setup.php:613 setup.php:614 setup.php:615
 #, php-format
 msgid "%d Minutes"
 msgstr "%d 分鐘"
 
-#: setup.php:511
+#: flowview_schedules.php:143
+msgid "Legacy Email Settings"
+msgstr ""
+
+#: flowview_schedules.php:148
+msgid "Email Addresses"
+msgstr "電子郵件信箱"
+
+#: flowview_schedules.php:149
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "用於發送此NetFlow Scan的電子郵件地址（命令分隔）。"
+
+#: flowview_schedules.php:156 setup.php:531
+msgid "Format File to Use"
+msgstr "格式化文件以使用"
+
+#: flowview_schedules.php:159 setup.php:534
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "選擇要使用的自定義html包裝器和CSS文件。此文件包含用於包裝報表的html和CSS。如果它不僅包含CSS，那麼您需要放置一個特殊的<REPORT>標籤裡面的文件。此格式標記將替換為報告內容。這些文件位於“formats”目錄中。"
+
+#: flowview_schedules.php:164
+msgid "Notification List Settings"
+msgstr ""
+
+#: flowview_schedules.php:169
+msgid "Notification List"
+msgstr ""
+
+#: flowview_schedules.php:170
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr ""
+
+#: flowview_schedules.php:266
+#, fuzzy
+msgid "The Report will arrive once complete."
+msgstr "一旦完成，報告將到達。"
+
+#: flowview_schedules.php:301
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "單擊“繼續”以刪除以下計劃。"
+
+#: flowview_schedules.php:308
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "點擊“繼續”立即發送以下時間表。"
+
+#: flowview_schedules.php:315
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "單擊“繼續”以禁用以下計劃。"
+
+#: flowview_schedules.php:322
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "單擊“繼續”以啟用以下計劃。"
+
+#: flowview_schedules.php:329
+msgid "You must select at least one schedule."
+msgstr "您必須至少選擇一個計劃。"
+
+#: flowview_schedules.php:368 flowview_schedules.php:394
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr ""
+
+#: flowview_schedules.php:422
+msgid "You must specify Emails, a Notification List or both!"
+msgstr ""
+
+#: flowview_schedules.php:489
+#, fuzzy, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "報告：[編輯：%s]"
+
+#: flowview_schedules.php:491
+#, fuzzy, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "報告：[編輯：%s]"
+
+#: flowview_schedules.php:494
+#, fuzzy
+msgid "Scheduled Report: [new]"
+msgstr "報告：[新]"
+
+#: flowview_schedules.php:559 flowview_schedules.php:856
+#: flowview_schedules.php:980 setup.php:141 setup.php:228
+msgid "Schedules"
+msgstr "排程"
+
+#: flowview_schedules.php:646 flowview_schedules.php:945
+#, fuzzy
+msgid "Report Title"
+msgstr "報表類型"
+
+#: flowview_schedules.php:650
+msgid "Id"
+msgstr ""
+
+#: flowview_schedules.php:654
+#, fuzzy
+msgid "Output Type"
+msgstr "輸出字段"
+
+#: flowview_schedules.php:658 flowview_schedules.php:672
+msgid "Sent By"
+msgstr ""
+
+#: flowview_schedules.php:662
+#, fuzzy
+msgid "Date Sent"
+msgstr "路由集"
+
+#: flowview_schedules.php:667
+#, fuzzy
+msgid "Run Time"
+msgstr "結束時間"
+
+#: flowview_schedules.php:677 flowview_schedules.php:705
+msgid "Download Data"
+msgstr ""
+
+#: flowview_schedules.php:683
+#, fuzzy
+msgid "Report Logs"
+msgstr "報告"
+
+#: flowview_schedules.php:694
+msgid " [View Report Raw]"
+msgstr ""
+
+#: flowview_schedules.php:695
+msgid " [View Report with CSS]"
+msgstr ""
+
+#: flowview_schedules.php:701
+msgid "Manual Send"
+msgstr ""
+
+#: flowview_schedules.php:701
+#, fuzzy
+msgid "Scheduled"
+msgstr "排程"
+
+#: flowview_schedules.php:703
+#, php-format
+msgid "%s Seconds"
+msgstr ""
+
+#: flowview_schedules.php:768 functions.php:894
+msgid "Start Date Selector"
+msgstr "開始日期選擇器"
+
+#: flowview_schedules.php:838
+msgid "FlowView Schedules"
+msgstr "FlowView計劃"
+
+#: flowview_schedules.php:840
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "FlowView時間表[在時間表之前添加設備]"
+
+#: flowview_schedules.php:953
+msgid "Interval"
+msgstr "間隔"
+
+#: flowview_schedules.php:957
+msgid "Last Sent"
+msgstr ""
+
+#: flowview_schedules.php:961
+msgid "Next Send"
+msgstr "下一步發送"
+
+#: flowview_schedules.php:965
+#, fuzzy
+msgid "Email/List"
+msgstr "電子郵件"
+
+#: flowview_schedules.php:969
+msgid "Logged Sends"
+msgstr ""
+
+#: functions-pre13.php:42
+#, fuzzy, php-format
+msgid "Cacti %s"
+msgstr "仙人掌"
+
+#: functions-pre13.php:191
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr ""
+
+#: functions-pre13.php:197
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr ""
+
+#: functions.php:35 functions.php:116
+msgid "General"
+msgstr "一般"
+
+#: functions.php:117
+msgid "Logs"
+msgstr ""
+
+#: functions.php:173
+msgid "Select a Report Type First"
+msgstr "打印報告"
+
+#: functions.php:199
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "過濾器：[編輯：%s]"
+
+#: functions.php:201
+msgid "Filter: [new]"
+msgstr "報告：[新]"
+
+#: functions.php:617
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "未定義的過濾器[選擇過濾器以獲取詳細信息]"
+
+#: functions.php:627
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "統計報告：%s [包括以下指定的替代項]"
+
+#: functions.php:629
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "印刷報告：%s [包括以下指定的替代項]"
+
+#: functions.php:647
+msgid "Select a Filter"
+msgstr "打印報告"
+
+#: functions.php:666
+msgid "Select a Listener"
+msgstr "打印報告"
+
+#: functions.php:686
+#, fuzzy
+msgid "Stream"
+msgstr "流"
+
+#: functions.php:690
+#, fuzzy
+msgid "Select a Stream Host"
+msgstr "打印報告"
+
+#: functions.php:714
+msgid "Apply Filter"
+msgstr "篩選"
+
+#: functions.php:715
+msgid "Clear Filter"
+msgstr "清除篩選"
+
+#: functions.php:716
+msgid "Create new Flow Filter"
+msgstr "多久創建一個新的Flow文件。"
+
+#: functions.php:716
+msgid "New"
+msgstr "新增"
+
+#: functions.php:717
+msgid "Edit"
+msgstr "編輯"
+
+#: functions.php:717
+msgid "Edit the Flow Filter"
+msgstr "編輯當前過濾器"
+
+#: functions.php:718 functions.php:986
+msgid "Save"
+msgstr "儲存"
+
+#: functions.php:718
+msgid "Save the Flow Filter"
+msgstr "打印報告"
+
+#: functions.php:719
+msgid "Save As"
+msgstr "另存為"
+
+#: functions.php:719
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "打印報告"
+
+#: functions.php:720
+msgid "Rename"
+msgstr "重新命名"
+
+#: functions.php:720
+msgid "Rename the Flow Filter"
+msgstr "重新命名流量篩檢程式"
+
+#: functions.php:721
+msgid "Delete the Flow Filter"
+msgstr "打印報告"
+
+#: functions.php:729
+msgid "Report"
+msgstr "報告"
+
+#: functions.php:740
+#, php-format
+msgid "Statistical: %s"
+msgstr "統計：%s"
+
+#: functions.php:746
+#, php-format
+msgid "Printed: %s"
+msgstr "印刷： %s"
+
+#: functions.php:750 functions.php:767
+msgid "Select a Filter First"
+msgstr "打印報告"
+
+#: functions.php:817
+msgid "Lines"
+msgstr "明細列表"
+
+#: functions.php:835
+msgid "Exclude"
+msgstr "排除"
+
+#: functions.php:840
+msgid "Top Sample"
+msgstr "熱門樣本"
+
+#: functions.php:845
+#, php-format
+msgid "Top %d Samples"
+msgstr "前 %d 個示例"
+
+#: functions.php:851
+msgid "Octets"
+msgstr "八位位組"
+
+#: functions.php:864
+msgid "Show only Domains on Charts Below"
+msgstr "在下面的圖表上僅顯示域"
+
+#: functions.php:866
+msgid "Domains/Hostnames Only"
+msgstr "僅域"
+
+#: functions.php:873
+msgid "Timespan"
+msgstr "時間跨度"
+
+#: functions.php:882
+msgid "Custom"
+msgstr "自訂"
+
+#: functions.php:888
+msgid "From"
+msgstr "從"
+
+#: functions.php:897
+msgid "To"
+msgstr "到"
+
+#: functions.php:903
+msgid "End Date Selector"
+msgstr "結束日期選擇器"
+
+#: functions.php:906
+msgid "Shift Time Backward"
+msgstr "轉移時間倒退"
+
+#: functions.php:909
+msgid "Define Shifting Interval"
+msgstr "定義移位間隔"
+
+#: functions.php:922
+msgid "Shift Time Forward"
+msgstr "轉移時間"
+
+#: functions.php:929
+msgid "Graph"
+msgstr "圖表"
+
+#: functions.php:933
+msgid "Bar"
+msgstr "橫條"
+
+#: functions.php:934
+msgid "Pie"
+msgstr "圓餅圖"
+
+#: functions.php:935
+msgid "Treemap"
+msgstr "樹形圖"
+
+#: functions.php:939
+msgid "Height"
+msgstr "高度"
+
+#: functions.php:951
+msgid "Show/Hide"
+msgstr "顯示/隱藏"
+
+#: functions.php:955
+msgid "Table"
+msgstr "表格"
+
+#: functions.php:971
+#, fuzzy
+msgid "Export Raw Data"
+msgstr "報告"
+
+#: functions.php:981
+msgid "Save Flow Filter"
+msgstr "新篩選器"
+
+#: functions.php:983
+msgid "New Name"
+msgstr "新名稱"
+
+#: functions.php:992
+msgid "Delete Flow Filter"
+msgstr "打印報告"
+
+#: functions.php:994
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "要刪除此流量過濾器，請按繼續。 如果在計劃報告中使用流量篩檢程式，則該操作將被阻止。"
+
+#: functions.php:1011
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "位元組數的前%s分佈圖"
+
+#: functions.php:1012
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "前 %s 個餅圖位元組數"
+
+#: functions.php:1013
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "前 %s 個樹狀圖位元組圖"
+
+#: functions.php:1016
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "數據包的前%s分布圖"
+
+#: functions.php:1017
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "前 %s 個數據包餅圖"
+
+#: functions.php:1018
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Top %s Treemap 數據包圖"
+
+#: functions.php:1021
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "流量的前 %s 分布圖"
+
+#: functions.php:1022
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "前 %s 個餅圖流程圖"
+
+#: functions.php:1023
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "前 %s 條狀圖流程圖"
+
+#: functions.php:1135
+msgid "Rename Layout"
+msgstr "重新命名佈局"
+
+#: functions.php:1143
+msgid " <new>"
+msgstr "[新]"
+
+#: functions.php:1668
+msgid "Filter Settings Saved"
+msgstr "過濾器設置已保存"
+
+#: functions.php:1785
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "客戶/私人（%s）"
+
+#: functions.php:1787
+msgid "icmp (0)"
+msgstr "icmp（0）"
+
+#: functions.php:1798
+#, php-format
+msgid "Unknown (%s)"
+msgstr "未知 （%s）"
+
+#: functions.php:1824
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: functions.php:2097
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "子網篩選器：%s不是值CIDR格式"
+
+#: functions.php:2293 functions.php:2299 functions.php:2305 functions.php:2308
+#: functions.php:2334 functions.php:4490
+msgid "unresolved"
+msgstr "未解决的"
+
+#: functions.php:2683 functions.php:2684 functions.php:2685 functions.php:2686
+#: functions.php:2687 functions.php:2688 functions.php:2689 functions.php:2690
+#: functions.php:2691 functions.php:2692 functions.php:2693 functions.php:2694
+#: functions.php:2695 functions.php:2696 functions.php:2697 functions.php:2698
+#: functions.php:2699 functions.php:2700 functions.php:2701 functions.php:2702
+#: functions.php:2703 functions.php:2704 functions.php:2705 functions.php:2706
+#: functions.php:2707 functions.php:2708
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d 位元組"
+
+#: functions.php:2709
+#, fuzzy, php-format
+msgid "> %d Bytes"
+msgstr "％d字節"
+
+#: functions.php:3079
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3081
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3083
+msgid "No valid report was selected.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3274
+msgid "Source DNS"
+msgstr "資料來源"
+
+#: functions.php:3278
+msgid "Source Root DNS"
+msgstr "資料來源"
+
+#: functions.php:3282
+msgid "Dest DNS"
+msgstr "Dest AS"
+
+#: functions.php:3286
+msgid "Dest Root DNS"
+msgstr "目的通訊埠"
+
+#: functions.php:3290
+msgid "DNS"
+msgstr "DNS"
+
+#: functions.php:3294
+msgid "Root DNS"
+msgstr "根DNS"
+
+#: functions.php:3314
+msgid "Dest Port"
+msgstr "目的通訊埠"
+
+#: functions.php:3322
+msgid "Dest IF"
+msgstr "目的通訊埠"
+
+#: functions.php:3338
+msgid "Dest Prefix"
+msgstr "Dest前綴"
+
+#: functions.php:3346
+msgid "Type of Service"
+msgstr "服務種類"
+
+#: functions.php:3365
+msgid "Bytes/Packet"
+msgstr "封包"
+
+#: functions.php:3890
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "並行查詢超時。 請與您的管理員聯繫"
+
+#: functions.php:4596
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "布爾值：%s，數字：%s，十六進制：%s"
+
+#: functions.php:4607
+msgid "Low Delay"
+msgstr "低延遲"
+
+#: functions.php:4608
+msgid "Throughput"
+msgstr "吞吐量"
+
+#: functions.php:4609
+msgid "Reliability"
+msgstr "可靠性"
+
+#: functions.php:4610
+msgid "Mincost"
+msgstr "最低成本"
+
+#: functions.php:4614
+msgid "Net Control"
+msgstr "網絡控制"
+
+#: functions.php:4615
+msgid "Internet Control"
+msgstr "互聯網控制"
+
+#: functions.php:4616
+msgid "Critic ECP"
+msgstr "評論家ECP"
+
+#: functions.php:4617
+msgid "Flash Override"
+msgstr "閃存覆蓋"
+
+#: functions.php:4618
+msgid "Flash"
+msgstr "快閃"
+
+#: functions.php:4619
+msgid "Immediate"
+msgstr "即時"
+
+#: functions.php:4620
+msgid "Priority"
+msgstr "優先度"
+
+#: functions.php:4621
+msgid "Routine"
+msgstr "常規"
+
+#: functions.php:4661
+msgid "Summary Statistics"
+msgstr "摘要統計"
+
+#: functions.php:4672
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "IP數據包大小分佈（％）"
+
+#: functions.php:4677
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "每個流量分配的數據包（％）"
+
+#: functions.php:4682
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "每流量分佈的八位字節（％）"
+
+#: functions.php:4687
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "流動時間分佈（％）"
+
+#: functions.php:4872
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "您必須選擇統計報告或打印報告！"
+
+#: functions.php:4876
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "您必須只選擇統計報告或打印報告（不是兩者）！"
+
+#: functions.php:4880
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "日期無效，結束日期/時間早於開始日期/時間！"
+
+#: functions.php:4891 functions.php:4896
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "源地址的IP無效！ <br> （必須採用'192.168.0.1'的形式）"
+
+#: functions.php:4903 functions.php:4909 functions.php:4913
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "源地址的子網無效！ <br> （必須採用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
+
+#: functions.php:4927 functions.php:4931
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "目標地址的IP無效！ <br> （必須採用'192.168.0.1'的形式）"
+
+#: functions.php:4937 functions.php:4941 functions.php:4945
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "目標地址的子網無效！ <br> （必須採用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
+
+#: functions.php:4963
+msgid "Invalid value for Source Interface!"
+msgstr "源接口的值無效！"
+
+#: functions.php:4979
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "源端口的值無效！ （0  -  65535）"
+
+#: functions.php:4995
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "源AS的值無效！ （0  -  65535）"
+
+#: functions.php:5011
+msgid "Invalid value for Destination Interface!"
+msgstr "目標接口的值無效！"
+
+#: functions.php:5027
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "目標端口的值無效！ （0  -  65535）"
+
+#: functions.php:5043
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "目標AS的值無效！ （0  -  65535）"
+
+#: functions.php:5059
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "協議的值無效！ （1  -  255）"
+
+#: functions.php:5071
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "TCP標誌的值無效！ （例如：0x1b或0x1b / SA或SA / SA）"
+
+#: functions.php:5080
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Cutoff Octets的值無效！"
+
+#: functions.php:5087
+msgid "Invalid value for Cutoff Lines!"
+msgstr "截止線的值無效！"
+
+#: functions.php:5114
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "%s類型的 FlowView 圖表是%s"
+
+#: functions.php:5451
+msgid "Not Supported"
+msgstr "僅在“https”站點中受支持"
+
+#: functions.php:6693 setup.php:417
+#, fuzzy
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "Aria（快速、碰撞安全）"
+
+#: functions.php:6694 setup.php:418
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria（快速、碰撞安全）"
+
+#: functions.php:6695 setup.php:419
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB（慢速、高併發）"
+
+#: setup.php:45
+#, fuzzy
+msgid "NetFlow User"
+msgstr "NetFlow版本"
+
+#: setup.php:46
+#, fuzzy
+msgid "NetFlow Admin"
+msgstr "NetFlow版本"
+
+#: setup.php:53 setup.php:77
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "請重命名 flowview 目錄中的 config.php.dist 或 config_local.php.dist 檔，並在安裝之前更改資料庫設置。"
+
+#: setup.php:119
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "請注意，Flowview 外掛程式表正在後台進行升級。 這可能需要一些時間。檢查仙人掌日誌以獲取更多資訊"
+
+#: setup.php:132
+msgid "The Filter has been Deleted"
+msgstr "過濾器已被刪除"
+
+#: setup.php:133
+msgid "The Filter has been Updated"
+msgstr "過濾器已更新"
+
+#: setup.php:138
+msgid "Import/Export"
+msgstr "匯入/匯出"
+
+#: setup.php:139 setup.php:140 setup.php:141 setup.php:142 setup.php:147
+#: setup.php:291 setup.php:293
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php:142
+msgid "Databases"
+msgstr "資料庫"
+
+#: setup.php:150
+msgid "Normal User"
+msgstr "普通用戶"
+
+#: setup.php:151
+msgid "System Administration"
+msgstr "系統管理"
+
+#: setup.php:172 setup.php:193
+msgid "Flow Viewer"
+msgstr "流查看器"
+
+#: setup.php:179
+msgid "Dashboard"
+msgstr "控制台"
+
+#: setup.php:186 setup.php:214 setup.php:242 setup.php:270
+msgid "(save)"
+msgstr "儲存"
+
+#: setup.php:207 setup.php:235 setup.php:263
+msgid "(edit)"
+msgstr "(編輯)"
+
+#: setup.php:221 setup.php:249 setup.php:277
+msgid "(actions)"
+msgstr "動作"
+
+#: setup.php:364
+#, fuzzy, php-format
+msgid "%d Process"
+msgstr "%d圖元"
+
+#: setup.php:366
+#, php-format
+msgid "%d Processes"
+msgstr ""
+
+#: setup.php:372
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr ""
+
+#: setup.php:373
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr ""
+
+#: setup.php:386
+#, fuzzy
+msgid "Internet Proxy Settings"
+msgstr "互聯網控制"
+
+#: setup.php:391
+#, fuzzy
+msgid "Internet Proxy Address"
+msgstr "互聯網控制"
+
+#: setup.php:392
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr ""
+
+#: setup.php:399
+#, fuzzy
+msgid "Internet Proxy User"
+msgstr "互聯網控制"
+
+#: setup.php:400
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr ""
+
+#: setup.php:407
+msgid "Internet Proxy Password"
+msgstr ""
+
+#: setup.php:408
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr ""
+
+#: setup.php:451
+msgid "Name Resolution"
+msgstr "解析度"
+
+#: setup.php:456
+msgid "Hostname Resolution"
+msgstr "解析度"
+
+#: setup.php:457
+msgid "The method by which you wish to resolve hostnames."
+msgstr "您希望解析主機名的方法。"
+
+#: setup.php:460
+msgid "Use Local Server"
+msgstr "使用本地服務器"
+
+#: setup.php:461
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "使用下面的DNS服務器"
+
+#: setup.php:462
+msgid "Don't Resolve DNS"
+msgstr "不要解析DNS"
+
+#: setup.php:467
+#, fuzzy
+msgid "Download the Internet Registry Daily"
+msgstr "Internet Route Registry 詳細資訊"
+
+#: setup.php:468
+msgid "If you are interested in the publically available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr ""
+
+#: setup.php:473
+msgid "Local Domain Name"
+msgstr "剝離域名"
+
+#: setup.php:476
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "對於本地網路上無法在本地解析的 IPv4 位址，請將此後綴追加到生成的 IP 位址。"
+
+#: setup.php:481
+msgid "Local IP Range"
+msgstr "本地IP範圍"
+
+#: setup.php:484
+#, fuzzy
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "為可能未在 DNS 中註冊的主機提供本地網路的 IPv4 IP 位址範圍。 這些主機將映射到上面的本地域名。 這更適合家庭使用者。 您可以使用 CIDR 格式或非 CIDR 格式。 檢查：192.168.11.0 或 192.168.11.0/24"
+
+#: setup.php:485
+msgid "Use CIDR or Non-CIDR"
+msgstr "使用 CIDR 或非 CIDR"
+
+#: setup.php:490
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "使用 Arin 查找未註冊的功能變數名稱"
+
+#: setup.php:491
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "許多大型科技數據收集服務喜歡掩蓋他們對域名的擁有權，以混淆他們正在收集您的個人信息的事實。 如果您擔心這一點並且您的 Cacti 安裝可以存取 Internet，您可以使用 Arin 從那些大型科技公司那裡移除面具。"
+
+#: setup.php:496
+msgid "Whois Provider Host"
+msgstr "Whois 提供商託管"
+
+#: setup.php:499
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "請提供主機名以解決 whois 調用。 如果不為 null，則系統路徑中必須具有 whois 二進位檔。"
+
+#: setup.php:500
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php:505
+msgid "Whois Binary Path"
+msgstr "Flow Tools二進制路徑"
+
+#: setup.php:508
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "請提供「whois」二進位文件的路徑名。 “whois”二進位檔將用於查找補充 Arin 的 AS 資訊。"
+
+#: setup.php:509
+msgid "Enter binary path"
+msgstr "輸入二進位路徑"
+
+#: setup.php:514
+msgid "Graph Drilldown Settings"
+msgstr ""
+
+#: setup.php:519
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr ""
+
+#: setup.php:522
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr ""
+
+#: setup.php:526
+msgid "Data Retention and Report Generation"
+msgstr "數據保留和報告生成"
+
+#: setup.php:538
+msgid "Data Retention Policy"
+msgstr "資料保留政策"
+
+#: setup.php:539
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "仙人掌將維護分區流表的時間。"
+
+#: setup.php:542
+#, fuzzy, php-format
+msgid "%d Week"
+msgstr "％d週"
+
+#: setup.php:543 setup.php:544
+#, fuzzy, php-format
+msgid "%d Weeks"
+msgstr "最後％d週"
+
+#: setup.php:545
+#, php-format
+msgid "%d Month"
+msgstr "%d月"
+
+#: setup.php:546 setup.php:547 setup.php:548 setup.php:549
+#, fuzzy, php-format
+msgid "%d Months"
+msgstr "最後％d個月"
+
+#: setup.php:550
+#, php-format
+msgid "%d Year"
+msgstr "%d年"
+
+#: setup.php:555
+msgid "Database Partitioning Scheme"
+msgstr "數據庫分區方案"
+
+#: setup.php:556
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "根據每分鐘的流數，您可能每天需要更多表。"
+
+#: setup.php:559
+msgid "Daily"
+msgstr "每日"
+
+#: setup.php:560
+msgid "Hourly"
+msgstr "每小時"
+
+#: setup.php:565
+msgid "Storage Engine for Raw Tables"
+msgstr "原始表的儲存引擎"
+
+#: setup.php:566
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Aria Engine 非常適合除 Live raw 表以外的所有內容。 Live raw 表將始終為 InnoDB。 任您挑選。"
+
+#: setup.php:572
+msgid "Parallel Queries"
+msgstr "並行查詢"
+
+#: setup.php:577
+msgid "Max Concurrent Threads"
+msgstr "最大併發線程數"
+
+#: setup.php:578
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "為運行 FlowView 查詢而調度的最大線程數。 請注意，每個資料庫分區最多可以有1個線程，並且應注意不要因運行過多的併發線程而使資料庫伺服器過載。"
+
+#: setup.php:581
+msgid "Disabled"
+msgstr "停用"
+
+#: setup.php:582 setup.php:583 setup.php:584 setup.php:585 setup.php:586
+#: setup.php:587 setup.php:588 setup.php:589 setup.php:590 setup.php:591
+#: setup.php:592 setup.php:593 setup.php:594 setup.php:595 setup.php:596
+#: setup.php:597 setup.php:598 setup.php:599 setup.php:600
+#, fuzzy, php-format
+msgid "%d Threads"
+msgstr "％d個主題"
+
+#: setup.php:605
+msgid "Maximum Run Time"
+msgstr "最大行數"
+
+#: setup.php:606
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "如果並行查詢在此時間內未完成，請退出。"
+
+#: setup.php:620
 msgid "Cached Data Time to Live"
 msgstr "快取資料存留時間"
 
-#: setup.php:512
+#: setup.php:621
 msgid "How long should FlowView hold onto Cached Query results before purging them?"
 msgstr "在清除緩存查詢結果之前，FlowView 應將緩存查詢結果保留多長時間？"
 
-#: setup.php:515 setup.php:516
+#: setup.php:624 setup.php:625
 #, php-format
 msgid "%d Hours"
 msgstr "%d 小時"
 
-#: setup.php:517
+#: setup.php:626
 #, php-format
 msgid "%d Day"
 msgstr "%d 天"
 
-#: setup.php:518
+#: setup.php:627
 #, php-format
 msgid "%d Days"
 msgstr "%d 天"
 
-#: setup.php:523
+#: setup.php:632
 msgid "MaxScale Sharding"
 msgstr "MaxScale 分片"
 
-#: setup.php:528
+#: setup.php:633
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr ""
+
+#: setup.php:638
 msgid "Leverage MaxScale to Distribute Query Shards"
 msgstr "利用 MaxScale 分發查詢分片"
 
-#: setup.php:529
+#: setup.php:639
 msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
 msgstr "如果您有多個服務充當 MaxScale 的從屬伺服器，則可以通過將並行查詢分發到多個 MariaDB 後端伺服器來提高查詢速度。"
 
-#: setup.php:534
-msgid "MaxScale Read-Only Port"
+#: setup.php:644
+#, fuzzy
+msgid "MaxScale Read-Write Split Port"
 msgstr "MaxScale 只讀埠"
 
-#: setup.php:537
-msgid "This should be the port of the Read-Only-Service (readconnroute) service and router."
+#: setup.php:647
+#, fuzzy
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
 msgstr "這應該是只讀服務 （readconnroute） 服務和路由器的埠。"
 
-#: setup.php:543
+#: setup.php:653
 msgid "Flowview"
 msgstr "FlowView"
 
-#~ msgid "Top 3 Samples"
-#~ msgstr "前3個樣本"
+#: setup.php:1308
+msgid "View NetFlow Traffic In Range"
+msgstr ""
 
-#~ msgid "Top 4 Samples"
-#~ msgstr "前4個樣本"
-
-#~ msgid "Top 5 Samples"
-#~ msgstr "前5個樣本"
-
-#~ msgid "Save Overrides to Selected Filter"
-#~ msgstr "將替代保存到選定的過濾器"
-
-#, fuzzy
-#~ msgid "(e.g., -0x0b/0x0F)"
-#~ msgstr "（例如，-0x0b / 0x0F）"
-
-#~ msgid "(view)"
-#~ msgstr "(視圖)"
-
-#, fuzzy
-#~ msgid "0 (Disabled)"
-#~ msgstr "0（已禁用）"
-
-#, fuzzy
-#~ msgid "1 Line with Tags"
-#~ msgstr "1行標籤"
-
-#, fuzzy
-#~ msgid "3PC"
-#~ msgstr "3PC"
-
-#, fuzzy
-#~ msgid "9 (Highest)"
-#~ msgstr "9（最高）"
-
-#, fuzzy
-#~ msgid "A comma delimited list of domains names to strip from the domain."
-#~ msgstr "以逗號分隔的域名列表，用於從域中刪除。"
-
-#, fuzzy
-#~ msgid "ARGUS"
-#~ msgstr "ARGUS"
-
-#, fuzzy
-#~ msgid "AS"
-#~ msgstr "AS"
-
-#, fuzzy
-#~ msgid "AS Aggregation"
-#~ msgstr "AS聚合"
-
-#, fuzzy
-#~ msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
-#~ msgstr "另外，請記住從Net-Flow Capture位置刪除任何剩余文件。"
-
-#, fuzzy
-#~ msgid "Alternate DNS Server"
-#~ msgstr "備用DNS服務器"
-
-#, fuzzy
-#~ msgid "Any Part in Specified Time Span"
-#~ msgstr "指定時間跨度中的任何部分"
-
-#, fuzzy
-#~ msgid "BBN-RCC-MON"
-#~ msgstr "BBN-RCC-MON"
-
-#, fuzzy
-#~ msgid "CBT"
-#~ msgstr "CBT"
-
-#, fuzzy
-#~ msgid "CHAOS"
-#~ msgstr "混沌"
-
-#, fuzzy
-#~ msgid "Compression"
-#~ msgstr "壓縮"
-
-#, fuzzy
-#~ msgid "Compression Level"
-#~ msgstr "壓縮等級"
-
-#, fuzzy
-#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
-#~ msgstr "流文件的壓縮級別。更高的壓縮可以節省空間，但使用更多的CPU來存儲和檢索結果。"
-
-#, fuzzy
-#~ msgid "DCCP"
-#~ msgstr "DCCP"
-
-#, fuzzy
-#~ msgid "DCN-MEAS"
-#~ msgstr "DCN-MEAS"
-
-#, fuzzy
-#~ msgid "DDP"
-#~ msgstr "DDP"
-
-#, fuzzy
-#~ msgid "Defaults"
-#~ msgstr "當前課程 (預設為全部)"
-
-#, fuzzy
-#~ msgid "Dest Port(s)"
-#~ msgstr "目的港（s）"
-
-#, fuzzy
-#~ msgid "Destination Prefix Aggregation"
-#~ msgstr "目的地前綴聚合"
-
-#~ msgid "Device Name"
-#~ msgstr "設備名稱"
-
-#, fuzzy
-#~ msgid "Device [edit: %s]"
-#~ msgstr "設備[編輯：％s]"
-
-#, fuzzy
-#~ msgid "Device [new]"
-#~ msgstr "設備[新]"
-
-#, fuzzy
-#~ msgid "Directory"
-#~ msgstr "目錄"
-
-#, fuzzy
-#~ msgid "Directory Structure that will be used for the flows for this device."
-#~ msgstr "目錄將用於此設備的流的結構。"
-
-#, fuzzy
-#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
-#~ msgstr "此設備流所在的目錄。此目錄必須位於Flow Directory路徑中。不要把完整的路徑放在這裡。此外，如果您更改路徑，則必須重新保存要使用它的所有預定義文件管理器設置。"
-
-#~ msgid "Down"
-#~ msgstr "向下"
-
-#, fuzzy
-#~ msgid "EGP"
-#~ msgstr "EGP"
-
-#, fuzzy
-#~ msgid "EIGRP"
-#~ msgstr "EIGRP"
-
-#, fuzzy
-#~ msgid "EMCON"
-#~ msgstr "EMCON"
-
-#, fuzzy
-#~ msgid "ENCAP"
-#~ msgstr "ENCAP"
-
-#, fuzzy
-#~ msgid "End Date"
-#~ msgstr "結束日期"
-
-#, fuzzy
-#~ msgid "End Time in Specified Time Span"
-#~ msgstr "指定時間跨度的結束時間"
-
-#, fuzzy
-#~ msgid "Entirely in Specified Time Span"
-#~ msgstr "完全在指定的時間範圍內"
-
-#, fuzzy
-#~ msgid "Expire"
-#~ msgstr "訂閱的課程 %s 不久將到期"
-
-#, fuzzy
-#~ msgid "Filter Data"
-#~ msgstr "過濾條件名稱"
-
-#, fuzzy
-#~ msgid "Flow Filter Constraints"
-#~ msgstr "流量過濾器約束"
-
-#, fuzzy
-#~ msgid "Flow Tools Work Directory"
-#~ msgstr "Flow Tools工作目錄"
-
-#, fuzzy
-#~ msgid "Flow-Tools tagged version 5"
-#~ msgstr "Flow-Tools已標記為版本5"
-
-#, fuzzy
-#~ msgid "Flows Directory"
-#~ msgstr "流程目錄"
-
-#, fuzzy
-#~ msgid "Full (Catalyst)"
-#~ msgstr "全（催化劑）"
-
-#, fuzzy
-#~ msgid "GGP"
-#~ msgstr "GGP"
-
-#, fuzzy
-#~ msgid "GRE"
-#~ msgstr "GRE"
-
-#, fuzzy
-#~ msgid "HMP"
-#~ msgstr "HMP"
-
-#, fuzzy
-#~ msgid "How long to keep your flow files."
-#~ msgstr "保留流文件多長時間。"
-
-#, fuzzy
-#~ msgid "ICMP"
-#~ msgstr "ICMP"
-
-#, fuzzy
-#~ msgid "IDPR"
-#~ msgstr "IDPR"
-
-#, fuzzy
-#~ msgid "IDPR-CMTP"
-#~ msgstr "IDPR-CMTP"
-
-#, fuzzy
-#~ msgid "IDRP"
-#~ msgstr "IDRP"
-
-#, fuzzy
-#~ msgid "IGMP"
-#~ msgstr "IGMP"
-
-#, fuzzy
-#~ msgid "IGP"
-#~ msgstr "IGP"
-
-#, fuzzy
-#~ msgid "IL"
-#~ msgstr "IL"
-
-#, fuzzy
-#~ msgid "IP"
-#~ msgstr "IP"
-
-#, fuzzy
-#~ msgid "IPENCAP"
-#~ msgstr "ipencap則"
-
-#, fuzzy
-#~ msgid "IPIP"
-#~ msgstr "IPIP"
-
-#, fuzzy
-#~ msgid "IPSEC-AH"
-#~ msgstr "IPSEC-AH"
-
-#, fuzzy
-#~ msgid "IPSEC-ESP"
-#~ msgstr "IPSEC-ESP"
-
-#, fuzzy
-#~ msgid "IPv6-Frag"
-#~ msgstr "IPv6的破片"
-
-#, fuzzy
-#~ msgid "IPv6-ICMP"
-#~ msgstr "IPv6的ICMP"
-
-#, fuzzy
-#~ msgid "IPv6-NoNxt"
-#~ msgstr "IPv6的NoNxt"
-
-#, fuzzy
-#~ msgid "IPv6-Opts"
-#~ msgstr "IPv6的OPTS"
-
-#, fuzzy
-#~ msgid "IPv6-Route"
-#~ msgstr "IPv6的路由"
-
-#, fuzzy
-#~ msgid "IRTP"
-#~ msgstr "IRTP"
-
-#, fuzzy
-#~ msgid "ISO-TP4"
-#~ msgstr "ISO-TP4"
-
-#, fuzzy
-#~ msgid "Include if:"
-#~ msgstr "包括："
-
-#, fuzzy
-#~ msgid "LEAF-1"
-#~ msgstr "LEAF-1"
-
-#, fuzzy
-#~ msgid "LEAF-2"
-#~ msgstr "LEAF-2"
-
-#, fuzzy
-#~ msgid "MERIT-INP"
-#~ msgstr "MERIT-INP"
-
-#, fuzzy
-#~ msgid "MFE-NSP"
-#~ msgstr "MFE-NSP"
-
-#, fuzzy
-#~ msgid "MTP"
-#~ msgstr "MTP"
-
-#, fuzzy
-#~ msgid "MUX"
-#~ msgstr "MUX"
-
-#, fuzzy
-#~ msgid "Manage Listeners"
-#~ msgstr "管理聽眾"
-
-#~ msgid "Misc"
-#~ msgstr "雜項"
-
-#, fuzzy
-#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
-#~ msgstr "在上面的字段中允許使用逗號分隔的多個字段條目。減號（ - ）將取消一個條目（例如，端口為-80，將表示任何端口，但為80）"
-
-#, fuzzy
-#~ msgid "NETBLT"
-#~ msgstr "NETBLT"
-
-#, fuzzy
-#~ msgid "NVP-II"
-#~ msgstr "NVP-II"
-
-#, fuzzy
-#~ msgid "Nesting"
-#~ msgstr "嵌套"
-
-#, fuzzy
-#~ msgid "NetFlow AS Aggregation"
-#~ msgstr "NetFlow AS聚合"
-
-#, fuzzy
-#~ msgid "NetFlow Destination"
-#~ msgstr "NetFlow目的地"
-
-#, fuzzy
-#~ msgid "NetFlow Destination Prefix Aggregation"
-#~ msgstr "NetFlow目標前綴聚合"
-
-#, fuzzy
-#~ msgid "NetFlow Full Flow"
-#~ msgstr "NetFlow Full Flow"
-
-#, fuzzy
-#~ msgid "NetFlow Prefix Aggregation"
-#~ msgstr "NetFlow前綴聚合"
-
-#, fuzzy
-#~ msgid "NetFlow Proto Port Aggregation"
-#~ msgstr "NetFlow原始端口聚合"
-
-#, fuzzy
-#~ msgid "NetFlow Protocol version used by the device."
-#~ msgstr "設備使用的NetFlow協議版本。"
-
-#, fuzzy
-#~ msgid "NetFlow Source Destination"
-#~ msgstr "NetFlow源目的地"
-
-#, fuzzy
-#~ msgid "NetFlow Source Prefix Aggregation"
-#~ msgstr "NetFlow源前綴聚合"
-
-#, fuzzy
-#~ msgid "NetFlow ToS AS Aggregation"
-#~ msgstr "NetFlow ToS AS聚合"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Destination Prefix Aggregation"
-#~ msgstr "NetFlow ToS目標前綴聚合"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Aggregation"
-#~ msgstr "NetFlow ToS前綴聚合"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Port Aggregation"
-#~ msgstr "NetFlow ToS前綴端口聚合"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Proto Port Aggregation"
-#~ msgstr "NetFlow ToS原始端口聚合"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Source Prefix Aggregation"
-#~ msgstr "NetFlow ToS源前綴聚合"
-
-#, fuzzy
-#~ msgid "NetFlow Version"
-#~ msgstr "NetFlow版本"
-
-#, fuzzy
-#~ msgid "NetFlow version 1"
-#~ msgstr "NetFlow版本1"
-
-#, fuzzy
-#~ msgid "NetFlow version 5"
-#~ msgstr "NetFlow版本5"
-
-#, fuzzy
-#~ msgid "NetFlow version 6"
-#~ msgstr "NetFlow版本6"
-
-#, fuzzy
-#~ msgid "NetFlow version 7"
-#~ msgstr "NetFlow版本7"
-
-#, fuzzy
-#~ msgid "New Flow"
-#~ msgstr "新流程"
-
-#, fuzzy
-#~ msgid "New Query"
-#~ msgstr "新查詢"
-
-#, fuzzy
-#~ msgid "No Devices"
-#~ msgstr "設備"
-
-#, fuzzy
-#~ msgid "Note:"
-#~ msgstr "備註："
-
-#, fuzzy
-#~ msgid "OSPF"
-#~ msgstr "OSPF"
-
-#, fuzzy
-#~ msgid "PRM"
-#~ msgstr "PRM"
-
-#, fuzzy
-#~ msgid "PUP"
-#~ msgstr "小狗"
-
-#, fuzzy
-#~ msgid "Packets Bar"
-#~ msgstr "數據包吧"
-
-#, fuzzy
-#~ msgid "Prefix"
-#~ msgstr "標題"
-
-#, fuzzy
-#~ msgid "Prefix Aggregation"
-#~ msgstr "前綴聚合"
-
-#, fuzzy
-#~ msgid "Protocol Port Aggregation"
-#~ msgstr "協議端口聚合"
-
-#, fuzzy
-#~ msgid "RDP"
-#~ msgstr "RDP"
-
-#, fuzzy
-#~ msgid "RSPF"
-#~ msgstr "RSPF"
-
-#, fuzzy
-#~ msgid "RSVP"
-#~ msgstr "活動報名"
-
-#, fuzzy
-#~ msgid "Report Parameters"
-#~ msgstr "報告參數"
-
-#, fuzzy
-#~ msgid "SDRP"
-#~ msgstr "SDRP"
-
-#, fuzzy
-#~ msgid "ST"
-#~ msgstr "ST"
-
-#, fuzzy
-#~ msgid "Select One"
-#~ msgstr "-選擇一個"
-
-#, fuzzy
-#~ msgid "Select a Filter to display data"
-#~ msgstr "打印報告"
-
-#, fuzzy
-#~ msgid "Source Prefix Aggregation"
-#~ msgstr "源前綴聚合"
-
-#, fuzzy
-#~ msgid "Src AS"
-#~ msgstr "Src AS"
-
-#, fuzzy
-#~ msgid "Src IF"
-#~ msgstr "Src IF"
-
-#, fuzzy
-#~ msgid "Src IP"
-#~ msgstr "來源 IP"
-
-#, fuzzy
-#~ msgid "Src Port"
-#~ msgstr "Src港口"
-
-#, fuzzy
-#~ msgid "Src Prefix"
-#~ msgstr "Src前綴"
-
-#, fuzzy
-#~ msgid "Src/Dest IP"
-#~ msgstr "Src / Dest IP"
-
-#, fuzzy
-#~ msgid "Start Time in Specified Time Span"
-#~ msgstr "以指定時間跨度開始時間"
-
-#, fuzzy
-#~ msgid "TCP"
-#~ msgstr "TCP"
-
-#, fuzzy
-#~ msgid "TP++"
-#~ msgstr "TP ++"
-
-#, fuzzy
-#~ msgid "TRUNK-1"
-#~ msgstr "TRUNK-1"
-
-#, fuzzy
-#~ msgid "TRUNK-2"
-#~ msgstr "TRUNK-2"
-
-#, fuzzy
-#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-#~ msgstr "flow-cat，flow-filter和flow-stat二進製文件的路徑。"
-
-#, fuzzy
-#~ msgid "This is the DNS Server used to resolve names."
-#~ msgstr "這是用於解析名稱的DNS服務器。"
-
-#, fuzzy
-#~ msgid "This is the path to a temporary directory to do work."
-#~ msgstr "這是臨時目錄的工作路徑。"
-
-#, fuzzy
-#~ msgid "This is the path to base the path of your flow folder structure."
-#~ msgstr "這是基於流文件夾結構路徑的路徑。"
-
-#, fuzzy
-#~ msgid "UDP"
-#~ msgstr "UDP"
-
-#~ msgid "Up"
-#~ msgstr "向上"
-
-#, fuzzy
-#~ msgid "VMTP"
-#~ msgstr "VMTP"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "查看"
-
 #, fuzzy
-#~ msgid "XNET"
-#~ msgstr "XNET"
+#~ msgid "XTP"
+#~ msgstr "XTP"
 
 #, fuzzy
 #~ msgid "XNS-IDP"
 #~ msgstr "XNS-IDP"
 
 #, fuzzy
-#~ msgid "XTP"
-#~ msgstr "XTP"
+#~ msgid "XNET"
+#~ msgstr "XNET"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "查看"
+
+#, fuzzy
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#~ msgid "Up"
+#~ msgstr "向上"
+
+#, fuzzy
+#~ msgid "UDP"
+#~ msgstr "UDP"
+
+#, fuzzy
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "這是基於流文件夾結構路徑的路徑。"
+
+#, fuzzy
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "這是臨時目錄的工作路徑。"
+
+#, fuzzy
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "這是用於解析名稱的DNS服務器。"
+
+#, fuzzy
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "flow-cat，flow-filter和flow-stat二進製文件的路徑。"
+
+#, fuzzy
+#~ msgid "TRUNK-2"
+#~ msgstr "TRUNK-2"
+
+#, fuzzy
+#~ msgid "TRUNK-1"
+#~ msgstr "TRUNK-1"
+
+#, fuzzy
+#~ msgid "TP++"
+#~ msgstr "TP ++"
+
+#, fuzzy
+#~ msgid "TCP"
+#~ msgstr "TCP"
+
+#, fuzzy
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "以指定時間跨度開始時間"
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "Src / Dest IP"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "Src前綴"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "Src港口"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "來源 IP"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "Src IF"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "Src AS"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "源前綴聚合"
+
+#, fuzzy
+#~ msgid "Select a Filter to display data"
+#~ msgstr "打印報告"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "-選擇一個"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "ST"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "SDRP"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "報告參數"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "活動報名"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "RSPF"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "RDP"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "協議端口聚合"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "前綴聚合"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "標題"
+
+#, fuzzy
+#~ msgid "Packets Bar"
+#~ msgstr "數據包吧"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "小狗"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "PRM"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "OSPF"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "備註："
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "設備"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "新查詢"
+
+#, fuzzy
+#~ msgid "New Flow"
+#~ msgstr "新流程"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "NetFlow版本7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "NetFlow版本6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "NetFlow版本5"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "NetFlow版本1"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "NetFlow ToS源前綴聚合"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "NetFlow ToS原始端口聚合"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "NetFlow ToS前綴端口聚合"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "NetFlow ToS前綴聚合"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "NetFlow ToS目標前綴聚合"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "NetFlow ToS AS聚合"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "NetFlow源前綴聚合"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "NetFlow源目的地"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "設備使用的NetFlow協議版本。"
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "NetFlow原始端口聚合"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "NetFlow前綴聚合"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "NetFlow Full Flow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "NetFlow目標前綴聚合"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "NetFlow目的地"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "NetFlow AS聚合"
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "嵌套"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP-II"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "NETBLT"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr "在上面的字段中允許使用逗號分隔的多個字段條目。減號（ - ）將取消一個條目（例如，端口為-80，將表示任何端口，但為80）"
+
+#~ msgid "Misc"
+#~ msgstr "雜項"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "管理聽眾"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "MTP"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "MFE-NSP"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "MERIT-INP"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "LEAF-2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "LEAF-1"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "包括："
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "ISO-TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "IPv6的路由"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "IPv6的OPTS"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "IPv6的NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "IPv6的ICMP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "IPv6的破片"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ESP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-AH"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "ipencap則"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "IP"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "IL"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "IGP"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "ICMP"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "保留流文件多長時間。"
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "HMP"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "GRE"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "GGP"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "全（催化劑）"
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "流程目錄"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "Flow-Tools已標記為版本5"
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "Flow Tools工作目錄"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "流量過濾器約束"
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "過濾條件名稱"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "訂閱的課程 %s 不久將到期"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "完全在指定的時間範圍內"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "指定時間跨度的結束時間"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "結束日期"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "ENCAP"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "EIGRP"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "EGP"
+
+#~ msgid "Down"
+#~ msgstr "向下"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "此設備流所在的目錄。此目錄必須位於Flow Directory路徑中。不要把完整的路徑放在這裡。此外，如果您更改路徑，則必須重新保存要使用它的所有預定義文件管理器設置。"
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "目錄將用於此設備的流的結構。"
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "目錄"
+
+#, fuzzy
+#~ msgid "Device [new]"
+#~ msgstr "設備[新]"
+
+#, fuzzy
+#~ msgid "Device [edit: %s]"
+#~ msgstr "設備[編輯：％s]"
+
+#~ msgid "Device Name"
+#~ msgstr "設備名稱"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "目的地前綴聚合"
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "目的港（s）"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "當前課程 (預設為全部)"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "DDP"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "DCN-MEAS"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "流文件的壓縮級別。更高的壓縮可以節省空間，但使用更多的CPU來存儲和檢索結果。"
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "壓縮等級"
+
+#, fuzzy
+#~ msgid "Compression"
+#~ msgstr "壓縮"
+
+#, fuzzy
+#~ msgid "CHAOS"
+#~ msgstr "混沌"
+
+#, fuzzy
+#~ msgid "CBT"
+#~ msgstr "CBT"
+
+#, fuzzy
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "BBN-RCC-MON"
+
+#, fuzzy
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "指定時間跨度中的任何部分"
+
+#, fuzzy
+#~ msgid "Alternate DNS Server"
+#~ msgstr "備用DNS服務器"
+
+#, fuzzy
+#~ msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
+#~ msgstr "另外，請記住從Net-Flow Capture位置刪除任何剩余文件。"
+
+#, fuzzy
+#~ msgid "AS Aggregation"
+#~ msgstr "AS聚合"
+
+#, fuzzy
+#~ msgid "AS"
+#~ msgstr "AS"
+
+#, fuzzy
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
+
+#, fuzzy
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "以逗號分隔的域名列表，用於從域中刪除。"
+
+#, fuzzy
+#~ msgid "9 (Highest)"
+#~ msgstr "9（最高）"
+
+#, fuzzy
+#~ msgid "3PC"
+#~ msgstr "3PC"
+
+#, fuzzy
+#~ msgid "1 Line with Tags"
+#~ msgstr "1行標籤"
+
+#, fuzzy
+#~ msgid "0 (Disabled)"
+#~ msgstr "0（已禁用）"
+
+#~ msgid "(view)"
+#~ msgstr "(視圖)"
+
+#, fuzzy
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "（例如，-0x0b / 0x0F）"
+
+#~ msgid "Save Overrides to Selected Filter"
+#~ msgstr "將替代保存到選定的過濾器"
+
+#~ msgid "Top 5 Samples"
+#~ msgstr "前5個樣本"
+
+#~ msgid "Top 4 Samples"
+#~ msgstr "前4個樣本"
+
+#~ msgid "Top 3 Samples"
+#~ msgstr "前3個樣本"
+
+#~ msgid "Plugin -> Flow Admin"
+#~ msgstr "插件 - > Flow Admin"
+
+#~ msgid "Plugin -> Flow Viewer"
+#~ msgstr "插件 - >流程查看器"
+
+#~ msgid "Packets Examined"
+#~ msgstr "數據包吧"
+
+#~ msgid "Bytes Exchanged"
+#~ msgstr "字節交換"
+
+#~ msgid "Total Flows"
+#~ msgstr "最大流量："
+
+#~ msgid "Invalid value for Sort Field!"
+#~ msgstr "排序字段的值無效！"
+
+#~ msgid "Cacti Flowview"
+#~ msgstr "Cacti Flowview"
+
+#~ msgid "Start Date"
+#~ msgstr "開始日期"
+
+#~ msgid "Sent Scheduled Report %s in Background."
+#~ msgstr "已在後台發送預定報告%s。"
+
+#~ msgid "You must select at least one device."
+#~ msgstr "您必須至少選擇一個設備。"
+
+#~ msgid "TCP Protocol"
+#~ msgstr "IP 通訊協定"
+
+#~ msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
+#~ msgstr "允許發送到此流收集器的設備的IP地址。對於任何主機，保留為0。"
+
+#~ msgid "Input IF"
+#~ msgstr "所選數據輸入源沒有輸入字段"

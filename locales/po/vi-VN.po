@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2024-07-14 20:09-0400\n"
+"POT-Creation-Date: 2025-09-11 23:08-0400\n"
 "PO-Revision-Date: 2024-07-14 20:38-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:619
+#: arrays.php:26 arrays.php:60 functions.php:737
 msgid "Select a Report"
 msgstr "Báo cáo in"
 
@@ -50,16 +50,16 @@ msgstr "Cổng nguồn UDP / TCP"
 msgid "UDP/TCP Port"
 msgstr "Cổng UDP / TCP"
 
-#: arrays.php:37 arrays.php:397 arrays.php:403 arrays.php:492 arrays.php:508
-#: arrays.php:520 arrays.php:785 functions.php:2912
+#: arrays.php:37 arrays.php:398 arrays.php:404 arrays.php:493 arrays.php:509
+#: arrays.php:521 arrays.php:786 functions.php:3301
 msgid "Source IP"
 msgstr "IP nguồn"
 
-#: arrays.php:38 arrays.php:391 arrays.php:494 arrays.php:509 arrays.php:523
+#: arrays.php:38 arrays.php:392 arrays.php:495 arrays.php:510 arrays.php:524
 msgid "Destination IP"
 msgstr "Destination IP"
 
-#: arrays.php:39
+#: arrays.php:39 functions.php:3299
 msgid "Source/Destination IP"
 msgstr "Nguồn / IP đích"
 
@@ -83,12 +83,12 @@ msgstr "Giao diện đầu ra"
 msgid "Input/Output Interface"
 msgstr "Giao diện đầu vào / đầu ra"
 
-#: arrays.php:48 arrays.php:434 arrays.php:446 arrays.php:511 arrays.php:809
-#: functions.php:2936
+#: arrays.php:48 arrays.php:435 arrays.php:447 arrays.php:512 arrays.php:810
+#: functions.php:3326
 msgid "Source AS"
 msgstr "Không có nguồn"
 
-#: arrays.php:49 arrays.php:440 arrays.php:447 arrays.php:512
+#: arrays.php:49 arrays.php:441 arrays.php:448 arrays.php:513
 msgid "Destination AS"
 msgstr "Điểm đến"
 
@@ -100,11 +100,11 @@ msgstr "Nguồn / Đích AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:466 arrays.php:478 functions.php:2944
+#: arrays.php:54 arrays.php:467 arrays.php:479 functions.php:3334
 msgid "Source Prefix"
 msgstr "Tiền tố nguồn"
 
-#: arrays.php:55 arrays.php:472
+#: arrays.php:55 arrays.php:473
 msgid "Destination Prefix"
 msgstr "Tiền tố đích"
 
@@ -169,8 +169,9 @@ msgstr "Không giới hạn"
 msgid "%s Bytes"
 msgstr "%s byte"
 
-#: arrays.php:106 arrays.php:567 arrays.php:575 arrays.php:604
-#: flowview_devices.php:465 flowview_devices.php:479 flowview_filters.php:369
+#: arrays.php:106 arrays.php:568 arrays.php:576 arrays.php:605
+#: flowview_devices.php:538 flowview_devices.php:552 flowview_devices.php:944
+#: flowview_filters.php:369 functions.php:670 functions.php:691
 msgid "All"
 msgstr "Tất cả"
 
@@ -179,31 +180,31 @@ msgid "Source Domain"
 msgstr "Cổng nguồn"
 
 #: arrays.php:355 arrays.php:361 arrays.php:368 arrays.php:374 arrays.php:380
-#: arrays.php:386 arrays.php:392 arrays.php:398 arrays.php:405 arrays.php:411
-#: arrays.php:417 arrays.php:423 arrays.php:429 arrays.php:435 arrays.php:441
-#: arrays.php:448 arrays.php:454 arrays.php:461 arrays.php:467 arrays.php:473
-#: arrays.php:480 arrays.php:541 functions.php:818 functions.php:866
-#: functions.php:2964 functions.php:3511
+#: arrays.php:387 arrays.php:393 arrays.php:399 arrays.php:406 arrays.php:412
+#: arrays.php:418 arrays.php:424 arrays.php:430 arrays.php:436 arrays.php:442
+#: arrays.php:449 arrays.php:455 arrays.php:462 arrays.php:468 arrays.php:474
+#: arrays.php:481 arrays.php:542 functions.php:967 functions.php:1020
+#: functions.php:3354 functions.php:4519
 msgid "Flows"
 msgstr "Flows"
 
 #: arrays.php:356 arrays.php:362 arrays.php:369 arrays.php:375 arrays.php:381
-#: arrays.php:387 arrays.php:393 arrays.php:399 arrays.php:406 arrays.php:412
-#: arrays.php:418 arrays.php:424 arrays.php:430 arrays.php:436 arrays.php:442
-#: arrays.php:449 arrays.php:455 arrays.php:462 arrays.php:468 arrays.php:474
-#: arrays.php:481 arrays.php:499 arrays.php:513 arrays.php:528 arrays.php:534
-#: arrays.php:543 functions.php:810 functions.php:856 functions.php:2968
-#: functions.php:3509
+#: arrays.php:388 arrays.php:394 arrays.php:400 arrays.php:407 arrays.php:413
+#: arrays.php:419 arrays.php:425 arrays.php:431 arrays.php:437 arrays.php:443
+#: arrays.php:450 arrays.php:456 arrays.php:463 arrays.php:469 arrays.php:475
+#: arrays.php:482 arrays.php:500 arrays.php:514 arrays.php:529 arrays.php:535
+#: arrays.php:544 functions.php:959 functions.php:1010 functions.php:3358
+#: functions.php:4517
 msgid "Bytes"
 msgstr "Bytes"
 
 #: arrays.php:357 arrays.php:363 arrays.php:370 arrays.php:376 arrays.php:382
-#: arrays.php:388 arrays.php:394 arrays.php:400 arrays.php:407 arrays.php:413
-#: arrays.php:419 arrays.php:425 arrays.php:431 arrays.php:437 arrays.php:443
-#: arrays.php:450 arrays.php:456 arrays.php:463 arrays.php:469 arrays.php:475
-#: arrays.php:482 arrays.php:498 arrays.php:514 arrays.php:527 arrays.php:533
-#: arrays.php:542 functions.php:814 functions.php:861 functions.php:2972
-#: functions.php:3510
+#: arrays.php:389 arrays.php:395 arrays.php:401 arrays.php:408 arrays.php:414
+#: arrays.php:420 arrays.php:426 arrays.php:432 arrays.php:438 arrays.php:444
+#: arrays.php:451 arrays.php:457 arrays.php:464 arrays.php:470 arrays.php:476
+#: arrays.php:483 arrays.php:499 arrays.php:515 arrays.php:528 arrays.php:534
+#: arrays.php:543 functions.php:963 functions.php:1015 functions.php:3362
+#: functions.php:4518
 msgid "Packets"
 msgstr "Gói"
 
@@ -211,1273 +212,1332 @@ msgstr "Gói"
 msgid "Destination Domain"
 msgstr "Destination IP"
 
-#: arrays.php:373 arrays.php:379 arrays.php:385 flowview_devices.php:66
-#: flowview_devices.php:765
+#: arrays.php:373 arrays.php:379 flowview_devices.php:77
+#: flowview_devices.php:842
 msgid "Port"
 msgstr "Cổng"
 
-#: arrays.php:404 arrays.php:817 functions.php:2916
-msgid "Dest IP"
-msgstr "Số phận IP"
-
-#: arrays.php:410 flowview_databases.php:1388 functions.php:2908
-msgid "IP Address"
-msgstr "Địa chỉ IP"
-
-#: arrays.php:416 arrays.php:495 arrays.php:510 arrays.php:525
-#: flowview_devices.php:75 flowview_devices.php:770 functions.php:2952
-msgid "Protocol"
-msgstr "Giao thức"
-
-#: arrays.php:422 arrays.php:459
-msgid "Input IF"
-msgstr "Trường nhập"
-
-#: arrays.php:428 arrays.php:460
-msgid "Output IF"
-msgstr "IF đầu ra"
-
-#: arrays.php:453
-msgid "TOS"
-msgstr "ĐKDV"
-
-#: arrays.php:479
-msgid "Destingation Prefix"
-msgstr "Tiền tố đích"
-
-#: arrays.php:485 functions.php:699 functions.php:3125 functions.php:3149
-msgid "N/A"
-msgstr "N/A"
-
-#: arrays.php:491 arrays.php:519 functions.php:2928
-msgid "Source IF"
-msgstr "Không có nguồn"
-
-#: arrays.php:493 arrays.php:522
-msgid "Destination IF"
-msgstr "Điểm đến"
-
-#: arrays.php:496 arrays.php:521 arrays.php:539 functions.php:2920
+#: arrays.php:385 arrays.php:497 arrays.php:522 arrays.php:540
+#: functions.php:3310
 msgid "Source Port"
 msgstr "Cổng Nguồn"
 
-#: arrays.php:497 arrays.php:524 arrays.php:540
+#: arrays.php:386 arrays.php:498 arrays.php:525 arrays.php:541
 msgid "Destination Port"
 msgstr "Cổng Đích đến"
 
-#: arrays.php:500 arrays.php:517 flowview_schedules.php:96 functions.php:2876
+#: arrays.php:405 arrays.php:818 functions.php:3306
+msgid "Dest IP"
+msgstr "Số phận IP"
+
+#: arrays.php:411 flowview_databases.php:1430
+msgid "IP Address"
+msgstr "Địa chỉ IP"
+
+#: arrays.php:417 arrays.php:496 arrays.php:511 arrays.php:526
+#: flowview_devices.php:86 flowview_devices.php:847 functions.php:3342
+msgid "Protocol"
+msgstr "Giao thức"
+
+#: arrays.php:423 arrays.php:460 arrays.php:492 arrays.php:520
+#: functions.php:3318
+msgid "Source IF"
+msgstr "Không có nguồn"
+
+#: arrays.php:429 arrays.php:461 arrays.php:494 arrays.php:523
+msgid "Destination IF"
+msgstr "Điểm đến"
+
+#: arrays.php:454
+msgid "TOS"
+msgstr "ĐKDV"
+
+#: arrays.php:480
+msgid "Destingation Prefix"
+msgstr "Tiền tố đích"
+
+#: arrays.php:486 flowview_devices.php:925 flowview_devices.php:926
+#: flowview_devices.php:927 flowview_devices.php:937 flowview_devices.php:940
+#: functions.php:828 functions.php:3518 functions.php:3542
+msgid "N/A"
+msgstr "N/A"
+
+#: arrays.php:501 arrays.php:518 functions.php:3266
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
-#: arrays.php:501 arrays.php:518 functions.php:2880
+#: arrays.php:502 arrays.php:519 functions.php:3270
 msgid "End Time"
 msgstr "Thời gian kết thúc"
 
-#: arrays.php:502
+#: arrays.php:503
 msgid "Active"
 msgstr "Kích hoạt"
 
-#: arrays.php:503
+#: arrays.php:504
 msgid "B/Pk"
 msgstr "B /"
 
-#: arrays.php:504
+#: arrays.php:505
 msgid "Ts"
 msgstr "Ts"
 
-#: arrays.php:505
+#: arrays.php:506
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:526 functions.php:2960
+#: arrays.php:527 functions.php:3350
 msgid "Flags"
 msgstr "Cờ"
 
-#: arrays.php:531 arrays.php:537 flowview_databases.php:295
-#: flowview_databases.php:869 flowview_databases.php:1244
-#: flowview_databases.php:1399 flowview_databases.php:1536
-#: flowview_databases.php:1706
+#: arrays.php:532 arrays.php:538 flowview_databases.php:308
+#: flowview_databases.php:913 flowview_databases.php:1282
+#: flowview_databases.php:1441 flowview_databases.php:1578
+#: flowview_databases.php:1808
 msgid "Source"
 msgstr "Nguồn"
 
-#: arrays.php:532 arrays.php:538
+#: arrays.php:533 arrays.php:539
 msgid "Destination"
 msgstr "Điểm đến"
 
-#: arrays.php:548 arrays.php:549 arrays.php:550 arrays.php:551 arrays.php:552
-#: arrays.php:553 arrays.php:554 arrays.php:555 arrays.php:556
+#: arrays.php:549 arrays.php:550 arrays.php:551 arrays.php:552 arrays.php:553
+#: arrays.php:554 arrays.php:555 arrays.php:556 arrays.php:557
 #, php-format
 msgid "%d Pixels"
 msgstr "Điểm ảnh %d"
 
-#: arrays.php:586
+#: arrays.php:587
 msgid "General Filters"
 msgstr "Xóa bộ lọc"
 
-#: arrays.php:589 flowview_databases.php:575 functions.php:537
+#: arrays.php:590 flowview_databases.php:588 functions.php:643
 msgid "Filter"
 msgstr "Bộ lọc"
 
-#: arrays.php:590
+#: arrays.php:591
 msgid "The Saved Filter to display."
 msgstr "Bộ lọc đã Lưu để hiển thị."
 
-#: arrays.php:593
+#: arrays.php:594
 msgid "New Filter"
 msgstr "Bộ lọc mới"
 
-#: arrays.php:598 flowview_filters.php:327 functions.php:556
+#: arrays.php:599 flowview_filters.php:327 functions.php:662
 msgid "Listener"
 msgstr "Người nghe"
 
-#: arrays.php:599
+#: arrays.php:600
 msgid "The Listener to use for the Filter."
 msgstr "Trình nghe để sử dụng cho Bộ lọc."
 
-#: arrays.php:607
+#: arrays.php:608
 msgid "Flow Template ID"
 msgstr "Mã ID mẫu, template"
 
-#: arrays.php:608
+#: arrays.php:609
 msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
 msgstr "ID mẫu luồng chỉ dành cho luồng v9 và IPFIX.  Lưu ý rằng ID mẫu có thể khác nhau giữa các nhà sản xuất."
 
-#: arrays.php:615
+#: arrays.php:616
 msgid "Stream Address"
 msgstr "Địa chỉ IP"
 
-#: arrays.php:616
+#: arrays.php:617
 msgid "The Stream IP Address or Hostname from the list of registered streams."
 msgstr "Địa chỉ IP luồng hoặc Tên máy chủ từ danh sách các luồng đã đăng ký."
 
-#: arrays.php:623
+#: arrays.php:624
 msgid "Presets"
 msgstr "Đặt trước"
 
-#: arrays.php:624
+#: arrays.php:625
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
 msgstr "Nếu Bộ lọc này dựa trên Khoảng thời gian được xác định trước, hãy chọn nó ở đây."
 
-#: arrays.php:633
+#: arrays.php:634
 msgid "Detailed Filter Criteria"
 msgstr "Tiêu chí bộ lọc chi tiết"
 
-#: arrays.php:636 flowview_filters.php:332
+#: arrays.php:637 flowview_filters.php:332
 msgid "Report Type"
 msgstr "Loại báo cáo"
 
-#: arrays.php:637
+#: arrays.php:638
 msgid "The Report Type to use by default for this Filter when creating a Report."
 msgstr "Loại Báo cáo để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo."
 
-#: arrays.php:640
+#: arrays.php:641
 msgid "Printed"
 msgstr "Đã in"
 
-#: arrays.php:640
+#: arrays.php:641
 msgid "Statistical"
 msgstr "Thống kê"
 
-#: arrays.php:644
+#: arrays.php:645
 msgid "Statistical Report"
 msgstr "Báo cáo thống kê"
 
-#: arrays.php:645
+#: arrays.php:646
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
 msgstr "Loại Báo cáo Hiển thị để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo."
 
-#: arrays.php:652
+#: arrays.php:653
 msgid "Printed Report"
 msgstr "Báo cáo in"
 
-#: arrays.php:653
+#: arrays.php:654
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
 msgstr "Loại Báo cáo In để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo In."
 
-#: arrays.php:660
+#: arrays.php:661
 msgid "Range Rules"
 msgstr "Quản lý lịch"
 
-#: arrays.php:661
+#: arrays.php:662
 msgid "Constrain the Filter Data by these time filter rules."
 msgstr "Ràng buộc Dữ liệu Bộ lọc theo các quy tắc lọc thời gian này."
 
-#: arrays.php:668
+#: arrays.php:669
 msgid "Resolve IP's"
 msgstr "Giải quyết các địa chỉ:"
 
-#: arrays.php:669
+#: arrays.php:670
 msgid "Resolve IP Addresses to Domain Names."
 msgstr "Giải quyết các địa chỉ:"
 
-#: arrays.php:674 flowview_schedules.php:588
+#: arrays.php:675 flowview_schedules.php:1008
 msgid "Yes"
 msgstr "Có"
 
-#: arrays.php:675 flowview_schedules.php:588
+#: arrays.php:676 flowview_schedules.php:1008
 msgid "No"
 msgstr "Không"
 
-#: arrays.php:679 flowview_filters.php:342 functions.php:644
+#: arrays.php:680 flowview_filters.php:342 functions.php:762
 msgid "Sort Field"
 msgstr "Trường sắp xếp:"
 
-#: arrays.php:680
+#: arrays.php:681
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
 msgstr "Trường Sắp xếp mặc định cho Bộ lọc. Cài đặt này sẽ được áp dụng cho bất kỳ Báo cáo đã Lập biểu nào."
 
-#: arrays.php:687
+#: arrays.php:688
 msgid "Maximum Rows"
 msgstr "Hàng tối đa"
 
-#: arrays.php:688
+#: arrays.php:689
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
 msgstr "Các hàng tối đa cần cung cấp trong Bộ lọc. Cài đặt này sẽ được áp dụng cho bất kỳ Báo cáo đã Lập biểu nào."
 
-#: arrays.php:695
+#: arrays.php:696
 msgid "Minimum Bytes"
 msgstr "Byte tối thiểu:"
 
-#: arrays.php:696
+#: arrays.php:697
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
 msgstr "Tổng số byte tối thiểu cần xem xét cho Bộ lọc. Bất kỳ tổng luồng nào nhỏ hơn nhiều byte này sẽ bị bỏ qua."
 
-#: arrays.php:705
+#: arrays.php:706
 msgid "Charting Options"
 msgstr "Tùy chọn biểu đồ"
 
-#: arrays.php:708
+#: arrays.php:709
 msgid "Graph Type"
 msgstr "Loại đồ thị"
 
-#: arrays.php:709
+#: arrays.php:710
 msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
 msgstr "Loại biểu đồ để hiển thị theo mặc định.  Chúng bao gồm Bar, Pie và Treemap."
 
-#: arrays.php:714
+#: arrays.php:715
 msgid "Bar Chart"
 msgstr "Biểu đồ thanh"
 
-#: arrays.php:715
+#: arrays.php:716
 msgid "Pie Chart"
 msgstr "Biểu đồ tròn"
 
-#: arrays.php:716
+#: arrays.php:717
 msgid "Treemap Chart"
 msgstr "Biểu đồ cây"
 
-#: arrays.php:720
+#: arrays.php:721
 msgid "Graph Height"
 msgstr "Chiều cao biểu đồ"
 
-#: arrays.php:721
-msgid "The Graph Hight to use by default."
+#: arrays.php:722
+#, fuzzy
+msgid "The Graph Height to use by default."
 msgstr "Biểu đồ Hight để sử dụng theo mặc định."
 
-#: arrays.php:728
+#: arrays.php:729
 msgid "Table Panel"
 msgstr "Bảng"
 
-#: arrays.php:729
+#: arrays.php:730
 msgid "Should the Table Panel be displayed by default."
 msgstr "Bảng điều khiển có nên được hiển thị theo mặc định."
 
-#: arrays.php:735
+#: arrays.php:736
 msgid "Bytes Panel"
 msgstr "Thanh byte"
 
-#: arrays.php:736
+#: arrays.php:737
 msgid "Should the Bytes Panel be displayed by default."
 msgstr "Bảng điều khiển Bytes nên được hiển thị theo mặc định."
 
-#: arrays.php:742
+#: arrays.php:743
 msgid "Packets Panel"
 msgstr "Gói thanh"
 
-#: arrays.php:743
+#: arrays.php:744
 msgid "Should the Packets Panel be displayed by default."
 msgstr "Bảng điều khiển gói được hiển thị theo mặc định."
 
-#: arrays.php:749
+#: arrays.php:750
 msgid "Flows Panel"
 msgstr "Thanh chảy"
 
-#: arrays.php:750
+#: arrays.php:751
 msgid "Should the Flows Panel be displayed by default."
 msgstr "Bảng điều khiển Flows có nên được hiển thị theo mặc định."
 
-#: arrays.php:758
+#: arrays.php:759
 msgid "Protocol Filters"
 msgstr "Giao thức"
 
-#: arrays.php:761
+#: arrays.php:762
 msgid "Protocols"
 msgstr "Giao thức"
 
-#: arrays.php:762
+#: arrays.php:763
 msgid "Select the Specific Protocol for the Filter."
 msgstr "Chọn Giao thức cụ thể cho Bộ lọc."
 
-#: arrays.php:769
+#: arrays.php:770
 msgid "TCP Flags"
 msgstr "TCP Flags"
 
-#: arrays.php:770
+#: arrays.php:771
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
 msgstr "Cờ TCP để tìm kiếm trong Bộ lọc. Đây có thể là danh sách các Cờ TCP được phân tách bằng dấu phẩy"
 
-#: arrays.php:777
+#: arrays.php:778
 msgid "TOS Fields"
 msgstr "Lĩnh vực ĐKDV"
 
-#: arrays.php:778
+#: arrays.php:779
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
 msgstr "Các Trường TOS để tìm kiếm trong Bộ lọc. Đây có thể là danh sách các Trường TOS được phân tách bằng dấu phẩy"
 
-#: arrays.php:786
+#: arrays.php:787
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "Lọc trên IP nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
 
-#: arrays.php:793
+#: arrays.php:794
 msgid "Source Ports"
 msgstr "Cổng nguồn"
 
-#: arrays.php:794
+#: arrays.php:795
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgstr "Lọc trên các Cổng nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách Cổng nguồn được phân tách bằng dấu phẩy."
 
-#: arrays.php:801
+#: arrays.php:802
 msgid "Source Interface"
 msgstr "Giao diện nguồn"
 
-#: arrays.php:802
+#: arrays.php:803
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
 msgstr "Lọc trên Giao diện nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các Giao diện Nguồn được phân tách bằng dấu phẩy"
 
-#: arrays.php:810
+#: arrays.php:811
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
 msgstr "Lọc trên AS đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân tách bằng dấu phẩy của Nguồn AS"
 
-#: arrays.php:818
+#: arrays.php:819
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "Lọc trên IP đích đã chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
 
-#: arrays.php:825
+#: arrays.php:826
 msgid "Dest Ports"
 msgstr "Cổng Dest"
 
-#: arrays.php:826
+#: arrays.php:827
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgstr "Lọc trên các Cổng đích đã chọn trong Bộ lọc. Đây có thể là danh sách các Cổng Đích được phân tách bằng dấu phẩy."
 
-#: arrays.php:833
+#: arrays.php:834
 msgid "Dest Interface"
 msgstr "Giao diện Dest"
 
-#: arrays.php:834
+#: arrays.php:835
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr "Lọc trên Giao diện đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân cách bằng dấu phẩy của các Giao diện điểm đến."
 
-#: arrays.php:841 functions.php:2940
+#: arrays.php:842 functions.php:3330
 msgid "Dest AS"
 msgstr "Dest AS"
 
-#: arrays.php:842
+#: arrays.php:843
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
 msgstr "Lọc trên AS đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân tách bằng dấu phẩy của đích AS's"
 
-#: arrays.php:860
+#: arrays.php:861
 msgid "DNS Cache"
 msgstr "DNS Cache"
 
-#: arrays.php:864
+#: arrays.php:865
 msgid "CIDR/Routes"
 msgstr "CIDR/Tuyến đường"
 
-#: arrays.php:868
+#: arrays.php:869
 msgid "Autonomous Numbers"
 msgstr "Số"
 
-#: arrays.php:876
+#: arrays.php:877
 msgid "AS Blocks"
 msgstr "Khối AS"
 
-#: arrays.php:884
+#: arrays.php:885
 msgid "AS Sets"
 msgstr "Bộ AS"
 
-#: arrays.php:892
+#: arrays.php:893
 msgid "Route Sets"
 msgstr "Bộ lộ trình"
 
-#: arrays.php:900
+#: arrays.php:901
 msgid "Domains"
 msgstr "Miền"
 
-#: arrays.php:908
+#: arrays.php:909
 msgid "Filter Sets"
 msgstr "Bộ lọc đã lưu"
 
-#: arrays.php:916
+#: arrays.php:917
 msgid "Peering Sets"
 msgstr "Bộ ngang hàng"
 
-#: arrays.php:924 flowview_databases.php:245 flowview_databases.php:505
+#: arrays.php:925 flowview_databases.php:258 flowview_databases.php:518
 msgid "Network"
 msgstr "Mạng"
 
-#: arrays.php:932
+#: arrays.php:933
 msgid "Internet Routers"
 msgstr "Kiểm soát Internet"
 
-#: arrays.php:940
+#: arrays.php:941
 msgid "Incident Response Teams"
 msgstr "Đội ứng phó sự cố"
 
-#: arrays.php:948
+#: arrays.php:949
 msgid "Auth Agents"
 msgstr "Đại lý Auth"
 
-#: arrays.php:956
+#: arrays.php:957
 msgid "Organizations"
 msgstr "Cơ quan"
 
-#: arrays.php:964
+#: arrays.php:965
 msgid "Roles"
 msgstr "Vai trò"
 
-#: arrays.php:972
+#: arrays.php:973
 msgid "Persons"
 msgstr "Người"
 
-#: flowview.php:124
+#: flowview.php:125
+msgid "Unable to find Raw Data for to Export"
+msgstr ""
+
+#: flowview.php:205
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr ""
+
+#: flowview.php:210
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr ""
+
+#: flowview.php:240
 #, php-format
 msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
 msgstr "Không thể xóa bộ lọc luồng '%s' khi nó được sử dụng trong Báo cáo theo lịch."
 
-#: flowview.php:127
+#: flowview.php:243
 #, php-format
 msgid "Flow Filter '%s' Deleted."
 msgstr "Bộ lọc luồng '%s' Đã xóa."
 
-#: flowview_databases.php:33 flowview_devices.php:35 flowview_filters.php:39
-#: flowview_schedules.php:37 functions.php:603
+#: flowview_databases.php:34 flowview_devices.php:35 flowview_filters.php:39
+#: flowview_schedules.php:37 functions.php:721
 msgid "Delete"
 msgstr "Xóa"
 
-#: flowview_databases.php:50
+#: flowview_databases.php:51
 msgid "DNS Cache has been purged.  It will refill as records come in."
 msgstr "DNS Cache đã bị xóa.  Nó sẽ nạp lại khi hồ sơ đến."
 
-#: flowview_databases.php:92
+#: flowview_databases.php:95
 msgid "Internet Route Registry Details"
 msgstr "Chi tiết đăng ký tuyến Internet"
 
-#: flowview_databases.php:99
+#: flowview_databases.php:116
 msgid "Authorized Agent Details"
 msgstr "Chi tiết đại lý ủy quyền"
 
-#: flowview_databases.php:205
+#: flowview_databases.php:176
+#, fuzzy
+msgid "No Details Found"
+msgstr "Không tìm thấy mục nhập bộ nhớ cache DNS"
+
+#: flowview_databases.php:218
 msgid "CIDR/Route"
 msgstr "CIDR/Tuyến đường"
 
-#: flowview_databases.php:210
+#: flowview_databases.php:223
 msgid "Autonomous Number"
 msgstr "Số"
 
-#: flowview_databases.php:215
+#: flowview_databases.php:228
 msgid "AS Block"
 msgstr "Khối AS"
 
-#: flowview_databases.php:220
+#: flowview_databases.php:233
 msgid "AS Set"
 msgstr "Chưa thiết lập"
 
-#: flowview_databases.php:225
+#: flowview_databases.php:238
 msgid "Route Set"
 msgstr "Bộ lộ trình"
 
-#: flowview_databases.php:230
+#: flowview_databases.php:243
 msgid "Domain"
 msgstr "Tên miền"
 
-#: flowview_databases.php:235
+#: flowview_databases.php:248
 msgid "Filter Set"
 msgstr "Bộ lọc đã lưu"
 
-#: flowview_databases.php:240
+#: flowview_databases.php:253
 msgid "Peering Set"
 msgstr "Bộ ngang hàng"
 
-#: flowview_databases.php:250
+#: flowview_databases.php:263
 msgid "Internet Router"
 msgstr "Kiểm soát Internet"
 
-#: flowview_databases.php:255
+#: flowview_databases.php:268
 msgid "Incident Response Team"
 msgstr "Đội ứng phó sự cố"
 
-#: flowview_databases.php:260
+#: flowview_databases.php:273
 msgid "Auth Agent"
 msgstr "Đại lý Auth"
 
-#: flowview_databases.php:265 flowview_databases.php:315
+#: flowview_databases.php:278 flowview_databases.php:328
 msgid "Organization"
 msgstr "Tổ chức"
 
-#: flowview_databases.php:270
+#: flowview_databases.php:283
 msgid "Role"
 msgstr "Vai trò"
 
-#: flowview_databases.php:275
+#: flowview_databases.php:288
 msgid "Person"
 msgstr "Người"
 
-#: flowview_databases.php:280
+#: flowview_databases.php:293
 msgid "Router Set"
 msgstr "Bộ lộ trình"
 
-#: flowview_databases.php:285
+#: flowview_databases.php:298
 msgid "Remarks"
 msgstr "Nhận xét"
 
-#: flowview_databases.php:290 flowview_databases.php:1718
+#: flowview_databases.php:303 flowview_databases.php:1820
 msgid "Last Modified"
 msgstr "Sửa đổi lần cuối"
 
-#: flowview_databases.php:300
+#: flowview_databases.php:313
 msgid "Registration Date"
 msgstr "Ngày đăng ký"
 
-#: flowview_databases.php:305
+#: flowview_databases.php:318
 msgid "MNT By"
 msgstr "MNT Bởi"
 
-#: flowview_databases.php:310
+#: flowview_databases.php:323
 msgid "Admin Contact"
 msgstr "Liên hệ quản trị viên"
 
-#: flowview_databases.php:320
+#: flowview_databases.php:333
 msgid "Changes"
 msgstr "Thay đổi"
 
-#: flowview_databases.php:325
+#: flowview_databases.php:338
 msgid "Notify"
 msgstr "Thông báo"
 
-#: flowview_databases.php:330
+#: flowview_databases.php:343
 msgid "Description"
 msgstr "Mô tả"
 
-#: flowview_databases.php:335
+#: flowview_databases.php:348
 msgid "Tech Contact"
 msgstr "Liên hệ công nghệ"
 
-#: flowview_databases.php:340
+#: flowview_databases.php:353
 msgid "MNT Lower"
 msgstr "MNT thấp hơn"
 
-#: flowview_databases.php:345
+#: flowview_databases.php:358
 msgid "Country"
 msgstr "Quốc gia"
 
-#: flowview_databases.php:350
+#: flowview_databases.php:363
 msgid "Abuse Email"
 msgstr "Email"
 
-#: flowview_databases.php:355
+#: flowview_databases.php:368
 msgid "Fax Number"
 msgstr "Số Fax"
 
-#: flowview_databases.php:360
+#: flowview_databases.php:373
 msgid "Phone"
 msgstr "Điện thoại"
 
-#: flowview_databases.php:365 flowview_schedules.php:559
+#: flowview_databases.php:378
 msgid "Email"
 msgstr "Email"
 
-#: flowview_databases.php:370 flowview_devices.php:336 flowview_devices.php:551
+#: flowview_databases.php:383 flowview_devices.php:398 flowview_devices.php:624
 msgid "Address"
 msgstr "Địa chỉ"
 
-#: flowview_databases.php:375 flowview_devices.php:340 flowview_devices.php:775
+#: flowview_databases.php:388 flowview_devices.php:402 flowview_devices.php:852
 msgid "Status"
 msgstr "Trạng thái"
 
-#: flowview_databases.php:380
+#: flowview_databases.php:393
 msgid "Members By Fef"
 msgstr "Thành viên By Fef"
 
-#: flowview_databases.php:385
+#: flowview_databases.php:398
 msgid "Abuse Contacts"
 msgstr "Liên hệ lạm dụng"
 
-#: flowview_databases.php:390
+#: flowview_databases.php:403
 msgid "MNT Reference"
 msgstr "Tài liệu tham khảo MNT"
 
-#: flowview_databases.php:395
+#: flowview_databases.php:408
 msgid "Members"
 msgstr "Thành viên"
 
-#: flowview_databases.php:400
+#: flowview_databases.php:413
 msgid "MNT Notify"
 msgstr "Thông báo MNT"
 
-#: flowview_databases.php:405
+#: flowview_databases.php:418
 msgid "Authorization"
 msgstr "Xác thực"
 
-#: flowview_databases.php:410
+#: flowview_databases.php:423
 msgid "MNT Routes"
 msgstr "Các tuyến MNT"
 
-#: flowview_databases.php:415
+#: flowview_databases.php:428
 msgid "Member of"
 msgstr "Thành viên"
 
-#: flowview_databases.php:420
+#: flowview_databases.php:433
 msgid "Updates Email"
 msgstr "Cập nhật"
 
-#: flowview_databases.php:425
+#: flowview_databases.php:438
 msgid "NOC Handle"
 msgstr "Tay cầm NOC"
 
-#: flowview_databases.php:430
+#: flowview_databases.php:443
 msgid "Sponsor Org"
 msgstr "Tổ chức tài trợ"
 
-#: flowview_databases.php:435
+#: flowview_databases.php:448
 msgid "MNT Irt"
 msgstr "MNT Irt"
 
-#: flowview_databases.php:440
+#: flowview_databases.php:453
 msgid "MP Members"
 msgstr "Số"
 
-#: flowview_databases.php:445
+#: flowview_databases.php:458
 msgid "Sub Domain"
 msgstr "Cổng nguồn"
 
-#: flowview_databases.php:450
+#: flowview_databases.php:463
 msgid "Pingable"
 msgstr "Bật"
 
-#: flowview_databases.php:455
+#: flowview_databases.php:468
 msgid "Alias"
 msgstr "Bí danh"
 
-#: flowview_databases.php:460
+#: flowview_databases.php:473
 msgid "Org Type"
 msgstr "Loại kho"
 
-#: flowview_databases.php:465
+#: flowview_databases.php:478
 msgid "Refer To"
 msgstr "Tham khảo"
 
-#: flowview_databases.php:470
+#: flowview_databases.php:483
 msgid "MP Peering"
 msgstr "MP Peering"
 
-#: flowview_databases.php:475 flowview_devices.php:490
+#: flowview_databases.php:488 flowview_devices.php:563 functions.php:971
 msgid "Export"
 msgstr "Xuất ra"
 
-#: flowview_databases.php:480
+#: flowview_databases.php:493
 msgid "Holes"
 msgstr "Lỗ"
 
-#: flowview_databases.php:485
+#: flowview_databases.php:498
 msgid "MP Default"
 msgstr "Mặc định"
 
-#: flowview_databases.php:490
+#: flowview_databases.php:503
 msgid "Components"
 msgstr "Các thành phần"
 
-#: flowview_databases.php:495
+#: flowview_databases.php:508
 msgid "RS Out"
 msgstr "RS ra"
 
-#: flowview_databases.php:500
+#: flowview_databases.php:513
 msgid "Organization Name"
 msgstr "Tên tổ chức"
 
-#: flowview_databases.php:510
+#: flowview_databases.php:523
 msgid "AS Name"
 msgstr "Tên:"
 
-#: flowview_databases.php:515
+#: flowview_databases.php:528
 msgid "Author"
 msgstr "Tác giả"
 
-#: flowview_databases.php:520
+#: flowview_databases.php:533
 msgid "IRT Notify"
 msgstr "Thông báo IRT"
 
-#: flowview_databases.php:525
+#: flowview_databases.php:538
 msgid "Aggr MTD"
 msgstr "Aggr MTD"
 
-#: flowview_databases.php:530
+#: flowview_databases.php:543
 msgid "AS Type"
 msgstr "Loại AS"
 
-#: flowview_databases.php:535
+#: flowview_databases.php:548
 msgid "MP Filter"
 msgstr "Bộ lọc"
 
-#: flowview_databases.php:540
+#: flowview_databases.php:553
 msgid "Default Route"
 msgstr "Mặc định"
 
-#: flowview_databases.php:545
+#: flowview_databases.php:558
 msgid "Assignment Size"
 msgstr "Kích thước bài tập"
 
-#: flowview_databases.php:550
+#: flowview_databases.php:563
 msgid "Export Comps"
 msgstr "Báo cáo"
 
-#: flowview_databases.php:555
+#: flowview_databases.php:568
 msgid "RS In"
 msgstr "RS vào"
 
-#: flowview_databases.php:560
+#: flowview_databases.php:573
 msgid "Net Name"
 msgstr "Tên trường"
 
-#: flowview_databases.php:565
+#: flowview_databases.php:578
 msgid "DS Rdata"
 msgstr "DS Rdata"
 
-#: flowview_databases.php:570
+#: flowview_databases.php:583
 msgid "Aggr Boundary"
 msgstr "Ranh giới Aggr"
 
-#: flowview_databases.php:580
+#: flowview_databases.php:593
 msgid "MP Import"
 msgstr "Nhập khẩu MP"
 
-#: flowview_databases.php:585
+#: flowview_databases.php:598
 msgid "Language"
 msgstr "Ngôn ngữ"
 
-#: flowview_databases.php:590
+#: flowview_databases.php:603
 msgid "RESFful Link"
 msgstr "Liên kết RESFful"
 
-#: flowview_databases.php:595
+#: flowview_databases.php:608
 msgid "Peer"
 msgstr "Peer"
 
-#: flowview_databases.php:600
+#: flowview_databases.php:613
 msgid "Zone Contact"
 msgstr "Khu vực liên hệ"
 
-#: flowview_databases.php:605
+#: flowview_databases.php:618
 msgid "Inject"
 msgstr "Tiêm"
 
-#: flowview_databases.php:610
+#: flowview_databases.php:623
 msgid "MP Peer"
 msgstr "MP ngang hàng"
 
-#: flowview_databases.php:615
+#: flowview_databases.php:628
 msgid "Referral By"
 msgstr "Giới thiệu bởi"
 
-#: flowview_databases.php:620
+#: flowview_databases.php:633
 msgid "Form"
 msgstr "Biểu mẫu"
 
-#: flowview_databases.php:625
+#: flowview_databases.php:638
 msgid "MNT Domains"
 msgstr "Tên miền MNT"
 
-#: flowview_databases.php:630
+#: flowview_databases.php:643
 msgid "Origin AS"
 msgstr "Nguồn gốc AS"
 
-#: flowview_databases.php:635
+#: flowview_databases.php:648
 msgid "MP Export"
 msgstr "Báo cáo"
 
-#: flowview_databases.php:640
-msgid "Encyption"
+#: flowview_databases.php:653
+#, fuzzy
+msgid "Encryption"
 msgstr "Hết hạn"
 
-#: flowview_databases.php:645
+#: flowview_databases.php:658
 msgid "Geo Feed"
 msgstr "Nguồn cấp dữ liệu địa lý"
 
-#: flowview_databases.php:650
+#: flowview_databases.php:663
 msgid "Geo Index"
 msgstr "Chỉ số địa lý"
 
-#: flowview_databases.php:655
+#: flowview_databases.php:668
 msgid "Interface Addr"
 msgstr "Giao diện"
 
-#: flowview_databases.php:660
+#: flowview_databases.php:673
 msgid "Export Via"
 msgstr "Báo cáo"
 
-#: flowview_databases.php:665
+#: flowview_databases.php:678
 msgid "Trouble"
 msgstr "Rắc rối"
 
-#: flowview_databases.php:670
+#: flowview_databases.php:683
 msgid "Name Servers"
 msgstr "Máy chủ định danh"
 
-#: flowview_databases.php:675
+#: flowview_databases.php:688
 msgid "Ping Handle"
 msgstr "Núm điều khiển Ping"
 
-#: flowview_databases.php:680
+#: flowview_databases.php:693
 msgid "Interface"
 msgstr "Giao diện"
 
-#: flowview_databases.php:685
+#: flowview_databases.php:698
 msgid "Import"
 msgstr "Nhập"
 
-#: flowview_databases.php:690
+#: flowview_databases.php:703
 msgid "Signature"
 msgstr "Chữ ký"
 
-#: flowview_databases.php:695
+#: flowview_databases.php:708
 msgid "Geo Location"
 msgstr "Địa điểm"
 
-#: flowview_databases.php:700
+#: flowview_databases.php:713
 msgid "Local AS"
 msgstr "Địa phương"
 
-#: flowview_databases.php:705
+#: flowview_databases.php:718
 msgid "Import Via"
 msgstr "Nhập khẩu qua"
 
-#: flowview_databases.php:750
+#: flowview_databases.php:790
 #, php-format
 msgid "FATAL: Unknown Database Table %s"
 msgstr "FATAL: Bảng cơ sở dữ liệu không xác định %s"
 
-#: flowview_databases.php:863 flowview_databases.php:1228
-#: flowview_databases.php:1520 flowview_devices.php:699
-#: flowview_filters.php:233 flowview_schedules.php:450
+#: flowview_databases.php:907 flowview_databases.php:1266
+#: flowview_databases.php:1562 flowview_devices.php:772
+#: flowview_filters.php:233 flowview_schedules.php:553
+#: flowview_schedules.php:850
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: flowview_databases.php:873 flowview_databases.php:1238
-#: flowview_databases.php:1248 flowview_databases.php:1530
-#: flowview_databases.php:1540
+#: flowview_databases.php:917 flowview_databases.php:1276
+#: flowview_databases.php:1286 flowview_databases.php:1572
+#: flowview_databases.php:1582
 msgid "Any"
 msgstr "Bất kỳ"
 
-#: flowview_databases.php:891 flowview_databases.php:1023
-#: flowview_databases.php:1266 flowview_databases.php:1378
-#: flowview_databases.php:1558 flowview_databases.php:1679
+#: flowview_databases.php:935 flowview_databases.php:1060
+#: flowview_databases.php:1304 flowview_databases.php:1420
+#: flowview_databases.php:1600 flowview_databases.php:1781
 msgid "Entries"
 msgstr "Mục"
 
-#: flowview_databases.php:895 flowview_databases.php:1270
-#: flowview_databases.php:1562 flowview_filters.php:243
-#: flowview_schedules.php:460
+#: flowview_databases.php:939 flowview_databases.php:1308
+#: flowview_databases.php:1604 flowview_filters.php:243
+#: flowview_schedules.php:563 flowview_schedules.php:860
 msgid "Default"
 msgstr "Mặc định"
 
-#: flowview_databases.php:907 flowview_databases.php:1282
-#: flowview_databases.php:1574 flowview_devices.php:489
-#: flowview_devices.php:706 flowview_filters.php:254 flowview_schedules.php:471
-#: functions.php:596
+#: flowview_databases.php:951 flowview_databases.php:1320
+#: flowview_databases.php:1616 flowview_devices.php:562
+#: flowview_devices.php:779 flowview_filters.php:255 flowview_schedules.php:575
+#: flowview_schedules.php:872 functions.php:714
 msgid "Go"
 msgstr "Đi"
 
-#: flowview_databases.php:907 flowview_databases.php:1282
-#: flowview_databases.php:1574 flowview_devices.php:706
-#: flowview_filters.php:254 flowview_schedules.php:471
+#: flowview_databases.php:951 flowview_databases.php:1320
+#: flowview_databases.php:1616 flowview_devices.php:779
+#: flowview_filters.php:255 flowview_schedules.php:575
+#: flowview_schedules.php:872
 msgid "Set/Refresh Filters"
 msgstr "Đặt / Làm mới Bộ lọc"
 
-#: flowview_databases.php:908 flowview_databases.php:1283
-#: flowview_databases.php:1575 flowview_devices.php:707
-#: flowview_filters.php:257 flowview_schedules.php:474 functions.php:597
+#: flowview_databases.php:952 flowview_databases.php:1321
+#: flowview_databases.php:1617 flowview_devices.php:780
+#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_schedules.php:873 functions.php:715
 msgid "Clear"
 msgstr "Xóa"
 
-#: flowview_databases.php:908 flowview_databases.php:1283
-#: flowview_databases.php:1575 flowview_devices.php:707
-#: flowview_filters.php:257 flowview_schedules.php:474
+#: flowview_databases.php:952 flowview_databases.php:1321
+#: flowview_databases.php:1617 flowview_devices.php:780
+#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_schedules.php:873
 msgid "Clear Filters"
 msgstr "Xóa bộ lọc"
 
-#: flowview_databases.php:909 flowview_databases.php:1284
-msgid "Purge"
-msgstr "Gỡ"
-
-#: flowview_databases.php:909 flowview_databases.php:1284
+#: flowview_databases.php:953 flowview_databases.php:1322
 msgid "Purge the DNS Cache"
 msgstr "Xóa bộ nhớ cache DNS"
 
-#: flowview_databases.php:1064
+#: flowview_databases.php:1101
 msgid "Not Specified"
 msgstr "Không được chỉ định"
 
-#: flowview_databases.php:1080
+#: flowview_databases.php:1117
 msgid "No Matching Entries Found"
 msgstr "Không tìm thấy mục nhập phù hợp"
 
-#: flowview_databases.php:1140
-msgid "Click 'Continue' to delete the following DNS Cache Entriy."
+#: flowview_databases.php:1177
+#, fuzzy
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
 msgstr[0] "Nhấp vào 'Tiếp tục' để xóa (các) Lịch biểu sau."
 
-#: flowview_databases.php:1145 flowview_devices.php:222
-#: flowview_filters.php:164 flowview_schedules.php:262 functions.php:833
-#: functions.php:843
+#: flowview_databases.php:1182 flowview_devices.php:268
+#: flowview_filters.php:164 flowview_schedules.php:340 functions.php:987
+#: functions.php:997
 msgid "Cancel"
 msgstr "Hủy"
 
-#: flowview_databases.php:1145 flowview_devices.php:214
-#: flowview_filters.php:156 flowview_schedules.php:254 functions.php:842
+#: flowview_databases.php:1183 flowview_devices.php:260
+#: flowview_filters.php:156 flowview_schedules.php:332 functions.php:996
 msgid "Continue"
 msgstr "Tiếp tục"
 
-#: flowview_databases.php:1145
+#: flowview_databases.php:1183
 msgid "Delete DNS Entry"
 msgid_plural "Delete DNS Entries"
 msgstr[0] "Xóa mục nhập DNS"
 
-#: flowview_databases.php:1219
+#: flowview_databases.php:1257
 msgid "Flowview DNS Cache Entries"
 msgstr "Lịch trình FlowView"
 
-#: flowview_databases.php:1234 flowview_databases.php:1240
-#: flowview_databases.php:1439
+#: flowview_databases.php:1272 flowview_databases.php:1278
+#: flowview_databases.php:1481
 msgid "Verified"
 msgstr "Đã xác minh"
 
-#: flowview_databases.php:1239 flowview_databases.php:1439
+#: flowview_databases.php:1277 flowview_databases.php:1481
 msgid "Unverified"
 msgstr "Chưa được xác minh"
 
-#: flowview_databases.php:1390
+#: flowview_databases.php:1322
+msgid "Purge"
+msgstr "Gỡ"
+
+#: flowview_databases.php:1432
 msgid "This is the IP Address of the Cache entry."
 msgstr "Đây là Địa chỉ IP của mục Cache."
 
-#: flowview_databases.php:1393
+#: flowview_databases.php:1435
 msgid "DNS Hostname"
 msgstr "Tên máy chủ DNS"
 
-#: flowview_databases.php:1396
+#: flowview_databases.php:1438
 msgid "The DNS Name assigned to the IP Address."
 msgstr "Tên DNS được gán cho Địa chỉ IP."
 
-#: flowview_databases.php:1402
+#: flowview_databases.php:1444
 msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
 msgstr "Nguồn của Tên máy chủ DNS.  Nó có thể là DNS, Tra cứu tĩnh hoặc ARIN."
 
-#: flowview_databases.php:1405
+#: flowview_databases.php:1447
 msgid "Arin Verified"
 msgstr "Arin đã xác minh"
 
-#: flowview_databases.php:1408
+#: flowview_databases.php:1450
 msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
 msgstr "Thông tin Arin cho Địa chỉ IP này được xác minh hoặc đó là Địa chỉ IP miền cục bộ."
 
-#: flowview_databases.php:1411
+#: flowview_databases.php:1453
 msgid "CIDR ID"
 msgstr "CIDR ID"
 
-#: flowview_databases.php:1414
+#: flowview_databases.php:1456
 msgid "The Arin primary key.  This is not official Arin information."
 msgstr "Khóa chính Arin.  Đây không phải là thông tin chính thức của Arin."
 
-#: flowview_databases.php:1417
+#: flowview_databases.php:1459
 msgid "Autonomous System ID"
 msgstr "ID hệ thống tự trị"
 
-#: flowview_databases.php:1420
+#: flowview_databases.php:1462
 msgid "The Arin Origin AS.  This is official Arin AS information."
 msgstr "Nguồn gốc Arin AS.  Đây là thông tin chính thức của Arin AS."
 
-#: flowview_databases.php:1423
+#: flowview_databases.php:1465
 msgid "Updated Time"
 msgstr "Thời gian cập nhật"
 
-#: flowview_databases.php:1426
+#: flowview_databases.php:1468
 msgid "This is the time that the DNS cache was entered or last updated."
 msgstr "Đây là thời gian bộ nhớ cache DNS được nhập hoặc cập nhật lần cuối."
 
-#: flowview_databases.php:1447
+#: flowview_databases.php:1489
 msgid "No DNS Cache Entries Found"
 msgstr "Không tìm thấy mục nhập bộ nhớ cache DNS"
 
-#: flowview_databases.php:1511
+#: flowview_databases.php:1553
 msgid "Flowview Internet Routes"
 msgstr "Trình nghe FlowView"
 
-#: flowview_databases.php:1526
+#: flowview_databases.php:1568
 msgid "IP Version"
 msgstr "Phiên bản"
 
-#: flowview_databases.php:1531
+#: flowview_databases.php:1573
 msgid "IPv4"
 msgstr "IPv4"
 
-#: flowview_databases.php:1532
+#: flowview_databases.php:1574
 msgid "IPv6"
 msgstr "IPv6"
 
-#: flowview_databases.php:1689
+#: flowview_databases.php:1791
 msgid "Route"
 msgstr "Lộ trình"
 
-#: flowview_databases.php:1691
+#: flowview_databases.php:1793
 msgid "This is the published Internet Route."
 msgstr "Đây là Tuyến đường Internet được xuất bản."
 
-#: flowview_databases.php:1694
+#: flowview_databases.php:1796
 msgid "AS Number"
 msgstr "Mã cổng"
 
-#: flowview_databases.php:1697
+#: flowview_databases.php:1799
 msgid "The Autonomous System Number for the route."
 msgstr "Số hệ thống tự trị cho tuyến đường."
 
-#: flowview_databases.php:1700
+#: flowview_databases.php:1802
 msgid "Route Description"
 msgstr "Mô tả tuyến đường"
 
-#: flowview_databases.php:1703
-msgid "The Descrption logged by the Route Maintainer."
+#: flowview_databases.php:1805
+#, fuzzy
+msgid "The Description logged by the Route Maintainer."
 msgstr "Sự phân hủy được ghi lại bởi Người duy trì tuyến đường."
 
-#: flowview_databases.php:1709
+#: flowview_databases.php:1811
 msgid "The source database used to publish the route."
 msgstr "Cơ sở dữ liệu nguồn được sử dụng để xuất bản tuyến."
 
-#: flowview_databases.php:1712
+#: flowview_databases.php:1814
 msgid "Maintained By"
 msgstr "Được duy trì bởi"
 
-#: flowview_databases.php:1715
+#: flowview_databases.php:1817
 msgid "The Internet Carrier who is maintaining the route for the customer."
 msgstr "Nhà cung cấp dịch vụ Internet đang duy trì tuyến đường cho khách hàng."
 
-#: flowview_databases.php:1721
+#: flowview_databases.php:1823
 msgid "The last time the information on this route was modified."
 msgstr "Lần cuối cùng thông tin trên tuyến đường này đã được sửa đổi."
 
-#: flowview_databases.php:1742
+#: flowview_databases.php:1850
 msgid "No Matching Routes Found"
 msgstr "Không tìm thấy tuyến đường phù hợp"
 
-#: flowview_devices.php:43
+#: flowview_devices.php:36 flowview_filters.php:41 flowview_schedules.php:39
+msgid "Enable"
+msgstr "Bật"
+
+#: flowview_devices.php:37 flowview_filters.php:40 flowview_schedules.php:38
+msgid "Disable"
+msgstr "Vô hiệu hóa"
+
+#: flowview_devices.php:45
 msgid "Listener Name"
 msgstr "Người nghe"
 
-#: flowview_devices.php:44
+#: flowview_devices.php:46
 msgid "Name of the device to be displayed."
 msgstr "Tên của thiết bị sẽ được hiển thị."
 
-#: flowview_devices.php:49
+#: flowview_devices.php:51
 msgid "Collection Method"
 msgstr "Bộ sưu tập Medhod"
 
-#: flowview_devices.php:50
+#: flowview_devices.php:52
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
 msgstr "Có hai phương pháp thu thập hỗ trợ, phương pháp thứ nhất sử dụng các mã nhị phân luồng công cụ kế thừa và phương pháp thứ hai tận dụng máy chủ luồng luồng dựa trên PHP của riêng Cacti."
 
-#: flowview_devices.php:57
-msgid "Allowed Host"
+#: flowview_devices.php:59
+msgid "Bind to address"
+msgstr ""
+
+#: flowview_devices.php:60
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr ""
+
+#: flowview_devices.php:68
+#, fuzzy
+msgid "Allowed Host Range"
 msgstr "Máy chủ được phép"
 
-#: flowview_devices.php:58
-msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
-msgstr "Địa chỉ IP của thiết bị được phép gửi đến bộ thu lưu lượng này. Để lại là 0 cho bất kỳ máy chủ lưu trữ."
+#: flowview_devices.php:69
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr ""
 
-#: flowview_devices.php:67
+#: flowview_devices.php:78
 msgid "Port this collector will listen on."
 msgstr "Cổng nhà sưu tập này sẽ lắng nghe."
 
-#: flowview_devices.php:76
+#: flowview_devices.php:87
 msgid "The IP Protocol to use for this listener."
 msgstr "Trình nghe để sử dụng cho Bộ lọc."
 
-#: flowview_devices.php:78
-msgid "TCP Protocol"
-msgstr "Giao thức IP"
-
-#: flowview_devices.php:78
+#: flowview_devices.php:89
 msgid "UDP Protocol"
 msgstr "Giao thức IP"
 
-#: flowview_devices.php:152
+#: flowview_devices.php:94 flowview_schedules.php:89 flowview_schedules.php:974
+msgid "Enabled"
+msgstr "Bật"
+
+#: flowview_devices.php:95
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr ""
+
+#: flowview_devices.php:170
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "Không tìm thấy Mẫu luồng nào cho ID thiết bị:%s và ID mẫu:%s"
 
-#: flowview_devices.php:204
-msgid "Click 'Continue' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service."
+#: flowview_devices.php:236 flowview_devices.php:250
+#, fuzzy
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
 msgstr "Nhấp vào 'Tiếp tục' để xóa Trình nghe Net-Flow sau đây. Sau đó, bạn sẽ cần khởi động lại Dịch vụ thu thập lưu lượng."
 
-#: flowview_devices.php:211
-msgid "You must select at least one device."
+#: flowview_devices.php:243
+#, fuzzy
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Nhấp vào 'Tiếp tục' để xóa Trình nghe Net-Flow sau đây. Sau đó, bạn sẽ cần khởi động lại Dịch vụ thu thập lưu lượng."
+
+#: flowview_devices.php:257
+#, fuzzy
+msgid "You must select at least one Listener."
 msgstr "Bạn phải chọn ít nhất một thiết bị."
 
-#: flowview_devices.php:270
+#: flowview_devices.php:312
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
 msgstr "Lưu thành công.  Flowview Listener đã được lưu và dịch vụ được khởi động lại."
 
-#: flowview_devices.php:272
+#: flowview_devices.php:314
 msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
 msgstr "Lưu thành công.  Flowview Listener đã được lưu.  Tuy nhiên, dịch vụ thu thập luồng không chạy."
 
-#: flowview_devices.php:291
+#: flowview_devices.php:353
 #, php-format
 msgid "Listener [edit: %s]"
 msgstr "Báo cáo: [chỉnh sửa: %s]"
 
-#: flowview_devices.php:295
+#: flowview_devices.php:357
 msgid "Listener [new]"
 msgstr "Báo cáo: [mới]"
 
-#: flowview_devices.php:332 flowview_devices.php:752
+#: flowview_devices.php:394 flowview_devices.php:825
 msgid "Name"
 msgstr "Tên"
 
-#: flowview_devices.php:344
+#: flowview_devices.php:406
 msgid "Version"
 msgstr "Phiên bản"
 
-#: flowview_devices.php:348 functions.php:34
+#: flowview_devices.php:410 functions.php:38
 msgid "Templates"
 msgstr "Giao diện"
 
-#: flowview_devices.php:352 flowview_devices.php:798
+#: flowview_devices.php:414 flowview_devices.php:879
 msgid "Last Updated"
 msgstr "Cập nhật mới nhất"
 
-#: flowview_devices.php:354
+#: flowview_devices.php:416
 msgid "Active Streams update every 5 minutes"
 msgstr "Luồng đang hoạt động cập nhật 5 phút một lần"
 
-#: flowview_devices.php:386
+#: flowview_devices.php:459
 msgid "No Inbound Streams Detected"
 msgstr "Không phát hiện luồng đến"
 
-#: flowview_devices.php:451
+#: flowview_devices.php:524
 msgid "Listener Detected Templates"
 msgstr "Mẫu được phát hiện của người nghe"
 
-#: flowview_devices.php:460
+#: flowview_devices.php:533
 msgid "Ex Addr"
 msgstr "Ví dụ Addr"
 
-#: flowview_devices.php:474
+#: flowview_devices.php:547
 msgid "Template"
 msgstr "Mẫu"
 
-#: flowview_devices.php:555
+#: flowview_devices.php:628
 msgid "Template ID"
 msgstr "Mã ID mẫu, template"
 
-#: flowview_devices.php:559
+#: flowview_devices.php:632
 msgid "Field Name"
 msgstr "Tên trường"
 
-#: flowview_devices.php:563 functions.php:4457
+#: flowview_devices.php:636 functions.php:5449
 msgid "Supported"
 msgstr "Hỗ trợ"
 
-#: flowview_devices.php:567
+#: flowview_devices.php:640
 msgid "Field ID"
 msgstr "Mã trường"
 
-#: flowview_devices.php:571
+#: flowview_devices.php:644
 msgid "Field Type"
 msgstr "Loại trường"
 
-#: flowview_devices.php:575
+#: flowview_devices.php:648
 msgid "Length"
 msgstr "Dài"
 
-#: flowview_devices.php:579
+#: flowview_devices.php:652
 msgid "Unpack"
 msgstr "Khui"
 
-#: flowview_devices.php:621
+#: flowview_devices.php:694
 msgid "No Inbound Stream Templates Detected"
 msgstr "Không phát hiện mẫu luồng đến"
 
-#: flowview_devices.php:690
+#: flowview_devices.php:763
 msgid "FlowView Listeners"
 msgstr "Trình nghe FlowView"
 
-#: flowview_devices.php:742 setup.php:143 setup.php:204
+#: flowview_devices.php:815 setup.php:139 setup.php:200
 msgid "Listeners"
 msgstr "Người nghe"
 
-#: flowview_devices.php:756
+#: flowview_devices.php:829
 msgid "Method"
 msgstr "Phương thức"
 
-#: flowview_devices.php:760
+#: flowview_devices.php:833
+#, fuzzy
+msgid "Bind address"
+msgstr "Địa chỉ IP"
+
+#: flowview_devices.php:837
 msgid "Allowed From"
 msgstr "Được phép từ"
 
-#: flowview_devices.php:780
+#: flowview_devices.php:857
 msgid "Observed Listen"
 msgstr "Nghe đã quan sát"
 
-#: flowview_devices.php:782
+#: flowview_devices.php:858
 msgid "The port security actually observed on the listeners port."
 msgstr "An ninh cổng thực sự được quan sát trên cổng người nghe."
 
-#: flowview_devices.php:786
+#: flowview_devices.php:862
+msgid "Backlog"
+msgstr ""
+
+#: flowview_devices.php:863
+msgid "The Size of the UDP backlog in bytes."
+msgstr ""
+
+#: flowview_devices.php:867
 msgid "Streams"
 msgstr "Suối"
 
-#: flowview_devices.php:788
+#: flowview_devices.php:869
 msgid "The number of inbound connections from various sources."
 msgstr "Số lượng kết nối đến từ nhiều nguồn khác nhau."
 
-#: flowview_devices.php:792
+#: flowview_devices.php:873
 msgid "Stream Versions"
 msgstr "Phiên bản"
 
-#: flowview_devices.php:794
+#: flowview_devices.php:875
 msgid "The Traffic Flow versions being observed."
 msgstr "Các phiên bản Traffic Flow đang được quan sát."
 
-#: flowview_devices.php:800
+#: flowview_devices.php:881
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Thời gian cập nhật tối đa từ tất cả các luồng đang được thu thập.  Giá trị này được cập nhật 5 phút một lần."
 
-#: flowview_devices.php:833
+#: flowview_devices.php:916 flowview_schedules.php:171 functions.php:839
+msgid "None"
+msgstr "Không"
+
+#: flowview_devices.php:920
+#, fuzzy
+msgid "No Connections"
+msgstr "Địa điểm"
+
+#: flowview_devices.php:949
 msgid "Cacti"
 msgstr "Xương rồng"
 
-#: flowview_devices.php:846
+#: flowview_devices.php:964
 msgid "No Flowview Listeners"
 msgstr "Trình nghe FlowView"
-
-#: flowview_filters.php:38 flowview_schedules.php:36
-msgid "Send Now"
-msgstr "Gửi ngay"
-
-#: flowview_filters.php:40 flowview_schedules.php:38
-msgid "Disable"
-msgstr "Vô hiệu hóa"
-
-#: flowview_filters.php:41 flowview_schedules.php:39
-msgid "Enable"
-msgstr "Bật"
 
 #: flowview_filters.php:132
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
@@ -1503,13 +1563,13 @@ msgstr "Bộ lọc dòng chảy"
 msgid "FlowView Filters [ Add Devices before Filters ]"
 msgstr "Bộ lọc FlowView [Thêm thiết bị trước bộ lọc]"
 
-#: flowview_filters.php:239 flowview_filters.php:353 setup.php:144
-#: setup.php:260
+#: flowview_filters.php:239 flowview_filters.php:353 setup.php:140
+#: setup.php:256
 msgid "Filters"
 msgstr "Bộ lọc"
 
-#: flowview_filters.php:322 flowview_schedules.php:81
-#: flowview_schedules.php:543
+#: flowview_filters.php:322 flowview_schedules.php:97
+#: flowview_schedules.php:949
 msgid "Filter Name"
 msgstr "Tên bộ lọc"
 
@@ -1520,6 +1580,10 @@ msgstr "ID"
 #: flowview_filters.php:347
 msgid "Resolution"
 msgstr "Resolution - Độ phân giải"
+
+#: flowview_schedules.php:36
+msgid "Send Now"
+msgstr "Gửi ngay"
 
 #: flowview_schedules.php:43
 msgid "Every Hour"
@@ -1548,1045 +1612,1696 @@ msgstr "Mỗi% d Tuần, 2"
 msgid "Every Month"
 msgstr "Mỗi tháng"
 
-#: flowview_schedules.php:64
+#: flowview_schedules.php:76
+#, fuzzy
+msgid "General Settings"
+msgstr "Xóa bộ lọc"
+
+#: flowview_schedules.php:80
 msgid "Title"
 msgstr "Tiêu đề"
 
-#: flowview_schedules.php:66
+#: flowview_schedules.php:82
 msgid "New Schedule"
 msgstr "Kế hoạch mới"
 
-#: flowview_schedules.php:67
+#: flowview_schedules.php:83
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "Nhập một Tiêu đề báo cáo cho Lịch trình FlowView."
 
-#: flowview_schedules.php:73 flowview_schedules.php:563
-msgid "Enabled"
-msgstr "Bật"
-
-#: flowview_schedules.php:76
+#: flowview_schedules.php:92
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "Liệu NetFlow Scan này có được gửi hay không."
 
-#: flowview_schedules.php:82
+#: flowview_schedules.php:98
 msgid "Name of the query to run."
 msgstr "Tên của truy vấn để chạy."
 
-#: flowview_schedules.php:87
+#: flowview_schedules.php:103
+#, fuzzy
+msgid "Send Settings"
+msgstr "Bộ AS"
+
+#: flowview_schedules.php:107
 msgid "Send Interval"
 msgstr "Gửi Khoảng thời gian"
 
-#: flowview_schedules.php:88
+#: flowview_schedules.php:108
 msgid "How often to send this NetFlow Report?"
 msgstr "Bao lâu để gửi Báo cáo NetFlow này?"
 
-#: flowview_schedules.php:97
+#: flowview_schedules.php:116
+#, fuzzy
+msgid "Scheduled Base Time"
+msgstr "Lịch trình tiêu đề"
+
+#: flowview_schedules.php:117
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr "Đây là ngày / thời gian đầu tiên để gửi email NetFlow Scan. Tất cả các Email trong tương lai sẽ được tính trong thời gian này cộng với khoảng thời gian được đưa ra ở trên."
 
-#: flowview_schedules.php:105
-msgid "Email Addresses"
-msgstr "Địa chỉ Email"
-
-#: flowview_schedules.php:106
-msgid "Email addresses (command delimited) to send this NetFlow Scan to."
-msgstr "Địa chỉ email (được phân tách bằng lệnh) để gửi NetFlow Scan này tới."
-
-#: flowview_schedules.php:113 setup.php:419
-msgid "Format File to Use"
-msgstr "Định dạng tệp để sử dụng"
-
-#: flowview_schedules.php:116 setup.php:422
-msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "Chọn trình bao bọc html và tệp CSS tùy chỉnh để sử dụng. Tệp này chứa cả html và CSS để bao quanh báo cáo của bạn. Nếu nó chứa nhiều hơn chỉ là CSS, bạn cần phải đặt một<REPORT> thẻ bên trong của tệp. Thẻ định dạng này sẽ được thay thế bằng nội dung báo cáo. Các tệp này nằm trong thư mục 'định dạng'."
-
-#: flowview_schedules.php:185
-#, php-format
-msgid "Sent Scheduled Report %s in Background."
-msgstr "Đã gửi báo cáo đã lên lịch %s trong nền."
-
-#: flowview_schedules.php:188
-msgid "Reports will arrive once Complete."
-msgstr "Báo cáo sẽ đến sau khi Hoàn thành."
-
-#: flowview_schedules.php:223
-msgid "Click 'Continue' to delete the following Schedule(s)."
-msgstr "Nhấp vào 'Tiếp tục' để xóa (các) Lịch biểu sau."
-
-#: flowview_schedules.php:230
-msgid "Click 'Continue' to send the following Schedule(s) now."
-msgstr "Nhấp vào 'Tiếp tục' để gửi (các) Lịch trình sau đây ngay bây giờ."
-
-#: flowview_schedules.php:237
-msgid "Click 'Continue' to Disable the following Schedule(s)."
-msgstr "Nhấp vào 'Tiếp tục' để Tắt (các) Lịch biểu sau đây."
-
-#: flowview_schedules.php:244
-msgid "Click 'Continue' to Enable the following Schedule(s)."
-msgstr "Nhấp vào 'Tiếp tục' để bật (các) Lịch biểu sau."
-
-#: flowview_schedules.php:251
-msgid "You must select at least one schedule."
-msgstr "Bạn phải chọn ít nhất một lịch trình."
-
-#: flowview_schedules.php:345
-#, php-format
-msgid "Report: [edit: %s]"
-msgstr "Báo cáo: [chỉnh sửa: %s]"
-
-#: flowview_schedules.php:347
-msgid "Report: [new]"
-msgstr "Báo cáo: [mới]"
-
-#: flowview_schedules.php:368 functions.php:745
-msgid "Start Date Selector"
-msgstr "Ngày bắt đầu chọn"
-
-#: flowview_schedules.php:438
-msgid "FlowView Schedules"
-msgstr "Lịch trình FlowView"
-
-#: flowview_schedules.php:440
-msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr "Lịch biểu FlowView [Thêm thiết bị trước lịch biểu]"
-
-#: flowview_schedules.php:456 flowview_schedules.php:568 setup.php:145
-#: setup.php:232
-msgid "Schedules"
-msgstr "Kế hoạch"
-
-#: flowview_schedules.php:539
-msgid "Schedule Title"
-msgstr "Lịch trình tiêu đề"
-
-#: flowview_schedules.php:547
-msgid "Interval"
-msgstr "Interval"
-
-#: flowview_schedules.php:551
-msgid "Start Date"
-msgstr "Ngày bắt đầu"
-
-#: flowview_schedules.php:555
-msgid "Next Send"
-msgstr "Gửi tiếp theo"
-
-#: functions.php:31
-msgid "General"
-msgstr "Chung"
-
-#: functions.php:112
-msgid "Select a Report Type First"
-msgstr "Báo cáo in"
-
-#: functions.php:138
-#, php-format
-msgid "Filter: [edit: %s]"
-msgstr "Báo cáo: [chỉnh sửa: %s]"
-
-#: functions.php:140
-msgid "Filter: [new]"
-msgstr "Báo cáo: [mới]"
-
-#: functions.php:511
-msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr "Bộ lọc không xác định [Chọn Bộ lọc để nhận chi tiết]"
-
-#: functions.php:521
-#, php-format
-msgid "Statistical Report: %s [ Including overrides as specified below ]"
-msgstr "Báo cáo Thống kê: %s [Bao gồm các ghi đè như được xác định bên dưới]"
-
-#: functions.php:523
-#, php-format
-msgid "Printed Report: %s [ Including overrides as specified below ]"
-msgstr "Báo cáo đã in: %s [Bao gồm các ghi đè như cụ thể bên dưới]"
-
-#: functions.php:541
-msgid "Select a Filter"
-msgstr "Báo cáo in"
-
-#: functions.php:560
-msgid "Select a Listener"
-msgstr "Báo cáo in"
-
-#: functions.php:575
-msgid "Exclude"
-msgstr "Loại trừ"
-
-#: functions.php:579
-msgid "None"
-msgstr "Không"
-
-#: functions.php:580
-msgid "Top Sample"
-msgstr "Mẫu hàng đầu"
-
-#: functions.php:585
-#, php-format
-msgid "Top %d Samples"
-msgstr "%d mẫu hàng đầu"
-
-#: functions.php:590
-msgid "Show only Domains on Charts Below"
-msgstr "Chỉ hiển thị Tên miền trên Biểu đồ bên dưới"
-
-#: functions.php:592
-msgid "Domains/Hostnames Only"
-msgstr "Chỉ miền"
-
-#: functions.php:596
-msgid "Apply Filter"
-msgstr "Áp dụng bộ lọc"
-
-#: functions.php:597
-msgid "Clear Filter"
-msgstr "Xóa bộ lọc"
-
-#: functions.php:598
-msgid "Create new Flow Filter"
-msgstr "Tần suất để tạo một tệp Flow mới."
-
-#: functions.php:598
-msgid "New"
-msgstr "Mới"
-
-#: functions.php:599
-msgid "Edit"
-msgstr "Sửa"
-
-#: functions.php:599
-msgid "Edit the Flow Filter"
-msgstr "Chỉnh sửa Bộ lọc Hiện tại"
-
-#: functions.php:600 functions.php:832
-msgid "Save"
-msgstr "Lưu"
-
-#: functions.php:600
-msgid "Save the Flow Filter"
-msgstr "Báo cáo in"
-
-#: functions.php:601
-msgid "Save As"
-msgstr "Lưu thành"
-
-#: functions.php:601
-msgid "Save the existing Flow Filter as new Filter"
-msgstr "Báo cáo in"
-
-#: functions.php:602
-msgid "Rename"
-msgstr "Đổi tên"
-
-#: functions.php:602
-msgid "Rename the Flow Filter"
-msgstr "Đổi tên bộ lọc luồng"
-
-#: functions.php:603
-msgid "Delete the Flow Filter"
-msgstr "Báo cáo in"
-
-#: functions.php:611
-msgid "Report"
-msgstr "Báo cáo"
-
-#: functions.php:622
-#, php-format
-msgid "Statistical: %s"
-msgstr "Thống kê: %s"
-
-#: functions.php:628
-#, php-format
-msgid "Printed: %s"
-msgstr "In: %s"
-
-#: functions.php:632 functions.php:649
-msgid "Select a Filter First"
-msgstr "Báo cáo in"
-
-#: functions.php:688
-msgid "Lines"
-msgstr "Các dòng"
-
-#: functions.php:706
-msgid "Octets"
-msgstr "Octets"
-
-#: functions.php:724
-msgid "Timespan"
-msgstr "Thời gian"
-
-#: functions.php:733
-msgid "Custom"
-msgstr "Tùy chỉnh"
-
-#: functions.php:739
-msgid "From"
-msgstr "Từ"
-
-#: functions.php:748
-msgid "To"
-msgstr "Đến"
-
-#: functions.php:754
-msgid "End Date Selector"
-msgstr "Bộ chọn ngày kết thúc"
-
-#: functions.php:757
-msgid "Shift Time Backward"
-msgstr "Chuyển thời gian lùi lại"
-
-#: functions.php:760
-msgid "Define Shifting Interval"
-msgstr "Xác định khoảng thời gian dịch chuyển"
-
-#: functions.php:773
-msgid "Shift Time Forward"
-msgstr "Chuyển thời gian chuyển tiếp"
-
-#: functions.php:780
-msgid "Graph"
-msgstr "Biểu đồ"
-
-#: functions.php:784
-msgid "Bar"
-msgstr "Bar"
-
-#: functions.php:785
-msgid "Pie"
-msgstr "Bánh"
-
-#: functions.php:786
-msgid "Treemap"
-msgstr "Bản đồ cây"
-
-#: functions.php:790
-msgid "Height"
-msgstr "Chiều cao"
-
-#: functions.php:802
-msgid "Show/Hide"
-msgstr "Hiển thị / ẩn"
-
-#: functions.php:806
-msgid "Table"
-msgstr "Bảng"
-
-#: functions.php:827
-msgid "Save Flow Filter"
-msgstr "Bộ lọc mới"
-
-#: functions.php:829
-msgid "New Name"
-msgstr "新しい名前"
-
-#: functions.php:838
-msgid "Delete Flow Filter"
-msgstr "Báo cáo in"
-
-#: functions.php:840
-msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
-msgstr "Để Xóa Bộ lọc Dòng chảy này, hãy nhấn Tiếp tục.  Nếu Bộ lọc lưu lượng đang được sử dụng trong Báo cáo theo lịch, hoạt động sẽ bị chặn."
-
-#: functions.php:857
-#, php-format
-msgid "Top %s Distribution Chart of Bytes"
-msgstr "Biểu đồ phân phối %s hàng đầu của byte"
-
-#: functions.php:858
-#, php-format
-msgid "Top %s Pie Chart of Bytes"
-msgstr "%s biểu đồ hình tròn hàng đầu của byte"
-
-#: functions.php:859
-#, php-format
-msgid "Top %s Treemap Chart of Bytes"
-msgstr "Biểu đồ %s cây hàng đầu của byte"
-
-#: functions.php:862
-#, php-format
-msgid "Top %s Distribution Chart of Packets"
-msgstr "Biểu đồ phân phối %s hàng đầu của các gói"
-
-#: functions.php:863
-#, php-format
-msgid "Top %s Pie Chart of Packets"
-msgstr "%s biểu đồ hình tròn hàng đầu của các gói"
-
-#: functions.php:864
-#, php-format
-msgid "Top %s Treemap Chart of Packets"
-msgstr "Biểu đồ %s cây hàng đầu của các gói"
-
-#: functions.php:867
-#, php-format
-msgid "Top %s Distribution Chart of Flows"
-msgstr "Biểu đồ phân phối %s hàng đầu của dòng chảy"
-
-#: functions.php:868
-#, php-format
-msgid "Top %s Pie Chart of Flows"
-msgstr "Biểu đồ hình tròn %s trên cùng của dòng chảy"
-
-#: functions.php:869
-#, php-format
-msgid "Top %s Treemap Chart of Flows"
-msgstr "Biểu đồ %s cây hàng đầu của các dòng chảy"
-
-#: functions.php:976
-msgid "Rename Layout"
-msgstr "Đổi tên bố cục"
-
-#: functions.php:984
-msgid " <new>"
-msgstr " <new>"
-
-#: functions.php:1502
-msgid "Filter Settings Saved"
-msgstr "Cài đặt bộ lọc đã lưu"
-
-#: functions.php:1618
-#, php-format
-msgid "Client/Private (%s)"
-msgstr "Khách hàng / Riêng tư (%s)"
-
-#: functions.php:1620
-msgid "icmp (0)"
-msgstr "icmp (0)"
-
-#: functions.php:1631
-#, php-format
-msgid "Unknown (%s)"
-msgstr "Không xác định (%s)"
-
-#: functions.php:1662
-msgid "Cacti Flowview"
-msgstr "Cacti Flowview"
-
-#: functions.php:1668
-#, php-format
-msgid "Netflow - %s"
-msgstr "Netflow - %s"
-
-#: functions.php:1870
-#, php-format
-msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr "Bộ lọc mạng con: %s không phải là định dạng CIDR giá trị"
-
-#: functions.php:2044 functions.php:2050 functions.php:2056 functions.php:2059
-#: functions.php:2085 functions.php:3482
-msgid "unresolved"
-msgstr "- chưa giải quyết -"
-
-#: functions.php:2394 functions.php:2395 functions.php:2396 functions.php:2397
-#: functions.php:2398 functions.php:2399 functions.php:2400 functions.php:2401
-#: functions.php:2402 functions.php:2403 functions.php:2404 functions.php:2405
-#: functions.php:2406 functions.php:2407 functions.php:2408 functions.php:2409
-#: functions.php:2410 functions.php:2411 functions.php:2412 functions.php:2413
-#: functions.php:2414 functions.php:2415 functions.php:2416 functions.php:2417
-#: functions.php:2418 functions.php:2419
-#, php-format
-msgid "%d - %d Bytes"
-msgstr "%d - %d byte"
-
-#: functions.php:2420
-#, php-format
-msgid "> %d Bytes"
-msgstr "> %d byte"
-
-#: functions.php:2884
-msgid "Source DNS"
-msgstr "Tên Nguồn"
-
-#: functions.php:2888
-msgid "Source Root DNS"
-msgstr "Tên Nguồn"
-
-#: functions.php:2892
-msgid "Dest DNS"
-msgstr "Dest AS"
-
-#: functions.php:2896
-msgid "Dest Root DNS"
-msgstr "Cổng Dest"
-
-#: functions.php:2900
-msgid "DNS"
-msgstr "DSR"
-
-#: functions.php:2904
-msgid "Root DNS"
-msgstr "DNS gốc"
-
-#: functions.php:2924
-msgid "Dest Port"
-msgstr "Cổng Dest"
-
-#: functions.php:2932
-msgid "Dest IF"
-msgstr "Dest IF"
-
-#: functions.php:2948
-msgid "Dest Prefix"
-msgstr "Tiền tố Dest"
-
-#: functions.php:2956
-msgid "Type of Service"
-msgstr "Loại hình dịch vụ"
-
-#: functions.php:2975
-msgid "Bytes/Packet"
-msgstr "Gói"
-
-#: functions.php:3395
-msgid "The Parallel Query Timed Out.  Please contact your administrator"
-msgstr "Truy vấn song song đã hết thời gian.  Vui lòng liên hệ với quản trị viên của bạn"
-
-#: functions.php:3588
-#, php-format
-msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr "Boolean: %s, Numeric: %s, Hex: %s"
-
-#: functions.php:3599
-msgid "Low Delay"
-msgstr "Độ trễ thấp"
-
-#: functions.php:3600
-msgid "Throughput"
-msgstr "Thông lượng"
-
-#: functions.php:3601
-msgid "Reliability"
-msgstr "Độ tin cậy"
-
-#: functions.php:3602
-msgid "Mincost"
-msgstr "Mincost"
-
-#: functions.php:3606
-msgid "Net Control"
-msgstr "Kiểm soát mạng"
-
-#: functions.php:3607
-msgid "Internet Control"
-msgstr "Kiểm soát Internet"
-
-#: functions.php:3608
-msgid "Critic ECP"
-msgstr "ECP phê bình"
-
-#: functions.php:3609
-msgid "Flash Override"
-msgstr "Ghi đè Flash"
-
-#: functions.php:3610
-msgid "Flash"
-msgstr "Đèn flash"
-
-#: functions.php:3611
-msgid "Immediate"
-msgstr "Khẩn"
-
-#: functions.php:3612
-msgid "Priority"
-msgstr "Ưu tiên"
-
-#: functions.php:3613
-msgid "Routine"
-msgstr "Quay vòng"
-
-#: functions.php:3653
-msgid "Summary Statistics"
-msgstr "Tóm tắt thống kê"
-
-#: functions.php:3664
-#, php-format
-msgid "IP Packet Size Distribution (%%)"
-msgstr "Phân phối kích thước gói IP (%%)"
-
-#: functions.php:3669
-#, php-format
-msgid "Packets per Flow Distribution (%%)"
-msgstr "Gói trên mỗi phân phối luồng (%%)"
-
-#: functions.php:3674
-#, php-format
-msgid "Octets per Flow Distribution (%%)"
-msgstr "Octet trên mỗi phân phối dòng chảy (%%)"
-
-#: functions.php:3679
-#, php-format
-msgid "Flow Time Distribution (%%)"
-msgstr "Phân phối thời gian dòng chảy (%%)"
-
-#: functions.php:3864
-msgid "You must select a Statistics Report or Printed Report!"
-msgstr "Bạn phải chọn Báo cáo thống kê hoặc Báo cáo in!"
-
-#: functions.php:3868
-msgid "You must select only a Statistics Report or a Printed Report (not both)!"
-msgstr "Bạn phải chọn chỉ một Báo cáo thống kê hoặc Báo cáo in (không phải cả hai)!"
-
-#: functions.php:3872
-msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
-msgstr "Ngày không hợp lệ, Ngày kết thúc / Thời gian sớm hơn Ngày / Giờ bắt đầu!"
-
-#: functions.php:3883 functions.php:3888
-msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr "IP không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1')"
-
-#: functions.php:3895 functions.php:3901 functions.php:3905
-msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "Mạng con không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
-
-#: functions.php:3919 functions.php:3923
-msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr "IP không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1')"
-
-#: functions.php:3929 functions.php:3933 functions.php:3937
-msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "Mạng con không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
-
-#: functions.php:3955
-msgid "Invalid value for Source Interface!"
-msgstr "Giá trị không hợp lệ cho Giao diện nguồn!"
-
-#: functions.php:3971
-msgid "Invalid value for Source Port! (0 - 65535)"
-msgstr "Giá trị không hợp lệ cho Cổng nguồn! (0 - 65535)"
-
-#: functions.php:3987
-msgid "Invalid value for Source AS! (0 - 65535)"
-msgstr "Giá trị không hợp lệ cho Nguồn AS! (0 - 65535)"
-
-#: functions.php:4003
-msgid "Invalid value for Destination Interface!"
-msgstr "Giá trị không hợp lệ cho Giao diện đích!"
-
-#: functions.php:4019
-msgid "Invalid value for Destination Port! (0 - 65535)"
-msgstr "Giá trị không hợp lệ cho Cổng đích! (0 - 65535)"
-
-#: functions.php:4035
-msgid "Invalid value for Destination AS! (0 - 65535)"
-msgstr "Giá trị không hợp lệ cho Đích AS! (0 - 65535)"
-
-#: functions.php:4051
-msgid "Invalid value for Protocol! (1 - 255)"
-msgstr "Giá trị không hợp lệ cho Giao thức! (1 - 255)"
-
-#: functions.php:4063
-msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
-msgstr "Giá trị không hợp lệ cho Cờ TCP! (ví dụ: 0x1b hoặc 0x1b / SA hoặc SA / SA)"
-
-#: functions.php:4072
-msgid "Invalid value for Cutoff Octets!"
-msgstr "Giá trị không hợp lệ cho Octoff Cutoff!"
-
-#: functions.php:4079
-msgid "Invalid value for Cutoff Lines!"
-msgstr "Giá trị không hợp lệ cho Cutoff Lines!"
-
-#: functions.php:4086
-msgid "Invalid value for Sort Field!"
-msgstr "Giá trị không hợp lệ cho Trường sắp xếp!"
-
-#: functions.php:4113
-#, php-format
-msgid "FlowView Chart for %s Type is %s"
-msgstr "Biểu đồ FlowView cho %s Loại là %s"
-
-#: functions.php:4459
-msgid "Not Supported"
-msgstr "Không được hỗ trợ"
-
-#: functions.php:4534
-msgid "Total Flows"
-msgstr "Dòng tối đa:"
-
-#: functions.php:4539
-msgid "Bytes Exchanged"
-msgstr "Đã trao đổi byte"
-
-#: functions.php:4543
-msgid "Packets Examined"
-msgstr "Gói thanh"
-
-#: setup.php:35
-msgid "Plugin -> Flow Viewer"
-msgstr "Plugin -> Trình xem luồng"
-
-#: setup.php:36
-msgid "Plugin -> Flow Admin"
-msgstr "Plugin -> Quản trị luồng"
-
-#: setup.php:43 setup.php:71
-msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
-msgstr "Vui lòng đổi tên tệp config.php.dist hoặc config_local.php.dist của bạn trong thư mục flowview và thay đổi thiết lập cơ sở dữ liệu của bạn trước khi cài đặt."
-
-#: setup.php:123
-msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
-msgstr "Xin lưu ý rằng các bảng plugin Flowview đang được nâng cấp trong nền.  Điều này có thể mất một thời gian. Kiểm tra nhật ký Cacti để biết thêm thông tin"
-
-#: setup.php:136
-msgid "The Filter has been Deleted"
-msgstr "Bộ lọc đã bị xóa"
-
-#: setup.php:137
-msgid "The Filter has been Updated"
-msgstr "Bộ lọc đã được cập nhật"
-
-#: setup.php:142
-msgid "Import/Export"
-msgstr "Nhập vào/Xuất ra"
-
-#: setup.php:143 setup.php:144 setup.php:145 setup.php:146 setup.php:151
-#: setup.php:295 setup.php:297
-msgid "FlowView"
-msgstr "FlowView"
-
-#: setup.php:146
-msgid "Databases"
-msgstr "Cơ sở dữ liệu"
-
-#: setup.php:154
-msgid "Normal User"
-msgstr "Người dùng bình thường"
-
-#: setup.php:155
-msgid "System Administration"
-msgstr "Quản lí hệ thống"
-
-#: setup.php:176 setup.php:197
-msgid "Flow Viewer"
-msgstr "Trình xem lưu lượng"
-
-#: setup.php:183
-msgid "Dashboard"
-msgstr "Bảng điều khiển"
-
-#: setup.php:190 setup.php:218 setup.php:246 setup.php:274
-msgid "(save)"
-msgstr "Lưu"
-
-#: setup.php:211 setup.php:239 setup.php:267
-msgid "(edit)"
-msgstr "(chinnhr sửa)"
-
-#: setup.php:225 setup.php:253 setup.php:281
-msgid "(actions)"
-msgstr "Hành động"
-
-#: setup.php:357
-msgid "Name Resolution"
-msgstr "Resolution - Độ phân giải"
-
-#: setup.php:362
-msgid "Hostname Resolution"
-msgstr "Resolution - Độ phân giải"
-
-#: setup.php:363
-msgid "The method by which you wish to resolve hostnames."
-msgstr "Phương pháp mà bạn muốn giải quyết tên máy chủ."
-
-#: setup.php:366
-msgid "Use Local Server"
-msgstr "Sử dụng máy chủ cục bộ"
-
-#: setup.php:367
-msgid "Use DNS Servers under Mail/Reporting/DNS"
-msgstr "Sử dụng máy chủ DNS bên dưới"
-
-#: setup.php:368
-msgid "Don't Resolve DNS"
-msgstr "Không giải quyết DNS"
-
-#: setup.php:373
-msgid "Local Domain Name"
-msgstr "Dải tên miền"
-
-#: setup.php:376
-msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
-msgstr "Đối với các địa chỉ IPv4 trên mạng cục bộ không phân giải cục bộ, hãy thêm hậu tố này vào địa chỉ IP kết quả."
-
-#: setup.php:381
-msgid "Local IP Range"
-msgstr "Dải IP cục bộ"
-
-#: setup.php:384
-msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For examle: 192.168.11.0 or 192.168.11.0/24"
-msgstr "Cung cấp dải địa chỉ IP IPv4 cho mạng cục bộ của bạn cho các máy chủ có thể không được đăng ký trong DNS.  Các máy chủ này sẽ được ánh xạ tới Tên miền cục bộ ở trên.  Điều này nhiều hơn cho người dùng gia đình.  Bạn có thể sử dụng định dạng CIDR hoặc không CIDR.  Đối với kỳ thi: 192.168.11.0 hoặc 192.168.11.0/24"
-
-#: setup.php:385
-msgid "Use CIDR or Non-CIDR"
-msgstr "Sử dụng CIDR hoặc Non-CIDR"
-
-#: setup.php:390
-msgid "Use Arin to find Domains and AS Numbers"
-msgstr "Sử dụng Arin để tìm các tên miền chưa đăng ký"
-
-#: setup.php:391
-msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
-msgstr "Nhiều dịch vụ thu thập dữ liệu Big Tech muốn che giấu quyền sở hữu tên miền của họ để làm xáo trộn thực tế rằng họ đang thu thập thông tin cá nhân của bạn.  Nếu bạn quan tâm đến điều này và cài đặt Cacti của bạn có quyền truy cập Internet, bạn có thể sử dụng Arin để tháo mặt nạ khỏi các công ty Big Tech đó."
-
-#: setup.php:396
-msgid "Whois Provider Host"
-msgstr "Máy chủ nhà cung cấp Whois"
-
-#: setup.php:399
-msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
-msgstr "Vui lòng cung cấp tên máy chủ để giải quyết cuộc gọi whois.  Nếu không null, bạn phải có nhị phân whois trong đường dẫn hệ thống của bạn."
-
-#: setup.php:400
-msgid "whois.radb.net"
-msgstr "whois.radb.net"
-
-#: setup.php:405
-msgid "Whois Binary Path"
-msgstr "Công cụ lưu lượng Đường dẫn nhị phân"
-
-#: setup.php:408
-msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
-msgstr "Vui lòng cung cấp tên đường dẫn cho tệp nhị phân 'whois'.  Nhị phân 'whois' sẽ được sử dụng để tìm thông tin AS bổ sung cho Arin."
-
-#: setup.php:409
-msgid "Enter binary path"
-msgstr "Nhập đường dẫn nhị phân"
-
-#: setup.php:414
-msgid "Data Retention and Report Generation"
-msgstr "Lưu giữ dữ liệu và tạo báo cáo"
-
-#: setup.php:426
-msgid "Data Retention Policy"
-msgstr "Chính sách lưu giữ dữ liệu"
-
-#: setup.php:427
-msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr "Khoảng thời gian Cacti sẽ duy trì các bảng Flow được phân vùng."
-
-#: setup.php:430
-#, php-format
-msgid "%d Week"
-msgstr "% d Tuần"
-
-#: setup.php:431 setup.php:432
-#, php-format
-msgid "%d Weeks"
-msgstr "% d Tuần"
-
-#: setup.php:433
-#, php-format
-msgid "%d Month"
-msgstr "% d Tháng"
-
-#: setup.php:434 setup.php:435 setup.php:436 setup.php:437
-#, php-format
-msgid "%d Months"
-msgstr "% d Tháng"
-
-#: setup.php:438
-#, php-format
-msgid "%d Year"
-msgstr "% d Năm"
-
-#: setup.php:443
-msgid "Database Partitioning Scheme"
-msgstr "Lược đồ phân vùng cơ sở dữ liệu"
-
-#: setup.php:444
-msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr "Tùy thuộc vào số lượng dòng chảy mỗi phút, bạn có thể yêu cầu nhiều bảng hơn mỗi ngày."
-
-#: setup.php:447
-msgid "Daily"
-msgstr "Hàng ngày"
-
-#: setup.php:448
-msgid "Hourly"
-msgstr "Hàng Giờ"
-
-#: setup.php:453
-msgid "Storage Engine for Raw Tables"
-msgstr "Công cụ lưu trữ cho bảng thô"
-
-#: setup.php:454
-msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
-msgstr "Aria Engine là hoàn hảo cho tất cả trừ bảng Live thô.  Bảng Live raw sẽ luôn là InnoDB.  Hãy lựa chọn của bạn."
-
-#: setup.php:457
-msgid "Aria (Fast, Crash Safe)"
-msgstr "Aria (Nhanh, An toàn)"
-
-#: setup.php:458
-msgid "InnoDB (Slow, High Concurrency)"
-msgstr "InnoDB (chậm, tính đồng thời cao)"
-
-#: setup.php:463
-msgid "Parallel Queries"
-msgstr "Truy vấn song song"
-
-#: setup.php:468
-msgid "Max Concurrent Threads"
-msgstr "Chủ đề đồng thời tối đa"
-
-#: setup.php:469
-msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
-msgstr "Số lượng luồng tối đa sẽ được gửi đi để chạy các truy vấn FlowView.  Lưu ý rằng bạn có thể có tối đa 1 luồng cho mỗi phân vùng cơ sở dữ liệu và bạn nên cẩn thận để không làm quá tải máy chủ cơ sở dữ liệu của mình khi có quá nhiều luồng đồng thời đang chạy."
-
-#: setup.php:472
-msgid "Disabled"
-msgstr "Vô hiệu hóa"
-
-#: setup.php:473 setup.php:474 setup.php:475 setup.php:476 setup.php:477
-#: setup.php:478 setup.php:479 setup.php:480 setup.php:481 setup.php:482
-#: setup.php:483 setup.php:484 setup.php:485 setup.php:486 setup.php:487
-#: setup.php:488 setup.php:489 setup.php:490 setup.php:491
-#, php-format
-msgid "%d Threads"
-msgstr "Chủ đề %d"
-
-#: setup.php:496
-msgid "Maximum Run Time"
-msgstr "Hàng tối đa"
-
-#: setup.php:497
-msgid "If the Parallel Query does not finish in this time, exit."
-msgstr "Nếu Truy vấn song song không kết thúc trong thời gian này, hãy thoát."
-
-#: setup.php:500
+#: flowview_schedules.php:124
+msgid "Max Allowed Runtime"
+msgstr ""
+
+#: flowview_schedules.php:125
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr ""
+
+#: flowview_schedules.php:130 setup.php:609
 #, php-format
 msgid "%d Minute"
 msgstr "%d phút"
 
-#: setup.php:501 setup.php:502 setup.php:503 setup.php:504 setup.php:505
-#: setup.php:506
+#: flowview_schedules.php:131 flowview_schedules.php:132
+#: flowview_schedules.php:133 flowview_schedules.php:134
+#: flowview_schedules.php:135 flowview_schedules.php:136
+#: flowview_schedules.php:137 flowview_schedules.php:138
+#: flowview_schedules.php:139 setup.php:610 setup.php:611 setup.php:612
+#: setup.php:613 setup.php:614 setup.php:615
 #, php-format
 msgid "%d Minutes"
 msgstr "%d phút"
 
-#: setup.php:511
+#: flowview_schedules.php:143
+msgid "Legacy Email Settings"
+msgstr ""
+
+#: flowview_schedules.php:148
+msgid "Email Addresses"
+msgstr "Địa chỉ Email"
+
+#: flowview_schedules.php:149
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "Địa chỉ email (được phân tách bằng lệnh) để gửi NetFlow Scan này tới."
+
+#: flowview_schedules.php:156 setup.php:531
+msgid "Format File to Use"
+msgstr "Định dạng tệp để sử dụng"
+
+#: flowview_schedules.php:159 setup.php:534
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Chọn trình bao bọc html và tệp CSS tùy chỉnh để sử dụng. Tệp này chứa cả html và CSS để bao quanh báo cáo của bạn. Nếu nó chứa nhiều hơn chỉ là CSS, bạn cần phải đặt một<REPORT> thẻ bên trong của tệp. Thẻ định dạng này sẽ được thay thế bằng nội dung báo cáo. Các tệp này nằm trong thư mục 'định dạng'."
+
+#: flowview_schedules.php:164
+msgid "Notification List Settings"
+msgstr ""
+
+#: flowview_schedules.php:169
+msgid "Notification List"
+msgstr ""
+
+#: flowview_schedules.php:170
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr ""
+
+#: flowview_schedules.php:266
+#, fuzzy
+msgid "The Report will arrive once complete."
+msgstr "Báo cáo sẽ đến sau khi Hoàn thành."
+
+#: flowview_schedules.php:301
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Nhấp vào 'Tiếp tục' để xóa (các) Lịch biểu sau."
+
+#: flowview_schedules.php:308
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Nhấp vào 'Tiếp tục' để gửi (các) Lịch trình sau đây ngay bây giờ."
+
+#: flowview_schedules.php:315
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Nhấp vào 'Tiếp tục' để Tắt (các) Lịch biểu sau đây."
+
+#: flowview_schedules.php:322
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Nhấp vào 'Tiếp tục' để bật (các) Lịch biểu sau."
+
+#: flowview_schedules.php:329
+msgid "You must select at least one schedule."
+msgstr "Bạn phải chọn ít nhất một lịch trình."
+
+#: flowview_schedules.php:368 flowview_schedules.php:394
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr ""
+
+#: flowview_schedules.php:422
+msgid "You must specify Emails, a Notification List or both!"
+msgstr ""
+
+#: flowview_schedules.php:489
+#, fuzzy, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Báo cáo: [chỉnh sửa: %s]"
+
+#: flowview_schedules.php:491
+#, fuzzy, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Báo cáo: [chỉnh sửa: %s]"
+
+#: flowview_schedules.php:494
+#, fuzzy
+msgid "Scheduled Report: [new]"
+msgstr "Báo cáo: [mới]"
+
+#: flowview_schedules.php:559 flowview_schedules.php:856
+#: flowview_schedules.php:980 setup.php:141 setup.php:228
+msgid "Schedules"
+msgstr "Kế hoạch"
+
+#: flowview_schedules.php:646 flowview_schedules.php:945
+#, fuzzy
+msgid "Report Title"
+msgstr "Loại báo cáo"
+
+#: flowview_schedules.php:650
+msgid "Id"
+msgstr ""
+
+#: flowview_schedules.php:654
+#, fuzzy
+msgid "Output Type"
+msgstr "IF đầu ra"
+
+#: flowview_schedules.php:658 flowview_schedules.php:672
+msgid "Sent By"
+msgstr ""
+
+#: flowview_schedules.php:662
+#, fuzzy
+msgid "Date Sent"
+msgstr "Bộ lộ trình"
+
+#: flowview_schedules.php:667
+#, fuzzy
+msgid "Run Time"
+msgstr "Thời gian kết thúc"
+
+#: flowview_schedules.php:677 flowview_schedules.php:705
+msgid "Download Data"
+msgstr ""
+
+#: flowview_schedules.php:683
+#, fuzzy
+msgid "Report Logs"
+msgstr "Báo cáo"
+
+#: flowview_schedules.php:694
+msgid " [View Report Raw]"
+msgstr ""
+
+#: flowview_schedules.php:695
+msgid " [View Report with CSS]"
+msgstr ""
+
+#: flowview_schedules.php:701
+msgid "Manual Send"
+msgstr ""
+
+#: flowview_schedules.php:701
+#, fuzzy
+msgid "Scheduled"
+msgstr "Kế hoạch"
+
+#: flowview_schedules.php:703
+#, php-format
+msgid "%s Seconds"
+msgstr ""
+
+#: flowview_schedules.php:768 functions.php:894
+msgid "Start Date Selector"
+msgstr "Ngày bắt đầu chọn"
+
+#: flowview_schedules.php:838
+msgid "FlowView Schedules"
+msgstr "Lịch trình FlowView"
+
+#: flowview_schedules.php:840
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "Lịch biểu FlowView [Thêm thiết bị trước lịch biểu]"
+
+#: flowview_schedules.php:953
+msgid "Interval"
+msgstr "Interval"
+
+#: flowview_schedules.php:957
+msgid "Last Sent"
+msgstr ""
+
+#: flowview_schedules.php:961
+msgid "Next Send"
+msgstr "Gửi tiếp theo"
+
+#: flowview_schedules.php:965
+#, fuzzy
+msgid "Email/List"
+msgstr "Email"
+
+#: flowview_schedules.php:969
+msgid "Logged Sends"
+msgstr ""
+
+#: functions-pre13.php:42
+#, fuzzy, php-format
+msgid "Cacti %s"
+msgstr "Xương rồng"
+
+#: functions-pre13.php:191
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr ""
+
+#: functions-pre13.php:197
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr ""
+
+#: functions.php:35 functions.php:116
+msgid "General"
+msgstr "Chung"
+
+#: functions.php:117
+msgid "Logs"
+msgstr ""
+
+#: functions.php:173
+msgid "Select a Report Type First"
+msgstr "Báo cáo in"
+
+#: functions.php:199
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Báo cáo: [chỉnh sửa: %s]"
+
+#: functions.php:201
+msgid "Filter: [new]"
+msgstr "Báo cáo: [mới]"
+
+#: functions.php:617
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Bộ lọc không xác định [Chọn Bộ lọc để nhận chi tiết]"
+
+#: functions.php:627
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Báo cáo Thống kê: %s [Bao gồm các ghi đè như được xác định bên dưới]"
+
+#: functions.php:629
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Báo cáo đã in: %s [Bao gồm các ghi đè như cụ thể bên dưới]"
+
+#: functions.php:647
+msgid "Select a Filter"
+msgstr "Báo cáo in"
+
+#: functions.php:666
+msgid "Select a Listener"
+msgstr "Báo cáo in"
+
+#: functions.php:686
+#, fuzzy
+msgid "Stream"
+msgstr "Suối"
+
+#: functions.php:690
+#, fuzzy
+msgid "Select a Stream Host"
+msgstr "Báo cáo in"
+
+#: functions.php:714
+msgid "Apply Filter"
+msgstr "Áp dụng bộ lọc"
+
+#: functions.php:715
+msgid "Clear Filter"
+msgstr "Xóa bộ lọc"
+
+#: functions.php:716
+msgid "Create new Flow Filter"
+msgstr "Tần suất để tạo một tệp Flow mới."
+
+#: functions.php:716
+msgid "New"
+msgstr "Mới"
+
+#: functions.php:717
+msgid "Edit"
+msgstr "Sửa"
+
+#: functions.php:717
+msgid "Edit the Flow Filter"
+msgstr "Chỉnh sửa Bộ lọc Hiện tại"
+
+#: functions.php:718 functions.php:986
+msgid "Save"
+msgstr "Lưu"
+
+#: functions.php:718
+msgid "Save the Flow Filter"
+msgstr "Báo cáo in"
+
+#: functions.php:719
+msgid "Save As"
+msgstr "Lưu thành"
+
+#: functions.php:719
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Báo cáo in"
+
+#: functions.php:720
+msgid "Rename"
+msgstr "Đổi tên"
+
+#: functions.php:720
+msgid "Rename the Flow Filter"
+msgstr "Đổi tên bộ lọc luồng"
+
+#: functions.php:721
+msgid "Delete the Flow Filter"
+msgstr "Báo cáo in"
+
+#: functions.php:729
+msgid "Report"
+msgstr "Báo cáo"
+
+#: functions.php:740
+#, php-format
+msgid "Statistical: %s"
+msgstr "Thống kê: %s"
+
+#: functions.php:746
+#, php-format
+msgid "Printed: %s"
+msgstr "In: %s"
+
+#: functions.php:750 functions.php:767
+msgid "Select a Filter First"
+msgstr "Báo cáo in"
+
+#: functions.php:817
+msgid "Lines"
+msgstr "Các dòng"
+
+#: functions.php:835
+msgid "Exclude"
+msgstr "Loại trừ"
+
+#: functions.php:840
+msgid "Top Sample"
+msgstr "Mẫu hàng đầu"
+
+#: functions.php:845
+#, php-format
+msgid "Top %d Samples"
+msgstr "%d mẫu hàng đầu"
+
+#: functions.php:851
+msgid "Octets"
+msgstr "Octets"
+
+#: functions.php:864
+msgid "Show only Domains on Charts Below"
+msgstr "Chỉ hiển thị Tên miền trên Biểu đồ bên dưới"
+
+#: functions.php:866
+msgid "Domains/Hostnames Only"
+msgstr "Chỉ miền"
+
+#: functions.php:873
+msgid "Timespan"
+msgstr "Thời gian"
+
+#: functions.php:882
+msgid "Custom"
+msgstr "Tùy chỉnh"
+
+#: functions.php:888
+msgid "From"
+msgstr "Từ"
+
+#: functions.php:897
+msgid "To"
+msgstr "Đến"
+
+#: functions.php:903
+msgid "End Date Selector"
+msgstr "Bộ chọn ngày kết thúc"
+
+#: functions.php:906
+msgid "Shift Time Backward"
+msgstr "Chuyển thời gian lùi lại"
+
+#: functions.php:909
+msgid "Define Shifting Interval"
+msgstr "Xác định khoảng thời gian dịch chuyển"
+
+#: functions.php:922
+msgid "Shift Time Forward"
+msgstr "Chuyển thời gian chuyển tiếp"
+
+#: functions.php:929
+msgid "Graph"
+msgstr "Biểu đồ"
+
+#: functions.php:933
+msgid "Bar"
+msgstr "Bar"
+
+#: functions.php:934
+msgid "Pie"
+msgstr "Bánh"
+
+#: functions.php:935
+msgid "Treemap"
+msgstr "Bản đồ cây"
+
+#: functions.php:939
+msgid "Height"
+msgstr "Chiều cao"
+
+#: functions.php:951
+msgid "Show/Hide"
+msgstr "Hiển thị / ẩn"
+
+#: functions.php:955
+msgid "Table"
+msgstr "Bảng"
+
+#: functions.php:971
+#, fuzzy
+msgid "Export Raw Data"
+msgstr "Báo cáo"
+
+#: functions.php:981
+msgid "Save Flow Filter"
+msgstr "Bộ lọc mới"
+
+#: functions.php:983
+msgid "New Name"
+msgstr "新しい名前"
+
+#: functions.php:992
+msgid "Delete Flow Filter"
+msgstr "Báo cáo in"
+
+#: functions.php:994
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "Để Xóa Bộ lọc Dòng chảy này, hãy nhấn Tiếp tục.  Nếu Bộ lọc lưu lượng đang được sử dụng trong Báo cáo theo lịch, hoạt động sẽ bị chặn."
+
+#: functions.php:1011
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Biểu đồ phân phối %s hàng đầu của byte"
+
+#: functions.php:1012
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "%s biểu đồ hình tròn hàng đầu của byte"
+
+#: functions.php:1013
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Biểu đồ %s cây hàng đầu của byte"
+
+#: functions.php:1016
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Biểu đồ phân phối %s hàng đầu của các gói"
+
+#: functions.php:1017
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "%s biểu đồ hình tròn hàng đầu của các gói"
+
+#: functions.php:1018
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Biểu đồ %s cây hàng đầu của các gói"
+
+#: functions.php:1021
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Biểu đồ phân phối %s hàng đầu của dòng chảy"
+
+#: functions.php:1022
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Biểu đồ hình tròn %s trên cùng của dòng chảy"
+
+#: functions.php:1023
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Biểu đồ %s cây hàng đầu của các dòng chảy"
+
+#: functions.php:1135
+msgid "Rename Layout"
+msgstr "Đổi tên bố cục"
+
+#: functions.php:1143
+msgid " <new>"
+msgstr " <new>"
+
+#: functions.php:1668
+msgid "Filter Settings Saved"
+msgstr "Cài đặt bộ lọc đã lưu"
+
+#: functions.php:1785
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Khách hàng / Riêng tư (%s)"
+
+#: functions.php:1787
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: functions.php:1798
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Không xác định (%s)"
+
+#: functions.php:1824
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: functions.php:2097
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Bộ lọc mạng con: %s không phải là định dạng CIDR giá trị"
+
+#: functions.php:2293 functions.php:2299 functions.php:2305 functions.php:2308
+#: functions.php:2334 functions.php:4490
+msgid "unresolved"
+msgstr "- chưa giải quyết -"
+
+#: functions.php:2683 functions.php:2684 functions.php:2685 functions.php:2686
+#: functions.php:2687 functions.php:2688 functions.php:2689 functions.php:2690
+#: functions.php:2691 functions.php:2692 functions.php:2693 functions.php:2694
+#: functions.php:2695 functions.php:2696 functions.php:2697 functions.php:2698
+#: functions.php:2699 functions.php:2700 functions.php:2701 functions.php:2702
+#: functions.php:2703 functions.php:2704 functions.php:2705 functions.php:2706
+#: functions.php:2707 functions.php:2708
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d byte"
+
+#: functions.php:2709
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d byte"
+
+#: functions.php:3079
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3081
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3083
+msgid "No valid report was selected.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3274
+msgid "Source DNS"
+msgstr "Tên Nguồn"
+
+#: functions.php:3278
+msgid "Source Root DNS"
+msgstr "Tên Nguồn"
+
+#: functions.php:3282
+msgid "Dest DNS"
+msgstr "Dest AS"
+
+#: functions.php:3286
+msgid "Dest Root DNS"
+msgstr "Cổng Dest"
+
+#: functions.php:3290
+msgid "DNS"
+msgstr "DSR"
+
+#: functions.php:3294
+msgid "Root DNS"
+msgstr "DNS gốc"
+
+#: functions.php:3314
+msgid "Dest Port"
+msgstr "Cổng Dest"
+
+#: functions.php:3322
+msgid "Dest IF"
+msgstr "Dest IF"
+
+#: functions.php:3338
+msgid "Dest Prefix"
+msgstr "Tiền tố Dest"
+
+#: functions.php:3346
+msgid "Type of Service"
+msgstr "Loại hình dịch vụ"
+
+#: functions.php:3365
+msgid "Bytes/Packet"
+msgstr "Gói"
+
+#: functions.php:3890
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Truy vấn song song đã hết thời gian.  Vui lòng liên hệ với quản trị viên của bạn"
+
+#: functions.php:4596
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Boolean: %s, Numeric: %s, Hex: %s"
+
+#: functions.php:4607
+msgid "Low Delay"
+msgstr "Độ trễ thấp"
+
+#: functions.php:4608
+msgid "Throughput"
+msgstr "Thông lượng"
+
+#: functions.php:4609
+msgid "Reliability"
+msgstr "Độ tin cậy"
+
+#: functions.php:4610
+msgid "Mincost"
+msgstr "Mincost"
+
+#: functions.php:4614
+msgid "Net Control"
+msgstr "Kiểm soát mạng"
+
+#: functions.php:4615
+msgid "Internet Control"
+msgstr "Kiểm soát Internet"
+
+#: functions.php:4616
+msgid "Critic ECP"
+msgstr "ECP phê bình"
+
+#: functions.php:4617
+msgid "Flash Override"
+msgstr "Ghi đè Flash"
+
+#: functions.php:4618
+msgid "Flash"
+msgstr "Đèn flash"
+
+#: functions.php:4619
+msgid "Immediate"
+msgstr "Khẩn"
+
+#: functions.php:4620
+msgid "Priority"
+msgstr "Ưu tiên"
+
+#: functions.php:4621
+msgid "Routine"
+msgstr "Quay vòng"
+
+#: functions.php:4661
+msgid "Summary Statistics"
+msgstr "Tóm tắt thống kê"
+
+#: functions.php:4672
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "Phân phối kích thước gói IP (%%)"
+
+#: functions.php:4677
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Gói trên mỗi phân phối luồng (%%)"
+
+#: functions.php:4682
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Octet trên mỗi phân phối dòng chảy (%%)"
+
+#: functions.php:4687
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Phân phối thời gian dòng chảy (%%)"
+
+#: functions.php:4872
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Bạn phải chọn Báo cáo thống kê hoặc Báo cáo in!"
+
+#: functions.php:4876
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Bạn phải chọn chỉ một Báo cáo thống kê hoặc Báo cáo in (không phải cả hai)!"
+
+#: functions.php:4880
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Ngày không hợp lệ, Ngày kết thúc / Thời gian sớm hơn Ngày / Giờ bắt đầu!"
+
+#: functions.php:4891 functions.php:4896
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1')"
+
+#: functions.php:4903 functions.php:4909 functions.php:4913
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Mạng con không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
+
+#: functions.php:4927 functions.php:4931
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1')"
+
+#: functions.php:4937 functions.php:4941 functions.php:4945
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Mạng con không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
+
+#: functions.php:4963
+msgid "Invalid value for Source Interface!"
+msgstr "Giá trị không hợp lệ cho Giao diện nguồn!"
+
+#: functions.php:4979
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Giá trị không hợp lệ cho Cổng nguồn! (0 - 65535)"
+
+#: functions.php:4995
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Giá trị không hợp lệ cho Nguồn AS! (0 - 65535)"
+
+#: functions.php:5011
+msgid "Invalid value for Destination Interface!"
+msgstr "Giá trị không hợp lệ cho Giao diện đích!"
+
+#: functions.php:5027
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Giá trị không hợp lệ cho Cổng đích! (0 - 65535)"
+
+#: functions.php:5043
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Giá trị không hợp lệ cho Đích AS! (0 - 65535)"
+
+#: functions.php:5059
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Giá trị không hợp lệ cho Giao thức! (1 - 255)"
+
+#: functions.php:5071
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Giá trị không hợp lệ cho Cờ TCP! (ví dụ: 0x1b hoặc 0x1b / SA hoặc SA / SA)"
+
+#: functions.php:5080
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Giá trị không hợp lệ cho Octoff Cutoff!"
+
+#: functions.php:5087
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Giá trị không hợp lệ cho Cutoff Lines!"
+
+#: functions.php:5114
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "Biểu đồ FlowView cho %s Loại là %s"
+
+#: functions.php:5451
+msgid "Not Supported"
+msgstr "Không được hỗ trợ"
+
+#: functions.php:6693 setup.php:417
+#, fuzzy
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "Aria (Nhanh, An toàn)"
+
+#: functions.php:6694 setup.php:418
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (Nhanh, An toàn)"
+
+#: functions.php:6695 setup.php:419
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (chậm, tính đồng thời cao)"
+
+#: setup.php:45
+#, fuzzy
+msgid "NetFlow User"
+msgstr "Phiên bản NetFlow"
+
+#: setup.php:46
+#, fuzzy
+msgid "NetFlow Admin"
+msgstr "Phiên bản NetFlow"
+
+#: setup.php:53 setup.php:77
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Vui lòng đổi tên tệp config.php.dist hoặc config_local.php.dist của bạn trong thư mục flowview và thay đổi thiết lập cơ sở dữ liệu của bạn trước khi cài đặt."
+
+#: setup.php:119
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Xin lưu ý rằng các bảng plugin Flowview đang được nâng cấp trong nền.  Điều này có thể mất một thời gian. Kiểm tra nhật ký Cacti để biết thêm thông tin"
+
+#: setup.php:132
+msgid "The Filter has been Deleted"
+msgstr "Bộ lọc đã bị xóa"
+
+#: setup.php:133
+msgid "The Filter has been Updated"
+msgstr "Bộ lọc đã được cập nhật"
+
+#: setup.php:138
+msgid "Import/Export"
+msgstr "Nhập vào/Xuất ra"
+
+#: setup.php:139 setup.php:140 setup.php:141 setup.php:142 setup.php:147
+#: setup.php:291 setup.php:293
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php:142
+msgid "Databases"
+msgstr "Cơ sở dữ liệu"
+
+#: setup.php:150
+msgid "Normal User"
+msgstr "Người dùng bình thường"
+
+#: setup.php:151
+msgid "System Administration"
+msgstr "Quản lí hệ thống"
+
+#: setup.php:172 setup.php:193
+msgid "Flow Viewer"
+msgstr "Trình xem lưu lượng"
+
+#: setup.php:179
+msgid "Dashboard"
+msgstr "Bảng điều khiển"
+
+#: setup.php:186 setup.php:214 setup.php:242 setup.php:270
+msgid "(save)"
+msgstr "Lưu"
+
+#: setup.php:207 setup.php:235 setup.php:263
+msgid "(edit)"
+msgstr "(chinnhr sửa)"
+
+#: setup.php:221 setup.php:249 setup.php:277
+msgid "(actions)"
+msgstr "Hành động"
+
+#: setup.php:364
+#, fuzzy, php-format
+msgid "%d Process"
+msgstr "Điểm ảnh %d"
+
+#: setup.php:366
+#, php-format
+msgid "%d Processes"
+msgstr ""
+
+#: setup.php:372
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr ""
+
+#: setup.php:373
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr ""
+
+#: setup.php:386
+#, fuzzy
+msgid "Internet Proxy Settings"
+msgstr "Kiểm soát Internet"
+
+#: setup.php:391
+#, fuzzy
+msgid "Internet Proxy Address"
+msgstr "Kiểm soát Internet"
+
+#: setup.php:392
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr ""
+
+#: setup.php:399
+#, fuzzy
+msgid "Internet Proxy User"
+msgstr "Kiểm soát Internet"
+
+#: setup.php:400
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr ""
+
+#: setup.php:407
+msgid "Internet Proxy Password"
+msgstr ""
+
+#: setup.php:408
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr ""
+
+#: setup.php:451
+msgid "Name Resolution"
+msgstr "Resolution - Độ phân giải"
+
+#: setup.php:456
+msgid "Hostname Resolution"
+msgstr "Resolution - Độ phân giải"
+
+#: setup.php:457
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Phương pháp mà bạn muốn giải quyết tên máy chủ."
+
+#: setup.php:460
+msgid "Use Local Server"
+msgstr "Sử dụng máy chủ cục bộ"
+
+#: setup.php:461
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Sử dụng máy chủ DNS bên dưới"
+
+#: setup.php:462
+msgid "Don't Resolve DNS"
+msgstr "Không giải quyết DNS"
+
+#: setup.php:467
+#, fuzzy
+msgid "Download the Internet Registry Daily"
+msgstr "Chi tiết đăng ký tuyến Internet"
+
+#: setup.php:468
+msgid "If you are interested in the publically available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr ""
+
+#: setup.php:473
+msgid "Local Domain Name"
+msgstr "Dải tên miền"
+
+#: setup.php:476
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "Đối với các địa chỉ IPv4 trên mạng cục bộ không phân giải cục bộ, hãy thêm hậu tố này vào địa chỉ IP kết quả."
+
+#: setup.php:481
+msgid "Local IP Range"
+msgstr "Dải IP cục bộ"
+
+#: setup.php:484
+#, fuzzy
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Cung cấp dải địa chỉ IP IPv4 cho mạng cục bộ của bạn cho các máy chủ có thể không được đăng ký trong DNS.  Các máy chủ này sẽ được ánh xạ tới Tên miền cục bộ ở trên.  Điều này nhiều hơn cho người dùng gia đình.  Bạn có thể sử dụng định dạng CIDR hoặc không CIDR.  Đối với kỳ thi: 192.168.11.0 hoặc 192.168.11.0/24"
+
+#: setup.php:485
+msgid "Use CIDR or Non-CIDR"
+msgstr "Sử dụng CIDR hoặc Non-CIDR"
+
+#: setup.php:490
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Sử dụng Arin để tìm các tên miền chưa đăng ký"
+
+#: setup.php:491
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Nhiều dịch vụ thu thập dữ liệu Big Tech muốn che giấu quyền sở hữu tên miền của họ để làm xáo trộn thực tế rằng họ đang thu thập thông tin cá nhân của bạn.  Nếu bạn quan tâm đến điều này và cài đặt Cacti của bạn có quyền truy cập Internet, bạn có thể sử dụng Arin để tháo mặt nạ khỏi các công ty Big Tech đó."
+
+#: setup.php:496
+msgid "Whois Provider Host"
+msgstr "Máy chủ nhà cung cấp Whois"
+
+#: setup.php:499
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Vui lòng cung cấp tên máy chủ để giải quyết cuộc gọi whois.  Nếu không null, bạn phải có nhị phân whois trong đường dẫn hệ thống của bạn."
+
+#: setup.php:500
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php:505
+msgid "Whois Binary Path"
+msgstr "Công cụ lưu lượng Đường dẫn nhị phân"
+
+#: setup.php:508
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Vui lòng cung cấp tên đường dẫn cho tệp nhị phân 'whois'.  Nhị phân 'whois' sẽ được sử dụng để tìm thông tin AS bổ sung cho Arin."
+
+#: setup.php:509
+msgid "Enter binary path"
+msgstr "Nhập đường dẫn nhị phân"
+
+#: setup.php:514
+msgid "Graph Drilldown Settings"
+msgstr ""
+
+#: setup.php:519
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr ""
+
+#: setup.php:522
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr ""
+
+#: setup.php:526
+msgid "Data Retention and Report Generation"
+msgstr "Lưu giữ dữ liệu và tạo báo cáo"
+
+#: setup.php:538
+msgid "Data Retention Policy"
+msgstr "Chính sách lưu giữ dữ liệu"
+
+#: setup.php:539
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Khoảng thời gian Cacti sẽ duy trì các bảng Flow được phân vùng."
+
+#: setup.php:542
+#, php-format
+msgid "%d Week"
+msgstr "% d Tuần"
+
+#: setup.php:543 setup.php:544
+#, php-format
+msgid "%d Weeks"
+msgstr "% d Tuần"
+
+#: setup.php:545
+#, php-format
+msgid "%d Month"
+msgstr "% d Tháng"
+
+#: setup.php:546 setup.php:547 setup.php:548 setup.php:549
+#, php-format
+msgid "%d Months"
+msgstr "% d Tháng"
+
+#: setup.php:550
+#, php-format
+msgid "%d Year"
+msgstr "% d Năm"
+
+#: setup.php:555
+msgid "Database Partitioning Scheme"
+msgstr "Lược đồ phân vùng cơ sở dữ liệu"
+
+#: setup.php:556
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Tùy thuộc vào số lượng dòng chảy mỗi phút, bạn có thể yêu cầu nhiều bảng hơn mỗi ngày."
+
+#: setup.php:559
+msgid "Daily"
+msgstr "Hàng ngày"
+
+#: setup.php:560
+msgid "Hourly"
+msgstr "Hàng Giờ"
+
+#: setup.php:565
+msgid "Storage Engine for Raw Tables"
+msgstr "Công cụ lưu trữ cho bảng thô"
+
+#: setup.php:566
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Aria Engine là hoàn hảo cho tất cả trừ bảng Live thô.  Bảng Live raw sẽ luôn là InnoDB.  Hãy lựa chọn của bạn."
+
+#: setup.php:572
+msgid "Parallel Queries"
+msgstr "Truy vấn song song"
+
+#: setup.php:577
+msgid "Max Concurrent Threads"
+msgstr "Chủ đề đồng thời tối đa"
+
+#: setup.php:578
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Số lượng luồng tối đa sẽ được gửi đi để chạy các truy vấn FlowView.  Lưu ý rằng bạn có thể có tối đa 1 luồng cho mỗi phân vùng cơ sở dữ liệu và bạn nên cẩn thận để không làm quá tải máy chủ cơ sở dữ liệu của mình khi có quá nhiều luồng đồng thời đang chạy."
+
+#: setup.php:581
+msgid "Disabled"
+msgstr "Vô hiệu hóa"
+
+#: setup.php:582 setup.php:583 setup.php:584 setup.php:585 setup.php:586
+#: setup.php:587 setup.php:588 setup.php:589 setup.php:590 setup.php:591
+#: setup.php:592 setup.php:593 setup.php:594 setup.php:595 setup.php:596
+#: setup.php:597 setup.php:598 setup.php:599 setup.php:600
+#, php-format
+msgid "%d Threads"
+msgstr "Chủ đề %d"
+
+#: setup.php:605
+msgid "Maximum Run Time"
+msgstr "Hàng tối đa"
+
+#: setup.php:606
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Nếu Truy vấn song song không kết thúc trong thời gian này, hãy thoát."
+
+#: setup.php:620
 msgid "Cached Data Time to Live"
 msgstr "Dữ liệu được lưu trong bộ nhớ cache Thời gian tồn tại"
 
-#: setup.php:512
+#: setup.php:621
 msgid "How long should FlowView hold onto Cached Query results before purging them?"
 msgstr "FlowView nên giữ kết quả Truy vấn được lưu trong bộ nhớ cache trong bao lâu trước khi xóa chúng?"
 
-#: setup.php:515 setup.php:516
+#: setup.php:624 setup.php:625
 #, php-format
 msgid "%d Hours"
 msgstr "%d giờ"
 
-#: setup.php:517
+#: setup.php:626
 #, php-format
 msgid "%d Day"
 msgstr "%d Ngày"
 
-#: setup.php:518
+#: setup.php:627
 #, php-format
 msgid "%d Days"
 msgstr "%d Ngày"
 
-#: setup.php:523
+#: setup.php:632
 msgid "MaxScale Sharding"
 msgstr "MaxScale Sharding"
 
-#: setup.php:528
+#: setup.php:633
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr ""
+
+#: setup.php:638
 msgid "Leverage MaxScale to Distribute Query Shards"
 msgstr "Tận dụng MaxScale để phân phối các phân đoạn truy vấn"
 
-#: setup.php:529
+#: setup.php:639
 msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
 msgstr "Nếu bạn có nhiều dịch vụ hoạt động như nô lệ cho MaxScale, bạn có thể tăng tốc độ truy vấn bằng cách phân phối các truy vấn song song đến nhiều máy chủ phụ trợ MariaDB."
 
-#: setup.php:534
-msgid "MaxScale Read-Only Port"
+#: setup.php:644
+#, fuzzy
+msgid "MaxScale Read-Write Split Port"
 msgstr "Cổng chỉ đọc MaxScale"
 
-#: setup.php:537
-msgid "This should be the port of the Read-Only-Service (readconnroute) service and router."
+#: setup.php:647
+#, fuzzy
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
 msgstr "Đây phải là cổng của dịch vụ và bộ định tuyến Read-Only-Service (readconnroute)."
 
-#: setup.php:543
+#: setup.php:653
 msgid "Flowview"
 msgstr "FlowView"
 
-#~ msgid "Top 3 Samples"
-#~ msgstr "Top 3 mẫu"
-
-#~ msgid "Top 4 Samples"
-#~ msgstr "Top 4 mẫu"
-
-#~ msgid "Top 5 Samples"
-#~ msgstr "Top 5 mẫu"
-
-#~ msgid "Save Overrides to Selected Filter"
-#~ msgstr "Lưu ghi đè vào bộ lọc đã chọn"
+#: setup.php:1308
+msgid "View NetFlow Traffic In Range"
+msgstr ""
 
 #, fuzzy
-#~ msgid "(e.g., -0x0b/0x0F)"
-#~ msgstr "(ví dụ: -0x0b / 0x0F)"
-
-#~ msgid "(view)"
-#~ msgstr "(xem)"
+#~ msgid "XTP"
+#~ msgstr "XTP"
 
 #, fuzzy
-#~ msgid "0 (Disabled)"
-#~ msgstr "0 (Vô hiệu hóa)"
+#~ msgid "XNS-IDP"
+#~ msgstr "XNS-IDP"
 
 #, fuzzy
-#~ msgid "1 Line with Tags"
-#~ msgstr "1 dòng có thẻ"
+#~ msgid "XNET"
+#~ msgstr "XNET"
 
 #, fuzzy
-#~ msgid "3PC"
-#~ msgstr "3PC"
+#~ msgid "View"
+#~ msgstr "Xem"
 
 #, fuzzy
-#~ msgid "9 (Highest)"
-#~ msgstr "9 (Cao nhất)"
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#~ msgid "Up"
+#~ msgstr "Lên trên"
 
 #, fuzzy
-#~ msgid "A comma delimited list of domains names to strip from the domain."
-#~ msgstr "Một danh sách được phân tách bằng dấu phẩy của các tên miền để tách khỏi miền."
+#~ msgid "UDP"
+#~ msgstr "UDP"
 
 #, fuzzy
-#~ msgid "ARGUS"
-#~ msgstr "ARGUS"
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "Đây là đường dẫn để căn cứ đường dẫn của cấu trúc thư mục luồng của bạn."
 
 #, fuzzy
-#~ msgid "AS"
-#~ msgstr "NHƯ"
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "Đây là đường dẫn đến một thư mục tạm thời để làm việc."
 
 #, fuzzy
-#~ msgid "AS Aggregation"
-#~ msgstr "NHƯ tập hợp"
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "Đây là Máy chủ DNS được sử dụng để phân giải tên."
 
 #, fuzzy
-#~ msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
-#~ msgstr "Ngoài ra, hãy nhớ xóa mọi tệp còn sót lại khỏi vị trí Net-Flow Capture của bạn."
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "Đường dẫn đến tệp lưu lượng, lưu lượng và bộ lọc lưu lượng của bạn."
 
 #, fuzzy
-#~ msgid "Alternate DNS Server"
-#~ msgstr "Máy chủ DNS thay thế"
+#~ msgid "TRUNK-2"
+#~ msgstr "TRUNK-2"
 
 #, fuzzy
-#~ msgid "Any Part in Specified Time Span"
-#~ msgstr "Bất kỳ phần nào trong khoảng thời gian được chỉ định"
+#~ msgid "TRUNK-1"
+#~ msgstr "TRUNK-1"
 
 #, fuzzy
-#~ msgid "BBN-RCC-MON"
-#~ msgstr "BBN-RCC-MON"
+#~ msgid "TP++"
+#~ msgstr "TP ++"
 
 #, fuzzy
-#~ msgid "CBT"
-#~ msgstr "CBT"
+#~ msgid "TCP"
+#~ msgstr "TCP"
 
 #, fuzzy
-#~ msgid "CHAOS"
-#~ msgstr "CHAOS"
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "Thời gian bắt đầu trong khoảng thời gian được chỉ định"
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "Src / Dest IP"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "Tiền tố Src"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "Cổng Src"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "IP Src"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "NẾU"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "Src NHƯ"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "Tổng hợp tiền tố nguồn"
+
+#, fuzzy
+#~ msgid "Select a Filter to display data"
+#~ msgstr "Báo cáo in"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "Chọn một"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "ST"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "SDRP"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "Thông số báo cáo"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "vui lòng phúc đáp"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "RSPF"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "RDP"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "Tổng hợp cổng giao thức"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "Tập hợp tiền tố"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "Tiền tố"
+
+#, fuzzy
+#~ msgid "Packets Bar"
+#~ msgstr "Gói thanh"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "PUP"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "PRM"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "OSPF"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "Ghi chú:"
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "Thiết bị"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "Truy vấn mới"
+
+#, fuzzy
+#~ msgid "New Flow"
+#~ msgstr "Dòng chảy mới"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "NetFlow phiên bản 7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "NetFlow phiên bản 6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "NetFlow phiên bản 5"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "NetFlow phiên bản 1"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "Tập hợp tiền tố nguồn NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "NetFlow ToS Tổng hợp cổng Proto"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "Tổng hợp cổng tiền tố NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "Tập hợp tiền tố NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "NetFlow ToS Tổng hợp tiền tố đích"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "NetFlow ToS AS Tập hợp"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "Tập hợp tiền tố nguồn NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "Điểm đến nguồn NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "Phiên bản Giao thức NetFlow được sử dụng bởi thiết bị."
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "Tổng hợp cổng Proto NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "Tập hợp tiền tố NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "Dòng chảy đầy đủ của NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "Tập hợp tiền tố đích NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "Điểm đến NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "Tập hợp NetFlow AS"
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "Làm tổ"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP-II"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "MẠNG"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr "Nhiều mục nhập trường, được phân tách bằng dấu phẩy, được cho phép trong các trường ở trên. Dấu trừ (-) sẽ phủ nhận mục nhập (ví dụ -80 cho Cổng, có nghĩa là bất kỳ Cổng nào ngoài 80)"
+
+#~ msgid "Misc"
+#~ msgstr "Linh tinh"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "Quản lý người nghe"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "MTP"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "MFE-NSP"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "INIT"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "LỚP-2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "LỚP-1"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "Bao gồm nếu:"
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "ISO-TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "Tuyến đường IPv6"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "IPv6-Opts"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "IPv6-NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "IPv6-ICMP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "IPv6-Frag"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ESP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-AH"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "IPENCAP"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "IP"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "IL"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "IGP"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "ICMP"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "Bao lâu để giữ các tệp lưu lượng của bạn."
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "HMP"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "LỚN"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "GGP"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "Đầy đủ (Chất xúc tác)"
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "Thư mục dòng"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "Flow-Tools được gắn thẻ phiên bản 5"
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "Thư mục công cụ Flow"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "Ràng buộc bộ lọc dòng chảy"
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "Tên bộ lọc"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "Hết hiệu lực"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "Hoàn toàn trong khoảng thời gian được chỉ định"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "Thời gian kết thúc trong khoảng thời gian được chỉ định"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "Ngày kết thúc"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "ENCAP"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "EIGRP"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "TRỨNG"
+
+#~ msgid "Down"
+#~ msgstr "Xuống"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "Thư mục mà các thiết bị này chảy vào. Thư mục này phải nằm trong đường dẫn Thư mục lưu lượng. Đừng đặt con đường đầy đủ ở đây. Ngoài ra, không phải là nếu bạn thay đổi đường dẫn, tất cả các thiết lập filer được xác định trước để sử dụng nó sẽ phải được lưu lại."
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "Cấu trúc thư mục sẽ được sử dụng cho các luồng cho thiết bị này."
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "Danh mục"
+
+#, fuzzy
+#~ msgid "Device [new]"
+#~ msgstr "Thiết bị [mới]"
+
+#, fuzzy
+#~ msgid "Device [edit: %s]"
+#~ msgstr "Thiết bị [chỉnh sửa: %s]"
+
+#~ msgid "Device Name"
+#~ msgstr "Tên thiết bị"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "Tập hợp tiền tố đích"
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "Cổng Dest"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "Mặc định"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "DDP"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "VÒI"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "Mức nén của các tệp lưu lượng. Nén cao hơn tiết kiệm không gian nhưng sử dụng nhiều CPU hơn để lưu trữ và truy xuất kết quả."
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "Mức nén"
 
 #, fuzzy
 #~ msgid "Compression"
@@ -2595,505 +3310,115 @@ msgstr "FlowView"
 #~ "Nén"
 
 #, fuzzy
-#~ msgid "Compression Level"
-#~ msgstr "Mức nén"
+#~ msgid "CHAOS"
+#~ msgstr "CHAOS"
 
 #, fuzzy
-#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
-#~ msgstr "Mức nén của các tệp lưu lượng. Nén cao hơn tiết kiệm không gian nhưng sử dụng nhiều CPU hơn để lưu trữ và truy xuất kết quả."
+#~ msgid "CBT"
+#~ msgstr "CBT"
 
 #, fuzzy
-#~ msgid "DCCP"
-#~ msgstr "DCCP"
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "BBN-RCC-MON"
 
 #, fuzzy
-#~ msgid "DCN-MEAS"
-#~ msgstr "VÒI"
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "Bất kỳ phần nào trong khoảng thời gian được chỉ định"
 
 #, fuzzy
-#~ msgid "DDP"
-#~ msgstr "DDP"
+#~ msgid "Alternate DNS Server"
+#~ msgstr "Máy chủ DNS thay thế"
 
 #, fuzzy
-#~ msgid "Defaults"
-#~ msgstr "Mặc định"
+#~ msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
+#~ msgstr "Ngoài ra, hãy nhớ xóa mọi tệp còn sót lại khỏi vị trí Net-Flow Capture của bạn."
 
 #, fuzzy
-#~ msgid "Dest Port(s)"
-#~ msgstr "Cổng Dest"
+#~ msgid "AS Aggregation"
+#~ msgstr "NHƯ tập hợp"
 
 #, fuzzy
-#~ msgid "Destination Prefix Aggregation"
-#~ msgstr "Tập hợp tiền tố đích"
+#~ msgid "AS"
+#~ msgstr "NHƯ"
 
-#~ msgid "Device Name"
-#~ msgstr "Tên thiết bị"
-
-#, fuzzy
-#~ msgid "Device [edit: %s]"
-#~ msgstr "Thiết bị [chỉnh sửa: %s]"
-
-#, fuzzy
-#~ msgid "Device [new]"
-#~ msgstr "Thiết bị [mới]"
-
-#, fuzzy
-#~ msgid "Directory"
-#~ msgstr "Danh mục"
-
-#, fuzzy
-#~ msgid "Directory Structure that will be used for the flows for this device."
-#~ msgstr "Cấu trúc thư mục sẽ được sử dụng cho các luồng cho thiết bị này."
-
-#, fuzzy
-#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
-#~ msgstr "Thư mục mà các thiết bị này chảy vào. Thư mục này phải nằm trong đường dẫn Thư mục lưu lượng. Đừng đặt con đường đầy đủ ở đây. Ngoài ra, không phải là nếu bạn thay đổi đường dẫn, tất cả các thiết lập filer được xác định trước để sử dụng nó sẽ phải được lưu lại."
-
-#~ msgid "Down"
-#~ msgstr "Xuống"
-
-#, fuzzy
-#~ msgid "EGP"
-#~ msgstr "TRỨNG"
-
-#, fuzzy
-#~ msgid "EIGRP"
-#~ msgstr "EIGRP"
-
-#, fuzzy
-#~ msgid "EMCON"
-#~ msgstr "EMCON"
-
-#, fuzzy
-#~ msgid "ENCAP"
-#~ msgstr "ENCAP"
-
-#, fuzzy
-#~ msgid "End Date"
-#~ msgstr "Ngày kết thúc"
-
-#, fuzzy
-#~ msgid "End Time in Specified Time Span"
-#~ msgstr "Thời gian kết thúc trong khoảng thời gian được chỉ định"
-
-#, fuzzy
-#~ msgid "Entirely in Specified Time Span"
-#~ msgstr "Hoàn toàn trong khoảng thời gian được chỉ định"
-
-#, fuzzy
-#~ msgid "Expire"
-#~ msgstr "Hết hiệu lực"
-
-#, fuzzy
-#~ msgid "Filter Data"
-#~ msgstr "Tên bộ lọc"
-
-#, fuzzy
-#~ msgid "Flow Filter Constraints"
-#~ msgstr "Ràng buộc bộ lọc dòng chảy"
-
-#, fuzzy
-#~ msgid "Flow Tools Work Directory"
-#~ msgstr "Thư mục công cụ Flow"
-
-#, fuzzy
-#~ msgid "Flow-Tools tagged version 5"
-#~ msgstr "Flow-Tools được gắn thẻ phiên bản 5"
-
-#, fuzzy
-#~ msgid "Flows Directory"
-#~ msgstr "Thư mục dòng"
-
-#, fuzzy
-#~ msgid "Full (Catalyst)"
-#~ msgstr "Đầy đủ (Chất xúc tác)"
-
-#, fuzzy
-#~ msgid "GGP"
-#~ msgstr "GGP"
-
-#, fuzzy
-#~ msgid "GRE"
-#~ msgstr "LỚN"
-
-#, fuzzy
-#~ msgid "HMP"
-#~ msgstr "HMP"
-
-#, fuzzy
-#~ msgid "How long to keep your flow files."
-#~ msgstr "Bao lâu để giữ các tệp lưu lượng của bạn."
-
-#, fuzzy
-#~ msgid "ICMP"
-#~ msgstr "ICMP"
-
-#, fuzzy
-#~ msgid "IDPR"
-#~ msgstr "IDPR"
-
-#, fuzzy
-#~ msgid "IDPR-CMTP"
-#~ msgstr "IDPR-CMTP"
-
-#, fuzzy
-#~ msgid "IDRP"
-#~ msgstr "IDRP"
-
-#, fuzzy
-#~ msgid "IGMP"
-#~ msgstr "IGMP"
-
-#, fuzzy
-#~ msgid "IGP"
-#~ msgstr "IGP"
-
-#, fuzzy
-#~ msgid "IL"
-#~ msgstr "IL"
-
-#, fuzzy
-#~ msgid "IP"
-#~ msgstr "IP"
-
-#, fuzzy
-#~ msgid "IPENCAP"
-#~ msgstr "IPENCAP"
-
-#, fuzzy
-#~ msgid "IPIP"
-#~ msgstr "IPIP"
-
-#, fuzzy
-#~ msgid "IPSEC-AH"
-#~ msgstr "IPSEC-AH"
-
-#, fuzzy
-#~ msgid "IPSEC-ESP"
-#~ msgstr "IPSEC-ESP"
-
 #, fuzzy
-#~ msgid "IPv6-Frag"
-#~ msgstr "IPv6-Frag"
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
 
 #, fuzzy
-#~ msgid "IPv6-ICMP"
-#~ msgstr "IPv6-ICMP"
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "Một danh sách được phân tách bằng dấu phẩy của các tên miền để tách khỏi miền."
 
 #, fuzzy
-#~ msgid "IPv6-NoNxt"
-#~ msgstr "IPv6-NoNxt"
+#~ msgid "9 (Highest)"
+#~ msgstr "9 (Cao nhất)"
 
 #, fuzzy
-#~ msgid "IPv6-Opts"
-#~ msgstr "IPv6-Opts"
+#~ msgid "3PC"
+#~ msgstr "3PC"
 
 #, fuzzy
-#~ msgid "IPv6-Route"
-#~ msgstr "Tuyến đường IPv6"
+#~ msgid "1 Line with Tags"
+#~ msgstr "1 dòng có thẻ"
 
 #, fuzzy
-#~ msgid "IRTP"
-#~ msgstr "IRTP"
+#~ msgid "0 (Disabled)"
+#~ msgstr "0 (Vô hiệu hóa)"
 
-#, fuzzy
-#~ msgid "ISO-TP4"
-#~ msgstr "ISO-TP4"
-
-#, fuzzy
-#~ msgid "Include if:"
-#~ msgstr "Bao gồm nếu:"
-
-#, fuzzy
-#~ msgid "LEAF-1"
-#~ msgstr "LỚP-1"
-
-#, fuzzy
-#~ msgid "LEAF-2"
-#~ msgstr "LỚP-2"
-
-#, fuzzy
-#~ msgid "MERIT-INP"
-#~ msgstr "INIT"
-
-#, fuzzy
-#~ msgid "MFE-NSP"
-#~ msgstr "MFE-NSP"
-
-#, fuzzy
-#~ msgid "MTP"
-#~ msgstr "MTP"
-
-#, fuzzy
-#~ msgid "MUX"
-#~ msgstr "MUX"
-
-#, fuzzy
-#~ msgid "Manage Listeners"
-#~ msgstr "Quản lý người nghe"
-
-#~ msgid "Misc"
-#~ msgstr "Linh tinh"
-
-#, fuzzy
-#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
-#~ msgstr "Nhiều mục nhập trường, được phân tách bằng dấu phẩy, được cho phép trong các trường ở trên. Dấu trừ (-) sẽ phủ nhận mục nhập (ví dụ -80 cho Cổng, có nghĩa là bất kỳ Cổng nào ngoài 80)"
-
-#, fuzzy
-#~ msgid "NETBLT"
-#~ msgstr "MẠNG"
-
-#, fuzzy
-#~ msgid "NVP-II"
-#~ msgstr "NVP-II"
-
-#, fuzzy
-#~ msgid "Nesting"
-#~ msgstr "Làm tổ"
-
-#, fuzzy
-#~ msgid "NetFlow AS Aggregation"
-#~ msgstr "Tập hợp NetFlow AS"
-
-#, fuzzy
-#~ msgid "NetFlow Destination"
-#~ msgstr "Điểm đến NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Destination Prefix Aggregation"
-#~ msgstr "Tập hợp tiền tố đích NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Full Flow"
-#~ msgstr "Dòng chảy đầy đủ của NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Prefix Aggregation"
-#~ msgstr "Tập hợp tiền tố NetFlow"
+#~ msgid "(view)"
+#~ msgstr "(xem)"
 
 #, fuzzy
-#~ msgid "NetFlow Proto Port Aggregation"
-#~ msgstr "Tổng hợp cổng Proto NetFlow"
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "(ví dụ: -0x0b / 0x0F)"
 
-#, fuzzy
-#~ msgid "NetFlow Protocol version used by the device."
-#~ msgstr "Phiên bản Giao thức NetFlow được sử dụng bởi thiết bị."
-
-#, fuzzy
-#~ msgid "NetFlow Source Destination"
-#~ msgstr "Điểm đến nguồn NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Source Prefix Aggregation"
-#~ msgstr "Tập hợp tiền tố nguồn NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow ToS AS Aggregation"
-#~ msgstr "NetFlow ToS AS Tập hợp"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Destination Prefix Aggregation"
-#~ msgstr "NetFlow ToS Tổng hợp tiền tố đích"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Aggregation"
-#~ msgstr "Tập hợp tiền tố NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Port Aggregation"
-#~ msgstr "Tổng hợp cổng tiền tố NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Proto Port Aggregation"
-#~ msgstr "NetFlow ToS Tổng hợp cổng Proto"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Source Prefix Aggregation"
-#~ msgstr "Tập hợp tiền tố nguồn NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow Version"
-#~ msgstr "Phiên bản NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow version 1"
-#~ msgstr "NetFlow phiên bản 1"
-
-#, fuzzy
-#~ msgid "NetFlow version 5"
-#~ msgstr "NetFlow phiên bản 5"
-
-#, fuzzy
-#~ msgid "NetFlow version 6"
-#~ msgstr "NetFlow phiên bản 6"
-
-#, fuzzy
-#~ msgid "NetFlow version 7"
-#~ msgstr "NetFlow phiên bản 7"
+#~ msgid "Save Overrides to Selected Filter"
+#~ msgstr "Lưu ghi đè vào bộ lọc đã chọn"
 
-#, fuzzy
-#~ msgid "New Flow"
-#~ msgstr "Dòng chảy mới"
-
-#, fuzzy
-#~ msgid "New Query"
-#~ msgstr "Truy vấn mới"
-
-#, fuzzy
-#~ msgid "No Devices"
-#~ msgstr "Thiết bị"
+#~ msgid "Top 5 Samples"
+#~ msgstr "Top 5 mẫu"
 
-#, fuzzy
-#~ msgid "Note:"
-#~ msgstr "Ghi chú:"
+#~ msgid "Top 4 Samples"
+#~ msgstr "Top 4 mẫu"
 
-#, fuzzy
-#~ msgid "OSPF"
-#~ msgstr "OSPF"
+#~ msgid "Top 3 Samples"
+#~ msgstr "Top 3 mẫu"
 
-#, fuzzy
-#~ msgid "PRM"
-#~ msgstr "PRM"
+#~ msgid "Plugin -> Flow Admin"
+#~ msgstr "Plugin -> Quản trị luồng"
 
-#, fuzzy
-#~ msgid "PUP"
-#~ msgstr "PUP"
+#~ msgid "Plugin -> Flow Viewer"
+#~ msgstr "Plugin -> Trình xem luồng"
 
-#, fuzzy
-#~ msgid "Packets Bar"
+#~ msgid "Packets Examined"
 #~ msgstr "Gói thanh"
 
-#, fuzzy
-#~ msgid "Prefix"
-#~ msgstr "Tiền tố"
+#~ msgid "Bytes Exchanged"
+#~ msgstr "Đã trao đổi byte"
 
-#, fuzzy
-#~ msgid "Prefix Aggregation"
-#~ msgstr "Tập hợp tiền tố"
+#~ msgid "Total Flows"
+#~ msgstr "Dòng tối đa:"
 
-#, fuzzy
-#~ msgid "Protocol Port Aggregation"
-#~ msgstr "Tổng hợp cổng giao thức"
+#~ msgid "Invalid value for Sort Field!"
+#~ msgstr "Giá trị không hợp lệ cho Trường sắp xếp!"
 
-#, fuzzy
-#~ msgid "RDP"
-#~ msgstr "RDP"
+#~ msgid "Cacti Flowview"
+#~ msgstr "Cacti Flowview"
 
-#, fuzzy
-#~ msgid "RSPF"
-#~ msgstr "RSPF"
+#~ msgid "Start Date"
+#~ msgstr "Ngày bắt đầu"
 
-#, fuzzy
-#~ msgid "RSVP"
-#~ msgstr "vui lòng phúc đáp"
+#~ msgid "Sent Scheduled Report %s in Background."
+#~ msgstr "Đã gửi báo cáo đã lên lịch %s trong nền."
 
-#, fuzzy
-#~ msgid "Report Parameters"
-#~ msgstr "Thông số báo cáo"
+#~ msgid "You must select at least one device."
+#~ msgstr "Bạn phải chọn ít nhất một thiết bị."
 
-#, fuzzy
-#~ msgid "SDRP"
-#~ msgstr "SDRP"
+#~ msgid "TCP Protocol"
+#~ msgstr "Giao thức IP"
 
-#, fuzzy
-#~ msgid "ST"
-#~ msgstr "ST"
+#~ msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
+#~ msgstr "Địa chỉ IP của thiết bị được phép gửi đến bộ thu lưu lượng này. Để lại là 0 cho bất kỳ máy chủ lưu trữ."
 
-#, fuzzy
-#~ msgid "Select One"
-#~ msgstr "Chọn một"
-
-#, fuzzy
-#~ msgid "Select a Filter to display data"
-#~ msgstr "Báo cáo in"
-
-#, fuzzy
-#~ msgid "Source Prefix Aggregation"
-#~ msgstr "Tổng hợp tiền tố nguồn"
-
-#, fuzzy
-#~ msgid "Src AS"
-#~ msgstr "Src NHƯ"
-
-#, fuzzy
-#~ msgid "Src IF"
-#~ msgstr "NẾU"
-
-#, fuzzy
-#~ msgid "Src IP"
-#~ msgstr "IP Src"
-
-#, fuzzy
-#~ msgid "Src Port"
-#~ msgstr "Cổng Src"
-
-#, fuzzy
-#~ msgid "Src Prefix"
-#~ msgstr "Tiền tố Src"
-
-#, fuzzy
-#~ msgid "Src/Dest IP"
-#~ msgstr "Src / Dest IP"
-
-#, fuzzy
-#~ msgid "Start Time in Specified Time Span"
-#~ msgstr "Thời gian bắt đầu trong khoảng thời gian được chỉ định"
-
-#, fuzzy
-#~ msgid "TCP"
-#~ msgstr "TCP"
-
-#, fuzzy
-#~ msgid "TP++"
-#~ msgstr "TP ++"
-
-#, fuzzy
-#~ msgid "TRUNK-1"
-#~ msgstr "TRUNK-1"
-
-#, fuzzy
-#~ msgid "TRUNK-2"
-#~ msgstr "TRUNK-2"
-
-#, fuzzy
-#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-#~ msgstr "Đường dẫn đến tệp lưu lượng, lưu lượng và bộ lọc lưu lượng của bạn."
-
-#, fuzzy
-#~ msgid "This is the DNS Server used to resolve names."
-#~ msgstr "Đây là Máy chủ DNS được sử dụng để phân giải tên."
-
-#, fuzzy
-#~ msgid "This is the path to a temporary directory to do work."
-#~ msgstr "Đây là đường dẫn đến một thư mục tạm thời để làm việc."
-
-#, fuzzy
-#~ msgid "This is the path to base the path of your flow folder structure."
-#~ msgstr "Đây là đường dẫn để căn cứ đường dẫn của cấu trúc thư mục luồng của bạn."
-
-#, fuzzy
-#~ msgid "UDP"
-#~ msgstr "UDP"
-
-#~ msgid "Up"
-#~ msgstr "Lên trên"
-
-#, fuzzy
-#~ msgid "VMTP"
-#~ msgstr "VMTP"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "Xem"
-
-#, fuzzy
-#~ msgid "XNET"
-#~ msgstr "XNET"
-
-#, fuzzy
-#~ msgid "XNS-IDP"
-#~ msgstr "XNS-IDP"
-
-#, fuzzy
-#~ msgid "XTP"
-#~ msgstr "XTP"
+#~ msgid "Input IF"
+#~ msgstr "Trường nhập"

@@ -287,7 +287,9 @@ if ($maint) {
 		array($retention_days));
 
 	/* download a fresh copy of the radb.db.gz and load it */
-	flowview_check_databases();
+	if (read_config_option('flowview_download_irr') == 'on') {
+		flowview_check_databases();
+	}
 }
 
 $end = microtime(true);

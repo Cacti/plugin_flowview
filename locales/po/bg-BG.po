@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2024-07-14 20:09-0400\n"
+"POT-Creation-Date: 2025-09-11 23:08-0400\n"
 "PO-Revision-Date: 2024-07-14 20:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: arrays.php:26 arrays.php:60 functions.php:619
+#: arrays.php:26 arrays.php:60 functions.php:737
 msgid "Select a Report"
 msgstr "Отпечатване на отчети"
 
@@ -50,16 +50,16 @@ msgstr "UDP / TCP изходен порт"
 msgid "UDP/TCP Port"
 msgstr "UDP / TCP порт"
 
-#: arrays.php:37 arrays.php:397 arrays.php:403 arrays.php:492 arrays.php:508
-#: arrays.php:520 arrays.php:785 functions.php:2912
+#: arrays.php:37 arrays.php:398 arrays.php:404 arrays.php:493 arrays.php:509
+#: arrays.php:521 arrays.php:786 functions.php:3301
 msgid "Source IP"
 msgstr "Източник IP"
 
-#: arrays.php:38 arrays.php:391 arrays.php:494 arrays.php:509 arrays.php:523
+#: arrays.php:38 arrays.php:392 arrays.php:495 arrays.php:510 arrays.php:524
 msgid "Destination IP"
 msgstr "Целеви IP адрес"
 
-#: arrays.php:39
+#: arrays.php:39 functions.php:3299
 msgid "Source/Destination IP"
 msgstr "IP на източник / местоназначение"
 
@@ -83,12 +83,12 @@ msgstr "Изходен интерфейс"
 msgid "Input/Output Interface"
 msgstr "Входно / изходен интерфейс"
 
-#: arrays.php:48 arrays.php:434 arrays.php:446 arrays.php:511 arrays.php:809
-#: functions.php:2936
+#: arrays.php:48 arrays.php:435 arrays.php:447 arrays.php:512 arrays.php:810
+#: functions.php:3326
 msgid "Source AS"
 msgstr "Източник"
 
-#: arrays.php:49 arrays.php:440 arrays.php:447 arrays.php:512
+#: arrays.php:49 arrays.php:441 arrays.php:448 arrays.php:513
 msgid "Destination AS"
 msgstr "Дестинация"
 
@@ -100,11 +100,11 @@ msgstr "Източник / местоназначение AS"
 msgid "IP ToS"
 msgstr "IP ToS"
 
-#: arrays.php:54 arrays.php:466 arrays.php:478 functions.php:2944
+#: arrays.php:54 arrays.php:467 arrays.php:479 functions.php:3334
 msgid "Source Prefix"
 msgstr "Префикс на източника"
 
-#: arrays.php:55 arrays.php:472
+#: arrays.php:55 arrays.php:473
 msgid "Destination Prefix"
 msgstr "Целеви префикс"
 
@@ -169,8 +169,9 @@ msgstr "Без ограничение"
 msgid "%s Bytes"
 msgstr "%s байта"
 
-#: arrays.php:106 arrays.php:567 arrays.php:575 arrays.php:604
-#: flowview_devices.php:465 flowview_devices.php:479 flowview_filters.php:369
+#: arrays.php:106 arrays.php:568 arrays.php:576 arrays.php:605
+#: flowview_devices.php:538 flowview_devices.php:552 flowview_devices.php:944
+#: flowview_filters.php:369 functions.php:670 functions.php:691
 msgid "All"
 msgstr "Всички"
 
@@ -179,31 +180,31 @@ msgid "Source Domain"
 msgstr "Порт (и) на източника"
 
 #: arrays.php:355 arrays.php:361 arrays.php:368 arrays.php:374 arrays.php:380
-#: arrays.php:386 arrays.php:392 arrays.php:398 arrays.php:405 arrays.php:411
-#: arrays.php:417 arrays.php:423 arrays.php:429 arrays.php:435 arrays.php:441
-#: arrays.php:448 arrays.php:454 arrays.php:461 arrays.php:467 arrays.php:473
-#: arrays.php:480 arrays.php:541 functions.php:818 functions.php:866
-#: functions.php:2964 functions.php:3511
+#: arrays.php:387 arrays.php:393 arrays.php:399 arrays.php:406 arrays.php:412
+#: arrays.php:418 arrays.php:424 arrays.php:430 arrays.php:436 arrays.php:442
+#: arrays.php:449 arrays.php:455 arrays.php:462 arrays.php:468 arrays.php:474
+#: arrays.php:481 arrays.php:542 functions.php:967 functions.php:1020
+#: functions.php:3354 functions.php:4519
 msgid "Flows"
 msgstr "потоци"
 
 #: arrays.php:356 arrays.php:362 arrays.php:369 arrays.php:375 arrays.php:381
-#: arrays.php:387 arrays.php:393 arrays.php:399 arrays.php:406 arrays.php:412
-#: arrays.php:418 arrays.php:424 arrays.php:430 arrays.php:436 arrays.php:442
-#: arrays.php:449 arrays.php:455 arrays.php:462 arrays.php:468 arrays.php:474
-#: arrays.php:481 arrays.php:499 arrays.php:513 arrays.php:528 arrays.php:534
-#: arrays.php:543 functions.php:810 functions.php:856 functions.php:2968
-#: functions.php:3509
+#: arrays.php:388 arrays.php:394 arrays.php:400 arrays.php:407 arrays.php:413
+#: arrays.php:419 arrays.php:425 arrays.php:431 arrays.php:437 arrays.php:443
+#: arrays.php:450 arrays.php:456 arrays.php:463 arrays.php:469 arrays.php:475
+#: arrays.php:482 arrays.php:500 arrays.php:514 arrays.php:529 arrays.php:535
+#: arrays.php:544 functions.php:959 functions.php:1010 functions.php:3358
+#: functions.php:4517
 msgid "Bytes"
 msgstr "Bytes"
 
 #: arrays.php:357 arrays.php:363 arrays.php:370 arrays.php:376 arrays.php:382
-#: arrays.php:388 arrays.php:394 arrays.php:400 arrays.php:407 arrays.php:413
-#: arrays.php:419 arrays.php:425 arrays.php:431 arrays.php:437 arrays.php:443
-#: arrays.php:450 arrays.php:456 arrays.php:463 arrays.php:469 arrays.php:475
-#: arrays.php:482 arrays.php:498 arrays.php:514 arrays.php:527 arrays.php:533
-#: arrays.php:542 functions.php:814 functions.php:861 functions.php:2972
-#: functions.php:3510
+#: arrays.php:389 arrays.php:395 arrays.php:401 arrays.php:408 arrays.php:414
+#: arrays.php:420 arrays.php:426 arrays.php:432 arrays.php:438 arrays.php:444
+#: arrays.php:451 arrays.php:457 arrays.php:464 arrays.php:470 arrays.php:476
+#: arrays.php:483 arrays.php:499 arrays.php:515 arrays.php:528 arrays.php:534
+#: arrays.php:543 functions.php:963 functions.php:1015 functions.php:3362
+#: functions.php:4518
 msgid "Packets"
 msgstr "Пакети"
 
@@ -211,1275 +212,1334 @@ msgstr "Пакети"
 msgid "Destination Domain"
 msgstr "Целеви IP адрес"
 
-#: arrays.php:373 arrays.php:379 arrays.php:385 flowview_devices.php:66
-#: flowview_devices.php:765
+#: arrays.php:373 arrays.php:379 flowview_devices.php:77
+#: flowview_devices.php:842
 msgid "Port"
 msgstr "Порт"
 
-#: arrays.php:404 arrays.php:817 functions.php:2916
-msgid "Dest IP"
-msgstr "Целеви IP адрес"
-
-#: arrays.php:410 flowview_databases.php:1388 functions.php:2908
-msgid "IP Address"
-msgstr "IP Адрес"
-
-#: arrays.php:416 arrays.php:495 arrays.php:510 arrays.php:525
-#: flowview_devices.php:75 flowview_devices.php:770 functions.php:2952
-msgid "Protocol"
-msgstr "Протокол"
-
-#: arrays.php:422 arrays.php:459
-msgid "Input IF"
-msgstr "Въвеждане на IF"
-
-#: arrays.php:428 arrays.php:460
-msgid "Output IF"
-msgstr "Формат на изходните данни"
-
-#: arrays.php:453
-msgid "TOS"
-msgstr "Усложия за ползуване"
-
-#: arrays.php:479
-msgid "Destingation Prefix"
-msgstr "Целеви префикс"
-
-#: arrays.php:485 functions.php:699 functions.php:3125 functions.php:3149
-msgid "N/A"
-msgstr "Няма"
-
-#: arrays.php:491 arrays.php:519 functions.php:2928
-msgid "Source IF"
-msgstr "Източник"
-
-#: arrays.php:493 arrays.php:522
-msgid "Destination IF"
-msgstr "Дестинация"
-
-#: arrays.php:496 arrays.php:521 arrays.php:539 functions.php:2920
+#: arrays.php:385 arrays.php:497 arrays.php:522 arrays.php:540
+#: functions.php:3310
 msgid "Source Port"
 msgstr "Порт (и) на източника"
 
-#: arrays.php:497 arrays.php:524 arrays.php:540
+#: arrays.php:386 arrays.php:498 arrays.php:525 arrays.php:541
 msgid "Destination Port"
 msgstr "Целеви IP адрес"
 
-#: arrays.php:500 arrays.php:517 flowview_schedules.php:96 functions.php:2876
+#: arrays.php:405 arrays.php:818 functions.php:3306
+msgid "Dest IP"
+msgstr "Целеви IP адрес"
+
+#: arrays.php:411 flowview_databases.php:1430
+msgid "IP Address"
+msgstr "IP Адрес"
+
+#: arrays.php:417 arrays.php:496 arrays.php:511 arrays.php:526
+#: flowview_devices.php:86 flowview_devices.php:847 functions.php:3342
+msgid "Protocol"
+msgstr "Протокол"
+
+#: arrays.php:423 arrays.php:460 arrays.php:492 arrays.php:520
+#: functions.php:3318
+msgid "Source IF"
+msgstr "Източник"
+
+#: arrays.php:429 arrays.php:461 arrays.php:494 arrays.php:523
+msgid "Destination IF"
+msgstr "Дестинация"
+
+#: arrays.php:454
+msgid "TOS"
+msgstr "Усложия за ползуване"
+
+#: arrays.php:480
+msgid "Destingation Prefix"
+msgstr "Целеви префикс"
+
+#: arrays.php:486 flowview_devices.php:925 flowview_devices.php:926
+#: flowview_devices.php:927 flowview_devices.php:937 flowview_devices.php:940
+#: functions.php:828 functions.php:3518 functions.php:3542
+msgid "N/A"
+msgstr "Няма"
+
+#: arrays.php:501 arrays.php:518 functions.php:3266
 msgid "Start Time"
 msgstr "Начален час"
 
-#: arrays.php:501 arrays.php:518 functions.php:2880
+#: arrays.php:502 arrays.php:519 functions.php:3270
 msgid "End Time"
 msgstr "Краен час"
 
-#: arrays.php:502
+#: arrays.php:503
 msgid "Active"
 msgstr "Активен"
 
-#: arrays.php:503
+#: arrays.php:504
 msgid "B/Pk"
 msgstr "Б / Pk"
 
-#: arrays.php:504
+#: arrays.php:505
 msgid "Ts"
 msgstr "Ц."
 
-#: arrays.php:505
+#: arrays.php:506
 msgid "Fl"
 msgstr "Fl"
 
-#: arrays.php:526 functions.php:2960
+#: arrays.php:527 functions.php:3350
 msgid "Flags"
 msgstr "Знамена"
 
-#: arrays.php:531 arrays.php:537 flowview_databases.php:295
-#: flowview_databases.php:869 flowview_databases.php:1244
-#: flowview_databases.php:1399 flowview_databases.php:1536
-#: flowview_databases.php:1706
+#: arrays.php:532 arrays.php:538 flowview_databases.php:308
+#: flowview_databases.php:913 flowview_databases.php:1282
+#: flowview_databases.php:1441 flowview_databases.php:1578
+#: flowview_databases.php:1808
 msgid "Source"
 msgstr "Източник"
 
-#: arrays.php:532 arrays.php:538
+#: arrays.php:533 arrays.php:539
 msgid "Destination"
 msgstr "Дестинация"
 
-#: arrays.php:548 arrays.php:549 arrays.php:550 arrays.php:551 arrays.php:552
-#: arrays.php:553 arrays.php:554 arrays.php:555 arrays.php:556
+#: arrays.php:549 arrays.php:550 arrays.php:551 arrays.php:552 arrays.php:553
+#: arrays.php:554 arrays.php:555 arrays.php:556 arrays.php:557
 #, php-format
 msgid "%d Pixels"
 msgstr "%d пиксела"
 
-#: arrays.php:586
+#: arrays.php:587
 msgid "General Filters"
 msgstr "Изчистване на филтрите"
 
-#: arrays.php:589 flowview_databases.php:575 functions.php:537
+#: arrays.php:590 flowview_databases.php:588 functions.php:643
 msgid "Filter"
 msgstr "Филтър"
 
-#: arrays.php:590
+#: arrays.php:591
 msgid "The Saved Filter to display."
 msgstr "Записаният филтър за показване."
 
-#: arrays.php:593
+#: arrays.php:594
 msgid "New Filter"
 msgstr "Филтър"
 
-#: arrays.php:598 flowview_filters.php:327 functions.php:556
+#: arrays.php:599 flowview_filters.php:327 functions.php:662
 msgid "Listener"
 msgstr "Слушател"
 
-#: arrays.php:599
+#: arrays.php:600
 msgid "The Listener to use for the Filter."
 msgstr "Слушателят, който да се използва за филтъра."
 
-#: arrays.php:607
+#: arrays.php:608
 msgid "Flow Template ID"
 msgstr "ИД на шаблон"
 
-#: arrays.php:608
+#: arrays.php:609
 msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
 msgstr "ИД на шаблон за поток само за v9 и IPFIX потоци.  Обърнете внимание, че ИД на шаблон може да се различава от производител до производител."
 
-#: arrays.php:615
+#: arrays.php:616
 msgid "Stream Address"
 msgstr "IP Адрес"
 
-#: arrays.php:616
+#: arrays.php:617
 msgid "The Stream IP Address or Hostname from the list of registered streams."
 msgstr "IP адресът на потока или името на хоста от списъка с регистрирани потоци."
 
-#: arrays.php:623
+#: arrays.php:624
 msgid "Presets"
 msgstr "Предварително"
 
-#: arrays.php:624
+#: arrays.php:625
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
 msgstr "Ако този филтър се основава на предварително определен период от време, изберете го тук."
 
-#: arrays.php:633
+#: arrays.php:634
 msgid "Detailed Filter Criteria"
 msgstr "Подробни критерии за филтриране"
 
-#: arrays.php:636 flowview_filters.php:332
+#: arrays.php:637 flowview_filters.php:332
 msgid "Report Type"
 msgstr "Вид на доклада"
 
-#: arrays.php:637
+#: arrays.php:638
 msgid "The Report Type to use by default for this Filter when creating a Report."
 msgstr "Типът отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
 
-#: arrays.php:640
+#: arrays.php:641
 msgid "Printed"
 msgstr "Отпечатано:"
 
-#: arrays.php:640
+#: arrays.php:641
 msgid "Statistical"
 msgstr "Статистика"
 
-#: arrays.php:644
+#: arrays.php:645
 msgid "Statistical Report"
 msgstr "Статистически доклади"
 
-#: arrays.php:645
+#: arrays.php:646
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
 msgstr "Показване на типа отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
 
-#: arrays.php:652
+#: arrays.php:653
 msgid "Printed Report"
 msgstr "Отпечатване на отчети"
 
-#: arrays.php:653
+#: arrays.php:654
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
 msgstr "Типът отпечатан отчет, който да се използва по подразбиране за този филтър при създаване на отпечатан отчет."
 
-#: arrays.php:660
+#: arrays.php:661
 msgid "Range Rules"
 msgstr "Управление на графиците"
 
-#: arrays.php:661
+#: arrays.php:662
 msgid "Constrain the Filter Data by these time filter rules."
 msgstr "Ограничете данните за филтриране чрез тези правила за филтриране на времето."
 
-#: arrays.php:668
+#: arrays.php:669
 msgid "Resolve IP's"
 msgstr "Разрешаване на адреси:"
 
-#: arrays.php:669
+#: arrays.php:670
 msgid "Resolve IP Addresses to Domain Names."
 msgstr "Разрешаване на адреси:"
 
-#: arrays.php:674 flowview_schedules.php:588
+#: arrays.php:675 flowview_schedules.php:1008
 msgid "Yes"
 msgstr "Да"
 
-#: arrays.php:675 flowview_schedules.php:588
+#: arrays.php:676 flowview_schedules.php:1008
 msgid "No"
 msgstr "Не"
 
-#: arrays.php:679 flowview_filters.php:342 functions.php:644
+#: arrays.php:680 flowview_filters.php:342 functions.php:762
 msgid "Sort Field"
 msgstr "Сортиране на полето:"
 
-#: arrays.php:680
+#: arrays.php:681
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
 msgstr "Полето за сортиране по подразбиране за филтъра. Тази настройка ще се прилага за всички планирани отчети."
 
-#: arrays.php:687
+#: arrays.php:688
 msgid "Maximum Rows"
 msgstr "Максимален брой редове"
 
-#: arrays.php:688
+#: arrays.php:689
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
 msgstr "Максималните редове, които трябва да се предоставят във филтъра. Тази настройка ще се прилага за всички планирани отчети."
 
-#: arrays.php:695
+#: arrays.php:696
 msgid "Minimum Bytes"
 msgstr "Минимални байтове:"
 
-#: arrays.php:696
+#: arrays.php:697
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
 msgstr "Минималният общ байт, който трябва да се вземе предвид за филтъра. Общите потоци, които са по-малки от толкова много байта, ще бъдат игнорирани."
 
-#: arrays.php:705
+#: arrays.php:706
 msgid "Charting Options"
 msgstr "Опции за чертане на диаграми"
 
-#: arrays.php:708
+#: arrays.php:709
 msgid "Graph Type"
 msgstr "Тип на графиката"
 
-#: arrays.php:709
+#: arrays.php:710
 msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
 msgstr "Типът на графиката за показване по подразбиране.  Те включват Bar, Pie и Treemap."
 
-#: arrays.php:714
+#: arrays.php:715
 msgid "Bar Chart"
 msgstr "Стълбовидна диаграма"
 
-#: arrays.php:715
+#: arrays.php:716
 msgid "Pie Chart"
 msgstr "Диаграма"
 
-#: arrays.php:716
+#: arrays.php:717
 msgid "Treemap Chart"
 msgstr "Йерархична диаграма"
 
-#: arrays.php:720
+#: arrays.php:721
 msgid "Graph Height"
 msgstr "Височина на графиката"
 
-#: arrays.php:721
-msgid "The Graph Hight to use by default."
+#: arrays.php:722
+#, fuzzy
+msgid "The Graph Height to use by default."
 msgstr "Височината на графиката, която да се използва по подразбиране."
 
-#: arrays.php:728
+#: arrays.php:729
 msgid "Table Panel"
 msgstr "Таблица"
 
-#: arrays.php:729
+#: arrays.php:730
 msgid "Should the Table Panel be displayed by default."
 msgstr "Трябва ли панелът на таблицата да се показва по подразбиране."
 
-#: arrays.php:735
+#: arrays.php:736
 msgid "Bytes Panel"
 msgstr "Бар за байтове"
 
-#: arrays.php:736
+#: arrays.php:737
 msgid "Should the Bytes Panel be displayed by default."
 msgstr "Трябва ли панелът за байтове да се показва по подразбиране."
 
-#: arrays.php:742
+#: arrays.php:743
 msgid "Packets Panel"
 msgstr "Пакет бар"
 
-#: arrays.php:743
+#: arrays.php:744
 msgid "Should the Packets Panel be displayed by default."
 msgstr "Трябва ли панелът за пакети да се показва по подразбиране."
 
-#: arrays.php:749
+#: arrays.php:750
 msgid "Flows Panel"
 msgstr "Бар за потоци"
 
-#: arrays.php:750
+#: arrays.php:751
 msgid "Should the Flows Panel be displayed by default."
 msgstr "Трябва ли панелът Flows да се показва по подразбиране."
 
-#: arrays.php:758
+#: arrays.php:759
 msgid "Protocol Filters"
 msgstr "протоколи"
 
-#: arrays.php:761
+#: arrays.php:762
 msgid "Protocols"
 msgstr "Протоколи"
 
-#: arrays.php:762
+#: arrays.php:763
 msgid "Select the Specific Protocol for the Filter."
 msgstr "Изберете специфичния протокол за филтъра."
 
-#: arrays.php:769
+#: arrays.php:770
 msgid "TCP Flags"
 msgstr "TCP знамена"
 
-#: arrays.php:770
+#: arrays.php:771
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
 msgstr "TCP флаговете, които да търсите във филтъра. Това може да бъде списък с TCP флагове, разделен със запетая"
 
-#: arrays.php:777
+#: arrays.php:778
 msgid "TOS Fields"
 msgstr "Полета на TOS"
 
-#: arrays.php:778
+#: arrays.php:779
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
 msgstr "Полетата на TOS, които да търсите във филтъра. Това може да бъде списък с TOS полета, разделен със запетая"
 
-#: arrays.php:786
+#: arrays.php:787
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "Филтрирайте върху избрания IP адрес на източника във филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
 
-#: arrays.php:793
+#: arrays.php:794
 msgid "Source Ports"
 msgstr "Порт (и) на източника"
 
-#: arrays.php:794
+#: arrays.php:795
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgstr "Филтрирайте върху избраните портове източник за във филтъра. Това може да бъде списък с портове източници, разделен със запетая."
 
-#: arrays.php:801
+#: arrays.php:802
 msgid "Source Interface"
 msgstr "Изходен интерфейс"
 
-#: arrays.php:802
+#: arrays.php:803
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
 msgstr "Филтрирайте върху избрания интерфейс на източника за във филтъра. Това може да бъде списък с интерфейси с източник, разделен със запетая"
 
-#: arrays.php:810
+#: arrays.php:811
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
 msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с източници на AS, разделен със запетая"
 
-#: arrays.php:818
+#: arrays.php:819
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "Филтрирайте върху избрания IP адрес на дестинация във Филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
 
-#: arrays.php:825
+#: arrays.php:826
 msgid "Dest Ports"
 msgstr "Пристанищен порт"
 
-#: arrays.php:826
+#: arrays.php:827
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgstr "Филтрирайте върху избраните пристанищни портове за във филтъра Това може да бъде списък с разделителни портове, разделен със запетая."
 
-#: arrays.php:833
+#: arrays.php:834
 msgid "Dest Interface"
 msgstr "Интерфейс за достъп"
 
-#: arrays.php:834
+#: arrays.php:835
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
 msgstr "Филтрирайте върху избрания интерфейс за дестинация във във Филтъра. Това може да бъде списък с интерфейси за дестимиране, разделен със запетая."
 
-#: arrays.php:841 functions.php:2940
+#: arrays.php:842 functions.php:3330
 msgid "Dest AS"
 msgstr "Dest AS"
 
-#: arrays.php:842
+#: arrays.php:843
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
 msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с разделители със запетая на AS за оценка"
 
-#: arrays.php:860
+#: arrays.php:861
 msgid "DNS Cache"
 msgstr "DNS кеш"
 
-#: arrays.php:864
+#: arrays.php:865
 msgid "CIDR/Routes"
 msgstr "CIDR/Маршрути"
 
-#: arrays.php:868
+#: arrays.php:869
 msgid "Autonomous Numbers"
 msgstr "Числа"
 
-#: arrays.php:876
+#: arrays.php:877
 msgid "AS Blocks"
 msgstr "AS блокове"
 
-#: arrays.php:884
+#: arrays.php:885
 msgid "AS Sets"
 msgstr "AS комплекти"
 
-#: arrays.php:892
+#: arrays.php:893
 msgid "Route Sets"
 msgstr "Набори от маршрути"
 
-#: arrays.php:900
+#: arrays.php:901
 msgid "Domains"
 msgstr "Домейни"
 
-#: arrays.php:908
+#: arrays.php:909
 msgid "Filter Sets"
 msgstr "Филтърът е запазен"
 
-#: arrays.php:916
+#: arrays.php:917
 msgid "Peering Sets"
 msgstr "Пиъринг сетове"
 
-#: arrays.php:924 flowview_databases.php:245 flowview_databases.php:505
+#: arrays.php:925 flowview_databases.php:258 flowview_databases.php:518
 msgid "Network"
 msgstr "Мрежа"
 
-#: arrays.php:932
+#: arrays.php:933
 msgid "Internet Routers"
 msgstr "Интернет контрол"
 
-#: arrays.php:940
+#: arrays.php:941
 msgid "Incident Response Teams"
 msgstr "Екипи за реагиране при инциденти"
 
-#: arrays.php:948
+#: arrays.php:949
 msgid "Auth Agents"
 msgstr "Агенти за удостоверяване"
 
-#: arrays.php:956
+#: arrays.php:957
 msgid "Organizations"
 msgstr "Организации"
 
-#: arrays.php:964
+#: arrays.php:965
 msgid "Roles"
 msgstr "Роли"
 
-#: arrays.php:972
+#: arrays.php:973
 msgid "Persons"
 msgstr "Души"
 
-#: flowview.php:124
+#: flowview.php:125
+msgid "Unable to find Raw Data for to Export"
+msgstr ""
+
+#: flowview.php:205
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr ""
+
+#: flowview.php:210
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr ""
+
+#: flowview.php:240
 #, php-format
 msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
 msgstr "Филтърът на потока \"%s\" не може да бъде изтрит, тъй като се използва в планиран отчет."
 
-#: flowview.php:127
+#: flowview.php:243
 #, fuzzy, php-format
 msgid "Flow Filter '%s' Deleted."
 msgstr "Филтърът е изтрит"
 
-#: flowview_databases.php:33 flowview_devices.php:35 flowview_filters.php:39
-#: flowview_schedules.php:37 functions.php:603
+#: flowview_databases.php:34 flowview_devices.php:35 flowview_filters.php:39
+#: flowview_schedules.php:37 functions.php:721
 msgid "Delete"
 msgstr "Изтрий"
 
-#: flowview_databases.php:50
+#: flowview_databases.php:51
 msgid "DNS Cache has been purged.  It will refill as records come in."
 msgstr "DNS кешът е изчистен.  Тя ще се напълни отново, когато влязат записите."
 
-#: flowview_databases.php:92
+#: flowview_databases.php:95
 msgid "Internet Route Registry Details"
 msgstr "Подробни данни за системния регистър на интернет маршрути"
 
-#: flowview_databases.php:99
+#: flowview_databases.php:116
 msgid "Authorized Agent Details"
 msgstr "Данни за упълномощен агент"
 
-#: flowview_databases.php:205
+#: flowview_databases.php:176
+#, fuzzy
+msgid "No Details Found"
+msgstr "Не са намерени записи в DNS кеша"
+
+#: flowview_databases.php:218
 msgid "CIDR/Route"
 msgstr "CIDR/Маршрути"
 
-#: flowview_databases.php:210
+#: flowview_databases.php:223
 msgid "Autonomous Number"
 msgstr "Числа"
 
-#: flowview_databases.php:215
+#: flowview_databases.php:228
 msgid "AS Block"
 msgstr "AS блокове"
 
-#: flowview_databases.php:220
+#: flowview_databases.php:233
 msgid "AS Set"
 msgstr "Не е зададен"
 
-#: flowview_databases.php:225
+#: flowview_databases.php:238
 msgid "Route Set"
 msgstr "Набори от маршрути"
 
-#: flowview_databases.php:230
+#: flowview_databases.php:243
 msgid "Domain"
 msgstr "Домейн"
 
-#: flowview_databases.php:235
+#: flowview_databases.php:248
 msgid "Filter Set"
 msgstr "Филтърът е запазен"
 
-#: flowview_databases.php:240
+#: flowview_databases.php:253
 msgid "Peering Set"
 msgstr "Пиъринг сетове"
 
-#: flowview_databases.php:250
+#: flowview_databases.php:263
 msgid "Internet Router"
 msgstr "Интернет контрол"
 
-#: flowview_databases.php:255
+#: flowview_databases.php:268
 msgid "Incident Response Team"
 msgstr "Екипи за реагиране при инциденти"
 
-#: flowview_databases.php:260
+#: flowview_databases.php:273
 msgid "Auth Agent"
 msgstr "Агенти за удостоверяване"
 
-#: flowview_databases.php:265 flowview_databases.php:315
+#: flowview_databases.php:278 flowview_databases.php:328
 msgid "Organization"
 msgstr "Организация"
 
-#: flowview_databases.php:270
+#: flowview_databases.php:283
 msgid "Role"
 msgstr "Роля"
 
-#: flowview_databases.php:275
+#: flowview_databases.php:288
 msgid "Person"
 msgstr "Човек"
 
-#: flowview_databases.php:280
+#: flowview_databases.php:293
 msgid "Router Set"
 msgstr "Набори от маршрути"
 
-#: flowview_databases.php:285
+#: flowview_databases.php:298
 msgid "Remarks"
 msgstr "Забележки"
 
-#: flowview_databases.php:290 flowview_databases.php:1718
+#: flowview_databases.php:303 flowview_databases.php:1820
 msgid "Last Modified"
 msgstr "Последна промяна"
 
-#: flowview_databases.php:300
+#: flowview_databases.php:313
 msgid "Registration Date"
 msgstr "Дата на регистрация"
 
-#: flowview_databases.php:305
+#: flowview_databases.php:318
 msgid "MNT By"
 msgstr "MNT от"
 
-#: flowview_databases.php:310
+#: flowview_databases.php:323
 msgid "Admin Contact"
 msgstr "Администратор Контакт"
 
-#: flowview_databases.php:320
+#: flowview_databases.php:333
 msgid "Changes"
 msgstr "Промени"
 
-#: flowview_databases.php:325
+#: flowview_databases.php:338
 msgid "Notify"
 msgstr "Извести"
 
-#: flowview_databases.php:330
+#: flowview_databases.php:343
 msgid "Description"
 msgstr "Описание"
 
-#: flowview_databases.php:335
+#: flowview_databases.php:348
 msgid "Tech Contact"
 msgstr "Технически контакт"
 
-#: flowview_databases.php:340
+#: flowview_databases.php:353
 msgid "MNT Lower"
 msgstr "MNT Долна"
 
-#: flowview_databases.php:345
+#: flowview_databases.php:358
 msgid "Country"
 msgstr "Държава"
 
-#: flowview_databases.php:350
+#: flowview_databases.php:363
 msgid "Abuse Email"
 msgstr "Имейл"
 
-#: flowview_databases.php:355
+#: flowview_databases.php:368
 msgid "Fax Number"
 msgstr "Факс"
 
-#: flowview_databases.php:360
+#: flowview_databases.php:373
 msgid "Phone"
 msgstr "Телефон"
 
-#: flowview_databases.php:365 flowview_schedules.php:559
+#: flowview_databases.php:378
 msgid "Email"
 msgstr "Имейл"
 
-#: flowview_databases.php:370 flowview_devices.php:336 flowview_devices.php:551
+#: flowview_databases.php:383 flowview_devices.php:398 flowview_devices.php:624
 msgid "Address"
 msgstr "Адрес"
 
-#: flowview_databases.php:375 flowview_devices.php:340 flowview_devices.php:775
+#: flowview_databases.php:388 flowview_devices.php:402 flowview_devices.php:852
 msgid "Status"
 msgstr "Статус"
 
-#: flowview_databases.php:380
+#: flowview_databases.php:393
 msgid "Members By Fef"
 msgstr "Членове от fef"
 
-#: flowview_databases.php:385
+#: flowview_databases.php:398
 msgid "Abuse Contacts"
 msgstr "Злоупотреба Контакти"
 
-#: flowview_databases.php:390
+#: flowview_databases.php:403
 msgid "MNT Reference"
 msgstr "Референция за MNT"
 
-#: flowview_databases.php:395
+#: flowview_databases.php:408
 msgid "Members"
 msgstr "Членове"
 
-#: flowview_databases.php:400
+#: flowview_databases.php:413
 msgid "MNT Notify"
 msgstr "MNT Уведомяване"
 
-#: flowview_databases.php:405
+#: flowview_databases.php:418
 msgid "Authorization"
 msgstr "Оторизиране"
 
-#: flowview_databases.php:410
+#: flowview_databases.php:423
 msgid "MNT Routes"
 msgstr "MNT маршрути"
 
-#: flowview_databases.php:415
+#: flowview_databases.php:428
 msgid "Member of"
 msgstr "Потребител от"
 
-#: flowview_databases.php:420
+#: flowview_databases.php:433
 msgid "Updates Email"
 msgstr "Обновяване"
 
-#: flowview_databases.php:425
+#: flowview_databases.php:438
 msgid "NOC Handle"
 msgstr "NOC дръжка"
 
-#: flowview_databases.php:430
+#: flowview_databases.php:443
 msgid "Sponsor Org"
 msgstr "Спонсор Org"
 
-#: flowview_databases.php:435
+#: flowview_databases.php:448
 msgid "MNT Irt"
 msgstr "МНТ Ирт"
 
-#: flowview_databases.php:440
+#: flowview_databases.php:453
 msgid "MP Members"
 msgstr "Числа"
 
-#: flowview_databases.php:445
+#: flowview_databases.php:458
 msgid "Sub Domain"
 msgstr "Порт (и) на източника"
 
-#: flowview_databases.php:450
+#: flowview_databases.php:463
 msgid "Pingable"
 msgstr "Включи"
 
-#: flowview_databases.php:455
+#: flowview_databases.php:468
 msgid "Alias"
 msgstr "Псевдоним"
 
-#: flowview_databases.php:460
+#: flowview_databases.php:473
 msgid "Org Type"
 msgstr "Тип на графиката"
 
-#: flowview_databases.php:465
+#: flowview_databases.php:478
 msgid "Refer To"
 msgstr "Обърнете се към"
 
-#: flowview_databases.php:470
+#: flowview_databases.php:483
 msgid "MP Peering"
 msgstr "MP Пиъринг"
 
-#: flowview_databases.php:475 flowview_devices.php:490
+#: flowview_databases.php:488 flowview_devices.php:563 functions.php:971
 msgid "Export"
 msgstr "Експортиране"
 
-#: flowview_databases.php:480
+#: flowview_databases.php:493
 msgid "Holes"
 msgstr "Дупки"
 
-#: flowview_databases.php:485
+#: flowview_databases.php:498
 msgid "MP Default"
 msgstr "По подразбиране"
 
-#: flowview_databases.php:490
+#: flowview_databases.php:503
 msgid "Components"
 msgstr "Компоненти"
 
-#: flowview_databases.php:495
+#: flowview_databases.php:508
 msgid "RS Out"
 msgstr "RS Вън"
 
-#: flowview_databases.php:500
+#: flowview_databases.php:513
 msgid "Organization Name"
 msgstr "Име на организацията"
 
-#: flowview_databases.php:510
+#: flowview_databases.php:523
 msgid "AS Name"
 msgstr "Име:"
 
-#: flowview_databases.php:515
+#: flowview_databases.php:528
 msgid "Author"
 msgstr "Автор"
 
-#: flowview_databases.php:520
+#: flowview_databases.php:533
 msgid "IRT Notify"
 msgstr "IRT Уведомяване"
 
-#: flowview_databases.php:525
+#: flowview_databases.php:538
 msgid "Aggr MTD"
 msgstr "Аггр МТД"
 
-#: flowview_databases.php:530
+#: flowview_databases.php:543
 msgid "AS Type"
 msgstr "Тип"
 
-#: flowview_databases.php:535
+#: flowview_databases.php:548
 msgid "MP Filter"
 msgstr "Филтър"
 
-#: flowview_databases.php:540
+#: flowview_databases.php:553
 msgid "Default Route"
 msgstr "По подразбиране"
 
-#: flowview_databases.php:545
+#: flowview_databases.php:558
 msgid "Assignment Size"
 msgstr "Размер на присвояване"
 
-#: flowview_databases.php:550
+#: flowview_databases.php:563
 msgid "Export Comps"
 msgstr "Отчет"
 
-#: flowview_databases.php:555
+#: flowview_databases.php:568
 msgid "RS In"
 msgstr "RS В"
 
-#: flowview_databases.php:560
+#: flowview_databases.php:573
 msgid "Net Name"
 msgstr "Име на поле"
 
-#: flowview_databases.php:565
+#: flowview_databases.php:578
 msgid "DS Rdata"
 msgstr "ДС Рдата"
 
-#: flowview_databases.php:570
+#: flowview_databases.php:583
 msgid "Aggr Boundary"
 msgstr "Граница на Aggr"
 
-#: flowview_databases.php:580
+#: flowview_databases.php:593
 msgid "MP Import"
 msgstr "Импортиране на MP"
 
-#: flowview_databases.php:585
+#: flowview_databases.php:598
 msgid "Language"
 msgstr "Език"
 
-#: flowview_databases.php:590
+#: flowview_databases.php:603
 msgid "RESFful Link"
 msgstr "RESFful Link"
 
-#: flowview_databases.php:595
+#: flowview_databases.php:608
 msgid "Peer"
 msgstr "Партньорска"
 
-#: flowview_databases.php:600
+#: flowview_databases.php:613
 msgid "Zone Contact"
 msgstr "Контакт със зона"
 
-#: flowview_databases.php:605
+#: flowview_databases.php:618
 msgid "Inject"
 msgstr "Инжектира"
 
-#: flowview_databases.php:610
+#: flowview_databases.php:623
 msgid "MP Peer"
 msgstr "MP Peer"
 
-#: flowview_databases.php:615
+#: flowview_databases.php:628
 msgid "Referral By"
 msgstr "Препращане от"
 
-#: flowview_databases.php:620
+#: flowview_databases.php:633
 msgid "Form"
 msgstr "Форма"
 
-#: flowview_databases.php:625
+#: flowview_databases.php:638
 msgid "MNT Domains"
 msgstr "MNT домейни"
 
-#: flowview_databases.php:630
+#: flowview_databases.php:643
 msgid "Origin AS"
 msgstr "Произход AS"
 
-#: flowview_databases.php:635
+#: flowview_databases.php:648
 msgid "MP Export"
 msgstr "Отчет"
 
-#: flowview_databases.php:640
-msgid "Encyption"
+#: flowview_databases.php:653
+#, fuzzy
+msgid "Encryption"
 msgstr "Краен срок"
 
-#: flowview_databases.php:645
+#: flowview_databases.php:658
 msgid "Geo Feed"
 msgstr "Гео Фийд"
 
-#: flowview_databases.php:650
+#: flowview_databases.php:663
 msgid "Geo Index"
 msgstr "Гео индекс"
 
-#: flowview_databases.php:655
+#: flowview_databases.php:668
 msgid "Interface Addr"
 msgstr "интерфейс"
 
-#: flowview_databases.php:660
+#: flowview_databases.php:673
 msgid "Export Via"
 msgstr "Отчет"
 
-#: flowview_databases.php:665
+#: flowview_databases.php:678
 msgid "Trouble"
 msgstr "Безпокойство"
 
-#: flowview_databases.php:670
+#: flowview_databases.php:683
 msgid "Name Servers"
 msgstr "Сървъри за имена"
 
-#: flowview_databases.php:675
+#: flowview_databases.php:688
 msgid "Ping Handle"
 msgstr "Дръжка за пинг"
 
-#: flowview_databases.php:680
+#: flowview_databases.php:693
 msgid "Interface"
 msgstr "Интерфейс"
 
-#: flowview_databases.php:685
+#: flowview_databases.php:698
 msgid "Import"
 msgstr "Импорт"
 
-#: flowview_databases.php:690
+#: flowview_databases.php:703
 msgid "Signature"
 msgstr "Подпис"
 
-#: flowview_databases.php:695
+#: flowview_databases.php:708
 msgid "Geo Location"
 msgstr "Геолокация"
 
-#: flowview_databases.php:700
+#: flowview_databases.php:713
 msgid "Local AS"
 msgstr "Местен"
 
-#: flowview_databases.php:705
+#: flowview_databases.php:718
 msgid "Import Via"
 msgstr "Импортиране чрез"
 
-#: flowview_databases.php:750
+#: flowview_databases.php:790
 #, php-format
 msgid "FATAL: Unknown Database Table %s"
 msgstr "ФАТАЛНО: Неизвестна таблица на базата данни %s"
 
-#: flowview_databases.php:863 flowview_databases.php:1228
-#: flowview_databases.php:1520 flowview_devices.php:699
-#: flowview_filters.php:233 flowview_schedules.php:450
+#: flowview_databases.php:907 flowview_databases.php:1266
+#: flowview_databases.php:1562 flowview_devices.php:772
+#: flowview_filters.php:233 flowview_schedules.php:553
+#: flowview_schedules.php:850
 msgid "Search"
 msgstr "Търсене"
 
-#: flowview_databases.php:873 flowview_databases.php:1238
-#: flowview_databases.php:1248 flowview_databases.php:1530
-#: flowview_databases.php:1540
+#: flowview_databases.php:917 flowview_databases.php:1276
+#: flowview_databases.php:1286 flowview_databases.php:1572
+#: flowview_databases.php:1582
 msgid "Any"
 msgstr "Всички"
 
-#: flowview_databases.php:891 flowview_databases.php:1023
-#: flowview_databases.php:1266 flowview_databases.php:1378
-#: flowview_databases.php:1558 flowview_databases.php:1679
+#: flowview_databases.php:935 flowview_databases.php:1060
+#: flowview_databases.php:1304 flowview_databases.php:1420
+#: flowview_databases.php:1600 flowview_databases.php:1781
 msgid "Entries"
 msgstr "Получени съобщения"
 
-#: flowview_databases.php:895 flowview_databases.php:1270
-#: flowview_databases.php:1562 flowview_filters.php:243
-#: flowview_schedules.php:460
+#: flowview_databases.php:939 flowview_databases.php:1308
+#: flowview_databases.php:1604 flowview_filters.php:243
+#: flowview_schedules.php:563 flowview_schedules.php:860
 msgid "Default"
 msgstr "По подразбиране"
 
-#: flowview_databases.php:907 flowview_databases.php:1282
-#: flowview_databases.php:1574 flowview_devices.php:489
-#: flowview_devices.php:706 flowview_filters.php:254 flowview_schedules.php:471
-#: functions.php:596
+#: flowview_databases.php:951 flowview_databases.php:1320
+#: flowview_databases.php:1616 flowview_devices.php:562
+#: flowview_devices.php:779 flowview_filters.php:255 flowview_schedules.php:575
+#: flowview_schedules.php:872 functions.php:714
 msgid "Go"
 msgstr "Търси"
 
-#: flowview_databases.php:907 flowview_databases.php:1282
-#: flowview_databases.php:1574 flowview_devices.php:706
-#: flowview_filters.php:254 flowview_schedules.php:471
+#: flowview_databases.php:951 flowview_databases.php:1320
+#: flowview_databases.php:1616 flowview_devices.php:779
+#: flowview_filters.php:255 flowview_schedules.php:575
+#: flowview_schedules.php:872
 msgid "Set/Refresh Filters"
 msgstr "Задаване / опресняване на филтрите"
 
-#: flowview_databases.php:908 flowview_databases.php:1283
-#: flowview_databases.php:1575 flowview_devices.php:707
-#: flowview_filters.php:257 flowview_schedules.php:474 functions.php:597
+#: flowview_databases.php:952 flowview_databases.php:1321
+#: flowview_databases.php:1617 flowview_devices.php:780
+#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_schedules.php:873 functions.php:715
 msgid "Clear"
 msgstr "Изчисти"
 
-#: flowview_databases.php:908 flowview_databases.php:1283
-#: flowview_databases.php:1575 flowview_devices.php:707
-#: flowview_filters.php:257 flowview_schedules.php:474
+#: flowview_databases.php:952 flowview_databases.php:1321
+#: flowview_databases.php:1617 flowview_devices.php:780
+#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_schedules.php:873
 msgid "Clear Filters"
 msgstr "Изчистване на филтрите"
 
-#: flowview_databases.php:909 flowview_databases.php:1284
-msgid "Purge"
-msgstr "Изтриване"
-
-#: flowview_databases.php:909 flowview_databases.php:1284
+#: flowview_databases.php:953 flowview_databases.php:1322
 msgid "Purge the DNS Cache"
 msgstr "Изчистване на DNS кеша"
 
-#: flowview_databases.php:1064
+#: flowview_databases.php:1101
 msgid "Not Specified"
 msgstr "Не е посочено"
 
-#: flowview_databases.php:1080
+#: flowview_databases.php:1117
 msgid "No Matching Entries Found"
 msgstr "Не са намерени съвпадащи записи"
 
-#: flowview_databases.php:1140
-msgid "Click 'Continue' to delete the following DNS Cache Entriy."
+#: flowview_databases.php:1177
+#, fuzzy
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
 msgstr[0] "Кликнете върху „Напред“, за да изтриете следните графици."
 msgstr[1] "Кликнете върху „Напред“, за да изтриете следните графици."
 
-#: flowview_databases.php:1145 flowview_devices.php:222
-#: flowview_filters.php:164 flowview_schedules.php:262 functions.php:833
-#: functions.php:843
+#: flowview_databases.php:1182 flowview_devices.php:268
+#: flowview_filters.php:164 flowview_schedules.php:340 functions.php:987
+#: functions.php:997
 msgid "Cancel"
 msgstr "Отказ"
 
-#: flowview_databases.php:1145 flowview_devices.php:214
-#: flowview_filters.php:156 flowview_schedules.php:254 functions.php:842
+#: flowview_databases.php:1183 flowview_devices.php:260
+#: flowview_filters.php:156 flowview_schedules.php:332 functions.php:996
 msgid "Continue"
 msgstr "Продължи"
 
-#: flowview_databases.php:1145
+#: flowview_databases.php:1183
 msgid "Delete DNS Entry"
 msgid_plural "Delete DNS Entries"
 msgstr[0] "Изтриване на DNS запис"
 msgstr[1] "Изтриване на DNS записи"
 
-#: flowview_databases.php:1219
+#: flowview_databases.php:1257
 msgid "Flowview DNS Cache Entries"
 msgstr "Разписания за FlowView"
 
-#: flowview_databases.php:1234 flowview_databases.php:1240
-#: flowview_databases.php:1439
+#: flowview_databases.php:1272 flowview_databases.php:1278
+#: flowview_databases.php:1481
 msgid "Verified"
 msgstr "Потвърден"
 
-#: flowview_databases.php:1239 flowview_databases.php:1439
+#: flowview_databases.php:1277 flowview_databases.php:1481
 msgid "Unverified"
 msgstr "Неверифицирана"
 
-#: flowview_databases.php:1390
+#: flowview_databases.php:1322
+msgid "Purge"
+msgstr "Изтриване"
+
+#: flowview_databases.php:1432
 msgid "This is the IP Address of the Cache entry."
 msgstr "Това е IP адресът на записа в кеша."
 
-#: flowview_databases.php:1393
+#: flowview_databases.php:1435
 msgid "DNS Hostname"
 msgstr "Име на DNS хост"
 
-#: flowview_databases.php:1396
+#: flowview_databases.php:1438
 msgid "The DNS Name assigned to the IP Address."
 msgstr "DNS името, присвоено на IP адреса."
 
-#: flowview_databases.php:1402
+#: flowview_databases.php:1444
 msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
 msgstr "Източникът на името на DNS хост.  Тя може да бъде DNS, статично търсене или ARIN."
 
-#: flowview_databases.php:1405
+#: flowview_databases.php:1447
 msgid "Arin Verified"
 msgstr "Арин Потвърден"
 
-#: flowview_databases.php:1408
+#: flowview_databases.php:1450
 msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
 msgstr "Информацията за Arin за този IP адрес е проверена или това е IP адрес на локален домейн."
 
-#: flowview_databases.php:1411
+#: flowview_databases.php:1453
 msgid "CIDR ID"
 msgstr "CIDR ID"
 
-#: flowview_databases.php:1414
+#: flowview_databases.php:1456
 msgid "The Arin primary key.  This is not official Arin information."
 msgstr "Първичният ключ на Арин.  Това не е официална информация за Арин."
 
-#: flowview_databases.php:1417
+#: flowview_databases.php:1459
 msgid "Autonomous System ID"
 msgstr "ИД на автономна система"
 
-#: flowview_databases.php:1420
+#: flowview_databases.php:1462
 msgid "The Arin Origin AS.  This is official Arin AS information."
 msgstr "Произходът на Арин AS.  Това е официална информация на Arin AS."
 
-#: flowview_databases.php:1423
+#: flowview_databases.php:1465
 msgid "Updated Time"
 msgstr "Време на ъпдейт"
 
-#: flowview_databases.php:1426
+#: flowview_databases.php:1468
 msgid "This is the time that the DNS cache was entered or last updated."
 msgstr "Това е часът, в който DNS кешът е въведен или последно актуализиран."
 
-#: flowview_databases.php:1447
+#: flowview_databases.php:1489
 msgid "No DNS Cache Entries Found"
 msgstr "Не са намерени записи в DNS кеша"
 
-#: flowview_databases.php:1511
+#: flowview_databases.php:1553
 msgid "Flowview Internet Routes"
 msgstr "Слушатели на FlowView"
 
-#: flowview_databases.php:1526
+#: flowview_databases.php:1568
 msgid "IP Version"
 msgstr "Версия"
 
-#: flowview_databases.php:1531
+#: flowview_databases.php:1573
 msgid "IPv4"
 msgstr "ИПв4"
 
-#: flowview_databases.php:1532
+#: flowview_databases.php:1574
 msgid "IPv6"
 msgstr "IPv6"
 
-#: flowview_databases.php:1689
+#: flowview_databases.php:1791
 msgid "Route"
 msgstr "Маршрут"
 
-#: flowview_databases.php:1691
+#: flowview_databases.php:1793
 msgid "This is the published Internet Route."
 msgstr "Това е публикуваният Интернет маршрут."
 
-#: flowview_databases.php:1694
+#: flowview_databases.php:1796
 msgid "AS Number"
 msgstr "Номер на порт"
 
-#: flowview_databases.php:1697
+#: flowview_databases.php:1799
 msgid "The Autonomous System Number for the route."
 msgstr "Номерът на автономната система за маршрута."
 
-#: flowview_databases.php:1700
+#: flowview_databases.php:1802
 msgid "Route Description"
 msgstr "Описание на маршрута"
 
-#: flowview_databases.php:1703
-msgid "The Descrption logged by the Route Maintainer."
+#: flowview_databases.php:1805
+#, fuzzy
+msgid "The Description logged by the Route Maintainer."
 msgstr "Описанието, регистрирано от отговорника по поддръжката на маршрута."
 
-#: flowview_databases.php:1709
+#: flowview_databases.php:1811
 msgid "The source database used to publish the route."
 msgstr "Базата данни източник, използвана за публикуване на маршрута."
 
-#: flowview_databases.php:1712
+#: flowview_databases.php:1814
 msgid "Maintained By"
 msgstr "Поддържан от"
 
-#: flowview_databases.php:1715
+#: flowview_databases.php:1817
 msgid "The Internet Carrier who is maintaining the route for the customer."
 msgstr "Интернет превозвачът, който поддържа маршрута за клиента."
 
-#: flowview_databases.php:1721
+#: flowview_databases.php:1823
 msgid "The last time the information on this route was modified."
 msgstr "Последният път, когато информацията за този маршрут беше променена."
 
-#: flowview_databases.php:1742
+#: flowview_databases.php:1850
 msgid "No Matching Routes Found"
 msgstr "Не са намерени съвпадащи маршрути"
 
-#: flowview_devices.php:43
+#: flowview_devices.php:36 flowview_filters.php:41 flowview_schedules.php:39
+msgid "Enable"
+msgstr "Включи"
+
+#: flowview_devices.php:37 flowview_filters.php:40 flowview_schedules.php:38
+msgid "Disable"
+msgstr "Изключи"
+
+#: flowview_devices.php:45
 msgid "Listener Name"
 msgstr "Слушател"
 
-#: flowview_devices.php:44
+#: flowview_devices.php:46
 msgid "Name of the device to be displayed."
 msgstr "Име на устройството, което ще се показва."
 
-#: flowview_devices.php:49
+#: flowview_devices.php:51
 msgid "Collection Method"
 msgstr "Колекция Medhod"
 
-#: flowview_devices.php:50
+#: flowview_devices.php:52
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
 msgstr "Има два метода за събиране на поддръжка, първият използва старите двоични файлове на поточни инструменти, а вторият използва собствения PHP базиран сървър на потока на потока."
 
-#: flowview_devices.php:57
-msgid "Allowed Host"
+#: flowview_devices.php:59
+msgid "Bind to address"
+msgstr ""
+
+#: flowview_devices.php:60
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr ""
+
+#: flowview_devices.php:68
+#, fuzzy
+msgid "Allowed Host Range"
 msgstr "Разрешен хост"
 
-#: flowview_devices.php:58
-msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
-msgstr "IP адрес на устройството, на което е разрешено да изпраща към този колектор. Оставете като 0 за всеки хост."
+#: flowview_devices.php:69
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr ""
 
-#: flowview_devices.php:67
+#: flowview_devices.php:78
 msgid "Port this collector will listen on."
 msgstr "Портът, който този колектор ще слуша."
 
-#: flowview_devices.php:76
+#: flowview_devices.php:87
 msgid "The IP Protocol to use for this listener."
 msgstr "Слушателят, който да се използва за филтъра."
 
-#: flowview_devices.php:78
-msgid "TCP Protocol"
-msgstr "IP протокол"
-
-#: flowview_devices.php:78
+#: flowview_devices.php:89
 msgid "UDP Protocol"
 msgstr "IP протокол"
 
-#: flowview_devices.php:152
+#: flowview_devices.php:94 flowview_schedules.php:89 flowview_schedules.php:974
+msgid "Enabled"
+msgstr "Разрешен"
+
+#: flowview_devices.php:95
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr ""
+
+#: flowview_devices.php:170
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "Не е намерен шаблон за поток за ИД на устройство:%s и ИД на шаблон:%s"
 
-#: flowview_devices.php:204
-msgid "Click 'Continue' to delete the following Net-Flow Listeners.  After which, you will need to restart your Flow-Capture Service."
+#: flowview_devices.php:236 flowview_devices.php:250
+#, fuzzy
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
 msgstr "Кликнете върху „Напред“, за да изтриете следните слушатели на Net-Flow. След което ще трябва да рестартирате услугата Flow-Capture."
 
-#: flowview_devices.php:211
-msgid "You must select at least one device."
+#: flowview_devices.php:243
+#, fuzzy
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Кликнете върху „Напред“, за да изтриете следните слушатели на Net-Flow. След което ще трябва да рестартирате услугата Flow-Capture."
+
+#: flowview_devices.php:257
+#, fuzzy
+msgid "You must select at least one Listener."
 msgstr "Трябва да изберете поне едно устройство."
 
-#: flowview_devices.php:270
+#: flowview_devices.php:312
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
 msgstr "Запиши успешно.  Слушателят на Flowview е записан и услугата е рестартирана."
 
-#: flowview_devices.php:272
+#: flowview_devices.php:314
 msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
 msgstr "Запиши успешно.  Слушателят на Flowview е записан.  Улавянето на потока на услугата обаче не се изпълнява."
 
-#: flowview_devices.php:291
+#: flowview_devices.php:353
 #, php-format
 msgid "Listener [edit: %s]"
 msgstr "Отчет: [редактиране: %s]"
 
-#: flowview_devices.php:295
+#: flowview_devices.php:357
 msgid "Listener [new]"
 msgstr "Доклад: [нов]"
 
-#: flowview_devices.php:332 flowview_devices.php:752
+#: flowview_devices.php:394 flowview_devices.php:825
 msgid "Name"
 msgstr "Име"
 
-#: flowview_devices.php:344
+#: flowview_devices.php:406
 msgid "Version"
 msgstr "Версия"
 
-#: flowview_devices.php:348 functions.php:34
+#: flowview_devices.php:410 functions.php:38
 msgid "Templates"
 msgstr "Шаблони"
 
-#: flowview_devices.php:352 flowview_devices.php:798
+#: flowview_devices.php:414 flowview_devices.php:879
 msgid "Last Updated"
 msgstr "Последно актуализирано"
 
-#: flowview_devices.php:354
+#: flowview_devices.php:416
 msgid "Active Streams update every 5 minutes"
 msgstr "Активните потоци се актуализират на всеки 5 минути"
 
-#: flowview_devices.php:386
+#: flowview_devices.php:459
 msgid "No Inbound Streams Detected"
 msgstr "Не са открити входящи потоци"
 
-#: flowview_devices.php:451
+#: flowview_devices.php:524
 msgid "Listener Detected Templates"
 msgstr "Шаблони за откриване на слушатели"
 
-#: flowview_devices.php:460
+#: flowview_devices.php:533
 msgid "Ex Addr"
 msgstr "Ex Addr"
 
-#: flowview_devices.php:474
+#: flowview_devices.php:547
 msgid "Template"
 msgstr "Шаблон"
 
-#: flowview_devices.php:555
+#: flowview_devices.php:628
 msgid "Template ID"
 msgstr "ИД на шаблон"
 
-#: flowview_devices.php:559
+#: flowview_devices.php:632
 msgid "Field Name"
 msgstr "Име на поле"
 
-#: flowview_devices.php:563 functions.php:4457
+#: flowview_devices.php:636 functions.php:5449
 msgid "Supported"
 msgstr "Поддържа"
 
-#: flowview_devices.php:567
+#: flowview_devices.php:640
 msgid "Field ID"
 msgstr "ИД на поле"
 
-#: flowview_devices.php:571
+#: flowview_devices.php:644
 msgid "Field Type"
 msgstr "Тип на полето"
 
-#: flowview_devices.php:575
+#: flowview_devices.php:648
 msgid "Length"
 msgstr "Дължина"
 
-#: flowview_devices.php:579
+#: flowview_devices.php:652
 msgid "Unpack"
 msgstr "Разопаковам"
 
-#: flowview_devices.php:621
+#: flowview_devices.php:694
 msgid "No Inbound Stream Templates Detected"
 msgstr "Не са открити шаблони за входящ поток"
 
-#: flowview_devices.php:690
+#: flowview_devices.php:763
 msgid "FlowView Listeners"
 msgstr "Слушатели на FlowView"
 
-#: flowview_devices.php:742 setup.php:143 setup.php:204
+#: flowview_devices.php:815 setup.php:139 setup.php:200
 msgid "Listeners"
 msgstr "Слушатели"
 
-#: flowview_devices.php:756
+#: flowview_devices.php:829
 msgid "Method"
 msgstr "Метод"
 
-#: flowview_devices.php:760
+#: flowview_devices.php:833
+#, fuzzy
+msgid "Bind address"
+msgstr "IP Адрес"
+
+#: flowview_devices.php:837
 msgid "Allowed From"
 msgstr "Разрешено от"
 
-#: flowview_devices.php:780
+#: flowview_devices.php:857
 msgid "Observed Listen"
 msgstr "Наблюдавано Слушай"
 
-#: flowview_devices.php:782
+#: flowview_devices.php:858
 msgid "The port security actually observed on the listeners port."
 msgstr "Сигурността на пристанището всъщност се наблюдава на порта на слушателите."
 
-#: flowview_devices.php:786
+#: flowview_devices.php:862
+msgid "Backlog"
+msgstr ""
+
+#: flowview_devices.php:863
+msgid "The Size of the UDP backlog in bytes."
+msgstr ""
+
+#: flowview_devices.php:867
 msgid "Streams"
 msgstr "Потоци"
 
-#: flowview_devices.php:788
+#: flowview_devices.php:869
 msgid "The number of inbound connections from various sources."
 msgstr "Броят на входящите връзки от различни източници."
 
-#: flowview_devices.php:792
+#: flowview_devices.php:873
 msgid "Stream Versions"
 msgstr "Версия"
 
-#: flowview_devices.php:794
+#: flowview_devices.php:875
 msgid "The Traffic Flow versions being observed."
 msgstr "Наблюдават се версиите на Traffic Flow."
 
-#: flowview_devices.php:800
+#: flowview_devices.php:881
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Максималното време за актуализация от всички потоци, които се събират.  Тази стойност се актуализира на всеки 5 минути."
 
-#: flowview_devices.php:833
+#: flowview_devices.php:916 flowview_schedules.php:171 functions.php:839
+msgid "None"
+msgstr "Няма"
+
+#: flowview_devices.php:920
+#, fuzzy
+msgid "No Connections"
+msgstr "Геолокация"
+
+#: flowview_devices.php:949
 msgid "Cacti"
 msgstr "Кактусови"
 
-#: flowview_devices.php:846
+#: flowview_devices.php:964
 msgid "No Flowview Listeners"
 msgstr "Слушатели на FlowView"
-
-#: flowview_filters.php:38 flowview_schedules.php:36
-msgid "Send Now"
-msgstr "Изпрати"
-
-#: flowview_filters.php:40 flowview_schedules.php:38
-msgid "Disable"
-msgstr "Изключи"
-
-#: flowview_filters.php:41 flowview_schedules.php:39
-msgid "Enable"
-msgstr "Включи"
 
 #: flowview_filters.php:132
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
@@ -1505,13 +1565,13 @@ msgstr "Поточни филтри"
 msgid "FlowView Filters [ Add Devices before Filters ]"
 msgstr "FlowView филтри [Добавяне на устройства преди филтри]"
 
-#: flowview_filters.php:239 flowview_filters.php:353 setup.php:144
-#: setup.php:260
+#: flowview_filters.php:239 flowview_filters.php:353 setup.php:140
+#: setup.php:256
 msgid "Filters"
 msgstr "Филтри"
 
-#: flowview_filters.php:322 flowview_schedules.php:81
-#: flowview_schedules.php:543
+#: flowview_filters.php:322 flowview_schedules.php:97
+#: flowview_schedules.php:949
 msgid "Filter Name"
 msgstr "Име на филтъра"
 
@@ -1522,6 +1582,10 @@ msgstr "ID"
 #: flowview_filters.php:347
 msgid "Resolution"
 msgstr "Резолюция на име на хост"
+
+#: flowview_schedules.php:36
+msgid "Send Now"
+msgstr "Изпрати"
 
 #: flowview_schedules.php:43
 msgid "Every Hour"
@@ -1550,1551 +1614,1812 @@ msgstr "Всеки% d седмици, 2"
 msgid "Every Month"
 msgstr "Всеки месец"
 
-#: flowview_schedules.php:64
+#: flowview_schedules.php:76
+#, fuzzy
+msgid "General Settings"
+msgstr "Изчистване на филтрите"
+
+#: flowview_schedules.php:80
 msgid "Title"
 msgstr "Заглавие"
 
-#: flowview_schedules.php:66
+#: flowview_schedules.php:82
 msgid "New Schedule"
 msgstr "Нов график"
 
-#: flowview_schedules.php:67
+#: flowview_schedules.php:83
 msgid "Enter a Report Title for the FlowView Schedule."
 msgstr "Въведете заглавие на отчета за графика на потока."
 
-#: flowview_schedules.php:73 flowview_schedules.php:563
-msgid "Enabled"
-msgstr "Разрешен"
-
-#: flowview_schedules.php:76
+#: flowview_schedules.php:92
 msgid "Whether or not this NetFlow Scan will be sent."
 msgstr "Дали това NetFlow сканиране ще бъде изпратено."
 
-#: flowview_schedules.php:82
+#: flowview_schedules.php:98
 msgid "Name of the query to run."
 msgstr "Име на заявката за изпълнение."
 
-#: flowview_schedules.php:87
+#: flowview_schedules.php:103
+#, fuzzy
+msgid "Send Settings"
+msgstr "AS комплекти"
+
+#: flowview_schedules.php:107
 msgid "Send Interval"
 msgstr "Изпращане на интервал"
 
-#: flowview_schedules.php:88
+#: flowview_schedules.php:108
 msgid "How often to send this NetFlow Report?"
 msgstr "Колко често да изпращате този отчет за NetFlow?"
 
-#: flowview_schedules.php:97
+#: flowview_schedules.php:116
+#, fuzzy
+msgid "Scheduled Base Time"
+msgstr "Заглавие на графика"
+
+#: flowview_schedules.php:117
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
 msgstr "Това е първата дата / час за изпращане на имейла в NetFlow Scan. Всички бъдещи имейли ще бъдат изчислени извън този час плюс посочения по-горе интервал."
 
-#: flowview_schedules.php:105
-msgid "Email Addresses"
-msgstr "Джибути"
-
-#: flowview_schedules.php:106
-msgid "Email addresses (command delimited) to send this NetFlow Scan to."
-msgstr "Имейл адреси (разделени с команда) за изпращане на това сканиране от NetFlow."
-
-#: flowview_schedules.php:113 setup.php:419
-msgid "Format File to Use"
-msgstr "Форматирайте файла, който да използвате"
-
-#: flowview_schedules.php:116 setup.php:422
-msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "Изберете персонализираната HTML обвивка и CSS файла, които да използвате. Този файл съдържа както html, така и CSS, за да обгърне отчета ви. Ако съдържа повече от просто CSS, трябва да поставите специален<REPORT> етикет във файла. Този таг на формата ще бъде заменен от съдържанието на отчета. Тези файлове се намират в директорията „формати“."
-
-#: flowview_schedules.php:185
-#, php-format
-msgid "Sent Scheduled Report %s in Background."
-msgstr "Изпратен планиран отчет %s във фонов режим."
-
-#: flowview_schedules.php:188
-msgid "Reports will arrive once Complete."
-msgstr "Докладите ще пристигнат след попълване."
-
-#: flowview_schedules.php:223
-msgid "Click 'Continue' to delete the following Schedule(s)."
-msgstr "Кликнете върху „Напред“, за да изтриете следните графици."
-
-#: flowview_schedules.php:230
-msgid "Click 'Continue' to send the following Schedule(s) now."
-msgstr "Кликнете върху „Напред“, за да изпратите сегашното График (и)."
-
-#: flowview_schedules.php:237
-msgid "Click 'Continue' to Disable the following Schedule(s)."
-msgstr "Кликнете върху „Напред“, за да деактивирате следните графици."
-
-#: flowview_schedules.php:244
-msgid "Click 'Continue' to Enable the following Schedule(s)."
-msgstr "Кликнете върху „Напред“, за да активирате следните графици."
-
-#: flowview_schedules.php:251
-msgid "You must select at least one schedule."
-msgstr "Трябва да изберете поне един график."
-
-#: flowview_schedules.php:345
-#, php-format
-msgid "Report: [edit: %s]"
-msgstr "Отчет: [редактиране: %s]"
-
-#: flowview_schedules.php:347
-msgid "Report: [new]"
-msgstr "Доклад: [нов]"
-
-#: flowview_schedules.php:368 functions.php:745
-msgid "Start Date Selector"
-msgstr "Стартирайте Селектора за дата"
-
-#: flowview_schedules.php:438
-msgid "FlowView Schedules"
-msgstr "Разписания за FlowView"
-
-#: flowview_schedules.php:440
-msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr "FlowView Schedules [Добавяне на устройства преди графици]"
-
-#: flowview_schedules.php:456 flowview_schedules.php:568 setup.php:145
-#: setup.php:232
-msgid "Schedules"
-msgstr "Графици"
-
-#: flowview_schedules.php:539
-msgid "Schedule Title"
-msgstr "Заглавие на графика"
-
-#: flowview_schedules.php:547
-msgid "Interval"
-msgstr "Интервал"
-
-#: flowview_schedules.php:551
-msgid "Start Date"
-msgstr "Начална Дата"
-
-#: flowview_schedules.php:555
-msgid "Next Send"
-msgstr "Следваща Изпращане"
-
-#: functions.php:31
-msgid "General"
-msgstr "Основни"
-
-#: functions.php:112
-msgid "Select a Report Type First"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:138
-#, php-format
-msgid "Filter: [edit: %s]"
-msgstr "Отчет: [редактиране: %s]"
-
-#: functions.php:140
-msgid "Filter: [new]"
-msgstr "Доклад: [нов]"
-
-#: functions.php:511
-msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr "Недефиниран филтър [Изберете филтър, за да получите подробности]"
-
-#: functions.php:521
-#, php-format
-msgid "Statistical Report: %s [ Including overrides as specified below ]"
-msgstr "Статистически доклад: %s [Включително замествания, както е посочено по-долу]"
-
-#: functions.php:523
-#, php-format
-msgid "Printed Report: %s [ Including overrides as specified below ]"
-msgstr "Отпечатан отчет: %s [Включително замествания, както е посочено по-долу]"
-
-#: functions.php:541
-msgid "Select a Filter"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:560
-msgid "Select a Listener"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:575
-msgid "Exclude"
-msgstr "Изключване"
-
-#: functions.php:579
-msgid "None"
-msgstr "Няма"
-
-#: functions.php:580
-msgid "Top Sample"
-msgstr "Нагоре Проба"
-
-#: functions.php:585
-#, fuzzy, php-format
-msgid "Top %d Samples"
-msgstr "Топ 2 проби"
-
-#: functions.php:590
-msgid "Show only Domains on Charts Below"
-msgstr "Показване само на домейни в диаграмите отдолу"
-
-#: functions.php:592
-msgid "Domains/Hostnames Only"
-msgstr "Само домейни"
-
-#: functions.php:596
-msgid "Apply Filter"
-msgstr "Прилагане на стил"
-
-#: functions.php:597
-msgid "Clear Filter"
-msgstr "Изчистване на филтрите"
-
-#: functions.php:598
-msgid "Create new Flow Filter"
-msgstr "Колко често да се създава нов поточен файл."
-
-#: functions.php:598
-msgid "New"
-msgstr "Нов"
-
-#: functions.php:599
-msgid "Edit"
-msgstr "Редактирай"
-
-#: functions.php:599
-msgid "Edit the Flow Filter"
-msgstr "Редактиране на текущия филтър"
-
-#: functions.php:600 functions.php:832
-msgid "Save"
-msgstr "Запази"
-
-#: functions.php:600
-msgid "Save the Flow Filter"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:601
-msgid "Save As"
-msgstr "Запис като"
-
-#: functions.php:601
-msgid "Save the existing Flow Filter as new Filter"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:602
-msgid "Rename"
-msgstr "Преименуване"
-
-#: functions.php:602
-msgid "Rename the Flow Filter"
-msgstr "Преименуване на филтъра за поток"
-
-#: functions.php:603
-msgid "Delete the Flow Filter"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:611
-msgid "Report"
-msgstr "Отчет"
-
-#: functions.php:622
-#, php-format
-msgid "Statistical: %s"
-msgstr "Статистически: %s"
-
-#: functions.php:628
-#, php-format
-msgid "Printed: %s"
-msgstr "Отпечатано: %s"
-
-#: functions.php:632 functions.php:649
-msgid "Select a Filter First"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:688
-msgid "Lines"
-msgstr "Редове"
-
-#: functions.php:706
-msgid "Octets"
-msgstr "Октети"
-
-#: functions.php:724
-msgid "Timespan"
-msgstr "Време"
-
-#: functions.php:733
-msgid "Custom"
-msgstr "Персонализиране"
-
-#: functions.php:739
-msgid "From"
-msgstr "От"
-
-#: functions.php:748
-msgid "To"
-msgstr "Дo"
-
-#: functions.php:754
-msgid "End Date Selector"
-msgstr "Селектор за крайна дата"
-
-#: functions.php:757
-msgid "Shift Time Backward"
-msgstr "Преместване на времето назад"
-
-#: functions.php:760
-msgid "Define Shifting Interval"
-msgstr "Определете интервала за превключване"
-
-#: functions.php:773
-msgid "Shift Time Forward"
-msgstr "Преместване на времето напред"
-
-#: functions.php:780
-msgid "Graph"
-msgstr "Графика"
-
-#: functions.php:784
-msgid "Bar"
-msgstr "Бар"
-
-#: functions.php:785
-msgid "Pie"
-msgstr "Отпечатано:"
-
-#: functions.php:786
-msgid "Treemap"
-msgstr "Карта на съдържанието"
-
-#: functions.php:790
-msgid "Height"
-msgstr "Височина"
-
-#: functions.php:802
-msgid "Show/Hide"
-msgstr "Покажи/Скрий"
-
-#: functions.php:806
-msgid "Table"
-msgstr "Таблица"
-
-#: functions.php:827
-msgid "Save Flow Filter"
-msgstr "Филтър"
-
-#: functions.php:829
-msgid "New Name"
-msgstr "Ново име"
-
-#: functions.php:838
-msgid "Delete Flow Filter"
-msgstr "Отпечатване на отчети"
-
-#: functions.php:840
-msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
-msgstr "За да изтриете този филтър на потока, натиснете \"Продължи\".  Ако филтърът за поток се използва в планиран отчет, операцията ще бъде блокирана."
-
-#: functions.php:857
-#, php-format
-msgid "Top %s Distribution Chart of Bytes"
-msgstr "Най-горе %s диаграма на разпределение на байтове"
-
-#: functions.php:858
-#, php-format
-msgid "Top %s Pie Chart of Bytes"
-msgstr "Най-горе %s кръгова диаграма от байтове"
-
-#: functions.php:859
-#, php-format
-msgid "Top %s Treemap Chart of Bytes"
-msgstr "Най-горе %s йерархична диаграма на байтовете"
-
-#: functions.php:862
-#, php-format
-msgid "Top %s Distribution Chart of Packets"
-msgstr "Най-добра %s диаграма за разпространение на пакети"
-
-#: functions.php:863
-#, php-format
-msgid "Top %s Pie Chart of Packets"
-msgstr "Най-горе %s кръгова диаграма на пакети"
-
-#: functions.php:864
-#, php-format
-msgid "Top %s Treemap Chart of Packets"
-msgstr "Най-горе %s йерархична диаграма на пакетите"
-
-#: functions.php:867
-#, php-format
-msgid "Top %s Distribution Chart of Flows"
-msgstr "Най-горе %s Разпределителна диаграма на потоците"
-
-#: functions.php:868
-#, php-format
-msgid "Top %s Pie Chart of Flows"
-msgstr "Най-горе %s кръгова диаграма на потоците"
-
-#: functions.php:869
-#, php-format
-msgid "Top %s Treemap Chart of Flows"
-msgstr "Най-горе %s йерархична диаграма на потоците"
-
-#: functions.php:976
-msgid "Rename Layout"
-msgstr "Преименуване на оформление"
-
-#: functions.php:984
-msgid " <new>"
-msgstr "Нов"
-
-#: functions.php:1502
-msgid "Filter Settings Saved"
-msgstr "Настройките на филтъра са запазени"
-
-#: functions.php:1618
-#, php-format
-msgid "Client/Private (%s)"
-msgstr "Клиент / частен (%s)"
-
-#: functions.php:1620
-msgid "icmp (0)"
-msgstr "icmp (0)"
-
-#: functions.php:1631
-#, php-format
-msgid "Unknown (%s)"
-msgstr "Неизвестен (%s)"
-
-#: functions.php:1662
-msgid "Cacti Flowview"
-msgstr "Cacti Flowview"
-
-#: functions.php:1668
-#, php-format
-msgid "Netflow - %s"
-msgstr "Нетен поток - %s"
-
-#: functions.php:1870
-#, php-format
-msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr "Филтър на подмрежата: %s не е стойностен формат CIDR"
-
-#: functions.php:2044 functions.php:2050 functions.php:2056 functions.php:2059
-#: functions.php:2085 functions.php:3482
-msgid "unresolved"
-msgstr "- нерешен -"
-
-#: functions.php:2394 functions.php:2395 functions.php:2396 functions.php:2397
-#: functions.php:2398 functions.php:2399 functions.php:2400 functions.php:2401
-#: functions.php:2402 functions.php:2403 functions.php:2404 functions.php:2405
-#: functions.php:2406 functions.php:2407 functions.php:2408 functions.php:2409
-#: functions.php:2410 functions.php:2411 functions.php:2412 functions.php:2413
-#: functions.php:2414 functions.php:2415 functions.php:2416 functions.php:2417
-#: functions.php:2418 functions.php:2419
-#, php-format
-msgid "%d - %d Bytes"
-msgstr "%d - %d байта"
-
-#: functions.php:2420
-#, php-format
-msgid "> %d Bytes"
-msgstr "> %d байта"
-
-#: functions.php:2884
-msgid "Source DNS"
-msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
-
-#: functions.php:2888
-msgid "Source Root DNS"
-msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
-
-#: functions.php:2892
-msgid "Dest DNS"
-msgstr "Dest AS"
-
-#: functions.php:2896
-msgid "Dest Root DNS"
-msgstr "Пристанищен порт"
-
-#: functions.php:2900
-msgid "DNS"
-msgstr "DSR"
-
-#: functions.php:2904
-msgid "Root DNS"
-msgstr "Корен DNS"
-
-#: functions.php:2924
-msgid "Dest Port"
-msgstr "Пристанищен порт"
-
-#: functions.php:2932
-msgid "Dest IF"
-msgstr "Dest IF"
-
-#: functions.php:2948
-msgid "Dest Prefix"
-msgstr "Преден префикс"
-
-#: functions.php:2956
-msgid "Type of Service"
-msgstr "Вид на услугата"
-
-#: functions.php:2975
-msgid "Bytes/Packet"
-msgstr "Пакети"
-
-#: functions.php:3395
-msgid "The Parallel Query Timed Out.  Please contact your administrator"
-msgstr "Времето за изчакване на паралелната заявка изтече.  Обърнете се към вашия администратор"
-
-#: functions.php:3588
-#, php-format
-msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr "Булево: %s, Числово: %s, Шестнадесетично: %s"
-
-#: functions.php:3599
-msgid "Low Delay"
-msgstr "Ниско забавяне"
-
-#: functions.php:3600
-msgid "Throughput"
-msgstr "Пропускателна способност"
-
-#: functions.php:3601
-msgid "Reliability"
-msgstr "Надеждност"
-
-#: functions.php:3602
-msgid "Mincost"
-msgstr "Минкост"
-
-#: functions.php:3606
-msgid "Net Control"
-msgstr "Контрол на мрежата"
-
-#: functions.php:3607
-msgid "Internet Control"
-msgstr "Интернет контрол"
-
-#: functions.php:3608
-msgid "Critic ECP"
-msgstr "Критичен ECP"
-
-#: functions.php:3609
-msgid "Flash Override"
-msgstr "Замяна на Flash"
-
-#: functions.php:3610
-msgid "Flash"
-msgstr "Светкавица"
-
-#: functions.php:3611
-msgid "Immediate"
-msgstr "Незабавно"
-
-#: functions.php:3612
-msgid "Priority"
-msgstr "Приоритет"
-
-#: functions.php:3613
-msgid "Routine"
-msgstr "Рутинна"
-
-#: functions.php:3653
-msgid "Summary Statistics"
-msgstr "Обобщена статистика"
-
-#: functions.php:3664
-#, php-format
-msgid "IP Packet Size Distribution (%%)"
-msgstr "Разпределение на размера на IP пакетите (%%)"
-
-#: functions.php:3669
-#, php-format
-msgid "Packets per Flow Distribution (%%)"
-msgstr "Пакети за разпределение на потока (%%)"
-
-#: functions.php:3674
-#, php-format
-msgid "Octets per Flow Distribution (%%)"
-msgstr "Октети за разпределение на потока (%%)"
-
-#: functions.php:3679
-#, php-format
-msgid "Flow Time Distribution (%%)"
-msgstr "Разпределение на времето на потока (%%)"
-
-#: functions.php:3864
-msgid "You must select a Statistics Report or Printed Report!"
-msgstr "Трябва да изберете статистически отчет или отпечатан отчет!"
-
-#: functions.php:3868
-msgid "You must select only a Statistics Report or a Printed Report (not both)!"
-msgstr "Трябва да изберете само статистически отчет или отпечатан отчет (не и двете)!"
-
-#: functions.php:3872
-msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
-msgstr "Невалидни дати, Крайна дата / час е по-ранна от началната дата / час!"
-
-#: functions.php:3883 functions.php:3888
-msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr "Невалиден IP адрес за източника! <br> (Трябва да е под формата на „192.168.0.1“)"
-
-#: functions.php:3895 functions.php:3901 functions.php:3905
-msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "Невалидна подмрежа за изходния адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
-
-#: functions.php:3919 functions.php:3923
-msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr "Невалиден IP адрес за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1“)"
-
-#: functions.php:3929 functions.php:3933 functions.php:3937
-msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "Невалидна подмрежа за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
-
-#: functions.php:3955
-msgid "Invalid value for Source Interface!"
-msgstr "Невалидна стойност за изходния интерфейс!"
-
-#: functions.php:3971
-msgid "Invalid value for Source Port! (0 - 65535)"
-msgstr "Невалидна стойност за изходния порт! (0 - 65535)"
-
-#: functions.php:3987
-msgid "Invalid value for Source AS! (0 - 65535)"
-msgstr "Невалидна стойност за Source AS! (0 - 65535)"
-
-#: functions.php:4003
-msgid "Invalid value for Destination Interface!"
-msgstr "Невалидна стойност за целевия интерфейс!"
-
-#: functions.php:4019
-msgid "Invalid value for Destination Port! (0 - 65535)"
-msgstr "Невалидна стойност за целевия порт! (0 - 65535)"
-
-#: functions.php:4035
-msgid "Invalid value for Destination AS! (0 - 65535)"
-msgstr "Невалидна стойност за Destination AS! (0 - 65535)"
-
-#: functions.php:4051
-msgid "Invalid value for Protocol! (1 - 255)"
-msgstr "Невалидна стойност за протокол! (1 - 255)"
-
-#: functions.php:4063
-msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
-msgstr "Невалидна стойност за TCP флаг! (напр .: 0x1b или 0x1b / SA или SA / SA)"
-
-#: functions.php:4072
-msgid "Invalid value for Cutoff Octets!"
-msgstr "Невалидна стойност за Octoff Octoff!"
-
-#: functions.php:4079
-msgid "Invalid value for Cutoff Lines!"
-msgstr "Невалидна стойност за Линиите за изключване!"
-
-#: functions.php:4086
-msgid "Invalid value for Sort Field!"
-msgstr "Невалидна стойност за полето за сортиране!"
-
-#: functions.php:4113
-#, php-format
-msgid "FlowView Chart for %s Type is %s"
-msgstr "Диаграма за преглеждане на потока за %s Тип е %s"
-
-#: functions.php:4459
-msgid "Not Supported"
-msgstr "Не се поддържа"
-
-#: functions.php:4534
-msgid "Total Flows"
-msgstr "Максимални потоци:"
-
-#: functions.php:4539
-msgid "Bytes Exchanged"
-msgstr "Разменени байтове"
-
-#: functions.php:4543
-msgid "Packets Examined"
-msgstr "Пакет бар"
-
-#: setup.php:35
-msgid "Plugin -> Flow Viewer"
-msgstr "Приставката -> Преглед на потока"
-
-#: setup.php:36
-msgid "Plugin -> Flow Admin"
-msgstr "Плъгин -> Администратор на поток"
-
-#: setup.php:43 setup.php:71
-msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
-msgstr "Преименувайте вашите файлове config.php.dist или config_local.php.dist в директорията flowview и променете настройката на вашата база данни, преди да инсталирате."
-
-#: setup.php:123
-msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
-msgstr "Моля, имайте предвид, че Flowview плъгини Таблиците се надстройват във фонов режим.  Това може да отнеме известно време. Проверете дневника на Cacti за повече информация"
-
-#: setup.php:136
-msgid "The Filter has been Deleted"
-msgstr "Филтърът е изтрит"
-
-#: setup.php:137
-msgid "The Filter has been Updated"
-msgstr "Филтърът е актуализиран"
-
-#: setup.php:142
-msgid "Import/Export"
-msgstr "Импорт/Експорт"
-
-#: setup.php:143 setup.php:144 setup.php:145 setup.php:146 setup.php:151
-#: setup.php:295 setup.php:297
-msgid "FlowView"
-msgstr "FlowView"
-
-#: setup.php:146
-msgid "Databases"
-msgstr "Бази данни"
-
-#: setup.php:154
-msgid "Normal User"
-msgstr "Обикновен потребител"
-
-#: setup.php:155
-msgid "System Administration"
-msgstr "Системна администрация"
-
-#: setup.php:176 setup.php:197
-msgid "Flow Viewer"
-msgstr "Преглед на потока"
-
-#: setup.php:183
-msgid "Dashboard"
-msgstr "Табло"
-
-#: setup.php:190 setup.php:218 setup.php:246 setup.php:274
-msgid "(save)"
-msgstr "Запази"
-
-#: setup.php:211 setup.php:239 setup.php:267
-msgid "(edit)"
-msgstr "Редактиране..."
-
-#: setup.php:225 setup.php:253 setup.php:281
-msgid "(actions)"
-msgstr "Действия"
-
-#: setup.php:357
-msgid "Name Resolution"
-msgstr "Резолюция на име на хост"
-
-#: setup.php:362
-msgid "Hostname Resolution"
-msgstr "Резолюция на име на хост"
-
-#: setup.php:363
-msgid "The method by which you wish to resolve hostnames."
-msgstr "Методът, чрез който искате да разрешите имената на хостове."
-
-#: setup.php:366
-msgid "Use Local Server"
-msgstr "Използвайте локален сървър"
-
-#: setup.php:367
-msgid "Use DNS Servers under Mail/Reporting/DNS"
-msgstr "Използвайте DNS сървър по-долу"
-
-#: setup.php:368
-msgid "Don't Resolve DNS"
-msgstr "Не разрешавайте DNS"
-
-#: setup.php:373
-msgid "Local Domain Name"
-msgstr "Изолирайте домейн имената"
-
-#: setup.php:376
-msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
-msgstr "За IPv4 адреси в локалната мрежа, които не се разрешават локално, добавете този суфикс към получения IP адрес."
-
-#: setup.php:381
-msgid "Local IP Range"
-msgstr "Локален IP диапазон"
-
-#: setup.php:384
-msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For examle: 192.168.11.0 or 192.168.11.0/24"
-msgstr "Предоставете диапазона от IPv4 IP адреси за вашата локална мрежа за хостове, които може да не са регистрирани в DNS.  Тези хостове ще бъдат съпоставени с името на локалния домейн по-горе.  Това е повече за домашните потребители.  Можете да използвате CIDR или не-CIDR формати.  За изпит: 192.168.11.0 или 192.168.11.0/24"
-
-#: setup.php:385
-msgid "Use CIDR or Non-CIDR"
-msgstr "Използвайте CIDR или не-CIDR"
-
-#: setup.php:390
-msgid "Use Arin to find Domains and AS Numbers"
-msgstr "Използвайте Arin за намиране на нерегистрирани домейни"
-
-#: setup.php:391
-msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
-msgstr "Много услуги за събиране на данни на Big Tech обичат да маскират собствеността си върху домейни, за да замъглят факта, че събират вашата лична информация.  Ако сте загрижени за това и вашата инсталация на Cacti има достъп до интернет, можете да използвате Arin, за да премахнете маската от тези големи технологични компании."
-
-#: setup.php:396
-msgid "Whois Provider Host"
-msgstr "Хост на кой е доставчик"
-
-#: setup.php:399
-msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
-msgstr "Моля, посочете името на хоста за разрешаване на whois повиквания.  Ако не е нула, трябва да имате whois двоичен във вашия системен път."
-
-#: setup.php:400
-msgid "whois.radb.net"
-msgstr "whois.radb.net"
-
-#: setup.php:405
-msgid "Whois Binary Path"
-msgstr "Двоичен път на инструментите за поток"
-
-#: setup.php:408
-msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
-msgstr "Моля, посочете името на пътя за двоичния файл \"whois\".  Двоичният \"whois\" ще бъде използван за намиране на AS информация, допълваща Arin."
-
-#: setup.php:409
-msgid "Enter binary path"
-msgstr "Въведете двоичен път"
-
-#: setup.php:414
-msgid "Data Retention and Report Generation"
-msgstr "Запазване на данни и генериране на отчети"
-
-#: setup.php:426
-msgid "Data Retention Policy"
-msgstr "Политика за задържане на данни"
-
-#: setup.php:427
-msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr "Времето, през което кактусите ще поддържат разделените таблици на потока."
-
-#: setup.php:430
-#, php-format
-msgid "%d Week"
-msgstr "% d Седмица"
-
-#: setup.php:431 setup.php:432
-#, php-format
-msgid "%d Weeks"
-msgstr "% d седмици"
-
-#: setup.php:433
-#, php-format
-msgid "%d Month"
-msgstr "% d Месец"
-
-#: setup.php:434 setup.php:435 setup.php:436 setup.php:437
-#, php-format
-msgid "%d Months"
-msgstr "% d Месеци"
-
-#: setup.php:438
-#, php-format
-msgid "%d Year"
-msgstr "% d Година"
-
-#: setup.php:443
-msgid "Database Partitioning Scheme"
-msgstr "Схема за разделяне на база данни"
-
-#: setup.php:444
-msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr "В зависимост от броя на потоците в минута може да се наложи повече таблици на ден."
-
-#: setup.php:447
-msgid "Daily"
-msgstr "Ежедневно"
-
-#: setup.php:448
-msgid "Hourly"
-msgstr "Почасово"
-
-#: setup.php:453
-msgid "Storage Engine for Raw Tables"
-msgstr "Двигател за съхранение на сурови таблици"
-
-#: setup.php:454
-msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
-msgstr "Aria Engine е идеален за всички, освен за суровата маса на живо.  Живата сурова маса винаги ще бъде InnoDB.  Направете своя избор."
-
-#: setup.php:457
-msgid "Aria (Fast, Crash Safe)"
-msgstr "Ария (Бързо, Crash Safe)"
-
-#: setup.php:458
-msgid "InnoDB (Slow, High Concurrency)"
-msgstr "InnoDB (бавна, висока едновременност)"
-
-#: setup.php:463
-msgid "Parallel Queries"
-msgstr "Паралелни заявки"
-
-#: setup.php:468
-msgid "Max Concurrent Threads"
-msgstr "Макс едновременни нишки"
-
-#: setup.php:469
-msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
-msgstr "Максималният брой нишки, които ще бъдат изпратени за изпълнение на заявките FlowView.  Имайте предвид, че можете да имате най-много 1 нишка на дял от базата данни и трябва да внимавате да не претоварите сървъра на базата данни с твърде много едновременни нишки."
-
-#: setup.php:472
-msgid "Disabled"
-msgstr "Изключен"
-
-#: setup.php:473 setup.php:474 setup.php:475 setup.php:476 setup.php:477
-#: setup.php:478 setup.php:479 setup.php:480 setup.php:481 setup.php:482
-#: setup.php:483 setup.php:484 setup.php:485 setup.php:486 setup.php:487
-#: setup.php:488 setup.php:489 setup.php:490 setup.php:491
-#, php-format
-msgid "%d Threads"
-msgstr "%d нишки"
-
-#: setup.php:496
-msgid "Maximum Run Time"
-msgstr "Максимален брой редове"
-
-#: setup.php:497
-msgid "If the Parallel Query does not finish in this time, exit."
-msgstr "Ако паралелната заявка не завърши в този час, излезте."
-
-#: setup.php:500
+#: flowview_schedules.php:124
+msgid "Max Allowed Runtime"
+msgstr ""
+
+#: flowview_schedules.php:125
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr ""
+
+#: flowview_schedules.php:130 setup.php:609
 #, php-format
 msgid "%d Minute"
 msgstr "%d минута"
 
-#: setup.php:501 setup.php:502 setup.php:503 setup.php:504 setup.php:505
-#: setup.php:506
+#: flowview_schedules.php:131 flowview_schedules.php:132
+#: flowview_schedules.php:133 flowview_schedules.php:134
+#: flowview_schedules.php:135 flowview_schedules.php:136
+#: flowview_schedules.php:137 flowview_schedules.php:138
+#: flowview_schedules.php:139 setup.php:610 setup.php:611 setup.php:612
+#: setup.php:613 setup.php:614 setup.php:615
 #, php-format
 msgid "%d Minutes"
 msgstr "%d минути"
 
-#: setup.php:511
+#: flowview_schedules.php:143
+msgid "Legacy Email Settings"
+msgstr ""
+
+#: flowview_schedules.php:148
+msgid "Email Addresses"
+msgstr "Джибути"
+
+#: flowview_schedules.php:149
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "Имейл адреси (разделени с команда) за изпращане на това сканиране от NetFlow."
+
+#: flowview_schedules.php:156 setup.php:531
+msgid "Format File to Use"
+msgstr "Форматирайте файла, който да използвате"
+
+#: flowview_schedules.php:159 setup.php:534
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Изберете персонализираната HTML обвивка и CSS файла, които да използвате. Този файл съдържа както html, така и CSS, за да обгърне отчета ви. Ако съдържа повече от просто CSS, трябва да поставите специален<REPORT> етикет във файла. Този таг на формата ще бъде заменен от съдържанието на отчета. Тези файлове се намират в директорията „формати“."
+
+#: flowview_schedules.php:164
+msgid "Notification List Settings"
+msgstr ""
+
+#: flowview_schedules.php:169
+msgid "Notification List"
+msgstr ""
+
+#: flowview_schedules.php:170
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr ""
+
+#: flowview_schedules.php:266
+#, fuzzy
+msgid "The Report will arrive once complete."
+msgstr "Докладите ще пристигнат след попълване."
+
+#: flowview_schedules.php:301
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Кликнете върху „Напред“, за да изтриете следните графици."
+
+#: flowview_schedules.php:308
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Кликнете върху „Напред“, за да изпратите сегашното График (и)."
+
+#: flowview_schedules.php:315
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Кликнете върху „Напред“, за да деактивирате следните графици."
+
+#: flowview_schedules.php:322
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Кликнете върху „Напред“, за да активирате следните графици."
+
+#: flowview_schedules.php:329
+msgid "You must select at least one schedule."
+msgstr "Трябва да изберете поне един график."
+
+#: flowview_schedules.php:368 flowview_schedules.php:394
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr ""
+
+#: flowview_schedules.php:422
+msgid "You must specify Emails, a Notification List or both!"
+msgstr ""
+
+#: flowview_schedules.php:489
+#, fuzzy, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Отчет: [редактиране: %s]"
+
+#: flowview_schedules.php:491
+#, fuzzy, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Отчет: [редактиране: %s]"
+
+#: flowview_schedules.php:494
+#, fuzzy
+msgid "Scheduled Report: [new]"
+msgstr "Доклад: [нов]"
+
+#: flowview_schedules.php:559 flowview_schedules.php:856
+#: flowview_schedules.php:980 setup.php:141 setup.php:228
+msgid "Schedules"
+msgstr "Графици"
+
+#: flowview_schedules.php:646 flowview_schedules.php:945
+#, fuzzy
+msgid "Report Title"
+msgstr "Вид на доклада"
+
+#: flowview_schedules.php:650
+msgid "Id"
+msgstr ""
+
+#: flowview_schedules.php:654
+#, fuzzy
+msgid "Output Type"
+msgstr "Формат на изходните данни"
+
+#: flowview_schedules.php:658 flowview_schedules.php:672
+msgid "Sent By"
+msgstr ""
+
+#: flowview_schedules.php:662
+#, fuzzy
+msgid "Date Sent"
+msgstr "Набори от маршрути"
+
+#: flowview_schedules.php:667
+#, fuzzy
+msgid "Run Time"
+msgstr "Краен час"
+
+#: flowview_schedules.php:677 flowview_schedules.php:705
+msgid "Download Data"
+msgstr ""
+
+#: flowview_schedules.php:683
+#, fuzzy
+msgid "Report Logs"
+msgstr "Отчет"
+
+#: flowview_schedules.php:694
+msgid " [View Report Raw]"
+msgstr ""
+
+#: flowview_schedules.php:695
+msgid " [View Report with CSS]"
+msgstr ""
+
+#: flowview_schedules.php:701
+msgid "Manual Send"
+msgstr ""
+
+#: flowview_schedules.php:701
+#, fuzzy
+msgid "Scheduled"
+msgstr "Графици"
+
+#: flowview_schedules.php:703
+#, php-format
+msgid "%s Seconds"
+msgstr ""
+
+#: flowview_schedules.php:768 functions.php:894
+msgid "Start Date Selector"
+msgstr "Стартирайте Селектора за дата"
+
+#: flowview_schedules.php:838
+msgid "FlowView Schedules"
+msgstr "Разписания за FlowView"
+
+#: flowview_schedules.php:840
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "FlowView Schedules [Добавяне на устройства преди графици]"
+
+#: flowview_schedules.php:953
+msgid "Interval"
+msgstr "Интервал"
+
+#: flowview_schedules.php:957
+msgid "Last Sent"
+msgstr ""
+
+#: flowview_schedules.php:961
+msgid "Next Send"
+msgstr "Следваща Изпращане"
+
+#: flowview_schedules.php:965
+#, fuzzy
+msgid "Email/List"
+msgstr "Имейл"
+
+#: flowview_schedules.php:969
+msgid "Logged Sends"
+msgstr ""
+
+#: functions-pre13.php:42
+#, fuzzy, php-format
+msgid "Cacti %s"
+msgstr "Кактусови"
+
+#: functions-pre13.php:191
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr ""
+
+#: functions-pre13.php:197
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr ""
+
+#: functions.php:35 functions.php:116
+msgid "General"
+msgstr "Основни"
+
+#: functions.php:117
+msgid "Logs"
+msgstr ""
+
+#: functions.php:173
+msgid "Select a Report Type First"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:199
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Отчет: [редактиране: %s]"
+
+#: functions.php:201
+msgid "Filter: [new]"
+msgstr "Доклад: [нов]"
+
+#: functions.php:617
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Недефиниран филтър [Изберете филтър, за да получите подробности]"
+
+#: functions.php:627
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Статистически доклад: %s [Включително замествания, както е посочено по-долу]"
+
+#: functions.php:629
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Отпечатан отчет: %s [Включително замествания, както е посочено по-долу]"
+
+#: functions.php:647
+msgid "Select a Filter"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:666
+msgid "Select a Listener"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:686
+#, fuzzy
+msgid "Stream"
+msgstr "Потоци"
+
+#: functions.php:690
+#, fuzzy
+msgid "Select a Stream Host"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:714
+msgid "Apply Filter"
+msgstr "Прилагане на стил"
+
+#: functions.php:715
+msgid "Clear Filter"
+msgstr "Изчистване на филтрите"
+
+#: functions.php:716
+msgid "Create new Flow Filter"
+msgstr "Колко често да се създава нов поточен файл."
+
+#: functions.php:716
+msgid "New"
+msgstr "Нов"
+
+#: functions.php:717
+msgid "Edit"
+msgstr "Редактирай"
+
+#: functions.php:717
+msgid "Edit the Flow Filter"
+msgstr "Редактиране на текущия филтър"
+
+#: functions.php:718 functions.php:986
+msgid "Save"
+msgstr "Запази"
+
+#: functions.php:718
+msgid "Save the Flow Filter"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:719
+msgid "Save As"
+msgstr "Запис като"
+
+#: functions.php:719
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:720
+msgid "Rename"
+msgstr "Преименуване"
+
+#: functions.php:720
+msgid "Rename the Flow Filter"
+msgstr "Преименуване на филтъра за поток"
+
+#: functions.php:721
+msgid "Delete the Flow Filter"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:729
+msgid "Report"
+msgstr "Отчет"
+
+#: functions.php:740
+#, php-format
+msgid "Statistical: %s"
+msgstr "Статистически: %s"
+
+#: functions.php:746
+#, php-format
+msgid "Printed: %s"
+msgstr "Отпечатано: %s"
+
+#: functions.php:750 functions.php:767
+msgid "Select a Filter First"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:817
+msgid "Lines"
+msgstr "Редове"
+
+#: functions.php:835
+msgid "Exclude"
+msgstr "Изключване"
+
+#: functions.php:840
+msgid "Top Sample"
+msgstr "Нагоре Проба"
+
+#: functions.php:845
+#, fuzzy, php-format
+msgid "Top %d Samples"
+msgstr "Топ 2 проби"
+
+#: functions.php:851
+msgid "Octets"
+msgstr "Октети"
+
+#: functions.php:864
+msgid "Show only Domains on Charts Below"
+msgstr "Показване само на домейни в диаграмите отдолу"
+
+#: functions.php:866
+msgid "Domains/Hostnames Only"
+msgstr "Само домейни"
+
+#: functions.php:873
+msgid "Timespan"
+msgstr "Време"
+
+#: functions.php:882
+msgid "Custom"
+msgstr "Персонализиране"
+
+#: functions.php:888
+msgid "From"
+msgstr "От"
+
+#: functions.php:897
+msgid "To"
+msgstr "Дo"
+
+#: functions.php:903
+msgid "End Date Selector"
+msgstr "Селектор за крайна дата"
+
+#: functions.php:906
+msgid "Shift Time Backward"
+msgstr "Преместване на времето назад"
+
+#: functions.php:909
+msgid "Define Shifting Interval"
+msgstr "Определете интервала за превключване"
+
+#: functions.php:922
+msgid "Shift Time Forward"
+msgstr "Преместване на времето напред"
+
+#: functions.php:929
+msgid "Graph"
+msgstr "Графика"
+
+#: functions.php:933
+msgid "Bar"
+msgstr "Бар"
+
+#: functions.php:934
+msgid "Pie"
+msgstr "Отпечатано:"
+
+#: functions.php:935
+msgid "Treemap"
+msgstr "Карта на съдържанието"
+
+#: functions.php:939
+msgid "Height"
+msgstr "Височина"
+
+#: functions.php:951
+msgid "Show/Hide"
+msgstr "Покажи/Скрий"
+
+#: functions.php:955
+msgid "Table"
+msgstr "Таблица"
+
+#: functions.php:971
+#, fuzzy
+msgid "Export Raw Data"
+msgstr "Отчет"
+
+#: functions.php:981
+msgid "Save Flow Filter"
+msgstr "Филтър"
+
+#: functions.php:983
+msgid "New Name"
+msgstr "Ново име"
+
+#: functions.php:992
+msgid "Delete Flow Filter"
+msgstr "Отпечатване на отчети"
+
+#: functions.php:994
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "За да изтриете този филтър на потока, натиснете \"Продължи\".  Ако филтърът за поток се използва в планиран отчет, операцията ще бъде блокирана."
+
+#: functions.php:1011
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Най-горе %s диаграма на разпределение на байтове"
+
+#: functions.php:1012
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "Най-горе %s кръгова диаграма от байтове"
+
+#: functions.php:1013
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Най-горе %s йерархична диаграма на байтовете"
+
+#: functions.php:1016
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Най-добра %s диаграма за разпространение на пакети"
+
+#: functions.php:1017
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "Най-горе %s кръгова диаграма на пакети"
+
+#: functions.php:1018
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Най-горе %s йерархична диаграма на пакетите"
+
+#: functions.php:1021
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Най-горе %s Разпределителна диаграма на потоците"
+
+#: functions.php:1022
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Най-горе %s кръгова диаграма на потоците"
+
+#: functions.php:1023
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Най-горе %s йерархична диаграма на потоците"
+
+#: functions.php:1135
+msgid "Rename Layout"
+msgstr "Преименуване на оформление"
+
+#: functions.php:1143
+msgid " <new>"
+msgstr "Нов"
+
+#: functions.php:1668
+msgid "Filter Settings Saved"
+msgstr "Настройките на филтъра са запазени"
+
+#: functions.php:1785
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Клиент / частен (%s)"
+
+#: functions.php:1787
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: functions.php:1798
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Неизвестен (%s)"
+
+#: functions.php:1824
+#, php-format
+msgid "Netflow - %s"
+msgstr "Нетен поток - %s"
+
+#: functions.php:2097
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Филтър на подмрежата: %s не е стойностен формат CIDR"
+
+#: functions.php:2293 functions.php:2299 functions.php:2305 functions.php:2308
+#: functions.php:2334 functions.php:4490
+msgid "unresolved"
+msgstr "- нерешен -"
+
+#: functions.php:2683 functions.php:2684 functions.php:2685 functions.php:2686
+#: functions.php:2687 functions.php:2688 functions.php:2689 functions.php:2690
+#: functions.php:2691 functions.php:2692 functions.php:2693 functions.php:2694
+#: functions.php:2695 functions.php:2696 functions.php:2697 functions.php:2698
+#: functions.php:2699 functions.php:2700 functions.php:2701 functions.php:2702
+#: functions.php:2703 functions.php:2704 functions.php:2705 functions.php:2706
+#: functions.php:2707 functions.php:2708
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d байта"
+
+#: functions.php:2709
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d байта"
+
+#: functions.php:3079
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3081
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3083
+msgid "No valid report was selected.  Please open a bug on GitHub"
+msgstr ""
+
+#: functions.php:3274
+msgid "Source DNS"
+msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
+
+#: functions.php:3278
+msgid "Source Root DNS"
+msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
+
+#: functions.php:3282
+msgid "Dest DNS"
+msgstr "Dest AS"
+
+#: functions.php:3286
+msgid "Dest Root DNS"
+msgstr "Пристанищен порт"
+
+#: functions.php:3290
+msgid "DNS"
+msgstr "DSR"
+
+#: functions.php:3294
+msgid "Root DNS"
+msgstr "Корен DNS"
+
+#: functions.php:3314
+msgid "Dest Port"
+msgstr "Пристанищен порт"
+
+#: functions.php:3322
+msgid "Dest IF"
+msgstr "Dest IF"
+
+#: functions.php:3338
+msgid "Dest Prefix"
+msgstr "Преден префикс"
+
+#: functions.php:3346
+msgid "Type of Service"
+msgstr "Вид на услугата"
+
+#: functions.php:3365
+msgid "Bytes/Packet"
+msgstr "Пакети"
+
+#: functions.php:3890
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Времето за изчакване на паралелната заявка изтече.  Обърнете се към вашия администратор"
+
+#: functions.php:4596
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Булево: %s, Числово: %s, Шестнадесетично: %s"
+
+#: functions.php:4607
+msgid "Low Delay"
+msgstr "Ниско забавяне"
+
+#: functions.php:4608
+msgid "Throughput"
+msgstr "Пропускателна способност"
+
+#: functions.php:4609
+msgid "Reliability"
+msgstr "Надеждност"
+
+#: functions.php:4610
+msgid "Mincost"
+msgstr "Минкост"
+
+#: functions.php:4614
+msgid "Net Control"
+msgstr "Контрол на мрежата"
+
+#: functions.php:4615
+msgid "Internet Control"
+msgstr "Интернет контрол"
+
+#: functions.php:4616
+msgid "Critic ECP"
+msgstr "Критичен ECP"
+
+#: functions.php:4617
+msgid "Flash Override"
+msgstr "Замяна на Flash"
+
+#: functions.php:4618
+msgid "Flash"
+msgstr "Светкавица"
+
+#: functions.php:4619
+msgid "Immediate"
+msgstr "Незабавно"
+
+#: functions.php:4620
+msgid "Priority"
+msgstr "Приоритет"
+
+#: functions.php:4621
+msgid "Routine"
+msgstr "Рутинна"
+
+#: functions.php:4661
+msgid "Summary Statistics"
+msgstr "Обобщена статистика"
+
+#: functions.php:4672
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "Разпределение на размера на IP пакетите (%%)"
+
+#: functions.php:4677
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Пакети за разпределение на потока (%%)"
+
+#: functions.php:4682
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Октети за разпределение на потока (%%)"
+
+#: functions.php:4687
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Разпределение на времето на потока (%%)"
+
+#: functions.php:4872
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Трябва да изберете статистически отчет или отпечатан отчет!"
+
+#: functions.php:4876
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Трябва да изберете само статистически отчет или отпечатан отчет (не и двете)!"
+
+#: functions.php:4880
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Невалидни дати, Крайна дата / час е по-ранна от началната дата / час!"
+
+#: functions.php:4891 functions.php:4896
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Невалиден IP адрес за източника! <br> (Трябва да е под формата на „192.168.0.1“)"
+
+#: functions.php:4903 functions.php:4909 functions.php:4913
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Невалидна подмрежа за изходния адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
+
+#: functions.php:4927 functions.php:4931
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Невалиден IP адрес за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1“)"
+
+#: functions.php:4937 functions.php:4941 functions.php:4945
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Невалидна подмрежа за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
+
+#: functions.php:4963
+msgid "Invalid value for Source Interface!"
+msgstr "Невалидна стойност за изходния интерфейс!"
+
+#: functions.php:4979
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Невалидна стойност за изходния порт! (0 - 65535)"
+
+#: functions.php:4995
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Невалидна стойност за Source AS! (0 - 65535)"
+
+#: functions.php:5011
+msgid "Invalid value for Destination Interface!"
+msgstr "Невалидна стойност за целевия интерфейс!"
+
+#: functions.php:5027
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Невалидна стойност за целевия порт! (0 - 65535)"
+
+#: functions.php:5043
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Невалидна стойност за Destination AS! (0 - 65535)"
+
+#: functions.php:5059
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Невалидна стойност за протокол! (1 - 255)"
+
+#: functions.php:5071
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Невалидна стойност за TCP флаг! (напр .: 0x1b или 0x1b / SA или SA / SA)"
+
+#: functions.php:5080
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Невалидна стойност за Octoff Octoff!"
+
+#: functions.php:5087
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Невалидна стойност за Линиите за изключване!"
+
+#: functions.php:5114
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "Диаграма за преглеждане на потока за %s Тип е %s"
+
+#: functions.php:5451
+msgid "Not Supported"
+msgstr "Не се поддържа"
+
+#: functions.php:6693 setup.php:417
+#, fuzzy
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "Ария (Бързо, Crash Safe)"
+
+#: functions.php:6694 setup.php:418
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Ария (Бързо, Crash Safe)"
+
+#: functions.php:6695 setup.php:419
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (бавна, висока едновременност)"
+
+#: setup.php:45
+#, fuzzy
+msgid "NetFlow User"
+msgstr "NetFlow версия"
+
+#: setup.php:46
+#, fuzzy
+msgid "NetFlow Admin"
+msgstr "NetFlow версия"
+
+#: setup.php:53 setup.php:77
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Преименувайте вашите файлове config.php.dist или config_local.php.dist в директорията flowview и променете настройката на вашата база данни, преди да инсталирате."
+
+#: setup.php:119
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Моля, имайте предвид, че Flowview плъгини Таблиците се надстройват във фонов режим.  Това може да отнеме известно време. Проверете дневника на Cacti за повече информация"
+
+#: setup.php:132
+msgid "The Filter has been Deleted"
+msgstr "Филтърът е изтрит"
+
+#: setup.php:133
+msgid "The Filter has been Updated"
+msgstr "Филтърът е актуализиран"
+
+#: setup.php:138
+msgid "Import/Export"
+msgstr "Импорт/Експорт"
+
+#: setup.php:139 setup.php:140 setup.php:141 setup.php:142 setup.php:147
+#: setup.php:291 setup.php:293
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php:142
+msgid "Databases"
+msgstr "Бази данни"
+
+#: setup.php:150
+msgid "Normal User"
+msgstr "Обикновен потребител"
+
+#: setup.php:151
+msgid "System Administration"
+msgstr "Системна администрация"
+
+#: setup.php:172 setup.php:193
+msgid "Flow Viewer"
+msgstr "Преглед на потока"
+
+#: setup.php:179
+msgid "Dashboard"
+msgstr "Табло"
+
+#: setup.php:186 setup.php:214 setup.php:242 setup.php:270
+msgid "(save)"
+msgstr "Запази"
+
+#: setup.php:207 setup.php:235 setup.php:263
+msgid "(edit)"
+msgstr "Редактиране..."
+
+#: setup.php:221 setup.php:249 setup.php:277
+msgid "(actions)"
+msgstr "Действия"
+
+#: setup.php:364
+#, fuzzy, php-format
+msgid "%d Process"
+msgstr "%d пиксела"
+
+#: setup.php:366
+#, php-format
+msgid "%d Processes"
+msgstr ""
+
+#: setup.php:372
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr ""
+
+#: setup.php:373
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr ""
+
+#: setup.php:386
+#, fuzzy
+msgid "Internet Proxy Settings"
+msgstr "Интернет контрол"
+
+#: setup.php:391
+#, fuzzy
+msgid "Internet Proxy Address"
+msgstr "Интернет контрол"
+
+#: setup.php:392
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr ""
+
+#: setup.php:399
+#, fuzzy
+msgid "Internet Proxy User"
+msgstr "Интернет контрол"
+
+#: setup.php:400
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr ""
+
+#: setup.php:407
+msgid "Internet Proxy Password"
+msgstr ""
+
+#: setup.php:408
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr ""
+
+#: setup.php:451
+msgid "Name Resolution"
+msgstr "Резолюция на име на хост"
+
+#: setup.php:456
+msgid "Hostname Resolution"
+msgstr "Резолюция на име на хост"
+
+#: setup.php:457
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Методът, чрез който искате да разрешите имената на хостове."
+
+#: setup.php:460
+msgid "Use Local Server"
+msgstr "Използвайте локален сървър"
+
+#: setup.php:461
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Използвайте DNS сървър по-долу"
+
+#: setup.php:462
+msgid "Don't Resolve DNS"
+msgstr "Не разрешавайте DNS"
+
+#: setup.php:467
+#, fuzzy
+msgid "Download the Internet Registry Daily"
+msgstr "Подробни данни за системния регистър на интернет маршрути"
+
+#: setup.php:468
+msgid "If you are interested in the publically available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr ""
+
+#: setup.php:473
+msgid "Local Domain Name"
+msgstr "Изолирайте домейн имената"
+
+#: setup.php:476
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "За IPv4 адреси в локалната мрежа, които не се разрешават локално, добавете този суфикс към получения IP адрес."
+
+#: setup.php:481
+msgid "Local IP Range"
+msgstr "Локален IP диапазон"
+
+#: setup.php:484
+#, fuzzy
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Предоставете диапазона от IPv4 IP адреси за вашата локална мрежа за хостове, които може да не са регистрирани в DNS.  Тези хостове ще бъдат съпоставени с името на локалния домейн по-горе.  Това е повече за домашните потребители.  Можете да използвате CIDR или не-CIDR формати.  За изпит: 192.168.11.0 или 192.168.11.0/24"
+
+#: setup.php:485
+msgid "Use CIDR or Non-CIDR"
+msgstr "Използвайте CIDR или не-CIDR"
+
+#: setup.php:490
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Използвайте Arin за намиране на нерегистрирани домейни"
+
+#: setup.php:491
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Много услуги за събиране на данни на Big Tech обичат да маскират собствеността си върху домейни, за да замъглят факта, че събират вашата лична информация.  Ако сте загрижени за това и вашата инсталация на Cacti има достъп до интернет, можете да използвате Arin, за да премахнете маската от тези големи технологични компании."
+
+#: setup.php:496
+msgid "Whois Provider Host"
+msgstr "Хост на кой е доставчик"
+
+#: setup.php:499
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Моля, посочете името на хоста за разрешаване на whois повиквания.  Ако не е нула, трябва да имате whois двоичен във вашия системен път."
+
+#: setup.php:500
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php:505
+msgid "Whois Binary Path"
+msgstr "Двоичен път на инструментите за поток"
+
+#: setup.php:508
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Моля, посочете името на пътя за двоичния файл \"whois\".  Двоичният \"whois\" ще бъде използван за намиране на AS информация, допълваща Arin."
+
+#: setup.php:509
+msgid "Enter binary path"
+msgstr "Въведете двоичен път"
+
+#: setup.php:514
+msgid "Graph Drilldown Settings"
+msgstr ""
+
+#: setup.php:519
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr ""
+
+#: setup.php:522
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr ""
+
+#: setup.php:526
+msgid "Data Retention and Report Generation"
+msgstr "Запазване на данни и генериране на отчети"
+
+#: setup.php:538
+msgid "Data Retention Policy"
+msgstr "Политика за задържане на данни"
+
+#: setup.php:539
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Времето, през което кактусите ще поддържат разделените таблици на потока."
+
+#: setup.php:542
+#, php-format
+msgid "%d Week"
+msgstr "% d Седмица"
+
+#: setup.php:543 setup.php:544
+#, php-format
+msgid "%d Weeks"
+msgstr "% d седмици"
+
+#: setup.php:545
+#, php-format
+msgid "%d Month"
+msgstr "% d Месец"
+
+#: setup.php:546 setup.php:547 setup.php:548 setup.php:549
+#, php-format
+msgid "%d Months"
+msgstr "% d Месеци"
+
+#: setup.php:550
+#, php-format
+msgid "%d Year"
+msgstr "% d Година"
+
+#: setup.php:555
+msgid "Database Partitioning Scheme"
+msgstr "Схема за разделяне на база данни"
+
+#: setup.php:556
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "В зависимост от броя на потоците в минута може да се наложи повече таблици на ден."
+
+#: setup.php:559
+msgid "Daily"
+msgstr "Ежедневно"
+
+#: setup.php:560
+msgid "Hourly"
+msgstr "Почасово"
+
+#: setup.php:565
+msgid "Storage Engine for Raw Tables"
+msgstr "Двигател за съхранение на сурови таблици"
+
+#: setup.php:566
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Aria Engine е идеален за всички, освен за суровата маса на живо.  Живата сурова маса винаги ще бъде InnoDB.  Направете своя избор."
+
+#: setup.php:572
+msgid "Parallel Queries"
+msgstr "Паралелни заявки"
+
+#: setup.php:577
+msgid "Max Concurrent Threads"
+msgstr "Макс едновременни нишки"
+
+#: setup.php:578
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Максималният брой нишки, които ще бъдат изпратени за изпълнение на заявките FlowView.  Имайте предвид, че можете да имате най-много 1 нишка на дял от базата данни и трябва да внимавате да не претоварите сървъра на базата данни с твърде много едновременни нишки."
+
+#: setup.php:581
+msgid "Disabled"
+msgstr "Изключен"
+
+#: setup.php:582 setup.php:583 setup.php:584 setup.php:585 setup.php:586
+#: setup.php:587 setup.php:588 setup.php:589 setup.php:590 setup.php:591
+#: setup.php:592 setup.php:593 setup.php:594 setup.php:595 setup.php:596
+#: setup.php:597 setup.php:598 setup.php:599 setup.php:600
+#, php-format
+msgid "%d Threads"
+msgstr "%d нишки"
+
+#: setup.php:605
+msgid "Maximum Run Time"
+msgstr "Максимален брой редове"
+
+#: setup.php:606
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Ако паралелната заявка не завърши в този час, излезте."
+
+#: setup.php:620
 msgid "Cached Data Time to Live"
 msgstr "Кеширани данни време за живеене"
 
-#: setup.php:512
+#: setup.php:621
 msgid "How long should FlowView hold onto Cached Query results before purging them?"
 msgstr "Колко дълго FlowView трябва да задържи резултатите от кешираната заявка, преди да ги изчисти?"
 
-#: setup.php:515 setup.php:516
+#: setup.php:624 setup.php:625
 #, php-format
 msgid "%d Hours"
 msgstr "%d часа"
 
-#: setup.php:517
+#: setup.php:626
 #, php-format
 msgid "%d Day"
 msgstr "% d дни"
 
-#: setup.php:518
+#: setup.php:627
 #, php-format
 msgid "%d Days"
 msgstr "% d дни"
 
-#: setup.php:523
+#: setup.php:632
 msgid "MaxScale Sharding"
 msgstr "МаксСкално раздробяване"
 
-#: setup.php:528
+#: setup.php:633
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr ""
+
+#: setup.php:638
 msgid "Leverage MaxScale to Distribute Query Shards"
 msgstr "Използвайте MaxScale за разпространение на парчета от заявки"
 
-#: setup.php:529
+#: setup.php:639
 msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
 msgstr "Ако имате няколко услуги, действащи като роби за MaxScale, можете да увеличите скоростта на заявките, като разпространите паралелните заявки към няколко сървъра на MariaDB."
 
-#: setup.php:534
-msgid "MaxScale Read-Only Port"
+#: setup.php:644
+#, fuzzy
+msgid "MaxScale Read-Write Split Port"
 msgstr "Порт само за четене на MaxScale"
 
-#: setup.php:537
-msgid "This should be the port of the Read-Only-Service (readconnroute) service and router."
+#: setup.php:647
+#, fuzzy
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
 msgstr "Това трябва да бъде портът на услугата и маршрутизатора само за четене (readconnroute)."
 
-#: setup.php:543
+#: setup.php:653
 msgid "Flowview"
 msgstr "FlowView"
 
-#~ msgid "Top 3 Samples"
-#~ msgstr "Топ 3 проби"
+#: setup.php:1308
+msgid "View NetFlow Traffic In Range"
+msgstr ""
 
-#~ msgid "Top 4 Samples"
-#~ msgstr "Топ 4 проби"
-
-#~ msgid "Top 5 Samples"
-#~ msgstr "Топ 5 проби"
-
-#~ msgid "Save Overrides to Selected Filter"
-#~ msgstr "Запазване на замените в избрания филтър"
-
-#, fuzzy
-#~ msgid "(e.g., -0x0b/0x0F)"
-#~ msgstr "(напр. -0x0b / 0x0F)"
-
-#, fuzzy
-#~ msgid "(view)"
-#~ msgstr "Преглед"
-
-#, fuzzy
-#~ msgid "0 (Disabled)"
-#~ msgstr "0 (забранено)"
-
-#, fuzzy
-#~ msgid "1 Line with Tags"
-#~ msgstr "1 ред с маркери"
-
-#, fuzzy
-#~ msgid "3PC"
-#~ msgstr "3PC"
-
-#, fuzzy
-#~ msgid "9 (Highest)"
-#~ msgstr "9 (най-висока)"
-
-#, fuzzy
-#~ msgid "A comma delimited list of domains names to strip from the domain."
-#~ msgstr "Списък с имена на домейни, разделени със запетая, за премахване от домейна."
-
-#, fuzzy
-#~ msgid "ARGUS"
-#~ msgstr "ARGUS"
-
-#, fuzzy
-#~ msgid "AS"
-#~ msgstr "КАТО"
-
-#, fuzzy
-#~ msgid "AS Aggregation"
-#~ msgstr "AS Aggregation"
-
-#, fuzzy
-#~ msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
-#~ msgstr "Също така не забравяйте да премахнете всички останали файлове от местоположението на Вашия Net-Flow Capture."
-
-#, fuzzy
-#~ msgid "Alternate DNS Server"
-#~ msgstr "Алтернативен DNS сървър"
-
-#, fuzzy
-#~ msgid "Any Part in Specified Time Span"
-#~ msgstr "Всяка част в определен период от време"
-
-#, fuzzy
-#~ msgid "BBN-RCC-MON"
-#~ msgstr "BBN-RCC-MON"
-
-#, fuzzy
-#~ msgid "CBT"
-#~ msgstr "Пенис"
-
-#, fuzzy
-#~ msgid "CHAOS"
-#~ msgstr "CHAOS"
-
-#, fuzzy
-#~ msgid "Compression"
-#~ msgstr "компресия"
-
-#, fuzzy
-#~ msgid "Compression Level"
-#~ msgstr "Ниво на компресия"
-
-#, fuzzy
-#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
-#~ msgstr "Ниво на компресиране на поточни файлове. По-високата компресия спестява място, но използва повече CPU за съхраняване и извличане на резултати."
-
-#, fuzzy
-#~ msgid "DCCP"
-#~ msgstr "DCCP"
-
-#, fuzzy
-#~ msgid "DCN-MEAS"
-#~ msgstr "DCN-MEAS"
-
-#, fuzzy
-#~ msgid "DDP"
-#~ msgstr "DDP"
-
-#, fuzzy
-#~ msgid "Defaults"
-#~ msgstr "По подразбиране"
-
-#, fuzzy
-#~ msgid "Dest Port(s)"
-#~ msgstr "Порт (и) за търсене"
-
-#, fuzzy
-#~ msgid "Destination Prefix Aggregation"
-#~ msgstr "Агрегация на целевия префикс"
-
-#~ msgid "Device Name"
-#~ msgstr "Име на устройство"
-
-#, fuzzy
-#~ msgid "Device [edit: %s]"
-#~ msgstr "Устройство [редактиране: %s]"
-
-#, fuzzy
-#~ msgid "Device [new]"
-#~ msgstr "Устройство [ново]"
-
-#, fuzzy
-#~ msgid "Directory"
-#~ msgstr "Папка"
-
-#, fuzzy
-#~ msgid "Directory Structure that will be used for the flows for this device."
-#~ msgstr "Структура на указателя, която ще се използва за потоците за това устройство."
-
-#, fuzzy
-#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
-#~ msgstr "Директорията, в която текат тези устройства. Тази директория трябва да бъде в пътя на директорията на потока. Не поставяйте пълния път тук. Също така, не че ако промените пътя, всички предварително дефинирани настройки на филтъра, за да го използвате, ще трябва да бъдат презаписани."
-
-#~ msgid "Down"
-#~ msgstr "Надолу"
-
-#, fuzzy
-#~ msgid "EGP"
-#~ msgstr "EGP"
-
-#, fuzzy
-#~ msgid "EIGRP"
-#~ msgstr "EIGRP"
-
-#, fuzzy
-#~ msgid "EMCON"
-#~ msgstr "EMCON"
-
-#, fuzzy
-#~ msgid "ENCAP"
-#~ msgstr "ENCAP"
-
-#, fuzzy
-#~ msgid "End Date"
-#~ msgstr "Крайна дата"
-
-#, fuzzy
-#~ msgid "End Time in Specified Time Span"
-#~ msgstr "Крайно време в определен период от време"
-
-#, fuzzy
-#~ msgid "Entirely in Specified Time Span"
-#~ msgstr "Изцяло в определен период от време"
-
-#, fuzzy
-#~ msgid "Expire"
-#~ msgstr "Изтича"
-
-#, fuzzy
-#~ msgid "Filter Data"
-#~ msgstr "Име на филтъра"
-
-#, fuzzy
-#~ msgid "Flow Filter Constraints"
-#~ msgstr "Ограничения на филтъра на потока"
-
-#, fuzzy
-#~ msgid "Flow Tools Work Directory"
-#~ msgstr "Работна директория за поточни инструменти"
-
-#, fuzzy
-#~ msgid "Flow-Tools tagged version 5"
-#~ msgstr "Инструменти за потоци, маркирани версия 5"
-
-#, fuzzy
-#~ msgid "Flows Directory"
-#~ msgstr "Директория на потоците"
-
-#, fuzzy
-#~ msgid "Full (Catalyst)"
-#~ msgstr "Пълно (катализатор)"
-
-#, fuzzy
-#~ msgid "GGP"
-#~ msgstr "GGP"
-
-#, fuzzy
-#~ msgid "GRE"
-#~ msgstr "GRE"
-
-#, fuzzy
-#~ msgid "HMP"
-#~ msgstr "HMP"
-
-#, fuzzy
-#~ msgid "How long to keep your flow files."
-#~ msgstr "Колко дълго трябва да поддържате поточните си файлове."
-
-#, fuzzy
-#~ msgid "ICMP"
-#~ msgstr "ICMP"
-
-#, fuzzy
-#~ msgid "IDPR"
-#~ msgstr "IDPR"
-
-#, fuzzy
-#~ msgid "IDPR-CMTP"
-#~ msgstr "IDPR-CMTP"
-
-#, fuzzy
-#~ msgid "IDRP"
-#~ msgstr "IDRP"
-
-#, fuzzy
-#~ msgid "IGMP"
-#~ msgstr "IGMP"
-
-#, fuzzy
-#~ msgid "IGP"
-#~ msgstr "IGP"
-
-#, fuzzy
-#~ msgid "IL"
-#~ msgstr "I Л"
-
-#, fuzzy
-#~ msgid "IP"
-#~ msgstr "IP адрес"
-
-#, fuzzy
-#~ msgid "IPENCAP"
-#~ msgstr "IPENCAP"
-
-#, fuzzy
-#~ msgid "IPIP"
-#~ msgstr "IPIP"
-
-#, fuzzy
-#~ msgid "IPSEC-AH"
-#~ msgstr "IPSEC-AH"
-
-#, fuzzy
-#~ msgid "IPSEC-ESP"
-#~ msgstr "IPSEC-ESP"
-
-#, fuzzy
-#~ msgid "IPv6-Frag"
-#~ msgstr "IPv6-Frag"
-
-#, fuzzy
-#~ msgid "IPv6-ICMP"
-#~ msgstr "IPv6-ICMP"
-
-#, fuzzy
-#~ msgid "IPv6-NoNxt"
-#~ msgstr "IPv6-NoNxt"
-
-#, fuzzy
-#~ msgid "IPv6-Opts"
-#~ msgstr "IPv6-избира"
-
-#, fuzzy
-#~ msgid "IPv6-Route"
-#~ msgstr "IPv6-Route"
-
-#, fuzzy
-#~ msgid "IRTP"
-#~ msgstr "IRTP"
-
-#, fuzzy
-#~ msgid "ISO-TP4"
-#~ msgstr "ISO-TP4"
-
-#, fuzzy
-#~ msgid "Include if:"
-#~ msgstr "Включете, ако:"
-
-#, fuzzy
-#~ msgid "LEAF-1"
-#~ msgstr "КРИЛОТО-1"
-
-#, fuzzy
-#~ msgid "LEAF-2"
-#~ msgstr "КРИЛОТО-2"
-
-#, fuzzy
-#~ msgid "MERIT-INP"
-#~ msgstr "Заслугите INP"
-
-#, fuzzy
-#~ msgid "MFE-NSP"
-#~ msgstr "MFE-НСП"
-
-#, fuzzy
-#~ msgid "MTP"
-#~ msgstr "МТР"
-
-#, fuzzy
-#~ msgid "MUX"
-#~ msgstr "MUX"
-
-#, fuzzy
-#~ msgid "Manage Listeners"
-#~ msgstr "Управление на слушателите"
-
-#~ msgid "Misc"
-#~ msgstr "Разни"
-
-#, fuzzy
-#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
-#~ msgstr "В полетата по-горе са разрешени няколко полета, разделени със запетаи. Знакът минус (-) ще отхвърли запис (напр. -80 за пристанище, означава всеки порт, но 80)"
-
-#, fuzzy
-#~ msgid "NETBLT"
-#~ msgstr "NETBLT"
-
-#, fuzzy
-#~ msgid "NVP-II"
-#~ msgstr "NVP-II"
-
-#, fuzzy
-#~ msgid "Nesting"
-#~ msgstr "Разполагане"
-
-#, fuzzy
-#~ msgid "NetFlow AS Aggregation"
-#~ msgstr "Агрегиране на NetFlow AS"
-
-#, fuzzy
-#~ msgid "NetFlow Destination"
-#~ msgstr "Дестинация на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Destination Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс за дестинация на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Full Flow"
-#~ msgstr "NetFlow Full Flow"
-
-#, fuzzy
-#~ msgid "NetFlow Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Proto Port Aggregation"
-#~ msgstr "NetFlow Proto Port Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow Protocol version used by the device."
-#~ msgstr "Версия NetFlow протокол, използвана от устройството."
-
-#, fuzzy
-#~ msgid "NetFlow Source Destination"
-#~ msgstr "Целева цел на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow Source Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на източника на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow ToS AS Aggregation"
-#~ msgstr "Агрегиране на NetFlow ToS AS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Destination Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на целеви префикс на NetFlow"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Prefix Port Aggregation"
-#~ msgstr "Агрегиране на пристанището на NetFlow ToS"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Proto Port Aggregation"
-#~ msgstr "NetFlow ToS Proto Port Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow ToS Source Prefix Aggregation"
-#~ msgstr "Агрегиране на NetFlow ToS Source Prefix Aggregation"
-
-#, fuzzy
-#~ msgid "NetFlow Version"
-#~ msgstr "NetFlow версия"
-
-#, fuzzy
-#~ msgid "NetFlow version 1"
-#~ msgstr "NetFlow версия 1"
-
-#, fuzzy
-#~ msgid "NetFlow version 5"
-#~ msgstr "NetFlow версия 5"
-
-#, fuzzy
-#~ msgid "NetFlow version 6"
-#~ msgstr "NetFlow версия 6"
-
-#, fuzzy
-#~ msgid "NetFlow version 7"
-#~ msgstr "NetFlow версия 7"
-
-#, fuzzy
-#~ msgid "New Flow"
-#~ msgstr "Нов поток"
-
-#, fuzzy
-#~ msgid "New Query"
-#~ msgstr "Нова заявка"
-
-#, fuzzy
-#~ msgid "No Devices"
-#~ msgstr "Устройства"
-
-#, fuzzy
-#~ msgid "Note:"
-#~ msgstr "Бележка:"
-
-#, fuzzy
-#~ msgid "OSPF"
-#~ msgstr "OSPF"
-
-#, fuzzy
-#~ msgid "PRM"
-#~ msgstr "Лица с намалена подвижност"
-
-#, fuzzy
-#~ msgid "PUP"
-#~ msgstr "ПУП"
-
-#, fuzzy
-#~ msgid "Packets Bar"
-#~ msgstr "Пакет бар"
-
-#, fuzzy
-#~ msgid "Prefix"
-#~ msgstr "Префикс"
-
-#, fuzzy
-#~ msgid "Prefix Aggregation"
-#~ msgstr "Агрегация на префикса"
-
-#, fuzzy
-#~ msgid "Protocol Port Aggregation"
-#~ msgstr "Протокол Агрегиране на портове"
-
-#, fuzzy
-#~ msgid "RDP"
-#~ msgstr "ПРСР"
-
-#, fuzzy
-#~ msgid "RSPF"
-#~ msgstr "RSPF"
-
-#, fuzzy
-#~ msgid "RSVP"
-#~ msgstr "Регистрация"
-
-#, fuzzy
-#~ msgid "Report Parameters"
-#~ msgstr "Параметри на отчета"
-
-#, fuzzy
-#~ msgid "SDRP"
-#~ msgstr "SDRP"
-
-#, fuzzy
-#~ msgid "ST"
-#~ msgstr "ST"
-
-#, fuzzy
-#~ msgid "Select One"
-#~ msgstr "Избери един"
-
-#, fuzzy
-#~ msgid "Select a Filter to display data"
-#~ msgstr "Отпечатване на отчети"
-
-#, fuzzy
-#~ msgid "Source Prefix Aggregation"
-#~ msgstr "Агрегиране на префикс на източника"
-
-#, fuzzy
-#~ msgid "Src AS"
-#~ msgstr "Src AS"
-
-#, fuzzy
-#~ msgid "Src IF"
-#~ msgstr "Src IF"
-
-#, fuzzy
-#~ msgid "Src IP"
-#~ msgstr "Src IP"
-
-#, fuzzy
-#~ msgid "Src Port"
-#~ msgstr "Порт Src"
-
-#, fuzzy
-#~ msgid "Src Prefix"
-#~ msgstr "Src Prefix"
-
-#, fuzzy
-#~ msgid "Src/Dest IP"
-#~ msgstr "Src / IP адрес"
-
-#, fuzzy
-#~ msgid "Start Time in Specified Time Span"
-#~ msgstr "Начално време в определен период от време"
-
-#, fuzzy
-#~ msgid "TCP"
-#~ msgstr "TCP"
-
-#, fuzzy
-#~ msgid "TP++"
-#~ msgstr "TP ++"
-
-#, fuzzy
-#~ msgid "TRUNK-1"
-#~ msgstr "Багажника-1"
-
-#, fuzzy
-#~ msgid "TRUNK-2"
-#~ msgstr "Багажника-2"
-
-#, fuzzy
-#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
-#~ msgstr "Пътят към вашата поточна котка, филтър за потока и двоичен поток."
-
-#, fuzzy
-#~ msgid "This is the DNS Server used to resolve names."
-#~ msgstr "Това е DNS сървърът, използван за разрешаване на имена."
-
-#, fuzzy
-#~ msgid "This is the path to a temporary directory to do work."
-#~ msgstr "Това е пътят към временна директория за работа."
-
-#, fuzzy
-#~ msgid "This is the path to base the path of your flow folder structure."
-#~ msgstr "Това е пътят към базата на пътя на структурата на поточната ви папка."
-
-#, fuzzy
-#~ msgid "UDP"
-#~ msgstr "UDP"
-
-#~ msgid "Up"
-#~ msgstr "Нагоре"
-
-#, fuzzy
-#~ msgid "VMTP"
-#~ msgstr "VMTP"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "Преглед"
-
 #, fuzzy
-#~ msgid "XNET"
-#~ msgstr "XNET"
+#~ msgid "XTP"
+#~ msgstr "XTP"
 
 #, fuzzy
 #~ msgid "XNS-IDP"
 #~ msgstr "XNS-IDP"
 
 #, fuzzy
-#~ msgid "XTP"
-#~ msgstr "XTP"
+#~ msgid "XNET"
+#~ msgstr "XNET"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Преглед"
+
+#, fuzzy
+#~ msgid "VMTP"
+#~ msgstr "VMTP"
+
+#~ msgid "Up"
+#~ msgstr "Нагоре"
+
+#, fuzzy
+#~ msgid "UDP"
+#~ msgstr "UDP"
+
+#, fuzzy
+#~ msgid "This is the path to base the path of your flow folder structure."
+#~ msgstr "Това е пътят към базата на пътя на структурата на поточната ви папка."
+
+#, fuzzy
+#~ msgid "This is the path to a temporary directory to do work."
+#~ msgstr "Това е пътят към временна директория за работа."
+
+#, fuzzy
+#~ msgid "This is the DNS Server used to resolve names."
+#~ msgstr "Това е DNS сървърът, използван за разрешаване на имена."
+
+#, fuzzy
+#~ msgid "The path to your flow-cat, flow-filter, and flow-stat binary."
+#~ msgstr "Пътят към вашата поточна котка, филтър за потока и двоичен поток."
+
+#, fuzzy
+#~ msgid "TRUNK-2"
+#~ msgstr "Багажника-2"
+
+#, fuzzy
+#~ msgid "TRUNK-1"
+#~ msgstr "Багажника-1"
+
+#, fuzzy
+#~ msgid "TP++"
+#~ msgstr "TP ++"
+
+#, fuzzy
+#~ msgid "TCP"
+#~ msgstr "TCP"
+
+#, fuzzy
+#~ msgid "Start Time in Specified Time Span"
+#~ msgstr "Начално време в определен период от време"
+
+#, fuzzy
+#~ msgid "Src/Dest IP"
+#~ msgstr "Src / IP адрес"
+
+#, fuzzy
+#~ msgid "Src Prefix"
+#~ msgstr "Src Prefix"
+
+#, fuzzy
+#~ msgid "Src Port"
+#~ msgstr "Порт Src"
+
+#, fuzzy
+#~ msgid "Src IP"
+#~ msgstr "Src IP"
+
+#, fuzzy
+#~ msgid "Src IF"
+#~ msgstr "Src IF"
+
+#, fuzzy
+#~ msgid "Src AS"
+#~ msgstr "Src AS"
+
+#, fuzzy
+#~ msgid "Source Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на източника"
+
+#, fuzzy
+#~ msgid "Select a Filter to display data"
+#~ msgstr "Отпечатване на отчети"
+
+#, fuzzy
+#~ msgid "Select One"
+#~ msgstr "Избери един"
+
+#, fuzzy
+#~ msgid "ST"
+#~ msgstr "ST"
+
+#, fuzzy
+#~ msgid "SDRP"
+#~ msgstr "SDRP"
+
+#, fuzzy
+#~ msgid "Report Parameters"
+#~ msgstr "Параметри на отчета"
+
+#, fuzzy
+#~ msgid "RSVP"
+#~ msgstr "Регистрация"
+
+#, fuzzy
+#~ msgid "RSPF"
+#~ msgstr "RSPF"
+
+#, fuzzy
+#~ msgid "RDP"
+#~ msgstr "ПРСР"
+
+#, fuzzy
+#~ msgid "Protocol Port Aggregation"
+#~ msgstr "Протокол Агрегиране на портове"
+
+#, fuzzy
+#~ msgid "Prefix Aggregation"
+#~ msgstr "Агрегация на префикса"
+
+#, fuzzy
+#~ msgid "Prefix"
+#~ msgstr "Префикс"
+
+#, fuzzy
+#~ msgid "Packets Bar"
+#~ msgstr "Пакет бар"
+
+#, fuzzy
+#~ msgid "PUP"
+#~ msgstr "ПУП"
+
+#, fuzzy
+#~ msgid "PRM"
+#~ msgstr "Лица с намалена подвижност"
+
+#, fuzzy
+#~ msgid "OSPF"
+#~ msgstr "OSPF"
+
+#, fuzzy
+#~ msgid "Note:"
+#~ msgstr "Бележка:"
+
+#, fuzzy
+#~ msgid "No Devices"
+#~ msgstr "Устройства"
+
+#, fuzzy
+#~ msgid "New Query"
+#~ msgstr "Нова заявка"
+
+#, fuzzy
+#~ msgid "New Flow"
+#~ msgstr "Нов поток"
+
+#, fuzzy
+#~ msgid "NetFlow version 7"
+#~ msgstr "NetFlow версия 7"
+
+#, fuzzy
+#~ msgid "NetFlow version 6"
+#~ msgstr "NetFlow версия 6"
+
+#, fuzzy
+#~ msgid "NetFlow version 5"
+#~ msgstr "NetFlow версия 5"
+
+#, fuzzy
+#~ msgid "NetFlow version 1"
+#~ msgstr "NetFlow версия 1"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Source Prefix Aggregation"
+#~ msgstr "Агрегиране на NetFlow ToS Source Prefix Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Proto Port Aggregation"
+#~ msgstr "NetFlow ToS Proto Port Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Port Aggregation"
+#~ msgstr "Агрегиране на пристанището на NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на NetFlow ToS"
+
+#, fuzzy
+#~ msgid "NetFlow ToS Destination Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на целеви префикс на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow ToS AS Aggregation"
+#~ msgstr "Агрегиране на NetFlow ToS AS"
+
+#, fuzzy
+#~ msgid "NetFlow Source Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на източника на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Source Destination"
+#~ msgstr "Целева цел на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Protocol version used by the device."
+#~ msgstr "Версия NetFlow протокол, използвана от устройството."
+
+#, fuzzy
+#~ msgid "NetFlow Proto Port Aggregation"
+#~ msgstr "NetFlow Proto Port Aggregation"
+
+#, fuzzy
+#~ msgid "NetFlow Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Full Flow"
+#~ msgstr "NetFlow Full Flow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination Prefix Aggregation"
+#~ msgstr "Агрегиране на префикс за дестинация на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow Destination"
+#~ msgstr "Дестинация на NetFlow"
+
+#, fuzzy
+#~ msgid "NetFlow AS Aggregation"
+#~ msgstr "Агрегиране на NetFlow AS"
+
+#, fuzzy
+#~ msgid "Nesting"
+#~ msgstr "Разполагане"
+
+#, fuzzy
+#~ msgid "NVP-II"
+#~ msgstr "NVP-II"
+
+#, fuzzy
+#~ msgid "NETBLT"
+#~ msgstr "NETBLT"
+
+#, fuzzy
+#~ msgid "Multiple field entries, separated by commas, are permitted in the fields above. A minus sign (-) will negate an entry (e.g. -80 for Port, would mean any Port but 80)"
+#~ msgstr "В полетата по-горе са разрешени няколко полета, разделени със запетаи. Знакът минус (-) ще отхвърли запис (напр. -80 за пристанище, означава всеки порт, но 80)"
+
+#~ msgid "Misc"
+#~ msgstr "Разни"
+
+#, fuzzy
+#~ msgid "Manage Listeners"
+#~ msgstr "Управление на слушателите"
+
+#, fuzzy
+#~ msgid "MUX"
+#~ msgstr "MUX"
+
+#, fuzzy
+#~ msgid "MTP"
+#~ msgstr "МТР"
+
+#, fuzzy
+#~ msgid "MFE-NSP"
+#~ msgstr "MFE-НСП"
+
+#, fuzzy
+#~ msgid "MERIT-INP"
+#~ msgstr "Заслугите INP"
+
+#, fuzzy
+#~ msgid "LEAF-2"
+#~ msgstr "КРИЛОТО-2"
+
+#, fuzzy
+#~ msgid "LEAF-1"
+#~ msgstr "КРИЛОТО-1"
+
+#, fuzzy
+#~ msgid "Include if:"
+#~ msgstr "Включете, ако:"
+
+#, fuzzy
+#~ msgid "ISO-TP4"
+#~ msgstr "ISO-TP4"
+
+#, fuzzy
+#~ msgid "IRTP"
+#~ msgstr "IRTP"
+
+#, fuzzy
+#~ msgid "IPv6-Route"
+#~ msgstr "IPv6-Route"
+
+#, fuzzy
+#~ msgid "IPv6-Opts"
+#~ msgstr "IPv6-избира"
+
+#, fuzzy
+#~ msgid "IPv6-NoNxt"
+#~ msgstr "IPv6-NoNxt"
+
+#, fuzzy
+#~ msgid "IPv6-ICMP"
+#~ msgstr "IPv6-ICMP"
+
+#, fuzzy
+#~ msgid "IPv6-Frag"
+#~ msgstr "IPv6-Frag"
+
+#, fuzzy
+#~ msgid "IPSEC-ESP"
+#~ msgstr "IPSEC-ESP"
+
+#, fuzzy
+#~ msgid "IPSEC-AH"
+#~ msgstr "IPSEC-AH"
+
+#, fuzzy
+#~ msgid "IPIP"
+#~ msgstr "IPIP"
+
+#, fuzzy
+#~ msgid "IPENCAP"
+#~ msgstr "IPENCAP"
+
+#, fuzzy
+#~ msgid "IP"
+#~ msgstr "IP адрес"
+
+#, fuzzy
+#~ msgid "IL"
+#~ msgstr "I Л"
+
+#, fuzzy
+#~ msgid "IGP"
+#~ msgstr "IGP"
+
+#, fuzzy
+#~ msgid "IGMP"
+#~ msgstr "IGMP"
+
+#, fuzzy
+#~ msgid "IDRP"
+#~ msgstr "IDRP"
+
+#, fuzzy
+#~ msgid "IDPR-CMTP"
+#~ msgstr "IDPR-CMTP"
+
+#, fuzzy
+#~ msgid "IDPR"
+#~ msgstr "IDPR"
+
+#, fuzzy
+#~ msgid "ICMP"
+#~ msgstr "ICMP"
+
+#, fuzzy
+#~ msgid "How long to keep your flow files."
+#~ msgstr "Колко дълго трябва да поддържате поточните си файлове."
+
+#, fuzzy
+#~ msgid "HMP"
+#~ msgstr "HMP"
+
+#, fuzzy
+#~ msgid "GRE"
+#~ msgstr "GRE"
+
+#, fuzzy
+#~ msgid "GGP"
+#~ msgstr "GGP"
+
+#, fuzzy
+#~ msgid "Full (Catalyst)"
+#~ msgstr "Пълно (катализатор)"
+
+#, fuzzy
+#~ msgid "Flows Directory"
+#~ msgstr "Директория на потоците"
+
+#, fuzzy
+#~ msgid "Flow-Tools tagged version 5"
+#~ msgstr "Инструменти за потоци, маркирани версия 5"
+
+#, fuzzy
+#~ msgid "Flow Tools Work Directory"
+#~ msgstr "Работна директория за поточни инструменти"
+
+#, fuzzy
+#~ msgid "Flow Filter Constraints"
+#~ msgstr "Ограничения на филтъра на потока"
+
+#, fuzzy
+#~ msgid "Filter Data"
+#~ msgstr "Име на филтъра"
+
+#, fuzzy
+#~ msgid "Expire"
+#~ msgstr "Изтича"
+
+#, fuzzy
+#~ msgid "Entirely in Specified Time Span"
+#~ msgstr "Изцяло в определен период от време"
+
+#, fuzzy
+#~ msgid "End Time in Specified Time Span"
+#~ msgstr "Крайно време в определен период от време"
+
+#, fuzzy
+#~ msgid "End Date"
+#~ msgstr "Крайна дата"
+
+#, fuzzy
+#~ msgid "ENCAP"
+#~ msgstr "ENCAP"
+
+#, fuzzy
+#~ msgid "EMCON"
+#~ msgstr "EMCON"
+
+#, fuzzy
+#~ msgid "EIGRP"
+#~ msgstr "EIGRP"
+
+#, fuzzy
+#~ msgid "EGP"
+#~ msgstr "EGP"
+
+#~ msgid "Down"
+#~ msgstr "Надолу"
+
+#, fuzzy
+#~ msgid "Directory that this devices flows are in.  This directory must be in the Flow Directory path.  Do not put the full path here.  Also, not that if you change the path, all the predefined filer setup to to use it will have to be resaved."
+#~ msgstr "Директорията, в която текат тези устройства. Тази директория трябва да бъде в пътя на директорията на потока. Не поставяйте пълния път тук. Също така, не че ако промените пътя, всички предварително дефинирани настройки на филтъра, за да го използвате, ще трябва да бъдат презаписани."
+
+#, fuzzy
+#~ msgid "Directory Structure that will be used for the flows for this device."
+#~ msgstr "Структура на указателя, която ще се използва за потоците за това устройство."
+
+#, fuzzy
+#~ msgid "Directory"
+#~ msgstr "Папка"
+
+#, fuzzy
+#~ msgid "Device [new]"
+#~ msgstr "Устройство [ново]"
+
+#, fuzzy
+#~ msgid "Device [edit: %s]"
+#~ msgstr "Устройство [редактиране: %s]"
+
+#~ msgid "Device Name"
+#~ msgstr "Име на устройство"
+
+#, fuzzy
+#~ msgid "Destination Prefix Aggregation"
+#~ msgstr "Агрегация на целевия префикс"
+
+#, fuzzy
+#~ msgid "Dest Port(s)"
+#~ msgstr "Порт (и) за търсене"
+
+#, fuzzy
+#~ msgid "Defaults"
+#~ msgstr "По подразбиране"
+
+#, fuzzy
+#~ msgid "DDP"
+#~ msgstr "DDP"
+
+#, fuzzy
+#~ msgid "DCN-MEAS"
+#~ msgstr "DCN-MEAS"
+
+#, fuzzy
+#~ msgid "DCCP"
+#~ msgstr "DCCP"
+
+#, fuzzy
+#~ msgid "Compression level of flow files.  Higher compression saves space but uses more CPU to store and retrieve results."
+#~ msgstr "Ниво на компресиране на поточни файлове. По-високата компресия спестява място, но използва повече CPU за съхраняване и извличане на резултати."
+
+#, fuzzy
+#~ msgid "Compression Level"
+#~ msgstr "Ниво на компресия"
+
+#, fuzzy
+#~ msgid "Compression"
+#~ msgstr "компресия"
+
+#, fuzzy
+#~ msgid "CHAOS"
+#~ msgstr "CHAOS"
+
+#, fuzzy
+#~ msgid "CBT"
+#~ msgstr "Пенис"
+
+#, fuzzy
+#~ msgid "BBN-RCC-MON"
+#~ msgstr "BBN-RCC-MON"
+
+#, fuzzy
+#~ msgid "Any Part in Specified Time Span"
+#~ msgstr "Всяка част в определен период от време"
+
+#, fuzzy
+#~ msgid "Alternate DNS Server"
+#~ msgstr "Алтернативен DNS сървър"
+
+#, fuzzy
+#~ msgid "Also, remember to remove any leftover files from your Net-Flow Capture location."
+#~ msgstr "Също така не забравяйте да премахнете всички останали файлове от местоположението на Вашия Net-Flow Capture."
+
+#, fuzzy
+#~ msgid "AS Aggregation"
+#~ msgstr "AS Aggregation"
+
+#, fuzzy
+#~ msgid "AS"
+#~ msgstr "КАТО"
+
+#, fuzzy
+#~ msgid "ARGUS"
+#~ msgstr "ARGUS"
+
+#, fuzzy
+#~ msgid "A comma delimited list of domains names to strip from the domain."
+#~ msgstr "Списък с имена на домейни, разделени със запетая, за премахване от домейна."
+
+#, fuzzy
+#~ msgid "9 (Highest)"
+#~ msgstr "9 (най-висока)"
+
+#, fuzzy
+#~ msgid "3PC"
+#~ msgstr "3PC"
+
+#, fuzzy
+#~ msgid "1 Line with Tags"
+#~ msgstr "1 ред с маркери"
+
+#, fuzzy
+#~ msgid "0 (Disabled)"
+#~ msgstr "0 (забранено)"
+
+#, fuzzy
+#~ msgid "(view)"
+#~ msgstr "Преглед"
+
+#, fuzzy
+#~ msgid "(e.g., -0x0b/0x0F)"
+#~ msgstr "(напр. -0x0b / 0x0F)"
+
+#~ msgid "Save Overrides to Selected Filter"
+#~ msgstr "Запазване на замените в избрания филтър"
+
+#~ msgid "Top 5 Samples"
+#~ msgstr "Топ 5 проби"
+
+#~ msgid "Top 4 Samples"
+#~ msgstr "Топ 4 проби"
+
+#~ msgid "Top 3 Samples"
+#~ msgstr "Топ 3 проби"
+
+#~ msgid "Plugin -> Flow Admin"
+#~ msgstr "Плъгин -> Администратор на поток"
+
+#~ msgid "Plugin -> Flow Viewer"
+#~ msgstr "Приставката -> Преглед на потока"
+
+#~ msgid "Packets Examined"
+#~ msgstr "Пакет бар"
+
+#~ msgid "Bytes Exchanged"
+#~ msgstr "Разменени байтове"
+
+#~ msgid "Total Flows"
+#~ msgstr "Максимални потоци:"
+
+#~ msgid "Invalid value for Sort Field!"
+#~ msgstr "Невалидна стойност за полето за сортиране!"
+
+#~ msgid "Cacti Flowview"
+#~ msgstr "Cacti Flowview"
+
+#~ msgid "Start Date"
+#~ msgstr "Начална Дата"
+
+#~ msgid "Sent Scheduled Report %s in Background."
+#~ msgstr "Изпратен планиран отчет %s във фонов режим."
+
+#~ msgid "You must select at least one device."
+#~ msgstr "Трябва да изберете поне едно устройство."
+
+#~ msgid "TCP Protocol"
+#~ msgstr "IP протокол"
+
+#~ msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0 for any host."
+#~ msgstr "IP адрес на устройството, на което е разрешено да изпраща към този колектор. Оставете като 0 за всеки хост."
+
+#~ msgid "Input IF"
+#~ msgstr "Въвеждане на IF"

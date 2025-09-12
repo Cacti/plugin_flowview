@@ -69,9 +69,27 @@ function display_flowview_db_tabs() {
 
 	/* if they were redirected to the page, let's set that up */
 	if (!isset_request_var('tab')) {
-		$current_tab = 'general';
+		$current_tab = 'dns_cache';
 	} else {
 		$current_tab = get_nfilter_request_var('tab');
+	}
+
+	if (read_config_option('flowview_download_irr') == '') {
+		unset($db_tabs['route']);
+		unset($db_tabs['aut_num']);
+		unset($db_tabs['as_block']);
+		unset($db_tabs['as_set']);
+		unset($db_tabs['route_set']);
+		unset($db_tabs['domain']);
+		unset($db_tabs['filter_set']);
+		unset($db_tabs['peering_set']);
+		unset($db_tabs['inetnum']);
+		unset($db_tabs['inet_rtr']);
+		unset($db_tabs['irt']);
+		unset($db_tabs['mntner']);
+		unset($db_tabs['organisation']);
+		unset($db_tabs['role']);
+		unset($db_tabs['person']);
 	}
 
 	/* draw the tabs */

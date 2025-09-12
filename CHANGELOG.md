@@ -6,6 +6,7 @@
 * issue: Fix FreeBSD netstat detection
 * issue: Running irr_tables.php from the UI cause plguin to disable
 * feature: Add bind address option
+* feature: Make downloading from the Internet Route Registry optional
 
 --- 4.9 ---
 
