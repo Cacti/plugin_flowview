@@ -37,11 +37,6 @@ if ($raw_engine == 'Aria') {
 	$row_format = 'ROW_FORMAT=Dynamic';
 }
 
-/* if the database is not being downloaded, don't create the tables */
-if (read_config_option('flowview_download_irr') == '') {
-	exit;
-}
-
 flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_irr_route` (
 	`route` varchar(40) NOT NULL DEFAULT '',
 	`source` varchar(20) NOT NULL DEFAULT '',
