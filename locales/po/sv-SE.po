@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-09-11 23:08-0400\nPO-Revision-Date: 2025-09-18 15:33+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-09-11 23:08-0400\nPO-Revision-Date: 2025-09-18 16:07+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: arrays.php:26 arrays.php:60 functions.php:737
 msgid "Select a Report"
@@ -456,9 +456,8 @@ msgid "Graph Height"
 msgstr "Grafens höjd"
 
 #: arrays.php:722
-#, fuzzy
 msgid "The Graph Height to use by default."
-msgstr "Grafhöjden som ska användas som standard."
+msgstr "Den grafhöjd som ska användas som standard."
 
 #: arrays.php:729
 msgid "Table Panel"
@@ -638,15 +637,15 @@ msgstr "Personer"
 
 #: flowview.php:125
 msgid "Unable to find Raw Data for to Export"
-msgstr ""
+msgstr "Det går inte att hitta rådata för att exportera"
 
 #: flowview.php:205
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
-msgstr ""
+msgstr "Flowview-frågan som tillhandahålls finns inte.  Vänligen skicka med en giltig fråga."
 
 #: flowview.php:210
 msgid "Invalid source Query provided.  Please submit with a valid query."
-msgstr ""
+msgstr "Ogiltig källförfrågan angiven.  Vänligen skicka med en giltig fråga."
 
 #: flowview.php:240
 #, php-format
@@ -676,9 +675,8 @@ msgid "Authorized Agent Details"
 msgstr "Uppgifter om auktoriserat ombud"
 
 #: flowview_databases.php:176
-#, fuzzy
 msgid "No Details Found"
-msgstr "Inga DNS-cacheposter hittades"
+msgstr "Inga detaljer hittades"
 
 #: flowview_databases.php:218
 msgid "CIDR/Route"
@@ -1009,9 +1007,8 @@ msgid "MP Export"
 msgstr "Rapportera"
 
 #: flowview_databases.php:653
-#, fuzzy
 msgid "Encryption"
-msgstr "Utgång"
+msgstr "Kryptering"
 
 #: flowview_databases.php:658
 msgid "Geo Feed"
@@ -1136,11 +1133,10 @@ msgid "No Matching Entries Found"
 msgstr "Inga matchande poster hittades"
 
 #: flowview_databases.php:1177
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Klicka på \"Fortsätt\" för att radera följande schema."
-msgstr[1] "Klicka på \"Fortsätt\" för att radera följande schema."
+msgstr[0] "Klicka på \"Fortsätt\" för att ta bort följande DNS Cache-post."
+msgstr[1] "Klicka på \"Fortsätt\" för att radera alla följande DNS Cache-poster."
 
 #: flowview_databases.php:1182 flowview_devices.php:268
 #: flowview_filters.php:164 flowview_schedules.php:340 functions.php:987
@@ -1265,9 +1261,8 @@ msgid "Route Description"
 msgstr "Beskrivning av rutten"
 
 #: flowview_databases.php:1805
-#, fuzzy
 msgid "The Description logged by the Route Maintainer."
-msgstr "Beskrivningen som loggas av den som ansvarar för rutten."
+msgstr "Den beskrivning som loggas av Route Maintainer."
 
 #: flowview_databases.php:1811
 msgid "The source database used to publish the route."
@@ -1315,20 +1310,19 @@ msgstr "Det finns två metoder för stödinsamling, den första använder de äl
 
 #: flowview_devices.php:59
 msgid "Bind to address"
-msgstr ""
+msgstr "Bind till adress"
 
 #: flowview_devices.php:60
 msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
-msgstr ""
+msgstr "Om Cacti-servern har fler IP-adresser kan du ange ett specifikt gränssnitt. Låt 0.0.0.0 vara kvar för det primära gränssnittet."
 
 #: flowview_devices.php:68
-#, fuzzy
 msgid "Allowed Host Range"
-msgstr "Tillåtna värd"
+msgstr "Tillåtet värdintervall"
 
 #: flowview_devices.php:69
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
-msgstr ""
+msgstr "IP-adress för den enhet som får skicka till denna flödessamlare.  Lämna som 0.0.0.0 för alla värdar.  Observera att PHP är petig med vad den tillåter.  CIDR-syntax stöds såväl som intervallsyntax, till exempel 192.168.1.0 eller 192.168.1.0/24.  Om du vill ha specifika IP-adresser, separera dem med ett kommatecken."
 
 #: flowview_devices.php:78
 msgid "Port this collector will listen on."
@@ -1348,7 +1342,7 @@ msgstr "Aktiverad"
 
 #: flowview_devices.php:95
 msgid "If checked, the Listener service will be started and will wait on incoming data."
-msgstr ""
+msgstr "Om den är markerad startas Listener-tjänsten och väntar på inkommande data."
 
 #: flowview_devices.php:170
 #, php-format
@@ -1356,19 +1350,16 @@ msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "Ingen flödesmall hittades för Enhets-ID:%s och Mall-ID:%s"
 
 #: flowview_devices.php:236 flowview_devices.php:250
-#, fuzzy
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "Klicka på \"Fortsätt\" för att radera följande Netflow-lyssnare. Därefter måste du starta om din Flow-Capture Service."
+msgstr "Klicka på \"Fortsätt\" för att ta bort följande NetFlow-lyssnare.  Därefter kommer Cacti att försöka starta om din Flow-Capture-tjänst."
 
 #: flowview_devices.php:243
-#, fuzzy
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "Klicka på \"Fortsätt\" för att radera följande Netflow-lyssnare. Därefter måste du starta om din Flow-Capture Service."
+msgstr "Klicka på \"Fortsätt\" för att aktivera följande NetFlow-lyssnare.  Därefter kommer Cacti att försöka starta om din Flow-Capture-tjänst."
 
 #: flowview_devices.php:257
-#, fuzzy
 msgid "You must select at least one Listener."
-msgstr "Du måste välja minst en enhet."
+msgstr "Du måste välja minst en lyssnare."
 
 #: flowview_devices.php:312
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
@@ -1468,9 +1459,8 @@ msgid "Method"
 msgstr "Metod"
 
 #: flowview_devices.php:833
-#, fuzzy
 msgid "Bind address"
-msgstr "IP adress"
+msgstr "Bindadress"
 
 #: flowview_devices.php:837
 msgid "Allowed From"
@@ -1486,11 +1476,11 @@ msgstr "Portsäkerheten observerades faktiskt på lyssnarporten."
 
 #: flowview_devices.php:862
 msgid "Backlog"
-msgstr ""
+msgstr "Backlog"
 
 #: flowview_devices.php:863
 msgid "The Size of the UDP backlog in bytes."
-msgstr ""
+msgstr "Storleken på UDP-backloggen i byte."
 
 #: flowview_devices.php:867
 msgid "Streams"
@@ -1517,9 +1507,8 @@ msgid "None"
 msgstr "Ingen"
 
 #: flowview_devices.php:920
-#, fuzzy
 msgid "No Connections"
-msgstr "Geo-plats"
+msgstr "Inga anslutningar"
 
 #: flowview_devices.php:949
 msgid "Cacti"
@@ -1603,9 +1592,8 @@ msgid "Every Month"
 msgstr "Varje månad"
 
 #: flowview_schedules.php:76
-#, fuzzy
 msgid "General Settings"
-msgstr "Allmänna filter"
+msgstr "Allmänna inställningar"
 
 #: flowview_schedules.php:80
 msgid "Title"
@@ -1628,9 +1616,8 @@ msgid "Name of the query to run."
 msgstr "Namn på frågan som ska köras."
 
 #: flowview_schedules.php:103
-#, fuzzy
 msgid "Send Settings"
-msgstr "AS-uppsättningar"
+msgstr "Skicka inställningar"
 
 #: flowview_schedules.php:107
 msgid "Send Interval"
@@ -1641,9 +1628,8 @@ msgid "How often to send this NetFlow Report?"
 msgstr "Hur ofta skickar du denna NetFlow-rapport?"
 
 #: flowview_schedules.php:116
-#, fuzzy
 msgid "Scheduled Base Time"
-msgstr "Rubrik för schema"
+msgstr "Schemalagd bastid"
 
 #: flowview_schedules.php:117
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
@@ -1651,11 +1637,11 @@ msgstr "Detta är första datum / tid för att skicka NetFlow Scan-e-postmeddela
 
 #: flowview_schedules.php:124
 msgid "Max Allowed Runtime"
-msgstr ""
+msgstr "Max tillåten körtid"
 
 #: flowview_schedules.php:125
 msgid "How long should the report be allowed to execute before exiting?"
-msgstr ""
+msgstr "Hur länge ska rapporten få köras innan den avslutas?"
 
 #: flowview_schedules.php:130 setup.php:609
 #, php-format
@@ -1674,7 +1660,7 @@ msgstr "%d minuter"
 
 #: flowview_schedules.php:143
 msgid "Legacy Email Settings"
-msgstr ""
+msgstr "Inställningar för äldre e-post"
 
 #: flowview_schedules.php:148
 msgid "Email Addresses"
@@ -1694,20 +1680,19 @@ msgstr "Välj det anpassade html-omslaget och CSS-filen som ska användas. Den h
 
 #: flowview_schedules.php:164
 msgid "Notification List Settings"
-msgstr ""
+msgstr "Inställningar för meddelandelista"
 
 #: flowview_schedules.php:169
 msgid "Notification List"
-msgstr ""
+msgstr "Aviseringslista"
 
 #: flowview_schedules.php:170
 msgid "If the Thold Plugin is installed, you may select a Notification List"
-msgstr ""
+msgstr "Om Thold Plugin är installerat kan du välja en meddelandelista"
 
 #: flowview_schedules.php:266
-#, fuzzy
 msgid "The Report will arrive once complete."
-msgstr "Rapporter kommer när de är klara."
+msgstr "Rapporten kommer att skickas när den är klar."
 
 #: flowview_schedules.php:301
 msgid "Click 'Continue' to delete the following Schedule(s)."
@@ -1732,26 +1717,25 @@ msgstr "Du måste välja minst ett schema."
 #: flowview_schedules.php:368 flowview_schedules.php:394
 #, php-format
 msgid "Unable to find Report Raw Data for Report ID %s"
-msgstr ""
+msgstr "Det går inte att hitta rådata för rapport-ID %s"
 
 #: flowview_schedules.php:422
 msgid "You must specify Emails, a Notification List or both!"
-msgstr ""
+msgstr "Du måste ange e-postmeddelanden, en meddelandelista eller båda!"
 
 #: flowview_schedules.php:489
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report: [edit: %s]"
-msgstr "Rapportera: [redigera: %s]"
+msgstr "Schemalagd rapport: [redigera: %s]"
 
 #: flowview_schedules.php:491
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report History: [edit: %s]"
-msgstr "Rapportera: [redigera: %s]"
+msgstr "Schemalagd rapporthistorik: [redigera: %s]"
 
 #: flowview_schedules.php:494
-#, fuzzy
 msgid "Scheduled Report: [new]"
-msgstr "Rapportera: [ny]"
+msgstr "Schemalagd rapport: [ny]"
 
 #: flowview_schedules.php:559 flowview_schedules.php:856
 #: flowview_schedules.php:980 setup.php:141 setup.php:228
@@ -1759,58 +1743,52 @@ msgid "Schedules"
 msgstr "Scheman"
 
 #: flowview_schedules.php:646 flowview_schedules.php:945
-#, fuzzy
 msgid "Report Title"
-msgstr "Typ av rapport"
+msgstr "Rapportens titel"
 
 #: flowview_schedules.php:650
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: flowview_schedules.php:654
-#, fuzzy
 msgid "Output Type"
-msgstr "Skriv direkt till webbläsaren (i Cacti)"
+msgstr "Utmatningstyp"
 
 #: flowview_schedules.php:658 flowview_schedules.php:672
 msgid "Sent By"
-msgstr ""
+msgstr "Skickad av"
 
 #: flowview_schedules.php:662
-#, fuzzy
 msgid "Date Sent"
-msgstr "Uppsättningar av rutter"
+msgstr "Datum skickat"
 
 #: flowview_schedules.php:667
-#, fuzzy
 msgid "Run Time"
-msgstr "Sluttid"
+msgstr "Körtid"
 
 #: flowview_schedules.php:677 flowview_schedules.php:705
 msgid "Download Data"
-msgstr ""
+msgstr "Ladda ner data"
 
 #: flowview_schedules.php:683
-#, fuzzy
 msgid "Report Logs"
-msgstr "Rapportera"
+msgstr "Rapportera loggar"
 
 #: flowview_schedules.php:694
 msgid " [View Report Raw]"
-msgstr ""
+msgstr " [Visa rådatarapport]"
 
 #: flowview_schedules.php:695
 msgid " [View Report with CSS]"
-msgstr ""
+msgstr " [Visa rapport med CSS]"
 
 #: flowview_schedules.php:701
 msgid "Manual Send"
-msgstr ""
+msgstr "Manuell sändning"
 
 #: flowview_schedules.php:701
-#, fuzzy
 msgid "Scheduled"
-msgstr "Scheman"
+msgstr "Schemalagd"
 
 #: flowview_schedules.php:703
 #, php-format
@@ -1835,35 +1813,34 @@ msgstr "Intervall"
 
 #: flowview_schedules.php:957
 msgid "Last Sent"
-msgstr ""
+msgstr "Senast skickat"
 
 #: flowview_schedules.php:961
 msgid "Next Send"
 msgstr "Nästa Skicka"
 
 #: flowview_schedules.php:965
-#, fuzzy
 msgid "Email/List"
-msgstr "E-post"
+msgstr "E-post/Lista"
 
 #: flowview_schedules.php:969
 msgid "Logged Sends"
-msgstr ""
+msgstr "Loggade sändningar"
 
 #: functions-pre13.php:42
-#, fuzzy, php-format
+#, php-format
 msgid "Cacti %s"
-msgstr "Kaktusväxter"
+msgstr "Kaktusar %s"
 
 #: functions-pre13.php:191
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
-msgstr ""
+msgstr "Rapporten '%s' från källa %s med id %s är planerad att köras!"
 
 #: functions-pre13.php:197
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
-msgstr ""
+msgstr "Rapporten '%s' från källa %s med id %s var inte schemalagd att köras på grund av ett fel!"
 
 #: functions.php:35 functions.php:116
 msgid "General"
@@ -1871,7 +1848,7 @@ msgstr "Allmänt"
 
 #: functions.php:117
 msgid "Logs"
-msgstr ""
+msgstr "Loggar"
 
 #: functions.php:173
 msgid "Select a Report Type First"
@@ -1909,14 +1886,12 @@ msgid "Select a Listener"
 msgstr "Skriv ut rapporter"
 
 #: functions.php:686
-#, fuzzy
 msgid "Stream"
-msgstr "Streams"
+msgstr "Stream"
 
 #: functions.php:690
-#, fuzzy
 msgid "Select a Stream Host"
-msgstr "Skriv ut rapporter"
+msgstr "Välj en streamvärd"
 
 #: functions.php:714
 msgid "Apply Filter"
@@ -2078,9 +2053,8 @@ msgid "Table"
 msgstr "Tabell"
 
 #: functions.php:971
-#, fuzzy
 msgid "Export Raw Data"
-msgstr "Rapportera"
+msgstr "Exportera rådata"
 
 #: functions.php:981
 msgid "Save Flow Filter"
@@ -2203,16 +2177,16 @@ msgstr "> %d byte"
 #: functions.php:3079
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "Statistikrapporten %s är inte känd.  Vänligen öppna en bugg på GitHub"
 
 #: functions.php:3081
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "Den tryckta rapporten %s är inte känd.  Vänligen öppna en bugg på GitHub"
 
 #: functions.php:3083
 msgid "No valid report was selected.  Please open a bug on GitHub"
-msgstr ""
+msgstr "Ingen giltig rapport valdes.  Vänligen öppna en bugg på GitHub"
 
 #: functions.php:3274
 msgid "Source DNS"
@@ -2417,9 +2391,8 @@ msgid "Not Supported"
 msgstr "Stöds inte"
 
 #: functions.php:6693 setup.php:417
-#, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
-msgstr "Aria (snabb, krocksäker)"
+msgstr "MyISAM (snabb, icke-kraschsäker)"
 
 #: functions.php:6694 setup.php:418
 msgid "Aria (Fast, Crash Safe)"
@@ -2430,14 +2403,12 @@ msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (långsam, hög samtidighet)"
 
 #: setup.php:45
-#, fuzzy
 msgid "NetFlow User"
-msgstr "NetFlow Version"
+msgstr "NetFlow-användare"
 
 #: setup.php:46
-#, fuzzy
 msgid "NetFlow Admin"
-msgstr "NetFlow Version"
+msgstr "NetFlow-administratör"
 
 #: setup.php:53 setup.php:77
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
@@ -2497,53 +2468,50 @@ msgid "(actions)"
 msgstr "Åtgärder"
 
 #: setup.php:364
-#, fuzzy, php-format
+#, php-format
 msgid "%d Process"
-msgstr "%d bildpunkter"
+msgstr "%d process"
 
 #: setup.php:366
 #, php-format
 msgid "%d Processes"
-msgstr ""
+msgstr "%d processer"
 
 #: setup.php:372
 msgid "Report Concurrent Processes (FlowView Only)"
-msgstr ""
+msgstr "Rapportera samtidiga processer (endast FlowView)"
 
 #: setup.php:373
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
-msgstr ""
+msgstr "Välj det maximala antalet samtidiga rapportprocesser som kan köras samtidigt."
 
 #: setup.php:386
-#, fuzzy
 msgid "Internet Proxy Settings"
-msgstr "Internetkontroll"
+msgstr "Inställningar för Internet-proxy"
 
 #: setup.php:391
-#, fuzzy
 msgid "Internet Proxy Address"
-msgstr "Internetkontroll"
+msgstr "Proxy-adress för Internet"
 
 #: setup.php:392
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "För antingen Cacti Core Services eller Plugins som kräver internetåtkomst anger du proxyservern och porten här i följande format IP:PORT.  Till exempel 192.168.1.1:8080."
 
 #: setup.php:399
-#, fuzzy
 msgid "Internet Proxy User"
-msgstr "Internetkontroll"
+msgstr "Internet Proxy-användare"
 
 #: setup.php:400
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "Om din Internet Proxy kräver ett användarnamn, ange det här."
 
 #: setup.php:407
 msgid "Internet Proxy Password"
-msgstr ""
+msgstr "Internet Proxy Lösenord"
 
 #: setup.php:408
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "Om din Internet Proxy kräver ett lösenord, ange det här."
 
 #: setup.php:451
 msgid "Name Resolution"
@@ -2570,13 +2538,12 @@ msgid "Don't Resolve DNS"
 msgstr "Lös inte DNS"
 
 #: setup.php:467
-#, fuzzy
 msgid "Download the Internet Registry Daily"
-msgstr "Information om Internet Route-registret"
+msgstr "Ladda ner Internetregistret dagligen"
 
 #: setup.php:468
 msgid "If you are interested in the publically available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
-msgstr ""
+msgstr "Om du är intresserad av offentligt tillgänglig information om hela Internet kan du välja det här alternativet.  Cacti kommer att kontakta Internetregistren i hela världen en gång om dagen och kontrollera om det har skett några ändringar i rutterna för hela Internet och ladda in den informationen i Cacti.  Observera att detta kommer att skapa en ganska stor databas med över 3 GByte data."
 
 #: setup.php:473
 msgid "Local Domain Name"
@@ -2591,9 +2558,8 @@ msgid "Local IP Range"
 msgstr "Lokalt IP-intervall"
 
 #: setup.php:484
-#, fuzzy
 msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
-msgstr "Ange IPv4 IP-adressintervallet för ditt lokala nätverk för värdar som kanske inte är registrerade i DNS.  Dessa värdar kommer att mappas till det lokala domännamnet ovan.  Detta mer för hemanvändare.  Du kan använda antingen CIDR- eller icke-CIDR-format.  Till exempel: 192.168.11.0 eller 192.168.11.0/24"
+msgstr "Ange IPv4-adressintervallet för ditt lokala nätverk för värdar som kanske inte är registrerade i DNS.  Dessa värdar kommer att mappas till det lokala domännamnet ovan.  Detta är mer för hemanvändare.  Du kan använda antingen CIDR eller icke-CIDR format.  Till exempel: 192.168.11.0 eller 192.168.11.0/24"
 
 #: setup.php:485
 msgid "Use CIDR or Non-CIDR"
@@ -2633,15 +2599,15 @@ msgstr "Ange binär sökväg"
 
 #: setup.php:514
 msgid "Graph Drilldown Settings"
-msgstr ""
+msgstr "Inställningar för grafdrilldown"
 
 #: setup.php:519
 msgid "Default Search Filter for Graph Drilldowns"
-msgstr ""
+msgstr "Standard sökfilter för grafdrilldowns"
 
 #: setup.php:522
 msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
-msgstr ""
+msgstr "Välj ett befintligt Flowview-sökfilter som du vill använda för Graph Drilldowns."
 
 #: setup.php:526
 msgid "Data Retention and Report Generation"
@@ -2765,7 +2731,7 @@ msgstr "MaxScale Sharding"
 
 #: setup.php:633
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
-msgstr ""
+msgstr "Detta krävs endast om Cacti-systemets Flowview-databasanslutning inte redan använder en MaxScale-aktiverad Read-Write Split-port."
 
 #: setup.php:638
 msgid "Leverage MaxScale to Distribute Query Shards"
@@ -2776,14 +2742,12 @@ msgid "If you have multiple service acting as slaves for MaxScale, you can incre
 msgstr "Om du har flera tjänster som fungerar som slavar för MaxScale kan du öka hastigheten på frågor genom att distribuera de parallella frågorna till flera MariaDB-serverdelsservrar."
 
 #: setup.php:644
-#, fuzzy
 msgid "MaxScale Read-Write Split Port"
-msgstr "Skrivskyddad MaxScale-port"
+msgstr "MaxScale Läs- Skriv Split Port"
 
 #: setup.php:647
-#, fuzzy
 msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
-msgstr "Detta bör vara porten för Read-Only-Service-tjänsten (readconnroute) och routern."
+msgstr "Detta bör vara porten för Read-Write-Split-Service (readwrite)-tjänsten och routern."
 
 #: setup.php:653
 msgid "Flowview"
@@ -2791,7 +2755,7 @@ msgstr "FlowView"
 
 #: setup.php:1308
 msgid "View NetFlow Traffic In Range"
-msgstr ""
+msgstr "Visa NetFlow-trafik inom intervall"
 
 #, fuzzy
 #~ msgid "XTP"
