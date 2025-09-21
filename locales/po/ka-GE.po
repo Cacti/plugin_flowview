@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: Cacti\n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2025-09-11 23:08-0400\n"
-"PO-Revision-Date: 2025-08-09 09:57+0000\n"
-"Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
-"Language-Team: Georgian <https://translate.cacti.net/projects/cacti/flowview/ka/>\n"
-"Language: ka-GE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2025-09-11 23:08-0400\nPO-Revision-Date: 2025-09-21 03:57+0000\nLast-Translator: Ekaterine papava <papava.e@gtu.ge>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/flowview/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: arrays.php:26 arrays.php:60 functions.php:737
 msgid "Select a Report"
@@ -32,7 +20,7 @@ msgstr "წყაროს ძირითადი დომენი"
 
 #: arrays.php:30
 msgid "Destination Root Domain"
-msgstr ""
+msgstr "სამიზნე ძირითადი დომენი"
 
 #: arrays.php:31
 msgid "Source/Destination Root Domain"
@@ -40,11 +28,11 @@ msgstr "წყაროს/სამიზნის საწყისი დო
 
 #: arrays.php:33
 msgid "UDP/TCP Destination Port"
-msgstr ""
+msgstr "UDP/TCP სამიზნე პორტი"
 
 #: arrays.php:34
 msgid "UDP/TCP Source Port"
-msgstr ""
+msgstr "UDP/TCP წყარო პორტი"
 
 #: arrays.php:35
 msgid "UDP/TCP Port"
@@ -65,7 +53,7 @@ msgstr "წყარო/სამიზნე IP"
 
 #: arrays.php:40
 msgid "Source or Destination IP"
-msgstr ""
+msgstr "წყარო ან სამიზნე IP"
 
 #: arrays.php:42
 msgid "IP Protocol"
@@ -118,7 +106,7 @@ msgstr "ნაკადის დროები"
 
 #: arrays.php:62
 msgid "Source/Destination IPs and Ports"
-msgstr ""
+msgstr "წყარო/სამიზნე IP-ები და პორტები"
 
 #: arrays.php:63
 msgid "AS Numbers"
@@ -130,23 +118,23 @@ msgstr "132 სვეტი"
 
 #: arrays.php:65
 msgid "Show IP Accounting Emulation"
-msgstr ""
+msgstr "IP აღრიცხვის ემულაციის ჩვენება"
 
 #: arrays.php:69
 msgid "Any Part in Range (slow)"
-msgstr ""
+msgstr "ნებისმიერი პორტი შუალედში (ნელი)"
 
 #: arrays.php:70
 msgid "End Time in Range (fast)"
-msgstr ""
+msgstr "დასრულების დრო შუალედში (სწრაფი)"
 
 #: arrays.php:71
 msgid "Start Time in Range (fast)"
-msgstr ""
+msgstr "საწყისი დრო შუალედში (სწრაფი)"
 
 #: arrays.php:72
 msgid "Entirely in Range (slow)"
-msgstr ""
+msgstr "სრულ შუალედში (ნელი)"
 
 #: arrays.php:76
 msgid "Return All Lines"
@@ -317,7 +305,7 @@ msgstr "ფილტრი"
 
 #: arrays.php:591
 msgid "The Saved Filter to display."
-msgstr ""
+msgstr "შენახული ფილტრი საჩვენებლად."
 
 #: arrays.php:594
 msgid "New Filter"
@@ -1019,7 +1007,6 @@ msgid "MP Export"
 msgstr "MP-ის გატანა"
 
 #: flowview_databases.php:653
-#, fuzzy
 msgid "Encryption"
 msgstr "დაშიფვრა"
 
@@ -1330,9 +1317,8 @@ msgid "If Cacti server has more IP Addresses, you can specify specific interface
 msgstr ""
 
 #: flowview_devices.php:68
-#, fuzzy
 msgid "Allowed Host Range"
-msgstr "დაშვებული ჰოსტი"
+msgstr "დაშვებული ჰოსტების დიაპაზონი"
 
 #: flowview_devices.php:69
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
@@ -1473,9 +1459,8 @@ msgid "Method"
 msgstr "მეთოდი"
 
 #: flowview_devices.php:833
-#, fuzzy
 msgid "Bind address"
-msgstr "IP მისამართი"
+msgstr "მიბმის მისამართი"
 
 #: flowview_devices.php:837
 msgid "Allowed From"
@@ -1522,9 +1507,8 @@ msgid "None"
 msgstr "არცერთი"
 
 #: flowview_devices.php:920
-#, fuzzy
 msgid "No Connections"
-msgstr "გეოლოკაცია"
+msgstr "კავშირების გარეშე"
 
 #: flowview_devices.php:949
 msgid "Cacti"
@@ -1532,7 +1516,7 @@ msgstr "Cacti"
 
 #: flowview_devices.php:964
 msgid "No Flowview Listeners"
-msgstr ""
+msgstr "Flowview-ის მსმენელების გარეშე"
 
 #: flowview_filters.php:132
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
@@ -1608,9 +1592,8 @@ msgid "Every Month"
 msgstr "ყოველთვე"
 
 #: flowview_schedules.php:76
-#, fuzzy
 msgid "General Settings"
-msgstr "ზოგადი ფილტრები"
+msgstr "ზოგადი პარამეტრები"
 
 #: flowview_schedules.php:80
 msgid "Title"
@@ -1633,9 +1616,8 @@ msgid "Name of the query to run."
 msgstr ""
 
 #: flowview_schedules.php:103
-#, fuzzy
 msgid "Send Settings"
-msgstr "AS-ის ნაკრებები"
+msgstr "გაგზავნის პარამეტრები"
 
 #: flowview_schedules.php:107
 msgid "Send Interval"
@@ -1646,9 +1628,8 @@ msgid "How often to send this NetFlow Report?"
 msgstr ""
 
 #: flowview_schedules.php:116
-#, fuzzy
 msgid "Scheduled Base Time"
-msgstr "გეგმის სათაური"
+msgstr "დაგეგმილი საბაზისო დრო"
 
 #: flowview_schedules.php:117
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
@@ -1703,7 +1684,7 @@ msgstr ""
 
 #: flowview_schedules.php:169
 msgid "Notification List"
-msgstr ""
+msgstr "გაფრთხილებების სია"
 
 #: flowview_schedules.php:170
 msgid "If the Thold Plugin is installed, you may select a Notification List"
@@ -1743,19 +1724,18 @@ msgid "You must specify Emails, a Notification List or both!"
 msgstr ""
 
 #: flowview_schedules.php:489
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report: [edit: %s]"
-msgstr "რეპორტი: [ჩასწორება: %s]"
+msgstr "დაგეგმილი რეპორტი: [ჩასწორება: %s]"
 
 #: flowview_schedules.php:491
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report History: [edit: %s]"
-msgstr "რეპორტი: [ჩასწორება: %s]"
+msgstr "დაგეგმილი რეპორტის ისტორია: [ჩასწორება: %s]"
 
 #: flowview_schedules.php:494
-#, fuzzy
 msgid "Scheduled Report: [new]"
-msgstr "რეპორტი: [ახალი]"
+msgstr "დაგეგმილი რეპორტი: [ახალი]"
 
 #: flowview_schedules.php:559 flowview_schedules.php:856
 #: flowview_schedules.php:980 setup.php:141 setup.php:228
@@ -1763,41 +1743,36 @@ msgid "Schedules"
 msgstr "გეგმები"
 
 #: flowview_schedules.php:646 flowview_schedules.php:945
-#, fuzzy
 msgid "Report Title"
-msgstr "ანგარიშის ტიპი"
+msgstr "ანგარიშის სათაური"
 
 #: flowview_schedules.php:650
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: flowview_schedules.php:654
-#, fuzzy
 msgid "Output Type"
-msgstr "გამოტანის IF"
+msgstr "გამოტანის ტიპი"
 
 #: flowview_schedules.php:658 flowview_schedules.php:672
 msgid "Sent By"
-msgstr ""
+msgstr "გაგზავნილია ვის მიერ"
 
 #: flowview_schedules.php:662
-#, fuzzy
 msgid "Date Sent"
-msgstr "რაუტების ნაკრები"
+msgstr "გაგზავნის თარიღი"
 
 #: flowview_schedules.php:667
-#, fuzzy
 msgid "Run Time"
-msgstr "დასრულების დრო"
+msgstr "შესრულების დრო"
 
 #: flowview_schedules.php:677 flowview_schedules.php:705
 msgid "Download Data"
-msgstr ""
+msgstr "მონაცემების გადმოწერა"
 
 #: flowview_schedules.php:683
-#, fuzzy
 msgid "Report Logs"
-msgstr "ანგარიში"
+msgstr "რეპორტის ჟურნალი"
 
 #: flowview_schedules.php:694
 msgid " [View Report Raw]"
@@ -1809,17 +1784,16 @@ msgstr ""
 
 #: flowview_schedules.php:701
 msgid "Manual Send"
-msgstr ""
+msgstr "ხელით გაგზავნა"
 
 #: flowview_schedules.php:701
-#, fuzzy
 msgid "Scheduled"
-msgstr "გეგმები"
+msgstr "დაგეგმილია"
 
 #: flowview_schedules.php:703
 #, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s წამი"
 
 #: flowview_schedules.php:768 functions.php:894
 msgid "Start Date Selector"
@@ -1839,25 +1813,24 @@ msgstr "ინტერვალი"
 
 #: flowview_schedules.php:957
 msgid "Last Sent"
-msgstr ""
+msgstr "ბოლო გაგზავნილი"
 
 #: flowview_schedules.php:961
 msgid "Next Send"
 msgstr "შემდეგი გაგზავნა"
 
 #: flowview_schedules.php:965
-#, fuzzy
 msgid "Email/List"
-msgstr "ელფოსტა"
+msgstr "ელფოსტა/სია"
 
 #: flowview_schedules.php:969
 msgid "Logged Sends"
-msgstr ""
+msgstr "ჟურნალში ჩაწერილი გაგზავნები"
 
 #: functions-pre13.php:42
-#, fuzzy, php-format
+#, php-format
 msgid "Cacti %s"
-msgstr "Cacti"
+msgstr "Cacti %s"
 
 #: functions-pre13.php:191
 #, php-format
@@ -1875,7 +1848,7 @@ msgstr "ზოგადი"
 
 #: functions.php:117
 msgid "Logs"
-msgstr ""
+msgstr "ჟურნალი"
 
 #: functions.php:173
 msgid "Select a Report Type First"
@@ -1910,17 +1883,15 @@ msgstr "აირჩიეთ ფილტრი"
 
 #: functions.php:666
 msgid "Select a Listener"
-msgstr ""
+msgstr "აირჩიეთ მსმენელი"
 
 #: functions.php:686
-#, fuzzy
 msgid "Stream"
-msgstr "წყაროები"
+msgstr "ნაკადი"
 
 #: functions.php:690
-#, fuzzy
 msgid "Select a Stream Host"
-msgstr "აირჩიეთ ანგარიში"
+msgstr "აირჩიეთ ნაკადის ჰოსტი"
 
 #: functions.php:714
 msgid "Apply Filter"
@@ -2082,9 +2053,8 @@ msgid "Table"
 msgstr "ცხრილი"
 
 #: functions.php:971
-#, fuzzy
 msgid "Export Raw Data"
-msgstr "გატანა გავლით"
+msgstr "დაუმუშავებელი მონაცემების გატანა"
 
 #: functions.php:981
 msgid "Save Flow Filter"
@@ -2096,7 +2066,7 @@ msgstr "ახალი სახელი"
 
 #: functions.php:992
 msgid "Delete Flow Filter"
-msgstr ""
+msgstr "დინების ფილტრის წაშლა"
 
 #: functions.php:994
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
@@ -2433,13 +2403,12 @@ msgid "InnoDB (Slow, High Concurrency)"
 msgstr ""
 
 #: setup.php:45
-#, fuzzy
 msgid "NetFlow User"
-msgstr "ნორმალური მომხმარებელი"
+msgstr "NetFlow-ის მომხმარებელი"
 
 #: setup.php:46
 msgid "NetFlow Admin"
-msgstr ""
+msgstr "NetFlow-ის ადმინისტრატორი"
 
 #: setup.php:53 setup.php:77
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
@@ -2499,14 +2468,14 @@ msgid "(actions)"
 msgstr "(ქმედებები)"
 
 #: setup.php:364
-#, fuzzy, php-format
+#, php-format
 msgid "%d Process"
-msgstr "%d პიქსელი"
+msgstr "%d პროცესი"
 
 #: setup.php:366
 #, php-format
 msgid "%d Processes"
-msgstr ""
+msgstr "%d პროცესი"
 
 #: setup.php:372
 msgid "Report Concurrent Processes (FlowView Only)"
@@ -2517,23 +2486,20 @@ msgid "Select the maximum concurrent reports processes that can be running at an
 msgstr ""
 
 #: setup.php:386
-#, fuzzy
 msgid "Internet Proxy Settings"
-msgstr "ინტერნეტის რაუტერები"
+msgstr "ინტერნეტის პროქსის პარამეტრები"
 
 #: setup.php:391
-#, fuzzy
 msgid "Internet Proxy Address"
-msgstr "ინტერნეტის რაუტერები"
+msgstr "ინტერნეტ-პროქსის მისამართი"
 
 #: setup.php:392
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
 msgstr ""
 
 #: setup.php:399
-#, fuzzy
 msgid "Internet Proxy User"
-msgstr "ინტერნეტის რაუტერი"
+msgstr "ინტერნეტის პროქსის მომხმარებელი"
 
 #: setup.php:400
 msgid "If your Internet Proxy requires a username, enter it here."
@@ -2581,7 +2547,7 @@ msgstr ""
 
 #: setup.php:473
 msgid "Local Domain Name"
-msgstr ""
+msgstr "ლოკალური დომენის სახელი"
 
 #: setup.php:476
 msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
@@ -2621,7 +2587,7 @@ msgstr "whois.radb.net"
 
 #: setup.php:505
 msgid "Whois Binary Path"
-msgstr ""
+msgstr "Whois-ს გამშვების ბილიკი"
 
 #: setup.php:508
 msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
