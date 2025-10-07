@@ -465,7 +465,7 @@ function flowview_config_settings() {
 		),
 		'flowview_download_irr' => array(
 			'friendly_name' => __('Download the Internet Registry Daily', 'flowview'),
-			'description' => __('If you are interested in the publically available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data.', 'flowview'),
+			'description' => __('If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data.', 'flowview'),
 			'method' => 'checkbox',
 			'default' => ''
 		),
