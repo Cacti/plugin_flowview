@@ -6678,7 +6678,7 @@ function get_tables_range($begin, $end = null) {
 
 		$table = 'plugin_flowview_raw_' . $suffix;
 
-		if (!db_table_exists($table)) {
+		if (!flowview_db_table_exists($table)) {
 			create_raw_partition($table);
 		}
 
