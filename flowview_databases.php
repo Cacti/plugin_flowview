@@ -72,7 +72,7 @@ function flowview_get_item_details() {
 	$sql_where  = '';
 	$sql_params = array();
 
-	if (cacti_sizeof($ids) && db_table_exists($table)) {
+	if (cacti_sizeof($ids) && flowview_db_table_exists($table)) {
 		foreach($ids as $col => $value) {
 			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . "$col = ?";
 			$sql_params[] = $value;
@@ -791,7 +791,7 @@ function view_db_table($tab, &$tabs) {
 		exit;
 	}
 
-	if (!db_table_exists($table_name)) {
+	if (!flowview_db_table_exists($table_name)) {
 		print __esc("FATAL: Unknown Database Table %s", $table_name) . PHP_EOL;
 		exit;
 	}
