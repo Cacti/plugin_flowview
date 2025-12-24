@@ -1,5 +1,9 @@
 # Changelog
 
+--- develop ---
+
+* issue#240: Call to db_table_exists is incorrect in some cases
+
 --- 5.0 ---
 
 * issue#233: Colum Size Issues and Update Copyrights
