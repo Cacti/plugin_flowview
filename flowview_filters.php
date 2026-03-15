@@ -27,6 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
+include_once($config['base_path'] . '/plugins/flowview/ui_helpers.php');
 include_once($config['base_path'] . '/lib/time.php');
 include_once($config['base_path'] . '/lib/timespan_settings.php');
 
@@ -52,21 +53,11 @@ switch (get_request_var('action')) {
 		sort_filter();
 		break;
 	case 'edit':
-		if (!isset_request_var('embed')) {
-			top_header();
-		}
-
-		edit_filter();
-
-		if (!isset_request_var('embed')) {
-			bottom_footer();
-		}
+		flowview_filters_render_with_layout('edit_filter', true);
 
 		break;
 	default:
-		top_header();
-		show_filters();
-		bottom_footer();
+		flowview_filters_render_with_layout('show_filters');
 		break;
 }
 
@@ -399,4 +390,3 @@ function show_filters() {
 
 	form_end();
 }
-
