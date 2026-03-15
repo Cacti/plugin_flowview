@@ -298,7 +298,10 @@ function save_device() {
 
 	$id = flowview_sql_save($save, 'plugin_flowview_devices', 'id', true);
 
-	$pid = db_fetch_cell('SELECT pid FROM processes WHERE tasktype="flowview" AND taskname="master"');
+	$pid = db_fetch_cell_prepared('SELECT pid
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?', array('flowview', 'master'));
 
 	if (is_error_message()) {
 		raise_message(2);
@@ -320,10 +323,10 @@ function save_device() {
 }
 
 function restart_services() {
-	$pid = db_fetch_cell('SELECT pid
+	$pid = db_fetch_cell_prepared('SELECT pid
 		FROM processes
-		WHERE tasktype="flowview"
-		AND taskname="master"');
+		WHERE tasktype = ?
+		AND taskname = ?', array('flowview', 'master'));
 
 	if ($pid > 0) {
 		if (!defined('SIGHUP')) {
@@ -974,4 +977,3 @@ function show_devices () {
 
 	form_end();
 }
-
