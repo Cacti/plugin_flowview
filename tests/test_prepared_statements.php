@@ -14,6 +14,20 @@ function assert_not_contains($haystack, $needle, $message) {
 	}
 }
 
+function assert_regex($pattern, $subject, $message) {
+	if (!preg_match($pattern, $subject)) {
+		fwrite(STDERR, $message . PHP_EOL);
+		exit(1);
+	}
+}
+
+function assert_not_regex($pattern, $subject, $message) {
+	if (preg_match($pattern, $subject)) {
+		fwrite(STDERR, $message . PHP_EOL);
+		exit(1);
+	}
+}
+
 $devices = file_get_contents(__DIR__ . '/../flowview_devices.php');
 if ($devices === false) {
 	fwrite(STDERR, "Unable to read flowview_devices.php\n");
@@ -26,9 +40,9 @@ assert_contains(
 	'Expected flowview_devices.php process lookup to use db_fetch_cell_prepared().'
 );
 
-assert_not_contains(
+assert_not_regex(
+	"/db_fetch_cell\\s*\\(\\s*['\\\"]SELECT\\s+pid\\s+FROM\\s+processes\\s+WHERE\\s+tasktype\\s*=\\s*['\\\"]flowview['\\\"]\\s+AND\\s+taskname\\s*=\\s*['\\\"]master['\\\"]/is",
 	$devices,
-	'db_fetch_cell(\'SELECT pid FROM processes WHERE tasktype="flowview" AND taskname="master"\')',
 	'Raw process lookup should not remain in flowview_devices.php.'
 );
 
@@ -44,9 +58,9 @@ assert_contains(
 	'Expected setup.php plugin version lookup to use db_fetch_cell_prepared().'
 );
 
-assert_contains(
+assert_regex(
+	"/WHERE\\s+directory\\s*=\\s*\\?\\s*'?,\\s*array\\(\\s*'flowview'\\s*\\)\\s*\\)/s",
 	$setup,
-	"WHERE directory = ?', array('flowview'))",
 	'Expected setup.php version lookup to bind flowview directory via placeholder.'
 );
 
@@ -56,9 +70,9 @@ assert_not_contains(
 	'Raw version lookup should not remain in setup.php.'
 );
 
-assert_not_contains(
+assert_not_regex(
+	"/db_fetch_cell\\s*\\(\\s*['\\\"]SELECT\\s+pid\\s+FROM\\s+processes\\s+WHERE\\s+tasktype\\s*=\\s*['\\\"]flowview['\\\"]\\s+AND\\s+taskname\\s*=\\s*['\\\"]master['\\\"]/is",
 	$setup,
-	'db_fetch_cell(\'SELECT pid FROM processes WHERE tasktype="flowview" AND taskname="master"\')',
 	'Raw process lookup should not remain in setup.php.'
 );
 
