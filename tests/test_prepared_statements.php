@@ -39,6 +39,11 @@ assert_contains(
 	"db_fetch_cell_prepared('SELECT pid",
 	'Expected flowview_devices.php process lookup to use db_fetch_cell_prepared().'
 );
+assert_regex(
+	"/db_fetch_cell_prepared\\s*\\(\\s*'SELECT\\s+pid[\\s\\S]*tasktype\\s*=\\s*\\?[\\s\\S]*taskname\\s*=\\s*\\?[\\s\\S]*array\\(\\s*'flowview'\\s*,\\s*'master'\\s*\\)\\s*\\)/s",
+	$devices,
+	'Expected flowview_devices.php process lookup to bind flowview/master via placeholders.'
+);
 
 assert_not_regex(
 	"/db_fetch_cell\\s*\\(\\s*['\\\"]SELECT\\s+pid\\s+FROM\\s+processes\\s+WHERE\\s+tasktype\\s*=\\s*['\\\"]flowview['\\\"]\\s+AND\\s+taskname\\s*=\\s*['\\\"]master['\\\"]/is",
@@ -56,6 +61,11 @@ assert_contains(
 	$setup,
 	"db_fetch_cell_prepared('SELECT version",
 	'Expected setup.php plugin version lookup to use db_fetch_cell_prepared().'
+);
+assert_regex(
+	"/db_fetch_cell_prepared\\s*\\(\\s*'SELECT\\s+pid[\\s\\S]*tasktype\\s*=\\s*\\?[\\s\\S]*taskname\\s*=\\s*\\?[\\s\\S]*array\\(\\s*'flowview'\\s*,\\s*'master'\\s*\\)\\s*\\)/s",
+	$setup,
+	'Expected setup.php process lookup to bind flowview/master via placeholders.'
 );
 
 assert_regex(
