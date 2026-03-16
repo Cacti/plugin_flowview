@@ -1,5 +1,16 @@
 <?php
 
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2026 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ +-------------------------------------------------------------------------+
+ */
+
 require_once __DIR__ . '/../ui_helpers.php';
 
 $events = [];
@@ -34,6 +45,13 @@ function assert_same($expected, $actual, $message) {
 	}
 }
 
+function assert_regex($pattern, $subject, $message) {
+	if (!preg_match($pattern, $subject)) {
+		fwrite(STDERR, $message . PHP_EOL);
+		exit(1);
+	}
+}
+
 flowview_filters_render_with_layout('test_renderer');
 assert_same(['top', 'render', 'bottom'], $events, 'Default wrapper should render with layout.');
 
@@ -52,14 +70,16 @@ if ($source === false) {
 	exit(1);
 }
 
-if (strpos($source, "flowview_filters_render_with_layout('edit_filter', true);") === false) {
-	fwrite(STDERR, 'Expected edit action to use shared layout helper.' . PHP_EOL);
-	exit(1);
-}
+assert_regex(
+	"/flowview_filters_render_with_layout\\(\\s*'edit_filter'\\s*,\\s*true\\s*\\)\\s*;/",
+	$source,
+	'Expected edit action to use shared layout helper.'
+);
 
-if (strpos($source, "flowview_filters_render_with_layout('show_filters');") === false) {
-	fwrite(STDERR, 'Expected default action to use shared layout helper.' . PHP_EOL);
-	exit(1);
-}
+assert_regex(
+	"/flowview_filters_render_with_layout\\(\\s*'show_filters'\\s*\\)\\s*;/",
+	$source,
+	'Expected default action to use shared layout helper.'
+);
 
 echo "OK\n";
