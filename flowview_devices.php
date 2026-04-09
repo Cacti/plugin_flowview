@@ -585,15 +585,15 @@ function edit_device() {
 			}
 
 			$(function() {
-				$('#template, #ex_addr').change(function() {
+				$('#template, #ex_addr').on('change', function() {
 					applyFilter();
 				});
 
-				$('#go').click(function() {
+				$('#go').on('click', function() {
 					applyFilter();
 				});
 
-				$('#export').click(function() {
+				$('#export').on('click', function() {
 					exportFilter();
 				});
 
@@ -796,11 +796,11 @@ function show_devices () {
 		}
 
 		$(function() {
-			$('#clear').click(function() {
+			$('#clear').on('click', function() {
 				clearFilter();
 			});
 
-			$('#listeners').submit(function(event) {
+			$('#listeners').on('submit', function(event) {
 				event.preventDefault();
 				applyFilter();
 			});

@@ -595,15 +595,15 @@ function edit_log($header_label, $report) {
 		}
 
 		$(function() {
-			$('#clear').click(function() {
+			$('#clear').on('click', function() {
 				clearFilter();
 			});
 
-			$('#rows').change(function() {
+			$('#rows').on('change', function() {
 				applyFilter();
 			});
 
-			$('#form_schedule').submit(function(event) {
+			$('#form_schedule').on('submit', function(event) {
 				event.preventDefault();
 				applyFilter();
 			});
@@ -766,7 +766,7 @@ function edit_general($header_label, $report) {
 
 	$(function() {
 		$('#start').after("<i id='startDate' class='calendar fa fa-calendar' title='<?php print __esc('Start Date Selector', 'flowview');?>'></i>");
-		$('#startDate').click(function() {
+		$('#startDate').on('click', function() {
 			if (startOpen) {
 				startOpen = false;
 				$('#start').datetimepicker('hide');
@@ -890,15 +890,15 @@ function show_schedules() {
 		}
 
 		$(function() {
-			$('#clear').click(function() {
+			$('#clear').on('click', function() {
 				clearFilter();
 			});
 
-			$('#rows').change(function() {
+			$('#rows').on('change', function() {
 				applyFilter();
 			});
 
-			$('#form_schedule').submit(function(event) {
+			$('#form_schedule').on('submit', function(event) {
 				event.preventDefault();
 				applyFilter();
 			});

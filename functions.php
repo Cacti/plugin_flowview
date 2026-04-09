@@ -328,7 +328,7 @@ function edit_filter() {
 		});
 	}
 
-	$('#date1, #date2').change(function() {
+	$('#date1, #date2').on('change', function() {
 		$('#predefined_timespan').val('0');
 		<?php if (get_selected_theme() != 'classic') {?>
 		$('#predefined_timespan').selectmenu('refresh');
@@ -336,7 +336,7 @@ function edit_filter() {
 	});
 
 	$(function() {
-		$('#startDate').click(function() {
+		$('#startDate').on('click', function() {
 			if (date1Open) {
 				date1Open = false;
 				$('#date1').datetimepicker('hide');
@@ -346,7 +346,7 @@ function edit_filter() {
 			}
 		});
 
-		$('#endDate').click(function() {
+		$('#endDate').on('click', function() {
 			if (date2Open) {
 				date2Open = false;
 				$('#date2').datetimepicker('hide');
@@ -390,11 +390,11 @@ function edit_filter() {
 			}
 		}
 
-		$('#statistics, #printed, #device_id, #ex_addr').change(function() {
+		$('#statistics, #printed, #device_id, #ex_addr').on('change', function() {
 			applyFilter();
 		});
 
-		$('#rtype').change(function() {
+		$('#rtype').on('change', function() {
 			changeRType();
 			applyFilter();
 		});
@@ -1088,7 +1088,7 @@ function flowview_display_filter() {
 			applyFilter(false);
 		});
 
-		$('#flowview_filter').submit(function(event) {
+		$('#flowview_filter').on('submit', function(event) {
 			event.preventDefault();
 			applyFilter(false);
 		});
@@ -1319,7 +1319,7 @@ function flowview_display_filter() {
 
 		$('.tablesorter-resizable-container').hide();
 
-		$('#startDate').click(function() {
+		$('#startDate').on('click', function() {
 			if (date1Open) {
 				date1Open = false;
 				$('#date1').datetimepicker('hide');
@@ -1329,7 +1329,7 @@ function flowview_display_filter() {
 			}
 		});
 
-		$('#endDate').click(function() {
+		$('#endDate').on('click', function() {
 			if (date2Open) {
 				date2Open = false;
 				$('#date2').datetimepicker('hide');
@@ -1756,7 +1756,7 @@ function flowview_display_filter() {
 		loadPageNoHeader('flowview.php?header=false&clear=true');
 	}
 
-	$('#date1, #date2').change(function() {
+	$('#date1, #date2').on('change', function() {
 		$('#predefined_timespan').val('0');
 		<?php if (get_selected_theme() != 'classic') {?>
 		$('#predefined_timespan').selectmenu('refresh');
