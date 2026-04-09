@@ -97,7 +97,7 @@ function plugin_flowview_upgrade() {
 function plugin_flowview_check_upgrade($force = false) {
 	global $config;
 
-	$files = array('plugins.php', 'flowview.php', 'index.php');
+	$files = ['plugins.php', 'flowview.php', 'index.php'];
 	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
 		return;
 	}
@@ -149,11 +149,11 @@ function flowview_config_arrays() {
 	$menu_glyphs[__('FlowView', 'flowview')] = 'fas fa-crosshairs';
 
 	if (function_exists('auth_augment_roles')) {
-		auth_augment_roles(__('Normal User'), array('flowview.php'));
-		auth_augment_roles(__('System Administration'), array('flowview_devices.php','flowview_schedules.php','flowview_filters.php'));
+		auth_augment_roles(__('Normal User'), ['flowview.php']);
+		auth_augment_roles(__('System Administration'), ['flowview_devices.php','flowview_schedules.php','flowview_filters.php']);
 	}
 
-	$flowview_sighup_settings = array(
+	$flowview_sighup_settings = [
 		'flowview_partition',
 		'settings_from_email',
 		'settings_from_name',
@@ -164,7 +164,7 @@ function flowview_config_arrays() {
 		'settings_dns_timeout',
 		'flowview_local_domain',
 		'flowview_local_iprange'
-	);
+	];
 
 	plugin_flowview_check_upgrade();
 }
@@ -353,13 +353,13 @@ function flowview_config_settings() {
 	$formats = reports_get_format_files();
 
 	if (!isset($settings['poller']['reports_concurrent'])) {
-		$nsettings = array();
+		$nsettings = [];
 
 		foreach($settings['poller'] as $setting => $data) {
 			if ($setting != 'reports_timeout' && $setting != 'scheduler_timeout') {
 				$nsettings[$setting] = $data;
 			} else {
-				$processes = array();
+				$processes = [];
 
 				for($i = 1; $i <= 10; $i++) {
 					if ($i == 1) {
@@ -445,7 +445,7 @@ function flowview_config_settings() {
 			'id', 'name'
 		);
 	} else {
-		$queries = array();
+		$queries = [];
 	}
 
 	$temp = array(
@@ -1091,8 +1091,8 @@ function flowview_drop_table($tables) {
 function flowview_graph_button($data) {
 	global $config, $timespan, $graph_timeshifts;
 
-	static $flow_hosts = array();
-	static $flow_hosts_map = array();
+	static $flow_hosts = [];
+	static $flow_hosts_map = [];
 	static $flowview_default_filter;
 
 	$flowview_default_filter = read_config_option('flowview_default_filter');
@@ -1121,7 +1121,7 @@ function flowview_graph_button($data) {
 	$host_id = db_fetch_cell_prepared('SELECT host_id
 		FROM graph_local
 		WHERE id = ?',
-		array($local_graph_id));
+		[$local_graph_id]);
 
 	/* get all the IP addresses and hostname for various streams */
 	if (!cacti_sizeof($flow_hosts)) {
@@ -1135,7 +1135,7 @@ function flowview_graph_button($data) {
 
 	$sql_where1   = '';
 	$sql_where2   = '';
-	$sql_params   = array();
+	$sql_params   = [];
 
 	/**
 	 * Find an elegant way to match the queries stream clients
@@ -1147,8 +1147,8 @@ function flowview_graph_button($data) {
 	 */
 	if (cacti_sizeof($flow_hosts)) {
 		$i = 0;
-		$sql_params1 = array();
-		$sql_params2 = array();
+		$sql_params1 = [];
+		$sql_params2 = [];
 
 		foreach($flow_hosts as $id => $host) {
 			if ($i == 0) {
@@ -1235,7 +1235,7 @@ function flowview_graph_button($data) {
 							FROM plugin_flowview_queries
 							WHERE device_id = ?
 							LIMIT 1',
-							array($host['id']));
+							[$host['id']]);
 
 						$flow_hosts_map[$host_id]['ex_addr'] = $ex_addr;
 
@@ -1257,7 +1257,7 @@ function flowview_graph_button($data) {
 
 		/* initialize settings from the database if they are not set already */
 		if (cacti_sizeof($query_data)) {
-			$columns = array(
+			$columns = [
 				'device_id',
 				'includeif',
 				'sortfield',
@@ -1272,7 +1272,7 @@ function flowview_graph_button($data) {
 				'panel_bytes',
 				'panel_packets',
 				'panel_flows'
-			);
+			];
 
 			foreach($columns as $c) {
 				if (strpos($c, 'panel') !== false) {

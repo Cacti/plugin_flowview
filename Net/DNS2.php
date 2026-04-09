@@ -325,7 +325,7 @@ class Net_DNS2
         //
         // otherwise, see if it's a path to a resolv.conf file and if so, load it
         //
-        if (is_array($nameservers)) {
+        if (is_[$nameservers]) {
 
             //
             // make sure all the name servers are IP addresses (either v4 or v6)

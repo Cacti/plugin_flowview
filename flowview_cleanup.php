@@ -82,7 +82,7 @@ $processes = db_fetch_assoc_prepared('SELECT * FROM processes
 	WHERE tasktype = ?
 	AND taskname LIKE "db_%"
 	ORDER BY taskname',
-	array('flowview'));
+	['flowview']);
 
 if (cacti_sizeof($processes)) {
 	foreach($processes as $p) {
@@ -90,7 +90,7 @@ if (cacti_sizeof($processes)) {
 
 		posix_kill($p['pid'], SIGINT);
 
-		db_execute_prepared('DELETE FROM processes WHERE id = ?', array($p['id']));
+		db_execute_prepared('DELETE FROM processes WHERE id = ?', [$p['id']]);
 	}
 }
 

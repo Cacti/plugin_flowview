@@ -72,7 +72,7 @@ function flowview_get_item_details() {
 	$table = "plugin_flowview_irr_$tab";
 
 	$sql_where  = '';
-	$sql_params = array();
+	$sql_params = [];
 
 	if (cacti_sizeof($ids) && flowview_db_table_exists($table)) {
 		foreach($ids as $col => $value) {
@@ -104,7 +104,7 @@ function flowview_get_item_details() {
 		$maintainers = preg_split('/[\s]+/', trim($response['mnt_by']));
 
 		foreach($maintainers as $m) {
-			$sql_params   = array();
+			$sql_params   = [];
 			$sql_params[] = $m;
 			$sql_params[] = $response['mnt_by_source'];
 
@@ -178,7 +178,7 @@ function flowview_print_details(&$cols, &$details) {
 		print '<tr><td><em>' . __('No Details Found', 'flowview') . '</em></td></tr>';
 	}
 
-	return array('mnt_by_present' => $mnt_by_present, 'mnt_by' => $mnt_by, 'mnt_by_source' => $mnt_by_source);
+	return ['mnt_by_present' => $mnt_by_present, 'mnt_by' => $mnt_by, 'mnt_by_source' => $mnt_by_source];
 }
 
 function view_databases() {
@@ -213,7 +213,7 @@ function view_databases() {
 }
 
 function get_all_columns() {
-	$display_text = array();
+	$display_text = [];
 
 	$columns = array(
 		'route' => array(
@@ -763,7 +763,7 @@ function view_db_table($tab, &$tabs) {
 	$filter        = array_map('trim', explode(',', $table_det['filter']));
 	$rowid         = array_map('trim', explode(',', $table_det['rowid']));
 	$table_name    = trim("plugin_flowview_irr_$tab");
-	$odisplay_text = array();
+	$odisplay_text = [];
 
 	/* create display text for column */
 	if (isset($tabs[$tab])) {
@@ -802,34 +802,34 @@ function view_db_table($tab, &$tabs) {
 
 	/* ================= input validation and session storage ================= */
 	$filters = array(
-		'rows' => array(
+		'rows' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-		),
-		'page' => array(
+		],
+		'page' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-		),
-		'filter' => array(
+		],
+		'filter' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-		),
-		'source' => array(
+		],
+		'source' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => '-1'
-		),
+		],
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => $default_column,
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => $default_direction,
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		)
 	);
 
@@ -843,18 +843,18 @@ function view_db_table($tab, &$tabs) {
 	}
 
 	$sql_where  = '';
-	$sql_params = array();
+	$sql_params = [];
 	$sql_order  = get_order_string();
 	$sql_limit  = ' LIMIT ' . ($rows*(get_request_var('page')-1)) . ',' . $rows;
 
 	/* sort naturally if the origin is in the sort */
-	$natural_columns = array(
+	$natural_columns = [
 		'origin',
 		'route',
 		'aut_num',
 		'as_block',
 		'as_net'
-	);
+	];
 
 	$sort_type = get_database_sort_type();
 
@@ -1075,7 +1075,7 @@ function view_db_table($tab, &$tabs) {
 	$i = 0;
 	if (cacti_sizeof($results)) {
 		foreach($results as $result) {
-			$id = array();
+			$id = [];
 			foreach($rowid as $col) {
 				$id[$col] = $result[$col];
 			}
@@ -1100,7 +1100,7 @@ function view_db_table($tab, &$tabs) {
 					$result[$c] = strtoupper($result[$c]);
 				}
 
-				if (in_array($c, $search, true)) {
+				if (in_[$c, $search, true]) {
 					form_selectable_cell(filter_value($result[$c], get_request_var('filter')), $i, '', $align);
 				} else {
 					if ($c == 'last_modified' || $c == 'created') {
@@ -1157,7 +1157,7 @@ function form_actions() {
 
 	/* setup some variables */
 	$dns_list = '';
-	$dns_array = array();
+	$dns_array = [];
 
 	/* loop through each of the graphs selected on the previous page and get more info about them */
 	foreach ($_POST as $var => $val) {
@@ -1166,7 +1166,7 @@ function form_actions() {
 			input_validate_input_number($matches[1]);
 			/* ==================================================== */
 
-			$dns_list .= '<li>' . html_escape(flowview_db_fetch_cell_prepared('SELECT CONCAT(host, "(", ip, ")") AS name FROM plugin_flowview_dnscache WHERE id = ?', array($matches[1]))) . '</li>';
+			$dns_list .= '<li>' . html_escape(flowview_db_fetch_cell_prepared('SELECT CONCAT(host, "(", ip, ")") AS name FROM plugin_flowview_dnscache WHERE id = ?', [$matches[1]])) . '</li>';
 			$dns_array[] = $matches[1];
 		}
 	}
@@ -1216,39 +1216,39 @@ function view_dns_cache() {
 
 	/* ================= input validation and session storage ================= */
 	$filters = array(
-		'rows' => array(
+		'rows' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-		),
-		'page' => array(
+		],
+		'page' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-		),
-		'filter' => array(
+		],
+		'filter' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-		),
-		'source' => array(
+		],
+		'source' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => '-1'
-		),
-		'verified' => array(
+		],
+		'verified' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => '-1'
-		),
+		],
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'host',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		)
 	);
 
@@ -1513,38 +1513,38 @@ function view_routes($tab) {
 
 	/* ================= input validation and session storage ================= */
 	$filters = array(
-		'rows' => array(
+		'rows' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-		),
-		'page' => array(
+		],
+		'page' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-		),
-		'filter' => array(
+		],
+		'filter' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-		),
-		'version' => array(
+		],
+		'version' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '-1'
-		),
-		'source' => array(
+		],
+		'source' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => '-1'
-		),
+		],
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'route',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		)
 	);
 
@@ -1835,7 +1835,7 @@ function view_routes($tab) {
 
 	if (cacti_sizeof($dns_cache)) {
 		foreach ($dns_cache as $l) {
-			$id = array();
+			$id = [];
 			$rowid = array_keys($l);
 			foreach($rowid as $col) {
 				$id[$col] = $l[$col];

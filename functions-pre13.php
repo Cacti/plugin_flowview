@@ -24,11 +24,11 @@ declare(strict_types=1);
  +-------------------------------------------------------------------------+
 */
 
-function reports_log_and_notify($id, $start_time, $report_type, $source, $source_id, $subject, &$raw_data, &$oput_raw, &$oput_html, &$oput_text, $attachments = array(), $headers = false) {
+function reports_log_and_notify($id, $start_time, $report_type, $source, $source_id, $subject, &$raw_data, &$oput_raw, &$oput_html, &$oput_text, $attachments = [], $headers = false) {
 	$report = db_fetch_row_prepared('SELECT *
 		FROM reports_queued
 		WHERE id = ?',
-		array($id));
+		[$id]);
 
 	if ($oput_text == null) {
 		$oput_text = '';
@@ -90,7 +90,7 @@ function reports_log_and_notify($id, $start_time, $report_type, $source, $source
 							$list = db_fetch_row_prepared('SELECT *
 								FROM plugin_notify_list
 								WHERE id = ?',
-								array($data['id']));
+								[$data['id']]);
 
 							if (cacti_sizeof($list)) {
 								/* process the format file */
@@ -134,7 +134,7 @@ function reports_log_and_notify($id, $start_time, $report_type, $source, $source
 
 		$end_time = microtime(true);
 
-		$save = array();
+		$save = [];
 
 		$save['id']                 = 0;
 		$save['name']               = $report['name'];
@@ -162,7 +162,7 @@ function reports_queue($name, $request_type, $source, $source_id, $command, $not
 		$requested_by = db_fetch_cell_prepared('SELECT username
 			FROM user_auth
 			WHERE id = ?',
-			array($requested_id));
+			[$requested_id]);
 
 		if ($requested_by == '') {
 			$requested_by = 'unknown';
@@ -172,7 +172,7 @@ function reports_queue($name, $request_type, $source, $source_id, $command, $not
 		$requested_by = 'system';
 	}
 
-	$save = array();
+	$save = [];
 
 	$save['id']             = 0;
 	$save['name']           = $name;
@@ -211,7 +211,7 @@ function reports_run($id) {
 	$report = db_fetch_row_prepared('SELECT *
 		FROM reports_queued
 		WHERE id = ?',
-		array($id));
+		[$id]);
 
 	if (cacti_sizeof($report)) {
 		db_execute_prepared('UPDATE reports_queued
@@ -225,7 +225,7 @@ function reports_run($id) {
 	$start = microtime(true);
 
 	$return_code = 0;
-	$output      = array();
+	$output      = [];
 	$command     = $report['run_command'] . " --report-id=$id";
 	$timeout     = $report['run_timeout'];
 
@@ -239,6 +239,6 @@ function reports_run($id) {
 
 	cacti_log($stats, false, 'SYSTEM');
 
-	db_execute_prepared('DELETE FROM reports_queued WHERE id = ?', array($id));
+	db_execute_prepared('DELETE FROM reports_queued WHERE id = ?', [$id]);
 }
 

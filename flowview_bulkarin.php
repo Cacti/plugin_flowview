@@ -98,8 +98,8 @@ if (read_config_option('flowview_use_arin') == 'on') {
 }
 
 $time      = time();
-$addresses = array();
-$cidrs     = array();
+$addresses = [];
+$cidrs     = [];
 
 $whois_provider = read_config_option('flowview_whois_provider');
 $whois_path     = read_config_option('flowview_path_whois');
@@ -116,11 +116,11 @@ if (cacti_sizeof($cidrs)) {
 		$arin_id = $row['id'];
 
 		$return_var = 0;
-		$output = array();
+		$output = [];
 		$origin = flowview_db_fetch_cell_prepared('SELECT origin
 			FROM plugin_flowview_irr_route
 			WHERE route = ?',
-			array($cidr));
+			[$cidr]);
 
 		if ($origin == '') {
 			if (file_exists($whois_path) && is_executable($whois_path) && $whois_provider != '') {
@@ -137,7 +137,7 @@ if (cacti_sizeof($cidrs)) {
 					flowview_db_execute_prepared('UPDATE plugin_flowview_arin_information
 						SET origin = ?
 						WHERE id = ?',
-						array($origin, $arin_id));
+						[$origin, $arin_id]);
 				} else {
 					print "WARNING: Origin AS Not Verified for CIDR Address:$cidr." . PHP_EOL;
 				}
@@ -151,7 +151,7 @@ if (cacti_sizeof($cidrs)) {
 			flowview_db_execute_prepared('UPDATE plugin_flowview_arin_information
 				SET origin = ?
 				WHERE id = ?',
-				array($origin, $arin_id));
+				[$origin, $arin_id]);
 		}
 	}
 }
@@ -180,7 +180,7 @@ if (cacti_sizeof($addresses)) {
 			flowview_db_execute_prepared('UPDATE plugin_flowview_dnscache
 				SET `arin_verified` = ?, `arin_id` = ?, `time` = ?
 				WHERE `ip` = ?',
-				array($arin_ver, $arin_id, $time, $p['ip']));
+				[$arin_ver, $arin_id, $time, $p['ip']]);
 		} else {
 			print "WARNING: Arin Not Verified for IP Address:{$p['ip']} and DNS Name:{$p['host']}" . PHP_EOL;
 		}

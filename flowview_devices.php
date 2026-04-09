@@ -98,10 +98,10 @@ $device_edit = array(
 		'value' => '|arg1:enabled|',
 		'default' => ''
 	),
-	'id' => array(
+	'id' => [
 		'method' => 'hidden_zero',
 		'value' => '|arg1:id|'
-	)
+	]
 );
 
 switch (get_request_var('action')) {
@@ -143,7 +143,7 @@ function export_template() {
 		WHERE device_id = ?
 		AND template_id = ?
 		AND ex_addr = ?',
-		array($device_id, $template_id, $ex_addr));
+		[$device_id, $template_id, $ex_addr]);
 
 	if ($data != '') {
 		$data = json_decode($data, true);
@@ -185,19 +185,19 @@ function actions_devices () {
 			if (get_nfilter_request_var('drp_action') == '1') {
 				foreach ($selected_items as $item) {
 					flowview_db_execute_prepared('DELETE FROM plugin_flowview_devices
-						WHERE id = ?', array($item));
+						WHERE id = ?', [$item]);
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '2') {
 				foreach ($selected_items as $item) {
 					flowview_db_execute_prepared('UPDATE plugin_flowview_devices
 						SET enabled = "on"
-						WHERE id = ?', array($item));
+						WHERE id = ?', [$item]);
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '3') {
 				foreach ($selected_items as $item) {
 					flowview_db_execute_prepared('UPDATE plugin_flowview_devices
 						SET enabled = ""
-						WHERE id = ?', array($item));
+						WHERE id = ?', [$item]);
 				}
 			}
 
@@ -345,7 +345,7 @@ function edit_device() {
 	get_filter_request_var('id');
 	/* ==================================================== */
 
-	$device = array();
+	$device = [];
 
 	if (!isempty_request_var('id')) {
 		$device = flowview_db_fetch_row('SELECT *
@@ -366,7 +366,7 @@ function edit_device() {
 
 		draw_edit_form(
 			array(
-				'config' => array('no_form_tag' => true),
+				'config' => ['no_form_tag' => true],
 				'fields' => inject_form_variables($device_edit, $device)
 			)
 		);
@@ -387,7 +387,7 @@ function edit_device() {
 				USING (device_id, ex_addr)
 				WHERE ds.device_id = ?
 				GROUP BY ds.ex_addr',
-				array($device['id'], $device['id']));
+				[$device['id'], $device['id']]);
 
 			html_start_box('Inbound Streams and Status', '100%', '', '4', 'center', '');
 
@@ -438,7 +438,7 @@ function edit_device() {
 					$enabled = flowview_db_fetch_cell_prepared('SELECT enabled
 						FROM plugin_flowview_devices
 						WHERE id = ?',
-						array($device['id']));
+						[$device['id']]);
 
 					if ($enabled == 'on') {
 						$disabled = false;
@@ -468,7 +468,7 @@ function edit_device() {
 			$ex_addr = flowview_db_fetch_cell_prepared('SELECT ex_addr
 				FROM plugin_flowview_device_templates
 				WHERE device_id = ?
-				LIMIT 1', array($device['id']));
+				LIMIT 1', [$device['id']]);
 
 			set_request_var('ex_addr', $ex_addr);
 		}
@@ -485,14 +485,14 @@ function edit_device() {
 
 		/* ================= input validation and session storage ================= */
 		$filters = array(
-			'template' => array(
+			'template' => [
 				'filter' => FILTER_VALIDATE_INT,
 				'default' => '-1'
-			),
+			],
 			'ex_addr' => array(
 				'filter' => FILTER_CALLBACK,
 				'default' => '-1',
-				'options' => array('options' => 'sanitize_search_string')
+				'options' => ['options' => 'sanitize_search_string']
 			)
 		);
 
@@ -521,7 +521,7 @@ function edit_device() {
 		$addrs = flowview_db_fetch_assoc_prepared('SELECT DISTINCT ex_addr
 			FROM plugin_flowview_device_templates
 			WHERE device_id = ?',
-			array($device['id']));
+			[$device['id']]);
 
 		html_start_box(__('Listener Detected Templates', 'flowview'), '100%', '', '4', 'center', '');
 
@@ -714,24 +714,24 @@ function show_devices () {
 
 	/* ================= input validation and session storage ================= */
 	$filters = array(
-		'page' => array(
+		'page' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-		),
-		'filter' => array(
+		],
+		'filter' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-		),
+		],
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'name',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		)
 	);
 

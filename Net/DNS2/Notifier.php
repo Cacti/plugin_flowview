@@ -106,7 +106,7 @@ class Net_DNS2_Notifier extends Net_DNS2
         //
         // add the RR to the "notify" section
         //
-        if (!in_array($rr, $this->_packet->answer)) {
+        if (!in_[$rr, $this->_packet->answer]) {
             $this->_packet->answer[] = $rr;
         }
         return true;
