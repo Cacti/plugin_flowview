@@ -79,7 +79,7 @@ class Net_DNS2_Cache
             if ($this->cache_serializer == 'json') {
                 return json_decode($this->cache_data[$key]['object']);
             } else {
-                return unserialize($this->cache_data[$key]['object']);
+                return unserialize($this->cache_data[$key]['object'], array('allowed_classes' => false));
             }
         } else {
 
