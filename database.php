@@ -65,7 +65,7 @@ function flowview_db_close(&$flowview_cnn) {
  * @return '1' for success, '0' for error
  */
 function flowview_db_execute($sql, $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_execute($sql, $log, $flowview_cnn);
 }
@@ -80,7 +80,7 @@ function flowview_db_execute($sql, $log = true, $cnn_id = false) {
  * @return '1' for success, '0' for error
  */
 function flowview_db_execute_prepared($sql, $parms = array(), $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_execute_prepared($sql, $parms, $log, $flowview_cnn);
 }
@@ -97,7 +97,7 @@ function flowview_db_execute_prepared($sql, $parms = array(), $log = true, $cnn_
  * @return (bool) the output of the sql query as a single variable
  */
 function flowview_db_fetch_cell($sql, $col_name = '', $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_cell($sql, $col_name, $log, $flowview_cnn);
 }
@@ -115,7 +115,7 @@ function flowview_db_fetch_cell($sql, $col_name = '', $log = true, $cnn_id = fal
  * @return (bool) the output of the sql query as a single variable
  */
 function flowview_db_fetch_cell_prepared($sql, $params = array(), $col_name = '', $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_cell_prepared($sql, $params, $col_name, $log, $flowview_cnn);
 }
@@ -130,7 +130,7 @@ function flowview_db_fetch_cell_prepared($sql, $params = array(), $col_name = ''
  * @return the first row of the result as a hash
  */
 function flowview_db_fetch_row($sql, $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_row($sql, $log, $flowview_cnn);
 }
@@ -146,7 +146,7 @@ function flowview_db_fetch_row($sql, $log = true, $cnn_id = false) {
  * @return the first row of the result as a hash
  */
 function flowview_db_fetch_row_prepared($sql, $params = array(), $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_row_prepared($sql, $params, $log, $flowview_cnn);
 }
@@ -161,7 +161,7 @@ function flowview_db_fetch_row_prepared($sql, $params = array(), $log = true, $c
  * @return the entire result set as a multi-dimensional hash
  */
 function flowview_db_fetch_assoc($sql, $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_assoc($sql, $log, $flowview_cnn);
 }
@@ -177,7 +177,7 @@ function flowview_db_fetch_assoc($sql, $log = true, $cnn_id = false) {
  * @return the entire result set as a multi-dimensional hash
  */
 function flowview_db_fetch_assoc_prepared($sql, $params = array(), $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_assoc_prepared($sql, $params, $log, $flowview_cnn);
 }
@@ -190,7 +190,7 @@ function flowview_db_fetch_assoc_prepared($sql, $params = array(), $log = true, 
  * @return the id of the last auto incriment row that was created
  */
 function flowview_db_fetch_insert_id($cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return  db_fetch_insert_id($flowview_cnn);
 }
@@ -206,7 +206,7 @@ function flowview_db_fetch_insert_id($cnn_id = false) {
  * @return the auto incriment id column (if applicable)
  */
 function flowview_db_replace($table_name, $array_items, $keyCols, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_replace($table_name, $array_items, $keyCols, $flowview_cnn);
 }
@@ -223,7 +223,7 @@ function flowview_db_replace($table_name, $array_items, $keyCols, $cnn_id = fals
  * @return the auto incriment id column (if applicable)
  */
 function flowview_sql_save($array_items, $table_name, $key_cols = 'id', $autoinc = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return sql_save($array_items, $table_name, $key_cols, $autoinc, $flowview_cnn);
 }
@@ -238,7 +238,7 @@ function flowview_sql_save($array_items, $table_name, $key_cols = 'id', $autoinc
  * @return (bool) the output of the sql query as a single variable
  */
 function flowview_db_table_exists($table, $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	preg_match("/([`]{0,1}(?<database>[\w_]+)[`]{0,1}\.){0,1}[`]{0,1}(?<table>[\w_]+)[`]{0,1}/", $table, $matches);
 	if ($matches !== false && array_key_exists('table', $matches)) {
@@ -250,7 +250,7 @@ function flowview_db_table_exists($table, $log = true, $cnn_id = false) {
 }
 
 function flowview_db_table_create($table, $data, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	$result = flowview_db_fetch_assoc('SHOW TABLES');
 	$tables = array();
@@ -352,13 +352,13 @@ function flowview_db_table_create($table, $data, $cnn_id = false) {
 }
 
 function flowview_db_column_exists($table, $column, $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_column_exists($table, $column, $log, $flowview_cnn);
 }
 
 function flowview_db_add_column($table, $column, $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_add_column($table, $column, $log, $flowview_cnn);
 }
@@ -372,9 +372,9 @@ function flowview_db_add_column($table, $column, $log = true, $cnn_id = false) {
  *                       or false on error
  */
 function flowview_db_affected_rows($cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
-	return db_affected_rows($flowview_cnn);;
+	return db_affected_rows($flowview_cnn);
 }
 
 /**
@@ -388,7 +388,7 @@ function flowview_db_affected_rows($cnn_id = false) {
  * @return bool          The output of the sql query as a single variable
  */
 function flowview_db_index_exists($table, $index, $log = true, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_index_exists($table, $index, $log, $flowview_cnn);
 }
@@ -412,13 +412,13 @@ function flowview_get_connection($cnn_id) {
  * @return (array) An array of column types indexed by the column names
  */
 function flowview_db_get_table_column_types($table, $cnn_id = false) {
-	$flowview_cnn = flowview_get_connection($cnn_id);;
+	$flowview_cnn = flowview_get_connection($cnn_id);
 
     $columns = db_fetch_assoc("SHOW COLUMNS FROM $table", false, $flowview_cnn);
     $cols    = array();
     if (cacti_sizeof($columns)) {
         foreach($columns as $col) {
-            $cols[$col['Field']] = array('type' => $col['Type'], 'null' => $col['Null'], 'default' => $col['Default'], 'extra' => $col['Extra']);;
+            $cols[$col['Field']] = array('type' => $col['Type'], 'null' => $col['Null'], 'default' => $col['Default'], 'extra' => $col['Extra']);
         }
     }
 
