@@ -1100,7 +1100,7 @@ function view_db_table($tab, &$tabs) {
 					$result[$c] = strtoupper($result[$c]);
 				}
 
-				if (in_[$c, $search, true]) {
+				if (in_array($c, $search, true)) {
 					form_selectable_cell(filter_value($result[$c], get_request_var('filter')), $i, '', $align);
 				} else {
 					if ($c == 'last_modified' || $c == 'created') {

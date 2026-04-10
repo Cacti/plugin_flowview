@@ -2028,7 +2028,7 @@ function get_numeric_filter($sql_where, &$sql_params, $value, $column) {
 
 	$sql_where = trim($sql_where);
 
-	if (is_[$value]) {
+	if (is_array($value)) {
 		$value = implode(',', $value);
 	}
 
@@ -5750,7 +5750,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 		}
 
 		if (($force || $import_only !== false) || (($last_serial == '' || $curr_serial != $last_serial) && $curr_serial != '')) {
-			if (!is_[$details['files']]) {
+			if (!is_array($details['files')]) {
 				$details['files'] = [$details['files']];
 			}
 
@@ -5945,7 +5945,7 @@ function flowview_update_database($source, $irr_file = false) {
 		}
 
 		if ($irr_column != '') {
-			if ($irr_column != '' && in_[$irr_column, $supported_sections, true]) {
+			if ($irr_column != '' && in_array($irr_column, $supported_sections, true)) {
 				$prev_section = $section;
 
 				// Let's not eat too much memory
@@ -5986,7 +5986,7 @@ function flowview_update_database($source, $irr_file = false) {
 				$records[$section][$record_num[$section]]['present']  = 1;
 
 				$cur_section  = $section;
-			} elseif (in_[$irr_column, $unsupported_sections, true]) {
+			} elseif (in_array($irr_column, $unsupported_sections, true)) {
 				$skip = true;
 			} elseif (!$skip) {
 				if (trim(substr($line, 0, 16)) == '') {

@@ -83,7 +83,7 @@ class Net_DNS2_Cache_File extends Net_DNS2_Cache
                     $decoded = unserialize($data, array('allowed_classes' => false));                
                 }
 
-                if (is_[$decoded] == true) {
+                if (is_array($decoded) == true) {
 
                     $this->cache_data = $decoded;
                 } else {
@@ -175,7 +175,7 @@ class Net_DNS2_Cache_File extends Net_DNS2_Cache
                         $decoded = unserialize($data, array('allowed_classes' => false));
                     }
                 
-                    if (is_[$decoded] == true) {
+                    if (is_array($decoded) == true) {
 
                         $this->cache_data = array_merge($c, $decoded);
                     }

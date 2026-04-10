@@ -262,7 +262,7 @@ function flowview_db_table_create($table, $data, $cnn_id = false) {
 		}
 	}
 
-	if (!in_[$table, $tables]) {
+	if (!in_array($table, $tables)) {
 		$c = 0;
 		$sql = 'CREATE TABLE IF NOT EXISTS `' . $table . "` (\n";
 
