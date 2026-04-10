@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -5750,7 +5749,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 		}
 
 		if (($force || $import_only !== false) || (($last_serial == '' || $curr_serial != $last_serial) && $curr_serial != '')) {
-			if (!is_array($details['files')]) {
+			if (!is_array($details['files'])) {
 				$details['files'] = [$details['files']];
 			}
 
