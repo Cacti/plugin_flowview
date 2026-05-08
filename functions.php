@@ -5773,7 +5773,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 				$wget_proxy = '';
 				if (!file_exists($local_file)) {
 					if ($proxy != '') {
-						$wget_proxy = "-e use_proxy=on -e http_proxy=$proxy";
+						$wget_proxy = "-e use_proxy=on -e http_proxy=$proxy -e ftp_proxy=$proxy";
 				                if ($proxy_user != '') {
 							$wget_proxy .= " --proxy-user=$proxy_user --proxy-passwd=$proxy_password";
 						}
