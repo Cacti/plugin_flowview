@@ -78,7 +78,7 @@ class Net_DNS2_Cache_File extends Net_DNS2_Cache
                     $decoded = json_decode($data, true);         
                 } else {
 
-                    $decoded = unserialize($data);                
+                    $decoded = unserialize($data, array('allowed_classes' => false));                
                 }
 
                 if (is_array($decoded) == true) {
@@ -170,7 +170,7 @@ class Net_DNS2_Cache_File extends Net_DNS2_Cache
                         $decoded = json_decode($data, true);
                     } else {
 
-                        $decoded = unserialize($data);
+                        $decoded = unserialize($data, array('allowed_classes' => false));
                     }
                 
                     if (is_array($decoded) == true) {

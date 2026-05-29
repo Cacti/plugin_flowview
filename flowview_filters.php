@@ -273,15 +273,15 @@ function show_filters() {
 		}
 
 		$(function() {
-			$('#clear').click(function() {
+			$('#clear').on('click', function() {
 				clearFilter();
 			});
 
-			$('#rows').change(function() {
+			$('#rows').on('change', function() {
 				applyFilter();
 			});
 
-			$('#form_filter').submit(function(event) {
+			$('#form_filter').on('submit', function(event) {
 				event.preventDefault();
 				applyFilter();
 			});
