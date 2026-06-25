@@ -974,7 +974,7 @@ $db_tabs = array(
 		'function' => 'view_db_table',
 		'filter'   => '',
 		'columns'  => 'person, nic_hdl, source, mnt_by, created, last_modified',
-		'search'   => 'person, nic_hdl, mnt_by, remarks, email, address',
+		'search'   => 'person, nic_hdl, mnt_by, remarks, e_mail, address',
 		'rowid'    => 'person, source, nic_hdl'
 	)
 );
