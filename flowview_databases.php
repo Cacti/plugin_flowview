@@ -1035,19 +1035,19 @@ function view_db_table($tab, &$tabs) {
 			}
 
 			$(function() {
-				$('#refresh').click(function() {
+				$('#refresh').on('click', function() {
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 
-				$('#purge').click(function() {
+				$('#purge').on('click', function() {
 					purgeFilter();
 				});
 
-				$('#form').submit(function(event) {
+				$('#form').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});
@@ -1353,19 +1353,19 @@ function view_dns_cache() {
 			}
 
 			$(function() {
-				$('#refresh').click(function() {
+				$('#refresh').on('click', function() {
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 
-				$('#purge').click(function() {
+				$('#purge').on('click', function() {
 					purgeFilter();
 				});
 
-				$('#form').submit(function(event) {
+				$('#form').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});
@@ -1701,19 +1701,19 @@ function view_routes($tab) {
 			}
 
 			$(function() {
-				$('#refresh').click(function() {
+				$('#refresh').on('click', function() {
 					applyFilter();
 				});
 
-				$('#clear').click(function() {
+				$('#clear').on('click', function() {
 					clearFilter();
 				});
 
-				$('#purge').click(function() {
+				$('#purge').on('click', function() {
 					purgeFilter();
 				});
 
-				$('#form').submit(function(event) {
+				$('#form').on('submit', function(event) {
 					event.preventDefault();
 					applyFilter();
 				});

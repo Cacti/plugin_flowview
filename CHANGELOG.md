@@ -3,6 +3,7 @@
 --- develop ---
 
 * issue#240: Call to db_table_exists is incorrect in some cases
+* issue: Killing processes does not occur when they are in D-State
 
 --- 5.0 ---
 

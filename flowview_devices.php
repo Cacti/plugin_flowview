@@ -568,14 +568,14 @@ function edit_device() {
 			</form>
 			<script type='text/javascript'>
 			function applyFilter() {
-				strURL  = 'flowview_devices.php?action=edit&id=<?php print get_request_var('id');?>&tab=templates&header=false';
+				strURL  = 'flowview_devices.php?action=edit&id=<?php print (int)get_filter_request_var('id'); ?>&tab=templates&header=false';
 				strURL += '&template=' + $('#template').val();
 				strURL += '&ex_addr='  + $('#ex_addr').val();
 				loadPageNoHeader(strURL);
 			}
 
 			function exportFilter() {
-				strURL  = 'flowview_devices.php?action=export&id=<?php print get_request_var('id');?>&tab=templates&header=false';
+				strURL  = 'flowview_devices.php?action=export&id=<?php print (int)get_filter_request_var('id'); ?>&tab=templates&header=false';
 				strURL += '&template=' + $('#template').val();
 				strURL += '&ex_addr='  + $('#ex_addr').val();
 
@@ -585,15 +585,15 @@ function edit_device() {
 			}
 
 			$(function() {
-				$('#template, #ex_addr').change(function() {
+				$('#template, #ex_addr').on('change', function() {
 					applyFilter();
 				});
 
-				$('#go').click(function() {
+				$('#go').on('click', function() {
 					applyFilter();
 				});
 
-				$('#export').click(function() {
+				$('#export').on('click', function() {
 					exportFilter();
 				});
 
@@ -796,11 +796,11 @@ function show_devices () {
 		}
 
 		$(function() {
-			$('#clear').click(function() {
+			$('#clear').on('click', function() {
 				clearFilter();
 			});
 
-			$('#listeners').submit(function(event) {
+			$('#listeners').on('submit', function(event) {
 				event.preventDefault();
 				applyFilter();
 			});
