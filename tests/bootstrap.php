@@ -15,51 +15,51 @@
 $GLOBALS['__test_db_calls'] = array();
 
 if (!function_exists('db_execute')) {
-	function db_execute($sql) {
+	function db_execute($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array());
 		return true;
 	}
 }
 
 if (!function_exists('db_execute_prepared')) {
-	function db_execute_prepared($sql, $params = array()) {
+	function db_execute_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params);
 		return true;
 	}
 }
 
 if (!function_exists('db_fetch_assoc')) {
-	function db_fetch_assoc($sql) {
+	function db_fetch_assoc($sql, $log = true, $conn = false) {
 		return array();
 	}
 }
 
 if (!function_exists('db_fetch_assoc_prepared')) {
-	function db_fetch_assoc_prepared($sql, $params = array()) {
+	function db_fetch_assoc_prepared($sql, $params = array(), $log = true, $conn = false) {
 		return array();
 	}
 }
 
 if (!function_exists('db_fetch_row')) {
-	function db_fetch_row($sql) {
+	function db_fetch_row($sql, $log = true, $conn = false) {
 		return array();
 	}
 }
 
 if (!function_exists('db_fetch_row_prepared')) {
-	function db_fetch_row_prepared($sql, $params = array()) {
+	function db_fetch_row_prepared($sql, $params = array(), $log = true, $conn = false) {
 		return array();
 	}
 }
 
 if (!function_exists('db_fetch_cell')) {
-	function db_fetch_cell($sql) {
+	function db_fetch_cell($sql, $column = '', $log = true, $conn = false) {
 		return '';
 	}
 }
 
 if (!function_exists('db_fetch_cell_prepared')) {
-	function db_fetch_cell_prepared($sql, $params = array()) {
+	function db_fetch_cell_prepared($sql, $params = array(), $column = '', $log = true, $conn = false) {
 		return '';
 	}
 }
@@ -112,7 +112,13 @@ if (!function_exists('__')) {
 }
 
 if (!function_exists('__esc')) {
-	function __esc($text, $domain = '') {
+	function __esc($text, ...$args) {
+		if (!empty($args)) {
+			array_pop($args);
+		}
+		if (!empty($args)) {
+			$text = vsprintf($text, $args);
+		}
 		return htmlspecialchars($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	}
 }
@@ -176,7 +182,8 @@ if (!function_exists('sql_save')) {
 }
 
 if (!defined('CACTI_PATH_BASE')) {
-	define('CACTI_PATH_BASE', '/var/www/html/cacti');
+	$test_root = realpath(__DIR__ . '/..');
+	define('CACTI_PATH_BASE', $test_root !== false ? $test_root : dirname(__DIR__));
 }
 
 if (!defined('POLLER_VERBOSITY_LOW')) {
@@ -197,4 +204,20 @@ if (!defined('POLLER_VERBOSITY_NONE')) {
 
 if (!defined('MESSAGE_LEVEL_ERROR')) {
 	define('MESSAGE_LEVEL_ERROR', 1);
+}
+
+if (!function_exists('plugin_test_read_source')) {
+	function plugin_test_read_source($relative_file) {
+		$path = realpath(__DIR__ . '/../' . $relative_file);
+		if ($path === false) {
+			throw new RuntimeException("Unable to resolve required file: {$relative_file}");
+		}
+
+		$contents = file_get_contents($path);
+		if ($contents === false) {
+			throw new RuntimeException("Unable to read required file: {$relative_file}");
+		}
+
+		return $contents;
+	}
 }
