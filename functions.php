@@ -2022,8 +2022,6 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
  *
  */
 function get_numeric_filter($sql_where, &$sql_params, $value, $column) {
-	$values = array();
-
 	$sql_where = trim($sql_where);
 
 	if (is_array($value)) {
@@ -2044,7 +2042,11 @@ function get_numeric_filter($sql_where, &$sql_params, $value, $column) {
 			}
 		}
 
-		$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . "`$column` IN ($instr)";
+		if ($instr != '') {
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . "`$column` IN ($instr)";
+		} else {
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '1 = 0';
+		}
 	}
 
 	return $sql_where;
@@ -2067,11 +2069,8 @@ function get_ip_filter($sql_where, &$sql_params, $value, $column) {
 	$sql_where = trim($sql_where);
 
 	if ($value != '') {
-		$values = array();
 		$parts  = explode(',', $value);
-		$i      = 0;
-
-		$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(';
+		$predicates = array();
 
 		foreach($parts as $part) {
 			$part = trim($part);
@@ -2081,32 +2080,34 @@ function get_ip_filter($sql_where, &$sql_params, $value, $column) {
 				$addr = cacti_pton($part);
 
 				if (isset($addr['subnet'])) {
-					// Example looking for IP's in the network to the right: 192.168.11.0/24
-					// src_addr & inet6_aton('255.255.255.0') = inet6_aton('192.168.11.0')
-					$subnet  = inet_ntop($addr['subnet']);
 					$network = inet_ntop($addr['subnet'] & $addr['ip']);
+					$last    = inet_ntop(($addr['subnet'] & $addr['ip']) | ~$addr['subnet']);
 
-					$sql_where .= ($i == 0 ? '':' OR ') .
-						"(`$column` & INET6_ATON(?) = INET6_ATON(?) OR `$column` & INET_ATON(?) = INET_ATON(?))";
+					// VARBINARY values cannot be masked reliably with SQL's numeric
+					// bitwise operators.  Match the address family and use the
+					// lexicographic range represented by the first and last address.
+					$predicates[] = "(OCTET_LENGTH(`$column`) = OCTET_LENGTH(INET6_ATON(?)) AND `$column` BETWEEN INET6_ATON(?) AND INET6_ATON(?))";
 
-					$sql_params[] = $subnet;
 					$sql_params[] = $network;
-					$sql_params[] = $subnet;
 					$sql_params[] = $network;
+					$sql_params[] = $last;
 				} else {
 					raise_message('subnet_filter', __('Subnet Filter: %s is not a value CIDR format', $part, 'flowview'), MESSAGE_LEVEL_ERROR);
 				}
+			} elseif (is_ipaddress($part)) {
+				$predicates[] = "(`$column` = INET6_ATON(?))";
+
+				$sql_params[] = $part;
 			} else {
-				$sql_where .= ($i == 0 ? '':' OR ') . "(`$column` = INET6_ATON(?) OR `$column` = INET_ATON(?)";
-
-				$sql_params[] = $part;
-				$sql_params[] = $part;
+				raise_message('ip_filter', __('IP Filter: %s is not a valid IP address', $part, 'flowview'), MESSAGE_LEVEL_ERROR);
 			}
-
-			$i++;
 		}
 
-		$sql_where .= ')';
+		if (!empty($predicates)) {
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '(' . implode(' OR ', $predicates) . ')';
+		} else {
+			$sql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . '1 = 0';
+		}
 	}
 
 	return $sql_where;
@@ -3569,7 +3570,11 @@ function run_flow_query($session, $query_id, $start, $end) {
 }
 
 function flowview_table_name_to_time($table, $type) {
-	$suffix = str_replace('plugin_flowview_raw_', '', $table);
+	if (!preg_match('/^plugin_flowview_raw_([0-9]{7})([0-9]{2})?$/', $table, $matches)) {
+		return false;
+	}
+
+	$suffix = $matches[1] . (isset($matches[2]) ? $matches[2] : '');
 
 	$year = substr($suffix, 0, 4);
 	$day  = substr($suffix, 4, 3);
@@ -3579,7 +3584,7 @@ function flowview_table_name_to_time($table, $type) {
 		$hour = 0;
 	} else {
 		$gran = 'hours';
-		$hour = substr($suffix, 8, 2);
+		$hour = substr($suffix, 7, 2);
 	}
 
 	$dates = flowview_convert_yeardayhour_to_date($gran, $year, $day, $hour);
@@ -3588,16 +3593,19 @@ function flowview_table_name_to_time($table, $type) {
 }
 
 function flowview_convert_yeardayhour_to_date($range, $year, $day, $hour = 0) {
-    $datetime = new DateTime();
+	$datetime = new DateTime();
+	$datetime->setDate((int) $year, 1, 1)->setTime(0, 0, 0);
+	$datetime->modify('+' . (int) $day . ' days');
 
 	if ($range == 'days') {
-    	$datetime->setTimestamp(mktime(0, 0, 0, 0, 0, $year) + ($day * 86400));
 		$start_date = $datetime->format('Y-m-d 00:00:00');
-		$end_date   = date('Y-m-d 00:00:00', strtotime($start_date)+86400);
+		$datetime->modify('+1 day');
+		$end_date = $datetime->format('Y-m-d 00:00:00');
 	} else {
-    	$datetime->setTimestamp(mktime(0, 0, 0, 0, 0, $year) + ($day * 86400) + ($hour * 3600));
+		$datetime->modify('+' . (int) $hour . ' hours');
 		$start_date = $datetime->format('Y-m-d H:00:00');
-		$end_date   = date('Y-m-d H:00:00', strtotime($start_date) + ($hour * 3600));
+		$datetime->modify('+1 hour');
+		$end_date = $datetime->format('Y-m-d H:00:00');
 	}
 
 	$start_time = strtotime($start_date);
@@ -4765,11 +4773,7 @@ function flowview_explode($string) {
 }
 
 function removeWhiteSpace($string) {
-	$string = str_replace("\t", ' ', $string);
-	while (substr_count('  ',$string)) {
-		$string = str_replace('  ', ' ', $string);
-	}
-	return $string;
+	return preg_replace('/\s+/', ' ', $string);
 }
 
 function plugin_flowview_get_protocol($prot, $prot_hex) {
@@ -6334,14 +6338,17 @@ function flowview_get_owner_from_arin($host) {
 	}
 }
 
-function flowview_get_domain($host, $domain = 'false') {
-	if ($domain == 'false') {
+function flowview_get_domain($host, $domain = false) {
+	if ($domain === false || $domain === 'false') {
 		return $host;
 	} elseif (is_ipaddress($host)) {
 		return $host;
 	} else {
 		$parts = explode('.', $host);
 		$size  = cacti_sizeof($parts);
+		if ($size < 2) {
+			return $host;
+		}
 		return $parts[$size - 2] . '.' . $parts[$size - 1];
 	}
 }

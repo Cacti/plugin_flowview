@@ -240,9 +240,10 @@ function flowview_sql_save($array_items, $table_name, $key_cols = 'id', $autoinc
 function flowview_db_table_exists($table, $log = true, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
-	preg_match("/([`]{0,1}(?<database>[\w_]+)[`]{0,1}\.){0,1}[`]{0,1}(?<table>[\w_]+)[`]{0,1}/", $table, $matches);
-	if ($matches !== false && array_key_exists('table', $matches)) {
-		$sql = 'SHOW TABLES LIKE \'' . $matches['table'] . '\'';
+	$matched = preg_match('/^(?:`?(?<database>[A-Za-z0-9_]+)`?\.)?`?(?<table>[A-Za-z0-9_]+)`?$/D', $table, $matches);
+	if ($matched === 1) {
+		$table_pattern = addcslashes($matches['table'], '\\%_');
+		$sql = 'SHOW TABLES LIKE \'' . $table_pattern . '\'';
 
 		return (db_fetch_cell($sql, '', $log, $flowview_cnn) ? true : false);
 	}

@@ -1,0 +1,31 @@
+{
+    "name": "cacti/plugin_flowview",
+    "description": "plugin_flowview plugin for Cacti",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "pestphp/pest": "^1.23"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4.33"
+        },
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "autoload-dev": {
+        "files": [
+            "tests/bootstrap.php"
+        ]
+    },
+    "scripts": {
+        "test": "pest --colors=always",
+        "test:unit": "pest --colors=always --exclude-group=integration",
+        "test:integration": "pest --colors=always --group=integration",
+        "test:syntax": "bash tests/scripts/php-syntax.sh",
+        "test:all": [
+            "@test:syntax",
+            "@test"
+        ]
+    }
+}
