@@ -17,5 +17,15 @@
         "files": [
             "tests/bootstrap.php"
         ]
+    },
+    "scripts": {
+        "test": "pest --colors=always",
+        "test:unit": "pest --colors=always --exclude-group=integration",
+        "test:integration": "pest --colors=always --group=integration",
+        "test:syntax": "bash tests/scripts/php-syntax.sh",
+        "test:all": [
+            "@test:syntax",
+            "@test"
+        ]
     }
 }

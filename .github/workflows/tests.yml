@@ -1,0 +1,107 @@
+name: Tests
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: PHP ${{ matrix.php }} unit and contract tests
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.1', '8.3']
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: shivammathur/setup-php@ec406be512d7077f68eed36e63f4d91bc006edc4 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+      - uses: ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520 # v3
+      - name: Validate PHP syntax
+        run: composer test:syntax
+      - name: Run isolated tests
+        run: composer test:unit
+
+  php84-syntax:
+    name: PHP 8.4 forward-compatibility syntax
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: shivammathur/setup-php@ec406be512d7077f68eed36e63f4d91bc006edc4 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: Validate PHP syntax
+        run: bash tests/scripts/php-syntax.sh
+
+  database:
+    name: ${{ matrix.database.name }} database contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        database:
+          - name: MariaDB 10.6
+            image: mariadb:10.6
+          - name: MySQL 8.4
+            image: mysql:8.4
+    services:
+      database:
+        image: ${{ matrix.database.image }}
+        env:
+          MYSQL_ROOT_PASSWORD: flowview
+          MYSQL_DATABASE: flowview_test
+          MARIADB_ROOT_PASSWORD: flowview
+          MARIADB_DATABASE: flowview_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pflowview"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: shivammathur/setup-php@ec406be512d7077f68eed36e63f4d91bc006edc4 # v2
+        with:
+          php-version: '8.1'
+          extensions: pdo_mysql
+          coverage: none
+          tools: composer:v2
+      - uses: ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520 # v3
+      - name: Run connector and schema contracts
+        env:
+          FLOWVIEW_TEST_DB_DSN: mysql:host=127.0.0.1;port=3306;dbname=flowview_test
+          FLOWVIEW_TEST_DB_USER: root
+          FLOWVIEW_TEST_DB_PASSWORD: flowview
+        run: composer test:integration
+
+  required:
+    name: Tests / required
+    if: always()
+    needs: [unit, php84-syntax, database]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require every test job
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          failures=$(jq -r 'to_entries[] | select(.value.result != "success") | "\(.key)=\(.value.result)"' <<<"$RESULTS")
+          test -z "$failures" || { printf 'Required jobs failed:\n%s\n' "$failures"; exit 1; }
