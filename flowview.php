@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -152,7 +153,7 @@ function save_filter_as() {
 				}
 			}
 
-			$overrides = array(
+			$overrides = [
 				'device_id',
 				'excluded',
 				'sortfield',
@@ -161,7 +162,7 @@ function save_filter_as() {
 				'predefined_timespan',
 				'graph_type',
 				'graph_height',
-			);
+			];
 
 			foreach($overrides as $variable) {
 				if (isset_request_var($variable)) {
@@ -173,12 +174,12 @@ function save_filter_as() {
 				}
 			}
 
-			$checkbox_overrides = array(
+			$checkbox_overrides = [
 				'table',
 				'bytes',
 				'packets',
 				'flows'
-			);
+			];
 
 			foreach($checkbox_overrides as $variable) {
 				if (isset_request_var($variable)) {
@@ -220,7 +221,7 @@ function rename_filter() {
 	flowview_db_execute_prepared('UPDATE plugin_flowview_queries
 		SET name = ?
 		WHERE id = ?',
-		array($name, $query));
+		[$name, $query]);
 }
 
 function delete_filter() {
@@ -229,17 +230,17 @@ function delete_filter() {
 	$exists = flowview_db_fetch_cell_prepared('SELECT COUNT(*)
 		FROM plugin_flowview_schedules
 		WHERE query_id = ?',
-		array($query));
+		[$query]);
 
 	$name = flowview_db_fetch_cell_prepared('SELECT name
 		FROM plugin_flowview_queries
 		WHERE id = ?',
-		array($query));
+		[$query]);
 
 	if ($exists) {
 		raise_message('flow_delete', __esc('Unable to Delete Flow Filter \'%s\' as its in use in a Scheduled Report.', $name, 'flowview'), MESSAGE_LEVEL_WARN);
 	} else {
-		flowview_db_execute_prepared('DELETE FROM plugin_flowview_queries WHERE id = ?', array($query));
+		flowview_db_execute_prepared('DELETE FROM plugin_flowview_queries WHERE id = ?', [$query]);
 		raise_message('flow_delete', __esc('Flow Filter \'%s\' Deleted.', 'flowview'), MESSAGE_LEVEL_INFO);
 	}
 }
@@ -291,7 +292,7 @@ function load_session_for_filter() {
 								set_request_var('date1', strtoupper($query['startdate']));
 								set_request_var('date2', strtoupper($query['enddate']));
 							} else {
-								$span = array();
+								$span = [];
 								get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
 								set_request_var('date1', $span['current_value_date1']);
 								set_request_var('date2', $span['current_value_date2']);
@@ -403,14 +404,14 @@ function flowview_request_vars() {
 			WHERE id = ?',
 			array(get_request_var('query')));
 
-		$columns = array(
+		$columns = [
 			'graph_type',
 			'graph_height',
 			'panel_table',
 			'panel_bytes',
 			'panel_packets',
 			'panel_flows'
-		);
+		];
 
 		if (cacti_sizeof($listener)) {
 			foreach($columns as $c) {
@@ -433,49 +434,49 @@ function flowview_request_vars() {
 
     /* ================= input validation and session storage ================= */
     $filters = array(
-		'device_id' => array(
+		'device_id' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '0'
-		),
+		],
 		'sortfield' => array(
 			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
+			'options' => ['options' => 'sanitize_search_string'],
 			'default' => 'bytes'
 		),
 		'report' => array(
 			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
+			'options' => ['options' => 'sanitize_search_string'],
 			'default' => 0
 		),
-		'cutofflines' => array(
+		'cutofflines' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '20'
-		),
-		'cutoffoctets' => array(
+		],
+		'cutoffoctets' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1000000'
-		),
+		],
 		'predefined_timespan' => array(
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => read_user_setting('default_timespan')
 		),
-		'exclude' => array(
+		'exclude' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '0'
-		),
+		],
 		'date1' => array(
 			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
+			'options' => ['options' => 'sanitize_search_string'],
 			'default' => ''
 		),
 		'date2' => array(
 			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
+			'options' => ['options' => 'sanitize_search_string'],
 			'default' => ''
 		),
 		'ex_addr' => array(
 			'filter' => FILTER_CALLBACK,
-			'options' => array('options' => 'sanitize_search_string'),
+			'options' => ['options' => 'sanitize_search_string'],
 			'default' => '0'
 		),
 		'domains' => array(
@@ -508,10 +509,10 @@ function flowview_request_vars() {
 			'options' => array('options' => array('regexp' => '(bar|pie|treemap)')),
 			'default' => 'bar'
 		),
-		'graph_height' => array(
+		'graph_height' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '400'
-		)
+		]
 	);
 
 	validate_store_request_vars($filters, 'sess_fv_' . get_filter_request_var('query'));

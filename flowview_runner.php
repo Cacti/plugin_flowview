@@ -183,7 +183,7 @@ function flowview_launch_workers($query_id, $threads, $running) {
 		FROM parallel_database_query_shard
 		WHERE query_id = ?
 		AND status = ?',
-		array($query_id, 'pending'));
+		[$query_id, 'pending']);
 
 	$redirect   = '';
 
@@ -196,14 +196,14 @@ function flowview_launch_workers($query_id, $threads, $running) {
 				WHERE query_id = ?
 				AND status = ?
 				LIMIT 1',
-				array($query_id, 'pending'));
+				[$query_id, 'pending']);
 
 			if ($shard_id >= 0 && $shard_id != '') {
 				flowview_db_execute_prepared('UPDATE parallel_database_query_shard
 					SET status = ?
 					WHERE query_id = ?
 					AND shard_id = ?',
-					array('running', $query_id, $shard_id));
+					['running', $query_id, $shard_id]);
 
 				db_debug('Launching FlowView Database Shard Process ' . $shard_id);
 

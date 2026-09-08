@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -68,7 +69,7 @@ if (db_table_exists('plugin_notification_lists')) {
 		'id', 'name'
 	);
 } else {
-	$notification_lists = array();
+	$notification_lists = [];
 }
 
 $schedule_edit = array(
@@ -172,10 +173,10 @@ $schedule_edit = array(
 		'array' => $notification_lists,
 		'value' => '|arg1:notification_list|'
 	),
-	'id' => array(
+	'id' => [
 		'method' => 'hidden_zero',
 		'value' => '|arg1:id|'
-	),
+	],
 );
 
 switch (get_request_var('action')) {
@@ -223,21 +224,21 @@ function actions_schedules() {
 			if (get_nfilter_request_var('drp_action') == '1') {
 				foreach($selected_items as $item) {
 					flowview_db_execute_prepared('DELETE FROM plugin_flowview_schedules
-						WHERE id = ?', array($item));
+						WHERE id = ?', [$item]);
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '3') {
 				foreach($selected_items as $item) {
 					flowview_db_execute_prepared('UPDATE plugin_flowview_schedules
 						SET enabled = ""
 						WHERE id = ?',
-						array($item));
+						[$item]);
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '4') {
 				foreach($selected_items as $item) {
 					flowview_db_execute_prepared('UPDATE plugin_flowview_schedules
 						SET enabled = "on"
 						WHERE id = ?',
-						array($item));
+						[$item]);
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '2') {
 				$php = read_config_option('path_php_binary');
@@ -246,11 +247,11 @@ function actions_schedules() {
 					$report = flowview_db_fetch_row_prepared('SELECT *
 						FROM plugin_flowview_schedules
 						WHERE id = ?',
-						array($item));
+						[$item]);
 
 					$command = "$php {$config['base_path']}/plugins/flowview/run_schedule.php";
 
-					$notification = array();
+					$notification = [];
 
 					if ($report['email'] != '') {
 						$notification['email']['to_email'] = $report['email'];
@@ -284,7 +285,7 @@ function actions_schedules() {
 			$schedule_list .= '<li>' . flowview_db_fetch_cell_prepared('SELECT name FROM plugin_flowview_queries AS pfq
 				INNER JOIN plugin_flowview_schedules AS pfs
 				ON pfq.id=pfs.query_id
-				WHERE pfs.id = ?', array($matches[1])) . '</li>';
+				WHERE pfs.id = ?', [$matches[1]]) . '</li>';
 			$schedule_array[] = $matches[1];
 		}
 	}
@@ -353,7 +354,7 @@ function view_log_data() {
 	$id   = get_filter_request_var('id');
 	$type = get_nfilter_request_var('type');
 
-	$log_data = db_fetch_row_prepared('SELECT * FROM reports_log WHERE id = ?', array($id));
+	$log_data = db_fetch_row_prepared('SELECT * FROM reports_log WHERE id = ?', [$id]);
 
 	if (cacti_sizeof($log_data)) {
 		$data    = json_decode($log_data['report_raw_data'], true);
@@ -376,7 +377,7 @@ function view_log_data() {
 function download_log_data() {
 	$id = get_filter_request_var('id');
 
-	$log_data = db_fetch_row_prepared('SELECT * FROM reports_log WHERE id = ?', array($id));
+	$log_data = db_fetch_row_prepared('SELECT * FROM reports_log WHERE id = ?', [$id]);
 
 	if (cacti_sizeof($log_data)) {
 		$data    = json_decode($log_data['report_raw_data'], true);
@@ -476,7 +477,7 @@ function edit_schedule() {
 
 	display_sched_tabs();
 
-	$report = array();
+	$report = [];
 	if (!isempty_request_var('id')) {
 		$report = flowview_db_fetch_row_prepared('SELECT pfs.*, pfq.name
 			FROM plugin_flowview_schedules AS pfs
@@ -492,7 +493,7 @@ function edit_schedule() {
 		}
 	} else {
 		$header_label = __('Scheduled Report: [new]', 'flowview');
-		$report = array();
+		$report = [];
 	}
 
 	if (!isset_request_var('tab') || get_nfilter_request_var('tab') == 'general') {
@@ -507,29 +508,29 @@ function edit_log($header_label, $report) {
 
     /* ================= input validation and session storage ================= */
     $filters = array(
-		'rows' => array(
+		'rows' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-		),
-		'page' => array(
+		],
+		'page' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-		),
-		'filter' => array(
+		],
+		'filter' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-		),
+		],
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'send_time',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'DESC',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		)
 	);
 
@@ -614,7 +615,7 @@ function edit_log($header_label, $report) {
 	<?php
 	html_end_box();
 
-	$sql_params = array();
+	$sql_params = [];
 
 	$sql_params[] = 'flowview';
 	$sql_params[] = get_request_var('id');
@@ -753,7 +754,7 @@ function edit_general($header_label, $report) {
 
 	draw_edit_form(
 		array(
-			'config' => array('no_form_tag' => true),
+			'config' => ['no_form_tag' => true],
 			'fields' => inject_form_variables($schedule_edit, $report)
 		)
 	);
@@ -797,29 +798,29 @@ function show_schedules() {
 
     /* ================= input validation and session storage ================= */
     $filters = array(
-		'rows' => array(
+		'rows' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-		),
-		'page' => array(
+		],
+		'page' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-		),
-		'filter' => array(
+		],
+		'filter' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-		),
+		],
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'title',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		)
 	);
 

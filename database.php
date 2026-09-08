@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -79,7 +80,7 @@ function flowview_db_execute($sql, $log = true, $cnn_id = false) {
  *
  * @return '1' for success, '0' for error
  */
-function flowview_db_execute_prepared($sql, $parms = array(), $log = true, $cnn_id = false) {
+function flowview_db_execute_prepared($sql, $parms = [], $log = true, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_execute_prepared($sql, $parms, $log, $flowview_cnn);
@@ -114,7 +115,7 @@ function flowview_db_fetch_cell($sql, $col_name = '', $log = true, $cnn_id = fal
  *
  * @return (bool) the output of the sql query as a single variable
  */
-function flowview_db_fetch_cell_prepared($sql, $params = array(), $col_name = '', $log = true, $cnn_id = false) {
+function flowview_db_fetch_cell_prepared($sql, $params = [], $col_name = '', $log = true, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_cell_prepared($sql, $params, $col_name, $log, $flowview_cnn);
@@ -145,7 +146,7 @@ function flowview_db_fetch_row($sql, $log = true, $cnn_id = false) {
  *
  * @return the first row of the result as a hash
  */
-function flowview_db_fetch_row_prepared($sql, $params = array(), $log = true, $cnn_id = false) {
+function flowview_db_fetch_row_prepared($sql, $params = [], $log = true, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_row_prepared($sql, $params, $log, $flowview_cnn);
@@ -176,7 +177,7 @@ function flowview_db_fetch_assoc($sql, $log = true, $cnn_id = false) {
  *
  * @return the entire result set as a multi-dimensional hash
  */
-function flowview_db_fetch_assoc_prepared($sql, $params = array(), $log = true, $cnn_id = false) {
+function flowview_db_fetch_assoc_prepared($sql, $params = [], $log = true, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_assoc_prepared($sql, $params, $log, $flowview_cnn);
@@ -253,7 +254,7 @@ function flowview_db_table_create($table, $data, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	$result = flowview_db_fetch_assoc('SHOW TABLES');
-	$tables = array();
+	$tables = [];
 	foreach($result as $index => $arr) {
 		foreach ($arr as $t) {
 			$tables[] = $t;
@@ -342,7 +343,7 @@ function flowview_db_table_create($table, $data, $cnn_id = false) {
 			db_execute_prepared("REPLACE INTO plugin_db_changes
 				(plugin, `table`, `column`, `method`)
 				VALUES (?, ?, '', 'create')",
-				array('flowview', $table));
+				['flowview', $table]);
 
 			if (isset($data['collate'])) {
 				flowview_db_execute("ALTER TABLE `$table` COLLATE = " . $data['collate']);
@@ -415,10 +416,10 @@ function flowview_db_get_table_column_types($table, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
     $columns = db_fetch_assoc("SHOW COLUMNS FROM $table", false, $flowview_cnn);
-    $cols    = array();
+    $cols    = [];
     if (cacti_sizeof($columns)) {
         foreach($columns as $col) {
-            $cols[$col['Field']] = array('type' => $col['Type'], 'null' => $col['Null'], 'default' => $col['Default'], 'extra' => $col['Extra']);
+            $cols[$col['Field']] = ['type' => $col['Type'], 'null' => $col['Null'], 'default' => $col['Default'], 'extra' => $col['Extra']];
         }
     }
 

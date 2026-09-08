@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -167,7 +168,7 @@ $ip_protocols_array = array(
 	98 => 'ENCAP'
 );
 
-$required_fields_v4 = array(
+$required_fields_v4 = [
 	'octetDeltaCount'             => 1,
 	'packetDeltaCount'            => 2,
 	'protocolIdentifier'          => 4,
@@ -175,9 +176,9 @@ $required_fields_v4 = array(
 	'sourceIPv4Address'           => 8,
 	'destinationTransportPort'    => 11,
 	'destinationIPv4Address'      => 12,
-);
+];
 
-$required_fields_v6 = array(
+$required_fields_v6 = [
 	'octetDeltaCount'             => 1,
 	'packetDeltaCount'            => 2,
 	'protocolIdentifier'          => 4,
@@ -196,9 +197,9 @@ $required_fields_v6 = array(
 	'samplingInterval'            => 34,
 	'ipVersion'                   => 60,
 	'ipNextHopIPv6Address'        => 62,
-);
+];
 
-$flow_fields = array(
+$flow_fields = [
 	'engine_type'       => 38,
 	'engine_id'         => 39,
 	'sampling_interval' => 34,
@@ -232,121 +233,121 @@ $flow_fields = array(
 	'flags'             => 6,
 	'start_time'        => 22,
 	'end_time'          => 21
-);
+];
 
 $flow_fieldids = array(
-	1 => array(
+	1 => [
 		'column' => 'dOctets',
 		'name'   => 'octetDeltaCount'
-	),
-	2 => array(
+	],
+	2 => [
 		'column' => 'dPkts',
 		'name'   => 'packetDeltaCount'
-	),
-	4 => array(
+	],
+	4 => [
 		'column' => 'protocol',
 		'name'   => 'protocolIdentifier'
-	),
-	5 => array(
+	],
+	5 => [
 		'column' => 'tos',
 		'name'   => 'ipClassOfService'
-	),
-	6 => array(
+	],
+	6 => [
 		'column' => 'flags',
 		'name'   => 'tcpControlBits'
-	),
-	7 => array(
+	],
+	7 => [
 		'column' => 'src_port',
 		'name'   => 'sourceTransportPort'
-	),
-	8 => array(
+	],
+	8 => [
 		'column' => 'src_addr',
 		'name'   => 'sourceIPv4Address'
-	),
-	9 => array(
+	],
+	9 => [
 		'column' => 'src_prefix',
 		'name'   => 'sourceIPv4PrefixLength'
-	),
-	10 => array(
+	],
+	10 => [
 		'column' => 'src_if',
 		'name'   => 'ingressInterface'
-	),
-	11 => array(
+	],
+	11 => [
 		'column' => 'dst_port',
 		'name'   => 'destinationTransportPort'
-	),
-	12 => array(
+	],
+	12 => [
 		'column' => 'dst_addr',
 		'name'   => 'destinationIPv4Address'
-	),
-	13 => array(
+	],
+	13 => [
 		'column' => 'dst_prefix',
 		'name'   => 'destinationIPv4PrefixLength'
-	),
-	14 => array(
+	],
+	14 => [
 		'column' => 'dst_if',
 		'name'   => 'egressInterface'
-	),
-	15 => array(
+	],
+	15 => [
 		'column' => 'nexthop',
 		'name'   => 'ipNextHopIPv4Address'
-	),
-	16 => array(
+	],
+	16 => [
 		'column' => 'src_as',
 		'name'   => 'bgpSourceAsNumber'
-	),
-	17 => array(
+	],
+	17 => [
 		'column' => 'dst_as',
 		'name'   => 'bgpDestinationAsNumber'
-	),
-	21 => array(
+	],
+	21 => [
 		'column' => 'end_time',
 		'name'   => 'flowEndSysUpTime'
-	),
-	22 => array(
+	],
+	22 => [
 		'column' => 'start_time',
 		'name'   => 'flowStartSysUpTime'
-	),
-	27 => array(
+	],
+	27 => [
 		'column' => 'src_addr',
 		'name'   => 'sourceIPv6Address'
-	),
-	28 => array(
+	],
+	28 => [
 		'column' => 'dst_addr',
 		'name'   => 'destinationIPv6Address'
-	),
-	29 => array(
+	],
+	29 => [
 		'column' => 'src_prefix',
 		'name'   => 'sourceIPv6PrefixLength'
-	),
-	30 => array(
+	],
+	30 => [
 		'column' => 'dst_prefix',
 		'name'   => 'destinationIPv6PrefixLength'
-	),
-	34 => array(
+	],
+	34 => [
 		'column' => 'sampling_interval',
 		'name'   => 'samplingInterval'
-	),
-	38 => array(
+	],
+	38 => [
 		'column' => 'engine_type',
 		'name'   => 'engineType'
-	),
-	39 => array(
+	],
+	39 => [
 		'column' => 'engine_id',
 		'name'   => 'engineId'
-	),
-	60 => array(
+	],
+	60 => [
 		'column' => 'ipVersion',
 		'name'   => 'ipVersion'
-	),
-	62 => array(
+	],
+	62 => [
 		'column' => 'nexthop',
 		'name'   => 'ipNextHopIPv6Address'
-	),
-	160 => array(
+	],
+	160 => [
 		'column' => 'sysuptime',
 		'name'   => 'systemInitTimeMilliseconds'
-	)
+	]
 );
 
 $stat_columns_array = array(
@@ -682,7 +683,7 @@ $filter_edit = array(
 		'value' => '|arg1:sortfield|',
 		'method' => 'drop_array',
 		'default' => '10',
-		'array' => array()
+		'array' => []
 	),
 	'cutofflines' => array(
 		'friendly_name' => __('Maximum Rows', 'flowview'),
@@ -850,10 +851,10 @@ $filter_edit = array(
 		'method' => 'hidden',
 		'value' => get_request_var('return')
 	),
-	'id' => array(
+	'id' => [
 		'method' => 'hidden',
 		'value' => '|arg1:id|'
-	)
+	]
 );
 
 $db_tabs = array(

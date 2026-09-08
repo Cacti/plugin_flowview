@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -151,7 +152,7 @@ function listener_has_templates($id) {
 		FROM plugin_flowview_device_streams
 		WHERE version != "v5"
 		AND device_id = ?',
-		array($id));
+		[$id]);
 
 	return $streams > 0 ? true:false;
 }
@@ -189,7 +190,7 @@ function edit_filter() {
 		$page = 'flowview_filters.php';
 	}
 
-	$report = array();
+	$report = [];
 	if (!isempty_request_var('id')) {
 		$report = flowview_db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
@@ -236,15 +237,15 @@ function edit_filter() {
 
 	get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
 
-	$filter_edit['date1'] = array(
+	$filter_edit['date1'] = [
 		'value'  => $span['current_value_date1'],
 		'method' => 'hidden'
-	);
+	];
 
-	$filter_edit['date2'] = array(
+	$filter_edit['date2'] = [
 		'value'  => $span['current_value_date2'],
 		'method' => 'hidden'
-	);
+	];
 
 	if ($found) {
 		if (cacti_sizeof($report)) {
@@ -269,7 +270,7 @@ function edit_filter() {
 
 	draw_edit_form(
 		array(
-			'config' => array('no_form_tag' => true),
+			'config' => ['no_form_tag' => true],
 			'fields' => inject_form_variables($filter_edit, $report)
 		)
 	);
@@ -590,7 +591,7 @@ function flowview_gettimespan() {
 	$timespan = get_filter_request_var('predefined_timespan');
 	$date1    = get_nfilter_request_var('date1');
 	$date2    = get_nfilter_request_var('date2');
-	$span     = array();
+	$span     = [];
 
 	if ($timespan > 0) {
 		get_timespan($span, time(), $timespan, read_user_setting('first_weekdayid'));
@@ -731,7 +732,7 @@ function flowview_display_filter() {
 					<td>
 						<select id='report' name='report' onChange='applyFilter(false)'>
 							<?php
-							$reports = array();
+							$reports = [];
 
 							if (get_request_var('query') > 0) {
 								$reports[0] = __('Select a Report', 'flowview');
@@ -839,7 +840,7 @@ function flowview_display_filter() {
 							<option value='0'<?php print (get_request_var('exclude') == 0 ? ' selected':'');?>><?php print __('None', 'flowview');?></option>
 							<option value='1'<?php print (get_request_var('exclude') == 1 ? ' selected':'');?>><?php print __('Top Sample', 'flowview');?></option>
 							<?php
-							$samples = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+							$samples = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 							foreach($samples as $s) {
 								print "<option value='$s'" . (get_request_var('exclude') == $s ? ' selected':'') . ">" . __('Top %d Samples', $s, 'flowview') . '</option>';
@@ -1790,7 +1791,7 @@ function get_port_name($port_num, $port_proto = 6) {
 			FROM plugin_flowview_ports
 			WHERE port = ?
 			AND proto = ?',
-			array($port_num, $port_proto));
+			[$port_num, $port_proto]);
 
 		if ($port_name != '') {
 			return sprintf('%s (%s)', $port_name, $port_num, 'flowview');
@@ -1808,12 +1809,12 @@ function plugin_flowview_run_schedule($id, $report_id) {
 	$schedule = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_schedules
 		WHERE id = ?',
-		array($id));
+		[$id]);
 
 	$query = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
-		array($schedule['query_id']));
+		[$schedule['query_id']]);
 
 	/* get the timespan from the query */
 	get_timespan($span, time(), $query['timespan'], read_user_setting('first_weekdayid'));
@@ -1874,7 +1875,7 @@ function plugin_flowview_run_schedule($id, $report_id) {
 	$headers['X-Priority'] = '1';
 
 	if (cacti_sizeof($data['data'])) {
-		reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, array(), $headers);
+		reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers);
 	} else {
 		cacti_log(sprintf('WARNING: Running of Flowview Schedule %s Returned not Data.  Please Check your Flowview Schedule', $report_id), false, 'FLOWVIEW');
 	}
@@ -1947,7 +1948,7 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
 	$output    = '';
 	$title     = '';
 	$time      = time();
-	$data      = array();
+	$data      = [];
 
 	/* override for graph drilldowns */
 	if (isset_request_var('timespan') && get_nfilter_request_var('timespan') == 'session') {
@@ -1966,9 +1967,9 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
 			$timespan = flowview_db_fetch_cell_prepared('SELECT timespan
 				FROM plugin_flowview_queries
 				WHERE id = ?',
-				array($id));
+				[$id]);
 
-			$span = array();
+			$span = [];
 			get_timespan($span, time(), $timespan, read_user_setting('first_weekdayid'));
 
 			$start = strtotime($span['current_value_date1']);
@@ -1981,9 +1982,9 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
 			$timespan = flowview_db_fetch_cell_prepared('SELECT timespan
 				FROM plugin_flowview_queries
 				WHERE id = ?',
-				array($id));
+				[$id]);
 
-			$span = array();
+			$span = [];
 			get_timespan($span, time(), $timespan, read_user_setting('first_weekdayid'));
 			set_request_var('date1', $span['current_value_date1']);
 			set_request_var('date2', $span['current_value_date2']);
@@ -2022,7 +2023,7 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
  *
  */
 function get_numeric_filter($sql_where, &$sql_params, $value, $column) {
-	$values = array();
+	$values = [];
 
 	$sql_where = trim($sql_where);
 
@@ -2067,7 +2068,7 @@ function get_ip_filter($sql_where, &$sql_params, $value, $column) {
 	$sql_where = trim($sql_where);
 
 	if ($value != '') {
-		$values = array();
+		$values = [];
 		$parts  = explode(',', $value);
 		$i      = 0;
 
@@ -2205,7 +2206,7 @@ function get_tables_for_query($start, $end = null) {
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
 	$part_type  = read_config_option('flowview_partition');
-	$inc_tables = array();
+	$inc_tables = [];
 
 	if ($end === null) {
 		$end = time();
@@ -2284,7 +2285,7 @@ function flowview_get_chartdata() {
 
 				foreach($category as $c) {
 					if ($domains != 'false' && strpos($c, 'domain') !== false) {
-						$p = array();
+						$p = [];
 
 						if (isset($row[$c])) {
 							if ($row[$c] != '') {
@@ -2334,23 +2335,23 @@ function flowview_get_chartdata() {
 					$catstring = __('unresolved', 'flowview');
 				}
 
-				$chartData[] = array(
+				$chartData[] = [
 					'name'  => $catstring,
 					'value' => $row[$type],
 					'index' => $index
-				);
+				];
 			}
 
-			$outputData = array(
+			$outputData = [
 				$chartData,
-			);
+			];
 
 			print json_encode($chartData, JSON_NUMERIC_CHECK);
 			exit;
 		}
 	}
 
-	print json_encode(array());
+	print json_encode([]);
 	exit;
 }
 
@@ -2364,90 +2365,90 @@ function flowview_get_chartdata() {
  * @return array    The columns
  */
 function get_category_columns($statistics, $domain) {
-	$category = array();
+	$category = [];
 
 	if ($statistics > 0) {
 		switch($statistics) {
 			case 99:
 				break;
 			case 2:
-				$category = array('src_rdomain');
+				$category = ['src_rdomain'];
 				break;
 			case 3:
-				$category = array('dst_rdomain');
+				$category = ['dst_rdomain'];
 				break;
 			case 4:
-				$category = array('src_rdomain', 'dst_rdomain');
+				$category = ['src_rdomain', 'dst_rdomain'];
 				break;
 			case 5:
-				$category = array('dst_port');
+				$category = ['dst_port'];
 				break;
 			case 6:
-				$category = array('src_port');
+				$category = ['src_port'];
 				break;
 			case 7:
-				$category = array('src_port', 'dst_port');
+				$category = ['src_port', 'dst_port'];
 				break;
 			case 8:
 				if ($domain == 'false') {
-					$category = array('src_addr', 'dst_addr');
+					$category = ['src_addr', 'dst_addr'];
 				} else {
-					$category = array('src_domain', 'dst_domain');
+					$category = ['src_domain', 'dst_domain'];
 				}
 				break;
 			case 9:
 				if ($domain == 'false') {
-					$category = array('src_addr');
+					$category = ['src_addr'];
 				} else {
-					$category = array('src_domain');
+					$category = ['src_domain'];
 				}
 				break;
 			case 10:
 				if ($domain == 'false') {
-					$category = array('src_addr', 'dst_addr');
+					$category = ['src_addr', 'dst_addr'];
 				} else {
-					$category = array('src_domain', 'dst_domain');
+					$category = ['src_domain', 'dst_domain'];
 				}
 				break;
 			case 11:
 				if ($domain == 'false') {
-					$category = array('src_addr');
+					$category = ['src_addr'];
 				} else {
-					$category = array('src_rdomain');
+					$category = ['src_rdomain'];
 				}
 				break;
 			case 12:
-				$category = array('protocol');
+				$category = ['protocol'];
 				break;
 			case 17:
-				$category = array('src_if');
+				$category = ['src_if'];
 				break;
 			case 18:
-				$category = array('dst_if');
+				$category = ['dst_if'];
 				break;
 			case 23:
-				$category = array('src_if', 'dst_if');
+				$category = ['src_if', 'dst_if'];
 				break;
 			case 19:
-				$category = array('src_as');
+				$category = ['src_as'];
 				break;
 			case 20:
-				$category = array('dst_as');
+				$category = ['dst_as'];
 				break;
 			case 21:
-				$category = array('src_as', 'dst_as');
+				$category = ['src_as', 'dst_as'];
 				break;
 			case 22:
-				$category = array('tos');
+				$category = ['tos'];
 				break;
 			case 24:
-				$category = array('src_prefix');
+				$category = ['src_prefix'];
 				break;
 			case 25:
-				$category = array('dst_prefix');
+				$category = ['dst_prefix'];
 				break;
 			case 26:
-				$category = array('src_prefix', 'dst_prefix');
+				$category = ['src_prefix', 'dst_prefix'];
 				break;
 		}
 	}
@@ -2486,9 +2487,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 	$time = time();
 
 	$sql_where        = '';
-	$sql_params       = array();
+	$sql_params       = [];
 	$sql_range        = '';
-	$sql_range_params = array();
+	$sql_range_params = [];
 
 	$key  = get_flowview_session_key($query_id, $start, $end);
 	if ($session && isset($_SESSION['sess_flowdata'][$key])) {
@@ -2503,12 +2504,12 @@ function run_flow_query($session, $query_id, $start, $end) {
 	$data = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
-		array($query_id));
+		[$query_id]);
 
 	$title = flowview_db_fetch_cell_prepared('SELECT name
 		FROM plugin_flowview_queries
 		WHERE id = ?',
-		array($query_id));
+		[$query_id]);
 
 	/*-------------------------------------------------------------*/
 	/* Overrides - These variables can be overridden by the user   */
@@ -3092,27 +3093,27 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 		/* clean up sql formatting */
 		if (isset($sql_inner)) {
-			$sql_outer          = str_replace(array("\n", "\t"), array(' ', ''), $sql_outer);
-			$sql_inner          = str_replace(array("\n", "\t"), array(' ', ''), $sql_inner);
+			$sql_outer          = str_replace(["\n", "\t"], [' ', ''], $sql_outer);
+			$sql_inner          = str_replace(["\n", "\t"], [' ', ''], $sql_inner);
 
-			$sql_groupby        = str_replace(array("\n", "\t"), array(' ', ''), $sql_groupby);
-			$sql_inner_groupby  = str_replace(array("\n", "\t"), array(' ', ''), $sql_inner_groupby);
+			$sql_groupby        = str_replace(["\n", "\t"], [' ', ''], $sql_groupby);
+			$sql_inner_groupby  = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby);
 		} else {
-			$sql_outer          = str_replace(array("\n", "\t"), array(' ', ''), $sql_outer);
-			$sql_inner1         = str_replace(array("\n", "\t"), array(' ', ''), $sql_inner1);
-			$sql_inner2         = str_replace(array("\n", "\t"), array(' ', ''), $sql_inner2);
+			$sql_outer          = str_replace(["\n", "\t"], [' ', ''], $sql_outer);
+			$sql_inner1         = str_replace(["\n", "\t"], [' ', ''], $sql_inner1);
+			$sql_inner2         = str_replace(["\n", "\t"], [' ', ''], $sql_inner2);
 
-			$sql_groupby        = str_replace(array("\n", "\t"), array(' ', ''), $sql_groupby);
-			$sql_inner_groupby1 = str_replace(array("\n", "\t"), array(' ', ''), $sql_inner_groupby1);
-			$sql_inner_groupby2 = str_replace(array("\n", "\t"), array(' ', ''), $sql_inner_groupby2);
+			$sql_groupby        = str_replace(["\n", "\t"], [' ', ''], $sql_groupby);
+			$sql_inner_groupby1 = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby1);
+			$sql_inner_groupby2 = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby2);
 		}
 
 		$tables     = get_tables_for_query($start, $end);
 		$sql        = '';
-		$all_params = array();
-		$results    = array();
+		$all_params = [];
+		$results    = [];
 		$threads    = read_config_option('flowview_parallel_threads');
-		$requests   = array();
+		$requests   = [];
 
 		if (cacti_sizeof($tables)) {
 			if (empty($threads) || $threads == 1) {
@@ -3120,7 +3121,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 					$start_time  = strtotime($details['min_date']);
 					$end_time    = strtotime($details['max_date']);
 					$fsql_where  = '';
-					$fsql_params = array();
+					$fsql_params = [];
 
 					if ($start < $start_time && $end > $end_time) {
 						$full_scan = true;
@@ -3165,7 +3166,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 				cacti_log(sprintf('PARALLEL STATS: Time:%0.3f Threads:%d Shards:%d', $end - $start, $threads, $shards), false, 'FLOWVIEW');
 			} else {
 				if (isset($sql_inner1)) {
-					$stru_inner1 = array(
+					$stru_inner1 = [
 						'sql_query'        => $sql_inner1,
 						'sql_where'        => $sql_where,
 						'sql_range'        => $sql_range,
@@ -3177,9 +3178,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 						'sql_range_params' => $sql_range_params,
 						'sql_start_time'   => $start,
 						'sql_end_time'     => $end
-					);
+					];
 
-					$stru_inner2 = array(
+					$stru_inner2 = [
 						'sql_query'        => $sql_inner2,
 						'sql_where'        => $sql_where,
 						'sql_range'        => $sql_range,
@@ -3191,17 +3192,17 @@ function run_flow_query($session, $query_id, $start, $end) {
 						'sql_range_params' => $sql_range_params,
 						'sql_start_time'   => $start,
 						'sql_end_time'     => $end
-					);
+					];
 
-					$stru_outer = array(
+					$stru_outer = [
 						'sql_query'   => $sql_outer,
 						'sql_where'   => '',
 						'sql_groupby' => $sql_groupby,
 						'sql_having'  => $sql_having,
 						'sql_order'   => $sql_order,
 						'sql_limit'   => $sql_limit,
-						'sql_params'  => array()
-					);
+						'sql_params'  => []
+					];
 
 					if ($request_type == 'printed') {
 						$stru_inner1['sql_limit'] = 'LIMIT 100';
@@ -3213,7 +3214,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 					$requests[] = parallel_database_query_request($tables, $stru_inner1, $stru_outer);
 					$requests[] = parallel_database_query_request($tables, $stru_inner2, $stru_outer);
 				} else {
-					$stru_inner = array(
+					$stru_inner = [
 						'sql_query'        => $sql_inner,
 						'sql_where'        => $sql_where,
 						'sql_range'        => $sql_range,
@@ -3225,22 +3226,22 @@ function run_flow_query($session, $query_id, $start, $end) {
 						'sql_range_params' => $sql_range_params,
 						'sql_start_time'   => $start,
 						'sql_end_time'     => $end
-					);
+					];
 
 					if ($request_type == 'printed') {
 						$stru_inner['sql_limit'] = 'LIMIT 100';
 						$stru_inner['sql_order'] = $sql_order;
 					}
 
-					$stru_outer = array(
+					$stru_outer = [
 						'sql_query'        => $sql_outer,
 						'sql_where'        => '',
 						'sql_having'       => $sql_having,
 						'sql_groupby'      => $sql_groupby,
 						'sql_order'        => $sql_order,
 						'sql_limit'        => $sql_limit,
-						'sql_params'       => array()
-					);
+						'sql_params'       => []
+					];
 
 					$requests[] = parallel_database_query_request($tables, $stru_inner, $stru_outer);
 				}
@@ -3603,12 +3604,12 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, $hour = 0) {
 	$start_time = strtotime($start_date);
 	$end_time   = strtotime($end_date);
 
-	return array(
+	return [
 		'start_date' => $start_date,
 		'start_time' => $start_time,
 		'end_date'   => $end_date,
 		'end_time'   => $end_time
-	);
+	];
 }
 /**
  * parallel_database_query_request - Given a series of tables and
@@ -3653,7 +3654,7 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, $hour = 0) {
  *   'sql_groupby'      => $sql_groupby,
  *   'sql_order'        => $sql_order,
  *   'sql_limit'        => $sql_limit,
- *   'sql_params'       => array()
+ *   'sql_params'       => []
  *
  * @param  array    An array of tables to use for the map query
  * @param  array    An array of map query parameters
@@ -3662,7 +3663,7 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, $hour = 0) {
  * @return int      A request id that will be used in the run phase
  */
 function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
-	$save = array();
+	$save = [];
 
 	if (isset($_SESSION['sess_user_id'])) {
 		$user_id = $_SESSION['sess_user_id'];
@@ -3684,7 +3685,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	$map_query        = $stru_inner;
 	$sql_start_time   = $stru_inner['sql_start_time'];
 	$sql_end_time     = $stru_inner['sql_end_time'];
-	$md5_array        = array($stru_inner, $stru_outer);
+	$md5_array        = [$stru_inner, $stru_outer];
 	$query_md5        = md5(json_encode($md5_array));
 
 	unset($map_query['sql_range']);
@@ -3706,7 +3707,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		FROM parallel_database_query
 		WHERE md5sum = ?
 		AND user_id = ?',
-		array($query_md5, $user_id));
+		[$query_md5, $user_id]);
 
 	$time_to_live = read_config_option('flowview_parallel_time_to_live');
 
@@ -3740,7 +3741,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		flowview_db_execute_prepared('UPDATE parallel_database_query
 			SET map_table = ?
 			WHERE id = ?',
-			array($table_name, $request_id));
+			[$table_name, $request_id]);
 
 		$start = $sql_start_time;
 		$end   = $sql_end_time;
@@ -3760,7 +3761,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 			}
 
 			$fsql_where  = '';
-			$fsql_params = array();
+			$fsql_params = [];
 
 			if ($start < $start_time && $end > $end_time) {
 				$full_scan = true;
@@ -3815,7 +3816,7 @@ function parallel_database_query_is_running($request_id) {
 		FROM parallel_database_query
 		WHERE id = ?
 		AND status != ?',
-		array($request_id, 'complete'));
+		[$request_id, 'complete']);
 
 	if ($status != 0) {
 		return true;
@@ -3847,14 +3848,14 @@ function parallel_database_query_run($requests) {
 			FROM parallel_database_query
 			WHERE id = ?
 			AND status = ?',
-			array($request_id, 'pending'));
+			[$request_id, 'pending']);
 
 		if ($pending > 0) {
 			/* prime the table to prevent multiple runs */
 			flowview_db_execute_prepared('UPDATE parallel_database_query
 				SET status = ?
 				WHERE id = ?',
-				array('scheduled', $request_id));
+				['scheduled', $request_id]);
 
 			db_debug('Launching FlowView Database Query Process ' . $request_id);
 
@@ -3900,18 +3901,18 @@ function parallel_database_query_run($requests) {
 		$results = json_decode(flowview_db_fetch_cell_prepared('SELECT results
 			FROM parallel_database_query
 			WHERE id = ?',
-			array($request_id)), true);
+			[$request_id]), true);
 	} else {
 		$reduce_query = flowview_db_fetch_cell_prepared('SELECT reduce_query
 			FROM parallel_database_query
 			WHERE id = ?',
-			array($requests[0]));
+			[$requests[0]]);
 
 		$tables = array_rekey(
 			flowview_db_fetch_assoc('SELECT map_table, map_create, results
 				FROM parallel_database_query
 				WHERE id IN(' . implode(', ', $requests) . ')'),
-			'map_table', array('map_create', 'results')
+			'map_table', ['map_create', 'results']
 		);
 
 		if ($reduce_query != '' && cacti_sizeof($tables)) {
@@ -3929,7 +3930,7 @@ function parallel_database_query_run($requests) {
 				$results = json_decode($data['results'], true);
 
 				if (cacti_sizeof($results)) {
-					$sql     = array();
+					$sql     = [];
 					$columns = array_keys($results[0]);
 
 					$sql_prefix = "INSERT INTO $temp_table (";
@@ -3980,7 +3981,7 @@ function parallel_database_query_run($requests) {
 
 			flowview_db_execute("DROP TEMPORARY TABLE IF EXISTS $temp_table");
 		} else {
-			$results = array();
+			$results = [];
 		}
 	}
 
@@ -4019,15 +4020,15 @@ function parallel_database_query_create_reduce_table($request_id, $sql_query, $t
 	$table_name = "parallel_database_query_map_$request_id";
 
 	$sql_create = "CREATE TABLE IF NOT EXISTS $table_name (";
-	$sql_query  = str_replace(array("\n", "\t"), array(' ', ''), $sql_query);
+	$sql_query  = str_replace(["\n", "\t"], [' ', ''], $sql_query);
 
 	/* get the columns from the base table */
 	$columns = array_rekey(
 		flowview_db_fetch_assoc_prepared('SELECT *
 			FROM INFORMATION_SCHEMA.COLUMNS
 			WHERE table_name = ?',
-			array($table)),
-		'COLUMN_NAME', array('DATA_TYPE', 'COLUMN_TYPE', 'IS_NULLABLE', 'COLUMN_DEFAULT')
+			[$table]),
+		'COLUMN_NAME', ['DATA_TYPE', 'COLUMN_TYPE', 'IS_NULLABLE', 'COLUMN_DEFAULT']
 	);
 
 	$raw_engine = get_set_default_fast_engine();
@@ -4081,7 +4082,7 @@ function parallel_database_query_create_reduce_table($request_id, $sql_query, $t
 	flowview_db_execute_prepared('UPDATE parallel_database_query
 		SET map_create = ?
 		WHERE id = ?',
-		array($sql_create, $request_id));
+		[$sql_create, $request_id]);
 
 	return $table_name;
 }
@@ -4096,7 +4097,7 @@ function parallel_database_query_expire() {
 
 	$expired_queries = flowview_db_fetch_assoc_prepared('SELECT id
 		FROM parallel_database_query
-		WHERE UNIX_TIMESTAMP()-? > time_to_live', array($ttl));
+		WHERE UNIX_TIMESTAMP()-? > time_to_live', [$ttl]);
 
 	if (cacti_sizeof($expired_queries)) {
 		foreach($expired_queries as $q) {
@@ -4112,7 +4113,7 @@ function parallel_database_query_cleanup($request_id, $remove = false) {
 	$table = flowview_db_fetch_cell_prepared('SELECT map_table
 		FROM parallel_database_query
 		WHERE id = ?',
-		array($request_id));
+		[$request_id]);
 
 	if ($table != '') {
 		flowview_db_execute_prepared("DROP TABLE IF EXISTS $table");
@@ -4121,16 +4122,16 @@ function parallel_database_query_cleanup($request_id, $remove = false) {
 	$shards = flowview_db_fetch_assoc_prepared('SELECT *
 		FROM parallel_database_query_shard
 		WHERE query_id = ?',
-		array($request_id));
+		[$request_id]);
 
 	flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard
 		WHERE query_id = ?',
-		array($request_id));
+		[$request_id]);
 
 	$processes = db_fetch_assoc_prepared('SELECT *
 		FROM processes WHERE tasktype = ?
 		AND taskname LIKE ?',
-		array('flowview', "db_query{$request_id}"));
+		['flowview', "db_query{$request_id}"]);
 
 	if (cacti_sizeof($processes)) {
 		foreach($processes as $p) {
@@ -4140,14 +4141,14 @@ function parallel_database_query_cleanup($request_id, $remove = false) {
 
 			db_execute_prepared('DELETE FROM processes
 				WHERE pid = ?',
-				array($p['pid']));
+				[$p['pid']]);
 		}
 	}
 
 	if ($remove) {
 		flowview_db_execute_prepared('DELETE FROM parallel_database_query
 			WHERE id = ?',
-			array($request_id));
+			[$request_id]);
 	}
 }
 
@@ -4157,7 +4158,7 @@ function parallel_database_query_cancel($query_id) {
 		WHERE tasktype = ?
 		AND taskname LIKE ?
 		OR taskname LIKE ?',
-		array('flowview', 'db_query_' . $query_id, 'db_shard_' . $query_id));
+		['flowview', 'db_query_' . $query_id, 'db_shard_' . $query_id]);
 
 	if (cacti_sizeof($processes)) {
 		foreach($processes as $p) {
@@ -4165,7 +4166,7 @@ function parallel_database_query_cancel($query_id) {
 
 			posix_kill($p['pid'], SIGKILL);
 
-			db_execute_prepared('DELETE FROM processes WHERE id = ?', array($p['id']));
+			db_execute_prepared('DELETE FROM processes WHERE id = ?', [$p['id']]);
 		}
 	}
 
@@ -4173,7 +4174,7 @@ function parallel_database_query_cancel($query_id) {
 	flowview_db_execute_prepared("DROP TABLE IF EXISTS parallel_database_query_map_$query_id");
 	flowview_db_execute_prepared("DELETE FROM parallel_database_query_shard
 		WHERE query_id = ?",
-		array($query_id));
+		[$query_id]);
 }
 
 function parallel_database_parent_runner($query_id) {
@@ -4186,7 +4187,7 @@ function parallel_database_parent_runner($query_id) {
 	$status = flowview_db_fetch_cell_prepared('SELECT status
 		FROM parallel_database_query
 		WHERE id = ?',
-		array($query_id));
+		[$query_id]);
 
 	$max_runtime = read_config_option('flowview_parallel_runlimit');
 
@@ -4213,18 +4214,18 @@ function parallel_database_parent_runner($query_id) {
 	$query   = flowview_db_fetch_row_prepared('SELECT *
 		FROM parallel_database_query
 		WHERE id = ?',
-		array($query_id));
+		[$query_id]);
 
 	$shards  = flowview_db_fetch_cell_prepared('SELECT COUNT(*)
 		FROM parallel_database_query_shard
 		WHERE query_id = ?',
-		array($query_id));
+		[$query_id]);
 
 	$tables = array_rekey(
 		flowview_db_fetch_assoc_prepared('SELECT map_table
 			FROM parallel_database_query_shard
 			WHERE query_id = ?',
-			array($query_id)),
+			[$query_id]),
 		'map_table', 'map_table'
 	);
 
@@ -4235,13 +4236,13 @@ function parallel_database_parent_runner($query_id) {
 			WHERE md5sum = ?
 			AND min_date BETWEEN ? AND ?
 			AND max_date BETWEEN ? AND ?',
-			array(
+			[
 				$query['md5sum_tables'],
 				$map_range[0],
 				$map_range[1],
 				$map_range[0],
 				$map_range[1],
-			)
+			]
 		),
 		'map_table', 'map_table'
 	);
@@ -4268,13 +4269,13 @@ function parallel_database_parent_runner($query_id) {
 	$running = 0;
 	$start   = microtime(true);
 
-	$stats = array(
+	$stats = [
 		'threads'     => 0,
 		'shards'      => 0,
 		'cached'      => 0,
 		'total_size'  => 0,
 		'cached_size' => 0
-	);
+	];
 
 	if (cacti_sizeof($query)) {
 		$finished = $query['finished_shards'];
@@ -4286,7 +4287,7 @@ function parallel_database_parent_runner($query_id) {
                 FROM parallel_database_query_shard
 				WHERE query_id = ?
 				AND status = "running"',
-				array($query_id));
+				[$query_id]);
 
 			flowview_launch_workers($query_id, $threads, $running);
 
@@ -4296,7 +4297,7 @@ function parallel_database_parent_runner($query_id) {
 				FROM parallel_database_query_shard
 				WHERE query_id = ?
 				AND status != "finished"',
-				array($query_id));
+				[$query_id]);
 
 			if ($notfinished == 0) {
 				break;
@@ -4322,22 +4323,22 @@ function parallel_database_parent_runner($query_id) {
 
 		flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard
 			WHERE query_id = ?',
-			array($query_id));
+			[$query_id]);
 
 		$cached = flowview_db_fetch_cell_prepared('SELECT cached_shards
 			FROM parallel_database_query
 			WHERE id = ?',
-			array($query_id));
+			[$query_id]);
 
 		db_debug("Query $query_id finished");
 
-		$stats = array(
+		$stats = [
 			'threads'     => $threads,
 			'shards'      => $shards,
 			'cached'      => $cached,
 			'total_size'  => $total_size,
 			'cached_size' => $cached_size
-		);
+		];
 	}
 
 	return $stats;
@@ -4355,14 +4356,14 @@ function parallel_database_child_runner($query_id, $shard_id) {
 	$query = flowview_db_fetch_row_prepared('SELECT *
 		FROM parallel_database_query
 		WHERE id = ?',
-		array($query_id), false, $max_cnn);
+		[$query_id], false, $max_cnn);
 
 	if (cacti_sizeof($query)) {
 		$shard = flowview_db_fetch_row_prepared('SELECT *
 			FROM parallel_database_query_shard
 			WHERE query_id = ?
 			AND shard_id = ?',
-			array($query_id, $shard_id), false, $max_cnn);
+			[$query_id, $shard_id], false, $max_cnn);
 
 		if (cacti_sizeof($shard)) {
 			$table = $query['map_table'];
@@ -4371,7 +4372,7 @@ function parallel_database_child_runner($query_id, $shard_id) {
 				SET status = ?
 				WHERE query_id = ?
 				AND shard_id = ?',
-				array('running', $query_id, $shard_id));
+				['running', $query_id, $shard_id]);
 
 			if ($shard['full_scan']) {
 				$exists = flowview_db_fetch_row_prepared('SELECT *
@@ -4379,14 +4380,14 @@ function parallel_database_child_runner($query_id, $shard_id) {
 					WHERE md5sum = ?
 					AND map_table = ?
 					AND map_partition = ?',
-					array(
+					[
 						$query['md5sum_tables'],
 						$shard['map_table'],
 						$shard['map_partition']
-					)
+					]
 				);
 			} else {
-				$exists = array();
+				$exists = [];
 			}
 
 			if (!cacti_sizeof($exists)) {
@@ -4395,7 +4396,7 @@ function parallel_database_child_runner($query_id, $shard_id) {
 				flowview_db_execute_prepared('UPDATE parallel_database_query
 					SET cached_shards = cached_shards + 1
 					WHERE id = ?',
-					array($query_id));
+					[$query_id]);
 
 				$results = json_decode($exists['results'], true);
 			}
@@ -4429,7 +4430,7 @@ function parallel_database_child_runner($query_id, $shard_id) {
 			}
 
 			if (cacti_sizeof($results)) {
-				$sql     = array();
+				$sql     = [];
 				$columns = array_keys($results[0]);
 
 				$sql_prefix = "INSERT INTO $table (";
@@ -4458,7 +4459,7 @@ function parallel_database_child_runner($query_id, $shard_id) {
 				SET status = ?
 				WHERE query_id = ?
 				AND shard_id = ?',
-				array('finished', $query_id, $shard_id));
+				['finished', $query_id, $shard_id]);
 		} else {
 			db_debug("Shard $shard_id Not Found");
 		}
@@ -4470,7 +4471,7 @@ function parallel_database_child_runner($query_id, $shard_id) {
 
 	flowview_db_execute_prepared('UPDATE parallel_database_query
 		SET finished_shards = finished_shards + 1
-		WHERE id = ?', array($query_id));
+		WHERE id = ?', [$query_id]);
 
 	db_debug("Query $query_id and Shard $shard_id Complete");
 }
@@ -4492,7 +4493,7 @@ function display_domain($domain) {
 }
 
 function get_json_params() {
-	$arr = array();
+	$arr = [];
 
 	foreach($_POST as $var => $val) {
 		switch($var) {
@@ -4752,7 +4753,7 @@ function parseSummaryReport($output) {
 function flowview_explode($string) {
 	$string=trim($string);
 
-	if (!strlen($string)) return array();
+	if (!strlen($string)) return [];
 
 	$array=explode(' ', $string);
 	foreach($array as $e) {
@@ -4789,7 +4790,7 @@ function plugin_flowview_get_protocol($prot, $prot_hex) {
 
 function plugin_flowview_formatoctet($size, $div = 1024) {
 	$x=0;
-	$tag = array('Bytes', 'KB', 'MB', 'GB', 'TB');
+	$tag = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 	while ($size > $div) {
 		$size = $size / $div;
 		$x++;
@@ -4820,8 +4821,8 @@ function flowview_get_rdomain_from_domain($domain) {
 function flowview_translate_port($port, $is_hex, $detail = true) {
 	global $config;
 
-	static $services = array();
-	static $services_detail = array();
+	static $services = [];
+	static $services_detail = [];
 
 	if ($is_hex) {
 		$port = hexdec($port);
@@ -4836,7 +4837,7 @@ function flowview_translate_port($port, $is_hex, $detail = true) {
 	$service = flowview_db_fetch_cell_prepared('SELECT service
 		FROM plugin_flowview_ports
 		WHERE port = ?
-		LIMIT 1', array($port));
+		LIMIT 1', [$port]);
 
 	if ($service != '') {
 		if (!$detail) {
@@ -5134,7 +5135,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 	$cache = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_dnscache
 		WHERE ip = ?',
-		array($ip));
+		[$ip]);
 
 	if (isset($cache['host'])) {
 		return $cache['host'];
@@ -5179,7 +5180,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 						host = VALUES(host),
 						arin_verified = VALUES(arin_verified),
 						arin_id = VALUES(arin_id)',
-					array($ip, $dns_name, 'Local Domain', $arin_ver, $arin_id, $time));
+					[$ip, $dns_name, 'Local Domain', $arin_ver, $arin_id, $time]);
 
 				return $dns_name;
 			} else {
@@ -5192,7 +5193,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 						host = VALUES(host),
 						arin_verified = VALUES(arin_verified),
 						arin_id = VALUES(arin_id)',
-					array($ip, $dns_name, 'Static Private', $arin_ver, $arin_id, $time));
+					[$ip, $dns_name, 'Static Private', $arin_ver, $arin_id, $time]);
 
 				return $dns_name;
 			}
@@ -5211,7 +5212,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 					host = VALUES(host),
 					arin_verified = VALUES(arin_verified),
 					arin_id = VALUES(arin_id)',
-				array($ip, $priv_dns_name, 'Local DNS', $arin_ver, $arin_id, $time));
+				[$ip, $priv_dns_name, 'Local DNS', $arin_ver, $arin_id, $time]);
 
 			return $priv_dns_name;
 		}
@@ -5228,10 +5229,10 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 		}
 
 		$resolver = new Net_DNS2_Resolver(
-			array(
+			[
 				'nameservers' => $nameservers,
 				'timeout'     => $timeout
-			)
+			]
 		);
 
 		try {
@@ -5260,7 +5261,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 							host = VALUES(host),
 							arin_verified = VALUES(arin_verified),
 							arin_id = VALUES(arin_id)',
-						array($ip, $dns_name, 'Specified DNS', $arin_ver, $arin_id, $time));
+						[$ip, $dns_name, 'Specified DNS', $arin_ver, $arin_id, $time]);
 
 					return $dns_name . $suffix;
 				}
@@ -5307,7 +5308,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 						host = VALUES(host),
 						arin_verified = VALUES(arin_verified),
 						arin_id = VALUES(arin_id)',
-					array($ip, $dns_name, 'ARIN', $arin_ver, $arin_id, $time));
+					[$ip, $dns_name, 'ARIN', $arin_ver, $arin_id, $time]);
 
 				return $dns_name;
 			} else {
@@ -5323,7 +5324,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 						host = VALUES(host),
 						arin_verified = VALUES(arin_verified),
 						arin_id = VALUES(arin_id)',
-					array($ip, $dns_name, 'ARIN Error', $arin_ver, $arin_id, $time));
+					[$ip, $dns_name, 'ARIN Error', $arin_ver, $arin_id, $time]);
 
 				return $dns_name;
 			}
@@ -5342,7 +5343,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 					host = VALUES(host),
 					arin_verified = VALUES(arin_verified),
 					arin_id = VALUES(arin_id)',
-				array($ip, $dns_name, 'Local DNS', 1, 0, $time));
+				[$ip, $dns_name, 'Local DNS', 1, 0, $time]);
 
 			return $dns_name . $suffix;
 		}
@@ -5368,7 +5369,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 					host = VALUES(host),
 					arin_verified = VALUES(arin_verified),
 					arin_id = VALUES(arin_id)',
-				array($ip, $dns_name, 'Local DNS', 1, 0, $time));
+				[$ip, $dns_name, 'Local DNS', 1, 0, $time]);
 
 			return $dns_name;
 		} else {
@@ -5395,7 +5396,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 						host = VALUES(host),
 						arin_verified = VALUES(arin_verified),
 						arin_id = VALUES(arin_id)',
-					array($ip, $dns_name, 'ARIN', $arin_ver, $arin_id, $time));
+					[$ip, $dns_name, 'ARIN', $arin_ver, $arin_id, $time]);
 
 				return $dns_name;
 			} else {
@@ -5411,7 +5412,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 						host = VALUES(host),
 						arin_verified = VALUES(arin_verified),
 						arin_id = VALUES(arin_id)',
-					array($ip, $ip, 'ARIN Error', $arin_ver, $arin_id, $time));
+					[$ip, $ip, 'ARIN Error', $arin_ver, $arin_id, $time]);
 
 				return $dns_name;
 			}
@@ -5421,7 +5422,7 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 
 function flowview_get_color($as_array = false) {
 	static $position = 0;
-	$palette = array('#F23C2E', '#32599A', '#F18A47', '#AC9509', '#DAAC10');
+	$palette = ['#F23C2E', '#32599A', '#F18A47', '#AC9509', '#DAAC10'];
 
 	if ($as_array) {
 		$position = 0;
@@ -5463,32 +5464,32 @@ function flowview_report_session() {
 		'exclude' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => '0',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'domains' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'true',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'table' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'packets' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'bytes' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		),
 		'flows' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => '',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 		)
 	);
 
@@ -5524,7 +5525,7 @@ function flowview_check_local_iprange($ip) {
 
 		$matches = db_fetch_cell_prepared('SELECT
 			INET_ATON(?) & -1 << 32 - ? = INET_ATON(?) & -1 << 32 - ? AS matches',
-			array($ip, $cidr, $range, $cidr));
+			[$ip, $cidr, $range, $cidr]);
 
 		if ($matches == 1) {
 			return true;
@@ -5537,19 +5538,19 @@ function flowview_check_local_iprange($ip) {
 
 function flowview_check_databases($import_only = false, $force = false) {
 	$databases = array(
-		'afrinic' => array(
+		'afrinic' => [
 			'serial'  => 'AFRINIC.CURRENTSERIAL',
 			'files'   => 'afrinic.db.gz',
 			'ftp'     => 'ftp://ftp.afrinic.net/pub/dbase/'
-		),
-		'altdb' => array(
+		],
+		'altdb' => [
 			'serial'  => 'ALTDB.CURRENTSERIAL',
 			'files'   => 'altdb.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
+		],
 		'apnic' => array(
 			'serial'  => 'APNIC.CURRENTSERIAL',
-			'files' => array(
+			'files' => [
 				'apnic.db.as-block.gz',
 				'apnic.db.as-set.gz',
 				'apnic.db.aut-num.gz',
@@ -5568,102 +5569,102 @@ function flowview_check_databases($import_only = false, $force = false) {
 				'apnic.db.route.gz',
 				'apnic.db.route6.gz',
 				'apnic.db.rtr-set.gz'
-			),
+			],
 			'ftp'     => 'ftp://ftp.apnic.net/apnic/whois/'
 		),
-		'arin' => array(
+		'arin' => [
 			'serial'  => 'ARIN.CURRENTSERIAL',
 			'files'   => 'arin.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'bboi' => array(
+		],
+		'bboi' => [
 			'serial'  => 'BBOI.CURRENTSERIAL',
 			'files'   => 'bboi.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'bell' => array(
+		],
+		'bell' => [
 			'serial'  => 'BELL.CURRENTSERIAL',
 			'files'   => 'bell.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'canarie' => array(
+		],
+		'canarie' => [
 			'serial'  => 'CANARIE.CURRENTSERIAL',
 			'files'   => 'canarie.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'idnic' => array(
+		],
+		'idnic' => [
 			'serial'  => 'IDNIC.CURRENTSERIAL',
 			'files'   => 'idnic.db.gz',
 			'ftp'     => 'ftp://irr-mirror.idnic.net/'
-		),
-		'jpirr' => array(
+		],
+		'jpirr' => [
 			'serial'  => 'JPIRR.CURRENTSERIAL',
 			'files'   => 'jpirr.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'jpnic' => array(
+		],
+		'jpnic' => [
 			'serial'  => 'JPNIC.CURRENTSERIAL',
 			'files'   => 'jpnic.db.gz',
 			'ftp'     => 'ftp://ftp.apnic.net/public/apnic/dbase/data/'
-		),
-		'krnic' => array(
+		],
+		'krnic' => [
 			'serial'  => 'KRNIC.CURRENTSERIAL',
 			'files'   => 'krnic.db.gz',
 			'ftp'     => 'ftp://ftp.apnic.net/public/apnic/dbase/data/'
-		),
-		'twnic' => array(
+		],
+		'twnic' => [
 			'serial'  => 'TWNIC.CURRENTSERIAL',
 			'files'   => 'twnic.db.gz',
 			'ftp'     => 'ftp://ftp.apnic.net/public/apnic/dbase/data/'
-		),
-		'lacnic' => array(
+		],
+		'lacnic' => [
 			'serial'  => 'LACNIC.CURRENTSERIAL',
 			'files'   => 'lacnic.db.gz',
 			'ftp'     => 'https://irr.lacnic.net/'
-		),
-		'level3' => array(
+		],
+		'level3' => [
 			'serial'  => 'LEVEL3.CURRENTSERIAL',
 			'files'   => 'level3.db.gz',
 			'ftp'     => 'ftp://rr.level3.net/'
-		),
-		'wcgdb' => array(
+		],
+		'wcgdb' => [
 			'serial'  => 'WCGDB.CURRENTSERIAL',
 			'files'   => 'wcgdb.db.gz',
 			'ftp'     => 'ftp://rr.level3.net/'
-		),
+		],
 		'netegg' => array(
 			'serial'  => 'NETEGG.CURRENTSERIAL',
-			'files'   => array('netegg.db.gz', 'nestegg.db.gz'),
+			'files'   => ['netegg.db.gz', 'nestegg.db.gz'],
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
 		),
-		'nttcom' => array(
+		'nttcom' => [
 			'serial'  => 'NTTCOM.CURRENTSERIAL',
 			'files'   => 'nttcom.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'radb' => array(
+		],
+		'radb' => [
 			'serial'  => 'RADB.CURRENTSERIAL',
 			'files'   => 'radb.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'reach' => array(
+		],
+		'reach' => [
 			'serial'  => 'REACH.CURRENTSERIAL',
 			'files'   => 'reach.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		),
-		'ripe' => array(
+		],
+		'ripe' => [
 			'serial'  => 'RIPE.CURRENTSERIAL',
 			'files'   => 'ripe.db.gz',
 			'ftp'     => 'ftp://ftp.ripe.net/ripe/dbase/'
-		),
-		'tc' => array(
+		],
+		'tc' => [
 			'serial'  => 'TC.CURRENTSERIAL',
 			'files'   => 'tc.db.gz',
 			'ftp'     => 'ftp://ftp.radb.net/radb/dbase/'
-		)
+		]
 	);
 
-	$supported_tables = array(
+	$supported_tables = [
 		'as_block',
 		'as_set',
 		'aut_num',
@@ -5682,7 +5683,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 		'route',
 		'route_set',
 		'rtr_set'
-	);
+	];
 
 	$directory = sys_get_temp_dir();
 
@@ -5699,7 +5700,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 	$proxy_password = read_config_option('settings_proxy_password');
 
 	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept:application/json'));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept:application/json']);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120);
@@ -5749,11 +5750,11 @@ function flowview_check_databases($import_only = false, $force = false) {
 
 		if (($force || $import_only !== false) || (($last_serial == '' || $curr_serial != $last_serial) && $curr_serial != '')) {
 			if (!is_array($details['files'])) {
-				$details['files'] = array($details['files']);
+				$details['files'] = [$details['files']];
 			}
 
 			foreach($supported_tables as $table) {
-				flowview_db_execute_prepared("UPDATE plugin_flowview_irr_$table SET present = 0 WHERE source = ?", array($source));
+				flowview_db_execute_prepared("UPDATE plugin_flowview_irr_$table SET present = 0 WHERE source = ?", [$source]);
 			}
 
 			$files_broken = false;
@@ -5769,7 +5770,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 				}
 
 				$return_var = 0;
-				$output     = array();
+				$output     = [];
 				$wget_proxy = '';
 				if (!file_exists($local_file)) {
 					if ($proxy != '') {
@@ -5803,7 +5804,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 
 			if (!$files_broken) {
 				foreach($supported_tables as $table) {
-					flowview_db_execute_prepared("DELETE FROM plugin_flowview_irr_$table WHERE present = 0 AND source = ?", array($source));
+					flowview_db_execute_prepared("DELETE FROM plugin_flowview_irr_$table WHERE present = 0 AND source = ?", [$source]);
 				}
 			}
 		}
@@ -5820,19 +5821,19 @@ function flowview_update_database($source, $irr_file = false) {
 	}
 
 	$file         = gzopen($irr_file, 'r');
-	$record       = array();
-	$prefixes     = array();
+	$record       = [];
+	$prefixes     = [];
 	$column       = '';
 	$skip         = false;
 	$source       = strtoupper($source);
-	$records      = array();
-	$record_nums  = array();
+	$records      = [];
+	$record_nums  = [];
 	$prevc        = '';
 	$section      = '';
 	$curr_section = '';
 	$start        = microtime(true);
 
-	$supported_sections = array(
+	$supported_sections = [
 		'as-block',
 		'as-set',
 		'aut-num',
@@ -5853,11 +5854,11 @@ function flowview_update_database($source, $irr_file = false) {
 		'route6',
 		'route-set',
 		'rtr-set',
-	);
+	];
 
-	$unsupported_sections = array(
+	$unsupported_sections = [
 		'key-cert',
-	);
+	];
 
 	/* prime the template records with base columns */
 	foreach($supported_sections as $section) {
@@ -5897,7 +5898,7 @@ function flowview_update_database($source, $irr_file = false) {
 	$prev_irr_column = '';
 	$name_remove_ct  = 1;
 	$sections_done   = 0;
-	$record_num = array();
+	$record_num = [];
 
 	while (!feof($file) !== false) {
 		$line = fgets($file);
@@ -5952,8 +5953,8 @@ function flowview_update_database($source, $irr_file = false) {
 
 					flowview_insert_irr_sections($records, $prefixes, $supported_sections);
 
-					$records    = array();
-					$record_num = array();
+					$records    = [];
+					$record_num = [];
 				} else {
 					$sections_done++;
 				}
@@ -6064,7 +6065,7 @@ function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_section
 			$section_chunks = array_chunk($section_rows, 100);
 
 			foreach($section_chunks as $section_chunk) {
-				$sql_params = array();
+				$sql_params = [];
 				$sql_insert = $sql_prefix;
 
 				foreach($section_chunk as $index => $row) {
@@ -6180,7 +6181,7 @@ function flowview_get_owner_from_arin($host) {
 
 	curl_setopt($ch, CURLOPT_URL, 'https://whois.arin.net/rest/ip/' . $host);
 	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept:application/json'));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept:application/json']);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 40);
@@ -6256,11 +6257,11 @@ function flowview_get_owner_from_arin($host) {
 				$origin = flowview_db_fetch_cell_prepared('SELECT origin
 					FROM plugin_flowview_irr_route
 					WHERE route = ?',
-					array($cidr));
+					[$cidr]);
 
 				if ($origin == '') {
 					$return_var = 0;
-					$output = array();
+					$output = [];
 					$origin = '';
 
 					if (file_exists($whois_path) && is_executable($whois_path) && $whois_provider != '') {
@@ -6298,7 +6299,7 @@ function flowview_get_owner_from_arin($host) {
 					last_changed = VALUES(last_changed),
 					json_data = VALUES(json_data),
 					comments = VALUES(comments)',
-				array(
+				[
 					$cidr,
 					$net_range,
 					$name,
@@ -6311,18 +6312,18 @@ function flowview_get_owner_from_arin($host) {
 					$self,
 					$alternate,
 					$response
-				)
+				]
 			);
 
 			$arin_id = flowview_db_fetch_cell_prepared('SELECT id
 				FROM plugin_flowview_arin_information
 				WHERE cidr = ?',
-				array($cidr));
+				[$cidr]);
 
 			if (isset($json['net']['name']['$'])) {
 				$dns_name = 'ip-' . str_replace('.', '-', $host) . '.' . strtolower($json['net']['name']['$']) . '.net';
 
-				return array('dns_name' => $dns_name, 'arin_id' => $arin_id);
+				return ['dns_name' => $dns_name, 'arin_id' => $arin_id];
 			} else {
 				return false;
 			}
@@ -6364,22 +6365,22 @@ function flowview_getmax($value) {
 
 function flowview_autoscale($value) {
 	if ($value < 1000) {
-		return  array(1, '');
+		return  [1, ''];
 	} elseif ($value < 1000000) {
-		return array(1000, 'K');
+		return [1000, 'K'];
 	} elseif ($value < 1000000000) {
-		return array(1000000, 'M');
+		return [1000000, 'M'];
 	} elseif ($value < 1000000000000) {
-		return array(1000000000, 'G');
+		return [1000000000, 'G'];
 	} else {
-		return array(1000000000000, 'P');
+		return [1000000000000, 'P'];
 	}
 }
 
 function create_raw_partition($table) {
 	global $config;
 
-	$data = array();
+	$data = [];
 	// Auto increment sequence
 	$data['columns'][] = array('name' => 'sequence', 'type' => 'bigint(20)', 'unsigned' => true, 'auto_increment' => true);
 
@@ -6432,18 +6433,18 @@ function create_raw_partition($table) {
 	$data['columns'][] = array('name' => 'bytes', 'type' => 'bigint(20)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 
 	// Calculated field
-	$data['columns'][] = array('name' => 'bytes_ppacket', 'type' => 'double', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = ['name' => 'bytes_ppacket', 'type' => 'double', 'unsigned' => true, 'NULL' => false, 'default' => '0'];
 
 	// Type of service and flags
 	$data['columns'][] = array('name' => 'tos', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'flags', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 
 	$data['primary']   = 'sequence';
-	$data['keys'][]    = array('name' => 'listener_id', 'columns' => 'listener_id');
-	$data['keys'][]    = array('name' => 'template_id', 'columns' => 'template_id');
-	$data['keys'][]    = array('name' => 'ex_addr', 'columns' => 'ex_addr');
-	$data['keys'][]    = array('name' => 'start_time', 'columns' => 'start_time');
-	$data['keys'][]    = array('name' => 'end_time', 'columns' => 'end_time');
+	$data['keys'][]    = ['name' => 'listener_id', 'columns' => 'listener_id'];
+	$data['keys'][]    = ['name' => 'template_id', 'columns' => 'template_id'];
+	$data['keys'][]    = ['name' => 'ex_addr', 'columns' => 'ex_addr'];
+	$data['keys'][]    = ['name' => 'start_time', 'columns' => 'start_time'];
+	$data['keys'][]    = ['name' => 'end_time', 'columns' => 'end_time'];
 
 	$data['type']       = 'InnoDB';
 	$data['collate']    = 'latin1_swedish_ci';
@@ -6526,7 +6527,7 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 		cacti_log('Can not find flow-export binary for import file ' . $file, false, 'FLOWVIEW');
 	}
 
-	$sql = array();
+	$sql = [];
 
 	if ($data != '') {
 		$data = explode("\n", $data);
@@ -6647,7 +6648,7 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 			if ($i > 100) {
 				flowview_db_execute($sql_prefix . implode(', ', $sql));
 				$i = 0;
-				$sql = array();
+				$sql = [];
 			}
 		}
 
@@ -6658,7 +6659,7 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 }
 
 function get_tables_range($begin, $end = null) {
-	$tables    = array();
+	$tables    = [];
 	$partition = read_config_option('flowview_partition');
 
 	if ($end == null) {

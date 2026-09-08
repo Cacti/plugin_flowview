@@ -1,4 +1,5 @@
 <?php
+
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
@@ -115,7 +116,7 @@ function actions_filters() {
 			/* ==================================================== */
 
 			$filter_list .= '<li>' . flowview_db_fetch_cell_prepared('SELECT name FROM plugin_flowview_queries
-				WHERE id = ?', array($matches[1])) . '</li>';
+				WHERE id = ?', [$matches[1]]) . '</li>';
 			$filter_array[] = $matches[1];
 		}
 	}
@@ -180,29 +181,29 @@ function show_filters() {
 
     /* ================= input validation and session storage ================= */
     $filters = array(
-		'rows' => array(
+		'rows' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'pageset' => true,
 			'default' => '-1'
-			),
-		'page' => array(
+			],
+		'page' => [
 			'filter' => FILTER_VALIDATE_INT,
 			'default' => '1'
-			),
-		'filter' => array(
+			],
+		'filter' => [
 			'filter' => FILTER_DEFAULT,
 			'pageset' => true,
 			'default' => ''
-			),
+			],
 		'sort_column' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'fq.name',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 			),
 		'sort_direction' => array(
 			'filter' => FILTER_CALLBACK,
 			'default' => 'ASC',
-			'options' => array('options' => 'sanitize_search_string')
+			'options' => ['options' => 'sanitize_search_string']
 			)
 	);
 
