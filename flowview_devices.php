@@ -27,6 +27,7 @@ chdir('../../');
 include('./include/auth.php');
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
+include_once($config['base_path'] . '/plugins/flowview/flowview_security.php');
 
 flowview_connect();
 
@@ -293,13 +294,23 @@ function save_device() {
 	$save['cmethod']      = get_nfilter_request_var('cmethod');
 	$save['bind_address'] = get_filter_request_var('bind_address', FILTER_VALIDATE_IP);
 	$save['allowfrom']    = get_filter_request_var('allowfrom', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([0-9\.\/ ,]+)$/')));
-	$save['port']         = get_filter_request_var('port');
+	$save['port']         = flowview_normalize_listener_port(get_nfilter_request_var('port'));
 	$save['protocol']     = get_nfilter_request_var('protocol');
 	$save['enabled']      = isset_request_var('enabled') ? 'on':'';
 
+	if ($save['port'] === false) {
+		raise_message(2, __('The listener port must be a numeric value between 1 and 65535.', 'flowview'), MESSAGE_LEVEL_ERROR);
+
+		header('Location: flowview_devices.php?header=false&action=edit&id=' . get_request_var('id'));
+		exit;
+	}
+
 	$id = flowview_sql_save($save, 'plugin_flowview_devices', 'id', true);
 
-	$pid = db_fetch_cell('SELECT pid FROM processes WHERE tasktype="flowview" AND taskname="master"');
+	$pid = db_fetch_cell_prepared('SELECT pid
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?', array('flowview', 'master'));
 
 	if (is_error_message()) {
 		raise_message(2);
@@ -321,10 +332,10 @@ function save_device() {
 }
 
 function restart_services() {
-	$pid = db_fetch_cell('SELECT pid
+	$pid = db_fetch_cell_prepared('SELECT pid
 		FROM processes
-		WHERE tasktype="flowview"
-		AND taskname="master"');
+		WHERE tasktype = ?
+		AND taskname = ?', array('flowview', 'master'));
 
 	if ($pid > 0) {
 		if (!defined('SIGHUP')) {
@@ -888,18 +899,29 @@ function show_devices () {
 
 	if (cacti_sizeof($result)) {
 		foreach ($result as $row) {
+			$status = '';
+			$parts  = array();
+
 			if ($os == 'freebsd') {
-				$status = shell_exec("netstat -an | grep '." . $row['port'] . " '");
+				$status_cmd = flowview_build_listener_status_command($os, $row['port']);
 				$column = 3;
 				$scolumn = -1;
 			} else {
-				$status = shell_exec("ss -lntu | grep ':" . $row['port'] . " '");
+				$status_cmd = flowview_build_listener_status_command($os, $row['port']);
 				$column = 4;
 				$scolumn = 2;
-				if (empty($status)) {
-					$status = shell_exec("netstat -an | grep ':" . $row['port'] . " '");
-					$column = 3;
-					$scolumn = 1;
+			}
+
+			if ($status_cmd !== false) {
+				$status = shell_exec($status_cmd);
+
+				if ($os != 'freebsd' && empty($status)) {
+					$status_cmd = flowview_build_listener_status_command($os, $row['port'], true);
+					if ($status_cmd !== false) {
+						$status = shell_exec($status_cmd);
+						$column = 3;
+						$scolumn = 1;
+					}
 				}
 			}
 
@@ -975,4 +997,3 @@ function show_devices () {
 
 	form_end();
 }
-

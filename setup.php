@@ -108,9 +108,9 @@ function plugin_flowview_check_upgrade($force = false) {
 	$info    = plugin_flowview_version();
 	$current = $info['version'];
 
-	$old = db_fetch_cell('SELECT version
+	$old = db_fetch_cell_prepared('SELECT version
 		FROM plugin_config
-		WHERE directory="flowview"');
+		WHERE directory = ?', array('flowview'));
 
 	if ($current != $old || $force) {
 		$php_binary = read_config_option('path_php_binary');
@@ -322,7 +322,10 @@ function flowview_global_settings_update() {
 	}
 
 	if ($hup_process) {
-		$pid = db_fetch_cell('SELECT pid FROM processes WHERE tasktype="flowview" AND taskname="master"');
+		$pid = db_fetch_cell_prepared('SELECT pid
+			FROM processes
+			WHERE tasktype = ?
+			AND taskname = ?', array('flowview', 'master'));
 
 		if ($pid > 0) {
 			if (!defined('SIGHUP')) {
@@ -1310,4 +1313,3 @@ function flowview_graph_button($data) {
 		}
 	}
 }
-
