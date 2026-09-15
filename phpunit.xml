@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="../../include/vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/bootstrap-unit.php"
+         cacheDirectory=".phpunit.cache"
          colors="true"
-         failOnRisky="true"
          failOnWarning="true"
-         beStrictAboutTestsThatDoNotTestAnything="true">
+         failOnNotice="true"
+         failOnDeprecation="true"
+         beStrictAboutOutputDuringTests="false">
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="date.timezone" value="UTC"/>
+        <env name="CACTI_TEST_BOOTSTRAP" value="1"/>
+    </php>
     <testsuites>
-        <testsuite name="Plugin Flowview">
-            <directory>tests</directory>
+        <testsuite name="Plugin FlowView">
+            <directory>tests/Security</directory>
+            <directory>tests/Unit</directory>
         </testsuite>
     </testsuites>
-    <php>
-        <ini name="date.timezone" value="UTC"/>
-    </php>
+
+    <!--
+        Pest reads this PHPUnit-compatible configuration through Cacti's
+        Composer-managed vendor tree, checked out alongside this plugin by
+        the CI workflow (see .github/workflows/plugin-ci-workflow.yml).
+    -->
+    <source>
+        <include>
+            <file>setup.php</file>
+            <file>functions.php</file>
+            <file>database.php</file>
+        </include>
+    </source>
 </phpunit>

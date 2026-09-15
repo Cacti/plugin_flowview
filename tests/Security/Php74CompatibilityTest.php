@@ -12,13 +12,30 @@
  * Cacti 1.2.x plugins must remain compatible with PHP 7.4.
  */
 
-	$files = array(
-		'flowview.php',
-		'flowview_devices.php',
-		'flowview_filters.php',
-		'flowview_schedules.php',
-		'setup.php',
+	// Discovered recursively so new production PHP files are covered automatically.
+	$pluginRoot = realpath(__DIR__ . '/../..');
+	$files      = array();
+
+	$iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator($pluginRoot, FilesystemIterator::SKIP_DOTS)
 	);
+
+	foreach ($iterator as $file) {
+		if ($file->getExtension() !== 'php') {
+			continue;
+		}
+
+		$relativeFile = ltrim(str_replace($pluginRoot, '', $file->getPathname()), DIRECTORY_SEPARATOR);
+		$relativeFile = str_replace(DIRECTORY_SEPARATOR, '/', $relativeFile);
+
+		if (strpos($relativeFile, 'tests/') === 0) {
+			continue;
+		}
+
+		$files[] = $relativeFile;
+	}
+
+	sort($files);
 
 	it('does not use str_contains (PHP 8.0)', function () use ($files) {
 		foreach ($files as $relativeFile) {

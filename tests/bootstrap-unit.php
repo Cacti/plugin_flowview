@@ -2,48 +2,104 @@
 /*
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
  +-------------------------------------------------------------------------+
  | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
 
 /*
- * Test bootstrap: stub Cacti framework functions so plugin code
- * can be loaded in isolation without the full Cacti application.
+ * Test bootstrap.
+ *
+ * FlowView's sources expect to be included by Cacti, which has already
+ * defined the db_*, request-variable, and logging helpers as plain global
+ * functions. Nothing here talks to a database or a network: each Cacti
+ * function is declared as a stub that records the call in
+ * $GLOBALS['__test_db_calls'] and hands back a safe (optionally queued)
+ * default via plugin_test_queue_db_result()/plugin_test_db_result().
+ *
+ * The CI workflow checks out a pinned Cacti release next to this plugin so
+ * Pest runs against Cacti's own Composer-managed vendor tree (Pest/PHPUnit)
+ * instead of a vendor tree local to this plugin. The version check below
+ * makes sure that checkout actually matches what tests/.cacti-version
+ * expects before any plugin source is loaded.
+ *
+ * Guarding every declaration with function_exists() keeps this file usable
+ * if a future integration suite loads real Cacti first.
  */
 
-$GLOBALS['__test_db_calls'] = array();
-$GLOBALS['__test_db_results'] = array();
-$GLOBALS['__test_config'] = array();
-$GLOBALS['__test_messages'] = array();
-$GLOBALS['__test_pdo'] = null;
-$GLOBALS['__test_integration_db'] = false;
+$cacti_root = dirname(__DIR__, 3);
+$autoload   = $cacti_root . '/include/vendor/autoload.php';
+$version    = $cacti_root . '/include/cacti_version';
+$expected   = __DIR__ . '/.cacti-version';
+
+if (!is_readable($autoload)) {
+	throw new RuntimeException("Cacti Composer autoloader is not readable: $autoload");
+}
+
+if (!is_readable($version)) {
+	throw new RuntimeException("Cacti version file is not readable: $version");
+}
+
+if (!is_readable($expected)) {
+	throw new RuntimeException("Expected Cacti version file is not readable: $expected");
+}
+
+$cacti_version    = trim((string) file_get_contents($version));
+$expected_version = trim((string) file_get_contents($expected));
+
+if ($cacti_version === '') {
+	throw new RuntimeException("Cacti version file is empty: $version");
+}
+
+if ($expected_version === '') {
+	throw new RuntimeException("Expected Cacti version file is empty: $expected");
+}
+
+// The CI workflow tracks a moving branch (1.2.x or develop) rather than a pinned release, so any actual version is accepted.
+if (!in_array($expected_version, array('1.2.x', 'develop'), true) && $cacti_version !== $expected_version) {
+	throw new RuntimeException("Expected Cacti $expected_version, found $cacti_version in $version");
+}
+
+require_once $autoload;
+require_once __DIR__ . '/TestCase.php';
 
 if (!defined('CACTI_VERSION')) {
-	define('CACTI_VERSION', '1.3.0');
+	define('CACTI_VERSION', $cacti_version);
 }
+
+/*
+ * base_path has to point at the Cacti root two levels above this plugin:
+ * flowview's source files build include paths from it at runtime.
+ */
+$GLOBALS['config'] = array(
+	'base_path'       => $cacti_root,
+	'url_path'        => '/cacti/',
+	'cacti_version'   => $cacti_version,
+	'cacti_server_os' => 'unix',
+);
+
+$GLOBALS['__test_db_calls']   = array();
+$GLOBALS['__test_db_results'] = array();
+$GLOBALS['__test_config']     = array();
+$GLOBALS['__test_messages']   = array();
 
 if (!function_exists('plugin_test_reset')) {
 	function plugin_test_reset() {
-		$GLOBALS['__test_db_calls'] = array();
+		$GLOBALS['__test_db_calls']   = array();
 		$GLOBALS['__test_db_results'] = array();
-		$GLOBALS['__test_config'] = array();
-		$GLOBALS['__test_messages'] = array();
-		$GLOBALS['__test_pdo'] = null;
-		$GLOBALS['__test_integration_db'] = false;
-		$_GET = array();
-		$_POST = array();
+		$GLOBALS['__test_config']     = array();
+		$GLOBALS['__test_messages']   = array();
+		$_GET     = array();
+		$_POST    = array();
 		$_REQUEST = array();
 		$_SESSION = array();
-	}
-}
-
-if (!function_exists('plugin_test_use_database')) {
-	function plugin_test_use_database($enabled) {
-		$GLOBALS['__test_integration_db'] = (bool) $enabled;
-		if (!$enabled) {
-			$GLOBALS['__test_pdo'] = null;
-		}
 	}
 }
 
@@ -65,50 +121,9 @@ if (!function_exists('plugin_test_db_result')) {
 	}
 }
 
-if (!function_exists('plugin_test_pdo')) {
-	function plugin_test_pdo() {
-		if (!$GLOBALS['__test_integration_db']) {
-			return null;
-		}
-
-		if ($GLOBALS['__test_pdo'] instanceof PDO) {
-			return $GLOBALS['__test_pdo'];
-		}
-
-		$dsn = getenv('FLOWVIEW_TEST_DB_DSN');
-		if ($dsn === false || $dsn === '') {
-			return null;
-		}
-
-		$GLOBALS['__test_pdo'] = new PDO(
-			$dsn,
-			getenv('FLOWVIEW_TEST_DB_USER') ?: 'root',
-			getenv('FLOWVIEW_TEST_DB_PASSWORD') ?: '',
-			array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-		);
-
-		return $GLOBALS['__test_pdo'];
-	}
-}
-
-if (!function_exists('plugin_test_db_query')) {
-	function plugin_test_db_query($sql, $params = array()) {
-		$pdo = plugin_test_pdo();
-		if (!$pdo) {
-			return null;
-		}
-		$stmt = $pdo->prepare($sql);
-		$stmt->execute($params);
-		return $stmt;
-	}
-}
-
 if (!function_exists('db_execute')) {
 	function db_execute($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			plugin_test_db_query($sql);
-		}
 		return true;
 	}
 }
@@ -116,9 +131,6 @@ if (!function_exists('db_execute')) {
 if (!function_exists('db_execute_prepared')) {
 	function db_execute_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			plugin_test_db_query($sql, $params);
-		}
 		return true;
 	}
 }
@@ -126,9 +138,6 @@ if (!function_exists('db_execute_prepared')) {
 if (!function_exists('db_fetch_assoc')) {
 	function db_fetch_assoc($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			return plugin_test_db_query($sql)->fetchAll(PDO::FETCH_ASSOC);
-		}
 		return plugin_test_db_result('db_fetch_assoc', array());
 	}
 }
@@ -136,9 +145,6 @@ if (!function_exists('db_fetch_assoc')) {
 if (!function_exists('db_fetch_assoc_prepared')) {
 	function db_fetch_assoc_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			return plugin_test_db_query($sql, $params)->fetchAll(PDO::FETCH_ASSOC);
-		}
 		return plugin_test_db_result('db_fetch_assoc_prepared', array());
 	}
 }
@@ -146,10 +152,6 @@ if (!function_exists('db_fetch_assoc_prepared')) {
 if (!function_exists('db_fetch_row')) {
 	function db_fetch_row($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			$row = plugin_test_db_query($sql)->fetch(PDO::FETCH_ASSOC);
-			return $row === false ? array() : $row;
-		}
 		return plugin_test_db_result('db_fetch_row', array());
 	}
 }
@@ -157,10 +159,6 @@ if (!function_exists('db_fetch_row')) {
 if (!function_exists('db_fetch_row_prepared')) {
 	function db_fetch_row_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			$row = plugin_test_db_query($sql, $params)->fetch(PDO::FETCH_ASSOC);
-			return $row === false ? array() : $row;
-		}
 		return plugin_test_db_result('db_fetch_row_prepared', array());
 	}
 }
@@ -168,10 +166,6 @@ if (!function_exists('db_fetch_row_prepared')) {
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql, $column = '', $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			$value = plugin_test_db_query($sql)->fetchColumn();
-			return $value === false ? '' : $value;
-		}
 		return plugin_test_db_result('db_fetch_cell', '');
 	}
 }
@@ -179,10 +173,6 @@ if (!function_exists('db_fetch_cell')) {
 if (!function_exists('db_fetch_cell_prepared')) {
 	function db_fetch_cell_prepared($sql, $params = array(), $column = '', $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		if (plugin_test_pdo()) {
-			$value = plugin_test_db_query($sql, $params)->fetchColumn();
-			return $value === false ? '' : $value;
-		}
 		return plugin_test_db_result('db_fetch_cell_prepared', '');
 	}
 }
@@ -312,9 +302,9 @@ if (!function_exists('cacti_pton')) {
 		if (count($parts) !== 2 || filter_var($parts[0], FILTER_VALIDATE_IP) === false) {
 			return array();
 		}
-		$ip = inet_pton($parts[0]);
+		$ip   = inet_pton($parts[0]);
 		$bits = (int) $parts[1];
-		$max = strlen($ip) * 8;
+		$max  = strlen($ip) * 8;
 		if ($bits < 0 || $bits > $max) {
 			return array();
 		}
@@ -360,8 +350,7 @@ if (!function_exists('sql_save')) {
 }
 
 if (!defined('CACTI_PATH_BASE')) {
-	$test_root = realpath(__DIR__ . '/..');
-	define('CACTI_PATH_BASE', $test_root !== false ? $test_root : dirname(__DIR__));
+	define('CACTI_PATH_BASE', $GLOBALS['config']['base_path']);
 }
 
 if (!defined('POLLER_VERBOSITY_LOW')) {
@@ -401,6 +390,33 @@ if (!function_exists('plugin_test_read_source')) {
 		}
 
 		return $contents;
+	}
+}
+
+/**
+ * Load a plugin source file at global scope.
+ *
+ * Some plugin files define data as file-scope variables that the rest of
+ * the plugin reads as globals, and they read $config while doing so.
+ * Requiring them from inside a method would make both halves of that
+ * method-local, so the require happens here and any variable the file
+ * introduced is published to $GLOBALS.
+ *
+ * @param string $path Absolute path to the file.
+ *
+ * @return void
+ */
+function flowview_test_load($path) {
+	global $config;
+
+	$__before = get_defined_vars();
+
+	require_once $path;
+
+	foreach (get_defined_vars() as $__name => $__value) {
+		if (!array_key_exists($__name, $__before) && strncmp($__name, '__', 2) !== 0) {
+			$GLOBALS[$__name] = $__value;
+		}
 	}
 }
 

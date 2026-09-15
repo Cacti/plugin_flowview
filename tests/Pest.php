@@ -8,5 +8,7 @@
 */
 
 /*
- * Pest configuration file. The bootstrap is loaded by Composer autoload-dev.
+ * Pest configuration file. The bootstrap is loaded via phpunit.xml's
+ * bootstrap attribute (tests/bootstrap-unit.php), which requires Cacti's
+ * own Composer-managed vendor tree checked out by the CI workflow.
  */

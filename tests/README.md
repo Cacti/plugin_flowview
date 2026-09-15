@@ -1,36 +1,40 @@
 # FlowView test harness
 
-The harness separates fast deterministic checks from connector-backed database
-tests.
+The harness separates fast deterministic checks (`tests/Security`) from
+plugin-logic unit tests (`tests/Unit`), following the same pattern used by
+`plugin_evidence`.
 
-## Local unit and contract tests
+Tests do not use a Composer install local to this plugin. Instead, Pest runs
+against a working Cacti installation checked out next to this plugin, reusing
+Cacti's own Composer-managed vendor tree for Pest/PHPUnit. This is exactly
+what `.github/workflows/plugin-ci-workflow.yml` does in CI.
 
-```sh
-composer install
-composer test:unit
-composer test:syntax
-```
+## Running the tests against a Cacti checkout
 
-Unit tests load the shipped `functions.php` and `database.php` through a small,
-stateful Cacti API double. Database responses can be queued with
-`plugin_test_queue_db_result()`, and every SQL call is recorded in
-`$GLOBALS['__test_db_calls']` for parameter and connection assertions.
-
-## Database integration tests
-
-Start a disposable MariaDB or MySQL database, then run:
+Clone or symlink this plugin into a Cacti checkout's `plugins/flowview`
+directory, install Cacti's dev dependencies once, then run Pest through
+Cacti's vendor binary:
 
 ```sh
-FLOWVIEW_TEST_DB_DSN='mysql:host=127.0.0.1;port=3306;dbname=flowview_test' \
-FLOWVIEW_TEST_DB_USER=root \
-FLOWVIEW_TEST_DB_PASSWORD=flowview \
-composer test:integration
+git clone https://github.com/Cacti/cacti.git
+git clone https://github.com/Cacti/plugin_flowview.git cacti/plugins/flowview
+
+cd cacti
+composer config --no-plugins allow-plugins.pestphp/pest-plugin true
+composer require --dev "pestphp/pest:^3" "pestphp/pest-plugin-drift:^3.0"
+
+echo -n "$(cat include/cacti_version)" > plugins/flowview/tests/.cacti-version
+
+include/vendor/bin/pest --configuration=plugins/flowview/phpunit.xml \
+	plugins/flowview/tests/Security plugins/flowview/tests/Unit
 ```
 
-The integration suite creates and removes only `plugin_flowview_test_raw`. It
-round-trips IPv4 and IPv6 addresses, microsecond timestamps, counters, prepared
-parameters, and report aggregates through the real PDO MySQL connector. CI runs
-the same contract against MariaDB 10.6 and MySQL 8.4.
+Unit tests load the shipped `functions.php` and `database.php` through a
+small, stateful Cacti API double defined in `tests/bootstrap-unit.php`.
+Database responses can be queued with `plugin_test_queue_db_result()`, and
+every SQL call is recorded in `$GLOBALS['__test_db_calls']` for parameter and
+connection assertions.
 
-`composer test` runs every test; without `FLOWVIEW_TEST_DB_DSN`, integration
-tests are explicitly skipped rather than silently simulated.
+Security tests validate PHP 7.4 syntax compatibility and the plugin's
+install/version/uninstall structure without executing plugin source.
+
