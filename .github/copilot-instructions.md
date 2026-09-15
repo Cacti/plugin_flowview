@@ -109,7 +109,7 @@ function plugin_flowview_check_upgrade($force = false) {
 	if ($current != $old || $force) {
 		$php_binary = read_config_option('path_php_binary');
 		exec_background($php_binary, '-q ' . $config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
-		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background...'), MESSAGE_LEVEL_INFO);
+		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background...', 'flowview'), MESSAGE_LEVEL_INFO);
 	}
 }
 ```
