@@ -69,7 +69,7 @@ All plugin tables match `plugin_flowview%` or `parallel_database%` (see `plugin_
 - **Spacing**: Space after control structure keywords (`if`, `foreach`, `while`).
 
 ### File Headers
-ALL PHP files MUST include the standard GPL v2 license header used throughout this repository (see `setup.php`), crediting "The Cacti Group".
+Plugin-maintained PHP files MUST include the standard GPL v2 license header used throughout this repository (see `setup.php`), crediting "The Cacti Group"; preserve the original license headers for vendored dependencies such as `Net/`.
 
 ## Security Standards
 
