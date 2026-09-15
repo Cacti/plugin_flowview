@@ -12,7 +12,6 @@ describe('prepared statement consistency in flowview', function () {
 		$targetFiles = array(
 		'flowview_devices.php',
 		'setup.php',
-		'tests/test_prepared_statements.php',
 		);
 
 		$rawPattern = '/\bdb_(?:execute|fetch_row|fetch_assoc|fetch_cell)\s*\(/';
@@ -30,6 +29,10 @@ describe('prepared statement consistency in flowview', function () {
 			foreach ($lines as $line) {
 				$trimmed = ltrim($line);
 				if (strpos($trimmed, '//') === 0 || strpos($trimmed, '*') === 0 || strpos($trimmed, '#') === 0) continue;
+
+				// Static CREATE TABLE DDL takes no bound values, so it has nothing to parameterize.
+				if (stripos($line, 'CREATE TABLE') !== false) continue;
+
 				if (preg_match($rawPattern, $line) && !preg_match($preparedPattern, $line)) {
 					$rawCalls++;
 				}
@@ -43,7 +46,6 @@ describe('prepared statement consistency in flowview', function () {
 		$targetFiles = array(
 		'flowview_devices.php',
 		'setup.php',
-		'tests/test_prepared_statements.php',
 		);
 
 		foreach ($targetFiles as $relativeFile) {

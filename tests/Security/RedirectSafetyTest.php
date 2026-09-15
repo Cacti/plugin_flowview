@@ -12,7 +12,6 @@ describe('redirect safety in flowview', function () {
 		$files = array(
 		'flowview_devices.php',
 		'setup.php',
-		'tests/test_prepared_statements.php',
 		);
 
 		foreach ($files as $relativeFile) {

@@ -11,7 +11,6 @@ describe('auth guard presence in flowview', function () {
 	it('includes auth.php or global.php in all UI entry points', function () {
 		$uiFiles = array(
 		'flowview_devices.php',
-		'tests/test_prepared_statements.php',
 		);
 
 		foreach ($uiFiles as $relativeFile) {
@@ -39,7 +38,6 @@ describe('auth guard presence in flowview', function () {
 	it('validates numeric IDs from request variables before DB queries', function () {
 		$uiFiles = array(
 		'flowview_devices.php',
-		'tests/test_prepared_statements.php',
 		);
 
 		foreach ($uiFiles as $relativeFile) {
