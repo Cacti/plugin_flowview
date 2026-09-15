@@ -20,6 +20,12 @@
 # +-------------------------------------------------------------------------+
 
 .git*
+!.github/
+!.github/workflows/
+!.github/workflows/*.yml
+.phpunit.result.cache
+.phpunit.cache/
+coverage/
 config.php
 locales/po/*.mo
 .omc/
