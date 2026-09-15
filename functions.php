@@ -2081,17 +2081,18 @@ function get_ip_filter($sql_where, &$sql_params, $value, $column) {
 				$addr = cacti_pton($part);
 
 				if (isset($addr['subnet'])) {
-					$network = inet_ntop($addr['subnet'] & $addr['ip']);
-					$last    = inet_ntop(($addr['subnet'] & $addr['ip']) | ~$addr['subnet']);
+					$network   = $addr['ip'] & $addr['subnet'];
+					$broadcast = $network | ~$addr['subnet'];
 
-					// VARBINARY values cannot be masked reliably with SQL's numeric
-					// bitwise operators.  Match the address family and use the
-					// lexicographic range represented by the first and last address.
-					$predicates[] = "(OCTET_LENGTH(`$column`) = OCTET_LENGTH(INET6_ATON(?)) AND `$column` BETWEEN INET6_ATON(?) AND INET6_ATON(?))";
+					// A bitwise AND against a VARBINARY column is not portable: MySQL 8.0
+					// casts it correctly, but MariaDB casts both sides to BIGINT, which
+					// always matches. A range comparison works on both, and LENGTH()
+					// keeps a 4-byte IPv4 range from reaching 16-byte IPv6 rows.
+					$predicates[] = "(LENGTH(`$column`) = ? AND `$column` BETWEEN INET6_ATON(?) AND INET6_ATON(?))";
 
-					$sql_params[] = $network;
-					$sql_params[] = $network;
-					$sql_params[] = $last;
+					$sql_params[] = strlen($network);
+					$sql_params[] = inet_ntop($network);
+					$sql_params[] = inet_ntop($broadcast);
 				} else {
 					raise_message('subnet_filter', __('Subnet Filter: %s is not a value CIDR format', $part, 'flowview'), MESSAGE_LEVEL_ERROR);
 				}

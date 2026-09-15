@@ -59,16 +59,16 @@ it('binds CIDR masks and network addresses', function () {
 	$params = array();
 	$where = get_ip_filter('', $params, '192.0.2.0/24', 'dst_addr');
 
-	expect($where)->toContain('OCTET_LENGTH(`dst_addr`) = OCTET_LENGTH(INET6_ATON(?))')
+	expect($where)->toContain('LENGTH(`dst_addr`) = ?')
 		->and($where)->toContain('`dst_addr` BETWEEN INET6_ATON(?) AND INET6_ATON(?)')
-		->and($params)->toBe(array('192.0.2.0', '192.0.2.0', '192.0.2.255'));
+		->and($params)->toBe(array(4, '192.0.2.0', '192.0.2.255'));
 });
 
 it('computes the full IPv6 CIDR range', function () {
 	$params = array();
 	get_ip_filter('', $params, '2001:db8::/64', 'dst_addr');
 
-	expect($params)->toBe(array('2001:db8::', '2001:db8::', '2001:db8::ffff:ffff:ffff:ffff'));
+	expect($params)->toBe(array(16, '2001:db8::', '2001:db8::ffff:ffff:ffff:ffff'));
 });
 
 it('builds each supported temporal overlap contract', function ($rangeType, $expectedSql, $expectedCount) {
