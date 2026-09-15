@@ -118,13 +118,13 @@ function flowview_upgrade($current, $old) {
 			db_execute_prepared("UPDATE plugin_config SET
 				version = ?, name = ?, author = ?, webpage = ?
 				WHERE directory = ?",
-				array(
+				[
 					$info['version'],
 					$info['longname'],
 					$info['author'],
 					$info['homepage'],
 					$info['name']
-				)
+				]
 			);
 		}
 
@@ -340,7 +340,7 @@ function flowview_upgrade($current, $old) {
 			flowview_db_execute("UPDATE plugin_flowview_schedules SET title='Ugraded Schedule' WHERE title=''");
 
 			/* Set the new version */
-			db_execute_prepared("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', ?)", array($current));
+			db_execute_prepared("REPLACE INTO settings (name, value) VALUES ('plugin_flowview_version', ?)", [$current]);
 
 			flowview_db_execute('ALTER TABLE plugin_flowview_devices ENGINE=InnoDB');
 		}
@@ -547,7 +547,7 @@ function flowview_upgrade($current, $old) {
 
 			$columns = array_rekey(
 				flowview_db_fetch_assoc('SHOW COLUMNS FROM ' . $t['TABLE_NAME']),
-				'Field', array('Type', 'Null', 'Key', 'Default', 'Extra')
+				'Field', ['Type', 'Null', 'Key', 'Default', 'Extra']
 			);
 
 			if (isset($columns['ex_addr']) && stripos($columns['ex_addr']['Type'], 'VARCHAR') === false) {

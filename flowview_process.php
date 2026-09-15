@@ -38,12 +38,12 @@ $debug = false;
 $maint = false;
 
 $shortopts = 'VvHh';
-$longopts = array(
+$longopts = [
 	'maint',
 	'debug',
 	'version',
 	'help',
-);
+];
 
 $options = getopt($shortopts, $longopts);
 
@@ -75,7 +75,7 @@ foreach($options as $arg => $value) {
 	}
 }
 
-$templates = array();
+$templates = [];
 
 $t = time();
 $r = intval($t / 60) * 60;
@@ -122,7 +122,7 @@ if (cacti_sizeof($schedules)) {
 		$source    = 'flowview';
 		$source_id = $s['id'];
 
-		$notification = array();
+		$notification = [];
 
 		if ($s['email'] != '') {
 			$notification['email']['to_email'] = $s['email'];
@@ -162,7 +162,7 @@ foreach($tables as $table) {
 		$data = flowview_db_fetch_row_prepared("SELECT COUNT(*) AS totals, MAX(sequence) AS sequence
 			FROM $table
 			WHERE sequence > ?",
-			array($last_sequence));
+			[$last_sequence]);
 
 		$nlast_table = $table;
 	} else {
@@ -271,7 +271,7 @@ if ($maint) {
 						WHERE md5sum = ?
 						AND map_table = ?
 						AND map_partition = ?',
-						array($entry['md5sum'], $entry['map_table'], $entry['map_partition']));
+						[$entry['md5sum'], $entry['map_table'], $entry['map_partition']]);
 
 					$dropped++;
 				}
@@ -284,7 +284,7 @@ if ($maint) {
 	db_execute_prepared('DELETE FROM reports_log
 		WHERE send_time < FROM_UNIXTIME(UNIX_TIMESTAMP() - (? * 86400))
 		AND source = "flowview"',
-		array($retention_days));
+		[$retention_days]);
 
 	/* download a fresh copy of the radb.db.gz and load it */
 	if (read_config_option('flowview_download_irr') == 'on') {

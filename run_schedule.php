@@ -43,14 +43,14 @@ $scheduled = false;
 $report_id = false;
 
 $shortopts = 'VvHh';
-$longopts = array(
+$longopts = [
 	'scheduled::',
 	'report-id::',
 	'debug',
 	'force',
 	'version',
 	'help',
-);
+];
 
 $options = getopt($shortopts, $longopts);
 
@@ -111,14 +111,14 @@ if ($scheduled == true) {
 		FROM reports_queued
 		WHERE status = ?
 		AND source = ?',
-		array('pending', 'flowview'));
+		['pending', 'flowview']);
 
 	while(true) {
 		$running = db_fetch_cell_prepared('SELECT COUNT(*)
 			FROM processes
 			WHERE taskname = ?
 			AND tasktype LIKE ?',
-			array('flowsched', 'child%'));
+			['flowsched', 'child%']);
 
 		if ($running < $concurrent_processes) {
 			$report = db_fetch_row_prepared('SELECT *
@@ -126,7 +126,7 @@ if ($scheduled == true) {
 				WHERE source = ?
 				AND status = ?
 				LIMIT 1',
-				array('flowview', 'pending'));
+				['flowview', 'pending']);
 
 			if (cacti_sizeof($report)) {
 				reports_run($report['id']);
@@ -157,7 +157,7 @@ if ($scheduled == true) {
 		FROM reports_queued AS rq
 		WHERE rq.source = ?
 		AND rq.id = ?',
-		array('flowview', $report_id));
+		['flowview', $report_id]);
 
 	if (cacti_sizeof($report)) {
 		$id = $report['source_id'];
@@ -176,7 +176,7 @@ if ($scheduled == true) {
 		$schedule = flowview_db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_schedules
 			WHERE id = ?',
-			array($id));
+			[$id]);
 
 		if (cacti_sizeof($schedule)) {
 			flowview_db_execute_prepared('UPDATE plugin_flowview_schedules
