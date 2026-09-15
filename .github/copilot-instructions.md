@@ -55,7 +55,7 @@ flowview/                     # Repository root (install to plugins/flowview/ in
 
 ### Function Names
 - **Plugin lifecycle/hook-registration functions** MUST be prefixed `plugin_flowview_`: `plugin_flowview_install()`, `plugin_flowview_check_upgrade()`, `plugin_flowview_version()`.
-- **All other functions** MUST be prefixed `flowview_`: `flowview_config_arrays()`, `flowview_setup_table()`, `flowview_connect()`.
+- **New plugin-owned functions** SHOULD use the `flowview_` prefix: `flowview_config_arrays()`, `flowview_setup_table()`, `flowview_connect()`. Preserve established subsystem prefixes such as `process_fv*`, `parallel_database_*`, and `display_*` when extending those APIs.
 - Match the existing prefix used by the function you are editing; do not introduce a third naming scheme.
 
 ### Database Tables
