@@ -74,7 +74,7 @@ Plugin-maintained PHP files MUST include the standard GPL v2 license header used
 ## Security Standards
 
 ### SQL Query Security
-**ALWAYS use the `flowview_db_*` wrapper functions with prepared statements** for anything involving variable input, never raw string concatenation:
+**ALWAYS use the `flowview_db_*` wrapper functions and prepared statements for variable values; never interpolate untrusted values into SQL. Dynamic identifiers (such as raw table names) cannot be bound, so validate or whitelist them before constructing the query.**
 
 ```php
 // CORRECT
