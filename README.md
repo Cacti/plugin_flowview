@@ -94,6 +94,21 @@ at MariaDB 10.5 or above.  Cacti has been shown to support MariaDB upto 11.4.x.
 MySQL 8.0+ is required. Unfortunately, MySQL does not support Aria Tables and will
 therefore have lower performance than MariaDB for scanning data.
 
+## Galera Cluster Replication (Aria Tables)
+
+Flowview's raw flow tables use the Aria storage engine. If you replicate your
+database with MariaDB Galera Cluster (rather than standard replication/MaxScale
+above), be aware that Galera does **not** replicate non-InnoDB storage engines
+by default, so Aria tables will silently fail to replicate to other cluster nodes.
+
+MariaDB Galera Cluster (10.6.0+) offers `wsrep_mode=REPLICATE_ARIA`, which enables
+replication of DML updates to Aria tables. However, **MariaDB's own documentation
+still marks this option as experimental and states it should not be relied upon in
+production systems.** There is currently no MariaDB version that officially/fully
+supports Aria table replication under Galera. See
+[Cacti/plugin_flowview#253](https://github.com/Cacti/plugin_flowview/issues/253)
+for background and current tracking status.
+
 Then, Install flowview just like any other plugin, just copy it into the plugin
 directory, and Use Console > Plugin Management to Install and Enable.
 

@@ -114,6 +114,32 @@ function plugin_flowview_check_upgrade($force = false) {
 }
 ```
 
+## Galera/Aria Replication Compatibility Tracking
+
+FlowView's raw flow tables use the Aria storage engine. MariaDB Galera Cluster does not fully
+support replicating non-InnoDB storage engines out of the box (see
+[Cacti/plugin_flowview#253](https://github.com/Cacti/plugin_flowview/issues/253)); Aria
+replication is currently only reachable via the **experimental** `wsrep_mode=REPLICATE_ARIA`
+option.
+
+**Recurring check**: On any pull request opened at least one month after the previous pull
+request, check the current MariaDB Galera Cluster documentation (the `wsrep_mode` system
+variable and Galera known-limitations pages at https://mariadb.com/docs/galera-cluster/) for
+whether Aria table replication has become officially/production supported and, if so, in which
+MariaDB version(s). Update the "Current status" note below with the finding, the MariaDB
+version(s) involved, and the date checked.
+
+**Once confirmed supported** (MariaDB documentation no longer marks Aria replication under
+Galera as experimental): add an application note to `README.md` stating the minimum MariaDB
+version and any required configuration (e.g. `wsrep_mode=REPLICATE_ARIA`), then delete this
+"Galera/Aria Replication Compatibility Tracking" section entirely — no further periodic checks
+are needed once the support note lives in `README.md`.
+
+**Current status (checked 2026-09-16)**: Still experimental. `wsrep_mode=REPLICATE_ARIA`
+(introduced in MariaDB 10.6.0) allows DML updates on Aria tables to replicate, but MariaDB's own
+documentation states this "is experimental and should not be relied upon in production systems."
+No MariaDB version currently offers production-supported Aria replication under Galera.
+
 ## Internationalization
 
 ALL user-facing strings MUST use `__()` with the `'flowview'` text domain.
