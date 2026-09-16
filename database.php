@@ -66,9 +66,29 @@ function flowview_db_close(&$flowview_cnn) {
  * @return bool          True when the database is connected, otherwise false
  */
 function flowview_db_check_reconnect($log = true) {
-	global $flowview_cnn;
+	global $flowview_cnn, $config, $local_db_cnn_id, $remote_db_cnn_id;
 
-	return db_check_reconnect($flowview_cnn, $log);
+	$previous_cnn = $flowview_cnn;
+
+	$result = db_check_reconnect($flowview_cnn, $log);
+
+	/**
+	 * When flowview is sharing the main Cacti database, $flowview_cnn is
+	 * just an alias of $local_db_cnn_id/$remote_db_cnn_id set up by
+	 * flowview_connect().  Propagate the reconnected handle back to
+	 * whichever one it was aliasing, otherwise a subsequent call to
+	 * flowview_connect() will overwrite $flowview_cnn with the stale,
+	 * dead connection again.
+	 */
+	if ($flowview_cnn !== $previous_cnn) {
+		if ($config['poller_id'] == 1 && $local_db_cnn_id === $previous_cnn) {
+			$local_db_cnn_id = $flowview_cnn;
+		} elseif ($remote_db_cnn_id === $previous_cnn) {
+			$remote_db_cnn_id = $flowview_cnn;
+		}
+	}
+
+	return $result;
 }
 
 /**
