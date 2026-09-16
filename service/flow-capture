@@ -170,7 +170,7 @@ function start($systemd = true) {
 		while (true) {
 			sleep(300);
 
-			db_check_reconnect(false, true);
+			flowview_db_check_reconnect(true);
 
 			heartbeat_process('flowview', 'master', $config['poller_id']);
 

@@ -57,6 +57,21 @@ function flowview_db_close(&$flowview_cnn) {
 }
 
 /**
+ * flowview_db_check_reconnect - check the flowview database connection.  If
+ *   the connection is gone, attempt to reconnect and update the global
+ *   flowview connection with the new one.
+ *
+ * @param  bool          Whether or not to log the connection check
+ *
+ * @return bool          True when the database is connected, otherwise false
+ */
+function flowview_db_check_reconnect($log = true) {
+	global $flowview_cnn;
+
+	return db_check_reconnect($flowview_cnn, $log);
+}
+
+/**
  * flowview_db_execute - run an sql query and do not return any output
  *
  * @param  string        The sql query to execute
