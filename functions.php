@@ -2276,6 +2276,12 @@ function get_tables_for_query($start, $end = null) {
  * @return bool    True if the table has the NAT columns
  */
 function flowview_nat_columns_supported($table) {
+	// Deliberately a function-local static, NOT $_SESSION or any other
+	// store that would outlive this request/CLI invocation. Each new
+	// request/script starts with an empty cache, so it always re-checks
+	// the real schema and can never go stale after
+	// flowview_upgrade_nat_columns.php upgrades a partition -- there is
+	// nothing to explicitly invalidate.
 	static $cache = [];
 
 	if (!isset($cache[$table])) {
