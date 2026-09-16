@@ -1465,7 +1465,7 @@ function get_sql_prefix($flowtime) {
 
 	$last_table = $table;
 
-	return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags) VALUES ';
+	return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags, post_nat_src_addr, post_nat_src_domain, post_nat_src_rdomain, post_nat_src_port, post_nat_dst_addr, post_nat_dst_domain, post_nat_dst_rdomain, post_nat_dst_port) VALUES ';
 }
 
 function process_fv10($p, $ex_addr) {
@@ -1786,6 +1786,30 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 		return false;
 	}
 
+	/**
+	 * Post-NAT (translated) addresses/ports - issue#110.  Unlike src/dst,
+	 * these are genuinely optional: many vendors (notably Cisco ASA/FTD
+	 * NSEL) split a NAT'd flow across a "Creation" template (which has the
+	 * NAT fields) and a "Teardown" template (which has the byte/packet
+	 * counts but not the NAT fields), so absence here is normal and must
+	 * not fail the record.
+	 */
+	if (isset($data[$flow_fields['post_nat_src_addr_ipv6']])) {
+		$post_nat_src_addr = $data[$flow_fields['post_nat_src_addr_ipv6']];
+	} elseif (isset($data[$flow_fields['post_nat_src_addr']])) {
+		$post_nat_src_addr = $data[$flow_fields['post_nat_src_addr']];
+	} else {
+		$post_nat_src_addr = '';
+	}
+
+	if (isset($data[$flow_fields['post_nat_dst_addr_ipv6']])) {
+		$post_nat_dst_addr = $data[$flow_fields['post_nat_dst_addr_ipv6']];
+	} elseif (isset($data[$flow_fields['post_nat_dst_addr']])) {
+		$post_nat_dst_addr = $data[$flow_fields['post_nat_dst_addr']];
+	} else {
+		$post_nat_dst_addr = '';
+	}
+
 	if (isset($data[$flow_fields['nexthop_ipv6']])) {
 		$nexthop = $data[$flow_fields['nexthop_ipv6']];
 	} elseif (isset($data[$flow_fields['nexthop']])) {
@@ -1848,6 +1872,22 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 	$dst_domain  = flowview_get_dns_from_ip($dst_addr, 100);
 	$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain, $dst_addr);
 
+	if ($post_nat_src_addr != '') {
+		$post_nat_src_domain  = flowview_get_dns_from_ip($post_nat_src_addr, 100);
+		$post_nat_src_rdomain = flowview_get_rdomain_from_domain($post_nat_src_domain, $post_nat_src_addr);
+	} else {
+		$post_nat_src_domain  = '';
+		$post_nat_src_rdomain = '';
+	}
+
+	if ($post_nat_dst_addr != '') {
+		$post_nat_dst_domain  = flowview_get_dns_from_ip($post_nat_dst_addr, 100);
+		$post_nat_dst_rdomain = flowview_get_rdomain_from_domain($post_nat_dst_domain, $post_nat_dst_addr);
+	} else {
+		$post_nat_dst_domain  = '';
+		$post_nat_dst_rdomain = '';
+	}
+
 	if (isset($data[$flow_fields['src_port']])) {
 		$src_rport = flowview_translate_port($data[$flow_fields['src_port']], false, false);
 	} else {
@@ -1903,7 +1943,17 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 		check_set($data, $flow_fields['dOctets'])           . ', ' .
 		$pps                                                . ', ' .
 		check_set($data, $flow_fields['tos'])               . ', ' .
-		check_set($data, $flow_fields['flags'])             . ')';
+		check_set($data, $flow_fields['flags'])             . ', ' .
+
+		($post_nat_src_addr != '' ? 'INET6_ATON(' . db_qstr($post_nat_src_addr) . ')':db_qstr('')) . ', ' .
+		db_qstr($post_nat_src_domain)                       . ', ' .
+		db_qstr($post_nat_src_rdomain)                      . ', ' .
+		check_set($data, $flow_fields['post_nat_src_port']) . ', ' .
+
+		($post_nat_dst_addr != '' ? 'INET6_ATON(' . db_qstr($post_nat_dst_addr) . ')':db_qstr('')) . ', ' .
+		db_qstr($post_nat_dst_domain)                       . ', ' .
+		db_qstr($post_nat_dst_rdomain)                      . ', ' .
+		check_set($data, $flow_fields['post_nat_dst_port']) . ')';
 
 	return $sql;
 }

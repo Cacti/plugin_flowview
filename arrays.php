@@ -232,8 +232,23 @@ $flow_fields = [
 	'tos'               => 5,
 	'flags'             => 6,
 	'start_time'        => 22,
-	'end_time'          => 21
+	'end_time'          => 21,
+
+	// NAT (Network Address Translation) fields.  Common to Cisco ASA/FTD,
+	// Juniper SRX, and MikroTik RouterOS NetFlow v9/IPFIX exports (issue#110).
+	'post_nat_src_addr'      => 225,
+	'post_nat_src_addr_ipv6' => 281,
+	'post_nat_dst_addr'      => 226,
+	'post_nat_dst_addr_ipv6' => 282,
+	'post_nat_src_port'      => 227,
+	'post_nat_dst_port'      => 228
 ];
+
+// Field IDs kept out of the plain "Supported" bucket in the per-listener
+// template viewer (get_colored_field_column()) even though they are fully
+// extracted/stored -- NAT is an opt-in aggregate extension, not one of the
+// original core fields, so it is called out with its own status/color.
+$flow_fieldids_nat = [225, 226, 227, 228, 281, 282];
 
 $flow_fieldids = array(
 	1 => [
@@ -347,6 +362,30 @@ $flow_fieldids = array(
 	160 => [
 		'column' => 'sysuptime',
 		'name'   => 'systemInitTimeMilliseconds'
+	],
+	225 => [
+		'column' => 'post_nat_src_addr',
+		'name'   => 'postNATSourceIPv4Address'
+	],
+	226 => [
+		'column' => 'post_nat_dst_addr',
+		'name'   => 'postNATDestinationIPv4Address'
+	],
+	227 => [
+		'column' => 'post_nat_src_port',
+		'name'   => 'postNAPTSourceTransportPort'
+	],
+	228 => [
+		'column' => 'post_nat_dst_port',
+		'name'   => 'postNAPTDestinationTransportPort'
+	],
+	281 => [
+		'column' => 'post_nat_src_addr',
+		'name'   => 'postNATSourceIPv6Address'
+	],
+	282 => [
+		'column' => 'post_nat_dst_addr',
+		'name'   => 'postNATDestinationIPv6Address'
 	]
 );
 
@@ -844,6 +883,38 @@ $filter_edit = array(
 		'description' => __('Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS\'s', 'flowview'),
 		'method' => 'textbox',
 		'value' => '|arg1:destas|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'postnatsourceip' => array(
+		'friendly_name' => __('Post-NAT Source IP', 'flowview'),
+		'description' => __('Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24).', 'flowview'),
+		'method' => 'textarea',
+		'value' => '|arg1:postnatsourceip|',
+		'textarea_rows' => '2',
+		'textarea_cols' => '80'
+	),
+	'postnatsourceport' => array(
+		'friendly_name' => __('Post-NAT Source Port', 'flowview'),
+		'description' => __('Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:postnatsourceport|',
+		'max_length' => '20',
+		'size' => '14'
+	),
+	'postnatdestip' => array(
+		'friendly_name' => __('Post-NAT Dest IP', 'flowview'),
+		'description' => __('Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24).', 'flowview'),
+		'method' => 'textarea',
+		'value' => '|arg1:postnatdestip|',
+		'textarea_rows' => '2',
+		'textarea_cols' => '80'
+	),
+	'postnatdestport' => array(
+		'friendly_name' => __('Post-NAT Dest Port', 'flowview'),
+		'description' => __('Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports.', 'flowview'),
+		'method' => 'textbox',
+		'value' => '|arg1:postnatdestport|',
 		'max_length' => '20',
 		'size' => '14'
 	),

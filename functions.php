@@ -510,6 +510,11 @@ function save_filter() {
 	$save['destinterface']   = get_nfilter_request_var('destinterface');
 	$save['destas']          = get_nfilter_request_var('destas');
 
+	$save['postnatsourceip']   = get_nfilter_request_var('postnatsourceip');
+	$save['postnatsourceport'] = get_nfilter_request_var('postnatsourceport');
+	$save['postnatdestip']     = get_nfilter_request_var('postnatdestip');
+	$save['postnatdestport']   = get_nfilter_request_var('postnatdestport');
+
 	$save['statistics']      = get_nfilter_request_var('statistics');
 	$save['printed']         = get_nfilter_request_var('printed');
 	$save['includeif']       = get_nfilter_request_var('includeif');
@@ -2262,6 +2267,54 @@ function get_tables_for_query($start, $end = null) {
 }
 
 /**
+ * flowview_nat_columns_supported - checks (and caches) whether a raw
+ *   partition table has been upgraded with the post-NAT columns
+ *   (issue#110).  Older, not-yet-upgraded partitions won't have them.
+ *
+ * @param  string  The raw partition table name
+ *
+ * @return bool    True if the table has the NAT columns
+ */
+function flowview_nat_columns_supported($table) {
+	static $cache = [];
+
+	if (!isset($cache[$table])) {
+		$cache[$table] = flowview_db_column_exists($table, 'post_nat_src_addr', false);
+	}
+
+	return $cache[$table];
+}
+
+/**
+ * flowview_nat_safe_sql - given a fragment of a per-table SQL query, make
+ *   it safe to run against a raw partition table that pre-dates the NAT
+ *   columns (issue#110) by substituting NULL for any NAT column reference.
+ *   This lets old and upgraded partitions be UNION'd together without the
+ *   query erroring on "Unknown column" for the older tables.
+ *
+ * @param  string  The SQL fragment (SELECT list, WHERE, or GROUP BY)
+ * @param  string  The raw partition table this fragment will run against
+ *
+ * @return string  The SQL fragment, safe to run against $table
+ */
+function flowview_nat_safe_sql($sql, $table) {
+	static $nat_columns = [
+		'post_nat_src_addr', 'post_nat_src_domain', 'post_nat_src_rdomain', 'post_nat_src_port',
+		'post_nat_dst_addr', 'post_nat_dst_domain', 'post_nat_dst_rdomain', 'post_nat_dst_port'
+	];
+
+	if ($sql == '' || flowview_nat_columns_supported($table)) {
+		return $sql;
+	}
+
+	foreach ($nat_columns as $column) {
+		$sql = preg_replace('/\b' . preg_quote($column, '/') . '\b/i', 'NULL', $sql);
+	}
+
+	return $sql;
+}
+
+/**
  * flowview_get_chartdata() - This function returns chart
  * data from the session.
  */
@@ -2642,6 +2695,26 @@ function run_flow_query($session, $query_id, $start, $end) {
 	/* destination as filter */
 	if (isset($data['destas']) && $data['destas'] != '') {
 		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['destas'], 'dst_as');
+	}
+
+	/* post-nat source ip filter */
+	if (isset($data['postnatsourceip']) && $data['postnatsourceip'] != '') {
+		$sql_where = get_ip_filter($sql_where, $sql_params, $data['postnatsourceip'], 'post_nat_src_addr');
+	}
+
+	/* post-nat source port filter */
+	if (isset($data['postnatsourceport']) && $data['postnatsourceport'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['postnatsourceport'], 'post_nat_src_port');
+	}
+
+	/* post-nat destination ip filter */
+	if (isset($data['postnatdestip']) && $data['postnatdestip'] != '') {
+		$sql_where = get_ip_filter($sql_where, $sql_params, $data['postnatdestip'], 'post_nat_dst_addr');
+	}
+
+	/* post-nat destination port filter */
+	if (isset($data['postnatdestport']) && $data['postnatdestport'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['postnatdestport'], 'post_nat_dst_port');
 	}
 
 	/* protocols filter */
@@ -3140,13 +3213,23 @@ function run_flow_query($session, $query_id, $start, $end) {
 							$fsql_params = $sql_params;
 						}
 
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$sql_inner1 FROM $t $fsql_where $sql_inner_groupby1";
+						$safe_fsql_where          = flowview_nat_safe_sql($fsql_where, $table_name);
+						$safe_sql_inner1          = flowview_nat_safe_sql($sql_inner1, $table_name);
+						$safe_sql_inner2          = flowview_nat_safe_sql($sql_inner2, $table_name);
+						$safe_sql_inner_groupby1  = flowview_nat_safe_sql($sql_inner_groupby1, $table_name);
+						$safe_sql_inner_groupby2  = flowview_nat_safe_sql($sql_inner_groupby2, $table_name);
+
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner1 FROM $t $safe_fsql_where $safe_sql_inner_groupby1";
 						$all_params = array_merge($all_params, $fsql_params);
 
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$sql_inner2 FROM $t $fsql_where $sql_inner_groupby2";
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner2 FROM $t $safe_fsql_where $safe_sql_inner_groupby2";
 						$all_params = array_merge($all_params, $fsql_params);
 					} else {
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$sql_inner FROM $t $fsql_where $sql_inner_groupby";
+						$safe_fsql_where         = flowview_nat_safe_sql($fsql_where, $table_name);
+						$safe_sql_inner          = flowview_nat_safe_sql($sql_inner, $table_name);
+						$safe_sql_inner_groupby  = flowview_nat_safe_sql($sql_inner_groupby, $table_name);
+
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner FROM $t $safe_fsql_where $safe_sql_inner_groupby";
 						$all_params = array_merge($all_params, $fsql_params);
 					}
 				}
@@ -5449,9 +5532,11 @@ function flowview_get_color($as_array = false) {
  * @return - a string containing html that represents the field id's status
  */
 function get_colored_field_column($field_id) {
-	global $flow_fieldids;
+	global $flow_fieldids, $flow_fieldids_nat;
 
-	if (isset($flow_fieldids[$field_id])) {
+	if (in_array($field_id, $flow_fieldids_nat, true)) {
+		return "<span class='deviceRecovering'>" . __('Supported (NAT)', 'flowview') . "</span>";
+	} elseif (isset($flow_fieldids[$field_id])) {
 		return "<span class='deviceUp'>" . __('Supported', 'flowview') . "</span>";
 	} else {
 		return "<span class='deviceDown'>" . __('Not Supported', 'flowview') . "</span>";
@@ -6426,6 +6511,18 @@ function create_raw_partition($table) {
 	$data['columns'][] = array('name' => 'dst_prefix', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'dst_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'dst_rport', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
+
+	// Post-NAT (translated) Details - issue#110.  Populated only when the
+	// exporter's template includes postNAT* fields (Cisco ASA/FTD, Juniper
+	// SRX, MikroTik, etc); left at defaults otherwise.
+	$data['columns'][] = array('name' => 'post_nat_src_addr', 'type' => 'varbinary(16)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_src_domain', 'type' => 'varchar(256)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_src_rdomain', 'type' => 'varchar(80)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_src_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'post_nat_dst_addr', 'type' => 'varbinary(16)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_dst_domain', 'type' => 'varchar(256)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_dst_rdomain', 'type' => 'varchar(80)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_dst_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 
 	// Generic Information for Combo Reports
 	$data['columns'][] = array('name' => 'nexthop', 'type' => 'varchar(48)', 'NULL' => false, 'default' => '0');
