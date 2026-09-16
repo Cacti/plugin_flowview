@@ -177,6 +177,23 @@ if (!function_exists('db_fetch_cell_prepared')) {
 	}
 }
 
+// $replacement mirrors core's real reconnect: false means the connection was
+// still alive and $conn is left untouched; anything else is queued via
+// plugin_test_queue_db_result('db_check_reconnect', ...) and written back.
+if (!function_exists('db_check_reconnect')) {
+	function db_check_reconnect(&$conn, $log = true) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_check_reconnect', 'conn' => $conn, 'log' => $log);
+
+		$replacement = plugin_test_db_result('db_check_reconnect', false);
+
+		if ($replacement !== false) {
+			$conn = $replacement;
+		}
+
+		return true;
+	}
+}
+
 if (!function_exists('db_index_exists')) {
 	function db_index_exists($table, $index) {
 		return false;
