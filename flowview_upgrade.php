@@ -608,6 +608,13 @@ function flowview_upgrade($current, $old) {
 				ADD COLUMN postnatdestport VARCHAR(255) NOT NULL DEFAULT '' AFTER postnatdestip");
 		}
 
+		if (!flowview_db_column_exists('plugin_flowview_queries', 'usenat', false)) {
+			cacti_log('Adding usenat column to plugin_flowview_queries table.', true, 'FLOWVIEW');
+
+			flowview_db_execute("ALTER TABLE plugin_flowview_queries
+				ADD COLUMN usenat CHAR(2) NOT NULL DEFAULT '' AFTER panel_flows");
+		}
+
 		/**
 		 * The post-NAT columns on the (much larger) plugin_flowview_raw_*
 		 * partition tables are intentionally NOT altered here -- a busy

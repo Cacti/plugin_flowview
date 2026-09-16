@@ -529,6 +529,7 @@ function save_filter() {
 	$save['panel_bytes']     = isset_request_var('panel_bytes') ? 'on':'';
 	$save['panel_packets']   = isset_request_var('panel_packets') ? 'on':'';
 	$save['panel_flows']     = isset_request_var('panel_flows') ? 'on':'';
+	$save['usenat']          = isset_request_var('usenat') ? 'on':'';
 
 	if ($save['panel_table'] == '' && $save['panel_bytes'] == '' && $save['panel_packets'] == '' && $save['panel_flows'] == '') {
 		$save['panel_table'] = 'on';
@@ -871,6 +872,10 @@ function flowview_display_filter() {
 						<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
 						<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
 					</td>
+					<td class='nowrap' title='<?php print __esc('Show the post-NAT (translated) IP/DNS name instead of the original values');?>'>
+						<input type='checkbox' id='usenat' name='usenat' <?php print (get_request_var('usenat') == 'true' ? 'checked':'');?>>
+						<label for='usenat'><?php print __('Use NAT Data', 'flowview');?></label>
+					</td>
 				</tr>
 			</table>
 			<table class='filterTable'>
@@ -1090,7 +1095,7 @@ function flowview_display_filter() {
 			changeQuery(true);
 		});
 
-		$('#domains, #exclude, #graph_type, #graph_height, #device_id, #ex_addr').off('change').on('change', function() {
+		$('#domains, #usenat, #exclude, #graph_type, #graph_height, #device_id, #ex_addr').off('change').on('change', function() {
 			applyFilter(false);
 		});
 
@@ -2321,6 +2326,46 @@ function flowview_nat_safe_sql($sql, $table) {
 }
 
 /**
+ * flowview_apply_nat_toggle - given the innermost (per-table) SELECT list
+ *   or GROUP BY fragment of a report query, swap the src/dst address, port,
+ *   and DNS columns for their post-NAT equivalents (issue#110) when the
+ *   'Use NAT Data' filter option is enabled.
+ *
+ *   When $alias_back is true (SELECT list use), each swapped column is
+ *   aliased back to its original name (e.g. 'post_nat_src_addr AS
+ *   src_addr'), so the outer query, its own GROUP BY/ORDER BY, and the
+ *   report table renderer keep working completely unmodified -- they just
+ *   end up reading NAT data under the usual 'src_addr'/'dst_addr'/etc.
+ *   names. GROUP BY fragments have no output name to preserve, so
+ *   $alias_back should be false there.
+ *
+ * @param  string  The SQL fragment to rewrite
+ * @param  bool    Whether the 'Use NAT Data' option is enabled
+ * @param  bool    True for a SELECT list (alias back to the original
+ *                 name), false for a GROUP BY fragment (plain swap)
+ *
+ * @return string  The SQL fragment, using post-NAT columns if requested
+ */
+function flowview_apply_nat_toggle($sql, $use_nat, $alias_back) {
+	static $columns = [
+		'src_addr', 'src_domain', 'src_rdomain', 'src_port',
+		'dst_addr', 'dst_domain', 'dst_rdomain', 'dst_port'
+	];
+
+	if (!$use_nat || $sql == '') {
+		return $sql;
+	}
+
+	foreach ($columns as $column) {
+		$replacement = $alias_back ? ('post_nat_' . $column . ' AS ' . $column):('post_nat_' . $column);
+
+		$sql = preg_replace('/\b' . preg_quote($column, '/') . '\b/i', $replacement, $sql);
+	}
+
+	return $sql;
+}
+
+/**
  * flowview_get_chartdata() - This function returns chart
  * data from the session.
  */
@@ -3172,6 +3217,13 @@ function run_flow_query($session, $query_id, $start, $end) {
 			return false;
 		}
 
+		/* use post-NAT data instead of the original src/dst values - issue#110 */
+		if (isset_request_var('usenat')) {
+			$use_nat = (get_request_var('usenat') == 'true');
+		} else {
+			$use_nat = (isset($data['usenat']) && $data['usenat'] == 'on');
+		}
+
 		/* clean up sql formatting */
 		if (isset($sql_inner)) {
 			$sql_outer          = str_replace(["\n", "\t"], [' ', ''], $sql_outer);
@@ -3179,6 +3231,18 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 			$sql_groupby        = str_replace(["\n", "\t"], [' ', ''], $sql_groupby);
 			$sql_inner_groupby  = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby);
+
+			/**
+			 * Only the innermost (per-table) SELECT/GROUP BY need to change
+			 * for the NAT toggle - it's aliased back to the original column
+			 * name (e.g. 'post_nat_src_addr AS src_addr'), so everything
+			 * downstream (the outer query, its GROUP BY/ORDER BY, and the
+			 * report table renderer) keeps working unmodified against the
+			 * usual 'src_addr'/'dst_addr'/etc. names, just backed by NAT
+			 * data instead - issue#110.
+			 */
+			$sql_inner          = flowview_apply_nat_toggle($sql_inner, $use_nat, true);
+			$sql_inner_groupby  = flowview_apply_nat_toggle($sql_inner_groupby, $use_nat, false);
 		} else {
 			$sql_outer          = str_replace(["\n", "\t"], [' ', ''], $sql_outer);
 			$sql_inner1         = str_replace(["\n", "\t"], [' ', ''], $sql_inner1);
@@ -3187,6 +3251,11 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$sql_groupby        = str_replace(["\n", "\t"], [' ', ''], $sql_groupby);
 			$sql_inner_groupby1 = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby1);
 			$sql_inner_groupby2 = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby2);
+
+			$sql_inner1         = flowview_apply_nat_toggle($sql_inner1, $use_nat, true);
+			$sql_inner2         = flowview_apply_nat_toggle($sql_inner2, $use_nat, true);
+			$sql_inner_groupby1 = flowview_apply_nat_toggle($sql_inner_groupby1, $use_nat, false);
+			$sql_inner_groupby2 = flowview_apply_nat_toggle($sql_inner_groupby2, $use_nat, false);
 		}
 
 		$tables     = get_tables_for_query($start, $end);

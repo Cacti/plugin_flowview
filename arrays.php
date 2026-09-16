@@ -765,6 +765,13 @@ $filter_edit = array(
 		'default' => 'bar',
 		'array' => $graph_heights
 	),
+	'usenat' => array(
+		'friendly_name' => __('Use NAT Data', 'flowview'),
+		'description' => __('Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values.', 'flowview'),
+		'method' => 'checkbox',
+		'value' => '|arg1:usenat|',
+		'default' => ''
+	),
 	'panel_table' => array(
 		'friendly_name' => __('Table Panel', 'flowview'),
 		'description' => __('Should the Table Panel be displayed by default.', 'flowview'),

@@ -350,6 +350,7 @@ function load_session_for_filter() {
 					case 'panel_bytes':
 					case 'panel_packets':
 					case 'panel_flows':
+					case 'usenat':
 						if (!isset_request_var($column)) {
 							$column = str_replace('panel_', '', $column);
 
@@ -410,12 +411,17 @@ function flowview_request_vars() {
 			'panel_table',
 			'panel_bytes',
 			'panel_packets',
-			'panel_flows'
+			'panel_flows',
+			'usenat'
 		];
 
 		if (cacti_sizeof($listener)) {
 			foreach($columns as $c) {
-				if (strpos($c, 'panel')) {
+				if ($c == 'usenat') {
+					if (!isset_request_var($c)) {
+						set_request_var($c, $listener[$c] == 'on' ? 'true':'false');
+					}
+				} elseif (strpos($c, 'panel')) {
 					$rv  = str_replace('panel_', '', $c);
 
 					if (!isset_request_var($rv)) {
@@ -483,6 +489,11 @@ function flowview_request_vars() {
 			'filter' => FILTER_VALIDATE_REGEXP,
 			'options' => array('options' => array('regexp' => '(true|false)')),
 			'default' => 'true'
+		),
+		'usenat' => array(
+			'filter' => FILTER_VALIDATE_REGEXP,
+			'options' => array('options' => array('regexp' => '(true|false)')),
+			'default' => 'false'
 		),
 		'table' => array(
 			'filter' => FILTER_VALIDATE_REGEXP,

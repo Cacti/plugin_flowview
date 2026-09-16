@@ -941,6 +941,7 @@ function flowview_setup_table() {
 		panel_bytes char(2) NOT NULL default 'on',
 		panel_packets char(2) NOT NULL default 'on',
 		panel_flows char(2) NOT NULL default 'on',
+		usenat char(2) NOT NULL default '',
 		PRIMARY KEY (`id`))
 		ENGINE=InnoDB,
 		ROW_FORMAT=DYNAMIC,
