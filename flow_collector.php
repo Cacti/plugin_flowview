@@ -1104,7 +1104,17 @@ function process_fv5($p, $ex_addr) {
 			$pps                            . ', ' .
 
 			db_qstr($data['tos'])           . ', ' .
-			db_qstr($data['flags'])         . ')';
+			db_qstr($data['flags'])         . ', ' .
+
+			/* NetFlow v5 has no NAT fields; fill the shared post-NAT columns with defaults */
+			db_qstr('')                     . ', ' .
+			db_qstr('')                     . ', ' .
+			db_qstr('')                     . ', ' .
+			'0'                             . ', ' .
+			db_qstr('')                     . ', ' .
+			db_qstr('')                     . ', ' .
+			db_qstr('')                     . ', ' .
+			'0'                             . ')';
 	}
 
 	if (cacti_sizeof($sql)) {

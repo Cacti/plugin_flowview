@@ -2314,7 +2314,13 @@ function flowview_nat_safe_sql($sql, $table) {
 		'post_nat_dst_addr', 'post_nat_dst_domain', 'post_nat_dst_rdomain', 'post_nat_dst_port'
 	];
 
-	if ($sql == '' || flowview_nat_columns_supported($table)) {
+	// Cheap string check first so ordinary fragments with no NAT reference
+	// never trigger a per-table schema lookup.
+	if ($sql == '' || stripos($sql, 'post_nat') === false) {
+		return $sql;
+	}
+
+	if (flowview_nat_columns_supported($table)) {
 		return $sql;
 	}
 
@@ -3294,17 +3300,17 @@ function run_flow_query($session, $query_id, $start, $end) {
 						$safe_sql_inner_groupby1  = flowview_nat_safe_sql($sql_inner_groupby1, $table_name);
 						$safe_sql_inner_groupby2  = flowview_nat_safe_sql($sql_inner_groupby2, $table_name);
 
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner1 FROM $t $safe_fsql_where $safe_sql_inner_groupby1";
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner1 FROM $table_name $safe_fsql_where $safe_sql_inner_groupby1";
 						$all_params = array_merge($all_params, $fsql_params);
 
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner2 FROM $t $safe_fsql_where $safe_sql_inner_groupby2";
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner2 FROM $table_name $safe_fsql_where $safe_sql_inner_groupby2";
 						$all_params = array_merge($all_params, $fsql_params);
 					} else {
 						$safe_fsql_where         = flowview_nat_safe_sql($fsql_where, $table_name);
 						$safe_sql_inner          = flowview_nat_safe_sql($sql_inner, $table_name);
 						$safe_sql_inner_groupby  = flowview_nat_safe_sql($sql_inner_groupby, $table_name);
 
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner FROM $t $safe_fsql_where $safe_sql_inner_groupby";
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner FROM $table_name $safe_fsql_where $safe_sql_inner_groupby";
 						$all_params = array_merge($all_params, $fsql_params);
 					}
 				}
@@ -3944,10 +3950,17 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 				$fsql_params = $stru_inner['sql_params'];
 			}
 
-			$map_query  = $stru_inner['sql_query'];
+			// Apply the same per-table NAT-column rewrite as the serial
+			// path (issue#110) so a shard against a pre-upgrade partition
+			// doesn't reference missing post_nat_* columns.
+			$safe_sql_query   = flowview_nat_safe_sql($stru_inner['sql_query'], $table);
+			$safe_fsql_where  = flowview_nat_safe_sql($fsql_where, $table);
+			$safe_sql_groupby = isset($stru_inner['sql_groupby']) ? flowview_nat_safe_sql($stru_inner['sql_groupby'], $table) : '';
+
+			$map_query  = $safe_sql_query;
 			$map_query .= " FROM $table";
-			$map_query .= ($fsql_where != '' ? ' ' . $fsql_where:'');
-			$map_query .= (isset($stru_inner['sql_groupby']) ? ' ' . $stru_inner['sql_groupby']:'');
+			$map_query .= ($safe_fsql_where != '' ? ' ' . $safe_fsql_where:'');
+			$map_query .= ($safe_sql_groupby != '' ? ' ' . $safe_sql_groupby:'');
 			$map_query .= (isset($stru_inner['sql_having'])  ? ' ' . $stru_inner['sql_having']:'');
 			$map_query .= (isset($stru_inner['sql_order'])   ? ' ' . $stru_inner['sql_order']:'');
 			$map_query .= (isset($stru_inner['sql_limit'])   ? ' ' . $stru_inner['sql_limit']:'');
