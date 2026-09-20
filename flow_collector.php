@@ -1446,7 +1446,8 @@ function process_fv9($p, $ex_addr) {
 
 function get_sql_prefix($flowtime) {
 	global $partition, $flowview_nat_columns_active;
-	static $last_table = '';
+	static $last_table   = '';
+	static $last_checked = 0;
 
 	flowview_connect();
 
@@ -1458,9 +1459,18 @@ function get_sql_prefix($flowtime) {
 		$suffix = date('Y', $flowtime) . substr('000' . date('z', $flowtime), -3) . date('H', $flowtime);
 	}
 
-	$table  = 'plugin_flowview_raw_' . $suffix;
+	$table = 'plugin_flowview_raw_' . $suffix;
+	$now   = time();
 
-	if ($table != $last_table) {
+	// flow_collector.php is a long-lived daemon, not a short web request, so
+	// a plain "recheck only when $table changes" gate can stay stuck on a
+	// stale "not upgraded" result for as long as the daemon keeps writing to
+	// the same partition: if the standalone flowview_upgrade_nat_columns.php
+	// utility backfills that partition's NAT columns while the collector is
+	// still on it, NAT data would otherwise be silently dropped until the
+	// daemon restarts. Recheck at most once every 5 minutes even when the
+	// table hasn't changed, to bound that staleness window.
+	if ($table != $last_table || ($now - $last_checked) >= 300) {
 		if (!flowview_db_table_exists($table)) {
 			create_raw_partition($table);
 			$flowview_nat_columns_active = true;
@@ -1471,9 +1481,14 @@ function get_sql_prefix($flowtime) {
 			   raw partition, can stall inserts long enough to lose incoming
 			   flows. Only check whether the columns are already present;
 			   the actual backfill is intentionally left to the standalone
-			   flowview_upgrade_nat_columns.php utility. */
-			$flowview_nat_columns_active = flowview_nat_columns_supported($table);
+			   flowview_upgrade_nat_columns.php utility. A direct, uncached
+			   check is used here (rather than flowview_nat_columns_supported()'s
+			   per-table cache) so the periodic recheck above actually picks
+			   up a backfill that happened after the first check. */
+			$flowview_nat_columns_active = flowview_db_column_exists($table, 'post_nat_src_addr', false);
 		}
+
+		$last_checked = $now;
 	}
 
 	$last_table = $table;
