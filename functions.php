@@ -872,7 +872,7 @@ function flowview_display_filter() {
 						<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
 						<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
 					</td>
-					<td class='nowrap' title='<?php print __esc('Show the post-NAT (translated) IP/DNS name instead of the original values');?>'>
+					<td class='nowrap' title='<?php print __esc('Show the post-NAT (translated) IP/DNS name instead of the original values', 'flowview');?>'>
 						<input type='checkbox' id='usenat' name='usenat' <?php print (get_request_var('usenat') == 'true' ? 'checked':'');?>>
 						<label for='usenat'><?php print __('Use NAT Data', 'flowview');?></label>
 					</td>
@@ -2325,7 +2325,10 @@ function flowview_nat_safe_sql($sql, $table) {
 	}
 
 	foreach ($nat_columns as $column) {
-		$sql = preg_replace('/\b' . preg_quote($column, '/') . '\b/i', 'NULL', $sql);
+		/* consume a surrounding pair of backticks along with the identifier
+		   so a quoted reference (e.g. `post_nat_src_addr`) becomes the
+		   unquoted literal NULL, not the still-quoted identifier `NULL` */
+		$sql = preg_replace('/`?\b' . preg_quote($column, '/') . '\b`?/i', 'NULL', $sql);
 	}
 
 	return $sql;
@@ -2363,10 +2366,21 @@ function flowview_apply_nat_toggle($sql, $use_nat, $alias_back) {
 	}
 
 	foreach ($columns as $column) {
-		$replacement = $alias_back ? ('post_nat_' . $column . ' AS ' . $column):('post_nat_' . $column);
+		/* match the column reference and, if it already carries an explicit
+		   "AS alias" (e.g. 'dst_domain AS src_domain'), reuse that alias
+		   instead of appending a second one, which would otherwise produce
+		   invalid SQL like 'post_nat_dst_domain AS src_domain AS src_domain' */
+		$sql = preg_replace_callback(
+			'/\b' . preg_quote($column, '/') . '\b(\s+AS\s+(\w+))?/i',
+			function ($matches) use ($column, $alias_back) {
+				$alias = (isset($matches[2]) && $matches[2] !== '') ? $matches[2] : $column;
 
-		$sql = preg_replace('/\b' . preg_quote($column, '/') . '\b/i', $replacement, $sql);
+				return $alias_back ? ('post_nat_' . $column . ' AS ' . $alias) : ('post_nat_' . $column);
+			},
+			$sql
+		);
 	}
+
 
 	return $sql;
 }
@@ -6649,6 +6663,40 @@ function create_raw_partition($table) {
 
 	// Work around for unicode issues
 	flowview_fix_collate_issues();
+}
+
+/*
+ * flowview_ensure_nat_columns - lazily backfills the post-NAT columns
+ * (issue#110) onto a single raw partition table that pre-dates the NAT
+ * feature. Mirrors flowview_upgrade_nat_columns.php's bulk logic, but is
+ * scoped to one table so the collector can call it on demand for whichever
+ * partition it is about to insert into, instead of requiring the manual
+ * bulk utility to be run first. Safe to call repeatedly; already-upgraded
+ * tables are left untouched.
+ */
+function flowview_ensure_nat_columns($table) {
+	$nat_columns = [
+		'post_nat_src_addr'    => "varbinary(16) NOT NULL DEFAULT ''",
+		'post_nat_src_domain'  => "varchar(256) NOT NULL DEFAULT ''",
+		'post_nat_src_rdomain' => "varchar(80) NOT NULL DEFAULT ''",
+		'post_nat_src_port'    => "int(11) unsigned NOT NULL DEFAULT '0'",
+		'post_nat_dst_addr'    => "varbinary(16) NOT NULL DEFAULT ''",
+		'post_nat_dst_domain'  => "varchar(256) NOT NULL DEFAULT ''",
+		'post_nat_dst_rdomain' => "varchar(80) NOT NULL DEFAULT ''",
+		'post_nat_dst_port'    => "int(11) unsigned NOT NULL DEFAULT '0'"
+	];
+
+	$adding = [];
+
+	foreach ($nat_columns as $column => $definition) {
+		if (!flowview_db_column_exists($table, $column, false)) {
+			$adding[] = "ADD COLUMN `$column` $definition";
+		}
+	}
+
+	if (cacti_sizeof($adding)) {
+		flowview_db_execute("ALTER TABLE `$table` " . implode(', ', $adding));
+	}
 }
 
 function flowview_fix_collate_issues() {

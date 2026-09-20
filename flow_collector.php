@@ -1470,6 +1470,11 @@ function get_sql_prefix($flowtime) {
 	if ($table != $last_table) {
 		if (!flowview_db_table_exists($table)) {
 			create_raw_partition($table);
+		} else {
+			/* pre-existing partitions from before issue#110 lack the NAT
+			   columns the INSERT below always lists; backfill them here so
+			   inserts don't fail with an unknown-column error */
+			flowview_ensure_nat_columns($table);
 		}
 	}
 
