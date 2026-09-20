@@ -2365,24 +2365,33 @@ function flowview_apply_nat_toggle($sql, $use_nat, $alias_back) {
 		return $sql;
 	}
 
-	foreach ($columns as $column) {
-		/* match the column reference and, if it already carries an explicit
-		   "AS alias" (e.g. 'dst_domain AS src_domain'), reuse that alias
-		   instead of appending a second one, which would otherwise produce
-		   invalid SQL like 'post_nat_dst_domain AS src_domain AS src_domain' */
-		$sql = preg_replace_callback(
-			'/\b' . preg_quote($column, '/') . '\b(\s+AS\s+(\w+))?/i',
-			function ($matches) use ($column, $alias_back) {
-				$alias = (isset($matches[2]) && $matches[2] !== '') ? $matches[2] : $column;
+	/* Match every target column in a single combined pass instead of
+	   looping the substitution once per column. Looping over the columns
+	   let an earlier column's freshly inserted 'post_nat_x AS y' text get
+	   re-matched (and re-aliased) by a later column's own pass whenever a
+	   column name doubled as another column's alias (e.g. the reverse-
+	   direction report's 'dst_addr AS src_addr'), producing invalid
+	   double-AS SQL such as 'post_nat_dst_addr AS post_nat_src_addr AS
+	   src_addr'. A single pass only ever considers the original text, so
+	   each reference is rewritten exactly once. */
+	static $pattern = null;
 
-				return $alias_back ? ('post_nat_' . $column . ' AS ' . $alias) : ('post_nat_' . $column);
-			},
-			$sql
-		);
+	if ($pattern === null) {
+		$pattern = '/\b(' . implode('|', array_map(function ($c) {
+			return preg_quote($c, '/');
+		}, $columns)) . ')\b(\s+AS\s+(\w+))?/i';
 	}
 
+	return preg_replace_callback(
+		$pattern,
+		function ($matches) use ($alias_back) {
+			$column = strtolower($matches[1]);
+			$alias  = (isset($matches[3]) && $matches[3] !== '') ? $matches[3] : $column;
 
-	return $sql;
+			return $alias_back ? ('post_nat_' . $column . ' AS ' . $alias) : ('post_nat_' . $column);
+		},
+		$sql
+	);
 }
 
 /**

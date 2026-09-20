@@ -1104,17 +1104,10 @@ function process_fv5($p, $ex_addr) {
 			$pps                            . ', ' .
 
 			db_qstr($data['tos'])           . ', ' .
-			db_qstr($data['flags'])         . ', ' .
+			db_qstr($data['flags'])         .
 
-			/* NetFlow v5 has no NAT fields; fill the shared post-NAT columns with defaults */
-			db_qstr('')                     . ', ' .
-			db_qstr('')                     . ', ' .
-			db_qstr('')                     . ', ' .
-			'0'                             . ', ' .
-			db_qstr('')                     . ', ' .
-			db_qstr('')                     . ', ' .
-			db_qstr('')                     . ', ' .
-			'0'                             . ')';
+			/* NetFlow v5 has no NAT fields; fill the shared post-NAT columns with defaults when present */
+			flowview_nat_value_segment('', '', '', '0', '', '', '', '0') . ')';
 	}
 
 	if (cacti_sizeof($sql)) {
@@ -1452,7 +1445,7 @@ function process_fv9($p, $ex_addr) {
 }
 
 function get_sql_prefix($flowtime) {
-	global $partition;
+	global $partition, $flowview_nat_columns_active;
 	static $last_table = '';
 
 	flowview_connect();
@@ -1470,17 +1463,30 @@ function get_sql_prefix($flowtime) {
 	if ($table != $last_table) {
 		if (!flowview_db_table_exists($table)) {
 			create_raw_partition($table);
+			$flowview_nat_columns_active = true;
 		} else {
-			/* pre-existing partitions from before issue#110 lack the NAT
-			   columns the INSERT below always lists; backfill them here so
-			   inserts don't fail with an unknown-column error */
-			flowview_ensure_nat_columns($table);
+			/* Pre-existing partitions from before issue#110 lack the NAT
+			   columns. Backfilling them here with an ALTER TABLE would run
+			   synchronously on the collector's ingest path and, on a large
+			   raw partition, can stall inserts long enough to lose incoming
+			   flows. Only check whether the columns are already present;
+			   the actual backfill is intentionally left to the standalone
+			   flowview_upgrade_nat_columns.php utility. */
+			$flowview_nat_columns_active = flowview_nat_columns_supported($table);
 		}
 	}
 
 	$last_table = $table;
 
-	return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags, post_nat_src_addr, post_nat_src_domain, post_nat_src_rdomain, post_nat_src_port, post_nat_dst_addr, post_nat_dst_domain, post_nat_dst_rdomain, post_nat_dst_port) VALUES ';
+	if ($flowview_nat_columns_active) {
+		return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags, post_nat_src_addr, post_nat_src_domain, post_nat_src_rdomain, post_nat_src_port, post_nat_dst_addr, post_nat_dst_domain, post_nat_dst_rdomain, post_nat_dst_port) VALUES ';
+	}
+
+	/* Table not yet upgraded with the NAT columns: omit them from the
+	   insert entirely rather than failing with an unknown-column error.
+	   Reports against this partition simply see no NAT data until it is
+	   backfilled (see flowview_nat_safe_sql() in functions.php). */
+	return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags) VALUES ';
 }
 
 function process_fv10($p, $ex_addr) {
@@ -1958,19 +1964,39 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 		check_set($data, $flow_fields['dOctets'])           . ', ' .
 		$pps                                                . ', ' .
 		check_set($data, $flow_fields['tos'])               . ', ' .
-		check_set($data, $flow_fields['flags'])             . ', ' .
+		check_set($data, $flow_fields['flags'])             .
 
-		($post_nat_src_addr != '' ? 'INET6_ATON(' . db_qstr($post_nat_src_addr) . ')':db_qstr('')) . ', ' .
-		db_qstr($post_nat_src_domain)                       . ', ' .
-		db_qstr($post_nat_src_rdomain)                      . ', ' .
-		check_set($data, $flow_fields['post_nat_src_port']) . ', ' .
-
-		($post_nat_dst_addr != '' ? 'INET6_ATON(' . db_qstr($post_nat_dst_addr) . ')':db_qstr('')) . ', ' .
-		db_qstr($post_nat_dst_domain)                       . ', ' .
-		db_qstr($post_nat_dst_rdomain)                      . ', ' .
-		check_set($data, $flow_fields['post_nat_dst_port']) . ')';
+		flowview_nat_value_segment(
+			$post_nat_src_addr, $post_nat_src_domain, $post_nat_src_rdomain, check_set($data, $flow_fields['post_nat_src_port']),
+			$post_nat_dst_addr, $post_nat_dst_domain, $post_nat_dst_rdomain, check_set($data, $flow_fields['post_nat_dst_port'])
+		) . ')';
 
 	return $sql;
+}
+
+/*
+ * flowview_nat_value_segment - builds the trailing post-NAT VALUES fragment
+ * (including its leading comma) for a raw-partition INSERT, or an empty
+ * string when the current partition table has not been backfilled with the
+ * NAT columns (see get_sql_prefix()/$flowview_nat_columns_active), so the
+ * tuple's arity always matches the column list that INSERT is using.
+ */
+function flowview_nat_value_segment($src_addr, $src_domain, $src_rdomain, $src_port, $dst_addr, $dst_domain, $dst_rdomain, $dst_port) {
+	global $flowview_nat_columns_active;
+
+	if (empty($flowview_nat_columns_active)) {
+		return '';
+	}
+
+	return ', ' .
+		($src_addr != '' ? 'INET6_ATON(' . db_qstr($src_addr) . ')' : db_qstr('')) . ', ' .
+		db_qstr($src_domain)  . ', ' .
+		db_qstr($src_rdomain) . ', ' .
+		$src_port             . ', ' .
+		($dst_addr != '' ? 'INET6_ATON(' . db_qstr($dst_addr) . ')' : db_qstr('')) . ', ' .
+		db_qstr($dst_domain)  . ', ' .
+		db_qstr($dst_rdomain) . ', ' .
+		$dst_port;
 }
 
 function check_set(&$data, $index, $quote = false) {
