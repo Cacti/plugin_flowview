@@ -68,7 +68,6 @@ if (!in_array($expected_version, array('1.2.x', 'develop'), true) && $cacti_vers
 }
 
 require_once $autoload;
-require_once __DIR__ . '/TestCase.php';
 
 if (!defined('CACTI_VERSION')) {
 	define('CACTI_VERSION', $cacti_version);
