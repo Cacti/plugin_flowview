@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* chore: Harmonize CI workflow, issue/PR templates, and PHP-compatibility test structure with the shared Cacti plugin baseline
 * issue#261: Cacti 1.2.x flowview 5.0 update of 16.09 error on call db_check_reconnect inside flow_capture
 * issue#240: Call to db_table_exists is incorrect in some cases
 * issue: Killing processes does not occur when they are in D-State

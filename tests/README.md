@@ -35,6 +35,6 @@ Database responses can be queued with `plugin_test_queue_db_result()`, and
 every SQL call is recorded in `$GLOBALS['__test_db_calls']` for parameter and
 connection assertions.
 
-Security tests validate PHP 7.4 syntax compatibility and the plugin's
+Security tests validate PHP 8.2 syntax compatibility and the plugin's
 install/version/uninstall structure without executing plugin source.
 
