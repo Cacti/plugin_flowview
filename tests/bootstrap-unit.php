@@ -68,7 +68,6 @@ if (!in_array($expected_version, array('1.2.x', 'develop'), true) && $cacti_vers
 }
 
 require_once $autoload;
-require_once __DIR__ . '/TestCase.php';
 
 if (!defined('CACTI_VERSION')) {
 	define('CACTI_VERSION', $cacti_version);
@@ -214,6 +213,37 @@ if (!function_exists('api_plugin_db_add_column')) {
 
 if (!function_exists('api_plugin_db_table_create')) {
 	function api_plugin_db_table_create($plugin, $table, $data) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'api_plugin_db_table_create', 'sql' => $table, 'params' => $data);
+		return true;
+	}
+}
+
+$GLOBALS['__test_registered_hooks'] = array();
+
+if (!function_exists('api_plugin_register_hook')) {
+	function api_plugin_register_hook($plugin, $hook, $function, $file, $subtype = '') {
+		$GLOBALS['__test_registered_hooks'][] = array(
+			'name'     => $plugin,
+			'hook'     => $hook,
+			'function' => $function,
+			'file'     => $file,
+		);
+
+		return true;
+	}
+}
+
+$GLOBALS['__test_registered_realms'] = array();
+
+if (!function_exists('api_plugin_register_realm')) {
+	function api_plugin_register_realm($plugin, $file, $description, $enabled) {
+		$GLOBALS['__test_registered_realms'][] = array(
+			'name'        => $plugin,
+			'file'        => $file,
+			'description' => $description,
+			'enabled'     => $enabled,
+		);
+
 		return true;
 	}
 }
