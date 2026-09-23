@@ -924,6 +924,10 @@ function flowview_setup_table() {
 		destport varchar(255) NOT NULL,
 		destinterface varchar(64) NOT NULL,
 		destas varchar(64) NOT NULL,
+		postnatsourceip varchar(255) NOT NULL DEFAULT '',
+		postnatsourceport varchar(255) NOT NULL DEFAULT '',
+		postnatdestip varchar(255) NOT NULL DEFAULT '',
+		postnatdestport varchar(255) NOT NULL DEFAULT '',
 		statistics int(3) unsigned NOT NULL,
 		printed int(3) unsigned NOT NULL,
 		includeif int(2) unsigned NOT NULL,
@@ -937,6 +941,7 @@ function flowview_setup_table() {
 		panel_bytes char(2) NOT NULL default 'on',
 		panel_packets char(2) NOT NULL default 'on',
 		panel_flows char(2) NOT NULL default 'on',
+		usenat char(2) NOT NULL default '',
 		PRIMARY KEY (`id`))
 		ENGINE=InnoDB,
 		ROW_FORMAT=DYNAMIC,

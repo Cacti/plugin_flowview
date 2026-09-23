@@ -1104,7 +1104,10 @@ function process_fv5($p, $ex_addr) {
 			$pps                            . ', ' .
 
 			db_qstr($data['tos'])           . ', ' .
-			db_qstr($data['flags'])         . ')';
+			db_qstr($data['flags'])         .
+
+			/* NetFlow v5 has no NAT fields; fill the shared post-NAT columns with defaults when present */
+			flowview_nat_value_segment('', '', '', '0', '', '', '', '0') . ')';
 	}
 
 	if (cacti_sizeof($sql)) {
@@ -1442,8 +1445,9 @@ function process_fv9($p, $ex_addr) {
 }
 
 function get_sql_prefix($flowtime) {
-	global $partition;
-	static $last_table = '';
+	global $partition, $flowview_nat_columns_active;
+	static $last_table   = '';
+	static $last_checked = 0;
 
 	flowview_connect();
 
@@ -1455,16 +1459,48 @@ function get_sql_prefix($flowtime) {
 		$suffix = date('Y', $flowtime) . substr('000' . date('z', $flowtime), -3) . date('H', $flowtime);
 	}
 
-	$table  = 'plugin_flowview_raw_' . $suffix;
+	$table = 'plugin_flowview_raw_' . $suffix;
+	$now   = time();
 
-	if ($table != $last_table) {
+	// flow_collector.php is a long-lived daemon, not a short web request, so
+	// a plain "recheck only when $table changes" gate can stay stuck on a
+	// stale "not upgraded" result for as long as the daemon keeps writing to
+	// the same partition: if the standalone flowview_upgrade_nat_columns.php
+	// utility backfills that partition's NAT columns while the collector is
+	// still on it, NAT data would otherwise be silently dropped until the
+	// daemon restarts. Recheck at most once every 5 minutes even when the
+	// table hasn't changed, to bound that staleness window.
+	if ($table != $last_table || ($now - $last_checked) >= 300) {
 		if (!flowview_db_table_exists($table)) {
 			create_raw_partition($table);
+			$flowview_nat_columns_active = true;
+		} else {
+			/* Pre-existing partitions from before issue#110 lack the NAT
+			   columns. Backfilling them here with an ALTER TABLE would run
+			   synchronously on the collector's ingest path and, on a large
+			   raw partition, can stall inserts long enough to lose incoming
+			   flows. Only check whether the columns are already present;
+			   the actual backfill is intentionally left to the standalone
+			   flowview_upgrade_nat_columns.php utility. A direct, uncached
+			   check is used here (rather than flowview_nat_columns_supported()'s
+			   per-table cache) so the periodic recheck above actually picks
+			   up a backfill that happened after the first check. */
+			$flowview_nat_columns_active = flowview_db_column_exists($table, 'post_nat_src_addr', false);
 		}
+
+		$last_checked = $now;
 	}
 
 	$last_table = $table;
 
+	if ($flowview_nat_columns_active) {
+		return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags, post_nat_src_addr, post_nat_src_domain, post_nat_src_rdomain, post_nat_src_port, post_nat_dst_addr, post_nat_dst_domain, post_nat_dst_rdomain, post_nat_dst_port) VALUES ';
+	}
+
+	/* Table not yet upgraded with the NAT columns: omit them from the
+	   insert entirely rather than failing with an unknown-column error.
+	   Reports against this partition simply see no NAT data until it is
+	   backfilled (see flowview_nat_safe_sql() in functions.php). */
 	return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags) VALUES ';
 }
 
@@ -1786,6 +1822,30 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 		return false;
 	}
 
+	/**
+	 * Post-NAT (translated) addresses/ports - issue#110.  Unlike src/dst,
+	 * these are genuinely optional: many vendors (notably Cisco ASA/FTD
+	 * NSEL) split a NAT'd flow across a "Creation" template (which has the
+	 * NAT fields) and a "Teardown" template (which has the byte/packet
+	 * counts but not the NAT fields), so absence here is normal and must
+	 * not fail the record.
+	 */
+	if (isset($data[$flow_fields['post_nat_src_addr_ipv6']])) {
+		$post_nat_src_addr = $data[$flow_fields['post_nat_src_addr_ipv6']];
+	} elseif (isset($data[$flow_fields['post_nat_src_addr']])) {
+		$post_nat_src_addr = $data[$flow_fields['post_nat_src_addr']];
+	} else {
+		$post_nat_src_addr = '';
+	}
+
+	if (isset($data[$flow_fields['post_nat_dst_addr_ipv6']])) {
+		$post_nat_dst_addr = $data[$flow_fields['post_nat_dst_addr_ipv6']];
+	} elseif (isset($data[$flow_fields['post_nat_dst_addr']])) {
+		$post_nat_dst_addr = $data[$flow_fields['post_nat_dst_addr']];
+	} else {
+		$post_nat_dst_addr = '';
+	}
+
 	if (isset($data[$flow_fields['nexthop_ipv6']])) {
 		$nexthop = $data[$flow_fields['nexthop_ipv6']];
 	} elseif (isset($data[$flow_fields['nexthop']])) {
@@ -1848,6 +1908,22 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 	$dst_domain  = flowview_get_dns_from_ip($dst_addr, 100);
 	$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain, $dst_addr);
 
+	if ($post_nat_src_addr != '') {
+		$post_nat_src_domain  = flowview_get_dns_from_ip($post_nat_src_addr, 100);
+		$post_nat_src_rdomain = flowview_get_rdomain_from_domain($post_nat_src_domain, $post_nat_src_addr);
+	} else {
+		$post_nat_src_domain  = '';
+		$post_nat_src_rdomain = '';
+	}
+
+	if ($post_nat_dst_addr != '') {
+		$post_nat_dst_domain  = flowview_get_dns_from_ip($post_nat_dst_addr, 100);
+		$post_nat_dst_rdomain = flowview_get_rdomain_from_domain($post_nat_dst_domain, $post_nat_dst_addr);
+	} else {
+		$post_nat_dst_domain  = '';
+		$post_nat_dst_rdomain = '';
+	}
+
 	if (isset($data[$flow_fields['src_port']])) {
 		$src_rport = flowview_translate_port($data[$flow_fields['src_port']], false, false);
 	} else {
@@ -1903,9 +1979,39 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 		check_set($data, $flow_fields['dOctets'])           . ', ' .
 		$pps                                                . ', ' .
 		check_set($data, $flow_fields['tos'])               . ', ' .
-		check_set($data, $flow_fields['flags'])             . ')';
+		check_set($data, $flow_fields['flags'])             .
+
+		flowview_nat_value_segment(
+			$post_nat_src_addr, $post_nat_src_domain, $post_nat_src_rdomain, check_set($data, $flow_fields['post_nat_src_port']),
+			$post_nat_dst_addr, $post_nat_dst_domain, $post_nat_dst_rdomain, check_set($data, $flow_fields['post_nat_dst_port'])
+		) . ')';
 
 	return $sql;
+}
+
+/*
+ * flowview_nat_value_segment - builds the trailing post-NAT VALUES fragment
+ * (including its leading comma) for a raw-partition INSERT, or an empty
+ * string when the current partition table has not been backfilled with the
+ * NAT columns (see get_sql_prefix()/$flowview_nat_columns_active), so the
+ * tuple's arity always matches the column list that INSERT is using.
+ */
+function flowview_nat_value_segment($src_addr, $src_domain, $src_rdomain, $src_port, $dst_addr, $dst_domain, $dst_rdomain, $dst_port) {
+	global $flowview_nat_columns_active;
+
+	if (empty($flowview_nat_columns_active)) {
+		return '';
+	}
+
+	return ', ' .
+		($src_addr != '' ? 'INET6_ATON(' . db_qstr($src_addr) . ')' : db_qstr('')) . ', ' .
+		db_qstr($src_domain)  . ', ' .
+		db_qstr($src_rdomain) . ', ' .
+		$src_port             . ', ' .
+		($dst_addr != '' ? 'INET6_ATON(' . db_qstr($dst_addr) . ')' : db_qstr('')) . ', ' .
+		db_qstr($dst_domain)  . ', ' .
+		db_qstr($dst_rdomain) . ', ' .
+		$dst_port;
 }
 
 function check_set(&$data, $index, $quote = false) {

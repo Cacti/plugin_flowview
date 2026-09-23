@@ -510,6 +510,11 @@ function save_filter() {
 	$save['destinterface']   = get_nfilter_request_var('destinterface');
 	$save['destas']          = get_nfilter_request_var('destas');
 
+	$save['postnatsourceip']   = get_nfilter_request_var('postnatsourceip');
+	$save['postnatsourceport'] = get_nfilter_request_var('postnatsourceport');
+	$save['postnatdestip']     = get_nfilter_request_var('postnatdestip');
+	$save['postnatdestport']   = get_nfilter_request_var('postnatdestport');
+
 	$save['statistics']      = get_nfilter_request_var('statistics');
 	$save['printed']         = get_nfilter_request_var('printed');
 	$save['includeif']       = get_nfilter_request_var('includeif');
@@ -524,6 +529,7 @@ function save_filter() {
 	$save['panel_bytes']     = isset_request_var('panel_bytes') ? 'on':'';
 	$save['panel_packets']   = isset_request_var('panel_packets') ? 'on':'';
 	$save['panel_flows']     = isset_request_var('panel_flows') ? 'on':'';
+	$save['usenat']          = isset_request_var('usenat') ? 'on':'';
 
 	if ($save['panel_table'] == '' && $save['panel_bytes'] == '' && $save['panel_packets'] == '' && $save['panel_flows'] == '') {
 		$save['panel_table'] = 'on';
@@ -866,6 +872,10 @@ function flowview_display_filter() {
 						<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
 						<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
 					</td>
+					<td class='nowrap' title='<?php print __esc('Show the post-NAT (translated) IP/DNS name instead of the original values', 'flowview');?>'>
+						<input type='checkbox' id='usenat' name='usenat' <?php print (get_request_var('usenat') == 'true' ? 'checked':'');?>>
+						<label for='usenat'><?php print __('Use NAT Data', 'flowview');?></label>
+					</td>
 				</tr>
 			</table>
 			<table class='filterTable'>
@@ -1085,7 +1095,7 @@ function flowview_display_filter() {
 			changeQuery(true);
 		});
 
-		$('#domains, #exclude, #graph_type, #graph_height, #device_id, #ex_addr').off('change').on('change', function() {
+		$('#domains, #usenat, #exclude, #graph_type, #graph_height, #device_id, #ex_addr').off('change').on('change', function() {
 			applyFilter(false);
 		});
 
@@ -2262,6 +2272,129 @@ function get_tables_for_query($start, $end = null) {
 }
 
 /**
+ * flowview_nat_columns_supported - checks (and caches) whether a raw
+ *   partition table has been upgraded with the post-NAT columns
+ *   (issue#110).  Older, not-yet-upgraded partitions won't have them.
+ *
+ * @param  string  The raw partition table name
+ *
+ * @return bool    True if the table has the NAT columns
+ */
+function flowview_nat_columns_supported($table) {
+	// Deliberately a function-local static, NOT $_SESSION or any other
+	// store that would outlive this request/CLI invocation. Each new
+	// request/script starts with an empty cache, so it always re-checks
+	// the real schema and can never go stale after
+	// flowview_upgrade_nat_columns.php upgrades a partition -- there is
+	// nothing to explicitly invalidate.
+	static $cache = [];
+
+	if (!isset($cache[$table])) {
+		$cache[$table] = flowview_db_column_exists($table, 'post_nat_src_addr', false);
+	}
+
+	return $cache[$table];
+}
+
+/**
+ * flowview_nat_safe_sql - given a fragment of a per-table SQL query, make
+ *   it safe to run against a raw partition table that pre-dates the NAT
+ *   columns (issue#110) by substituting NULL for any NAT column reference.
+ *   This lets old and upgraded partitions be UNION'd together without the
+ *   query erroring on "Unknown column" for the older tables.
+ *
+ * @param  string  The SQL fragment (SELECT list, WHERE, or GROUP BY)
+ * @param  string  The raw partition table this fragment will run against
+ *
+ * @return string  The SQL fragment, safe to run against $table
+ */
+function flowview_nat_safe_sql($sql, $table) {
+	static $nat_columns = [
+		'post_nat_src_addr', 'post_nat_src_domain', 'post_nat_src_rdomain', 'post_nat_src_port',
+		'post_nat_dst_addr', 'post_nat_dst_domain', 'post_nat_dst_rdomain', 'post_nat_dst_port'
+	];
+
+	// Cheap string check first so ordinary fragments with no NAT reference
+	// never trigger a per-table schema lookup.
+	if ($sql == '' || stripos($sql, 'post_nat') === false) {
+		return $sql;
+	}
+
+	if (flowview_nat_columns_supported($table)) {
+		return $sql;
+	}
+
+	foreach ($nat_columns as $column) {
+		/* consume a surrounding pair of backticks along with the identifier
+		   so a quoted reference (e.g. `post_nat_src_addr`) becomes the
+		   unquoted literal NULL, not the still-quoted identifier `NULL` */
+		$sql = preg_replace('/`?\b' . preg_quote($column, '/') . '\b`?/i', 'NULL', $sql);
+	}
+
+	return $sql;
+}
+
+/**
+ * flowview_apply_nat_toggle - given the innermost (per-table) SELECT list
+ *   or GROUP BY fragment of a report query, swap the src/dst address, port,
+ *   and DNS columns for their post-NAT equivalents (issue#110) when the
+ *   'Use NAT Data' filter option is enabled.
+ *
+ *   When $alias_back is true (SELECT list use), each swapped column is
+ *   aliased back to its original name (e.g. 'post_nat_src_addr AS
+ *   src_addr'), so the outer query, its own GROUP BY/ORDER BY, and the
+ *   report table renderer keep working completely unmodified -- they just
+ *   end up reading NAT data under the usual 'src_addr'/'dst_addr'/etc.
+ *   names. GROUP BY fragments have no output name to preserve, so
+ *   $alias_back should be false there.
+ *
+ * @param  string  The SQL fragment to rewrite
+ * @param  bool    Whether the 'Use NAT Data' option is enabled
+ * @param  bool    True for a SELECT list (alias back to the original
+ *                 name), false for a GROUP BY fragment (plain swap)
+ *
+ * @return string  The SQL fragment, using post-NAT columns if requested
+ */
+function flowview_apply_nat_toggle($sql, $use_nat, $alias_back) {
+	static $columns = [
+		'src_addr', 'src_domain', 'src_rdomain', 'src_port',
+		'dst_addr', 'dst_domain', 'dst_rdomain', 'dst_port'
+	];
+
+	if (!$use_nat || $sql == '') {
+		return $sql;
+	}
+
+	/* Match every target column in a single combined pass instead of
+	   looping the substitution once per column. Looping over the columns
+	   let an earlier column's freshly inserted 'post_nat_x AS y' text get
+	   re-matched (and re-aliased) by a later column's own pass whenever a
+	   column name doubled as another column's alias (e.g. the reverse-
+	   direction report's 'dst_addr AS src_addr'), producing invalid
+	   double-AS SQL such as 'post_nat_dst_addr AS post_nat_src_addr AS
+	   src_addr'. A single pass only ever considers the original text, so
+	   each reference is rewritten exactly once. */
+	static $pattern = null;
+
+	if ($pattern === null) {
+		$pattern = '/\b(' . implode('|', array_map(function ($c) {
+			return preg_quote($c, '/');
+		}, $columns)) . ')\b(\s+AS\s+(\w+))?/i';
+	}
+
+	return preg_replace_callback(
+		$pattern,
+		function ($matches) use ($alias_back) {
+			$column = strtolower($matches[1]);
+			$alias  = (isset($matches[3]) && $matches[3] !== '') ? $matches[3] : $column;
+
+			return $alias_back ? ('post_nat_' . $column . ' AS ' . $alias) : ('post_nat_' . $column);
+		},
+		$sql
+	);
+}
+
+/**
  * flowview_get_chartdata() - This function returns chart
  * data from the session.
  */
@@ -2642,6 +2775,26 @@ function run_flow_query($session, $query_id, $start, $end) {
 	/* destination as filter */
 	if (isset($data['destas']) && $data['destas'] != '') {
 		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['destas'], 'dst_as');
+	}
+
+	/* post-nat source ip filter */
+	if (isset($data['postnatsourceip']) && $data['postnatsourceip'] != '') {
+		$sql_where = get_ip_filter($sql_where, $sql_params, $data['postnatsourceip'], 'post_nat_src_addr');
+	}
+
+	/* post-nat source port filter */
+	if (isset($data['postnatsourceport']) && $data['postnatsourceport'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['postnatsourceport'], 'post_nat_src_port');
+	}
+
+	/* post-nat destination ip filter */
+	if (isset($data['postnatdestip']) && $data['postnatdestip'] != '') {
+		$sql_where = get_ip_filter($sql_where, $sql_params, $data['postnatdestip'], 'post_nat_dst_addr');
+	}
+
+	/* post-nat destination port filter */
+	if (isset($data['postnatdestport']) && $data['postnatdestport'] != '') {
+		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['postnatdestport'], 'post_nat_dst_port');
 	}
 
 	/* protocols filter */
@@ -3093,6 +3246,13 @@ function run_flow_query($session, $query_id, $start, $end) {
 			return false;
 		}
 
+		/* use post-NAT data instead of the original src/dst values - issue#110 */
+		if (isset_request_var('usenat')) {
+			$use_nat = (get_request_var('usenat') == 'true');
+		} else {
+			$use_nat = (isset($data['usenat']) && $data['usenat'] == 'on');
+		}
+
 		/* clean up sql formatting */
 		if (isset($sql_inner)) {
 			$sql_outer          = str_replace(["\n", "\t"], [' ', ''], $sql_outer);
@@ -3100,6 +3260,18 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 			$sql_groupby        = str_replace(["\n", "\t"], [' ', ''], $sql_groupby);
 			$sql_inner_groupby  = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby);
+
+			/**
+			 * Only the innermost (per-table) SELECT/GROUP BY need to change
+			 * for the NAT toggle - it's aliased back to the original column
+			 * name (e.g. 'post_nat_src_addr AS src_addr'), so everything
+			 * downstream (the outer query, its GROUP BY/ORDER BY, and the
+			 * report table renderer) keeps working unmodified against the
+			 * usual 'src_addr'/'dst_addr'/etc. names, just backed by NAT
+			 * data instead - issue#110.
+			 */
+			$sql_inner          = flowview_apply_nat_toggle($sql_inner, $use_nat, true);
+			$sql_inner_groupby  = flowview_apply_nat_toggle($sql_inner_groupby, $use_nat, false);
 		} else {
 			$sql_outer          = str_replace(["\n", "\t"], [' ', ''], $sql_outer);
 			$sql_inner1         = str_replace(["\n", "\t"], [' ', ''], $sql_inner1);
@@ -3108,6 +3280,11 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$sql_groupby        = str_replace(["\n", "\t"], [' ', ''], $sql_groupby);
 			$sql_inner_groupby1 = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby1);
 			$sql_inner_groupby2 = str_replace(["\n", "\t"], [' ', ''], $sql_inner_groupby2);
+
+			$sql_inner1         = flowview_apply_nat_toggle($sql_inner1, $use_nat, true);
+			$sql_inner2         = flowview_apply_nat_toggle($sql_inner2, $use_nat, true);
+			$sql_inner_groupby1 = flowview_apply_nat_toggle($sql_inner_groupby1, $use_nat, false);
+			$sql_inner_groupby2 = flowview_apply_nat_toggle($sql_inner_groupby2, $use_nat, false);
 		}
 
 		$tables     = get_tables_for_query($start, $end);
@@ -3140,13 +3317,23 @@ function run_flow_query($session, $query_id, $start, $end) {
 							$fsql_params = $sql_params;
 						}
 
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$sql_inner1 FROM $t $fsql_where $sql_inner_groupby1";
+						$safe_fsql_where          = flowview_nat_safe_sql($fsql_where, $table_name);
+						$safe_sql_inner1          = flowview_nat_safe_sql($sql_inner1, $table_name);
+						$safe_sql_inner2          = flowview_nat_safe_sql($sql_inner2, $table_name);
+						$safe_sql_inner_groupby1  = flowview_nat_safe_sql($sql_inner_groupby1, $table_name);
+						$safe_sql_inner_groupby2  = flowview_nat_safe_sql($sql_inner_groupby2, $table_name);
+
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner1 FROM $table_name $safe_fsql_where $safe_sql_inner_groupby1";
 						$all_params = array_merge($all_params, $fsql_params);
 
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$sql_inner2 FROM $t $fsql_where $sql_inner_groupby2";
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner2 FROM $table_name $safe_fsql_where $safe_sql_inner_groupby2";
 						$all_params = array_merge($all_params, $fsql_params);
 					} else {
-						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$sql_inner FROM $t $fsql_where $sql_inner_groupby";
+						$safe_fsql_where         = flowview_nat_safe_sql($fsql_where, $table_name);
+						$safe_sql_inner          = flowview_nat_safe_sql($sql_inner, $table_name);
+						$safe_sql_inner_groupby  = flowview_nat_safe_sql($sql_inner_groupby, $table_name);
+
+						$sql .= ($sql != '' ? ' UNION ALL ':'') . "$safe_sql_inner FROM $table_name $safe_fsql_where $safe_sql_inner_groupby";
 						$all_params = array_merge($all_params, $fsql_params);
 					}
 				}
@@ -3786,10 +3973,17 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 				$fsql_params = $stru_inner['sql_params'];
 			}
 
-			$map_query  = $stru_inner['sql_query'];
+			// Apply the same per-table NAT-column rewrite as the serial
+			// path (issue#110) so a shard against a pre-upgrade partition
+			// doesn't reference missing post_nat_* columns.
+			$safe_sql_query   = flowview_nat_safe_sql($stru_inner['sql_query'], $table);
+			$safe_fsql_where  = flowview_nat_safe_sql($fsql_where, $table);
+			$safe_sql_groupby = isset($stru_inner['sql_groupby']) ? flowview_nat_safe_sql($stru_inner['sql_groupby'], $table) : '';
+
+			$map_query  = $safe_sql_query;
 			$map_query .= " FROM $table";
-			$map_query .= ($fsql_where != '' ? ' ' . $fsql_where:'');
-			$map_query .= (isset($stru_inner['sql_groupby']) ? ' ' . $stru_inner['sql_groupby']:'');
+			$map_query .= ($safe_fsql_where != '' ? ' ' . $safe_fsql_where:'');
+			$map_query .= ($safe_sql_groupby != '' ? ' ' . $safe_sql_groupby:'');
 			$map_query .= (isset($stru_inner['sql_having'])  ? ' ' . $stru_inner['sql_having']:'');
 			$map_query .= (isset($stru_inner['sql_order'])   ? ' ' . $stru_inner['sql_order']:'');
 			$map_query .= (isset($stru_inner['sql_limit'])   ? ' ' . $stru_inner['sql_limit']:'');
@@ -5449,9 +5643,11 @@ function flowview_get_color($as_array = false) {
  * @return - a string containing html that represents the field id's status
  */
 function get_colored_field_column($field_id) {
-	global $flow_fieldids;
+	global $flow_fieldids, $flow_fieldids_nat;
 
-	if (isset($flow_fieldids[$field_id])) {
+	if (in_array($field_id, $flow_fieldids_nat, true)) {
+		return "<span class='deviceRecovering'>" . __('Supported (NAT)', 'flowview') . "</span>";
+	} elseif (isset($flow_fieldids[$field_id])) {
 		return "<span class='deviceUp'>" . __('Supported', 'flowview') . "</span>";
 	} else {
 		return "<span class='deviceDown'>" . __('Not Supported', 'flowview') . "</span>";
@@ -6427,6 +6623,18 @@ function create_raw_partition($table) {
 	$data['columns'][] = array('name' => 'dst_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'dst_rport', 'type' => 'varchar(20)', 'NULL' => false, 'default' => '');
 
+	// Post-NAT (translated) Details - issue#110.  Populated only when the
+	// exporter's template includes postNAT* fields (Cisco ASA/FTD, Juniper
+	// SRX, MikroTik, etc); left at defaults otherwise.
+	$data['columns'][] = array('name' => 'post_nat_src_addr', 'type' => 'varbinary(16)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_src_domain', 'type' => 'varchar(256)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_src_rdomain', 'type' => 'varchar(80)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_src_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'post_nat_dst_addr', 'type' => 'varbinary(16)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_dst_domain', 'type' => 'varchar(256)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_dst_rdomain', 'type' => 'varchar(80)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'post_nat_dst_port', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
+
 	// Generic Information for Combo Reports
 	$data['columns'][] = array('name' => 'nexthop', 'type' => 'varchar(48)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'protocol', 'type' => 'int(11)', 'unsigned' => true, 'NULL' => false, 'default' => '0');
@@ -6464,6 +6672,40 @@ function create_raw_partition($table) {
 
 	// Work around for unicode issues
 	flowview_fix_collate_issues();
+}
+
+/*
+ * flowview_ensure_nat_columns - lazily backfills the post-NAT columns
+ * (issue#110) onto a single raw partition table that pre-dates the NAT
+ * feature. Mirrors flowview_upgrade_nat_columns.php's bulk logic, but is
+ * scoped to one table so the collector can call it on demand for whichever
+ * partition it is about to insert into, instead of requiring the manual
+ * bulk utility to be run first. Safe to call repeatedly; already-upgraded
+ * tables are left untouched.
+ */
+function flowview_ensure_nat_columns($table) {
+	$nat_columns = [
+		'post_nat_src_addr'    => "varbinary(16) NOT NULL DEFAULT ''",
+		'post_nat_src_domain'  => "varchar(256) NOT NULL DEFAULT ''",
+		'post_nat_src_rdomain' => "varchar(80) NOT NULL DEFAULT ''",
+		'post_nat_src_port'    => "int(11) unsigned NOT NULL DEFAULT '0'",
+		'post_nat_dst_addr'    => "varbinary(16) NOT NULL DEFAULT ''",
+		'post_nat_dst_domain'  => "varchar(256) NOT NULL DEFAULT ''",
+		'post_nat_dst_rdomain' => "varchar(80) NOT NULL DEFAULT ''",
+		'post_nat_dst_port'    => "int(11) unsigned NOT NULL DEFAULT '0'"
+	];
+
+	$adding = [];
+
+	foreach ($nat_columns as $column => $definition) {
+		if (!flowview_db_column_exists($table, $column, false)) {
+			$adding[] = "ADD COLUMN `$column` $definition";
+		}
+	}
+
+	if (cacti_sizeof($adding)) {
+		flowview_db_execute("ALTER TABLE `$table` " . implode(', ', $adding));
+	}
 }
 
 function flowview_fix_collate_issues() {

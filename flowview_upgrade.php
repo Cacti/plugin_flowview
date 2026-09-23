@@ -598,6 +598,34 @@ function flowview_upgrade($current, $old) {
 		flowview_db_execute('UPDATE plugin_flowview_devices SET bind_address = "0.0.0.0" WHERE bind_address = "0"');
 		flowview_db_execute('UPDATE plugin_flowview_devices SET allowfrom = "0.0.0.0" WHERE allowfrom = "0"');
 
+		if (!flowview_db_column_exists('plugin_flowview_queries', 'postnatsourceip', false)) {
+			cacti_log('Adding post-NAT filter columns to plugin_flowview_queries table.', true, 'FLOWVIEW');
+
+			flowview_db_execute("ALTER TABLE plugin_flowview_queries
+				ADD COLUMN postnatsourceip VARCHAR(255) NOT NULL DEFAULT '' AFTER destas,
+				ADD COLUMN postnatsourceport VARCHAR(255) NOT NULL DEFAULT '' AFTER postnatsourceip,
+				ADD COLUMN postnatdestip VARCHAR(255) NOT NULL DEFAULT '' AFTER postnatsourceport,
+				ADD COLUMN postnatdestport VARCHAR(255) NOT NULL DEFAULT '' AFTER postnatdestip");
+		}
+
+		if (!flowview_db_column_exists('plugin_flowview_queries', 'usenat', false)) {
+			cacti_log('Adding usenat column to plugin_flowview_queries table.', true, 'FLOWVIEW');
+
+			flowview_db_execute("ALTER TABLE plugin_flowview_queries
+				ADD COLUMN usenat CHAR(2) NOT NULL DEFAULT '' AFTER panel_flows");
+		}
+
+		/**
+		 * The post-NAT columns on the (much larger) plugin_flowview_raw_*
+		 * partition tables are intentionally NOT altered here -- a busy
+		 * install can have hundreds of large partitions, and this
+		 * background upgrade needs to stay fast.  Run
+		 * flowview_upgrade_nat_columns.php manually to backfill existing
+		 * partitions; new partitions already include the columns.  See
+		 * flowview_nat_safe_sql() in functions.php for how queries degrade
+		 * gracefully against partitions that haven't been backfilled yet.
+		 */
+
 		cacti_log('Flowview Database Upgrade Complete', true, 'FLOWVIEW');
 	}
 
