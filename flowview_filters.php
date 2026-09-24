@@ -71,6 +71,21 @@ switch (get_request_var('action')) {
 		break;
 }
 
+/**
+ * Handles the bulk-action confirmation page/submission for the saved
+ * filters list: on first display, renders a confirmation box listing
+ * the selected filters; on confirmed submission, performs the selected
+ * action (delete, disable, enable) for each selected filter. Called
+ * from this script's main request-dispatch switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $sched_actions Map of drp_action value => action
+ *                              label, used to populate the
+ *                              confirmation box title.
+ * @global array $config        Cacti global configuration array
+ *                              (declared but not directly used here).
+ */
 function actions_filters() {
 	global $sched_actions, $config;
 
@@ -174,6 +189,27 @@ function actions_filters() {
 	bottom_footer();
 }
 
+/**
+ * Renders the main saved filters list page: validates/stores this
+ * view's filter request variables, then displays a sortable/paginated
+ * table of saved flow query filters along with the bulk-actions
+ * dropdown. Called from this script's main request-dispatch switch as
+ * the default view.
+ *
+ * @return void
+ *
+ * @global array $config          Cacti global configuration array;
+ *                                used to include the arrays library.
+ * @global array $sched_actions   Map of drp_action value => action
+ *                                label, used for the bulk-actions
+ *                                dropdown.
+ * @global array $graph_timespans Reserved/declared for parity with
+ *                                other functions in this file; not
+ *                                used directly here.
+ * @global array $item_rows       Cacti's standard row-count option
+ *                                list, used to populate the rows
+ *                                dropdown.
+ */
 function show_filters() {
 	global $config, $sched_actions, $graph_timespans, $item_rows;
 

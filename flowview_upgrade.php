@@ -102,6 +102,23 @@ unregister_process('flowview', 'upgrade', 1);
 
 exit(0);
 
+/**
+ * Performs the plugin's version upgrade steps: re-registers its hooks
+ * and updates the plugin_config record when the recorded version
+ * differs from the current one. Called from this script's main flow
+ * after determining the old/current versions.
+ *
+ * @param string $current The plugin's current (target) version.
+ * @param string $old      The plugin's previously recorded version.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate and include irr_tables.php during the
+ *                       schema upgrade steps.
+ * @global array $info   The plugin's INFO metadata, used to update the
+ *                       plugin_config record.
+ */
 function flowview_upgrade($current, $old) {
 	global $config, $info;
 
@@ -603,7 +620,12 @@ function flowview_upgrade($current, $old) {
 
 }
 
-/*  display_version - displays version information */
+/**
+ * Prints this script's version and copyright banner. Called from
+ * display_help() and when invoked with '--version'.
+ *
+ * @return void
+ */
 function display_version() {
 	$info    = plugin_flowview_version();
 	$version = $info['version'];
@@ -611,7 +633,13 @@ function display_version() {
 	print "Cacti Flowview Database Upgrade Utility, Version $version, " . COPYRIGHT_YEARS . PHP_EOL;
 }
 
-/*  display_help - displays the usage of the function */
+/**
+ * Prints the version banner followed by this script's command-line
+ * usage summary. Called when invoked with '--help' or with invalid/
+ * missing arguments.
+ *
+ * @return void
+ */
 function display_help () {
 	display_version();
 

@@ -131,6 +131,18 @@ switch (get_request_var('action')) {
 		break;
 }
 
+/**
+ * Exports a device's detected flow template column spec (with each
+ * field flagged supported/unsupported per this plugin's known field
+ * ids) as a downloadable YAML (preferred) or JSON file. Called from
+ * this script's main request-dispatch switch when action=export.
+ *
+ * @return void This function calls exit() and never returns normally.
+ *
+ * @global array $flow_fieldids Map of known flow field ids, used to
+ *                              flag each template field as
+ *                              supported/unsupported.
+ */
 function export_template() {
 	global $flow_fieldids;
 
@@ -160,6 +172,7 @@ function export_template() {
 			$data = yaml_emit($data, JSON_PRETTY_PRINT);
 			header('Content-type: application/yaml');
 	        header('Content-Disposition: attachment; filename=template_export.yaml');
+			print $data;
 		} else {
 			$data = json_encode($data, JSON_PRETTY_PRINT);
 			header('Content-type: application/json');
@@ -175,6 +188,21 @@ function export_template() {
 	}
 }
 
+/**
+ * Handles the bulk-action confirmation page/submission for the flow
+ * listener devices list: on first display, renders a confirmation box
+ * listing the selected devices; on confirmed submission, performs the
+ * selected action for each device. Called from this script's main
+ * request-dispatch switch when action=actions.
+ *
+ * @return void
+ *
+ * @global array $flow_actions Map of drp_action value => action label,
+ *                             used for the bulk-actions confirmation
+ *                             display.
+ * @global array $config       Cacti global configuration array
+ *                             (declared but not directly used here).
+ */
 function actions_devices () {
 	global $flow_actions, $config;
 
@@ -279,6 +307,15 @@ function actions_devices () {
 	bottom_footer();
 }
 
+/**
+ * Validates and saves a flow listener device's settings (name,
+ * collection method, bind address, allowed sources, listener port,
+ * protocol, enabled flag), restarting the flow-capture service if it's
+ * currently running so the new settings take effect. Called from this
+ * script's main request-dispatch switch when action=save.
+ *
+ * @return void
+ */
 function save_device() {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
@@ -331,6 +368,14 @@ function save_device() {
 	exit;
 }
 
+/**
+ * Signals the running flow-capture master process (via SIGHUP) to
+ * reload its configuration and pauses briefly to let it restart.
+ * Called from save_device() after saving listener changes while the
+ * service is running.
+ *
+ * @return void
+ */
 function restart_services() {
 	$pid = db_fetch_cell_prepared('SELECT pid
 		FROM processes
@@ -348,6 +393,18 @@ function restart_services() {
 	}
 }
 
+/**
+ * Renders the add/edit form for a flow listener device (name,
+ * collection method, bind address, allowed sources, port, protocol,
+ * enabled flag, and detected flow templates), drawing the tab bar
+ * first when editing an existing device. Called from this script's
+ * main request-dispatch switch when action=edit.
+ *
+ * @return void
+ *
+ * @global array $device_edit    The device edit form's field
+ *                               definitions.
+ */
 function edit_device() {
 	global $device_edit, $flow_fieldids;
 
@@ -712,6 +769,32 @@ function edit_device() {
 	html_end_box();
 }
 
+/**
+ * Renders the main flow listener devices list page: detects the host
+ * OS (for netstat/ss command compatibility), validates/stores this
+ * view's filter request variables, then displays a filtered table of
+ * configured flow listener devices with their status and the
+ * bulk-actions dropdown. Called from this script's main
+ * request-dispatch switch as the default view.
+ *
+ * @return void
+ *
+ * @global mixed $action        Reserved/declared for parity with other
+ *                              functions in this file; not used
+ *                              directly here.
+ * @global array $expire_arr    Data expiration option list used when
+ *                              displaying device settings.
+ * @global array $rotation_arr  Rotation option list used when
+ *                              displaying device settings.
+ * @global array $version_arr   Flow protocol version option list used
+ *                              when displaying device settings.
+ * @global array $nesting_arr   Reserved/declared for parity with other
+ *                              functions in this file; not used
+ *                              directly here.
+ * @global array $config        Cacti global configuration array.
+ * @global array $flow_actions  Map of drp_action value => action label,
+ *                              used for the bulk-actions dropdown.
+ */
 function show_devices () {
 	global $action, $expire_arr, $rotation_arr, $version_arr, $nesting_arr;
 	global $config, $flow_actions;

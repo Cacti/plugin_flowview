@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-21 13:13-0400\n"
+"POT-Creation-Date: 2026-09-24 10:24-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -170,8 +170,8 @@ msgid "%s Bytes"
 msgstr ""
 
 #: arrays.php:107 arrays.php:569 arrays.php:577 arrays.php:606
-#: flowview_devices.php:550 flowview_devices.php:564 flowview_devices.php:967
-#: flowview_filters.php:370 functions.php:671 functions.php:692
+#: flowview_devices.php:607 flowview_devices.php:621 flowview_devices.php:1050
+#: flowview_filters.php:406 functions.php:671 functions.php:692
 msgid "All"
 msgstr ""
 
@@ -213,7 +213,7 @@ msgid "Destination Domain"
 msgstr ""
 
 #: arrays.php:374 arrays.php:380 flowview_devices.php:79
-#: flowview_devices.php:854
+#: flowview_devices.php:937
 msgid "Port"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgid "IP Address"
 msgstr ""
 
 #: arrays.php:418 arrays.php:497 arrays.php:512 arrays.php:527
-#: flowview_devices.php:88 flowview_devices.php:859 functions.php:3345
+#: flowview_devices.php:88 flowview_devices.php:942 functions.php:3345
 msgid "Protocol"
 msgstr ""
 
@@ -256,9 +256,10 @@ msgstr ""
 msgid "Destingation Prefix"
 msgstr ""
 
-#: arrays.php:487 flowview_devices.php:948 flowview_devices.php:949
-#: flowview_devices.php:950 flowview_devices.php:960 flowview_devices.php:963
-#: functions.php:829 functions.php:3521 functions.php:3545
+#: arrays.php:487 flowview_devices.php:1031 flowview_devices.php:1032
+#: flowview_devices.php:1033 flowview_devices.php:1043
+#: flowview_devices.php:1046 functions.php:829 functions.php:3521
+#: functions.php:3545
 msgid "N/A"
 msgstr ""
 
@@ -323,7 +324,7 @@ msgstr ""
 msgid "New Filter"
 msgstr ""
 
-#: arrays.php:600 flowview_filters.php:328 functions.php:663
+#: arrays.php:600 flowview_filters.php:364 functions.php:663
 msgid "Listener"
 msgstr ""
 
@@ -359,7 +360,7 @@ msgstr ""
 msgid "Detailed Filter Criteria"
 msgstr ""
 
-#: arrays.php:638 flowview_filters.php:333
+#: arrays.php:638 flowview_filters.php:369
 msgid "Report Type"
 msgstr ""
 
@@ -415,7 +416,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: arrays.php:681 flowview_filters.php:343 functions.php:763
+#: arrays.php:681 flowview_filters.php:379 functions.php:763
 msgid "Sort Field"
 msgstr ""
 
@@ -647,24 +648,24 @@ msgstr ""
 msgid "Persons"
 msgstr ""
 
-#: flowview.php:126
+#: flowview.php:133
 msgid "Unable to find Raw Data for to Export"
 msgstr ""
 
-#: flowview.php:206
+#: flowview.php:223
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
 msgstr ""
 
-#: flowview.php:211
+#: flowview.php:228
 msgid "Invalid source Query provided.  Please submit with a valid query."
 msgstr ""
 
-#: flowview.php:241
+#: flowview.php:271
 #, php-format
 msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
 msgstr ""
 
-#: flowview.php:244
+#: flowview.php:274
 #, php-format
 msgid "Flow Filter '%s' Deleted."
 msgstr ""
@@ -810,11 +811,11 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: flowview_databases.php:384 flowview_devices.php:410 flowview_devices.php:636
+#: flowview_databases.php:384 flowview_devices.php:467 flowview_devices.php:693
 msgid "Address"
 msgstr ""
 
-#: flowview_databases.php:389 flowview_devices.php:414 flowview_devices.php:864
+#: flowview_databases.php:389 flowview_devices.php:471 flowview_devices.php:947
 msgid "Status"
 msgstr ""
 
@@ -894,7 +895,7 @@ msgstr ""
 msgid "MP Peering"
 msgstr ""
 
-#: flowview_databases.php:489 flowview_devices.php:575 functions.php:972
+#: flowview_databases.php:489 flowview_devices.php:632 functions.php:972
 msgid "Export"
 msgstr ""
 
@@ -1080,8 +1081,8 @@ msgid "FATAL: Unknown Database Table %s"
 msgstr ""
 
 #: flowview_databases.php:913 flowview_databases.php:1272
-#: flowview_databases.php:1568 flowview_devices.php:784
-#: flowview_filters.php:234 flowview_schedules.php:554
+#: flowview_databases.php:1568 flowview_devices.php:867
+#: flowview_filters.php:270 flowview_schedules.php:554
 #: flowview_schedules.php:851
 msgid "Search"
 msgstr ""
@@ -1099,35 +1100,35 @@ msgid "Entries"
 msgstr ""
 
 #: flowview_databases.php:945 flowview_databases.php:1314
-#: flowview_databases.php:1610 flowview_filters.php:244
+#: flowview_databases.php:1610 flowview_filters.php:280
 #: flowview_schedules.php:564 flowview_schedules.php:861
 msgid "Default"
 msgstr ""
 
 #: flowview_databases.php:957 flowview_databases.php:1326
-#: flowview_databases.php:1622 flowview_devices.php:574
-#: flowview_devices.php:791 flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_databases.php:1622 flowview_devices.php:631
+#: flowview_devices.php:874 flowview_filters.php:292 flowview_schedules.php:576
 #: flowview_schedules.php:873 functions.php:715
 msgid "Go"
 msgstr ""
 
 #: flowview_databases.php:957 flowview_databases.php:1326
-#: flowview_databases.php:1622 flowview_devices.php:791
-#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_databases.php:1622 flowview_devices.php:874
+#: flowview_filters.php:292 flowview_schedules.php:576
 #: flowview_schedules.php:873
 msgid "Set/Refresh Filters"
 msgstr ""
 
 #: flowview_databases.php:958 flowview_databases.php:1327
-#: flowview_databases.php:1623 flowview_devices.php:792
-#: flowview_filters.php:257 flowview_schedules.php:577
+#: flowview_databases.php:1623 flowview_devices.php:875
+#: flowview_filters.php:293 flowview_schedules.php:577
 #: flowview_schedules.php:874 functions.php:716
 msgid "Clear"
 msgstr ""
 
 #: flowview_databases.php:958 flowview_databases.php:1327
-#: flowview_databases.php:1623 flowview_devices.php:792
-#: flowview_filters.php:257 flowview_schedules.php:577
+#: flowview_databases.php:1623 flowview_devices.php:875
+#: flowview_filters.php:293 flowview_schedules.php:577
 #: flowview_schedules.php:874
 msgid "Clear Filters"
 msgstr ""
@@ -1150,14 +1151,14 @@ msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
 msgstr[0] ""
 msgstr[1] ""
 
-#: flowview_databases.php:1188 flowview_devices.php:270
-#: flowview_filters.php:165 flowview_schedules.php:341 functions.php:988
+#: flowview_databases.php:1188 flowview_devices.php:298
+#: flowview_filters.php:180 flowview_schedules.php:341 functions.php:988
 #: functions.php:998
 msgid "Cancel"
 msgstr ""
 
-#: flowview_databases.php:1189 flowview_devices.php:262
-#: flowview_filters.php:157 flowview_schedules.php:333 functions.php:997
+#: flowview_databases.php:1189 flowview_devices.php:290
+#: flowview_filters.php:172 flowview_schedules.php:333 functions.php:997
 msgid "Continue"
 msgstr ""
 
@@ -1356,223 +1357,223 @@ msgstr ""
 msgid "If checked, the Listener service will be started and will wait on incoming data."
 msgstr ""
 
-#: flowview_devices.php:172
+#: flowview_devices.php:185
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr ""
 
-#: flowview_devices.php:238 flowview_devices.php:252
+#: flowview_devices.php:266 flowview_devices.php:280
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
 msgstr ""
 
-#: flowview_devices.php:245
+#: flowview_devices.php:273
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
 msgstr ""
 
-#: flowview_devices.php:259
+#: flowview_devices.php:287
 msgid "You must select at least one Listener."
 msgstr ""
 
-#: flowview_devices.php:302
+#: flowview_devices.php:339
 msgid "The listener port must be a numeric value between 1 and 65535."
 msgstr ""
 
-#: flowview_devices.php:324
+#: flowview_devices.php:361
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
 msgstr ""
 
-#: flowview_devices.php:326
+#: flowview_devices.php:363
 msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
 msgstr ""
 
-#: flowview_devices.php:365
+#: flowview_devices.php:422
 #, php-format
 msgid "Listener [edit: %s]"
 msgstr ""
 
-#: flowview_devices.php:369
+#: flowview_devices.php:426
 msgid "Listener [new]"
 msgstr ""
 
-#: flowview_devices.php:406 flowview_devices.php:837
+#: flowview_devices.php:463 flowview_devices.php:920
 msgid "Name"
 msgstr ""
 
-#: flowview_devices.php:418
+#: flowview_devices.php:475
 msgid "Version"
 msgstr ""
 
-#: flowview_devices.php:422 functions.php:39
+#: flowview_devices.php:479 functions.php:39
 msgid "Templates"
 msgstr ""
 
-#: flowview_devices.php:426 flowview_devices.php:891
+#: flowview_devices.php:483 flowview_devices.php:974
 msgid "Last Updated"
 msgstr ""
 
-#: flowview_devices.php:428
+#: flowview_devices.php:485
 msgid "Active Streams update every 5 minutes"
 msgstr ""
 
-#: flowview_devices.php:471
+#: flowview_devices.php:528
 msgid "No Inbound Streams Detected"
 msgstr ""
 
-#: flowview_devices.php:536
+#: flowview_devices.php:593
 msgid "Listener Detected Templates"
 msgstr ""
 
-#: flowview_devices.php:545
+#: flowview_devices.php:602
 msgid "Ex Addr"
 msgstr ""
 
-#: flowview_devices.php:559
+#: flowview_devices.php:616
 msgid "Template"
 msgstr ""
 
-#: flowview_devices.php:640
+#: flowview_devices.php:697
 msgid "Template ID"
 msgstr ""
 
-#: flowview_devices.php:644
+#: flowview_devices.php:701
 msgid "Field Name"
 msgstr ""
 
-#: flowview_devices.php:648 functions.php:5455
+#: flowview_devices.php:705 functions.php:5455
 msgid "Supported"
 msgstr ""
 
-#: flowview_devices.php:652
+#: flowview_devices.php:709
 msgid "Field ID"
 msgstr ""
 
-#: flowview_devices.php:656
+#: flowview_devices.php:713
 msgid "Field Type"
 msgstr ""
 
-#: flowview_devices.php:660
+#: flowview_devices.php:717
 msgid "Length"
 msgstr ""
 
-#: flowview_devices.php:664
+#: flowview_devices.php:721
 msgid "Unpack"
 msgstr ""
 
-#: flowview_devices.php:706
+#: flowview_devices.php:763
 msgid "No Inbound Stream Templates Detected"
 msgstr ""
 
-#: flowview_devices.php:775
+#: flowview_devices.php:858
 msgid "FlowView Listeners"
 msgstr ""
 
-#: flowview_devices.php:827 setup.php:140 setup.php:201
+#: flowview_devices.php:910 setup.php:140 setup.php:201
 msgid "Listeners"
 msgstr ""
 
-#: flowview_devices.php:841
+#: flowview_devices.php:924
 msgid "Method"
 msgstr ""
 
-#: flowview_devices.php:845
+#: flowview_devices.php:928
 msgid "Bind address"
 msgstr ""
 
-#: flowview_devices.php:849
+#: flowview_devices.php:932
 msgid "Allowed From"
 msgstr ""
 
-#: flowview_devices.php:869
+#: flowview_devices.php:952
 msgid "Observed Listen"
 msgstr ""
 
-#: flowview_devices.php:870
+#: flowview_devices.php:953
 msgid "The port security actually observed on the listeners port."
 msgstr ""
 
-#: flowview_devices.php:874
+#: flowview_devices.php:957
 msgid "Backlog"
 msgstr ""
 
-#: flowview_devices.php:875
+#: flowview_devices.php:958
 msgid "The Size of the UDP backlog in bytes."
 msgstr ""
 
-#: flowview_devices.php:879
+#: flowview_devices.php:962
 msgid "Streams"
 msgstr ""
 
-#: flowview_devices.php:881
+#: flowview_devices.php:964
 msgid "The number of inbound connections from various sources."
 msgstr ""
 
-#: flowview_devices.php:885
+#: flowview_devices.php:968
 msgid "Stream Versions"
 msgstr ""
 
-#: flowview_devices.php:887
+#: flowview_devices.php:970
 msgid "The Traffic Flow versions being observed."
 msgstr ""
 
-#: flowview_devices.php:893
+#: flowview_devices.php:976
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr ""
 
-#: flowview_devices.php:939 flowview_schedules.php:172 functions.php:840
+#: flowview_devices.php:1022 flowview_schedules.php:172 functions.php:840
 msgid "None"
 msgstr ""
 
-#: flowview_devices.php:943
+#: flowview_devices.php:1026
 msgid "No Connections"
 msgstr ""
 
-#: flowview_devices.php:972
+#: flowview_devices.php:1055
 msgid "Cacti"
 msgstr ""
 
-#: flowview_devices.php:987
+#: flowview_devices.php:1070
 msgid "No Flowview Listeners"
 msgstr ""
 
-#: flowview_filters.php:133
+#: flowview_filters.php:148
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
 msgstr ""
 
-#: flowview_filters.php:140
+#: flowview_filters.php:155
 msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
 msgstr ""
 
-#: flowview_filters.php:147
+#: flowview_filters.php:162
 msgid "Click 'Continue' to Enable the following Filters(s)."
 msgstr ""
 
-#: flowview_filters.php:154
+#: flowview_filters.php:169
 msgid "You must select at least one Filter."
 msgstr ""
 
-#: flowview_filters.php:222
+#: flowview_filters.php:258
 msgid "FlowView Filters"
 msgstr ""
 
-#: flowview_filters.php:224
+#: flowview_filters.php:260
 msgid "FlowView Filters [ Add Devices before Filters ]"
 msgstr ""
 
-#: flowview_filters.php:240 flowview_filters.php:354 setup.php:141
+#: flowview_filters.php:276 flowview_filters.php:390 setup.php:141
 #: setup.php:257
 msgid "Filters"
 msgstr ""
 
-#: flowview_filters.php:323 flowview_schedules.php:98
+#: flowview_filters.php:359 flowview_schedules.php:98
 #: flowview_schedules.php:950
 msgid "Filter Name"
 msgstr ""
 
-#: flowview_filters.php:338
+#: flowview_filters.php:374
 msgid "ID"
 msgstr ""
 
-#: flowview_filters.php:348
+#: flowview_filters.php:384
 msgid "Resolution"
 msgstr ""
 
@@ -1843,17 +1844,17 @@ msgstr ""
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php:43
+#: functions-pre13.php:70
 #, php-format
 msgid "Cacti %s"
 msgstr ""
 
-#: functions-pre13.php:192
+#: functions-pre13.php:239
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php:198
+#: functions-pre13.php:245
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""

@@ -153,6 +153,28 @@ if ($shard_id === false) {
 	exit(0);
 }
 
+/**
+ * Signal handler that cleans up this process's registered lock (shard
+ * or full-query) and exits when the process receives SIGTERM/SIGINT,
+ * ignoring all other signals. Registered as this script's signal
+ * handler to ensure graceful shutdown on termination.
+ *
+ * @param int $signo The received signal number.
+ *
+ * @return void
+ *
+ * @global mixed $shard_id      The current shard id being processed (if
+ *                              any), used to unregister the correct
+ *                              process lock.
+ * @global mixed $query_id      The current query id being processed,
+ *                              used to unregister the process lock.
+ * @global array $config        Reserved/declared for parity with other
+ *                              functions in this file; not used
+ *                              directly here.
+ * @global mixed $current_lock  Reserved/declared for parity with other
+ *                              functions in this file; not used
+ *                              directly here.
+ */
 function sig_handler($signo) {
 	global $shard_id, $query_id, $config, $current_lock;
 
@@ -174,6 +196,26 @@ function sig_handler($signo) {
 	}
 }
 
+/**
+ * Launches additional background worker processes (up to the
+ * configured thread count) to process pending shards of a parallel
+ * database query, marking each launched shard as running before
+ * starting its worker. Called from this script's main polling loop to
+ * keep the configured number of parallel workers busy.
+ *
+ * @param int $query_id The parallel_database_query_shard query id being
+ *                      processed.
+ * @param int $threads  The target number of concurrent worker
+ *                      processes.
+ * @param int $running  The number of worker processes currently
+ *                      running.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the PHP binary and this script's path.
+ * @global bool  $debug  Whether debug output is enabled.
+ */
 function flowview_launch_workers($query_id, $threads, $running) {
 	global $config, $debug;
 
