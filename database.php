@@ -286,6 +286,15 @@ function flowview_db_table_exists($table, $log = true, $cnn_id = false) {
 	return false;
 }
 
+/**
+ * flowview_db_table_create - creates a database table if it does not already exist
+ *
+ * @param  string        The name of the table to create
+ * @param  array         The table's column/key/engine definition data
+ * @param  bool|object   Optional connection id in case you are using a proxy
+ *
+ * @return void
+ */
 function flowview_db_table_create($table, $data, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
@@ -388,12 +397,32 @@ function flowview_db_table_create($table, $data, $cnn_id = false) {
 	}
 }
 
+/**
+ * flowview_db_column_exists - checks whether a column exists
+ *
+ * @param  string        The name of the table
+ * @param  string        The name of the column
+ * @param  bool          Whether to log error messages, defaults to true
+ * @param  bool|object   Optional connection id in case you are using a proxy
+ *
+ * @return bool          True if the column exists, false otherwise
+ */
 function flowview_db_column_exists($table, $column, $log = true, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_column_exists($table, $column, $log, $flowview_cnn);
 }
 
+/**
+ * flowview_db_add_column - adds a column to a table if it does not already exist
+ *
+ * @param  string        The name of the table
+ * @param  array         The column definition to add
+ * @param  bool          Whether to log error messages, defaults to true
+ * @param  bool|object   Optional connection id in case you are using a proxy
+ *
+ * @return bool          True on success, false on error
+ */
 function flowview_db_add_column($table, $column, $log = true, $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
@@ -430,6 +459,16 @@ function flowview_db_index_exists($table, $index, $log = true, $cnn_id = false) 
 	return db_index_exists($table, $index, $log, $flowview_cnn);
 }
 
+/**
+ * flowview_get_connection - resolves the database connection to use for a
+ * flowview_db_* call, falling back to this plugin's default connection
+ * when no explicit connection id is given
+ *
+ * @param  bool|object   An explicit connection id to use, or false to use
+ *                       the plugin's default connection
+ *
+ * @return bool|object   The resolved connection to use
+ */
 function flowview_get_connection($cnn_id) {
 	global $flowview_cnn;
 

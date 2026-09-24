@@ -107,6 +107,13 @@ switch(get_request_var('action')) {
 
 exit;
 
+/**
+ * Exports the current filter's flow data as a downloadable CSV file.
+ * Called from this script's main request-dispatch switch when
+ * action=export.
+ *
+ * @return void
+ */
 function flowview_export_data() {
 	flowview_request_vars();
 	$data  = load_data_for_filter();
@@ -127,6 +134,16 @@ function flowview_export_data() {
 	}
 }
 
+/**
+ * Saves the current view's filter settings as a new named saved query,
+ * copying the source query's base settings and applying any overridden
+ * request-variable values (device, timespan, sort field, cutoffs,
+ * graph options, display panels) before redirecting to view the new
+ * filter. Called from this script's main request-dispatch switch when
+ * action=save_as.
+ *
+ * @return void
+ */
 function save_filter_as() {
 	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
 		$save = db_fetch_row_prepared('SELECT *
@@ -214,6 +231,12 @@ function save_filter_as() {
 	}
 }
 
+/**
+ * Renames a saved flow query filter. Called from this script's main
+ * request-dispatch switch when action=rename_filter.
+ *
+ * @return void
+ */
 function rename_filter() {
 	$name  = get_nfilter_request_var('sname');
 	$query = get_nfilter_request_var('query');
@@ -224,6 +247,13 @@ function rename_filter() {
 		[$name, $query]);
 }
 
+/**
+ * Deletes a saved flow query filter, refusing to delete it if it's
+ * still referenced by a scheduled report. Called from this script's
+ * main request-dispatch switch when action=delete_filter.
+ *
+ * @return void
+ */
 function delete_filter() {
 	$query = get_nfilter_request_var('query');
 
@@ -245,6 +275,15 @@ function delete_filter() {
 	}
 }
 
+/**
+ * Restores the user's last-used filter request variables from the
+ * session when no explicit query is requested, or loads a saved
+ * query's settings into the request when one is. Called from this
+ * script's main flow before rendering the flow filter form, to
+ * persist/restore filter state across requests.
+ *
+ * @return void
+ */
 function load_session_for_filter() {
 	/**
 	 * Take the last session filter settings
@@ -387,6 +426,15 @@ function load_session_for_filter() {
 	return isset($query['name']) ? $query['name']:'';
 }
 
+/**
+ * Validates and stores this view's filter request variables, restoring
+ * the last-used query from the session when none is explicitly
+ * requested, and seeding the session's per-query settings from the
+ * saved query's database row on first access. Called from this
+ * script's main flow before rendering the flow view.
+ *
+ * @return void
+ */
 function flowview_request_vars() {
 	/* restore the last session just in case */
 	if (!isset_request_var('query')) {

@@ -23,6 +23,33 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Pre-1.3 Cacti compatibility shim for reports_log_and_notify():
+ * records a completed queued report's result and notification
+ * settings into the reports_log table and sends its notification
+ * (attachments/email) via the report's stored delivery settings.
+ * Called from this plugin's report-running code on Cacti versions
+ * lacking the native reports_log_and_notify() function.
+ *
+ * @param int    $id           The reports_queued id being completed.
+ * @param float  $start_time   The Unix timestamp the run started at.
+ * @param string $report_type  The rendered report format (e.g.
+ *                            'html').
+ * @param string $source       The plugin/source name generating the
+ *                            report (e.g. 'flowview').
+ * @param int    $source_id    The source's own report/schedule id.
+ * @param string $subject      The notification email subject.
+ * @param array  $raw_data     Reference, the report's raw result data.
+ * @param mixed  $oput_raw     Reference, the raw rendered output.
+ * @param string $oput_html    Reference, the HTML-rendered output body.
+ * @param string $oput_text    Reference, the plain-text output body
+ *                            (defaulted to '' if null).
+ * @param array  $attachments  Optional list of file attachments to
+ *                            include.
+ * @param array|false $headers Optional extra email headers to include.
+ *
+ * @return void
+ */
 function reports_log_and_notify($id, $start_time, $report_type, $source, $source_id, $subject, &$raw_data, &$oput_raw, &$oput_html, &$oput_text, $attachments = [], $headers = false) {
 	$report = db_fetch_row_prepared('SELECT *
 		FROM reports_queued
@@ -155,6 +182,26 @@ function reports_log_and_notify($id, $start_time, $report_type, $source, $source
 	}
 }
 
+/**
+ * Pre-1.3 Cacti compatibility shim for reports_queue(): inserts a new
+ * pending row into the reports_queued table, recording who requested
+ * it, and raises/logs a scheduling confirmation or error message.
+ * Called from this plugin's report-scheduling code on Cacti versions
+ * lacking the native reports_queue() function.
+ *
+ * @param string $name          The report's display name.
+ * @param string $request_type  The type of request/report being
+ *                              queued.
+ * @param string $source        The plugin/source name generating the
+ *                              report (e.g. 'flowview').
+ * @param int    $source_id     The source's own report/schedule id.
+ * @param string $command       The CLI command to run to generate the
+ *                              report.
+ * @param mixed  $notification  The notification/delivery settings to
+ *                              store (JSON-encoded).
+ *
+ * @return void
+ */
 function reports_queue($name, $request_type, $source, $source_id, $command, $notification) {
 	if (isset($_SESSION['sess_user_id'])) {
 		$requested_id = $_SESSION['sess_user_id'];
@@ -202,6 +249,19 @@ function reports_queue($name, $request_type, $source, $source_id, $command, $not
 	}
 }
 
+/**
+ * Pre-1.3 Cacti compatibility shim for reports_run(): marks a queued
+ * report as running (recording its start time) and launches its
+ * generation. Called from this plugin's report-running code on Cacti
+ * versions lacking the native reports_run() function.
+ *
+ * @param int $id The reports_queued id to run.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include the poller library.
+ */
 function reports_run($id) {
 	global $config;
 

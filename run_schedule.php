@@ -201,11 +201,24 @@ if ($scheduled == true) {
 	}
 }
 
+/**
+ * Prints this script's version and copyright banner. Called from
+ * display_help() and when invoked with '--version'.
+ *
+ * @return void
+ */
 function display_version() {
 	$version = get_cacti_cli_version();
 	print "Cacti FlowView Schedule Poller, Version $version, " . COPYRIGHT_YEARS . PHP_EOL;
 }
 
+/**
+ * Prints the version banner followed by this script's command-line
+ * usage summary. Called when invoked with '--help' or with invalid/
+ * missing arguments.
+ *
+ * @return void
+ */
 function display_help() {
 	display_version();
 
