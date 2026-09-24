@@ -42,8 +42,8 @@
  * @param array  $raw_data     Reference, the report's raw result data.
  * @param mixed  $oput_raw     Reference, the raw rendered output.
  * @param string $oput_html    Reference, the HTML-rendered output body.
- * @param string $oput_text    Reference, the plain-text output body
- *                            (defaulted to '' if null).
+ * @param string|null $oput_text Reference, the plain-text output body
+ *                              (defaulted to '' if null).
  * @param array  $attachments  Optional list of file attachments to
  *                            include.
  * @param array|false $headers Optional extra email headers to include.
@@ -257,7 +257,9 @@ function reports_queue($name, $request_type, $source, $source_id, $command, $not
  *
  * @param int $id The reports_queued id to run.
  *
- * @return void
+ * @return bool|null False if the queued report could not be found;
+ *                   otherwise no explicit value is returned after
+ *                   launching generation.
  *
  * @global array $config Cacti global configuration array; used to
  *                       include the poller library.

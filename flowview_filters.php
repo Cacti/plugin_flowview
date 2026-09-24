@@ -80,9 +80,9 @@ switch (get_request_var('action')) {
  *
  * @return void
  *
- * @global array $sched_actions Reserved/declared for parity with other
- *                              functions in this file; not used
- *                              directly here.
+ * @global array $sched_actions Map of drp_action value => action
+ *                              label, used to populate the
+ *                              confirmation box title.
  * @global array $config        Cacti global configuration array
  *                              (declared but not directly used here).
  */
@@ -203,9 +203,9 @@ function actions_filters() {
  * @global array $sched_actions   Map of drp_action value => action
  *                                label, used for the bulk-actions
  *                                dropdown.
- * @global array $graph_timespans Timespan option list used when
- *                                displaying each filter's configured
- *                                timespan.
+ * @global array $graph_timespans Reserved/declared for parity with
+ *                                other functions in this file; not
+ *                                used directly here.
  * @global array $item_rows       Cacti's standard row-count option
  *                                list, used to populate the rows
  *                                dropdown.

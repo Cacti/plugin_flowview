@@ -282,7 +282,8 @@ function delete_filter() {
  * script's main flow before rendering the flow filter form, to
  * persist/restore filter state across requests.
  *
- * @return void
+ * @return string The saved query's name if one was loaded, otherwise
+ *                an empty string.
  */
 function load_session_for_filter() {
 	/**

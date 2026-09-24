@@ -289,9 +289,9 @@ function flowview_db_table_exists($table, $log = true, $cnn_id = false) {
 /**
  * flowview_db_table_create - creates a database table if it does not already exist
  *
- * @param  string        The name of the table to create
- * @param  array         The table's column/key/engine definition data
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param  string       $table  The name of the table to create
+ * @param  array        $data   The table's column/key/engine definition data
+ * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
  *
  * @return void
  */
@@ -400,10 +400,10 @@ function flowview_db_table_create($table, $data, $cnn_id = false) {
 /**
  * flowview_db_column_exists - checks whether a column exists
  *
- * @param  string        The name of the table
- * @param  string        The name of the column
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param  string       $table  The name of the table
+ * @param  string       $column The name of the column
+ * @param  bool         $log    Whether to log error messages, defaults to true
+ * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
  *
  * @return bool          True if the column exists, false otherwise
  */
@@ -416,10 +416,10 @@ function flowview_db_column_exists($table, $column, $log = true, $cnn_id = false
 /**
  * flowview_db_add_column - adds a column to a table if it does not already exist
  *
- * @param  string        The name of the table
- * @param  array         The column definition to add
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param  string       $table  The name of the table
+ * @param  array        $column The column definition to add
+ * @param  bool         $log    Whether to log error messages, defaults to true
+ * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
  *
  * @return bool          True on success, false on error
  */
@@ -432,7 +432,7 @@ function flowview_db_add_column($table, $column, $log = true, $cnn_id = false) {
 /**
  * flowview_db_affected_rows - return the number of rows affected by the last transaction
  *
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
  *
  * @return bool|int      The number of rows affected by the last transaction,
  *                       or false on error

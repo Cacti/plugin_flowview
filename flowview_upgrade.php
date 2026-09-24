@@ -113,8 +113,9 @@ exit(0);
  *
  * @return void
  *
- * @global array $config Cacti global configuration array (declared but
- *                       not directly used here).
+ * @global array $config Cacti global configuration array; used to
+ *                       locate and include irr_tables.php during the
+ *                       schema upgrade steps.
  * @global array $info   The plugin's INFO metadata, used to update the
  *                       plugin_config record.
  */

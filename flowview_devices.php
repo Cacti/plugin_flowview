@@ -172,6 +172,7 @@ function export_template() {
 			$data = yaml_emit($data, JSON_PRETTY_PRINT);
 			header('Content-type: application/yaml');
 	        header('Content-Disposition: attachment; filename=template_export.yaml');
+			print $data;
 		} else {
 			$data = json_encode($data, JSON_PRETTY_PRINT);
 			header('Content-type: application/json');
@@ -403,8 +404,6 @@ function restart_services() {
  *
  * @global array $device_edit    The device edit form's field
  *                               definitions.
- * @global array $flow_fieldids  Map of known flow field ids, used when
- *                               rendering detected template details.
  */
 function edit_device() {
 	global $device_edit, $flow_fieldids;
@@ -789,8 +788,9 @@ function edit_device() {
  *                              displaying device settings.
  * @global array $version_arr   Flow protocol version option list used
  *                              when displaying device settings.
- * @global array $nesting_arr   Nesting option list used when
- *                              displaying device settings.
+ * @global array $nesting_arr   Reserved/declared for parity with other
+ *                              functions in this file; not used
+ *                              directly here.
  * @global array $config        Cacti global configuration array.
  * @global array $flow_actions  Map of drp_action value => action label,
  *                              used for the bulk-actions dropdown.
