@@ -962,7 +962,7 @@ function view_db_table($tab, &$tabs) {
 				</tr>
 			</table>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 
 			var tab='<?php print $tab;?>';
 			var myTimer;
@@ -1331,7 +1331,7 @@ function view_dns_cache() {
 				</tr>
 			</table>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 
 			function applyFilter() {
 				strURL  = 'flowview_databases.php?header=false';
@@ -1626,7 +1626,7 @@ function view_routes($tab) {
 				</tr>
 			</table>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 
 			var tab='<?php print $tab;?>';
 			var myTimer;

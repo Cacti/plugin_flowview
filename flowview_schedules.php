@@ -580,7 +580,7 @@ function edit_log($header_label, $report) {
 				</tr>
 			</table>
 		</form>
-		<script type='text/javascript'>
+		<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 		var id = '<?php print get_filter_request_var('id'); ?>';
 
 		function applyFilter() {
@@ -716,7 +716,7 @@ function edit_log($header_label, $report) {
 
 	?>
 	<div id='reportDiv'></div>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 	var log_id='<?php print get_filter_request_var('id'); ?>';
 
 	function exportLog() {
@@ -762,7 +762,7 @@ function edit_general($header_label, $report) {
 	html_end_box();
 
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 	var startOpen = false;
 
 	$(function() {
@@ -877,7 +877,7 @@ function show_schedules() {
 				</tr>
 			</table>
 		</form>
-		<script type='text/javascript'>
+		<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 		function applyFilter() {
 			strURL  = 'flowview_schedules.php?header=false';
 			strURL += '&filter='+escape($('#filter').val());

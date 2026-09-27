@@ -635,7 +635,7 @@ function edit_device() {
 					</tr>
 				</table>
 			</form>
-			<script type='text/javascript'>
+			<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 			function applyFilter() {
 				strURL  = 'flowview_devices.php?action=edit&id=<?php print get_filter_request_var('id'); ?>&tab=templates&header=false';
 				strURL += '&template=' + $('#template').val();
@@ -878,7 +878,7 @@ function show_devices () {
 				</tr>
 			</table>
 		</form>
-		<script type='text/javascript'>
+		<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 		function applyFilter() {
 			strURL  = 'flowview_devices.php?header=false';
 			strURL += '&filter='+escape($('#filter').val());
