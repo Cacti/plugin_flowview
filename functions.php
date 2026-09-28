@@ -6705,11 +6705,14 @@ function flowview_ensure_nat_columns($table) {
 	];
 
 	$adding = [];
+	$after  = 'dst_rport';
 
 	foreach ($nat_columns as $column => $definition) {
 		if (!flowview_db_column_exists($table, $column, false)) {
-			$adding[] = "ADD COLUMN `$column` $definition";
+			$adding[] = "ADD COLUMN `$column` $definition AFTER `$after`";
 		}
+
+		$after = $column;
 	}
 
 	if (cacti_sizeof($adding)) {

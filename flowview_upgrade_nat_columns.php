@@ -108,11 +108,14 @@ if (cacti_sizeof($tables)) {
 	foreach ($tables as $t) {
 		$table  = $t['TABLE_NAME'];
 		$adding = [];
+		$after  = 'dst_rport';
 
 		foreach ($nat_columns as $column => $definition) {
 			if (!flowview_db_column_exists($table, $column, false)) {
-				$adding[] = "ADD COLUMN `$column` $definition";
+				$adding[] = "ADD COLUMN `$column` $definition AFTER `$after`";
 			}
+
+			$after = $column;
 		}
 
 		if (!cacti_sizeof($adding)) {
