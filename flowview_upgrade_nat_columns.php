@@ -97,7 +97,8 @@ $nat_columns = [
 
 $tables = flowview_db_fetch_assoc('SELECT TABLE_NAME
 	FROM information_schema.TABLES
-	WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"
+	WHERE TABLE_SCHEMA = DATABASE()
+	AND TABLE_NAME LIKE "plugin_flowview_raw_%"
 	ORDER BY TABLE_NAME');
 
 $altered = 0;

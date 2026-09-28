@@ -447,7 +447,8 @@ function save_filter_form() {
 		panel_table = ?,
 		panel_bytes = ?,
 		panel_packets = ?,
-		panel_flows = ?
+		panel_flows = ?,
+		usenat = ?
 		WHERE id = ?',
 		array(
 			get_request_var('timespan'),
@@ -463,6 +464,7 @@ function save_filter_form() {
 			get_nfilter_request_var('bytes') == 'true' ? 'on':'',
 			get_nfilter_request_var('packets') == 'true' ? 'on':'',
 			get_nfilter_request_var('flows') == 'true' ? 'on':'',
+			get_nfilter_request_var('usenat') == 'true' ? 'on':'',
 			get_request_var('query')
 		)
 	);
@@ -1437,6 +1439,7 @@ function flowview_display_filter() {
 	function renderBarChart(type, bindto, title, label, height, width) {
 		$.getJSON('flowview.php?action=chartdata&type=' + type +
 			'&domains='      + $('#domains').is(':checked') +
+			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
 			'&report='       + $('#report').val() +
 			'&device_id='    + $('#device_id').val() +
@@ -1501,6 +1504,7 @@ function flowview_display_filter() {
 	function renderTreemapChart(type, bindto, title, label, height, width) {
 		$.getJSON('flowview.php?action=chartdata&type=' + type +
 			'&domains='      + $('#domains').is(':checked') +
+			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
 			'&report='       + $('#report').val() +
 			'&device_id='    + $('#device_id').val() +
@@ -1566,6 +1570,7 @@ function flowview_display_filter() {
 	function renderPieChart(type, bindto, title, label, height, width) {
 		$.getJSON('flowview.php?action=chartdata&type=' + type +
 			'&domains='      + $('#domains').is(':checked') +
+			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
 			'&report='       + $('#report').val() +
 			'&device_id='    + $('#device_id').val() +
@@ -1661,6 +1666,7 @@ function flowview_display_filter() {
 			'?action=savefilter' +
 			'&query='        + $('#query').val() +
 			'&domains='      + $('#domains').is(':checked') +
+			'&usenat='      + $('#usenat').is(':checked') +
 			'&timespan='     + $('#predefined_timespan').val() +
 			'&report='       + $('#report').val() +
 			'&device_id='    + $('#device_id').val() +
@@ -1685,6 +1691,7 @@ function flowview_display_filter() {
 			'?action=updatesess' +
 			'&query='   + $('#query').val() +
 			'&domains=' + $('#domains').is(':checked') +
+			'&usenat=' + $('#usenat').is(':checked') +
 			'&table='   + $('#table').is(':checked') +
 			'&bytes='   + $('#bytes').is(':checked') +
 			'&packets=' + $('#packets').is(':checked') +
@@ -1720,6 +1727,7 @@ function flowview_display_filter() {
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
 			'?action=query'         +
 			'&domains='             + $('#domains').is(':checked') +
+			'&usenat='             + $('#usenat').is(':checked') +
 			'&device_id='           + $('#device_id').val() +
 			'&ex_addr='             + $('#ex_addr').val() +
 			'&query='               + $('#query').val() +
@@ -1747,6 +1755,7 @@ function flowview_display_filter() {
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
 			'?action=view'          +
 			'&domains='             + $('#domains').is(':checked') +
+			'&usenat='             + $('#usenat').is(':checked') +
 			'&query='               + $('#query').val() +
 			'&predefined_timespan=' + $('#predefined_timespan').val() +
 			'&report='              + report +
