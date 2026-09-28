@@ -296,7 +296,7 @@ function show_filters() {
 				</tr>
 			</table>
 		</form>
-		<script type='text/javascript'>
+		<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 		function applyFilter() {
 			strURL  = 'flowview_filters.php?header=false';
 			strURL += '&filter='+escape($('#filter').val());
