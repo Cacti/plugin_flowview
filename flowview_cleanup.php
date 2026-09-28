@@ -115,7 +115,12 @@ flowview_db_execute_prepared('TRUNCATE TABLE parallel_database_query_shard_cache
 
 exit(0);
 
-/*  display_version - displays version information */
+/**
+ * Prints this script's version and copyright banner. Called from
+ * display_help() and when invoked with '--version'.
+ *
+ * @return void
+ */
 function display_version() {
 	$info    = plugin_flowview_version();
 	$version = $info['version'];
@@ -123,7 +128,13 @@ function display_version() {
 	print "Cacti Flowview Cleanup Parallel Queries, Version $version, " . COPYRIGHT_YEARS . PHP_EOL;
 }
 
-/*  display_help - displays the usage of the function */
+/**
+ * Prints the version banner followed by this script's command-line
+ * usage summary. Called when invoked with '--help' or with invalid/
+ * missing arguments.
+ *
+ * @return void
+ */
 function display_help () {
 	display_version();
 

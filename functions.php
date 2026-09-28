@@ -280,7 +280,7 @@ function edit_filter() {
 	form_save_button($page, 'return');
 
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 	var date1Open  = false;
 	var date2Open  = false;
 	var returnPage = '<?php print $page;?>';
@@ -1011,7 +1011,7 @@ function flowview_display_filter() {
 		</td>
 	</tr>
 	<tr><td>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 
 	var height    = $(window).height() - 200;
 	var date1Open = false;

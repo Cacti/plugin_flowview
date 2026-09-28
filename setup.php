@@ -23,6 +23,22 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Return the CSP nonce attribute for inline <script> tags, safely across
+ * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
+ * requires a per-request nonce on parser-inserted scripts; older releases lack
+ * the CactiSecureHeaders class, so this returns an empty string there.
+ *
+ * @return string The nonce attribute when supported, otherwise empty string.
+ */
+function plugin_flowview_csp_nonce(): string {
+	if (class_exists('CactiSecureHeaders')) {
+		return CactiSecureHeaders::getNonceAttribute();
+	}
+
+	return '';
+}
+
 function plugin_flowview_install() {
 	// Setup core hooks for just about every plugin
 	api_plugin_register_hook('flowview', 'config_arrays',          'flowview_config_arrays',          'setup.php');
@@ -302,9 +318,9 @@ function flowview_page_head() {
 	$theme = get_selected_theme();
 
 	if (file_exists($config['base_path'] . '/plugins/flowview/themes/' . $theme . '.css')) {
-		print '<link href="' . $config['url_path'] . 'plugins/flowview/themes/' . $theme . '.css" type="text/css" rel="stylesheet">' . PHP_EOL;
+		print get_md5_include_css('plugins/flowview/themes/' . $theme . '.css');
 	} else {
-		print '<link href="' . $config['url_path'] . 'plugins/flowview/themes/default.css" type="text/css" rel="stylesheet">' . PHP_EOL;
+		print get_md5_include_css('plugins/flowview/themes/default.css');
 	}
 }
 

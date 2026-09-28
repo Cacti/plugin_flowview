@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-21 13:13-0400\n"
+"POT-Creation-Date: 2026-09-27 11:28-0400\n"
 "PO-Revision-Date: 2024-07-14 20:25-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -170,8 +170,8 @@ msgid "%s Bytes"
 msgstr "%s Bytes"
 
 #: arrays.php:107 arrays.php:569 arrays.php:577 arrays.php:606
-#: flowview_devices.php:550 flowview_devices.php:564 flowview_devices.php:967
-#: flowview_filters.php:370 functions.php:671 functions.php:692
+#: flowview_devices.php:607 flowview_devices.php:621 flowview_devices.php:1050
+#: flowview_filters.php:406 functions.php:671 functions.php:692
 msgid "All"
 msgstr "Tutti"
 
@@ -213,7 +213,7 @@ msgid "Destination Domain"
 msgstr "IP di destinazione"
 
 #: arrays.php:374 arrays.php:380 flowview_devices.php:79
-#: flowview_devices.php:854
+#: flowview_devices.php:937
 msgid "Port"
 msgstr "Porta"
 
@@ -235,7 +235,7 @@ msgid "IP Address"
 msgstr "Indirizzo IP"
 
 #: arrays.php:418 arrays.php:497 arrays.php:512 arrays.php:527
-#: flowview_devices.php:88 flowview_devices.php:859 functions.php:3345
+#: flowview_devices.php:88 flowview_devices.php:942 functions.php:3345
 msgid "Protocol"
 msgstr "Protocollo"
 
@@ -256,9 +256,10 @@ msgstr "Termini e Condizioni"
 msgid "Destingation Prefix"
 msgstr "Prefisso di destinazione"
 
-#: arrays.php:487 flowview_devices.php:948 flowview_devices.php:949
-#: flowview_devices.php:950 flowview_devices.php:960 flowview_devices.php:963
-#: functions.php:829 functions.php:3521 functions.php:3545
+#: arrays.php:487 flowview_devices.php:1031 flowview_devices.php:1032
+#: flowview_devices.php:1033 flowview_devices.php:1043
+#: flowview_devices.php:1046 functions.php:829 functions.php:3521
+#: functions.php:3545
 msgid "N/A"
 msgstr "N/A"
 
@@ -323,7 +324,7 @@ msgstr "Il filtro salvato da visualizzare."
 msgid "New Filter"
 msgstr "Nuovo filtro"
 
-#: arrays.php:600 flowview_filters.php:328 functions.php:663
+#: arrays.php:600 flowview_filters.php:364 functions.php:663
 msgid "Listener"
 msgstr "Ascoltatore"
 
@@ -359,7 +360,7 @@ msgstr "Se questo filtro si basa su un intervallo di tempo predefinito, selezion
 msgid "Detailed Filter Criteria"
 msgstr "Criteri di filtro dettagliati"
 
-#: arrays.php:638 flowview_filters.php:333
+#: arrays.php:638 flowview_filters.php:369
 msgid "Report Type"
 msgstr "Tipo di Rapporto"
 
@@ -415,7 +416,7 @@ msgstr "Si"
 msgid "No"
 msgstr "No"
 
-#: arrays.php:681 flowview_filters.php:343 functions.php:763
+#: arrays.php:681 flowview_filters.php:379 functions.php:763
 msgid "Sort Field"
 msgstr "Ordina campo:"
 
@@ -648,24 +649,24 @@ msgstr "Ruoli"
 msgid "Persons"
 msgstr "Persone"
 
-#: flowview.php:126
+#: flowview.php:133
 msgid "Unable to find Raw Data for to Export"
 msgstr ""
 
-#: flowview.php:206
+#: flowview.php:223
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
 msgstr ""
 
-#: flowview.php:211
+#: flowview.php:228
 msgid "Invalid source Query provided.  Please submit with a valid query."
 msgstr ""
 
-#: flowview.php:241
+#: flowview.php:271
 #, php-format
 msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
 msgstr "Impossibile eliminare il filtro di flusso '%s' in quanto è in uso in un report pianificato."
 
-#: flowview.php:244
+#: flowview.php:274
 #, php-format
 msgid "Flow Filter '%s' Deleted."
 msgstr "Filtro di flusso '%s' eliminato."
@@ -812,11 +813,11 @@ msgstr "Telefono"
 msgid "Email"
 msgstr "Email"
 
-#: flowview_databases.php:384 flowview_devices.php:410 flowview_devices.php:636
+#: flowview_databases.php:384 flowview_devices.php:467 flowview_devices.php:693
 msgid "Address"
 msgstr "Indirizzo"
 
-#: flowview_databases.php:389 flowview_devices.php:414 flowview_devices.php:864
+#: flowview_databases.php:389 flowview_devices.php:471 flowview_devices.php:947
 msgid "Status"
 msgstr "Stato"
 
@@ -896,7 +897,7 @@ msgstr "Fare riferimento a"
 msgid "MP Peering"
 msgstr "MP Peering"
 
-#: flowview_databases.php:489 flowview_devices.php:575 functions.php:972
+#: flowview_databases.php:489 flowview_devices.php:632 functions.php:972
 msgid "Export"
 msgstr "Esporta"
 
@@ -1083,8 +1084,8 @@ msgid "FATAL: Unknown Database Table %s"
 msgstr "IRREVERSIBILE: Tabella di database sconosciuta %s"
 
 #: flowview_databases.php:913 flowview_databases.php:1272
-#: flowview_databases.php:1568 flowview_devices.php:784
-#: flowview_filters.php:234 flowview_schedules.php:554
+#: flowview_databases.php:1568 flowview_devices.php:867
+#: flowview_filters.php:270 flowview_schedules.php:554
 #: flowview_schedules.php:851
 msgid "Search"
 msgstr "Cerca"
@@ -1102,35 +1103,35 @@ msgid "Entries"
 msgstr "Voci"
 
 #: flowview_databases.php:945 flowview_databases.php:1314
-#: flowview_databases.php:1610 flowview_filters.php:244
+#: flowview_databases.php:1610 flowview_filters.php:280
 #: flowview_schedules.php:564 flowview_schedules.php:861
 msgid "Default"
 msgstr "Predefinito"
 
 #: flowview_databases.php:957 flowview_databases.php:1326
-#: flowview_databases.php:1622 flowview_devices.php:574
-#: flowview_devices.php:791 flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_databases.php:1622 flowview_devices.php:631
+#: flowview_devices.php:874 flowview_filters.php:292 flowview_schedules.php:576
 #: flowview_schedules.php:873 functions.php:715
 msgid "Go"
 msgstr "Vai"
 
 #: flowview_databases.php:957 flowview_databases.php:1326
-#: flowview_databases.php:1622 flowview_devices.php:791
-#: flowview_filters.php:256 flowview_schedules.php:576
+#: flowview_databases.php:1622 flowview_devices.php:874
+#: flowview_filters.php:292 flowview_schedules.php:576
 #: flowview_schedules.php:873
 msgid "Set/Refresh Filters"
 msgstr "Impostazione/Rifresh Filtri"
 
 #: flowview_databases.php:958 flowview_databases.php:1327
-#: flowview_databases.php:1623 flowview_devices.php:792
-#: flowview_filters.php:257 flowview_schedules.php:577
+#: flowview_databases.php:1623 flowview_devices.php:875
+#: flowview_filters.php:293 flowview_schedules.php:577
 #: flowview_schedules.php:874 functions.php:716
 msgid "Clear"
 msgstr "Cancella"
 
 #: flowview_databases.php:958 flowview_databases.php:1327
-#: flowview_databases.php:1623 flowview_devices.php:792
-#: flowview_filters.php:257 flowview_schedules.php:577
+#: flowview_databases.php:1623 flowview_devices.php:875
+#: flowview_filters.php:293 flowview_schedules.php:577
 #: flowview_schedules.php:874
 msgid "Clear Filters"
 msgstr "Pulisci filtri"
@@ -1154,14 +1155,14 @@ msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
 msgstr[0] "Fare clic su \"Continua\" per eliminare il seguente/i Programma(i)."
 msgstr[1] "Fare clic su \"Continua\" per eliminare il seguente/i Programma(i)."
 
-#: flowview_databases.php:1188 flowview_devices.php:270
-#: flowview_filters.php:165 flowview_schedules.php:341 functions.php:988
+#: flowview_databases.php:1188 flowview_devices.php:298
+#: flowview_filters.php:180 flowview_schedules.php:341 functions.php:988
 #: functions.php:998
 msgid "Cancel"
 msgstr "Annulla"
 
-#: flowview_databases.php:1189 flowview_devices.php:262
-#: flowview_filters.php:157 flowview_schedules.php:333 functions.php:997
+#: flowview_databases.php:1189 flowview_devices.php:290
+#: flowview_filters.php:172 flowview_schedules.php:333 functions.php:997
 msgid "Continue"
 msgstr "Continua"
 
@@ -1362,228 +1363,228 @@ msgstr "Abilitato"
 msgid "If checked, the Listener service will be started and will wait on incoming data."
 msgstr ""
 
-#: flowview_devices.php:172
+#: flowview_devices.php:185
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "Non è stato trovato alcun modello di flusso per ID dispositivo:%s e ID modello:%s"
 
-#: flowview_devices.php:238 flowview_devices.php:252
+#: flowview_devices.php:266 flowview_devices.php:280
 #, fuzzy
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
 msgstr "Fare clic su 'Continua' per eliminare i seguenti ascoltatori Net-Flow.  Dopo di che, sarà necessario riavviare il servizio di Flow-Capture."
 
-#: flowview_devices.php:245
+#: flowview_devices.php:273
 #, fuzzy
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
 msgstr "Fare clic su 'Continua' per eliminare i seguenti ascoltatori Net-Flow.  Dopo di che, sarà necessario riavviare il servizio di Flow-Capture."
 
-#: flowview_devices.php:259
+#: flowview_devices.php:287
 #, fuzzy
 msgid "You must select at least one Listener."
 msgstr "È necessario selezionare almeno un dispositivo."
 
-#: flowview_devices.php:302
+#: flowview_devices.php:339
 msgid "The listener port must be a numeric value between 1 and 65535."
 msgstr ""
 
-#: flowview_devices.php:324
+#: flowview_devices.php:361
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
 msgstr "Salvataggio riuscito.  Il listener Flowview è stato salvato e il servizio è stato riavviato."
 
-#: flowview_devices.php:326
+#: flowview_devices.php:363
 msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
 msgstr "Salvataggio riuscito.  Il listener Flowview è stato salvato.  Tuttavia, l'acquisizione del flusso del servizio non è in esecuzione."
 
-#: flowview_devices.php:365
+#: flowview_devices.php:422
 #, php-format
 msgid "Listener [edit: %s]"
 msgstr "Rapporto: [modifica: %s]"
 
-#: flowview_devices.php:369
+#: flowview_devices.php:426
 msgid "Listener [new]"
 msgstr "Rapporto: [nuovo]"
 
-#: flowview_devices.php:406 flowview_devices.php:837
+#: flowview_devices.php:463 flowview_devices.php:920
 msgid "Name"
 msgstr "Nome"
 
-#: flowview_devices.php:418
+#: flowview_devices.php:475
 msgid "Version"
 msgstr "Versione"
 
-#: flowview_devices.php:422 functions.php:39
+#: flowview_devices.php:479 functions.php:39
 msgid "Templates"
 msgstr "Modelli"
 
-#: flowview_devices.php:426 flowview_devices.php:891
+#: flowview_devices.php:483 flowview_devices.php:974
 msgid "Last Updated"
 msgstr "Ultimo Aggiornamento"
 
-#: flowview_devices.php:428
+#: flowview_devices.php:485
 msgid "Active Streams update every 5 minutes"
 msgstr "Active Streams si aggiorna ogni 5 minuti"
 
-#: flowview_devices.php:471
+#: flowview_devices.php:528
 msgid "No Inbound Streams Detected"
 msgstr "Nessun flusso in entrata rilevato"
 
-#: flowview_devices.php:536
+#: flowview_devices.php:593
 msgid "Listener Detected Templates"
 msgstr "Modelli rilevati dal listener"
 
-#: flowview_devices.php:545
+#: flowview_devices.php:602
 msgid "Ex Addr"
 msgstr "Ex Addr"
 
-#: flowview_devices.php:559
+#: flowview_devices.php:616
 msgid "Template"
 msgstr "Modello"
 
-#: flowview_devices.php:640
+#: flowview_devices.php:697
 msgid "Template ID"
 msgstr "ID template"
 
-#: flowview_devices.php:644
+#: flowview_devices.php:701
 msgid "Field Name"
 msgstr "Campo Nome"
 
-#: flowview_devices.php:648 functions.php:5455
+#: flowview_devices.php:705 functions.php:5455
 msgid "Supported"
 msgstr "Sostenuto"
 
-#: flowview_devices.php:652
+#: flowview_devices.php:709
 msgid "Field ID"
 msgstr "ID Campo"
 
-#: flowview_devices.php:656
+#: flowview_devices.php:713
 msgid "Field Type"
 msgstr "Tipo di campo"
 
-#: flowview_devices.php:660
+#: flowview_devices.php:717
 msgid "Length"
 msgstr "Lunghezza"
 
-#: flowview_devices.php:664
+#: flowview_devices.php:721
 msgid "Unpack"
 msgstr "Disimballare"
 
-#: flowview_devices.php:706
+#: flowview_devices.php:763
 msgid "No Inbound Stream Templates Detected"
 msgstr "Nessun modello di flusso in entrata rilevato"
 
-#: flowview_devices.php:775
+#: flowview_devices.php:858
 msgid "FlowView Listeners"
 msgstr "Ascoltatori FlowView"
 
-#: flowview_devices.php:827 setup.php:140 setup.php:201
+#: flowview_devices.php:910 setup.php:156 setup.php:217
 msgid "Listeners"
 msgstr "Ascoltatori"
 
-#: flowview_devices.php:841
+#: flowview_devices.php:924
 msgid "Method"
 msgstr "Metodo"
 
-#: flowview_devices.php:845
+#: flowview_devices.php:928
 #, fuzzy
 msgid "Bind address"
 msgstr "Indirizzo IP"
 
-#: flowview_devices.php:849
+#: flowview_devices.php:932
 msgid "Allowed From"
 msgstr "Consentito da"
 
-#: flowview_devices.php:869
+#: flowview_devices.php:952
 msgid "Observed Listen"
 msgstr "Ascolta osservato"
 
-#: flowview_devices.php:870
+#: flowview_devices.php:953
 msgid "The port security actually observed on the listeners port."
 msgstr "La sicurezza della porta effettivamente osservata sulla porta dei listener."
 
-#: flowview_devices.php:874
+#: flowview_devices.php:957
 msgid "Backlog"
 msgstr ""
 
-#: flowview_devices.php:875
+#: flowview_devices.php:958
 msgid "The Size of the UDP backlog in bytes."
 msgstr ""
 
-#: flowview_devices.php:879
+#: flowview_devices.php:962
 msgid "Streams"
 msgstr "Contenuti"
 
-#: flowview_devices.php:881
+#: flowview_devices.php:964
 msgid "The number of inbound connections from various sources."
 msgstr "Il numero di connessioni in entrata da varie origini."
 
-#: flowview_devices.php:885
+#: flowview_devices.php:968
 msgid "Stream Versions"
 msgstr "Versione"
 
-#: flowview_devices.php:887
+#: flowview_devices.php:970
 msgid "The Traffic Flow versions being observed."
 msgstr "Le versioni del flusso di traffico osservate."
 
-#: flowview_devices.php:893
+#: flowview_devices.php:976
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Il tempo massimo di aggiornamento di tutti i flussi raccolti.  Questo valore viene aggiornato ogni 5 minuti."
 
-#: flowview_devices.php:939 flowview_schedules.php:172 functions.php:840
+#: flowview_devices.php:1022 flowview_schedules.php:172 functions.php:840
 msgid "None"
 msgstr "Nessuno"
 
-#: flowview_devices.php:943
+#: flowview_devices.php:1026
 #, fuzzy
 msgid "No Connections"
 msgstr "Geolocalizzazione"
 
-#: flowview_devices.php:972
+#: flowview_devices.php:1055
 msgid "Cacti"
 msgstr "Cactus"
 
-#: flowview_devices.php:987
+#: flowview_devices.php:1070
 msgid "No Flowview Listeners"
 msgstr "Ascoltatori FlowView"
 
-#: flowview_filters.php:133
+#: flowview_filters.php:148
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
 msgstr "Fare clic su \"Continua\" per eliminare il seguente/i Programma(i)."
 
-#: flowview_filters.php:140
+#: flowview_filters.php:155
 msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
 msgstr "Fare clic su \"Continua\" per disattivare il/i seguente/i programma/i."
 
-#: flowview_filters.php:147
+#: flowview_filters.php:162
 msgid "Click 'Continue' to Enable the following Filters(s)."
 msgstr "Fare clic su 'Continua' per attivare il seguente programma(i)."
 
-#: flowview_filters.php:154
+#: flowview_filters.php:169
 msgid "You must select at least one Filter."
 msgstr "È necessario selezionare almeno un dispositivo."
 
-#: flowview_filters.php:222
+#: flowview_filters.php:258
 msgid "FlowView Filters"
 msgstr "Filtri di flusso"
 
-#: flowview_filters.php:224
+#: flowview_filters.php:260
 msgid "FlowView Filters [ Add Devices before Filters ]"
 msgstr "Filtri FlowView [Aggiungi dispositivi prima dei filtri]"
 
-#: flowview_filters.php:240 flowview_filters.php:354 setup.php:141
-#: setup.php:257
+#: flowview_filters.php:276 flowview_filters.php:390 setup.php:157
+#: setup.php:273
 msgid "Filters"
 msgstr "Filtri"
 
-#: flowview_filters.php:323 flowview_schedules.php:98
+#: flowview_filters.php:359 flowview_schedules.php:98
 #: flowview_schedules.php:950
 msgid "Filter Name"
 msgstr "Nome Filtri"
 
-#: flowview_filters.php:338
+#: flowview_filters.php:374
 msgid "ID"
 msgstr "ID"
 
-#: flowview_filters.php:348
+#: flowview_filters.php:384
 msgid "Resolution"
 msgstr "Risoluzione"
 
@@ -1673,7 +1674,7 @@ msgstr ""
 msgid "How long should the report be allowed to execute before exiting?"
 msgstr ""
 
-#: flowview_schedules.php:131 setup.php:613
+#: flowview_schedules.php:131 setup.php:629
 #, php-format
 msgid "%d Minute"
 msgstr "%d Minuto"
@@ -1682,8 +1683,8 @@ msgstr "%d Minuto"
 #: flowview_schedules.php:134 flowview_schedules.php:135
 #: flowview_schedules.php:136 flowview_schedules.php:137
 #: flowview_schedules.php:138 flowview_schedules.php:139
-#: flowview_schedules.php:140 setup.php:614 setup.php:615 setup.php:616
-#: setup.php:617 setup.php:618 setup.php:619
+#: flowview_schedules.php:140 setup.php:630 setup.php:631 setup.php:632
+#: setup.php:633 setup.php:634 setup.php:635
 #, php-format
 msgid "%d Minutes"
 msgstr "%d Minuti"
@@ -1700,11 +1701,11 @@ msgstr "Indirizzo email"
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
 msgstr "Indirizzi e-mail (delimitati dal comando) a cui inviare questa scansione NetFlow."
 
-#: flowview_schedules.php:157 setup.php:535
+#: flowview_schedules.php:157 setup.php:551
 msgid "Format File to Use"
 msgstr "Formato file da utilizzare"
 
-#: flowview_schedules.php:160 setup.php:538
+#: flowview_schedules.php:160 setup.php:554
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
 msgstr "Scegli il wrapper html personalizzato e il file CSS da utilizzare. Questo file contiene sia html che CSS per avvolgere il tuo rapporto. Se contiene più del semplice CSS, è necessario inserire un file speciale<REPORT> tag all'interno del file. Questo tag di formato verrà sostituito dal contenuto del report. Questi file si trovano nella directory \"formati\"."
 
@@ -1770,7 +1771,7 @@ msgid "Scheduled Report: [new]"
 msgstr "Rapporto: [nuovo]"
 
 #: flowview_schedules.php:560 flowview_schedules.php:857
-#: flowview_schedules.php:981 setup.php:142 setup.php:229
+#: flowview_schedules.php:981 setup.php:158 setup.php:245
 msgid "Schedules"
 msgstr "Pianificazioni"
 
@@ -1866,17 +1867,17 @@ msgstr "Email"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php:43
+#: functions-pre13.php:70
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "Cactus"
 
-#: functions-pre13.php:192
+#: functions-pre13.php:239
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php:198
+#: functions-pre13.php:245
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
@@ -2438,380 +2439,380 @@ msgstr "Diagramma di visualizzazione del flusso per %s Tipo è %s"
 msgid "Not Supported"
 msgstr "Non supportato"
 
-#: functions.php:6702 setup.php:421
+#: functions.php:6702 setup.php:437
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria (veloce, a prova di incidente)"
 
-#: functions.php:6703 setup.php:422
+#: functions.php:6703 setup.php:438
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (veloce, a prova di incidente)"
 
-#: functions.php:6704 setup.php:423
+#: functions.php:6704 setup.php:439
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (concorrenza lenta e alta)"
 
-#: setup.php:46
+#: setup.php:62
 #, fuzzy
 msgid "NetFlow User"
 msgstr "Versione NetFlow"
 
-#: setup.php:47
+#: setup.php:63
 #, fuzzy
 msgid "NetFlow Admin"
 msgstr "Versione NetFlow"
 
-#: setup.php:54 setup.php:78
+#: setup.php:70 setup.php:94
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
 msgstr "Rinominare i file config.php.dist o config_local.php.dist nella directory flowview e modificare la configurazione del database prima dell'installazione."
 
-#: setup.php:120
+#: setup.php:136
 msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
 msgstr "Tieni presente che le tabelle dei plug-in Flowview vengono aggiornate in background.  Questo potrebbe richiedere del tempo. Per ulteriori informazioni, consulta il registro dei cactus"
 
-#: setup.php:133
+#: setup.php:149
 msgid "The Filter has been Deleted"
 msgstr "Il filtro è stato eliminato"
 
-#: setup.php:134
+#: setup.php:150
 msgid "The Filter has been Updated"
 msgstr "Il filtro è stato aggiornato"
 
-#: setup.php:139
+#: setup.php:155
 msgid "Import/Export"
 msgstr "Importa/Esporta"
 
-#: setup.php:140 setup.php:141 setup.php:142 setup.php:143 setup.php:148
-#: setup.php:292 setup.php:294
+#: setup.php:156 setup.php:157 setup.php:158 setup.php:159 setup.php:164
+#: setup.php:308 setup.php:310
 msgid "FlowView"
 msgstr "FlowView"
 
-#: setup.php:143
+#: setup.php:159
 msgid "Databases"
 msgstr "Database"
 
-#: setup.php:151
+#: setup.php:167
 msgid "Normal User"
 msgstr "Utente Normale"
 
-#: setup.php:152
+#: setup.php:168
 msgid "System Administration"
 msgstr "Amministrazione di sistema"
 
-#: setup.php:173 setup.php:194
+#: setup.php:189 setup.php:210
 msgid "Flow Viewer"
 msgstr "Visualizzatore di flusso"
 
-#: setup.php:180
+#: setup.php:196
 msgid "Dashboard"
 msgstr "Bacheca"
 
-#: setup.php:187 setup.php:215 setup.php:243 setup.php:271
+#: setup.php:203 setup.php:231 setup.php:259 setup.php:287
 msgid "(save)"
 msgstr "Salva"
 
-#: setup.php:208 setup.php:236 setup.php:264
+#: setup.php:224 setup.php:252 setup.php:280
 msgid "(edit)"
 msgstr "(modificare)"
 
-#: setup.php:222 setup.php:250 setup.php:278
+#: setup.php:238 setup.php:266 setup.php:294
 msgid "(actions)"
 msgstr "Azioni"
 
-#: setup.php:368
+#: setup.php:384
 #, fuzzy, php-format
 msgid "%d Process"
 msgstr "%d pixel"
 
-#: setup.php:370
+#: setup.php:386
 #, php-format
 msgid "%d Processes"
 msgstr ""
 
-#: setup.php:376
+#: setup.php:392
 msgid "Report Concurrent Processes (FlowView Only)"
 msgstr ""
 
-#: setup.php:377
+#: setup.php:393
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
 msgstr ""
 
-#: setup.php:390
+#: setup.php:406
 #, fuzzy
 msgid "Internet Proxy Settings"
 msgstr "Controllo di Internet"
 
-#: setup.php:395
+#: setup.php:411
 #, fuzzy
 msgid "Internet Proxy Address"
 msgstr "Controllo di Internet"
 
-#: setup.php:396
+#: setup.php:412
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
 msgstr ""
 
-#: setup.php:403
+#: setup.php:419
 #, fuzzy
 msgid "Internet Proxy User"
 msgstr "Controllo di Internet"
 
-#: setup.php:404
+#: setup.php:420
 msgid "If your Internet Proxy requires a username, enter it here."
 msgstr ""
 
-#: setup.php:411
+#: setup.php:427
 msgid "Internet Proxy Password"
 msgstr ""
 
-#: setup.php:412
+#: setup.php:428
 msgid "If your Internet Proxy requires a password, enter it here."
 msgstr ""
 
-#: setup.php:455
+#: setup.php:471
 msgid "Name Resolution"
 msgstr "Risoluzione"
 
-#: setup.php:460
+#: setup.php:476
 msgid "Hostname Resolution"
 msgstr "Risoluzione"
 
-#: setup.php:461
+#: setup.php:477
 msgid "The method by which you wish to resolve hostnames."
 msgstr "Il metodo con cui si desidera risolvere i nomi degli host."
 
-#: setup.php:464
+#: setup.php:480
 msgid "Use Local Server"
 msgstr "Utilizzare il server locale"
 
-#: setup.php:465
+#: setup.php:481
 msgid "Use DNS Servers under Mail/Reporting/DNS"
 msgstr "Usa il server DNS qui sotto"
 
-#: setup.php:466
+#: setup.php:482
 msgid "Don't Resolve DNS"
 msgstr "Non risolvere i DNS"
 
-#: setup.php:471
+#: setup.php:487
 #, fuzzy
 msgid "Download the Internet Registry Daily"
 msgstr "Dettagli del Registro di sistema delle route Internet"
 
-#: setup.php:472
+#: setup.php:488
 msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
 msgstr ""
 
-#: setup.php:477
+#: setup.php:493
 msgid "Local Domain Name"
 msgstr "Nomi a dominio di striscia"
 
-#: setup.php:480
+#: setup.php:496
 msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
 msgstr "Per gli indirizzi IPv4 nella rete locale che non vengono risolti localmente, aggiungere questo suffisso all'indirizzo IP risultante."
 
-#: setup.php:485
+#: setup.php:501
 msgid "Local IP Range"
 msgstr "Intervallo IP locale"
 
-#: setup.php:488
+#: setup.php:504
 #, fuzzy
 msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
 msgstr "Specificare l'intervallo di indirizzi IP IPv4 per la rete locale per gli host che potrebbero non essere registrati in DNS.  Questi host verranno mappati al nome di dominio locale di cui sopra.  Questo più per gli utenti domestici.  È possibile utilizzare formati CIDR o non CIDR.  Ad esempio: 192.168.11.0 o 192.168.11.0/24"
 
-#: setup.php:489
+#: setup.php:505
 msgid "Use CIDR or Non-CIDR"
 msgstr "Usa CIDR o non CIDR"
 
-#: setup.php:494
+#: setup.php:510
 msgid "Use Arin to find Domains and AS Numbers"
 msgstr "Usa Arin per trovare domini non registrati"
 
-#: setup.php:495
+#: setup.php:511
 msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
 msgstr "Molti servizi di raccolta dati Big Tech amano mascherare la loro proprietà dei domini per offuscare il fatto che stanno raccogliendo le tue informazioni personali.  Se sei preoccupato per questo e la tua installazione di Cacti ha accesso a Internet, puoi usare Arin per rimuovere la maschera da quelle aziende Big Tech."
 
-#: setup.php:500
+#: setup.php:516
 msgid "Whois Provider Host"
 msgstr "Whois Provider Host"
 
-#: setup.php:503
+#: setup.php:519
 msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
 msgstr "Fornisci il nome host per risolvere le chiamate whois.  Se non null, è necessario avere il file binario whois nel percorso di sistema."
 
-#: setup.php:504
+#: setup.php:520
 msgid "whois.radb.net"
 msgstr "whois.radb.net"
 
-#: setup.php:509
+#: setup.php:525
 msgid "Whois Binary Path"
 msgstr "Percorso binario degli strumenti di flusso"
 
-#: setup.php:512
+#: setup.php:528
 msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
 msgstr "Fornisci il percorso per il binario 'whois'.  Il binario 'whois' verrà utilizzato per trovare informazioni AS che integrano Arin."
 
-#: setup.php:513
+#: setup.php:529
 msgid "Enter binary path"
 msgstr "Inserisci il percorso binario"
 
-#: setup.php:518
+#: setup.php:534
 msgid "Graph Drilldown Settings"
 msgstr ""
 
-#: setup.php:523
+#: setup.php:539
 msgid "Default Search Filter for Graph Drilldowns"
 msgstr ""
 
-#: setup.php:526
+#: setup.php:542
 msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
 msgstr ""
 
-#: setup.php:530
+#: setup.php:546
 msgid "Data Retention and Report Generation"
 msgstr "Conservazione dei dati e generazione di report"
 
-#: setup.php:542
+#: setup.php:558
 msgid "Data Retention Policy"
 msgstr "Politica di conservazione dei dati"
 
-#: setup.php:543
+#: setup.php:559
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
 msgstr "La quantità di tempo che Cacti manterrà le tabelle Flow partizionate."
 
-#: setup.php:546
+#: setup.php:562
 #, php-format
 msgid "%d Week"
 msgstr "%d Settimana"
 
-#: setup.php:547 setup.php:548
+#: setup.php:563 setup.php:564
 #, php-format
 msgid "%d Weeks"
 msgstr "%d Settimane"
 
-#: setup.php:549
+#: setup.php:565
 #, php-format
 msgid "%d Month"
 msgstr "%d Mese"
 
-#: setup.php:550 setup.php:551 setup.php:552 setup.php:553
+#: setup.php:566 setup.php:567 setup.php:568 setup.php:569
 #, php-format
 msgid "%d Months"
 msgstr "%d Mesi"
 
-#: setup.php:554
+#: setup.php:570
 #, php-format
 msgid "%d Year"
 msgstr "%d Anno"
 
-#: setup.php:559
+#: setup.php:575
 msgid "Database Partitioning Scheme"
 msgstr "Schema di partizionamento del database"
 
-#: setup.php:560
+#: setup.php:576
 msgid "Depending on the number of flows per minute, you may require more tables per day."
 msgstr "A seconda del numero di flussi al minuto, potrebbero essere necessarie più tabelle al giorno."
 
-#: setup.php:563
+#: setup.php:579
 msgid "Daily"
 msgstr "Giornaliero"
 
-#: setup.php:564
+#: setup.php:580
 msgid "Hourly"
 msgstr "Ogni ora"
 
-#: setup.php:569
+#: setup.php:585
 msgid "Storage Engine for Raw Tables"
 msgstr "Motore di archiviazione per tabelle non elaborate"
 
-#: setup.php:570
+#: setup.php:586
 msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
 msgstr "L'Aria Engine è perfetto per tutti tranne che per il tavolo Live raw.  La tabella non elaborata Live sarà sempre InnoDB.  Fai la tua scelta."
 
-#: setup.php:576
+#: setup.php:592
 msgid "Parallel Queries"
 msgstr "Query parallele"
 
-#: setup.php:581
+#: setup.php:597
 msgid "Max Concurrent Threads"
 msgstr "Numero massimo di thread simultanei"
 
-#: setup.php:582
+#: setup.php:598
 msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
 msgstr "Numero massimo di thread che verranno inviati per eseguire le query FlowView.  Si noti che è possibile avere al massimo 1 thread per partizione di database e che è necessario prestare attenzione a non sovraccaricare il server di database con troppi thread simultanei in esecuzione."
 
-#: setup.php:585
+#: setup.php:601
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: setup.php:586 setup.php:587 setup.php:588 setup.php:589 setup.php:590
-#: setup.php:591 setup.php:592 setup.php:593 setup.php:594 setup.php:595
-#: setup.php:596 setup.php:597 setup.php:598 setup.php:599 setup.php:600
-#: setup.php:601 setup.php:602 setup.php:603 setup.php:604
+#: setup.php:602 setup.php:603 setup.php:604 setup.php:605 setup.php:606
+#: setup.php:607 setup.php:608 setup.php:609 setup.php:610 setup.php:611
+#: setup.php:612 setup.php:613 setup.php:614 setup.php:615 setup.php:616
+#: setup.php:617 setup.php:618 setup.php:619 setup.php:620
 #, php-format
 msgid "%d Threads"
 msgstr "%d discussioni"
 
-#: setup.php:609
+#: setup.php:625
 msgid "Maximum Run Time"
 msgstr "Righe massime"
 
-#: setup.php:610
+#: setup.php:626
 msgid "If the Parallel Query does not finish in this time, exit."
 msgstr "Se la query in parallelo non viene completata in questo lasso di tempo, uscire."
 
-#: setup.php:624
+#: setup.php:640
 msgid "Cached Data Time to Live"
 msgstr "Durata dei dati memorizzati nella cache"
 
-#: setup.php:625
+#: setup.php:641
 msgid "How long should FlowView hold onto Cached Query results before purging them?"
 msgstr "Per quanto tempo FlowView deve conservare i risultati delle query memorizzate nella cache prima di eliminarli?"
 
-#: setup.php:628 setup.php:629
+#: setup.php:644 setup.php:645
 #, php-format
 msgid "%d Hours"
 msgstr "%d Ore"
 
-#: setup.php:630
+#: setup.php:646
 #, php-format
 msgid "%d Day"
 msgstr "%d Giorno"
 
-#: setup.php:631
+#: setup.php:647
 #, php-format
 msgid "%d Days"
 msgstr "%d Giorni"
 
-#: setup.php:636
+#: setup.php:652
 msgid "MaxScale Sharding"
 msgstr "Partizionamento orizzontale MaxScale"
 
-#: setup.php:637
+#: setup.php:653
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
 msgstr ""
 
-#: setup.php:642
+#: setup.php:658
 msgid "Leverage MaxScale to Distribute Query Shards"
 msgstr "Sfruttare MaxScale per distribuire le partizioni di query"
 
-#: setup.php:643
+#: setup.php:659
 msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
 msgstr "Se si dispone di più servizi che fungono da slave per MaxScale, è possibile aumentare la velocità di esecuzione delle query distribuendo le query parallele a più server backend MariaDB."
 
-#: setup.php:648
+#: setup.php:664
 #, fuzzy
 msgid "MaxScale Read-Write Split Port"
 msgstr "Porta di sola lettura MaxScale"
 
-#: setup.php:651
+#: setup.php:667
 #, fuzzy
 msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
 msgstr "Deve essere la porta del servizio di sola lettura (readconnroute) e del router."
 
-#: setup.php:657
+#: setup.php:673
 msgid "Flowview"
 msgstr "FlowView"
 
-#: setup.php:1312
+#: setup.php:1328
 msgid "View NetFlow Traffic In Range"
 msgstr ""
 
