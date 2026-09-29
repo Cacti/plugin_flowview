@@ -25,32 +25,33 @@
 
 /**
  * flowview_db_connect_real - makes a connection to the database server
- * @param  $host - the hostname of the database server, 'localhost' if the database server is running
- *    on this machine
+ * on this machine
  *
- * @param  string        Username to connect to the database server as
- * @param  string        Password to connect to the database server with
- * @param  string        Name of the database to connect to
- * @param  string        Type of database server to connect to, only 'mysql' is currently supported
- * @param  int           Number a time the server should attempt to connect before failing
- * @param  bool          Either true or false, is the database using ssl
- * @param  string        Path to the ssl key file
- * @param  string        Path to the ssl cert file
- * @param  string        Path to the ssl ca file
+ * @param mixed $host
+ * @param mixed $user
+ * @param mixed $pass
+ * @param mixed $db_name
+ * @param mixed $db_type
+ * @param string $port
+ * @param int $retries
+ * @param string $db_ssl
+ * @param string $db_ssl_key
+ * @param string $db_ssl_cert
+ * @param string $db_ssl_ca
  *
- * @return (object) connection_id for success, (bool) '0' for error
+ * @return mixed
  */
-function flowview_db_connect_real($host, $user, $pass, $db_name, $db_type, $port = '3306', $retries = 20, $db_ssl = '',
-	$db_ssl_key = '', $db_ssl_cert = '', $db_ssl_ca = '') {
-	return db_connect_real($host, $user, $pass, $db_name, $db_type, $port, $retries, $db_ssl, $db_ssl_key, $db_ssl_cert, $db_ssl_ca);
+function flowview_db_connect_real($host, $user, $pass, $db_name, $db_type, string $port = '3306', int $retries = 20, string $db_ssl = '',
+	string $db_ssl_key = '', string $db_ssl_cert = '', string $db_ssl_ca = '') {
+	return db_connect_real($host, $user, $pass, $db_name, $db_type, (int) $port, $retries, (bool) $db_ssl, $db_ssl_key, $db_ssl_cert, $db_ssl_ca);
 }
 
 /**
  * flowview_db_close - closes the open connection
  *
- * @param  $flowview_cnn - the connection object to connect to
+ * @param mixed $flowview_cnn
  *
- * @return the result of the close command
+ * @return mixed
  */
 function flowview_db_close(&$flowview_cnn) {
 	return db_close($flowview_cnn);
@@ -58,14 +59,14 @@ function flowview_db_close(&$flowview_cnn) {
 
 /**
  * flowview_db_check_reconnect - check the flowview database connection.  If
- *   the connection is gone, attempt to reconnect and update the global
- *   flowview connection with the new one.
+ * the connection is gone, attempt to reconnect and update the global
+ * flowview connection with the new one.
  *
- * @param  bool          Whether or not to log the connection check
+ * @param bool $log
  *
- * @return bool          True when the database is connected, otherwise false
+ * @return mixed
  */
-function flowview_db_check_reconnect($log = true) {
+function flowview_db_check_reconnect(bool $log = true) {
 	global $flowview_cnn, $config, $local_db_cnn_id, $remote_db_cnn_id;
 
 	$previous_cnn = $flowview_cnn;
@@ -94,13 +95,13 @@ function flowview_db_check_reconnect($log = true) {
 /**
  * flowview_db_execute - run an sql query and do not return any output
  *
- * @param  string        The sql query to execute
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return '1' for success, '0' for error
+ * @return mixed
  */
-function flowview_db_execute($sql, $log = true, $cnn_id = false) {
+function flowview_db_execute($sql, bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_execute($sql, $log, $flowview_cnn);
@@ -109,13 +110,14 @@ function flowview_db_execute($sql, $log = true, $cnn_id = false) {
 /**
  * flowview_db_execute_prepared - run an sql query and do not return any output
  *
- * @param  string        The sql query to execute
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param array $parms
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return '1' for success, '0' for error
+ * @return mixed
  */
-function flowview_db_execute_prepared($sql, $parms = [], $log = true, $cnn_id = false) {
+function flowview_db_execute_prepared($sql, array $parms = [], bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_execute_prepared($sql, $parms, $log, $flowview_cnn);
@@ -123,16 +125,16 @@ function flowview_db_execute_prepared($sql, $parms = [], $log = true, $cnn_id = 
 
 /**
  * flowview_db_fetch_cell - run a 'select' sql query and return the first column of the
- *   first row found
+ * first row found
  *
- * @param  string        The sql query to execute
- * @param  bool          Whether to log error messages, defaults to true
- * @param  string        Use this column name instead of the first one
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param string $col_name
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return (bool) the output of the sql query as a single variable
+ * @return mixed
  */
-function flowview_db_fetch_cell($sql, $col_name = '', $log = true, $cnn_id = false) {
+function flowview_db_fetch_cell($sql, string $col_name = '', bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_cell($sql, $col_name, $log, $flowview_cnn);
@@ -140,17 +142,17 @@ function flowview_db_fetch_cell($sql, $col_name = '', $log = true, $cnn_id = fal
 
 /**
  * flowview_db_fetch_cell_prepared - run a 'select' sql query and return the first column of the
- *   first row found
+ * first row found
  *
- * @param  string        The sql query to execute
- * @param  array         An array of parameters
- * @param  string        Use this column name instead of the first one
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param array $params
+ * @param string $col_name
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return (bool) the output of the sql query as a single variable
+ * @return mixed
  */
-function flowview_db_fetch_cell_prepared($sql, $params = [], $col_name = '', $log = true, $cnn_id = false) {
+function flowview_db_fetch_cell_prepared($sql, array $params = [], string $col_name = '', bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_cell_prepared($sql, $params, $col_name, $log, $flowview_cnn);
@@ -159,13 +161,13 @@ function flowview_db_fetch_cell_prepared($sql, $params = [], $col_name = '', $lo
 /**
  * flowview_db_fetch_row - run a 'select' sql query and return the first row found
  *
- * @param  string        The sql query to execute
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return the first row of the result as a hash
+ * @return mixed
  */
-function flowview_db_fetch_row($sql, $log = true, $cnn_id = false) {
+function flowview_db_fetch_row($sql, bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_row($sql, $log, $flowview_cnn);
@@ -174,14 +176,14 @@ function flowview_db_fetch_row($sql, $log = true, $cnn_id = false) {
 /**
  * flowview_db_fetch_row_prepared - run a 'select' sql query and return the first row found
  *
- * @param  string        The sql query to execute
- * @param  array         An array of parameters
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param array $params
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return the first row of the result as a hash
+ * @return mixed
  */
-function flowview_db_fetch_row_prepared($sql, $params = [], $log = true, $cnn_id = false) {
+function flowview_db_fetch_row_prepared($sql, array $params = [], bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_row_prepared($sql, $params, $log, $flowview_cnn);
@@ -190,13 +192,13 @@ function flowview_db_fetch_row_prepared($sql, $params = [], $log = true, $cnn_id
 /**
  * flowview_db_fetch_assoc - run a 'select' sql query and return all rows found
  *
- * @param  string        The sql query to execute
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return the entire result set as a multi-dimensional hash
+ * @return mixed
  */
-function flowview_db_fetch_assoc($sql, $log = true, $cnn_id = false) {
+function flowview_db_fetch_assoc($sql, bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_assoc($sql, $log, $flowview_cnn);
@@ -205,14 +207,14 @@ function flowview_db_fetch_assoc($sql, $log = true, $cnn_id = false) {
 /**
  * flowview_db_fetch_assoc_prepared - run a 'select' sql query and return all rows found
  *
- * @param  string        The sql query to execute
- * @param  array         An array of parameters
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $sql
+ * @param array $params
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return the entire result set as a multi-dimensional hash
+ * @return mixed
  */
-function flowview_db_fetch_assoc_prepared($sql, $params = [], $log = true, $cnn_id = false) {
+function flowview_db_fetch_assoc_prepared($sql, array $params = [], bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_fetch_assoc_prepared($sql, $params, $log, $flowview_cnn);
@@ -221,11 +223,11 @@ function flowview_db_fetch_assoc_prepared($sql, $params = [], $log = true, $cnn_
 /**
  * flowview_db_fetch_insert_id - get the last insert_id or auto incriment
  *
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param $cnn_id
  *
- * @return the id of the last auto incriment row that was created
+ * @return mixed
  */
-function flowview_db_fetch_insert_id($cnn_id = false) {
+function flowview_db_fetch_insert_id(mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return  db_fetch_insert_id($flowview_cnn);
@@ -234,14 +236,14 @@ function flowview_db_fetch_insert_id($cnn_id = false) {
 /**
  * flowview_db_replace - replaces the data contained in a particular row
  *
- * @param  string        The name of the table to make the replacement in
- * @param  array         An array containing each column -> value mapping in the row
- * @param  string|array  The name of the column containing the primary key
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $table_name
+ * @param mixed $array_items
+ * @param mixed $keyCols
+ * @param $cnn_id
  *
- * @return the auto incriment id column (if applicable)
+ * @return mixed
  */
-function flowview_db_replace($table_name, $array_items, $keyCols, $cnn_id = false) {
+function flowview_db_replace($table_name, $array_items, $keyCols, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_replace($table_name, $array_items, $keyCols, $flowview_cnn);
@@ -250,15 +252,15 @@ function flowview_db_replace($table_name, $array_items, $keyCols, $cnn_id = fals
 /**
  * flowview_sql_save - saves data to an sql table
  *
- * @param  array         An array containing each column -> value mapping in the row
- * @param  string        The name of the table to make the replacement in
- * @param  string|array  The primary key(s)
- * @param  bool          Notify if the table is auto_increment or not
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $array_items
+ * @param mixed $table_name
+ * @param string $key_cols
+ * @param bool $autoinc
+ * @param $cnn_id
  *
- * @return the auto incriment id column (if applicable)
+ * @return mixed
  */
-function flowview_sql_save($array_items, $table_name, $key_cols = 'id', $autoinc = true, $cnn_id = false) {
+function flowview_sql_save($array_items, $table_name, string $key_cols = 'id', bool $autoinc = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return sql_save($array_items, $table_name, $key_cols, $autoinc, $flowview_cnn);
@@ -267,13 +269,13 @@ function flowview_sql_save($array_items, $table_name, $key_cols = 'id', $autoinc
 /**
  * flowview_db_table_exists - checks whether a table exists
  *
- * @param  string        The name of the table
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $table
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return (bool) the output of the sql query as a single variable
+ * @return mixed
  */
-function flowview_db_table_exists($table, $log = true, $cnn_id = false) {
+function flowview_db_table_exists($table, bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	$matched = preg_match('/^(?:`?(?<database>[A-Za-z0-9_]+)`?\.)?`?(?<table>[A-Za-z0-9_]+)`?$/D', $table, $matches);
@@ -289,13 +291,13 @@ function flowview_db_table_exists($table, $log = true, $cnn_id = false) {
 /**
  * flowview_db_table_create - creates a database table if it does not already exist
  *
- * @param  string       $table  The name of the table to create
- * @param  array        $data   The table's column/key/engine definition data
- * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
+ * @param mixed $table
+ * @param mixed $data
+ * @param $cnn_id
  *
  * @return void
  */
-function flowview_db_table_create($table, $data, $cnn_id = false) {
+function flowview_db_table_create($table, $data, mixed $cnn_id = false): void {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	$result = flowview_db_fetch_assoc('SHOW TABLES');
@@ -400,14 +402,14 @@ function flowview_db_table_create($table, $data, $cnn_id = false) {
 /**
  * flowview_db_column_exists - checks whether a column exists
  *
- * @param  string       $table  The name of the table
- * @param  string       $column The name of the column
- * @param  bool         $log    Whether to log error messages, defaults to true
- * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
+ * @param mixed $table
+ * @param mixed $column
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return bool          True if the column exists, false otherwise
+ * @return mixed
  */
-function flowview_db_column_exists($table, $column, $log = true, $cnn_id = false) {
+function flowview_db_column_exists($table, $column, bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_column_exists($table, $column, $log, $flowview_cnn);
@@ -416,14 +418,14 @@ function flowview_db_column_exists($table, $column, $log = true, $cnn_id = false
 /**
  * flowview_db_add_column - adds a column to a table if it does not already exist
  *
- * @param  string       $table  The name of the table
- * @param  array        $column The column definition to add
- * @param  bool         $log    Whether to log error messages, defaults to true
- * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
+ * @param mixed $table
+ * @param mixed $column
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return bool          True on success, false on error
+ * @return mixed
  */
-function flowview_db_add_column($table, $column, $log = true, $cnn_id = false) {
+function flowview_db_add_column($table, $column, bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_add_column($table, $column, $log, $flowview_cnn);
@@ -431,13 +433,13 @@ function flowview_db_add_column($table, $column, $log = true, $cnn_id = false) {
 
 /**
  * flowview_db_affected_rows - return the number of rows affected by the last transaction
+ * or false on error
  *
- * @param  bool|object  $cnn_id Optional connection id in case you are using a proxy
+ * @param $cnn_id
  *
- * @return bool|int      The number of rows affected by the last transaction,
- *                       or false on error
+ * @return mixed
  */
-function flowview_db_affected_rows($cnn_id = false) {
+function flowview_db_affected_rows(mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_affected_rows($flowview_cnn);
@@ -446,14 +448,14 @@ function flowview_db_affected_rows($cnn_id = false) {
 /**
  * flowview_db_index_exists - checks whether an index exists
  *
- * @param  string        The name of the table
- * @param  string        The name of the index
- * @param  bool          Whether to log error messages, defaults to true
- * @param  bool|object   Optional connection id in case you are using a proxy
+ * @param mixed $table
+ * @param mixed $index
+ * @param bool $log
+ * @param $cnn_id
  *
- * @return bool          The output of the sql query as a single variable
+ * @return mixed
  */
-function flowview_db_index_exists($table, $index, $log = true, $cnn_id = false) {
+function flowview_db_index_exists($table, $index, bool $log = true, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
 	return db_index_exists($table, $index, $log, $flowview_cnn);
@@ -463,11 +465,11 @@ function flowview_db_index_exists($table, $index, $log = true, $cnn_id = false) 
  * flowview_get_connection - resolves the database connection to use for a
  * flowview_db_* call, falling back to this plugin's default connection
  * when no explicit connection id is given
+ * the plugin's default connection
  *
- * @param  bool|object   An explicit connection id to use, or false to use
- *                       the plugin's default connection
+ * @param mixed $cnn_id
  *
- * @return bool|object   The resolved connection to use
+ * @return mixed
  */
 function flowview_get_connection($cnn_id) {
 	global $flowview_cnn;
@@ -482,12 +484,12 @@ function flowview_get_connection($cnn_id) {
 /**
  * flowview_db_get_table_column_types - returns all the types for each column of a table
  *
- * @param  (string)        The name of the table
- * @param  (bool|resource) The connection to use or false to use the default
+ * @param mixed $table
+ * @param $cnn_id
  *
- * @return (array) An array of column types indexed by the column names
+ * @return mixed
  */
-function flowview_db_get_table_column_types($table, $cnn_id = false) {
+function flowview_db_get_table_column_types($table, mixed $cnn_id = false) {
 	$flowview_cnn = flowview_get_connection($cnn_id);
 
     $columns = db_fetch_assoc("SHOW COLUMNS FROM $table", false, $flowview_cnn);

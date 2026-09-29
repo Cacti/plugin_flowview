@@ -8,6 +8,13 @@
 * issue#261: Cacti 1.2.x flowview 5.0 update of 16.09 error on call db_check_reconnect inside flow_capture
 * issue#240: Call to db_table_exists is incorrect in some cases
 * issue: Killing processes does not occur when they are in D-State
+* chore: Bring all first-party PHP files to PHPStan level 8 with zero errors and add native parameter/return type declarations throughout (behavior-preserving)
+* fix: run_flow_query() used isset($sql_inner) as the statistical-vs-printed discriminator, but $sql_inner is always initialized so the check was always true and printed reports skipped the issue#110 NAT-safe SQL cleanup; corrected to a value check so printed reports now apply the NAT toggle
+* fix: Flow Collector "unable to open port" FATAL log always showed an empty error because $errno/$errstr were never populated; now sourced from socket_last_error()/socket_strerror()
+* fix: IRR database refresh no longer runs the present=0 cleanup DELETE when a database file download fails (the $files_broken guard was initialized but never engaged)
+* fix: Correct a duplicate 'src_rdomain' array key in the Source/Destination Root Domain report column map that overwrote the Destination Domain column
+* fix: Correct a stray "$" in the Source AS filter that read get_request_var() through an undefined variable-variable
+* fix: TCP flag validation regex used an unescaped delimiter making it always invalid, rejecting every TCP flag filter value
 
 --- 5.0 ---
 

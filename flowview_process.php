@@ -25,6 +25,8 @@
 
 chdir(__DIR__ . '/../../');
 include('./include/cli_check.php');
+
+global $config;
 include_once($config['base_path'] . '/lib/poller.php');
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
@@ -60,18 +62,12 @@ foreach($options as $arg => $value) {
 		case 'version':
 			display_version();
 			exit(0);
-
-			break;
 		case 'help':
 			display_help();
 			exit(0);
-
-			break;
 		default:
 			print 'ERROR: Invalid options' . PHP_EOL;
 			exit(1);
-
-			break;
 	}
 }
 
@@ -175,10 +171,6 @@ foreach($tables as $table) {
 	if (cacti_sizeof($data)) {
 		$sequence = intval($data['sequence']);
 		$records += $data['totals'];
-	}
-
-	if ($sequence == '') {
-		$sequence = 0;
 	}
 }
 
@@ -316,7 +308,7 @@ cacti_log('FLOWVIEW STATS: ' . $cacti_stats , true, 'SYSTEM');
  *
  * @return void
  */
-function display_version() {
+function display_version(): void {
 	$version = get_cacti_cli_version();
 	print "Cacti Flow Poller, Version $version, " . COPYRIGHT_YEARS . PHP_EOL;
 }
@@ -328,7 +320,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL . 'usage: flowview_process.php [--debug]' . PHP_EOL . PHP_EOL;

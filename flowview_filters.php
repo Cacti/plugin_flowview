@@ -26,6 +26,8 @@
 chdir('../../');
 
 include('./include/auth.php');
+
+global $config;
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 include_once($config['base_path'] . '/lib/time.php');
@@ -77,16 +79,15 @@ switch (get_request_var('action')) {
  * the selected filters; on confirmed submission, performs the selected
  * action (delete, disable, enable) for each selected filter. Called
  * from this script's main request-dispatch switch when action=actions.
+ * @global array $sched_actions Map of drp_action value => action
+ * label, used to populate the
+ * confirmation box title.
+ * @global array $config        Cacti global configuration array
+ * (declared but not directly used here).
  *
  * @return void
- *
- * @global array $sched_actions Map of drp_action value => action
- *                              label, used to populate the
- *                              confirmation box title.
- * @global array $config        Cacti global configuration array
- *                              (declared but not directly used here).
  */
-function actions_filters() {
+function actions_filters(): void {
 	global $sched_actions, $config;
 
 	/* ================= input validation ================= */
@@ -140,7 +141,7 @@ function actions_filters() {
 
 	form_start('flowview_filters.php');
 
-	html_start_box($sched_actions[get_nfilter_request_var('drp_action')], '60%', '', '3', 'center', '');
+	html_start_box($sched_actions[get_nfilter_request_var('drp_action')], '60%', false, 3, 'center', '');
 
 	if (get_nfilter_request_var('drp_action') == '1') { /* Delete */
 		print "<tr>
@@ -195,22 +196,23 @@ function actions_filters() {
  * table of saved flow query filters along with the bulk-actions
  * dropdown. Called from this script's main request-dispatch switch as
  * the default view.
+ * @global array $config          Cacti global configuration array;
+ * used to include the arrays library.
+ * @global array $sched_actions   Map of drp_action value => action
+ * label, used for the bulk-actions
+ * dropdown.
+ * @global array $graph_timespans Reserved/declared for parity with
+ * other functions in this file; not
+ * used directly here.
+ * @global array $item_rows       Cacti's standard row-count option
+ * list, used to populate the rows
+ * dropdown.
  *
  * @return void
- *
- * @global array $config          Cacti global configuration array;
- *                                used to include the arrays library.
- * @global array $sched_actions   Map of drp_action value => action
- *                                label, used for the bulk-actions
- *                                dropdown.
- * @global array $graph_timespans Reserved/declared for parity with
- *                                other functions in this file; not
- *                                used directly here.
- * @global array $item_rows       Cacti's standard row-count option
- *                                list, used to populate the rows
- *                                dropdown.
  */
-function show_filters() {
+function show_filters(): void {
+	global $stat_report_array, $stat_columns_array, $print_report_array, $print_columns_array;
+
 	global $config, $sched_actions, $graph_timespans, $item_rows;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
@@ -255,9 +257,9 @@ function show_filters() {
 	$listeners = flowview_db_fetch_cell('SELECT COUNT(*) FROM plugin_flowview_devices');
 
 	if ($listeners) {
-		html_start_box(__('FlowView Filters', 'flowview'), '100%', '', '3', 'center', 'flowview_filters.php?action=edit');
+		html_start_box(__('FlowView Filters', 'flowview'), '100%', false, 3, 'center', 'flowview_filters.php?action=edit');
 	} else {
-		html_start_box(__('FlowView Filters [ Add Devices before Filters ]', 'flowview'), '100%', '', '3', 'center', '');
+		html_start_box(__('FlowView Filters [ Add Devices before Filters ]', 'flowview'), '100%', false, 3, 'center', '');
 	}
 
 	?>
@@ -393,7 +395,7 @@ function show_filters() {
 
     print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', false, 3, 'center', '');
 
 	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 

@@ -25,6 +25,8 @@
 
 chdir(__DIR__ . '/../../');
 include('./include/cli_check.php');
+
+global $config;
 include_once($config['base_path'] . '/lib/poller.php');
 include_once($config['base_path'] . '/lib/time.php');
 include_once($config['base_path'] . '/plugins/flowview/database.php');
@@ -69,24 +71,18 @@ foreach($options as $arg => $value) {
 
 			break;
 		case 'report-id':
-			$report_id = $value;
+			$report_id = is_array($value) ? end($value) : $value;
 
 			break;
 		case 'version':
 			display_version();
 			exit(0);
-
-			break;
 		case 'help':
 			display_help();
 			exit(0);
-
-			break;
 		default:
 			print 'ERROR: Invalid option ' . $arg . PHP_EOL;
 			exit(1);
-
-			break;
 	}
 }
 
@@ -207,7 +203,7 @@ if ($scheduled == true) {
  *
  * @return void
  */
-function display_version() {
+function display_version(): void {
 	$version = get_cacti_cli_version();
 	print "Cacti FlowView Schedule Poller, Version $version, " . COPYRIGHT_YEARS . PHP_EOL;
 }
@@ -219,7 +215,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL . 'usage: schedule_run.php --schedule=ID [--debug]' . PHP_EOL . PHP_EOL;

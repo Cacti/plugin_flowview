@@ -107,19 +107,18 @@ exit(0);
  * and updates the plugin_config record when the recorded version
  * differs from the current one. Called from this script's main flow
  * after determining the old/current versions.
+ * @global array $config Cacti global configuration array; used to
+ * locate and include irr_tables.php during the
+ * schema upgrade steps.
+ * @global array $info   The plugin's INFO metadata, used to update the
+ * plugin_config record.
  *
- * @param string $current The plugin's current (target) version.
- * @param string $old      The plugin's previously recorded version.
+ * @param mixed $current
+ * @param mixed $old
  *
  * @return void
- *
- * @global array $config Cacti global configuration array; used to
- *                       locate and include irr_tables.php during the
- *                       schema upgrade steps.
- * @global array $info   The plugin's INFO metadata, used to update the
- *                       plugin_config record.
  */
-function flowview_upgrade($current, $old) {
+function flowview_upgrade($current, $old): void {
 	global $config, $info;
 
 	if ($current != $old) {
@@ -654,7 +653,7 @@ function flowview_upgrade($current, $old) {
  *
  * @return void
  */
-function display_version() {
+function display_version(): void {
 	$info    = plugin_flowview_version();
 	$version = $info['version'];
 
@@ -668,7 +667,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help () {
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL . 'usage: flowview_database.php [--forcever=VERSION]' . PHP_EOL . PHP_EOL;

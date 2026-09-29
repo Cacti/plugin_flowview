@@ -23,6 +23,8 @@
  +-------------------------------------------------------------------------+
 */
 
+global $graph_timespans;
+
 $stat_report_array = array(
 	0  => __('Select a Report', 'flowview'),
 	99 => __('Summary', 'flowview'),
@@ -404,7 +406,7 @@ $stat_columns_array = array(
 	),
 	4 => array(
 		'src_rdomain' => __('Source Domain', 'flowview'),
-		'src_rdomain' => __('Destination Domain', 'flowview'),
+		'dst_rdomain' => __('Destination Domain', 'flowview'),
 		'flows'       => __('Flows', 'flowview'),
 		'bytes'       => __('Bytes', 'flowview'),
 		'packets'     => __('Packets', 'flowview')

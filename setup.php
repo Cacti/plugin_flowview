@@ -29,7 +29,7 @@
  * requires a per-request nonce on parser-inserted scripts; older releases lack
  * the CactiSecureHeaders class, so this returns an empty string there.
  *
- * @return string The nonce attribute when supported, otherwise empty string.
+ * @return string
  */
 function plugin_flowview_csp_nonce(): string {
 	if (class_exists('CactiSecureHeaders')) {
@@ -39,7 +39,10 @@ function plugin_flowview_csp_nonce(): string {
 	return '';
 }
 
-function plugin_flowview_install() {
+/**
+ * @return bool
+ */
+function plugin_flowview_install(): bool {
 	// Setup core hooks for just about every plugin
 	api_plugin_register_hook('flowview', 'config_arrays',          'flowview_config_arrays',          'setup.php');
 	api_plugin_register_hook('flowview', 'draw_navigation_text',   'flowview_draw_navigation_text',   'setup.php');
@@ -72,9 +75,13 @@ function plugin_flowview_install() {
 	}
 
 	flowview_setup_table();
+	return true;
 }
 
-function plugin_flowview_uninstall() {
+/**
+ * @return void
+ */
+function plugin_flowview_uninstall(): void {
 	flowview_connect();
 
 	$tables = array_rekey(
@@ -88,7 +95,10 @@ function plugin_flowview_uninstall() {
 	flowview_drop_table($tables);
 }
 
-function plugin_flowview_check_config() {
+/**
+ * @return bool
+ */
+function plugin_flowview_check_config(): bool {
 	// Here we will check to ensure everything is configured
 	if (!file_exists(dirname(__FILE__) . '/config_local.php') && !file_exists(dirname(__FILE__) . '/config.php')) {
 		raise_message('flowview_info', __('Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing.', 'flowview'), MESSAGE_LEVEL_ERROR);
@@ -103,13 +113,21 @@ function plugin_flowview_check_config() {
 	return true;
 }
 
-function plugin_flowview_upgrade() {
+/**
+ * @return bool
+ */
+function plugin_flowview_upgrade(): bool {
 	// Here we will upgrade to the newest version
 	plugin_flowview_check_upgrade();
 	return false;
 }
 
-function plugin_flowview_check_upgrade($force = false) {
+/**
+ * @param bool $force
+ *
+ * @return void
+ */
+function plugin_flowview_check_upgrade(bool $force = false): void {
 	global $config;
 
 	$files = ['plugins.php', 'flowview.php', 'index.php'];
@@ -137,13 +155,24 @@ function plugin_flowview_check_upgrade($force = false) {
 	}
 }
 
+/**
+ * @return mixed
+ */
 function plugin_flowview_version() {
 	global $config;
 	$info = parse_ini_file($config['base_path'] . '/plugins/flowview/INFO', true);
+
+	if (!is_array($info) || !isset($info['info'])) {
+		return [];
+	}
+
 	return $info['info'];
 }
 
-function flowview_config_arrays() {
+/**
+ * @return void
+ */
+function flowview_config_arrays(): void {
 	global $menu, $menu_glyphs, $messages, $flowview_sighup_settings;
 
 	$messages['flow_deleted'] = array('message' => __('The Filter has been Deleted', 'flowview'), 'type' => 'info');
@@ -184,6 +213,11 @@ function flowview_config_arrays() {
 	plugin_flowview_check_upgrade();
 }
 
+/**
+ * @param mixed $nav
+ *
+ * @return mixed
+ */
 function flowview_draw_navigation_text($nav) {
 	$nav['flowview.php:'] = array(
 		'title' => __('Flow Viewer', 'flowview'),
@@ -300,7 +334,10 @@ function flowview_draw_navigation_text($nav) {
 	return $nav;
 }
 
-function flowview_show_tab() {
+/**
+ * @return void
+ */
+function flowview_show_tab(): void {
 	global $config;
 
 	if (api_user_realm_auth('flowview.php')) {
@@ -312,7 +349,10 @@ function flowview_show_tab() {
 	}
 }
 
-function flowview_page_head() {
+/**
+ * @return void
+ */
+function flowview_page_head(): void {
 	global $config, $colors;
 
 	$theme = get_selected_theme();
@@ -324,7 +364,10 @@ function flowview_page_head() {
 	}
 }
 
-function flowview_global_settings_update() {
+/**
+ * @return void
+ */
+function flowview_global_settings_update(): void {
 	global $config, $flowview_sighup_settings;
 
 	$hup_process   = false;
@@ -353,7 +396,10 @@ function flowview_global_settings_update() {
 	}
 }
 
-function flowview_config_settings() {
+/**
+ * @return void
+ */
+function flowview_config_settings(): void {
 	global $config, $settings, $tabs, $flowview_sighup_settings;
 
 	include_once($config['base_path'] . '/lib/reports.php');
@@ -679,7 +725,10 @@ function flowview_config_settings() {
 	}
 }
 
-function flowview_poller_bottom() {
+/**
+ * @return void
+ */
+function flowview_poller_bottom(): void {
 	global $config;
 
 	include_once($config['base_path'] . '/lib/poller.php');
@@ -710,7 +759,10 @@ function flowview_poller_bottom() {
 	exec_background($php, $config['base_path'] . '/plugins/flowview/flowview_process.php');
 }
 
-function flowview_determine_config() {
+/**
+ * @return void
+ */
+function flowview_determine_config(): void {
 	global $config, $flowview_use_cacti_db;
 
 	// Setup the flowview database settings path
@@ -725,8 +777,14 @@ function flowview_determine_config() {
 	}
 }
 
-function flowview_connect($maxscale = false) {
+/**
+ * @param bool $maxscale
+ *
+ * @return mixed
+ */
+function flowview_connect(bool $maxscale = false) {
 	global $config, $flowview_cnn, $flowviewdb_default, $local_db_cnn_id, $remote_db_cnn_id, $database_hostname;
+	global $flowviewdb_hostname, $flowviewdb_username, $flowviewdb_password, $flowviewdb_type;
 
 	// Assume that you are connecting locally first
 	$flowview_use_cacti_db = true;
@@ -782,7 +840,7 @@ function flowview_connect($maxscale = false) {
 			 *
 			 */
 			if ($database_hostname == 'localhost' || $database_hostname == '127.0.0.1') {
-				$flowviewdb_hostname = gethostbyname(gethostname());
+				$flowviewdb_hostname = gethostbyname((string) gethostname());
 			}
 		}
 
@@ -841,7 +899,10 @@ function flowview_connect($maxscale = false) {
 	return $cnn_id;
 }
 
-function flowview_setup_table() {
+/**
+ * @return void
+ */
+function flowview_setup_table(): void {
 	global $config, $settings, $flowviewdb_default;
 
 	flowview_connect();
@@ -1089,7 +1150,7 @@ function flowview_setup_table() {
 		ROW_FORMAT=DYNAMIC
 		COMMENT='Holds Scheduled Reports'");
 
-	$inserts = file($config['base_path'] . '/plugins/flowview/plugin_flowview_ports.sql');
+	$inserts = file($config['base_path'] . '/plugins/flowview/plugin_flowview_ports.sql') ?: [];
 
 	if (cacti_sizeof($inserts)) {
 		flowview_db_execute('TRUNCATE plugin_flowview_ports');
@@ -1099,7 +1160,12 @@ function flowview_setup_table() {
 	}
 }
 
-function flowview_drop_table($tables) {
+/**
+ * @param mixed $tables
+ *
+ * @return void
+ */
+function flowview_drop_table($tables): void {
 	global $config, $flowviewdb_default;
 
 	flowview_connect();
@@ -1111,7 +1177,12 @@ function flowview_drop_table($tables) {
 	}
 }
 
-function flowview_graph_button($data) {
+/**
+ * @param mixed $data
+ *
+ * @return bool
+ */
+function flowview_graph_button($data): bool {
 	global $config, $timespan, $graph_timeshifts;
 
 	static $flow_hosts = [];
@@ -1333,4 +1404,5 @@ function flowview_graph_button($data) {
 			print '<a class="iconLink flowview" href="' .  html_escape($url) . '" title="' . __esc('View NetFlow Traffic In Range', 'flowview') . '"><i class="deviceRecovering fas fa-water"></i></a><br>';
 		}
 	}
+	return true;
 }

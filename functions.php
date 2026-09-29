@@ -27,7 +27,12 @@ if (version_compare(CACTI_VERSION, '1.3', '<')) {
 	include_once(__DIR__ . '/functions-pre13.php');
 }
 
-function display_flowview_tabs($id) {
+/**
+ * @param mixed $id
+ *
+ * @return void
+ */
+function display_flowview_tabs($id): void {
 	global $config;
 
 	$streams = listener_has_templates($id);
@@ -63,7 +68,10 @@ function display_flowview_tabs($id) {
 	print "</ul></nav></div>";
 }
 
-function display_flowview_db_tabs() {
+/**
+ * @return void
+ */
+function display_flowview_db_tabs(): void {
 	global $db_tabs, $config;
 
 	$base_url = 'flowview_databases.php';
@@ -108,7 +116,10 @@ function display_flowview_db_tabs() {
 	print '</ul></nav></div>';
 }
 
-function display_sched_tabs() {
+/**
+ * @return void
+ */
+function display_sched_tabs(): void {
 	global $config;
 
 	$base_url = 'flowview_schedules.php';
@@ -147,6 +158,11 @@ function display_sched_tabs() {
 	print '</ul></nav></div>';
 }
 
+/**
+ * @param mixed $id
+ *
+ * @return mixed
+ */
 function listener_has_templates($id) {
 	$streams = flowview_db_fetch_cell_prepared('SELECT COUNT(*)
 		FROM plugin_flowview_device_streams
@@ -157,7 +173,12 @@ function listener_has_templates($id) {
 	return $streams > 0 ? true:false;
 }
 
-function sort_filter() {
+/**
+ * @return void
+ */
+function sort_filter(): void {
+	global $stat_columns_array, $print_columns_array;
+
 	global $config, $filter_edit, $graph_timespans;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
@@ -175,7 +196,12 @@ function sort_filter() {
 	}
 }
 
-function edit_filter() {
+/**
+ * @return void
+ */
+function edit_filter(): void {
+	global $stat_columns_array, $print_columns_array;
+
 	global $config, $filter_edit, $graph_timespans;
 
 	/* ================= input validation ================= */
@@ -233,7 +259,9 @@ function edit_filter() {
 
 	form_start($page, 'chk');
 
-	html_start_box($header_label, '100%', '', '3', 'center', '');
+	html_start_box($header_label, '100%', false, 3, 'center', '');
+
+	$span = [];
 
 	get_timespan($span, time(), get_request_var('predefined_timespan'), read_user_setting('first_weekdayid'));
 
@@ -410,7 +438,10 @@ function edit_filter() {
 	<?php
 }
 
-function save_filter_form() {
+/**
+ * @return void
+ */
+function save_filter_form(): void {
 	global $config;
 
 	/* ================= input validation ================= */
@@ -423,6 +454,9 @@ function save_filter_form() {
 	/* ==================================================== */
 
 	$report = get_nfilter_request_var('report');
+
+	$printed     = 0;
+	$statistical = 0;
 
 	if (substr($report, 0, 1) == 's') {
 		$report      = intval(trim($report, 's'));
@@ -470,7 +504,10 @@ function save_filter_form() {
 	);
 }
 
-function save_filter() {
+/**
+ * @return void
+ */
+function save_filter(): void {
 	global $config;
 
 	/* ================= input validation ================= */
@@ -564,7 +601,12 @@ function save_filter() {
 	exit;
 }
 
-function flowview_purge_query_caches($id) {
+/**
+ * @param mixed $id
+ *
+ * @return void
+ */
+function flowview_purge_query_caches($id): void {
 	if (isset($_SESSION['sess_flowdata']) && cacti_sizeof($_SESSION['sess_flowdata'])) {
 		foreach($_SESSION['sess_flowdata'] as $key => $data) {
 			$parts = explode('_', $key, 2);
@@ -576,7 +618,10 @@ function flowview_purge_query_caches($id) {
 	}
 }
 
-function flowview_delete_filter() {
+/**
+ * @return void
+ */
+function flowview_delete_filter(): void {
 	global $config;
 
 	flowview_db_execute_prepared('DELETE FROM plugin_flowview_queries
@@ -593,7 +638,10 @@ function flowview_delete_filter() {
 	exit;
 }
 
-function flowview_gettimespan() {
+/**
+ * @return void
+ */
+function flowview_gettimespan(): void {
 	global $config;
 
 	$timespan = get_filter_request_var('predefined_timespan');
@@ -613,13 +661,25 @@ function flowview_gettimespan() {
 	print json_encode($span);
 }
 
-function flowview_show_summary(&$data) {
+/**
+ * @param mixed $data
+ *
+ * @return void
+ */
+function flowview_show_summary(&$data): void {
 	print isset($data['table']) ? $data['table'] : '';
 }
 
 
-function flowview_display_filter() {
+/**
+ * @return void
+ */
+function flowview_display_filter(): void {
+	global $stat_report_array, $stat_columns_array, $print_report_array, $print_columns_array;
+
 	global $config, $graph_timeshifts, $graph_timespans, $graph_heights;
+
+	global $cutoff_lines, $cutoff_octets;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
 
@@ -640,7 +700,7 @@ function flowview_display_filter() {
 		}
 	}
 
-	html_start_box($title . '&nbsp;<span id="text"></span>', '100%', '', '3', 'center', '');
+	html_start_box($title . '&nbsp;<span id="text"></span>', '100%', false, 3, 'center', '');
 
 	?>
 	<tr class='even'>
@@ -1790,7 +1850,13 @@ function flowview_display_filter() {
 	html_end_box();
 }
 
-function get_port_name($port_num, $port_proto = 6) {
+/**
+ * @param mixed $port_num
+ * @param int $port_proto
+ *
+ * @return mixed
+ */
+function get_port_name($port_num, int $port_proto = 6) {
 	global $config, $graph_timespans;
 
 	include($config['base_path'] . '/plugins/flowview/arrays.php');
@@ -1813,14 +1879,20 @@ function get_port_name($port_num, $port_proto = 6) {
 			[$port_num, $port_proto]);
 
 		if ($port_name != '') {
-			return sprintf('%s (%s)', $port_name, $port_num, 'flowview');
+			return sprintf('%s (%s)', $port_name, $port_num);
 		} else {
 			return __esc('Unknown (%s)', $port_num, 'flowview');
 		}
 	}
 }
 
-function plugin_flowview_run_schedule($id, $report_id) {
+/**
+ * @param mixed $id
+ * @param mixed $report_id
+ *
+ * @return void
+ */
+function plugin_flowview_run_schedule($id, $report_id): void {
 	global $config;
 
 	$start_time = microtime(true);
@@ -1836,6 +1908,8 @@ function plugin_flowview_run_schedule($id, $report_id) {
 		[$schedule['query_id']]);
 
 	/* get the timespan from the query */
+	$span = [];
+
 	get_timespan($span, time(), $query['timespan'], read_user_setting('first_weekdayid'));
 
 	$start = $span['begin_now'];
@@ -1900,7 +1974,12 @@ function plugin_flowview_run_schedule($id, $report_id) {
 	}
 }
 
-function flowview_debug($string) {
+/**
+ * @param mixed $string
+ *
+ * @return void
+ */
+function flowview_debug($string): void {
 	global $debug;
 
 	if ($debug) {
@@ -1908,6 +1987,13 @@ function flowview_debug($string) {
 	}
 }
 
+/**
+ * @param mixed $id
+ * @param mixed $start
+ * @param mixed $end
+ *
+ * @return mixed
+ */
 function get_flowview_session_key($id, $start, $end) {
 	if (isset_request_var('sortfield')) {
 		$key = $id . '_' . $start . '_' . $end . '_' .
@@ -1929,9 +2015,9 @@ function get_flowview_session_key($id, $start, $end) {
  * purge_flowview_session - This function manages the Cacti session
  * to prevent it from growing too large with session data
  *
- * @return null
+ * @return void
  */
-function purge_flowview_sessions() {
+function purge_flowview_sessions(): void {
 	$now = time();
 	$i   = 0;
 
@@ -1949,19 +2035,19 @@ function purge_flowview_sessions() {
 /**
  * load_data_for_filter - This function will run the query against the
  * database of pull it from a saved session.
+ * format.  If false, it will calculate the
+ * time from the query default.
+ * format.  If false, it will calculate the
+ * time from the query default.
+ * or from the results of the query.
  *
- * @param  int         The query to load without overrides
- * @param  bool|string The start date for the query in Y-m-d H:i:s
- *                     format.  If false, it will calculate the
- *                     time from the query default.
- * @param  bool|string The end date for the query in Y-m-d H:i:s
- *                     format.  If false, it will calculate the
- *                     time from the query default.
+ * @param int $id
+ * @param bool $start
+ * @param bool $end
  *
- * @return array       The query results either from the cache
- *                     or from the results of the query.
+ * @return mixed
  */
-function load_data_for_filter($id = 0, $start = false, $end = false) {
+function load_data_for_filter(int $id = 0, bool $start = false, bool $end = false) {
 	global $config;
 
 	$output    = '';
@@ -2032,14 +2118,12 @@ function load_data_for_filter($id = 0, $start = false, $end = false) {
  * get_numeric_filter - This function constructs a $sql_where
  * from numeric data.
  *
- * @param  string    The sql where clause to append
- * @param  array     An array of parameters to append for the query
- * @param  string    The value to match
- * @param  string    The column to match
+ * @param mixed $sql_where
+ * @param mixed $sql_params
+ * @param mixed $value
+ * @param mixed $column
  *
- * @return string    The updated sql where clause
- * @return byref     The updated sql params.
- *
+ * @return mixed
  */
 function get_numeric_filter($sql_where, &$sql_params, $value, $column) {
 	$sql_where = trim($sql_where);
@@ -2077,13 +2161,12 @@ function get_numeric_filter($sql_where, &$sql_params, $value, $column) {
  * the ip ranges.  This function accepts ip addresses or ranges
  * using the CIDR format.
  *
- * @param  string    The sql where clause to append
- * @param  array     An array of parameters to append for the query
- * @param  string    The value to match
- * @param  string    The column to match
+ * @param mixed $sql_where
+ * @param mixed $sql_params
+ * @param mixed $value
+ * @param mixed $column
  *
- * @return string    The updated sql where clause
- * @return byref     The updated sql params.
+ * @return mixed
  */
 function get_ip_filter($sql_where, &$sql_params, $value, $column) {
 	$sql_where = trim($sql_where);
@@ -2138,16 +2221,15 @@ function get_ip_filter($sql_where, &$sql_params, $value, $column) {
  * get_date_filter - given the dates and the range type
  * return a well formed sql_range value and it's params.
  *
- * @param  string      A sql_range clause to be appended to the $sql_where
- * @param  array       Array of parameters.
- * @param  int         Start date from the filter
- * @param  int         End date from the filter
- * @param  int         The range type defined by the filter
+ * @param mixed $sql_range
+ * @param mixed $sql_range_params
+ * @param mixed $start
+ * @param mixed $end
+ * @param int $range_type
  *
- * @return string      The modified sql_range
- *
+ * @return mixed
  */
-function get_date_filter($sql_range, &$sql_range_params, $start, $end, $range_type = 1) {
+function get_date_filter($sql_range, &$sql_range_params, $start, $end, int $range_type = 1) {
 	$sql_range = trim($sql_range);
 
 	$date1 = date('Y-m-d H:i:s', $start);
@@ -2198,28 +2280,23 @@ function get_date_filter($sql_range, &$sql_range_params, $start, $end, $range_ty
  * of tables for a query and returns them to the caller.
  * This list of tables depends on the start and end times
  * if the end time is null, it means current time.
- *
  * The table names will be constructed by looking first
  * at the partitioning scheme selected and then constructing
  * the table names.  The tables are constructed through
  * a suffix that includes the YYYYDDDHH or for example:
- *
  * For hourly partitioning we use:
- *
  * plugin_flowview_raw_202416412
- *                     |   |  |
- *                     Yr  DoY Hr
- *
+ * |   |  |
+ * Yr  DoY Hr
  * For daily partitioning we use:
- *
  * plugin_flowview_raw_2024164
- *                     |   |
- *                     Yr  DoY
+ * |   |
+ * Yr  DoY
  *
- * @param  int       The unix timestamp of the range start
- * @param  bool|int  The unix timestamp of the range end or null
+ * @param mixed $start
+ * @param mixed $end
  *
- * @return array     An array of table names
+ * @return mixed
  */
 function get_tables_for_query($start, $end = null) {
 	global $config, $graph_timespans;
@@ -2282,12 +2359,12 @@ function get_tables_for_query($start, $end = null) {
 
 /**
  * flowview_nat_columns_supported - checks (and caches) whether a raw
- *   partition table has been upgraded with the post-NAT columns
- *   (issue#110).  Older, not-yet-upgraded partitions won't have them.
+ * partition table has been upgraded with the post-NAT columns
+ * (issue#110).  Older, not-yet-upgraded partitions won't have them.
  *
- * @param  string  The raw partition table name
+ * @param mixed $table
  *
- * @return bool    True if the table has the NAT columns
+ * @return mixed
  */
 function flowview_nat_columns_supported($table) {
 	// Deliberately a function-local static, NOT $_SESSION or any other
@@ -2307,15 +2384,15 @@ function flowview_nat_columns_supported($table) {
 
 /**
  * flowview_nat_safe_sql - given a fragment of a per-table SQL query, make
- *   it safe to run against a raw partition table that pre-dates the NAT
- *   columns (issue#110) by substituting NULL for any NAT column reference.
- *   This lets old and upgraded partitions be UNION'd together without the
- *   query erroring on "Unknown column" for the older tables.
+ * it safe to run against a raw partition table that pre-dates the NAT
+ * columns (issue#110) by substituting NULL for any NAT column reference.
+ * This lets old and upgraded partitions be UNION'd together without the
+ * query erroring on "Unknown column" for the older tables.
  *
- * @param  string  The SQL fragment (SELECT list, WHERE, or GROUP BY)
- * @param  string  The raw partition table this fragment will run against
+ * @param mixed $sql
+ * @param mixed $table
  *
- * @return string  The SQL fragment, safe to run against $table
+ * @return mixed
  */
 function flowview_nat_safe_sql($sql, $table) {
 	static $nat_columns = [
@@ -2345,24 +2422,23 @@ function flowview_nat_safe_sql($sql, $table) {
 
 /**
  * flowview_apply_nat_toggle - given the innermost (per-table) SELECT list
- *   or GROUP BY fragment of a report query, swap the src/dst address, port,
- *   and DNS columns for their post-NAT equivalents (issue#110) when the
- *   'Use NAT Data' filter option is enabled.
+ * or GROUP BY fragment of a report query, swap the src/dst address, port,
+ * and DNS columns for their post-NAT equivalents (issue#110) when the
+ * 'Use NAT Data' filter option is enabled.
+ * When $alias_back is true (SELECT list use), each swapped column is
+ * aliased back to its original name (e.g. 'post_nat_src_addr AS
+ * src_addr'), so the outer query, its own GROUP BY/ORDER BY, and the
+ * report table renderer keep working completely unmodified -- they just
+ * end up reading NAT data under the usual 'src_addr'/'dst_addr'/etc.
+ * names. GROUP BY fragments have no output name to preserve, so
+ * $alias_back should be false there.
+ * name), false for a GROUP BY fragment (plain swap)
  *
- *   When $alias_back is true (SELECT list use), each swapped column is
- *   aliased back to its original name (e.g. 'post_nat_src_addr AS
- *   src_addr'), so the outer query, its own GROUP BY/ORDER BY, and the
- *   report table renderer keep working completely unmodified -- they just
- *   end up reading NAT data under the usual 'src_addr'/'dst_addr'/etc.
- *   names. GROUP BY fragments have no output name to preserve, so
- *   $alias_back should be false there.
+ * @param mixed $sql
+ * @param mixed $use_nat
+ * @param mixed $alias_back
  *
- * @param  string  The SQL fragment to rewrite
- * @param  bool    Whether the 'Use NAT Data' option is enabled
- * @param  bool    True for a SELECT list (alias back to the original
- *                 name), false for a GROUP BY fragment (plain swap)
- *
- * @return string  The SQL fragment, using post-NAT columns if requested
+ * @return mixed
  */
 function flowview_apply_nat_toggle($sql, $use_nat, $alias_back) {
 	static $columns = [
@@ -2406,8 +2482,10 @@ function flowview_apply_nat_toggle($sql, $use_nat, $alias_back) {
 /**
  * flowview_get_chartdata() - This function returns chart
  * data from the session.
+ *
+ * @return void
  */
-function flowview_get_chartdata() {
+function flowview_get_chartdata(): void {
 	$query_id = get_filter_request_var('query');
 	$type     = get_nfilter_request_var('type');
 	$domains  = get_nfilter_request_var('domains');
@@ -2423,6 +2501,8 @@ function flowview_get_chartdata() {
 		if ($output !== false && cacti_sizeof($output['data']) && $report > 0 && $report < 99) {
 			$columns  = array_keys($output['data'][0]);
 			$category = get_category_columns($report, $domains);
+
+			$chartData = [];
 
 			foreach($output['data'] as $index => $row) {
 				$catstring = '';
@@ -2457,7 +2537,7 @@ function flowview_get_chartdata() {
 							$p = array_reverse($p);
 
 							if (isset($p[1])) {
-								$string = (isset($p[1]) ? $p[1]:'') . '.' . $p[0];
+								$string = $p[1] . '.' . $p[0];
 							} else {
 								$string = $p[0];
 							}
@@ -2503,10 +2583,10 @@ function flowview_get_chartdata() {
  * get_category_columns - This function helps construct the
  * columns required for a query
  *
- * @param  string   The report to get columns for
- * @param  string   The domain to include
+ * @param mixed $statistics
+ * @param mixed $domain
  *
- * @return array    The columns
+ * @return mixed
  */
 function get_category_columns($statistics, $domain) {
 	$category = [];
@@ -2604,24 +2684,25 @@ function get_category_columns($statistics, $domain) {
  * run_flow_query - This function will take the combination of
  * request variables and data stored in the table
  * plugin_flowview_query to gather data for calling function.
- *
  * The current instantiation of the function includes a session
  * cache that was used previously to speed up the gathering
  * of data for the various rendering functions such as bar
  * charts. This legacy functionality is commented out for now
  * as it generates a rather large session file over time.
+ * cache.  If true, the cache can be used.
+ * filter table
+ * an error.
  *
- * @param  bool    Direction as to whether or not to use the session
- *                 cache.  If true, the cache can be used.
- * @param  int     The ID of the query stored in the flowview
- *                 filter table
- * @param  int     The unix timestamp of the query range start
- * @param  int     The unix timestamp of the query range end
+ * @param mixed $session
+ * @param mixed $query_id
+ * @param mixed $start
+ * @param mixed $end
  *
- * @return bool|array Either the results or false if there was
- *                    an error.
+ * @return mixed
  */
 function run_flow_query($session, $query_id, $start, $end) {
+	global $stat_columns_array;
+
 	global $config, $graph_timespans;
 
 	if (empty($query_id)) {
@@ -2717,6 +2798,8 @@ function run_flow_query($session, $query_id, $start, $end) {
 	}
 
 	/* report override */
+	$report = '';
+
 	if (isset_request_var('report')) {
 		$report  = get_nfilter_request_var('report');
 		$nreport = trim(get_nfilter_request_var('report'), 'sp');
@@ -2831,6 +2914,14 @@ function run_flow_query($session, $query_id, $start, $end) {
 	$sql       = '';
 	$sql_outer = '';
 	$sql_inner = '';
+
+	$sql_inner1         = '';
+	$sql_inner2         = '';
+	$sql_groupby        = '';
+	$sql_inner_groupby  = '';
+	$sql_inner_groupby1 = '';
+	$sql_inner_groupby2 = '';
+	$sql_order          = '';
 
 	if (cacti_sizeof($data)) {
 		if ($data['statistics'] > 0) {
@@ -3263,7 +3354,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 		}
 
 		/* clean up sql formatting */
-		if (isset($sql_inner)) {
+		if ($sql_inner != '') {
 			$sql_outer          = str_replace(["\n", "\t"], [' ', ''], $sql_outer);
 			$sql_inner          = str_replace(["\n", "\t"], [' ', ''], $sql_inner);
 
@@ -3317,7 +3408,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 						$full_scan = false;
 					}
 
-					if (isset($sql_inner1)) {
+					if ($sql_inner1 != '') {
 						if (!$full_scan) {
 							$fsql_where .= ($sql_where != '' ? ' AND ':'WHERE ') . $sql_range;
 							$fsql_params = array_merge($sql_params, $sql_range_params);
@@ -3363,7 +3454,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 				cacti_log(sprintf('PARALLEL STATS: Time:%0.3f Threads:%d Shards:%d', $end - $start, $threads, $shards), false, 'FLOWVIEW');
 			} else {
-				if (isset($sql_inner1)) {
+				if ($sql_inner1 != '') {
 					$stru_inner1 = [
 						'sql_query'        => $sql_inner1,
 						'sql_where'        => $sql_where,
@@ -3694,6 +3785,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 				 */
 				$results = $results[0];
 
+				/** @var array<int, array{name: string, min: int, max: int, title: string}> $sql_array */
 				foreach($sql_array as $c) {
 					$total += $results[$c['name']];
 				}
@@ -3749,17 +3841,6 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$output['table'] = $table;
 			$output['title'] = $title;
 
-			if ($session) {
-				if (1 == 0) {
-					cacti_session_start();
-
-					$_SESSION['sess_flowdata'][$key]['data']    = $output;
-					$_SESSION['sess_flowdata'][$key]['timeout'] = $time + 600;
-
-					cacti_session_close();
-				}
-			}
-
 			return $output;
 		}
 	}
@@ -3767,6 +3848,12 @@ function run_flow_query($session, $query_id, $start, $end) {
 	return false;
 }
 
+/**
+ * @param mixed $table
+ * @param mixed $type
+ *
+ * @return mixed
+ */
 function flowview_table_name_to_time($table, $type) {
 	if (!preg_match('/^plugin_flowview_raw_([0-9]{7})([0-9]{2})?$/', $table, $matches)) {
 		return false;
@@ -3785,12 +3872,20 @@ function flowview_table_name_to_time($table, $type) {
 		$hour = substr($suffix, 7, 2);
 	}
 
-	$dates = flowview_convert_yeardayhour_to_date($gran, $year, $day, $hour);
+	$dates = flowview_convert_yeardayhour_to_date($gran, $year, $day, (int) $hour);
 
 	return $dates[$type];
 }
 
-function flowview_convert_yeardayhour_to_date($range, $year, $day, $hour = 0) {
+/**
+ * @param mixed $range
+ * @param mixed $year
+ * @param mixed $day
+ * @param int $hour
+ *
+ * @return array
+ */
+function flowview_convert_yeardayhour_to_date($range, $year, $day, int $hour = 0): array {
 	$datetime = new DateTime();
 	$datetime->setDate((int) $year, 1, 1)->setTime(0, 0, 0);
 	$datetime->modify('+' . (int) $day . ' days');
@@ -3821,51 +3916,45 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, $hour = 0) {
  * and inner (map phase) and outer (reduce phase) SQL queries,
  * create a series of shards requests to break the larger query into multiple
  * components to be used as a map reduce construct.
- *
  * Currently, this request design does not work with classic partitioned
  * tables.  In a later version of the parallel query we will support
  * querying from a single table constructed of multiple partitions
  * so long as we can quickly find the range of partitions that need
  * to be queried for data.
- *
  * The $stru_inner and $stru_outer have a very specific layout that follows
  * the pattern below.  The current version of the parallel query is designed
  * primarily for time related event data like syslog, and netflow data.
  * any other Time Series data requests would benefit from this API as the
  * speedups are almost linear.
- *
  * The $stru_inner syntax is as follows and documented on the right
- *
  * $stru_inner = array(
- *   'sql_query'        => $sql_inner,         // The SQL query using prepared format WHERE a = ?
- *   'sql_where'        => $sql_where,         // The SQL where for the query separated from the sql_query
- *   'sql_range'        => $sql_range,         // The SQL where of the query that includes the time range
- *   'sql_having'       => '',                 // Optional - The SQL having clause to apply
- *   'sql_order'        => '',                 // Optional - The SQL order to apply
- *   'sql_limit'        => '',                 // Optional - The SQL limit to apply
- *   'sql_groupby'      => $sql_inner_groupby, // The SQL Group By to apply
- *   'sql_params'       => $sql_params,        // An array of SQL prepared parameters
- *   'sql_range_params' => $sql_range_params,  // An array of SQL range parameters
- *   'sql_start_time'   => $start,             // The start time of the query for table reduction
- *   'sql_end_time'     => $end                // The end time of the query for table reduction
- *
+ * 'sql_query'        => $sql_inner,         // The SQL query using prepared format WHERE a = ?
+ * 'sql_where'        => $sql_where,         // The SQL where for the query separated from the sql_query
+ * 'sql_range'        => $sql_range,         // The SQL where of the query that includes the time range
+ * 'sql_having'       => '',                 // Optional - The SQL having clause to apply
+ * 'sql_order'        => '',                 // Optional - The SQL order to apply
+ * 'sql_limit'        => '',                 // Optional - The SQL limit to apply
+ * 'sql_groupby'      => $sql_inner_groupby, // The SQL Group By to apply
+ * 'sql_params'       => $sql_params,        // An array of SQL prepared parameters
+ * 'sql_range_params' => $sql_range_params,  // An array of SQL range parameters
+ * 'sql_start_time'   => $start,             // The start time of the query for table reduction
+ * 'sql_end_time'     => $end                // The end time of the query for table reduction
  * The $stru_outer syntax is below.  You will notice that the time dimension is removed here, but
  * much of the other attributes are intact and have the same meanings as above.
- *
  * $stru_outer = array(
- *   'sql_query'        => $sql_outer,
- *   'sql_where'        => '',
- *   'sql_having'       => $sql_having,
- *   'sql_groupby'      => $sql_groupby,
- *   'sql_order'        => $sql_order,
- *   'sql_limit'        => $sql_limit,
- *   'sql_params'       => []
+ * 'sql_query'        => $sql_outer,
+ * 'sql_where'        => '',
+ * 'sql_having'       => $sql_having,
+ * 'sql_groupby'      => $sql_groupby,
+ * 'sql_order'        => $sql_order,
+ * 'sql_limit'        => $sql_limit,
+ * 'sql_params'       => []
  *
- * @param  array    An array of tables to use for the map query
- * @param  array    An array of map query parameters
- * @param  array    An array of reduce query parameters
+ * @param mixed $tables
+ * @param mixed $stru_inner
+ * @param mixed $stru_outer
  *
- * @return int      A request id that will be used in the run phase
+ * @return mixed
  */
 function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	$save = [];
@@ -3891,7 +3980,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	$sql_start_time   = $stru_inner['sql_start_time'];
 	$sql_end_time     = $stru_inner['sql_end_time'];
 	$md5_array        = [$stru_inner, $stru_outer];
-	$query_md5        = md5(json_encode($md5_array));
+	$query_md5        = md5((string) json_encode($md5_array));
 
 	unset($map_query['sql_range']);
 	unset($map_query['sql_range_params']);
@@ -3899,7 +3988,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	unset($map_query['sql_end_time']);
 
 	$reduce_query = json_encode($stru_outer);
-	$map_query    = json_encode($map_query);
+	$map_query    = (string) json_encode($map_query);
 
 	$table_md5 = md5($map_query);
 
@@ -3935,6 +4024,8 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		$save['time_to_live']     = time() + $time_to_live;
 
 		$request_id = flowview_sql_save($save, 'parallel_database_query');
+
+		$base_table = '';
 
 		foreach($tables as $table => $details) {
 			$base_table = $table;
@@ -4022,8 +4113,12 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
  * parallel_database_query_is_running - Checks to see if an existing parallel
  * database query is currently running and return a true of false.  This prevents
  * multiple simultaneouls run requests from polluting the output.
+ *
+ * @param mixed $request_id
+ *
+ * @return bool
  */
-function parallel_database_query_is_running($request_id) {
+function parallel_database_query_is_running($request_id): bool {
 	$status = flowview_db_fetch_cell_prepared('SELECT COUNT(*)
 		FROM parallel_database_query
 		WHERE id = ?
@@ -4042,12 +4137,12 @@ function parallel_database_query_is_running($request_id) {
  * in background.  If the data is already cached, then the number of pending request
  * will be zero and the flowview_runner.php will not be called and the results will
  * be pulled from the parallel_database_query tabbles 'results' column.
+ * where it takes multiple requests to form a proper UNION of data
+ * there will be more than one request.
  *
- * @param  array   An array of requests to execute the parallel database.  In the case
- *                 where it takes multiple requests to form a proper UNION of data
- *                 there will be more than one request.
+ * @param mixed $requests
  *
- * @return array   An array of query results in the order for which they were requested
+ * @return mixed
  */
 function parallel_database_query_run($requests) {
 	global $config, $debug;
@@ -4113,7 +4208,7 @@ function parallel_database_query_run($requests) {
 		$results = json_decode(flowview_db_fetch_cell_prepared('SELECT results
 			FROM parallel_database_query
 			WHERE id = ?',
-			[$request_id]), true);
+			[$requests[0]]), true);
 	} else {
 		$reduce_query = flowview_db_fetch_cell_prepared('SELECT reduce_query
 			FROM parallel_database_query
@@ -4129,6 +4224,8 @@ function parallel_database_query_run($requests) {
 
 		if ($reduce_query != '' && cacti_sizeof($tables)) {
 			$i = 0;
+			$temp_table = '';
+
 			foreach($tables as $table => $data) {
 				if ($i == 0) {
 					$temp_table = 'parallel_database_query_temp_' . time();
@@ -4208,12 +4305,10 @@ function parallel_database_query_run($requests) {
  * parallel_database_query_create_reduce_table - Based upon the request ID and the
  * base table as well as the query parameters, construct a valid temporary table
  * to hold the map query results that will be reduced in a subsequent step.
- *
  * This function is pretty simplistic at this point in time.  It assumes that
  * the map query has aliases for all the columns and those aliases should match
  * the names in the base table provided as the third parameter.  With that
  * it will create a table to hold the map data using that structure.
- *
  * This is a rather simplistic approach.  In a future release, we will look
  * both at the base table, but also we will look at the consolidation functions
  * that the user has requested, for example SUM(), MIN(), MAX() can retain
@@ -4222,11 +4317,11 @@ function parallel_database_query_run($requests) {
  * with a CAST() function call in the reduce phase, but it would be convenient
  * to do this automatically in this function.
  *
- * @param  int     The parallel query request id
- * @param  string  The SQL map query to run
- * @param  string  The base table to inspect for column types
+ * @param mixed $request_id
+ * @param mixed $sql_query
+ * @param mixed $table
  *
- * @return string  The name of the table that was created to hold the map data
+ * @return mixed
  */
 function parallel_database_query_create_reduce_table($request_id, $sql_query, $table) {
 	$table_name = "parallel_database_query_map_$request_id";
@@ -4299,7 +4394,10 @@ function parallel_database_query_create_reduce_table($request_id, $sql_query, $t
 	return $table_name;
 }
 
-function parallel_database_query_expire() {
+/**
+ * @return void
+ */
+function parallel_database_query_expire(): void {
 	$ttl = read_config_option('flowview_parallel_time_to_live');
 
 	if (empty($ttl)) {
@@ -4321,7 +4419,13 @@ function parallel_database_query_expire() {
 	}
 }
 
-function parallel_database_query_cleanup($request_id, $remove = false) {
+/**
+ * @param mixed $request_id
+ * @param bool $remove
+ *
+ * @return void
+ */
+function parallel_database_query_cleanup($request_id, bool $remove = false): void {
 	$table = flowview_db_fetch_cell_prepared('SELECT map_table
 		FROM parallel_database_query
 		WHERE id = ?',
@@ -4364,7 +4468,12 @@ function parallel_database_query_cleanup($request_id, $remove = false) {
 	}
 }
 
-function parallel_database_query_cancel($query_id) {
+/**
+ * @param mixed $query_id
+ *
+ * @return void
+ */
+function parallel_database_query_cancel($query_id): void {
 	$processes = db_fetch_assoc_prepared('SELECT *
 		FROM processes
 		WHERE tasktype = ?
@@ -4389,6 +4498,11 @@ function parallel_database_query_cancel($query_id) {
 		[$query_id]);
 }
 
+/**
+ * @param mixed $query_id
+ *
+ * @return mixed
+ */
 function parallel_database_parent_runner($query_id) {
 	db_debug("Query $query_id started");
 
@@ -4556,7 +4670,13 @@ function parallel_database_parent_runner($query_id) {
 	return $stats;
 }
 
-function parallel_database_child_runner($query_id, $shard_id) {
+/**
+ * @param mixed $query_id
+ * @param mixed $shard_id
+ *
+ * @return void
+ */
+function parallel_database_child_runner($query_id, $shard_id): void {
 	db_debug(sprintf('Starting Shard Query ID:%s and Shard ID:%s', $query_id, $shard_id));
 
 	if (read_config_option('flowview_use_maxscale') == 'on') {
@@ -4688,7 +4808,12 @@ function parallel_database_child_runner($query_id, $shard_id) {
 	db_debug("Query $query_id and Shard $shard_id Complete");
 }
 
-function db_debug($string) {
+/**
+ * @param mixed $string
+ *
+ * @return void
+ */
+function db_debug($string): void {
 	global $debug;
 
 	if ($debug) {
@@ -4696,6 +4821,11 @@ function db_debug($string) {
 	}
 }
 
+/**
+ * @param mixed $domain
+ *
+ * @return mixed
+ */
 function display_domain($domain) {
 	if ($domain != '') {
 		return $domain;
@@ -4704,6 +4834,9 @@ function display_domain($domain) {
 	}
 }
 
+/**
+ * @return mixed
+ */
 function get_json_params() {
 	$arr = [];
 
@@ -4725,18 +4858,27 @@ function get_json_params() {
 	return json_encode($arr);
 }
 
-function get_column_alignment($column) {
+/**
+ * @param mixed $column
+ *
+ * @return string
+ */
+function get_column_alignment($column): string {
 	switch($column) {
 	case __('Bytes', 'flowview'):
 	case __('Packets', 'flowview'):
 	case __('Flows', 'flowview'):
 		return 'right';
-		break;
 	default:
 		return 'left';
 	}
 }
 
+/**
+ * @param mixed $tos
+ *
+ * @return mixed
+ */
 function parse_type_of_service($tos) {
 	$otosn = $tos;
 	$otosx = dechex($tos);
@@ -4812,6 +4954,11 @@ function parse_type_of_service($tos) {
 	return $tos;
 }
 
+/**
+ * @param mixed $tos
+ *
+ * @return mixed
+ */
 function parse_tos($tos) {
 	$iptos_tos_lower_mask = 30;
 	$iptos_tos_upper_mask = 224;
@@ -4855,6 +5002,11 @@ function parse_tos($tos) {
 	return $output;
 }
 
+/**
+ * @param mixed $output
+ *
+ * @return mixed
+ */
 function parseSummaryReport($output) {
 	global $config;
 
@@ -4871,7 +5023,7 @@ function parseSummaryReport($output) {
 	/* do some output buffering */
 	ob_start();
 
-	html_start_box(__('Summary Statistics', 'flowview'), '100%', '', '3', 'center', '');
+	html_start_box(__('Summary Statistics', 'flowview'), '100%', false, 3, 'center', '');
 
 	if (cacti_sizeof($output)) {
 		foreach($output as $l) {
@@ -4882,22 +5034,22 @@ function parseSummaryReport($output) {
 
 			if (substr_count($l, 'IP packet size distribution')) {
 				html_end_box(false);
-				html_start_box(__('IP Packet Size Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('IP Packet Size Distribution (%%)', 'flowview'), '100%', false, 3, 'center', '');
 				$section = 'inippsd';
 				continue;
 			} elseif (substr_count($l, 'Packets per flow distribution')) {
 				html_end_box(false);
-				html_start_box(__('Packets per Flow Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('Packets per Flow Distribution (%%)', 'flowview'), '100%', false, 3, 'center', '');
 				$section = 'inppfd';
 				continue;
 			} elseif (substr_count($l, 'Octets per flow distribution')) {
 				html_end_box(false);
-				html_start_box(__('Octets per Flow Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('Octets per Flow Distribution (%%)', 'flowview'), '100%', false, 3, 'center', '');
 				$section = 'inopfd';
 				continue;
 			} elseif (substr_count($l, 'Flow time distribution')) {
 				html_end_box(false);
-				html_start_box(__('Flow Time Distribution (%%)', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('Flow Time Distribution (%%)', 'flowview'), '100%', false, 3, 'center', '');
 				$section = 'inftd';
 				continue;
 			}
@@ -4962,12 +5114,18 @@ function parseSummaryReport($output) {
 	return ob_get_clean();
 }
 
+/**
+ * @param mixed $string
+ *
+ * @return mixed
+ */
 function flowview_explode($string) {
 	$string=trim($string);
 
 	if (!strlen($string)) return [];
 
 	$array=explode(' ', $string);
+	$newa = [];
 	foreach($array as $e) {
 		if ($e != '') {
 			$newa[] = $e;
@@ -4977,10 +5135,21 @@ function flowview_explode($string) {
 	return $newa;
 }
 
+/**
+ * @param mixed $string
+ *
+ * @return mixed
+ */
 function removeWhiteSpace($string) {
 	return preg_replace('/\s+/', ' ', $string);
 }
 
+/**
+ * @param mixed $prot
+ * @param mixed $prot_hex
+ *
+ * @return mixed
+ */
 function plugin_flowview_get_protocol($prot, $prot_hex) {
 	global $config, $graph_timespans;
 
@@ -4996,7 +5165,13 @@ function plugin_flowview_get_protocol($prot, $prot_hex) {
 	return $prot;
 }
 
-function plugin_flowview_formatoctet($size, $div = 1024) {
+/**
+ * @param mixed $size
+ * @param int $div
+ *
+ * @return mixed
+ */
+function plugin_flowview_formatoctet($size, int $div = 1024) {
 	$x=0;
 	$tag = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 	while ($size > $div) {
@@ -5006,7 +5181,12 @@ function plugin_flowview_formatoctet($size, $div = 1024) {
 	return round($size, 2) . ' ' . $tag[$x];
 }
 
-function flowview_altrow($i) {
+/**
+ * @param mixed $i
+ *
+ * @return string
+ */
+function flowview_altrow($i): string {
 	if ($i/2 == intval($i/2)) {
 		return 'even';
 	} else {
@@ -5014,6 +5194,11 @@ function flowview_altrow($i) {
 	}
 }
 
+/**
+ * @param mixed $domain
+ *
+ * @return mixed
+ */
 function flowview_get_rdomain_from_domain($domain) {
 	$str = '';
 
@@ -5026,7 +5211,14 @@ function flowview_get_rdomain_from_domain($domain) {
 	return $str;
 }
 
-function flowview_translate_port($port, $is_hex, $detail = true) {
+/**
+ * @param mixed $port
+ * @param mixed $is_hex
+ * @param bool $detail
+ *
+ * @return mixed
+ */
+function flowview_translate_port($port, $is_hex, bool $detail = true) {
 	global $config;
 
 	static $services = [];
@@ -5072,6 +5264,9 @@ function flowview_translate_port($port, $is_hex, $detail = true) {
 	}
 }
 
+/**
+ * @return mixed
+ */
 function flowview_check_fields() {
 	global $config, $graph_timespans;
 
@@ -5101,7 +5296,7 @@ function flowview_check_fields() {
 			}
 
 			$subs = explode('.', $source_ip);
-			if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
+			if (($subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
 				return __('Invalid IP for the Source Address!<br>(Must be in the form of \'192.168.0.1\')', 'flowview');
 			}
 
@@ -5114,7 +5309,7 @@ function flowview_check_fields() {
 
 					$subs = explode('.', $subnet);
 
-					if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
+					if (($subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
 						return __('Invalid subnet for the Source Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')', 'flowview');
 					}
 				} else {
@@ -5136,7 +5331,7 @@ function flowview_check_fields() {
 				return __('Invalid IP for the Destination Address!<br>(Must be in the form of \'192.168.0.1\')', 'flowview');
 			}
 			$subs = explode('.', $dest_ip);
-			if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
+			if (($subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
 				return __('Invalid IP for the Destination Address!<br>(Must be in the form of \'192.168.0.1\')', 'flowview');
 			}
 			if (isset($s[1])) {
@@ -5146,7 +5341,7 @@ function flowview_check_fields() {
 						return __('Invalid subnet for the Destination Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')', 'flowview');
 					}
 					$subs = explode('.', $subnet);
-					if ((!isset($subs[0]) || $subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
+					if (($subs[0] > 255) || (!isset($subs[1]) || $subs[1] > 255) || (!isset($subs[2]) || $subs[2] > 255) || (!isset($subs[3]) || $subs[3] > 255)) {
 						return __('Invalid subnet for the Destination Address!<br>(Must be in the form of \'192.168.0.1/255.255.255.0\' or \'192.168.0.1/24\')', 'flowview');
 					}
 				} else {
@@ -5191,7 +5386,7 @@ function flowview_check_fields() {
 	}
 
 	if (get_request_var('sourceas') != '') {
-		$sourceas = str_replace(' ', '', $get_request_var('sourceas'));
+		$sourceas = str_replace(' ', '', get_request_var('sourceas'));
 
 		$s_as = explode(',',$sourceas);
 
@@ -5276,7 +5471,7 @@ function flowview_check_fields() {
 		$tcp_flag = explode(',', $tcpflags);
 
 		foreach ($tcp_flag as $t) {
-			if (!preg_match("/^[-]{0,1}((0x[0-9a-zA-Z]{1,3})|([0-9a-zA-Z]{1,3}))(/[0-9a-zA-Z]{1,3}) {0,1}$/", $t)) {
+			if (!preg_match("/^[-]{0,1}((0x[0-9a-zA-Z]{1,3})|([0-9a-zA-Z]{1,3}))(\/[0-9a-zA-Z]{1,3}){0,1} {0,1}$/", $t)) {
 					return __('Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)', 'flowview');
 			}
 		}
@@ -5297,7 +5492,12 @@ function flowview_check_fields() {
 	}
 }
 
-function flowview_draw_table(&$output) {
+/**
+ * @param mixed $output
+ *
+ * @return void
+ */
+function flowview_draw_table(&$output): void {
 	print "<div>";
 	print "<div id='flowcontent' style='display:none'>";
 	if ($output !== false && isset($output['table'])) {
@@ -5307,7 +5507,12 @@ function flowview_draw_table(&$output) {
 	print "</div>";
 }
 
-function flowview_draw_statistics(&$output) {
+/**
+ * @param mixed $output
+ *
+ * @return void
+ */
+function flowview_draw_statistics(&$output): void {
 	print "<div>";
 	print "<div id='data'>";
 	print $output;
@@ -5315,12 +5520,18 @@ function flowview_draw_statistics(&$output) {
 	print "</div>";
 }
 
-function flowview_draw_chart($type, $title) {
+/**
+ * @param mixed $type
+ * @param mixed $title
+ *
+ * @return void
+ */
+function flowview_draw_chart($type, $title): void {
 	global $config;
 	static $chartid = 0;
 
 	print "<div id='wrapper" . $type . "' style='display:none;'>";
-	html_start_box(__('FlowView Chart for %s Type is %s', $title, ucfirst($type), 'flowview'), '100%', true, '3', 'center', '');
+	html_start_box(__('FlowView Chart for %s Type is %s', $title, ucfirst($type), 'flowview'), '100%', true, 3, 'center', '');
 	print "<tr><td class='center'>";
 	print "<div id='chart$type' class='chart'></div>";
 	print "</td></tr>";
@@ -5333,8 +5544,13 @@ function flowview_draw_chart($type, $title) {
 /**
  * flowview_get_dns_from_ip - This function provides a good method of performing
  * a rapid lookup of a DNS entry for a host so long as you don't have to look far.
+ *
+ * @param mixed $ip
+ * @param int $timeout
+ *
+ * @return mixed
  */
-function flowview_get_dns_from_ip($ip, $timeout = 1000) {
+function flowview_get_dns_from_ip($ip, int $timeout = 1000) {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/flowview/Net/DNS2.php');
@@ -5428,6 +5644,8 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 
 	/* now let's try our specified DNS if this option is selected */
 	if (read_config_option('flowview_dns_method') == 1 && ($dns1 != '' || $dns2 != '')) {
+		$nameservers = [];
+
 		if ($dns1 != '') {
 			$nameservers[] = $dns1;
 		}
@@ -5628,7 +5846,12 @@ function flowview_get_dns_from_ip($ip, $timeout = 1000) {
 	}
 }
 
-function flowview_get_color($as_array = false) {
+/**
+ * @param bool $as_array
+ *
+ * @return mixed
+ */
+function flowview_get_color(bool $as_array = false) {
 	static $position = 0;
 	$palette = ['#F23C2E', '#32599A', '#F18A47', '#AC9509', '#DAAC10'];
 
@@ -5647,11 +5870,11 @@ function flowview_get_color($as_array = false) {
  * return a supported or non-supported text with the correct
  * color.
  *
- * @param int     - The flowview template  id
+ * @param mixed $field_id
  *
- * @return - a string containing html that represents the field id's status
+ * @return string
  */
-function get_colored_field_column($field_id) {
+function get_colored_field_column($field_id): string {
 	global $flow_fieldids, $flow_fieldids_nat;
 
 	if (in_array($field_id, $flow_fieldids_nat, true)) {
@@ -5663,12 +5886,14 @@ function get_colored_field_column($field_id) {
 	}
 }
 
-/** flowview_report_session()
- *
+/**
+ * flowview_report_session()
  * This function will update the checkbox
  * session values for page refreshes.
+ *
+ * @return void
  */
-function flowview_report_session() {
+function flowview_report_session(): void {
 	/* ================= input validation and session storage ================= */
 	$filters = array(
 		'exclude' => array(
@@ -5707,7 +5932,12 @@ function flowview_report_session() {
 	/* ================= input validation ================= */
 }
 
-function flowview_check_local_iprange($ip) {
+/**
+ * @param mixed $ip
+ *
+ * @return bool
+ */
+function flowview_check_local_iprange($ip): bool {
     $local_iprange = read_config_option('flowview_local_iprange');
     $range_parts   = explode('/', $local_iprange);
 
@@ -5746,7 +5976,13 @@ function flowview_check_local_iprange($ip) {
 }
 
 
-function flowview_check_databases($import_only = false, $force = false) {
+/**
+ * @param string|false $import_only
+ * @param bool $force
+ *
+ * @return bool
+ */
+function flowview_check_databases($import_only = false, bool $force = false): bool {
 	$databases = array(
 		'afrinic' => [
 			'serial'  => 'AFRINIC.CURRENTSERIAL',
@@ -5946,7 +6182,7 @@ function flowview_check_databases($import_only = false, $force = false) {
 			cacti_log("ERROR: Unable to Download Databases $source, Error: $error_string", true, 'FLOWVIEW');
 			continue;
 		} elseif ($response != '') {
-			$curr_serial = trim($response);
+			$curr_serial = trim((string) $response);
 		} else {
 			cacti_log("ERROR: Databases $source, Empty Serial", true, 'FLOWVIEW');
 			continue;
@@ -6009,6 +6245,8 @@ function flowview_check_databases($import_only = false, $force = false) {
 					if (file_exists($local_file) && is_writable($local_file)) {
 						unlink($local_file);
 					}
+				} else {
+					$files_broken = true;
 				}
 			}
 
@@ -6020,9 +6258,16 @@ function flowview_check_databases($import_only = false, $force = false) {
 		}
 	}
 	curl_close($ch);
+	return true;
 }
 
-function flowview_update_database($source, $irr_file = false) {
+/**
+ * @param mixed $source
+ * @param string|false $irr_file
+ *
+ * @return bool
+ */
+function flowview_update_database($source, $irr_file = false): bool {
 	global $debug;
 
 	if ($irr_file === false) {
@@ -6031,6 +6276,12 @@ function flowview_update_database($source, $irr_file = false) {
 	}
 
 	$file         = gzopen($irr_file, 'r');
+
+	if ($file === false) {
+		cacti_log(sprintf('IRR UPDATE: WARNING: Unable to open IRR database file %s', $irr_file), true, 'FLOWVIEW');
+		return false;
+	}
+
 	$record       = [];
 	$prefixes     = [];
 	$column       = '';
@@ -6108,10 +6359,11 @@ function flowview_update_database($source, $irr_file = false) {
 	$prev_irr_column = '';
 	$name_remove_ct  = 1;
 	$sections_done   = 0;
+	/** @var array<string, int> $record_num */
 	$record_num = [];
 
 	while (!feof($file) !== false) {
-		$line = fgets($file);
+		$line = (string) fgets($file);
 
 		if (substr($line, 0, 1) == '#') {
 			// Ignore comment
@@ -6188,7 +6440,7 @@ function flowview_update_database($source, $irr_file = false) {
 				if (isset($record[$section])) {
 					$records[$section][$record_num[$section]] = $record[$section];
 				} else {
-					$records[$section][$record_num[$section]] = '';
+					$records[$section][$record_num[$section]] = [];
 				}
 
 				$records[$section][$record_num[$section]][$db_column] = $col_value;
@@ -6213,7 +6465,7 @@ function flowview_update_database($source, $irr_file = false) {
 				} else {
 					if ($db_column != 'source') {
 						if ($db_column == 'last_modified' || $db_column == 'created') {
-							$col_value = date('Y-m-d H:i:s', strtotime($col_value));
+							$col_value = date('Y-m-d H:i:s', (int) strtotime($col_value));
 						}
 
 						if (!isset($records[$section][$record_num[$section]][$db_column])) {
@@ -6256,7 +6508,14 @@ function flowview_update_database($source, $irr_file = false) {
 	return true;
 }
 
-function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_sections) {
+/**
+ * @param mixed $records
+ * @param mixed $prefixes
+ * @param mixed $supported_sections
+ *
+ * @return void
+ */
+function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_sections): void {
 	global $debug;
 
 	if ($debug) {
@@ -6293,6 +6552,11 @@ function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_section
 	}
 }
 
+/**
+ * @param mixed $db_table
+ *
+ * @return mixed
+ */
 function flowview_get_upsert_suffix($db_table) {
 	static $suffixes = [];
 
@@ -6323,6 +6587,11 @@ function flowview_get_upsert_suffix($db_table) {
 	return $suffix;
 }
 
+/**
+ * @param mixed $host
+ *
+ * @return mixed
+ */
 function flowview_check_for_private_network($host) {
 	if (filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
 		$parts = explode('.', $host);
@@ -6367,6 +6636,11 @@ function flowview_check_for_private_network($host) {
 	return $host;
 }
 
+/**
+ * @param mixed $host
+ *
+ * @return mixed
+ */
 function flowview_get_owner_from_arin($host) {
 	static $curlgood = true;
 
@@ -6417,14 +6691,12 @@ function flowview_get_owner_from_arin($host) {
 
 		return false;
 	} elseif ($response != '') {
-		$json = json_decode($response, true);
+$json = json_decode((string) $response, true);
 
 		if (isset($json['net'])) {
-			/* debugging */
-			if (1 == 0) {
-				cacti_log("The host is: $host", true, 'FLOWVIEW');
-				print_r($json);
-			}
+			$cidr      = '';
+			$net_range = '';
+			$net_type  = '';
 
 			if (isset($json['net']['netBlocks']['netBlock']['startAddress'])) {
 				$cidr = $json['net']['netBlocks']['netBlock']['startAddress']['$'] . '/' .
@@ -6545,7 +6817,13 @@ function flowview_get_owner_from_arin($host) {
 	}
 }
 
-function flowview_get_domain($host, $domain = false) {
+/**
+ * @param mixed $host
+ * @param bool $domain
+ *
+ * @return mixed
+ */
+function flowview_get_domain($host, bool $domain = false) {
 	if ($domain === false || $domain === 'false') {
 		return $host;
 	} elseif (is_ipaddress($host)) {
@@ -6560,12 +6838,17 @@ function flowview_get_domain($host, $domain = false) {
 	}
 }
 
+/**
+ * @param mixed $value
+ *
+ * @return mixed
+ */
 function flowview_getmax($value) {
 	$value = round($value * 1.01, 0);
 
-	$length  = strlen($value) - 2;
+	$length  = strlen((string) $value) - 2;
 	if ($length > 0) {
-		$divisor = ('1' . str_repeat('0', $length));
+		$divisor = (int) ('1' . str_repeat('0', $length));
 	} else {
 		$divisor = 1;
 	}
@@ -6576,7 +6859,12 @@ function flowview_getmax($value) {
 	return $temp * $divisor;
 }
 
-function flowview_autoscale($value) {
+/**
+ * @param mixed $value
+ *
+ * @return array
+ */
+function flowview_autoscale($value): array {
 	if ($value < 1000) {
 		return  [1, ''];
 	} elseif ($value < 1000000) {
@@ -6590,7 +6878,12 @@ function flowview_autoscale($value) {
 	}
 }
 
-function create_raw_partition($table) {
+/**
+ * @param mixed $table
+ *
+ * @return void
+ */
+function create_raw_partition($table): void {
 	global $config;
 
 	$data = [];
@@ -6692,7 +6985,12 @@ function create_raw_partition($table) {
  * bulk utility to be run first. Safe to call repeatedly; already-upgraded
  * tables are left untouched.
  */
-function flowview_ensure_nat_columns($table) {
+/**
+ * @param mixed $table
+ *
+ * @return void
+ */
+function flowview_ensure_nat_columns($table): void {
 	$nat_columns = [
 		'post_nat_src_addr'    => "varbinary(16) NOT NULL DEFAULT ''",
 		'post_nat_src_domain'  => "varchar(256) NOT NULL DEFAULT ''",
@@ -6720,27 +7018,19 @@ function flowview_ensure_nat_columns($table) {
 	}
 }
 
-function flowview_fix_collate_issues() {
+/**
+ * @return bool
+ */
+function flowview_fix_collate_issues(): bool {
 	global $config;
 
 	return false;
-
-	$tables = array_rekey(
-		flowview_db_fetch_assoc('SELECT TABLE_NAME
-			FROM information_schema.TABLES
-			WHERE TABLE_NAME LIKE "plugin_flowview_raw%"
-			AND TABLE_COLLATION != "utf8_unicode_ci"'),
-		'TABLE_NAME', 'TABLE_NAME'
-	);
-
-	if (cacti_sizeof($tables)) {
-		foreach($tables as $table) {
-			flowview_db_execute("ALTER TABLE $table COLLATE=utf8mb4_unicode_ci");
-		}
-	}
 }
 
-function import_flows() {
+/**
+ * @return void
+ */
+function import_flows(): void {
 	global $config;
 
 	$flow_directory = read_config_option('path_flows_dir');
@@ -6776,8 +7066,16 @@ function import_flows() {
 	}
 }
 
-function flowview_load_flow_file_into_database($file, $listener_id) {
+/**
+ * @param mixed $file
+ * @param mixed $listener_id
+ *
+ * @return void
+ */
+function flowview_load_flow_file_into_database($file, $listener_id): void {
 	$flow_export = read_config_option('path_flowtools') . '/flow-export';
+
+	$data = '';
 
 	if (file_exists($flow_export)) {
 		if (is_executable($flow_export)) {
@@ -6790,6 +7088,7 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 	}
 
 	$sql = [];
+	$sql_prefix = '';
 
 	if ($data != '') {
 		$data = explode("\n", $data);
@@ -6832,12 +7131,18 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 				list($unix_secs, $unix_nsecs, $sysuptime, $ex_addr, $packets, $bytes, $start_time, $end_time, $engine_type, $engine_id, $src_addr, $dst_addr, $nexthop, $src_if, $dst_if, $src_port, $dst_port, $protocol, $tos, $flags, $src_prefix, $dst_prefix, $src_as, $dst_as) = $cd;
 			}
 
+			$unix_secs  = (int) $unix_secs;
+			$unix_nsecs = (int) $unix_nsecs;
+			$sysuptime  = (int) $sysuptime;
+			$start_time = (int) $start_time;
+			$end_time   = (int) $end_time;
+
 			$cap_time = $unix_secs + ($unix_nsecs / 1000000);
 
 			$rstime = ($start_time - $sysuptime) / 1000;
-			$rsmsec = substr($start_time - $sysuptime, -3);
+			$rsmsec = substr((string) ($start_time - $sysuptime), -3);
 			$retime = ($end_time - $sysuptime) / 1000;
-			$remsec = substr($end_time - $sysuptime, -3);
+			$remsec = substr((string) ($end_time - $sysuptime), -3);
 
 			$start_time = date('Y-m-d H:i:s', $cap_time + $rstime) . '.' . $rsmsec;
 			$end_time   = date('Y-m-d H:i:s', $cap_time + $retime) . '.' . $remsec;
@@ -6861,10 +7166,10 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 			}
 
 			$src_domain  = flowview_get_dns_from_ip($src_addr, 100);
-			$src_rdomain = flowview_get_rdomain_from_domain($src_domain, $src_addr);
+			$src_rdomain = flowview_get_rdomain_from_domain($src_domain);
 
 			$dst_domain  = flowview_get_dns_from_ip($dst_addr, 100);
-			$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain, $dst_addr);
+			$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain);
 
 			$src_rport  = flowview_translate_port($src_port, false, false);
 			$dst_rport  = flowview_translate_port($dst_port, false, false);
@@ -6901,7 +7206,7 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 				$flows                  . ', ' .
 				$packets                . ', ' .
 				$bytes                  . ', ' .
-				round($bytes/$packets, 1) . ', ' .
+				round((int) $bytes/(int) $packets, 1) . ', ' .
 				$tos . ', ' .
 				$flags . ')';
 
@@ -6920,6 +7225,12 @@ function flowview_load_flow_file_into_database($file, $listener_id) {
 	}
 }
 
+/**
+ * @param mixed $begin
+ * @param mixed $end
+ *
+ * @return mixed
+ */
 function get_tables_range($begin, $end = null) {
 	$tables    = [];
 	$partition = read_config_option('flowview_partition');
@@ -6951,6 +7262,9 @@ function get_tables_range($begin, $end = null) {
 	return $tables;
 }
 
+/**
+ * @return mixed
+ */
 function get_set_default_fast_engine() {
 	$engines = array(
 		'MyISAM' => __('MyISAM (Fast, Non-Crash Safe)', 'flowview'),

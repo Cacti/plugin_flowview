@@ -30,27 +30,27 @@
  * (attachments/email) via the report's stored delivery settings.
  * Called from this plugin's report-running code on Cacti versions
  * lacking the native reports_log_and_notify() function.
+ * 'html').
+ * report (e.g. 'flowview').
+ * (defaulted to '' if null).
+ * include.
  *
- * @param int    $id           The reports_queued id being completed.
- * @param float  $start_time   The Unix timestamp the run started at.
- * @param string $report_type  The rendered report format (e.g.
- *                            'html').
- * @param string $source       The plugin/source name generating the
- *                            report (e.g. 'flowview').
- * @param int    $source_id    The source's own report/schedule id.
- * @param string $subject      The notification email subject.
- * @param array  $raw_data     Reference, the report's raw result data.
- * @param mixed  $oput_raw     Reference, the raw rendered output.
- * @param string $oput_html    Reference, the HTML-rendered output body.
- * @param string|null $oput_text Reference, the plain-text output body
- *                              (defaulted to '' if null).
- * @param array  $attachments  Optional list of file attachments to
- *                            include.
- * @param array|false $headers Optional extra email headers to include.
+ * @param mixed $id
+ * @param mixed $start_time
+ * @param mixed $report_type
+ * @param mixed $source
+ * @param mixed $source_id
+ * @param mixed $subject
+ * @param mixed $raw_data
+ * @param mixed $oput_raw
+ * @param mixed $oput_html
+ * @param mixed $oput_text
+ * @param array $attachments
+ * @param array $headers
  *
  * @return void
  */
-function reports_log_and_notify($id, $start_time, $report_type, $source, $source_id, $subject, &$raw_data, &$oput_raw, &$oput_html, &$oput_text, $attachments = [], $headers = false) {
+function reports_log_and_notify($id, $start_time, $report_type, $source, $source_id, $subject, &$raw_data, &$oput_raw, &$oput_html, &$oput_text, $attachments = [], $headers = []): void {
 	$report = db_fetch_row_prepared('SELECT *
 		FROM reports_queued
 		WHERE id = ?',
@@ -188,21 +188,21 @@ function reports_log_and_notify($id, $start_time, $report_type, $source, $source
  * it, and raises/logs a scheduling confirmation or error message.
  * Called from this plugin's report-scheduling code on Cacti versions
  * lacking the native reports_queue() function.
+ * queued.
+ * report (e.g. 'flowview').
+ * report.
+ * store (JSON-encoded).
  *
- * @param string $name          The report's display name.
- * @param string $request_type  The type of request/report being
- *                              queued.
- * @param string $source        The plugin/source name generating the
- *                              report (e.g. 'flowview').
- * @param int    $source_id     The source's own report/schedule id.
- * @param string $command       The CLI command to run to generate the
- *                              report.
- * @param mixed  $notification  The notification/delivery settings to
- *                              store (JSON-encoded).
+ * @param mixed $name
+ * @param mixed $request_type
+ * @param mixed $source
+ * @param mixed $source_id
+ * @param mixed $command
+ * @param mixed $notification
  *
  * @return void
  */
-function reports_queue($name, $request_type, $source, $source_id, $command, $notification) {
+function reports_queue($name, $request_type, $source, $source_id, $command, $notification): void {
 	if (isset($_SESSION['sess_user_id'])) {
 		$requested_id = $_SESSION['sess_user_id'];
 		$requested_by = db_fetch_cell_prepared('SELECT username
@@ -254,17 +254,16 @@ function reports_queue($name, $request_type, $source, $source_id, $command, $not
  * report as running (recording its start time) and launches its
  * generation. Called from this plugin's report-running code on Cacti
  * versions lacking the native reports_run() function.
- *
- * @param int $id The reports_queued id to run.
- *
- * @return bool|null False if the queued report could not be found;
- *                   otherwise no explicit value is returned after
- *                   launching generation.
- *
+ * otherwise no explicit value is returned after
+ * launching generation.
  * @global array $config Cacti global configuration array; used to
- *                       include the poller library.
+ * include the poller library.
+ *
+ * @param mixed $id
+ *
+ * @return bool
  */
-function reports_run($id) {
+function reports_run($id): bool {
 	global $config;
 
 	include_once($config['base_path'] . '/lib/poller.php');
@@ -296,10 +295,11 @@ function reports_run($id) {
 
 	$end  = microtime(true);
 
-	$stats = sprintf("FLOWVIEW REPORT STATS: Time:0.2f Report:'%s' Source:%s SourceID:%s", $end-$start, $report['name'], $report['source'], $report['source_id']);
+	$stats = sprintf("FLOWVIEW REPORT STATS: Time:%0.2f Report:'%s' Source:%s SourceID:%s", $end-$start, $report['name'], $report['source'], $report['source_id']);
 
 	cacti_log($stats, false, 'SYSTEM');
 
 	db_execute_prepared('DELETE FROM reports_queued WHERE id = ?', [$id]);
+	return true;
 }
 

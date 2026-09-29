@@ -25,6 +25,9 @@
 
 chdir('../../');
 include('./include/auth.php');
+
+global $config;
+
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 include_once($config['base_path'] . '/plugins/flowview/flowview_security.php');
@@ -136,14 +139,13 @@ switch (get_request_var('action')) {
  * field flagged supported/unsupported per this plugin's known field
  * ids) as a downloadable YAML (preferred) or JSON file. Called from
  * this script's main request-dispatch switch when action=export.
- *
- * @return void This function calls exit() and never returns normally.
- *
  * @global array $flow_fieldids Map of known flow field ids, used to
- *                              flag each template field as
- *                              supported/unsupported.
+ * flag each template field as
+ * supported/unsupported.
+ *
+ * @return void
  */
-function export_template() {
+function export_template(): void {
 	global $flow_fieldids;
 
 	$template_id = get_filter_request_var('template');
@@ -194,16 +196,15 @@ function export_template() {
  * listing the selected devices; on confirmed submission, performs the
  * selected action for each device. Called from this script's main
  * request-dispatch switch when action=actions.
+ * @global array $flow_actions Map of drp_action value => action label,
+ * used for the bulk-actions confirmation
+ * display.
+ * @global array $config       Cacti global configuration array
+ * (declared but not directly used here).
  *
  * @return void
- *
- * @global array $flow_actions Map of drp_action value => action label,
- *                             used for the bulk-actions confirmation
- *                             display.
- * @global array $config       Cacti global configuration array
- *                             (declared but not directly used here).
  */
-function actions_devices () {
+function actions_devices(): void {
 	global $flow_actions, $config;
 
 	if (isset_request_var('selected_items')) {
@@ -258,7 +259,7 @@ function actions_devices () {
 
 	form_start('flowview_devices.php');
 
-	html_start_box($flow_actions[get_nfilter_request_var('drp_action')], '60%', '', '3', 'center', '');
+	html_start_box($flow_actions[get_nfilter_request_var('drp_action')], '60%', false, 3, 'center', '');
 
 	if (get_nfilter_request_var('drp_action') == '1') { /* Delete */
 		print "<tr>
@@ -316,7 +317,7 @@ function actions_devices () {
  *
  * @return void
  */
-function save_device() {
+function save_device(): void {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
 	/* ==================================================== */
@@ -376,7 +377,7 @@ function save_device() {
  *
  * @return void
  */
-function restart_services() {
+function restart_services(): void {
 	$pid = db_fetch_cell_prepared('SELECT pid
 		FROM processes
 		WHERE tasktype = ?
@@ -399,13 +400,12 @@ function restart_services() {
  * enabled flag, and detected flow templates), drawing the tab bar
  * first when editing an existing device. Called from this script's
  * main request-dispatch switch when action=edit.
+ * @global array $device_edit    The device edit form's field
+ * definitions.
  *
  * @return void
- *
- * @global array $device_edit    The device edit form's field
- *                               definitions.
  */
-function edit_device() {
+function edit_device(): void {
 	global $device_edit, $flow_fieldids;
 
 	/* ================= input validation ================= */
@@ -429,7 +429,7 @@ function edit_device() {
 	if (!isset_request_var('tab') || get_request_var('tab') == 'general') {
 		form_start('flowview_devices.php', 'flowview');
 
-		html_start_box($header_label, '100%', '', '3', 'center', '');
+		html_start_box($header_label, '100%', false, 3, 'center', '');
 
 		draw_edit_form(
 			array(
@@ -456,7 +456,7 @@ function edit_device() {
 				GROUP BY ds.ex_addr',
 				[$device['id'], $device['id']]);
 
-			html_start_box('Inbound Streams and Status', '100%', '', '4', 'center', '');
+			html_start_box('Inbound Streams and Status', '100%', false, 4, 'center', '');
 
 			$display_array = array(
 				array(
@@ -486,7 +486,7 @@ function edit_device() {
 				)
 			);
 
-			html_header($display_array, false);
+			html_header($display_array, 1);
 
 			if (cacti_sizeof($streams)) {
 				$i = 0;
@@ -590,7 +590,7 @@ function edit_device() {
 			WHERE device_id = ?',
 			[$device['id']]);
 
-		html_start_box(__('Listener Detected Templates', 'flowview'), '100%', '', '4', 'center', '');
+		html_start_box(__('Listener Detected Templates', 'flowview'), '100%', false, 4, 'center', '');
 
 		?>
 		<tr class='even'>
@@ -686,7 +686,7 @@ function edit_device() {
 
 		html_end_box();
 
-		html_start_box('', '100%', '', '4', 'center', '');
+		html_start_box('', '100%', false, 4, 'center', '');
 
 		$display_array = array(
 			array(
@@ -776,26 +776,25 @@ function edit_device() {
  * configured flow listener devices with their status and the
  * bulk-actions dropdown. Called from this script's main
  * request-dispatch switch as the default view.
- *
- * @return void
- *
  * @global mixed $action        Reserved/declared for parity with other
- *                              functions in this file; not used
- *                              directly here.
+ * functions in this file; not used
+ * directly here.
  * @global array $expire_arr    Data expiration option list used when
- *                              displaying device settings.
+ * displaying device settings.
  * @global array $rotation_arr  Rotation option list used when
- *                              displaying device settings.
+ * displaying device settings.
  * @global array $version_arr   Flow protocol version option list used
- *                              when displaying device settings.
+ * when displaying device settings.
  * @global array $nesting_arr   Reserved/declared for parity with other
- *                              functions in this file; not used
- *                              directly here.
+ * functions in this file; not used
+ * directly here.
  * @global array $config        Cacti global configuration array.
  * @global array $flow_actions  Map of drp_action value => action label,
- *                              used for the bulk-actions dropdown.
+ * used for the bulk-actions dropdown.
+ *
+ * @return void
  */
-function show_devices () {
+function show_devices(): void {
 	global $action, $expire_arr, $rotation_arr, $version_arr, $nesting_arr;
 	global $config, $flow_actions;
 
@@ -855,7 +854,7 @@ function show_devices () {
 
 	$total_rows = flowview_db_fetch_cell("SELECT COUNT(*) FROM plugin_flowview_devices $sql_where");
 
-	html_start_box(__('FlowView Listeners', 'flowview'), '100%', '', '4', 'center', 'flowview_devices.php?action=edit');
+	html_start_box(__('FlowView Listeners', 'flowview'), '100%', false, 4, 'center', 'flowview_devices.php?action=edit');
 
 	?>
 	<tr class='even'>
@@ -913,7 +912,7 @@ function show_devices () {
 
 	print $nav;
 
-	html_start_box('', '100%', '', '4', 'center', '');
+	html_start_box('', '100%', false, 4, 'center', '');
 
 	$display_array = array(
 		'name' => array(

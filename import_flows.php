@@ -25,6 +25,8 @@
 
 chdir('../../');
 include('./include/cli_check.php');
+
+global $config;
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 

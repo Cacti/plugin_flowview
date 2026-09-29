@@ -139,7 +139,10 @@ if (cacti_sizeof($tables)) {
 print PHP_EOL . "Complete.  Altered:$altered, Already Upgraded:$skipped" . ($dry_run ? ' (dry run, no changes made)':'') . PHP_EOL;
 
 /*  display_version - displays version information */
-function display_version() {
+/**
+ * @return void
+ */
+function display_version(): void {
 	$info    = plugin_flowview_version();
 	$version = $info['version'];
 
@@ -147,7 +150,10 @@ function display_version() {
 }
 
 /*  display_help - displays the usage of the function */
-function display_help() {
+/**
+ * @return void
+ */
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL . 'usage: flowview_upgrade_nat_columns.php [--dry-run]' . PHP_EOL . PHP_EOL;
