@@ -6250,12 +6250,18 @@ function flowview_check_databases($import_only = false, bool $force = false): bo
 			}
 
 			if (!$files_broken) {
-				/* only persist the serial once every file imported cleanly, so a partial
-				 * failure re-runs next time instead of being skipped on a matching serial */
-				set_config_option("flowview_{$source}_serial", $curr_serial);
+				$cleanup_ok = true;
 
 				foreach($supported_tables as $table) {
-					flowview_db_execute_prepared("DELETE FROM plugin_flowview_irr_$table WHERE present = 0 AND source = ?", [$source]);
+					if (flowview_db_execute_prepared("DELETE FROM plugin_flowview_irr_$table WHERE present = 0 AND source = ?", [$source]) === false) {
+						$cleanup_ok = false;
+					}
+				}
+
+				/* advance the serial only after every cleanup query has completed, so a failed
+				 * DELETE (or an interrupted run) retries next time instead of being skipped */
+				if ($cleanup_ok) {
+					set_config_option("flowview_{$source}_serial", $curr_serial);
 				}
 			}
 		}
@@ -6502,13 +6508,13 @@ function flowview_update_database($source, $irr_file = false): bool {
 
 	gzclose($file);
 
-	flowview_insert_irr_sections($records, $prefixes, $supported_sections);
+	$inserted = flowview_insert_irr_sections($records, $prefixes, $supported_sections);
 
 	$end = microtime(true);
 
 	cacti_log(sprintf('STATS IRR UPDATE: Time:%0.2f File:%s Source:%s', $end - $start, basename($irr_file), strtolower($source)), true, 'SYSTEM');
 
-	return true;
+	return $inserted;
 }
 
 /**
@@ -6516,14 +6522,16 @@ function flowview_update_database($source, $irr_file = false): bool {
  * @param mixed $prefixes
  * @param mixed $supported_sections
  *
- * @return void
+ * @return bool True when every batch insert succeeded, false if any failed.
  */
-function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_sections): void {
+function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_sections): bool {
 	global $debug;
 
 	if ($debug) {
 		print "Writing Database Records" . PHP_EOL;
 	}
+
+	$ok = true;
 
 	/* do the table inserts now */
 	foreach($supported_sections as $section) {
@@ -6549,10 +6557,14 @@ function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_section
 					}
 				}
 
-				flowview_db_execute_prepared($sql_insert . $sql_suffix, $sql_params);
+				if (flowview_db_execute_prepared($sql_insert . $sql_suffix, $sql_params) === false) {
+					$ok = false;
+				}
 			}
 		}
 	}
+
+	return $ok;
 }
 
 /**

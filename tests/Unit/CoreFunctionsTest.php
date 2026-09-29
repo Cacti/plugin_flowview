@@ -105,3 +105,44 @@ it('uses local calendar boundaries across daylight-saving changes', function ($t
 	array('America/New_York', 'plugin_flowview_raw_202430701', '2024-11-03 01:00:00 EDT', '2024-11-03 02:00:00 EST'),
 	array('Europe/Berlin', 'plugin_flowview_raw_202409001', '2024-03-31 01:00:00', '2024-03-31 03:00:00'),
 ));
+
+it('declares load_data_for_filter start/end as int|false rather than bool', function () {
+	// Regression guard: a bool hint silently coerced the nonzero Unix timestamps
+	// plugin_flowview_run_schedule() passes into true, so scheduled reports queried
+	// epoch second 1. This exact change passed syntax and static-analysis checks.
+	$types = array();
+	foreach ((new ReflectionFunction('load_data_for_filter'))->getParameters() as $param) {
+		$types[$param->getName()] = (string) $param->getType();
+	}
+
+	expect($types['start'])->toBe('int|false')
+		->and($types['end'])->toBe('int|false');
+});
+
+it('carries nonzero epoch timestamps through load_data_for_filter to the query path', function () {
+	// Drive the request-var path so $session is true, then confirm run_flow_query()
+	// recomputes the session cache key from the real timestamps (not a coerced 1)
+	// by returning the entry seeded under that exact key.
+	$_REQUEST['query'] = 7;
+	$_REQUEST['date1'] = '2024-01-01 00:00:00';
+	$_REQUEST['date2'] = '2024-01-02 00:00:00';
+
+	$key      = get_flowview_session_key(7, strtotime('2024-01-01 00:00:00'), strtotime('2024-01-02 00:00:00'));
+	$sentinel = array('id' => 7, 'table' => 'sentinel-rows');
+
+	$_SESSION['sess_flowdata'] = array(
+		$key => array('data' => $sentinel, 'timeout' => time() + 60),
+	);
+
+	expect(load_data_for_filter())->toBe($sentinel);
+});
+
+it('formats nonzero epoch bounds into the flow date range filter', function () {
+	// get_date_filter() is run_flow_query()'s consumer of the timestamps; a coerced
+	// value of 1 would render 1970-01-01 00:00:01 instead of the real window.
+	$params = array();
+	$sql    = get_date_filter('', $params, strtotime('2024-01-01 00:00:00 UTC'), strtotime('2024-01-02 00:00:00 UTC'), 3);
+
+	expect($sql)->toBe('(`start_time` BETWEEN ? AND ?)')
+		->and($params)->toBe(array('2024-01-01 00:00:00', '2024-01-02 00:00:00'));
+});
