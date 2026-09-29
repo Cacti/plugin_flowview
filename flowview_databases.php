@@ -25,6 +25,8 @@
 
 chdir('../../');
 include('./include/auth.php');
+
+global $config;
 include('./lib/utility.php');
 include_once('./plugins/flowview/functions.php');
 include_once('./plugins/flowview/database.php');
@@ -59,7 +61,10 @@ switch (get_request_var('action')) {
 		break;
 }
 
-function flowview_get_item_details() {
+/**
+ * @return bool
+ */
+function flowview_get_item_details(): bool {
 	global $config, $db_tabs;
 	global $graph_timeshifts, $graph_timespans, $graph_heights;
 
@@ -93,14 +98,14 @@ function flowview_get_item_details() {
 
 	print "<div style='height:350px;overflow-y:scroll'>";
 
-	html_start_box(__('Internet Route Registry Details', 'flowview'), '100%', '', '3', 'center', '');
+	html_start_box(__('Internet Route Registry Details', 'flowview'), '100%', false, 3, 'center', '');
 
 	$response = flowview_print_details($cols, $details);
 
 	html_end_box();
 
 	if ($response['mnt_by_present'] == true) {
-		$maintainers = preg_split('/[\s]+/', trim($response['mnt_by']));
+		$maintainers = preg_split('/[\s]+/', trim($response['mnt_by'])) ?: [];
 
 		foreach($maintainers as $m) {
 			$sql_params   = [];
@@ -114,7 +119,7 @@ function flowview_get_item_details() {
 				LIMIT 1", $sql_params);
 
 			if (cacti_sizeof($details)) {
-				html_start_box(__('Authorized Agent Details', 'flowview'), '100%', '', '3', 'center', '');
+				html_start_box(__('Authorized Agent Details', 'flowview'), '100%', false, 3, 'center', '');
 
 				flowview_print_details($cols, $details);
 
@@ -126,9 +131,16 @@ function flowview_get_item_details() {
 	print "</div>";
 
 	ob_get_flush();
+	return true;
 }
 
-function flowview_print_details(&$cols, &$details) {
+/**
+ * @param mixed $cols
+ * @param mixed $details
+ *
+ * @return array
+ */
+function flowview_print_details(&$cols, &$details): array {
 	$mnt_by_present = false;
 	$mnt_by         = '';
 	$mnt_by_source  = '';
@@ -180,7 +192,10 @@ function flowview_print_details(&$cols, &$details) {
 	return ['mnt_by_present' => $mnt_by_present, 'mnt_by' => $mnt_by, 'mnt_by_source' => $mnt_by_source];
 }
 
-function view_databases() {
+/**
+ * @return void
+ */
+function view_databases(): void {
 	global $config, $actions, $item_rows, $db_tabs;
 	global $graph_timeshifts, $graph_timespans, $graph_heights;
 
@@ -200,7 +215,7 @@ function view_databases() {
 
 	$_SESSION['sess_fv_db_tab'] = $current_tab;
 
-	display_flowview_db_tabs($db_tabs);
+	display_flowview_db_tabs();
 
 	if ($current_tab == 'dns_cache') {
 		view_dns_cache();
@@ -211,6 +226,9 @@ function view_databases() {
 	}
 }
 
+/**
+ * @return mixed
+ */
 function get_all_columns() {
 	$display_text = [];
 
@@ -727,6 +745,9 @@ function get_all_columns() {
 	return $display_text;
 }
 
+/**
+ * @return mixed
+ */
 function get_database_sort_type() {
 	global $config;
 
@@ -751,7 +772,13 @@ function get_database_sort_type() {
 	return $sort_type;
 }
 
-function view_db_table($tab, &$tabs) {
+/**
+ * @param mixed $tab
+ * @param mixed $tabs
+ *
+ * @return void
+ */
+function view_db_table($tab, &$tabs): void {
 	global $item_rows;
 
 	$display_text = get_all_columns();
@@ -901,7 +928,7 @@ function view_db_table($tab, &$tabs) {
 		$sql_params);
 
 
-	html_start_box($table_det['name'], '100%', '', '3', 'center', '');
+	html_start_box($table_det['name'], '100%', false, 3, 'center', '');
 
 	?>
 	<tr class='even'>
@@ -1067,9 +1094,9 @@ function view_db_table($tab, &$tabs) {
 
 	print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', false, 3, 'center', '');
 
-	html_header_sort($odisplay_text, get_request_var('sort_column'), get_request_var('sort_direction'), false, "flowview_databases.php?tab=$tab");
+	html_header_sort($odisplay_text, get_request_var('sort_column'), get_request_var('sort_direction'), 1, "flowview_databases.php?tab=$tab");
 
 	$i = 0;
 	if (cacti_sizeof($results)) {
@@ -1079,7 +1106,7 @@ function view_db_table($tab, &$tabs) {
 				$id[$col] = $result[$col];
 			}
 
-			$rid = base64_encode(json_encode($id));
+			$rid = base64_encode((string) json_encode($id));
 
 			form_alternate_row('line_' . $rid, false);
 
@@ -1133,7 +1160,10 @@ function view_db_table($tab, &$tabs) {
 	print "<div id='database' class='database' style='width:1024px'></div>";
 }
 
-function form_actions() {
+/**
+ * @return void
+ */
+function form_actions(): void {
 	global $actions;
 
 	/* ================= input validation ================= */
@@ -1174,9 +1204,11 @@ function form_actions() {
 
 	form_start('flowview_databases.php?tab=dns_cache');
 
-	html_start_box($actions[get_nfilter_request_var('drp_action')], '60%', '', '3', 'center', '');
+	html_start_box($actions[get_nfilter_request_var('drp_action')], '60%', false, 3, 'center', '');
 
-	if (isset($dns_array) && cacti_sizeof($dns_array)) {
+	$save_html = '';
+
+	if (cacti_sizeof($dns_array)) {
 		if (get_nfilter_request_var('drp_action') == '1') { /* delete */
 			print "<tr>
 				<td class='textArea'>
@@ -1197,7 +1229,7 @@ function form_actions() {
 	print "<tr>
 		<td class='saveRow'>
 			<input type='hidden' name='action' value='actions'>
-			<input type='hidden' name='selected_items' value='" . (isset($dns_array) ? serialize($dns_array) : '') . "'>
+			<input type='hidden' name='selected_items' value='" . serialize($dns_array) . "'>
 			<input type='hidden' name='drp_action' value='" . html_escape(get_nfilter_request_var('drp_action')) . "'>
 			$save_html
 		</td>
@@ -1210,7 +1242,10 @@ function form_actions() {
 	bottom_footer();
 }
 
-function view_dns_cache() {
+/**
+ * @return void
+ */
+function view_dns_cache(): void {
 	global $actions, $item_rows;
 
 	/* ================= input validation and session storage ================= */
@@ -1260,7 +1295,7 @@ function view_dns_cache() {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Flowview DNS Cache Entries', 'flowview'), '100%', '', '3', 'center', '');
+	html_start_box(__('Flowview DNS Cache Entries', 'flowview'), '100%', false, 3, 'center', '');
 
 	?>
 	<tr class='even'>
@@ -1429,7 +1464,7 @@ function view_dns_cache() {
 
 	print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', false, 3, 'center', '');
 
 	$display_text = array(
 		'ip' => array(
@@ -1475,7 +1510,7 @@ function view_dns_cache() {
 		)
 	);
 
-	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'), false, 'flowview_databases.php?tab=dns_cache');
+	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'), true, 'flowview_databases.php?tab=dns_cache');
 
 	$i = 0;
 	if (cacti_sizeof($dns_cache)) {
@@ -1507,7 +1542,12 @@ function view_dns_cache() {
 	form_end();
 }
 
-function view_routes($tab) {
+/**
+ * @param mixed $tab
+ *
+ * @return void
+ */
+function view_routes($tab): void {
 	global $actions, $item_rows;
 
 	/* ================= input validation and session storage ================= */
@@ -1556,7 +1596,7 @@ function view_routes($tab) {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box(__('Flowview Internet Routes', 'flowview'), '100%', '', '3', 'center', '');
+	html_start_box(__('Flowview Internet Routes', 'flowview'), '100%', false, 3, 'center', '');
 
 	?>
 	<tr class='even'>
@@ -1790,7 +1830,7 @@ function view_routes($tab) {
 
 	print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', false, 3, 'center', '');
 
 	$display_text = array(
 		'route' => array(
@@ -1830,7 +1870,7 @@ function view_routes($tab) {
 		)
 	);
 
-	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'), false, 'flowview_databases.php?tab=route');
+	html_header_sort($display_text, get_request_var('sort_column'), get_request_var('sort_direction'), 1, 'flowview_databases.php?tab=route');
 
 	if (cacti_sizeof($dns_cache)) {
 		foreach ($dns_cache as $l) {
@@ -1840,7 +1880,7 @@ function view_routes($tab) {
 				$id[$col] = $l[$col];
 			}
 
-			$rid = base64_encode(json_encode($id));
+			$rid = base64_encode((string) json_encode($id));
 
 			form_alternate_row('line_' . $rid, false);
 

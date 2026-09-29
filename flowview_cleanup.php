@@ -121,7 +121,7 @@ exit(0);
  *
  * @return void
  */
-function display_version() {
+function display_version(): void {
 	$info    = plugin_flowview_version();
 	$version = $info['version'];
 
@@ -135,7 +135,7 @@ function display_version() {
  *
  * @return void
  */
-function display_help () {
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL . 'usage: flowview_cleanup.php [--proceed]' . PHP_EOL . PHP_EOL;

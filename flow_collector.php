@@ -38,6 +38,8 @@ ob_implicit_flush();
 
 chdir(__DIR__ . '/../../');
 include('./include/cli_check.php');
+
+global $config;
 include_once($config['base_path'] . '/lib/poller.php');
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
@@ -720,10 +722,13 @@ if (cacti_sizeof($listener)) {
 			$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 		} else {
 			$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-			socket_set_nonblock($socket);
+
+			if ($socket !== false) {
+				socket_set_nonblock($socket);
+			}
 		}
 
-		if (is_resource($socket) || $socket !== false) {
+if ($socket !== false) {
 			socket_bind($socket, $listener['bind_address'], $listener['port']);
 
 			if ($protocol == 'tcp') {
@@ -733,13 +738,16 @@ if (cacti_sizeof($listener)) {
 			$sndbuf = socket_get_option($socket, SOL_SOCKET, SO_SNDBUF);
 			$rcvbuf = socket_get_option($socket, SOL_SOCKET, SO_RCVBUF);
 
-			debug(sprintf("The Send buffer is:    %s KBytes\n", $sndbuf/1024));
-			debug(sprintf("The Receive buffer is: %s KBytesm\n", $rcvbuf/1024));
+			debug(sprintf("The Send buffer is:    %s KBytes\n", (int) $sndbuf/1024));
+			debug(sprintf("The Receive buffer is: %s KBytesm\n", (int) $rcvbuf/1024));
 		} else {
+			$errno  = socket_last_error();
+			$errstr = socket_strerror($errno);
+
 			cacti_log("FATAL: Flowview Listener unable to open port! Error: $errstr ($errno)", false, 'FLOWVIEW');
 
 			if (!$force) {
-				unregister_process('flowview', $taskname, $config['poller_id'], getmypid());
+				unregister_process('flowview', $taskname, $config['poller_id'], (int) getmypid());
 			}
 
 			exit(1);
@@ -786,8 +794,9 @@ if (cacti_sizeof($listener)) {
 
 			$start = microtime(true);
 
-			if ($p !== false && !$reload) {
-				$version = unpack('n', substr($p, 0, 2));
+			/* $reload is set asynchronously by the SIGHUP handler (sig_handler) */
+			if ($p !== false && empty($GLOBALS['reload'])) {
+				$version = unpack('n', substr($p, 0, 2)) ?: [];
 
 				update_stream_stats($listener['id'], $ex_addr, $version[1], $tmpl_refreshed, $templates, $refresh_seconds);
 
@@ -838,7 +847,17 @@ if (cacti_sizeof($listener)) {
 
 exit(0);
 
-function update_stream_stats($listener_id, $ex_addr, $version, &$tmpl_refreshed, &$templates, $refresh_seconds) {
+/**
+ * @param mixed $listener_id
+ * @param mixed $ex_addr
+ * @param mixed $version
+ * @param mixed $tmpl_refreshed
+ * @param mixed $templates
+ * @param mixed $refresh_seconds
+ *
+ * @return void
+ */
+function update_stream_stats($listener_id, $ex_addr, $version, &$tmpl_refreshed, &$templates, $refresh_seconds): void {
 	global $config;
 
 	static $stream_refreshed; // We update the heartbeat every $refresh_seconds per peer
@@ -877,7 +896,7 @@ function update_stream_stats($listener_id, $ex_addr, $version, &$tmpl_refreshed,
 
 		if (!isset($db_version)) {
 			if ((is_string($version) && strlen($version) > 0) || is_numeric($version)) {
-				$db_version = substr($version, 0, 5);
+				$db_version = substr((string) $version, 0, 5);
 			} else {
 				$db_version = 'N/A';
 			}
@@ -916,6 +935,11 @@ function update_stream_stats($listener_id, $ex_addr, $version, &$tmpl_refreshed,
 	$stream_refreshed[$ex_addr] = true;
 }
 
+/**
+ * @param mixed $peer
+ *
+ * @return mixed
+ */
 function get_peer_address($peer) {
 	$parts = explode(':', $peer);
 
@@ -931,6 +955,12 @@ function get_peer_address($peer) {
 	}
 }
 
+/**
+ * @param mixed $peer
+ * @param mixed $range
+ *
+ * @return mixed
+ */
 function is_valid_peer($peer, $range) {
 	if (strpos($range, ',') !== false) {
 		$ip_addresses = explode(',', $range);
@@ -956,20 +986,33 @@ function is_valid_peer($peer, $range) {
 
 		$range_decimal    = ip2long($range);
 		$ip_decimal       = ip2long($peer);
-		$wildcard_decimal = pow(2, (32 - $netmask)) - 1;
+		$wildcard_decimal = pow(2, (32 - (int) $netmask)) - 1;
 		$netmask_decimal  = ~ $wildcard_decimal;
 		return (($ip_decimal & $netmask_decimal) == ($range_decimal & $netmask_decimal));
 	}
-
-	return false;
 }
 
-function database_check_connect() {
+/**
+ * @return void
+ */
+function database_check_connect(): void {
 	global $config;
 
 	flowview_determine_config();
 
 	include($config['include_path'] . '/config.php');
+
+	/** @var string $database_hostname */
+	/** @var string $database_username */
+	/** @var string $database_password */
+	/** @var string $database_default */
+	/** @var string $database_type */
+	/** @var string $database_port */
+	/** @var string $database_retries */
+	/** @var string $database_ssl */
+	/** @var string $database_ssl_key */
+	/** @var string $database_ssl_cert */
+	/** @var string $database_ssl_ca */
 
 	$connection_good = flowview_db_fetch_cell('SELECT 1');
 
@@ -986,7 +1029,7 @@ function database_check_connect() {
 				$database_default,
 				$database_type,
 				$database_port,
-				$database_retries,
+				(int) $database_retries,
 				$database_ssl,
 				$database_ssl_key,
 				$database_ssl_cert,
@@ -1002,14 +1045,20 @@ function database_check_connect() {
 	}
 }
 
-function process_fv5($p, $ex_addr) {
+/**
+ * @param mixed $p
+ * @param mixed $ex_addr
+ *
+ * @return void
+ */
+function process_fv5($p, $ex_addr): void {
 	global $listener_id;
 
 	flowview_connect();
 
 	/* process header */
 	$header_len  = 24;
-	$header = unpack('nversion/ncount/Nsysuptime/Nunix_secs/Nunix_nsecs/Nflow_sequence/Cengine_type/Cengine_id/nsample_int', substr($p, 0, 24));
+	$header = unpack('nversion/ncount/Nsysuptime/Nunix_secs/Nunix_nsecs/Nflow_sequence/Cengine_type/Cengine_id/nsample_int', substr($p, 0, 24)) ?: [];
 
 	/* prepare to process records */
 	$records     = $header['count'];
@@ -1017,13 +1066,14 @@ function process_fv5($p, $ex_addr) {
 	$flowrec_len = 48;
 	$flowtime    = $header['unix_secs'];
 	$sql         = [];
+	$sql_prefix  = '';
 
 	debug('Flow: Processing v5 Data, Records: ' . $records);
 
 	for ($i = 0; $i < $records; $i++) {
 		$flowrec = substr($p, $header_len + ($i * $flowrec_len), $flowrec_len);
 
-		$data = unpack('C4src_addr/C4dst_addr/C4nexthop/nsrc_if/ndst_if/NdPkts/NdOctets/NFirst/NLast/nsrc_port/ndst_port/Cblank/Cflags/Cprotocol/Ctos/nsrc_as/ndst_as/Csrc_prefix/Cdst_prefix', $flowrec);
+		$data = unpack('C4src_addr/C4dst_addr/C4nexthop/nsrc_if/ndst_if/NdPkts/NdOctets/NFirst/NLast/nsrc_port/ndst_port/Cblank/Cflags/Cprotocol/Ctos/nsrc_as/ndst_as/Csrc_prefix/Cdst_prefix', $flowrec) ?: [];
 
 		$flowtime    = $header['unix_secs'] + ($header['unix_nsecs'] / 1000000000);
 		$time        = time();
@@ -1048,10 +1098,10 @@ function process_fv5($p, $ex_addr) {
 		$sql_prefix = get_sql_prefix($flowtime);
 
 		$src_domain  = flowview_get_dns_from_ip($src_addr, 100);
-		$src_rdomain = flowview_get_rdomain_from_domain($src_domain, $src_addr);
+		$src_rdomain = flowview_get_rdomain_from_domain($src_domain);
 
 		$dst_domain  = flowview_get_dns_from_ip($dst_addr, 100);
-		$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain, $dst_addr);
+		$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain);
 
 		$src_rport  = flowview_translate_port($data['src_port'], false, false);
 		$dst_rport  = flowview_translate_port($data['dst_port'], false, false);
@@ -1116,7 +1166,12 @@ function process_fv5($p, $ex_addr) {
 	}
 }
 
-function debug($string) {
+/**
+ * @param mixed $string
+ *
+ * @return void
+ */
+function debug($string): void {
 	global $debug;
 
 	if ($debug) {
@@ -1124,7 +1179,13 @@ function debug($string) {
 	}
 }
 
-function get_unpack_syntax(&$field, $version) {
+/**
+ * @param mixed $field
+ * @param mixed $version
+ *
+ * @return void
+ */
+function get_unpack_syntax(&$field, $version): void {
 	global $pacmap, $allfields;
 
 	if (isset($allfields[$field['field_id']])) {
@@ -1204,7 +1265,13 @@ function get_unpack_syntax(&$field, $version) {
 	debug("Flow: Name: $name, Id: $id, Length: $length, Type: $prepac, Unpack: {$field['unpack']}");
 }
 
-function process_fv9($p, $ex_addr) {
+/**
+ * @param mixed $p
+ * @param mixed $ex_addr
+ *
+ * @return void
+ */
+function process_fv9($p, $ex_addr): void {
 	global $templates, $tlengths, $allfields, $pacmap, $listener_id;
 
 	flowview_connect();
@@ -1215,7 +1282,7 @@ function process_fv9($p, $ex_addr) {
 
 	/* process header */
 	$header_len = 20;
-	$header     = unpack('nversion/ncount/Nsysuptime/Nunix_seconds/Nseq_num/Nsource_id', substr($p, 0, $header_len));
+	$header     = unpack('nversion/ncount/Nsysuptime/Nunix_seconds/Nseq_num/Nsource_id', substr($p, 0, $header_len)) ?: [];
 
 	/* prepare to process records */
 	$records    = $header['count'];
@@ -1231,7 +1298,7 @@ function process_fv9($p, $ex_addr) {
 
 	while ($j < $records) {
 		$header = substr($p, $i, 4);
-		$header = unpack('nflowset_id/nflowset_length', $header);
+		$header = unpack('nflowset_id/nflowset_length', $header) ?: [];
 		$h      = $i + 4;
 		$fslen  = $header['flowset_length'];
 		$fsid   = $header['flowset_id'];
@@ -1248,7 +1315,7 @@ function process_fv9($p, $ex_addr) {
 
 				while ($k < $fslen) {
 					$theader = substr($p, $h, 4);
-					$theader = unpack('ntemplate_id/nfieldcount', $theader);
+					$theader = unpack('ntemplate_id/nfieldcount', $theader) ?: [];
 					$tid     = $theader['template_id'];
 					$fcount  = $theader['fieldcount'];
 					$h += 4;
@@ -1262,7 +1329,7 @@ function process_fv9($p, $ex_addr) {
 
 					for ($a = 0; $a < $fcount; $a++) {
 						$field = substr($p, $h, 4);
-						$field = unpack('nfield_id/nfield_len', $field);
+						$field = unpack('nfield_id/nfield_len', $field) ?: [];
 						$tf    = [];
 
 						$tf['field_id'] = $field['field_id'];
@@ -1274,7 +1341,7 @@ function process_fv9($p, $ex_addr) {
 							$tf['enterprise'] = 1;
 
 							$entnum = substr($p, $h, 4);
-							$entnum = unpack('Nentnum', $entnum);
+							$entnum = unpack('Nentnum', $entnum) ?: [];
 
 							$tf['enterprise_number'] = $entnum['entnum'];
 
@@ -1355,7 +1422,7 @@ function process_fv9($p, $ex_addr) {
 
 						$field = substr($p, $h, $t['length']);
 
-						$field = unpack($t['unpack'], $field);
+						$field = unpack($t['unpack'], $field) ?: [];
 
 						if ($t['pack'] == 'ipv4Address') {
 							$field = implode('.', $field);
@@ -1444,7 +1511,12 @@ function process_fv9($p, $ex_addr) {
 	}
 }
 
-function get_sql_prefix($flowtime) {
+/**
+ * @param mixed $flowtime
+ *
+ * @return string
+ */
+function get_sql_prefix($flowtime): string {
 	global $partition, $flowview_nat_columns_active;
 	static $last_table   = '';
 	static $last_checked = 0;
@@ -1504,7 +1576,13 @@ function get_sql_prefix($flowtime) {
 	return 'INSERT INTO ' . $table . ' (listener_id, template_id, engine_type, engine_id, sampling_interval, ex_addr, sysuptime, src_addr, src_domain, src_rdomain, src_as, src_if, src_prefix, src_port, src_rport, dst_addr, dst_domain, dst_rdomain, dst_as, dst_if, dst_prefix, dst_port, dst_rport, nexthop, protocol, start_time, end_time, flows, packets, bytes, bytes_ppacket, tos, flags) VALUES ';
 }
 
-function process_fv10($p, $ex_addr) {
+/**
+ * @param mixed $p
+ * @param mixed $ex_addr
+ *
+ * @return void
+ */
+function process_fv10($p, $ex_addr): void {
 	global $listener_id, $templates, $tlengths, $allfields, $pacmap;
 
 	flowview_connect();
@@ -1515,7 +1593,7 @@ function process_fv10($p, $ex_addr) {
 
 	/* process header */
 	$header_len = 16;
-	$header     = unpack('nversion/ncount/Nexporttime/Nseq_num/Ndomainid', substr($p, 0, $header_len));
+	$header     = unpack('nversion/ncount/Nexporttime/Nseq_num/Ndomainid', substr($p, 0, $header_len)) ?: [];
 
 	/* prepare to process records */
 	$count      = $header['count'];
@@ -1528,7 +1606,7 @@ function process_fv10($p, $ex_addr) {
 
 	while ($i < $count) {
 		$header = substr($p, $i, 4);
-		$header = unpack('nflowset_id/nflowset_length', $header);
+		$header = unpack('nflowset_id/nflowset_length', $header) ?: [];
 
 		$h      = $i + 4;
 		$fsid   = $header['flowset_id'];
@@ -1546,7 +1624,7 @@ function process_fv10($p, $ex_addr) {
 
 				while ($k < $fslen) {
 					$theader = substr($p, $h, 4);
-					$theader = unpack('ntemplate_id/nfieldcount', $theader);
+					$theader = unpack('ntemplate_id/nfieldcount', $theader) ?: [];
 					$tid     = $theader['template_id'];
 					$fcount  = $theader['fieldcount'];
 					$h += 4;
@@ -1560,7 +1638,7 @@ function process_fv10($p, $ex_addr) {
 
 					for ($a = 0; $a < $fcount; $a++) {
 						$field = substr($p, $h, 4);
-						$field = unpack('nfield_id/nfield_len', $field);
+						$field = unpack('nfield_id/nfield_len', $field) ?: [];
 						$tf    = [];
 
 						$tf['field_id'] = $field['field_id'];
@@ -1572,7 +1650,7 @@ function process_fv10($p, $ex_addr) {
 							$tf['enterprise'] = 1;
 
 							$entnum = substr($p, $h, 4);
-							$entnum = unpack('Nentnum', $entnum);
+							$entnum = unpack('Nentnum', $entnum) ?: [];
 
 							$tf['enterprise_number'] = $entnum['entnum'];
 
@@ -1651,7 +1729,7 @@ function process_fv10($p, $ex_addr) {
 						$id    = $t['field_id'];
 
 						$field = substr($p, $h, $t['length']);
-						$field = unpack($t['unpack'], $field);
+						$field = unpack($t['unpack'], $field) ?: [];
 
 						if ($t['pack'] == 'ipv4Address') {
 							$field = implode('.', $field);
@@ -1735,7 +1813,13 @@ function process_fv10($p, $ex_addr) {
 	}
 }
 
-function flowview_template_supported($template, $tid) {
+/**
+ * @param mixed $template
+ * @param mixed $tid
+ *
+ * @return bool
+ */
+function flowview_template_supported($template, $tid): bool {
 	global $required_fields_v4, $required_fields_v6;
 
 	static $logged_ipv4_errors = false;
@@ -1775,7 +1859,16 @@ function flowview_template_supported($template, $tid) {
 	return true;
 }
 
-function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
+/**
+ * @param mixed $data
+ * @param mixed $ex_addr
+ * @param mixed $flowtime
+ * @param mixed $fsid
+ * @param int $sysuptime
+ *
+ * @return mixed
+ */
+function process_v9_v10($data, $ex_addr, $flowtime, $fsid, int $sysuptime = 0) {
 	global $listener_id, $partition, $flow_fields;
 
 	$flows = 1;
@@ -1898,19 +1991,19 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 			$delta_micro = $delta_sec = 0;
 		}
 
-		$start_date = date('Y-m-d H:i:s', intval($flowtime - $delta_sec)) . '.' . abs(substr("{$delta_micro}000000", 0, 6));
+		$start_date = date('Y-m-d H:i:s', intval($flowtime - $delta_sec)) . '.' . abs((int) substr("{$delta_micro}000000", 0, 6));
 		$end_date   = date('Y-m-d H:i:s', intval($flowtime)) . '.' . '000000';
 	}
 
 	$src_domain  = flowview_get_dns_from_ip($src_addr, 100);
-	$src_rdomain = flowview_get_rdomain_from_domain($src_domain, $src_addr);
+	$src_rdomain = flowview_get_rdomain_from_domain($src_domain);
 
 	$dst_domain  = flowview_get_dns_from_ip($dst_addr, 100);
-	$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain, $dst_addr);
+	$dst_rdomain = flowview_get_rdomain_from_domain($dst_domain);
 
 	if ($post_nat_src_addr != '') {
 		$post_nat_src_domain  = flowview_get_dns_from_ip($post_nat_src_addr, 100);
-		$post_nat_src_rdomain = flowview_get_rdomain_from_domain($post_nat_src_domain, $post_nat_src_addr);
+		$post_nat_src_rdomain = flowview_get_rdomain_from_domain($post_nat_src_domain);
 	} else {
 		$post_nat_src_domain  = '';
 		$post_nat_src_rdomain = '';
@@ -1918,7 +2011,7 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
 
 	if ($post_nat_dst_addr != '') {
 		$post_nat_dst_domain  = flowview_get_dns_from_ip($post_nat_dst_addr, 100);
-		$post_nat_dst_rdomain = flowview_get_rdomain_from_domain($post_nat_dst_domain, $post_nat_dst_addr);
+		$post_nat_dst_rdomain = flowview_get_rdomain_from_domain($post_nat_dst_domain);
 	} else {
 		$post_nat_dst_domain  = '';
 		$post_nat_dst_rdomain = '';
@@ -1996,7 +2089,19 @@ function process_v9_v10($data, $ex_addr, $flowtime, $fsid, $sysuptime = 0) {
  * NAT columns (see get_sql_prefix()/$flowview_nat_columns_active), so the
  * tuple's arity always matches the column list that INSERT is using.
  */
-function flowview_nat_value_segment($src_addr, $src_domain, $src_rdomain, $src_port, $dst_addr, $dst_domain, $dst_rdomain, $dst_port) {
+/**
+ * @param mixed $src_addr
+ * @param mixed $src_domain
+ * @param mixed $src_rdomain
+ * @param mixed $src_port
+ * @param mixed $dst_addr
+ * @param mixed $dst_domain
+ * @param mixed $dst_rdomain
+ * @param mixed $dst_port
+ *
+ * @return string
+ */
+function flowview_nat_value_segment($src_addr, $src_domain, $src_rdomain, $src_port, $dst_addr, $dst_domain, $dst_rdomain, $dst_port): string {
 	global $flowview_nat_columns_active;
 
 	if (empty($flowview_nat_columns_active)) {
@@ -2014,7 +2119,14 @@ function flowview_nat_value_segment($src_addr, $src_domain, $src_rdomain, $src_p
 		$dst_port;
 }
 
-function check_set(&$data, $index, $quote = false) {
+/**
+ * @param mixed $data
+ * @param mixed $index
+ * @param bool $quote
+ *
+ * @return mixed
+ */
+function check_set(&$data, $index, bool $quote = false) {
 	if (isset($data[$index])) {
 		if ($quote) {
 			return db_qstr($data[$index]);
@@ -2033,11 +2145,11 @@ function check_set(&$data, $index, $quote = false) {
 /**
  * sig_handler - provides a generic means to catch exceptions to the Cacti log.
  *
- * @param  (int) $signo - the signal that was thrown by the interface.
+ * @param mixed $signo
  *
- * @return (void)
+ * @return void
  */
-function sig_handler($signo) {
+function sig_handler($signo): void {
 	global $taskname, $force, $config, $reload, $flowview_sighup_settings;
 
 	switch ($signo) {
@@ -2056,11 +2168,10 @@ function sig_handler($signo) {
 			cacti_log("WARNING: Flowview Listener $taskname is shutting down by signal!", false, 'FLOWVIEW');
 
 			if (!$force) {
-				unregister_process('flowview', $taskname, $config['poller_id'], getmypid());
+				unregister_process('flowview', $taskname, $config['poller_id'], (int) getmypid());
 			}
 
 			exit(1);
-			break;
 		default:
 			/* ignore all other signals */
 	}
@@ -2068,16 +2179,20 @@ function sig_handler($signo) {
 
 /**
  * display_version - displays version information
+ *
+ * @return void
  */
-function display_version() {
+function display_version(): void {
 	$version = get_cacti_cli_version();
 	print "Cacti Flow Capture Utility, Version $version, " . COPYRIGHT_YEARS . PHP_EOL;
 }
 
 /**
  * display_help - displays help information
+ *
+ * @return void
  */
-function display_help() {
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL . "usage: flow_collector.php --listener-id=ID [--debug]" . PHP_EOL . PHP_EOL;

@@ -27,6 +27,8 @@ $guest_account = true;
 
 chdir('../../');
 include('./include/auth.php');
+
+global $config;
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
 include_once($config['base_path'] . '/lib/time.php');
@@ -91,7 +93,7 @@ switch(get_request_var('action')) {
 		$title = load_session_for_filter();
 		$data  = load_data_for_filter();
 
-		flowview_display_filter($data);
+		flowview_display_filter();
 
 		if (get_request_var('statistics') != 99) {
 			flowview_draw_table($data);
@@ -114,7 +116,7 @@ exit;
  *
  * @return void
  */
-function flowview_export_data() {
+function flowview_export_data(): void {
 	flowview_request_vars();
 	$data  = load_data_for_filter();
 
@@ -144,7 +146,7 @@ function flowview_export_data() {
  *
  * @return void
  */
-function save_filter_as() {
+function save_filter_as(): void {
 	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
 		$save = db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
@@ -237,7 +239,7 @@ function save_filter_as() {
  *
  * @return void
  */
-function rename_filter() {
+function rename_filter(): void {
 	$name  = get_nfilter_request_var('sname');
 	$query = get_nfilter_request_var('query');
 
@@ -254,7 +256,7 @@ function rename_filter() {
  *
  * @return void
  */
-function delete_filter() {
+function delete_filter(): void {
 	$query = get_nfilter_request_var('query');
 
 	$exists = flowview_db_fetch_cell_prepared('SELECT COUNT(*)
@@ -281,9 +283,9 @@ function delete_filter() {
  * query's settings into the request when one is. Called from this
  * script's main flow before rendering the flow filter form, to
  * persist/restore filter state across requests.
+ * an empty string.
  *
- * @return string The saved query's name if one was loaded, otherwise
- *                an empty string.
+ * @return mixed
  */
 function load_session_for_filter() {
 	/**
@@ -437,7 +439,7 @@ function load_session_for_filter() {
  *
  * @return void
  */
-function flowview_request_vars() {
+function flowview_request_vars(): void {
 	/* restore the last session just in case */
 	if (!isset_request_var('query')) {
 		if (isset($_SESSION['sess_fview_query_last'])) {

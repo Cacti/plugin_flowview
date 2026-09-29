@@ -25,6 +25,8 @@
 
 chdir('../../');
 include('./include/auth.php');
+
+global $config;
 include_once($config['base_path'] . '/lib/time.php');
 include_once($config['base_path'] . '/plugins/flowview/setup.php');
 include_once($config['base_path'] . '/plugins/flowview/functions.php');
@@ -210,7 +212,10 @@ switch (get_request_var('action')) {
 		break;
 }
 
-function actions_schedules() {
+/**
+ * @return void
+ */
+function actions_schedules(): void {
 	global $sched_actions, $config;
 
 	/* ================= input validation ================= */
@@ -294,7 +299,7 @@ function actions_schedules() {
 
 	form_start('flowview_schedules.php');
 
-	html_start_box($sched_actions[get_nfilter_request_var('drp_action')], '60%', '', '3', 'center', '');
+	html_start_box($sched_actions[get_nfilter_request_var('drp_action')], '60%', false, 3, 'center', '');
 
 	if (get_nfilter_request_var('drp_action') == '1') { /* Delete */
 		print "<tr>
@@ -350,7 +355,10 @@ function actions_schedules() {
 	bottom_footer();
 }
 
-function view_log_data() {
+/**
+ * @return void
+ */
+function view_log_data(): void {
 	$id   = get_filter_request_var('id');
 	$type = get_nfilter_request_var('type');
 
@@ -374,7 +382,10 @@ function view_log_data() {
 	exit;
 }
 
-function download_log_data() {
+/**
+ * @return void
+ */
+function download_log_data(): void {
 	$id = get_filter_request_var('id');
 
 	$log_data = db_fetch_row_prepared('SELECT * FROM reports_log WHERE id = ?', [$id]);
@@ -400,7 +411,10 @@ function download_log_data() {
 	exit;
 }
 
-function save_schedules() {
+/**
+ * @return void
+ */
+function save_schedules(): void {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
 	get_filter_request_var('query_id');
@@ -468,7 +482,10 @@ function save_schedules() {
 	exit;
 }
 
-function edit_schedule() {
+/**
+ * @return void
+ */
+function edit_schedule(): void {
 	global $config, $schedule_edit;
 
 	/* ================= input validation ================= */
@@ -503,7 +520,13 @@ function edit_schedule() {
 	}
 }
 
-function edit_log($header_label, $report) {
+/**
+ * @param mixed $header_label
+ * @param mixed $report
+ *
+ * @return void
+ */
+function edit_log($header_label, $report): void {
 	global $config, $item_rows;
 
     /* ================= input validation and session storage ================= */
@@ -543,7 +566,7 @@ function edit_log($header_label, $report) {
 		$rows = get_request_var('rows');
 	}
 
-	html_start_box($header_label, '100%', '', '3', 'center', '');
+	html_start_box($header_label, '100%', false, 3, 'center', '');
 	?>
 	<tr class='even'>
 		<td>
@@ -685,9 +708,9 @@ function edit_log($header_label, $report) {
 
     print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', false, 3, 'center', '');
 
-	html_header_sort($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
+	html_header_sort($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), 1);
 
 	$i=0;
 	if (cacti_sizeof($result)) {
@@ -745,12 +768,18 @@ function edit_log($header_label, $report) {
 	<?php
 }
 
-function edit_general($header_label, $report) {
+/**
+ * @param mixed $header_label
+ * @param mixed $report
+ *
+ * @return void
+ */
+function edit_general($header_label, $report): void {
 	global $config, $schedule_edit;
 
 	form_start('flowview_schedules.php?tab=general', 'chk');
 
-	html_start_box($header_label, '100%', '', '3', 'center', '');
+	html_start_box($header_label, '100%', false, 3, 'center', '');
 
 	draw_edit_form(
 		array(
@@ -793,7 +822,10 @@ function edit_general($header_label, $report) {
 	form_save_button('flowview_schedules.php?tab=general');
 }
 
-function show_schedules() {
+/**
+ * @return void
+ */
+function show_schedules(): void {
 	global $sendinterval_arr, $config, $sched_actions, $item_rows;
 
     /* ================= input validation and session storage ================= */
@@ -836,9 +868,9 @@ function show_schedules() {
 	$listeners = flowview_db_fetch_cell('SELECT COUNT(*) FROM plugin_flowview_devices');
 
 	if ($listeners) {
-		html_start_box(__('FlowView Schedules', 'flowview'), '100%', '', '3', 'center', 'flowview_schedules.php?tab=general&action=edit&id=');
+		html_start_box(__('FlowView Schedules', 'flowview'), '100%', false, 3, 'center', 'flowview_schedules.php?tab=general&action=edit&id=');
 	} else {
-		html_start_box(__('FlowView Schedules [ Add Devices before Schedules ]', 'flowview'), '100%', '', '3', 'center', '');
+		html_start_box(__('FlowView Schedules [ Add Devices before Schedules ]', 'flowview'), '100%', false, 3, 'center', '');
 	}
 
 	?>
@@ -984,9 +1016,9 @@ function show_schedules() {
 
     print $nav;
 
-	html_start_box('', '100%', '', '3', 'center', '');
+	html_start_box('', '100%', false, 3, 'center', '');
 
-	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
+	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), true);
 
 	$i=0;
 	if (cacti_sizeof($results)) {
