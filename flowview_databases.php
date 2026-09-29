@@ -1510,7 +1510,7 @@ function view_dns_cache(): void {
 		)
 	);
 
-	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'), true, 'flowview_databases.php?tab=dns_cache');
+	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'), false, 'flowview_databases.php?tab=dns_cache');
 
 	$i = 0;
 	if (cacti_sizeof($dns_cache)) {
