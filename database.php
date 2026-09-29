@@ -69,6 +69,18 @@ function flowview_db_close(&$flowview_cnn) {
 function flowview_db_check_reconnect(bool $log = true) {
 	global $flowview_cnn, $config, $local_db_cnn_id, $remote_db_cnn_id;
 
+	/**
+	 * db_check_reconnect() spl_object_hash()es the handle, so a null or other
+	 * non-object connection (e.g. when the shared Cacti handle it aliases is
+	 * not established in a long-running service like flow-capture) must be
+	 * passed as false.  Core then checks and, if needed, reconnects the
+	 * default connection - and logs its "Database Connection went away"
+	 * warning - instead of fatally throwing a TypeError.
+	 */
+	if (!is_object($flowview_cnn)) {
+		$flowview_cnn = false;
+	}
+
 	$previous_cnn = $flowview_cnn;
 
 	$result = db_check_reconnect($flowview_cnn, $log);
