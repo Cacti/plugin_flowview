@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
 * dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
 * issue#110: Add NAT (postNAT source/destination IP and port) support to the core raw flow schema, filters, and DNS resolution; see flowview_upgrade_nat_columns.php to backfill existing partitions
 * security: Add a version-safe CSP nonce (`plugin_flowview_csp_nonce()`) to every inline `<script>` tag so pages stay compatible with Cacti's Content-Security-Policy nonce enforcement, while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
