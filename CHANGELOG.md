@@ -15,6 +15,9 @@
 * fix: Correct a duplicate 'src_rdomain' array key in the Source/Destination Root Domain report column map that overwrote the Destination Domain column
 * fix: Correct a stray "$" in the Source AS filter that read get_request_var() through an undefined variable-variable
 * fix: TCP flag validation regex used an unescaped delimiter making it always invalid, rejecting every TCP flag filter value
+* fix: load_data_for_filter()'s $start/$end were typed bool during the PHPStan pass, coercing the Unix timestamps passed by plugin_flowview_run_schedule() to true so scheduled reports queried around epoch second 1; restored the int|false contract
+* fix: The DNS Cache list (flowview_databases.php) and Schedules list (flowview_schedules.php) passed include_form=true to html_header_sort_checkbox() while their own chk form was already open, emitting nested forms that could misdirect checkbox submissions and bulk deletes; reverted to false
+* fix: IRR database refresh persisted the per-source serial after each individual file downloaded, so a later file failing left the refresh skipped on the next run (matching serial) with failed sections stuck at present=0; the serial is now advanced only after every file imports cleanly and every cleanup DELETE succeeds, batch insert failures are propagated through flowview_insert_irr_sections()/flowview_update_database(), and empty files are treated as broken
 
 --- 5.0 ---
 

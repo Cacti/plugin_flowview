@@ -30,23 +30,19 @@
  * (attachments/email) via the report's stored delivery settings.
  * Called from this plugin's report-running code on Cacti versions
  * lacking the native reports_log_and_notify() function.
- * 'html').
- * report (e.g. 'flowview').
- * (defaulted to '' if null).
- * include.
  *
- * @param mixed $id
- * @param mixed $start_time
- * @param mixed $report_type
- * @param mixed $source
- * @param mixed $source_id
- * @param mixed $subject
- * @param mixed $raw_data
- * @param mixed $oput_raw
- * @param mixed $oput_html
- * @param mixed $oput_text
- * @param array $attachments
- * @param array $headers
+ * @param int    $id           The reports_queued id being completed.
+ * @param float  $start_time   The Unix timestamp the run started at.
+ * @param string $report_type  The rendered report format (e.g. 'html').
+ * @param string $source       The plugin/source name generating the report (e.g. 'flowview').
+ * @param int    $source_id    The source's own report/schedule id.
+ * @param string $subject      The notification email subject.
+ * @param array  $raw_data     Reference, the report's raw result data.
+ * @param mixed  $oput_raw     Reference, the raw rendered output.
+ * @param string $oput_html    Reference, the HTML-rendered output body.
+ * @param string|null $oput_text Reference, the plain-text output body (defaulted to '' if null).
+ * @param array  $attachments  Optional list of file attachments to include.
+ * @param array  $headers      Optional extra email headers to include.
  *
  * @return void
  */

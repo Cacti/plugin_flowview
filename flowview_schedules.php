@@ -1018,7 +1018,7 @@ function show_schedules(): void {
 
 	html_start_box('', '100%', false, 3, 'center', '');
 
-	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), true);
+	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	$i=0;
 	if (cacti_sizeof($results)) {

@@ -2034,20 +2034,17 @@ function purge_flowview_sessions(): void {
 
 /**
  * load_data_for_filter - This function will run the query against the
- * database of pull it from a saved session.
- * format.  If false, it will calculate the
- * time from the query default.
- * format.  If false, it will calculate the
- * time from the query default.
+ * database or pull it from a saved session. $start and $end are Unix
+ * timestamps; when false, the time is calculated from the query default
  * or from the results of the query.
  *
- * @param int $id
- * @param bool $start
- * @param bool $end
+ * @param int       $id
+ * @param int|false $start
+ * @param int|false $end
  *
  * @return mixed
  */
-function load_data_for_filter(int $id = 0, bool $start = false, bool $end = false) {
+function load_data_for_filter(int $id = 0, int|false $start = false, int|false $end = false) {
 	global $config;
 
 	$output    = '';
@@ -6234,12 +6231,14 @@ function flowview_check_databases($import_only = false, bool $force = false): bo
 				if ($return_var == 0) {
 					cacti_log("IRR UPDATE: Importing Database File: $file", true, 'FLOWVIEW', POLLER_VERBOSITY_MEDIUM);
 
-					set_config_option("flowview_{$source}_serial", $curr_serial);
-
 					if (filesize($local_file) > 0) {
-						flowview_update_database($source, $local_file);
+						if (!flowview_update_database($source, $local_file)) {
+							cacti_log("IRR UPDATE: ERROR: Failed to import Database File: $local_file", true, 'FLOWVIEW');
+							$files_broken = true;
+						}
 					} else {
 						cacti_log("IRR UPDATE: WARNING: File: $local_file is empty", true, 'FLOWVIEW');
+						$files_broken = true;
 					}
 
 					if (file_exists($local_file) && is_writable($local_file)) {
@@ -6251,8 +6250,18 @@ function flowview_check_databases($import_only = false, bool $force = false): bo
 			}
 
 			if (!$files_broken) {
+				$cleanup_ok = true;
+
 				foreach($supported_tables as $table) {
-					flowview_db_execute_prepared("DELETE FROM plugin_flowview_irr_$table WHERE present = 0 AND source = ?", [$source]);
+					if (flowview_db_execute_prepared("DELETE FROM plugin_flowview_irr_$table WHERE present = 0 AND source = ?", [$source]) === false) {
+						$cleanup_ok = false;
+					}
+				}
+
+				/* advance the serial only after every cleanup query has completed, so a failed
+				 * DELETE (or an interrupted run) retries next time instead of being skipped */
+				if ($cleanup_ok) {
+					set_config_option("flowview_{$source}_serial", $curr_serial);
 				}
 			}
 		}
@@ -6499,13 +6508,13 @@ function flowview_update_database($source, $irr_file = false): bool {
 
 	gzclose($file);
 
-	flowview_insert_irr_sections($records, $prefixes, $supported_sections);
+	$inserted = flowview_insert_irr_sections($records, $prefixes, $supported_sections);
 
 	$end = microtime(true);
 
 	cacti_log(sprintf('STATS IRR UPDATE: Time:%0.2f File:%s Source:%s', $end - $start, basename($irr_file), strtolower($source)), true, 'SYSTEM');
 
-	return true;
+	return $inserted;
 }
 
 /**
@@ -6513,14 +6522,16 @@ function flowview_update_database($source, $irr_file = false): bool {
  * @param mixed $prefixes
  * @param mixed $supported_sections
  *
- * @return void
+ * @return bool True when every batch insert succeeded, false if any failed.
  */
-function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_sections): void {
+function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_sections): bool {
 	global $debug;
 
 	if ($debug) {
 		print "Writing Database Records" . PHP_EOL;
 	}
+
+	$ok = true;
 
 	/* do the table inserts now */
 	foreach($supported_sections as $section) {
@@ -6546,10 +6557,14 @@ function flowview_insert_irr_sections(&$records, &$prefixes, &$supported_section
 					}
 				}
 
-				flowview_db_execute_prepared($sql_insert . $sql_suffix, $sql_params);
+				if (flowview_db_execute_prepared($sql_insert . $sql_suffix, $sql_params) === false) {
+					$ok = false;
+				}
 			}
 		}
 	}
+
+	return $ok;
 }
 
 /**
