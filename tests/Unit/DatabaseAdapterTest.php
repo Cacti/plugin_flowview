@@ -70,47 +70,69 @@ it('generates table DDL with primary, regular, and unique indexes', function () 
 });
 
 it('forwards the FlowView connection and log flag to db_check_reconnect by reference', function () {
+	$conn = new stdClass();
+	$GLOBALS['flowview_cnn'] = $conn;
+
 	$result = flowview_db_check_reconnect(false);
 
 	expect($result)->toBeTrue()
 		->and($GLOBALS['__test_db_calls'])->toHaveCount(1)
 		->and($GLOBALS['__test_db_calls'][0]['fn'])->toBe('db_check_reconnect')
-		->and($GLOBALS['__test_db_calls'][0]['conn'])->toBe('flowview-connection')
+		->and($GLOBALS['__test_db_calls'][0]['conn'])->toBe($conn)
 		->and($GLOBALS['__test_db_calls'][0]['log'])->toBeFalse();
 });
 
-it('retains a replacement connection returned by a successful reconnect', function () {
-	plugin_test_queue_db_result('db_check_reconnect', 'flowview-connection-2');
+it('passes false to db_check_reconnect when the shared handle is null instead of fataling', function () {
+	$GLOBALS['flowview_cnn'] = null;
 
 	$result = flowview_db_check_reconnect();
 
 	expect($result)->toBeTrue()
-		->and($GLOBALS['flowview_cnn'])->toBe('flowview-connection-2');
+		->and($GLOBALS['__test_db_calls'])->toHaveCount(1)
+		->and($GLOBALS['__test_db_calls'][0]['fn'])->toBe('db_check_reconnect')
+		->and($GLOBALS['__test_db_calls'][0]['conn'])->toBeFalse();
+});
+
+it('retains a replacement connection returned by a successful reconnect', function () {
+	$GLOBALS['flowview_cnn'] = new stdClass();
+	$replacement = new stdClass();
+	plugin_test_queue_db_result('db_check_reconnect', $replacement);
+
+	$result = flowview_db_check_reconnect();
+
+	expect($result)->toBeTrue()
+		->and($GLOBALS['flowview_cnn'])->toBe($replacement);
 });
 
 it('propagates a reconnected shared Cacti connection back to the aliased local/remote handle', function ($poller_id, $handle) {
+	$shared = new stdClass();
 	$GLOBALS['config']['poller_id'] = $poller_id;
-	$GLOBALS[$handle]               = 'flowview-connection';
+	$GLOBALS['flowview_cnn']        = $shared;
+	$GLOBALS[$handle]               = $shared;
 
-	plugin_test_queue_db_result('db_check_reconnect', 'flowview-connection-2');
+	$replacement = new stdClass();
+	plugin_test_queue_db_result('db_check_reconnect', $replacement);
 
 	flowview_db_check_reconnect();
 
-	expect($GLOBALS['flowview_cnn'])->toBe('flowview-connection-2')
-		->and($GLOBALS[$handle])->toBe('flowview-connection-2');
+	expect($GLOBALS['flowview_cnn'])->toBe($replacement)
+		->and($GLOBALS[$handle])->toBe($replacement);
 })->with(array(
 	array(1, 'local_db_cnn_id'),
 	array(2, 'remote_db_cnn_id'),
 ));
 
 it('does not touch local/remote connection handles when FlowView uses a dedicated database', function () {
-	$GLOBALS['local_db_cnn_id']  = 'cacti-connection';
+	$GLOBALS['flowview_cnn']     = new stdClass();
+	$cacti = new stdClass();
+	$GLOBALS['local_db_cnn_id']  = $cacti;
 	$GLOBALS['remote_db_cnn_id'] = null;
 
-	plugin_test_queue_db_result('db_check_reconnect', 'flowview-connection-2');
+	$replacement = new stdClass();
+	plugin_test_queue_db_result('db_check_reconnect', $replacement);
 
 	flowview_db_check_reconnect();
 
-	expect($GLOBALS['flowview_cnn'])->toBe('flowview-connection-2')
-		->and($GLOBALS['local_db_cnn_id'])->toBe('cacti-connection');
+	expect($GLOBALS['flowview_cnn'])->toBe($replacement)
+		->and($GLOBALS['local_db_cnn_id'])->toBe($cacti);
 });
