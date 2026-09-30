@@ -15,7 +15,7 @@ describe('listener status command security', function () {
 		$contents = file_get_contents($path);
 		expect($contents)->not->toBeFalse();
 
-		expect($contents)->toContain("include_once(\$config['base_path'] . '/plugins/flowview/flowview_security.php');");
+		expect($contents)->toContain("require_once(\$config['base_path'] . '/plugins/flowview/includes/flowview_security.php');");
 		expect($contents)->toContain("\$save['port']         = flowview_normalize_listener_port(get_nfilter_request_var('port'));");
 		expect($contents)->toContain("if (\$save['port'] === false)");
 		expect($contents)->toContain("flowview_build_listener_status_command(\$os, \$row['port'])");

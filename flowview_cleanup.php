@@ -24,10 +24,10 @@
 */
 
 chdir('../../');
-include('./include/cli_check.php');
-include_once('./plugins/flowview/functions.php');
-include_once('./plugins/flowview/setup.php');
-include_once('./plugins/flowview/database.php');
+require('./include/cli_check.php');
+require_once('./plugins/flowview/includes/functions.php');
+require_once('./plugins/flowview/setup.php');
+require_once('./plugins/flowview/includes/database.php');
 
 flowview_connect();
 

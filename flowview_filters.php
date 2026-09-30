@@ -25,13 +25,13 @@
 
 chdir('../../');
 
-include('./include/auth.php');
+require('./include/auth.php');
 
 global $config;
-include_once($config['base_path'] . '/plugins/flowview/setup.php');
-include_once($config['base_path'] . '/plugins/flowview/functions.php');
-include_once($config['base_path'] . '/lib/time.php');
-include_once($config['base_path'] . '/lib/timespan_settings.php');
+require_once($config['base_path'] . '/plugins/flowview/setup.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
+require_once($config['base_path'] . '/lib/time.php');
+require_once($config['base_path'] . '/lib/timespan_settings.php');
 
 flowview_connect();
 
@@ -215,7 +215,7 @@ function show_filters(): void {
 
 	global $config, $sched_actions, $graph_timespans, $item_rows;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
     /* ================= input validation and session storage ================= */
     $filters = array(

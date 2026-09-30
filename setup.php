@@ -798,8 +798,8 @@ function flowview_connect(bool $maxscale = false) {
 		include(FLOWVIEW_CONFIG);
 	}
 
-	include_once(dirname(__FILE__) . '/functions.php');
-	include_once(dirname(__FILE__) . '/database.php');
+	include_once(dirname(__FILE__) . '/includes/functions.php');
+	include_once(dirname(__FILE__) . '/includes/database.php');
 
 	/**
 	 * If connecting to MaxScale, set the port properly

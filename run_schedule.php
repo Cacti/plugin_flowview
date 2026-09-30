@@ -24,14 +24,14 @@
 */
 
 chdir(__DIR__ . '/../../');
-include('./include/cli_check.php');
+require('./include/cli_check.php');
 
 global $config;
-include_once($config['base_path'] . '/lib/poller.php');
-include_once($config['base_path'] . '/lib/time.php');
-include_once($config['base_path'] . '/plugins/flowview/database.php');
-include_once($config['base_path'] . '/plugins/flowview/setup.php');
-include_once($config['base_path'] . '/plugins/flowview/functions.php');
+require_once($config['base_path'] . '/lib/poller.php');
+require_once($config['base_path'] . '/lib/time.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/database.php');
+require_once($config['base_path'] . '/plugins/flowview/setup.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 
 flowview_connect();
 
