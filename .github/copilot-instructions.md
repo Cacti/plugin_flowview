@@ -4,7 +4,7 @@
 
 When generating code for this repository:
 
-1. **Version Compatibility**: This is a Cacti plugin (`flowview`, version 5.0) targeting Cacti 1.2.28+
+1. **Version Compatibility**: This is a Cacti plugin (`flowview`, version 5.0) targeting Cacti 1.2.32+
 2. **Context Files**: Prioritize patterns and standards defined in this file (`.github/copilot-instructions.md`)
 3. **Codebase Patterns**: When context files don't provide specific guidance, scan the codebase for established patterns
 4. **Architectural Consistency**: Maintain plugin-based architecture extending Cacti core
@@ -14,7 +14,7 @@ When generating code for this repository:
 
 ### Core Technologies
 - **PHP**: Compatible with Cacti 1.2.x supported versions
-- **Platform**: Cacti Plugin Architecture (Cacti 1.2.28+)
+- **Platform**: Cacti Plugin Architecture (Cacti 1.2.32+)
 - **Database**: MySQL/MariaDB; supports a **dedicated flowview database** in addition to the main Cacti database (see `config.php.dist`/`database.php`), similar in spirit to other dual-database Cacti plugins
 - **NetFlow**: Ingests NetFlow v5/v9/v10 (IPFIX) via `flow_collector.php`
 
