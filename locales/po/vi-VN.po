@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:38-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "Báo cáo in"
-
-#: arrays.php
-msgid "Summary"
-msgstr "Tóm tắt"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "IP nguồn hoặc đích"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "Destination IP"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "Nguồn / IP đích"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "Cổng đích UDP / TCP"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "Cổng nguồn UDP / TCP"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "Cổng UDP / TCP"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "IP nguồn"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "Destination IP"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "Nguồn / IP đích"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "IP nguồn hoặc đích"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "Giao thức IP"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "Giao diện nhập liệu"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "Giao diện đầu ra"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "Giao diện đầu vào / đầu ra"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "Không có nguồn"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "Điểm đến"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "Nguồn / Đích AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP ToS"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "Tiền tố nguồn"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "Tiền tố đích"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "Tiền tố nguồn / đích"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "Dòng chảy thời gian"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "Nguồn / IP đích"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "Số"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 cột"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "Hiển thị mô phỏng kế toán IP"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "Bất kỳ phần nào trong phạm vi"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "Thời gian kết thúc"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "Thời gian bắt đầu"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "Hoàn toàn trong phạm vi"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "Trả lại tất cả các dòng"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "Top% d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "Không giới hạn"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s byte"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "Tất cả"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "Cổng nguồn"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "Flows"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "Bytes"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "Gói"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "Destination IP"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "Cổng"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "Cổng Nguồn"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "Cổng Đích đến"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "Số phận IP"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "Địa chỉ IP"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "Giao thức"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "Không có nguồn"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "Điểm đến"
-
-#: arrays.php
-msgid "TOS"
-msgstr "ĐKDV"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "Tiền tố đích"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "N/A"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "Thời gian bắt đầu"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "Thời gian kết thúc"
-
-#: arrays.php
-msgid "Active"
-msgstr "Kích hoạt"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "B /"
-
-#: arrays.php
-msgid "Ts"
-msgstr "Ts"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "Cờ"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "Nguồn"
-
-#: arrays.php
-msgid "Destination"
-msgstr "Điểm đến"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "Điểm ảnh %d"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "Xóa bộ lọc"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "Bộ lọc"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "Bộ lọc đã Lưu để hiển thị."
-
-#: arrays.php
-msgid "New Filter"
-msgstr "Bộ lọc mới"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "Người nghe"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "Trình nghe để sử dụng cho Bộ lọc."
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "Mã ID mẫu, template"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "ID mẫu luồng chỉ dành cho luồng v9 và IPFIX.  Lưu ý rằng ID mẫu có thể khác nhau giữa các nhà sản xuất."
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "Địa chỉ IP"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "Địa chỉ IP luồng hoặc Tên máy chủ từ danh sách các luồng đã đăng ký."
-
-#: arrays.php
-msgid "Presets"
-msgstr "Đặt trước"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "Nếu Bộ lọc này dựa trên Khoảng thời gian được xác định trước, hãy chọn nó ở đây."
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "Tiêu chí bộ lọc chi tiết"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "Loại báo cáo"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "Loại Báo cáo để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo."
-
-#: arrays.php
-msgid "Printed"
-msgstr "Đã in"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "Thống kê"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "Báo cáo thống kê"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "Loại Báo cáo Hiển thị để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo."
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "Báo cáo in"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "Loại Báo cáo In để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo In."
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "Quản lý lịch"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "Ràng buộc Dữ liệu Bộ lọc theo các quy tắc lọc thời gian này."
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "Giải quyết các địa chỉ:"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "Giải quyết các địa chỉ:"
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "Có"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "Không"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "Trường sắp xếp:"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Trường Sắp xếp mặc định cho Bộ lọc. Cài đặt này sẽ được áp dụng cho bất kỳ Báo cáo đã Lập biểu nào."
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "Hàng tối đa"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Các hàng tối đa cần cung cấp trong Bộ lọc. Cài đặt này sẽ được áp dụng cho bất kỳ Báo cáo đã Lập biểu nào."
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "Byte tối thiểu:"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "Tổng số byte tối thiểu cần xem xét cho Bộ lọc. Bất kỳ tổng luồng nào nhỏ hơn nhiều byte này sẽ bị bỏ qua."
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "Tùy chọn biểu đồ"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "Loại đồ thị"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "Loại biểu đồ để hiển thị theo mặc định.  Chúng bao gồm Bar, Pie và Treemap."
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "Biểu đồ thanh"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "Biểu đồ tròn"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "Biểu đồ cây"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "Chiều cao biểu đồ"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "Biểu đồ Hight để sử dụng theo mặc định."
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "Bảng"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "Bảng điều khiển có nên được hiển thị theo mặc định."
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "Thanh byte"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "Bảng điều khiển Bytes nên được hiển thị theo mặc định."
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "Gói thanh"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "Bảng điều khiển gói được hiển thị theo mặc định."
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "Thanh chảy"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "Bảng điều khiển Flows có nên được hiển thị theo mặc định."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "Giao thức"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "Giao thức"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "Chọn Giao thức cụ thể cho Bộ lọc."
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "TCP Flags"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "Cờ TCP để tìm kiếm trong Bộ lọc. Đây có thể là danh sách các Cờ TCP được phân tách bằng dấu phẩy"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "Lĩnh vực ĐKDV"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "Các Trường TOS để tìm kiếm trong Bộ lọc. Đây có thể là danh sách các Trường TOS được phân tách bằng dấu phẩy"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Lọc trên IP nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "Cổng nguồn"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "Lọc trên các Cổng nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách Cổng nguồn được phân tách bằng dấu phẩy."
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "Giao diện nguồn"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "Lọc trên Giao diện nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các Giao diện Nguồn được phân tách bằng dấu phẩy"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "Lọc trên AS đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân tách bằng dấu phẩy của Nguồn AS"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Lọc trên IP đích đã chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "Cổng Dest"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "Lọc trên các Cổng đích đã chọn trong Bộ lọc. Đây có thể là danh sách các Cổng Đích được phân tách bằng dấu phẩy."
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "Giao diện Dest"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "Lọc trên Giao diện đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân cách bằng dấu phẩy của các Giao diện điểm đến."
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "Dest AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "Lọc trên AS đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân tách bằng dấu phẩy của đích AS's"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "IP nguồn"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Lọc trên IP nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "Cổng nguồn UDP / TCP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Lọc trên các Cổng nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách Cổng nguồn được phân tách bằng dấu phẩy."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "Số phận IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Lọc trên IP đích đã chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "Cổng Dest"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Lọc trên các Cổng đích đã chọn trong Bộ lọc. Đây có thể là danh sách các Cổng Đích được phân tách bằng dấu phẩy."
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "DNS Cache"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/Tuyến đường"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "Số"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "Khối AS"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "Bộ AS"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "Bộ lộ trình"
-
-#: arrays.php
-msgid "Domains"
-msgstr "Miền"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "Bộ lọc đã lưu"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "Bộ ngang hàng"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "Mạng"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "Kiểm soát Internet"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "Đội ứng phó sự cố"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "Đại lý Auth"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "Cơ quan"
-
-#: arrays.php
-msgid "Roles"
-msgstr "Vai trò"
-
-#: arrays.php
-msgid "Persons"
-msgstr "Người"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "Bộ lọc luồng '%s' Đã xóa."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "Xóa"
 
@@ -746,6 +94,10 @@ msgstr "Bộ lọc đã lưu"
 msgid "Peering Set"
 msgstr "Bộ ngang hàng"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Mạng"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "Kiểm soát Internet"
@@ -781,6 +133,10 @@ msgstr "Nhận xét"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "Sửa đổi lần cuối"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Nguồn"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "Tham khảo"
 msgid "MP Peering"
 msgstr "MP Peering"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "Xuất ra"
 
@@ -993,6 +349,10 @@ msgstr "DS Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Ranh giới Aggr"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Bộ lọc"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "Mặc định"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "Đi"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "Đặt / Làm mới Bộ lọc"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "Xóa"
 
@@ -1160,12 +520,12 @@ msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
 msgstr[0] "Nhấp vào 'Tiếp tục' để xóa (các) Lịch biểu sau."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "Hủy"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "Tiếp tục"
 
@@ -1189,6 +549,10 @@ msgstr "Chưa được xác minh"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "Gỡ"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "Địa chỉ IP"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1344,9 +708,17 @@ msgstr "Máy chủ được phép"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Cổng"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "Cổng nhà sưu tập này sẽ lắng nghe."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Giao thức"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1413,7 +785,7 @@ msgstr "Tên"
 msgid "Version"
 msgstr "Phiên bản"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "Giao diện"
 
@@ -1437,6 +809,11 @@ msgstr "Mẫu được phát hiện của người nghe"
 msgid "Ex Addr"
 msgstr "Ví dụ Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "Tất cả"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "Mẫu"
@@ -1449,7 +826,7 @@ msgstr "Mã ID mẫu, template"
 msgid "Field Name"
 msgstr "Tên trường"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "Hỗ trợ"
 
@@ -1530,7 +907,7 @@ msgstr "Các phiên bản Traffic Flow đang được quan sát."
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Thời gian cập nhật tối đa từ tất cả các luồng đang được thu thập.  Giá trị này được cập nhật 5 phút một lần."
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "Không"
 
@@ -1538,6 +915,10 @@ msgstr "Không"
 #, fuzzy
 msgid "No Connections"
 msgstr "Địa điểm"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "N/A"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1579,9 +960,21 @@ msgstr "Bộ lọc"
 msgid "Filter Name"
 msgstr "Tên bộ lọc"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "Người nghe"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Loại báo cáo"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Trường sắp xếp:"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1826,7 +1219,7 @@ msgstr "Kế hoạch"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "Ngày bắt đầu chọn"
 
@@ -1859,591 +1252,1199 @@ msgstr "Email"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Không"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Có"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Báo cáo in"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Tóm tắt"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "IP nguồn hoặc đích"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Destination IP"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Nguồn / IP đích"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "Cổng đích UDP / TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "Cổng nguồn UDP / TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "Cổng UDP / TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "IP nguồn"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Destination IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Nguồn / IP đích"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "IP nguồn hoặc đích"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "Giao thức IP"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Giao diện nhập liệu"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Giao diện đầu ra"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Giao diện đầu vào / đầu ra"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Không có nguồn"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Điểm đến"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Nguồn / Đích AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Tiền tố nguồn"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Tiền tố đích"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Tiền tố nguồn / đích"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Dòng chảy thời gian"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Nguồn / IP đích"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Số"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 cột"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Hiển thị mô phỏng kế toán IP"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Bất kỳ phần nào trong phạm vi"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Thời gian kết thúc"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Thời gian bắt đầu"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Hoàn toàn trong phạm vi"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Trả lại tất cả các dòng"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Top% d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Không giới hạn"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s byte"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Cổng nguồn"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Flows"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Gói"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Destination IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Cổng Nguồn"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Cổng Đích đến"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Số phận IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Không có nguồn"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Điểm đến"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "ĐKDV"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Tiền tố đích"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Thời gian bắt đầu"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Thời gian kết thúc"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Kích hoạt"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B /"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Cờ"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Điểm đến"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "Điểm ảnh %d"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Xóa bộ lọc"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Bộ lọc đã Lưu để hiển thị."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Bộ lọc mới"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Trình nghe để sử dụng cho Bộ lọc."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "Mã ID mẫu, template"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "ID mẫu luồng chỉ dành cho luồng v9 và IPFIX.  Lưu ý rằng ID mẫu có thể khác nhau giữa các nhà sản xuất."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Địa chỉ IP"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Địa chỉ IP luồng hoặc Tên máy chủ từ danh sách các luồng đã đăng ký."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Đặt trước"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Nếu Bộ lọc này dựa trên Khoảng thời gian được xác định trước, hãy chọn nó ở đây."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Tiêu chí bộ lọc chi tiết"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Loại Báo cáo để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Đã in"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Thống kê"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Báo cáo thống kê"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Loại Báo cáo Hiển thị để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Báo cáo in"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Loại Báo cáo In để sử dụng theo mặc định cho Bộ lọc này khi tạo Báo cáo In."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Quản lý lịch"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Ràng buộc Dữ liệu Bộ lọc theo các quy tắc lọc thời gian này."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Giải quyết các địa chỉ:"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Giải quyết các địa chỉ:"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Trường Sắp xếp mặc định cho Bộ lọc. Cài đặt này sẽ được áp dụng cho bất kỳ Báo cáo đã Lập biểu nào."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Hàng tối đa"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Các hàng tối đa cần cung cấp trong Bộ lọc. Cài đặt này sẽ được áp dụng cho bất kỳ Báo cáo đã Lập biểu nào."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Byte tối thiểu:"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Tổng số byte tối thiểu cần xem xét cho Bộ lọc. Bất kỳ tổng luồng nào nhỏ hơn nhiều byte này sẽ bị bỏ qua."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Tùy chọn biểu đồ"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Loại đồ thị"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Loại biểu đồ để hiển thị theo mặc định.  Chúng bao gồm Bar, Pie và Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Biểu đồ thanh"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Biểu đồ tròn"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Biểu đồ cây"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Chiều cao biểu đồ"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "Biểu đồ Hight để sử dụng theo mặc định."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Bảng"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Bảng điều khiển có nên được hiển thị theo mặc định."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Thanh byte"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Bảng điều khiển Bytes nên được hiển thị theo mặc định."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Gói thanh"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Bảng điều khiển gói được hiển thị theo mặc định."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Thanh chảy"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Bảng điều khiển Flows có nên được hiển thị theo mặc định."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Giao thức"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Giao thức"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Chọn Giao thức cụ thể cho Bộ lọc."
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP Flags"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "Cờ TCP để tìm kiếm trong Bộ lọc. Đây có thể là danh sách các Cờ TCP được phân tách bằng dấu phẩy"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "Lĩnh vực ĐKDV"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Các Trường TOS để tìm kiếm trong Bộ lọc. Đây có thể là danh sách các Trường TOS được phân tách bằng dấu phẩy"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Lọc trên IP nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Cổng nguồn"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Lọc trên các Cổng nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách Cổng nguồn được phân tách bằng dấu phẩy."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Giao diện nguồn"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Lọc trên Giao diện nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các Giao diện Nguồn được phân tách bằng dấu phẩy"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Lọc trên AS đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân tách bằng dấu phẩy của Nguồn AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Lọc trên IP đích đã chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Cổng Dest"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Lọc trên các Cổng đích đã chọn trong Bộ lọc. Đây có thể là danh sách các Cổng Đích được phân tách bằng dấu phẩy."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Giao diện Dest"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Lọc trên Giao diện đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân cách bằng dấu phẩy của các Giao diện điểm đến."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Dest AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Lọc trên AS đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân tách bằng dấu phẩy của đích AS's"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "IP nguồn"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Lọc trên IP nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "Cổng nguồn UDP / TCP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Lọc trên các Cổng nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách Cổng nguồn được phân tách bằng dấu phẩy."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "Số phận IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Lọc trên IP đích đã chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "Cổng Dest"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Lọc trên các Cổng đích đã chọn trong Bộ lọc. Đây có thể là danh sách các Cổng Đích được phân tách bằng dấu phẩy."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS Cache"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Tuyến đường"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Số"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "Khối AS"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "Bộ AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Bộ lộ trình"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Miền"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Bộ lọc đã lưu"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Bộ ngang hàng"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Kiểm soát Internet"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Đội ứng phó sự cố"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Đại lý Auth"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Cơ quan"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Vai trò"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Người"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "Xương rồng"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "Chung"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "Báo cáo: [chỉnh sửa: %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "Báo cáo: [mới]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Bộ lọc không xác định [Chọn Bộ lọc để nhận chi tiết]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "Báo cáo Thống kê: %s [Bao gồm các ghi đè như được xác định bên dưới]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "Báo cáo đã in: %s [Bao gồm các ghi đè như cụ thể bên dưới]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "Suối"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "Áp dụng bộ lọc"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "Xóa bộ lọc"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "Tần suất để tạo một tệp Flow mới."
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "Mới"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "Sửa"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "Chỉnh sửa Bộ lọc Hiện tại"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "Lưu"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "Lưu thành"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "Đổi tên"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "Đổi tên bộ lọc luồng"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "Báo cáo"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "Thống kê: %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "In: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "Các dòng"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "Loại trừ"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "Mẫu hàng đầu"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "%d mẫu hàng đầu"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "Octets"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "Chỉ hiển thị Tên miền trên Biểu đồ bên dưới"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "Chỉ miền"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "Thời gian"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "Tùy chỉnh"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "Từ"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "Đến"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "Bộ chọn ngày kết thúc"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "Chuyển thời gian lùi lại"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "Xác định khoảng thời gian dịch chuyển"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "Chuyển thời gian chuyển tiếp"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "Biểu đồ"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "Bar"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "Bánh"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "Bản đồ cây"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "Chiều cao"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "Hiển thị / ẩn"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "Bảng"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "Báo cáo"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "Bộ lọc mới"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "新しい名前"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "Báo cáo in"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "Để Xóa Bộ lọc Dòng chảy này, hãy nhấn Tiếp tục.  Nếu Bộ lọc lưu lượng đang được sử dụng trong Báo cáo theo lịch, hoạt động sẽ bị chặn."
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "Biểu đồ phân phối %s hàng đầu của byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "%s biểu đồ hình tròn hàng đầu của byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "Biểu đồ %s cây hàng đầu của byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "Biểu đồ phân phối %s hàng đầu của các gói"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "%s biểu đồ hình tròn hàng đầu của các gói"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "Biểu đồ %s cây hàng đầu của các gói"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "Biểu đồ phân phối %s hàng đầu của dòng chảy"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "Biểu đồ hình tròn %s trên cùng của dòng chảy"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "Biểu đồ %s cây hàng đầu của các dòng chảy"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "Đổi tên bố cục"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr " <new>"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "Cài đặt bộ lọc đã lưu"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "Khách hàng / Riêng tư (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "Không xác định (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Bộ lọc mạng con: %s không phải là định dạng CIDR giá trị"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "Bộ lọc mạng con: %s không phải là định dạng CIDR giá trị"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "- chưa giải quyết -"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "Tên Nguồn"
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "Tên Nguồn"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "Cổng Dest"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "DNS gốc"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "Cổng Dest"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "Tiền tố Dest"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "Loại hình dịch vụ"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "Gói"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "Truy vấn song song đã hết thời gian.  Vui lòng liên hệ với quản trị viên của bạn"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "Boolean: %s, Numeric: %s, Hex: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "Độ trễ thấp"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "Thông lượng"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "Độ tin cậy"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "Mincost"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "Kiểm soát mạng"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "Kiểm soát Internet"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "ECP phê bình"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "Ghi đè Flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "Đèn flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "Khẩn"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "Ưu tiên"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "Quay vòng"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "Tóm tắt thống kê"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Phân phối kích thước gói IP (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Gói trên mỗi phân phối luồng (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Octet trên mỗi phân phối dòng chảy (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Phân phối thời gian dòng chảy (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Bạn phải chọn Báo cáo thống kê hoặc Báo cáo in!"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Bạn phải chọn chỉ một Báo cáo thống kê hoặc Báo cáo in (không phải cả hai)!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Ngày không hợp lệ, Ngày kết thúc / Thời gian sớm hơn Ngày / Giờ bắt đầu!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Mạng con không hợp lệ cho Địa chỉ nguồn! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Mạng con không hợp lệ cho Địa chỉ đích! <br> (Phải ở dạng '192.168.0.1/255.255.255.0' hoặc '192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "Giá trị không hợp lệ cho Giao diện nguồn!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Cổng nguồn! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Nguồn AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "Giá trị không hợp lệ cho Giao diện đích!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Cổng đích! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Giá trị không hợp lệ cho Đích AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Giá trị không hợp lệ cho Giao thức! (1 - 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Giá trị không hợp lệ cho Cờ TCP! (ví dụ: 0x1b hoặc 0x1b / SA hoặc SA / SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Giá trị không hợp lệ cho Octoff Cutoff!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Giá trị không hợp lệ cho Cutoff Lines!"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "Biểu đồ FlowView cho %s Loại là %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "Hỗ trợ"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "Không được hỗ trợ"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria (Nhanh, An toàn)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (Nhanh, An toàn)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (chậm, tính đồng thời cao)"
 
