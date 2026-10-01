@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:20-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "Εκτύπωση αναφορών"
-
-#: arrays.php
-msgid "Summary"
-msgstr "Περίληψη"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "Πηγή ή διεύθυνση IP προορισμού"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "Προορισμός IP"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "Πηγή / διεύθυνση IP προορισμού"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "Θύρα προορισμού UDP / TCP"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "UDP / TCP θύρα πηγής"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "Θύρα UDP / TCP"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "Πηγή IP"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "Προορισμός IP"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "Πηγή / διεύθυνση IP προορισμού"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "Πηγή ή διεύθυνση IP προορισμού"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "IP Protocol"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "Διασύνδεση εισόδου"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "Διεπαφή εξόδου"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "Διασύνδεση εισόδου / εξόδου"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "Πηγή"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "Προορισμός"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "Πηγή / προορισμός AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP ToS"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "Πρόθεμα προέλευσης"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "Πρόθεμα προορισμού"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "Προέλευση προέλευσης / προορισμού"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "Χρόνοι ροής"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "Πηγή / διεύθυνση IP προορισμού"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "Αριθμοί"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 Στήλες"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "Εμφάνιση προσομοίωσης λογιστικής IP"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "Οποιοδήποτε μέρος στο εύρος"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "Ώρα Λήξης"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "Ώρα Έναρξης"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "Πλήρως σε εύρος"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "Επιστροφή όλων των γραμμών"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "Κορυφαία% d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "Χωρίς Όριο"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s Bytes"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "Όλα"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "Πηγή (ες) θύρας"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "Ροές"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "Bytes"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "Πακέτα"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "Προορισμός IP"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "Θύρα"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "Πηγή (ες) θύρας"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "Προορισμός IP"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "Dest. IP"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "IP Address"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "Πρωτόκολλο"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "Πηγή"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "Προορισμός"
-
-#: arrays.php
-msgid "TOS"
-msgstr "Όροι Χρήσης"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "Πρόθεμα προορισμού"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "Μη Διαθέσιμο"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "Ώρα Έναρξης"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "Ώρα Λήξης"
-
-#: arrays.php
-msgid "Active"
-msgstr "Ενεργό"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "B / Pk"
-
-#: arrays.php
-msgid "Ts"
-msgstr "Ts"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "Σημαίες"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "Πηγή"
-
-#: arrays.php
-msgid "Destination"
-msgstr "Προορισμός"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d Εικονοστοιχεία"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "Καθαρισμός Φίλτρων"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "Φίλτρο"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "Το αποθηκευμένο φίλτρο για εμφάνιση."
-
-#: arrays.php
-msgid "New Filter"
-msgstr "Φίλτρο"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "Ακροατής"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "Ο ακροατής που θα χρησιμοποιηθεί για το φίλτρο."
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "ID προτύπου"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "Το αναγνωριστικό προτύπου ροής μόνο για ροές v9 και IPFIX.  Λάβετε υπόψη ότι τα αναγνωριστικά προτύπου ενδέχεται να διαφέρουν από κατασκευαστή σε κατασκευαστή."
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "IP Address"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "Η διεύθυνση IP ροής ή το όνομα κεντρικού υπολογιστή από τη λίστα καταχωρημένων ροών."
-
-#: arrays.php
-msgid "Presets"
-msgstr "Προρυθμίσεις"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "Εάν αυτό το φίλτρο βασίζεται σε ένα προκαθορισμένο χρονικό διάστημα, επιλέξτε το εδώ."
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "Λεπτομερή κριτήρια φίλτρου"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "Είδος Αναφοράς"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "Ο τύπος αναφοράς για χρήση από προεπιλογή για αυτό το φίλτρο κατά τη δημιουργία μιας αναφοράς."
-
-#: arrays.php
-msgid "Printed"
-msgstr "Εμπριμέ"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "Στατιστικά"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "Στατιστικές αναφορές"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "Ο τύπος αναφοράς εμφάνισης για χρήση από προεπιλογή για αυτό το φίλτρο κατά τη δημιουργία αναφοράς"
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "Εκτύπωση αναφορών"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "Ο τυπωμένος τύπος αναφοράς για χρήση από προεπιλογή για αυτό το φίλτρο κατά τη δημιουργία μιας εκτυπωμένης αναφοράς."
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "Διαχείριση Προγραμμάτων"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "Περιορίστε τα δεδομένα φίλτρου με αυτούς τους κανόνες φίλτρου χρόνου."
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "Επίλυση διευθύνσεων:"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "Επίλυση διευθύνσεων:"
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "Ναι"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "Όχι"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "Πεδίο ταξινόμησης:"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Το προεπιλεγμένο πεδίο ταξινόμησης για το φίλτρο. Αυτή η ρύθμιση θα εφαρμοστεί για τυχόν προγραμματισμένες αναφορές."
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "Μέγιστος Αριθμός Σειρών"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Οι μέγιστες σειρές που πρέπει να παρέχονται στο φίλτρο. Αυτή η ρύθμιση θα εφαρμοστεί για τυχόν προγραμματισμένες αναφορές."
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "Ελάχιστα byte:"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "Τα ελάχιστα συνολικά bytes που πρέπει να ληφθούν υπόψη για το φίλτρο. Τυχόν σύνολα ροής που είναι μικρότερα από αυτό πολλά byte θα αγνοούνται."
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "Επιλογές γραφημάτων"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "Τύπος γραφήματος"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "Ο τύπος γραφήματος που θα εμφανίζεται από προεπιλογή.  Περιλαμβάνουν Bar, Pie και Treemap."
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "Ραβδόγραμμα"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "Γράφημα πίτας"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "Γράφημα Treemap"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "Ύψος γραφήματος"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "Το Γράφημα Hight για χρήση από προεπιλογή."
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "Πίνακας"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "Θα πρέπει ο πίνακας πίνακα πίνακα να εμφανίζεται από προεπιλογή."
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "Bytes Bar"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "Θα πρέπει ο πίνακας Bytes να εμφανίζεται από προεπιλογή."
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "Μπαταρίες πακέτων"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "Θα πρέπει ο πίνακας πακέτων να εμφανίζεται από προεπιλογή."
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "Ροή ροής"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "Θα πρέπει ο πίνακας \"Ροές\" να εμφανίζεται από προεπιλογή."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "Πρωτόκολλα"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "Πρωτόκολλα"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "Επιλέξτε το ειδικό πρωτόκολλο για το φίλτρο."
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "Σημαίες TCP"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "Οι σημαίες TCP για αναζήτηση στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα TCP Flags"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "Πεδία TOS"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "Τα πεδία TOS για αναζήτηση στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα πεδίων TOS"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Φιλτράρετε την επιλεγμένη πηγή IP για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "Πηγή (ες) θύρας"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "Φιλτράρετε στις επιλεγμένες θύρες πηγής για στο φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα πηγών πηγών."
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "Διασύνδεση πηγής"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "Φιλτράρετε την επιλεγμένη διεπαφή πηγής για το φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμμα των διασυνδέσεων πηγής"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "Φιλτράρετε στο επιλέξτε Destination AS για στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των Source AS's"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Φιλτράρετε στην επιλεγμένη διεύθυνση IP προορισμού στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "Dest Port"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "Φιλτράρετε στις επιλεγμένες θύρες προορισμού για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των λιμένων προορισμού."
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "Διασύνδεση Dest"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "Φιλτράρετε στην επιλογή Διεπαφή προορισμού για στο Φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμμα των διεπαφών προορισμού."
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "Dest AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "Φιλτράρετε στο επιλέξτε Destination AS για στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των Destimation AS's"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "Πηγή IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Φιλτράρετε την επιλεγμένη πηγή IP για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "UDP / TCP θύρα πηγής"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Φιλτράρετε στις επιλεγμένες θύρες πηγής για στο φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα πηγών πηγών."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "Dest. IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Φιλτράρετε στην επιλεγμένη διεύθυνση IP προορισμού στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "Dest Port"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Φιλτράρετε στις επιλεγμένες θύρες προορισμού για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των λιμένων προορισμού."
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "Προσωρινή μνήμη DNS"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/Διαδρομές"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "Αριθμοί"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "Μπλοκ AS"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "Σετ AS"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "Σύνολα διαδρομών"
-
-#: arrays.php
-msgid "Domains"
-msgstr "Domains"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "Σετ Φίλτρων"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "Σύνολα ανταλλαγής κίνησης"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "Δίκτυο"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "Έλεγχος Διαδικτύου"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "Ομάδες αντιμετώπισης περιστατικών"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "Πράκτορες ΑΠΘ"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "Οργανισμούς"
-
-#: arrays.php
-msgid "Roles"
-msgstr "Ρόλοι"
-
-#: arrays.php
-msgid "Persons"
-msgstr "Άτομα"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "Το φίλτρο έχει '%s' διαγραφεί"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "Διαγραφή"
 
@@ -746,6 +94,10 @@ msgstr "Σετ Φίλτρων"
 msgid "Peering Set"
 msgstr "Σύνολα ανταλλαγής κίνησης"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Δίκτυο"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "Έλεγχος Διαδικτύου"
@@ -781,6 +133,10 @@ msgstr "Προβλεπόμενη ώρα άφιξης"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "Τελευταία τροποποίηση"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Πηγή"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "Ανατρέξτε στο"
 msgid "MP Peering"
 msgstr "MP Peering"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "Εξαγωγή"
 
@@ -993,6 +349,10 @@ msgstr "DS Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Όριο Aggr"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Φίλτρο"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "Προεπιλογή"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "Πήγαινε"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "Ρύθμιση / Ανανέωση φίλτρων"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "Καθαρισμός"
 
@@ -1161,12 +521,12 @@ msgstr[0] "Κάντε κλικ στο κουμπί \"Συνέχεια\" για �
 msgstr[1] "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τα παρακάτω χρονοδιαγράμματα."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "Ακύρωση"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "Συνέχεια"
 
@@ -1191,6 +551,10 @@ msgstr "Ανεπιβεβαίωτη"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "Διαγραφή"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP Address"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1346,9 +710,17 @@ msgstr "Επιτρεπόμενη υποδοχής"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Θύρα"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "Λιμάνι ο συλλέκτης αυτός θα ακούσει."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Πρωτόκολλο"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1415,7 +787,7 @@ msgstr "Όνομα"
 msgid "Version"
 msgstr "Έκδοση"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "Πρότυπα"
 
@@ -1439,6 +811,11 @@ msgstr "Πρότυπα που εντοπίστηκαν από ακροατή"
 msgid "Ex Addr"
 msgstr "Πρώην Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "Όλα"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "Πρότυπο"
@@ -1451,7 +828,7 @@ msgstr "ID προτύπου"
 msgid "Field Name"
 msgstr "Όνομα Πεδίου"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "Υποστηρίζεται"
 
@@ -1532,7 +909,7 @@ msgstr "Οι εκδόσεις Traffic Flow που παρατηρούνται."
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Ο μέγιστος χρόνος ενημέρωσης από όλες τις ροές που συλλέγονται.  Αυτή η τιμή ενημερώνεται κάθε 5 λεπτά."
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "Κανένα"
 
@@ -1540,6 +917,10 @@ msgstr "Κανένα"
 #, fuzzy
 msgid "No Connections"
 msgstr "Γεω τοποθεσία"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "Μη Διαθέσιμο"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1581,9 +962,21 @@ msgstr "Φίλτρα"
 msgid "Filter Name"
 msgstr "Όνομα φίλτρου"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "Ακροατής"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Είδος Αναφοράς"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Πεδίο ταξινόμησης:"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1828,7 +1221,7 @@ msgstr "Πρόγραμμα"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "Επιλογή επιλογής έναρξης"
 
@@ -1861,591 +1254,1199 @@ msgstr "Email"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Όχι"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Ναι"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Εκτύπωση αναφορών"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Περίληψη"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Πηγή ή διεύθυνση IP προορισμού"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Προορισμός IP"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Πηγή / διεύθυνση IP προορισμού"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "Θύρα προορισμού UDP / TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP / TCP θύρα πηγής"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "Θύρα UDP / TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Πηγή IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Προορισμός IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Πηγή / διεύθυνση IP προορισμού"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Πηγή ή διεύθυνση IP προορισμού"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP Protocol"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Διασύνδεση εισόδου"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Διεπαφή εξόδου"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Διασύνδεση εισόδου / εξόδου"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Πηγή"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Προορισμός"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Πηγή / προορισμός AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Πρόθεμα προέλευσης"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Πρόθεμα προορισμού"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Προέλευση προέλευσης / προορισμού"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Χρόνοι ροής"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Πηγή / διεύθυνση IP προορισμού"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Αριθμοί"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 Στήλες"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Εμφάνιση προσομοίωσης λογιστικής IP"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Οποιοδήποτε μέρος στο εύρος"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Ώρα Λήξης"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Ώρα Έναρξης"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Πλήρως σε εύρος"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Επιστροφή όλων των γραμμών"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Κορυφαία% d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Χωρίς Όριο"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Bytes"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Πηγή (ες) θύρας"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Ροές"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Πακέτα"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Προορισμός IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Πηγή (ες) θύρας"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Προορισμός IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Dest. IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Πηγή"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Προορισμός"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "Όροι Χρήσης"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Πρόθεμα προορισμού"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Ώρα Έναρξης"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Ώρα Λήξης"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Ενεργό"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B / Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Σημαίες"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Προορισμός"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d Εικονοστοιχεία"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Καθαρισμός Φίλτρων"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Το αποθηκευμένο φίλτρο για εμφάνιση."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Φίλτρο"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Ο ακροατής που θα χρησιμοποιηθεί για το φίλτρο."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "ID προτύπου"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "Το αναγνωριστικό προτύπου ροής μόνο για ροές v9 και IPFIX.  Λάβετε υπόψη ότι τα αναγνωριστικά προτύπου ενδέχεται να διαφέρουν από κατασκευαστή σε κατασκευαστή."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "IP Address"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Η διεύθυνση IP ροής ή το όνομα κεντρικού υπολογιστή από τη λίστα καταχωρημένων ροών."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Προρυθμίσεις"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Εάν αυτό το φίλτρο βασίζεται σε ένα προκαθορισμένο χρονικό διάστημα, επιλέξτε το εδώ."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Λεπτομερή κριτήρια φίλτρου"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Ο τύπος αναφοράς για χρήση από προεπιλογή για αυτό το φίλτρο κατά τη δημιουργία μιας αναφοράς."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Εμπριμέ"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Στατιστικά"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Στατιστικές αναφορές"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Ο τύπος αναφοράς εμφάνισης για χρήση από προεπιλογή για αυτό το φίλτρο κατά τη δημιουργία αναφοράς"
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Εκτύπωση αναφορών"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Ο τυπωμένος τύπος αναφοράς για χρήση από προεπιλογή για αυτό το φίλτρο κατά τη δημιουργία μιας εκτυπωμένης αναφοράς."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Διαχείριση Προγραμμάτων"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Περιορίστε τα δεδομένα φίλτρου με αυτούς τους κανόνες φίλτρου χρόνου."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Επίλυση διευθύνσεων:"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Επίλυση διευθύνσεων:"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Το προεπιλεγμένο πεδίο ταξινόμησης για το φίλτρο. Αυτή η ρύθμιση θα εφαρμοστεί για τυχόν προγραμματισμένες αναφορές."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Μέγιστος Αριθμός Σειρών"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Οι μέγιστες σειρές που πρέπει να παρέχονται στο φίλτρο. Αυτή η ρύθμιση θα εφαρμοστεί για τυχόν προγραμματισμένες αναφορές."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Ελάχιστα byte:"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Τα ελάχιστα συνολικά bytes που πρέπει να ληφθούν υπόψη για το φίλτρο. Τυχόν σύνολα ροής που είναι μικρότερα από αυτό πολλά byte θα αγνοούνται."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Επιλογές γραφημάτων"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Τύπος γραφήματος"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Ο τύπος γραφήματος που θα εμφανίζεται από προεπιλογή.  Περιλαμβάνουν Bar, Pie και Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Ραβδόγραμμα"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Γράφημα πίτας"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Γράφημα Treemap"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Ύψος γραφήματος"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "Το Γράφημα Hight για χρήση από προεπιλογή."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Πίνακας"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Θα πρέπει ο πίνακας πίνακα πίνακα να εμφανίζεται από προεπιλογή."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Bytes Bar"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Θα πρέπει ο πίνακας Bytes να εμφανίζεται από προεπιλογή."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Μπαταρίες πακέτων"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Θα πρέπει ο πίνακας πακέτων να εμφανίζεται από προεπιλογή."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Ροή ροής"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Θα πρέπει ο πίνακας \"Ροές\" να εμφανίζεται από προεπιλογή."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Πρωτόκολλα"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Πρωτόκολλα"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Επιλέξτε το ειδικό πρωτόκολλο για το φίλτρο."
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "Σημαίες TCP"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "Οι σημαίες TCP για αναζήτηση στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα TCP Flags"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "Πεδία TOS"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Τα πεδία TOS για αναζήτηση στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα πεδίων TOS"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Φιλτράρετε την επιλεγμένη πηγή IP για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Πηγή (ες) θύρας"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Φιλτράρετε στις επιλεγμένες θύρες πηγής για στο φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα πηγών πηγών."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Διασύνδεση πηγής"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Φιλτράρετε την επιλεγμένη διεπαφή πηγής για το φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμμα των διασυνδέσεων πηγής"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Φιλτράρετε στο επιλέξτε Destination AS για στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των Source AS's"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Φιλτράρετε στην επιλεγμένη διεύθυνση IP προορισμού στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Dest Port"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Φιλτράρετε στις επιλεγμένες θύρες προορισμού για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των λιμένων προορισμού."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Διασύνδεση Dest"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Φιλτράρετε στην επιλογή Διεπαφή προορισμού για στο Φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμμα των διεπαφών προορισμού."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Dest AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Φιλτράρετε στο επιλέξτε Destination AS για στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των Destimation AS's"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "Πηγή IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Φιλτράρετε την επιλεγμένη πηγή IP για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "UDP / TCP θύρα πηγής"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Φιλτράρετε στις επιλεγμένες θύρες πηγής για στο φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα πηγών πηγών."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "Dest. IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Φιλτράρετε στην επιλεγμένη διεύθυνση IP προορισμού στο φίλτρο. Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 ή μια λίστα οριοθετημένων με κόμματα διευθύνσεων IPv4 ή IPv6 σε μορφή CIDR (π.χ. 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "Dest Port"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Φιλτράρετε στις επιλεγμένες θύρες προορισμού για το φίλτρο Αυτή μπορεί να είναι μια λίστα οριοθετημένων με κόμματα των λιμένων προορισμού."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "Προσωρινή μνήμη DNS"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Διαδρομές"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Αριθμοί"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "Μπλοκ AS"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "Σετ AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Σύνολα διαδρομών"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Domains"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Σετ Φίλτρων"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Σύνολα ανταλλαγής κίνησης"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Έλεγχος Διαδικτύου"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Ομάδες αντιμετώπισης περιστατικών"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Πράκτορες ΑΠΘ"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Οργανισμούς"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Ρόλοι"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Άτομα"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "Astrophytum asterias (I)"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "Γενικά"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "Αναφορά: [επεξεργασία: %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "Έκθεση: [νέο]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Απροσδιόριστο φίλτρο [Επιλέξτε φίλτρο για λήψη λεπτομερειών]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "Στατιστική αναφορά: %s [Συμπεριλαμβάνονται παρακάμψεις όπως ορίζονται παρακάτω]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "Έντυπη αναφορά: %s [Συμπεριλαμβάνονται παρακάμψεις όπως ορίζεται παρακάτω]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "Ροές"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "Εφαρμογή φίλτρου"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "Διαγραφή φίλτρου"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "Πόσο συχνά δημιουργείτε ένα νέο αρχείο ροής."
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "Νέο"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "Επεξεργασία τρέχοντος φίλτρου"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "Αποθήκευση Ως"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "Μετονομασία"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "Μετονομασία του φίλτρου ροής"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "Αναφορά"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "Στατιστικές: %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "Εκτύπωση: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "Γραμμές"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "Εξαίρεση"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "Κορυφή Δείγμα"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "Κορυφαία δείγματα %d"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "Οκτάδες"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "Εμφάνιση μόνο τομέων στους παρακάτω πίνακες"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "Μόνο τομείς"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "Χρόνος"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "Προσαρμογή"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "Από"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "Προς"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "Επιλογή ημερομηνίας λήξης"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "Shift Time προς τα πίσω"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "Ορίστε το διάστημα αλλαγής"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "Shift Time Forward"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "Γραφικό Σχήμα"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "Ραβδόγραμμα"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "Πίτα"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "Δεντροχάρτης"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "Ύψος"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "Εμφάνιση/απόκρυψη adminbar χρήστη"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "Πίνακας"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "Αναφορά"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "Φίλτρο"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "Νέο Όνομα"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "Εκτύπωση αναφορών"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "Για να διαγράψετε αυτό το φίλτρο ροής, πατήστε Συνέχεια.  Εάν το φίλτρο ροής χρησιμοποιείται σε μια προγραμματισμένη αναφορά, η λειτουργία θα αποκλειστεί."
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "Γράφημα διανομής Top %s των byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "Επάνω %s γράφημα πίτας byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "Κορυφή %s γράφημα Treemap των bytes"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "Top %s διάγραμμα διανομής πακέτων"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "Top %s γράφημα πίτας πακέτων"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "Top %s Treemap Γράφημα Πακέτων"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "Γράφημα διανομής ροών Top %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "Επάνω %s γράφημα πίτας ροών"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "Επάνω %s γράφημα ροών Treemap"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "Μετονομασία διάταξης"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr " <new>"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "Οι ρυθμίσεις φίλτρου αποθηκεύτηκαν"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "Πελάτης / Ιδιωτικός (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "Άγνωστο (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Φίλτρο υποδικτύου: Το %s δεν έχει μορφή CIDR αξίας"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "Φίλτρο υποδικτύου: Το %s δεν έχει μορφή CIDR αξίας"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "δεν επίλυσε"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d bytes"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d Bytes"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "Πηγή AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "Πηγή AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "Dest Port"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "Ρίζα DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "Dest Port"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "Dest Prefix"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "Τύπος υπηρεσίας"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "Πακέτα"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "Έληξε το χρονικό όριο του παράλληλου ερωτήματος.  Επικοινωνήστε με το διαχειριστή σας"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "Boolean: %s, Αριθμητικό: %s, Hex: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "Χαμηλή καθυστέρηση"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "Διακίνηση"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "Αξιοπιστία"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "Ελάχιστο κόστος"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "Καθαρός έλεγχος"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "Έλεγχος Διαδικτύου"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "Κρίσιμο ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "Παράκαμψη Flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "Φλας"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "Άμεση"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "Προτεραιότητα"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "Ρουτίνα"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "Συνοπτική Στατιστική"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Κατανομή μεγέθους πακέτου IP (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Πακέτα ανά διανομή ροής (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Οκτάδες ανά κατανομή ροής (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Κατανομή χρόνου ροής (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Πρέπει να επιλέξετε μια αναφορά στατιστικών στοιχείων ή μια τυπωμένη αναφορά!"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Πρέπει να επιλέξετε μόνο μια αναφορά στατιστικών στοιχείων ή μια τυπωμένη αναφορά (όχι και τις δύο)!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Μη έγκυρες ημερομηνίες, η ημερομηνία / ώρα λήξης είναι νωρίτερα από την ημερομηνία / ώρα έναρξης!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Μη έγκυρη διεύθυνση IP για τη διεύθυνση προέλευσης! <br> (Πρέπει να έχει τη μορφή '192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Μη έγκυρο υποδίκτυο για τη διεύθυνση προέλευσης! <br> (Πρέπει να έχει τη μορφή '192.168.0.1/255.255.255.0' ή '192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Μη έγκυρη διεύθυνση IP για τη διεύθυνση προορισμού! <br> (Πρέπει να έχει τη μορφή '192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Μη έγκυρο υποδίκτυο για τη διεύθυνση προορισμού! <br> (Πρέπει να έχει τη μορφή '192.168.0.1/255.255.255.0' ή '192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "Μη έγκυρη τιμή για τη διασύνδεση προέλευσης!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Μη έγκυρη τιμή για τη θύρα προέλευσης! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Μη έγκυρη τιμή για την προέλευση AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "Μη έγκυρη τιμή για τη διεπαφή προορισμού!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Μη έγκυρη τιμή για τη θύρα προορισμού! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Μη έγκυρη τιμή για τον προορισμό AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Μη έγκυρη τιμή για το πρωτόκολλο! (1 - 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Μη έγκυρη τιμή για την επισήμανση TCP! (πρώην: 0x1b ή 0x1b / SA ή SA / SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Μη έγκυρη τιμή για τα Octets Cutoff!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Μη έγκυρη τιμή για τις γραμμές Cutoff!"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "Ο χάρτης FlowView για τον τύπο %s είναι %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "Υποστηρίζεται"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "Δεν υποστηρίζεται"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria (Γρήγορη, ασφαλής σύγκρουση)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (Γρήγορη, ασφαλής σύγκρουση)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (αργή, υψηλή ταυτοχρονισμός)"
 
