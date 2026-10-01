@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2026-09-12 08:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\n"
@@ -17,657 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.11.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "Skriv ut rapporter"
-
-#: arrays.php
-msgid "Summary"
-msgstr "Sammanfattning"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "Källa eller destination IP"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "Destination IP"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "Källa / Destination IP"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "UDP / TCP-destinationsporten"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "UDP / TCP Source Port"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "UDP / TCP-port"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "Källa IP"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "Destination IP"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "Källa / Destination IP"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "Källa eller destination IP"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "IP-protokoll"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "Ingång Gränssnitt"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "Utgång Gränssnitt"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "Ingång / utgång Gränssnitt"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "Ingen källa"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "Destination"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "Källa / Destination AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP ToS"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "Källprefix"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "Destination Prefix"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "Källa / Destination Prefix"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "Flowtider"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "Källa / Destination IP"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "Nummer"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 kolumner"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "Visa emulering av IP-redovisning"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "Varje del inom räckvidden"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "Sluttid"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "Starttid"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "Helt inom räckvidd"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "Returnera alla rader"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "Överst %d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "Ingen gräns"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s GBytes"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "Alla"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "Källport (er)"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "Flöden"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "Byte"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "Paket"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "Destination IP"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "Port"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "Källport (er)"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "Destination IP"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "Dest IP"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "IP adress"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "Protokoll"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "Ingen källa"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "Destination"
-
-#: arrays.php
-msgid "TOS"
-msgstr "Villkor"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "Destination Prefix"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "N/A"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "Starttid"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "Sluttid"
-
-#: arrays.php
-msgid "Active"
-msgstr "Aktiv"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "B / Pk"
-
-#: arrays.php
-msgid "Ts"
-msgstr "Ts"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "Flaggor"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "Källa"
-
-#: arrays.php
-msgid "Destination"
-msgstr "Destination"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d bildpunkter"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "Allmänna filter"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "Filtrera"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "Det sparade filtret som ska visas."
-
-#: arrays.php
-msgid "New Filter"
-msgstr "Filtrera"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "Lyssnare"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "Lyssnaren som ska användas för filtret."
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "Mall ID"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "Flödesmall-ID endast för v9- och IPFIX-flöden.  Observera att mall-ID:n kan skilja sig från tillverkare till tillverkare."
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "IP adress"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "Strömmens IP-adress eller värdnamn från listan över registrerade strömmar."
-
-#: arrays.php
-msgid "Presets"
-msgstr "Förval"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "Om detta filter är baserat på en fördefinierad tidsperiod, välj det här."
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "Detaljerade filterkriterier"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "Typ av rapport"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "Den rapporttyp som ska användas som standard för det här filtret när du skapar en rapport."
-
-#: arrays.php
-msgid "Printed"
-msgstr "Utskriven"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "Statistik"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "Statistikrapporter"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "Den rapporttyp som visas som standard för detta filter när du skapar en rapport."
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "Skriv ut rapporter"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "Den utskrivna rapporttypen som standard används för detta filter när du skapar en utskriven rapport."
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "Hantera scheman"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "Begränsa filterdata efter dessa tidsfilterregler."
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "Slå upp IP"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "Slå upp IP-adresser till domännamn."
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "Ja"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "Nej"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "Sorteringsfält"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Standardsorteringsfältet för filtret. Denna inställning kommer att tillämpas för alla schemalagda rapporter."
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "Max antal rader"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Maximala rader som ska anges i filtret. Denna inställning kommer att tillämpas för alla schemalagda rapporter."
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "Minsta byte"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "Minsta totala byte som ska beaktas för filtret. Alla flödessummor som är mindre än så många byte ignoreras."
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "Alternativ för diagram"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "Typ av diagram"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "Den diagramtyp som ska visas som standard.  De inkluderar Bar, Pie och Treemap."
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "Stapeldiagram"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "Cirkeldiagram"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "Träddiagram"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "Grafhöjd"
-
-#: arrays.php
-msgid "The Graph Height to use by default."
-msgstr "Den diagramhöjd som ska användas som standard."
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "Tabell"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "Ska tabellpanelen visas som standard."
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "Bytes Bar"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "Ska panelen Byte visas som standard."
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "Packets Bar"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "Ska paketpanelen visas som standard."
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "Flöden Bar"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "Ska flödespanelen visas som standard."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "Protokoll"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "Protokoll"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "Välj det specifika protokollet för filtret."
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "TCP-flaggor"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "TCP-flaggorna att söka efter i filtret. Detta kan vara en kommaavgränsad lista över TCP-flaggor"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "TOS-fält"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "TOS-fälten att söka efter i filtret. Detta kan vara en kommaavgränsad lista över TOS-fält"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrera på den valda käll-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "Källport (er)"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "Filtrera på de valda källportarna för i filtret. Detta kan vara en kommaavgränsad lista över källportar."
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "Källans gränssnitt"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "Filtrera på det valda källgränssnittet för i filtret. Detta kan vara en kommaseparerad lista över källgränssnitt"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "Filtrera på den valda destinationen AS för i filtret. Detta kan vara en kommaavgränsad lista över Source AS"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrera på den valda mål-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "Dest Port"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "Filtrera på de valda destinationsportarna för i filtret. Detta kan vara en kommaavgränsad lista över Destimation Ports."
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "Dest-gränssnittet"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "Filtrera på det valda destinationsgränssnittet för i filtret. Detta kan vara en kommaavgränsad lista över Destimation-gränssnitt."
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "Dest AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "Filtrera på den valda destinationen AS för i filtret. Detta kan vara en kommaavgränsad lista över Destimation AS"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "Källa IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrera på den valda käll-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "UDP / TCP Source Port"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrera på de valda källportarna för i filtret. Detta kan vara en kommaavgränsad lista över källportar."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "Dest IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrera på den valda mål-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "Dest Port"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrera på de valda destinationsportarna för i filtret. Detta kan vara en kommaavgränsad lista över Destimation Ports."
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "DNS-cache"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/Rutter"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "Nummer"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "AS-block"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "AS-uppsättningar"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "Uppsättningar av rutter"
-
-#: arrays.php
-msgid "Domains"
-msgstr "Domäner"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "Filtret sparat"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "Peering-uppsättningar"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "Nätverk"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "Internetkontroll"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "Team för incidenthantering"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "Auth-agenter"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "Organisationer"
-
-#: arrays.php
-msgid "Roles"
-msgstr "Roller"
-
-#: arrays.php
-msgid "Persons"
-msgstr "Personer"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -692,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "Flödesfiltret \"%s\" har tagits bort."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -744,6 +93,10 @@ msgstr "Filtret sparat"
 msgid "Peering Set"
 msgstr "Peering-uppsättningar"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Nätverk"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "Internetkontroll"
@@ -779,6 +132,10 @@ msgstr "Anmärkningar"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "Senast ändrad"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Källa"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -916,7 +273,7 @@ msgstr "Åberopa"
 msgid "MP Peering"
 msgstr "MP-peering"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "Exportera"
 
@@ -991,6 +348,10 @@ msgstr "DS Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Aggr-gräns"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Filtrera"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1119,7 +480,7 @@ msgid "Default"
 msgstr "Standard"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "Utför"
 
@@ -1129,7 +490,7 @@ msgid "Set/Refresh Filters"
 msgstr "Ange / Uppdatera filter"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "Rensa"
 
@@ -1157,12 +518,12 @@ msgstr[0] "Klicka på \"Fortsätt\" för att ta bort följande DNS-cachepost."
 msgstr[1] "Klicka på \"Fortsätt\" för att ta bort alla följande DNS-cacheposter."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "Avbryt"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "Fortsätt"
 
@@ -1187,6 +548,10 @@ msgstr "Obekräftad"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "Rensa"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP adress"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1340,9 +705,17 @@ msgstr "Tillåtet värdintervall"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr "IP-adress för den enhet som får skicka till denna flödessamlare.  Lämna som 0.0.0.0 för alla värdar.  Observera att PHP är petig med vad den tillåter.  CIDR-syntax stöds såväl som intervallsyntax, till exempel 192.168.1.0 eller 192.168.1.0/24.  Om du vill ha specifika IP-adresser, separera dem med ett kommatecken."
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Port"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "Port den här samlaren lyssnar på."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Protokoll"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1406,7 +779,7 @@ msgstr "Namn"
 msgid "Version"
 msgstr "Version"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "Mallar"
 
@@ -1430,6 +803,11 @@ msgstr "Lyssnare identifierade mallar"
 msgid "Ex Addr"
 msgstr "Ex Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "Alla"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "Mall"
@@ -1442,7 +820,7 @@ msgstr "Mall ID"
 msgid "Field Name"
 msgstr "Fältnamn"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "Stödd"
 
@@ -1522,13 +900,17 @@ msgstr "De trafikflödesversioner som observeras."
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Den maximala uppdateringstiden från alla strömmar som samlas in.  Det här värdet uppdateras var 5:e minut."
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "inget"
 
 #: flowview_devices.php
 msgid "No Connections"
 msgstr "Inga anslutningar"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "N/A"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1570,9 +952,21 @@ msgstr "Filter"
 msgid "Filter Name"
 msgstr "Filternamn"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "Lyssnare"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Typ av rapport"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Sorteringsfält"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1806,7 +1200,7 @@ msgstr "Schemalagd"
 msgid "%s Seconds"
 msgstr "%s sekunder"
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "Startdatumsväljare"
 
@@ -1838,587 +1232,1194 @@ msgstr "E-post/Lista"
 msgid "Logged Sends"
 msgstr "Loggade sändningar"
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Nej"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Ja"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Skriv ut rapporter"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Sammanfattning"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Källa eller destination IP"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Destination IP"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Källa / Destination IP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP / TCP-destinationsporten"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP / TCP Source Port"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP / TCP-port"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Källa IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Destination IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Källa / Destination IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Källa eller destination IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP-protokoll"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Ingång Gränssnitt"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Utgång Gränssnitt"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Ingång / utgång Gränssnitt"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Ingen källa"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Destination"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Källa / Destination AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Källprefix"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Destination Prefix"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Källa / Destination Prefix"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Flowtider"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Källa / Destination IP"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Nummer"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 kolumner"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Visa emulering av IP-redovisning"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Varje del inom räckvidden"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Sluttid"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Starttid"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Helt inom räckvidd"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Returnera alla rader"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Överst %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Ingen gräns"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s GBytes"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Källport (er)"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Flöden"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Byte"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Paket"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Destination IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Källport (er)"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Destination IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Dest IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Ingen källa"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Destination"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "Villkor"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Destination Prefix"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Starttid"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Sluttid"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Aktiv"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B / Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Flaggor"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Destination"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d bildpunkter"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Allmänna filter"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Det sparade filtret som ska visas."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Filtrera"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Lyssnaren som ska användas för filtret."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "Mall ID"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "Flödesmall-ID endast för v9- och IPFIX-flöden.  Observera att mall-ID:n kan skilja sig från tillverkare till tillverkare."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "IP adress"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Strömmens IP-adress eller värdnamn från listan över registrerade strömmar."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Förval"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Om detta filter är baserat på en fördefinierad tidsperiod, välj det här."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Detaljerade filterkriterier"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Den rapporttyp som ska användas som standard för det här filtret när du skapar en rapport."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Utskriven"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Statistik"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Statistikrapporter"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Den rapporttyp som visas som standard för detta filter när du skapar en rapport."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Skriv ut rapporter"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Den utskrivna rapporttypen som standard används för detta filter när du skapar en utskriven rapport."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Hantera scheman"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Begränsa filterdata efter dessa tidsfilterregler."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Slå upp IP"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Slå upp IP-adresser till domännamn."
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Standardsorteringsfältet för filtret. Denna inställning kommer att tillämpas för alla schemalagda rapporter."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Max antal rader"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Maximala rader som ska anges i filtret. Denna inställning kommer att tillämpas för alla schemalagda rapporter."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Minsta byte"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Minsta totala byte som ska beaktas för filtret. Alla flödessummor som är mindre än så många byte ignoreras."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Alternativ för diagram"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Typ av diagram"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Den diagramtyp som ska visas som standard.  De inkluderar Bar, Pie och Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Stapeldiagram"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Cirkeldiagram"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Träddiagram"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Grafhöjd"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "Den diagramhöjd som ska användas som standard."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Tabell"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Ska tabellpanelen visas som standard."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Bytes Bar"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Ska panelen Byte visas som standard."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Packets Bar"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Ska paketpanelen visas som standard."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Flöden Bar"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Ska flödespanelen visas som standard."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Protokoll"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Protokoll"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Välj det specifika protokollet för filtret."
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP-flaggor"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "TCP-flaggorna att söka efter i filtret. Detta kan vara en kommaavgränsad lista över TCP-flaggor"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "TOS-fält"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "TOS-fälten att söka efter i filtret. Detta kan vara en kommaavgränsad lista över TOS-fält"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrera på den valda käll-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Källport (er)"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Filtrera på de valda källportarna för i filtret. Detta kan vara en kommaavgränsad lista över källportar."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Källans gränssnitt"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Filtrera på det valda källgränssnittet för i filtret. Detta kan vara en kommaseparerad lista över källgränssnitt"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Filtrera på den valda destinationen AS för i filtret. Detta kan vara en kommaavgränsad lista över Source AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrera på den valda mål-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Dest Port"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Filtrera på de valda destinationsportarna för i filtret. Detta kan vara en kommaavgränsad lista över Destimation Ports."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Dest-gränssnittet"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Filtrera på det valda destinationsgränssnittet för i filtret. Detta kan vara en kommaavgränsad lista över Destimation-gränssnitt."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Dest AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Filtrera på den valda destinationen AS för i filtret. Detta kan vara en kommaavgränsad lista över Destimation AS"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "Källa IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrera på den valda käll-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "UDP / TCP Source Port"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrera på de valda källportarna för i filtret. Detta kan vara en kommaavgränsad lista över källportar."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "Dest IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrera på den valda mål-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "Dest Port"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrera på de valda destinationsportarna för i filtret. Detta kan vara en kommaavgränsad lista över Destimation Ports."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS-cache"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Rutter"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Nummer"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS-block"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS-uppsättningar"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Uppsättningar av rutter"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Domäner"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Filtret sparat"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Peering-uppsättningar"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Internetkontroll"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Team för incidenthantering"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Auth-agenter"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Organisationer"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Roller"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Personer"
+
+#: includes/functions-pre13.php
 #, php-format
 msgid "Cacti %s"
 msgstr "Cacti %s"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr "Rapporten '%s' från källa %s med id %s är schemalagd att köras!"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr "Rapporten '%s' från källa %s med id %s var inte schemalagd att köras på grund av ett fel!"
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "Allmän"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr "Loggar"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "Rapportera: [redigera: %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "Rapportera: [ny]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Odefinierat filter [Välj filter för att få detaljer]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "Statistisk rapport: %s [Inkluderar åsidosättningar som anges nedan]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "Tryckt rapport: %s [Inkluderar åsidosättningar som anges nedan]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Stream"
 msgstr "Ström"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Stream Host"
 msgstr "Välj en streamvärd"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "Använd filter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "Rensa filter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "Skapa nytt flödesfilter"
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "Ny"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "Redigera"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "Redigera nuvarande filter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "Spara"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "Spara"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "Byt namn"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "Byt namn på flödesfiltret"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "Rapportera"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "Statistik: %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "Tryckt: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "Linjer"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "Exkludera"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "Toppprov"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "Topp %d exempel"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "Oktetter"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "Visa endast domäner i diagram nedan"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "Endast domäner"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "Tidsspann"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "Anpassad"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "Från"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "Till"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "Slutdatumväljare"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "Växla tiden bakåt"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "Definiera växlingsintervall"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "Växla tiden framåt"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "Diagram"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "Bar"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "Cirkel"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "Trädkarta"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "Höjd"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "Visa/dölj"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "Tabell"
 
-#: functions.php
+#: includes/functions.php
 msgid "Export Raw Data"
 msgstr "Exportera rådata"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "Filtrera"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "Fältnamn"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "Skriv ut rapporter"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "För att ta bort detta flödesfilter, tryck på Fortsätt.  Om flödesfiltret används i en schemalagd rapport kommer operationen att blockeras."
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "Diagram över de %s främsta fördelningsdiagrammet över byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "Översta %s cirkeldiagram över byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "Översta %s trädkartediagram över byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "Topp %s distributionsdiagram över paket"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "Topp %s cirkeldiagram över paket"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "Topp %s Treemap-diagram över paket"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "Topp %s distributionsdiagram över flöden"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "Topp %s cirkeldiagram över flöden"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "Översta %s trädkartediagram över flöden"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "Byt namn på layout"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr " <ny>"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "Filtreringsinställningar sparade"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "Kund / privat (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "Okänt (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Undernätfilter: %s är inte ett värde-CIDR-format"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "Undernätfilter: %s är inte ett värde-CIDR-format"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "olöst"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d – %d byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d byte"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr "Statistikrapporten %s är inte känd.  Öppna en felrapport på GitHub"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr "Den utskrivna rapporten %s är inte känd.  Öppna en felrapport på GitHub"
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr "Ingen giltig rapport valdes.  Öppna en felrapport på GitHub"
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "Datakälla"
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "Datakälla"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "Dest Port"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "Root DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "Dest Port"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "Dest Prefix"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "Typ av service"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "Byte/Paket"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "Tidsgränsen för den parallella frågan överskreds.  Kontakta din administratör"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "Boolean: %s, numerisk: %s, hex: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "Låg fördröjning"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "Genomströmning"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "Pålitlighet (Reliability)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "Mincost"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "Nettokontroll"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "Internetkontroll"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "Kritiker ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "Åsidosättning av blixt"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "Flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "Omedelbart"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "Prioritet"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "Rutin"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "Sammanfattande statistik"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Distribution av IP-paketstorlek (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Paket per flödesfördelning (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Oktetter per flödesfördelning (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Fördelning av flödestid (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Du måste välja en statistikrapport eller tryckt rapport!"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Du måste bara välja en statistikrapport eller en tryckt rapport (inte båda)!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Ogiltiga datum, Slutdatum / Tid är tidigare än Startdatum / Tid!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Ogiltig IP för källadressen! <br> (Måste vara i form av \"192.168.0.1\")"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Ogiltigt delnät för källadressen! <br> (Måste vara i form av \"192.168.0.1/255.255.255.0\" eller \"192.168.0.1/24\")"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Ogiltig IP för destinationsadressen! <br> (Måste vara i form av \"192.168.0.1\")"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Ogiltigt delnät för destinationsadressen! <br> (Måste vara i form av \"192.168.0.1/255.255.255.0\" eller \"192.168.0.1/24\")"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "Ogiltigt värde för källgränssnittet!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Ogiltigt värde för Source Port! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Ogiltigt värde för Source AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "Ogiltigt värde för destinationsgränssnittet!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Ogiltigt värde för destinationsporten! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Ogiltigt värde för Destination AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Ogiltigt värde för protokoll! (1- 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Ogiltigt värde för TCP Flagga! (ex: 0x1b eller 0x1b / SA eller SA / SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Ogiltigt värde för Cutoff Octets!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Ogiltigt värde för Cutoff Lines!"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "FlowView Diagram för %s Typ är %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "Stödd"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "Stöds inte"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "MyISAM (snabb, icke-kraschsäker)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (snabb, krocksäker)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (långsam, hög samtidighet)"
 
