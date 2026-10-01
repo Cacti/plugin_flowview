@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:23-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? 2 : 3);\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "הדפס דוחות"
-
-#: arrays.php
-msgid "Summary"
-msgstr "סיכום"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "כתובת IP של מקור או יעד"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "כתובת IP יעד"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "כתובת IP של מקור / יעד"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "UDP / נמל יעד TCP"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "UDP / יציאת מקור TCP"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "UDP / יציאת TCP"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "מקור IP"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "כתובת IP יעד"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "כתובת IP של מקור / יעד"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "כתובת IP של מקור או יעד"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "פרוטוקול IP"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "ממשק קלט"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "ממשק פלט"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "ממשק קלט / פלט"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "מקור"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "יעד"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "מקור / יעד AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "קידומת מקור"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "קידומת יעד"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "מקור / יעד קידומת"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "תזרים זרימה"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "כתובת IP של מקור / יעד"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "מספרים"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 עמודות"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "הצג הדמיית חשבונאות IP"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "כל חלק בטווח"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "שעת סיום"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "שעת התחלה"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "לגמרי בטווח"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "החזר את כל השורות"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "למעלה% d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "אין הגבלה"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s בתים"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "הכל"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "מקור דומיין"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "זורם"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "בייטים"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "מנות"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "כתובת IP יעד"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "פורט"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "יציאות מקור (ים)"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "כתובת IP יעד"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "כתובת IP של Dest"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "כתובת IP"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "פרוטוקול"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "מקור"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "יעד"
-
-#: arrays.php
-msgid "TOS"
-msgstr "תנאי שירות"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "קידומת יעד"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "לא זמין"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "זמן התחלה"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "שעת סיום"
-
-#: arrays.php
-msgid "Active"
-msgstr "פעיל"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "B / PK"
-
-#: arrays.php
-msgid "Ts"
-msgstr "Ts"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "דגלים"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "מקור"
-
-#: arrays.php
-msgid "Destination"
-msgstr "יעד"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d פיקסלים"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "מחיקת מסננים"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "סינון"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "המסנן השמור להצגה."
-
-#: arrays.php
-msgid "New Filter"
-msgstr "סינון"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "מקשיב"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "המאזין לשימוש עבור המסנן."
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "מזהה תבנית"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "מזהה תבנית Flow עבור זרימות v9 ו- IPFIX בלבד.  שים לב שמזהי התבנית עשויים להיות שונים מיצרן ליצרן."
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "כתובת IP"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "כתובת ה-IP של הזרם או שם המארח מרשימת הזרמים הרשומים."
-
-#: arrays.php
-msgid "Presets"
-msgstr "קבועים מראש"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "אם מסנן זה מבוסס על זמן מוגדר מראש, בחר אותו כאן."
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "קריטריוני סינון מפורטים"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "סוג דוח"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "סוג הדוח לשימוש כברירת מחדל עבור מסנן זה בעת יצירת דוח."
-
-#: arrays.php
-msgid "Printed"
-msgstr "נדפס:"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "סטטיסטי"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "דו ח סטטיסטי"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "סוג דוח התצוגה לשימוש כברירת מחדל עבור מסנן זה בעת יצירת דוח."
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "הדפס דוחות"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "סוג הדוח המודפס לשימוש כברירת מחדל עבור מסנן זה בעת יצירת דוח מודפס."
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "ניהול לוחות זמנים"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "הגבל את נתוני הסינון לפי כללי סינון הזמן הללו."
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "פתרון כתובות:"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "פתרון כתובות:"
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "כן"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "לא"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "שדה מיון"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "שדה המיון המוגדר כברירת מחדל עבור המסנן. הגדרה זו תחול על כל הדוחות המתוזמנים."
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "מקסימום שורות"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "שורות מקסימום לספק במסנן. הגדרה זו תחול על כל הדוחות המתוזמנים."
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "בתים מינימליים:"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "סה\"כ הבתים המינימליים שיש לקחת בחשבון עבור המסנן. יתעלם מכל סכומי הזרימה שהם פחות מביתים רבים."
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "אפשרויות יצירת תרשימים"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "סוג גרף סטטיסטיקה"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "סוג התרשים שיוצג כברירת מחדל.  הם כוללים בר, פאי ומפת עצים."
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "תרשים עמודות"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "דיאגרמת עוגה"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "תרשים מפת עץ"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "גובה גרף"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "רמת הגרף לשימוש כברירת מחדל."
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "טבלה"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "יש להציג את החלונית Table כברירת מחדל."
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "סרגל בתים"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "יש להציג את החלונית בתים כברירת מחדל."
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "בר Packets"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "יש להציג את החלונית Packets כברירת מחדל."
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "תזרים בר"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "יש להציג את החלונית Flows כברירת מחדל."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "פרוטוקולים"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "פרוטוקולים"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "בחר את הפרוטוקול הספציפי עבור המסנן."
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "דגלי TCP"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "דגלי TCP לחיפוש במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של דגלי TCP"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "שדות TOS"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "שדות ה- TOS לחיפוש במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של שדות TOS"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "סנן ב- IP המקור הנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "יציאות מקור (ים)"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "סנן ביציאות המקור שנבחרו במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות מקור."
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "ממשק המקור"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "סנן בממשק המקור הנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של ממשקי מקור"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "סנן לפי היעד AS שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של מקורות AS"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "סנן ב- IP היעד שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "נמל דסט"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "סנן ביציאת היעד שבחרת במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות Destimation."
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "ממשק Dest"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "סנן בממשק היעד שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של ממשקי Destimation."
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "Dest AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "סנן לפי היעד AS שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של Destimation AS"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "מקור IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "סנן ב- IP המקור הנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "UDP / יציאת מקור TCP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "סנן ביציאות המקור שנבחרו במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות מקור."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "כתובת IP של Dest"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "סנן ב- IP היעד שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "נמל דסט"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "סנן ביציאת היעד שבחרת במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות Destimation."
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "מטמון DNS"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/מסלולים"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "מספרים"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "כבלוקים"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "ערכות AS"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "ערכות מסלולים"
-
-#: arrays.php
-msgid "Domains"
-msgstr "שמות מתחם"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "המסנן נשמר"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "ערכות עמיתים"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "רשת"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "בקרת אינטרנט"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "צוותי תגובה לאירועים"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "סוכני Auth"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "ארגונים"
-
-#: arrays.php
-msgid "Roles"
-msgstr "תפקידים "
-
-#: arrays.php
-msgid "Persons"
-msgstr "אנשים"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "מסנן זרימה '%s' נמחק."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "מחק"
 
@@ -746,6 +94,10 @@ msgstr "המסנן נשמר"
 msgid "Peering Set"
 msgstr "ערכות עמיתים"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "רשת"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "בקרת אינטרנט"
@@ -781,6 +133,10 @@ msgstr "הערות"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "תאריך שינוי"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "מקור"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "עיין ב"
 msgid "MP Peering"
 msgstr "MP Peering"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "ייצא"
 
@@ -993,6 +349,10 @@ msgstr "DS Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "גבול Aggr"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "סינון"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "ברירת מחדל"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "עבור"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "הגדר / רענן מסננים"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "נקה"
 
@@ -1163,12 +523,12 @@ msgstr[2] ""
 msgstr[3] ""
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "ביטול"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "המשך"
 
@@ -1195,6 +555,10 @@ msgstr "לא מאומת"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "מחק"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "כתובת IP"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1350,9 +714,17 @@ msgstr "מארח מורשה"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "פורט"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "נמל אספן זה יקשיב."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "פרוטוקול"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1419,7 +791,7 @@ msgstr "שם"
 msgid "Version"
 msgstr "גרסה"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "תבניות"
 
@@ -1443,6 +815,11 @@ msgstr "תבניות שזוהו על ידי מאזין"
 msgid "Ex Addr"
 msgstr "אקס אדר"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "הכל"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "תבנית"
@@ -1455,7 +832,7 @@ msgstr "מזהה תבנית"
 msgid "Field Name"
 msgstr "שדה שם"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "נתמך"
 
@@ -1536,7 +913,7 @@ msgstr "גרסאות זרימת התנועה הנצפות."
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "זמן העדכון המרבי מכל הזרמים שנאספים.  ערך זה מתעדכן כל 5 דקות."
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "ללא"
 
@@ -1544,6 +921,10 @@ msgstr "ללא"
 #, fuzzy
 msgid "No Connections"
 msgstr "סיבוב"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "לא זמין"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1585,9 +966,21 @@ msgstr "מסננים"
 msgid "Filter Name"
 msgstr "שם הסינון"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "מקשיב"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "סוג דוח"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "מזהה"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "שדה מיון"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1832,7 +1225,7 @@ msgstr "תזמונים"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "בורר תאריך התחלה"
 
@@ -1865,591 +1258,1199 @@ msgstr "אימייל"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "לא"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "כן"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "הדפס דוחות"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "סיכום"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "כתובת IP של מקור או יעד"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "כתובת IP יעד"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "כתובת IP של מקור / יעד"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP / נמל יעד TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP / יציאת מקור TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP / יציאת TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "מקור IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "כתובת IP יעד"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "כתובת IP של מקור / יעד"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "כתובת IP של מקור או יעד"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "פרוטוקול IP"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "ממשק קלט"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "ממשק פלט"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "ממשק קלט / פלט"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "מקור"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "יעד"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "מקור / יעד AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "קידומת מקור"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "קידומת יעד"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "מקור / יעד קידומת"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "תזרים זרימה"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "כתובת IP של מקור / יעד"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "מספרים"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 עמודות"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "הצג הדמיית חשבונאות IP"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "כל חלק בטווח"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "שעת סיום"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "שעת התחלה"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "לגמרי בטווח"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "החזר את כל השורות"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "למעלה% d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "אין הגבלה"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s בתים"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "מקור דומיין"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "זורם"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "בייטים"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "מנות"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "כתובת IP יעד"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "יציאות מקור (ים)"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "כתובת IP יעד"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "כתובת IP של Dest"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "מקור"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "יעד"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "תנאי שירות"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "קידומת יעד"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "זמן התחלה"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "שעת סיום"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "פעיל"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B / PK"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "דגלים"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "יעד"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d פיקסלים"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "מחיקת מסננים"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "המסנן השמור להצגה."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "סינון"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "המאזין לשימוש עבור המסנן."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "מזהה תבנית"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "מזהה תבנית Flow עבור זרימות v9 ו- IPFIX בלבד.  שים לב שמזהי התבנית עשויים להיות שונים מיצרן ליצרן."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "כתובת IP"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "כתובת ה-IP של הזרם או שם המארח מרשימת הזרמים הרשומים."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "קבועים מראש"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "אם מסנן זה מבוסס על זמן מוגדר מראש, בחר אותו כאן."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "קריטריוני סינון מפורטים"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "סוג הדוח לשימוש כברירת מחדל עבור מסנן זה בעת יצירת דוח."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "נדפס:"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "סטטיסטי"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "דו ח סטטיסטי"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "סוג דוח התצוגה לשימוש כברירת מחדל עבור מסנן זה בעת יצירת דוח."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "הדפס דוחות"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "סוג הדוח המודפס לשימוש כברירת מחדל עבור מסנן זה בעת יצירת דוח מודפס."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "ניהול לוחות זמנים"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "הגבל את נתוני הסינון לפי כללי סינון הזמן הללו."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "פתרון כתובות:"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "פתרון כתובות:"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "שדה המיון המוגדר כברירת מחדל עבור המסנן. הגדרה זו תחול על כל הדוחות המתוזמנים."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "מקסימום שורות"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "שורות מקסימום לספק במסנן. הגדרה זו תחול על כל הדוחות המתוזמנים."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "בתים מינימליים:"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "סה\"כ הבתים המינימליים שיש לקחת בחשבון עבור המסנן. יתעלם מכל סכומי הזרימה שהם פחות מביתים רבים."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "אפשרויות יצירת תרשימים"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "סוג גרף סטטיסטיקה"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "סוג התרשים שיוצג כברירת מחדל.  הם כוללים בר, פאי ומפת עצים."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "תרשים עמודות"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "דיאגרמת עוגה"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "תרשים מפת עץ"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "גובה גרף"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "רמת הגרף לשימוש כברירת מחדל."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "טבלה"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "יש להציג את החלונית Table כברירת מחדל."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "סרגל בתים"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "יש להציג את החלונית בתים כברירת מחדל."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "בר Packets"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "יש להציג את החלונית Packets כברירת מחדל."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "תזרים בר"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "יש להציג את החלונית Flows כברירת מחדל."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "פרוטוקולים"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "פרוטוקולים"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "בחר את הפרוטוקול הספציפי עבור המסנן."
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "דגלי TCP"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "דגלי TCP לחיפוש במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של דגלי TCP"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "שדות TOS"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "שדות ה- TOS לחיפוש במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של שדות TOS"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "סנן ב- IP המקור הנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "יציאות מקור (ים)"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "סנן ביציאות המקור שנבחרו במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות מקור."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "ממשק המקור"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "סנן בממשק המקור הנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של ממשקי מקור"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "סנן לפי היעד AS שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של מקורות AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "סנן ב- IP היעד שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "נמל דסט"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "סנן ביציאת היעד שבחרת במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות Destimation."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "ממשק Dest"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "סנן בממשק היעד שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של ממשקי Destimation."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Dest AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "סנן לפי היעד AS שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של Destimation AS"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "מקור IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "סנן ב- IP המקור הנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "UDP / יציאת מקור TCP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "סנן ביציאות המקור שנבחרו במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות מקור."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "כתובת IP של Dest"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "סנן ב- IP היעד שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "נמל דסט"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "סנן ביציאת היעד שבחרת במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות Destimation."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "מטמון DNS"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/מסלולים"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "מספרים"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "כבלוקים"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "ערכות AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "ערכות מסלולים"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "שמות מתחם"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "המסנן נשמר"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "ערכות עמיתים"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "בקרת אינטרנט"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "צוותי תגובה לאירועים"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "סוכני Auth"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "ארגונים"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "תפקידים "
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "אנשים"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "צבריים"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "כללי"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "דוח: [עריכה: %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "דוח: [חדש]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "מסנן לא מוגדר [בחר מסנן לקבלת פרטים]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "דוח סטטיסטי: %s [כולל עקיפות כמפורט להלן]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "דוח מודפס: %s [כולל עקיפות כמפורט להלן]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "זרמים"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "הצג תוצאות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "איפוס סינון"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "כמה פעמים ליצור קובץ זרימה חדש."
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "חדש"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "ערוך"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "ערוך את המסנן הנוכחי"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "שמור"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "שמירה בשם"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "שינוי שם"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "שינוי שם מסנן הזרימה"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "דו\"ח"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "סטטיסטי: %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "נדפס: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "שורות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "לא לכלול"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "מדגם ראשון"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "%d הדוגמאות המובילות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "שמיניות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "הצג רק תחומים בתרשימים למטה"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "תחומים בלבד"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "זמן"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "מותאם אישית"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "מ"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "אל"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "סיים את בורר התאריכים"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "משמרת זמן לאחור"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "הגדר מרווח מעבר"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "משמרת זמן קדימה"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "Symbol for file attachment annotations"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "עמוד"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "עוגה"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "מפת עץ"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "גובה"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "הצג/הסתר"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "טבלה"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "דו\"ח"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "סינון"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "שדה שם"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "הדפס דוחות"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "כדי למחוק מסנן זרימה זה, לחץ על המשך.  אם מסנן הזרימה נמצא בשימוש בדוח מתוזמן, הפעולה תיחסם."
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "Top %s טבלת תפוצה של בתים"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "תרשים עוגה %s העליון של בתים"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "למעלה %s תרשים מפת עץ של בתים"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "טבלת תפוצה של מנות %s המובילות"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "טבלת עוגה %s העליונה של מנות"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "%s העליון תרשים מפת עץ של מנות"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "%s העליון תרשים תפוצה של זרימות"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "%s העליון תרשים עוגה של זרימות"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "%s העליון תרשים זרימות של מפת עץ"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "שינוי שם פריסה"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr " <new>"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "הגדרות סינון נשמרו"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "לקוח / פרטי (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "לא ידועה (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "מסנן רשת משנה: %s אינו פורמט CIDR ערכי"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "מסנן רשת משנה: %s אינו פורמט CIDR ערכי"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "לא פתור"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d בייט"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d בייט"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "מקור AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "מקור AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "נמל דסט"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "שורש DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "נמל דסט"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "קידומת Dest"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "סוג שירות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "מנות"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "הזמן הקצוב לשאילתה המקבילה הסתיים.  פנה למנהל המערכת שלך"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "בוליאני: %s, מספרי: %s, הקס: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "עיכוב נמוך"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "תפוקה"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "מהימנות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "מינקוסט"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "שליטה נטו"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "בקרת אינטרנט"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "ביקורת ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "ביטול פלאש"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "פלאש"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "מיידי"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "עדיפות"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "שגרה"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "סיכום סטטיסטיקות"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "התפלגות גודל מנת IP (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "מנות לכל התפלגות זרימה (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "שמיניות לכל התפלגות זרימה (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "חלוקת זמן זרימה (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "עליך לבחור דוח סטטיסטי או דוח מודפס!"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "עליך לבחור רק דוח סטטיסטי או דוח מודפס (לא שניהם)!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "תאריכים לא חוקיים, תאריך / שעה סיום מוקדם יותר מאשר תאריך התחלה / זמן!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "כתובת IP לא חוקית עבור כתובת המקור! <br> (חייב להיות בצורה של '192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "תת רשת לא חוקית עבור כתובת המקור! <br> (חייב להיות בצורה של '192.168.0.1/255.255.255.0' או '192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "כתובת IP לא חוקית עבור כתובת היעד! <br> (חייב להיות בצורה של '192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "תת רשת לא חוקית עבור כתובת היעד! <br> (חייב להיות בצורה של '192.168.0.1/255.255.255.0' או '192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "ערך לא חוקי עבור ממשק המקור!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "ערך לא חוקי עבור יציאת מקור! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "ערך לא חוקי עבור מקור AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "ערך לא חוקי עבור ממשק היעד!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "ערך לא חוקי עבור נמל יעד! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "ערך לא חוקי עבור יעד AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "ערך לא חוקי עבור פרוטוקול! (1 - 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "ערך לא חוקי עבור TCP דגל! (לדוגמה: 0x1b או 0x1b / SA או SA / SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "ערך לא חוקי עבור אוקטס Cutoff!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "ערך לא חוקי עבור קווי חיתוך!"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "תרשים זרימה עבור סוג %s הוא %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "נתמך"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "לא נתמך"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria (מהיר, בטוח להתרסקות)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (מהיר, בטוח להתרסקות)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (איטי, מקבילי גבוה)"
 
