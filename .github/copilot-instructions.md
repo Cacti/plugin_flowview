@@ -26,29 +26,29 @@ When generating code for this repository:
 ## Project Structure
 
 ```
-flowview/                     # Repository root (install to plugins/flowview/ in Cacti)
-├── maxscale/                  # MariaDB MaxScale integration assets
-├── Net/                        # Vendored IP/network helper classes
-├── service/                     # systemd/service unit assets for flow_collector
-├── themes/                       # CSS theme overlays
-├── arrays.php                     # Configuration arrays
-├── config.php.dist                 # Template for dedicated flowview database config
-├── database.php                     # flowview_db_* wrapper (dual-database support)
-├── flowview.php                      # Main NetFlow viewer UI
-├── flowview_devices.php               # Device/exporter administration
+flowview/                               # Repository root (install to plugins/flowview/ in Cacti)
+├── maxscale/                           # MariaDB MaxScale integration assets
+├── Net/                                # Vendored IP/network helper classes
+├── service/                            # systemd/service unit assets for flow_collector
+├── themes/                             # CSS theme overlays
+├── arrays.php                          # Configuration arrays
+├── config.php.dist                     # Template for dedicated flowview database config
+├── database.php                        # flowview_db_* wrapper (dual-database support)
+├── flowview.php                        # Main NetFlow viewer UI
+├── flowview_devices.php                # Device/exporter administration
 ├── flowview_filters.php                # Saved filter administration
-├── flowview_databases.php               # Database/sharding administration
-├── flowview_schedules.php                # Scheduled report administration
-├── flowview_process.php                   # CLI: parallel query execution / report runner
-├── flowview_cleanup.php                    # CLI: data retention cleanup
-├── flowview_upgrade.php                     # Background schema upgrade runner
-├── flow_collector.php                        # NetFlow v5/v9/v10 collector daemon
-├── functions.php / functions-pre13.php         # Core UI + protocol decode helpers
-├── import_flows.php                             # CLI flow file importer
-├── run_schedule.php                              # CLI scheduled-report executor
-├── INFO                                            # Plugin metadata (name, version, compat)
+├── flowview_databases.php              # Database/sharding administration
+├── flowview_schedules.php              # Scheduled report administration
+├── flowview_process.php                # CLI: parallel query execution / report runner
+├── flowview_cleanup.php                # CLI: data retention cleanup
+├── flowview_upgrade.php                # Background schema upgrade runner
+├── flow_collector.php                  # NetFlow v5/v9/v10 collector daemon
+├── functions.php / functions-pre13.php # Core UI + protocol decode helpers
+├── import_flows.php                    # CLI flow file importer
+├── run_schedule.php                    # CLI scheduled-report executor
+├── INFO                                # Plugin metadata (name, version, compat)
 ├── README.md
-└── setup.php                                        # Plugin install/uninstall/upgrade hooks
+└── setup.php                           # Plugin install/uninstall/upgrade hooks
 ```
 
 ## Naming Conventions
