@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flowview on cacti 1.1.34\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:39-0400\n"
 "Last-Translator: tql <fttx31@126.com>\n"
 "Language-Team: Chinese (Simplified) <http://translate.cacti.net/projects/cacti/flowview/zh_Hans/>\n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "选择报告"
-
-#: arrays.php
-msgid "Summary"
-msgstr "概要"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "源根域"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "目标IP"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "源/目标根域"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "UDP / TCP目标端口"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "UDP / TCP源端口"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "UDP / TCP端口"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "来源IP"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "目标IP"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "源/目标IP"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "源或目标IP"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "IP协议"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "输入接口"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "输出接口"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "输入/输出接口"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "来源AS"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "目标AS"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "来源/目标AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP ToS"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "来源前缀"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "目标前缀"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "来源/目标前缀"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "流动时间"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "源/目标IP"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "AS编号"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132列"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "显示IP计费仿真"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "范围内的任何零件"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "结束时间"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "开始时间"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "整个范围"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "返回所有行"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "靠前的 %d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "没有限制"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s Bytes"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "所有"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "来源域"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "流"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "Bytes"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "包"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "目标IP"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "port"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "源端口"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "目标端口"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "目标IP"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "IP地址"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "协议"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "无来源"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "目标AS"
-
-#: arrays.php
-msgid "TOS"
-msgstr "TOS"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "目标前缀"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "不可用"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "开始时间"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "结束时间"
-
-#: arrays.php
-msgid "Active"
-msgstr "活跃"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "B/Pk"
-
-#: arrays.php
-msgid "Ts"
-msgstr "Ts"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "标志"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "来源"
-
-#: arrays.php
-msgid "Destination"
-msgstr "目的地"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d像素"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "清除过滤"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "过滤"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "显示已保存的过滤器。"
-
-#: arrays.php
-msgid "New Filter"
-msgstr "新的筛选器"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "监听"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "用于过滤器的侦听器。"
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "模板ID"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "仅限 v9 和 IPFIX 流的流模板 ID。 请注意，模板 ID 可能因制造商而异。"
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "IP地址"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "已注册流列表中的流 IP 地址或主机名。"
-
-#: arrays.php
-msgid "Presets"
-msgstr "预置"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "如果此过滤器基于预定义的时间跨度，请在此处选择它。"
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "详细的过滤条件"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "报告类型"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "创建报告时默认用于此筛选器的报告类型。"
-
-#: arrays.php
-msgid "Printed"
-msgstr "打印"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "统计："
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "选择一个统计报告"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "创建报告时默认用于此筛选器的显示报告类型。"
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "您只能选择一份统计报告或一份打印报告（不是两种）！"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "创建打印报告时默认用于此筛选器的打印报告类型。"
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "管理时间表"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "通过这些时间过滤器规则约束过滤器数据。"
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "解析地址："
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "解析地址："
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "是"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "否"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "排序字段："
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "过滤器的默认排序字段。此设置将应用于所有计划的报告。"
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "最大行数"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "过滤器中要提供的最大行数。此设置将应用于所有计划的报告。"
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "最小字节数："
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "过滤器要考虑的最小总字节数。小于此字节总数的任何流总数将被忽略。"
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "图表选项"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "图形类型"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "默认情况下要显示的图形类型。 它们包括 Bar、Pie 和 Treemap。"
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "条形图"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "饼图"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "树状图"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "图形高度"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "默认情况下要使用的 Graph Hight。"
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "表"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "是否应默认显示表格面板。"
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "Bytes Bar"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "是否应默认显示“字节”面板。"
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "Packets Bar"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "默认情况下是否应显示“数据包”面板。"
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "Flows Bar"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "是否应默认显示“流”面板。"
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "协议"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "协议"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "选择过滤器的特定协议。"
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "TCP标志"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "在过滤器中搜索的TCP标志。这可以是TCP标志的逗号分隔列表"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "TOS字段"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "在过滤器中搜索的TOS字段。这可以是逗号分隔的TOS字段列表"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "在筛选器中选择的源IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "源端口"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "在“过滤器”中选择的“源端口”上进行过滤。这可以是逗号分隔的源端口列表。"
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "源接口"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "在过滤器中选择源接口上进行过滤。这可以是源接口的逗号分隔列表"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "在筛选器中选择的目标AS上进行筛选。这可以是逗号分隔的来源AS的列表"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "在筛选器中选择的目标IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "目标端口"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "在筛选器中选择的目标端口上进行筛选。这可以是以逗号分隔的“目标端口”列表。"
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "目标接口"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "在筛选器中选择的目标接口上进行筛选。这可以是Destimation接口的逗号分隔列表。"
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "目标AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "在筛选器中选择的目标AS上进行筛选。这可以是Destimation AS的逗号分隔列表"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "来源IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "在筛选器中选择的源IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "UDP / TCP源端口"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "在“过滤器”中选择的“源端口”上进行过滤。这可以是逗号分隔的源端口列表。"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "目标IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "在筛选器中选择的目标IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "目标端口"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "在筛选器中选择的目标端口上进行筛选。这可以是以逗号分隔的“目标端口”列表。"
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "DNS缓存"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/路由"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "AS编号"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "AS 块"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "AS 集"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "路由集"
-
-#: arrays.php
-msgid "Domains"
-msgstr "域"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "过滤器集"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "对等互连集"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "网络"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "互联网控制"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "事件响应团队"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "身份验证代理"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "组织"
-
-#: arrays.php
-msgid "Roles"
-msgstr "角色"
-
-#: arrays.php
-msgid "Persons"
-msgstr "人数"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "已删除流量过滤器“%s”。"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "删除"
 
@@ -746,6 +94,10 @@ msgstr "过滤器集"
 msgid "Peering Set"
 msgstr "对等互连集"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "网络"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "互联网控制"
@@ -781,6 +133,10 @@ msgstr "备注"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "上一次更改"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "来源"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "指"
 msgid "MP Peering"
 msgstr "MP 对等互连"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "导出"
 
@@ -993,6 +349,10 @@ msgstr "DS Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Aggr 边界"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "过滤"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "默认"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "Go"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "设置/刷新过滤器"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "清除"
 
@@ -1160,12 +520,12 @@ msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
 msgstr[0] "点击“继续”删除下列时间表。"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "取消"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "继续"
 
@@ -1189,6 +549,10 @@ msgstr "未验证"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "清空"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP地址"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1344,9 +708,17 @@ msgstr "允许的主机"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "port"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "这个收集器的端口将监听。"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "协议"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1413,7 +785,7 @@ msgstr "名称"
 msgid "Version"
 msgstr "版本"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "模板"
 
@@ -1437,6 +809,11 @@ msgstr "侦听器检测到的模板"
 msgid "Ex Addr"
 msgstr "Ex Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "所有"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "模板"
@@ -1449,7 +826,7 @@ msgstr "模板ID"
 msgid "Field Name"
 msgstr "字段名称"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "已支持"
 
@@ -1530,7 +907,7 @@ msgstr "正在观察的流量流版本。"
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "从收集的所有流中获取的最长更新时间。 此值每 5 分钟更新一次。"
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "无"
 
@@ -1538,6 +915,10 @@ msgstr "无"
 #, fuzzy
 msgid "No Connections"
 msgstr "地理位置"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "不可用"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1579,9 +960,21 @@ msgstr "过滤器"
 msgid "Filter Name"
 msgstr "过滤器名称"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "监听"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "报告类型"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "排序字段："
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1826,7 +1219,7 @@ msgstr "时间表"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "开始日期选择器"
 
@@ -1859,591 +1252,1199 @@ msgstr "电子邮件"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "否"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "是"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "选择报告"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "概要"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "源根域"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "目标IP"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "源/目标根域"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP / TCP目标端口"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP / TCP源端口"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP / TCP端口"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "来源IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "目标IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "源/目标IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "源或目标IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP协议"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "输入接口"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "输出接口"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "输入/输出接口"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "来源AS"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "目标AS"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "来源/目标AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "来源前缀"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "目标前缀"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "来源/目标前缀"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "流动时间"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "源/目标IP"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "AS编号"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132列"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "显示IP计费仿真"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "范围内的任何零件"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "结束时间"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "开始时间"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "整个范围"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "返回所有行"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "靠前的 %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "没有限制"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Bytes"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "来源域"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "流"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "包"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "目标IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "源端口"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "目标端口"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "目标IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "无来源"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "目标AS"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "目标前缀"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "开始时间"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "结束时间"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "活跃"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "标志"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "目的地"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d像素"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "清除过滤"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "显示已保存的过滤器。"
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "新的筛选器"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "用于过滤器的侦听器。"
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "模板ID"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "仅限 v9 和 IPFIX 流的流模板 ID。 请注意，模板 ID 可能因制造商而异。"
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "IP地址"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "已注册流列表中的流 IP 地址或主机名。"
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "预置"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "如果此过滤器基于预定义的时间跨度，请在此处选择它。"
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "详细的过滤条件"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "创建报告时默认用于此筛选器的报告类型。"
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "打印"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "统计："
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "选择一个统计报告"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "创建报告时默认用于此筛选器的显示报告类型。"
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "您只能选择一份统计报告或一份打印报告（不是两种）！"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "创建打印报告时默认用于此筛选器的打印报告类型。"
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "管理时间表"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "通过这些时间过滤器规则约束过滤器数据。"
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "解析地址："
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "解析地址："
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "过滤器的默认排序字段。此设置将应用于所有计划的报告。"
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "最大行数"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "过滤器中要提供的最大行数。此设置将应用于所有计划的报告。"
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "最小字节数："
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "过滤器要考虑的最小总字节数。小于此字节总数的任何流总数将被忽略。"
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "图表选项"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "图形类型"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "默认情况下要显示的图形类型。 它们包括 Bar、Pie 和 Treemap。"
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "条形图"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "饼图"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "树状图"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "图形高度"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "默认情况下要使用的 Graph Hight。"
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "表"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "是否应默认显示表格面板。"
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Bytes Bar"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "是否应默认显示“字节”面板。"
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Packets Bar"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "默认情况下是否应显示“数据包”面板。"
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Flows Bar"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "是否应默认显示“流”面板。"
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "协议"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "协议"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "选择过滤器的特定协议。"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP标志"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "在过滤器中搜索的TCP标志。这可以是TCP标志的逗号分隔列表"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "TOS字段"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "在过滤器中搜索的TOS字段。这可以是逗号分隔的TOS字段列表"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "在筛选器中选择的源IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "源端口"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "在“过滤器”中选择的“源端口”上进行过滤。这可以是逗号分隔的源端口列表。"
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "源接口"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "在过滤器中选择源接口上进行过滤。这可以是源接口的逗号分隔列表"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "在筛选器中选择的目标AS上进行筛选。这可以是逗号分隔的来源AS的列表"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "在筛选器中选择的目标IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "目标端口"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "在筛选器中选择的目标端口上进行筛选。这可以是以逗号分隔的“目标端口”列表。"
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "目标接口"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "在筛选器中选择的目标接口上进行筛选。这可以是Destimation接口的逗号分隔列表。"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "目标AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "在筛选器中选择的目标AS上进行筛选。这可以是Destimation AS的逗号分隔列表"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "来源IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "在筛选器中选择的源IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "UDP / TCP源端口"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "在“过滤器”中选择的“源端口”上进行过滤。这可以是逗号分隔的源端口列表。"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "目标IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "在筛选器中选择的目标IP上进行筛选。这可以是IPv4或IPv6地址的逗号分隔列表，也可以是CIDR格式（例如192.168.1.0/24）的IPv4或IPv6地址范围的逗号分隔列表。"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "目标端口"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "在筛选器中选择的目标端口上进行筛选。这可以是以逗号分隔的“目标端口”列表。"
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS缓存"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/路由"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "AS编号"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS 块"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS 集"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "路由集"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "域"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "过滤器集"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "对等互连集"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "互联网控制"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "事件响应团队"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "身份验证代理"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "组织"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "角色"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "人数"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "Cacti"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "基本"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "过滤器：[编辑：%s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "报告：[新]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "未定义的过滤器[选择过滤器以获取详细信息]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "统计报告：%s [包括以下指定的替代项]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "印刷报告：%s [包括以下指定的替代项]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "日志流"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "选择报告"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "应用过滤器"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "清除过滤器"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "多久创建一个新的Flow File。"
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "新"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "编辑"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "编辑当前过滤器"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "保存"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "另存为"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "重命名"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "重命名流量过滤器"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "报告"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "统计：%s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "印刷： %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "日志默认显示最后多少行"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "排除"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "顶部样本"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "前 %d 个示例"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "八位位组"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "在下面的图表上仅显示域"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "仅域"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "时间跨度"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "自定义"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "从"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "到"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "结束日期选择器"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "向后移动时间"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "定义移动间隔"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "向前移动时间"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "图形模板"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "栏"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "饼图"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "树状图"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "高度"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "显示隐藏"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "表"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "报告"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "新的筛选器"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "新建名称"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "选择报告打印"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "要删除此流量过滤器，请按继续。 如果在计划报告中使用流量过滤器，则该操作将被阻止。"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "字节数的前%s分布图"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "前 %s 个饼图字节数"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "前 %s 个树状图字节图"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "数据包的前%s分布图"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "前 %s 个数据包饼图"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "Top %s Treemap 数据包图"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "流量的前 %s 分布图"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "前 %s 个饼图流程图"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "前 %s 条状图流程图"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "重命名布局"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr "[新建]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "过滤器设置已保存"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "客户/私人（%s）"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp（0）"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "未知 (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "子网筛选器：%s不是值CIDR格式"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "子网筛选器：%s不是值CIDR格式"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "未解决"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d 字节"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "%d Bytes"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "来源AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "来源AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "目标AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "目标端口"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "根DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "目标端口"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "目标接口"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "目标前缀"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "服务类型"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "包"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "并行查询超时。 请与您的管理员联系"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "布尔值：%s，数字：%s，十六进制：%s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "低延迟"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "吞吐量"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "可靠性"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "最低成本"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "网络控制"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "互联网控制"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "评论家ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "闪存覆盖"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "闪"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "立刻"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "优先级"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "常规"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "摘要统计"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "IP数据包大小分布（％）"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "每个流量分配的数据包（%%）"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "每流量分布的八位字节（%%）"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "流量时间分布（％）"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "您必须选择一份统计报告或打印报告！"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "您只能选择一份统计报告或一份打印报告（不是两种）！"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "日期无效，结束日期/时间早于开始日期/时间！"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "源地址IP地址无效<br> <br>（必须采用'192.168.0.1'的形式）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "无效的源地址子网（<br>）（必须采用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "目标地址IP地址无效<br> <br>（必须采用'192.168.0.1'的形式）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "目标地址！<br>无效子网（必须采用'192.168.0.1/255.255.255.0'或'192.168.0.1/24'的形式）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "源接口的值无效！"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "源端口的值无效！ （0 - 65535）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "源AS的值无效！ （0 - 65535）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "目标接口的值无效！"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "目标端口的值无效！ （0 - 65535）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "目标AS的值无效！ （0 - 65535）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Protocol的值无效！ （1 - 255）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "TCP标志的值无效！ （例如：0x1b或0x1b / SA或SA / SA）"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "截止字节的值无效！"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "截止线的值无效！"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "FlowView图表 %s 类型是 %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "已支持"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "不支持"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria（快速、碰撞安全）"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria（快速、碰撞安全）"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB（慢速、高并发）"
 
