@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "Отпечатване на отчети"
-
-#: arrays.php
-msgid "Summary"
-msgstr "Резюме"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "Изходен или целеви IP адрес"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "Целеви IP адрес"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "IP на източник / местоназначение"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "UDP / TCP целеви порт"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "UDP / TCP изходен порт"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "UDP / TCP порт"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "Източник IP"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "Целеви IP адрес"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "IP на източник / местоназначение"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "Изходен или целеви IP адрес"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "IP протокол"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "Входен интерфейс"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "Изходен интерфейс"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "Входно / изходен интерфейс"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "Източник"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "Дестинация"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "Източник / местоназначение AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP ToS"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "Префикс на източника"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "Целеви префикс"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "Префикс за източник / цел"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "Flow Times"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "IP на източник / местоназначение"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "Числа"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 Колони"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "Показване на емулация на IP счетоводство"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "Всяка част в обхвата"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "Краен час"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "Начален час"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "Изцяло в обхват"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "Върнете всички линии"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "Най-горе% d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "Без ограничение"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s байта"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "Всички"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "Порт (и) на източника"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "потоци"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "Bytes"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "Пакети"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "Целеви IP адрес"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "Порт"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "Порт (и) на източника"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "Целеви IP адрес"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "Целеви IP адрес"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "IP Адрес"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "Протокол"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "Източник"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "Дестинация"
-
-#: arrays.php
-msgid "TOS"
-msgstr "Усложия за ползуване"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "Целеви префикс"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "Няма"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "Начален час"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "Краен час"
-
-#: arrays.php
-msgid "Active"
-msgstr "Активен"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "Б / Pk"
-
-#: arrays.php
-msgid "Ts"
-msgstr "Ц."
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "Знамена"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "Източник"
-
-#: arrays.php
-msgid "Destination"
-msgstr "Дестинация"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d пиксела"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "Изчистване на филтрите"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "Филтър"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "Записаният филтър за показване."
-
-#: arrays.php
-msgid "New Filter"
-msgstr "Филтър"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "Слушател"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "Слушателят, който да се използва за филтъра."
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "ИД на шаблон"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "ИД на шаблон за поток само за v9 и IPFIX потоци.  Обърнете внимание, че ИД на шаблон може да се различава от производител до производител."
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "IP Адрес"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "IP адресът на потока или името на хоста от списъка с регистрирани потоци."
-
-#: arrays.php
-msgid "Presets"
-msgstr "Предварително"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "Ако този филтър се основава на предварително определен период от време, изберете го тук."
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "Подробни критерии за филтриране"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "Вид на доклада"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "Типът отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
-
-#: arrays.php
-msgid "Printed"
-msgstr "Отпечатано:"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "Статистика"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "Статистически доклади"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "Показване на типа отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "Отпечатване на отчети"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "Типът отпечатан отчет, който да се използва по подразбиране за този филтър при създаване на отпечатан отчет."
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "Управление на графиците"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "Ограничете данните за филтриране чрез тези правила за филтриране на времето."
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "Разрешаване на адреси:"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "Разрешаване на адреси:"
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "Да"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "Не"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "Сортиране на полето:"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Полето за сортиране по подразбиране за филтъра. Тази настройка ще се прилага за всички планирани отчети."
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "Максимален брой редове"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Максималните редове, които трябва да се предоставят във филтъра. Тази настройка ще се прилага за всички планирани отчети."
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "Минимални байтове:"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "Минималният общ байт, който трябва да се вземе предвид за филтъра. Общите потоци, които са по-малки от толкова много байта, ще бъдат игнорирани."
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "Опции за чертане на диаграми"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "Тип на графиката"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "Типът на графиката за показване по подразбиране.  Те включват Bar, Pie и Treemap."
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "Стълбовидна диаграма"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "Диаграма"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "Йерархична диаграма"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "Височина на графиката"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "Височината на графиката, която да се използва по подразбиране."
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "Таблица"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "Трябва ли панелът на таблицата да се показва по подразбиране."
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "Бар за байтове"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "Трябва ли панелът за байтове да се показва по подразбиране."
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "Пакет бар"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "Трябва ли панелът за пакети да се показва по подразбиране."
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "Бар за потоци"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "Трябва ли панелът Flows да се показва по подразбиране."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "протоколи"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "Протоколи"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "Изберете специфичния протокол за филтъра."
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "TCP знамена"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "TCP флаговете, които да търсите във филтъра. Това може да бъде списък с TCP флагове, разделен със запетая"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "Полета на TOS"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "Полетата на TOS, които да търсите във филтъра. Това може да бъде списък с TOS полета, разделен със запетая"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Филтрирайте върху избрания IP адрес на източника във филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "Порт (и) на източника"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "Филтрирайте върху избраните портове източник за във филтъра. Това може да бъде списък с портове източници, разделен със запетая."
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "Изходен интерфейс"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "Филтрирайте върху избрания интерфейс на източника за във филтъра. Това може да бъде списък с интерфейси с източник, разделен със запетая"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с източници на AS, разделен със запетая"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Филтрирайте върху избрания IP адрес на дестинация във Филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "Пристанищен порт"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "Филтрирайте върху избраните пристанищни портове за във филтъра Това може да бъде списък с разделителни портове, разделен със запетая."
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "Интерфейс за достъп"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "Филтрирайте върху избрания интерфейс за дестинация във във Филтъра. Това може да бъде списък с интерфейси за дестимиране, разделен със запетая."
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "Dest AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с разделители със запетая на AS за оценка"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "Източник IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Филтрирайте върху избрания IP адрес на източника във филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "UDP / TCP изходен порт"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Филтрирайте върху избраните портове източник за във филтъра. Това може да бъде списък с портове източници, разделен със запетая."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "Целеви IP адрес"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Филтрирайте върху избрания IP адрес на дестинация във Филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "Пристанищен порт"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Филтрирайте върху избраните пристанищни портове за във филтъра Това може да бъде списък с разделителни портове, разделен със запетая."
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "DNS кеш"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/Маршрути"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "Числа"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "AS блокове"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "AS комплекти"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "Набори от маршрути"
-
-#: arrays.php
-msgid "Domains"
-msgstr "Домейни"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "Филтърът е запазен"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "Пиъринг сетове"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "Мрежа"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "Интернет контрол"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "Екипи за реагиране при инциденти"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "Агенти за удостоверяване"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "Организации"
-
-#: arrays.php
-msgid "Roles"
-msgstr "Роли"
-
-#: arrays.php
-msgid "Persons"
-msgstr "Души"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "Филтърът е изтрит"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "Изтрий"
 
@@ -746,6 +94,10 @@ msgstr "Филтърът е запазен"
 msgid "Peering Set"
 msgstr "Пиъринг сетове"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Мрежа"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "Интернет контрол"
@@ -781,6 +133,10 @@ msgstr "Забележки"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "Последна промяна"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Източник"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "Обърнете се към"
 msgid "MP Peering"
 msgstr "MP Пиъринг"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "Експортиране"
 
@@ -993,6 +349,10 @@ msgstr "ДС Рдата"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Граница на Aggr"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Филтър"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "По подразбиране"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "Търси"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "Задаване / опресняване на филтрите"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "Изчисти"
 
@@ -1161,12 +521,12 @@ msgstr[0] "Кликнете върху „Напред“, за да изтри�
 msgstr[1] "Кликнете върху „Напред“, за да изтриете следните графици."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "Отказ"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "Продължи"
 
@@ -1191,6 +551,10 @@ msgstr "Неверифицирана"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "Изтриване"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP Адрес"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1346,9 +710,17 @@ msgstr "Разрешен хост"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Порт"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "Портът, който този колектор ще слуша."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Протокол"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1415,7 +787,7 @@ msgstr "Име"
 msgid "Version"
 msgstr "Версия"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "Шаблони"
 
@@ -1439,6 +811,11 @@ msgstr "Шаблони за откриване на слушатели"
 msgid "Ex Addr"
 msgstr "Ex Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "Всички"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "Шаблон"
@@ -1451,7 +828,7 @@ msgstr "ИД на шаблон"
 msgid "Field Name"
 msgstr "Име на поле"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "Поддържа"
 
@@ -1532,7 +909,7 @@ msgstr "Наблюдават се версиите на Traffic Flow."
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Максималното време за актуализация от всички потоци, които се събират.  Тази стойност се актуализира на всеки 5 минути."
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "Няма"
 
@@ -1540,6 +917,10 @@ msgstr "Няма"
 #, fuzzy
 msgid "No Connections"
 msgstr "Геолокация"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "Няма"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1581,9 +962,21 @@ msgstr "Филтри"
 msgid "Filter Name"
 msgstr "Име на филтъра"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "Слушател"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Вид на доклада"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Сортиране на полето:"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1828,7 +1221,7 @@ msgstr "Графици"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "Стартирайте Селектора за дата"
 
@@ -1861,591 +1254,1199 @@ msgstr "Имейл"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Не"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Да"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Отпечатване на отчети"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Резюме"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Изходен или целеви IP адрес"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Целеви IP адрес"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "IP на източник / местоназначение"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP / TCP целеви порт"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP / TCP изходен порт"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP / TCP порт"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Източник IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Целеви IP адрес"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "IP на източник / местоназначение"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Изходен или целеви IP адрес"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP протокол"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Входен интерфейс"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Изходен интерфейс"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Входно / изходен интерфейс"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Източник"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Дестинация"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Източник / местоназначение AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Префикс на източника"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Целеви префикс"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Префикс за източник / цел"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Flow Times"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "IP на източник / местоназначение"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Числа"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 Колони"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Показване на емулация на IP счетоводство"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Всяка част в обхвата"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Краен час"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Начален час"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Изцяло в обхват"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Върнете всички линии"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Най-горе% d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Без ограничение"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s байта"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Порт (и) на източника"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "потоци"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Пакети"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Целеви IP адрес"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Порт (и) на източника"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Целеви IP адрес"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Целеви IP адрес"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Източник"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Дестинация"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "Усложия за ползуване"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Целеви префикс"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Начален час"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Краен час"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Активен"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "Б / Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ц."
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Знамена"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Дестинация"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d пиксела"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Изчистване на филтрите"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Записаният филтър за показване."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Филтър"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Слушателят, който да се използва за филтъра."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "ИД на шаблон"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "ИД на шаблон за поток само за v9 и IPFIX потоци.  Обърнете внимание, че ИД на шаблон може да се различава от производител до производител."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "IP Адрес"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "IP адресът на потока или името на хоста от списъка с регистрирани потоци."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Предварително"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Ако този филтър се основава на предварително определен период от време, изберете го тук."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Подробни критерии за филтриране"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Типът отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Отпечатано:"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Статистика"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Статистически доклади"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Показване на типа отчет, който да се използва по подразбиране за този филтър при създаване на отчет."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Отпечатване на отчети"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Типът отпечатан отчет, който да се използва по подразбиране за този филтър при създаване на отпечатан отчет."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Управление на графиците"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Ограничете данните за филтриране чрез тези правила за филтриране на времето."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Разрешаване на адреси:"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Разрешаване на адреси:"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Полето за сортиране по подразбиране за филтъра. Тази настройка ще се прилага за всички планирани отчети."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Максимален брой редове"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Максималните редове, които трябва да се предоставят във филтъра. Тази настройка ще се прилага за всички планирани отчети."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Минимални байтове:"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Минималният общ байт, който трябва да се вземе предвид за филтъра. Общите потоци, които са по-малки от толкова много байта, ще бъдат игнорирани."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Опции за чертане на диаграми"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Тип на графиката"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Типът на графиката за показване по подразбиране.  Те включват Bar, Pie и Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Стълбовидна диаграма"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Диаграма"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Йерархична диаграма"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Височина на графиката"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "Височината на графиката, която да се използва по подразбиране."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Таблица"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Трябва ли панелът на таблицата да се показва по подразбиране."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Бар за байтове"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Трябва ли панелът за байтове да се показва по подразбиране."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Пакет бар"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Трябва ли панелът за пакети да се показва по подразбиране."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Бар за потоци"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Трябва ли панелът Flows да се показва по подразбиране."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "протоколи"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Протоколи"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Изберете специфичния протокол за филтъра."
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP знамена"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "TCP флаговете, които да търсите във филтъра. Това може да бъде списък с TCP флагове, разделен със запетая"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "Полета на TOS"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Полетата на TOS, които да търсите във филтъра. Това може да бъде списък с TOS полета, разделен със запетая"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Филтрирайте върху избрания IP адрес на източника във филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Порт (и) на източника"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Филтрирайте върху избраните портове източник за във филтъра. Това може да бъде списък с портове източници, разделен със запетая."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Изходен интерфейс"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Филтрирайте върху избрания интерфейс на източника за във филтъра. Това може да бъде списък с интерфейси с източник, разделен със запетая"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с източници на AS, разделен със запетая"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Филтрирайте върху избрания IP адрес на дестинация във Филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Пристанищен порт"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Филтрирайте върху избраните пристанищни портове за във филтъра Това може да бъде списък с разделителни портове, разделен със запетая."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Интерфейс за достъп"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Филтрирайте върху избрания интерфейс за дестинация във във Филтъра. Това може да бъде списък с интерфейси за дестимиране, разделен със запетая."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Dest AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Филтрирайте върху избрания AS за дестинация във филтъра. Това може да бъде списък с разделители със запетая на AS за оценка"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "Източник IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Филтрирайте върху избрания IP адрес на източника във филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "UDP / TCP изходен порт"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Филтрирайте върху избраните портове източник за във филтъра. Това може да бъде списък с портове източници, разделен със запетая."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "Целеви IP адрес"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Филтрирайте върху избрания IP адрес на дестинация във Филтъра. Това може да бъде списък с IPv4 или IPv6, разделен със запетая, или списък с IPv4 или IPv6 адреси, разделени със запетая, във формат CIDR (напр. 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "Пристанищен порт"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Филтрирайте върху избраните пристанищни портове за във филтъра Това може да бъде списък с разделителни портове, разделен със запетая."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS кеш"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Маршрути"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Числа"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS блокове"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS комплекти"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Набори от маршрути"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Домейни"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Филтърът е запазен"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Пиъринг сетове"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Интернет контрол"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Екипи за реагиране при инциденти"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Агенти за удостоверяване"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Организации"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Роли"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Души"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "Кактусови"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "Основни"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "Отчет: [редактиране: %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "Доклад: [нов]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Недефиниран филтър [Изберете филтър, за да получите подробности]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "Статистически доклад: %s [Включително замествания, както е посочено по-долу]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "Отпечатан отчет: %s [Включително замествания, както е посочено по-долу]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "Потоци"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "Прилагане на стил"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "Изчистване на филтрите"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "Колко често да се създава нов поточен файл."
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "Нов"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "Редактирай"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "Редактиране на текущия филтър"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "Запази"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "Запис като"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "Преименуване"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "Преименуване на филтъра за поток"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "Отчет"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "Статистически: %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "Отпечатано: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "Редове"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "Изключване"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "Нагоре Проба"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 msgid "Top %d Samples"
 msgstr "Топ 2 проби"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "Октети"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "Показване само на домейни в диаграмите отдолу"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "Само домейни"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "Време"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "Персонализиране"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "От"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "Дo"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "Селектор за крайна дата"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "Преместване на времето назад"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "Определете интервала за превключване"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "Преместване на времето напред"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "Графика"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "Бар"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "Отпечатано:"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "Карта на съдържанието"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "Височина"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "Покажи/Скрий"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "Таблица"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "Отчет"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "Филтър"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "Ново име"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "Отпечатване на отчети"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "За да изтриете този филтър на потока, натиснете \"Продължи\".  Ако филтърът за поток се използва в планиран отчет, операцията ще бъде блокирана."
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "Най-горе %s диаграма на разпределение на байтове"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "Най-горе %s кръгова диаграма от байтове"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "Най-горе %s йерархична диаграма на байтовете"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "Най-добра %s диаграма за разпространение на пакети"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "Най-горе %s кръгова диаграма на пакети"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "Най-горе %s йерархична диаграма на пакетите"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "Най-горе %s Разпределителна диаграма на потоците"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "Най-горе %s кръгова диаграма на потоците"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "Най-горе %s йерархична диаграма на потоците"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "Преименуване на оформление"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr "Нов"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "Настройките на филтъра са запазени"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "Клиент / частен (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "Неизвестен (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Нетен поток - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Филтър на подмрежата: %s не е стойностен формат CIDR"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "Филтър на подмрежата: %s не е стойностен формат CIDR"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "- нерешен -"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d байта"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d байта"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "Скриптът/източникът използван за събиране на данни за този източник на данни."
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "Пристанищен порт"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "Корен DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "Пристанищен порт"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "Преден префикс"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "Вид на услугата"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "Пакети"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "Времето за изчакване на паралелната заявка изтече.  Обърнете се към вашия администратор"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "Булево: %s, Числово: %s, Шестнадесетично: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "Ниско забавяне"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "Пропускателна способност"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "Надеждност"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "Минкост"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "Контрол на мрежата"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "Интернет контрол"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "Критичен ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "Замяна на Flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "Светкавица"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "Незабавно"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "Приоритет"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "Рутинна"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "Обобщена статистика"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Разпределение на размера на IP пакетите (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Пакети за разпределение на потока (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Октети за разпределение на потока (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Разпределение на времето на потока (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Трябва да изберете статистически отчет или отпечатан отчет!"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Трябва да изберете само статистически отчет или отпечатан отчет (не и двете)!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Невалидни дати, Крайна дата / час е по-ранна от началната дата / час!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Невалиден IP адрес за източника! <br> (Трябва да е под формата на „192.168.0.1“)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Невалидна подмрежа за изходния адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Невалиден IP адрес за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1“)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Невалидна подмрежа за целевия адрес! <br> (Трябва да е под формата на „192.168.0.1/255.255.255.0“ или „192.168.0.1/24“)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "Невалидна стойност за изходния интерфейс!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Невалидна стойност за изходния порт! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Невалидна стойност за Source AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "Невалидна стойност за целевия интерфейс!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Невалидна стойност за целевия порт! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Невалидна стойност за Destination AS! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Невалидна стойност за протокол! (1 - 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Невалидна стойност за TCP флаг! (напр .: 0x1b или 0x1b / SA или SA / SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Невалидна стойност за Octoff Octoff!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Невалидна стойност за Линиите за изключване!"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "Диаграма за преглеждане на потока за %s Тип е %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "Поддържа"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "Не се поддържа"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Ария (Бързо, Crash Safe)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Ария (Бързо, Crash Safe)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (бавна, висока едновременност)"
 
