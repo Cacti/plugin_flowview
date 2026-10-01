@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:24-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "प्रिंट रिपोर्ट"
-
-#: arrays.php
-msgid "Summary"
-msgstr "सारांश"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "स्रोत या गंतव्य आईपी"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "स्रोत / गंतव्य आईपी"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "यूडीपी / टीसीपी गंतव्य बंदरगाह"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "यूडीपी / टीसीपी स्रोत पोर्ट"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "यूडीपी / टीसीपी पोर्ट"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "स्रोत आईपी"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "स्रोत / गंतव्य आईपी"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "स्रोत या गंतव्य आईपी"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "आईपी प्रोटोकॉल"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "इनपुट इंटरफ़ेस"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "आउटपुट इंटरफ़ेस"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "इनपुट / आउटपुट इंटरफ़ेस"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "डाटा स्रोत"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "स्थान"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "स्रोत / गंतव्य एएस"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "आईपी टो"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "स्रोत उपसर्ग"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "गंतव्य उपसर्ग"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "स्रोत / गंतव्य उपसर्ग"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "फ्लो टाइम्स"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "स्रोत / गंतव्य आईपी"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "एएस नंबर"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 कॉलम"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "आईपी अकाउंटिंग एमुलेशन दिखाएं"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "रेंज में कोई भी हिस्सा"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "अंतिम समय"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "प्रारंभ समय"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "पूरी तरह से रेंज में"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "सभी लाइनें लौटाएं"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "शीर्ष% d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "कोई सीमा नहीं"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s बाइट्स"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "所有"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "स्रोत पोर्ट"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "प्रवाह"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "बाइट्स"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "पैकेट"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "पोर्ट"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "स्रोत पोर्ट"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "गंतव्य आईपी"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "IP सिरनामा"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "मसविदा बनाना"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "डाटा स्रोत"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "स्थान"
-
-#: arrays.php
-msgid "TOS"
-msgstr "टीओएस"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "गंतव्य उपसर्ग"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "लागू नहीं"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "प्रारंभ समय"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "अंतिम समय"
-
-#: arrays.php
-msgid "Active"
-msgstr "सक्रिय"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "बी / पी"
-
-#: arrays.php
-msgid "Ts"
-msgstr "टी"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "झंडे"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "स्रोत आईपी"
-
-#: arrays.php
-msgid "Destination"
-msgstr "स्थान"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d पिक्सेल"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "साफ फिल्टर"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "छलनी "
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "प्रदर्शित करने के लिए सहेजा गया फ़िल्टर।"
-
-#: arrays.php
-msgid "New Filter"
-msgstr "छलनी "
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "श्रोता"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "फ़िल्टर के लिए उपयोग करने के लिए श्रोता।"
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "टेम्पलेट आईडी"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "केवल v9 और IPFIX प्रवाह के लिए प्रवाह टेम्पलेट ID.  ध्यान दें कि टेम्प्लेट आईडी निर्माता से निर्माता में भिन्न हो सकती है।"
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "IP सिरनामा"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "स्ट्रीम आईपी पता या होस्टनाम पंजीकृत धाराओं की सूची से।"
-
-#: arrays.php
-msgid "Presets"
-msgstr "प्रीसेट"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "यदि यह फ़िल्टर पूर्व-निर्धारित टाइमपैन पर आधारित है, तो इसे यहाँ चुनें।"
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "विस्तृत फ़िल्टर मानदंड"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "रिपोर्ट: [नया]"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए रिपोर्ट प्रकार।"
-
-#: arrays.php
-msgid "Printed"
-msgstr "प्रिंट किया गया:"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "सांख्यिकी:"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "सांख्यिकी रिपोर्ट"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए प्रदर्शन रिपोर्ट प्रकार।"
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "प्रिंट रिपोर्ट"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "मुद्रित रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए मुद्रित रिपोर्ट प्रकार।"
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "अनुसूचियां प्रबंधित करें"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "इन समय फ़िल्टर नियमों द्वारा फ़िल्टर डेटा को संकुचित करें।"
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "पते का समाधान करें:"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "पते का समाधान करें:"
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "हाँ"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "नहीं"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "फ़ील्ड को क्रमबद्ध करें:"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "फ़िल्टर के लिए डिफ़ॉल्ट सॉर्ट फ़ील्ड। यह सेटिंग किसी भी अनुसूचित रिपोर्ट के लिए लागू की जाएगी।"
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "अधिकतम पंक्तियाँ"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "फ़िल्टर में प्रदान करने के लिए अधिकतम पंक्तियाँ। यह सेटिंग किसी भी अनुसूचित रिपोर्ट के लिए लागू की जाएगी।"
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "न्यूनतम बाइट्स:"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "फ़िल्टर के लिए विचार करने के लिए न्यूनतम कुल बाइट्स। किसी भी प्रवाह योग जो इस कई बाइट्स से कम हैं, को अनदेखा किया जाएगा।"
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "चार्टिंग विकल्प"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "ग्राफ़ प्रकार"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "डिफ़ॉल्ट रूप से प्रदर्शित करने के लिए ग्राफ़ प्रकार।  इनमें बार, पाई और ट्रीमैप शामिल हैं।"
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "दंड ग्राफ़"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "पाइ चार्ट"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "ट्रीमैप चार्ट"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "ग्राफ ऊंचाई"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "डिफ़ॉल्ट रूप से उपयोग करने के लिए ग्राफ़ हाइट।"
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "तालिका"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "क्या टेबल पैनल डिफ़ॉल्ट रूप से प्रदर्शित किया जाना चाहिए।"
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "बाइट्स बार"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "क्या बाइट्स पैनल डिफ़ॉल्ट रूप से प्रदर्शित होना चाहिए।"
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "पैकेट बार"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "पैकेट पैनल डिफ़ॉल्ट रूप से प्रदर्शित किया जाना चाहिए।"
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "बार बहती है"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "प्रवाह पैनल डिफ़ॉल्ट रूप से प्रदर्शित किया जाना चाहिए."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "प्रोटोकॉल"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "प्रोटोकॉल"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "फ़िल्टर के लिए विशिष्ट प्रोटोकॉल का चयन करें।"
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "टीसीपी झंडे"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "फ़िल्टर में खोजने के लिए टीसीपी झंडे। यह टीसीपी फ्लैग की अल्पविराम सीमांकित सूची हो सकती है"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "टीओएस फील्ड्स"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "टीओएस फ़ील्ड फ़िल्टर में खोज करता है। यह टीओएस फील्ड्स की कॉमा सीमांकित सूची हो सकती है"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "फ़िल्टर के लिए चयन करें स्रोत IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "स्रोत पोर्ट"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "फ़िल्टर में सेलेक्ट सोर्स पोर्ट्स पर फ़िल्टर करें। यह स्रोत पोर्ट की अल्पविराम सीमांकित सूची हो सकती है।"
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "स्रोत इंटरफ़ेस"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "फ़िल्टर में सेलेक्ट सोर्स इंटरफ़ेस पर फ़िल्टर करें। यह स्रोत इंटरफेस की अल्पविराम सीमांकित सूची हो सकती है"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "फ़िल्टर में चयनित गंतव्य AS पर फ़िल्टर करें। यह स्रोत AS की अल्पविराम सीमांकित सूची हो सकती है"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "फ़िल्टर के लिए चयन गंतव्य IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "गंतव्य बंदरगाह"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "फ़िल्टर में चयन गंतव्य पोर्ट पर फ़िल्टर करें। यह डेस्टिनेशन पोर्ट्स की अल्पविराम सीमांकित सूची हो सकती है।"
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "गंतव्य इंटरफ़ेस"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "फ़िल्टर के लिए चयन गंतव्य इंटरफ़ेस पर फ़िल्टर करें। यह डेस्टिमेशन इंटरफेसेस की अल्पविराम सीमांकित सूची हो सकती है।"
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "गंतव्य के रूप में"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "फ़िल्टर में चयनित गंतव्य AS पर फ़िल्टर करें। यह डेस्टिनेशन एएस की कॉमा सीमांकित सूची हो सकती है"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "स्रोत आईपी"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "फ़िल्टर के लिए चयन करें स्रोत IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "यूडीपी / टीसीपी स्रोत पोर्ट"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "फ़िल्टर में सेलेक्ट सोर्स पोर्ट्स पर फ़िल्टर करें। यह स्रोत पोर्ट की अल्पविराम सीमांकित सूची हो सकती है।"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "गंतव्य आईपी"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "फ़िल्टर के लिए चयन गंतव्य IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "गंतव्य बंदरगाह"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "फ़िल्टर में चयन गंतव्य पोर्ट पर फ़िल्टर करें। यह डेस्टिनेशन पोर्ट्स की अल्पविराम सीमांकित सूची हो सकती है।"
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "DNS कैश"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "सीआईडीआर/मार्ग"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "एएस नंबर"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "एएस ब्लॉक"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "एएस सेट"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "मार्ग सेट"
-
-#: arrays.php
-msgid "Domains"
-msgstr "स्रोत पोर्ट"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "सेव को छान लें"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "पीयरिंग सेट"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "नैट्टवर्क"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "इंटरनेट कंट्रोल"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "घटना प्रतिक्रिया दल"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "प्रामाणिक एजेंट"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "संगठनों"
-
-#: arrays.php
-msgid "Roles"
-msgstr "भूमिकाओं"
-
-#: arrays.php
-msgid "Persons"
-msgstr "व्यक्तियों"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "प्रवाह फिल्टर '%s' हटा दिया गया।"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "हटाएं"
 
@@ -746,6 +94,10 @@ msgstr "सेव को छान लें"
 msgid "Peering Set"
 msgstr "पीयरिंग सेट"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "नैट्टवर्क"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "इंटरनेट कंट्रोल"
@@ -781,6 +133,10 @@ msgstr "टिप्पणियां"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "पिछली मर्तबा परिवर्धित"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "स्रोत आईपी"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "संदर्भ लें"
 msgid "MP Peering"
 msgstr "एमपी पीयरिंग"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "एक्सपोर्ट"
 
@@ -993,6 +349,10 @@ msgstr "डीएस Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Aggr सीमा"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "छलनी "
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "डिफ़ॉल्ट"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "जाएं"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "सेट / फ़िल्टर ताज़ा करें"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "明确"
 
@@ -1161,12 +521,12 @@ msgstr[0] "निम्न शेड्यूल को हटाने के �
 msgstr[1] "निम्न शेड्यूल को हटाने के लिए 'जारी रखें' पर क्लिक करें।"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "कैंसिल करें"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "जारी रखें"
 
@@ -1191,6 +551,10 @@ msgstr "असत्यापित"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "सफाई"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP सिरनामा"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1346,9 +710,17 @@ msgstr "होस्ट की अनुमति है"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "पोर्ट"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "पोर्ट इस कलेक्टर पर सुनेंगे।"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "मसविदा बनाना"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1415,7 +787,7 @@ msgstr "नाम"
 msgid "Version"
 msgstr "सरूप"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "टेम्पलेट्स"
 
@@ -1439,6 +811,11 @@ msgstr "श्रोता ने टेम्पलेट्स का पत�
 msgid "Ex Addr"
 msgstr "पूर्व Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "所有"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "खाका"
@@ -1451,7 +828,7 @@ msgstr "टेम्पलेट आईडी"
 msgid "Field Name"
 msgstr "क्षेत्र नाम"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "समर्थित"
 
@@ -1532,7 +909,7 @@ msgstr "ट्रैफ़िक प्रवाह संस्करणों 
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "एकत्र की जा रही सभी धाराओं से अधिकतम अद्यतन समय।  यह मान हर 5 मिनट में अपडेट किया जाता है।"
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "कोई नहीं"
 
@@ -1540,6 +917,10 @@ msgstr "कोई नहीं"
 #, fuzzy
 msgid "No Connections"
 msgstr "रोटेशन"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "लागू नहीं"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1581,9 +962,21 @@ msgstr "फिल्टर"
 msgid "Filter Name"
 msgstr "फ़िल्टर का नाम"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "श्रोता"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "रिपोर्ट: [नया]"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "फ़ील्ड को क्रमबद्ध करें:"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1828,7 +1221,7 @@ msgstr "अनुसूचियों"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "प्रारंभ तिथि चयनकर्ता"
 
@@ -1861,591 +1254,1199 @@ msgstr "ईमेल"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "नहीं"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "हाँ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "प्रिंट रिपोर्ट"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "सारांश"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "स्रोत या गंतव्य आईपी"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "स्रोत / गंतव्य आईपी"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "यूडीपी / टीसीपी गंतव्य बंदरगाह"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "यूडीपी / टीसीपी स्रोत पोर्ट"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "यूडीपी / टीसीपी पोर्ट"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "स्रोत आईपी"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "स्रोत / गंतव्य आईपी"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "स्रोत या गंतव्य आईपी"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "आईपी प्रोटोकॉल"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "इनपुट इंटरफ़ेस"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "आउटपुट इंटरफ़ेस"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "इनपुट / आउटपुट इंटरफ़ेस"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "डाटा स्रोत"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "स्थान"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "स्रोत / गंतव्य एएस"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "आईपी टो"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "स्रोत उपसर्ग"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "गंतव्य उपसर्ग"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "स्रोत / गंतव्य उपसर्ग"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "फ्लो टाइम्स"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "स्रोत / गंतव्य आईपी"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "एएस नंबर"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 कॉलम"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "आईपी अकाउंटिंग एमुलेशन दिखाएं"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "रेंज में कोई भी हिस्सा"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "अंतिम समय"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "प्रारंभ समय"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "पूरी तरह से रेंज में"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "सभी लाइनें लौटाएं"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "शीर्ष% d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "कोई सीमा नहीं"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s बाइट्स"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "स्रोत पोर्ट"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "प्रवाह"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "बाइट्स"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "पैकेट"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "स्रोत पोर्ट"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "लक्षित अंतरराष्ट्रीय कम्प्यूटर तंत्र प्रणाली नियमावली"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "गंतव्य आईपी"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "डाटा स्रोत"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "स्थान"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "टीओएस"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "गंतव्य उपसर्ग"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "प्रारंभ समय"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "अंतिम समय"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "सक्रिय"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "बी / पी"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "टी"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "झंडे"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "स्थान"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d पिक्सेल"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "साफ फिल्टर"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "प्रदर्शित करने के लिए सहेजा गया फ़िल्टर।"
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "छलनी "
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "फ़िल्टर के लिए उपयोग करने के लिए श्रोता।"
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "टेम्पलेट आईडी"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "केवल v9 और IPFIX प्रवाह के लिए प्रवाह टेम्पलेट ID.  ध्यान दें कि टेम्प्लेट आईडी निर्माता से निर्माता में भिन्न हो सकती है।"
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "IP सिरनामा"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "स्ट्रीम आईपी पता या होस्टनाम पंजीकृत धाराओं की सूची से।"
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "प्रीसेट"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "यदि यह फ़िल्टर पूर्व-निर्धारित टाइमपैन पर आधारित है, तो इसे यहाँ चुनें।"
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "विस्तृत फ़िल्टर मानदंड"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए रिपोर्ट प्रकार।"
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "प्रिंट किया गया:"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "सांख्यिकी:"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "सांख्यिकी रिपोर्ट"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए प्रदर्शन रिपोर्ट प्रकार।"
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "प्रिंट रिपोर्ट"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "मुद्रित रिपोर्ट बनाते समय इस फ़िल्टर के लिए डिफ़ॉल्ट रूप से उपयोग करने के लिए मुद्रित रिपोर्ट प्रकार।"
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "अनुसूचियां प्रबंधित करें"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "इन समय फ़िल्टर नियमों द्वारा फ़िल्टर डेटा को संकुचित करें।"
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "पते का समाधान करें:"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "पते का समाधान करें:"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "फ़िल्टर के लिए डिफ़ॉल्ट सॉर्ट फ़ील्ड। यह सेटिंग किसी भी अनुसूचित रिपोर्ट के लिए लागू की जाएगी।"
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "अधिकतम पंक्तियाँ"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "फ़िल्टर में प्रदान करने के लिए अधिकतम पंक्तियाँ। यह सेटिंग किसी भी अनुसूचित रिपोर्ट के लिए लागू की जाएगी।"
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "न्यूनतम बाइट्स:"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "फ़िल्टर के लिए विचार करने के लिए न्यूनतम कुल बाइट्स। किसी भी प्रवाह योग जो इस कई बाइट्स से कम हैं, को अनदेखा किया जाएगा।"
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "चार्टिंग विकल्प"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "ग्राफ़ प्रकार"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "डिफ़ॉल्ट रूप से प्रदर्शित करने के लिए ग्राफ़ प्रकार।  इनमें बार, पाई और ट्रीमैप शामिल हैं।"
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "दंड ग्राफ़"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "पाइ चार्ट"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "ट्रीमैप चार्ट"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "ग्राफ ऊंचाई"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "डिफ़ॉल्ट रूप से उपयोग करने के लिए ग्राफ़ हाइट।"
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "तालिका"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "क्या टेबल पैनल डिफ़ॉल्ट रूप से प्रदर्शित किया जाना चाहिए।"
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "बाइट्स बार"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "क्या बाइट्स पैनल डिफ़ॉल्ट रूप से प्रदर्शित होना चाहिए।"
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "पैकेट बार"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "पैकेट पैनल डिफ़ॉल्ट रूप से प्रदर्शित किया जाना चाहिए।"
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "बार बहती है"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "प्रवाह पैनल डिफ़ॉल्ट रूप से प्रदर्शित किया जाना चाहिए."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "प्रोटोकॉल"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "प्रोटोकॉल"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "फ़िल्टर के लिए विशिष्ट प्रोटोकॉल का चयन करें।"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "टीसीपी झंडे"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "फ़िल्टर में खोजने के लिए टीसीपी झंडे। यह टीसीपी फ्लैग की अल्पविराम सीमांकित सूची हो सकती है"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "टीओएस फील्ड्स"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "टीओएस फ़ील्ड फ़िल्टर में खोज करता है। यह टीओएस फील्ड्स की कॉमा सीमांकित सूची हो सकती है"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "फ़िल्टर के लिए चयन करें स्रोत IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "स्रोत पोर्ट"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "फ़िल्टर में सेलेक्ट सोर्स पोर्ट्स पर फ़िल्टर करें। यह स्रोत पोर्ट की अल्पविराम सीमांकित सूची हो सकती है।"
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "स्रोत इंटरफ़ेस"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "फ़िल्टर में सेलेक्ट सोर्स इंटरफ़ेस पर फ़िल्टर करें। यह स्रोत इंटरफेस की अल्पविराम सीमांकित सूची हो सकती है"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "फ़िल्टर में चयनित गंतव्य AS पर फ़िल्टर करें। यह स्रोत AS की अल्पविराम सीमांकित सूची हो सकती है"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "फ़िल्टर के लिए चयन गंतव्य IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "गंतव्य बंदरगाह"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "फ़िल्टर में चयन गंतव्य पोर्ट पर फ़िल्टर करें। यह डेस्टिनेशन पोर्ट्स की अल्पविराम सीमांकित सूची हो सकती है।"
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "गंतव्य इंटरफ़ेस"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "फ़िल्टर के लिए चयन गंतव्य इंटरफ़ेस पर फ़िल्टर करें। यह डेस्टिमेशन इंटरफेसेस की अल्पविराम सीमांकित सूची हो सकती है।"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "गंतव्य के रूप में"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "फ़िल्टर में चयनित गंतव्य AS पर फ़िल्टर करें। यह डेस्टिनेशन एएस की कॉमा सीमांकित सूची हो सकती है"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "स्रोत आईपी"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "फ़िल्टर के लिए चयन करें स्रोत IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "यूडीपी / टीसीपी स्रोत पोर्ट"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "फ़िल्टर में सेलेक्ट सोर्स पोर्ट्स पर फ़िल्टर करें। यह स्रोत पोर्ट की अल्पविराम सीमांकित सूची हो सकती है।"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "गंतव्य आईपी"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "फ़िल्टर के लिए चयन गंतव्य IP पर फ़िल्टर करें। यह IPv4 या IPv6 पतों की अल्पविराम सीमांकित सूची या CIDR प्रारूप में IPv4 या IPv6 पता श्रेणियों की अल्पविराम सीमांकित सूची हो सकती है (उदाहरण। 192.168.1.0/24)।"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "गंतव्य बंदरगाह"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "फ़िल्टर में चयन गंतव्य पोर्ट पर फ़िल्टर करें। यह डेस्टिनेशन पोर्ट्स की अल्पविराम सीमांकित सूची हो सकती है।"
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS कैश"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "सीआईडीआर/मार्ग"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "एएस नंबर"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "एएस ब्लॉक"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "एएस सेट"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "मार्ग सेट"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "स्रोत पोर्ट"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "सेव को छान लें"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "पीयरिंग सेट"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "इंटरनेट कंट्रोल"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "घटना प्रतिक्रिया दल"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "प्रामाणिक एजेंट"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "संगठनों"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "भूमिकाओं"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "व्यक्तियों"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "कैक्टस"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "सामान्य"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "रिपोर्ट: [संपादित करें: %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "रिपोर्ट: [नया]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "अपरिभाषित फ़िल्टर [विवरण प्राप्त करने के लिए फ़िल्टर का चयन करें]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "सांख्यिकीय रिपोर्ट: %s [नीचे बताए अनुसार ओवरराइड्स शामिल हैं]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "मुद्रित रिपोर्ट: %s [नीचे बताए अनुसार ओवरराइड्स शामिल हैं]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "धाराओं"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "फ़िल्टर्स लागू करें (p) View - >"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "साफ फिल्टर"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "एक नई फ़्लो फ़ाइल बनाने के लिए कितनी बार।"
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "नया"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "संपादित करें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "वर्तमान फ़िल्टर संपादित करें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "सेव करें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "के रूप रक्षित करें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "नाम बदलें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "फ्लो फ़िल्टर का नाम बदलें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "सांख्यिकीय: %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "मुद्रित: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "पंक्तियां"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "निकालना"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "शीर्ष नमूना"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "शीर्ष %d नमूने"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "ओक्टेट्स"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "नीचे दिए गए चार्ट पर केवल डोमेन दिखाएं"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "केवल डोमेन"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "काल"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "रुचि अनुसरणीय"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "और से"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "Til"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "अंतिम तिथि चयनकर्ता"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "शिफ्ट टाइम बैकवर्ड"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "शिफ्टिंग इंटरवल को परिभाषित करें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "शिफ्ट टाइम फॉरवर्ड"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "काल ग्राफ"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "छड़"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "प्रिंट किया गया:"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "ट्रीमैप"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "ऊंचाई"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "छुपा हुआ देखना"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "तालिका"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "छलनी "
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "क्षेत्र नाम"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "प्रिंट रिपोर्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "इस प्रवाह फ़िल्टर को हटाने के लिए, जारी रखें दबाएँ.  प्रवाह फ़िल्टर किसी शेड्यूल की गई रिपोर्ट में उपयोग में है, तो कार्रवाई ब्लॉक कर दिया जाएगा।"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "बाइट्स के शीर्ष %s वितरण चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "बाइट्स के शीर्ष %s पाई चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "बाइट्स के शीर्ष %s ट्रीमैप चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "पैकेट के शीर्ष %s वितरण चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "पैकेट के शीर्ष %s पाई चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "पैकेट के शीर्ष %s ट्रीमैप चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "प्रवाह के शीर्ष %s वितरण चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "प्रवाह का शीर्ष %s पाई चार्ट"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "शीर्ष %s प्रवाह का ट्रीमैप चार्ट"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "लेआउट का नाम बदलें"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr " <new>"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "फ़िल्टर सेटिंग्स सहेजे गए"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "ग्राहक / निजी (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "अज्ञात (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "नेटफ्लो - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "सबनेट फ़िल्टर: %s मान CIDR प्रारूप नहीं है"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "सबनेट फ़िल्टर: %s मान CIDR प्रारूप नहीं है"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "अनुत्तरित"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d बाइट्स"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d बाइट्स"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "स्रोत ए.एस."
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "स्रोत ए.एस."
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "गंतव्य के रूप में"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "गंतव्य बंदरगाह"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "NTP सर्वर का IP या DNS नाम डालें"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "रूट डीएनएस"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "गंतव्य बंदरगाह"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "गंतव्य स्थान"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "गंतव्य उपसर्ग"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "सेवा का प्रकार"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "पैकेट"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "समानांतर क्वेरी का समय समाप्त हो गया.  कृपया अपने व्यवस्थापक से संपर्क करें"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "बूलियन: %s, न्यूमेरिक: %s, हेक्स: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "कम देरी"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "प्रवाह"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "विश्वसनीयता"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "Mincost"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "नेट कंट्रोल"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "इंटरनेट कंट्रोल"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "आलोचक ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "फ्लैश ओवरराइड"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "Chamak"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "तुरंत"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "प्राथमिकता"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "सामान्य"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "सारांश आँकड़े"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "आईपी पैकेट आकार वितरण (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "पैकेट प्रति प्रवाह वितरण (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "ऑक्टेट्स प्रति प्रवाह वितरण (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "प्रवाह समय वितरण (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "आपको एक सांख्यिकी रिपोर्ट या मुद्रित रिपोर्ट का चयन करना होगा!"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "आपको केवल एक सांख्यिकी रिपोर्ट या मुद्रित रिपोर्ट (दोनों नहीं) का चयन करना होगा!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "अमान्य दिनांक, समाप्ति दिनांक / समय प्रारंभ दिनांक / समय से पहले है!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "स्रोत पते के लिए अमान्य IP! <br> ('192.168.0.1' के रूप में होना चाहिए)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "स्रोत पते के लिए अमान्य सबनेट! <br> ('192.168.0.1/255.255.255.0' या '192.168.0.1/24' के रूप में होना चाहिए)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "गंतव्य पते के लिए अमान्य IP! <br> ('192.168.0.1' के रूप में होना चाहिए)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "गंतव्य पते के लिए अमान्य सबनेट! <br> ('192.168.0.1/255.255.255.0' या '192.168.0.1/24' के रूप में होना चाहिए)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "स्रोत इंटरफ़ेस के लिए अमान्य मान!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "स्रोत पोर्ट के लिए अमान्य मान! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "स्रोत एएस के लिए अमान्य मान! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "गंतव्य इंटरफ़ेस के लिए अमान्य मान!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "गंतव्य पोर्ट के लिए अमान्य मान! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "गंतव्य के रूप में अमान्य मान! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "प्रोटोकॉल के लिए अमान्य मान! (1 - 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "टीसीपी ध्वज के लिए अमान्य मान! (उदा: 0x1b या 0x1b / SA या SA / SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "कटऑफ ओकटेट्स के लिए अमान्य मान!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "कटऑफ लाइन्स के लिए अमान्य मान!"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "%s प्रकार के लिए FlowView चार्ट %s है"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "समर्थित"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "समर्थित नहीं"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria (फास्ट, Crash सुरक्षित)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (फास्ट, Crash सुरक्षित)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (धीमा, उच्च संगामिति)"
 
