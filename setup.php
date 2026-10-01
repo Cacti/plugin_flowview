@@ -154,7 +154,7 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
 
 		// Remove files tombstoned in manifest.json plus the dev-only tests/ tree.
-		plugin_flowview_prune_files();
+		flowview_prune_files();
 	}
 }
 
@@ -1426,7 +1426,7 @@ function flowview_graph_button($data): bool {
  * @global array $config Cacti global configuration array; used to resolve
  *                       the plugin directory.
  */
-function plugin_flowview_prune_files(): void {
+function flowview_prune_files(): void {
 	global $config;
 
 	$plugin_dir    = $config['base_path'] . '/plugins/flowview';
@@ -1512,7 +1512,7 @@ function plugin_flowview_prune_files(): void {
 		}
 
 		if (is_dir($path) && !is_link($path)) {
-			$removed = plugin_flowview_rmtree($path);
+			$removed = flowview_rmtree($path);
 		} else {
 			$removed = @unlink($path);
 		}
@@ -1546,14 +1546,14 @@ function plugin_flowview_prune_files(): void {
 
 /**
  * Recursively deletes a directory and its contents. Symlinks are removed
- * without being followed. Helper for plugin_flowview_prune_files().
+ * without being followed. Helper for flowview_prune_files().
  *
  * @param string $dir Absolute path to the directory to remove.
  *
  * @return bool True if the directory and everything under it was removed;
  *              false if any entry could not be deleted.
  */
-function plugin_flowview_rmtree(string $dir): bool {
+function flowview_rmtree(string $dir): bool {
 	$entries = scandir($dir);
 	$ok      = true;
 
@@ -1565,7 +1565,7 @@ function plugin_flowview_rmtree(string $dir): bool {
 		$path = $dir . '/' . $entry;
 
 		if (is_dir($path) && !is_link($path)) {
-			if (!plugin_flowview_rmtree($path)) {
+			if (!flowview_rmtree($path)) {
 				$ok = false;
 			}
 		} elseif (!@unlink($path)) {
