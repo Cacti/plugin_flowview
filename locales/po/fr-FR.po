@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:22-0400\n"
 "Last-Translator: Larry Adams <thewitness@cacti.net>\n"
 "Language-Team: French <http://translate.cacti.net/projects/cacti/flowview/fr/>\n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "Imprimer les rapports"
-
-#: arrays.php
-msgid "Summary"
-msgstr "Résumé"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "IP source ou destination"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "Destination IP"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "Source/Destination IP"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "Port de destination UDP/TCP"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "Port source UDP/TCP"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "Port UDP/TCP"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "IP source"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "IP Destination"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "Source/Destination IP"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "IP source ou destination"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "Protocole IP"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "Interface d'entrée"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "Interface de sortie"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "Interface d'entrée/sortie"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "Pas de source"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "Destination"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "Source/Destination AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP ToS"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "Préfixe source"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "Préfixe de destination"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "Préfixe Source/Destination"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "Temps d'écoulement"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "Source/Destination IP"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "Nombres"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 Colonnes"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "Afficher l'émulation de la comptabilité IP"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "Toute pièce de la gamme"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "Heure de fin"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "Heure de début"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "Entièrement à portée"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "Renvoyer toutes les lignes"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "Top %d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "Aucune limite"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s Octets"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "Tout"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "Domaine source"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "Flux"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "Bytes"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "Paquets"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "Domaine de destination"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "Port"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "Port Source"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "Port Destination"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "Dest IP"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "Adresse IP"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "Protocole"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "Pas de source"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "Destination"
-
-#: arrays.php
-msgid "TOS"
-msgstr "CGU"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "Préfixe de destination"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "N/A"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "Heure de début"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "Heure de fin"
-
-#: arrays.php
-msgid "Active"
-msgstr "Actif"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "B/Pqt"
-
-#: arrays.php
-msgid "Ts"
-msgstr "Ts"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "Drapeaux"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "Source"
-
-#: arrays.php
-msgid "Destination"
-msgstr "Destination"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d pixels"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "Supprimer les filtres"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "Filtre"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "Le filtre enregistré à afficher."
-
-#: arrays.php
-msgid "New Filter"
-msgstr "Ajouter un filtre"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "Auditeur"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "L'auditeur à utiliser pour le filtre."
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "Template ID"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "ID de modèle de flux pour les flux v9 et IPFIX uniquement.  Notez que les ID de modèle peuvent différer d’un fabricant à l’autre."
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "Adresse IP"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "L’adresse IP du flux ou le nom d’hôte de la liste des flux enregistrés."
-
-#: arrays.php
-msgid "Presets"
-msgstr "Préréglages"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "Si ce filtre est basé sur une période prédéfinie, sélectionnez-le ici."
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "Critères de filtrage détaillés"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "Type de rapport"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "Type de rapport à utiliser par défaut pour ce filtre lors de la création d'un rapport."
-
-#: arrays.php
-msgid "Printed"
-msgstr "Imprimé"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "Statistique"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "Rapports statistiques"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "Le type de rapport d'affichage à utiliser par défaut pour ce filtre lors de la création d'un rapport."
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "Imprimer les rapports"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "Type de rapport imprimé à utiliser par défaut pour ce filtre lors de la création d'un rapport imprimé."
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "Gérer les horaires"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "Contraignez les données de filtre par ces règles de filtre temporel."
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "Résoudre les adresses :"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "Résoudre les adresses :"
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "Oui"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "Non"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "Zone de tri :"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Le champ de tri par défaut pour le filtre. Ce paramètre sera appliqué à tous les rapports programmés."
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "Lignes maximum"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Nombre maximal de lignes à fournir dans le filtre. Ce paramètre sera appliqué à tous les rapports programmés."
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "Octets minimum :"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "Nombre total minimal d'octets à prendre en compte pour le filtre. Tous les totaux de flux inférieurs à ce nombre d'octets seront ignorés."
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "Options de graphique"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "Type de Graphique"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "Type de graphique à afficher par défaut.  Il s’agit notamment de Bar, Pie et Treemap."
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "Graphique en barre"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "Camembert"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "Graphique Treemap"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "Hauteur du Graphique"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "Hauteur du graphique à utiliser par défaut."
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "Tableau"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "Le panneau Tableau doit-il être affiché par défaut."
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "Barre d'octets"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "Le panneau Octets doit-il être affiché par défaut."
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "Barre de paquets"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "Le panneau Paquets doit-il être affiché par défaut ?"
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "Barre d'écoulement"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "Le panneau Flux doit-il être affiché par défaut."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "Protocoles"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "Protocoles"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "Sélectionnez le protocole spécifique pour le filtre."
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "Drapeaux TCP"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "Les indicateurs TCP à rechercher dans le filtre. Cela peut être une liste délimitée par des virgules d'indicateurs TCP"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "Champs PEF"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "Les champs TOS à rechercher dans le filtre. Cela peut être une liste de champs TOS séparés par des virgules"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrez sur l'adresse IP source sélectionnée dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "Ports de Source"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "Filtrez sur les ports source sélectionnés pour dans le filtre. Cela peut être une liste de ports sources séparés par des virgules."
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "Interface Source"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "Filtrez sur l'interface source pour sélectionner dans le filtre. Cela peut être une liste d'interfaces source séparées par des virgules"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "Filtrer sur la destination AS sélectionnée pour dans le filtre. Cela peut être une liste délimitée par des virgules des AS source"
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrez sur l'adresse IP de destination sélectionnée pour dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "Port de destination"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "Filtrez sur les ports de destination sélectionnés pour dans le filtre. Cela peut être une liste de ports de Destimation séparés par des virgules."
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "Interface Dest"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "Filtrez sur l'interface de destination sélectionnée pour dans le filtre. Cela peut être une liste d'interfaces de Destimation séparées par des virgules."
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "Dest AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "Filtrer sur la destination AS sélectionnée pour dans le filtre. Cela peut être une liste délimitée par des virgules de Destimation AS"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "IP source"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrez sur l'adresse IP source sélectionnée dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "Port source UDP/TCP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrez sur les ports source sélectionnés pour dans le filtre. Cela peut être une liste de ports sources séparés par des virgules."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "Dest IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrez sur l'adresse IP de destination sélectionnée pour dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "Port de destination"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrez sur les ports de destination sélectionnés pour dans le filtre. Cela peut être une liste de ports de Destimation séparés par des virgules."
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "DNS Cache"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/Itinéraires"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "Nombres"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "Blocs AS"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "Ensembles AS"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "Ensembles d’itinéraires"
-
-#: arrays.php
-msgid "Domains"
-msgstr "Domaines"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "Filtre sauvegardé"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "Ensembles d’appairage"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "Réseau"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "Contrôle Internet"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "Équipes d’intervention en cas d’incident"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "Agents d’authentification"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "Organisations"
-
-#: arrays.php
-msgid "Roles"
-msgstr "Rôles"
-
-#: arrays.php
-msgid "Persons"
-msgstr "Personnes"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "Filtre de flux '%s' supprimé."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -746,6 +94,10 @@ msgstr "Filtre sauvegardé"
 msgid "Peering Set"
 msgstr "Ensembles d’appairage"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Réseau"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "Contrôle Internet"
@@ -781,6 +133,10 @@ msgstr "Remarques"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "Dernière modification"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Source"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "Faire référence à"
 msgid "MP Peering"
 msgstr "Appairage MP"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "Exporter"
 
@@ -993,6 +349,10 @@ msgstr "DS Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Limite d’agr"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Filtre"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "Défaut"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "Aller"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "Définir/Rafraîchir les filtres"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "Clair"
 
@@ -1161,12 +521,12 @@ msgstr[0] "Cliquez sur'Continuer' pour supprimer la ou les annexes suivantes."
 msgstr[1] "Cliquez sur'Continuer' pour supprimer la ou les annexes suivantes."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "Abandonner"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "Continuer"
 
@@ -1191,6 +551,10 @@ msgstr "Non vérifié"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "Supprimer"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "Adresse IP"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1346,9 +710,17 @@ msgstr "Hôte autorisé"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Port"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "Port sur lequel ce collecteur écoutera."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Protocole"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1415,7 +787,7 @@ msgstr "Nom"
 msgid "Version"
 msgstr "Version"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "Modèles"
 
@@ -1439,6 +811,11 @@ msgstr "Modèles d’écouteur détectés"
 msgid "Ex Addr"
 msgstr "Ex Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "Tout"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "Modèle"
@@ -1451,7 +828,7 @@ msgstr "Template ID"
 msgid "Field Name"
 msgstr "Nom du champ"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "Pris en charge"
 
@@ -1532,7 +909,7 @@ msgstr "Les versions de Traffic Flow observées."
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Temps de mise à jour maximal de tous les flux collectés.  Cette valeur est mise à jour toutes les 5 minutes."
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "Aucun"
 
@@ -1540,6 +917,10 @@ msgstr "Aucun"
 #, fuzzy
 msgid "No Connections"
 msgstr "Geolocalisation"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "N/A"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1581,9 +962,21 @@ msgstr "Filtres"
 msgid "Filter Name"
 msgstr "Nom du filtre"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "Auditeur"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Type de rapport"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Zone de tri :"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1828,7 +1221,7 @@ msgstr "Planifications"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "Sélecteur de date de début"
 
@@ -1861,591 +1254,1199 @@ msgstr "E-mail"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Non"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Oui"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Imprimer les rapports"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Résumé"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "IP source ou destination"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Destination IP"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Source/Destination IP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "Port de destination UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "Port source UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "Port UDP/TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "IP source"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "IP Destination"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Source/Destination IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "IP source ou destination"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "Protocole IP"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Interface d'entrée"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Interface de sortie"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Interface d'entrée/sortie"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Pas de source"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Destination"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Source/Destination AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Préfixe source"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Préfixe de destination"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Préfixe Source/Destination"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Temps d'écoulement"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Source/Destination IP"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Nombres"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 Colonnes"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Afficher l'émulation de la comptabilité IP"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Toute pièce de la gamme"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Heure de fin"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Heure de début"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Entièrement à portée"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Renvoyer toutes les lignes"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Top %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Aucune limite"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Octets"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Domaine source"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Flux"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Paquets"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Domaine de destination"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Port Source"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Port Destination"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Dest IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Pas de source"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Destination"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "CGU"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Préfixe de destination"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Heure de début"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Heure de fin"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Actif"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pqt"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Drapeaux"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Destination"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d pixels"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Supprimer les filtres"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Le filtre enregistré à afficher."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Ajouter un filtre"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "L'auditeur à utiliser pour le filtre."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "Template ID"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "ID de modèle de flux pour les flux v9 et IPFIX uniquement.  Notez que les ID de modèle peuvent différer d’un fabricant à l’autre."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Adresse IP"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "L’adresse IP du flux ou le nom d’hôte de la liste des flux enregistrés."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Préréglages"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Si ce filtre est basé sur une période prédéfinie, sélectionnez-le ici."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Critères de filtrage détaillés"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Type de rapport à utiliser par défaut pour ce filtre lors de la création d'un rapport."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Imprimé"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Statistique"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Rapports statistiques"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Le type de rapport d'affichage à utiliser par défaut pour ce filtre lors de la création d'un rapport."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Imprimer les rapports"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Type de rapport imprimé à utiliser par défaut pour ce filtre lors de la création d'un rapport imprimé."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Gérer les horaires"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Contraignez les données de filtre par ces règles de filtre temporel."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Résoudre les adresses :"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Résoudre les adresses :"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Le champ de tri par défaut pour le filtre. Ce paramètre sera appliqué à tous les rapports programmés."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Lignes maximum"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Nombre maximal de lignes à fournir dans le filtre. Ce paramètre sera appliqué à tous les rapports programmés."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Octets minimum :"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Nombre total minimal d'octets à prendre en compte pour le filtre. Tous les totaux de flux inférieurs à ce nombre d'octets seront ignorés."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Options de graphique"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Type de Graphique"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Type de graphique à afficher par défaut.  Il s’agit notamment de Bar, Pie et Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Graphique en barre"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Camembert"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Graphique Treemap"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Hauteur du Graphique"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "Hauteur du graphique à utiliser par défaut."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Tableau"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Le panneau Tableau doit-il être affiché par défaut."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Barre d'octets"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Le panneau Octets doit-il être affiché par défaut."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Barre de paquets"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Le panneau Paquets doit-il être affiché par défaut ?"
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Barre d'écoulement"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Le panneau Flux doit-il être affiché par défaut."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Protocoles"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Protocoles"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Sélectionnez le protocole spécifique pour le filtre."
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "Drapeaux TCP"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "Les indicateurs TCP à rechercher dans le filtre. Cela peut être une liste délimitée par des virgules d'indicateurs TCP"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "Champs PEF"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Les champs TOS à rechercher dans le filtre. Cela peut être une liste de champs TOS séparés par des virgules"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrez sur l'adresse IP source sélectionnée dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Ports de Source"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Filtrez sur les ports source sélectionnés pour dans le filtre. Cela peut être une liste de ports sources séparés par des virgules."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Interface Source"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Filtrez sur l'interface source pour sélectionner dans le filtre. Cela peut être une liste d'interfaces source séparées par des virgules"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Filtrer sur la destination AS sélectionnée pour dans le filtre. Cela peut être une liste délimitée par des virgules des AS source"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrez sur l'adresse IP de destination sélectionnée pour dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Port de destination"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Filtrez sur les ports de destination sélectionnés pour dans le filtre. Cela peut être une liste de ports de Destimation séparés par des virgules."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Interface Dest"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Filtrez sur l'interface de destination sélectionnée pour dans le filtre. Cela peut être une liste d'interfaces de Destimation séparées par des virgules."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Dest AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Filtrer sur la destination AS sélectionnée pour dans le filtre. Cela peut être une liste délimitée par des virgules de Destimation AS"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "IP source"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrez sur l'adresse IP source sélectionnée dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "Port source UDP/TCP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrez sur les ports source sélectionnés pour dans le filtre. Cela peut être une liste de ports sources séparés par des virgules."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "Dest IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrez sur l'adresse IP de destination sélectionnée pour dans le filtre. Il peut s'agir d'une liste d'adresses IPv4 ou IPv6 délimitée par des virgules, ou d'une liste délimitée par des virgules de plages d'adresses IPv4 ou IPv6 au format CIDR (par exemple 192.168.1.0/24)."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "Port de destination"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrez sur les ports de destination sélectionnés pour dans le filtre. Cela peut être une liste de ports de Destimation séparés par des virgules."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS Cache"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Itinéraires"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Nombres"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "Blocs AS"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "Ensembles AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Ensembles d’itinéraires"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Domaines"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Filtre sauvegardé"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Ensembles d’appairage"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Contrôle Internet"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Équipes d’intervention en cas d’incident"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Agents d’authentification"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Organisations"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Rôles"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Personnes"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "Cactus"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "Général"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "Rapport : [Modifier : %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "Rapport : [nouveau]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Filtre non défini [Sélectionner le filtre pour obtenir les détails]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "Rapport statistique: %s [y compris les remplacements spécifiés ci-dessous]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "Rapport imprimé: %s [y compris les remplacements spécifiés ci-dessous]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "Streams"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "Appliquer le Filtre"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "Clair le filtre"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "Combien de fois faut-il créer un nouveau fichier de déroulement ?"
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "Nouveau"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "Editer"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "Modifier le filtre actuel"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "Enregistrer sous"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "Renommer"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "Renommer le filtre de flux"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "Rapport"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "Statistiques : %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "Imprimé : %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "Lignes"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "Exclure"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "Échantillon supérieur"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "Les %d meilleurs échantillons"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "Octets"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "Afficher uniquement les domaines sur les graphiques ci-dessous"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "Domaines uniquement"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "Durée"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "Personnalisé"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "De"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "À"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "Sélecteur de date de fin"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "Reculer dans le temps"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "Définir l'intervalle de temps"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "Avancer dans le temps"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "Graphique"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "Bar"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "Camembert"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "Arborescence"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "Hauteur"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "Afficher / Masquer"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "Tableau"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "Rapport"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "Ajouter un filtre"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "Nouveau nom"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "Imprimer les rapports"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "Pour supprimer ce filtre de flux, appuyez sur Continuer.  Si le filtre de flux est utilisé dans un rapport planifié, l’opération sera bloquée."
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "Tableau de répartition des %s principaux octets"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "Top %s graphique circulaire des octets"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "Top %s Treemap Chart of Bytes"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "Tableau de distribution des %s principaux paquets"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "Top %s graphique circulaire des paquets"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "Top %s Treemap Chart of Packets"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "Graphique de distribution des flux des %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "Top %s graphique circulaire des flux"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "Top %s Treemap Graphique des flux"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "Renommer la mise en page"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr "[nouveau]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "Paramètres du filtre enregistrés"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "Client / Privé (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "Inconnu (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Filtre de sous-réseau: %s n'est pas un format CIDR de valeur"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "Filtre de sous-réseau: %s n'est pas un format CIDR de valeur"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "non résolu"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d octets"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d octets"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "Script/source utilisé pour collecter les données de cette source de donnée."
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "Script/source utilisé pour collecter les données de cette source de donnée."
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "Dest AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "Port de destination"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "DNS racine"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "Port de destination"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "Dest IF"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "Préfixe de destination"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "Type de Service"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "Paquets"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "La requête parallèle a expiré.  Veuillez contacter votre administrateur"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "Booléen: %s, numérique: %s, hexadécimal: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "Faible délai"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "élevé"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "Fiabilité "
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "Mincost"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "Contrôle net"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "Contrôle Internet"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "Critique ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "Remplacement Flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "Flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "Immédiat"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "Priorité"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "Emploi du temps"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "Statistiques sommaires"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "Distribution de la taille des paquets IP (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Paquets par distribution de flux (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Octets par distribution de flux (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Distribution du temps de flux (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Vous devez sélectionner un rapport statistique ou un rapport imprimé !"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Vous ne devez sélectionner qu'un rapport statistique ou un rapport imprimé (pas les deux) !"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Dates non valables, la date et l'heure de fin sont antérieures à la date et à l'heure de début !"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP invalide pour l'adresse source!<br>(Doit être sous la forme de'192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Sous-réseau invalide pour l'adresse source!<br>(Doit être sous la forme de'192.168.0.1/255.255.255.255.0' ou'192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "IP invalide pour l'adresse de destination!<br>(Doit être sous la forme de'192.168.0.1')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Sous-réseau invalide pour l'adresse de destination!<br>(Doit être sous la forme de'192.168.0.1/255.255.255.255.0' ou'192.168.0.1/24')"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "Valeur incorrecte pour l'interface source !"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Valeur incorrecte pour le port source ! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Valeur incorrecte pour Source AS ! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "Valeur incorrecte pour l'interface de destination !"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Valeur incorrecte pour le port de destination ! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Valeur incorrecte pour Destination AS ! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Valeur incorrecte pour le protocole ! (1 - 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "Valeur incorrecte pour TCP Flag ! (ex : 0x1b ou 0x1b/SA ou SA/SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Valeur incorrecte pour les octets de coupure !"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Valeur incorrecte pour les lignes de coupure !"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "Diagramme FlowView pour %s Type est %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "Pris en charge"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "Non Supporté"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria (rapide, sûr en cas d’accident)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (rapide, sûr en cas d’accident)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (simultanéité lente et élevée)"
 
