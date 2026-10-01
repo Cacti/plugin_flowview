@@ -24,7 +24,7 @@
 */
 
 if (version_compare(CACTI_VERSION, '1.3', '<')) {
-	include_once(__DIR__ . '/functions-pre13.php');
+	require_once(__DIR__ . '/functions-pre13.php');
 }
 
 /**
@@ -181,7 +181,7 @@ function sort_filter(): void {
 
 	global $config, $filter_edit, $graph_timespans;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	if (isset_request_var('printed') && get_filter_request_var('printed') > 0) {
 		foreach($print_columns_array[get_request_var('printed')] as $key => $value) {
@@ -208,7 +208,7 @@ function edit_filter(): void {
 	get_filter_request_var('id');
 	/* ==================================================== */
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	if (isset_request_var('return')) {
 		$page = get_nfilter_request_var('return');
@@ -681,7 +681,7 @@ function flowview_display_filter(): void {
 
 	global $cutoff_lines, $cutoff_octets;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	$title  = __esc('Undefined Filter [ Select Filter to get Details ]', 'flowview');
 
@@ -1859,7 +1859,7 @@ function flowview_display_filter(): void {
 function get_port_name($port_num, int $port_proto = 6) {
 	global $config, $graph_timespans;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	if (isset($ip_protocols_array[$port_proto])) {
 		$port_proto = strtolower($ip_protocols_array[$port_proto]);
@@ -2298,7 +2298,7 @@ function get_date_filter($sql_range, &$sql_range_params, $start, $end, int $rang
 function get_tables_for_query($start, $end = null) {
 	global $config, $graph_timespans;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	$part_type  = read_config_option('flowview_partition');
 	$inc_tables = [];
@@ -2721,7 +2721,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 	/* close session to allow offpage navigation */
 	cacti_session_close();
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	$data = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
@@ -5150,7 +5150,7 @@ function removeWhiteSpace($string) {
 function plugin_flowview_get_protocol($prot, $prot_hex) {
 	global $config, $graph_timespans;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	$prot = ltrim($prot,'0');
 	$prot = ($prot_hex ? hexdec($prot):$prot);
@@ -5267,7 +5267,7 @@ function flowview_translate_port($port, $is_hex, bool $detail = true) {
 function flowview_check_fields() {
 	global $config, $graph_timespans;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	if (get_request_var('statistics') == 0 && get_request_var('printed') == 0) {
 		return __('You must select a Statistics Report or Printed Report!', 'flowview');
@@ -5550,7 +5550,7 @@ function flowview_draw_chart($type, $title): void {
 function flowview_get_dns_from_ip($ip, int $timeout = 1000) {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/flowview/Net/DNS2.php');
+	require_once($config['base_path'] . '/plugins/flowview/Net/DNS2.php');
 
 	// First check to see if its in the cache
 	$cache = flowview_db_fetch_row_prepared('SELECT *

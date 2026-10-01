@@ -37,12 +37,12 @@ set_time_limit(0);
 ob_implicit_flush();
 
 chdir(__DIR__ . '/../../');
-include('./include/cli_check.php');
+require('./include/cli_check.php');
 
 global $config;
-include_once($config['base_path'] . '/lib/poller.php');
-include_once($config['base_path'] . '/plugins/flowview/setup.php');
-include_once($config['base_path'] . '/plugins/flowview/functions.php');
+require_once($config['base_path'] . '/lib/poller.php');
+require_once($config['base_path'] . '/plugins/flowview/setup.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 chdir(__DIR__);
 
 ini_set('max_execution_time', '-1');
@@ -50,7 +50,7 @@ ini_set('max_execution_time', '-1');
 flowview_connect();
 
 /* include arrays after flowview_connect() */
-include_once($config['base_path'] . '/plugins/flowview/arrays.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 $debug     = false;
 $force     = false;
@@ -1000,7 +1000,7 @@ function database_check_connect(): void {
 
 	flowview_determine_config();
 
-	include($config['include_path'] . '/config.php');
+	require($config['include_path'] . '/config.php');
 
 	/** @var string $database_hostname */
 	/** @var string $database_username */

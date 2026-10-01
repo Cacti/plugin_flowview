@@ -24,12 +24,12 @@
 */
 
 chdir('../../');
-include('./include/cli_check.php');
+require('./include/cli_check.php');
 
 global $config, $flowviewdb_default;
 
-include_once($config['base_path'] . '/plugins/flowview/setup.php');
-include_once($config['base_path'] . '/plugins/flowview/functions.php');
+require_once($config['base_path'] . '/plugins/flowview/setup.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 
 flowview_connect();
 

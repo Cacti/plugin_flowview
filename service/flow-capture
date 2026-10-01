@@ -57,7 +57,7 @@ if ($cacti_base === false) {
 include_once($cacti_base . '/include/cli_check.php');
 include_once($cacti_base . '/lib/poller.php');
 include_once($cacti_base . '/plugins/flowview/setup.php');
-include_once($cacti_base . '/plugins/flowview/functions.php');
+include_once($cacti_base . '/plugins/flowview/includes/functions.php');
 
 $shortopts = 'VvHh';
 $longopts = array(

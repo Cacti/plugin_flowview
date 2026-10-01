@@ -24,17 +24,17 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
+require('./include/auth.php');
 
 global $config;
 
-include_once($config['base_path'] . '/plugins/flowview/setup.php');
-include_once($config['base_path'] . '/plugins/flowview/functions.php');
-include_once($config['base_path'] . '/plugins/flowview/flowview_security.php');
+require_once($config['base_path'] . '/plugins/flowview/setup.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/flowview_security.php');
 
 flowview_connect();
 
-include_once($config['base_path'] . '/plugins/flowview/arrays.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 $flow_actions = array(
 	1 => __('Delete', 'flowview'),

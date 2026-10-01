@@ -24,12 +24,12 @@
 */
 
 chdir('../../');
-include('./include/auth.php');
+require('./include/auth.php');
 
 global $config;
-include('./lib/utility.php');
-include_once('./plugins/flowview/functions.php');
-include_once('./plugins/flowview/database.php');
+require('./lib/utility.php');
+require_once('./plugins/flowview/includes/functions.php');
+require_once('./plugins/flowview/includes/database.php');
 
 flowview_connect();
 
@@ -68,7 +68,7 @@ function flowview_get_item_details(): bool {
 	global $config, $db_tabs;
 	global $graph_timeshifts, $graph_timespans, $graph_heights;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	$cols  = get_all_columns();
 	$tab   = get_nfilter_request_var('tab');
@@ -199,7 +199,7 @@ function view_databases(): void {
 	global $config, $actions, $item_rows, $db_tabs;
 	global $graph_timeshifts, $graph_timespans, $graph_heights;
 
-	include($config['base_path'] . '/plugins/flowview/arrays.php');
+	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
 	get_filter_request_var('tab', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z_A-Z]+)$/')));
 

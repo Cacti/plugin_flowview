@@ -7,7 +7,7 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once __DIR__ . '/../../flowview_security.php';
+require_once __DIR__ . '/../../includes/flowview_security.php';
 
 describe('listener port normalization', function () {
 	it('accepts valid numeric ports', function () {

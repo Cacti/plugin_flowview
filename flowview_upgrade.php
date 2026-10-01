@@ -24,10 +24,10 @@
 */
 
 chdir('../../');
-include('./include/cli_check.php');
-include_once('./plugins/flowview/functions.php');
-include_once('./plugins/flowview/setup.php');
-include_once('./plugins/flowview/database.php');
+require('./include/cli_check.php');
+require_once('./plugins/flowview/includes/functions.php');
+require_once('./plugins/flowview/setup.php');
+require_once('./plugins/flowview/includes/database.php');
 
 flowview_connect();
 
@@ -516,7 +516,7 @@ function flowview_upgrade($current, $old): void {
 			flowview_db_execute('DROP TABLE IF EXISTS plugin_flowview_irr_route');
 		}
 
-		include($config['base_path'] . '/plugins/flowview/irr_tables.php');
+		require($config['base_path'] . '/plugins/flowview/irr_tables.php');
 
 		if (flowview_db_column_exists('plugin_flowview_arin_information', 'origin_as', false)) {
 			flowview_db_execute("ALTER TABLE plugin_flowview_arin_information CHANGE COLUMN origin_as origin varchar(20) NOT NULL DEFAULT ''");

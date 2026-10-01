@@ -135,6 +135,19 @@ transfer into the Cacti database.  Check the README.md in the service folder to
 describe this process.  Any time you add a new listener, you must restart this
 service.
 
+## Upgrading
+
+After upgrading the plugin (when new plugin files have been copied into place),
+restart the flow-capture service so it runs the updated capture/transfer code:
+
+```
+sudo systemctl restart flow-capture
+```
+
+(or the equivalent `service`/`init.d` command on non-systemd systems).  The
+plugin's own database tables are upgraded automatically in the background on the
+next Console page load.
+
 ## System Tuning
 
 You may be required to increase some system defaults such a max connections

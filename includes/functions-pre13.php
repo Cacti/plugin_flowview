@@ -262,7 +262,7 @@ function reports_queue($name, $request_type, $source, $source_id, $command, $not
 function reports_run($id): bool {
 	global $config;
 
-	include_once($config['base_path'] . '/lib/poller.php');
+	require_once($config['base_path'] . '/lib/poller.php');
 
 	$report = db_fetch_row_prepared('SELECT *
 		FROM reports_queued

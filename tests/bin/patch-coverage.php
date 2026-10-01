@@ -160,6 +160,29 @@ foreach ($clover->xpath('//file') as $file) {
  * Empty by default; add entries per repository as the need arises.
  */
 $unmeasured_allowlist = [
+	// setup.php's flowview_connect() performs runtime separate-database
+	// connection work that is not reachable from the isolated unit process; its
+	// lifecycle functions remain exercised by the lifecycle/install-hooks tests.
+	'setup.php',
+	// Web/CLI entry points (chdir + require auth.php or top-level execution)
+	// that cannot load in the isolated unit process. Changed here only by the
+	// includes/ library relocation + include_once -> require_once sweep.
+	'fixprivate.php',
+	'flow_collector.php',
+	'flowview.php',
+	'flowview_bulkarin.php',
+	'flowview_cleanup.php',
+	'flowview_databases.php',
+	'flowview_devices.php',
+	'flowview_drop_raw_tables.php',
+	'flowview_filters.php',
+	'flowview_process.php',
+	'flowview_schedules.php',
+	'flowview_upgrade.php',
+	'flowview_upgrade_nat_columns.php',
+	'import_flows.php',
+	'repair_tables.php',
+	'run_schedule.php',
 ];
 $unmeasured            = array_values(array_diff(array_keys($changed), array_keys($measured)));
 $unexpected_unmeasured = array_values(array_diff($unmeasured, $unmeasured_allowlist));
