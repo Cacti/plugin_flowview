@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 16:05-0400\n"
+"POT-Creation-Date: 2026-09-30 10:11-0400\n"
 "PO-Revision-Date: 2024-07-14 20:37-0400\n"
 "Last-Translator: San IPE <sanipe1949@krunsea.com>\n"
 "Language-Team: Turkish <http://translate.cacti.net/projects/cacti/flowview/tr/>\n"
@@ -17,658 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: arrays.php functions.php
-msgid "Select a Report"
-msgstr "Raporları Yazdır"
-
-#: arrays.php
-msgid "Summary"
-msgstr "Özet"
-
-#: arrays.php
-msgid "Source Root Domain"
-msgstr "Kaynak veya Hedef IP"
-
-#: arrays.php
-msgid "Destination Root Domain"
-msgstr "Hedef IP"
-
-#: arrays.php
-msgid "Source/Destination Root Domain"
-msgstr "Kaynak / Hedef IP"
-
-#: arrays.php
-msgid "UDP/TCP Destination Port"
-msgstr "UDP / TCP Hedef Bağlantı Noktası"
-
-#: arrays.php
-msgid "UDP/TCP Source Port"
-msgstr "UDP / TCP Kaynak Bağlantı Noktası"
-
-#: arrays.php
-msgid "UDP/TCP Port"
-msgstr "UDP / TCP Bağlantı Noktası"
-
-#: arrays.php functions.php
-msgid "Source IP"
-msgstr "Kaynak IP"
-
-#: arrays.php
-msgid "Destination IP"
-msgstr "Hedef IP"
-
-#: arrays.php functions.php
-msgid "Source/Destination IP"
-msgstr "Kaynak / Hedef IP"
-
-#: arrays.php
-msgid "Source or Destination IP"
-msgstr "Kaynak veya Hedef IP"
-
-#: arrays.php
-msgid "IP Protocol"
-msgstr "IP Protokolü"
-
-#: arrays.php
-msgid "Input Interface"
-msgstr "Giriş arayüzü"
-
-#: arrays.php
-msgid "Output Interface"
-msgstr "Çıkış arayüzü"
-
-#: arrays.php
-msgid "Input/Output Interface"
-msgstr "Giriş / Çıkış Arabirimi"
-
-#: arrays.php functions.php
-msgid "Source AS"
-msgstr "Kaynak Yok"
-
-#: arrays.php
-msgid "Destination AS"
-msgstr "Hedef"
-
-#: arrays.php
-msgid "Source/Destination AS"
-msgstr "Kaynak / Hedef AS"
-
-#: arrays.php
-msgid "IP ToS"
-msgstr "IP ToS"
-
-#: arrays.php functions.php
-msgid "Source Prefix"
-msgstr "Kaynak Öneki"
-
-#: arrays.php
-msgid "Destination Prefix"
-msgstr "Hedef Öneki"
-
-#: arrays.php
-msgid "Source/Destination Prefix"
-msgstr "Kaynak / Hedef Öneki"
-
-#: arrays.php
-msgid "Flow Times"
-msgstr "Akış zamanları"
-
-#: arrays.php
-msgid "Source/Destination IPs and Ports"
-msgstr "Kaynak / Hedef IP"
-
-#: arrays.php
-msgid "AS Numbers"
-msgstr "Sayılar"
-
-#: arrays.php
-msgid "132 Columns"
-msgstr "132 Sütunlar"
-
-#: arrays.php
-msgid "Show IP Accounting Emulation"
-msgstr "IP Hesap Öykünmesini Göster"
-
-#: arrays.php
-msgid "Any Part in Range (slow)"
-msgstr "Menzildeki Herhangi Bir Parça"
-
-#: arrays.php
-msgid "End Time in Range (fast)"
-msgstr "Bitiş Zamanı"
-
-#: arrays.php
-msgid "Start Time in Range (fast)"
-msgstr "Başlama Zamanı"
-
-#: arrays.php
-msgid "Entirely in Range (slow)"
-msgstr "Tamamen Menzilde"
-
-#: arrays.php
-msgid "Return All Lines"
-msgstr "Tüm Satırları Döndür"
-
-#: arrays.php
-#, php-format
-msgid "Top %d"
-msgstr "En iyi% d"
-
-#: arrays.php
-msgid "No Limit"
-msgstr "Limit yok"
-
-#: arrays.php
-#, php-format
-msgid "%s Bytes"
-msgstr "%s Bayt"
-
-#: arrays.php flowview_devices.php flowview_filters.php functions.php
-msgid "All"
-msgstr "Tümü"
-
-#: arrays.php
-msgid "Source Domain"
-msgstr "Kaynak Etki Alanı"
-
-#: arrays.php functions.php
-msgid "Flows"
-msgstr "Akışlar"
-
-#: arrays.php functions.php
-msgid "Bytes"
-msgstr "B"
-
-#: arrays.php functions.php
-msgid "Packets"
-msgstr "paketler"
-
-#: arrays.php
-msgid "Destination Domain"
-msgstr "Hedef IP"
-
-#: arrays.php flowview_devices.php
-msgid "Port"
-msgstr "Port"
-
-#: arrays.php functions.php
-msgid "Source Port"
-msgstr "Kaynak Bağlantı Noktası"
-
-#: arrays.php
-msgid "Destination Port"
-msgstr "Hedef IP"
-
-#: arrays.php functions.php
-msgid "Dest IP"
-msgstr "Hedef IP"
-
-#: arrays.php flowview_databases.php
-msgid "IP Address"
-msgstr "IP Adresi"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "Protocol"
-msgstr "Protokol"
-
-#: arrays.php functions.php
-msgid "Source IF"
-msgstr "Kaynak Yok"
-
-#: arrays.php
-msgid "Destination IF"
-msgstr "Hedef"
-
-#: arrays.php
-msgid "TOS"
-msgstr "Kullanım Koşulları"
-
-#: arrays.php
-msgid "Destingation Prefix"
-msgstr "Hedef Öneki"
-
-#: arrays.php flowview_devices.php functions.php
-msgid "N/A"
-msgstr "Yok"
-
-#: arrays.php functions.php
-msgid "Start Time"
-msgstr "Başlama Zamanı"
-
-#: arrays.php functions.php
-msgid "End Time"
-msgstr "Bitiş Zamanı"
-
-#: arrays.php
-msgid "Active"
-msgstr "Aktif"
-
-#: arrays.php
-msgid "B/Pk"
-msgstr "B / Tr"
-
-#: arrays.php
-msgid "Ts"
-msgstr "ts"
-
-#: arrays.php
-msgid "Fl"
-msgstr "Fl"
-
-#: arrays.php functions.php
-msgid "Flags"
-msgstr "Bayraklar"
-
-#: arrays.php flowview_databases.php
-msgid "Source"
-msgstr "Kaynak"
-
-#: arrays.php
-msgid "Destination"
-msgstr "Hedef"
-
-#: arrays.php
-#, php-format
-msgid "%d Pixels"
-msgstr "%d Piksel"
-
-#: arrays.php
-msgid "General Filters"
-msgstr "Filtreleri Temizle"
-
-#: arrays.php flowview_databases.php functions.php
-msgid "Filter"
-msgstr "Filtre"
-
-#: arrays.php
-msgid "The Saved Filter to display."
-msgstr "Kaydedilen Filtre görüntülenecek."
-
-#: arrays.php
-msgid "New Filter"
-msgstr "Yeni Filtre"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Listener"
-msgstr "dinleyici"
-
-#: arrays.php
-msgid "The Listener to use for the Filter."
-msgstr "Filtre için kullanılacak Dinleyici."
-
-#: arrays.php
-msgid "Flow Template ID"
-msgstr "Şablon KIMLIĞI"
-
-#: arrays.php
-msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr "Yalnızca v9 ve IPFIX Akışları için Akış Şablonu Kimliği.  Şablon Kimliklerinin üreticiden üreticiye farklılık gösterebileceğini unutmayın."
-
-#: arrays.php
-msgid "Stream Address"
-msgstr "IP Adresi"
-
-#: arrays.php
-msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr "Kayıtlı akışlar listesinden Akış IP Adresi veya Ana Bilgisayar Adı."
-
-#: arrays.php
-msgid "Presets"
-msgstr "Hazır ayarlar"
-
-#: arrays.php
-msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "Bu Filtre önceden tanımlanmış bir Zaman aralığına dayanıyorsa, buradan seçin."
-
-#: arrays.php
-msgid "Detailed Filter Criteria"
-msgstr "Ayrıntılı Filtre Kriterleri"
-
-#: arrays.php flowview_filters.php
-msgid "Report Type"
-msgstr "Rapor Tipi"
-
-#: arrays.php
-msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr "Bir Rapor oluştururken bu Filtre için varsayılan olarak kullanılacak Rapor Türü."
-
-#: arrays.php
-msgid "Printed"
-msgstr "Basılı"
-
-#: arrays.php
-msgid "Statistical"
-msgstr "İstatistiksel"
-
-#: arrays.php
-msgid "Statistical Report"
-msgstr "İstatistik Raporları"
-
-#: arrays.php
-msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr "Rapor oluştururken bu Filtre için varsayılan olarak kullanılacak Rapor Türünü Görüntüle."
-
-#: arrays.php
-msgid "Printed Report"
-msgstr "Raporları Yazdır"
-
-#: arrays.php
-msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr "Basılı Rapor oluştururken bu Filtre için varsayılan olarak kullanılacak Basılı Rapor Türü."
-
-#: arrays.php
-msgid "Range Rules"
-msgstr "Programları Yönet"
-
-#: arrays.php
-msgid "Constrain the Filter Data by these time filter rules."
-msgstr "Verileri bu zaman filtresi kurallarına göre sınırlayın."
-
-#: arrays.php
-msgid "Resolve IP's"
-msgstr "Adresleri Çöz:"
-
-#: arrays.php
-msgid "Resolve IP Addresses to Domain Names."
-msgstr "Adresleri Çöz:"
-
-#: arrays.php flowview_schedules.php
-msgid "Yes"
-msgstr "Evet"
-
-#: arrays.php flowview_schedules.php
-msgid "No"
-msgstr "Hayır"
-
-#: arrays.php flowview_filters.php functions.php
-msgid "Sort Field"
-msgstr "Alan Sırala:"
-
-#: arrays.php
-msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Filtrenin varsayılan Sıralama Alanı. Bu ayar, herhangi bir Planlanmış Rapor için geçerli olacaktır."
-
-#: arrays.php
-msgid "Maximum Rows"
-msgstr "En Fazla Satır"
-
-#: arrays.php
-msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Filtrede sağlanacak Maksimum Satır. Bu ayar, herhangi bir Planlanmış Rapor için geçerli olacaktır."
-
-#: arrays.php
-msgid "Minimum Bytes"
-msgstr "Minimum Bayt:"
-
-#: arrays.php
-msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "Filtre için dikkate alınacak Minimum Toplam Bayt. Bu kadar bayttan daha az olan akış toplamları göz ardı edilecektir."
-
-#: arrays.php
-msgid "Charting Options"
-msgstr "Grafik Seçenekleri"
-
-#: arrays.php
-msgid "Graph Type"
-msgstr "Grafik Türü"
-
-#: arrays.php
-msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr "Varsayılan olarak görüntülenecek Grafik Türü.  Bar, Pie ve Treemap'i içerirler."
-
-#: arrays.php
-msgid "Bar Chart"
-msgstr "Grafik çubuğu"
-
-#: arrays.php
-msgid "Pie Chart"
-msgstr "Pasta Grafiği"
-
-#: arrays.php
-msgid "Treemap Chart"
-msgstr "Ağaç Haritası Grafiği"
-
-#: arrays.php
-msgid "Graph Height"
-msgstr "Grafik Yüksekliği"
-
-#: arrays.php
-#, fuzzy
-msgid "The Graph Height to use by default."
-msgstr "Varsayılan olarak kullanılacak Grafik Yüksekliği."
-
-#: arrays.php functions.php
-msgid "Use NAT Data"
-msgstr ""
-
-#: arrays.php
-msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
-
-#: arrays.php
-msgid "Table Panel"
-msgstr "Tablo"
-
-#: arrays.php
-msgid "Should the Table Panel be displayed by default."
-msgstr "Tablo Paneli varsayılan olarak görüntülenmelidir."
-
-#: arrays.php
-msgid "Bytes Panel"
-msgstr "Bayt Çubuğu"
-
-#: arrays.php
-msgid "Should the Bytes Panel be displayed by default."
-msgstr "Bayt Paneli varsayılan olarak görüntülenmelidir."
-
-#: arrays.php
-msgid "Packets Panel"
-msgstr "Paket Çubuğu"
-
-#: arrays.php
-msgid "Should the Packets Panel be displayed by default."
-msgstr "Paketler Paneli varsayılan olarak görüntülenmelidir."
-
-#: arrays.php
-msgid "Flows Panel"
-msgstr "Akar Çubuğu"
-
-#: arrays.php
-msgid "Should the Flows Panel be displayed by default."
-msgstr "Akışlar Paneli varsayılan olarak görüntülenmelidir."
-
-#: arrays.php
-msgid "Protocol Filters"
-msgstr "Protokoller"
-
-#: arrays.php
-msgid "Protocols"
-msgstr "İletişim Kuralları"
-
-#: arrays.php
-msgid "Select the Specific Protocol for the Filter."
-msgstr "Filtre için Özel Protokolü seçin."
-
-#: arrays.php
-msgid "TCP Flags"
-msgstr "TCP Bayrakları"
-
-#: arrays.php
-msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr "Filtrede aranacak TCP Bayrakları. Bu, virgülle ayrılmış bir TCP Bayrakları listesi olabilir"
-
-#: arrays.php
-msgid "TOS Fields"
-msgstr "TOS Alanları"
-
-#: arrays.php
-msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr "Filtrede aranacak TOS Alanları. Bu, virgülle ayrılmış bir TOS Alanları listesi olabilir"
-
-#: arrays.php
-msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrede seçilen Kaynak IP'sine göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-msgid "Source Ports"
-msgstr "Kaynak Bağlantı Noktası"
-
-#: arrays.php
-msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr "Filtrede seçili Kaynak Bağlantı Noktalarında filtre uygulayın. Bu, Kaynak Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-msgid "Source Interface"
-msgstr "Kaynak Arabirimi"
-
-#: arrays.php
-msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr "Filtrede için seçilen Kaynak Arayüzünde filtre uygulayın. Bu, virgülle ayrılmış Kaynak Arayüzleri listesi olabilir"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "Filtrede Hedef AS'yi seçin. Bu, Kaynak AS'lerin virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrede seçilen Hedef IP'ye göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-msgid "Dest Ports"
-msgstr "Hedef Limanı"
-
-#: arrays.php
-msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr "Filtrede seçilen Hedef Bağlantı Noktalarında filtre uygulayın. Bu, Hedef Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-msgid "Dest Interface"
-msgstr "Hedef Arabirim"
-
-#: arrays.php
-msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "Filtrede için seçilen Hedef Arayüzünde filtre uygulayın. Bu, Hedef Arabirimlerinin virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php functions.php
-msgid "Dest AS"
-msgstr "Hedef AS"
-
-#: arrays.php
-msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr "Filtrede Hedef AS'yi seçin. Bu, Destimation AS'lerin virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Source IP"
-msgid "Post-NAT Source IP"
-msgstr "Kaynak IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrede seçilen Kaynak IP'sine göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
-msgid "Post-NAT Source Port"
-msgstr "UDP / TCP Kaynak Bağlantı Noktası"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrede seçili Kaynak Bağlantı Noktalarında filtre uygulayın. Bu, Kaynak Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest IP"
-msgid "Post-NAT Dest IP"
-msgstr "Hedef IP"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrede seçilen Hedef IP'ye göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-#, fuzzy
-#| msgid "Dest Port"
-msgid "Post-NAT Dest Port"
-msgstr "Hedef Limanı"
-
-#: arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrede seçilen Hedef Bağlantı Noktalarında filtre uygulayın. Bu, Hedef Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
-
-#: arrays.php
-msgid "DNS Cache"
-msgstr "DNS Önbelleği"
-
-#: arrays.php
-msgid "CIDR/Routes"
-msgstr "CIDR/Rotalar"
-
-#: arrays.php
-msgid "Autonomous Numbers"
-msgstr "Sayılar"
-
-#: arrays.php
-msgid "AS Blocks"
-msgstr "AS Blokları"
-
-#: arrays.php
-msgid "AS Sets"
-msgstr "AS Setleri"
-
-#: arrays.php
-msgid "Route Sets"
-msgstr "Rota Setleri"
-
-#: arrays.php
-msgid "Domains"
-msgstr "Alan Adları"
-
-#: arrays.php
-msgid "Filter Sets"
-msgstr "Filtre Ayarları"
-
-#: arrays.php
-msgid "Peering Sets"
-msgstr "Eşleme Kümeleri"
-
-#: arrays.php flowview_databases.php
-msgid "Network"
-msgstr "Ağ"
-
-#: arrays.php
-msgid "Internet Routers"
-msgstr "İnternet Kontrolü"
-
-#: arrays.php
-msgid "Incident Response Teams"
-msgstr "Olay Müdahale Ekipleri"
-
-#: arrays.php
-msgid "Auth Agents"
-msgstr "Kimlik Doğrulama Aracıları"
-
-#: arrays.php
-msgid "Organizations"
-msgstr "organizasyonlar"
-
-#: arrays.php
-msgid "Roles"
-msgstr "Roller"
-
-#: arrays.php
-msgid "Persons"
-msgstr "Kişiler"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -693,7 +41,7 @@ msgid "Flow Filter '%s' Deleted."
 msgstr "Akış filtresi '%s' silindi."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Delete"
 msgstr "Sil"
 
@@ -746,6 +94,10 @@ msgstr "Filtre Ayarları"
 msgid "Peering Set"
 msgstr "Eşleme Kümeleri"
 
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Ağ"
+
 #: flowview_databases.php
 msgid "Internet Router"
 msgstr "İnternet Kontrolü"
@@ -781,6 +133,10 @@ msgstr "Uyarılar"
 #: flowview_databases.php
 msgid "Last Modified"
 msgstr "Son Düzenleme"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Kaynak"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -918,7 +274,7 @@ msgstr "Bakın"
 msgid "MP Peering"
 msgstr "MP Eşleme"
 
-#: flowview_databases.php flowview_devices.php functions.php
+#: flowview_databases.php flowview_devices.php includes/functions.php
 msgid "Export"
 msgstr "Dışa Aktar"
 
@@ -993,6 +349,10 @@ msgstr "DS Rdata"
 #: flowview_databases.php
 msgid "Aggr Boundary"
 msgstr "Aggr Sınırı"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Filtre"
 
 #: flowview_databases.php
 msgid "MP Import"
@@ -1122,7 +482,7 @@ msgid "Default"
 msgstr "Varsayılan"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Go"
 msgstr "Git"
 
@@ -1132,7 +492,7 @@ msgid "Set/Refresh Filters"
 msgstr "Filtreleri Ayarla / Yenile"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Clear"
 msgstr "Temizle"
 
@@ -1161,12 +521,12 @@ msgstr[0] "Aşağıdaki Programları silmek için 'Devam Et'i tıklayın."
 msgstr[1] "Aşağıdaki Programları silmek için 'Devam Et'i tıklayın."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Cancel"
 msgstr "İptal"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Continue"
 msgstr "Devam et"
 
@@ -1191,6 +551,10 @@ msgstr "Doğrulanmamış"
 #: flowview_databases.php
 msgid "Purge"
 msgstr "Temizle"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP Adresi"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -1346,9 +710,17 @@ msgstr "İzin Verilen Ana Bilgisayar"
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
 msgstr ""
 
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Port"
+
 #: flowview_devices.php
 msgid "Port this collector will listen on."
 msgstr "Port bu koleksiyoncu dinleyecektir."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Protokol"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
@@ -1415,7 +787,7 @@ msgstr "İsim"
 msgid "Version"
 msgstr "Versiyon"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Templates"
 msgstr "Şablonlar"
 
@@ -1439,6 +811,11 @@ msgstr "Dinleyici Algılanan Şablonlar"
 msgid "Ex Addr"
 msgstr "Eski Addr"
 
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+#: includes/functions.php
+msgid "All"
+msgstr "Tümü"
+
 #: flowview_devices.php
 msgid "Template"
 msgstr "Şablon"
@@ -1451,7 +828,7 @@ msgstr "Şablon KIMLIĞI"
 msgid "Field Name"
 msgstr "Alan Adı"
 
-#: flowview_devices.php functions.php
+#: flowview_devices.php includes/functions.php
 msgid "Supported"
 msgstr "Destekli"
 
@@ -1532,7 +909,7 @@ msgstr "Gözlemlenen Trafik Akışı sürümleri."
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
 msgstr "Toplanan tüm akışlardan maksimum güncelleme süresi.  Bu değer her 5 dakikada bir güncellenir."
 
-#: flowview_devices.php flowview_schedules.php functions.php
+#: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
 msgstr "Yok"
 
@@ -1540,6 +917,10 @@ msgstr "Yok"
 #, fuzzy
 msgid "No Connections"
 msgstr "Coğrafi konum"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "Yok"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -1581,9 +962,21 @@ msgstr "Filtreler"
 msgid "Filter Name"
 msgstr "Filtre Adı"
 
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Listener"
+msgstr "dinleyici"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Rapor Tipi"
+
 #: flowview_filters.php
 msgid "ID"
 msgstr "ID"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Alan Sırala:"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1828,7 +1221,7 @@ msgstr "Toplu Zamanlama"
 msgid "%s Seconds"
 msgstr ""
 
-#: flowview_schedules.php functions.php
+#: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
 msgstr "Başlangıç Tarihi Seçicisi"
 
@@ -1861,591 +1254,1199 @@ msgstr "E-posta"
 msgid "Logged Sends"
 msgstr ""
 
-#: functions-pre13.php
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Hayır"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Evet"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Raporları Yazdır"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Özet"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Kaynak veya Hedef IP"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Hedef IP"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Kaynak / Hedef IP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP / TCP Hedef Bağlantı Noktası"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP / TCP Kaynak Bağlantı Noktası"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP / TCP Bağlantı Noktası"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Kaynak IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Hedef IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Kaynak / Hedef IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Kaynak veya Hedef IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP Protokolü"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Giriş arayüzü"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Çıkış arayüzü"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Giriş / Çıkış Arabirimi"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Kaynak Yok"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Hedef"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Kaynak / Hedef AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Kaynak Öneki"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Hedef Öneki"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Kaynak / Hedef Öneki"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Akış zamanları"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Kaynak / Hedef IP"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Sayılar"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 Sütunlar"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "IP Hesap Öykünmesini Göster"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Menzildeki Herhangi Bir Parça"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Bitiş Zamanı"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Başlama Zamanı"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Tamamen Menzilde"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Tüm Satırları Döndür"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "En iyi% d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Limit yok"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Bayt"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Kaynak Etki Alanı"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Akışlar"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "B"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "paketler"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Hedef IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Kaynak Bağlantı Noktası"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Hedef IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Hedef IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Kaynak Yok"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Hedef"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "Kullanım Koşulları"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Hedef Öneki"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Başlama Zamanı"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Bitiş Zamanı"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Aktif"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B / Tr"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Bayraklar"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Hedef"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d Piksel"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Filtreleri Temizle"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Kaydedilen Filtre görüntülenecek."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Yeni Filtre"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Filtre için kullanılacak Dinleyici."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "Şablon KIMLIĞI"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "Yalnızca v9 ve IPFIX Akışları için Akış Şablonu Kimliği.  Şablon Kimliklerinin üreticiden üreticiye farklılık gösterebileceğini unutmayın."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "IP Adresi"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Kayıtlı akışlar listesinden Akış IP Adresi veya Ana Bilgisayar Adı."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Hazır ayarlar"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Bu Filtre önceden tanımlanmış bir Zaman aralığına dayanıyorsa, buradan seçin."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Ayrıntılı Filtre Kriterleri"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Bir Rapor oluştururken bu Filtre için varsayılan olarak kullanılacak Rapor Türü."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Basılı"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "İstatistiksel"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "İstatistik Raporları"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Rapor oluştururken bu Filtre için varsayılan olarak kullanılacak Rapor Türünü Görüntüle."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Raporları Yazdır"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Basılı Rapor oluştururken bu Filtre için varsayılan olarak kullanılacak Basılı Rapor Türü."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Programları Yönet"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Verileri bu zaman filtresi kurallarına göre sınırlayın."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Adresleri Çöz:"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Adresleri Çöz:"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Filtrenin varsayılan Sıralama Alanı. Bu ayar, herhangi bir Planlanmış Rapor için geçerli olacaktır."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "En Fazla Satır"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Filtrede sağlanacak Maksimum Satır. Bu ayar, herhangi bir Planlanmış Rapor için geçerli olacaktır."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Minimum Bayt:"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Filtre için dikkate alınacak Minimum Toplam Bayt. Bu kadar bayttan daha az olan akış toplamları göz ardı edilecektir."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Grafik Seçenekleri"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Grafik Türü"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Varsayılan olarak görüntülenecek Grafik Türü.  Bar, Pie ve Treemap'i içerirler."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Grafik çubuğu"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Pasta Grafiği"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Ağaç Haritası Grafiği"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Grafik Yüksekliği"
+
+#: includes/arrays.php
+#, fuzzy
+msgid "The Graph Height to use by default."
+msgstr "Varsayılan olarak kullanılacak Grafik Yüksekliği."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr ""
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr ""
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Tablo"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Tablo Paneli varsayılan olarak görüntülenmelidir."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Bayt Çubuğu"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Bayt Paneli varsayılan olarak görüntülenmelidir."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Paket Çubuğu"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Paketler Paneli varsayılan olarak görüntülenmelidir."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Akar Çubuğu"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Akışlar Paneli varsayılan olarak görüntülenmelidir."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Protokoller"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "İletişim Kuralları"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Filtre için Özel Protokolü seçin."
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP Bayrakları"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "Filtrede aranacak TCP Bayrakları. Bu, virgülle ayrılmış bir TCP Bayrakları listesi olabilir"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "TOS Alanları"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Filtrede aranacak TOS Alanları. Bu, virgülle ayrılmış bir TOS Alanları listesi olabilir"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrede seçilen Kaynak IP'sine göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Kaynak Bağlantı Noktası"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Filtrede seçili Kaynak Bağlantı Noktalarında filtre uygulayın. Bu, Kaynak Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Kaynak Arabirimi"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Filtrede için seçilen Kaynak Arayüzünde filtre uygulayın. Bu, virgülle ayrılmış Kaynak Arayüzleri listesi olabilir"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Filtrede Hedef AS'yi seçin. Bu, Kaynak AS'lerin virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrede seçilen Hedef IP'ye göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Hedef Limanı"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Filtrede seçilen Hedef Bağlantı Noktalarında filtre uygulayın. Bu, Hedef Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Hedef Arabirim"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Filtrede için seçilen Hedef Arayüzünde filtre uygulayın. Bu, Hedef Arabirimlerinin virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Hedef AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Filtrede Hedef AS'yi seçin. Bu, Destimation AS'lerin virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Source IP"
+msgid "Post-NAT Source IP"
+msgstr "Kaynak IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrede seçilen Kaynak IP'sine göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "UDP/TCP Source Port"
+msgid "Post-NAT Source Port"
+msgstr "UDP / TCP Kaynak Bağlantı Noktası"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrede seçili Kaynak Bağlantı Noktalarında filtre uygulayın. Bu, Kaynak Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest IP"
+msgid "Post-NAT Dest IP"
+msgstr "Hedef IP"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrede seçilen Hedef IP'ye göre filtre uygulayın. Bu, IPv4 veya IPv6 adreslerinin virgülle ayrılmış bir listesi veya CIDR biçiminde (örn. 192.168.1.0/24) IPv4 veya IPv6 adres aralıklarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Dest Port"
+msgid "Post-NAT Dest Port"
+msgstr "Hedef Limanı"
+
+#: includes/arrays.php
+#, fuzzy
+#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrede seçilen Hedef Bağlantı Noktalarında filtre uygulayın. Bu, Hedef Bağlantı Noktalarının virgülle ayrılmış bir listesi olabilir."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS Önbelleği"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Rotalar"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Sayılar"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS Blokları"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS Setleri"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Rota Setleri"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Alan Adları"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Filtre Ayarları"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Eşleme Kümeleri"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "İnternet Kontrolü"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Olay Müdahale Ekipleri"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Kimlik Doğrulama Aracıları"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "organizasyonlar"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Roller"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Kişiler"
+
+#: includes/functions-pre13.php
 #, fuzzy, php-format
 msgid "Cacti %s"
 msgstr "Kaktüsgiller"
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
 msgstr ""
 
-#: functions-pre13.php
+#: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "General"
 msgstr "Genel"
 
-#: functions.php
+#: includes/functions.php
 msgid "Logs"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Report Type First"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
 msgstr "Rapor: [düzenle: %s]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter: [new]"
 msgstr "Rapor: [yeni]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Tanımsız Filtre [Ayrıntıları almak için Filtre Seçin]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
 msgstr "İstatistik Raporu: %s [Aşağıda belirtilen geçersiz kılmalar dahil]"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
 msgstr "Basılı Rapor: %s [Aşağıda belirtilen geçersiz kılmalar dahil]"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Listener"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Stream"
 msgstr "Akışlar"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Select a Stream Host"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Apply Filter"
 msgstr "Filtre Uygula"
 
-#: functions.php
+#: includes/functions.php
 msgid "Clear Filter"
 msgstr "Filtreyi Temizle"
 
-#: functions.php
+#: includes/functions.php
 msgid "Create new Flow Filter"
 msgstr "Ne sıklıkta yeni bir Akış Dosyası oluşturulur."
 
-#: functions.php
+#: includes/functions.php
 msgid "New"
 msgstr "Yeni"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit"
 msgstr "Düzenle"
 
-#: functions.php
+#: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "Mevcut Filtreyi Düzenle"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save"
 msgstr "Kaydet"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the Flow Filter"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save As"
 msgstr "Farklı kaydet"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename"
 msgstr "Yeniden Adlandır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename the Flow Filter"
 msgstr "Akış filtresini yeniden adlandırma"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete the Flow Filter"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Report"
 msgstr "Rapor"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Statistical: %s"
 msgstr "İstatistiksel: %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Printed: %s"
 msgstr "Basılı: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Select a Filter First"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Lines"
 msgstr "Çizgiler"
 
-#: functions.php
+#: includes/functions.php
 msgid "Exclude"
 msgstr "Hariç tut"
 
-#: functions.php
+#: includes/functions.php
 msgid "Top Sample"
 msgstr "En İyi Örnek"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
 msgstr "En İyi %d Örnekleri"
 
-#: functions.php
+#: includes/functions.php
 msgid "Octets"
 msgstr "Sekizliler"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show only Domains on Charts Below"
 msgstr "Aşağıdaki Grafiklerde Yalnızca Alan Adlarını Göster"
 
-#: functions.php
+#: includes/functions.php
 msgid "Domains/Hostnames Only"
 msgstr "Yalnızca Alanlar"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Timespan"
 msgstr "Zaman Süreci"
 
-#: functions.php
+#: includes/functions.php
 msgid "Custom"
 msgstr "Özel"
 
-#: functions.php
+#: includes/functions.php
 msgid "From"
 msgstr "Kimden"
 
-#: functions.php
+#: includes/functions.php
 msgid "To"
 msgstr "Kime"
 
-#: functions.php
+#: includes/functions.php
 msgid "End Date Selector"
 msgstr "Bitiş Tarihi Seçicisi"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Backward"
 msgstr "Zamanı Geri Kaydır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Define Shifting Interval"
 msgstr "Vites Değiştirme Aralığını Tanımlayın"
 
-#: functions.php
+#: includes/functions.php
 msgid "Shift Time Forward"
 msgstr "Zamanı İleri Kaydır"
 
-#: functions.php
+#: includes/functions.php
 msgid "Graph"
 msgstr "Grafik"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bar"
 msgstr "Çubuk"
 
-#: functions.php
+#: includes/functions.php
 msgid "Pie"
 msgstr "Turta"
 
-#: functions.php
+#: includes/functions.php
 msgid "Treemap"
 msgstr "Ağaç görünüm"
 
-#: functions.php
+#: includes/functions.php
 msgid "Height"
 msgstr "Yükseklik"
 
-#: functions.php
+#: includes/functions.php
 msgid "Show/Hide"
 msgstr "Göster/gizle"
 
-#: functions.php
+#: includes/functions.php
 msgid "Table"
 msgstr "Tablo"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 msgid "Export Raw Data"
 msgstr "Rapor"
 
-#: functions.php
+#: includes/functions.php
 msgid "Save Flow Filter"
 msgstr "Yeni Filtre"
 
-#: functions.php
+#: includes/functions.php
 msgid "New Name"
 msgstr "Yeni Ad"
 
-#: functions.php
+#: includes/functions.php
 msgid "Delete Flow Filter"
 msgstr "Raporları Yazdır"
 
-#: functions.php
+#: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
 msgstr "Bu Akış Filtresini Silmek için Devam'a basın.  Akış Filtresi bir Zamanlanmış Raporda kullanılıyorsa, işlem engellenir."
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
 msgstr "Baytların En İyi %s Dağılım Grafiği"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
 msgstr "Baytların En İyi %s Pasta Grafiği"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
 msgstr "En İyi %s Ağaç Haritası Bayt Grafiği"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
 msgstr "Paketlerin En İyi %s Dağıtım Tablosu"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
 msgstr "Paketlerin İlk %s Pasta Grafiği"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
 msgstr "En İyi %s Ağaç Haritası Paket Grafiği"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
 msgstr "Akışların İlk %s Dağılım Grafiği"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
 msgstr "Akışların En İyi %s Pasta Grafiği"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
 msgstr "En İyi %s Ağaç Haritası Akış Grafiği"
 
-#: functions.php
+#: includes/functions.php
 msgid "Rename Layout"
 msgstr "Düzeni Yeniden Adlandır"
 
-#: functions.php
+#: includes/functions.php
 msgid " <new>"
 msgstr " <new>"
 
-#: functions.php
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "Kayıtlı Filtre Ayarları"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
 msgstr "İstemci / Özel (%s)"
 
-#: functions.php
+#: includes/functions.php
 msgid "icmp (0)"
 msgstr "icmp (0)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Unknown (%s)"
 msgstr "Bilinmeyen (%s)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Netflow - %s"
 msgstr "Netflow - %s"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Alt Ağ Filtresi: %s bir değer CIDR biçimi değil"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
 msgstr "Alt Ağ Filtresi: %s bir değer CIDR biçimi değil"
 
-#: functions.php
+#: includes/functions.php
 msgid "unresolved"
 msgstr "- çözülmemiş -"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
 msgstr "%d - %d Bayt"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "> %d Bytes"
 msgstr "> %d Bayt"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "No valid report was selected.  Please open a bug on GitHub"
 msgstr ""
 
-#: functions.php
+#: includes/functions.php
 msgid "Source DNS"
 msgstr "Kaynak Türü"
 
-#: functions.php
+#: includes/functions.php
 msgid "Source Root DNS"
 msgstr "Kaynak Türü"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest DNS"
 msgstr "Hedef AS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Root DNS"
 msgstr "Hedef Limanı"
 
-#: functions.php
+#: includes/functions.php
 msgid "DNS"
 msgstr "DSR"
 
-#: functions.php
+#: includes/functions.php
 msgid "Root DNS"
 msgstr "Kök DNS"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Port"
 msgstr "Hedef Limanı"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest IF"
 msgstr "Hedef IF"
 
-#: functions.php
+#: includes/functions.php
 msgid "Dest Prefix"
 msgstr "Hedef Öneki"
 
-#: functions.php
+#: includes/functions.php
 msgid "Type of Service"
 msgstr "Servis tipi"
 
-#: functions.php
+#: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "paketler"
 
-#: functions.php
+#: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
 msgstr "Paralel sorgu zaman aşımına uğradı.  Lütfen yöneticinize başvurun"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
 msgstr "Boole: %s, Sayısal: %s, Onaltılık: %s"
 
-#: functions.php
+#: includes/functions.php
 msgid "Low Delay"
 msgstr "Düşük Gecikme"
 
-#: functions.php
+#: includes/functions.php
 msgid "Throughput"
 msgstr "Çıktı"
 
-#: functions.php
+#: includes/functions.php
 msgid "Reliability"
 msgstr "Güvenilirlik"
 
-#: functions.php
+#: includes/functions.php
 msgid "Mincost"
 msgstr "Mincost"
 
-#: functions.php
+#: includes/functions.php
 msgid "Net Control"
 msgstr "Net Kontrol"
 
-#: functions.php
+#: includes/functions.php
 msgid "Internet Control"
 msgstr "İnternet Kontrolü"
 
-#: functions.php
+#: includes/functions.php
 msgid "Critic ECP"
 msgstr "Eleştirel ECP"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash Override"
 msgstr "Flash Geçersiz Kılma"
 
-#: functions.php
+#: includes/functions.php
 msgid "Flash"
 msgstr "Flash"
 
-#: functions.php
+#: includes/functions.php
 msgid "Immediate"
 msgstr "Acil"
 
-#: functions.php
+#: includes/functions.php
 msgid "Priority"
 msgstr "Öncelik"
 
-#: functions.php
+#: includes/functions.php
 msgid "Routine"
 msgstr "Rutin"
 
-#: functions.php
+#: includes/functions.php
 msgid "Summary Statistics"
 msgstr "Özet İstatistikler"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
 msgstr "IP Paket Boyutu Dağıtımı (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
 msgstr "Akış Dağıtımı Başına Paket Sayısı (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
 msgstr "Akış Dağılımı Başına Sekizli (%%)"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
 msgstr "Akış Süresi Dağılımı (%%)"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
 msgstr "Bir İstatistik Raporu veya Basılı Rapor seçmelisiniz!"
 
-#: functions.php
+#: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
 msgstr "Sadece bir İstatistik Raporu veya Basılı Rapor seçmelisiniz (ikisini birden değil)!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
 msgstr "Geçersiz tarihler, Bitiş Tarihi / Saati, Başlangıç Tarihi / Saatinden daha erkendir!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Kaynak Adres için Geçersiz IP! <br> ('192.168.0.1' şeklinde olmalı)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Kaynak Adres için geçersiz alt ağ! <br> ('192.168.0.1/255.255.255.0' veya '192.168.0.1/24' şeklinde olmalıdır)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
 msgstr "Hedef Adres için Geçersiz IP! <br> ('192.168.0.1' şeklinde olmalı)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
 msgstr "Hedef Adres için geçersiz alt ağ! <br> ('192.168.0.1/255.255.255.0' veya '192.168.0.1/24' şeklinde olmalıdır)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Interface!"
 msgstr "Kaynak Arabirimi için geçersiz değer!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
 msgstr "Kaynak Bağlantı Noktası için geçersiz değer! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
 msgstr "Kaynak AS! İçin geçersiz değer (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Interface!"
 msgstr "Hedef Arayüz için geçersiz değer!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
 msgstr "Hedef Bağlantı Noktası için geçersiz değer! (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
 msgstr "Hedef AS! İçin geçersiz değer (0 - 65535)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
 msgstr "Protokol için geçersiz değer! (1 - 255)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
 msgstr "TCP Bayrağı için geçersiz değer! (örn: 0x1b veya 0x1b / SA veya SA / SA)"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
 msgstr "Kesim Octets için geçersiz değer!"
 
-#: functions.php
+#: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
 msgstr "Kesme Çizgileri için geçersiz değer!"
 
-#: functions.php
+#: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
 msgstr "%s için FlowView Şeması Tür %s"
 
-#: functions.php
+#: includes/functions.php
 #, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
 msgstr "Destekli"
 
-#: functions.php
+#: includes/functions.php
 msgid "Not Supported"
 msgstr "Desteklenmiyor"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 #, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
 msgstr "Aria (Hızlı, Çarpışmaya Karşı Güvenli)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
 msgstr "Aria (Hızlı, Çarpışmaya Karşı Güvenli)"
 
-#: functions.php setup.php
+#: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (Yavaş, Yüksek Eşzamanlılık)"
 
