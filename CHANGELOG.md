@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* dev: Replace the translation-template CI check that regenerated locales/po/cacti.pot and compared it with a diff-based gate (tests/bin/check-i18n-pot.php) requiring cacti.pot to be updated only when a pull request adds, removes, or modifies an i18n function call
 * issue: Prevent flow-capture from fatally erroring (TypeError in spl_object_hash) when flowview_db_check_reconnect() held a null shared-database handle; normalize a non-object connection to false so db_check_reconnect() checks and reconnects the default connection instead
 * dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
 * dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
