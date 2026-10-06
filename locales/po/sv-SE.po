@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-30 10:11-0400\nPO-Revision-Date: 2026-10-05 08:54+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-30 10:11-0400\nPO-Revision-Date: 2026-10-06 09:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -31,7 +31,7 @@ msgstr "Flödesfiltret \"%s\" har tagits bort."
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
 msgid "Delete"
-msgstr "Ta bort"
+msgstr "Radera"
 
 #: flowview_databases.php
 msgid "DNS Cache has been purged.  It will refill as records come in."
@@ -175,7 +175,7 @@ msgstr "Telefon"
 
 #: flowview_databases.php
 msgid "Email"
-msgstr "eMail"
+msgstr "E-post"
 
 #: flowview_databases.php flowview_devices.php
 msgid "Address"
@@ -470,12 +470,12 @@ msgstr "Standard"
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
 msgid "Go"
-msgstr "Utför"
+msgstr "Start"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php
 msgid "Set/Refresh Filters"
-msgstr "Ange/uppdatera filter"
+msgstr "Ställ in/uppdatera filter"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -539,7 +539,7 @@ msgstr "Rensa"
 
 #: flowview_databases.php includes/arrays.php
 msgid "IP Address"
-msgstr "IP adress"
+msgstr "IP-adress"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
@@ -740,7 +740,7 @@ msgstr "Du måste välja minst en lyssnare."
 
 #: flowview_devices.php
 msgid "The listener port must be a numeric value between 1 and 65535."
-msgstr ""
+msgstr "Lyssnarporten måste vara ett numeriskt värde mellan 1 och 65535."
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
@@ -890,7 +890,7 @@ msgstr "Den maximala uppdateringstiden från alla strömmar som samlas in.  Det 
 
 #: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
-msgstr "inget"
+msgstr "Ingen"
 
 #: flowview_devices.php
 msgid "No Connections"
@@ -1601,11 +1601,11 @@ msgstr "Den diagramhöjd som ska användas som standard."
 
 #: includes/arrays.php includes/functions.php
 msgid "Use NAT Data"
-msgstr ""
+msgstr "Använd NAT-data"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
+msgstr "Visa IP-adress och DNS-namn för källa/mål efter NAT-översättning i rapporten i stället för de ursprungliga värdena före NAT."
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1720,50 +1720,34 @@ msgid "Filter on the select Destination AS for in the Filter.  This can be a com
 msgstr "Filtrera på den valda destinationen AS för i filtret. Detta kan vara en kommaavgränsad lista över Destimation AS"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Source IP"
 msgid "Post-NAT Source IP"
-msgstr "Källa IP"
+msgstr "Käll-IP efter NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "Filtrera på den valda käll-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
 msgid "Post-NAT Source Port"
-msgstr "UDP / TCP Source Port"
+msgstr "Källport efter NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
 msgstr "Filtrera på de valda källportarna för i filtret. Detta kan vara en kommaavgränsad lista över källportar."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest IP"
 msgid "Post-NAT Dest IP"
-msgstr "Dest IP"
+msgstr "Mål-IP efter NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgstr "Filtrera på den valda mål-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest Port"
 msgid "Post-NAT Dest Port"
-msgstr "Dest Port"
+msgstr "Målport efter NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
 msgstr "Filtrera på de valda destinationsportarna för i filtret. Detta kan vara en kommaavgränsad lista över Destimation Ports."
 
@@ -1973,7 +1957,7 @@ msgstr "Uteslut"
 
 #: includes/functions.php
 msgid "Top Sample"
-msgstr "Toppprov"
+msgstr "Högsta provet"
 
 #: includes/functions.php
 #, php-format
@@ -1994,7 +1978,7 @@ msgstr "Endast domäner"
 
 #: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
-msgstr ""
+msgstr "Visa IP-adress/DNS-namn efter NAT-översättning i stället för de ursprungliga värdena"
 
 #: includes/functions.php
 msgid "Timespan"
@@ -2158,10 +2142,9 @@ msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Undernätfilter: %s är inte ett värde-CIDR-format"
 
 #: includes/functions.php
-#, fuzzy, php-format
-#| msgid "Subnet Filter: %s is not a value CIDR format"
+#, php-format
 msgid "IP Filter: %s is not a valid IP address"
-msgstr "Undernätfilter: %s är inte ett värde-CIDR-format"
+msgstr "IP-filter: %s är inte en giltig IP-adress"
 
 #: includes/functions.php
 msgid "unresolved"
@@ -2350,11 +2333,11 @@ msgstr "Ogiltigt värde för källgränssnittet!"
 
 #: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
-msgstr "Ogiltigt värde för Source Port! (0 - 65535)"
+msgstr "Ogiltigt värde för källporten! (0–65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
-msgstr "Ogiltigt värde för Source AS! (0 - 65535)"
+msgstr "Ogiltigt värde för käll-AS! (0–65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Interface!"
@@ -2362,11 +2345,11 @@ msgstr "Ogiltigt värde för destinationsgränssnittet!"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
-msgstr "Ogiltigt värde för destinationsporten! (0 - 65535)"
+msgstr "Ogiltigt värde för destinationsporten! (0–65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
-msgstr "Ogiltigt värde för Destination AS! (0 - 65535)"
+msgstr "Ogiltigt värde för destinations-AS! (0–65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
@@ -2390,10 +2373,8 @@ msgid "FlowView Chart for %s Type is %s"
 msgstr "FlowView Diagram för %s Typ är %s"
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "Supported"
 msgid "Supported (NAT)"
-msgstr "Stödd"
+msgstr "Stöds (NAT)"
 
 #: includes/functions.php
 msgid "Not Supported"
@@ -2473,7 +2454,7 @@ msgstr "(redigera)"
 
 #: setup.php
 msgid "(actions)"
-msgstr "Åtgärder"
+msgstr "(åtgärder)"
 
 #: setup.php
 #, php-format
@@ -2550,8 +2531,6 @@ msgid "Download the Internet Registry Daily"
 msgstr "Hämta ner Internetregistret dagligen"
 
 #: setup.php
-#, fuzzy
-#| msgid "If you are interested in the publically available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
 msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
 msgstr "Om du är intresserad av offentligt tillgänglig information om hela Internet kan du välja det här alternativet.  Cacti kommer att kontakta Internetregistren i hela världen en gång om dagen och kontrollera om det har skett några ändringar i rutterna för hela Internet och ladda in den informationen i Cacti.  Observera att detta kommer att skapa en ganska stor databas med över 3 GByte data."
 
@@ -2690,7 +2669,7 @@ msgstr "Maximalt antal samtidiga trådar"
 
 #: setup.php
 msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
-msgstr "Det maximala antalet trådar som ska skickas för att köra FlowView-frågorna.  Observera att du kan ha högst 1 tråd per databaspartition, och du bör vara försiktig så att du inte överbelastar databasservern med för många samtidiga trådar som körs."
+msgstr "Det maximala antalet trådar som ska skickas för att köra FlowView-frågorna.  Observera att du kan ha högst 1 tråd per databaspartition och du bör vara försiktig så att du inte överbelastar databasservern med för många samtidiga trådar som körs."
 
 #: setup.php
 msgid "Disabled"
