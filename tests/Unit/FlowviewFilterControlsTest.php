@@ -13,7 +13,8 @@
  */
 
 beforeAll(function () {
-	require_once __DIR__ . '/../../setup.php';
+require_once __DIR__ . '/../../setup.php';
+require_once __DIR__ . '/../../includes/functions.php';
 
 	// The full filter render calls a handful of Cacti UI helpers the unit
 	// harness does not otherwise need; stub the ones it does not already define.
