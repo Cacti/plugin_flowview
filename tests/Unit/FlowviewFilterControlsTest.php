@@ -22,6 +22,26 @@ require_once __DIR__ . '/../../includes/functions.php';
 	if (!function_exists('html_end_box'))            { function html_end_box(...$args) {} }
 	if (!function_exists('title_trim'))              { function title_trim($text, $length = 0) { return (string) $text; } }
 	if (!function_exists('html_escape_request_var')) { function html_escape_request_var($name) { return ''; } }
+
+	// includes/arrays.php (required inside flowview_display_filter) re-keys its
+	// device/template lookups with Cacti core's array_rekey(), which the stub
+	// harness does not provide; mirror core's behaviour so the require succeeds.
+	if (!function_exists('array_rekey')) {
+		function array_rekey($array, $key, $value) {
+			$ret = array();
+			if (is_array($array)) {
+				foreach ($array as $item) {
+					$k = $item[$key];
+					if (is_array($value)) {
+						foreach ($value as $v) { $ret[$k][$v] = $item[$v]; }
+					} else {
+						$ret[$k] = $item[$value];
+					}
+				}
+			}
+			return $ret;
+		}
+	}
 });
 
 it('renders the time-shift controls with CSP-safe classes and no inline handlers', function () {
