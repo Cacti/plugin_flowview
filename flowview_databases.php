@@ -946,7 +946,7 @@ function view_db_table($tab, &$tabs): void {
 						<?php print __('Source', 'flowview');?>
 					</td>
 					<td>
-						<select id='source' name='source' onChange='applyFilter()'>
+						<select id='source' name='source'>
 							<option value='-1'<?php print (get_request_var('source') == '-1' ? ' selected>':'>') . __('Any', 'flowview');?></option>
 							<?php
 							$sources = array_rekey(
@@ -968,7 +968,7 @@ function view_db_table($tab, &$tabs): void {
 						<?php print __('Entries', 'flowview');?>
 					</td>
 					<td>
-						<select id='rows' name='rows' onChange='applyFilter()'>
+						<select id='rows' name='rows'>
 							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default', 'flowview');?></option>
 							<?php
 							if (cacti_sizeof($item_rows) > 0) {
@@ -1063,6 +1063,10 @@ function view_db_table($tab, &$tabs): void {
 			}
 
 			$(function() {
+				$('#source, #rows, #verified, #version').change(function() {
+					applyFilter();
+				});
+
 				$('#refresh').on('click', function() {
 					applyFilter();
 				});
@@ -1217,7 +1221,7 @@ function form_actions(): void {
 				</td>
 			</tr>\n";
 
-			$save_html = "<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'flowview') . "</button>
+			$save_html = "<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Cancel', 'flowview') . "</button>
 				<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active' title='" . __n('Delete DNS Entry', 'Delete DNS Entries', cacti_sizeof($dns_array), 'flowview') . "'>" . __esc('Continue', 'flowview') . '</button>';
 		}
 	} else {
@@ -1313,7 +1317,7 @@ function view_dns_cache(): void {
 						<?php print __('Verified', 'flowview');?>
 					</td>
 					<td>
-						<select id='verified' name='verified' onChange='applyFilter()'>
+						<select id='verified' name='verified'>
 							<option value='-1'<?php print (get_request_var('verified') == '-1' ? ' selected>':'>') . __('Any', 'flowview');?></option>
 							<option value='0'<?php print (get_request_var('verified') == '0' ? ' selected>':'>') . __('Unverified', 'flowview');?></option>
 							<option value='1'<?php print (get_request_var('verified') == '1' ? ' selected>':'>') . __('Verified', 'flowview');?></option>
@@ -1323,7 +1327,7 @@ function view_dns_cache(): void {
 						<?php print __('Source', 'flowview');?>
 					</td>
 					<td>
-						<select id='source' name='source' onChange='applyFilter()'>
+						<select id='source' name='source'>
 							<option value='-1'<?php print (get_request_var('source') == '-1' ? ' selected>':'>') . __('Any', 'flowview');?></option>
 							<?php
 							$sources = array_rekey(
@@ -1345,7 +1349,7 @@ function view_dns_cache(): void {
 						<?php print __('Entries', 'flowview');?>
 					</td>
 					<td>
-						<select id='rows' name='rows' onChange='applyFilter()'>
+						<select id='rows' name='rows'>
 							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default', 'flowview');?></option>
 							<?php
 							if (cacti_sizeof($item_rows) > 0) {
@@ -1389,6 +1393,10 @@ function view_dns_cache(): void {
 			}
 
 			$(function() {
+				$('#source, #rows, #verified, #version').change(function() {
+					applyFilter();
+				});
+
 				$('#refresh').on('click', function() {
 					applyFilter();
 				});
@@ -1614,7 +1622,7 @@ function view_routes($tab): void {
 						<?php print __('IP Version', 'flowview');?>
 					</td>
 					<td>
-						<select id='version' name='verified' onChange='applyFilter()'>
+						<select id='version' name='verified'>
 							<option value='-1'<?php print (get_request_var('version') == '-1' ? ' selected>':'>') . __('Any', 'flowview');?></option>
 							<option value='0'<?php print (get_request_var('version') == '0' ? ' selected>':'>') . __('IPv4', 'flowview');?></option>
 							<option value='1'<?php print (get_request_var('version') == '1' ? ' selected>':'>') . __('IPv6', 'flowview');?></option>
@@ -1624,7 +1632,7 @@ function view_routes($tab): void {
 						<?php print __('Source', 'flowview');?>
 					</td>
 					<td>
-						<select id='source' name='source' onChange='applyFilter()'>
+						<select id='source' name='source'>
 							<option value='-1'<?php print (get_request_var('source') == '-1' ? ' selected>':'>') . __('Any', 'flowview');?></option>
 							<?php
 							$sources = array_rekey(
@@ -1646,7 +1654,7 @@ function view_routes($tab): void {
 						<?php print __('Entries', 'flowview');?>
 					</td>
 					<td>
-						<select id='rows' name='rows' onChange='applyFilter()'>
+						<select id='rows' name='rows'>
 							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected>':'>') . __('Default', 'flowview');?></option>
 							<?php
 							if (cacti_sizeof($item_rows) > 0) {
@@ -1742,6 +1750,10 @@ function view_routes($tab): void {
 			}
 
 			$(function() {
+				$('#source, #rows, #verified, #version').change(function() {
+					applyFilter();
+				});
+
 				$('#refresh').on('click', function() {
 					applyFilter();
 				});

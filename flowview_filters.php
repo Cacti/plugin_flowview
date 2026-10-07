@@ -178,7 +178,7 @@ function actions_filters(): void {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($filter_array) ? serialize($filter_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>
-			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'flowview') . "</button>
+			<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Cancel', 'flowview') . "</button>
 			$save_html
 		</td>
 	</tr>";

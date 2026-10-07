@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* security: Move the plugin's remaining inline event handlers to CSP-safe bindings so the pages no longer trip Cacti's Content-Security-Policy script-src-attr directive: confirmation Cancel buttons use the `cactiReturnTo` class, the database/filter selects are bound via change() in their ready blocks, and the main filter's sort/report selects and time-shift icons are bound in flowview_display_filter's ready block
 * dev: Replace the translation-template CI check that regenerated locales/po/cacti.pot and compared it with a diff-based gate (tests/bin/check-i18n-pot.php) requiring cacti.pot to be updated only when a pull request adds, removes, or modifies an i18n function call
 * issue: Prevent flow-capture from fatally erroring (TypeError in spl_object_hash) when flowview_db_check_reconnect() held a null shared-database handle; normalize a non-object connection to false so db_check_reconnect() checks and reconnects the default connection instead
 * dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
