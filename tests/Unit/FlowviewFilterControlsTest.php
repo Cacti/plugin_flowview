@@ -37,6 +37,7 @@ it('renders the time-shift controls with CSP-safe classes and no inline handlers
 
 	$output = ob_get_clean();
 
-	expect($output)->toContain('timeshiftBackward');
-	expect($output)->toContain('timeshiftForward');
+expect($output)->toContain('timeshiftBackward');
+expect($output)->toContain('timeshiftForward');
+expect($output)->not->toMatch('/\son(?:click|change)\s*=/i');
 });
