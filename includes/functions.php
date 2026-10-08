@@ -23,7 +23,11 @@
  +-------------------------------------------------------------------------+
 */
 
-if (version_compare(CACTI_VERSION, '1.3', '<')) {
+// reports_run()/reports_queue()/reports_log_and_notify() are native in Cacti
+// 1.3+. Load the compat shims only when they are actually missing: a develop
+// build can report a version that compares < 1.3 while already defining them
+// natively, and unconditionally including the shims would fatally redeclare them.
+if (!function_exists('reports_run')) {
 	require_once(__DIR__ . '/functions-pre13.php');
 }
 
