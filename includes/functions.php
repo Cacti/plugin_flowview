@@ -798,7 +798,7 @@ function flowview_display_filter(): void {
 						<?php print __('Report', 'flowview');?>
 					</td>
 					<td>
-						<select id='report' name='report' onChange='applyFilter(false)'>
+						<select id='report' name='report'>
 							<?php
 							$reports = [];
 
@@ -831,7 +831,7 @@ function flowview_display_filter(): void {
 						<?php print __('Sort Field', 'flowview');?>
 					</td>
 					<td>
-						<select id='sortfield' name='sortfield' onChange='applyFilter(false)'>
+						<select id='sortfield' name='sortfield'>
 							<?php
 							$columns[0] = __('Select a Filter First', 'flowview');
 
@@ -886,7 +886,7 @@ function flowview_display_filter(): void {
 						<?php print __('Lines', 'flowview');?>
 					</td>
 					<td>
-						<select id='cutofflines' name='cutofflines' onChange='applyFilter(false)'>
+						<select id='cutofflines' name='cutofflines'>
 							<?php
 							if (cacti_sizeof($cutoff_lines)) {
 								if (get_request_var('report') != 's99') {
@@ -920,7 +920,7 @@ function flowview_display_filter(): void {
 						<?php print __('Octets', 'flowview');?>
 					</td>
 					<td>
-						<select id='cutoffoctets' name='cutoffoctets' onChange='applyFilter(false)'>
+						<select id='cutoffoctets' name='cutoffoctets'>
 							<?php
 							if (cacti_sizeof($cutoff_octets)) {
 								foreach($cutoff_octets as $key => $value) {
@@ -946,7 +946,7 @@ function flowview_display_filter(): void {
 						<?php print __('Timespan', 'flowview');?>
 					</td>
 					<td>
-						<select id='predefined_timespan' name='predefined_timespan' onChange='applyTimespan()'>
+						<select id='predefined_timespan' name='predefined_timespan'>
 							<?php
 							if (cacti_sizeof($graph_timespans)) {
 								foreach($graph_timespans as $key => $value) {
@@ -976,7 +976,7 @@ function flowview_display_filter(): void {
 						<i title='<?php print __esc('End Date Selector', 'flowview');?>' class='calendar fa fa-calendar-alt' id='endDate'></i>
 					</td>
 					<td>
-						<i title='<?php print __esc('Shift Time Backward', 'flowview');?>' onclick='timeshiftFilterLeft()' class='shiftArrow fa fa-backward'></i>
+						<i title='<?php print __esc('Shift Time Backward', 'flowview');?>' class='shiftArrow fa fa-backward timeshiftBackward'></i>
 					</td>
 					<td>
 						<select id='predefined_timeshift' title='<?php print __esc('Define Shifting Interval', 'flowview');?>'>
@@ -992,7 +992,7 @@ function flowview_display_filter(): void {
 						</select>
 					</td>
 					<td>
-						<i title='<?php print __esc('Shift Time Forward', 'flowview');?>' onclick='timeshiftFilterRight()' class='shiftArrow fa fa-forward'></i>
+						<i title='<?php print __esc('Shift Time Forward', 'flowview');?>' class='shiftArrow fa fa-forward timeshiftForward'></i>
 					</td>
 				</tr>
 			</table>
@@ -1157,8 +1157,20 @@ function flowview_display_filter(): void {
 			changeQuery(true);
 		});
 
-		$('#domains, #usenat, #exclude, #graph_type, #graph_height, #device_id, #ex_addr').off('change').on('change', function() {
+		$('#domains, #usenat, #exclude, #graph_type, #graph_height, #device_id, #ex_addr, #report, #sortfield, #cutofflines, #cutoffoctets').off('change').on('change', function() {
 			applyFilter(false);
+		});
+
+		$('#predefined_timespan').off('change').on('change', function() {
+			applyTimespan();
+		});
+
+		$('.timeshiftBackward').off('click').on('click', function() {
+			timeshiftFilterLeft();
+		});
+
+		$('.timeshiftForward').off('click').on('click', function() {
+			timeshiftFilterRight();
 		});
 
 		$('#flowview_filter').on('submit', function(event) {

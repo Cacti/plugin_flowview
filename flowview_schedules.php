@@ -343,7 +343,7 @@ function actions_schedules(): void {
 			<input type='hidden' name='action' value='actions'>
 			<input type='hidden' name='selected_items' value='" . (isset($schedule_array) ? serialize($schedule_array) : '') . "'>
 			<input type='hidden' name='drp_action' value='" . get_nfilter_request_var('drp_action') . "'>
-			<button type='button' class='ui-button ui-corner-all ui-widget' onClick='cactiReturnTo()'>" . __esc('Cancel', 'flowview') . "</button>
+			<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Cancel', 'flowview') . "</button>
 			$save_html
 		</td>
 	</tr>";
