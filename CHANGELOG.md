@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* bug: Guard the pre-1.3 report compatibility shims (reports_run/reports_queue/reports_log_and_notify) behind a function_exists() check instead of a CACTI_VERSION string comparison, so a develop build that reports a version comparing < 1.3 no longer fatally redeclares those now-native functions
 * security: Move the plugin's remaining inline event handlers to CSP-safe bindings so the pages no longer trip Cacti's Content-Security-Policy script-src-attr directive: confirmation Cancel buttons use the `cactiReturnTo` class, the database/filter selects are bound via change() in their ready blocks, and the main filter's sort/report selects and time-shift icons are bound in flowview_display_filter's ready block
 * dev: Replace the translation-template CI check that regenerated locales/po/cacti.pot and compared it with a diff-based gate (tests/bin/check-i18n-pot.php) requiring cacti.pot to be updated only when a pull request adds, removes, or modifies an i18n function call
 * issue: Prevent flow-capture from fatally erroring (TypeError in spl_object_hash) when flowview_db_check_reconnect() held a null shared-database handle; normalize a non-object connection to false so db_check_reconnect() checks and reconnects the default connection instead
