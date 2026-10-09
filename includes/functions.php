@@ -23,11 +23,20 @@
  +-------------------------------------------------------------------------+
 */
 
-// reports_run()/reports_queue()/reports_log_and_notify() are native in Cacti
-// 1.3+. Load the compat shims only when they are actually missing: a develop
-// build can report a version that compares < 1.3 while already defining them
-// natively, and unconditionally including the shims would fatally redeclare them.
-if (!function_exists('reports_run')) {
+// reports_run()/reports_queue()/reports_log_and_notify() became native in
+// Cacti 1.3. Whether core will declare them is fixed by the Cacti version at
+// bootstrap, so gate the pre-1.3 shims on that rather than on function_exists():
+// this file can be included during plugin init before core loads lib/reports.php,
+// so a function_exists() probe misses the now-native functions, declares the
+// shims, and core then fatally redeclares them. cacti_version_compare() treats a
+// 1.3.0 develop build (CACTI_VERSION '1.3.0') as >= 1.3. Fall back to the
+// function_exists() check only when the version helpers are unavailable (e.g.
+// including this file outside a full Cacti bootstrap, as the unit tests do).
+if (
+	(function_exists('cacti_version_compare') && defined('CACTI_VERSION'))
+		? cacti_version_compare(CACTI_VERSION, '1.3', '<')
+		: !function_exists('reports_run')
+) {
 	require_once(__DIR__ . '/functions-pre13.php');
 }
 
