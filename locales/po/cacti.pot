@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-30 10:11-0400\n"
+"POT-Creation-Date: 2026-10-10 19:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -2673,6 +2673,38 @@ msgstr ""
 
 #: setup.php
 msgid "Parallel Queries"
+msgstr ""
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr ""
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr ""
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr ""
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr ""
+
+#: setup.php
+msgid "Query Service URL"
+msgstr ""
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr ""
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr ""
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
 msgstr ""
 
 #: setup.php
