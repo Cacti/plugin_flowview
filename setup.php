@@ -642,6 +642,32 @@ function flowview_config_settings(): void {
 			'method' => 'spacer',
 			'collapsible' => 'true'
 		),
+		'flowview_parallel_backend' => array(
+			'friendly_name' => __('Parallel Query Backend', 'flowview'),
+			'description' => __('Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running.', 'flowview'),
+			'method' => 'drop_array',
+			'array' => array(
+				'legacy'  => __('Legacy PHP Runner', 'flowview'),
+				'service' => __('FlowView Query Service', 'flowview')
+			),
+			'default' => 'legacy'
+		),
+		'flowview_query_service_url' => array(
+			'friendly_name' => __('Query Service URL', 'flowview'),
+			'description' => __('Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service\'s port file.', 'flowview'),
+			'method' => 'textbox',
+			'default' => '',
+			'max_length' => 128,
+			'size' => 60
+		),
+		'flowview_query_service_portfile' => array(
+			'friendly_name' => __('Query Service Port File', 'flowview'),
+			'description' => __('Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank.', 'flowview'),
+			'method' => 'textbox',
+			'default' => '/var/run/flowview/flowview-query.port',
+			'max_length' => 255,
+			'size' => 60
+		),
 		'flowview_parallel_threads' => array(
 			'friendly_name' => __('Max Concurrent Threads', 'flowview'),
 			'description' => __('The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running.', 'flowview'),
