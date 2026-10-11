@@ -1,0 +1,37 @@
+{
+  "listen_host": "127.0.0.1",
+  "listen_port": 0,
+  "port_file": "/var/run/flowview/flowview-query.port",
+
+  "_comment_auth_token": "Optional shared secret. When set, state-changing endpoints (/run, /maintenance, /cache/invalidate) require 'Authorization: Bearer <token>'. Must match the FlowView 'Query Service Token' setting. May also be supplied via the FLOWVIEW_QUERY_TOKEN environment variable.",
+  "auth_token": "",
+
+  "use_cacti_db": true,
+
+  "cacti": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "flowview_svc",
+    "password": "CHANGE_ME",
+    "database": "cacti",
+    "tls": ""
+  },
+
+  "flowview": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "flowview_svc",
+    "password": "CHANGE_ME",
+    "database": "flowview",
+    "tls": ""
+  },
+
+  "maxscale": {
+    "enabled": false,
+    "host": "127.0.0.1",
+    "port": 3307
+  },
+
+  "scheduler_interval": "60s",
+  "settings_refresh": "60s"
+}

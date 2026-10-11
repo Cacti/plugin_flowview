@@ -1,0 +1,67 @@
+# +-------------------------------------------------------------------------+
+# | Copyright (C) 2004-2026 The Cacti Group                                 |
+# |                                                                         |
+# | This program is free software; you can redistribute it and/or           |
+# | modify it under the terms of the GNU General Public License             |
+# | as published by the Free Software Foundation; either version 2          |
+# | of the License, or (at your option) any later version.                  |
+# +-------------------------------------------------------------------------+
+
+name: FlowView Query Service (Go)
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'service/flowview-query/**'
+      - '.github/workflows/flowview-query-go.yml'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'service/flowview-query/**'
+      - '.github/workflows/flowview-query-go.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  go-test:
+    runs-on: ubuntu-latest
+
+    name: Build, vet and test the Go query service
+
+    defaults:
+      run:
+        working-directory: service/flowview-query
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    - name: Set up Go
+      uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      with:
+        go-version-file: service/flowview-query/go.mod
+        cache-dependency-path: service/flowview-query/go.sum
+
+    - name: Verify formatting
+      run: |
+        unformatted="$(gofmt -l .)"
+        if [ -n "$unformatted" ]; then
+          echo "The following files are not gofmt-clean:"
+          echo "$unformatted"
+          exit 1
+        fi
+
+    - name: Vet
+      run: go vet ./...
+
+    - name: Build
+      run: go build ./...
+
+    - name: Test
+      run: go test -race -cover ./...

@@ -642,6 +642,40 @@ function flowview_config_settings(): void {
 			'method' => 'spacer',
 			'collapsible' => 'true'
 		),
+		'flowview_parallel_backend' => array(
+			'friendly_name' => __('Parallel Query Backend', 'flowview'),
+			'description' => __('Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running.', 'flowview'),
+			'method' => 'drop_array',
+			'array' => array(
+				'legacy'  => __('Legacy PHP Runner', 'flowview'),
+				'service' => __('FlowView Query Service', 'flowview')
+			),
+			'default' => 'legacy'
+		),
+		'flowview_query_service_url' => array(
+			'friendly_name' => __('Query Service URL', 'flowview'),
+			'description' => __('Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service\'s port file.', 'flowview'),
+			'method' => 'textbox',
+			'default' => '',
+			'max_length' => 128,
+			'size' => 60
+		),
+		'flowview_query_service_portfile' => array(
+			'friendly_name' => __('Query Service Port File', 'flowview'),
+			'description' => __('Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank.', 'flowview'),
+			'method' => 'textbox',
+			'default' => '/var/run/flowview/flowview-query.port',
+			'max_length' => 255,
+			'size' => 60
+		),
+		'flowview_query_service_token' => array(
+			'friendly_name' => __('Query Service Token', 'flowview'),
+			'description' => __('Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an "Authorization: Bearer" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service\'s config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes.', 'flowview'),
+			'method' => 'textbox',
+			'default' => '',
+			'max_length' => 255,
+			'size' => 60
+		),
 		'flowview_parallel_threads' => array(
 			'friendly_name' => __('Max Concurrent Threads', 'flowview'),
 			'description' => __('The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running.', 'flowview'),
@@ -760,6 +794,132 @@ function flowview_poller_bottom(): void {
 	}
 
 	exec_background($php, $config['base_path'] . '/plugins/flowview/flowview_process.php');
+}
+
+/**
+ * flowview_query_service_endpoint - Resolve the base URL of the FlowView Query
+ * Service, using the configured URL or, when blank, the port file the service
+ * writes its bound loopback address to.
+ *
+ * @return string The base URL without a trailing slash, or '' when unavailable.
+ */
+function flowview_query_service_endpoint(): string {
+	$url = trim((string) read_config_option('flowview_query_service_url'));
+
+	if ($url != '') {
+		return rtrim($url, '/');
+	}
+
+	$portfile = trim((string) read_config_option('flowview_query_service_portfile'));
+
+	if ($portfile == '') {
+		$portfile = '/var/run/flowview/flowview-query.port';
+	}
+
+	if (is_readable($portfile)) {
+		$addr = trim((string) file_get_contents($portfile));
+
+		if ($addr != '') {
+			return 'http://' . $addr;
+		}
+	}
+
+	return '';
+}
+
+/**
+ * flowview_query_service_run - Dispatch the given query ids to the FlowView
+ * Query Service, which runs the same map-reduce and writes the results back to
+ * the parallel_database_query table.
+ *
+ * @param array $request_ids The parallel_database_query ids to run.
+ *
+ * @return bool True when the service accepted and completed the queries, false
+ *              on any error so the caller can fall back to the legacy runner.
+ */
+function flowview_query_service_run($request_ids): bool {
+	$base = flowview_query_service_endpoint();
+
+	if ($base == '' || !function_exists('curl_init')) {
+		return false;
+	}
+
+	$timeout = (int) read_config_option('flowview_parallel_runlimit');
+
+	if ($timeout <= 0) {
+		$timeout = 300;
+	}
+
+	$payload = json_encode(array('query_ids' => array_map('intval', $request_ids)));
+
+	$headers = array('Content-Type: application/json');
+
+	$token = trim((string) read_config_option('flowview_query_service_token'));
+
+	if ($token != '') {
+		$headers[] = 'Authorization: Bearer ' . $token;
+	}
+
+	$ch = curl_init($base . '/run');
+
+	curl_setopt_array($ch, array(
+		CURLOPT_POST           => true,
+		CURLOPT_POSTFIELDS     => $payload,
+		CURLOPT_HTTPHEADER     => $headers,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_CONNECTTIMEOUT => 2,
+		CURLOPT_TIMEOUT        => $timeout,
+	));
+
+	$response = curl_exec($ch);
+	$code     = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	$err      = curl_error($ch);
+
+	curl_close($ch);
+
+	if ($response === false || $code != 200) {
+		cacti_log(sprintf('WARNING: FlowView Query Service call failed (code:%d err:%s)', $code, $err), false, 'FLOWVIEW');
+
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * flowview_parallel_reset_query - Restore a parallel query to a clean, re-runnable
+ * state before the Legacy PHP Runner takes over from a failed Query Service
+ * attempt.  A partial service run may have staged map rows, advanced the
+ * finished/cached counters and left shards in the 'running'/'finished' state;
+ * the legacy runner only launches 'pending' shards and loops until every shard
+ * is 'finished', so without this reset it could hang or return duplicated data.
+ *
+ * @param mixed $query_id The parallel_database_query id to reset.
+ *
+ * @return void
+ */
+function flowview_parallel_reset_query($query_id): void {
+	$map_table = flowview_db_fetch_cell_prepared('SELECT map_table
+		FROM parallel_database_query
+		WHERE id = ?',
+		[$query_id]);
+
+	/* discard any rows the service staged into the intermediary table */
+	if ($map_table != '') {
+		flowview_db_execute_prepared("TRUNCATE TABLE $map_table");
+	}
+
+	/* return every shard to 'pending' so the legacy runner relaunches them all */
+	flowview_db_execute_prepared('UPDATE parallel_database_query_shard
+		SET status = ?, completed = NULL
+		WHERE query_id = ?',
+		['pending', $query_id]);
+
+	/* reset the progress counters and mark the query schedulable again */
+	flowview_db_execute_prepared('UPDATE parallel_database_query
+		SET finished_shards = 0, cached_shards = 0, status = ?
+		WHERE id = ?',
+		['scheduled', $query_id]);
 }
 
 /**

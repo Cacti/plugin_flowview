@@ -1,0 +1,33 @@
+[Unit]
+Description=FlowView Parallel Query Service
+Documentation=https://github.com/Cacti/plugin_flowview
+After=network-online.target mariadb.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Dedicated unprivileged user; see README for the DB grants it needs.
+User=flowview
+Group=flowview
+RuntimeDirectory=flowview
+RuntimeDirectoryMode=0750
+
+# The config file holds the database credentials; keep it root:flowview 0640.
+ExecStart=/usr/local/bin/flowview-query -config /etc/flowview/flowview-query.json
+Restart=on-failure
+RestartSec=3
+
+# Hardening: minimal privileges and filesystem exposure.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/run/flowview
+# NOTE: The HTTP listener binds loopback only (listen_host in the config), but we
+# deliberately do NOT add IPAddressAllow/IPAddressDeny here: those egress filters
+# would also block the service from reaching a database or MaxScale node on a
+# separate host. If you want to additionally sandbox egress and your DB is local,
+# you may add:  IPAddressAllow=localhost  /  IPAddressDeny=any
+
+[Install]
+WantedBy=multi-user.target
