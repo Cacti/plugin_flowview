@@ -4155,88 +4155,6 @@ function parallel_database_query_is_running($request_id): bool {
 }
 
 /**
- * flowview_query_service_endpoint - Resolve the base URL of the FlowView Query
- * Service, using the configured URL or, when blank, the port file the service
- * writes its bound loopback address to.
- *
- * @return string The base URL without a trailing slash, or '' when unavailable.
- */
-function flowview_query_service_endpoint(): string {
-	$url = trim((string) read_config_option('flowview_query_service_url'));
-
-	if ($url != '') {
-		return rtrim($url, '/');
-	}
-
-	$portfile = trim((string) read_config_option('flowview_query_service_portfile'));
-
-	if ($portfile == '') {
-		$portfile = '/var/run/flowview/flowview-query.port';
-	}
-
-	if (is_readable($portfile)) {
-		$addr = trim((string) file_get_contents($portfile));
-
-		if ($addr != '') {
-			return 'http://' . $addr;
-		}
-	}
-
-	return '';
-}
-
-/**
- * flowview_query_service_run - Dispatch the given scheduled query ids to the
- * FlowView Query Service, which runs the same map-reduce and writes the results
- * back to the parallel_database_query table.
- *
- * @param array $request_ids The scheduled parallel_database_query ids.
- *
- * @return bool True when the service accepted and completed the queries, false
- *              on any error so the caller can fall back to the legacy runner.
- */
-function flowview_query_service_run($request_ids): bool {
-	$base = flowview_query_service_endpoint();
-
-	if ($base == '' || !function_exists('curl_init')) {
-		return false;
-	}
-
-	$timeout = (int) read_config_option('flowview_parallel_runlimit');
-
-	if ($timeout <= 0) {
-		$timeout = 300;
-	}
-
-	$payload = json_encode(array('query_ids' => array_map('intval', $request_ids)));
-
-	$ch = curl_init($base . '/run');
-
-	curl_setopt_array($ch, array(
-		CURLOPT_POST           => true,
-		CURLOPT_POSTFIELDS     => $payload,
-		CURLOPT_HTTPHEADER     => array('Content-Type: application/json'),
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_CONNECTTIMEOUT => 2,
-		CURLOPT_TIMEOUT        => $timeout,
-	));
-
-	$response = curl_exec($ch);
-	$code     = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	$err      = curl_error($ch);
-
-	curl_close($ch);
-
-	if ($response === false || $code != 200) {
-		cacti_log(sprintf('WARNING: FlowView Query Service call failed (code:%d err:%s)', $code, $err), false, 'FLOWVIEW');
-
-		return false;
-	}
-
-	return true;
-}
-
-/**
  * parallel_database_query_run - Runs a parallel query by calling the flowview_running.php
  * in background.  If the data is already cached, then the number of pending request
  * will be zero and the flowview_runner.php will not be called and the results will
@@ -4254,14 +4172,6 @@ function parallel_database_query_run($requests) {
 	$php      = read_config_option('path_php_binary');
 	$redirect = '';
 
-	$backend = read_config_option('flowview_parallel_backend');
-
-	if (empty($backend)) {
-		$backend = 'legacy';
-	}
-
-	$scheduled = [];
-
 	foreach($requests as $request_id) {
 		$pending = flowview_db_fetch_cell_prepared('SELECT COUNT(*)
 			FROM parallel_database_query
@@ -4276,29 +4186,13 @@ function parallel_database_query_run($requests) {
 				WHERE id = ?',
 				['scheduled', $request_id]);
 
-			$scheduled[] = $request_id;
+			db_debug('Launching FlowView Database Query Process ' . $request_id);
+
+			cacti_log('NOTE: Launching FlowView Database Query Process ' . $request_id, false, 'BOOST', POLLER_VERBOSITY_MEDIUM);
+
+			exec_background($php, $config['base_path'] . "/plugins/flowview/flowview_runner.php --query-id=$request_id" . ($debug ? ' --debug':''), $redirect);
 		} else {
 			db_debug('Not Launching FlowView Database Query Process ' . $request_id . ' as it has already completed or is running.');
-		}
-	}
-
-	if (cacti_sizeof($scheduled)) {
-		/* The Query Service runs the same map-reduce and writes results/status
-		 * back, so the result-retrieval loop below is unchanged either way. */
-		if ($backend == 'service' && flowview_query_service_run($scheduled)) {
-			db_debug('Dispatched FlowView Queries to the Query Service: ' . implode(', ', $scheduled));
-		} else {
-			if ($backend == 'service') {
-				cacti_log('WARNING: FlowView Query Service unavailable, falling back to the Legacy PHP Runner', false, 'FLOWVIEW');
-			}
-
-			foreach($scheduled as $request_id) {
-				db_debug('Launching FlowView Database Query Process ' . $request_id);
-
-				cacti_log('NOTE: Launching FlowView Database Query Process ' . $request_id, false, 'BOOST', POLLER_VERBOSITY_MEDIUM);
-
-				exec_background($php, $config['base_path'] . "/plugins/flowview/flowview_runner.php --query-id=$request_id" . ($debug ? ' --debug':''), $redirect);
-			}
 		}
 	}
 

@@ -177,6 +177,7 @@ $unmeasured_allowlist = [
 	'flowview_drop_raw_tables.php',
 	'flowview_filters.php',
 	'flowview_process.php',
+	'flowview_runner.php',
 	'flowview_schedules.php',
 	'flowview_upgrade.php',
 	'flowview_upgrade_nat_columns.php',

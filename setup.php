@@ -789,6 +789,88 @@ function flowview_poller_bottom(): void {
 }
 
 /**
+ * flowview_query_service_endpoint - Resolve the base URL of the FlowView Query
+ * Service, using the configured URL or, when blank, the port file the service
+ * writes its bound loopback address to.
+ *
+ * @return string The base URL without a trailing slash, or '' when unavailable.
+ */
+function flowview_query_service_endpoint(): string {
+	$url = trim((string) read_config_option('flowview_query_service_url'));
+
+	if ($url != '') {
+		return rtrim($url, '/');
+	}
+
+	$portfile = trim((string) read_config_option('flowview_query_service_portfile'));
+
+	if ($portfile == '') {
+		$portfile = '/var/run/flowview/flowview-query.port';
+	}
+
+	if (is_readable($portfile)) {
+		$addr = trim((string) file_get_contents($portfile));
+
+		if ($addr != '') {
+			return 'http://' . $addr;
+		}
+	}
+
+	return '';
+}
+
+/**
+ * flowview_query_service_run - Dispatch the given query ids to the FlowView
+ * Query Service, which runs the same map-reduce and writes the results back to
+ * the parallel_database_query table.
+ *
+ * @param array $request_ids The parallel_database_query ids to run.
+ *
+ * @return bool True when the service accepted and completed the queries, false
+ *              on any error so the caller can fall back to the legacy runner.
+ */
+function flowview_query_service_run($request_ids): bool {
+	$base = flowview_query_service_endpoint();
+
+	if ($base == '' || !function_exists('curl_init')) {
+		return false;
+	}
+
+	$timeout = (int) read_config_option('flowview_parallel_runlimit');
+
+	if ($timeout <= 0) {
+		$timeout = 300;
+	}
+
+	$payload = json_encode(array('query_ids' => array_map('intval', $request_ids)));
+
+	$ch = curl_init($base . '/run');
+
+	curl_setopt_array($ch, array(
+		CURLOPT_POST           => true,
+		CURLOPT_POSTFIELDS     => $payload,
+		CURLOPT_HTTPHEADER     => array('Content-Type: application/json'),
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_CONNECTTIMEOUT => 2,
+		CURLOPT_TIMEOUT        => $timeout,
+	));
+
+	$response = curl_exec($ch);
+	$code     = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	$err      = curl_error($ch);
+
+	curl_close($ch);
+
+	if ($response === false || $code != 200) {
+		cacti_log(sprintf('WARNING: FlowView Query Service call failed (code:%d err:%s)', $code, $err), false, 'FLOWVIEW');
+
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * @return void
  */
 function flowview_determine_config(): void {

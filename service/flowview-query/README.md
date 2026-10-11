@@ -207,13 +207,15 @@ is required to switch:
 > - **Legacy PHP Runner** (default) — forks `flowview_runner.php` per query/shard.
 > - **FlowView Query Service** — dispatches to this service over localhost.
 
-When the service backend is selected, `parallel_database_query_run()` replaces
-its `exec_background()` launch with a single call to `POST /run`, passing the
-ids of the queries it just scheduled. The service reads those rows
-(`parallel_database_query` + `parallel_database_query_shard`), runs the same
-map-reduce (cache-aware, thread-capped), and writes `results` + `status =
-'complete'` back — so the existing result-retrieval path is unchanged. If the
-service cannot be reached, PHP automatically falls back to the legacy runner.
+When the service backend is selected, the parent runner (`flowview_runner.php`)
+delegates the whole query to the service via `POST /run` **instead of forking a
+PHP worker per shard**. `parallel_database_query_run()` is unchanged: it still
+launches `flowview_runner.php`, which now returns as soon as the service has
+read the query's shard rows (`parallel_database_query` +
+`parallel_database_query_shard`), run the same cache-aware, thread-capped
+map-reduce, and written `results` + `status = 'complete'` back. If the service
+cannot be reached, the parent runner falls back to the legacy in-PHP
+`parallel_database_parent_runner()`.
 
 Endpoint discovery: set **Query Service URL** explicitly (e.g.
 `http://127.0.0.1:8699`), or leave it blank and set **Query Service Port File**
