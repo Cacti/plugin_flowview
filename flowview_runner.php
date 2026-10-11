@@ -127,7 +127,26 @@ if ($shard_id === false) {
 
 	$current_time  = time();
 
-	$stats = parallel_database_parent_runner($query_id);
+	/* The Query Service backend runs the whole map-reduce in-process (shards as
+	 * goroutines, shared shard cache) and writes results back, so we do not fork
+	 * per-shard PHP workers.  Fall back to the legacy parent runner when the
+	 * service is disabled or unreachable. */
+	$backend = read_config_option('flowview_parallel_backend');
+
+	if ($backend == 'service' && flowview_query_service_run(array($query_id))) {
+		$stats = array('threads' => 0, 'shards' => 0, 'cached' => 0, 'total_size' => 0, 'cached_size' => 0);
+	} else {
+		if ($backend == 'service') {
+			cacti_log('WARNING: FlowView Query Service unavailable, falling back to the Legacy PHP Runner', false, 'FLOWVIEW');
+
+			/* a partial service run may have staged map rows and left shards
+			 * mid-flight; reset to a clean pending state so the legacy runner
+			 * relaunches every shard and does not hang or duplicate data */
+			flowview_parallel_reset_query($query_id);
+		}
+
+		$stats = parallel_database_parent_runner($query_id);
+	}
 
 	unregister_process('flowview', "db_query_{$query_id}", 0);
 
