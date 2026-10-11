@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-09-30 10:11-0400\nPO-Revision-Date: 2026-10-06 09:18+0000\nLast-Translator: YU HAO HUANG <mix@b51.tw>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-10 20:49-0400\n"
+"PO-Revision-Date: 2026-10-06 09:18+0000\n"
+"Last-Translator: YU HAO HUANG <mix@b51.tw>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hant/>\n"
+"Language: zh-TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -2786,6 +2798,50 @@ msgstr "Aria Engine 非常適合除 Live raw 表以外的所有內容。 Live ra
 #: setup.php
 msgid "Parallel Queries"
 msgstr "並行查詢"
+
+#: setup.php
+#, fuzzy
+#| msgid "Parallel Queries"
+msgid "Parallel Query Backend"
+msgstr "並行查詢"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr ""
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr ""
+
+#: setup.php
+#, fuzzy
+#| msgid "Flow Viewer"
+msgid "FlowView Query Service"
+msgstr "流查看器"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr ""
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr ""
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr ""
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr ""
+
+#: setup.php
+msgid "Query Service Token"
+msgstr ""
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr ""
 
 #: setup.php
 msgid "Max Concurrent Threads"
