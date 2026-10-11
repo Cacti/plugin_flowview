@@ -668,6 +668,14 @@ function flowview_config_settings(): void {
 			'max_length' => 255,
 			'size' => 60
 		),
+		'flowview_query_service_token' => array(
+			'friendly_name' => __('Query Service Token', 'flowview'),
+			'description' => __('Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an "Authorization: Bearer" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service\'s config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes.', 'flowview'),
+			'method' => 'textbox',
+			'default' => '',
+			'max_length' => 255,
+			'size' => 60
+		),
 		'flowview_parallel_threads' => array(
 			'friendly_name' => __('Max Concurrent Threads', 'flowview'),
 			'description' => __('The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running.', 'flowview'),
@@ -844,12 +852,20 @@ function flowview_query_service_run($request_ids): bool {
 
 	$payload = json_encode(array('query_ids' => array_map('intval', $request_ids)));
 
+	$headers = array('Content-Type: application/json');
+
+	$token = trim((string) read_config_option('flowview_query_service_token'));
+
+	if ($token != '') {
+		$headers[] = 'Authorization: Bearer ' . $token;
+	}
+
 	$ch = curl_init($base . '/run');
 
 	curl_setopt_array($ch, array(
 		CURLOPT_POST           => true,
 		CURLOPT_POSTFIELDS     => $payload,
-		CURLOPT_HTTPHEADER     => array('Content-Type: application/json'),
+		CURLOPT_HTTPHEADER     => $headers,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_CONNECTTIMEOUT => 2,
 		CURLOPT_TIMEOUT        => $timeout,
@@ -868,6 +884,42 @@ function flowview_query_service_run($request_ids): bool {
 	}
 
 	return true;
+}
+
+/**
+ * flowview_parallel_reset_query - Restore a parallel query to a clean, re-runnable
+ * state before the Legacy PHP Runner takes over from a failed Query Service
+ * attempt.  A partial service run may have staged map rows, advanced the
+ * finished/cached counters and left shards in the 'running'/'finished' state;
+ * the legacy runner only launches 'pending' shards and loops until every shard
+ * is 'finished', so without this reset it could hang or return duplicated data.
+ *
+ * @param mixed $query_id The parallel_database_query id to reset.
+ *
+ * @return void
+ */
+function flowview_parallel_reset_query($query_id): void {
+	$map_table = flowview_db_fetch_cell_prepared('SELECT map_table
+		FROM parallel_database_query
+		WHERE id = ?',
+		[$query_id]);
+
+	/* discard any rows the service staged into the intermediary table */
+	if ($map_table != '') {
+		flowview_db_execute_prepared("TRUNCATE TABLE $map_table");
+	}
+
+	/* return every shard to 'pending' so the legacy runner relaunches them all */
+	flowview_db_execute_prepared('UPDATE parallel_database_query_shard
+		SET status = ?, completed = NULL
+		WHERE query_id = ?',
+		['pending', $query_id]);
+
+	/* reset the progress counters and mark the query schedulable again */
+	flowview_db_execute_prepared('UPDATE parallel_database_query
+		SET finished_shards = 0, cached_shards = 0, status = ?
+		WHERE id = ?',
+		['scheduled', $query_id]);
 }
 
 /**

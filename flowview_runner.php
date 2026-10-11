@@ -138,6 +138,11 @@ if ($shard_id === false) {
 	} else {
 		if ($backend == 'service') {
 			cacti_log('WARNING: FlowView Query Service unavailable, falling back to the Legacy PHP Runner', false, 'FLOWVIEW');
+
+			/* a partial service run may have staged map rows and left shards
+			 * mid-flight; reset to a clean pending state so the legacy runner
+			 * relaunches every shard and does not hang or duplicate data */
+			flowview_parallel_reset_query($query_id);
 		}
 
 		$stats = parallel_database_parent_runner($query_id);

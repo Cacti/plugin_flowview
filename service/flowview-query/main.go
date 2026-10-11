@@ -82,8 +82,8 @@ func runService(cfg *Config) error {
 		defer flow.Close()
 	}
 
-	read := flow
-	if cfg.MaxScale.Enabled && settings.UseMaxScale() {
+	var maxscale *sql.DB
+	if cfg.MaxScale.Enabled {
 		ms := cfg.FlowView
 		if cfg.UseCactiDB {
 			ms = cfg.Cacti
@@ -94,17 +94,17 @@ func runService(cfg *Config) error {
 		if cfg.MaxScale.Port != 0 {
 			ms.Port = cfg.MaxScale.Port
 		}
-		read, err = ms.open(maxInt(settings.Threads(), 4))
+		maxscale, err = ms.open(maxInt(settings.Threads(), 4))
 		if err != nil {
 			return fmt.Errorf("connect maxscale: %w", err)
 		}
-		defer read.Close()
-		logf("map reads routed through MaxScale at %s:%d", ms.Host, ms.Port)
+		defer maxscale.Close()
+		logf("MaxScale pool ready at %s:%d (map reads follow the live flowview_use_maxscale setting)", ms.Host, ms.Port)
 	}
 
-	eng := &Engine{flow: flow, read: read, cacti: cacti, settings: settings}
+	eng := NewEngine(flow, maxscale, cacti, settings)
 	sched := &Scheduler{eng: eng, interval: cfg.SchedulerInterval.D()}
-	srv := &Server{eng: eng, sched: sched}
+	srv := &Server{eng: eng, sched: sched, authToken: cfg.AuthToken}
 
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
@@ -125,6 +125,10 @@ func runService(cfg *Config) error {
 
 	// Scheduler goroutine for cache/partition maintenance.
 	go sched.Run(ctx)
+
+	if !isLoopbackHost(cfg.ListenHost) {
+		return fmt.Errorf("listen_host %q is not a loopback address: the query service is unauthenticated by default and must bind to loopback (use a reverse proxy or set auth_token for remote access)", cfg.ListenHost)
+	}
 
 	ln, err := net.Listen("tcp", net.JoinHostPort(cfg.ListenHost, strconv.Itoa(cfg.ListenPort)))
 	if err != nil {
@@ -159,7 +163,7 @@ func runService(cfg *Config) error {
 func runSelftest(cfg *Config) error {
 	demoMapReduce(4)
 
-	eng := &Engine{settings: defaultSettings()}
+	eng := NewEngine(nil, nil, nil, defaultSettings())
 	srv := &Server{eng: eng, sched: &Scheduler{eng: eng}}
 
 	ln, err := net.Listen("tcp", "127.0.0.1:0")

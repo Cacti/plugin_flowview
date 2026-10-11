@@ -81,7 +81,10 @@ func (s *Scheduler) expireQueries(ctx context.Context) error {
 	for _, item := range expired {
 		if item.table != "" {
 			if _, err := s.eng.flow.ExecContext(ctx, "DROP TABLE IF EXISTS "+quoteTable(item.table)); err != nil {
-				logf("scheduler: drop map table %s: %v", item.table, err)
+				// Keep the query row so a later pass can retry the drop; deleting
+				// it now would orphan the intermediary table.
+				logf("scheduler: drop map table %s (will retry): %v", item.table, err)
+				continue
 			}
 		}
 		if _, err := s.eng.flow.ExecContext(ctx,

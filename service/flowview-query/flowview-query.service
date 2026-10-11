@@ -17,14 +17,17 @@ ExecStart=/usr/local/bin/flowview-query -config /etc/flowview/flowview-query.jso
 Restart=on-failure
 RestartSec=3
 
-# Hardening: the service only needs loopback networking and its runtime dir.
+# Hardening: minimal privileges and filesystem exposure.
 NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=true
 PrivateTmp=true
 ReadWritePaths=/var/run/flowview
-IPAddressAllow=localhost
-IPAddressDeny=any
+# NOTE: The HTTP listener binds loopback only (listen_host in the config), but we
+# deliberately do NOT add IPAddressAllow/IPAddressDeny here: those egress filters
+# would also block the service from reaching a database or MaxScale node on a
+# separate host. If you want to additionally sandbox egress and your DB is local,
+# you may add:  IPAddressAllow=localhost  /  IPAddressDeny=any
 
 [Install]
 WantedBy=multi-user.target

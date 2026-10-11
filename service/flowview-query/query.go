@@ -9,15 +9,43 @@ import (
 	"math"
 	"strings"
 	"sync"
+	"time"
 )
 
 // Engine runs parallel map-reduce queries against the FlowView database,
 // mirroring parallel_database_parent_runner / parallel_database_child_runner.
 type Engine struct {
 	flow     *sql.DB // primary flow connection (intermediary + cache writes, reduce)
-	read     *sql.DB // map read connection (MaxScale RW-split when enabled, else == flow)
+	maxscale *sql.DB // optional MaxScale RW-split pool for map reads (nil = disabled)
 	cacti    *sql.DB // Cacti control DB (settings)
 	settings *Settings
+	sem      chan struct{} // shared, engine-wide worker limiter (global concurrency cap)
+}
+
+// NewEngine builds an engine with a shared worker limiter sized to the current
+// flowview_parallel_threads, so total database concurrency is bounded across
+// all concurrent /run requests rather than per request.
+func NewEngine(flow, maxscale, cacti *sql.DB, settings *Settings) *Engine {
+	threads := settings.Threads()
+	if threads < 1 {
+		threads = 1
+	}
+	return &Engine{
+		flow:     flow,
+		maxscale: maxscale,
+		cacti:    cacti,
+		settings: settings,
+		sem:      make(chan struct{}, threads),
+	}
+}
+
+// readPool returns the pool for map (read) queries, honouring the live
+// flowview_use_maxscale setting when a MaxScale pool is configured.
+func (e *Engine) readPool() *sql.DB {
+	if e.maxscale != nil && e.settings.UseMaxScale() {
+		return e.maxscale
+	}
+	return e.flow
 }
 
 // RunQueries executes each requested query to completion (writing results and
@@ -53,8 +81,6 @@ func (e *Engine) RunQuery(ctx context.Context, id int64) (Stats, error) {
 		return Stats{}, err
 	}
 
-	sem := make(chan struct{}, threads)
-
 	var (
 		wg       sync.WaitGroup
 		mu       sync.Mutex
@@ -66,11 +92,22 @@ func (e *Engine) RunQuery(ctx context.Context, id int64) (Stats, error) {
 		s := shards[i]
 
 		wg.Add(1)
-		sem <- struct{}{}
 
 		go func(s shardRow) {
 			defer wg.Done()
-			defer func() { <-sem }()
+
+			// Shared engine limiter: caps concurrency across all /run requests.
+			select {
+			case e.sem <- struct{}{}:
+				defer func() { <-e.sem }()
+			case <-ctx.Done():
+				mu.Lock()
+				if firstErr == nil {
+					firstErr = ctx.Err()
+				}
+				mu.Unlock()
+				return
+			}
 
 			wasCached, err := e.runShard(ctx, q, s)
 
@@ -150,7 +187,7 @@ func (e *Engine) mapShard(ctx context.Context, q *queryRow, s shardRow) ([]*Orde
 		}
 	}
 
-	rows, err := e.queryDB(ctx, e.read, s.MapQuery, decodeParams(s.MapParams))
+	rows, err := e.queryDB(ctx, e.readPool(), s.MapQuery, decodeParams(s.MapParams))
 	if err != nil {
 		return nil, false, err
 	}
@@ -460,6 +497,10 @@ func normalizeVal(v any) any {
 	switch t := v.(type) {
 	case []byte:
 		return string(t)
+	case time.Time:
+		// Match the PHP backend's SQL datetime strings (not RFC3339) so detailed
+		// reports and warm-cache DATETIME reinsertion keep the same format.
+		return t.Format("2006-01-02 15:04:05")
 	default:
 		return v
 	}

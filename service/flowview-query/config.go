@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"net"
 	"os"
 	"strconv"
 	"sync"
@@ -58,6 +59,12 @@ type Config struct {
 
 	// SettingsRefresh controls how often live Cacti settings are re-read.
 	SettingsRefresh Duration `json:"settings_refresh"`
+
+	// AuthToken, when set, is required on the state-changing endpoints via an
+	// "Authorization: Bearer <token>" header. The PHP client sends the same
+	// token (flowview_query_service_token). Loopback alone is not treated as an
+	// authorization boundary.
+	AuthToken string `json:"auth_token"`
 }
 
 // Duration is a JSON-friendly time.Duration ("30s", "5m").
@@ -77,6 +84,19 @@ func (d *Duration) UnmarshalJSON(b []byte) error {
 }
 
 func (d Duration) D() time.Duration { return time.Duration(d) }
+
+// isLoopbackHost reports whether host resolves only to loopback, so the
+// unauthenticated-by-default service cannot be bound to a routable interface.
+func isLoopbackHost(host string) bool {
+	switch host {
+	case "", "localhost":
+		return true
+	}
+	if ip := net.ParseIP(host); ip != nil {
+		return ip.IsLoopback()
+	}
+	return false
+}
 
 // LoadConfig reads the JSON config file and applies environment overrides.
 func LoadConfig(path string) (*Config, error) {
@@ -98,6 +118,10 @@ func LoadConfig(path string) (*Config, error) {
 
 	applyEnvDB("CACTI", &c.Cacti)
 	applyEnvDB("FLOWVIEW", &c.FlowView)
+
+	if v := os.Getenv("FLOWVIEW_QUERY_TOKEN"); v != "" {
+		c.AuthToken = v
+	}
 
 	if c.ListenHost == "" {
 		c.ListenHost = "127.0.0.1"
@@ -143,8 +167,7 @@ func (db DBConfig) dsn() string {
 	cfg.Net = "tcp"
 	cfg.Addr = fmt.Sprintf("%s:%d", db.Host, port)
 	cfg.DBName = db.Database
-	cfg.ParseTime = true
-	cfg.Loc = time.Local
+	cfg.ParseTime = false
 	cfg.Params = map[string]string{"charset": "utf8mb4"}
 	if db.TLS != "" {
 		cfg.TLSConfig = db.TLS

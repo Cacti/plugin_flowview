@@ -214,8 +214,11 @@ launches `flowview_runner.php`, which now returns as soon as the service has
 read the query's shard rows (`parallel_database_query` +
 `parallel_database_query_shard`), run the same cache-aware, thread-capped
 map-reduce, and written `results` + `status = 'complete'` back. If the service
-cannot be reached, the parent runner falls back to the legacy in-PHP
-`parallel_database_parent_runner()`.
+cannot be reached, the parent runner resets the query to a clean pending state
+(`flowview_parallel_reset_query()` — truncates any partially-staged map rows,
+returns all shards to `pending`, zeroes the finished/cached counters) and then
+falls back to the legacy in-PHP `parallel_database_parent_runner()`, so a
+half-finished service attempt never hangs or duplicates data.
 
 Endpoint discovery: set **Query Service URL** explicitly (e.g.
 `http://127.0.0.1:8699`), or leave it blank and set **Query Service Port File**
@@ -239,12 +242,18 @@ the legacy path, a partition cached by one backend is reused by the other.
 
 ## 7. Endpoints
 
-| Method & path | Purpose |
-| ------------- | ------- |
-| `POST /run` | Run the given `{"query_ids":[...]}` to completion; returns per-query stats. |
-| `GET  /health` | Liveness + DB ping + current thread setting. |
-| `POST /maintenance` | Run one scheduler pass now (expiry/cleanup). |
-| `POST /cache/invalidate?md5sum=<sig>` | Drop cached shards for a deleted query/filter signature. |
+| Method & path | Auth | Purpose |
+| ------------- | ---- | ------- |
+| `POST /run` | token | Run the given `{"query_ids":[...]}` to completion; returns per-query stats. |
+| `GET  /health` | none | Liveness + DB ping + current thread setting. |
+| `POST /maintenance` | token | Run one scheduler pass now (expiry/cleanup). |
+| `POST /cache/invalidate?md5sum=<sig>` | token | Drop cached shards for a deleted query/filter signature. |
+
+All state-changing endpoints require `POST`; a `GET` to them returns
+`405 Method Not Allowed`. When an auth token is configured (see §9) they also
+require a matching `Authorization: Bearer <token>` header and otherwise return
+`401 Unauthorized`. `/health` is always open (and never touches state) so it can
+be used as a liveness probe.
 
 ## 8. Scheduler
 
@@ -258,6 +267,27 @@ A goroutine runs every `scheduler_interval` (and once at startup):
 
 Deleting a saved query or filter should call `POST /cache/invalidate` with that
 signature so its cache does not linger until TTL.
+
+## 9. Security & network exposure
+
+The service is unauthenticated by default and is intended to listen on
+**loopback only**:
+
+- `listen_host` **must** resolve to a loopback address (`127.0.0.1`, `::1`,
+  `localhost`). The service refuses to start on a routable address so it cannot
+  be accidentally exposed without authentication.
+- For any deployment where the loopback assumption does not hold (e.g. a shared
+  host, or when you front the service with a reverse proxy on another
+  interface), set a **shared secret**: `auth_token` in the config file (or the
+  `FLOWVIEW_QUERY_TOKEN` environment variable) **and** the matching **FlowView →
+  Parallel Queries → Query Service Token** setting. State-changing requests then
+  require `Authorization: Bearer <token>`; Cacti sends it automatically.
+- The **database/MaxScale connections may target separate hosts.** The systemd
+  unit therefore does **not** apply `IPAddressAllow`/`IPAddressDeny` egress
+  filters (those would block reaching a remote DB). Only the HTTP *listener* is
+  loopback-bound. If your database is local and you want to additionally sandbox
+  egress, you can add `IPAddressAllow=localhost` / `IPAddressDeny=any` to the
+  unit yourself.
 
 ## Files
 
