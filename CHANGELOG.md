@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu
+* dev: Create the plugin's config.php from config.php.dist for the flowview install step in the integration-test workflow (removed immediately afterwards so the unit tests still run with no config file), so the install no longer fails with "needs configuration"
 * feature: Add an optional FlowView Query Service (a long-running Go service under service/flowview-query) as a selectable Parallel Query Backend under FlowView Settings (default Legacy PHP Runner); when enabled, the parallel query parent runner (flowview_runner.php) delegates the whole query to the service over localhost instead of forking a PHP worker per shard, running the same cache-aware map-reduce (sharing parallel_database_query_shard_cache) and writing results back, with automatic fallback to the legacy runner when the service is unreachable
 
 * bug: Load the pre-1.3 report compatibility shims (reports_run/reports_queue/reports_log_and_notify) only when the running Cacti is older than 1.3, decided with cacti_version_compare(CACTI_VERSION, '1.3', ...) rather than a function_exists() probe; because the plugin's functions.php is included during plugin init before core loads lib/reports.php, the function_exists() check ran while the now-native helpers were still absent, declared the shims, and core then fatally redeclared reports_log_and_notify() on 1.3.0 develop builds (falls back to function_exists() only when the Cacti version helpers are unavailable, e.g. the unit tests)
