@@ -1564,7 +1564,7 @@ function flowview_graph_button($data): bool {
 		//cacti_log("The URL is this:" . $url);
 
 		if (api_user_realm_auth('flowview.php') && !empty($host_id)) {
-			print '<a class="iconLink flowview" href="' .  html_escape($url) . '" title="' . __esc('View NetFlow Traffic In Range', 'flowview') . '"><i class="deviceRecovering fas fa-water"></i></a><br>';
+			print '<a class="iconLink flowview" href="' .  html_escape($url) . '" title="' . __esc('NetFlow', 'flowview') . '"><i class="deviceRecovering fas fa-water"></i></a><br>';
 		}
 	}
 	return true;
