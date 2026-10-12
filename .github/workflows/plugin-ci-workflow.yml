@@ -156,16 +156,15 @@ jobs:
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
 
-    - name: Create flowview config.php
-      run: |
-        cp ${{ github.workspace }}/cacti/plugins/flowview/config.php.dist \
-           ${{ github.workspace }}/cacti/plugins/flowview/config.php
-        sudo chmod 664 ${{ github.workspace }}/cacti/plugins/flowview/config.php
-
     - name: Install flowview Plugin
       run: |
         cd ${{ github.workspace }}/cacti
+        # flowview's pre-install check requires a config.php; create it from the
+        # dist (which defaults to the Cacti database) only for the install and
+        # remove it afterwards so the unit tests still run with no config file.
+        cp plugins/flowview/config.php.dist plugins/flowview/config.php
         sudo php cli/plugin_manage.php --plugin=flowview --install --enable
+        rm -f plugins/flowview/config.php
 
     - name: Check PHP Syntax for Plugin
       run: |
