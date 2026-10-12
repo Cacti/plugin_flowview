@@ -156,6 +156,12 @@ jobs:
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
 
+    - name: Create flowview config.php
+      run: |
+        cp ${{ github.workspace }}/cacti/plugins/flowview/config.php.dist \
+           ${{ github.workspace }}/cacti/plugins/flowview/config.php
+        sudo chmod 664 ${{ github.workspace }}/cacti/plugins/flowview/config.php
+
     - name: Install flowview Plugin
       run: |
         cd ${{ github.workspace }}/cacti
