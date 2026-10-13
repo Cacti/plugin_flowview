@@ -1,6 +1,7 @@
 # Changelog
 
 --- develop ---
+* security: Pin CI fixtures and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 
 * issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu
 * dev: Create the plugin's config.php from config.php.dist for the flowview install step in the integration-test workflow (removed immediately afterwards so the unit tests still run with no config file), so the install no longer fails with "needs configuration"
