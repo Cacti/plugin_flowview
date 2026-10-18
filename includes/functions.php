@@ -1921,7 +1921,7 @@ function get_port_name($port_num, int $port_proto = 6) {
 function plugin_flowview_run_schedule($id, $report_id): void {
 	global $config;
 
-	if (!flowview_filter_status_upgrade()) {
+	if (!flowview_filter_status_ready()) {
 		return;
 	}
 
@@ -7361,4 +7361,16 @@ function flowview_filter_status(array $record): array {
 	return $record['enabled'] === 'on'
 		? ['class' => 'deviceUp', 'label' => __('Enabled', 'flowview')]
 		: ['class' => 'deviceDisabled', 'label' => __('Disabled', 'flowview')];
+}
+
+/** Enabled choices plus the existing association when editing a schedule. */
+function flowview_schedule_filters(int $schedule_id): array {
+	$rows = flowview_db_fetch_assoc_prepared('SELECT id, name, enabled FROM plugin_flowview_queries
+		WHERE enabled = "on" OR id = (SELECT query_id FROM plugin_flowview_schedules WHERE id = ?)
+		ORDER BY name', [$schedule_id]);
+	$options = [];
+	foreach ($rows ?: [] as $row) {
+		$options[$row['id']] = $row['enabled'] === 'on' ? $row['name'] : sprintf(__('%s (Disabled)', 'flowview'), $row['name']);
+	}
+	return $options;
 }

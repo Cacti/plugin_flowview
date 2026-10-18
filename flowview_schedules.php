@@ -32,7 +32,12 @@ require_once($config['base_path'] . '/plugins/flowview/setup.php');
 require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 
 flowview_connect();
-flowview_filter_status_upgrade();
+if (!flowview_filter_status_ready()) {
+	plugin_flowview_check_upgrade();
+	http_response_code(503);
+	print html_escape(__('FlowView filter schema upgrade is pending. Please try again shortly.', 'flowview'));
+	exit;
+}
 
 set_default_action();
 
@@ -57,13 +62,7 @@ $sendinterval_arr = array(
 
 $formats = reports_get_format_files();
 
-$query_array = array_rekey(
-	flowview_db_fetch_assoc('SELECT id, name
-		FROM plugin_flowview_queries
-		WHERE enabled = "on"
-		ORDER BY name'),
-	'id', 'name'
-);
+$query_array = flowview_schedule_filters((int) get_filter_request_var('id'));
 
 if (db_table_exists('plugin_notification_lists')) {
 	$notification_lists = array_rekey(

@@ -515,25 +515,21 @@ function flowview_db_get_table_column_types($table, mixed $cnn_id = false) {
     return $cols;
 }
 
-/**
- * Repair the missing state column used by the existing filter bulk actions.
- * Works for same-version upgrades and the configured FlowView connection.
- *
- * @return bool
- */
+/** Check live metadata without Cacti's per-request column cache. */
+function flowview_filter_status_ready(): bool {
+	return (bool) flowview_db_fetch_row("SHOW COLUMNS FROM plugin_flowview_queries LIKE 'enabled'", false);
+}
+
+/** Repair legacy state only from the background upgrade process. */
 function flowview_filter_status_upgrade(): bool {
 	if (!flowview_db_table_exists('plugin_flowview_queries')) {
 		return false;
 	}
-
-	if (flowview_db_column_exists('plugin_flowview_queries', 'enabled', false)) {
+	if (flowview_filter_status_ready()) {
 		return true;
 	}
-
 	if (flowview_db_execute("ALTER TABLE plugin_flowview_queries ADD COLUMN enabled char(2) NOT NULL DEFAULT 'on' AFTER name", false)) {
 		return true;
 	}
-
-	// Another request may have completed the same upgrade concurrently.
-	return flowview_db_column_exists('plugin_flowview_queries', 'enabled', false);
+	return flowview_filter_status_ready();
 }

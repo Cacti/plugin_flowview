@@ -22,7 +22,7 @@ it('does not alter a missing filter table', function () {
 
 it('leaves an existing enabled column intact', function () {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
-	plugin_test_queue_db_result('db_column_exists', true);
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 	expect(flowview_filter_status_upgrade())->toBeTrue();
 	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('db_execute');
 });
@@ -38,8 +38,8 @@ it('repairs legacy filters as enabled through the configured database', function
 
 it('rechecks concurrent upgrades and reports actual failures', function ($exists) {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
-	plugin_test_queue_db_result('db_column_exists', false);
-	plugin_test_queue_db_result('db_column_exists', $exists);
+	plugin_test_queue_db_result('db_fetch_row', []);
+	plugin_test_queue_db_result('db_fetch_row', $exists ? ['Field' => 'enabled'] : []);
 	plugin_test_queue_db_result('db_execute', false);
 	expect(flowview_filter_status_upgrade())->toBe($exists);
 })->with([true, false]);
@@ -51,7 +51,7 @@ it('does not run a schedule when the state schema is unavailable', function () {
 
 it('does not prepare scheduled reports for missing or disabled filters', function ($query) {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
-	plugin_test_queue_db_result('db_column_exists', true);
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 7]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', $query);
 	plugin_flowview_run_schedule(1, 1);
@@ -61,7 +61,9 @@ it('does not prepare scheduled reports for missing or disabled filters', functio
 
 // Stop at time selection so the positive path cannot send a report in unit tests.
 if (!function_exists('read_user_setting')) {
-	function read_user_setting($name) { return false; }
+	function read_user_setting($name) {
+		return false;
+	}
 }
 if (!function_exists('get_timespan')) {
 	function get_timespan(&$span, $now, $timespan, $weekday) {
@@ -71,8 +73,19 @@ if (!function_exists('get_timespan')) {
 
 it('continues preparing an enabled scheduled filter', function () {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
-	plugin_test_queue_db_result('db_column_exists', true);
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 7]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['enabled' => 'on', 'timespan' => 1]);
 	expect(fn () => plugin_flowview_run_schedule(1, 1))->toThrow(RuntimeException::class, 'enabled report reached time selection');
+});
+
+it('preserves an existing disabled schedule filter with an explicit label', function () {
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['id' => 2, 'name' => 'Active', 'enabled' => 'on'], ['id' => 7, 'name' => 'Saved', 'enabled' => '']]);
+	expect(flowview_schedule_filters(3))->toBe([2 => 'Active', 7 => 'Saved (Disabled)']);
+	$call = $GLOBALS['__test_db_calls'][0];
+	expect($call['params'])->toBe([3])->and($call['sql'])->toContain('SELECT query_id');
+});
+it('handles unavailable schedule choices without replacing the association', function () {
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', false);
+	expect(flowview_schedule_filters(3))->toBe([]);
 });

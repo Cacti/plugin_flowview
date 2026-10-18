@@ -130,7 +130,7 @@ function plugin_flowview_upgrade(): bool {
 function plugin_flowview_check_upgrade(bool $force = false): void {
 	global $config;
 
-	$files = ['plugins.php', 'flowview.php', 'index.php'];
+	$files = ['plugins.php', 'flowview.php', 'flowview_filters.php', 'flowview_schedules.php', 'index.php'];
 	if (isset($_SERVER['PHP_SELF']) && !in_array(basename($_SERVER['PHP_SELF']), $files)) {
 		return;
 	}
@@ -146,7 +146,7 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 		FROM plugin_config
 		WHERE directory = ?', array('flowview'));
 
-	if ($current != $old || $force) {
+	if ($current != $old || $force || !flowview_filter_status_ready()) {
 		$php_binary = read_config_option('path_php_binary');
 
 		exec_background($php_binary, '-q ' .$config['base_path'] . '/plugins/flowview/flowview_upgrade.php');

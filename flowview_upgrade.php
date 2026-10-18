@@ -30,7 +30,6 @@ require_once('./plugins/flowview/setup.php');
 require_once('./plugins/flowview/includes/database.php');
 
 flowview_connect();
-flowview_filter_status_upgrade();
 
 ini_set('max_execution_time', '0');
 
@@ -82,17 +81,22 @@ if ($forcever == '') {
 $info            = plugin_flowview_version();
 $current_version = $info['version'];
 
-/* do a version check */
-if ($forcever == '' && $old_version == $current_version) {
-	cacti_log('Your Flowview is already up to date (v' . $current_version . ' vs v' . $old_version . ') not upgrading.  Use --forcever to override', true, 'FLOWVIEW');
-	exit(0);
-}
-
 if (!register_process_start('flowview', 'upgrade', 1, 86400)) {
 	if (empty($forcever)) {
 		print 'WARNING: Running process detected.  To override use --forcever' . PHP_EOL;
 		exit(1);
 	}
+}
+
+if (!flowview_filter_status_upgrade()) {
+	cacti_log('FlowView filter state upgrade failed; it will be retried.', true, 'FLOWVIEW');
+	exit(1);
+}
+
+/* do a version check */
+if ($forcever == '' && $old_version == $current_version) {
+	cacti_log('Your Flowview is already up to date (v' . $current_version . ' vs v' . $old_version . ') not upgrading.  Use --forcever to override', true, 'FLOWVIEW');
+	exit(0);
 }
 
 cacti_log('Upgrading from v' . $old_version . ' to ' . $current_version, true, 'FLOWVIEW');
