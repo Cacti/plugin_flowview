@@ -97,6 +97,7 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_messages']   = array();
 		$GLOBALS['__test_user_settings'] = array();
 		$GLOBALS['__test_csrf_valid'] = true;
+		$GLOBALS['__test_translations'] = array();
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -279,7 +280,8 @@ if (!function_exists('html_escape')) {
 if (!function_exists('__')) {
 	function __($text, ...$args) {
 		if ($args) {
-			array_pop($args); // Cacti passes the text domain last.
+			$domain = array_pop($args); // Cacti passes the text domain last.
+			$text = $GLOBALS['__test_translations'][$domain][$text] ?? $text;
 		}
 		return $args ? vsprintf($text, $args) : $text;
 	}

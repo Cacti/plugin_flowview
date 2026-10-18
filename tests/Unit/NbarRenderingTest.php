@@ -95,6 +95,7 @@ it('escapes names, prefixes and dynamic settings in the Options markup', functio
 
 
 it('labels conversation directions, observation dates and the application drilldown', function () {
+	$GLOBALS['__test_translations']['flowview']['Top 100 conversations by combined data volume. Each row groups an Internal Host, External Host and application across both directions. Uses only the selected LAN captures to avoid counting WAN copies. Local and multicast traffic is excluded. DNS names identify servers, not the exact website requested. History retention: %d days.'] = '<localized> retention %d days.';
 	$GLOBALS['fv_nbar_preferences'] = ['prefixes' => ['192.0.2.0/24'], 'dns' => '0'];
 	$nbar_preferences = $GLOBALS['fv_nbar_preferences'];
 	$listener_scope = 'd.listener_id=?';
@@ -112,6 +113,7 @@ it('labels conversation directions, observation dates and the application drilld
 	include dirname(__DIR__, 2) . '/nbar_conversations.php';
 	$html = ob_get_clean();
 	expect($html)->toContain('Internal Host', 'External Host', '&lt;app&gt;', 'parent_app=0d000001', 'mode=connections', 'Back to top applications', 'First seen', 'Last seen');
+	expect($html)->toContain('&lt;localized&gt; retention ' . fv_nbar_retention_days() . ' days.')->not->toContain('<localized>', 'Top 100 conversations by combined data volume.');
 	expect($html)->not->toContain('<app>');
 	$call = end($GLOBALS['__test_db_calls']);
 	expect($call['params'])->toBe([1, $start, $end, $aid, $host, $host]);
