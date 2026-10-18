@@ -4,6 +4,9 @@
 
 * fix: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
 
+* feature: Add Cisco Apps (NBAR) reports for application-bearing NetFlow v9 exports, with IPv4/IPv6 application totals, conversations, paged connections, per-account capture/network options, recent-record status, first/last observation dates and a router setup guide
+* feature: Maintain reusable per-capture NBAR hourly/daily summaries through the existing Cacti poller, with raw partial-boundary fallback and a separate retention setting capped at 30 days
+
 * issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu
 * dev: Create the plugin's config.php from config.php.dist for the flowview install step in the integration-test workflow (removed immediately afterwards so the unit tests still run with no config file), so the install no longer fails with "needs configuration"
 * feature: Add an optional FlowView Query Service (a long-running Go service under service/flowview-query) as a selectable Parallel Query Backend under FlowView Settings (default Legacy PHP Runner); when enabled, the parallel query parent runner (flowview_runner.php) delegates the whole query to the service over localhost instead of forking a PHP worker per shard, running the same cache-aware map-reduce (sharing parallel_database_query_shard_cache) and writing results back, with automatic fallback to the legacy runner when the service is unreachable
