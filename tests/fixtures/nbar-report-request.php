@@ -104,6 +104,10 @@ if ($scenario === 'nav-redirect' || $scenario === 'nav-redirect-header') {
 	$_REQUEST = array_replace($_REQUEST, ['mode' => 'connections', 'app' => '0d000001', 'parent_app' => '0d000001', 'internal' => '192.0.2.10', 'external' => '198.51.100.20', 'context' => json_encode(['report' => 'bad', 'nested' => ['bad']])]);
 } elseif ($scenario === 'conversations') {
 	$_REQUEST['mode'] = 'conversations';
+} elseif ($scenario === 'apps-failure') {
+	$_REQUEST['mode'] = 'apps';
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', false);
 } elseif ($scenario === 'conversation-failure') {
 	$_REQUEST['mode'] = 'conversations';
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', []);

@@ -5,6 +5,8 @@ beforeEach(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
 	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
 	flowview_test_load(dirname(__DIR__, 2) . '/nbar_count.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/nbar_connections.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/nbar_query.php');
 	$GLOBALS['flowview_cnn'] = 'review-database';
 });
 it('selects an exact count deadline for the actual flow database', function ($version, $fragment) {

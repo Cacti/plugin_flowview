@@ -299,6 +299,11 @@ if ($mode === 'connections') {
 	}
 } else {
 	$rows = fv_nbar_query_cached($sql, $args);
+	if (!is_array($rows)) {
+		echo '<p class="alert">' . fv_nbar_h(__('Unable to load applications. Please try again.', 'flowview')) . '</p>';
+		bottom_footer();
+		return;
+	}
 }
 $has_next = $mode === 'connections' && cacti_sizeof($rows) > 100;
 if ($has_next) {
