@@ -297,6 +297,10 @@ function reports_run($id): bool {
 
 	cacti_log($stats, false, 'SYSTEM');
 
+	if ($report['source'] === 'flowview' && ($last_line === false || $return_code !== 0)) {
+		db_execute_prepared('UPDATE reports_queued SET status = ? WHERE id = ?', ['pending', $id]);
+		return false;
+	}
 	db_execute_prepared('DELETE FROM reports_queued WHERE id = ?', [$id]);
 	return true;
 }

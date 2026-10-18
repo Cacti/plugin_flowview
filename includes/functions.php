@@ -7375,21 +7375,43 @@ function flowview_schedule_filters(int $schedule_id): array {
 	return $options;
 }
 
-/** Preserve a pending occurrence if a queue runner has already claimed its row. */
-function flowview_retry_queued_report(array $report): bool {
-	if (($report['source'] ?? '') !== 'flowview' || empty($report['id'])) {
+/** Resolve native queue IDs and the pre-1.3 report-ID convention. */
+function flowview_schedule_queue_id(array $options) {
+	$value = $options['queue-id'] ?? false;
+	if ($value === false) {
+		$value = $options['report-id'] ?? false;
+	}
+	return filter_var($value, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]) ?: false;
+}
+
+/** Own FlowView dispatch so failed/deferred children cannot consume queue rows. */
+function flowview_reports_run(int $id): bool {
+	global $config;
+	if (!flowview_filter_status_ready()) {
 		return false;
 	}
-	if (($report['status'] ?? '') === 'pending') {
-		return true;
-	}
-	$retry = $report;
-	$retry['id'] = 0;
-	$retry['status'] = 'pending';
-	unset($retry['start_time']);
-	if ((int) sql_save($retry, 'reports_queued') <= 0) {
-		cacti_log('Unable to preserve the queued FlowView occurrence for retry.', false, 'FLOWVIEW');
+	$report = db_fetch_row_prepared('SELECT * FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']);
+	if (!$report) {
 		return false;
 	}
-	return true;
+	require_once $config['base_path'] . '/lib/poller.php';
+	if (!db_execute_prepared('UPDATE reports_queued SET status=?, start_time=? WHERE id=? AND source=?', ['running', date('Y-m-d H:i:s'), $id, 'flowview'])) {
+		return false;
+	}
+	$output = [];
+	$status = 1;
+	$command = $report['run_command'] . ' --report-id=' . (int) $report['source_id'] . ' --queue-id=' . $id;
+	$timeout = (int) $report['run_timeout'];
+	if ($timeout <= 0) {
+		$timeout = max(1, (int) read_config_option('scheduler_timeout') ?: 300);
+	}
+	$result = exec_with_timeout($command, $output, $status, $timeout);
+	if ($result === false || $status !== 0) {
+		// Keep the original even if resetting its state fails; never delete it.
+		if (!db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=? AND source=?', ['pending', $id, 'flowview'])) {
+			cacti_log('Unable to reset the retained FlowView occurrence; queue repair is required.', false, 'FLOWVIEW');
+		}
+		return false;
+	}
+	return db_execute_prepared('DELETE FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']) !== false;
 }

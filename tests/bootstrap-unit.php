@@ -132,7 +132,7 @@ if (!function_exists('db_execute')) {
 if (!function_exists('db_execute_prepared')) {
 	function db_execute_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute_prepared', true);
 	}
 }
 

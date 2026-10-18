@@ -43,11 +43,13 @@ $maint     = false;
 $force     = false;
 $scheduled = false;
 $report_id = false;
+$queue_id = false;
 
 $shortopts = 'VvHh';
 $longopts = [
 	'scheduled::',
 	'report-id::',
+	'queue-id::',
 	'debug',
 	'force',
 	'version',
@@ -73,6 +75,9 @@ foreach($options as $arg => $value) {
 		case 'report-id':
 			$report_id = is_array($value) ? end($value) : $value;
 
+			break;
+		case 'queue-id':
+			$queue_id = is_array($value) ? end($value) : $value;
 			break;
 		case 'version':
 			display_version();
@@ -131,7 +136,7 @@ if ($scheduled == true) {
 				['flowview', 'pending']);
 
 			if (cacti_sizeof($report)) {
-				if (!flowview_filter_status_ready() || reports_run($report['id']) === false) {
+				if (!flowview_filter_status_ready() || flowview_reports_run($report['id']) === false) {
 					break;
 				}
 
@@ -152,6 +157,7 @@ if ($scheduled == true) {
 		unregister_process('flowsched', 'master', 0);
 	}
 } else {
+	$report_id = flowview_schedule_queue_id(['report-id' => $report_id, 'queue-id' => $queue_id]);
 	if ($report_id === false) {
 		cacti_log('FATAL: Flowview Schedule Report ID not provided', true, 'FLOWVIEW');
 		exit(1);
@@ -167,9 +173,7 @@ if ($scheduled == true) {
 		$id = $report['source_id'];
 
 		if (!flowview_filter_status_ready()) {
-			// Core queue runners may delete the claimed row after this child exits.
-			// Preserve a new pending row first, without touching schedule timestamps.
-			flowview_retry_queued_report($report);
+			// The FlowView parent retains this original occurrence on a retry exit.
 			exit(75);
 		}
 
