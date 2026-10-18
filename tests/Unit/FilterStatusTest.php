@@ -59,23 +59,12 @@ it('does not prepare scheduled reports for missing or disabled filters', functio
 	expect($reads)->toHaveCount(2);
 })->with([[[]], [['enabled' => '']], [['name' => 'legacy']]]);
 
-// Stop at time selection so the positive path cannot send a report in unit tests.
-if (!function_exists('read_user_setting')) {
-	function read_user_setting($name) {
-		return false;
-	}
-}
-if (!function_exists('get_timespan')) {
-	function get_timespan(&$span, $now, $timespan, $weekday) {
-		throw new RuntimeException('enabled report reached time selection');
-	}
-}
-
 it('continues preparing an enabled scheduled filter', function () {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 7]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['enabled' => 'on', 'timespan' => 1]);
+	plugin_test_queue_db_result('get_timespan', new RuntimeException('enabled report reached time selection'));
 	expect(fn () => plugin_flowview_run_schedule(1, 1))->toThrow(RuntimeException::class, 'enabled report reached time selection');
 });
 
@@ -88,4 +77,12 @@ it('preserves an existing disabled schedule filter with an explicit label', func
 it('handles unavailable schedule choices without replacing the association', function () {
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', false);
 	expect(flowview_schedule_filters(3))->toBe([]);
+});
+
+it('resets a queued time-selection exception between tests', function () {
+	plugin_test_queue_db_result('get_timespan', new RuntimeException('fixture only'));
+	plugin_test_reset();
+	$span = [];
+	get_timespan($span, 2000, 1, 0);
+	expect($span)->toBe(['begin_now' => 200, 'end_now' => 2000]);
 });

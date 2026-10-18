@@ -262,14 +262,16 @@ function reports_queue($name, $request_type, $source, $source_id, $command, $not
 function reports_run($id): bool {
 	global $config;
 
-	require_once($config['base_path'] . '/lib/poller.php');
-
 	$report = db_fetch_row_prepared('SELECT *
 		FROM reports_queued
 		WHERE id = ?',
 		[$id]);
 
 	if (cacti_sizeof($report)) {
+		if ($report['source'] === 'flowview' && !flowview_filter_status_ready()) {
+			return false;
+		}
+		require_once($config['base_path'] . '/lib/poller.php');
 		db_execute_prepared('UPDATE reports_queued
 			SET status = ?, start_time = ?
 			WHERE id = ?',

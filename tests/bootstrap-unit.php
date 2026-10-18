@@ -95,6 +95,8 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_db_results'] = array();
 		$GLOBALS['__test_config']     = array();
 		$GLOBALS['__test_messages']   = array();
+		$GLOBALS['__test_saved_rows'] = [];
+		$GLOBALS['__test_user_settings'] = [];
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -394,7 +396,8 @@ if (!function_exists('is_error_message')) {
 
 if (!function_exists('sql_save')) {
 	function sql_save($array, $table, $key = 'id') {
-		return isset($array['id']) ? $array['id'] : 1;
+		$GLOBALS['__test_saved_rows'][] = ['table' => $table, 'row' => $array];
+		return plugin_test_db_result('sql_save', isset($array['id']) ? $array['id'] : 1);
 	}
 }
 
@@ -471,3 +474,25 @@ function flowview_test_load($path) {
 
 require_once dirname(__DIR__) . '/includes/functions.php';
 require_once dirname(__DIR__) . '/includes/database.php';
+
+// Core helper doubles are reset through plugin_test_reset(), never test collection.
+if (!function_exists('read_user_setting')) {
+	function read_user_setting($name, $default = false) {
+		return $GLOBALS['__test_user_settings'][$name] ?? $default;
+	}
+}
+if (!function_exists('get_timespan')) {
+	function get_timespan(&$span, $now, $timespan, $weekday) {
+		$result = plugin_test_db_result('get_timespan', ['begin_now' => $now - 1800, 'end_now' => $now]);
+		if ($result instanceof Throwable) {
+			throw $result;
+		}
+		$span = $result;
+	}
+}
+if (!function_exists('exec_with_timeout')) {
+	function exec_with_timeout($command, &$output, &$status, $timeout = 5) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_with_timeout', 'sql' => '', 'params' => [$command, $timeout]];
+		$status = plugin_test_db_result('exec_with_timeout', 0);
+	}
+}

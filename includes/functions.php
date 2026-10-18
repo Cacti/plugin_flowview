@@ -7374,3 +7374,22 @@ function flowview_schedule_filters(int $schedule_id): array {
 	}
 	return $options;
 }
+
+/** Preserve a pending occurrence if a queue runner has already claimed its row. */
+function flowview_retry_queued_report(array $report): bool {
+	if (($report['source'] ?? '') !== 'flowview' || empty($report['id'])) {
+		return false;
+	}
+	if (($report['status'] ?? '') === 'pending') {
+		return true;
+	}
+	$retry = $report;
+	$retry['id'] = 0;
+	$retry['status'] = 'pending';
+	unset($retry['start_time']);
+	if ((int) sql_save($retry, 'reports_queued') <= 0) {
+		cacti_log('Unable to preserve the queued FlowView occurrence for retry.', false, 'FLOWVIEW');
+		return false;
+	}
+	return true;
+}

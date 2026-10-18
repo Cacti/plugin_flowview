@@ -86,6 +86,12 @@ foreach($options as $arg => $value) {
 	}
 }
 
+// Do not claim pending rows while the filter-state schema is unavailable.
+if ($scheduled && !flowview_filter_status_ready()) {
+	cacti_log('FlowView scheduled reports deferred until the filter-state upgrade completes.', false, 'FLOWVIEW');
+	exit(75);
+}
+
 if ($scheduled == true) {
 	/* silently end if the registered process is still running, or process table missing */
 	if (!$force) {
@@ -125,7 +131,9 @@ if ($scheduled == true) {
 				['flowview', 'pending']);
 
 			if (cacti_sizeof($report)) {
-				reports_run($report['id']);
+				if (!flowview_filter_status_ready() || reports_run($report['id']) === false) {
+					break;
+				}
 
 				$run++;
 			} else {
@@ -157,6 +165,13 @@ if ($scheduled == true) {
 
 	if (cacti_sizeof($report)) {
 		$id = $report['source_id'];
+
+		if (!flowview_filter_status_ready()) {
+			// Core queue runners may delete the claimed row after this child exits.
+			// Preserve a new pending row first, without touching schedule timestamps.
+			flowview_retry_queued_report($report);
+			exit(75);
+		}
 
 		/* silently end if the registered process is still running, or process table missing */
 		if (!$force) {

@@ -23,7 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
+chdir(__DIR__ . '/../../');
 require('./include/cli_check.php');
 require_once('./plugins/flowview/includes/functions.php');
 require_once('./plugins/flowview/setup.php');
