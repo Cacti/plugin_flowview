@@ -83,7 +83,7 @@ function fv_nbar_summary_store($sql, $listener, $hours, $args = []) {
  *
  * @return int
  */
-function fv_nbar_summary_refresh($budget = 20) {
+function fv_nbar_summary_refresh($budget = 20, $supervised = false) {
 	$lock = flowview_db_fetch_row("SELECT GET_LOCK(CONCAT('flowview_nbar_summary:',LEFT(SHA2(DATABASE(),256),16)),0) acquired");
 	if ((int) ($lock['acquired'] ?? 0) !== 1) {
 		return 0;
@@ -113,7 +113,7 @@ function fv_nbar_summary_refresh($budget = 20) {
 			if (microtime(true) - $started >= max(1, (int) $budget)) {
 				break;
 			}
-			if (fv_nbar_summary_build((int) $item['listener_id'], (int) $item['hour'])) {
+			if (fv_nbar_summary_build((int) $item['listener_id'], (int) $item['hour'], $supervised)) {
 				$done++;
 			}
 		}
@@ -131,12 +131,17 @@ function fv_nbar_summary_refresh($budget = 20) {
  *
  * @return bool
  */
-function fv_nbar_summary_build($listener, $hour) {
-	// READ COMMITTED avoids holding raw-record locks during INSERT ... SELECT.
-	if (flowview_db_execute('SET TRANSACTION ISOLATION LEVEL READ COMMITTED') === false || flowview_db_execute('START TRANSACTION') === false) {
+function fv_nbar_summary_build($listener, $hour, $supervised = false) {
+	// A MySQL build without DML timeouts is allowed only in the supervised child.
+	$old_timeout = fv_nbar_worker_timeout(20);
+	if ($old_timeout === null && !$supervised) {
 		return false;
 	}
 	try {
+		// READ COMMITTED avoids holding raw-record locks during INSERT ... SELECT.
+		if (flowview_db_execute('SET TRANSACTION ISOLATION LEVEL READ COMMITTED') === false || flowview_db_execute('START TRANSACTION') === false) {
+			return false;
+		}
 		$state = flowview_db_fetch_row_prepared('SELECT revision FROM plugin_flowview_nbar_hours WHERE listener_id=? AND hour=?', [$listener, $hour]);
 		if (!isset($state['revision'])) {
 			throw new RuntimeException('Missing summary state');
@@ -171,6 +176,10 @@ function fv_nbar_summary_build($listener, $hour) {
 	} catch (Throwable $e) {
 		flowview_db_execute('ROLLBACK');
 		return false;
+	} finally {
+		if ($old_timeout !== null) {
+			flowview_db_execute('SET SESSION max_statement_time=' . $old_timeout);
+		}
 	}
 }
 

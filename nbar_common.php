@@ -89,3 +89,35 @@ function fv_nbar_worker_timeout(int $seconds): ?float {
 	}
 	return (float) $old;
 }
+
+/** Launch maintenance without holding the Cacti poller on aggregate queries. */
+function fv_nbar_launch_maintenance(): bool {
+	global $config;
+	$php = read_config_option('path_php_binary');
+	if (!is_string($php) || $php === '') {
+		cacti_log('NBAR maintenance requires a configured PHP binary.', false, 'FLOWVIEW');
+		return false;
+	}
+	exec_background($php, '-q ' . escapeshellarg($config['base_path'] . '/plugins/flowview/flowview_upgrade.php') . ' --nbar-worker=supervise');
+	return true;
+}
+
+/** Run an isolated maintenance child with a hard process deadline. */
+function fv_nbar_supervise_maintenance(): void {
+	global $config;
+	if (!register_process_start('flowview', 'nbar_maintenance', 0, 120)) {
+		return;
+	}
+	try {
+		$output = [];
+		$status = 0;
+		// An argv array lets proc_open target PHP itself, with no shell intermediary.
+		$command = [read_config_option('path_php_binary'), '-q', $config['base_path'] . '/plugins/flowview/flowview_upgrade.php', '--nbar-worker=build'];
+		$result = exec_with_timeout($command, $output, $status, 90);
+		if ($result === false || $status !== 0) {
+			cacti_log('NBAR maintenance child failed or exceeded its 90-second deadline.', false, 'FLOWVIEW');
+		}
+	} finally {
+		unregister_process('flowview', 'nbar_maintenance', 0);
+	}
+}

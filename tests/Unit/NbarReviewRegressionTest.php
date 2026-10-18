@@ -26,6 +26,7 @@ it('defers DML when a deadline is unsupported or cannot be set', function ($valu
 	expect(fv_nbar_worker_timeout(20))->toBeNull();
 })->with([false, '-1', '4.5']);
 it('does not mutate daily data without a verified statement deadline', function () {
+	plugin_test_queue_db_result('db_fetch_cell', false);
 	plugin_test_queue_db_result('db_fetch_row_prepared', []);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['n' => 1, 'ready' => 1, 'rev' => '1']);
 	expect(fv_nbar_daily_build(1, 1800000000, 1800003600))->toBe(0);

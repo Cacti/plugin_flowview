@@ -23,7 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
+chdir(__DIR__ . '/../../');
 require('./include/cli_check.php');
 require_once('./plugins/flowview/includes/functions.php');
 require_once('./plugins/flowview/setup.php');
@@ -38,6 +38,7 @@ $parms = $_SERVER['argv'];
 array_shift($parms);
 
 $forcever    = '';
+$nbar_worker = '';
 
 if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
@@ -49,6 +50,12 @@ if (cacti_sizeof($parms)) {
 		}
 
 		switch ($arg) {
+			case '--nbar-worker':
+				if (!in_array($value, ['supervise', 'build'], true)) {
+					exit(1);
+				}
+				$nbar_worker = $value;
+				break;
 			case '--forcever':
 				$forcever = $value;
 				break;
@@ -70,6 +77,19 @@ if (cacti_sizeof($parms)) {
 	}
 }
 
+
+// Internal maintenance modes never enter the schema-upgrade path.
+if ($nbar_worker !== '') {
+	require_once __DIR__ . '/nbar_common.php';
+	require_once $config['base_path'] . '/lib/poller.php';
+	if ($nbar_worker === 'supervise') {
+		fv_nbar_supervise_maintenance();
+	} elseif ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
+		fv_nbar_summary_refresh(20, true);
+		fv_nbar_cleanup();
+	}
+	exit(0);
+}
 
 /* we need to rerun the upgrade, force the current version */
 if ($forcever == '') {

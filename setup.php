@@ -796,8 +796,7 @@ function flowview_poller_bottom(): void {
 	flowview_connect();
     require_once __DIR__ . '/nbar_common.php';
     if ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
-        fv_nbar_summary_refresh();
-        fv_nbar_cleanup();
+        fv_nbar_launch_maintenance();
     }
 
 	$retention_days = read_config_option('flowview_retention');

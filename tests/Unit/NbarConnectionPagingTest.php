@@ -110,3 +110,36 @@ it('rejects failed planning metadata instead of returning an empty report', func
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', false);
 	expect(fn () => fv_nbar_connection_plan([1], $this->start, $this->start + 7200, time()))->toThrow(RuntimeException::class);
 })->with(['day', 'hour']);
+
+
+it('keeps exporter name ranks ahead of endpoints when candidate pages contain ties', function () {
+	plugin_test_reset();
+	$names = [];
+	$ranks = [3, 1, 0, 2];
+	$labels = ['Zulu', 'Alpha', null, 'Bravo'];
+	foreach ([0, 1, 3] as $i) {
+		$names[] = ['listener_id' => 1, 'router' => '192.0.2.' . (201 + $i), 'app_id' => '0d000001', 'name_id' => $ranks[$i], 'name' => $labels[$i]];
+	}
+	$tuples = [];
+	for ($i = 0; $i < 256; $i++) {
+		$tuples[] = array_replace($this->tuple, ['router' => '192.0.2.' . (201 + $i % 4), 'sport' => 1000 + intdiv($i, 4), 'bytes' => $i < 101 ? '10' : '1']);
+	}
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['hour' => $this->start]]);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', $names);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array_merge($tuples, [array_replace($this->tuple, ['sport' => 9000, 'bytes' => '1'])]));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', $tuples);
+	$rows = fv_nbar_connections_direct([1], $this->start, $this->start + 3600, '1=1', [], 1);
+	$expected = array_slice($tuples, 0, 101);
+	usort($expected, function ($a, $b) use ($ranks) {
+		$ai = (int) substr($a['router'], -3) - 201;
+		$bi = (int) substr($b['router'], -3) - 201;
+		return ($ranks[$ai] <=> $ranks[$bi]) ?: ($a['sport'] <=> $b['sport']);
+	});
+	expect(array_column($rows, 'router'))->toBe(array_column($expected, 'router'));
+	expect(array_column($rows, 'sport'))->toBe(array_column($expected, 'sport'));
+	expect($rows[0]['name'])->toBeNull()->and($rows[100]['name'])->toBe('Zulu');
+	foreach ($GLOBALS['__test_db_calls'] as $call) {
+		expect($call['sql'])->not->toContain('OFFSET');
+	}
+});

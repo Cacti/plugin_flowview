@@ -84,7 +84,7 @@ it('does not build summaries when transaction creation or commit fails', functio
 	} else {
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => 4]);
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => 4]);
-		foreach ([true, true, false] as $result) {
+		foreach ([true, true, true, false] as $result) {
 			plugin_test_queue_db_result('db_execute', $result);
 		}
 		expect(fv_nbar_summary_build(1, 1800000000))->toBeFalse();

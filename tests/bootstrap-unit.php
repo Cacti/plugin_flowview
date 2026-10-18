@@ -168,7 +168,7 @@ if (!function_exists('db_fetch_row_prepared')) {
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql, $column = '', $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		return plugin_test_db_result('db_fetch_cell', '');
+		return plugin_test_db_result('db_fetch_cell', str_contains($sql, '@@session.max_statement_time') ? '0' : '');
 	}
 }
 
@@ -510,4 +510,27 @@ if (!function_exists('csrf_check')) {
     function csrf_check($fatal = true) {
         return $GLOBALS['__test_csrf_valid'] ?? true;
     }
+}
+
+if (!function_exists('exec_background')) {
+	function exec_background($command, $args) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_background', 'sql' => $command, 'params' => [$args]];
+	}
+}
+if (!function_exists('register_process_start')) {
+	function register_process_start($name, $type, $id, $timeout) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'register_process_start', 'sql' => $name, 'params' => [$type, $id, $timeout]];
+		return plugin_test_db_result('register_process_start', true);
+	}
+}
+if (!function_exists('unregister_process')) {
+	function unregister_process($name, $type, $id) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'unregister_process', 'sql' => $name, 'params' => [$type, $id]];
+	}
+}
+if (!function_exists('exec_with_timeout')) {
+	function exec_with_timeout($command, &$output, &$status, $timeout = 5) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_with_timeout', 'sql' => '', 'params' => [$command, $timeout]];
+		$status = plugin_test_db_result('exec_with_timeout', 0);
+	}
 }

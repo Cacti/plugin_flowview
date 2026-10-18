@@ -46,7 +46,8 @@ it('rebuilds all hourly tables and publishes only a matching revision', function
 	expect(fv_nbar_summary_build(3, 1800000000))->toBeTrue();
 	$calls = $GLOBALS['__test_db_calls'];
 	$sql = array_column($calls, 'sql');
-	expect(end($sql))->toBe('COMMIT');
+	expect($sql[count($sql) - 2])->toBe('COMMIT');
+	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
 	$publish = array_values(array_filter($calls, fn ($c) => str_starts_with($c['sql'], 'UPDATE plugin_flowview_nbar_hours')));
 	expect($publish[0]['params'])->toBe(['123', '123', 3, 1800000000]);
 });
@@ -59,7 +60,8 @@ it('rolls back each failed hourly mutation without committing partial totals', f
 	}
 	expect(fv_nbar_summary_build(3, 1800000000))->toBeFalse();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
-	expect(end($sql))->toBe('ROLLBACK');
+	expect($sql[count($sql) - 2])->toBe('ROLLBACK');
+	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
 	expect($sql)->not->toContain('COMMIT');
 })->with(range(0, 6));
 
@@ -68,14 +70,16 @@ it('rejects hourly builds with missing or changed revisions', function ($latest)
 	plugin_test_queue_db_result('db_fetch_row_prepared', $latest);
 	expect(fv_nbar_summary_build(3, 1800000000))->toBeFalse();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
-	expect(end($sql))->toBe('ROLLBACK');
+	expect($sql[count($sql) - 2])->toBe('ROLLBACK');
+	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
 	expect(implode(' ', $sql))->not->toContain('UPDATE plugin_flowview_nbar_hours SET built');
 })->with([[['revision' => '124']], [[]]]);
 
 it('rejects a build with no initial hourly state', function () {
 	expect(fv_nbar_summary_build(3, 1800000000))->toBeFalse();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
-	expect(end($sql))->toBe('ROLLBACK');
+	expect($sql[count($sql) - 2])->toBe('ROLLBACK');
+	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
 });
 
 it('skips hourly maintenance while another worker holds its lock', function () {

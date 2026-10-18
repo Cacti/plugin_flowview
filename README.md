@@ -287,3 +287,5 @@ Copyright (c) 2004-2026 - The Cacti Group, Inc.
 NBAR daily summary materialization and observation-date backfill require MariaDB statement deadlines. On MySQL 8, these workers safely defer their DML rather than running without a bound; reports continue through hourly/raw sources. Exact counts use the MySQL SELECT execution-time hint.
 
 New NBAR records retain the actual exporter address through hourly and daily summaries. Legacy rows keep their counters with an unknown exporter; an exact single-address listener may still resolve their names, but earlier multi-exporter rows cannot be attributed retrospectively.
+
+NBAR maintenance is launched independently of the poller. A registered supervisor runs the PHP maintenance child with a 90-second process deadline. MariaDB hourly mutations also set and restore a verified 20-second statement deadline. MySQL hourly builds remain available only inside the supervised child; raw records remain the fallback until a checkpoint is published.
