@@ -7433,8 +7433,8 @@ function flowview_reports_run_pending(int $concurrency = 1, int $limit = 100): i
 		if (!flowview_filter_status_ready()) {
 			break;
 		}
-		$running = db_fetch_cell_prepared('SELECT COUNT(*) FROM processes WHERE tasktype=? AND taskname LIKE ?', ['flowsched', 'child%']);
-		if ($running === false || (int) $running >= max(1, $concurrency)) {
+		$running = flowview_running_schedule_children();
+		if ($running === null || (int) $running >= max(1, $concurrency)) {
 			break;
 		}
 		if (flowview_reports_run((int) $report['id'])) {
@@ -7442,4 +7442,37 @@ function flowview_reports_run_pending(int $concurrency = 1, int $limit = 100): i
 		}
 	}
 	return $done;
+}
+
+/** Count live/uncertain children, removing only exact registrations confirmed dead. */
+function flowview_running_schedule_children(): ?int {
+	$rows = db_fetch_assoc_prepared('SELECT taskname,taskid,pid FROM processes WHERE tasktype=? AND taskname LIKE ?', ['flowsched', 'child%']);
+	if (!is_array($rows)) {
+		return null;
+	}
+	$running = 0;
+	foreach ($rows as $row) {
+		if (flowview_schedule_pid_alive($row['pid']) !== false) {
+			$running++;
+			continue;
+		}
+		// A concurrent registration with another PID must survive this cleanup.
+		if (!db_execute_prepared('DELETE FROM processes WHERE tasktype=? AND taskname=? AND taskid=? AND pid=?', ['flowsched', $row['taskname'], $row['taskid'], $row['pid']])) {
+			$running++;
+			cacti_log('Unable to remove a dead FlowView child registration.', false, 'FLOWVIEW');
+		}
+	}
+	return $running;
+}
+
+/** Null means liveness cannot be established; permission errors never mean dead. */
+function flowview_schedule_pid_alive($pid): ?bool {
+	$valid = filter_var($pid, FILTER_VALIDATE_INT, ['options' => ['min_range' => 2, 'max_range' => 2147483647]]);
+	if (!$valid || !function_exists('posix_kill') || !function_exists('posix_get_last_error')) {
+		return null;
+	}
+	if (@posix_kill($valid, 0)) {
+		return true;
+	}
+	return posix_get_last_error() === 3 ? false : null;
 }
