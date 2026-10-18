@@ -730,6 +730,7 @@ function flowview_display_filter(): void {
 							<?php
 							$queries = flowview_db_fetch_assoc('SELECT id, name
 								FROM plugin_flowview_queries
+								WHERE enabled = "on"
 								ORDER BY name');
 
 							if (cacti_sizeof($queries)) {
@@ -1920,6 +1921,10 @@ function get_port_name($port_num, int $port_proto = 6) {
 function plugin_flowview_run_schedule($id, $report_id): void {
 	global $config;
 
+	if (!flowview_filter_status_upgrade()) {
+		return;
+	}
+
 	$start_time = microtime(true);
 
 	$schedule = flowview_db_fetch_row_prepared('SELECT *
@@ -1931,6 +1936,10 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		[$schedule['query_id']]);
+
+	if (empty($query) || ($query['enabled'] ?? '') !== 'on') {
+		return;
+	}
 
 	/* get the timespan from the query */
 	$span = [];
@@ -7336,4 +7345,20 @@ function get_set_default_fast_engine() {
 	}
 
 	return $myengine;
+}
+
+/**
+ * Return the theme status class and translated state without missing-key warnings.
+ *
+ * @param array $record Filter or schedule row.
+ * @return array
+ */
+function flowview_filter_status(array $record): array {
+	if (!array_key_exists('enabled', $record)) {
+		return ['class' => 'deviceDisabled', 'label' => __('Unavailable', 'flowview')];
+	}
+
+	return $record['enabled'] === 'on'
+		? ['class' => 'deviceUp', 'label' => __('Enabled', 'flowview')]
+		: ['class' => 'deviceDisabled', 'label' => __('Disabled', 'flowview')];
 }

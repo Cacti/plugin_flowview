@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* fix: Persist filter enabled state on fresh and existing installations, show enabled/disabled filter and schedule status using theme colours, and exclude disabled filters from report and schedule selection
+
 * issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu
 * dev: Create the plugin's config.php from config.php.dist for the flowview install step in the integration-test workflow (removed immediately afterwards so the unit tests still run with no config file), so the install no longer fails with "needs configuration"
 * feature: Add an optional FlowView Query Service (a long-running Go service under service/flowview-query) as a selectable Parallel Query Backend under FlowView Settings (default Legacy PHP Runner); when enabled, the parallel query parent runner (flowview_runner.php) delegates the whole query to the service over localhost instead of forking a PHP worker per shard, running the same cache-aware map-reduce (sharing parallel_database_query_shard_cache) and writing results back, with automatic fallback to the legacy runner when the service is unreachable

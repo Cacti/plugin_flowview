@@ -123,7 +123,7 @@ if (!function_exists('plugin_test_db_result')) {
 if (!function_exists('db_execute')) {
 	function db_execute($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute', true);
 	}
 }
 
@@ -201,7 +201,7 @@ if (!function_exists('db_index_exists')) {
 
 if (!function_exists('db_column_exists')) {
 	function db_column_exists($table, $column) {
-		return false;
+		return plugin_test_db_result('db_column_exists', false);
 	}
 }
 

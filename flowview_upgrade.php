@@ -30,6 +30,7 @@ require_once('./plugins/flowview/setup.php');
 require_once('./plugins/flowview/includes/database.php');
 
 flowview_connect();
+flowview_filter_status_upgrade();
 
 ini_set('max_execution_time', '0');
 

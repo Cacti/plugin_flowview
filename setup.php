@@ -1147,6 +1147,7 @@ function flowview_setup_table(): void {
 	flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_queries` (
 		id int(11) unsigned NOT NULL AUTO_INCREMENT,
 		name varchar(255) NOT NULL,
+		enabled char(2) NOT NULL DEFAULT 'on',
 		device_id int(11) unsigned NOT NULL,
 		template_id int(11) NOT NULL DEFAULT '0',
 		ex_addr varchar(46) NOT NULL DEFAULT '',
