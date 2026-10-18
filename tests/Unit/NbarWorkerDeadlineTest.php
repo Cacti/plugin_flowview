@@ -54,3 +54,12 @@ it('uses identical tie ordering before and after SQL pagination', function () {
 	expect($sql)->toContain('ORDER BY bytes DESC,d.app_id,COALESCE(n.name_id,0),d.src,d.dst,d.sport,d.dport,d.protocol,d.router LIMIT 101 OFFSET 100');
 	expect($sql)->toContain('ORDER BY d.bytes DESC,d.app_id,d.name_id,d.src,d.dst,d.sport,d.dport,d.protocol,d.router');
 });
+
+it('logs child startup failures even before an exit status is available', function () {
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+	$GLOBALS['__test_cacti_log'] = [];
+	plugin_test_queue_db_result('exec_with_timeout_result', false);
+	fv_nbar_supervise_maintenance();
+	expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('failed or exceeded');
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->toContain('unregister_process');
+});

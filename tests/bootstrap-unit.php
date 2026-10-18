@@ -524,13 +524,14 @@ if (!function_exists('register_process_start')) {
 	}
 }
 if (!function_exists('unregister_process')) {
-	function unregister_process($name, $type, $id) {
-		$GLOBALS['__test_db_calls'][] = ['fn' => 'unregister_process', 'sql' => $name, 'params' => [$type, $id]];
+	function unregister_process($name, $type, $id = 0, $pid = -1) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'unregister_process', 'sql' => $name, 'params' => [$type, $id, $pid]];
 	}
 }
 if (!function_exists('exec_with_timeout')) {
 	function exec_with_timeout($command, &$output, &$status, $timeout = 5) {
 		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_with_timeout', 'sql' => '', 'params' => [$command, $timeout]];
 		$status = plugin_test_db_result('exec_with_timeout', 0);
+		return plugin_test_db_result('exec_with_timeout_result', null);
 	}
 }
