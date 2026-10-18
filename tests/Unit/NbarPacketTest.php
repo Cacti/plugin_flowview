@@ -101,7 +101,7 @@ it('rejects a large zero-length template before repeatedly parsing its data', fu
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
 
-it('invalidates data templates with oversized numeric fields before decoding', function ($field) {
+it('invalidates data templates with oversized numeric fields before decoding', function ($field, $width) {
 	$tid = 1100 + $field;
 	$router = '192.0.2.110';
 	$fields = [[95, 4], [8, 4], [12, 4], [1, 4]];
@@ -114,12 +114,12 @@ it('invalidates data templates with oversized numeric fields before decoding', f
 	fv_nbar_packet($this->header . $encode($fields) . $normal, $router);
 	plugin_test_reset();
 	$invalid = $fields;
-	$invalid[] = [$field, 4096];
-	$data = pack('nn', $tid, 4 + strlen($record) + 4096) . $record . str_repeat('x', 4096);
+	$invalid[] = [$field, $width];
+	$data = pack('nn', $tid, 4 + strlen($record) + $width) . $record . str_repeat('x', $width);
 	fv_nbar_packet($this->header . $encode($invalid) . $data, $router);
 	fv_nbar_packet($this->header . $normal, $router);
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
-})->with([1, 2, 4, 7, 11, 21]);
+})->with([[1, 4096], [2, 4096], [4, 4096], [7, 4096], [11, 4096], [21, 4096], [4, 2], [7, 3], [11, 3], [21, 5]]);
 
 it('keeps wide options scopes separate from numeric data field widths', function () {
 	$def = pack('nnnnnn', 1, 16, 95, 4, 96, 32);

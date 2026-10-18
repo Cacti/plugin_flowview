@@ -184,7 +184,8 @@ function fv_nbar_packet($p, $router) {
 				for ($z = 0;$z < $size;$z += 4) {
 					$f = fv_nbar_uint(substr($p, $q + $z, 2));
 					$l = fv_nbar_uint(substr($p, $q + $z + 2, 2));
-					if ($l === 0 || ($id === 0 && in_array($f, [1, 2, 4, 7, 11, 21], true) && $l > 8)) {
+					$width = [1 => 8, 2 => 8, 4 => 1, 7 => 2, 11 => 2, 21 => 4][$f] ?? null;
+					if ($l === 0 || ($id === 0 && $width !== null && $l > $width)) {
 						$valid = false;
 						break;
 					}
