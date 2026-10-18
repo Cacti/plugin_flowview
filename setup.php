@@ -161,7 +161,7 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 		FROM plugin_config
 		WHERE directory = ?', array('flowview'));
 
-	if ($current != $old || $force || (int) read_config_option('flowview_nbar_schema_version') < 1) {
+	if ($current != $old || $force || (int) read_config_option('flowview_nbar_schema_version') < 2) {
 		$php_binary = read_config_option('path_php_binary');
 
 		exec_background($php_binary, '-q ' .$config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
@@ -795,7 +795,7 @@ function flowview_poller_bottom(): void {
 
 	flowview_connect();
     require_once __DIR__ . '/nbar_common.php';
-    if ((int) read_config_option('flowview_nbar_schema_version') >= 1) {
+    if ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
         fv_nbar_summary_refresh();
         fv_nbar_cleanup();
     }
@@ -1101,7 +1101,7 @@ function flowview_setup_table(): void {
     if (!fv_nbar_schema_install()) {
         throw new RuntimeException('Unable to install NBAR history schema');
     }
-    set_config_option('flowview_nbar_schema_version', '1');
+    set_config_option('flowview_nbar_schema_version', '2');
 
 	flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_dnscache` (
 		`id` int(11) unsigned NOT NULL AUTO_INCREMENT,

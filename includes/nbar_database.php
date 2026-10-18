@@ -37,6 +37,7 @@ if (!function_exists('flowview_db_table_create')) {
 function fv_nbar_schema_definition($suffix) {
 	$fields = [
 		'listener_id' => ['type' => 'int', 'unsigned' => true],
+		'router' => ['type' => 'varchar(45)', 'default' => ''],
 		'minute' => ['type' => 'int', 'unsigned' => true],
 		'hour' => ['type' => 'int', 'unsigned' => true],
 		'app_id' => ['type' => 'varchar(32)'],
@@ -104,6 +105,10 @@ function fv_nbar_schema_definition($suffix) {
 	if (!in_array($suffix, ['names', 'data', 'hours', 'apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections', 'days', 'seen_upgrade'], true)) {
 		throw new InvalidArgumentException('Unknown NBAR schema');
 	}
+	if (in_array($kind, ['data', 'apps', 'pairs', 'connections'], true)) {
+		$primary[] = 'router';
+		$columns[] = 'router';
+	}
 	$fields = array_merge($fields, $extra);
 	$definition = ['columns' => [], 'primary' => implode('`,`', $primary), 'keys' => $keys, 'type' => 'InnoDB'];
 	foreach ($columns as $name) {
@@ -126,4 +131,18 @@ function fv_nbar_schema_table($suffix) {
 	// records plugin ownership, while supporting its separate flow database.
 	flowview_db_table_create($table, $definition);
 	return flowview_db_fetch_cell("SHOW TABLES LIKE '$table'") === $table;
+}
+
+/** Preserve exporter identity when upgrading records collected by older builds. */
+function fv_nbar_exporter_schema(): bool {
+	foreach (['data', 'apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections'] as $suffix) {
+		$table = 'plugin_flowview_nbar_' . $suffix;
+		if (!flowview_db_fetch_row("SHOW COLUMNS FROM $table LIKE 'router'")) {
+			$primary = fv_nbar_schema_definition($suffix)['primary'];
+			if (!flowview_db_execute("ALTER TABLE $table ADD COLUMN router varchar(45) NOT NULL DEFAULT '', DROP PRIMARY KEY, ADD PRIMARY KEY (`$primary`)")) {
+				return false;
+			}
+		}
+	}
+	return true;
 }

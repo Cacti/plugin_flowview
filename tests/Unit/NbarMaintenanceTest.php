@@ -111,12 +111,11 @@ it('keeps observation dates unknown when any contributing row lacks dates', func
 
 it('does not start date backfill without both scoped locks', function () {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
-	plugin_test_queue_db_result('db_fetch_cell', 7);
 	plugin_test_queue_db_result('db_fetch_cell', 'REPEATABLE-READ');
 	plugin_test_queue_db_result('db_fetch_cell', 0);
 	expect(fv_nbar_seen_backfill())->toBe(0);
 	$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
-	expect($sql)->toContain('RELEASE_LOCK', 'max_statement_time=7', 'REPEATABLE READ');
+	expect($sql)->toContain('RELEASE_LOCK', 'REPEATABLE READ');
 	expect($sql)->not->toContain('UPDATE plugin_flowview_nbar_');
 });
 
@@ -190,6 +189,6 @@ it('uses summary tuple fields for counts without aggregating traffic counters', 
 	flowview_test_load(dirname(__DIR__, 2) . '/nbar_count.php');
 	$key = fv_nbar_count_context('', 'd.listener_id=? AND d.minute>=? AND d.minute<?', [1, 1800000000, 1800001800], 1800001800, [1], 1800000000);
 	$sql = $_SESSION['fv_nbar_counts'][$key]['sql'];
-	expect($sql)->toContain('COUNT(DISTINCT', 'count_part', 'listener_id=1');
+	expect($sql)->toContain('COUNT(DISTINCT', 'plugin_flowview_nbar_data', 'd.listener_id=?');
 	expect($sql)->not->toContain('SUM(d.bytes)');
 });

@@ -64,10 +64,17 @@ it('expires negative DNS entries and retains at most 512 addresses', function ()
 	expect($_SESSION['fv_nbar_dns_negative'])->toHaveKey('192.0.2.208');
 });
 
+require_once dirname(__DIR__) . '/helpers/request.php';
 it('stops further DNS lookups after the report lookup budget is exhausted', function () {
-	$GLOBALS['fv_nbar_preferences'] = ['dns' => '1'];
-	$queries = count(Net_DNS2_Resolver::$queries);
-	usleep(1100000);
-	expect(fv_nbar_dns('192.0.2.250'))->toBe('Not resolved');
-	expect(Net_DNS2_Resolver::$queries)->toHaveCount($queries);
+	$directory = sys_get_temp_dir() . '/flowview-dns-' . bin2hex(random_bytes(8));
+	mkdir($directory, 0700);
+	try {
+		[$stdout] = flowview_test_request(dirname(__DIR__) . '/fixtures/nbar-dns-budget.php', 'budget', $directory);
+		expect(json_decode($stdout, true, 512, JSON_THROW_ON_ERROR))->toBe(['name' => 'Not resolved', 'queries' => 1]);
+	} finally {
+		foreach (glob($directory . '/*') as $file) {
+			unlink($file);
+		}
+		rmdir($directory);
+	}
 });

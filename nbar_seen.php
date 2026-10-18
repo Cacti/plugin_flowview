@@ -85,11 +85,12 @@ function fv_nbar_seen_schema() {
 		if (fv_nbar_schema_table('seen_upgrade') === false) {
 			return false;
 		}
-		foreach (['0' => 'hours', '1' => 'days'] as $kind => $table) {
-			$field = $kind === 0 ? 'hour' : 'day';
-			if (flowview_db_execute("INSERT IGNORE INTO plugin_flowview_nbar_seen_upgrade (kind,listener_id,period) SELECT $kind,listener_id,$field FROM plugin_flowview_nbar_$table") === false) {
-				return false;
-			}
+	}
+	// Always retry idempotent seeds, including after an interrupted installation.
+	foreach (['0' => 'hours', '1' => 'days'] as $kind => $table) {
+		$field = $kind === 0 ? 'hour' : 'day';
+		if (flowview_db_execute("INSERT IGNORE INTO plugin_flowview_nbar_seen_upgrade (kind,listener_id,period) SELECT $kind,listener_id,$field FROM plugin_flowview_nbar_$table") === false) {
+			return false;
 		}
 	}
 	foreach (['phase' => ['name' => 'phase', 'type' => 'tinyint', 'unsigned' => true, 'NULL' => false, 'default' => 0], 'app_cursor' => ['name' => 'app_cursor', 'type' => 'varchar(32)', 'NULL' => false, 'default' => '']] as $field => $definition) {
@@ -113,15 +114,23 @@ function fv_nbar_seen_backfill($budget = 10) {
 	$daily = false;
 	$done = 0;
 	$began = microtime(true);
-	$old = flowview_db_fetch_cell('SELECT @@session.max_statement_time');
-	$isolation = flowview_db_fetch_cell('SELECT @@session.tx_isolation');
+	$old = null;
+	$isolation = flowview_db_fetch_cell('SELECT @@session.transaction_isolation', '', false);
+	if (!in_array($isolation, ['READ-UNCOMMITTED', 'READ-COMMITTED', 'REPEATABLE-READ', 'SERIALIZABLE'], true)) {
+		$isolation = flowview_db_fetch_cell('SELECT @@session.tx_isolation', '', false);
+	}
 	try {
 		$daily = (int) flowview_db_fetch_cell("SELECT GET_LOCK(CONCAT('flowview_nbar_daily:',LEFT(SHA2(DATABASE(),256),16)),0)") === 1;
 		if (!$daily) {
 			return 0;
 		}
-		flowview_db_execute('SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED');
-		flowview_db_execute('SET SESSION max_statement_time=20');
+		if (!in_array($isolation, ['READ-UNCOMMITTED', 'READ-COMMITTED', 'REPEATABLE-READ', 'SERIALIZABLE'], true)) {
+			return 0;
+		}
+		$old = fv_nbar_worker_timeout(20);
+		if ($old === null || !flowview_db_execute('SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED')) {
+			return 0;
+		}
 		$jobs = flowview_db_fetch_assoc('SELECT kind,listener_id,period,phase,app_cursor FROM plugin_flowview_nbar_seen_upgrade WHERE done=0 ORDER BY kind,period DESC,listener_id LIMIT 100');
 		foreach ($jobs as $job) {
 			if (microtime(true) - $began >= $budget) {
@@ -143,8 +152,8 @@ function fv_nbar_seen_backfill($budget = 10) {
 					$phase++;
 					continue;
 				}
-				$group = $kind === 'apps' ? 'app_id,LENGTH(src)' : $fields;
-				$keys = $kind === 'apps' ? ['app_id', 'family'] : explode(',', $fields);
+				$group = ($kind === 'apps' ? 'app_id,LENGTH(src)' : $fields) . ',router';
+				$keys = array_merge($kind === 'apps' ? ['app_id', 'family'] : explode(',', $fields), ['router']);
 				$column = flowview_db_fetch_row("SHOW FULL COLUMNS FROM plugin_flowview_nbar_$prefix$kind LIKE 'app_id'");
 				$collation = $column['Collation'];
 				if (!preg_match('/^[a-zA-Z0-9_]+$/D', $collation)) {
@@ -153,7 +162,7 @@ function fv_nbar_seen_backfill($budget = 10) {
 				$join = implode(' AND ', array_map(static function ($k) use ($collation) {return $k === 'app_id' ? "s.$k=r.$k COLLATE $collation" : "s.$k=r.$k";}, $keys));
 				$source = $isDay ? fv_nbar_hourly_source($kind, [$listener], $period, $end) : '(SELECT *,minute first_seen,minute last_seen FROM plugin_flowview_nbar_data)';
 				$dates = 'IF(COUNT(first_seen)=COUNT(*),MIN(first_seen),NULL) first_seen,IF(COUNT(last_seen)=COUNT(*),MAX(last_seen),NULL) last_seen';
-				$sql = "UPDATE plugin_flowview_nbar_$prefix$kind s JOIN (SELECT $fields,SUM(bytes) bytes,SUM(packets) packets,SUM(flows) flows,$dates FROM $source d WHERE listener_id=$listener AND minute>=$period AND minute<$end GROUP BY $group) r ON $join SET s.first_seen=r.first_seen,s.last_seen=r.last_seen WHERE s.listener_id=$listener AND s.hour=$period AND s.bytes=r.bytes AND s.packets=r.packets AND s.flows=r.flows AND (s.first_seen IS NULL OR s.last_seen IS NULL)";
+				$sql = "UPDATE plugin_flowview_nbar_$prefix$kind s JOIN (SELECT $fields,router,SUM(bytes) bytes,SUM(packets) packets,SUM(flows) flows,$dates FROM $source d WHERE listener_id=$listener AND minute>=$period AND minute<$end GROUP BY $group) r ON $join SET s.first_seen=r.first_seen,s.last_seen=r.last_seen WHERE s.listener_id=$listener AND s.hour=$period AND s.bytes=r.bytes AND s.packets=r.packets AND s.flows=r.flows AND (s.first_seen IS NULL OR s.last_seen IS NULL)";
 				$applications = [null];
 				if ($isDay && $kind === 'connections') {
 					$applications = array_column(flowview_db_fetch_assoc_prepared('SELECT DISTINCT app_id FROM plugin_flowview_nbar_daily_apps WHERE listener_id=? AND hour=? AND app_id>? ORDER BY app_id', [$listener, $period, ($job['app_cursor'] ?? '')]), 'app_id');
@@ -196,7 +205,9 @@ function fv_nbar_seen_backfill($budget = 10) {
 	} catch (Throwable $e) {
 		cacti_log('NBAR observation upgrade: ' . $e->getMessage(), false, 'FLOWVIEW');
 	} finally {
-		flowview_db_execute('SET SESSION max_statement_time=' . (float) $old);
+		if ($old !== null) {
+			flowview_db_execute('SET SESSION max_statement_time=' . $old);
+		}
 		if (in_array($isolation, ['READ-UNCOMMITTED', 'READ-COMMITTED', 'REPEATABLE-READ', 'SERIALIZABLE'], true)) {
 			flowview_db_execute('SET SESSION TRANSACTION ISOLATION LEVEL ' . str_replace('-', ' ', $isolation));
 		}

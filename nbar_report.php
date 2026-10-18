@@ -27,7 +27,7 @@
 if (!isset($config) || !function_exists('flowview_connect')) {
 	exit;
 }
-if ((int) read_config_option('flowview_nbar_schema_version') < 1) {
+if ((int) read_config_option('flowview_nbar_schema_version') < 2) {
 	plugin_flowview_check_upgrade();
 	print '<p class="textInfo nbarReportText">' . html_escape(__('NBAR history is being upgraded. Refresh this report shortly.', 'flowview')) . '</p>';
 	bottom_footer();
@@ -283,7 +283,7 @@ if ($mode === 'connections') {
 $nbar_source = $mode === 'apps' ? fv_nbar_summary_source($mode === 'apps' && $host === '' ? 'apps' : ($mode === 'apps' ? 'pairs' : 'connections'), $lid === 0 ? $combined_lids : [$lid], $start, $end) : null;
 if ($mode === 'apps') {
 	// Resolve names after reducing raw records to one row per capture/application.
-	$sql = 'SELECT d.app_id,n.name,SUM(d.bytes) bytes,SUM(d.packets) packets,SUM(d.flows) records,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen FROM (SELECT d.listener_id,d.app_id,SUM(d.bytes) bytes,SUM(d.packets) packets,SUM(d.flows) flows,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen FROM ' . $nbar_source . ' d WHERE ' . $where . ' GROUP BY d.listener_id,d.app_id) d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=l.allowfrom AND n.app_id=d.app_id GROUP BY d.app_id,n.name ORDER BY bytes DESC LIMIT 100';
+	$sql = 'SELECT d.app_id,n.name,SUM(d.bytes) bytes,SUM(d.packets) packets,SUM(d.flows) records,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen FROM (SELECT d.listener_id,d.app_id,d.router,SUM(d.bytes) bytes,SUM(d.packets) packets,SUM(d.flows) flows,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen FROM ' . $nbar_source . ' d WHERE ' . $where . ' GROUP BY d.listener_id,d.app_id,d.router) d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id GROUP BY d.app_id,n.name ORDER BY bytes DESC LIMIT 100';
 }
 if ($mode === 'connections') {
 	require_once __DIR__ . '/nbar_count.php';

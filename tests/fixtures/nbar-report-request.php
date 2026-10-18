@@ -68,7 +68,7 @@ function html_end_box(...$args) {
 function bottom_footer() {
 	$GLOBALS['__test_footer_rendered'] = true;
 }
-$GLOBALS['__test_config']['flowview_nbar_schema_version'] = '1';
+$GLOBALS['__test_config']['flowview_nbar_schema_version'] = '2';
 $GLOBALS['__test_user_settings']['flowview_nbar_preferences'] = json_encode(['prefixes' => ['192.0.2.0/24'], 'listeners' => [], 'dns' => '0']);
 $graph_timespans = [GT_LAST_HALF_HOUR => 'Last Half Hour', GT_LAST_HOUR => 'Last Hour', GT_LAST_DAY => 'Last Day', GT_LAST_YEAR => 'Last Year'];
 $_REQUEST = ['action' => 'view', 'report' => 'nbar', 'mode' => 'apps', 'listener' => '1'];
@@ -104,6 +104,10 @@ if ($scenario === 'nav-redirect' || $scenario === 'nav-redirect-header') {
 	$_REQUEST = array_replace($_REQUEST, ['mode' => 'connections', 'app' => '0d000001', 'parent_app' => '0d000001', 'internal' => '192.0.2.10', 'external' => '198.51.100.20', 'context' => json_encode(['report' => 'bad', 'nested' => ['bad']])]);
 } elseif ($scenario === 'conversations') {
 	$_REQUEST['mode'] = 'conversations';
+} elseif ($scenario === 'conversation-failure') {
+	$_REQUEST['mode'] = 'conversations';
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', false);
 } elseif ($scenario === 'failure') {
 	$_REQUEST['mode'] = 'connections';
 	plugin_test_queue_db_result('db_execute', false);
@@ -114,7 +118,7 @@ if ($scenario === 'nav-redirect' || $scenario === 'nav-redirect-header') {
 	$_REQUEST['mode'] = 'connections';
 	$from = (int) floor(time() / 3600) * 3600 - 3600;
 	$_REQUEST += ['predefined_timespan' => '0', 'date1' => date('Y-m-d H:i', $from), 'date2' => date('Y-m-d H:i', $from + 1200), 'lock_range' => '1'];
-	foreach (range(1, 6) as $unused) {
+	foreach (range(1, 4) as $unused) {
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
 	}
 	$rows = [];

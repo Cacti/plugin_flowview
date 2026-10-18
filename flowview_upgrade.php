@@ -82,7 +82,7 @@ $info            = plugin_flowview_version();
 $current_version = $info['version'];
 
 /* do a version check */
-if ($forcever == '' && $old_version == $current_version && (int) read_config_option('flowview_nbar_schema_version') >= 1) {
+if ($forcever == '' && $old_version == $current_version && (int) read_config_option('flowview_nbar_schema_version') >= 2) {
 	cacti_log('Your Flowview is already up to date (v' . $current_version . ' vs v' . $old_version . ') not upgrading.  Use --forcever to override', true, 'FLOWVIEW');
 	exit(0);
 }
@@ -123,7 +123,7 @@ function flowview_upgrade($current, $old): void {
 	if (!fv_nbar_schema_install()) {
 		throw new RuntimeException('Unable to upgrade NBAR history schema');
 	}
-	set_config_option('flowview_nbar_schema_version', '1');
+	set_config_option('flowview_nbar_schema_version', '2');
 
 
 	global $config, $info;

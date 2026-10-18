@@ -69,7 +69,7 @@ function fv_nbar_decimal_compare($a, $b) {
  * @return string
  */
 function fv_nbar_connection_key($row, $names, $listener) {
-	return json_encode([(string) $row['app_id'], (int) ($names[$listener][$row['app_id']]['name_id'] ?? 0), $row['src_hex'], $row['dst_hex'], (int) $row['sport'], (int) $row['dport'], (int) $row['protocol']]);
+	return json_encode([(string) $row['app_id'], (int) ($names[$listener][($row['router'] ?? '') . ':' . $row['app_id']]['name_id'] ?? 0), $row['src_hex'], $row['dst_hex'], (int) $row['sport'], (int) $row['dport'], (int) $row['protocol'], (string) ($row['router'] ?? '')]);
 }
 /**
  * Order connection totals by exact byte count and deterministic tuple fields.
@@ -85,7 +85,7 @@ function fv_nbar_connection_compare($a, $b) {
 		return $cmp;
 	}
 	foreach ($a['_key'] as $i => $v) {
-		$cmp = ($i === 0 || $i === 2 || $i === 3) ? strcmp((string) $v, (string) $b['_key'][$i]) : ($v <=> $b['_key'][$i]);
+		$cmp = ($i === 0 || $i === 2 || $i === 3 || $i === 7) ? strcmp((string) $v, (string) $b['_key'][$i]) : ($v <=> $b['_key'][$i]);
 		if ($cmp) {
 			return $cmp;
 		}
@@ -114,10 +114,10 @@ function fv_nbar_connection_edges($listener, $from, $to, $now) {
 		$hour = (int) (floor($cursor / 3600) * 3600);
 		$end = min($to, $hour + 3600);
 		if ($cursor == $hour && $end == $hour + 3600 && isset($hours[$hour])) {
-			$source = '(SELECT listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen FROM plugin_flowview_nbar_connections WHERE listener_id=' . (int) $listener . ' AND hour=' . $hour . ')';
+			$source = '(SELECT listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen,router FROM plugin_flowview_nbar_connections WHERE listener_id=' . (int) $listener . ' AND hour=' . $hour . ')';
 			$segments[] = ['listener' => $listener, 'source' => $source, 'daily' => true];
 		} else {
-			$source = '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen FROM plugin_flowview_nbar_data WHERE listener_id=' . (int) $listener . ' AND minute>=' . (int) $cursor . ' AND minute<' . (int) $end . ')';
+			$source = '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data WHERE listener_id=' . (int) $listener . ' AND minute>=' . (int) $cursor . ' AND minute<' . (int) $end . ')';
 			$segments[] = ['listener' => $listener, 'source' => $source, 'daily' => false];
 		}
 	}
@@ -157,7 +157,7 @@ function fv_nbar_connection_plan($listeners, $start, $end, $now) {
 			if ($from > $cursor) {
 				$segments = array_merge($segments, fv_nbar_connection_edges($listener, $cursor, $from, $now));
 			}
-			$segments[] = ['listener' => $listener, 'source' => '(SELECT listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen FROM plugin_flowview_nbar_daily_connections WHERE listener_id=' . $listener . ' AND hour=' . $from . ')', 'daily' => true];
+			$segments[] = ['listener' => $listener, 'source' => '(SELECT listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen,router FROM plugin_flowview_nbar_daily_connections WHERE listener_id=' . $listener . ' AND hour=' . $from . ')', 'daily' => true];
 			$cursor = $to;
 		}
 		if ($cursor < $end) {
@@ -195,18 +195,21 @@ function fv_nbar_connections_direct($listeners, $start, $end, $where, $args, $pa
 	}
 	try {
 		$segments = fv_nbar_connection_plan($listeners, (int) $start, (int) $end, time());
-		$nameRows = flowview_db_fetch_assoc_prepared('SELECT l.id listener_id,n.app_id,n.name,DENSE_RANK() OVER (ORDER BY n.name) name_id FROM plugin_flowview_devices l LEFT JOIN plugin_flowview_nbar_names n ON n.router=l.allowfrom WHERE l.id IN (' . implode(',', $listeners) . ')', []);
+		$nameRows = flowview_db_fetch_assoc_prepared('SELECT l.id listener_id,l.allowfrom,n.router,n.app_id,n.name,DENSE_RANK() OVER (ORDER BY n.name) name_id FROM plugin_flowview_devices l CROSS JOIN plugin_flowview_nbar_names n WHERE l.id IN (' . implode(',', $listeners) . ')', []);
 		if (!is_array($nameRows)) {
 			throw new RuntimeException('Cannot read application names');
 		}
 		$names = [];
 		foreach ($nameRows as $row) {
 			if ($row['app_id'] !== null) {
-				$names[(int) $row['listener_id']][$row['app_id']] = $row;
+				$names[(int) $row['listener_id']][($row['router'] ?? '') . ':' . $row['app_id']] = $row;
+				if (($row['router'] ?? '') === ($row['allowfrom'] ?? '')) {
+					$names[(int) $row['listener_id']][':' . $row['app_id']] = $row;
+				}
 			}
 		}
-		$fields = 'd.app_id,HEX(d.src) src_hex,HEX(d.dst) dst_hex,d.sport,d.dport,d.protocol';
-		$group = 'd.app_id,d.src,d.dst,d.sport,d.dport,d.protocol';
+		$fields = 'd.router,d.app_id,HEX(d.src) src_hex,HEX(d.dst) dst_hex,d.sport,d.dport,d.protocol';
+		$group = 'd.router,d.app_id,d.src,d.dst,d.sport,d.dport,d.protocol';
 		$counters = 'd.bytes bytes,d.packets packets,d.flows records,d.first_seen,d.last_seen';
 		$sum = 'SUM(d.bytes) bytes,SUM(d.packets) packets,SUM(d.flows) records,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen';
 		$order = 'bytes DESC';
@@ -260,15 +263,15 @@ function fv_nbar_connections_direct($listeners, $start, $end, $where, $args, $pa
 			}
 			$tuples = [];
 			foreach ($candidates as $row) {
-				$tuples[json_encode([$row['app_id'], $row['src_hex'], $row['dst_hex'], $row['sport'], $row['dport'], $row['protocol']])] = $row;
+				$tuples[json_encode([$row['router'] ?? '', $row['app_id'], $row['src_hex'], $row['dst_hex'], $row['sport'], $row['dport'], $row['protocol']])] = $row;
 			}
 			foreach ($segments as $segment) {
 				foreach (array_chunk(array_values($tuples), 400) as $chunk) {
 					$lookup = [];
 					$values = [];
 					foreach ($chunk as $row) {
-						$lookup[] = '(?,UNHEX(?),UNHEX(?),?,?,?)';
-						array_push($values, $row['app_id'], $row['src_hex'], $row['dst_hex'], $row['sport'], $row['dport'], $row['protocol']);
+						$lookup[] = '(?,?,UNHEX(?),UNHEX(?),?,?,?)';
+						array_push($values, $row['router'] ?? '', $row['app_id'], $row['src_hex'], $row['dst_hex'], $row['sport'], $row['dport'], $row['protocol']);
 					}
 					$sql = 'SELECT ' . $fields . ',' . ($segment['daily'] ? $counters : $sum) . ' FROM ' . $segment['source'] . ' d WHERE ' . $where . ' AND (' . $group . ') IN (' . implode(',', $lookup) . ')' . ($segment['daily'] ? '' : ' GROUP BY ' . $group);
 					$rows = flowview_db_fetch_assoc_prepared($sql, array_merge($args, $values));

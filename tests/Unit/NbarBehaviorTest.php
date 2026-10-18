@@ -71,7 +71,7 @@ it('decodes template-defined IPv4 and IPv6 application records using the dedicat
 		expect($call['params'][2])->toBe('0d000001');
 		expect($call['params'][3])->toBe(bin2hex($src));
 		expect($call['params'][4])->toBe(bin2hex($dst));
-		expect(array_slice($call['params'], 5))->toBe([50000, 443, 6, 123456, 120]);
+		expect(array_slice($call['params'], 5))->toBe([50000, 443, 6, 123456, 120, '192.0.2.1']);
 	}
 });
 

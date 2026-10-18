@@ -45,9 +45,13 @@ function fv_nbar_chart($scope, $args, $family, $host = '') {
 		array_push($args, $host, $host);
 	}
 	$rows = fv_nbar_query_cached(
-		"SELECT COALESCE(NULLIF(n.name,''),CONCAT('Application ',d.app_id)) name,SUM(d.bytes) bytes FROM (SELECT d.listener_id,d.app_id,SUM(d.bytes) bytes FROM " . $source . " d WHERE " . $where . ' GROUP BY d.listener_id,d.app_id) d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=l.allowfrom AND n.app_id=d.app_id GROUP BY name ORDER BY bytes DESC',
+		"SELECT COALESCE(NULLIF(n.name,''),CONCAT('Application ',d.app_id)) name,SUM(d.bytes) bytes FROM (SELECT d.listener_id,d.app_id,d.router,SUM(d.bytes) bytes FROM " . $source . " d WHERE " . $where . ' GROUP BY d.listener_id,d.app_id,d.router) d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id GROUP BY name ORDER BY bytes DESC',
 		$args
 	);
+	if (!is_array($rows)) {
+		echo '<aside class="nbarChart"><p>' . fv_nbar_h(__('Unable to load application chart. Please try again.', 'flowview')) . '</p></aside>';
+		return;
+	}
 	$total = array_sum(array_column($rows, 'bytes'));
 	$items = array_slice($rows, 0, 5);
 	$other = $total - array_sum(array_column($items, 'bytes'));

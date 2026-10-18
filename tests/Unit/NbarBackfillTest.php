@@ -9,7 +9,7 @@ beforeAll(function () {
 beforeEach(function () {
 	plugin_test_reset();
 	$GLOBALS['flowview_cnn'] = 'backfill-test';
-	foreach ([1, '7.5', 'REPEATABLE-READ', 1] as $value) {
+	foreach ([1, 'REPEATABLE-READ', 1, '7.5'] as $value) {
 		plugin_test_queue_db_result('db_fetch_cell', $value);
 	}
 });

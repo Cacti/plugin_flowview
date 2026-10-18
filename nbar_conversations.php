@@ -46,8 +46,12 @@ $dl = fv_nbar_local_sql('d.dst');
 $where .= " AND (($sl AND NOT $dl) OR ($dl AND NOT $sl))";
 $fields = "d.app_id,n.name,INET6_NTOA(IF($sl,d.src,d.dst)) internal,INET6_NTOA(IF($sl,d.dst,d.src)) external,SUM(IF($sl,d.bytes,0)) upload,SUM(IF($dl,d.bytes,0)) download,SUM(d.bytes) total,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen";
 $nbar_source = fv_nbar_summary_source('pairs', $lid === 0 ? $combined_lids : [$lid], $start, $end);
-$sql = "SELECT $fields FROM $nbar_source d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=l.allowfrom AND n.app_id=d.app_id WHERE $where GROUP BY d.app_id,n.name,internal,external ORDER BY total DESC LIMIT 100";
+$sql = "SELECT $fields FROM $nbar_source d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id WHERE $where GROUP BY d.app_id,n.name,internal,external ORDER BY total DESC LIMIT 100";
 $rows = fv_nbar_query_cached($sql, $args);
+if (!is_array($rows)) {
+	echo '<p class="textInfo nbarReportText">' . fv_nbar_h(__('Unable to load conversations. Please try again.', 'flowview')) . '</p>';
+	return;
+}
 $convbase = $base . '&mode=conversations' . ($aid !== '' ? '&app=' . $aid : '');
 if ($aid !== '') {
 	echo '<p class="textInfo nbarReportText"><a class="ui-button ui-corner-all ui-widget" href="' . fv_nbar_h($base . '&mode=apps') . '">' . html_escape(__('← Back to top applications', 'flowview')) . '</a></p>';

@@ -48,7 +48,7 @@ function fv_nbar_h($s) {
  * @return bool
  */
 function fv_nbar_schema_install() {
-	return fv_nbar_schema_table('names') && fv_nbar_schema_table('data') && fv_nbar_summary_schema();
+	return fv_nbar_schema_table('names') && fv_nbar_schema_table('data') && fv_nbar_summary_schema() && fv_nbar_exporter_schema();
 }
 /**
  * Read the validated history-retention setting with a short cache.
@@ -76,4 +76,16 @@ function fv_nbar_cleanup() {
 		flowview_db_execute("DELETE FROM plugin_flowview_nbar_$table WHERE hour<$cutoff LIMIT 50000");
 	}
 	flowview_db_execute('DELETE FROM plugin_flowview_nbar_data WHERE minute < ' . (time() - fv_nbar_retention_days() * 86400) . ' LIMIT 50000');
+}
+
+/** Establish a verified DML deadline; MySQL SELECT timeouts do not bound INSERT SELECT. */
+function fv_nbar_worker_timeout(int $seconds): ?float {
+	$old = flowview_db_fetch_cell('SELECT @@session.max_statement_time', '', false);
+	if (!is_numeric($old) || (float) $old < 0) {
+		return null;
+	}
+	if (!flowview_db_execute('SET SESSION max_statement_time=' . $seconds, false)) {
+		return null;
+	}
+	return (float) $old;
 }

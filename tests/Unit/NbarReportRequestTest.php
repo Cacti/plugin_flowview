@@ -32,5 +32,5 @@ it('renders report boundaries without leaking unsafe parameters', function ($sce
 	['fallback-span', 'Last Hour'], ['all-history', 'Last 7 Days'], ['clamped', 'Dates adjusted'],
 	['legacy', 'Last Hour'], ['drilldown', 'Back to conversations'], ['conversations', 'Internal Host'],
 	['invalid-mode', 'Internal Host'], ['no-combined', 'Fixture router'], ['unknown-context', 'Cisco Apps'], ['more-pages', 'Next'],
-	['failure', 'Unable to load connections'], ['upgrade', 'history is being upgraded'], ['csrf', '']
+	['conversation-failure', 'Unable to load conversations'], ['failure', 'Unable to load connections'], ['upgrade', 'history is being upgraded'], ['csrf', '']
 ]);

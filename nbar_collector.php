@@ -142,7 +142,7 @@ function fv_nbar_packet($p, $router) {
 					continue;
 				}
 				$hours[(int) (floor($ts / 3600) * 3600)] = true;
-				$rows[] = '(?,?,?,UNHEX(?),UNHEX(?),?,?,?,?,?,1)';
+				$rows[] = '(?,?,?,UNHEX(?),UNHEX(?),?,?,?,?,?,1,?)';
 				array_push(
 					$args,
 					(int) $listener_id,
@@ -154,7 +154,8 @@ function fv_nbar_packet($p, $router) {
 					fv_nbar_uint($data[11] ?? chr(0)),
 					fv_nbar_uint($data[4] ?? chr(0)),
 					fv_nbar_uint($data[1]),
-					fv_nbar_uint($data[2] ?? chr(0))
+					fv_nbar_uint($data[2] ?? chr(0)),
+					$router
 				);
 			}
 		}

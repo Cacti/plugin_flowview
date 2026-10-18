@@ -49,6 +49,7 @@ if ($scenario === 'malformed') {
 	plugin_test_queue_db_result('db_fetch_cell', 0);
 } else {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
+	plugin_test_queue_db_result('db_fetch_cell', '11.8.9-MariaDB');
 	plugin_test_queue_db_result('db_fetch_row_prepared', str_contains($scenario, 'failed') ? false : ['total' => 12345]);
 	if (str_starts_with($scenario, 'background')) {
 		function fastcgi_finish_request() {

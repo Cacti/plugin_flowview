@@ -123,16 +123,19 @@ function fv_nbar_daily_build($listener, $day, $target) {
 		flowview_db_execute('ROLLBACK');
 		return 0;
 	}
-	$statement_timeout = (float) flowview_db_fetch_cell('SELECT @@session.max_statement_time');
-	flowview_db_execute('SET SESSION max_statement_time=20');
+	$statement_timeout = fv_nbar_worker_timeout(20);
+	if ($statement_timeout === null) {
+		flowview_db_execute('ROLLBACK');
+		return 0;
+	}
 	try {
 		foreach (['apps' => 'app_id,LENGTH(src)', 'pairs' => 'app_id,src,dst', 'connections' => 'app_id,src,dst,sport,dport,protocol'] as $kind => $fields) {
 			if (!$valid && !flowview_db_execute_prepared("DELETE FROM plugin_flowview_nbar_daily_$kind WHERE listener_id=? AND hour=?", [$listener, $day])) {
 				throw new RuntimeException('Daily reset failed');
 			}
 			$source = fv_nbar_hourly_source($kind, [$listener], $from, $to);
-			$sql = "INSERT INTO plugin_flowview_nbar_daily_$kind SELECT $listener,$day,$fields,SUM(bytes),SUM(packets),SUM(flows),IF(COUNT(first_seen)=COUNT(*),MIN(first_seen),NULL),IF(COUNT(last_seen)=COUNT(*),MAX(last_seen),NULL)
-                FROM $source d WHERE d.listener_id=$listener AND d.minute>=$from AND d.minute<$to GROUP BY $fields
+			$sql = "INSERT INTO plugin_flowview_nbar_daily_$kind SELECT $listener,$day,$fields,SUM(bytes),SUM(packets),SUM(flows),IF(COUNT(first_seen)=COUNT(*),MIN(first_seen),NULL),IF(COUNT(last_seen)=COUNT(*),MAX(last_seen),NULL),router
+                FROM $source d WHERE d.listener_id=$listener AND d.minute>=$from AND d.minute<$to GROUP BY $fields,router
                 ON DUPLICATE KEY UPDATE bytes=bytes+VALUES(bytes),packets=packets+VALUES(packets),flows=flows+VALUES(flows),first_seen=LEAST(first_seen,VALUES(first_seen)),last_seen=GREATEST(last_seen,VALUES(last_seen))";
 			if (!flowview_db_execute($sql)) {
 				throw new RuntimeException('Daily aggregate failed');
@@ -243,7 +246,7 @@ function fv_nbar_summary_source($kind, $listeners, $start, $end, $now = null) {
 	}
 	$listeners = array_values(array_unique(array_filter(array_map('intval', $listeners), static function ($id) {return $id > 0;})));
 	if (!$listeners) {
-		return '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen FROM plugin_flowview_nbar_data)';
+		return '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data)';
 	}
 	$start = (int) $start;
 	$end = (int) $end;
@@ -267,11 +270,11 @@ function fv_nbar_summary_source($kind, $listeners, $start, $end, $now = null) {
 			}
 			$ready = fv_nbar_daily_guard($listener, $day, $to, $row['revision']);
 			if ($kind === 'apps') {
-				$fields = 'listener_id,hour minute,app_id,REPEAT(CHAR(0),family) src,REPEAT(CHAR(0),family) dst,0 sport,0 dport,0 protocol,bytes,packets,flows,first_seen,last_seen';
+				$fields = 'listener_id,hour minute,app_id,REPEAT(CHAR(0),family) src,REPEAT(CHAR(0),family) dst,0 sport,0 dport,0 protocol,bytes,packets,flows,first_seen,last_seen,router';
 			} elseif ($kind === 'pairs') {
-				$fields = 'listener_id,hour minute,app_id,src,dst,0 sport,0 dport,0 protocol,bytes,packets,flows,first_seen,last_seen';
+				$fields = 'listener_id,hour minute,app_id,src,dst,0 sport,0 dport,0 protocol,bytes,packets,flows,first_seen,last_seen,router';
 			} else {
-				$fields = 'listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen';
+				$fields = 'listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen,router';
 			}
 			$parts[] = "SELECT $fields FROM plugin_flowview_nbar_daily_$kind WHERE listener_id=$listener AND hour=$day AND ($ready)";
 			$s = fv_nbar_hourly_source($kind, [$listener], $day, $to, $now);

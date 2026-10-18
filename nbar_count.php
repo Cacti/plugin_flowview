@@ -34,7 +34,7 @@
  */
 function fv_nbar_count_sql($source, $where) {
 	$map = '(SELECT router,app_id,DENSE_RANK() OVER (ORDER BY name) name_id FROM plugin_flowview_nbar_names)';
-	return 'SELECT COUNT(DISTINCT d.app_id,COALESCE(n.name_id,0),d.src,d.dst,d.sport,d.dport,d.protocol) total FROM ' . $source . ' d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN ' . $map . ' n ON n.router=l.allowfrom AND n.app_id=d.app_id WHERE ' . $where;
+	return 'SELECT COUNT(DISTINCT d.router,d.app_id,COALESCE(n.name_id,0),d.src,d.dst,d.sport,d.dport,d.protocol) total FROM ' . $source . ' d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN ' . $map . ' n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id WHERE ' . $where;
 }
 /**
  * Store a bounded account-scoped context for an asynchronous exact count.
@@ -49,16 +49,9 @@ function fv_nbar_count_sql($source, $where) {
  * @return string
  */
 function fv_nbar_count_context($source, $where, $args, $end, $listeners = null, $start = null) {
-	// Count only tuple fields; do not regroup counters for partial days.
+	// Guards are evaluated in the count statement, after any intervening refresh.
 	if ($listeners !== null && $start !== null) {
-		require_once __DIR__ . '/nbar_connections.php';
-		$parts = [];
-		foreach (fv_nbar_connection_plan($listeners, (int) $start, (int) $end, time()) as $segment) {
-			$parts[] = 'SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol FROM ' . $segment['source'] . ' count_part';
-		}
-		if ($parts) {
-			$source = '(' . implode(' UNION ALL ', $parts) . ')';
-		}
+		$source = fv_nbar_summary_source('connections', $listeners, (int) $start, (int) $end);
 	}
 	$sql = fv_nbar_count_sql($source, $where);
 	$key = hash('sha256', serialize([$_SESSION['sess_user_id'] ?? 0, $sql, $args]));
@@ -130,7 +123,7 @@ function fv_nbar_count_request() {
 	$row = null;
 	try {
 		set_time_limit(100);
-		$row = flowview_db_fetch_row_prepared('SET STATEMENT max_statement_time=90 FOR ' . $entry['sql'], $entry['args']);
+		$row = fv_nbar_count_query($entry['sql'], $entry['args']);
 	} finally {
 		flowview_db_fetch_cell("SELECT RELEASE_LOCK(CONCAT('flowview_nbar_page_count:',LEFT(SHA2(DATABASE(),256),16)))");
 	}
@@ -156,4 +149,16 @@ function fv_nbar_count_request() {
 		exit;
 	}
 	fv_nbar_count_response(['status' => 'ready', 'pages' => (int) ceil($total / 100), 'total' => $total]);
+}
+
+/** Bound a SELECT on the actual FlowView server rather than Cacti's server. */
+function fv_nbar_count_query(string $sql, array $args) {
+	$version = flowview_db_fetch_cell('SELECT VERSION()');
+	if (is_string($version) && stripos($version, 'MariaDB') !== false) {
+		return flowview_db_fetch_row_prepared('SET STATEMENT max_statement_time=90 FOR ' . $sql, $args);
+	}
+	if (is_string($version) && preg_match('/^8[.]/', $version)) {
+		return flowview_db_fetch_row_prepared(preg_replace('/^SELECT /', 'SELECT /*+ MAX_EXECUTION_TIME(90000) */ ', $sql), $args);
+	}
+	return false;
 }

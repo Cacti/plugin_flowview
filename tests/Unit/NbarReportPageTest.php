@@ -33,7 +33,7 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 			$GLOBALS['__test_footer_rendered'] = true;
 		}
 	}
-	$GLOBALS['__test_config']['flowview_nbar_schema_version'] = '1';
+	$GLOBALS['__test_config']['flowview_nbar_schema_version'] = '2';
 	$GLOBALS['__test_user_settings']['flowview_nbar_preferences'] = json_encode(['listeners' => [1, 2, 3], 'prefixes' => ['2001:db8::/64'], 'dns' => '0']);
 	$graph_timespans = [GT_LAST_HALF_HOUR => 'Last Half Hour', GT_LAST_HOUR => 'Last Hour', GT_LAST_DAY => 'Last Day', GT_LAST_WEEK => 'Last Week'];
 	$now = (int) floor(time() / 60) * 60;
@@ -48,7 +48,7 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 	}
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['name' => '<app>', 'bytes' => 1000000]]);
 	if ($view === 'connections') {
-		for ($i = 0; $i < 13; $i++) {
+		for ($i = 0; $i < 7; $i++) {
 			plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
 		}
 	}
