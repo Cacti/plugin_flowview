@@ -7370,7 +7370,7 @@ function flowview_schedule_filters(int $schedule_id): array {
 		ORDER BY name', [$schedule_id]);
 	$options = [];
 	foreach ($rows ?: [] as $row) {
-		$options[$row['id']] = $row['enabled'] === 'on' ? $row['name'] : sprintf(__('%s (Disabled)', 'flowview'), $row['name']);
+		$options[$row['id']] = $row['enabled'] === 'on' ? $row['name'] : $row['name'] . ' (' . __('Disabled', 'flowview') . ')';
 	}
 	return $options;
 }
