@@ -114,40 +114,7 @@ if ($scheduled == true) {
 		$concurrent_processes = 1;
 	}
 
-	$reports = db_fetch_assoc_prepared('SELECT *
-		FROM reports_queued
-		WHERE status = ?
-		AND source = ?',
-		['pending', 'flowview']);
-
-	while(true) {
-		$running = db_fetch_cell_prepared('SELECT COUNT(*)
-			FROM processes
-			WHERE taskname = ?
-			AND tasktype LIKE ?',
-			['flowsched', 'child%']);
-
-		if ($running < $concurrent_processes) {
-			$report = db_fetch_row_prepared('SELECT *
-				FROM reports_queued
-				WHERE source = ?
-				AND status = ?
-				LIMIT 1',
-				['flowview', 'pending']);
-
-			if (cacti_sizeof($report)) {
-				if (!flowview_filter_status_ready() || flowview_reports_run($report['id']) === false) {
-					break;
-				}
-
-				$run++;
-			} else {
-				break;
-			}
-
-			sleep(1);
-		}
-	}
+	$run = flowview_reports_run_pending((int) $concurrent_processes);
 
 	$end = microtime(true);
 

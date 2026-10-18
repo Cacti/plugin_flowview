@@ -219,3 +219,5 @@ Filters and schedules show Enabled in green and Disabled in grey, using the Cact
 Missing filter-state columns are repaired by the background upgrade process, including same-version repairs. Pages return a retry message until repair completes; scheduled reports defer without issuing schema changes. Editing a schedule retains its existing disabled filter and labels it Disabled.
 
 Pending filter-state migration leaves scheduled queue entries and lastsent/start timestamps unchanged. FlowView uses its own dispatcher on both Cacti versions: deferred or failed children retain their original occurrence, without saving a replacement. Native queue IDs and the older report-ID convention are both accepted. If resetting the retained row to pending fails, the row is kept and a queue-repair error is logged.
+
+Queue dispatch processes a bounded snapshot, attempting each occurrence once per pass. A failed occurrence stays retained while healthy entries continue; previously attempted rows sort behind new work so repeated failures cannot monopolize the next snapshot. Schema loss or exhausted concurrency stops the pass.

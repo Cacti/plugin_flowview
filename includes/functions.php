@@ -7415,3 +7415,31 @@ function flowview_reports_run(int $id): bool {
 	}
 	return db_execute_prepared('DELETE FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']) !== false;
 }
+
+/** Attempt a bounded, fair queue snapshot without retrying failures in the same pass. */
+function flowview_reports_run_pending(int $concurrency = 1, int $limit = 100): int {
+	if (!flowview_filter_status_ready()) {
+		return 0;
+	}
+	// Previously attempted rows sort behind new work, so a full failed batch
+	// cannot indefinitely starve occurrences beyond this snapshot's limit.
+	$reports = db_fetch_assoc_prepared('SELECT id FROM reports_queued WHERE source=? AND status=? ORDER BY start_time,scheduled_time,id LIMIT ' . max(1, min(1000, $limit)), ['flowview', 'pending']);
+	if (!is_array($reports)) {
+		cacti_log('Unable to read pending FlowView occurrences.', false, 'FLOWVIEW');
+		return 0;
+	}
+	$done = 0;
+	foreach ($reports as $report) {
+		if (!flowview_filter_status_ready()) {
+			break;
+		}
+		$running = db_fetch_cell_prepared('SELECT COUNT(*) FROM processes WHERE tasktype=? AND taskname LIKE ?', ['flowsched', 'child%']);
+		if ($running === false || (int) $running >= max(1, $concurrency)) {
+			break;
+		}
+		if (flowview_reports_run((int) $report['id'])) {
+			$done++;
+		}
+	}
+	return $done;
+}
