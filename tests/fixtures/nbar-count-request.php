@@ -30,7 +30,6 @@ $GLOBALS['flowview_cnn'] = 'count-endpoint-test';
 ini_set('session.use_cookies', '0');
 session_cache_limiter('');
 session_save_path($directory);
-session_id('flowview-count-test');
 session_start();
 $key = str_repeat('a', 64);
 $_REQUEST = ['key' => $key];

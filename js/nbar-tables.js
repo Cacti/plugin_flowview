@@ -74,7 +74,7 @@ window.flowviewNbarInitTable = function (spec) {
             var input = $(this).closest('.nbarPagination').find('.nbarPageNumber')[0];
             if (input && input.checkValidity()) {
                 saveSort();
-                location.href = this.dataset.url + '&page=' + parseInt(input.value, 10);
+                location.href = this.dataset.url + '&page=' + Number.parseInt(input.value, 10);
             }
         });
         $('.nbarPageNumber').on('keydown', function (event) {

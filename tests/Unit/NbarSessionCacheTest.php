@@ -17,13 +17,12 @@ beforeEach(function () {
 	session_save_path(sys_get_temp_dir());
 	ini_set('session.use_cookies', '0');
 	session_cache_limiter('');
-	session_id('flowview-unit-' . bin2hex(random_bytes(8)));
 	session_start();
+	session_regenerate_id(true);
 });
 
 afterEach(function () {
 	session_destroy();
-	session_id('');
 	session_save_path($this->oldSessionPath);
 	ini_set('session.use_cookies', $this->oldSessionCookies);
 	session_cache_limiter($this->oldSessionLimiter);
