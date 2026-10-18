@@ -385,8 +385,7 @@ function show_filters(): void {
 		),
 		'nosort2' => array(
 			'display' => __('Status', 'flowview'),
-			'align' => 'center',
-			'sort' => 'ASC'
+			'align' => 'center'
 		),
 		'nosort1' => array(
 			'display' => __('Resolution', 'flowview'),
