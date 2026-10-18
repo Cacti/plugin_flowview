@@ -147,7 +147,7 @@ if ($scheduled == true) {
 		/* silently end if the registered process is still running, or process table missing */
 		if (!$force) {
 			if (!register_process_start('flowsched', "child_$id", 0, 1200)) {
-				exit(0);
+				exit(75);
 			}
 		}
 

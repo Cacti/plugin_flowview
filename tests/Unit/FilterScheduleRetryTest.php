@@ -84,7 +84,7 @@ it('rejects missing queue rows or failed claims without running a child', functi
 	}
 })->with([true, false]);
 
-it('runs the actual child entrypoint with native and legacy dispatch IDs', function ($native) {
+it('runs the actual child entrypoint with native and legacy dispatch IDs', function ($native, $ready) {
 	$root = sys_get_temp_dir() . '/flowview-entrypoint-' . bin2hex(random_bytes(8));
 	mkdir($root . '/plugins/flowview/includes', 0700, true);
 	mkdir($root . '/include');
@@ -101,7 +101,8 @@ it('runs the actual child entrypoint with native and legacy dispatch IDs', funct
 	$bootstrap = var_export(dirname(__DIR__) . '/bootstrap-unit.php', true);
 	$result = var_export($root . '/result.json', true);
 	$core = var_export($root, true);
-	file_put_contents($root . '/include/cli_check.php', '<?php require ' . $bootstrap . '; $config["base_path"]=' . $core . '; plugin_test_queue_db_result("db_fetch_row_prepared", ["id"=>51,"source"=>"flowview","source_id"=>7]); register_shutdown_function(function(){file_put_contents(' . $result . ',json_encode($GLOBALS["__test_db_calls"]));});');
+	$readyCode = $ready ? 'plugin_test_queue_db_result("db_fetch_row", ["Field"=>"enabled"]);plugin_test_queue_db_result("register_process_start", false);' : '';
+	file_put_contents($root . '/include/cli_check.php', '<?php require ' . $bootstrap . '; $config["base_path"]=' . $core . '; ' . $readyCode . ' plugin_test_queue_db_result("db_fetch_row_prepared", ["id"=>51,"source"=>"flowview","source_id"=>7]); register_shutdown_function(function(){file_put_contents(' . $result . ',json_encode($GLOBALS["__test_db_calls"]));});');
 	try {
 		$command = [PHP_BINARY, $root . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
 		if ($native) {
@@ -116,8 +117,23 @@ it('runs the actual child entrypoint with native and legacy dispatch IDs', funct
 		$exit = proc_close($process);
 		expect($error)->toBe('')->and($output)->toBe('')->and($exit)->toBe(75);
 		$calls = json_decode(file_get_contents($root . '/result.json'), true);
-		expect($calls)->toHaveCount(2)->and($calls[0]['params'])->toBe(['flowview', 51]);
+		expect($calls)->toHaveCount($ready ? 3 : 2)->and($calls[0]['params'])->toBe(['flowview', 51]);
 		expect(array_column($calls, 'fn'))->not->toContain('db_execute_prepared');
+		if ($ready) {
+			global $config;
+			$oldBase = $config['base_path'];
+			$config['base_path'] = $root;
+			try {
+				plugin_test_reset();
+				plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+				plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
+				plugin_test_queue_db_result('exec_with_timeout', $exit);
+				expect(flowview_reports_run(51))->toBeFalse();
+				expect(implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql')))->not->toContain('DELETE FROM reports_queued');
+			} finally {
+				$config['base_path'] = $oldBase;
+			}
+		}
 	} finally {
 		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
 		foreach ($iterator as $file) {
@@ -129,4 +145,4 @@ it('runs the actual child entrypoint with native and legacy dispatch IDs', funct
 		}
 		rmdir($root);
 	}
-})->with([false, true]);
+})->with([[false, false], [true, false], [false, true], [true, true]]);

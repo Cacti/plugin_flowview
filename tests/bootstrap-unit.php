@@ -497,3 +497,15 @@ if (!function_exists('exec_with_timeout')) {
 		return plugin_test_db_result('exec_with_timeout_result', null);
 	}
 }
+
+if (!function_exists('db_affected_rows')) {
+	function db_affected_rows($conn = false) {
+		return plugin_test_db_result('db_affected_rows', 1);
+	}
+}
+if (!function_exists('register_process_start')) {
+	function register_process_start($type, $name, $id = 0, $timeout = 300) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'register_process_start', 'sql' => '', 'params' => [$type, $name, $id, $timeout]];
+		return plugin_test_db_result('register_process_start', true);
+	}
+}

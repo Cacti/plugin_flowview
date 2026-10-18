@@ -108,3 +108,19 @@ it('does not grant capacity when removal of a dead registration fails', function
 	expect(flowview_running_schedule_children())->toBe(1);
 	expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('Unable to remove a dead FlowView child registration');
 });
+
+it('keeps a capacity reservation when a concurrent replacement makes dead-PID deletion affect no rows', function () {
+	if (!function_exists('posix_kill')) {
+		$this->markTestSkipped('POSIX liveness is unavailable');
+	}
+	for ($i = 0;$i < 2;$i++) {
+		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	}
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['id' => 52]]);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['taskname' => 'child_7', 'taskid' => 0, 'pid' => 2147483647]]);
+	plugin_test_queue_db_result('db_affected_rows', 0);
+	expect(flowview_reports_run_pending(1))->toBe(0);
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('exec_with_timeout');
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM processes')));
+	expect($deletes)->toHaveCount(1)->and($deletes[0]['params'])->toBe(['flowsched', 'child_7', 0, 2147483647]);
+});

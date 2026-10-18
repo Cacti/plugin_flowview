@@ -7457,9 +7457,13 @@ function flowview_running_schedule_children(): ?int {
 			continue;
 		}
 		// A concurrent registration with another PID must survive this cleanup.
-		if (!db_execute_prepared('DELETE FROM processes WHERE tasktype=? AND taskname=? AND taskid=? AND pid=?', ['flowsched', $row['taskname'], $row['taskid'], $row['pid']])) {
+		$deleted = db_execute_prepared('DELETE FROM processes WHERE tasktype=? AND taskname=? AND taskid=? AND pid=?', ['flowsched', $row['taskname'], $row['taskid'], $row['pid']]);
+		if (!$deleted) {
 			$running++;
 			cacti_log('Unable to remove a dead FlowView child registration.', false, 'FLOWVIEW');
+		} elseif ((int) db_affected_rows() !== 1) {
+			// A replacement PID may now own the reservation; do not grant its slot.
+			$running++;
 		}
 	}
 	return $running;
