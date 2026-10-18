@@ -34,12 +34,7 @@ require_once($config['base_path'] . '/lib/time.php');
 require_once($config['base_path'] . '/lib/timespan_settings.php');
 
 flowview_connect();
-if (!flowview_filter_status_ready()) {
-	plugin_flowview_check_upgrade();
-	http_response_code(503);
-	print html_escape(__('FlowView filter schema upgrade is pending. Please try again shortly.', 'flowview'));
-	exit;
-}
+flowview_require_filter_status();
 
 set_default_action();
 

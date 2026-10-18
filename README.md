@@ -215,3 +215,5 @@ Copyright (c) 2004-2026 - The Cacti Group, Inc.
 ### Filter and schedule status
 
 Filters and schedules show Enabled in green and Disabled in grey, using the Cacti theme status classes. A disabled filter is excluded from report and schedule selectors and does not run scheduled reports. Disabling a filter does not stop its listener or delete history. Installations missing the filter state column retain existing filters as enabled when the column is created.
+
+Missing filter-state columns are repaired by the background upgrade process, including same-version repairs. Pages return a retry message until repair completes; scheduled reports defer without issuing schema changes. Editing a schedule retains its existing disabled filter and labels it Disabled.

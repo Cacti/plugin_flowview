@@ -158,6 +158,17 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 	}
 }
 
+/** Keep ordinary page requests out of metadata-lock waits during repair. */
+function flowview_require_filter_status(): void {
+	if (flowview_filter_status_ready()) {
+		return;
+	}
+	plugin_flowview_check_upgrade();
+	http_response_code(503);
+	print html_escape(__('FlowView filter schema upgrade is pending. Please try again shortly.', 'flowview'));
+	exit;
+}
+
 /**
  * @return mixed
  */
