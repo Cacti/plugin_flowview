@@ -42,6 +42,10 @@ function fv_nbar_feed_status(array $devices, array $capture_ids): void {
 		}
 		// Indexed lookup independent of historical report filters.
 		$latest = flowview_db_fetch_row_prepared('SELECT minute FROM plugin_flowview_nbar_data WHERE listener_id=? ORDER BY minute DESC LIMIT 1', [$id]);
+		if (!is_array($latest)) {
+			$items[] = '<span class="textError">' . fv_nbar_h($device['name']) . ': ' . fv_nbar_h(__('Unable to load NBAR status. Please try again.', 'flowview')) . '</span>';
+			continue;
+		}
 		$last = isset($latest['minute']) ? (int) $latest['minute'] : 0;
 		$receiving = $last > 0 && $last >= $now - 300 && $last <= $now + 60;
 		$label = $receiving ? __('Receiving', 'flowview') : __('No recent NBAR', 'flowview');

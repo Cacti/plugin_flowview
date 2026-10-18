@@ -289,3 +289,5 @@ NBAR daily summary materialization and observation-date backfill require MariaDB
 New NBAR records retain the actual exporter address through hourly and daily summaries. Legacy rows keep their counters with an unknown exporter; an exact single-address listener may still resolve their names, but earlier multi-exporter rows cannot be attributed retrospectively.
 
 NBAR maintenance is launched independently of the poller. A registered supervisor runs the PHP maintenance child with a 90-second process deadline. MariaDB hourly mutations also set and restore a verified 20-second statement deadline. MySQL hourly builds remain available only inside the supervised child; raw records remain the fallback until a checkpoint is published.
+
+NBAR timespan requests keep their session state separate from Flow Reports. Conversation totals exclude IPv4 and IPv6 multicast endpoints, and feed lookup failures are shown separately from empty captures. Retention maintenance drains additional batches across raw, hourly and daily tables within a shared ten-second cleanup budget, under the supervised worker deadline.

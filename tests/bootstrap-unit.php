@@ -535,3 +535,9 @@ if (!function_exists('exec_with_timeout')) {
 		return plugin_test_db_result('exec_with_timeout_result', null);
 	}
 }
+
+if (!function_exists('db_affected_rows')) {
+	function db_affected_rows($conn = false) {
+		return plugin_test_db_result('db_affected_rows', 0);
+	}
+}

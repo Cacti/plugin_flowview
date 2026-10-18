@@ -69,13 +69,33 @@ function fv_nbar_retention_days() {
  *
  * @return void
  */
-function fv_nbar_cleanup() {
-	fv_nbar_daily_cleanup();
+function fv_nbar_cleanup($budget = 10) {
 	$cutoff = (int) (floor((time() - fv_nbar_retention_days() * 86400) / 3600) * 3600);
+	$queries = [];
 	foreach (['apps', 'pairs', 'connections', 'hours'] as $table) {
-		flowview_db_execute("DELETE FROM plugin_flowview_nbar_$table WHERE hour<$cutoff LIMIT 50000");
+		$queries[] = ["DELETE FROM plugin_flowview_nbar_$table WHERE hour<$cutoff LIMIT 50000", 50000];
 	}
-	flowview_db_execute('DELETE FROM plugin_flowview_nbar_data WHERE minute < ' . (time() - fv_nbar_retention_days() * 86400) . ' LIMIT 50000');
+	$queries[] = ['DELETE FROM plugin_flowview_nbar_data WHERE minute < ' . (time() - fv_nbar_retention_days() * 86400) . ' LIMIT 50000', 50000];
+	$queries = array_merge($queries, fv_nbar_daily_cleanup_queries());
+	fv_nbar_cleanup_batches($queries, microtime(true) + max(0, (float) $budget));
+}
+
+/** Drain every retention level fairly until empty or the shared deadline expires. */
+function fv_nbar_cleanup_batches(array $queries, float $deadline): void {
+	while ($queries && microtime(true) < $deadline) {
+		foreach ($queries as $key => [$sql, $limit]) {
+			if (microtime(true) >= $deadline) {
+				return;
+			}
+			if (flowview_db_execute($sql) === false) {
+				unset($queries[$key]);
+				continue;
+			}
+			if ((int) flowview_db_affected_rows() < $limit) {
+				unset($queries[$key]);
+			}
+		}
+	}
 }
 
 /** Establish a verified DML deadline; MySQL SELECT timeouts do not bound INSERT SELECT. */

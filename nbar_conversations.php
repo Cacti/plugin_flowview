@@ -43,6 +43,7 @@ if ($host !== '') {
 }
 $sl = fv_nbar_local_sql('d.src');
 $dl = fv_nbar_local_sql('d.dst');
+$where .= ' AND ' . fv_nbar_unicast_sql('d.src') . ' AND ' . fv_nbar_unicast_sql('d.dst');
 $where .= " AND (($sl AND NOT $dl) OR ($dl AND NOT $sl))";
 $fields = "d.app_id,n.name,INET6_NTOA(IF($sl,d.src,d.dst)) internal,INET6_NTOA(IF($sl,d.dst,d.src)) external,SUM(IF($sl,d.bytes,0)) upload,SUM(IF($dl,d.bytes,0)) download,SUM(d.bytes) total,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen";
 $nbar_source = fv_nbar_summary_source('pairs', $lid === 0 ? $combined_lids : [$lid], $start, $end);

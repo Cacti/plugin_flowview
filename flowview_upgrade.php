@@ -85,8 +85,8 @@ if ($nbar_worker !== '') {
 	if ($nbar_worker === 'supervise') {
 		fv_nbar_supervise_maintenance();
 	} elseif ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
-		fv_nbar_summary_refresh(20, true);
 		fv_nbar_cleanup();
+		fv_nbar_summary_refresh(20, true);
 	}
 	exit(0);
 }

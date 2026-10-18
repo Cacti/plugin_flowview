@@ -223,11 +223,17 @@ function fv_nbar_daily_refresh($budget = 20) {
  * @return void
  */
 function fv_nbar_daily_cleanup() {
+	fv_nbar_cleanup_batches(fv_nbar_daily_cleanup_queries(), microtime(true) + 10);
+}
+/** Return allowlisted daily retention batches for the shared cleanup worker. */
+function fv_nbar_daily_cleanup_queries(): array {
 	$cutoff = time() - fv_nbar_retention_days() * 86400;
+	$queries = [];
 	foreach (['apps', 'pairs', 'connections'] as $kind) {
-		flowview_db_execute("DELETE FROM plugin_flowview_nbar_daily_$kind WHERE hour<$cutoff LIMIT 5000");
+		$queries[] = ["DELETE FROM plugin_flowview_nbar_daily_$kind WHERE hour<$cutoff LIMIT 5000", 5000];
 	}
-	flowview_db_execute("DELETE FROM plugin_flowview_nbar_days WHERE day<$cutoff LIMIT 100");
+	$queries[] = ["DELETE FROM plugin_flowview_nbar_days WHERE day<$cutoff LIMIT 100", 100];
+	return $queries;
 }
 /**
  * Use valid full-day summaries and hourly or raw boundary records.

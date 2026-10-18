@@ -176,3 +176,11 @@ function fv_nbar_preferences_render($devices, $base, $mode, $aid, $parent_app) {
 	echo '<script src="' . plugin_flowview_escape_attr($config['url_path'] . 'plugins/flowview/js/nbar-preferences.js') . '"></script>';
 
 }
+
+/** Exclude multicast endpoints from internal/external conversations. */
+function fv_nbar_unicast_sql(string $field): string {
+	if (!in_array($field, ['d.src', 'd.dst'], true)) {
+		throw new InvalidArgumentException('Invalid address field');
+	}
+	return "NOT ((LENGTH($field)=4 AND (ORD(SUBSTRING($field,1,1)) & 240)=224) OR (LENGTH($field)=16 AND ORD(SUBSTRING($field,1,1))=255))";
+}

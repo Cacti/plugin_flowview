@@ -89,15 +89,12 @@ switch(get_request_var('action')) {
 
 		break;
 	case 'gettimespan':
-		// The NBAR retention preset is not a core Cacti graph timespan.
-            if (get_nfilter_request_var('report') === 'nbar' && (int) get_filter_request_var('predefined_timespan') === 1000) {
-                require_once __DIR__ . '/nbar_common.php';
-                $end = (int) (floor(time() / 60) * 60);
-                $start = $end - fv_nbar_retention_days() * 86400;
-                header('Content-Type: application/json');
-                print json_encode(['current_value_date1' => date('Y-m-d H:i', $start), 'current_value_date2' => date('Y-m-d H:i', $end), 'begin_now' => $start, 'end_now' => $end]);
-                exit;
-            }
+        require_once __DIR__ . '/nbar_common.php';
+        require_once __DIR__ . '/nbar_timespan.php';
+        if (fv_nbar_timespan_request()) {
+            break;
+        }
+
 		flowview_request_vars();
 		flowview_gettimespan();
 

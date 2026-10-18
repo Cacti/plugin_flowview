@@ -74,3 +74,19 @@ function fv_nbar_bound_dates($start, $end, $now, $days) {
 	}
 	return [$from, $to, $from !== $start || $to !== $end];
 }
+
+/** Handle NBAR timespans without mutating legacy Flow Reports session state. */
+function fv_nbar_timespan_request(): bool {
+	if (get_nfilter_request_var('report') !== 'nbar') {
+		return false;
+	}
+	header('Content-Type: application/json');
+	if ((int) get_filter_request_var('predefined_timespan') === 1000) {
+		$end = (int) (floor(time() / 60) * 60);
+		$start = $end - fv_nbar_retention_days() * 86400;
+		print json_encode(['current_value_date1' => date('Y-m-d H:i', $start), 'current_value_date2' => date('Y-m-d H:i', $end), 'begin_now' => $start, 'end_now' => $end]);
+	} else {
+		flowview_gettimespan();
+	}
+	return true;
+}
