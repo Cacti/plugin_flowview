@@ -69,3 +69,34 @@ it('ignores incomplete records and reports a failed record transaction', functio
 		expect($GLOBALS['__test_db_calls'])->toBe([]);
 	}
 })->with(['application', 'address', 'transaction']);
+
+it('invalidates cached templates containing any zero-length field and recovers on a valid refresh', function ($options, $position) {
+	$tid = 960 + $position + ($options ? 10 : 0);
+	$router = '192.0.2.96';
+	$fields = $options ? [[1, 4], [95, 4], [96, 32]] : [[95, 4], [8, 4], [12, 4], [1, 4]];
+	$record = $options ? inet_pton('192.0.2.1') . hex2bin('0d000001') . str_pad('youtube', 32, chr(0)) : hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . pack('N', 1000);
+	$encode = static function ($fields) use ($options, $tid) {
+		$definitions = implode('', array_map(fn ($f) => pack('nn', ...$f), $fields));
+		return ($options ? pack('nnnnn', 1, 10 + strlen($definitions), $tid, 4, strlen($definitions) - 4) : pack('nnnn', 0, 8 + strlen($definitions), $tid, count($fields))) . $definitions;
+	};
+	$data = pack('nn', $tid, 4 + strlen($record)) . $record;
+	fv_nbar_packet($this->header . $encode($fields) . $data, $router);
+	expect($GLOBALS['__test_db_calls'])->not->toBe([]);
+	plugin_test_reset();
+	$invalid = $fields;
+	array_splice($invalid, $position, 0, [[999, 0]]);
+	fv_nbar_packet($this->header . $encode($invalid) . $data, $router);
+	fv_nbar_packet($this->header . $data, $router);
+	expect($GLOBALS['__test_db_calls'])->toBe([]);
+	fv_nbar_packet($this->header . $encode($fields) . $data, $router);
+	expect($GLOBALS['__test_db_calls'])->not->toBe([]);
+})->with([[false, 0], [false, 2], [false, 4], [true, 0], [true, 2], [true, 3]]);
+
+it('rejects a large zero-length template before repeatedly parsing its data', function () {
+	$definitions = str_repeat(pack('nn', 999, 0), 1999) . pack('nn', 95, 1);
+	$template = pack('nnnn', 0, 8 + strlen($definitions), 990, 2000) . $definitions;
+	$data = pack('nn', 990, 56004) . str_repeat('x', 56000);
+	fv_nbar_packet($this->header . $template . $data, '192.0.2.99');
+	fv_nbar_packet($this->header . $data,'192.0.2.99');
+	expect($GLOBALS['__test_db_calls'])->toBe([]);
+});

@@ -94,18 +94,26 @@ function fv_nbar_packet($p, $router) {
 					$q += 6;
 				}
 				if ($size < 4 || $size % 4 || $q + $size > $end) {
+					unset($templates[$key][$tid]);
 					break;
 				}
 				$fields = [];
 				$total = 0;
+				$valid = true;
 				for ($z = 0;$z < $size;$z += 4) {
 					$f = fv_nbar_uint(substr($p, $q + $z, 2));
 					$l = fv_nbar_uint(substr($p, $q + $z + 2, 2));
+					if ($l === 0) {
+						$valid = false;
+						break;
+					}
 					$fields[] = [$f, $l];
 					$total += $l;
 				}
-				if ($total > 0 && $total <= 65535) {
+				if ($valid && $total > 0 && $total <= 65535) {
 					$templates[$key][$tid] = [$fields, $total, $id === 1];
+				} else {
+					unset($templates[$key][$tid]);
 				}
 				$q += $size;
 			}

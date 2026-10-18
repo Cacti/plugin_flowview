@@ -143,3 +143,13 @@ it('shows an empty conversation table when no matching records exist', function 
 	include dirname(__DIR__, 2) . '/nbar_conversations.php';
 	expect(ob_get_clean())->toContain('No conversations for this period');
 });
+
+it('groups chart rows by the complete fallback label for missing names', function () {
+	ob_start();
+	fv_nbar_chart('d.listener_id=?', [1, 1800000000, 1800001800], 'all');
+	ob_end_clean();
+	$queries = array_column($GLOBALS['__test_db_calls'], 'sql');
+	$sql = implode(' ', $queries);
+	expect($sql)->toContain("GROUP BY COALESCE(NULLIF(n.name,''),CONCAT('Application ',d.app_id)) ORDER BY bytes DESC");
+	expect($sql)->not->toContain('GROUP BY name ORDER BY');
+});

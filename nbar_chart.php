@@ -45,7 +45,7 @@ function fv_nbar_chart($scope, $args, $family, $host = '') {
 		array_push($args, $host, $host);
 	}
 	$rows = fv_nbar_query_cached(
-		"SELECT COALESCE(NULLIF(n.name,''),CONCAT('Application ',d.app_id)) name,SUM(d.bytes) bytes FROM (SELECT d.listener_id,d.app_id,d.router,SUM(d.bytes) bytes FROM " . $source . " d WHERE " . $where . ' GROUP BY d.listener_id,d.app_id,d.router) d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id GROUP BY name ORDER BY bytes DESC',
+		"SELECT COALESCE(NULLIF(n.name,''),CONCAT('Application ',d.app_id)) name,SUM(d.bytes) bytes FROM (SELECT d.listener_id,d.app_id,d.router,SUM(d.bytes) bytes FROM " . $source . " d WHERE " . $where . ' GROUP BY d.listener_id,d.app_id,d.router) d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id GROUP BY COALESCE(NULLIF(n.name,\'\'),CONCAT(\'Application \',d.app_id)) ORDER BY bytes DESC',
 		$args
 	);
 	if (!is_array($rows)) {
