@@ -229,7 +229,7 @@ class Net_DNS2
      * @access public
      *
      */
-    public function __construct(array $options = null)
+    public function __construct(?array $options = null)
     {
         //
         // load any options that were provided
