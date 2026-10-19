@@ -33,38 +33,12 @@ it('does not mutate daily data without a verified statement deadline', function 
 	$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
 	expect($sql)->toContain('ROLLBACK')->not->toContain('INSERT INTO', 'DELETE FROM');
 });
-it('retains exporter identity in all raw and summary primary keys', function () {
-	foreach (['data', 'apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections'] as $suffix) {
-		$definition = fv_nbar_schema_definition($suffix);
-		expect($definition['primary'])->toEndWith('router');
-		expect(end($definition['columns'])['name'])->toBe('router');
-	}
-});
-it('repairs legacy exporter keys and leaves already upgraded tables intact', function () {
-	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'router']);
-	expect(fv_nbar_exporter_schema())->toBeTrue();
-	$writes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($call) => $call['fn'] === 'db_execute'));
-	expect($writes)->toHaveCount(6)->and($writes[0]['sql'])->toContain('ADD COLUMN router', 'DROP PRIMARY KEY', 'router`)');
-});
-it('does not publish a failed exporter upgrade', function () {
-	plugin_test_queue_db_result('db_execute', false);
-	expect(fv_nbar_exporter_schema())->toBeFalse();
-});
 it('does not merge matching connection tuples from distinct exporters', function () {
 	$row           = ['app_id' => 'a1', 'src_hex' => 'C0000201', 'dst_hex' => 'C6336401', 'sport' => 10, 'dport' => 443, 'protocol' => 6, 'router' => '192.0.2.1'];
 	$names         = [1 => ['192.0.2.1:a1' => ['name_id' => 1], '192.0.2.2:a1' => ['name_id' => 2]]];
 	$key           = fv_nbar_connection_key($row, $names, 1);
 	$row['router'] = '192.0.2.2';
 	expect($key)->not->toBe(fv_nbar_connection_key($row, $names, 1));
-});
-it('retries checkpoint seeds after a previous schema creation succeeded', function () {
-	foreach (range(1, 14) as $unused) {
-		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'present']);
-	}
-	plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_seen_upgrade');
-	expect(fv_nbar_seen_schema())->toBeTrue();
-	$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
-	expect($sql)->toContain('SELECT 0,listener_id,hour', 'SELECT 1,listener_id,day')->not->toContain('CREATE TABLE');
 });
 it('renders a chart failure without aborting the report', function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_chart.php');

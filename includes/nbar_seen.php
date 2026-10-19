@@ -62,50 +62,6 @@ function fv_nbar_seen_merge(array &$total, array $row): void {
 	$total['last_seen']  = $total['last_seen']  === null ? $last : max($total['last_seen'], $last);
 }
 /**
- * Install observation columns and resumable backfill checkpoints.
- *
- * @return bool
- */
-function fv_nbar_seen_schema(): bool {
-	foreach (['', 'daily_'] as $prefix) {
-		foreach (['apps', 'pairs', 'connections'] as $kind) {
-			$table = 'plugin_flowview_nbar_' . $prefix . $kind;
-
-			foreach (['first_seen', 'last_seen'] as $field) {
-				if (!flowview_db_fetch_row("SHOW COLUMNS FROM $table LIKE '$field'")) {
-					if (flowview_db_add_column($table, ['name' => $field, 'type' => 'int', 'unsigned' => true, 'NULL' => true]) === false) {
-						return false;
-					}
-				}
-			}
-		}
-	}
-	$exists = flowview_db_fetch_cell("SHOW TABLES LIKE 'plugin_flowview_nbar_seen_upgrade'");
-
-	if (!$exists) {
-		if (fv_nbar_schema_table('seen_upgrade') === false) {
-			return false;
-		}
-	}
-
-	// Always retry idempotent seeds, including after an interrupted installation.
-	foreach (['0' => 'hours', '1' => 'days'] as $kind => $table) {
-		$field = $kind === 0 ? 'hour' : 'day';
-
-		if (flowview_db_execute("INSERT IGNORE INTO plugin_flowview_nbar_seen_upgrade (kind,listener_id,period) SELECT $kind,listener_id,$field FROM plugin_flowview_nbar_$table") === false) {
-			return false;
-		}
-	}
-
-	foreach (['phase' => ['name' => 'phase', 'type' => 'tinyint', 'unsigned' => true, 'NULL' => false, 'default' => 0], 'app_cursor' => ['name' => 'app_cursor', 'type' => 'varchar(32)', 'NULL' => false, 'default' => '']] as $field => $definition) {
-		if (!flowview_db_fetch_row("SHOW COLUMNS FROM plugin_flowview_nbar_seen_upgrade LIKE '$field'") && flowview_db_add_column('plugin_flowview_nbar_seen_upgrade', $definition) === false) {
-			return false;
-		}
-	}
-
-	return true;
-}
-/**
  * Backfill dates only where retained counters exactly match source totals.
  *
  * @param int $budget Worker time budget in seconds.

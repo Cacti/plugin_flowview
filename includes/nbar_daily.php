@@ -24,26 +24,6 @@
 */
 
 /**
- * Create reusable daily summary tables and their checkpoint schema.
- *
- * @return bool
- */
-function fv_nbar_daily_schema(): bool {
-	foreach (['apps', 'pairs', 'connections'] as $kind) {
-		if (!fv_nbar_schema_table('daily_' . $kind)) {
-			return false;
-		}
-	}
-
-	if (!flowview_db_fetch_row("SHOW INDEX FROM plugin_flowview_nbar_daily_connections WHERE Key_name='capture_day_bytes'")) {
-		if (!flowview_db_execute('ALTER TABLE plugin_flowview_nbar_daily_connections ADD INDEX capture_day_bytes (listener_id,hour,bytes), ALGORITHM=INPLACE, LOCK=NONE')) {
-			return false;
-		}
-	}
-
-	return fv_nbar_schema_table('days');
-}
-/**
  * Return local calendar-day boundaries, including daylight-saving changes.
  *
  * @param int $timestamp Unix observation time.

@@ -147,7 +147,7 @@ exit(0);
  * @return void
  */
 function flowview_upgrade($current, $old): void {
-	if (!fv_nbar_schema_install()) {
+	if (!flowview_db_create_nbar_tables()) {
 		throw new RuntimeException('Unable to upgrade NBAR history schema');
 	}
 	set_config_option('flowview_nbar_schema_version', '2');

@@ -1103,7 +1103,7 @@ function flowview_setup_table(): void {
 
 	flowview_connect();
 
-	if (!fv_nbar_schema_install()) {
+	if (!flowview_db_create_nbar_tables()) {
 		throw new RuntimeException('Unable to install NBAR history schema');
 	}
 

@@ -26,26 +26,6 @@
 require_once(__DIR__ . '/nbar_daily.php');
 
 /**
- * Install hourly summaries and idempotent compatibility upgrades.
- *
- * @return bool
- */
-function fv_nbar_summary_schema(): bool {
-	foreach (['hours', 'apps', 'pairs', 'connections'] as $suffix) {
-		if (!fv_nbar_schema_table($suffix)) {
-			return false;
-		}
-	}
-	$column = flowview_db_fetch_row("SHOW COLUMNS FROM plugin_flowview_nbar_hours LIKE 'connection_built'");
-
-	if (!$column && flowview_db_add_column('plugin_flowview_nbar_hours', ['name' => 'connection_built', 'type' => 'bigint', 'NULL' => true, 'default' => -1]) === false) {
-		return false;
-	}
-
-	return fv_nbar_daily_schema() && fv_nbar_seen_schema();
-}
-
-/**
  * Write raw records and invalidate affected hours in one transaction.
  *
  * @param string $sql      Trusted SQL statement.

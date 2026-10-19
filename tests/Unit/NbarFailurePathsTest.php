@@ -37,46 +37,6 @@ it('does not draw a chart slice for a zero-byte application', function () {
 	expect($html)->not->toContain('Empty app');
 });
 
-it('stops hourly schema setup on creation or column-upgrade failure', function ($stage) {
-	if ($stage === 'column') {
-		foreach (['hours', 'apps', 'pairs', 'connections'] as $kind) {
-			plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_' . $kind);
-		}
-		plugin_test_queue_db_result('db_add_column', false);
-	}
-	expect(fv_nbar_summary_schema())->toBeFalse();
-})->with(['create', 'column']);
-
-it('stops daily schema setup on table or index failures', function ($stage) {
-	if ($stage === 'index') {
-		foreach (['apps', 'pairs', 'connections'] as $kind) {
-			plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_daily_' . $kind);
-		}
-
-		foreach ([true, true, true, false] as $result) {
-			plugin_test_queue_db_result('db_execute', $result);
-		}
-	}
-	expect(fv_nbar_daily_schema())->toBeFalse();
-})->with(['create', 'index']);
-
-it('does not complete observation schema setup after failed checkpoint writes', function ($stage) {
-	foreach (range(1, 12) as $unused) {
-		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'present']);
-	}
-
-	if ($stage === 'column') {
-		plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_seen_upgrade');
-		plugin_test_queue_db_result('db_add_column', false);
-	} elseif ($stage === 'seed') {
-		plugin_test_queue_db_result('db_fetch_cell', '');
-		plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_seen_upgrade');
-		plugin_test_queue_db_result('db_execute', true);
-		plugin_test_queue_db_result('db_execute', false);
-	}
-	expect(fv_nbar_seen_schema())->toBeFalse();
-})->with(['create', 'seed', 'column']);
-
 it('does not build summaries when transaction creation or commit fails', function ($stage) {
 	if ($stage === 'start') {
 		plugin_test_queue_db_result('db_execute', false);

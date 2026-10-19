@@ -23,11 +23,10 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once(__DIR__ . '/nbar_database.php');
 require_once(__DIR__ . '/nbar_seen.php');
 require_once(__DIR__ . '/nbar_summary.php');
 
-// Shared NBAR schema and retention helpers.
+// Shared NBAR report and retention helpers.
 
 /**
  * Escape report text and quoted HTML attributes.
@@ -40,14 +39,6 @@ function fv_nbar_h(mixed $s): string {
 	return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 }
 
-/**
- * Install application-name, raw-record and summary schemas.
- *
- * @return bool
- */
-function fv_nbar_schema_install(): bool {
-	return fv_nbar_schema_table('names') && fv_nbar_schema_table('data') && fv_nbar_summary_schema() && fv_nbar_exporter_schema();
-}
 /**
  * Read the validated history-retention setting with a short cache.
  *
