@@ -161,12 +161,19 @@ if ($scheduled == true) {
 			[$id]);
 
 		if (cacti_sizeof($schedule)) {
+			if (!plugin_flowview_run_schedule($id, $report_id)) {
+				// A later readiness failure must preserve the original occurrence
+				// and its schedule timestamps just like the initial check does.
+				if (!$force) {
+					unregister_process('flowsched', "child_$id", 0);
+				}
+				exit(75);
+			}
+
 			flowview_db_execute_prepared('UPDATE plugin_flowview_schedules
 				SET lastsent = ?, start = ?
 				WHERE id = ?',
 				array($r, date('Y-m-d H:i:s'), $id));
-
-			plugin_flowview_run_schedule($id, $report_id);
 
 			$end = microtime(true);
 

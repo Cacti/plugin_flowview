@@ -4,7 +4,8 @@
 $config = ['base_path' => dirname(__DIR__), 'poller_id' => 1];
 $local_db_cnn_id = 'fixture';
 $mode = getenv('FLOWVIEW_FIXTURE_MODE');
-$ready = $mode === 'ready';
+$ready = in_array($mode, ['ready', 'late', 'child-disabled'], true);
+$metadataReads = 0;
 $calls = [];
 const MESSAGE_LEVEL_INFO = 1;
 function __(string $text, ...$args) {
@@ -31,7 +32,8 @@ function db_fetch_cell(...$args) {
 }
 function db_fetch_row($sql, ...$args) {
 	$GLOBALS['calls'][] = ['read', $sql];
-	return $GLOBALS['ready'] ? ['Field' => 'enabled'] : [];
+	$GLOBALS['metadataReads']++;
+	return $GLOBALS['ready'] && ($GLOBALS['mode'] !== 'late' || $GLOBALS['metadataReads'] === 1) ? ['Field' => 'enabled'] : [];
 }
 function db_execute($sql, ...$args) {
 	$GLOBALS['calls'][] = ['ddl', $sql];
@@ -55,3 +57,14 @@ function set_default_action() {
 register_shutdown_function(function () {
 	file_put_contents(getenv('FLOWVIEW_FIXTURE_RESULT'), json_encode(['calls' => $GLOBALS['calls'], 'status' => http_response_code()]));
 });
+function db_fetch_row_prepared($sql, $params = [], ...$args) {
+	$GLOBALS['calls'][] = ['row', $sql, $params];
+	if (str_contains($sql, 'reports_queued')) {
+		return ['id' => 51, 'source' => 'flowview', 'source_id' => 7];
+	}
+	return str_contains($sql, 'plugin_flowview_schedules') ? ['id' => 7, 'query_id' => 3] : ['enabled' => ''];
+}
+function db_execute_prepared($sql, $params = [], ...$args) {
+	$GLOBALS['calls'][] = ['write', $sql, $params];
+	return true;
+}

@@ -9,7 +9,9 @@ beforeEach(function () {
 	foreach (['setup.php', 'includes', 'flowview.php', 'flowview_filters.php', 'flowview_schedules.php'] as $file) {
 		symlink($plugin . '/' . $file, $this->fixtureRoot . '/plugins/flowview/' . $file);
 	}
-	copy($plugin . '/flowview_upgrade.php', $this->fixtureRoot . '/plugins/flowview/flowview_upgrade.php');
+	foreach (['flowview_upgrade.php', 'run_schedule.php'] as $file) {
+		copy($plugin . '/' . $file, $this->fixtureRoot . '/plugins/flowview/' . $file);
+	}
 	file_put_contents($this->fixtureRoot . '/plugins/flowview/INFO', "[info]\nversion=fixture-version\n");
 	foreach (['auth.php', 'cli_check.php'] as $file) {
 		copy(dirname(__DIR__) . '/fixtures/filter-lifecycle.php', $this->fixtureRoot . '/include/' . $file);
@@ -76,3 +78,34 @@ it('retains a full failing snapshot while advancing to healthy rows on the next 
 		->and($result['afterFirst'])->toHaveCount(4)
 		->and($result['remaining'])->toBe([['id' => 1, 'status' => 'pending'], ['id' => 2, 'status' => 'pending']]);
 });
+
+it('preserves late schema failures through the real child and parent completion path', function ($native, $retry) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
+	if ($native) {
+		$command[] = '--queue-id=51';
+	}
+	[$exit, $output] = ($this->runFixture)($command, $retry ? 'late' : 'child-disabled');
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	$writes = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'write'));
+	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+	expect($output)->toBe('')->and($exit)->toBe($retry ? 75 : 0)
+		->and($released)->toBe([['unregister', ['flowsched', 'child_7', 0]]])
+		->and($writes)->toHaveCount($retry ? 0 : 1);
+	if (!$retry) {
+		expect($writes[0][1])->toContain('UPDATE plugin_flowview_schedules');
+	}
+	global $config;
+	$oldBase = $config['base_path'];
+	$config['base_path'] = $this->fixtureRoot;
+	try {
+		plugin_test_reset();
+		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+		plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
+		plugin_test_queue_db_result('exec_with_timeout', $exit);
+		expect(flowview_reports_run(51))->toBe(!$retry);
+		$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM reports_queued')));
+		expect($deletes)->toHaveCount($retry ? 0 : 1);
+	} finally {
+		$config['base_path'] = $oldBase;
+	}
+})->with([false, true])->with([false, true]);

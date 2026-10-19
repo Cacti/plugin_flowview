@@ -45,7 +45,7 @@ it('rechecks concurrent upgrades and reports actual failures', function ($exists
 })->with([true, false]);
 
 it('does not run a schedule when the state schema is unavailable', function () {
-	plugin_flowview_run_schedule(1, 1);
+	expect(plugin_flowview_run_schedule(1, 1))->toBeFalse();
 	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('db_fetch_row_prepared');
 });
 
@@ -54,7 +54,7 @@ it('does not prepare scheduled reports for missing or disabled filters', functio
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 7]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', $query);
-	plugin_flowview_run_schedule(1, 1);
+	expect(plugin_flowview_run_schedule(1, 1))->toBeTrue();
 	$reads = array_filter($GLOBALS['__test_db_calls'], fn ($call) => $call['fn'] === 'db_fetch_row_prepared');
 	expect($reads)->toHaveCount(2);
 })->with([[[]], [['enabled' => '']], [['name' => 'legacy']]]);
@@ -85,4 +85,19 @@ it('resets a queued time-selection exception between tests', function () {
 	$span = [];
 	get_timespan($span, 2000, 1, 0);
 	expect($span)->toBe(['begin_now' => 200, 'end_now' => 2000]);
+});
+
+it('returns success after preparing an enabled schedule', function () {
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 3, 'title' => 'Fixture', 'format_file' => 'default']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['enabled' => 'on', 'timespan' => 1, 'name' => 'Fixture']);
+	plugin_test_queue_db_result('get_timespan', ['begin_now' => 0, 'end_now' => 2000]);
+	set_request_var('timespan', 'custom');
+	set_request_var('query', 3);
+	set_request_var('date1', date('Y-m-d H:i:s', 100));
+	set_request_var('date2', date('Y-m-d H:i:s', 2000));
+	$key = get_flowview_session_key(3, 100, 2000);
+	$_SESSION['sess_flowdata'][$key] = ['timeout' => time() + 60, 'data' => ['table' => 'Fixture', 'data' => [['bytes' => 42]]]];
+	expect(plugin_flowview_run_schedule(7, 51))->toBeTrue();
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->toContain('reports_load_format_file');
 });

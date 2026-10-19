@@ -1916,13 +1916,13 @@ function get_port_name($port_num, int $port_proto = 6) {
  * @param mixed $id
  * @param mixed $report_id
  *
- * @return void
+ * @return bool False when schema readiness requires retry; true otherwise.
  */
-function plugin_flowview_run_schedule($id, $report_id): void {
+function plugin_flowview_run_schedule($id, $report_id): bool {
 	global $config;
 
 	if (!flowview_filter_status_ready()) {
-		return;
+		return false;
 	}
 
 	$start_time = microtime(true);
@@ -1938,7 +1938,7 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 		[$schedule['query_id']]);
 
 	if (empty($query) || ($query['enabled'] ?? '') !== 'on') {
-		return;
+		return true;
 	}
 
 	/* get the timespan from the query */
@@ -2006,6 +2006,7 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 	} else {
 		cacti_log(sprintf('WARNING: Running of Flowview Schedule %s Returned not Data.  Please Check your Flowview Schedule', $report_id), false, 'FLOWVIEW');
 	}
+	return true;
 }
 
 /**

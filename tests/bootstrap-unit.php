@@ -509,3 +509,12 @@ if (!function_exists('register_process_start')) {
 		return plugin_test_db_result('register_process_start', true);
 	}
 }
+
+if (!function_exists('reports_load_format_file')) {
+	function reports_load_format_file($format, &$output, &$report_tag, &$theme) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'reports_load_format_file', 'sql' => '', 'params' => [$format]];
+		$output = '<REPORT>';
+		$report_tag = true;
+		return true;
+	}
+}
