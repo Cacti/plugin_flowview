@@ -121,12 +121,12 @@ it('retries failed filter lookups while consuming genuinely absent or disabled f
 	expect(plugin_flowview_run_schedule(7, 51))->toBe($success);
 })->with([[false, false], [[], true], [['enabled' => ''], true]]);
 
-it('distinguishes uncached empty query execution from failure in scheduled preparation', function ($rows, $success) {
+it('distinguishes uncached empty query execution from failure in scheduled preparation', function ($rows, $success, $catalog = 'normal', $details = 'normal') {
 	$start = strtotime('2024-01-01 00:00:00 UTC');
 	$end = $start + 3600;
 	$query = ['id' => 3, 'name' => 'Fixture', 'enabled' => 'on', 'timespan' => 1, 'statistics' => 9, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 100];
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
-	plugin_test_queue_db_result('db_fetch_row', ['min_date' => date('Y-m-d H:i:s', $start), 'max_date' => date('Y-m-d H:i:s', $end), 'table_partition' => '']);
+	plugin_test_queue_db_result('db_fetch_row', $details === 'normal' ? ['min_date' => date('Y-m-d H:i:s', $start), 'max_date' => date('Y-m-d H:i:s', $end), 'table_partition' => ''] : $details);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 3, 'title' => 'Fixture', 'format_file' => 'default']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', $query);
 	plugin_test_queue_db_result('db_fetch_row_prepared', $query);
@@ -135,15 +135,25 @@ it('distinguishes uncached empty query execution from failure in scheduled prepa
 	for ($i = 0; $i < 6; $i++) {
 		plugin_test_queue_db_result('db_fetch_assoc', []);
 	}
-	plugin_test_queue_db_result('db_fetch_assoc', [['table' => 'plugin_flowview_raw_202400000']]);
+	plugin_test_queue_db_result('db_fetch_assoc', $catalog === 'normal' ? [['table' => 'plugin_flowview_raw_202400000']] : $catalog);
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', $rows);
 	$GLOBALS['__test_config']['flowview_partition'] = 1;
 	$GLOBALS['__test_config']['flowview_parallel_threads'] = 1;
 	expect(plugin_flowview_run_schedule(7, 51))->toBe($success);
 	$queries = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_assoc_prepared'));
-	expect($queries)->toHaveCount(1)->and($queries[0]['sql'])->toContain('FROM plugin_flowview_raw_202400000');
+	if ($catalog === 'normal' && $details === 'normal') {
+		expect($queries)->toHaveCount(1)->and($queries[0]['sql'])->toContain('FROM plugin_flowview_raw_202400000');
+	} else {
+		expect($queries)->toHaveCount(0);
+		expect($_SESSION['sess_flowview_table_details'] ?? [])->not->toHaveKey('plugin_flowview_raw_202400000');
+	}
 	expect($_SESSION)->not->toHaveKey('sess_flowdata');
-})->with([[[], true], [false, false]]);
+})->with([
+	[[], true], [false, false],
+	[[], false, false], [[], true, []],
+	[[], false, 'normal', false], [[], false, 'normal', []],
+	[[], true, 'normal', ['min_date' => null, 'max_date' => null, 'table_partition' => '']],
+]);
 
 it('distinguishes failed and absent schedule lookups before reading a filter', function ($schedule, $success) {
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);

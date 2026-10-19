@@ -2339,7 +2339,7 @@ function get_date_filter($sql_range, &$sql_range_params, $start, $end, int $rang
  * @param mixed $start
  * @param mixed $end
  *
- * @return mixed
+ * @return array|false Matching partitions, or false when metadata discovery fails.
  */
 function get_tables_for_query($start, $end = null) {
 	global $config, $graph_timespans;
@@ -2365,6 +2365,10 @@ function get_tables_for_query($start, $end = null) {
 		FROM information_schema.TABLES
 		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
 
+	if ($tables === false) {
+		return false;
+	}
+
 	if (cacti_sizeof($tables)) {
 		foreach($tables as $t) {
 			$parts = explode('_', $t['table']);
@@ -2376,19 +2380,26 @@ function get_tables_for_query($start, $end = null) {
 			}
 
 			if ($partition >= $start_part && $partition <= $end_part) {
-				$inc_tables[$t['table']]['table_name'] = $t['table'];
-
 				if (!isset($_SESSION['sess_flowview_table_details'][$t['table']])) {
 					$details = flowview_db_fetch_row("SELECT MIN(start_time) AS min_date, MAX(end_time) AS max_date, '' AS table_partition FROM {$t['table']}");
 
-					if (!cacti_sizeof($details)) {
-						cacti_log("WARNING: No Details for {$t['table']} returned");
-					}
-
-					$_SESSION['sess_flowview_table_details'][$t['table']] = $details;
 				} else {
 					$details = $_SESSION['sess_flowview_table_details'][$t['table']];
 				}
+
+				if (!$details) {
+					unset($_SESSION['sess_flowview_table_details'][$t['table']]);
+					cacti_log("WARNING: No Details for {$t['table']} returned");
+					return false;
+				}
+				// MIN/MAX return NULL for an empty partition. Recheck it on the
+				// next request rather than caching empty bounds while it grows.
+				if ($details['min_date'] === null && $details['max_date'] === null) {
+					unset($_SESSION['sess_flowview_table_details'][$t['table']]);
+					continue;
+				}
+				$_SESSION['sess_flowview_table_details'][$t['table']] = $details;
+				$inc_tables[$t['table']]['table_name'] = $t['table'];
 
 				$inc_tables[$t['table']]['table_partition'] = $details['table_partition'];
 				$inc_tables[$t['table']]['min_date']        = $details['min_date'];
@@ -3435,6 +3446,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 		}
 
 		$tables     = get_tables_for_query($start, $end);
+		if ($tables === false) {
+			return false;
+		}
 		$sql        = '';
 		$all_params = [];
 		$results    = [];
