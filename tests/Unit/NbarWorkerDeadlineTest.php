@@ -14,14 +14,36 @@ it('does not launch maintenance with a missing PHP binary', function () {
 	expect(fv_nbar_launch_maintenance())->toBeFalse();
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
-it('supervises a shell-free child and always releases its process registration', function ($status) {
-	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
-	plugin_test_queue_db_result('exec_with_timeout', $status);
-	fv_nbar_supervise_maintenance();
-	$calls = $GLOBALS['__test_db_calls'];
-	expect(array_column($calls, 'fn'))->toBe(['register_process_start', 'exec_with_timeout', 'unregister_process']);
-	expect($calls[1]['params'][1])->toBe(90)->and($calls[1]['params'][0][0])->toBe('/usr/bin/php')->and($calls[1]['params'][0][3])->toBe('--nbar-worker=build');
-})->with([0, 124]);
+it('supervises a direct PHP child and releases registration after success or failure', function ($status, $invalidPhp) {
+	global $config;
+	$oldBase = $config['base_path'];
+	$root = sys_get_temp_dir() . "/flowview supervisor '" . bin2hex(random_bytes(8));
+	mkdir($root . '/plugins/flowview', 0700, true);
+	$script = $root . '/plugins/flowview/flowview_upgrade.php';
+	$marker = $root . '/args.json';
+	file_put_contents($script, '<?php file_put_contents(' . var_export($marker, true) . ', json_encode($argv)); exit(' . $status . ');');
+	try {
+		$config['base_path'] = $root;
+		$GLOBALS['__test_config']['path_php_binary'] = $invalidPhp ? $root . '/missing-php' : PHP_BINARY;
+		$GLOBALS['__test_cacti_log'] = [];
+		fv_nbar_supervise_maintenance();
+		expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->toBe(['register_process_start', 'unregister_process']);
+		if ($invalidPhp) {
+			expect(file_exists($marker))->toBeFalse();
+		} else {
+			expect(json_decode(file_get_contents($marker), true))->toBe([$script, '--nbar-worker=build']);
+		}
+		if ($invalidPhp || $status !== 0) {
+			expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('failed or exceeded');
+		}
+	} finally {
+		$config['base_path'] = $oldBase;
+		if (file_exists($marker)) {
+		unlink($marker);
+		}
+		unlink($script); rmdir($root . '/plugins/flowview'); rmdir($root . '/plugins'); rmdir($root);
+	}
+})->with([[0, false], [7, false], [0, true]]);
 it('does not start another child while maintenance is registered', function () {
 	plugin_test_queue_db_result('register_process_start', false);
 	fv_nbar_supervise_maintenance();
@@ -55,11 +77,15 @@ it('uses identical tie ordering before and after SQL pagination', function () {
 	expect($sql)->toContain('ORDER BY d.bytes DESC,d.app_id,d.name_id,d.src,d.dst,d.sport,d.dport,d.protocol,d.router');
 });
 
-it('logs child startup failures even before an exit status is available', function () {
-	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
-	$GLOBALS['__test_cacti_log'] = [];
-	plugin_test_queue_db_result('exec_with_timeout_result', false);
-	fv_nbar_supervise_maintenance();
-	expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('failed or exceeded');
-	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->toContain('unregister_process');
+it('returns a startup error for an invalid direct command', function () {
+	expect(fv_nbar_run_child([], 1))->toBe(125);
+	expect(fv_nbar_run_child([PHP_BINARY, "\0"], 1))->toBe(125);
+});
+it('drains both output pipes without letting them block child completion', function () {
+	expect(fv_nbar_run_child([PHP_BINARY, '-r', 'fwrite(STDOUT,str_repeat("x",81920));fwrite(STDERR,str_repeat("y",81920));exit(0);'], 5))->toBe(0);
+});
+it('terminates the actual child at the deadline', function () {
+	$started = microtime(true);
+	expect(fv_nbar_run_child([PHP_BINARY, '-r', 'usleep(5000000);'], 1))->toBe(124);
+	expect(microtime(true) - $started)->toBeLessThan(4);
 });

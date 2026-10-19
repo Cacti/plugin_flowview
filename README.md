@@ -295,3 +295,5 @@ NBAR timespan requests keep their session state separate from Flow Reports. Conv
 Template decoding rejects zero-length fields and invalidates the affected cached template until a valid refresh arrives. Chart fallback labels are grouped by their complete expression, so applications without learned names keep separate slices.
 
 The NBAR template cache retains at most 256 templates / 8,192 field definitions in total and 64 templates / 2,048 fields per exporter, across all source IDs. Least recently used entries are evicted and inactive templates expire after 30 minutes (removed lazily on packet activity). Evicted templates are learned again from the next exporter refresh. Numeric data fields must fit unsigned 64-bit values; options scope fields are decoded separately and are not treated as counters.
+
+NBAR maintenance supervision uses PHP's direct argv-array process API rather than Cacti's version-dependent timeout command interface, so startup and hard child termination work on the minimum supported Cacti 1.2.29 and newer releases. Both output pipes are drained in bounded chunks.

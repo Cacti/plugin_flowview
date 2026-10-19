@@ -129,15 +129,57 @@ function fv_nbar_supervise_maintenance(): void {
 		return;
 	}
 	try {
-		$output = [];
-		$status = 0;
-		// An argv array lets proc_open target PHP itself, with no shell intermediary.
+		// Invoke PHP directly; older Cacti timeout helpers accept strings only.
 		$command = [read_config_option('path_php_binary'), '-q', $config['base_path'] . '/plugins/flowview/flowview_upgrade.php', '--nbar-worker=build'];
-		$result = exec_with_timeout($command, $output, $status, 90);
-		if ($result === false || $status !== 0) {
+		$status = fv_nbar_run_child($command, 90);
+		if ($status !== 0) {
 			cacti_log('NBAR maintenance child failed or exceeded its 90-second deadline.', false, 'FLOWVIEW');
 		}
 	} finally {
 		unregister_process('flowview', 'nbar_maintenance', 0);
+	}
+}
+
+/** Supervise a direct PHP child independently of Cacti's versioned command API. */
+function fv_nbar_run_child(array $command, int $seconds): int {
+	$pipes = [];
+	$process = false;
+	$executable = $command[0] ?? '';
+	if (is_string($executable) && $executable !== '' && (strpbrk($executable, '/\\') === false || is_executable($executable))) {
+		try {
+			$process = @proc_open($command, [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, null, null, ['bypass_shell' => true]);
+		} catch (Throwable $error) {
+			$process = false;
+		}
+	}
+	if (!is_resource($process)) {
+		return 125;
+	}
+	try {
+		fclose($pipes[0]);
+		stream_set_blocking($pipes[1], false);
+		stream_set_blocking($pipes[2], false);
+		$deadline = hrtime(true) + max(1, $seconds) * 1000000000;
+		while (true) {
+			// Drain both pipes in bounded chunks; child output cannot fill memory.
+			stream_get_contents($pipes[1], 8192);
+			stream_get_contents($pipes[2], 8192);
+			$state = proc_get_status($process);
+			if (!$state['running']) {
+				return (int) $state['exitcode'];
+			}
+			if (hrtime(true) >= $deadline) {
+				proc_terminate($process, 9);
+				return 124;
+			}
+			usleep(10000);
+		}
+	} finally {
+		foreach ($pipes as $pipe) {
+			if (is_resource($pipe)) {
+				fclose($pipe);
+			}
+		}
+		proc_close($process);
 	}
 }
