@@ -59,7 +59,7 @@ it('retains the original on deferred or failed children and only deletes success
 		rmdir($root . '/lib');
 		rmdir($root);
 	}
-})->with([[75, true, false, false], [75, false, false, false], [1, true, false, false], [0, true, false, true], [0, true, false, false], [75, true, true, false], [75, false, true, false], [0, true, true, false], [0, true, true, true], [0, true, false, false, true], [0, true, true, false, true]]);
+})->with([[75, true, false, false], [75, false, false, false], [0, true, false, true], [0, true, false, false], [75, true, true, false], [75, false, true, false], [0, true, true, false], [0, true, true, true], [0, true, false, false, true], [0, true, true, false, true]]);
 it('rejects missing queue rows or failed claims without running a child', function ($missing) {
 	global $config;
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
@@ -104,7 +104,7 @@ it('runs the actual child entrypoint with native and legacy dispatch IDs', funct
 	$result = var_export($root . '/result.json', true);
 	$core = var_export($root, true);
 	$readyCode = $ready ? 'plugin_test_queue_db_result("db_fetch_row", ["Field"=>"enabled"]);plugin_test_queue_db_result("register_process_start", false);' : '';
-	file_put_contents($root . '/include/cli_check.php', '<?php require ' . $bootstrap . '; $config["base_path"]=' . $core . '; ' . $readyCode . ' plugin_test_queue_db_result("db_fetch_row_prepared", ["id"=>51,"source"=>"flowview","source_id"=>7]); register_shutdown_function(function(){file_put_contents(' . $result . ',json_encode($GLOBALS["__test_db_calls"]));});');
+	file_put_contents($root . '/include/cli_check.php', '<?php require ' . $bootstrap . '; $config["base_path"]=' . $core . '; ' . $readyCode . ' plugin_test_queue_db_result("db_fetch_row_prepared", ["id"=>51,"source"=>"flowview","source_id"=>7]); register_shutdown_function(function(){register_shutdown_function(function(){file_put_contents(' . $result . ',json_encode($GLOBALS["__test_db_calls"]));});});');
 	try {
 		$command = [PHP_BINARY, $root . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
 		if ($native) {
@@ -119,8 +119,9 @@ it('runs the actual child entrypoint with native and legacy dispatch IDs', funct
 		$exit = proc_close($process);
 		expect($error)->toBe('')->and($output)->toBe('')->and($exit)->toBe(75);
 		$calls = json_decode(file_get_contents($root . '/result.json'), true);
-		expect($calls)->toHaveCount($ready ? 3 : 2)->and($calls[0]['params'])->toBe(['flowview', 51]);
-		expect(array_column($calls, 'fn'))->not->toContain('db_execute_prepared');
+		expect($calls)->toHaveCount($ready ? 4 : 3)->and($calls[0]['params'])->toBe(['flowview', 51]);
+		$markers = array_values(array_filter($calls, fn ($c) => $c['fn'] === 'db_execute_prepared'));
+		expect($markers)->toHaveCount(1)->and($markers[0]['params'])->toBe(['retry', 51, 'flowview', 'running']);
 		if ($ready) {
 			global $config;
 			$oldBase = $config['base_path'];

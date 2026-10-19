@@ -4,7 +4,7 @@
 $config = ['base_path' => dirname(__DIR__), 'poller_id' => 1];
 $local_db_cnn_id = 'fixture';
 $mode = getenv('FLOWVIEW_FIXTURE_MODE');
-$ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure', 'parallel-timeout'], true);
+$ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure', 'parallel-timeout', 'timestamp-failure', 'master-busy'], true);
 $metadataReads = 0;
 $calls = [];
 const MESSAGE_LEVEL_INFO = 1;
@@ -19,7 +19,7 @@ function cacti_sizeof($value) {
 	return is_array($value) ? count($value) : 0;
 }
 function read_config_option($name) {
-	return ['path_php_binary' => PHP_BINARY, 'flowview_parallel_threads' => 2, 'flowview_partition' => 1, 'flowview_parallel_time_to_live' => 21600, 'flowview_parallel_runlimit' => 0][$name] ?? '';
+	return ['path_php_binary' => PHP_BINARY, 'reports_concurrent' => 1, 'flowview_parallel_threads' => 2, 'flowview_partition' => 1, 'flowview_parallel_time_to_live' => 21600, 'flowview_parallel_runlimit' => 0][$name] ?? '';
 }
 function cacti_log(...$args) {
 }
@@ -55,7 +55,7 @@ function exec_background(...$args) {
 }
 function register_process_start(...$args) {
 	$GLOBALS['calls'][] = ['register', $args];
-	return $GLOBALS['mode'] !== 'busy';
+	return !in_array($GLOBALS['mode'], ['busy', 'master-busy'], true);
 }
 function unregister_process(...$args) {
 	$GLOBALS['calls'][] = ['unregister', $args];
@@ -89,7 +89,7 @@ function db_fetch_row_prepared($sql, $params = [], ...$args) {
 }
 function db_execute_prepared($sql, $params = [], ...$args) {
 	$GLOBALS['calls'][] = ['write', $sql, $params];
-	return true;
+	return !($GLOBALS['mode'] === 'timestamp-failure' && str_contains($sql, 'UPDATE plugin_flowview_schedules'));
 }
 
 function db_fetch_assoc($sql, ...$args) {

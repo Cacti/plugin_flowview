@@ -82,7 +82,8 @@ it('retains a full failing snapshot while advancing to healthy rows on the next 
 	[$exit, $output] = ($this->runFixture)([PHP_BINARY, dirname(__DIR__) . '/fixtures/filter-queue.php', dirname(__DIR__, 2), $this->fixtureRoot]);
 	$result = json_decode($output, true);
 	expect($exit)->toBe(0)->and($result['first'])->toBe(0)->and($result['second'])->toBe(2)->and($result['third'])->toBe(0)
-		->and($result['attempts'])->toBe([1, 2, 3, 4, 1, 2])
+		->and($result['attempts'])->toBe([1, 2, 3, 4, 1, 2, 6])
+		->and($result['retryRace'])->toBeFalse()->and($result['raceStatus'])->toBe(['status' => 'running'])
 		->and($result['lostClaim'])->toBeFalse()->and($result['claimedStatus'])->toBe(['status' => 'running'])
 		->and($result['afterFirst'])->toHaveCount(4)
 		->and($result['remaining'])->toBe([['id' => 1, 'status' => 'pending'], ['id' => 2, 'status' => 'pending']]);
@@ -98,8 +99,9 @@ it('preserves late schema failures through the real child and parent completion 
 	$writes = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'write'));
 	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
 	expect($output)->toBe('')->and($exit)->toBe($retry ? 75 : 0)
-		->and($released)->toBe([['unregister', ['flowsched', 'child_7', 0]]])
-		->and($writes)->toHaveCount($retry ? 0 : 1);
+		->and($released)->toBe([['unregister', ['flowsched', 'child_7', 0, $result['pid']]]])
+		->and($writes)->toHaveCount($retry ? 1 : 2);
+	expect(end($writes)[2])->toBe([$retry ? 'retry' : 'complete', 51, 'flowview', 'running']);
 	if (!$retry) {
 		expect($writes[0][1])->toContain('UPDATE plugin_flowview_schedules');
 	}
@@ -128,10 +130,14 @@ it('returns retry from the real child when a queue, schedule or filter lookup fa
 	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
 	expect($exit)->toBe(75);
 	$actions = array_column($result['calls'], 0);
-	expect($actions)->not->toContain('write');
+	$writes = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'write'));
+	expect($writes)->toHaveCount(1);
+	if ($writes) {
+		expect($writes[0][2])->toBe(['retry', 51, 'flowview', 'running']);
+	}
 	if ($mode !== 'report-read-failure') {
 		$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
-		expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0]]]);
+		expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0, $result['pid']]]]);
 	}
 })->with(['report-read-failure', 'schedule-read-failure', 'filter-read-failure'])->with([false, true]);
 
@@ -148,7 +154,7 @@ it('retains a timed out parallel report through the actual child and parent', fu
 	$cleanup = array_values(array_filter($writes, fn ($c) => str_starts_with($c[1], 'DELETE FROM parallel_database_query_shard')));
 	expect(array_column($cleanup, 2))->toBe([[71]]);
 	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
-	expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0]]]);
+	expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0, $result['pid']]]]);
 	global $config;
 	$oldBase = $config['base_path'];
 	$config['base_path'] = $this->fixtureRoot;
@@ -186,3 +192,38 @@ it('completes an exit-zero report with stderr using Cactis actual process helper
 		->and($result['success'])->toBeTrue()->and($result['writes'])->toHaveCount(2)
 		->and($result['writes'][1]['sql'])->toStartWith('DELETE FROM reports_queued');
 })->with(['native', 'legacy']);
+
+it('reconciles a timeout with stderr and late completion without resending on either dispatcher', function ($runner) {
+	if (!extension_loaded('pdo_sqlite')) {
+		$this->markTestSkipped('PDO SQLite is needed for the persisted timeout regression');
+	}
+	global $config;
+	[$exit, $output] = ($this->runFixture)([PHP_BINARY, dirname(__DIR__) . '/fixtures/report-timeout.php', $config['base_path'], dirname(__DIR__, 2), $this->fixtureRoot, $runner]);
+	$result = json_decode($output, true);
+	expect($exit)->toBe(0)->and($result['remaining'])->toBe([])->and($result['deliveries'])->toHaveCount(1);
+	$resets = array_filter($result['writes'], fn ($c) => ($c[1][0] ?? '') === 'pending');
+	expect($resets)->toBe([]);
+	$claims = array_filter($result['writes'], fn ($c) => str_contains($c[0], 'start_time=?'));
+	expect($claims)->toHaveCount(1);
+})->with(['native', 'legacy']);
+
+it('holds a delivered occurrence when schedule timestamp persistence fails', function ($native) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
+	if ($native) { $command[] = '--queue-id=51'; }
+	[$exit] = ($this->runFixture)($command, 'timestamp-failure');
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	expect($exit)->toBe(76);
+	$outcomes = array_filter($result['calls'], fn ($c) => $c[0] === 'write' && str_contains($c[1], 'UPDATE reports_queued'));
+	expect($outcomes)->toBe([]);
+	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+	expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0, $result['pid']]]]);
+})->with([false, true]);
+
+it('releases only an acquired scheduler master registration at shutdown', function ($mode, $force) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--scheduled'];
+	if ($force) { $command[] = '--force'; }
+	[$exit] = ($this->runFixture)($command, $mode);
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+	expect($exit)->toBe(0)->and($released)->toBe($mode === 'master-busy' || $force ? [] : [['unregister', ['flowsched', 'master', 0, $result['pid']]]]);
+})->with([['ready', false], ['master-busy', false], ['ready', true]]);

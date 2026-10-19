@@ -112,7 +112,6 @@ cacti_log('Upgrading from v' . $old_version . ' to ' . $current_version, true, '
 
 flowview_upgrade($current_version, $old_version);
 
-
 exit(0);
 
 /**

@@ -36,7 +36,14 @@ function exec_with_timeout($command, &$output, &$status, $timeout) {
 	preg_match('/--queue-id=(\d+)/', $command, $match);
 	$id = (int) $match[1];
 	$GLOBALS['attempts'][] = $id;
-	$status = $id <= 2 ? 75 : 0;
+	$status = $id <= 2 || $id === 6 ? 75 : 0;
+	if ($status === 75) {
+		db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=?', ['retry', $id]);
+		if ($id === 6) {
+			// Another dispatcher consumed the child's retry marker before this parent returned.
+			db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=?', ['running', $id]);
+		}
+	}
 	return '';
 }
 function read_config_option(...$args) {
@@ -54,4 +61,7 @@ $third = flowview_reports_run_pending(1, 2);
 $db->exec("INSERT INTO reports_queued VALUES (5, 'flowview', 5, 'running', '2026-01-01 00:00:00', '2026-01-01 00:00:00', 'fixture', 1)");
 $lostClaim = flowview_reports_run(5);
 $claimedStatus = db_fetch_row_prepared('SELECT status FROM reports_queued WHERE id=5');
-echo json_encode(compact('first', 'second', 'third', 'attempts', 'afterFirst', 'remaining', 'lostClaim', 'claimedStatus'));
+$db->exec("INSERT INTO reports_queued VALUES (6, 'flowview', 6, 'pending', '2026-01-01 00:00:00', '2026-01-01 00:00:00', 'fixture', 1)");
+$retryRace = flowview_reports_run(6);
+$raceStatus = db_fetch_row_prepared('SELECT status FROM reports_queued WHERE id=6');
+echo json_encode(compact('retryRace', 'raceStatus', 'first', 'second', 'third', 'attempts', 'afterFirst', 'remaining', 'lostClaim', 'claimedStatus'));

@@ -47,3 +47,12 @@ an in-memory SQLite database to check persisted ordering across multiple passes:
 a full failed batch remains pending while healthy rows advance on the next pass.
 This queue test requires PDO SQLite and skips explicitly when it is unavailable;
 it does not validate MariaDB schema syntax or metadata locking.
+
+
+Timeout regressions load Cacti's actual process helper and persist queue state in
+SQLite while a worker writes stderr and completes after the parent timeout. Both
+legacy and native entrypoints must avoid requeueing and reconcile late completion
+without a second delivery. Separate actual-child tests cover durable outcome
+markers, PID-scoped shutdown cleanup, deferred preparation and timestamp-write
+failure after completion. Fixtures adapt database APIs and worker delivery; they
+do not test SMTP or replace live MariaDB concurrency validation.

@@ -33,7 +33,7 @@ it('attempts a failed occurrence once and still dispatches the healthy row behin
 	$deletes = array_values(array_filter($calls, fn ($c) => str_starts_with($c['sql'], 'DELETE FROM reports_queued')));
 	expect($deletes)->toHaveCount(1)->and($deletes[0]['params'])->toBe([52, 'flowview']);
 	$query = array_values(array_filter($calls, fn ($c) => $c['fn'] === 'db_fetch_assoc_prepared'))[0];
-	expect($query['sql'])->toContain('ORDER BY start_time,scheduled_time,id LIMIT 100');
+	expect($query['sql'])->toContain('ORDER BY (status=?) DESC,start_time,scheduled_time,id LIMIT 100');
 });
 it('stops the batch when schema readiness is lost instead of starting another child', function () {
 	foreach ([true, true, true, false] as $ready) {
@@ -161,3 +161,60 @@ it('retries successful completion cleanup without rerunning or requeuing the del
 		expect($log)->not->toContain('queue repair is required');
 	}
 })->with([[true, true], [false, true], [false, false]]);
+
+it('does not requeue an unresolved timeout or crash and reconciles only explicit child outcomes', function ($status, $outcome, $success, $reset) {
+	$GLOBALS['__test_cacti_log'] = [];
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 1]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', $outcome);
+	plugin_test_queue_db_result('exec_with_timeout', $status);
+	plugin_test_queue_db_result('exec_with_timeout_result', false);
+	expect(flowview_reports_run(51))->toBe($success);
+	$writes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
+	expect($writes)->toHaveCount(($success || $reset) ? 2 : 1);
+	if ($reset) {
+		expect($writes[1]['params'])->toBe(['pending', 51, 'flowview', 'retry']);
+	} elseif ($success) {
+		expect($writes[1]['sql'])->toStartWith('DELETE FROM reports_queued');
+	} else {
+		expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('unresolved child outcome', '51');
+	}
+})->with([[-1, ['status' => 'running'], false, false], [-1, false, false, false], [255, [], false, false], [-1, ['status' => 'complete'], true, false], [-1, ['status' => 'retry'], false, true]]);
+
+it('reconciles late complete and retry markers without losing queue ownership', function ($state, $reset, $claim, $success, $launches) {
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'status' => $state, 'run_command' => 'fixture', 'run_timeout' => 1]);
+	foreach ([$reset, $claim] as $value) {
+		plugin_test_queue_db_result('db_execute_prepared', $value);
+	}
+	expect(flowview_reports_run(51))->toBe($success);
+	expect(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_with_timeout'))->toHaveCount($launches);
+})->with([['complete', true, true, true, 0], ['retry', false, true, false, 0], ['retry', true, false, false, 0], ['retry', true, true, true, 1]]);
+
+it('cleans late completed reports even when execution capacity is full', function () {
+	for ($i = 0; $i < 3; $i++) {
+		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	}
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['id' => 51, 'status' => 'complete']]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'status' => 'complete']);
+	expect(flowview_reports_run_pending())->toBe(1);
+	$exec = array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_with_timeout');
+	expect($exec)->toHaveCount(0);
+	$reads = array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_assoc_prepared' && str_contains($c['sql'], 'FROM processes'));
+	expect($reads)->toHaveCount(0);
+});
+
+it('preserves legacy dispatch for other report sources', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'other-plugin', 'source_id' => 7, 'name' => 'Other report', 'run_command' => 'fixture', 'run_timeout' => 60]);
+	expect(reports_run(51))->toBeTrue();
+	$exec = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_with_timeout'));
+	expect($exec)->toHaveCount(1)->and($exec[0]['params'])->toBe(['fixture --report-id=51', 60]);
+});
+
+it('uses the scheduler default when a report timeout is unset', function () {
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 0]);
+	expect(flowview_reports_run(51))->toBeTrue();
+	$exec = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'exec_with_timeout'));
+	expect($exec[0]['params'][1])->toBe(300);
+});

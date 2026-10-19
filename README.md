@@ -223,3 +223,18 @@ Pending filter-state migration leaves scheduled queue entries and lastsent/start
 Queue dispatch processes a bounded snapshot, attempting each occurrence once per pass. A failed occurrence stays retained while healthy entries continue; previously attempted rows sort behind new work so repeated failures cannot monopolize the next snapshot. Schema loss or exhausted concurrency stops the pass.
 
 Scheduler capacity checks remove exact child registrations only when the operating system confirms that their PID no longer exists. Live or uncertain processes (including permission errors and platforms without POSIX liveness probes) retain their capacity reservation. Failed legacy queue resets now log an explicit queue-repair error while retaining the original occurrence.
+
+
+FlowView uses one dispatcher on both supported Cacti versions. A child records
+`complete` after successful preparation/delivery and saved schedule timestamps,
+or `retry` only for a known pre-delivery deferral. These markers let a later
+poller reconcile a child that finishes after its parent's timeout. Completed
+occurrences are deleted without executing them again. Only pending work or an
+explicit retry marker can start a new child.
+
+A timeout or crash with no recorded outcome leaves the occurrence `running` and
+logs its queue ID instead of automatically resending it. If it remains unresolved,
+check the child process and report/notification logs, then reconcile the specific
+`reports_queued` row: remove an already-delivered occurrence only after repairing
+its schedule timestamps, or return a confirmed undelivered occurrence to pending.
+Do not reset an unresolved row merely because its process has disappeared.

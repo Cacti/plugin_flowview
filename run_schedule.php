@@ -103,6 +103,10 @@ if ($scheduled == true) {
 		if (!register_process_start('flowsched', 'master', 0, 1200)) {
 			exit(0);
 		}
+		$master_pid = getmypid();
+		register_shutdown_function(static function () use ($master_pid) {
+			unregister_process('flowsched', 'master', 0, $master_pid);
+		});
 	}
 
 	$start = microtime(true);
@@ -120,15 +124,25 @@ if ($scheduled == true) {
 
 	cacti_log(sprintf('FLOWVIEW REPORT STATS: Time:%0.2f Reports:%s', $end - $start, $run), false, 'SYSTEM');
 
-	if (!$force) {
-		unregister_process('flowsched', 'master', 0);
-	}
 } else {
 	$report_id = flowview_schedule_queue_id(['report-id' => $report_id, 'queue-id' => $queue_id]);
 	if ($report_id === false) {
 		cacti_log('FATAL: Flowview Schedule Report ID not provided', true, 'FLOWVIEW');
 		exit(1);
 	}
+
+	$id = null;
+	$outcome = null;
+	$child_pid = getmypid();
+	$owns_registration = false;
+	register_shutdown_function(static function () use (&$outcome, &$owns_registration, $child_pid, &$id, $report_id) {
+		if ($outcome !== null && !db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=? AND source=? AND status=?', [$outcome, $report_id, 'flowview', 'running'])) {
+			cacti_log('Unable to record FlowView child outcome for occurrence ' . $report_id . '; queue repair is required. Do not resend without verifying delivery.', false, 'FLOWVIEW');
+		}
+		if ($owns_registration) {
+			unregister_process('flowsched', "child_$id", 0, $child_pid);
+		}
+	});
 
 	$report = db_fetch_row_prepared('SELECT rq.*
 		FROM reports_queued AS rq
@@ -137,6 +151,7 @@ if ($scheduled == true) {
 		['flowview', $report_id]);
 
 	if ($report === false) {
+		$outcome = 'retry';
 		exit(75);
 	}
 
@@ -145,14 +160,17 @@ if ($scheduled == true) {
 
 		if (!flowview_filter_status_ready()) {
 			// The FlowView parent retains this original occurrence on a retry exit.
+			$outcome = 'retry';
 			exit(75);
 		}
 
 		/* silently end if the registered process is still running, or process table missing */
 		if (!$force) {
 			if (!register_process_start('flowsched', "child_$id", 0, 1200)) {
+				$outcome = 'retry';
 				exit(75);
 			}
+			$owns_registration = true;
 		}
 
 		$t = time();
@@ -165,9 +183,7 @@ if ($scheduled == true) {
 			[$id]);
 
 		if ($schedule === false) {
-			if (!$force) {
-				unregister_process('flowsched', "child_$id", 0);
-			}
+			$outcome = 'retry';
 			exit(75);
 		}
 
@@ -175,16 +191,17 @@ if ($scheduled == true) {
 			if (!plugin_flowview_run_schedule($id, $report_id)) {
 				// A deferred or failed preparation must preserve the occurrence
 				// and schedule timestamps just like the initial readiness check.
-				if (!$force) {
-					unregister_process('flowsched', "child_$id", 0);
-				}
+				$outcome = 'retry';
 				exit(75);
 			}
 
-			flowview_db_execute_prepared('UPDATE plugin_flowview_schedules
+			if (!flowview_db_execute_prepared('UPDATE plugin_flowview_schedules
 				SET lastsent = ?, start = ?
 				WHERE id = ?',
-				array($r, date('Y-m-d H:i:s'), $id));
+				array($r, date('Y-m-d H:i:s'), $id))) {
+				cacti_log('FlowView occurrence ' . $report_id . ' finished delivery but schedule timestamps could not be saved; queue repair is required. Verify delivery and repair the schedule before clearing the occurrence.', false, 'FLOWVIEW');
+				exit(76);
+			}
 
 			$end = microtime(true);
 
@@ -193,9 +210,7 @@ if ($scheduled == true) {
 			cacti_log('FLOWVIEW SCHEDULE STATS: ' . $cacti_stats , true, 'SYSTEM');
 		}
 
-		if (!$force) {
-			unregister_process('flowsched', "child_$id", 0);
-		}
+		$outcome = 'complete';
 	} else {
 		cacti_log("WARNING: Unable to find Report ID $report_id", false, 'REPORTS');
 	}

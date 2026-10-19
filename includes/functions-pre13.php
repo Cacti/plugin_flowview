@@ -268,8 +268,8 @@ function reports_run($id): bool {
 		[$id]);
 
 	if (cacti_sizeof($report)) {
-		if ($report['source'] === 'flowview' && !flowview_filter_status_ready()) {
-			return false;
+		if ($report['source'] === 'flowview') {
+			return flowview_reports_run((int) $id, $report);
 		}
 		require_once($config['base_path'] . '/lib/poller.php');
 		db_execute_prepared('UPDATE reports_queued
@@ -297,12 +297,6 @@ function reports_run($id): bool {
 
 	cacti_log($stats, false, 'SYSTEM');
 
-	if ($report['source'] === 'flowview' && $return_code !== 0) {
-		if (!db_execute_prepared('UPDATE reports_queued SET status = ? WHERE id = ?', ['pending', $id])) {
-			cacti_log('Unable to reset the retained FlowView occurrence; queue repair is required.', false, 'FLOWVIEW');
-		}
-		return false;
-	}
 	db_execute_prepared('DELETE FROM reports_queued WHERE id = ?', [$id]);
 	return true;
 }
