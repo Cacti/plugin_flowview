@@ -124,6 +124,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'GET' && (!$section_entry || (cacti_s
 	$last = read_user_setting('flowview_last_section', '', true);
 	if (in_array($last, ['flows', 'nbar'], true)) {
 		$restore = fv_section_url($last);
+		if (get_nfilter_request_var('header') === 'false') {
+			$restore .= '&header=false';
+		}
 		if (isset_request_var('headercontent')) {
 			$restore .= '&headercontent=true';
 		}

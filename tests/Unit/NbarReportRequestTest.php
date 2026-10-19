@@ -11,6 +11,17 @@ it('renders report boundaries without leaking unsafe parameters', function ($sce
 		if (str_starts_with($scenario, 'nav-redirect')) {
 			expect($stdout)->toBe('');
 			expect($result['footer'])->toBeFalse();
+			parse_str(parse_url($result['redirect'], PHP_URL_QUERY), $redirect);
+			expect($redirect['section'])->toBe($scenario === 'nav-redirect-fragment-flows' ? 'flows' : 'nbar');
+			if (str_contains($scenario, 'fragment')) {
+				expect($redirect['header'])->toBe('false');
+			} else {
+				expect($redirect)->not->toHaveKey('header');
+			}
+			if (in_array($scenario, ['nav-redirect-header', 'nav-redirect-fragment-header'], true)) {
+				expect($redirect['headercontent'])->toBe('true');
+			}
+
 		} elseif ($scenario === 'csrf') {
 			expect($stdout)->toBe('');
 			expect($result['status'])->toBe(403);
@@ -27,7 +38,7 @@ it('renders report boundaries without leaking unsafe parameters', function ($sce
 		rmdir($directory);
 	}
 })->with([
-	['nav-redirect', ''], ['nav-redirect-header', ''], ['nav-select', 'Cisco Apps'], ['combine', 'Combined routers'],
+	['nav-redirect', ''], ['nav-redirect-header', ''], ['nav-redirect-fragment', ''], ['nav-redirect-fragment-header', ''], ['nav-redirect-fragment-flows', ''], ['nav-select', 'Cisco Apps'], ['combine', 'Combined routers'],
 	['default', 'Last Half Hour'], ['invalid', 'Fixture router'], ['retention', 'outside the 7-day'],
 	['fallback-span', 'Last Hour'], ['all-history', 'Last 7 Days'], ['clamped', 'Dates adjusted'],
 	['legacy', 'Last Hour'], ['drilldown', 'Back to conversations'], ['conversations', 'Internal Host'],

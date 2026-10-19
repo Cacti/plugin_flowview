@@ -22,7 +22,7 @@ register_shutdown_function(static function () use ($directory, $driver) {
 		$coverage = xdebug_get_code_coverage();
 		xdebug_stop_code_coverage();
 	}
-	file_put_contents($directory . '/result.json', json_encode(['session' => $_SESSION ?? [], 'calls' => $GLOBALS['__test_db_calls'], 'coverage' => $coverage, 'status' => http_response_code(), 'footer' => $GLOBALS['__test_footer_rendered'] ?? false]));
+	file_put_contents($directory . '/result.json', json_encode(['session' => $_SESSION ?? [], 'calls' => $GLOBALS['__test_db_calls'], 'coverage' => $coverage, 'status' => http_response_code(), 'footer' => $GLOBALS['__test_footer_rendered'] ?? false, 'redirect' => $GLOBALS['restore'] ?? null]));
 });
 flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
 $constants = file_get_contents($config['base_path'] . '/include/global_constants.php');
@@ -73,9 +73,12 @@ $GLOBALS['__test_user_settings']['flowview_nbar_preferences'] = json_encode(['pr
 $graph_timespans = [GT_LAST_HALF_HOUR => 'Last Half Hour', GT_LAST_HOUR => 'Last Hour', GT_LAST_DAY => 'Last Day', GT_LAST_YEAR => 'Last Year'];
 $_REQUEST = ['action' => 'view', 'report' => 'nbar', 'mode' => 'apps', 'listener' => '1'];
 $_SERVER['REQUEST_METHOD'] = 'GET';
-if ($scenario === 'nav-redirect' || $scenario === 'nav-redirect-header') {
-	$_REQUEST = $scenario === 'nav-redirect-header' ? ['headercontent' => 'true'] : [];
-	$GLOBALS['__test_user_settings']['flowview_last_section'] = 'nbar';
+if (str_starts_with($scenario, 'nav-redirect')) {
+	$_REQUEST = in_array($scenario, ['nav-redirect-header', 'nav-redirect-fragment-header'], true) ? ['headercontent' => 'true'] : [];
+	if (str_contains($scenario, 'fragment')) {
+		$_REQUEST += ['action' => 'view', 'header' => 'false'];
+	}
+	$GLOBALS['__test_user_settings']['flowview_last_section'] = $scenario === 'nav-redirect-fragment-flows' ? 'flows' : 'nbar';
 } elseif ($scenario === 'nav-select') {
 	$_REQUEST = ['section' => 'nbar', 'mode' => 'apps'];
 } elseif ($scenario === 'combine') {
