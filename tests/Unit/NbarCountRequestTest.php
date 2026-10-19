@@ -1,7 +1,7 @@
 <?php
 /* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
 
-require_once dirname(__DIR__) . '/helpers/request.php';
+require_once(dirname(__DIR__) . '/helpers/request.php');
 
 it('handles terminating count requests and preserves bounded account cache state', function ($scenario, $status) {
 	$directory = sys_get_temp_dir() . '/flowview-count-' . bin2hex(random_bytes(8));

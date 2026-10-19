@@ -23,6 +23,8 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once(__DIR__ . '/includes/nbar_common.php');
+
 /**
  * Return the CSP nonce attribute for inline <script> tags, safely across
  * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
@@ -46,7 +48,7 @@ function plugin_flowview_csp_nonce(): string {
  *
  * @return string Escaped attribute value.
  */
-function plugin_flowview_escape_attr($value): string {
+function plugin_flowview_escape_attr(mixed $value): string {
     if (function_exists('html_escape_attr')) {
         return html_escape_attr($value);
     }
@@ -164,7 +166,7 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 	if ($current != $old || $force || (int) read_config_option('flowview_nbar_schema_version') < 2) {
 		$php_binary = read_config_option('path_php_binary');
 
-		exec_background($php_binary, '-q ' .$config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
+		exec_background($php_binary, '-q ' .$config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php');
 
 		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
 
@@ -794,10 +796,10 @@ function flowview_poller_bottom(): void {
 	include_once($config['base_path'] . '/lib/poller.php');
 
 	flowview_connect();
-    require_once __DIR__ . '/nbar_common.php';
-    if ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
-        fv_nbar_launch_maintenance();
-    }
+
+	if ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
+		fv_nbar_launch_maintenance();
+	}
 
 	$retention_days = read_config_option('flowview_retention');
 
@@ -1096,11 +1098,12 @@ function flowview_setup_table(): void {
 	global $config, $settings, $flowviewdb_default;
 
 	flowview_connect();
-    require_once __DIR__ . '/nbar_common.php';
-    if (!fv_nbar_schema_install()) {
-        throw new RuntimeException('Unable to install NBAR history schema');
-    }
-    set_config_option('flowview_nbar_schema_version', '2');
+
+	if (!fv_nbar_schema_install()) {
+		throw new RuntimeException('Unable to install NBAR history schema');
+	}
+
+	set_config_option('flowview_nbar_schema_version', '2');
 
 	flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_dnscache` (
 		`id` int(11) unsigned NOT NULL AUTO_INCREMENT,

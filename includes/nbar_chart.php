@@ -33,7 +33,7 @@
  *
  * @return void
  */
-function fv_nbar_chart($scope, $args, $family, $host = '') {
+function fv_nbar_chart(string $scope, array $args, string $family, string $host = ''): void {
 	$where = $scope . ' AND d.minute>=? AND d.minute<?';
 	if ($family !== 'all') {
 		$where .= ' AND LENGTH(d.src)=' . ($family === '6' ? 16 : 4);

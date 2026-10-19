@@ -43,6 +43,7 @@ global $config;
 require_once($config['base_path'] . '/lib/poller.php');
 require_once($config['base_path'] . '/plugins/flowview/setup.php');
 require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/nbar_collector.php');
 chdir(__DIR__);
 
 ini_set('max_execution_time', '-1');
@@ -1275,7 +1276,6 @@ function process_fv9($p, $ex_addr): void {
 	global $templates, $tlengths, $allfields, $pacmap, $listener_id;
 
 	flowview_connect();
-	require_once __DIR__ . '/nbar_collector.php';
 	fv_nbar_packet($p, $ex_addr);
 
 	if (!isset($templates[$ex_addr])) {

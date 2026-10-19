@@ -3,10 +3,10 @@
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_query.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_connections.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_chart.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_query.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_connections.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_chart.php');
 	$_REQUEST = ['report' => 'nbar'];
 	flowview_test_load(dirname(__DIR__, 2) . '/flowview_sections.php');
 });

@@ -1,7 +1,7 @@
 <?php
 /* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
 
-require_once dirname(__DIR__) . '/helpers/request.php';
+require_once(dirname(__DIR__) . '/helpers/request.php');
 
 it('renders report boundaries without leaking unsafe parameters', function ($scenario, $expected) {
 	$directory = sys_get_temp_dir() . '/flowview-report-' . bin2hex(random_bytes(8));

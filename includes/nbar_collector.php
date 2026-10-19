@@ -23,7 +23,8 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once __DIR__ . "/nbar_common.php";
+require_once(__DIR__ . '/nbar_common.php');
+
 // Decode application-bearing NetFlow v9 records from exporter templates.
 /** Bounded LRU template state, shared across source IDs but limited per exporter. */
 class FlowviewNbarTemplateCache
@@ -107,7 +108,7 @@ class FlowviewNbarTemplateCache
  *
  * @return int|string
  */
-function fv_nbar_uint($s) {
+function fv_nbar_uint(string $s): int|string {
 	if (strlen($s) > 8) {
 		throw new InvalidArgumentException('NBAR numeric fields must fit an unsigned 64-bit value');
 	}
@@ -137,7 +138,7 @@ function fv_nbar_uint($s) {
  *
  * @return void
  */
-function fv_nbar_packet($p, $router) {
+function fv_nbar_packet(string $p, string $router): void {
 	global $listener_id;
 	static $templates = null;
 	if (strlen($p) < 20 || fv_nbar_uint(substr($p, 0, 2)) !== 9) {

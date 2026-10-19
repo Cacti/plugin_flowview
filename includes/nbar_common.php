@@ -23,13 +23,11 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once __DIR__ . '/includes/nbar_database.php';
-require_once __DIR__ . '/nbar_seen.php';
+require_once(__DIR__ . '/nbar_database.php');
+require_once(__DIR__ . '/nbar_seen.php');
+require_once(__DIR__ . '/nbar_summary.php');
+
 // Shared NBAR schema and retention helpers.
-if (!isset($GLOBALS['config']) || !function_exists('flowview_connect')) {
-	exit;
-}
-require_once __DIR__ . '/nbar_summary.php';
 
 /**
  * Escape report text and quoted HTML attributes.
@@ -38,7 +36,7 @@ require_once __DIR__ . '/nbar_summary.php';
  *
  * @return string
  */
-function fv_nbar_h($s) {
+function fv_nbar_h(mixed $s): string {
 	return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 }
 
@@ -47,7 +45,7 @@ function fv_nbar_h($s) {
  *
  * @return bool
  */
-function fv_nbar_schema_install() {
+function fv_nbar_schema_install(): bool {
 	return fv_nbar_schema_table('names') && fv_nbar_schema_table('data') && fv_nbar_summary_schema() && fv_nbar_exporter_schema();
 }
 /**
@@ -55,7 +53,7 @@ function fv_nbar_schema_install() {
  *
  * @return int
  */
-function fv_nbar_retention_days() {
+function fv_nbar_retention_days(): int {
 	static $days = 7,$checked = 0;
 	if (time() - $checked >= 60) {
 		$value = (int) read_config_option('flowview_nbar_retention_days', true);
@@ -69,7 +67,7 @@ function fv_nbar_retention_days() {
  *
  * @return void
  */
-function fv_nbar_cleanup($budget = 10) {
+function fv_nbar_cleanup(int|float $budget = 10): void {
 	$cutoff = (int) (floor((time() - fv_nbar_retention_days() * 86400) / 3600) * 3600);
 	$queries = [];
 	foreach (['apps', 'pairs', 'connections', 'hours'] as $table) {
@@ -118,7 +116,7 @@ function fv_nbar_launch_maintenance(): bool {
 		cacti_log('NBAR maintenance requires a configured PHP binary.', false, 'FLOWVIEW');
 		return false;
 	}
-	exec_background($php, '-q ' . escapeshellarg($config['base_path'] . '/plugins/flowview/flowview_upgrade.php') . ' --nbar-worker=supervise');
+	exec_background($php, '-q ' . escapeshellarg($config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php') . ' --nbar-worker=supervise');
 	return true;
 }
 
@@ -130,7 +128,7 @@ function fv_nbar_supervise_maintenance(): void {
 	}
 	try {
 		// Invoke PHP directly; older Cacti timeout helpers accept strings only.
-		$command = [read_config_option('path_php_binary'), '-q', $config['base_path'] . '/plugins/flowview/flowview_upgrade.php', '--nbar-worker=build'];
+		$command = [read_config_option('path_php_binary'), '-q', $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php', '--nbar-worker=build'];
 		$status = fv_nbar_run_child($command, 90);
 		if ($status !== 0) {
 			cacti_log('NBAR maintenance child failed or exceeded its 90-second deadline.', false, 'FLOWVIEW');

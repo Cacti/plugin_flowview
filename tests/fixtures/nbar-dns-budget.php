@@ -4,7 +4,7 @@
 if (PHP_SAPI !== 'cli' || count($argv) !== 3) {
 	exit(1);
 }
-require dirname(__DIR__) . '/bootstrap-unit.php';
+require(dirname(__DIR__) . '/bootstrap-unit.php');
 $scenario = $argv[1];
 $directory = $argv[2];
 $driver = function_exists('pcov\\start') ? 'pcov' : (function_exists('xdebug_start_code_coverage') ? 'xdebug' : '');
@@ -29,16 +29,16 @@ class Net_DNS2_Resolver
 {
 	public $timeout;
 	public static int $queries = 0;
-	public function __construct($options) {
+	public function __construct(array $options) {
 	}
-	public function query($ip, $type) {
+	public function query(string $ip, string $type): object {
 		self::$queries++;
 		return (object) ['answer' => []];
 	}
 }
 flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
-flowview_test_load(dirname(__DIR__, 2) . '/nbar_dns.php');
+flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
+flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_dns.php');
 $GLOBALS['fv_nbar_preferences'] = ['dns' => '1'];
 fv_nbar_dns('192.0.2.249');
 usleep(1100000);

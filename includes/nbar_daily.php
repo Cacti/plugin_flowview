@@ -23,16 +23,12 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!isset($GLOBALS['config']) || !function_exists('flowview_connect')) {
-	exit;
-}
-
 /**
  * Create reusable daily summary tables and their checkpoint schema.
  *
  * @return bool
  */
-function fv_nbar_daily_schema() {
+function fv_nbar_daily_schema(): bool {
 	foreach (['apps', 'pairs', 'connections'] as $kind) {
 		if (!fv_nbar_schema_table('daily_' . $kind)) {
 			return false;
@@ -52,7 +48,7 @@ function fv_nbar_daily_schema() {
  *
  * @return array
  */
-function fv_nbar_daily_bounds($timestamp) {
+function fv_nbar_daily_bounds(int $timestamp): array {
 	$day = new DateTimeImmutable(date('Y-m-d', (int) $timestamp), new DateTimeZone(date_default_timezone_get()));
 	return [$day->getTimestamp(), $day->modify('+1 day')->getTimestamp()];
 }
@@ -65,7 +61,7 @@ function fv_nbar_daily_bounds($timestamp) {
  *
  * @return string|null
  */
-function fv_nbar_daily_signature($listener, $from, $to) {
+function fv_nbar_daily_signature(int $listener, int $from, int $to): ?string {
 	$lo = (int) (floor($from / 3600) * 3600);
 	$hi = (int) (ceil($to / 3600) * 3600);
 	$r = flowview_db_fetch_row_prepared('SELECT COUNT(*) n, COALESCE(SUM(revision),0) rev,
@@ -83,7 +79,7 @@ function fv_nbar_daily_signature($listener, $from, $to) {
  *
  * @return string
  */
-function fv_nbar_daily_guard($listener, $day, $to, $revision) {
+function fv_nbar_daily_guard(int $listener, int $day, int $to, string $revision): string {
 	$listener = (int) $listener;
 	$lo = (int) (floor($day / 3600) * 3600);
 	$hi = (int) (ceil($to / 3600) * 3600);
@@ -102,7 +98,7 @@ function fv_nbar_daily_guard($listener, $day, $to, $revision) {
  *
  * @return int
  */
-function fv_nbar_daily_build($listener, $day, $target) {
+function fv_nbar_daily_build(int $listener, int $day, int $target): int {
 	$listener = (int) $listener;
 	$day = (int) $day;
 	$target = (int) $target;
@@ -168,7 +164,7 @@ function fv_nbar_daily_build($listener, $day, $target) {
  *
  * @return int
  */
-function fv_nbar_daily_refresh($budget = 20) {
+function fv_nbar_daily_refresh(int $budget = 20): int {
 	if ((int) flowview_db_fetch_cell("SELECT GET_LOCK(CONCAT('flowview_nbar_daily:',LEFT(SHA2(DATABASE(),256),16)),0)") !== 1) {
 		return 0;
 	}
@@ -201,7 +197,7 @@ function fv_nbar_daily_refresh($budget = 20) {
 			}
 		}
 		// Finish older days first; each checkpoint appends only the next hour.
-		usort($candidates, static function ($a, $b) {return $a[1] <=> $b[1] ?: $a[0] <=> $b[0];});
+		usort($candidates, static function (array $a, array $b): int {return $a[1] <=> $b[1] ?: $a[0] <=> $b[0];});
 		do {
 			$progress = 0;
 			foreach ($candidates as [$listener,$day,$target]) {
@@ -222,7 +218,7 @@ function fv_nbar_daily_refresh($budget = 20) {
  *
  * @return void
  */
-function fv_nbar_daily_cleanup() {
+function fv_nbar_daily_cleanup(): void {
 	fv_nbar_cleanup_batches(fv_nbar_daily_cleanup_queries(), microtime(true) + 10);
 }
 /** Return allowlisted daily retention batches for the shared cleanup worker. */
@@ -246,11 +242,11 @@ function fv_nbar_daily_cleanup_queries(): array {
  *
  * @return string
  */
-function fv_nbar_summary_source($kind, $listeners, $start, $end, $now = null) {
+function fv_nbar_summary_source(string $kind, array $listeners, int $start, int $end, ?int $now = null): string {
 	if (!in_array($kind, ['apps', 'pairs', 'connections'], true)) {
 		throw new InvalidArgumentException('Unknown summary kind');
 	}
-	$listeners = array_values(array_unique(array_filter(array_map('intval', $listeners), static function ($id) {return $id > 0;})));
+	$listeners = array_values(array_unique(array_filter(array_map('intval', $listeners), static function (int $id): bool {return $id > 0;})));
 	if (!$listeners) {
 		return '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data)';
 	}

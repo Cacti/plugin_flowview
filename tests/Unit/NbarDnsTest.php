@@ -24,8 +24,8 @@ if (!class_exists('Net_DNS2_Resolver')) {
 it('uses persistent DNS results and bounded positive and negative resolver caches', function () {
 	plugin_test_reset();
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_dns.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_dns.php');
 	$GLOBALS['fv_nbar_preferences'] = ['dns' => '1'];
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['host' => 'cached.example']);
 	expect(fv_nbar_dns('192.0.2.201'))->toBe('cached.example');
@@ -53,7 +53,7 @@ it('uses persistent DNS results and bounded positive and negative resolver cache
 
 it('expires negative DNS entries and retains at most 512 addresses', function () {
 	plugin_test_reset();
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_dns.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_dns.php');
 	$_SESSION['fv_nbar_dns_negative']['old'] = ['until' => time() - 1, 'name' => 'Old'];
 	foreach (range(1, 512) as $i) {
 		$_SESSION['fv_nbar_dns_negative']['host' . $i] = ['until' => time() + 100, 'name' => 'Not resolved'];
@@ -64,7 +64,7 @@ it('expires negative DNS entries and retains at most 512 addresses', function ()
 	expect($_SESSION['fv_nbar_dns_negative'])->toHaveKey('192.0.2.208');
 });
 
-require_once dirname(__DIR__) . '/helpers/request.php';
+require_once(dirname(__DIR__) . '/helpers/request.php');
 it('stops further DNS lookups after the report lookup budget is exhausted', function () {
 	$directory = sys_get_temp_dir() . '/flowview-dns-' . bin2hex(random_bytes(8));
 	mkdir($directory, 0700);

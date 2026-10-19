@@ -3,8 +3,8 @@
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_preferences.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_preferences.php');
 });
 
 beforeEach(function () {

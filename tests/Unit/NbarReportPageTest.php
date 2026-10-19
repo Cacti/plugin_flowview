@@ -54,8 +54,8 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 	}
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['src' => '2001:db8::10', 'dst' => '2001:db8::20', 'sport' => 12345, 'dport' => 443, 'protocol' => 6, 'app_id' => '0d000001', 'name' => '<app>', 'bytes' => 1000000, 'packets' => 20, 'records' => 2, 'first_seen' => $now - 600, 'last_seen' => $now - 60]]);
 	ob_start();
-	require_once dirname(__DIR__, 2) . '/flowview_sections.php';
-	require dirname(__DIR__, 2) . '/nbar_report.php';
+	require_once(dirname(__DIR__, 2) . '/flowview_sections.php');
+	require(dirname(__DIR__, 2) . '/nbar_report.php');
 	$html = ob_get_clean();
 	expect($html)->toContain('unit-csrf-token', 'method="post"', '&lt;router&gt;', '&lt;app&gt;', '2001:db8::10', 'First seen', 'Last seen', 'Setup guide', 'flowviewNbarInitTable');
 	expect($html)->not->toContain('<app>', '<router>', 'unexpected', '<scriptnonce');

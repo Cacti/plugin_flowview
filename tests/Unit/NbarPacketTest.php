@@ -3,7 +3,7 @@
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_collector.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_collector.php');
 });
 
 beforeEach(function () {

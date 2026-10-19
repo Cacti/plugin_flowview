@@ -2,7 +2,7 @@
 beforeEach(function () {
 	plugin_test_reset();
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
 });
 it('launches maintenance without running aggregation in the poller process', function () {
 	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
@@ -18,8 +18,8 @@ it('supervises a direct PHP child and releases registration after success or fai
 	global $config;
 	$oldBase = $config['base_path'];
 	$root = sys_get_temp_dir() . "/flowview supervisor '" . bin2hex(random_bytes(8));
-	mkdir($root . '/plugins/flowview', 0700, true);
-	$script = $root . '/plugins/flowview/flowview_upgrade.php';
+	mkdir($root . '/plugins/flowview/cli', 0700, true);
+	$script = $root . '/plugins/flowview/cli/flowview_upgrade.php';
 	$marker = $root . '/args.json';
 	file_put_contents($script, '<?php file_put_contents(' . var_export($marker, true) . ', json_encode($argv)); exit(' . $status . ');');
 	try {
@@ -41,7 +41,7 @@ it('supervises a direct PHP child and releases registration after success or fai
 		if (file_exists($marker)) {
 		unlink($marker);
 		}
-		unlink($script); rmdir($root . '/plugins/flowview'); rmdir($root . '/plugins'); rmdir($root);
+		unlink($script); rmdir($root . '/plugins/flowview/cli'); rmdir($root . '/plugins/flowview'); rmdir($root . '/plugins'); rmdir($root);
 	}
 })->with([[0, false], [7, false], [0, true]]);
 it('does not start another child while maintenance is registered', function () {
@@ -71,7 +71,7 @@ it('restores an established hourly deadline after a failed transaction setup', f
 	expect(end($sql))->toBe('SET SESSION max_statement_time=7.5');
 });
 it('uses identical tie ordering before and after SQL pagination', function () {
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_query.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_query.php');
 	$sql = fv_nbar_connections_sql('fixture', '1=1', 2);
 	expect($sql)->toContain('ORDER BY bytes DESC,d.app_id,COALESCE(n.name_id,0),d.src,d.dst,d.sport,d.dport,d.protocol,d.router LIMIT 101 OFFSET 100');
 	expect($sql)->toContain('ORDER BY d.bytes DESC,d.app_id,d.name_id,d.src,d.dst,d.sport,d.dport,d.protocol,d.router');

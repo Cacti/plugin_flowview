@@ -28,7 +28,7 @@
  *
  * @return array
  */
-function fv_section_request_params() {
+function fv_section_request_params(): array {
 	$params = [];
 	foreach (['action', 'section', 'report', 'query', 'device_id', 'listener', 'mode', 'family', 'predefined_timespan', 'period', 'date1', 'date2', 'context', 'sortfield', 'cutofflines', 'cutoffoctets', 'exclude', 'ex_addr', 'graph_type', 'graph_height', 'domains', 'headercontent'] as $key) {
 		$value = get_nfilter_request_var($key, null);
@@ -45,7 +45,7 @@ function fv_section_request_params() {
  *
  * @return array
  */
-function fv_section_params($section) {
+function fv_section_params(string $section): array {
 	$p = json_decode((string) read_user_setting('flowview_section_' . $section, '', true), true);
 	if (!is_array($p)) {
 		$p = [];
@@ -82,7 +82,7 @@ function fv_section_params($section) {
  *
  * @return string
  */
-function fv_section_url($section) {
+function fv_section_url(string $section): string {
 	return 'flowview.php?' . http_build_query(fv_section_params($section));
 }
 /**
@@ -93,7 +93,7 @@ function fv_section_url($section) {
  *
  * @return void
  */
-function fv_section_save($section, $params) {
+function fv_section_save(string $section, array $params): void {
 	unset($params['app'],$params['internal'],$params['external'],$params['section']);
 	$value = json_encode($params);
 	if (read_user_setting('flowview_last_section', '', true) !== $section) {
@@ -110,7 +110,7 @@ function fv_section_save($section, $params) {
  *
  * @return void
  */
-function fv_section_navigation($selected) {
+function fv_section_navigation(string $selected): void {
 	global $config;
 	echo '<link rel="stylesheet" href="' . plugin_flowview_escape_attr($config['url_path'] . 'plugins/flowview/css/nbar.css') . '">';
 	echo '<nav id="fv_section_tabs" class="tabs" aria-label="' . plugin_flowview_escape_attr(__('FlowView sections', 'flowview')) . '" style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0;border:0;background:none"><ul style="display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0;border:0">';

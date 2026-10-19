@@ -32,7 +32,7 @@
  *
  * @return string
  */
-function fv_nbar_count_sql($source, $where) {
+function fv_nbar_count_sql(string $source, string $where): string {
 	$map = '(SELECT router,app_id,DENSE_RANK() OVER (ORDER BY name) name_id FROM plugin_flowview_nbar_names)';
 	return 'SELECT COUNT(DISTINCT d.router,d.app_id,COALESCE(n.name_id,0),d.src,d.dst,d.sport,d.dport,d.protocol) total FROM ' . $source . ' d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN ' . $map . ' n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id WHERE ' . $where;
 }
@@ -48,7 +48,7 @@ function fv_nbar_count_sql($source, $where) {
  *
  * @return string
  */
-function fv_nbar_count_context($source, $where, $args, $end, $listeners = null, $start = null) {
+function fv_nbar_count_context(string $source, string $where, array $args, int $end, ?array $listeners = null, ?int $start = null): string {
 	// Guards are evaluated in the count statement, after any intervening refresh.
 	if ($listeners !== null && $start !== null) {
 		$source = fv_nbar_summary_source('connections', $listeners, (int) $start, (int) $end);
@@ -77,7 +77,7 @@ function fv_nbar_count_context($source, $where, $args, $end, $listeners = null, 
  *
  * @return never
  */
-function fv_nbar_count_response($payload) {
+function fv_nbar_count_response(array $payload): never {
 	header('Content-Type: application/json');
 	header('Cache-Control: no-store');
 	echo json_encode($payload);
@@ -88,7 +88,7 @@ function fv_nbar_count_response($payload) {
  *
  * @return never
  */
-function fv_nbar_count_request() {
+function fv_nbar_count_request(): never {
 	$key = get_nfilter_request_var('key');
 	if (!is_string($key) || !preg_match('/^[a-f0-9]{64}$/D', $key)) {
 		fv_nbar_count_response(['status' => 'expired']);
@@ -152,7 +152,7 @@ function fv_nbar_count_request() {
 }
 
 /** Bound a SELECT on the actual FlowView server rather than Cacti's server. */
-function fv_nbar_count_query(string $sql, array $args) {
+function fv_nbar_count_query(string $sql, array $args): array|false|null {
 	$version = flowview_db_fetch_cell('SELECT VERSION()');
 	if (is_string($version) && stripos($version, 'MariaDB') !== false) {
 		return flowview_db_fetch_row_prepared('SET STATEMENT max_statement_time=90 FOR ' . $sql, $args);

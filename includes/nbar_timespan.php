@@ -23,20 +23,17 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!function_exists('fv_nbar_retention_days')) {
-	exit;
-}
 /**
  * Limit preset choices to the configured retention window.
  *
  * @param array $presets Cacti timespan labels by identifier.
- * @param int $now Current Unix time, or null to read the clock.
+ * @param int $now Current Unix time.
  * @param int $days Configured retention in days.
  * @param int|string $weekday Cacti first-weekday setting.
  *
  * @return array
  */
-function fv_nbar_timespan_options($presets, $now, $days, $weekday) {
+function fv_nbar_timespan_options(array $presets, int $now, int $days, int|string $weekday): array {
 	$options = [];
 	$cutoff = $now - $days * 86400;
 	foreach ($presets as $id => $label) {
@@ -60,12 +57,12 @@ function fv_nbar_timespan_options($presets, $now, $days, $weekday) {
  *
  * @param int $start Inclusive range start in Unix seconds.
  * @param int $end Exclusive range end in Unix seconds.
- * @param int $now Current Unix time, or null to read the clock.
+ * @param int $now Current Unix time.
  * @param int $days Configured retention in days.
  *
  * @return array
  */
-function fv_nbar_bound_dates($start, $end, $now, $days) {
+function fv_nbar_bound_dates(int $start, int $end, int $now, int $days): array {
 	$cutoff = $now - $days * 86400;
 	$from = max($cutoff, $start);
 	$to = min($now, $end);

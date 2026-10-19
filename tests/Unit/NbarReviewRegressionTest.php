@@ -3,10 +3,10 @@
 beforeEach(function () {
 	plugin_test_reset();
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_count.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_connections.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_query.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_connections.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_query.php');
 	$GLOBALS['flowview_cnn'] = 'review-database';
 });
 it('selects an exact count deadline for the actual flow database', function ($version, $fragment) {
@@ -67,7 +67,7 @@ it('retries checkpoint seeds after a previous schema creation succeeded', functi
 	expect($sql)->toContain('SELECT 0,listener_id,hour', 'SELECT 1,listener_id,day')->not->toContain('CREATE TABLE');
 });
 it('renders a chart failure without aborting the report', function () {
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_chart.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_chart.php');
 	$GLOBALS['lid'] = 1;
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', false);
 	ob_start();

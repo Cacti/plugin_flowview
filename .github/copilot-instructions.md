@@ -41,7 +41,7 @@ flowview/                               # Repository root (install to plugins/fl
 ├── flowview_schedules.php              # Scheduled report administration
 ├── flowview_process.php                # CLI: parallel query execution / report runner
 ├── flowview_cleanup.php                # CLI: data retention cleanup
-├── flowview_upgrade.php                # Background schema upgrade runner
+├── cli/flowview_upgrade.php            # Background schema upgrade runner
 ├── flow_collector.php                  # NetFlow v5/v9/v10 collector daemon
 ├── functions.php / functions-pre13.php # Core UI + protocol decode helpers
 ├── import_flows.php                    # CLI flow file importer
@@ -104,7 +104,7 @@ context (e.g. arithmetic, strict `===` type comparisons).
 Use `flowview_setup_table()`/`flowview_drop_table()` helpers in `setup.php` rather than ad hoc `CREATE TABLE`/`DROP TABLE` calls scattered across pages.
 
 ### Upgrade Handling
-Schema upgrades run in the **background** via `flowview_upgrade.php` (spawned with `exec_background()` from `plugin_flowview_check_upgrade()`), since flow tables can be very large:
+Schema upgrades run in the **background** via `cli/flowview_upgrade.php` (spawned with `exec_background()` from `plugin_flowview_check_upgrade()`), since flow tables can be very large:
 
 ```php
 function plugin_flowview_check_upgrade($force = false) {
@@ -116,7 +116,7 @@ function plugin_flowview_check_upgrade($force = false) {
 
 	if ($current != $old || $force) {
 		$php_binary = read_config_option('path_php_binary');
-		exec_background($php_binary, '-q ' . $config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
+		exec_background($php_binary, '-q ' . $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php');
 		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background...', 'flowview'), MESSAGE_LEVEL_INFO);
 	}
 }

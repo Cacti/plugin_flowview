@@ -23,10 +23,6 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!function_exists('flowview_db_table_create')) {
-	exit;
-}
-
 /**
  * Describe the NBAR tables using FlowView's connection-aware schema API.
  *
@@ -34,7 +30,7 @@ if (!function_exists('flowview_db_table_create')) {
  *
  * @return array
  */
-function fv_nbar_schema_definition($suffix) {
+function fv_nbar_schema_definition(string $suffix): array {
 	$fields = [
 		'listener_id' => ['type' => 'int', 'unsigned' => true],
 		'router' => ['type' => 'varchar(45)', 'default' => ''],
@@ -124,7 +120,7 @@ function fv_nbar_schema_definition($suffix) {
  *
  * @return bool
  */
-function fv_nbar_schema_table($suffix) {
+function fv_nbar_schema_table(string $suffix): bool {
 	$definition = fv_nbar_schema_definition($suffix);
 	$table = 'plugin_flowview_nbar_' . $suffix;
 	// Core plugin APIs use Cacti's connection. FlowView's equivalent also

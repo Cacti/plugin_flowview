@@ -23,9 +23,6 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!function_exists('flowview_db_fetch_assoc_prepared')) {
-	exit;
-}
 /**
  * Fetch a bounded report result with a short account-session cache.
  *
@@ -34,7 +31,7 @@ if (!function_exists('flowview_db_fetch_assoc_prepared')) {
  *
  * @return array|false
  */
-function fv_nbar_query_cached($sql, $args) {
+function fv_nbar_query_cached(string $sql, array $args): array|false {
 	if (session_status() !== PHP_SESSION_ACTIVE) {
 		return flowview_db_fetch_assoc_prepared($sql, $args);
 	}
@@ -79,7 +76,7 @@ function fv_nbar_query_cached($sql, $args) {
  *
  * @return string
  */
-function fv_nbar_connections_sql($source, $where, $page) {
+function fv_nbar_connections_sql(string $source, string $where, int $page): string {
 	// Use compact name ranks while grouping; resolve display names after paging.
 	$map = '(SELECT router,app_id,DENSE_RANK() OVER (ORDER BY name) name_id FROM plugin_flowview_nbar_names)';
 	$group = 'd.app_id,COALESCE(n.name_id,0),d.src,d.dst,d.sport,d.dport,d.protocol,d.router';

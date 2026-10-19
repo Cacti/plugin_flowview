@@ -3,12 +3,12 @@
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_query.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_chart.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_feed_status.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_preferences.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_dns.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_query.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_chart.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_feed_status.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_preferences.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_dns.php');
 });
 
 beforeEach(function () {
@@ -110,7 +110,7 @@ it('labels conversation directions, observation dates and the application drilld
 	$base = 'flowview.php?report=nbar';
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['app_id' => $aid, 'name' => '<app>', 'internal' => $host, 'external' => '198.51.100.20', 'download' => 2000000, 'upload' => 10000, 'first_seen' => $start, 'last_seen' => $end - 60]]);
 	ob_start();
-	include dirname(__DIR__, 2) . '/nbar_conversations.php';
+	include(dirname(__DIR__, 2) . '/nbar_conversations.php');
 	$html = ob_get_clean();
 	expect($html)->toContain('Internal Host', 'External Host', '&lt;app&gt;', 'parent_app=0d000001', 'mode=connections', 'Back to top applications', 'First seen', 'Last seen');
 	expect($html)->toContain('&lt;localized&gt; retention ' . fv_nbar_retention_days() . ' days.')->not->toContain('<localized>', 'Top 100 conversations by combined data volume.');
@@ -123,7 +123,7 @@ it('labels conversation directions, observation dates and the application drilld
 it('explains why conversation classification needs internal networks', function () {
 	$nbar_preferences = ['prefixes' => []];
 	ob_start();
-	include dirname(__DIR__, 2) . '/nbar_conversations.php';
+	include(dirname(__DIR__, 2) . '/nbar_conversations.php');
 	expect(ob_get_clean())->toContain('Configure your site networks');
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
@@ -142,7 +142,7 @@ it('shows an empty conversation table when no matching records exist', function 
 	$host = '';
 	$base = 'flowview.php?report=nbar';
 	ob_start();
-	include dirname(__DIR__, 2) . '/nbar_conversations.php';
+	include(dirname(__DIR__, 2) . '/nbar_conversations.php');
 	expect(ob_get_clean())->toContain('No conversations for this period');
 });
 

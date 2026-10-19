@@ -3,7 +3,7 @@
 beforeEach(function () {
 	plugin_test_reset();
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_collector.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_collector.php');
 });
 it('bounds source-ID churn and keeps the most recently used templates', function () {
 	$cache = new FlowviewNbarTemplateCache();

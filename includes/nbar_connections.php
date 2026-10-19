@@ -23,9 +23,6 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!function_exists('flowview_db_fetch_assoc_prepared')) {
-	exit;
-}
 /**
  * Add unsigned decimal counters without floating-point rounding.
  *
@@ -34,7 +31,7 @@ if (!function_exists('flowview_db_fetch_assoc_prepared')) {
  *
  * @return string
  */
-function fv_nbar_decimal_add($a, $b) {
+function fv_nbar_decimal_add(int|string $a, int|string $b): string {
 	$a = strrev((string) $a);
 	$b = strrev((string) $b);
 	$carry = 0;
@@ -54,7 +51,7 @@ function fv_nbar_decimal_add($a, $b) {
  *
  * @return int
  */
-function fv_nbar_decimal_compare($a, $b) {
+function fv_nbar_decimal_compare(int|string $a, int|string $b): int {
 	$a = ltrim((string) $a, '0') ?: '0';
 	$b = ltrim((string) $b, '0') ?: '0';
 	return strlen($a) <=> strlen($b) ?: strcmp($a, $b);
@@ -68,7 +65,7 @@ function fv_nbar_decimal_compare($a, $b) {
  *
  * @return string
  */
-function fv_nbar_connection_key($row, $names, $listener) {
+function fv_nbar_connection_key(array $row, array $names, int $listener): string {
 	return json_encode([(string) $row['app_id'], (int) ($names[$listener][($row['router'] ?? '') . ':' . $row['app_id']]['name_id'] ?? 0), $row['src_hex'], $row['dst_hex'], (int) $row['sport'], (int) $row['dport'], (int) $row['protocol'], (string) ($row['router'] ?? '')]);
 }
 /**
@@ -79,7 +76,7 @@ function fv_nbar_connection_key($row, $names, $listener) {
  *
  * @return int
  */
-function fv_nbar_connection_compare($a, $b) {
+function fv_nbar_connection_compare(array $a, array $b): int {
 	$cmp = fv_nbar_decimal_compare($b['bytes'], $a['bytes']);
 	if ($cmp) {
 		return $cmp;
@@ -99,11 +96,11 @@ function fv_nbar_connection_compare($a, $b) {
  * @param int $listener Capture identifier.
  * @param int $from Inclusive boundary in Unix seconds.
  * @param int $to Exclusive boundary in Unix seconds.
- * @param int $now Current Unix time, or null to read the clock.
+ * @param int $now Current Unix time.
  *
  * @return array
  */
-function fv_nbar_connection_edges($listener, $from, $to, $now) {
+function fv_nbar_connection_edges(int $listener, int $from, int $to, int $now): array {
 	$segments = [];
 	$ready = flowview_db_fetch_assoc_prepared('SELECT hour FROM plugin_flowview_nbar_hours WHERE listener_id=? AND hour>=? AND hour<? AND connection_built>=0 AND connection_built=revision', [$listener, (int) (ceil($from / 3600) * 3600), (int) (floor(min($to, $now - 300) / 3600) * 3600)]);
 	if (!is_array($ready)) {
@@ -129,11 +126,11 @@ function fv_nbar_connection_edges($listener, $from, $to, $now) {
  * @param array $listeners Selected capture identifiers.
  * @param int $start Inclusive range start in Unix seconds.
  * @param int $end Exclusive range end in Unix seconds.
- * @param int $now Current Unix time, or null to read the clock.
+ * @param int $now Current Unix time.
  *
  * @return array
  */
-function fv_nbar_connection_plan($listeners, $start, $end, $now) {
+function fv_nbar_connection_plan(array $listeners, int $start, int $end, int $now): array {
 	$segments = [];
 	foreach ($listeners as $listener) {
 		$listener = (int) $listener;
@@ -179,7 +176,7 @@ function fv_nbar_connection_plan($listeners, $start, $end, $now) {
  *
  * @return array
  */
-function fv_nbar_connections_direct($listeners, $start, $end, $where, $args, $page, $size = 101) {
+function fv_nbar_connections_direct(array $listeners, int $start, int $end, string $where, array $args, int $page, int $size = 101): array {
 	$listeners = array_values(array_unique(array_map('intval', $listeners)));
 	if (!$listeners || cacti_sizeof($listeners) > 3) {
 		throw new InvalidArgumentException('Choose one to three captures');
@@ -314,7 +311,7 @@ function fv_nbar_connections_direct($listeners, $start, $end, $where, $args, $pa
 			}
 		}
 		// Exact fallback for exceptionally deep pages or a flat traffic distribution.
-		$source = '(' . implode(' UNION ALL ', array_map(static function ($segment) {return 'SELECT * FROM ' . $segment['source'] . ' s';}, $segments)) . ')';
+		$source = '(' . implode(' UNION ALL ', array_map(static function (array $segment): string {return 'SELECT * FROM ' . $segment['source'] . ' s';}, $segments)) . ')';
 		$result = flowview_db_fetch_assoc_prepared(str_replace(' LIMIT 101 OFFSET ', ' LIMIT ' . $size . ' OFFSET ', fv_nbar_connections_sql($source, $where, $page)), $args);
 		if (!is_array($result)) {
 			throw new RuntimeException('Cannot read connection page');
@@ -340,7 +337,7 @@ function fv_nbar_connections_direct($listeners, $start, $end, $where, $args, $pa
  *
  * @return array
  */
-function fv_nbar_connections_cached($listeners, $start, $end, $where, $args, $page) {
+function fv_nbar_connections_cached(array $listeners, int $start, int $end, string $where, array $args, int $page): array {
 	if (session_status() !== PHP_SESSION_ACTIVE) {
 		return fv_nbar_connections_direct($listeners, $start, $end, $where, $args, $page);
 	}

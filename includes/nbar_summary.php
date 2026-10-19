@@ -23,18 +23,14 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!isset($GLOBALS['config']) || !function_exists('flowview_connect')) {
-	exit;
-}
-
-require_once __DIR__ . '/nbar_daily.php';
+require_once(__DIR__ . '/nbar_daily.php');
 
 /**
  * Install hourly summaries and idempotent compatibility upgrades.
  *
  * @return bool
  */
-function fv_nbar_summary_schema() {
+function fv_nbar_summary_schema(): bool {
 	foreach (['hours', 'apps', 'pairs', 'connections'] as $suffix) {
 		if (!fv_nbar_schema_table($suffix)) {
 			return false;
@@ -57,7 +53,7 @@ function fv_nbar_summary_schema() {
  *
  * @return bool
  */
-function fv_nbar_summary_store($sql, $listener, $hours, $args = []) {
+function fv_nbar_summary_store(string $sql, int $listener, array $hours, array $args = []): bool {
 	if (flowview_db_execute('START TRANSACTION') === false) {
 		return false;
 	}
@@ -83,7 +79,7 @@ function fv_nbar_summary_store($sql, $listener, $hours, $args = []) {
  *
  * @return int
  */
-function fv_nbar_summary_refresh($budget = 20, $supervised = false) {
+function fv_nbar_summary_refresh(int $budget = 20, bool $supervised = false): int {
 	$lock = flowview_db_fetch_row("SELECT GET_LOCK(CONCAT('flowview_nbar_summary:',LEFT(SHA2(DATABASE(),256),16)),0) acquired");
 	if ((int) ($lock['acquired'] ?? 0) !== 1) {
 		return 0;
@@ -131,7 +127,7 @@ function fv_nbar_summary_refresh($budget = 20, $supervised = false) {
  *
  * @return bool
  */
-function fv_nbar_summary_build($listener, $hour, $supervised = false) {
+function fv_nbar_summary_build(int $listener, int $hour, bool $supervised = false): bool {
 	// A MySQL build without DML timeouts is allowed only in the supervised child.
 	$old_timeout = fv_nbar_worker_timeout(20);
 	if ($old_timeout === null && !$supervised) {
@@ -194,11 +190,11 @@ function fv_nbar_summary_build($listener, $hour, $supervised = false) {
  *
  * @return string
  */
-function fv_nbar_hourly_source($kind, $listeners, $start, $end, $now = null) {
+function fv_nbar_hourly_source(string $kind, array $listeners, int $start, int $end, ?int $now = null): string {
 	if (!in_array($kind, ['apps', 'pairs', 'connections'], true)) {
 		throw new InvalidArgumentException('Unknown summary kind');
 	}
-	$listeners = array_values(array_unique(array_filter(array_map('intval', $listeners), static function ($id) {return $id > 0;})));
+	$listeners = array_values(array_unique(array_filter(array_map('intval', $listeners), static function (int $id): bool {return $id > 0;})));
 	if (!$listeners) {
 		return '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data)';
 	}

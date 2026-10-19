@@ -23,10 +23,6 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!isset($GLOBALS['config']) || !function_exists('flowview_connect')) {
-	exit;
-}
-
 /**
  * Render minute-resolution observation dates or explicit unavailable cells.
  *
@@ -34,7 +30,7 @@ if (!isset($GLOBALS['config']) || !function_exists('flowview_connect')) {
  *
  * @return string
  */
-function fv_nbar_seen_cells(array $row) {
+function fv_nbar_seen_cells(array $row): string {
 	$html = '';
 	foreach (['first_seen', 'last_seen'] as $field) {
 		$stamp = (int) ($row[$field] ?? 0);
@@ -52,7 +48,7 @@ function fv_nbar_seen_cells(array $row) {
  *
  * @return void
  */
-function fv_nbar_seen_merge(array &$total, array $row) {
+function fv_nbar_seen_merge(array &$total, array $row): void {
 	if (!isset($row['first_seen'],$row['last_seen'])) {
 		$total['_seen_missing'] = true;
 		return;
@@ -67,7 +63,7 @@ function fv_nbar_seen_merge(array &$total, array $row) {
  *
  * @return bool
  */
-function fv_nbar_seen_schema() {
+function fv_nbar_seen_schema(): bool {
 	foreach (['', 'daily_'] as $prefix) {
 		foreach (['apps', 'pairs', 'connections'] as $kind) {
 			$table = 'plugin_flowview_nbar_' . $prefix . $kind;
@@ -107,7 +103,7 @@ function fv_nbar_seen_schema() {
  *
  * @return int
  */
-function fv_nbar_seen_backfill($budget = 10) {
+function fv_nbar_seen_backfill(int $budget = 10): int {
 	if ((int) flowview_db_fetch_cell("SELECT GET_LOCK(CONCAT('flowview_nbar_summary:',LEFT(SHA2(DATABASE(),256),16)),0)") !== 1) {
 		return 0;
 	}
@@ -159,7 +155,7 @@ function fv_nbar_seen_backfill($budget = 10) {
 				if (!preg_match('/^[a-zA-Z0-9_]+$/D', $collation)) {
 					throw new RuntimeException('Invalid application collation');
 				}
-				$join = implode(' AND ', array_map(static function ($k) use ($collation) {return $k === 'app_id' ? "s.$k=r.$k COLLATE $collation" : "s.$k=r.$k";}, $keys));
+				$join = implode(' AND ', array_map(static function (string $k) use ($collation): string {return $k === 'app_id' ? "s.$k=r.$k COLLATE $collation" : "s.$k=r.$k";}, $keys));
 				$source = $isDay ? fv_nbar_hourly_source($kind, [$listener], $period, $end) : '(SELECT *,minute first_seen,minute last_seen FROM plugin_flowview_nbar_data)';
 				$dates = 'IF(COUNT(first_seen)=COUNT(*),MIN(first_seen),NULL) first_seen,IF(COUNT(last_seen)=COUNT(*),MAX(last_seen),NULL) last_seen';
 				$sql = "UPDATE plugin_flowview_nbar_$prefix$kind s JOIN (SELECT $fields,router,SUM(bytes) bytes,SUM(packets) packets,SUM(flows) flows,$dates FROM $source d WHERE listener_id=$listener AND minute>=$period AND minute<$end GROUP BY $group) r ON $join SET s.first_seen=r.first_seen,s.last_seen=r.last_seen WHERE s.listener_id=$listener AND s.hour=$period AND s.bytes=r.bytes AND s.packets=r.packets AND s.flows=r.flows AND (s.first_seen IS NULL OR s.last_seen IS NULL)";

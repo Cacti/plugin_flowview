@@ -31,7 +31,7 @@
  *
  * @return string
  */
-function fv_nbar_dns($ip) {
+function fv_nbar_dns(string $ip): string {
 	global $config;
 	if (($GLOBALS['fv_nbar_preferences']['dns'] ?? '1') === '0') {
 		return '';
@@ -56,7 +56,7 @@ function fv_nbar_dns($ip) {
 	}
 	if ($resolver === null) {
 		set_include_path($config['base_path'] . '/plugins/flowview' . PATH_SEPARATOR . get_include_path());
-		include_once ($config['base_path'] . '/plugins/flowview/Net/DNS2.php');
+		require_once($config['base_path'] . '/plugins/flowview/Net/DNS2.php');
 		$servers = array_filter([read_config_option('settings_dns_primary'), read_config_option('settings_dns_secondary')]);
 		$resolver = new Net_DNS2_Resolver($servers ? ['nameservers' => array_values($servers)] : []);
 		$resolver->timeout = 1;
@@ -85,7 +85,7 @@ function fv_nbar_dns($ip) {
  *
  * @return string
  */
-function fv_nbar_dns_negative($ip, $name, $ttl) {
+function fv_nbar_dns_negative(string $ip, string $name, int $ttl): string {
 	$cache = $_SESSION['fv_nbar_dns_negative'] ?? [];
 	foreach ($cache as $key => $entry) {
 		if ($entry['until'] <= time()) {

@@ -3,11 +3,11 @@
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_collector.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_connections.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_query.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_preferences.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_timespan.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_collector.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_connections.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_query.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_preferences.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_timespan.php');
 });
 
 beforeEach(function () {

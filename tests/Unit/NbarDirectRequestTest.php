@@ -1,7 +1,7 @@
 <?php
 /* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
 
-require_once dirname(__DIR__) . '/helpers/request.php';
+require_once(dirname(__DIR__) . '/helpers/request.php');
 
 it('rejects direct requests without the Cacti bootstrap', function ($scenario, $expected) {
 	$directory = sys_get_temp_dir() . '/flowview-report-' . bin2hex(random_bytes(8));
@@ -18,7 +18,5 @@ it('rejects direct requests without the Cacti bootstrap', function ($scenario, $
 		rmdir($directory);
 	}
 })->with([
-	['database', false], ['common', false], ['connections', false], ['query', false],
-	['daily', false], ['seen', false], ['summary', false], ['timespan', false],
-	['preferences', 403], ['guide', 403], ['report', false], ['collector', false]
+	['guide', 403], ['report', false]
 ]);

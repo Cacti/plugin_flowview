@@ -23,11 +23,13 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir(__DIR__ . '/../../');
+chdir(__DIR__ . '/../../../');
 require('./include/cli_check.php');
+require_once('./lib/poller.php');
 require_once('./plugins/flowview/includes/functions.php');
 require_once('./plugins/flowview/setup.php');
 require_once('./plugins/flowview/includes/database.php');
+require_once('./plugins/flowview/includes/nbar_common.php');
 
 flowview_connect();
 
@@ -80,8 +82,6 @@ if (cacti_sizeof($parms)) {
 
 // Internal maintenance modes never enter the schema-upgrade path.
 if ($nbar_worker !== '') {
-	require_once __DIR__ . '/nbar_common.php';
-	require_once $config['base_path'] . '/lib/poller.php';
 	if ($nbar_worker === 'supervise') {
 		fv_nbar_supervise_maintenance();
 	} elseif ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
@@ -139,12 +139,10 @@ exit(0);
  * @return void
  */
 function flowview_upgrade($current, $old): void {
-	require_once __DIR__ . '/nbar_common.php';
 	if (!fv_nbar_schema_install()) {
 		throw new RuntimeException('Unable to upgrade NBAR history schema');
 	}
 	set_config_option('flowview_nbar_schema_version', '2');
-
 
 	global $config, $info;
 

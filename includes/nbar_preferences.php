@@ -24,10 +24,6 @@
 */
 
 // Personal report preferences; classification only, never router configuration.
-if (!isset($config['base_path'])) {
-	http_response_code(403);
-	exit;
-}
 /**
  * Validate and normalize up to 32 internal network prefixes.
  *
@@ -35,7 +31,7 @@ if (!isset($config['base_path'])) {
  *
  * @return array|false
  */
-function fv_nbar_cidrs($text) {
+function fv_nbar_cidrs(string $text): array|false {
 	$out = [];
 	foreach (preg_split('/[\s,]+/', trim($text), -1, PREG_SPLIT_NO_EMPTY) as $cidr) {
 		$parts = explode('/', $cidr);
@@ -61,7 +57,7 @@ function fv_nbar_cidrs($text) {
  *
  * @return array
  */
-function fv_nbar_preferences_init($devices) {
+function fv_nbar_preferences_init(array $devices): array {
 	$defaults = ['prefixes' => [], 'listeners' => [], 'data_unit' => 'GB', 'rate_unit' => 'Mbps', 'dns' => '1'];
 	$saved = json_decode((string) read_user_setting('flowview_nbar_preferences', ''), true);
 	$p = array_replace($defaults, is_array($saved) ? $saved : ($_SESSION['fv_nbar_preferences'] ?? []));
@@ -113,7 +109,7 @@ function fv_nbar_preferences_init($devices) {
  *
  * @return string
  */
-function fv_nbar_local_sql($f) {
+function fv_nbar_local_sql(string $f): string {
 	if (!in_array($f, ['d.src', 'd.dst'], true)) {
 		throw new InvalidArgumentException('Invalid address field');
 	}
@@ -148,7 +144,7 @@ function fv_nbar_local_sql($f) {
  *
  * @return void
  */
-function fv_nbar_preferences_render($devices, $base, $mode, $aid, $parent_app) {
+function fv_nbar_preferences_render(array $devices, string $base, string $mode, string $aid, string $parent_app): void {
 	global $config;
 	$p = $GLOBALS['fv_nbar_preferences'];
 	echo '<div id="nbarPreferences"><input type="hidden" name="prefs_apply" value="1">';

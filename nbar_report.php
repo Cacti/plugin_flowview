@@ -27,12 +27,28 @@
 if (!isset($config) || !function_exists('flowview_connect')) {
 	exit;
 }
+
+require_once($config['base_path'] . '/lib/time.php');
+require_once(__DIR__ . '/includes/nbar_common.php');
+require_once(__DIR__ . '/includes/nbar_dns.php');
+require_once(__DIR__ . '/includes/nbar_preferences.php');
+require_once(__DIR__ . '/includes/nbar_timespan.php');
+require_once(__DIR__ . '/includes/nbar_feed_status.php');
+require_once(__DIR__ . '/includes/nbar_query.php');
+require_once(__DIR__ . '/includes/nbar_chart.php');
+require_once(__DIR__ . '/includes/nbar_count.php');
+require_once(__DIR__ . '/includes/nbar_connections.php');
+
+// arrays.php populates report variables in this scope, so it is included on each request.
+include(__DIR__ . '/includes/arrays.php');
+
 if ((int) read_config_option('flowview_nbar_schema_version') < 2) {
 	plugin_flowview_check_upgrade();
 	print '<p class="textInfo nbarReportText">' . html_escape(__('NBAR history is being upgraded. Refresh this report shortly.', 'flowview')) . '</p>';
 	bottom_footer();
 	exit;
 }
+
 // Report controls use GET links or a protected POST form.
 $nbar_request = [];
 foreach (['listener', 'period', 'family', 'mode', 'app', 'host', 'page', 'parent_app', 'context', 'predefined_timespan', 'date1', 'date2', 'lock_range', 'internal', 'external'] as $key) {
@@ -41,13 +57,8 @@ foreach (['listener', 'period', 'family', 'mode', 'app', 'host', 'page', 'parent
 		$nbar_request[$key] = (string) $value;
 	}
 }
-require_once __DIR__ . '/nbar_common.php';
 
-require_once __DIR__ . '/nbar_dns.php';
-
-include __DIR__ . '/includes/arrays.php';
 $devices = flowview_db_fetch_assoc("SELECT id,name FROM plugin_flowview_devices WHERE enabled='on' ORDER BY id");
-include_once __DIR__ . '/nbar_preferences.php';
 $nbar_preferences = fv_nbar_preferences_init($devices);
 $lid = (int) ($nbar_request['listener'] ?? ($devices[0]['id'] ?? 0));
 $valid = array_column($devices, 'id');
@@ -89,7 +100,6 @@ if (!preg_match('/^[a-f0-9]{2,32}$/D', $parent_app)) {
 }
 $end = (int) (floor(time() / 60) * 60) - 60;
 $start = $end - $seconds;
-include_once $config['base_path'] . '/lib/time.php';
 $timespan_context = json_decode((string) ($nbar_request['context'] ?? ''), true);
 $timespan = (int) ($nbar_request['predefined_timespan'] ?? ($timespan_context['predefined_timespan'] ?? 0));
 $custom_start = strtotime((string) ($nbar_request['date1'] ?? ''));
@@ -107,7 +117,6 @@ if (!isset($nbar_request['predefined_timespan']) && !isset($timespan_context['pr
 if ($timespan > 0 && $timespan !== 1000 && !isset($graph_timespans[$timespan])) {
 	$timespan = GT_LAST_HOUR;
 }
-include_once __DIR__ . '/nbar_timespan.php';
 $nbar_now = (int) (floor(time() / 60) * 60);
 $nbar_retention_days = fv_nbar_retention_days();
 $nbar_timespans = fv_nbar_timespan_options($graph_timespans, $nbar_now, $nbar_retention_days, read_user_setting('first_weekdayid'));
@@ -195,7 +204,6 @@ fv_section_save('nbar', $section_params);
 fv_section_navigation('nbar');
 html_start_box(__('Application Report: Cisco Apps Recognition (NBAR)', 'flowview'), '100%', '', '3', 'center', '');
 echo '<tr class="even"><td style="padding:4px 8px">';
-include_once __DIR__ . '/nbar_feed_status.php';
 fv_nbar_feed_status($devices, array_map('intval', $lid === 0 ? $combined_lids : [$lid]));
 echo '</td></tr>';
 echo '<tr class="even"><td><div class="nbarReportBar"><form id="nbar_filter" method="post" action="flowview.php">';
@@ -232,12 +240,10 @@ if ($nbar_range_notice !== '') {
 }
 fv_nbar_preferences_render($devices, $base, $mode, $aid, $parent_app);
 echo '</form>';
-include_once __DIR__ . '/nbar_query.php';
-include_once __DIR__ . '/nbar_chart.php';
 fv_nbar_chart($listener_scope, $lid === 0 ? [$start, $end] : [$lid, $start, $end], $family, $host);
 echo '</div></td></tr>';
 html_end_box();
-include __DIR__ . '/nbar_setup_guide.php';
+include(__DIR__ . '/nbar_setup_guide.php');
 
 
 
@@ -246,7 +252,7 @@ echo '<script src="' . plugin_flowview_escape_attr($config['url_path'] . 'plugin
 echo '<script src="' . $config['url_path'] . 'include/js/jquery.tablesorter.widgets.js"></script>';
 echo '<script src="' . plugin_flowview_escape_attr($config['url_path'] . 'plugins/flowview/js/nbar-tables.js') . '"></script>';
 if ($mode === 'conversations') {
-	include __DIR__ . '/nbar_conversations.php';
+	include(__DIR__ . '/nbar_conversations.php');
 	bottom_footer();
 	exit;
 }
@@ -286,9 +292,7 @@ if ($mode === 'apps') {
 	$sql = 'SELECT d.app_id,n.name,SUM(d.bytes) bytes,SUM(d.packets) packets,SUM(d.flows) records,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen FROM (SELECT d.listener_id,d.app_id,d.router,SUM(d.bytes) bytes,SUM(d.packets) packets,SUM(d.flows) flows,IF(COUNT(d.first_seen)=COUNT(*),MIN(d.first_seen),NULL) first_seen,IF(COUNT(d.last_seen)=COUNT(*),MAX(d.last_seen),NULL) last_seen FROM ' . $nbar_source . ' d WHERE ' . $where . ' GROUP BY d.listener_id,d.app_id,d.router) d JOIN plugin_flowview_devices l ON l.id=d.listener_id LEFT JOIN plugin_flowview_nbar_names n ON n.router=COALESCE(NULLIF(d.router,SPACE(0)),l.allowfrom) AND n.app_id=d.app_id GROUP BY d.app_id,n.name ORDER BY bytes DESC LIMIT 100';
 }
 if ($mode === 'connections') {
-	require_once __DIR__ . '/nbar_count.php';
 	$nbar_count_key = fv_nbar_count_context('', $where, $args, $end, $lid === 0 ? $combined_lids : [$lid], $start);
-	require_once __DIR__ . '/nbar_connections.php';
 	try {
 		$rows = fv_nbar_connections_cached($lid === 0 ? $combined_lids : [$lid], $start, $end, $where, $args, $page);
 	} catch (Throwable $e) {

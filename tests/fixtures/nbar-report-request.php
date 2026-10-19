@@ -4,7 +4,7 @@
 if (PHP_SAPI !== 'cli' || count($argv) !== 3) {
 	exit(1);
 }
-require dirname(__DIR__) . '/bootstrap-unit.php';
+require(dirname(__DIR__) . '/bootstrap-unit.php');
 $scenario = $argv[1];
 $directory = $argv[2];
 $driver = function_exists('pcov\\start') ? 'pcov' : (function_exists('xdebug_start_code_coverage') ? 'xdebug' : '');
@@ -37,7 +37,7 @@ foreach ($matches as $match) {
  *
  * @return string
  */
-function csrf_get_tokens() {
+function csrf_get_tokens(): string {
 	return 'unit-csrf-token';
 }
 /**
@@ -47,7 +47,7 @@ function csrf_get_tokens() {
  *
  * @return void
  */
-function html_start_box(...$args) {
+function html_start_box(mixed ...$args): void {
 	echo '<table>';
 }
 /**
@@ -57,7 +57,7 @@ function html_start_box(...$args) {
  *
  * @return void
  */
-function html_end_box(...$args) {
+function html_end_box(mixed ...$args): void {
 	echo '</table>';
 }
 /**
@@ -65,7 +65,7 @@ function html_end_box(...$args) {
  *
  * @return void
  */
-function bottom_footer() {
+function bottom_footer(): void {
 	$GLOBALS['__test_footer_rendered'] = true;
 }
 $GLOBALS['__test_config']['flowview_nbar_schema_version'] = '2';
@@ -143,5 +143,5 @@ foreach (range(1, 3) as $unused) {
 	plugin_test_queue_db_result('db_fetch_assoc', []);
 }
 plugin_test_queue_db_result('db_fetch_assoc', $scenario === 'combine' ? [['id' => 1, 'name' => 'Fixture router'], ['id' => 2, 'name' => 'Second']] : [['id' => 1, 'name' => 'Fixture router']]);
-require dirname(__DIR__, 2) . '/flowview_sections.php';
-require dirname(__DIR__, 2) . '/nbar_report.php';
+require(dirname(__DIR__, 2) . '/flowview_sections.php');
+require(dirname(__DIR__, 2) . '/nbar_report.php');

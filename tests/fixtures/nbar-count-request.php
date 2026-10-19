@@ -4,7 +4,7 @@
 if (PHP_SAPI !== 'cli' || count($argv) !== 3) {
 	exit(1);
 }
-require dirname(__DIR__) . '/bootstrap-unit.php';
+require(dirname(__DIR__) . '/bootstrap-unit.php');
 $scenario = $argv[1];
 $directory = $argv[2];
 $driver = function_exists('pcov\\start') ? 'pcov' : (function_exists('xdebug_start_code_coverage') ? 'xdebug' : '');
@@ -25,7 +25,7 @@ register_shutdown_function(static function () use ($directory, $driver) {
 	file_put_contents($directory . '/result.json', json_encode(['session' => $_SESSION ?? [], 'calls' => $GLOBALS['__test_db_calls'], 'coverage' => $coverage]));
 });
 flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-flowview_test_load(dirname(__DIR__, 2) . '/nbar_count.php');
+flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
 $GLOBALS['flowview_cnn'] = 'count-endpoint-test';
 ini_set('session.use_cookies', '0');
 session_cache_limiter('');
@@ -52,7 +52,7 @@ if ($scenario === 'malformed') {
 	plugin_test_queue_db_result('db_fetch_cell', '11.8.9-MariaDB');
 	plugin_test_queue_db_result('db_fetch_row_prepared', str_contains($scenario, 'failed') ? false : ['total' => 12345]);
 	if (str_starts_with($scenario, 'background')) {
-		function fastcgi_finish_request() {
+		function fastcgi_finish_request(): bool {
 			$GLOBALS['__test_response_finished'] = true;
 			return true;
 		}

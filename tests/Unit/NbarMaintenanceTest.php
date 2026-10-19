@@ -3,9 +3,9 @@
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_common.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_connections.php');
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_query.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_connections.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_query.php');
 });
 
 beforeEach(function () {
@@ -163,7 +163,7 @@ it('restores the database timeout after building or rolling back a daily block',
 })->with([false, true]);
 
 it('caches exact-count contexts separately by account and filter', function () {
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_count.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
 	$_SESSION['sess_user_id'] = 1;
 	$a = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [1], time());
 	$b = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [2], time() - 3600);
@@ -178,7 +178,7 @@ it('caches exact-count contexts separately by account and filter', function () {
 });
 
 it('expires old count contexts and bounds the account cache', function () {
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_count.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
 	$_SESSION['fv_nbar_counts'] = ['expired' => ['expires' => time() - 1]];
 	foreach (range(1, 12) as $i) {
 		$_SESSION['fv_nbar_counts']['context' . $i] = ['expires' => time() + 3600];
@@ -190,7 +190,7 @@ it('expires old count contexts and bounds the account cache', function () {
 });
 
 it('uses summary tuple fields for counts without aggregating traffic counters', function () {
-	flowview_test_load(dirname(__DIR__, 2) . '/nbar_count.php');
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
 	$key = fv_nbar_count_context('', 'd.listener_id=? AND d.minute>=? AND d.minute<?', [1, 1800000000, 1800001800], 1800001800, [1], 1800000000);
 	$sql = $_SESSION['fv_nbar_counts'][$key]['sql'];
 	expect($sql)->toContain('COUNT(DISTINCT', 'plugin_flowview_nbar_data', 'd.listener_id=?');
