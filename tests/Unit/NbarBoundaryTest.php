@@ -40,8 +40,17 @@ it('ignores incompatible or overlapping daily checkpoints', function () {
 });
 
 it('uses a raw source when no capture scope exists', function () {
-	expect(fv_nbar_summary_source('apps', [], 0, 3600))->toContain('plugin_flowview_nbar_data', 'minute first_seen');
-	expect(fv_nbar_hourly_source('apps', [], 0, 3600))->toContain('plugin_flowview_nbar_data', 'minute last_seen');
+	plugin_test_queue_slices([fv_nbar_data_table(0), fv_nbar_data_table(7200)]);
+	$summary = fv_nbar_summary_source('apps', [], 0, 3600);
+	expect($summary)->toContain(fv_nbar_data_table(0), 'minute first_seen');
+	expect($summary)->not->toContain(fv_nbar_data_table(7200));
+	plugin_test_queue_slices([fv_nbar_data_table(0)]);
+	expect(fv_nbar_hourly_source('apps', [], 0, 3600))->toContain(fv_nbar_data_table(0), 'minute last_seen');
+});
+
+it('reads an empty typed relation when no raw slice exists yet', function () {
+	$sql = fv_nbar_hourly_source('apps', [], 0, 3600);
+	expect($sql)->toContain('WHERE 1=0', 'minute first_seen', 'fv_nbar_empty');
 });
 
 it('builds exact partial-byte internal-prefix predicates for both address families', function () {

@@ -28,18 +28,25 @@ require_once(__DIR__ . '/nbar_daily.php');
 /**
  * Write raw records and invalidate affected hours in one transaction.
  *
- * @param string $sql      Trusted SQL statement.
- * @param int    $listener Capture identifier.
- * @param array  $hours    Affected UTC hour boundaries.
- * @param array  $args     Prepared statement values.
+ * @param list<array{0: string, 1: array}> $statements One prepared INSERT per raw slice, as [sql, values].
+ * @param int                              $listener   Capture identifier.
+ * @param array                            $hours      Affected UTC hour boundaries.
  *
  * @return bool
  */
-function fv_nbar_summary_store(string $sql, int $listener, array $hours, array $args = []): bool {
+function fv_nbar_summary_store(array $statements, int $listener, array $hours): bool {
 	if (flowview_db_execute('START TRANSACTION') === false) {
 		return false;
 	}
-	$ok = flowview_db_execute_prepared($sql, $args) !== false;
+	$ok = true;
+
+	foreach ($statements as [$sql, $args]) {
+		if (flowview_db_execute_prepared($sql, $args) === false) {
+			$ok = false;
+
+			break;
+		}
+	}
 
 	if ($ok) {
 		$values = [];
@@ -82,7 +89,7 @@ function fv_nbar_summary_refresh(int $budget = 20, bool $supervised = false): in
 
 		foreach ($listeners as $listener) {
 			$id    = (int) $listener['id'];
-			$first = flowview_db_fetch_row_prepared('SELECT minute FROM plugin_flowview_nbar_data WHERE listener_id=? ORDER BY minute LIMIT 1', [$id]);
+			$first = fv_nbar_data_edge($id);
 
 			if (!isset($first['minute'])) {
 				continue;
@@ -141,8 +148,8 @@ function fv_nbar_summary_build(int $listener, int $hour, bool $supervised = fals
 		if (!isset($state['revision'])) {
 			throw new RuntimeException('Missing summary state');
 		}
-		$where = ' FROM plugin_flowview_nbar_data WHERE listener_id=? AND minute>=? AND minute<?';
-		$args  = [$listener, $hour, $hour + 3600];
+		$raw   = fv_nbar_data_source('listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,router', 'listener_id=' . $listener . ' AND minute>=' . $hour . ' AND minute<' . ($hour + 3600), $hour, $hour + 3600);
+		$where = ' FROM ' . $raw . ' fv_nbar_hour';
 		$specs = [
 			'apps'        => 'app_id,LENGTH(src)',
 			'pairs'       => 'app_id,src,dst',
@@ -155,7 +162,7 @@ function fv_nbar_summary_build(int $listener, int $hour, bool $supervised = fals
 			}
 			$sql = "INSERT INTO plugin_flowview_nbar_$table SELECT $listener,$hour,$fields,SUM(bytes),SUM(packets),SUM(flows),MIN(minute),MAX(minute),router$where GROUP BY $fields,router";
 
-			if (flowview_db_execute_prepared($sql, $args) === false) {
+			if (flowview_db_execute($sql) === false) {
 				throw new RuntimeException('Summary aggregate failed');
 			}
 		}
@@ -201,30 +208,30 @@ function fv_nbar_hourly_source(string $kind, array $listeners, int $start, int $
 		throw new InvalidArgumentException('Unknown summary kind');
 	}
 	$listeners = array_values(array_unique(array_filter(array_map('intval', $listeners), static function (int $id): bool {return $id > 0; })));
+	$start     = (int) $start;
+	$end       = (int) $end;
+	$raw       = fv_nbar_data_columns();
+	$tables    = fv_nbar_data_tables();
 
 	if (!$listeners) {
-		return '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data)';
+		return fv_nbar_data_source($raw, "minute>=$start AND minute<$end", $start, $end, $tables);
 	}
-	$start      = (int) $start;
-	$end        = (int) $end;
 	$full_start = (int) (ceil($start / 3600) * 3600);
 	$full_end   = min((int) (floor($end / 3600) * 3600), (int) (floor((($now ?? time()) - 300) / 3600) * 3600));
 
 	if ($full_end <= $full_start) {
-		return '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data)';
+		return fv_nbar_data_source($raw, 'listener_id IN (' . implode(',', $listeners) . ") AND minute>=$start AND minute<$end", $start, $end, $tables);
 	}
 	$built_column = $kind === 'connections' ? 'connection_built' : 'built';
 	$parts        = [];
 
 	foreach ($listeners as $listener) {
-		$raw = 'listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router';
-
 		if ($start < $full_start) {
-			$parts[] = "SELECT $raw FROM plugin_flowview_nbar_data WHERE listener_id=$listener AND minute>=$start AND minute<$full_start";
+			array_push($parts, ...fv_nbar_data_parts($raw, "listener_id=$listener AND minute>=$start AND minute<$full_start", $start, $full_start, $tables));
 		}
 
 		if ($full_end < $end) {
-			$parts[] = "SELECT $raw FROM plugin_flowview_nbar_data WHERE listener_id=$listener AND minute>=$full_end AND minute<$end";
+			array_push($parts, ...fv_nbar_data_parts($raw, "listener_id=$listener AND minute>=$full_end AND minute<$end", $full_end, $end, $tables));
 		}
 
 		for ($h = $full_start; $h < $full_end; $h = $to) {
@@ -240,7 +247,7 @@ function fv_nbar_hourly_source(string $kind, array $listeners, int $start, int $
 				$fields = 'listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen,router';
 			}
 			$parts[] = "SELECT $fields FROM plugin_flowview_nbar_$kind WHERE listener_id=$listener AND hour>=$h AND hour<$to AND ($ready)";
-			$parts[] = "SELECT $raw FROM plugin_flowview_nbar_data WHERE listener_id=$listener AND minute>=$h AND minute<$to AND NOT ($ready)";
+			array_push($parts, ...fv_nbar_data_parts($raw, "listener_id=$listener AND minute>=$h AND minute<$to AND NOT ($ready)", $h, $to, $tables));
 		}
 	}
 

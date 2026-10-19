@@ -23,6 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once(__DIR__ . '/nbar_partition.php');
 require_once(__DIR__ . '/nbar_seen.php');
 require_once(__DIR__ . '/nbar_summary.php');
 
@@ -56,7 +57,7 @@ function fv_nbar_retention_days(): int {
 	return $days;
 }
 /**
- * Expire raw records and summaries in bounded database batches.
+ * Expire raw records and summaries: whole raw slices are dropped, summaries are deleted in bounded batches.
  *
  * @return void
  */
@@ -64,11 +65,12 @@ function fv_nbar_cleanup(int|float $budget = 10): void {
 	$cutoff  = (int) (floor((time() - fv_nbar_retention_days() * 86400) / 3600) * 3600);
 	$queries = [];
 
+	fv_nbar_data_drop_expired(time() - fv_nbar_retention_days() * 86400);
+
 	foreach (['apps', 'pairs', 'connections', 'hours'] as $table) {
 		$queries[] = ["DELETE FROM plugin_flowview_nbar_$table WHERE hour<$cutoff LIMIT 50000", 50000];
 	}
-	$queries[] = ['DELETE FROM plugin_flowview_nbar_data WHERE minute < ' . (time() - fv_nbar_retention_days() * 86400) . ' LIMIT 50000', 50000];
-	$queries   = array_merge($queries, fv_nbar_daily_cleanup_queries());
+	$queries = array_merge($queries, fv_nbar_daily_cleanup_queries());
 	fv_nbar_cleanup_batches($queries, microtime(true) + max(0, (float) $budget));
 }
 

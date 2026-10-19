@@ -33,7 +33,7 @@ function flowview_test_create_nbar_tables(): array {
 function flowview_test_nbar_tables(): array {
 	return array_map(
 		fn ($suffix) => 'plugin_flowview_nbar_' . $suffix,
-		['names', 'data', 'hours', 'apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections', 'days', 'seen_upgrade']
+		['names', 'hours', 'apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections', 'days', 'seen_upgrade']
 	);
 }
 
@@ -76,7 +76,33 @@ it('keeps the exporter identity as the last primary key column of every raw and 
 
 	expect($sql)->toMatch('/PRIMARY KEY \([^)]*,`router`\)/')
 		->toContain("`router` varchar(45) NOT NULL DEFAULT ''");
-})->with(['data', 'apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections']);
+})->with(['apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections']);
+
+it('does not create the raw table with the fixed tables because raw records live in time slices', function () {
+	expect(array_keys(flowview_test_create_nbar_tables()))->not->toContain('plugin_flowview_nbar_data');
+});
+
+it('creates a raw slice with the standard layout and the exporter as the last key column', function ($table) {
+	plugin_test_queue_db_result('db_fetch_cell', $table);
+	expect(flowview_db_create_nbar_data_partition($table))->toBeTrue();
+	$call = $GLOBALS['__test_db_calls'][0];
+	expect($call['conn'])->toBe('nbar-schema-test');
+	expect($call['sql'])->toStartWith('CREATE TABLE IF NOT EXISTS `' . $table . '`')
+		->toContain('ENGINE=InnoDB', "COMMENT='Plugin Flowview - NBAR raw", 'KEY `minute` (`minute`)', '`bytes` bigint(20) unsigned NOT NULL')
+		->toMatch('/PRIMARY KEY \(`listener_id`,`minute`,[^)]*,`router`\)/');
+	$verify = end($GLOBALS['__test_db_calls']);
+	expect($verify['sql'])->toBe("SHOW TABLES LIKE '$table'");
+})->with(['plugin_flowview_nbar_data_202601412', 'plugin_flowview_nbar_data_2026014']);
+
+it('refuses to create a raw slice for a name that is not a slice', function ($table) {
+	expect(flowview_db_create_nbar_data_partition($table))->toBeFalse();
+	expect($GLOBALS['__test_db_calls'])->toBe([]);
+})->with(['plugin_flowview_nbar_data', 'plugin_flowview_nbar_data_x', 'plugin_flowview_nbar_data_2026014123', 'plugin_flowview_nbar_data_2026014; DROP TABLE x', "plugin_flowview_nbar_data_2026014\n", 'other_2026014']);
+
+it('reports a raw slice that cannot be verified after creation', function () {
+	plugin_test_queue_db_result('db_fetch_cell', '');
+	expect(flowview_db_create_nbar_data_partition('plugin_flowview_nbar_data_202601412'))->toBeFalse();
+});
 
 it('includes the observation dates and indexes that earlier builds added with ALTER TABLE', function () {
 	$created = flowview_test_create_nbar_tables();

@@ -50,6 +50,10 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 	}
 	plugin_test_queue_db_result('db_fetch_assoc', [['id' => 1, 'name' => '<router>'], ['id' => 2, 'name' => 'Second'], ['id' => 3, 'name' => 'Third']]);
 
+	for ($i = 0; $i < 3; $i++) {
+		plugin_test_queue_slices([fv_nbar_data_table($now - 60)]);
+	}
+
 	for ($i = 0; $i < 6; $i++) {
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $now - 60]);
 	}

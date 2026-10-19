@@ -40,6 +40,8 @@ it('uses exporter uptime to date records and rejects expired observations', func
 	$record   = hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . pack('NN', 1000, 95000);
 	$data     = pack('nn', 904, 4 + strlen($record)) . $record;
 	$now      = time();
+	$slice    = fv_nbar_data_table((int) (floor(($now - 5) / 60) * 60));
+	plugin_test_queue_db_result('db_fetch_cell', $slice);
 	fv_nbar_packet(pack('nnNNNN', 9, 2, 100000, $expired ? $now - 8 * 86400 : $now, 1, 904) . $template . $data, '192.0.2.94');
 	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
 
@@ -47,6 +49,7 @@ it('uses exporter uptime to date records and rejects expired observations', func
 		expect($calls)->toBe([]);
 	} else {
 		expect($calls)->toHaveCount(1);
+		expect($calls[0]['sql'])->toStartWith('INSERT INTO `' . $slice . '`');
 		expect($calls[0]['params'][1])->toBe((int) (floor(($now - 5) / 60) * 60));
 	}
 })->with([false, true]);
@@ -64,6 +67,9 @@ it('ignores incomplete records and reports a failed record transaction', functio
 	$data     = pack('nn', 905, 4 + strlen($record)) . $record;
 
 	if ($reason === 'transaction') {
+		// The first database call creates the slice; the next one starts the record transaction.
+		plugin_test_queue_db_result('db_fetch_cell', fv_nbar_data_table((int) (floor(time() / 60) * 60)));
+		plugin_test_queue_db_result('db_execute', true);
 		plugin_test_queue_db_result('db_execute', false);
 	}
 	fv_nbar_packet($this->header . $template . $data, '192.0.2.95');

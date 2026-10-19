@@ -191,7 +191,7 @@ if ($nbar_dates_adjusted) {
 $nbar_earliest = null;
 
 foreach ($lid === 0 ? $combined_lids : [$lid] as $nbar_capture_id) {
-	$nbar_first = flowview_db_fetch_row_prepared('SELECT minute FROM plugin_flowview_nbar_data WHERE listener_id=? ORDER BY minute LIMIT 1', [$nbar_capture_id]);
+	$nbar_first = fv_nbar_data_edge($nbar_capture_id);
 
 	if (isset($nbar_first['minute'])) {
 		$nbar_first_minute = max($nbar_now - $nbar_retention_days * 86400, (int) $nbar_first['minute']);

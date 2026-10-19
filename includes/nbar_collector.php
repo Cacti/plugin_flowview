@@ -176,12 +176,11 @@ function fv_nbar_packet(string $p, string $router): void {
 	$templates ??= new FlowviewNbarTemplateCache();
 	$now = time();
 	$templates->prune($now);
-	$source = bin2hex(substr($p, 16, 4));
-	$unix   = fv_nbar_int(substr($p, 8, 4));
-	$uptime = fv_nbar_int(substr($p, 4, 4));
-	$rows   = [];
-	$args   = [];
-	$hours  = [];
+	$source  = bin2hex(substr($p, 16, 4));
+	$unix    = fv_nbar_int(substr($p, 8, 4));
+	$uptime  = fv_nbar_int(substr($p, 4, 4));
+	$batches = [];
+	$hours   = [];
 
 	for ($o = 20; $o + 4 <= strlen($p);) {
 		$id  = fv_nbar_int(substr($p, $o, 2));
@@ -282,11 +281,14 @@ function fv_nbar_packet(string $p, string $router): void {
 					continue;
 				}
 				$hours[(int) (floor($ts / 3600) * 3600)] = true;
-				$rows[]                                  = '(?,?,?,UNHEX(?),UNHEX(?),?,?,?,?,?,1,?)';
+				$minute                                  = (int) (floor($ts / 60) * 60);
+				$table                                   = fv_nbar_data_table($minute);
+				$batches[$table] ??= ['rows' => [], 'args' => []];
+				$batches[$table]['rows'][] = '(?,?,?,UNHEX(?),UNHEX(?),?,?,?,?,?,1,?)';
 				array_push(
-					$args,
+					$batches[$table]['args'],
 					(int) $listener_id,
-					(int) (floor($ts / 60) * 60),
+					$minute,
 					$aid,
 					bin2hex($src),
 					bin2hex($dst),
@@ -301,8 +303,18 @@ function fv_nbar_packet(string $p, string $router): void {
 		}
 		$o = $end;
 	}
+	$statements = [];
 
-	if ($rows && !fv_nbar_summary_store('INSERT INTO plugin_flowview_nbar_data VALUES ' . implode(',', $rows) . ' ON DUPLICATE KEY UPDATE bytes=bytes+VALUES(bytes),packets=packets+VALUES(packets),flows=flows+1', $listener_id, $hours, $args)) {
+	foreach ($batches as $table => $batch) {
+		if (!fv_nbar_data_ensure($table)) {
+			cacti_log('WARNING: NBAR raw table ' . $table . ' could not be created', false, 'FLOWVIEW');
+
+			return;
+		}
+		$statements[] = ['INSERT INTO `' . $table . '` VALUES ' . implode(',', $batch['rows']) . ' ON DUPLICATE KEY UPDATE bytes=bytes+VALUES(bytes),packets=packets+VALUES(packets),flows=flows+1', $batch['args']];
+	}
+
+	if ($statements && !fv_nbar_summary_store($statements, (int) $listener_id, $hours)) {
 		cacti_log('WARNING: NBAR record transaction failed', false, 'FLOWVIEW');
 	}
 }

@@ -176,7 +176,7 @@ function fv_nbar_daily_refresh(int $budget = 20): int {
 		$candidates = [];
 
 		foreach ($listeners as $row) {
-			$first_record = flowview_db_fetch_cell_prepared('SELECT minute FROM plugin_flowview_nbar_data WHERE listener_id=? ORDER BY minute LIMIT 1', [(int) $row['listener_id']]);
+			$first_record = fv_nbar_data_edge((int) $row['listener_id'])['minute'] ?? 0;
 
 			if (!$first_record) {
 				continue;
@@ -257,12 +257,13 @@ function fv_nbar_summary_source(string $kind, array $listeners, int $start, int 
 	}
 	$listeners = array_values(array_unique(array_filter(array_map('intval', $listeners), static function (int $id): bool {return $id > 0; })));
 
-	if (!$listeners) {
-		return '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data)';
-	}
 	$start = (int) $start;
 	$end   = (int) $end;
-	$now   = $now ?? time();
+
+	if (!$listeners) {
+		return fv_nbar_data_source(fv_nbar_data_columns(), "minute>=$start AND minute<$end", $start, $end);
+	}
+	$now = $now ?? time();
 
 	if ($end - $start < 3600) {
 		return fv_nbar_hourly_source($kind, $listeners, $start, $end, $now);

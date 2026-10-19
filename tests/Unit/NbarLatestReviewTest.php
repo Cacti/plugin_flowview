@@ -37,6 +37,8 @@ it('leaves legacy timespan dispatch to its original handler', function () {
 	expect(fv_nbar_timespan_request())->toBeFalse();
 });
 it('distinguishes a status read failure from an empty feed and keeps other captures visible', function () {
+	plugin_test_queue_slices([fv_nbar_data_table(time())]);
+	plugin_test_queue_slices([fv_nbar_data_table(time())]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', false);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => time()]);
 	ob_start();

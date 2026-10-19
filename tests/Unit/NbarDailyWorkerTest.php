@@ -70,8 +70,10 @@ it('plans retained calendar days and seeds only empty hours before the first rec
 	plugin_test_queue_db_result('db_fetch_cell', 1);
 	$first = strtotime('yesterday') + 3 * 3600;
 	plugin_test_queue_db_result('db_fetch_assoc', [['listener_id' => 2, 'first_hour' => $first], ['listener_id' => 3, 'first_hour' => $first]]);
-	plugin_test_queue_db_result('db_fetch_cell_prepared', $first);
-	plugin_test_queue_db_result('db_fetch_cell_prepared', false);
+	plugin_test_queue_slices([fv_nbar_data_table($first)]);
+	plugin_test_queue_slices([fv_nbar_data_table($first)]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $first]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', []);
 	expect(fv_nbar_daily_refresh())->toBe(0);
 	$calls = $GLOBALS['__test_db_calls'];
 	$seeds = array_values(array_filter($calls, fn ($c) => str_contains($c['sql'], 'INSERT IGNORE INTO plugin_flowview_nbar_hours')));
@@ -86,6 +88,8 @@ it('seeds and publishes closed hours before handing off to the daily worker', fu
 	$hour = (int) floor((time() - 7200) / 3600) * 3600;
 	plugin_test_queue_db_result('db_fetch_row', ['acquired' => 1]);
 	plugin_test_queue_db_result('db_fetch_assoc', [['id' => 1], ['id' => 2]]);
+	plugin_test_queue_slices([fv_nbar_data_table($hour)]);
+	plugin_test_queue_slices([fv_nbar_data_table($hour)]);
 	plugin_test_queue_db_result('db_fetch_assoc', [['listener_id' => 1, 'hour' => $hour, 'revision' => 4]]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $hour]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', []);
@@ -99,6 +103,7 @@ it('seeds and publishes closed hours before handing off to the daily worker', fu
 it('releases the hourly worker lock when checkpoint seeding fails', function () {
 	plugin_test_queue_db_result('db_fetch_row', ['acquired' => 1]);
 	plugin_test_queue_db_result('db_fetch_assoc', [['id' => 1]]);
+	plugin_test_queue_slices([fv_nbar_data_table(time() - 7200)]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => time() - 7200]);
 	plugin_test_queue_db_result('db_execute', false);
 	expect(fv_nbar_summary_refresh())->toBe(0);
@@ -128,7 +133,8 @@ it('stops daily work after the worker deadline while releasing its lock', functi
 
 		return [['listener_id' => 1, 'first_hour' => time() - 7200]];
 	});
-	plugin_test_queue_db_result('db_fetch_cell_prepared', time() - 7200);
+	plugin_test_queue_slices([fv_nbar_data_table(time() - 7200)]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => time() - 7200]);
 	expect(fv_nbar_daily_refresh(1))->toBe(0);
 	$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
 	expect($sql)->toContain('RELEASE_LOCK');
@@ -139,7 +145,8 @@ it('does not materialize a calendar day that begins before the retention cutoff'
 	$cutoff = time() - fv_nbar_retention_days() * 86400;
 	plugin_test_queue_db_result('db_fetch_cell', 1);
 	plugin_test_queue_db_result('db_fetch_assoc', [['listener_id' => 2, 'first_hour' => $cutoff - 86400]]);
-	plugin_test_queue_db_result('db_fetch_cell_prepared', $cutoff - 86400);
+	plugin_test_queue_slices([fv_nbar_data_table($cutoff - 86400)]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $cutoff - 86400]);
 	expect(fv_nbar_daily_refresh())->toBe(0);
 	$lookups = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($call) => str_starts_with($call['sql'], 'SELECT * FROM plugin_flowview_nbar_days')));
 	expect($lookups)->not->toBe([]);

@@ -518,11 +518,13 @@ function flowview_db_get_table_column_types($table, mixed $cnn_id = false) {
 /**
  * flowview_db_create_nbar_tables - creates the Cisco Apps (NBAR) tables if they do not already exist
  *
- * The raw per-minute records, the hourly and daily summaries, the daily coverage
+ * The application names, the hourly and daily summaries, the daily coverage
  * checkpoints and the observation date backfill checkpoints.  The daily summary
- * tables store the start of the day in their hour column.  Every table is checked
- * after it is created, so a failure is reported instead of surfacing later as a
- * missing table.
+ * tables store the start of the day in their hour column.  The raw per-minute
+ * records are not created here: they live in time slices that are created as
+ * records arrive, see flowview_db_create_nbar_data_partition().  Every table is
+ * checked after it is created, so a failure is reported instead of surfacing
+ * later as a missing table.
  *
  * @return bool true when every table exists
  */
@@ -536,24 +538,6 @@ function flowview_db_create_nbar_tables(): bool {
 			PRIMARY KEY (`router`,`app_id`))
 			ENGINE=InnoDB
 			COMMENT='Plugin Flowview - NBAR application names learned from exporter options templates'",
-
-		'plugin_flowview_nbar_data' => "CREATE TABLE IF NOT EXISTS `plugin_flowview_nbar_data` (
-			`listener_id` int(10) unsigned NOT NULL,
-			`minute` int(10) unsigned NOT NULL,
-			`app_id` varchar(32) NOT NULL,
-			`src` varbinary(16) NOT NULL,
-			`dst` varbinary(16) NOT NULL,
-			`sport` smallint(5) unsigned NOT NULL,
-			`dport` smallint(5) unsigned NOT NULL,
-			`protocol` tinyint(3) unsigned NOT NULL,
-			`bytes` bigint(20) unsigned NOT NULL,
-			`packets` bigint(20) unsigned NOT NULL,
-			`flows` bigint(20) unsigned NOT NULL,
-			`router` varchar(45) NOT NULL DEFAULT '',
-			PRIMARY KEY (`listener_id`,`minute`,`app_id`,`src`,`dst`,`sport`,`dport`,`protocol`,`router`),
-			KEY `minute` (`minute`))
-			ENGINE=InnoDB
-			COMMENT='Plugin Flowview - NBAR raw per-minute application flow records'",
 
 		'plugin_flowview_nbar_hours' => "CREATE TABLE IF NOT EXISTS `plugin_flowview_nbar_hours` (
 			`listener_id` int(10) unsigned NOT NULL,
@@ -707,4 +691,41 @@ function flowview_db_create_nbar_tables(): bool {
 	}
 
 	return true;
+}
+
+/**
+ * flowview_db_create_nbar_data_partition - creates one time slice of the raw NBAR records if it does not already exist
+ *
+ * The raw records are partitioned the way the raw flow tables are, one table per hour or per
+ * day, named plugin_flowview_nbar_data_<year><day of year>[<hour>].  The table name is checked
+ * before it is used in the statement.
+ *
+ * @param string $table The slice table name.
+ *
+ * @return bool true when the slice exists
+ */
+function flowview_db_create_nbar_data_partition(string $table): bool {
+	if (!preg_match('/^plugin_flowview_nbar_data_[0-9]{7}([0-9]{2})?$/D', $table)) {
+		return false;
+	}
+
+	flowview_db_execute("CREATE TABLE IF NOT EXISTS `$table` (
+		`listener_id` int(10) unsigned NOT NULL,
+		`minute` int(10) unsigned NOT NULL,
+		`app_id` varchar(32) NOT NULL,
+		`src` varbinary(16) NOT NULL,
+		`dst` varbinary(16) NOT NULL,
+		`sport` smallint(5) unsigned NOT NULL,
+		`dport` smallint(5) unsigned NOT NULL,
+		`protocol` tinyint(3) unsigned NOT NULL,
+		`bytes` bigint(20) unsigned NOT NULL,
+		`packets` bigint(20) unsigned NOT NULL,
+		`flows` bigint(20) unsigned NOT NULL,
+		`router` varchar(45) NOT NULL DEFAULT '',
+		PRIMARY KEY (`listener_id`,`minute`,`app_id`,`src`,`dst`,`sport`,`dport`,`protocol`,`router`),
+		KEY `minute` (`minute`))
+		ENGINE=InnoDB
+		COMMENT='Plugin Flowview - NBAR raw per-minute application flow records'");
+
+	return flowview_db_fetch_cell("SHOW TABLES LIKE '$table'") === $table;
 }

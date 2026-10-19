@@ -19,6 +19,9 @@ beforeEach(function () {
 });
 
 it('escapes router names and reports freshness separately for three selected captures', function () {
+	foreach ([1, 2, 3] as $unused) {
+		plugin_test_queue_slices([fv_nbar_data_table(time())]);
+	}
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => time()]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => time() - 600]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', []);
@@ -32,7 +35,7 @@ it('escapes router names and reports freshness separately for three selected cap
 	expect($html)->not->toContain('<router>', 'Excluded');
 	expect(substr_count($html, 'fa-check-circle'))->toBe(1);
 	expect(substr_count($html, 'fa-times-circle'))->toBe(2);
-	expect($GLOBALS['__test_db_calls'])->toHaveCount(3);
+	expect($GLOBALS['__test_db_calls'])->toHaveCount(6);
 });
 
 it('renders an explicit empty status when no capture is selected', function () {

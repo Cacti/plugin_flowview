@@ -82,12 +82,14 @@ it('uses a complete daily checkpoint between raw partial-day boundaries', functi
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['n' => 24, 'ready' => 24, 'rev' => '10']);
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
+	plugin_test_queue_slices([fv_nbar_data_table($day - 1800)]);
+	plugin_test_queue_slices([fv_nbar_data_table($day + 86400)]);
 	$plan = fv_nbar_connection_plan([2], $day - 1800, $day + 88200, time());
 	expect($plan)->toHaveCount(3);
 	expect(array_column($plan, 'daily'))->toBe([false, true, false]);
 	expect($plan[1]['source'])->toContain('plugin_flowview_nbar_daily_connections', 'listener_id=2', 'hour=' . $day);
-	expect($plan[0]['source'])->toContain('minute>=' . ($day - 1800), 'minute<' . $day);
-	expect($plan[2]['source'])->toContain('minute>=' . ($day + 86400), 'minute<' . ($day + 88200));
+	expect($plan[0]['source'])->toContain('minute>=' . ($day - 1800), 'minute<' . $day, fv_nbar_data_table($day - 1800));
+	expect($plan[2]['source'])->toContain('minute>=' . ($day + 86400), 'minute<' . ($day + 88200), fv_nbar_data_table($day + 86400));
 });
 
 it('falls back to raw hours when a daily checkpoint is stale or uses another timezone', function ($reason) {
@@ -96,12 +98,14 @@ it('falls back to raw hours when a daily checkpoint is stale or uses another tim
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['day' => $day, 'covered_to' => $day + 86400, 'timezone' => $reason === 'timezone' ? 'Other/Zone' : date_default_timezone_get(), 'revision' => '10']]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['n' => 24, 'ready' => 24, 'rev' => '11']);
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
+	plugin_test_queue_slices(array_map(fn ($hour) => fv_nbar_data_table($day + $hour * 3600), range(-1, 25)));
 	$plan = fv_nbar_connection_plan([2], $day, $day + 86400, time());
 	expect($plan)->toHaveCount(24);
 
-	foreach ($plan as $part) {
+	foreach ($plan as $i => $part) {
 		expect($part['daily'])->toBeFalse();
-		expect($part['source'])->toContain('plugin_flowview_nbar_data');
+		expect($part['source'])->toContain('`' . fv_nbar_data_table($day + $i * 3600) . '`');
+		expect($part['source'])->not->toContain('`' . fv_nbar_data_table($day + ($i + 1) * 3600) . '`');
 	}
 })->with(['timezone', 'revision']);
 

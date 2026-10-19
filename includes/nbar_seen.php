@@ -131,7 +131,7 @@ function fv_nbar_seen_backfill(int $budget = 10): int {
 					throw new RuntimeException('Invalid application collation');
 				}
 				$join         = implode(' AND ', array_map(static function (string $k) use ($collation): string {return $k === 'app_id' ? "s.$k=r.$k COLLATE $collation" : "s.$k=r.$k"; }, $keys));
-				$source       = $isDay ? fv_nbar_hourly_source($kind, [$listener], $period, $end) : '(SELECT *,minute first_seen,minute last_seen FROM plugin_flowview_nbar_data)';
+				$source       = $isDay ? fv_nbar_hourly_source($kind, [$listener], $period, $end) : fv_nbar_data_source(fv_nbar_data_columns(), "listener_id=$listener AND minute>=$period AND minute<$end", $period, $end);
 				$dates        = 'IF(COUNT(first_seen)=COUNT(*),MIN(first_seen),NULL) first_seen,IF(COUNT(last_seen)=COUNT(*),MAX(last_seen),NULL) last_seen';
 				$sql          = "UPDATE plugin_flowview_nbar_$prefix$kind s JOIN (SELECT $fields,router,SUM(bytes) bytes,SUM(packets) packets,SUM(flows) flows,$dates FROM $source d WHERE listener_id=$listener AND minute>=$period AND minute<$end GROUP BY $group) r ON $join SET s.first_seen=r.first_seen,s.last_seen=r.last_seen WHERE s.listener_id=$listener AND s.hour=$period AND s.bytes=r.bytes AND s.packets=r.packets AND s.flows=r.flows AND (s.first_seen IS NULL OR s.last_seen IS NULL)";
 				$applications = [null];

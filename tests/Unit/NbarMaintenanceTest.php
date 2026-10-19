@@ -14,7 +14,7 @@ beforeEach(function () {
 });
 
 it('publishes raw data and revision invalidation in one transaction', function () {
-	expect(fv_nbar_summary_store('INSERT fixture VALUES (?)', 3, [1800000000 => true, 1800003600 => true], [42]))->toBeTrue();
+	expect(fv_nbar_summary_store([['INSERT fixture VALUES (?)', [42]]], 3, [1800000000 => true, 1800003600 => true]))->toBeTrue();
 	$calls = $GLOBALS['__test_db_calls'];
 	expect(array_column($calls, 'sql')[0])->toBe('START TRANSACTION');
 	expect($calls[1]['params'])->toBe([42]);
@@ -28,17 +28,32 @@ it('publishes raw data and revision invalidation in one transaction', function (
 
 it('does not publish revisions when transaction creation fails', function () {
 	plugin_test_queue_db_result('db_execute', false);
-	expect(fv_nbar_summary_store('INSERT fixture VALUES (?)', 3, [1800000000 => true], [42]))->toBeFalse();
+	expect(fv_nbar_summary_store([['INSERT fixture VALUES (?)', [42]]], 3, [1800000000 => true]))->toBeFalse();
 	expect($GLOBALS['__test_db_calls'])->toHaveCount(1);
 });
 
 it('rolls back when invalidation fails after the raw write', function () {
 	plugin_test_queue_db_result('db_execute', true);
 	plugin_test_queue_db_result('db_execute', false);
-	expect(fv_nbar_summary_store('INSERT fixture VALUES (?)', 3, [1800000000 => true], [42]))->toBeFalse();
+	expect(fv_nbar_summary_store([['INSERT fixture VALUES (?)', [42]]], 3, [1800000000 => true]))->toBeFalse();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
 	expect(end($sql))->toBe('ROLLBACK');
 	expect($sql)->not->toContain('COMMIT');
+});
+
+it('writes every slice in one transaction and rolls back when any slice fails', function () {
+	$statements = [['INSERT slice_a VALUES (?)', [1]], ['INSERT slice_b VALUES (?)', [2]]];
+	expect(fv_nbar_summary_store($statements, 3, [1800000000 => true]))->toBeTrue();
+	$prepared = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
+	expect(array_column($prepared, 'sql'))->toBe(['INSERT slice_a VALUES (?)', 'INSERT slice_b VALUES (?)']);
+
+	plugin_test_reset();
+	plugin_test_queue_db_result('db_execute_prepared', true);
+	plugin_test_queue_db_result('db_execute_prepared', false);
+	expect(fv_nbar_summary_store($statements, 3, [1800000000 => true]))->toBeFalse();
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect(end($sql))->toBe('ROLLBACK');
+	expect(implode(' ', $sql))->not->toContain('revision=revision+1');
 });
 
 it('rebuilds all hourly tables and publishes only a matching revision', function () {
@@ -53,19 +68,57 @@ it('rebuilds all hourly tables and publishes only a matching revision', function
 	expect($publish[0]['params'])->toBe(['123', '123', 3, 1800000000]);
 });
 
-it('rolls back each failed hourly mutation without committing partial totals', function ($failure) {
+it('rolls back each failed hourly mutation without committing partial totals', function ($function, $failure) {
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
 
-	for ($i = 0; $i <= $failure; $i++) {
-		plugin_test_queue_db_result('db_execute_prepared', $i !== $failure);
+	// db_execute runs the timeout, isolation level and START TRANSACTION before the three aggregates.
+	$passes = $function === 'db_execute' ? 3 + $failure : $failure;
+
+	for ($i = 0; $i < $passes; $i++) {
+		plugin_test_queue_db_result($function, true);
 	}
+	plugin_test_queue_db_result($function, false);
 	expect(fv_nbar_summary_build(3, 1800000000))->toBeFalse();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
 	expect($sql[count($sql) - 2])->toBe('ROLLBACK');
 	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
 	expect($sql)->not->toContain('COMMIT');
-})->with(range(0, 6));
+})->with([
+	['db_execute_prepared', 0], ['db_execute_prepared', 1], ['db_execute_prepared', 2], ['db_execute_prepared', 3],
+	['db_execute', 0], ['db_execute', 1], ['db_execute', 2],
+]);
+
+it('rejects an hourly build whose commit fails', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
+
+	// The timeout, isolation level, START TRANSACTION and three aggregates precede the COMMIT.
+	for ($i = 0; $i < 6; $i++) {
+		plugin_test_queue_db_result('db_execute', true);
+	}
+	plugin_test_queue_db_result('db_execute', false);
+	expect(fv_nbar_summary_build(3, 1800000000))->toBeFalse();
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect($sql[count($sql) - 2])->toBe('ROLLBACK');
+	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
+});
+
+it('aggregates an hour from only the slices that cover it', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
+	plugin_test_queue_slices([fv_nbar_data_table(1799996400), fv_nbar_data_table(1800000000), fv_nbar_data_table(1800003600)]);
+	expect(fv_nbar_summary_build(3, 1800000000))->toBeTrue();
+	$inserts = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'INSERT INTO plugin_flowview_nbar_')));
+	expect($inserts)->toHaveCount(3);
+
+	foreach ($inserts as $insert) {
+		expect($insert['sql'])->toContain(fv_nbar_data_table(1800000000));
+		expect($insert['sql'])->not->toContain(fv_nbar_data_table(1799996400));
+		expect($insert['sql'])->not->toContain(fv_nbar_data_table(1800003600));
+		expect($insert['sql'])->toContain('listener_id=3 AND minute>=1800000000 AND minute<1800003600');
+	}
+});
 
 it('rejects hourly builds with missing or changed revisions', function ($latest) {
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
@@ -125,14 +178,17 @@ it('does not start date backfill without both scoped locks', function () {
 	expect($sql)->not->toContain('UPDATE plugin_flowview_nbar_');
 });
 
-it('expires all summary levels with bounded database deletions', function () {
+it('expires all summary levels with bounded database deletions and drops raw slices', function () {
 	fv_nbar_cleanup();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
-	expect($sql)->toHaveCount(9);
+	expect($sql[0])->toStartWith('SHOW TABLES');
+	$deletes = array_slice($sql, 1);
+	expect($deletes)->toHaveCount(8);
 
-	foreach ($sql as $statement) {
+	foreach ($deletes as $statement) {
 		expect($statement)->toStartWith('DELETE FROM plugin_flowview_nbar_');
 		expect($statement)->toContain(' LIMIT ');
+		expect($statement)->not->toContain('plugin_flowview_nbar_data');
 	}
 });
 
@@ -143,9 +199,12 @@ it('rejects unknown summary types before constructing SQL', function () {
 
 it('keeps summary and raw branches mutually exclusive for complete hours', function () {
 	foreach (['apps', 'pairs', 'connections'] as $kind) {
+		plugin_test_queue_slices([fv_nbar_data_table(1800000000), fv_nbar_data_table(1800003600), fv_nbar_data_table(1800007200), fv_nbar_data_table(1800010800), fv_nbar_data_table(1800090000)]);
 		$sql = fv_nbar_hourly_source($kind, [3], 1800000010, 1800010810, 1800100000);
 		expect($sql)->toContain('UNION ALL', 'NOT (', 'listener_id=3');
 		expect($sql)->toContain('minute>=1800000010', 'minute<1800010810');
+		expect($sql)->toContain('`' . fv_nbar_data_table(1800000000) . '`', '`' . fv_nbar_data_table(1800003600) . '`', '`' . fv_nbar_data_table(1800010800) . '`');
+		expect($sql)->not->toContain(fv_nbar_data_table(1800090000));
 	}
 });
 
@@ -195,8 +254,9 @@ it('expires old count contexts and bounds the account cache', function () {
 
 it('uses summary tuple fields for counts without aggregating traffic counters', function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
+	plugin_test_queue_slices([fv_nbar_data_table(1800000000)]);
 	$key = fv_nbar_count_context('', 'd.listener_id=? AND d.minute>=? AND d.minute<?', [1, 1800000000, 1800001800], 1800001800, [1], 1800000000);
 	$sql = $_SESSION['fv_nbar_counts'][$key]['sql'];
-	expect($sql)->toContain('COUNT(DISTINCT', 'plugin_flowview_nbar_data', 'd.listener_id=?');
+	expect($sql)->toContain('COUNT(DISTINCT', fv_nbar_data_table(1800000000), 'd.listener_id=?');
 	expect($sql)->not->toContain('SUM(d.bytes)');
 });

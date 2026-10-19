@@ -53,6 +53,9 @@ it('validates internal IPv4 and IPv6 prefixes and rejects invalid masks', functi
 
 it('decodes template-defined IPv4 and IPv6 application records using the dedicated connection', function () {
 	$GLOBALS['listener_id'] = 3;
+	$now                    = time();
+	$slice                  = fv_nbar_data_table((int) (floor($now / 60) * 60));
+	plugin_test_queue_db_result('db_fetch_cell', $slice);
 
 	foreach ([4, 16] as $length) {
 		$src         = inet_pton($length === 4 ? '192.0.2.10' : '2001:db8::10');
@@ -66,9 +69,9 @@ it('decodes template-defined IPv4 and IPv6 application records using the dedicat
 		$template = pack('nnnn', 0, 8 + strlen($definitions), 400 + $length, count($fields)) . $definitions;
 		$record   = hex2bin('0d000001') . $src . $dst . pack('nnCNN', 50000, 443, 6, 123456, 120);
 		$data     = pack('nn', 400 + $length, 4 + strlen($record)) . $record;
-		$packet   = pack('nnNNNN', 9, 2, 100000, time(), 1, 100 + $length) . $template . $data;
+		$packet   = pack('nnNNNN', 9, 2, 100000, $now, 1, 100 + $length) . $template . $data;
 		fv_nbar_packet($packet, '192.0.2.1');
-		$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared' && str_contains($c['sql'], 'INSERT INTO plugin_flowview_nbar_data')));
+		$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared' && str_contains($c['sql'], 'INSERT INTO `' . $slice . '`')));
 		$call  = end($calls);
 		expect($call['conn'])->toBe('nbar-test-connection');
 		expect($call['params'][2])->toBe('0d000001');
@@ -114,7 +117,7 @@ it('rejects a single combined capture but permits saving networks with none sele
 
 it('rolls back a failed raw batch before publishing a summary revision', function () {
 	plugin_test_queue_db_result('db_execute_prepared', false);
-	expect(fv_nbar_summary_store('INSERT fixture VALUES (?)', 1, [1800000000 => true], [123]))->toBeFalse();
+	expect(fv_nbar_summary_store([['INSERT fixture VALUES (?)', [123]]], 1, [1800000000 => true]))->toBeFalse();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
 	expect(end($sql))->toBe('ROLLBACK');
 	expect(implode(' ', $sql))->not->toContain('revision=revision+1');
@@ -133,8 +136,11 @@ it('decodes unsigned 64-bit exporter counters without rounding', function () {
 
 it('passes full-width byte counters to the database as exact decimal strings', function () {
 	$GLOBALS['listener_id'] = 3;
-	$fields                 = [95 => 4, 8 => 4, 12 => 4, 1 => 8];
-	$definitions            = '';
+	$now                    = time();
+	$slice                  = fv_nbar_data_table((int) (floor($now / 60) * 60));
+	plugin_test_queue_db_result('db_fetch_cell', $slice);
+	$fields      = [95 => 4, 8 => 4, 12 => 4, 1 => 8];
+	$definitions = '';
 
 	foreach ($fields as $id => $size) {
 		$definitions .= pack('nn', $id, $size);
@@ -142,8 +148,8 @@ it('passes full-width byte counters to the database as exact decimal strings', f
 	$template = pack('nnnn', 0, 8 + strlen($definitions), 777, count($fields)) . $definitions;
 	$record   = hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . hex2bin('ffffffffffffffff');
 	$data     = pack('nn', 777, 4 + strlen($record)) . $record;
-	fv_nbar_packet(pack('nnNNNN', 9, 2, 100000, time(), 1, 777) . $template . $data, '192.0.2.1');
-	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared' && str_contains($c['sql'], 'INSERT INTO plugin_flowview_nbar_data')));
+	fv_nbar_packet(pack('nnNNNN', 9, 2, 100000, $now, 1, 777) . $template . $data, '192.0.2.1');
+	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared' && str_contains($c['sql'], 'INSERT INTO `' . $slice . '`')));
 	expect($calls)->toHaveCount(1);
 	expect($calls[0]['params'][8])->toBe('18446744073709551615');
 });

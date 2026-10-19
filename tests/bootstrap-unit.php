@@ -98,6 +98,7 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_user_settings'] = array();
 		$GLOBALS['__test_csrf_valid'] = true;
 		$GLOBALS['__test_translations'] = array();
+		$GLOBALS['fv_nbar_data_known']  = array();
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -111,6 +112,13 @@ if (!function_exists('plugin_test_queue_db_result')) {
 			$GLOBALS['__test_db_results'][$function] = array();
 		}
 		$GLOBALS['__test_db_results'][$function][] = $result;
+	}
+}
+
+if (!function_exists('plugin_test_queue_slices')) {
+	// Queue the answer to the SHOW TABLES that lists the raw NBAR slices.
+	function plugin_test_queue_slices(array $tables) {
+		plugin_test_queue_db_result('db_fetch_assoc', array_map(fn ($table) => array('Tables_in_cacti (plugin_flowview_nbar_data_%)' => $table), $tables));
 	}
 }
 

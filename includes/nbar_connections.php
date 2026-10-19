@@ -114,7 +114,8 @@ function fv_nbar_connection_edges(int $listener, int $from, int $to, int $now): 
 	if (!is_array($ready)) {
 		throw new RuntimeException('Cannot read hourly summary state');
 	}
-	$hours = array_fill_keys(array_column($ready, 'hour'), true);
+	$hours  = array_fill_keys(array_column($ready, 'hour'), true);
+	$tables = fv_nbar_data_tables();
 
 	for ($cursor = $from; $cursor < $to; $cursor = $end) {
 		$hour = (int) (floor($cursor / 3600) * 3600);
@@ -124,7 +125,7 @@ function fv_nbar_connection_edges(int $listener, int $from, int $to, int $now): 
 			$source     = '(SELECT listener_id,hour minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,first_seen,last_seen,router FROM plugin_flowview_nbar_connections WHERE listener_id=' . (int) $listener . ' AND hour=' . $hour . ')';
 			$segments[] = ['listener' => $listener, 'source' => $source, 'daily' => true];
 		} else {
-			$source     = '(SELECT listener_id,minute,app_id,src,dst,sport,dport,protocol,bytes,packets,flows,minute first_seen,minute last_seen,router FROM plugin_flowview_nbar_data WHERE listener_id=' . (int) $listener . ' AND minute>=' . (int) $cursor . ' AND minute<' . (int) $end . ')';
+			$source     = fv_nbar_data_source(fv_nbar_data_columns(), 'listener_id=' . (int) $listener . ' AND minute>=' . (int) $cursor . ' AND minute<' . (int) $end, (int) $cursor, (int) $end, $tables);
 			$segments[] = ['listener' => $listener, 'source' => $source, 'daily' => false];
 		}
 	}
