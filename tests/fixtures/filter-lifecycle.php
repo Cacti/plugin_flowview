@@ -4,7 +4,7 @@
 $config = ['base_path' => dirname(__DIR__), 'poller_id' => 1];
 $local_db_cnn_id = 'fixture';
 $mode = getenv('FLOWVIEW_FIXTURE_MODE');
-$ready = in_array($mode, ['ready', 'late', 'child-disabled'], true);
+$ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure'], true);
 $metadataReads = 0;
 $calls = [];
 const MESSAGE_LEVEL_INFO = 1;
@@ -59,6 +59,11 @@ register_shutdown_function(function () {
 });
 function db_fetch_row_prepared($sql, $params = [], ...$args) {
 	$GLOBALS['calls'][] = ['row', $sql, $params];
+	if (($GLOBALS['mode'] === 'report-read-failure' && str_contains($sql, 'reports_queued'))
+		|| ($GLOBALS['mode'] === 'schedule-read-failure' && str_contains($sql, 'plugin_flowview_schedules'))
+		|| ($GLOBALS['mode'] === 'filter-read-failure' && str_contains($sql, 'plugin_flowview_queries'))) {
+		return false;
+	}
 	if (str_contains($sql, 'reports_queued')) {
 		return ['id' => 51, 'source' => 'flowview', 'source_id' => 7];
 	}

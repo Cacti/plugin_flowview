@@ -136,6 +136,10 @@ if ($scheduled == true) {
 		AND rq.id = ?',
 		['flowview', $report_id]);
 
+	if ($report === false) {
+		exit(75);
+	}
+
 	if (cacti_sizeof($report)) {
 		$id = $report['source_id'];
 
@@ -159,6 +163,13 @@ if ($scheduled == true) {
 			FROM plugin_flowview_schedules
 			WHERE id = ?',
 			[$id]);
+
+		if ($schedule === false) {
+			if (!$force) {
+				unregister_process('flowsched', "child_$id", 0);
+			}
+			exit(75);
+		}
 
 		if (cacti_sizeof($schedule)) {
 			if (!plugin_flowview_run_schedule($id, $report_id)) {

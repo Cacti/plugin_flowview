@@ -521,3 +521,14 @@ if (!function_exists('reports_load_format_file')) {
 
 // Schema-mutation helpers are loaded explicitly for isolated upgrade tests.
 require_once dirname(__DIR__) . '/includes/filter_upgrade.php';
+
+if (!function_exists('cacti_session_close')) {
+	function cacti_session_close() {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'cacti_session_close', 'sql' => '', 'params' => []];
+	}
+}
+if (!function_exists('array_rekey')) {
+	function array_rekey($rows, $key, $value) {
+		return array_column($rows, $value, $key);
+	}
+}

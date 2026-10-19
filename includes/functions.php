@@ -1932,10 +1932,21 @@ function plugin_flowview_run_schedule($id, $report_id): bool {
 		WHERE id = ?',
 		[$id]);
 
+	if ($schedule === false) {
+		return false;
+	}
+	if (!$schedule) {
+		return true;
+	}
+
 	$query = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		[$schedule['query_id']]);
+
+	if ($query === false) {
+		return false;
+	}
 
 	if (empty($query) || ($query['enabled'] ?? '') !== 'on') {
 		return true;
@@ -2763,6 +2774,10 @@ function run_flow_query($session, $query_id, $start, $end) {
 		WHERE id = ?',
 		[$query_id]);
 
+	if (!$data) {
+		return false;
+	}
+
 	$title = flowview_db_fetch_cell_prepared('SELECT name
 		FROM plugin_flowview_queries
 		WHERE id = ?',
@@ -3569,6 +3584,13 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 				$results = parallel_database_query_run($requests);
 			}
+		}
+
+		if ($results === false) {
+			return false;
+		}
+		if (!$results) {
+			return ['data' => [], 'table' => '', 'title' => $title];
 		}
 
 		$output         = $data;

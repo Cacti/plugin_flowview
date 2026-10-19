@@ -111,3 +111,19 @@ it('preserves late schema failures through the real child and parent completion 
 		$config['base_path'] = $oldBase;
 	}
 })->with([false, true])->with([false, true]);
+
+it('returns retry from the real child when a queue, schedule or filter lookup fails', function ($mode, $native) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
+	if ($native) {
+		$command[] = '--queue-id=51';
+	}
+	[$exit] = ($this->runFixture)($command, $mode);
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	expect($exit)->toBe(75);
+	$actions = array_column($result['calls'], 0);
+	expect($actions)->not->toContain('write');
+	if ($mode !== 'report-read-failure') {
+		$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+		expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0]]]);
+	}
+})->with(['report-read-failure', 'schedule-read-failure', 'filter-read-failure'])->with([false, true]);
