@@ -157,3 +157,16 @@ it('retains a timed out parallel report through the actual child and parent', fu
 		$config['base_path'] = $oldBase;
 	}
 })->with([false, true]);
+
+it('recreates shards and launches the same query after a parallel timeout', function () {
+	if (!extension_loaded('pdo_sqlite')) {
+		$this->markTestSkipped('PDO SQLite is needed for the persisted parallel retry regression');
+	}
+	[$exit, $output] = ($this->runFixture)([PHP_BINARY, dirname(__DIR__) . '/fixtures/parallel-retry.php', dirname(__DIR__, 2), $this->fixtureRoot]);
+	$result = json_decode($output, true);
+	expect($exit)->toBe(0)->and($result['timeout'])->toBeFalse()
+		->and($result['remaining'])->toBe(0)->and($result['remainingShards'])->toBe(0)
+		->and($result['retry'])->not->toBe($result['first'])->and($result['retryShards'])->toBe(1)
+		->and($result['result'])->toBe([])->and($result['launches'])->toBe([$result['first'], $result['retry']])
+		->and($result['cached'])->toBe($result['retry'])->and($result['cachedResult'])->toBe([]);
+});

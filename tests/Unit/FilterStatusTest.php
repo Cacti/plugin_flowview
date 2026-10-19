@@ -197,6 +197,8 @@ it('preserves two-request reduce lookup failures and cleans up both requests', f
 	expect(parallel_database_query_run([71, 72]))->toBe($success ? [] : false);
 	$cleanup = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM parallel_database_query_shard')));
 	expect(array_column($cleanup, 'params'))->toBe([[71], [72]]);
+	$removed = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => preg_match('/^DELETE FROM parallel_database_query\s+WHERE/', $c['sql'])));
+	expect(array_column($removed, 'params'))->toBe($success ? [] : [[71], [72]]);
 })->with([[false, false], ['', false], ['null', false], ['bad-json', false], ['valid', true], ['valid', false, false], ['valid', false, []], ['{}', false]]);
 
 it('returns a failed result after cleaning up timed out parallel requests', function () {
@@ -209,3 +211,26 @@ it('returns a failed result after cleaning up timed out parallel requests', func
 	$cleanup = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM parallel_database_query_shard')));
 	expect(array_column($cleanup, 'params'))->toBe([[71], [72]]);
 });
+
+it('rejects a failed component before reducing any two-request results', function ($failed, $position) {
+	$GLOBALS['debug'] = false;
+	$GLOBALS['__test_config']['flowview_parallel_runlimit'] = 5;
+	$query = ['sql_query' => 'SELECT SUM(bytes) bytes', 'sql_where' => '', 'sql_groupby' => '', 'sql_having' => '', 'sql_order' => '', 'sql_limit' => '', 'sql_params' => []];
+	foreach ([0, 0, json_encode($query), '', ''] as $value) {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', $value);
+	}
+	plugin_test_queue_db_result('db_fetch_cell', 0);
+	$tables = [
+		['map_table' => 'fixture_map_71', 'map_create' => 'CREATE TABLE fixture_map_71 (bytes bigint)', 'results' => '[{"bytes":123}]'],
+		['map_table' => 'fixture_map_72', 'map_create' => 'CREATE TABLE fixture_map_72 (bytes bigint)', 'results' => '[{"bytes":456}]'],
+	];
+	$tables[$position]['results'] = $failed;
+	plugin_test_queue_db_result('db_fetch_assoc', $tables);
+	expect(parallel_database_query_run([71, 72]))->toBeFalse();
+	$cleanup = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM parallel_database_query_shard')));
+	expect(array_column($cleanup, 'params'))->toBe([[71], [72]]);
+	$removed = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => preg_match('/^DELETE FROM parallel_database_query\s+WHERE/', $c['sql'])));
+	expect(array_column($removed, 'params'))->toBe([[71], [72]]);
+	$reductions = array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute' || ($c['fn'] === 'db_fetch_assoc_prepared' && str_contains($c['sql'], 'SUM(bytes)')));
+	expect($reductions)->toBe([]);
+})->with(['false', 'null', 'invalid-json'])->with([0, 1]);

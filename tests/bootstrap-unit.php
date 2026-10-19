@@ -122,6 +122,12 @@ if (!function_exists('plugin_test_db_result')) {
 	}
 }
 
+if (!function_exists('db_qstr')) {
+	function db_qstr($value) {
+		return "'" . str_replace("'", "''", (string) $value) . "'";
+	}
+}
+
 if (!function_exists('db_execute')) {
 	function db_execute($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array(), 'conn' => $conn);

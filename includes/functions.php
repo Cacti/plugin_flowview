@@ -4266,7 +4266,7 @@ function parallel_database_query_run($requests) {
 		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
 
 		foreach($requests as $request_id) {
-			parallel_database_query_cleanup($request_id);
+			parallel_database_query_cleanup($request_id, true);
 		}
 
 		return false;
@@ -4288,9 +4288,20 @@ function parallel_database_query_run($requests) {
 			FROM parallel_database_query
 			WHERE id IN(' . implode(', ', $requests) . ')');
 
-		// Missing reduction metadata is a failed report, not a successful empty result.
+		$valid_results = is_array($tables) && count($tables) === count($requests);
+		if ($valid_results) {
+			foreach ($tables as $index => $data) {
+				$tables[$index]['results'] = json_decode($data['results'] ?: '', true);
+				if (!is_array($tables[$index]['results'])) {
+					$valid_results = false;
+					break;
+				}
+			}
+		}
+
+		// Every component must succeed before any results are materialized or reduced.
 		if (is_array($query) && isset($query['sql_query'], $query['sql_where'], $query['sql_groupby'], $query['sql_having'], $query['sql_order'], $query['sql_limit'], $query['sql_params'])
-			&& is_array($query['sql_params']) && is_array($tables) && count($tables) === count($requests)) {
+			&& is_array($query['sql_params']) && $valid_results) {
 			$tables = array_rekey($tables, 'map_table', ['map_create', 'results']);
 			$i = 0;
 			$temp_table = '';
@@ -4305,7 +4316,7 @@ function parallel_database_query_run($requests) {
 					flowview_db_execute($create);
 				}
 
-				$results = json_decode($data['results'], true);
+				$results = $data['results'];
 
 				if (cacti_sizeof($results)) {
 					$sql     = [];
@@ -4362,7 +4373,8 @@ function parallel_database_query_run($requests) {
 	}
 
 	foreach($requests as $request_id) {
-		parallel_database_query_cleanup($request_id);
+		// Failed cached requests must be recreated, with new shards, on retry.
+		parallel_database_query_cleanup($request_id, !is_array($results));
 	}
 
 	return $results;
