@@ -312,6 +312,12 @@ if (!function_exists('cacti_sizeof')) {
 	}
 }
 
+if (!function_exists('cacti_count')) {
+	function cacti_count($array) {
+		return is_array($array) ? count($array) : 0;
+	}
+}
+
 if (!function_exists('is_realm_allowed')) {
 	function is_realm_allowed($realm) {
 		return true;

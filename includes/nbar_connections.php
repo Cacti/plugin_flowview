@@ -69,7 +69,7 @@ function fv_nbar_decimal_compare(int|string $a, int|string $b): int {
  * @return string
  */
 function fv_nbar_connection_key(array $row, array $names, int $listener): string {
-	return json_encode([(string) $row['app_id'], (int) ($names[$listener][($row['router'] ?? '') . ':' . $row['app_id']]['name_id'] ?? 0), $row['src_hex'], $row['dst_hex'], (int) $row['sport'], (int) $row['dport'], (int) $row['protocol'], (string) ($row['router'] ?? '')]);
+	return json_encode([(string) $row['app_id'], (int) ($names[$listener][($row['router'] ?? '') . ':' . $row['app_id']]['name_id'] ?? 0), $row['src_hex'], $row['dst_hex'], (int) $row['sport'], (int) $row['dport'], (int) $row['protocol'], (string) ($row['router'] ?? '')], JSON_THROW_ON_ERROR);
 }
 /**
  * Order connection totals by exact byte count and deterministic tuple fields.
@@ -349,8 +349,8 @@ function fv_nbar_connections_direct(array $listeners, int $start, int $end, stri
 				$result = array_slice($ranked, $offset, $size);
 
 				foreach ($result as &$row) {
-					$row['src'] = inet_ntop(hex2bin($row['src_hex']));
-					$row['dst'] = inet_ntop(hex2bin($row['dst_hex']));
+					$row['src'] = inet_ntop((string) hex2bin($row['src_hex']));
+					$row['dst'] = inet_ntop((string) hex2bin($row['dst_hex']));
 					unset($row['_key'],$row['src_hex'],$row['dst_hex']);
 				} unset($row);
 				flowview_db_execute('COMMIT');

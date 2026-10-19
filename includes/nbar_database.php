@@ -115,6 +115,7 @@ function fv_nbar_schema_definition(string $suffix): array {
 		$primary[] = 'router';
 		$columns[] = 'router';
 	}
+	/** @var array<string, array<string, mixed>> $fields */
 	$fields     = array_merge($fields, $extra);
 	$definition = ['columns' => [], 'primary' => implode('`,`', $primary), 'keys' => $keys, 'type' => 'InnoDB'];
 

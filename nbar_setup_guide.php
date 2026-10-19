@@ -23,6 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
+/** @var array<string, mixed> $config Cacti's global configuration, available in nbar_report.php's scope. */
 if (!function_exists('fv_nbar_h')) {
 	http_response_code(403);
 	exit;

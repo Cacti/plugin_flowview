@@ -39,7 +39,7 @@ function fv_nbar_timespan_options(array $presets, int $now, int $days, int|strin
 
 	foreach ($presets as $id => $label) {
 		$span = [];
-		get_timespan($span, $now, $id, $weekday);
+		get_timespan($span, $now, $id, (int) $weekday);
 		$from = strtotime($span['current_value_date1']);
 		$to   = strtotime($span['current_value_date2']);
 

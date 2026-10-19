@@ -51,7 +51,7 @@ class FlowviewNbarTemplateCache {
 	public function store(string $router, string $source, int $id, array $template, int $now): bool {
 		$this->prune($now);
 		$this->remove($router, $source, $id);
-		$fields = count($template[0]);
+		$fields = cacti_count($template[0]);
 
 		if ($fields > 2048) {
 			return false;
@@ -97,10 +97,10 @@ class FlowviewNbarTemplateCache {
 	}
 
 	public function usage(string $router): array {
-		$usage = ['templates' => count($this->entries), 'fields' => 0, 'exporter_templates' => 0, 'exporter_fields' => 0];
+		$usage = ['templates' => cacti_count($this->entries), 'fields' => 0, 'exporter_templates' => 0, 'exporter_fields' => 0];
 
 		foreach ($this->entries as $entry) {
-			$fields = count($entry['template'][0]);
+			$fields = cacti_count($entry['template'][0]);
 			$usage['fields'] += $fields;
 
 			if ($entry['router'] === $router) {
@@ -126,9 +126,9 @@ function fv_nbar_uint(string $s): int|string {
 	}
 	$n = 0;
 
-	foreach (unpack('C*', $s) as $v) {
+	foreach (unpack('C*', $s) ?: [] as $v) {
 		if (is_int($n) && $n <= intdiv(PHP_INT_MAX - $v, 256)) {
-			$n = $n * 256 + $v;
+			$n = (int) ($n * 256 + $v);
 
 			continue;
 		}
@@ -146,6 +146,18 @@ function fv_nbar_uint(string $s): int|string {
 
 	return $n;
 }
+
+/**
+ * Decode a network-order integer of at most four bytes, which always fits a native int.
+ *
+ * @param string $s Network-order bytes.
+ *
+ * @return int
+ */
+function fv_nbar_int(string $s): int {
+	return (int) fv_nbar_uint($s);
+}
+
 /**
  * Decode template-defined NetFlow v9 application records and names.
  *
@@ -158,22 +170,22 @@ function fv_nbar_packet(string $p, string $router): void {
 	global $listener_id;
 	static $templates = null;
 
-	if (strlen($p) < 20 || fv_nbar_uint(substr($p, 0, 2)) !== 9) {
+	if (strlen($p) < 20 || fv_nbar_int(substr($p, 0, 2)) !== 9) {
 		return;
 	}
 	$templates ??= new FlowviewNbarTemplateCache();
 	$now = time();
 	$templates->prune($now);
 	$source = bin2hex(substr($p, 16, 4));
-	$unix   = fv_nbar_uint(substr($p, 8, 4));
-	$uptime = fv_nbar_uint(substr($p, 4, 4));
+	$unix   = fv_nbar_int(substr($p, 8, 4));
+	$uptime = fv_nbar_int(substr($p, 4, 4));
 	$rows   = [];
 	$args   = [];
 	$hours  = [];
 
 	for ($o = 20; $o + 4 <= strlen($p);) {
-		$id  = fv_nbar_uint(substr($p, $o, 2));
-		$len = fv_nbar_uint(substr($p, $o + 2, 2));
+		$id  = fv_nbar_int(substr($p, $o, 2));
+		$len = fv_nbar_int(substr($p, $o + 2, 2));
 
 		if ($len < 4 || $o + $len > strlen($p)) {
 			break;
@@ -183,18 +195,18 @@ function fv_nbar_packet(string $p, string $router): void {
 
 		if ($id === 0 || $id === 1) {
 			while ($q + ($id === 0 ? 4 : 6) <= $end) {
-				$tid = fv_nbar_uint(substr($p, $q, 2));
+				$tid = fv_nbar_int(substr($p, $q, 2));
 
 				if ($tid < 256) {
 					break;
 				}
 
 				if ($id === 0) {
-					$count = fv_nbar_uint(substr($p, $q + 2, 2));
+					$count = fv_nbar_int(substr($p, $q + 2, 2));
 					$size  = $count * 4;
 					$q += 4;
 				} else {
-					$size = fv_nbar_uint(substr($p, $q + 2, 2)) + fv_nbar_uint(substr($p, $q + 4, 2));
+					$size = fv_nbar_int(substr($p, $q + 2, 2)) + fv_nbar_int(substr($p, $q + 4, 2));
 					$q += 6;
 				}
 
@@ -208,8 +220,8 @@ function fv_nbar_packet(string $p, string $router): void {
 				$valid  = true;
 
 				for ($z = 0; $z < $size; $z += 4) {
-					$f     = fv_nbar_uint(substr($p, $q + $z, 2));
-					$l     = fv_nbar_uint(substr($p, $q + $z + 2, 2));
+					$f     = fv_nbar_int(substr($p, $q + $z, 2));
+					$l     = fv_nbar_int(substr($p, $q + $z + 2, 2));
 					$width = [1 => 8, 2 => 8, 4 => 1, 7 => 2, 11 => 2, 21 => 4][$f] ?? null;
 
 					if ($l === 0 || ($id === 0 && $width !== null && $l > $width)) {
@@ -262,7 +274,7 @@ function fv_nbar_packet(string $p, string $router): void {
 				$ts = $unix;
 
 				if (isset($data[21])) {
-					$age = ($uptime - fv_nbar_uint($data[21]) + 4294967296) % 4294967296;
+					$age = ($uptime - fv_nbar_int($data[21]) + 4294967296) % 4294967296;
 					$ts  = $unix - (int) floor($age / 1000);
 				}
 

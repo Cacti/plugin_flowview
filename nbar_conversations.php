@@ -24,6 +24,22 @@
 */
 
 // Conversation direction uses configured site networks and selected listeners.
+
+/**
+ * Report state supplied by nbar_report.php, which includes this file.
+ *
+ * @var array<string, mixed>   $nbar_preferences
+ * @var string                 $listener_scope
+ * @var int                    $lid
+ * @var int                    $start
+ * @var int                    $end
+ * @var int                    $seconds
+ * @var string                 $family
+ * @var string                 $aid
+ * @var string                 $host
+ * @var string                 $base
+ * @var array<int, int|string> $combined_lids
+ */
 if (empty($nbar_preferences['prefixes'])) {
 	print '<p class="textInfo nbarReportText">' . html_escape(__('Configure your site networks in Application settings to label internal and external devices. Top applications and Connections work directly with exported IPv4 and IPv6 addresses.', 'flowview')) . '</p>';
 

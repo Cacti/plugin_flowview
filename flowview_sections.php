@@ -64,14 +64,12 @@ function fv_section_params(string $section): array {
 	}
 	$p['predefined_timespan'] = 1; // Re-enter reports with a fresh half-hour window.
 
-	if ((int) ($p['predefined_timespan'] ?? 0) > 0) {
-		unset($p['date1'],$p['date2']);
-		$c = json_decode($p['context'] ?? '', true);
+	unset($p['date1'],$p['date2']);
+	$c = json_decode($p['context'] ?? '', true);
 
-		if (is_array($c)) {
-			unset($c['date1'],$c['date2']);
-			$p['context'] = json_encode($c);
-		}
+	if (is_array($c)) {
+		unset($c['date1'],$c['date2']);
+		$p['context'] = json_encode($c);
 	}
 	$p['action']  = 'view';
 	$p['section'] = $section;

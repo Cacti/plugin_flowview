@@ -2832,7 +2832,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$data['printed']    = $nreport;
 			$data['statistics'] = 0;
 		}
-	} elseif (!sizeof($data)) {
+	} elseif (!cacti_sizeof($data)) {
 		return false;
 	}
 

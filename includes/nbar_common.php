@@ -142,7 +142,7 @@ function fv_nbar_supervise_maintenance(): void {
 
 	try {
 		// Invoke PHP directly; older Cacti timeout helpers accept strings only.
-		$command = [read_config_option('path_php_binary'), '-q', $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php', '--nbar-worker=build'];
+		$command = [(string) read_config_option('path_php_binary'), '-q', $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php', '--nbar-worker=build'];
 		$status  = fv_nbar_run_child($command, 90);
 
 		if ($status !== 0) {
@@ -153,7 +153,14 @@ function fv_nbar_supervise_maintenance(): void {
 	}
 }
 
-/** Supervise a direct PHP child independently of Cacti's versioned command API. */
+/**
+ * Supervise a direct PHP child independently of Cacti's versioned command API.
+ *
+ * @param list<string> $command Executable followed by its arguments.
+ * @param int          $seconds Hard process deadline in seconds.
+ *
+ * @return int
+ */
 function fv_nbar_run_child(array $command, int $seconds): int {
 	$pipes      = [];
 	$process    = false;

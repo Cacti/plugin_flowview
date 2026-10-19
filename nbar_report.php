@@ -42,6 +42,13 @@ require_once(__DIR__ . '/includes/nbar_connections.php');
 // arrays.php populates report variables in this scope, so it is included on each request.
 include(__DIR__ . '/includes/arrays.php');
 
+/**
+ * Report arrays supplied by Cacti core and includes/arrays.php.
+ *
+ * @var array<int, string>               $graph_timespans
+ * @var array<int, array<string, mixed>> $stat_report_array
+ * @var array<int, array<string, mixed>> $print_report_array
+ */
 if ((int) read_config_option('flowview_nbar_schema_version') < 2) {
 	plugin_flowview_check_upgrade();
 	print '<p class="textInfo nbarReportText">' . html_escape(__('NBAR history is being upgraded. Refresh this report shortly.', 'flowview')) . '</p>';
@@ -147,6 +154,7 @@ if ($timespan === 1000) {
 	$start  = $end - $nbar_retention_days * 86400;
 	$custom = false;
 } elseif ($timespan > 0) {
+	$nbar_span = [];
 	get_timespan($nbar_span, $nbar_now, $timespan, read_user_setting('first_weekdayid'));
 	$start  = strtotime($nbar_span['current_value_date1']);
 	$end    = strtotime($nbar_span['current_value_date2']);
@@ -213,7 +221,7 @@ $report_key = (int) substr($context['report'], 1);
 if (!isset(($context['report'][0] === 's' ? $stat_report_array : $print_report_array)[$report_key])) {
 	$context['report'] = 's10';
 }
-$context_json                  = json_encode($context);
+$context_json                  = json_encode($context, JSON_THROW_ON_ERROR);
 $base                          = 'flowview.php?' . http_build_query(['action' => 'view', 'report' => 'nbar', 'listener' => $lid, 'predefined_timespan' => $timespan, 'lock_range' => 1, 'family' => $family, 'date1' => date('Y-m-d H:i', $start), 'date2' => date('Y-m-d H:i', $end), 'context' => $context_json, 'host' => $host]);
 $return                        = $context;
 $return['action']              = 'view';
@@ -223,11 +231,11 @@ $return['date2']               = date('Y-m-d H:i', $end);
 $return['predefined_timespan'] = $timespan;
 $return['section']             = 'flows';
 $return_url                    = 'flowview.php?' . http_build_query($return);
-parse_str(parse_url($base, PHP_URL_QUERY), $section_params);
+parse_str((string) parse_url($base, PHP_URL_QUERY), $section_params);
 $section_params['mode'] = $mode;
 fv_section_save('nbar', $section_params);
 fv_section_navigation('nbar');
-html_start_box(__('Application Report: Cisco Apps Recognition (NBAR)', 'flowview'), '100%', '', '3', 'center', '');
+html_start_box(__('Application Report: Cisco Apps Recognition (NBAR)', 'flowview'), '100%', false, 3, 'center', '');
 print '<tr class="even"><td style="padding:4px 8px">';
 fv_nbar_feed_status($devices, array_map('intval', $lid === 0 ? $combined_lids : [$lid]));
 print '</td></tr>';
@@ -240,7 +248,7 @@ foreach (['action' => 'view', 'report' => 'nbar', 'context' => $context_json, 'a
 
 foreach (['internal', 'external'] as $f) {
 	if ($mode === 'connections' && filter_var($nbar_request[$f] ?? '', FILTER_VALIDATE_IP)) {
-		print '<input type="hidden" name="' . $f . '" value="' . fv_nbar_h($nbar_request[$f]) . '">';
+		print '<input type="hidden" name="' . $f . '" value="' . fv_nbar_h($nbar_request[$f] ?? '') . '">';
 	}
 }
 print '<table class="filterTable"><tr><td>' . html_escape(__('Router / capture', 'flowview')) . '</td><td><select name="listener">';

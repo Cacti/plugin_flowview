@@ -34,13 +34,13 @@
 function fv_nbar_cidrs(string $text): array|false {
 	$out = [];
 
-	foreach (preg_split('/[\s,]+/', trim($text), -1, PREG_SPLIT_NO_EMPTY) as $cidr) {
+	foreach (preg_split('/[\s,]+/', trim($text), -1, PREG_SPLIT_NO_EMPTY) ?: [] as $cidr) {
 		$parts = explode('/', $cidr);
 
 		if (cacti_sizeof($parts) !== 2 || !ctype_digit($parts[1]) || !filter_var($parts[0], FILTER_VALIDATE_IP)) {
 			return false;
 		}
-		$packed = inet_pton($parts[0]);
+		$packed = (string) inet_pton($parts[0]);
 		$bits   = (int) $parts[1];
 
 		if ($bits < 0 || $bits > strlen($packed) * 8) {
@@ -128,7 +128,7 @@ function fv_nbar_local_sql(string $f): string {
 
 	foreach ($GLOBALS['fv_nbar_preferences']['prefixes'] as $cidr) {
 		[$ip,$bits] = explode('/', $cidr);
-		$packed     = inet_pton($ip);
+		$packed     = (string) inet_pton($ip);
 		$bits       = (int) $bits;
 		$whole      = intdiv($bits, 8);
 		$rest       = $bits % 8;
