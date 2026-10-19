@@ -37,6 +37,9 @@ function exec_with_timeout($command, &$output, &$status, $timeout) {
 	$id = (int) $match[1];
 	$GLOBALS['attempts'][] = $id;
 	$status = $id <= 2 || $id === 6 ? 75 : 0;
+	if ($status === 0) {
+		db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=?', ['complete', $id]);
+	}
 	if ($status === 75) {
 		db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=?', ['retry', $id]);
 		if ($id === 6) {

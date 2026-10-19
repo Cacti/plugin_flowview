@@ -4,6 +4,9 @@
 $config = ['base_path' => dirname(__DIR__), 'poller_id' => 1];
 $local_db_cnn_id = 'fixture';
 $mode = getenv('FLOWVIEW_FIXTURE_MODE');
+if ($mode === 'connection-failure') {
+	define('FLOWVIEW_CONFIG', dirname(__DIR__) . '/connection.php');
+}
 $ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure', 'parallel-timeout', 'timestamp-failure', 'master-busy'], true);
 $metadataReads = 0;
 $calls = [];
@@ -113,3 +116,8 @@ function array_rekey($rows, $key, $value) {
 }
 
 function __esc($text, ...$args) { return html_escape($text); }
+
+function db_connect_real(...$args) {
+	$GLOBALS['calls'][] = ['connect'];
+	return false;
+}

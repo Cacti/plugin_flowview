@@ -232,9 +232,14 @@ poller reconcile a child that finishes after its parent's timeout. Completed
 occurrences are deleted without executing them again. Only pending work or an
 explicit retry marker can start a new child.
 
-A timeout or crash with no recorded outcome leaves the occurrence `running` and
+Every started child requires a recorded outcome, including an exit code of zero.
+A timeout, crash or early exit with no recorded outcome leaves the occurrence `running` and
 logs its queue ID instead of automatically resending it. If it remains unresolved,
 check the child process and report/notification logs, then reconcile the specific
 `reports_queued` row: remove an already-delivered occurrence only after repairing
 its schedule timestamps, or return a confirmed undelivered occurrence to pending.
 Do not reset an unresolved row merely because its process has disappeared.
+
+Completion cleanup and executable reports use separate bounded snapshots, so
+persistent cleanup failures cannot consume the pending-work budget. Cleanup
+still runs first and does not require a free execution slot.

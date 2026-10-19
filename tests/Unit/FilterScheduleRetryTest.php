@@ -29,6 +29,7 @@ it('retains the original on deferred or failed children and only deletes success
 		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'name' => 'Fixture', 'source_id' => 7, 'run_command' => 'fixture-command', 'run_timeout' => $status === 1 ? 0 : 60]);
 		plugin_test_queue_db_result('exec_with_timeout', $startup ? null : $status);
+		plugin_test_queue_db_result('report_outcome', ['status' => $status === 0 ? 'complete' : 'retry']);
 		plugin_test_queue_db_result('exec_with_timeout_result', ($startup || $warning) ? false : null);
 		plugin_test_queue_db_result('db_execute_prepared', true);
 		plugin_test_queue_db_result('db_execute_prepared', $reset);
@@ -131,6 +132,7 @@ it('runs the actual child entrypoint with native and legacy dispatch IDs', funct
 				plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 				plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
 				plugin_test_queue_db_result('exec_with_timeout', $exit);
+				plugin_test_queue_db_result('report_outcome', ['status' => 'retry']);
 				expect(flowview_reports_run(51))->toBeFalse();
 				expect(implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql')))->not->toContain('DELETE FROM reports_queued');
 			} finally {

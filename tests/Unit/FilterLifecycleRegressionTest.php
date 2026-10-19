@@ -113,6 +113,7 @@ it('preserves late schema failures through the real child and parent completion 
 		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
 		plugin_test_queue_db_result('exec_with_timeout', $exit);
+		plugin_test_queue_db_result('report_outcome', ['status' => $exit === 0 ? 'complete' : 'retry']);
 		expect(flowview_reports_run(51))->toBe(!$retry);
 		$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM reports_queued')));
 		expect($deletes)->toHaveCount($retry ? 0 : 1);
@@ -162,6 +163,7 @@ it('retains a timed out parallel report through the actual child and parent', fu
 		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
 		plugin_test_queue_db_result('exec_with_timeout', $exit);
+		plugin_test_queue_db_result('report_outcome', ['status' => $exit === 0 ? 'complete' : 'retry']);
 		expect(flowview_reports_run(51))->toBeFalse();
 		$deletes = array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM reports_queued'));
 		expect($deletes)->toBe([]);
@@ -227,3 +229,33 @@ it('releases only an acquired scheduler master registration at shutdown', functi
 	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
 	expect($exit)->toBe(0)->and($released)->toBe($mode === 'master-busy' || $force ? [] : [['unregister', ['flowsched', 'master', 0, $result['pid']]]]);
 })->with([['ready', false], ['master-busy', false], ['ready', true]]);
+
+it('retains a child connection failure even when the actual entrypoint exits zero', function ($native) {
+	file_put_contents($this->fixtureRoot . '/connection.php', '<?php $flowview_use_cacti_db=false; $flowviewdb_hostname="fixture"; $flowviewdb_username="fixture"; $flowviewdb_password=""; $flowviewdb_default="fixture"; $flowviewdb_type="mysql";');
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
+	if ($native) { $command[] = '--queue-id=51'; }
+	[$exit] = ($this->runFixture)($command, 'connection-failure');
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	expect($exit)->toBe(0)->and(array_column($result['calls'], 0))->toContain('connect')->not->toContain('write', 'register');
+	global $config;
+	$oldBase = $config['base_path'];
+	$config['base_path'] = $this->fixtureRoot;
+	try {
+		plugin_test_reset();
+		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+		plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 1]);
+		plugin_test_queue_db_result('exec_with_timeout', $exit);
+		expect($native ? flowview_reports_run(51) : reports_run(51))->toBeFalse();
+		$writes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
+		expect($writes)->toHaveCount(1)->and($writes[0]['params'][0])->toBe('running');
+	} finally { $config['base_path'] = $oldBase; }
+})->with([false, true]);
+
+it('runs pending work beyond a full snapshot of undeletable completed occurrences', function () {
+	if (!extension_loaded('pdo_sqlite')) { $this->markTestSkipped('PDO SQLite is needed for the bounded cleanup regression'); }
+	[$exit, $output] = ($this->runFixture)([PHP_BINARY, dirname(__DIR__) . '/fixtures/completion-budget.php', dirname(__DIR__, 2), $this->fixtureRoot]);
+	$result = json_decode($output, true);
+	expect($exit)->toBe(0)->and($result['done'])->toBe(1)->and($result['attempts'])->toBe([101])
+		->and($result['deletes'])->toHaveCount(201)->and($result['remaining'])->toHaveCount(100)
+		->and(array_unique(array_column($result['remaining'], 'status')))->toBe(['complete']);
+});

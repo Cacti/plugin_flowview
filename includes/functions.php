@@ -7469,28 +7469,24 @@ function flowview_reports_run(int $id, ?array $report = null): bool {
 		$timeout = max(1, (int) read_config_option('scheduler_timeout') ?: 300);
 	}
 	exec_with_timeout($command, $output, $status, $timeout);
-	$startup_failed = $status === -2;
-	if (!$startup_failed && $status !== 0 && $status !== 75) {
-		// A timeout/crash is not proof of failed delivery. The child may still finish.
+	$expected = 'running';
+	if ($status !== -2) {
+		// Exit status alone cannot prove completion, even when it is zero.
 		$outcome = db_fetch_row_prepared('SELECT status FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']);
 		if (($outcome['status'] ?? '') === 'complete') {
 			return flowview_reports_complete($id, (int) $report['source_id']);
 		}
 		if (($outcome['status'] ?? '') !== 'retry') {
-			cacti_log('FlowView occurrence ' . $id . ' has an unresolved child outcome; retained without retry to prevent duplicate delivery. Check the child and reconcile reports_queued before retrying.', false, 'FLOWVIEW');
+			cacti_log('FlowView occurrence ' . $id . ' has an unresolved child outcome (exit ' . $status . '); retained without retry to prevent duplicate delivery. Check the child and reconcile reports_queued before retrying.', false, 'FLOWVIEW');
 			return false;
 		}
-		$status = 75;
+		$expected = 'retry';
 	}
-	if ($startup_failed || $status === 75) {
-		// Never overwrite a retry another dispatcher has already claimed.
-		$expected = $startup_failed ? 'running' : 'retry';
-		if (!db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=? AND source=? AND status=?', ['pending', $id, 'flowview', $expected])) {
-			cacti_log('Unable to reset the retained FlowView occurrence; queue repair is required.', false, 'FLOWVIEW');
-		}
-		return false;
+	// Never overwrite a retry another dispatcher has already claimed.
+	if (!db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=? AND source=? AND status=?', ['pending', $id, 'flowview', $expected])) {
+		cacti_log('Unable to reset the retained FlowView occurrence; queue repair is required.', false, 'FLOWVIEW');
 	}
-	return flowview_reports_complete($id, (int) $report['source_id']);
+	return false;
 }
 
 /** Delete a delivered occurrence without executing its child again. */
@@ -7510,23 +7506,28 @@ function flowview_reports_run_pending(int $concurrency = 1, int $limit = 100): i
 	if (!flowview_filter_status_ready()) {
 		return 0;
 	}
-	// Previously attempted rows sort behind new work, so a full failed batch
-	// cannot indefinitely starve occurrences beyond this snapshot's limit.
-	$reports = db_fetch_assoc_prepared('SELECT id,status FROM reports_queued WHERE source=? AND status IN (?, ?, ?) ORDER BY (status=?) DESC,start_time,scheduled_time,id LIMIT ' . max(1, min(1000, $limit)), ['flowview', 'pending', 'retry', 'complete', 'complete']);
+	$limit = max(1, min(1000, $limit));
+	$done = 0;
+	// Cleanup has its own budget: persistent deletion failures cannot starve execution.
+	$completed = db_fetch_assoc_prepared('SELECT id,source_id FROM reports_queued WHERE source=? AND status=? ORDER BY start_time,id LIMIT ' . $limit, ['flowview', 'complete']);
+	if (is_array($completed)) {
+		foreach ($completed as $report) {
+			if (flowview_reports_complete((int) $report['id'], (int) $report['source_id'])) {
+				$done++;
+			}
+		}
+	} else {
+		cacti_log('Unable to read completed FlowView occurrences for cleanup.', false, 'FLOWVIEW');
+	}
+	// Executable work has an independent bounded, fair snapshot.
+	$reports = db_fetch_assoc_prepared('SELECT id FROM reports_queued WHERE source=? AND status IN (?, ?) ORDER BY start_time,scheduled_time,id LIMIT ' . $limit, ['flowview', 'pending', 'retry']);
 	if (!is_array($reports)) {
 		cacti_log('Unable to read pending FlowView occurrences.', false, 'FLOWVIEW');
-		return 0;
+		return $done;
 	}
-	$done = 0;
 	foreach ($reports as $report) {
 		if (!flowview_filter_status_ready()) {
 			break;
-		}
-		if (($report['status'] ?? '') === 'complete') {
-			if (flowview_reports_run((int) $report['id'])) {
-				$done++;
-			}
-			continue;
 		}
 		$running = flowview_running_schedule_children();
 		if ($running === null || (int) $running >= max(1, $concurrency)) {

@@ -56,3 +56,8 @@ without a second delivery. Separate actual-child tests cover durable outcome
 markers, PID-scoped shutdown cleanup, deferred preparation and timestamp-write
 failure after completion. Fixtures adapt database APIs and worker delivery; they
 do not test SMTP or replace live MariaDB concurrency validation.
+
+Successful-dispatch doubles explicitly supply recorded child completion; an exit
+code alone never synthesizes that outcome. Regressions exercise an actual child
+connection failure that exits zero before its outcome callback, and a persistent
+queue with 100 undeletable completed rows followed by executable work.

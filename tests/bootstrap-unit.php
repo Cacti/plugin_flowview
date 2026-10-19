@@ -152,6 +152,9 @@ if (!function_exists('db_fetch_assoc')) {
 if (!function_exists('db_fetch_assoc_prepared')) {
 	function db_fetch_assoc_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
+		if (str_starts_with($sql, 'SELECT id,source_id FROM reports_queued')) {
+			return plugin_test_db_result('completed_reports', []);
+		}
 		return plugin_test_db_result('db_fetch_assoc_prepared', array());
 	}
 }
@@ -166,6 +169,9 @@ if (!function_exists('db_fetch_row')) {
 if (!function_exists('db_fetch_row_prepared')) {
 	function db_fetch_row_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
+		if (str_starts_with($sql, 'SELECT status FROM reports_queued')) {
+			return plugin_test_db_result('report_outcome', []);
+		}
 		return plugin_test_db_result('db_fetch_row_prepared', array());
 	}
 }
