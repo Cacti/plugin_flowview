@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -31,6 +31,7 @@ it('clips requested dates to retention without changing a valid selection', func
 
 it('uses local calendar days across daylight saving changes', function () {
 	$old = date_default_timezone_get();
+
 	try {
 		date_default_timezone_set('Australia/Adelaide');
 		[$from, $to] = fv_nbar_daily_bounds(strtotime('2026-10-04 12:00'));
@@ -52,21 +53,23 @@ it('validates internal IPv4 and IPv6 prefixes and rejects invalid masks', functi
 
 it('decodes template-defined IPv4 and IPv6 application records using the dedicated connection', function () {
 	$GLOBALS['listener_id'] = 3;
+
 	foreach ([4, 16] as $length) {
-		$src = inet_pton($length === 4 ? '192.0.2.10' : '2001:db8::10');
-		$dst = inet_pton($length === 4 ? '198.51.100.20' : '2001:db8:1::20');
-		$fields = [95 => 4, $length === 4 ? 8 : 27 => $length, $length === 4 ? 12 : 28 => $length, 7 => 2, 11 => 2, 4 => 1, 1 => 4, 2 => 4];
+		$src         = inet_pton($length === 4 ? '192.0.2.10' : '2001:db8::10');
+		$dst         = inet_pton($length === 4 ? '198.51.100.20' : '2001:db8:1::20');
+		$fields      = [95 => 4, $length === 4 ? 8 : 27 => $length, $length === 4 ? 12 : 28 => $length, 7 => 2, 11 => 2, 4 => 1, 1 => 4, 2 => 4];
 		$definitions = '';
+
 		foreach ($fields as $id => $size) {
 			$definitions .= pack('nn', $id, $size);
 		}
 		$template = pack('nnnn', 0, 8 + strlen($definitions), 400 + $length, count($fields)) . $definitions;
-		$record = hex2bin('0d000001') . $src . $dst . pack('nnCNN', 50000, 443, 6, 123456, 120);
-		$data = pack('nn', 400 + $length, 4 + strlen($record)) . $record;
-		$packet = pack('nnNNNN', 9, 2, 100000, time(), 1, 100 + $length) . $template . $data;
+		$record   = hex2bin('0d000001') . $src . $dst . pack('nnCNN', 50000, 443, 6, 123456, 120);
+		$data     = pack('nn', 400 + $length, 4 + strlen($record)) . $record;
+		$packet   = pack('nnNNNN', 9, 2, 100000, time(), 1, 100 + $length) . $template . $data;
 		fv_nbar_packet($packet, '192.0.2.1');
 		$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared' && str_contains($c['sql'], 'INSERT INTO plugin_flowview_nbar_data')));
-		$call = end($calls);
+		$call  = end($calls);
 		expect($call['conn'])->toBe('nbar-test-connection');
 		expect($call['params'][2])->toBe('0d000001');
 		expect($call['params'][3])->toBe(bin2hex($src));
@@ -82,12 +85,11 @@ it('ignores malformed or unsupported packets without writing data', function () 
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
 
-
 it('saves two or three combined captures without depending on a success message', function () {
 	$_SERVER['REQUEST_METHOD'] = 'POST';
-	$_REQUEST = ['prefs_apply' => '1', 'combine_apply' => '1', 'local_prefixes' => '192.0.2.0/24', 'site_listeners' => ['1', '2']];
-	$devices = [['id' => 1], ['id' => 2], ['id' => 3]];
-	$saved = fv_nbar_preferences_init($devices);
+	$_REQUEST                  = ['prefs_apply' => '1', 'combine_apply' => '1', 'local_prefixes' => '192.0.2.0/24', 'site_listeners' => ['1', '2']];
+	$devices                   = [['id' => 1], ['id' => 2], ['id' => 3]];
+	$saved                     = fv_nbar_preferences_init($devices);
 	expect($GLOBALS['fv_nbar_preferences_saved'])->toBeTrue();
 	expect($saved['listeners'])->toBe([1, 2]);
 	expect($GLOBALS['fv_nbar_preferences_message'])->toBe('');
@@ -98,12 +100,12 @@ it('saves two or three combined captures without depending on a success message'
 
 it('rejects a single combined capture but permits saving networks with none selected', function () {
 	$_SERVER['REQUEST_METHOD'] = 'POST';
-	$_REQUEST = ['prefs_apply' => '1', 'combine_apply' => '1', 'local_prefixes' => '2001:db8::/64', 'site_listeners' => ['1']];
-	$devices = [['id' => 1], ['id' => 2]];
+	$_REQUEST                  = ['prefs_apply' => '1', 'combine_apply' => '1', 'local_prefixes' => '2001:db8::/64', 'site_listeners' => ['1']];
+	$devices                   = [['id' => 1], ['id' => 2]];
 	fv_nbar_preferences_init($devices);
 	expect($GLOBALS['fv_nbar_preferences_saved'])->toBeFalse();
 	$_REQUEST['site_listeners'] = [];
-	$saved = fv_nbar_preferences_init($devices);
+	$saved                      = fv_nbar_preferences_init($devices);
 	expect($GLOBALS['fv_nbar_preferences_saved'])->toBeTrue();
 	expect($saved['listeners'])->toBe([]);
 	expect($saved['prefixes'])->toBe(['2001:db8::/64']);
@@ -118,11 +120,9 @@ it('rolls back a failed raw batch before publishing a summary revision', functio
 	expect(implode(' ', $sql))->not->toContain('revision=revision+1');
 });
 
-
 it('escapes quotes and markup in attributes on Cacti 1.2', function () {
 	expect(plugin_flowview_escape_attr('"<host>&'))->toBe('&quot;&lt;host&gt;&amp;');
 });
-
 
 it('decodes unsigned 64-bit exporter counters without rounding', function () {
 	expect(fv_nbar_uint(hex2bin('7fffffffffffffff')))->toBe(PHP_INT_MAX);
@@ -131,30 +131,31 @@ it('decodes unsigned 64-bit exporter counters without rounding', function () {
 	expect(fv_nbar_uint(hex2bin('00000000000000ff')))->toBe(255);
 });
 
-
 it('passes full-width byte counters to the database as exact decimal strings', function () {
 	$GLOBALS['listener_id'] = 3;
-	$fields = [95 => 4, 8 => 4, 12 => 4, 1 => 8];
-	$definitions = '';
+	$fields                 = [95 => 4, 8 => 4, 12 => 4, 1 => 8];
+	$definitions            = '';
+
 	foreach ($fields as $id => $size) {
 		$definitions .= pack('nn', $id, $size);
 	}
 	$template = pack('nnnn', 0, 8 + strlen($definitions), 777, count($fields)) . $definitions;
-	$record = hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . hex2bin('ffffffffffffffff');
-	$data = pack('nn', 777, 4 + strlen($record)) . $record;
+	$record   = hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . hex2bin('ffffffffffffffff');
+	$data     = pack('nn', 777, 4 + strlen($record)) . $record;
 	fv_nbar_packet(pack('nnNNNN', 9, 2, 100000, time(), 1, 777) . $template . $data, '192.0.2.1');
 	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared' && str_contains($c['sql'], 'INSERT INTO plugin_flowview_nbar_data')));
 	expect($calls)->toHaveCount(1);
 	expect($calls[0]['params'][8])->toBe('18446744073709551615');
 });
 
-
 it('uses a single grouped fallback before probing a sparse history across every segment', function () {
 	foreach (range(1, 3) as $unused) {
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
 	}
+
 	for ($segment = 0; $segment < 4; $segment++) {
 		$rows = [];
+
 		for ($i = 0; $i < 257; $i++) {
 			$rows[] = ['app_id' => '0d000001', 'src_hex' => 'C000020A', 'dst_hex' => strtoupper(bin2hex(inet_pton('198.18.0.' . ($segment + 1)))), 'sport' => $i, 'dport' => 443, 'protocol' => 6, 'bytes' => '100', 'packets' => '1', 'records' => '1', 'first_seen' => 1800000000, 'last_seen' => 1800000000];
 		}

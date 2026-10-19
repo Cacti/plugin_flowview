@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti 5.1\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-17 22:46+1030\n"
+"POT-Creation-Date: 2026-10-19 12:10-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -518,7 +518,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
-#: flowview_schedules.php includes/functions.php nbar_preferences.php
+#: flowview_schedules.php includes/functions.php includes/nbar_preferences.php
 msgid "Cancel"
 msgstr ""
 
@@ -1926,7 +1926,7 @@ msgstr ""
 msgid "Edit the Flow Filter"
 msgstr ""
 
-#: includes/functions.php nbar_preferences.php
+#: includes/functions.php includes/nbar_preferences.php
 msgid "Save"
 msgstr ""
 
@@ -2417,28 +2417,167 @@ msgstr ""
 msgid "InnoDB (Slow, High Concurrency)"
 msgstr ""
 
-#: nbar_chart.php
+#: includes/nbar_chart.php
+msgid "Unable to load application chart. Please try again."
+msgstr ""
+
+#: includes/nbar_chart.php
 msgid "Other"
 msgstr ""
 
-#: nbar_chart.php
+#: includes/nbar_chart.php
 msgid "Top 5 applications"
 msgstr ""
 
-#: nbar_chart.php
+#: includes/nbar_chart.php
 msgid "Top 5 applications by data"
 msgstr ""
 
-#: nbar_chart.php
+#: includes/nbar_chart.php
 msgid "Application data share for the selected period"
 msgstr ""
 
-#: nbar_chart.php
+#: includes/nbar_chart.php
 msgid "No application data in this period"
+msgstr ""
+
+#: includes/nbar_dns.php
+msgid "No reverse DNS"
+msgstr ""
+
+#: includes/nbar_dns.php
+msgid "Not resolved"
+msgstr ""
+
+#: includes/nbar_feed_status.php
+msgid "STATUS:"
+msgstr ""
+
+#: includes/nbar_feed_status.php
+msgid "Unable to load NBAR status. Please try again."
+msgstr ""
+
+#: includes/nbar_feed_status.php
+msgid "No recent NBAR"
+msgstr ""
+
+#: includes/nbar_feed_status.php
+msgid "Receiving"
+msgstr ""
+
+#: includes/nbar_feed_status.php
+#, php-format
+msgid "Last NBAR record: %s"
+msgstr ""
+
+#: includes/nbar_feed_status.php
+msgid "No retained NBAR records"
+msgstr ""
+
+#: includes/nbar_feed_status.php
+msgid "No captures selected"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Settings were not saved. Enter valid IPv4/IPv6 networks, or leave the list blank."
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Settings were not saved. Choose two or three captures to combine, or clear all selections to save Internal Networks only."
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Bandwidth units"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "DNS names"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Data units"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Hide"
+msgstr ""
+
+#: includes/nbar_preferences.php nbar_report.php
+msgid "Show"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Auto"
+msgstr ""
+
+#: includes/nbar_preferences.php nbar_setup_guide.php
+msgid "Close"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Combine Options"
+msgstr ""
+
+#: includes/nbar_preferences.php nbar_report.php
+msgid "Options"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Choose two or three captures to combine, normally one LAN capture per router. Leave all captures unticked to save Internal Networks only. Overlapping LAN and WAN captures are added together and can count traffic twice."
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Internal Networks"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "One internal IPv4 or IPv6 network per line. Used to identify internal hosts and upload/download direction in Conversations. Update delegated IPv6 prefixes when they change, and keep old prefixes for retained history. Exported flows do not automatically identify your site networks."
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid " — combining off"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid " — select another capture or untick all to save"
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Average rate across the selected timespan."
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "Decimal units: 1 GB = 1,000 MB."
+msgstr ""
+
+#: includes/nbar_preferences.php
+msgid "{count} of 3 selected"
+msgstr ""
+
+#: includes/nbar_seen.php
+msgid "Unavailable"
+msgstr ""
+
+#: includes/nbar_seen.php
+#, php-format
+msgid "FlowView observation within the selected period; minute precision. Time zone: %s"
+msgstr ""
+
+#: includes/nbar_timespan.php
+#, php-format
+msgid "Last %s Days"
+msgstr ""
+
+#: includes/nbar_timespan.php
+msgid "Last Day"
 msgstr ""
 
 #: nbar_conversations.php
 msgid "Configure your site networks in Application settings to label internal and external devices. Top applications and Connections work directly with exported IPv4 and IPv6 addresses."
+msgstr ""
+
+#: nbar_conversations.php
+msgid "Unable to load conversations. Please try again."
 msgstr ""
 
 #: nbar_conversations.php nbar_report.php
@@ -2502,117 +2641,13 @@ msgstr ""
 msgid "Report information"
 msgstr ""
 
+#: nbar_conversations.php
+#, php-format
+msgid "Top 100 conversations by combined data volume. Each row groups an Internal Host, External Host and application across both directions. Uses only the selected LAN captures to avoid counting WAN copies. Local and multicast traffic is excluded. DNS names identify servers, not the exact website requested. History retention: %d days."
+msgstr ""
+
 #: nbar_conversations.php nbar_report.php
 msgid "Drag to resize column"
-msgstr ""
-
-#: nbar_dns.php
-msgid "No reverse DNS"
-msgstr ""
-
-#: nbar_dns.php
-msgid "Not resolved"
-msgstr ""
-
-#: nbar_feed_status.php
-msgid "STATUS:"
-msgstr ""
-
-#: nbar_feed_status.php
-msgid "No recent NBAR"
-msgstr ""
-
-#: nbar_feed_status.php
-msgid "Receiving"
-msgstr ""
-
-#: nbar_feed_status.php
-#, php-format
-msgid "Last NBAR record: %s"
-msgstr ""
-
-#: nbar_feed_status.php
-msgid "No retained NBAR records"
-msgstr ""
-
-#: nbar_feed_status.php
-msgid "No captures selected"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Settings were not saved. Enter valid IPv4/IPv6 networks, or leave the list blank."
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Settings were not saved. Choose two or three captures to combine, or clear all selections to save Internal Networks only."
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Bandwidth units"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "DNS names"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Data units"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Hide"
-msgstr ""
-
-#: nbar_preferences.php nbar_report.php
-msgid "Show"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Auto"
-msgstr ""
-
-#: nbar_preferences.php nbar_setup_guide.php
-msgid "Close"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Combine Options"
-msgstr ""
-
-#: nbar_preferences.php nbar_report.php
-msgid "Options"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Choose two or three captures to combine, normally one LAN capture per router. Leave all captures unticked to save Internal Networks only. Overlapping LAN and WAN captures are added together and can count traffic twice."
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Internal Networks"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "One internal IPv4 or IPv6 network per line. Used to identify internal hosts and upload/download direction in Conversations. Update delegated IPv6 prefixes when they change, and keep old prefixes for retained history. Exported flows do not automatically identify your site networks."
-msgstr ""
-
-#: nbar_preferences.php
-msgid " — combining off"
-msgstr ""
-
-#: nbar_preferences.php
-msgid " — select another capture or untick all to save"
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Average rate across the selected timespan."
-msgstr ""
-
-#: nbar_preferences.php
-msgid "Decimal units: 1 GB = 1,000 MB."
-msgstr ""
-
-#: nbar_preferences.php
-msgid "{count} of 3 selected"
 msgstr ""
 
 #: nbar_report.php
@@ -2683,6 +2718,10 @@ msgstr ""
 
 #: nbar_report.php
 msgid "Unable to load connections. Try a shorter timespan or filter by IP."
+msgstr ""
+
+#: nbar_report.php
+msgid "Unable to load applications. Please try again."
 msgstr ""
 
 #: nbar_report.php
@@ -2760,15 +2799,6 @@ msgstr ""
 
 #: nbar_report.php
 msgid "Results are ordered by data volume; Connections shows up to 100 per page. Column sorting applies to the displayed page. NBAR history uses the configured retention setting. Daily summaries are reused across report selections; partial days use hourly summaries, and partial or changed hours use raw records. Connections pages are read from shared daily history, with nearby pages briefly cached for navigation. Average Mbps covers the selected period; allow 1–2 minutes for exports. Capture visibility depends on the device exporter and observation point. NAT can hide internal IPv4 addresses on a WAN capture. Select one observation point per traffic path to avoid duplicate totals. Cisco NBAR may classify encrypted traffic as SSL, QUIC or Unknown. History starts when export is enabled."
-msgstr ""
-
-#: nbar_seen.php
-msgid "Unavailable"
-msgstr ""
-
-#: nbar_seen.php
-#, php-format
-msgid "FlowView observation within the selected period; minute precision. Time zone: %s"
 msgstr ""
 
 #: nbar_setup_guide.php
@@ -2849,15 +2879,6 @@ msgstr ""
 
 #: nbar_setup_guide.php
 msgid "Reading reports"
-msgstr ""
-
-#: nbar_timespan.php
-#, php-format
-msgid "Last %s Days"
-msgstr ""
-
-#: nbar_timespan.php
-msgid "Last Day"
 msgstr ""
 
 #: setup.php
@@ -3277,25 +3298,4 @@ msgstr ""
 
 #: setup.php
 msgid "NetFlow"
-msgstr ""
-
-#: nbar_chart.php
-msgid "Unable to load application chart. Please try again."
-msgstr ""
-
-#: nbar_chart.php
-msgid "Unable to load conversations. Please try again."
-msgstr ""
-
-#: nbar_report.php
-msgid "Unable to load applications. Please try again."
-msgstr ""
-
-#: nbar_feed_status.php
-msgid "Unable to load NBAR status. Please try again."
-msgstr ""
-
-#: nbar_conversations.php
-#, php-format
-msgid "Top 100 conversations by combined data volume. Each row groups an Internal Host, External Host and application across both directions. Uses only the selected LAN captures to avoid counting WAN copies. Local and multicast traffic is excluded. DNS names identify servers, not the exact website requested. History retention: %d days."
 msgstr ""

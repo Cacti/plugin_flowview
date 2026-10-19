@@ -1735,6 +1735,7 @@ function process_fv10($p, $ex_addr): void {
 						$id    = $t['field_id'];
 
 						$field = substr($p, $h, $t['length']);
+
 						// Decode Cisco reduced-length three-byte unsigned integers.
 						if ($t['unpack'] === 'N' && $t['length'] == 3 && strlen($field) == 3) {
 							$field = chr(0) . $field;

@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -15,10 +15,12 @@ it('defines each NBAR table through the connection-aware schema contract', funct
 	$definition = fv_nbar_schema_definition($suffix);
 	expect($definition['type'])->toBe('InnoDB');
 	$columns = array_column($definition['columns'], null, 'name');
+
 	foreach (explode('`,`', $definition['primary']) as $key) {
 		expect($columns)->toHaveKey($key);
 		expect($columns[$key]['NULL'])->toBeFalse();
 	}
+
 	foreach ($definition['keys'] as $index) {
 		foreach ($index['columns'] as $key) {
 			expect($columns)->toHaveKey($key);
@@ -27,7 +29,7 @@ it('defines each NBAR table through the connection-aware schema contract', funct
 	plugin_test_queue_db_result('db_fetch_assoc', []);
 	plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_' . $suffix);
 	expect(fv_nbar_schema_table($suffix))->toBeTrue();
-	$calls = $GLOBALS['__test_db_calls'];
+	$calls  = $GLOBALS['__test_db_calls'];
 	$create = array_values(array_filter($calls, fn ($call) => str_starts_with($call['sql'], 'CREATE TABLE')));
 	expect($create)->toHaveCount(1);
 	expect($create[0]['conn'])->toBe('nbar-schema-test');
@@ -55,7 +57,6 @@ it('does not recreate or reclaim an existing table', function () {
 	expect($sql)->not->toContain('CREATE TABLE', 'REPLACE INTO plugin_db_changes');
 });
 
-
 it('installs the complete schema and upgrades missing columns on the flow connection', function () {
 	foreach (['names', 'data', 'hours', 'apps', 'pairs', 'connections', 'daily_apps', 'daily_pairs', 'daily_connections', 'days'] as $suffix) {
 		plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_' . $suffix);
@@ -65,6 +66,7 @@ it('installs the complete schema and upgrades missing columns on the flow connec
 	expect(fv_nbar_schema_install())->toBeTrue();
 	$alter = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($call) => $call['fn'] === 'db_add_column'));
 	expect($alter)->toHaveCount(15);
+
 	foreach ($alter as $call) {
 		expect($call['conn'])->toBe('nbar-schema-test');
 	}

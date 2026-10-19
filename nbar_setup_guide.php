@@ -95,4 +95,4 @@ show platform hardware qfp active datapath utilization
 </pre><h3><?php print html_escape(__('Reading reports', 'flowview')); ?></h3><p><?php print html_escape(__('Average bandwidth covers the selected timespan, not an instantaneous or peak rate. Conversations combines both directions for each Internal Host, External Host and application. Classification comes from the router; encrypted traffic can remain SSL or QUIC. DNS names identify hosts, not the exact HTTPS page.', 'flowview')); ?></p><hr><small>Copyright (c) 2004-2026 The Cacti Group.</small></div></dialog>
 <?php
 
-echo '<script src="' . plugin_flowview_escape_attr($config['url_path'] . 'plugins/flowview/js/nbar-setup-guide.js') . '"></script>';
+print '<script src="' . plugin_flowview_escape_attr($config['url_path'] . 'plugins/flowview/js/nbar-setup-guide.js') . '"></script>';

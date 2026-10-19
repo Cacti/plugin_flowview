@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -23,7 +23,7 @@ it('compares identical connection tuples consistently', function () {
 
 it('normalizes saved navigation fields without restoring NBAR into Flow Reports', function () {
 	$GLOBALS['__test_user_settings']['flowview_section_flows'] = json_encode(['report' => 'nbar', 'query' => ['bad'], 'mode' => 'apps']);
-	$params = fv_section_params('flows');
+	$params                                                    = fv_section_params('flows');
 	expect($params)->not->toHaveKey('report')->not->toHaveKey('query');
 	expect($params['section'])->toBe('flows');
 });
@@ -52,6 +52,7 @@ it('stops daily schema setup on table or index failures', function ($stage) {
 		foreach (['apps', 'pairs', 'connections'] as $kind) {
 			plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_daily_' . $kind);
 		}
+
 		foreach ([true, true, true, false] as $result) {
 			plugin_test_queue_db_result('db_execute', $result);
 		}
@@ -63,6 +64,7 @@ it('does not complete observation schema setup after failed checkpoint writes', 
 	foreach (range(1, 12) as $unused) {
 		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'present']);
 	}
+
 	if ($stage === 'column') {
 		plugin_test_queue_db_result('db_fetch_cell', 'plugin_flowview_nbar_seen_upgrade');
 		plugin_test_queue_db_result('db_add_column', false);
@@ -84,6 +86,7 @@ it('does not build summaries when transaction creation or commit fails', functio
 	} else {
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => 4]);
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => 4]);
+
 		foreach ([true, true, true, false] as $result) {
 			plugin_test_queue_db_result('db_execute', $result);
 		}
@@ -96,6 +99,7 @@ it('does not turn failed name or deep-page queries into an empty report', functi
 	foreach (range(1, 2) as $unused) {
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
 	}
+
 	if ($stage === 'page') {
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
 	}

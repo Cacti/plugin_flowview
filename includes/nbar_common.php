@@ -55,11 +55,13 @@ function fv_nbar_schema_install(): bool {
  */
 function fv_nbar_retention_days(): int {
 	static $days = 7,$checked = 0;
+
 	if (time() - $checked >= 60) {
-		$value = (int) read_config_option('flowview_nbar_retention_days', true);
-		$days = in_array($value, [1, 3, 7, 14, 30], true) ? $value : 7;
+		$value   = (int) read_config_option('flowview_nbar_retention_days', true);
+		$days    = in_array($value, [1, 3, 7, 14, 30], true) ? $value : 7;
 		$checked = time();
 	}
+
 	return $days;
 }
 /**
@@ -68,13 +70,14 @@ function fv_nbar_retention_days(): int {
  * @return void
  */
 function fv_nbar_cleanup(int|float $budget = 10): void {
-	$cutoff = (int) (floor((time() - fv_nbar_retention_days() * 86400) / 3600) * 3600);
+	$cutoff  = (int) (floor((time() - fv_nbar_retention_days() * 86400) / 3600) * 3600);
 	$queries = [];
+
 	foreach (['apps', 'pairs', 'connections', 'hours'] as $table) {
 		$queries[] = ["DELETE FROM plugin_flowview_nbar_$table WHERE hour<$cutoff LIMIT 50000", 50000];
 	}
 	$queries[] = ['DELETE FROM plugin_flowview_nbar_data WHERE minute < ' . (time() - fv_nbar_retention_days() * 86400) . ' LIMIT 50000', 50000];
-	$queries = array_merge($queries, fv_nbar_daily_cleanup_queries());
+	$queries   = array_merge($queries, fv_nbar_daily_cleanup_queries());
 	fv_nbar_cleanup_batches($queries, microtime(true) + max(0, (float) $budget));
 }
 
@@ -85,10 +88,13 @@ function fv_nbar_cleanup_batches(array $queries, float $deadline): void {
 			if (microtime(true) >= $deadline) {
 				return;
 			}
+
 			if (flowview_db_execute($sql) === false) {
 				unset($queries[$key]);
+
 				continue;
 			}
+
 			if ((int) flowview_db_affected_rows() < $limit) {
 				unset($queries[$key]);
 			}
@@ -99,12 +105,15 @@ function fv_nbar_cleanup_batches(array $queries, float $deadline): void {
 /** Establish a verified DML deadline; MySQL SELECT timeouts do not bound INSERT SELECT. */
 function fv_nbar_worker_timeout(int $seconds): ?float {
 	$old = flowview_db_fetch_cell('SELECT @@session.max_statement_time', '', false);
+
 	if (!is_numeric($old) || (float) $old < 0) {
 		return null;
 	}
+
 	if (!flowview_db_execute('SET SESSION max_statement_time=' . $seconds, false)) {
 		return null;
 	}
+
 	return (float) $old;
 }
 
@@ -112,24 +121,30 @@ function fv_nbar_worker_timeout(int $seconds): ?float {
 function fv_nbar_launch_maintenance(): bool {
 	global $config;
 	$php = read_config_option('path_php_binary');
+
 	if (!is_string($php) || $php === '') {
 		cacti_log('NBAR maintenance requires a configured PHP binary.', false, 'FLOWVIEW');
+
 		return false;
 	}
 	exec_background($php, '-q ' . escapeshellarg($config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php') . ' --nbar-worker=supervise');
+
 	return true;
 }
 
 /** Run an isolated maintenance child with a hard process deadline. */
 function fv_nbar_supervise_maintenance(): void {
 	global $config;
+
 	if (!register_process_start('flowview', 'nbar_maintenance', 0, 120)) {
 		return;
 	}
+
 	try {
 		// Invoke PHP directly; older Cacti timeout helpers accept strings only.
 		$command = [read_config_option('path_php_binary'), '-q', $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php', '--nbar-worker=build'];
-		$status = fv_nbar_run_child($command, 90);
+		$status  = fv_nbar_run_child($command, 90);
+
 		if ($status !== 0) {
 			cacti_log('NBAR maintenance child failed or exceeded its 90-second deadline.', false, 'FLOWVIEW');
 		}
@@ -140,9 +155,10 @@ function fv_nbar_supervise_maintenance(): void {
 
 /** Supervise a direct PHP child independently of Cacti's versioned command API. */
 function fv_nbar_run_child(array $command, int $seconds): int {
-	$pipes = [];
-	$process = false;
+	$pipes      = [];
+	$process    = false;
 	$executable = $command[0] ?? '';
+
 	if (is_string($executable) && $executable !== '' && (strpbrk($executable, '/\\') === false || is_executable($executable))) {
 		try {
 			$process = @proc_open($command, [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, null, null, ['bypass_shell' => true]);
@@ -150,24 +166,30 @@ function fv_nbar_run_child(array $command, int $seconds): int {
 			$process = false;
 		}
 	}
+
 	if (!is_resource($process)) {
 		return 125;
 	}
+
 	try {
 		fclose($pipes[0]);
 		stream_set_blocking($pipes[1], false);
 		stream_set_blocking($pipes[2], false);
 		$deadline = hrtime(true) + max(1, $seconds) * 1000000000;
+
 		while (true) {
 			// Drain both pipes in bounded chunks; child output cannot fill memory.
 			stream_get_contents($pipes[1], 8192);
 			stream_get_contents($pipes[2], 8192);
 			$state = proc_get_status($process);
+
 			if (!$state['running']) {
 				return (int) $state['exitcode'];
 			}
+
 			if (hrtime(true) >= $deadline) {
 				proc_terminate($process, 9);
+
 				return 124;
 			}
 			usleep(10000);

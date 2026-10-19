@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -9,14 +9,14 @@ beforeAll(function () {
 beforeEach(function () {
 	plugin_test_reset();
 	$GLOBALS['listener_id'] = 1;
-	$this->header = pack('nnNNNN', 9, 2, 100000, time(), 1, 902);
+	$this->header           = pack('nnNNNN', 9, 2, 100000, time(), 1, 902);
 });
 
 it('learns an application name from a v9 options template', function () {
 	$definitions = pack('nnnnnn', 1, 4, 95, 4, 96, 32);
-	$template = pack('nnnnn', 1, 10 + strlen($definitions), 901, 4, 8) . $definitions;
-	$record = inet_pton('192.0.2.1') . hex2bin('0d000001') . str_pad('youtube', 32, chr(0));
-	$data = pack('nn', 901, 4 + strlen($record)) . $record;
+	$template    = pack('nnnnn', 1, 10 + strlen($definitions), 901, 4, 8) . $definitions;
+	$record      = inet_pton('192.0.2.1') . hex2bin('0d000001') . str_pad('youtube', 32, chr(0));
+	$data        = pack('nn', 901, 4 + strlen($record)) . $record;
 	fv_nbar_packet($this->header . $template . $data, '192.0.2.91');
 	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
 	expect($calls)->toHaveCount(1);
@@ -30,17 +30,19 @@ it('ignores malformed template definitions without writing records', function ($
 })->with([pack('nnnn', 0, 8, 12, 1), pack('nnnn', 0, 8, 902, 1), pack('nnnnn', 1, 10, 903, 1, 0)]);
 
 it('uses exporter uptime to date records and rejects expired observations', function ($expired) {
-	$fields = [95 => 4, 8 => 4, 12 => 4, 1 => 4, 21 => 4];
+	$fields      = [95 => 4, 8 => 4, 12 => 4, 1 => 4, 21 => 4];
 	$definitions = '';
+
 	foreach ($fields as $id => $size) {
 		$definitions .= pack('nn', $id, $size);
 	}
 	$template = pack('nnnn', 0, 8 + strlen($definitions), 904, count($fields)) . $definitions;
-	$record = hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . pack('NN', 1000, 95000);
-	$data = pack('nn', 904, 4 + strlen($record)) . $record;
-	$now = time();
+	$record   = hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . pack('NN', 1000, 95000);
+	$data     = pack('nn', 904, 4 + strlen($record)) . $record;
+	$now      = time();
 	fv_nbar_packet(pack('nnNNNN', 9, 2, 100000, $expired ? $now - 8 * 86400 : $now, 1, 904) . $template . $data, '192.0.2.94');
 	$calls = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute_prepared'));
+
 	if ($expired) {
 		expect($calls)->toBe([]);
 	} else {
@@ -50,19 +52,22 @@ it('uses exporter uptime to date records and rejects expired observations', func
 })->with([false, true]);
 
 it('ignores incomplete records and reports a failed record transaction', function ($reason) {
-	$fields = $reason === 'application' ? [8 => 4, 12 => 4, 1 => 4] : [95 => 4, 8 => $reason === 'address' ? 1 : 4, 12 => 4, 1 => 4];
+	$fields      = $reason === 'application' ? [8 => 4, 12 => 4, 1 => 4] : [95 => 4, 8 => $reason === 'address' ? 1 : 4, 12 => 4, 1 => 4];
 	$definitions = '';
-	$record = '';
+	$record      = '';
+
 	foreach ($fields as $id => $size) {
 		$definitions .= pack('nn', $id, $size);
 		$record .= str_repeat(chr(1), $size);
 	}
 	$template = pack('nnnn', 0, 8 + strlen($definitions), 905, count($fields)) . $definitions;
-	$data = pack('nn', 905, 4 + strlen($record)) . $record;
+	$data     = pack('nn', 905, 4 + strlen($record)) . $record;
+
 	if ($reason === 'transaction') {
 		plugin_test_queue_db_result('db_execute', false);
 	}
 	fv_nbar_packet($this->header . $template . $data, '192.0.2.95');
+
 	if ($reason === 'transaction') {
 		expect(end($GLOBALS['__test_cacti_log']))->toBe('WARNING: NBAR record transaction failed');
 	} else {
@@ -71,12 +76,13 @@ it('ignores incomplete records and reports a failed record transaction', functio
 })->with(['application', 'address', 'transaction']);
 
 it('invalidates cached templates containing any zero-length field and recovers on a valid refresh', function ($options, $position) {
-	$tid = 960 + $position + ($options ? 10 : 0);
+	$tid    = 960 + $position + ($options ? 10 : 0);
 	$router = '192.0.2.96';
 	$fields = $options ? [[1, 4], [95, 4], [96, 32]] : [[95, 4], [8, 4], [12, 4], [1, 4]];
 	$record = $options ? inet_pton('192.0.2.1') . hex2bin('0d000001') . str_pad('youtube', 32, chr(0)) : hex2bin('0d000001') . inet_pton('192.0.2.10') . inet_pton('198.51.100.20') . pack('N', 1000);
 	$encode = static function ($fields) use ($options, $tid) {
 		$definitions = implode('', array_map(fn ($f) => pack('nn', ...$f), $fields));
+
 		return ($options ? pack('nnnnn', 1, 10 + strlen($definitions), $tid, 4, strlen($definitions) - 4) : pack('nnnn', 0, 8 + strlen($definitions), $tid, count($fields))) . $definitions;
 	};
 	$data = pack('nn', $tid, 4 + strlen($record)) . $record;
@@ -94,55 +100,57 @@ it('invalidates cached templates containing any zero-length field and recovers o
 
 it('rejects a large zero-length template before repeatedly parsing its data', function () {
 	$definitions = str_repeat(pack('nn', 999, 0), 1999) . pack('nn', 95, 1);
-	$template = pack('nnnn', 0, 8 + strlen($definitions), 990, 2000) . $definitions;
-	$data = pack('nn', 990, 56004) . str_repeat('x', 56000);
+	$template    = pack('nnnn', 0, 8 + strlen($definitions), 990, 2000) . $definitions;
+	$data        = pack('nn', 990, 56004) . str_repeat('x', 56000);
 	fv_nbar_packet($this->header . $template . $data, '192.0.2.99');
 	fv_nbar_packet($this->header . $data, '192.0.2.99');
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
 
 it('invalidates data templates with oversized numeric fields before decoding', function ($field, $width) {
-	$tid = 1100 + $field;
+	$tid    = 1100 + $field;
 	$router = '192.0.2.110';
 	$fields = [[95, 4], [8, 4], [12, 4], [1, 4]];
 	$encode = static function ($fields) use ($tid) {
 		$def = implode('', array_map(fn ($f) => pack('nn', ...$f), $fields));
+
 		return pack('nnnn', 0, 8 + strlen($def), $tid, count($fields)) . $def;
 	};
 	$record = hex2bin('0d000001') . inet_pton('192.0.2.1') . inet_pton('198.51.100.1') . pack('N', 10);
 	$normal = pack('nn', $tid, 4 + strlen($record)) . $record;
 	fv_nbar_packet($this->header . $encode($fields) . $normal, $router);
 	plugin_test_reset();
-	$invalid = $fields;
+	$invalid   = $fields;
 	$invalid[] = [$field, $width];
-	$data = pack('nn', $tid, 4 + strlen($record) + $width) . $record . str_repeat('x', $width);
+	$data      = pack('nn', $tid, 4 + strlen($record) + $width) . $record . str_repeat('x', $width);
 	fv_nbar_packet($this->header . $encode($invalid) . $data, $router);
 	fv_nbar_packet($this->header . $normal, $router);
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
 })->with([[1, 4096], [2, 4096], [4, 4096], [7, 4096], [11, 4096], [21, 4096], [4, 2], [7, 3], [11, 3], [21, 5]]);
 
 it('keeps wide options scopes separate from numeric data field widths', function () {
-	$def = pack('nnnnnn', 1, 16, 95, 4, 96, 32);
+	$def      = pack('nnnnnn', 1, 16, 95, 4, 96, 32);
 	$template = pack('nnnnn', 1, 10 + strlen($def), 1190, 4, 8) . $def;
-	$record = inet_pton('2001:db8::1') . hex2bin('0d000001') . str_pad('youtube', 32, chr(0));
+	$record   = inet_pton('2001:db8::1') . hex2bin('0d000001') . str_pad('youtube', 32, chr(0));
 	fv_nbar_packet($this->header . $template . pack('nn', 1190, 4 + strlen($record)) . $record, '192.0.2.119');
 	expect($GLOBALS['__test_db_calls'])->toHaveCount(1)->and($GLOBALS['__test_db_calls'][0]['params'][2])->toBe('youtube');
 });
 
 it('does not interpret options scopes as flow counters when names are absent', function () {
-	$def = pack('nnnnnnnn', 1, 16, 95, 4, 8, 4, 12, 4);
+	$def      = pack('nnnnnnnn', 1, 16, 95, 4, 8, 4, 12, 4);
 	$template = pack('nnnnn', 1, 10 + strlen($def), 1191, 4, 12) . $def;
-	$record = inet_pton('2001:db8::1') . hex2bin('0d000001') . inet_pton('192.0.2.1') . inet_pton('198.51.100.1');
+	$record   = inet_pton('2001:db8::1') . hex2bin('0d000001') . inet_pton('192.0.2.1') . inet_pton('198.51.100.1');
 	fv_nbar_packet($this->header . $template . pack('nn', 1191, 4 + strlen($record)) . $record, '192.0.2.119');
 	expect($GLOBALS['__test_db_calls'])->toBe([]);
 });
 
 it('bounds packet-controlled source IDs while continuing to decode recent templates', function () {
-	$def = pack('nnnnnnnn', 95, 4, 8, 4, 12, 4, 1, 4);
+	$def      = pack('nnnnnnnn', 95, 4, 8, 4, 12, 4, 1, 4);
 	$template = pack('nnnn', 0, 8 + strlen($def), 1300, 4) . $def;
-	$record = hex2bin('0d000001') . inet_pton('192.0.2.1') . inet_pton('198.51.100.1') . pack('N', 10);
-	$data = pack('nn', 1300, 4 + strlen($record)) . $record;
-	for ($i = 0;$i < 70;$i++) {
+	$record   = hex2bin('0d000001') . inet_pton('192.0.2.1') . inet_pton('198.51.100.1') . pack('N', 10);
+	$data     = pack('nn', 1300, 4 + strlen($record)) . $record;
+
+	for ($i = 0; $i < 70; $i++) {
 		fv_nbar_packet(pack('nnNNNN', 9, 1, 100000, time(), 1, 1000 + $i) . $template, '192.0.2.130');
 	}
 	fv_nbar_packet(pack('nnNNNN', 9, 1, 100000, time(), 1, 1000) . $data, '192.0.2.130');

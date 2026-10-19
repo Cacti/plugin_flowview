@@ -1,13 +1,14 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 // Run only as a child process of the isolated unit test suite.
 if (PHP_SAPI !== 'cli' || count($argv) !== 3) {
 	exit(1);
 }
 require(dirname(__DIR__) . '/bootstrap-unit.php');
-$scenario = $argv[1];
+$scenario  = $argv[1];
 $directory = $argv[2];
-$driver = function_exists('pcov\\start') ? 'pcov' : (function_exists('xdebug_start_code_coverage') ? 'xdebug' : '');
+$driver    = function_exists('pcov\\start') ? 'pcov' : (function_exists('xdebug_start_code_coverage') ? 'xdebug' : '');
+
 if ($driver === 'pcov') {
 	\pcov\start();
 } elseif ($driver === 'xdebug') {
@@ -15,6 +16,7 @@ if ($driver === 'pcov') {
 }
 register_shutdown_function(static function () use ($directory, $driver) {
 	$coverage = [];
+
 	if ($driver === 'pcov') {
 		\pcov\stop();
 		$coverage = \pcov\collect();
@@ -31,10 +33,11 @@ ini_set('session.use_cookies', '0');
 session_cache_limiter('');
 session_save_path($directory);
 session_start();
-$key = str_repeat('a', 64);
-$_REQUEST = ['key' => $key];
-$entry = ['expires' => time() + 3600, 'sql' => 'SELECT COUNT(*) total FROM fixture WHERE listener_id=?', 'args' => [3], 'ttl' => 600];
+$key                        = str_repeat('a', 64);
+$_REQUEST                   = ['key' => $key];
+$entry                      = ['expires' => time() + 3600, 'sql' => 'SELECT COUNT(*) total FROM fixture WHERE listener_id=?', 'args' => [3], 'ttl' => 600];
 $_SESSION['fv_nbar_counts'] = [$key => $entry];
+
 if ($scenario === 'malformed') {
 	$_REQUEST['key'] = ['nested'];
 } elseif ($scenario === 'missing') {
@@ -51,9 +54,11 @@ if ($scenario === 'malformed') {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
 	plugin_test_queue_db_result('db_fetch_cell', '11.8.9-MariaDB');
 	plugin_test_queue_db_result('db_fetch_row_prepared', str_contains($scenario, 'failed') ? false : ['total' => 12345]);
+
 	if (str_starts_with($scenario, 'background')) {
 		function fastcgi_finish_request(): bool {
 			$GLOBALS['__test_response_finished'] = true;
+
 			return true;
 		}
 	}

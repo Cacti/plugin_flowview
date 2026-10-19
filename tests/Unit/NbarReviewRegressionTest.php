@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 beforeEach(function () {
 	plugin_test_reset();
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -51,9 +51,9 @@ it('does not publish a failed exporter upgrade', function () {
 	expect(fv_nbar_exporter_schema())->toBeFalse();
 });
 it('does not merge matching connection tuples from distinct exporters', function () {
-	$row = ['app_id' => 'a1', 'src_hex' => 'C0000201', 'dst_hex' => 'C6336401', 'sport' => 10, 'dport' => 443, 'protocol' => 6, 'router' => '192.0.2.1'];
-	$names = [1 => ['192.0.2.1:a1' => ['name_id' => 1], '192.0.2.2:a1' => ['name_id' => 2]]];
-	$key = fv_nbar_connection_key($row, $names, 1);
+	$row           = ['app_id' => 'a1', 'src_hex' => 'C0000201', 'dst_hex' => 'C6336401', 'sport' => 10, 'dport' => 443, 'protocol' => 6, 'router' => '192.0.2.1'];
+	$names         = [1 => ['192.0.2.1:a1' => ['name_id' => 1], '192.0.2.2:a1' => ['name_id' => 2]]];
+	$key           = fv_nbar_connection_key($row, $names, 1);
 	$row['router'] = '192.0.2.2';
 	expect($key)->not->toBe(fv_nbar_connection_key($row, $names, 1));
 });

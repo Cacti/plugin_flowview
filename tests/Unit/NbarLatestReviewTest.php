@@ -1,15 +1,17 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 beforeEach(function () {
 	plugin_test_reset();
 	global $config;
 	$constants = file_get_contents($config['base_path'] . '/include/global_constants.php');
 	preg_match_all("/define\\('((?:GT_|GTS_)[A-Z0-9_]+)', ([0-9]+)\\);/", $constants, $matches, PREG_SET_ORDER);
+
 	foreach ($matches as $match) {
 		if (!defined($match[1])) {
 			define($match[1], (int) $match[2]);
 		}
 	}
+
 	if (!defined('DEFAULT_TIMESPAN')) {
 		define('DEFAULT_TIMESPAN', 1800);
 	}
@@ -23,7 +25,7 @@ beforeEach(function () {
 it('handles all NBAR timespans without replacing legacy sessions', function ($preset) {
 	$_SESSION = ['sess_fv_7' => ['report' => 7, 'predefined_timespan' => 4]];
 	$_REQUEST = ['report' => 'nbar', 'predefined_timespan' => $preset, 'date1' => '2026-10-10 00:00', 'date2' => '2026-10-10 01:00'];
-	$session = $_SESSION;
+	$session  = $_SESSION;
 	ob_start();
 	expect(fv_nbar_timespan_request())->toBeTrue();
 	$payload = json_decode(ob_get_clean(), true);
@@ -66,6 +68,7 @@ it('stops cleanup at its deadline and drops failed batches', function () {
 it('checks the shared deadline between cleanup statements', function () {
 	plugin_test_queue_db_result('db_execute', function () {
 		usleep(3000);
+
 		return true;
 	});
 	fv_nbar_cleanup_batches([['first', 1], ['second', 1]], microtime(true) + 0.001);

@@ -57,6 +57,7 @@ if (cacti_sizeof($parms)) {
 					exit(1);
 				}
 				$nbar_worker = $value;
+
 				break;
 			case '--forcever':
 				$forcever = $value;

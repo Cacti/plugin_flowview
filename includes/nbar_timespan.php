@@ -26,21 +26,23 @@
 /**
  * Limit preset choices to the configured retention window.
  *
- * @param array $presets Cacti timespan labels by identifier.
- * @param int $now Current Unix time.
- * @param int $days Configured retention in days.
+ * @param array      $presets Cacti timespan labels by identifier.
+ * @param int        $now     Current Unix time.
+ * @param int        $days    Configured retention in days.
  * @param int|string $weekday Cacti first-weekday setting.
  *
  * @return array
  */
 function fv_nbar_timespan_options(array $presets, int $now, int $days, int|string $weekday): array {
 	$options = [];
-	$cutoff = $now - $days * 86400;
+	$cutoff  = $now - $days * 86400;
+
 	foreach ($presets as $id => $label) {
 		$span = [];
 		get_timespan($span, $now, $id, $weekday);
 		$from = strtotime($span['current_value_date1']);
-		$to = strtotime($span['current_value_date2']);
+		$to   = strtotime($span['current_value_date2']);
+
 		if ($from >= $cutoff && $to > $from && $to <= $now) {
 			// The exact retention option below replaces duplicate rolling periods.
 			if ($from === $cutoff && $to === $now) {
@@ -50,25 +52,28 @@ function fv_nbar_timespan_options(array $presets, int $now, int $days, int|strin
 		}
 	}
 	$options[1000] = $days === 1 ? __('Last Day', 'flowview') : __('Last %s Days', $days, 'flowview');
+
 	return $options;
 }
 /**
  * Clamp a requested range to retained history and the current time.
  *
  * @param int $start Inclusive range start in Unix seconds.
- * @param int $end Exclusive range end in Unix seconds.
- * @param int $now Current Unix time.
- * @param int $days Configured retention in days.
+ * @param int $end   Exclusive range end in Unix seconds.
+ * @param int $now   Current Unix time.
+ * @param int $days  Configured retention in days.
  *
  * @return array
  */
 function fv_nbar_bound_dates(int $start, int $end, int $now, int $days): array {
 	$cutoff = $now - $days * 86400;
-	$from = max($cutoff, $start);
-	$to = min($now, $end);
+	$from   = max($cutoff, $start);
+	$to     = min($now, $end);
+
 	if ($to <= $from) {
 		return [$now - 1800, $now, true];
 	}
+
 	return [$from, $to, $from !== $start || $to !== $end];
 }
 
@@ -78,12 +83,14 @@ function fv_nbar_timespan_request(): bool {
 		return false;
 	}
 	header('Content-Type: application/json');
+
 	if ((int) get_filter_request_var('predefined_timespan') === 1000) {
-		$end = (int) (floor(time() / 60) * 60);
+		$end   = (int) (floor(time() / 60) * 60);
 		$start = $end - fv_nbar_retention_days() * 86400;
 		print json_encode(['current_value_date1' => date('Y-m-d H:i', $start), 'current_value_date2' => date('Y-m-d H:i', $end), 'begin_now' => $start, 'end_now' => $end]);
 	} else {
 		flowview_gettimespan();
 	}
+
 	return true;
 }

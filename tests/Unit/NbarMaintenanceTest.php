@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -20,6 +20,7 @@ it('publishes raw data and revision invalidation in one transaction', function (
 	expect($calls[1]['params'])->toBe([42]);
 	expect($calls[2]['sql'])->toContain('(3,1800000000,1,-1)', '(3,1800003600,1,-1)', 'revision=revision+1');
 	expect(end($calls)['sql'])->toBe('COMMIT');
+
 	foreach ($calls as $call) {
 		expect($call['conn'])->toBe('maintenance-test-connection');
 	}
@@ -45,7 +46,7 @@ it('rebuilds all hourly tables and publishes only a matching revision', function
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
 	expect(fv_nbar_summary_build(3, 1800000000))->toBeTrue();
 	$calls = $GLOBALS['__test_db_calls'];
-	$sql = array_column($calls, 'sql');
+	$sql   = array_column($calls, 'sql');
 	expect($sql[count($sql) - 2])->toBe('COMMIT');
 	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
 	$publish = array_values(array_filter($calls, fn ($c) => str_starts_with($c['sql'], 'UPDATE plugin_flowview_nbar_hours')));
@@ -55,6 +56,7 @@ it('rebuilds all hourly tables and publishes only a matching revision', function
 it('rolls back each failed hourly mutation without committing partial totals', function ($failure) {
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
+
 	for ($i = 0; $i <= $failure; $i++) {
 		plugin_test_queue_db_result('db_execute_prepared', $i !== $failure);
 	}
@@ -127,6 +129,7 @@ it('expires all summary levels with bounded database deletions', function () {
 	fv_nbar_cleanup();
 	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
 	expect($sql)->toHaveCount(9);
+
 	foreach ($sql as $statement) {
 		expect($statement)->toStartWith('DELETE FROM plugin_flowview_nbar_');
 		expect($statement)->toContain(' LIMIT ');
@@ -146,11 +149,11 @@ it('keeps summary and raw branches mutually exclusive for complete hours', funct
 	}
 });
 
-
 it('restores the database timeout after building or rolling back a daily block', function ($fail) {
 	plugin_test_queue_db_result('db_fetch_row_prepared', []);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['n' => 1, 'ready' => 1, 'rev' => '42']);
 	plugin_test_queue_db_result('db_fetch_cell', '7.5');
+
 	if ($fail) {
 		plugin_test_queue_db_result('db_execute', true);
 		plugin_test_queue_db_result('db_execute', true);
@@ -165,10 +168,10 @@ it('restores the database timeout after building or rolling back a daily block',
 it('caches exact-count contexts separately by account and filter', function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
 	$_SESSION['sess_user_id'] = 1;
-	$a = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [1], time());
-	$b = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [2], time() - 3600);
+	$a                        = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [1], time());
+	$b                        = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [2], time() - 3600);
 	$_SESSION['sess_user_id'] = 2;
-	$c = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [1], time());
+	$c                        = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [1], time());
 	expect($a)->not->toBe($b)->not->toBe($c);
 	expect($_SESSION['fv_nbar_counts'][$a]['ttl'])->toBe(60);
 	expect($_SESSION['fv_nbar_counts'][$b]['ttl'])->toBe(600);
@@ -180,6 +183,7 @@ it('caches exact-count contexts separately by account and filter', function () {
 it('expires old count contexts and bounds the account cache', function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
 	$_SESSION['fv_nbar_counts'] = ['expired' => ['expires' => time() - 1]];
+
 	foreach (range(1, 12) as $i) {
 		$_SESSION['fv_nbar_counts']['context' . $i] = ['expires' => time() + 3600];
 	}

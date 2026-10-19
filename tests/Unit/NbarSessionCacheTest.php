@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -11,7 +11,7 @@ beforeAll(function () {
 beforeEach(function () {
 	plugin_test_reset();
 	$GLOBALS['flowview_cnn'] = 'session-cache-test';
-	$this->oldSessionPath = session_save_path();
+	$this->oldSessionPath    = session_save_path();
 	$this->oldSessionCookies = ini_get('session.use_cookies');
 	$this->oldSessionLimiter = session_cache_limiter();
 	session_save_path(sys_get_temp_dir());
@@ -51,6 +51,7 @@ it('does not share cached results between accounts or different filters', functi
 
 it('expires stale cache entries and evicts the oldest compact result', function () {
 	$_SESSION['fv_nbar_query_cache'] = ['expired' => ['until' => time() - 1, 'rows' => []]];
+
 	foreach (range(1, 12) as $i) {
 		$_SESSION['fv_nbar_query_cache']['item' . $i] = ['until' => time() + 100, 'rows' => []];
 	}
@@ -68,7 +69,6 @@ it('does not retain failed or oversized query results', function () {
 	expect($_SESSION['fv_nbar_query_cache'])->toBe([]);
 });
 
-
 it('reuses connection pages only for the same account and page', function () {
 	$_SESSION['sess_user_id'] = 1;
 	expect(fv_nbar_connections_cached([1], 100, 100, '1=1', [], 1))->toBe([]);
@@ -77,7 +77,7 @@ it('reuses connection pages only for the same account and page', function () {
 	expect($GLOBALS['__test_db_calls'])->toHaveCount($calls);
 	fv_nbar_connections_cached([1], 100, 100, '1=1', [], 2);
 	expect(count($GLOBALS['__test_db_calls']))->toBeGreaterThan($calls);
-	$calls = count($GLOBALS['__test_db_calls']);
+	$calls                    = count($GLOBALS['__test_db_calls']);
 	$_SESSION['sess_user_id'] = 2;
 	fv_nbar_connections_cached([1], 100, 100, '1=1', [], 1);
 	expect(count($GLOBALS['__test_db_calls']))->toBeGreaterThan($calls);
@@ -86,6 +86,7 @@ it('reuses connection pages only for the same account and page', function () {
 
 it('expires old connection pages and retains at most three requested pages', function () {
 	$_SESSION['fv_nbar_connection_pages'] = ['expired' => ['until' => time() - 1, 'rows' => []]];
+
 	foreach (range(1, 3) as $i) {
 		$_SESSION['fv_nbar_connection_pages']['page' . $i] = ['until' => time() + 100, 'rows' => []];
 	}

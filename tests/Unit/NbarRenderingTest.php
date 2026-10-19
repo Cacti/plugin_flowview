@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -13,8 +13,8 @@ beforeAll(function () {
 
 beforeEach(function () {
 	plugin_test_reset();
-	$GLOBALS['flowview_cnn'] = 'render-test-connection';
-	$GLOBALS['lid'] = 1;
+	$GLOBALS['flowview_cnn']  = 'render-test-connection';
+	$GLOBALS['lid']           = 1;
 	$GLOBALS['combined_lids'] = [1, 2, 3];
 });
 
@@ -25,7 +25,7 @@ it('escapes router names and reports freshness separately for three selected cap
 	ob_start();
 	fv_nbar_feed_status([
 		['id' => 1, 'name' => '<router>'], ['id' => 2, 'name' => 'Second'],
-		['id' => 3, 'name' => 'Third'], ['id' => 4, 'name' => 'Excluded'],
+		['id' => 3, 'name' => 'Third'], ['id'    => 4, 'name' => 'Excluded'],
 	], [1, 2, 3]);
 	$html = ob_get_clean();
 	expect($html)->toContain('&lt;router&gt;: Receiving', 'Second: No recent NBAR', 'Third: No recent NBAR', 'No retained NBAR records');
@@ -52,9 +52,9 @@ it('does not mark future-dated records as a receiving feed', function () {
 it('shows the top five application totals plus Other without exposing application markup', function () {
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', [
 		['name' => '<script>alert(1)</script>', 'bytes' => 2000000000],
-		['name' => 'Two', 'bytes' => 4000000], ['name' => 'Three', 'bytes' => 3000000],
+		['name' => 'Two', 'bytes' => 4000000], ['name'  => 'Three', 'bytes' => 3000000],
 		['name' => 'Four', 'bytes' => 2000000], ['name' => 'Five', 'bytes' => 1000000],
-		['name' => 'Six', 'bytes' => 500000], ['name' => 'Zero', 'bytes' => 0],
+		['name' => 'Six', 'bytes' => 500000], ['name'   => 'Zero', 'bytes' => 0],
 	]);
 	ob_start();
 	fv_nbar_chart('d.listener_id=?', [1, 1800000000, 1800001800], 'all');
@@ -83,7 +83,7 @@ it('renders date cells with escaped labels and explicit unavailable observations
 });
 
 it('escapes names, prefixes and dynamic settings in the Options markup', function () {
-	$GLOBALS['fv_nbar_preferences'] = ['prefixes' => ['192.0.2.0/24'], 'listeners' => [1, 2], 'data_unit' => 'Auto', 'rate_unit' => 'Mbps', 'dns' => '0'];
+	$GLOBALS['fv_nbar_preferences']         = ['prefixes' => ['192.0.2.0/24'], 'listeners' => [1, 2], 'data_unit' => 'Auto', 'rate_unit' => 'Mbps', 'dns' => '0'];
 	$GLOBALS['fv_nbar_preferences_message'] = '<failure>';
 	ob_start();
 	fv_nbar_preferences_render([['id' => 1, 'name' => '<router>'], ['id' => 2, 'name' => 'Second']], '', '', '', '');
@@ -93,21 +93,20 @@ it('escapes names, prefixes and dynamic settings in the Options markup', functio
 	expect(substr_count($html, ' checked'))->toBe(2);
 });
 
-
 it('labels conversation directions, observation dates and the application drilldown', function () {
 	$GLOBALS['__test_translations']['flowview']['Top 100 conversations by combined data volume. Each row groups an Internal Host, External Host and application across both directions. Uses only the selected LAN captures to avoid counting WAN copies. Local and multicast traffic is excluded. DNS names identify servers, not the exact website requested. History retention: %d days.'] = '<localized> retention %d days.';
-	$GLOBALS['fv_nbar_preferences'] = ['prefixes' => ['192.0.2.0/24'], 'dns' => '0'];
-	$nbar_preferences = $GLOBALS['fv_nbar_preferences'];
-	$listener_scope = 'd.listener_id=?';
-	$lid = 1;
-	$combined_lids = [];
-	$start = 1800000000;
-	$end = 1800001800;
-	$seconds = 1800;
-	$family = '4';
-	$aid = '0d000001';
-	$host = '192.0.2.10';
-	$base = 'flowview.php?report=nbar';
+	$GLOBALS['fv_nbar_preferences']                                                                                                                                                                                                                                                                                                                                                           = ['prefixes' => ['192.0.2.0/24'], 'dns' => '0'];
+	$nbar_preferences                                                                                                                                                                                                                                                                                                                                                                         = $GLOBALS['fv_nbar_preferences'];
+	$listener_scope                                                                                                                                                                                                                                                                                                                                                                           = 'd.listener_id=?';
+	$lid                                                                                                                                                                                                                                                                                                                                                                                      = 1;
+	$combined_lids                                                                                                                                                                                                                                                                                                                                                                            = [];
+	$start                                                                                                                                                                                                                                                                                                                                                                                    = 1800000000;
+	$end                                                                                                                                                                                                                                                                                                                                                                                      = 1800001800;
+	$seconds                                                                                                                                                                                                                                                                                                                                                                                  = 1800;
+	$family                                                                                                                                                                                                                                                                                                                                                                                   = '4';
+	$aid                                                                                                                                                                                                                                                                                                                                                                                      = '0d000001';
+	$host                                                                                                                                                                                                                                                                                                                                                                                     = '192.0.2.10';
+	$base                                                                                                                                                                                                                                                                                                                                                                                     = 'flowview.php?report=nbar';
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['app_id' => $aid, 'name' => '<app>', 'internal' => $host, 'external' => '198.51.100.20', 'download' => 2000000, 'upload' => 10000, 'first_seen' => $start, 'last_seen' => $end - 60]]);
 	ob_start();
 	include(dirname(__DIR__, 2) . '/nbar_conversations.php');
@@ -130,17 +129,17 @@ it('explains why conversation classification needs internal networks', function 
 
 it('shows an empty conversation table when no matching records exist', function () {
 	$GLOBALS['fv_nbar_preferences'] = ['prefixes' => ['2001:db8::/64'], 'dns' => '0'];
-	$nbar_preferences = $GLOBALS['fv_nbar_preferences'];
-	$listener_scope = 'd.listener_id=?';
-	$lid = 1;
-	$combined_lids = [];
-	$start = 1800000000;
-	$end = 1800001800;
-	$seconds = 1800;
-	$family = 'all';
-	$aid = '';
-	$host = '';
-	$base = 'flowview.php?report=nbar';
+	$nbar_preferences               = $GLOBALS['fv_nbar_preferences'];
+	$listener_scope                 = 'd.listener_id=?';
+	$lid                            = 1;
+	$combined_lids                  = [];
+	$start                          = 1800000000;
+	$end                            = 1800001800;
+	$seconds                        = 1800;
+	$family                         = 'all';
+	$aid                            = '';
+	$host                           = '';
+	$base                           = 'flowview.php?report=nbar';
 	ob_start();
 	include(dirname(__DIR__, 2) . '/nbar_conversations.php');
 	expect(ob_get_clean())->toContain('No conversations for this period');
@@ -151,7 +150,7 @@ it('groups chart rows by the complete fallback label for missing names', functio
 	fv_nbar_chart('d.listener_id=?', [1, 1800000000, 1800001800], 'all');
 	ob_end_clean();
 	$queries = array_column($GLOBALS['__test_db_calls'], 'sql');
-	$sql = implode(' ', $queries);
+	$sql     = implode(' ', $queries);
 	expect($sql)->toContain("GROUP BY COALESCE(NULLIF(n.name,''),CONCAT('Application ',d.app_id)) ORDER BY bytes DESC");
 	expect($sql)->not->toContain('GROUP BY name ORDER BY');
 });

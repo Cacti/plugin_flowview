@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 beforeAll(function () {
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
@@ -18,7 +18,7 @@ it('appends the next hour to a valid daily checkpoint without resetting totals',
 	plugin_test_queue_db_result('db_fetch_cell', '6.25');
 	expect(fv_nbar_daily_build(2, 1800000000, 1800007200))->toBe(1);
 	$calls = $GLOBALS['__test_db_calls'];
-	$sql = implode(' ', array_column($calls, 'sql'));
+	$sql   = implode(' ', array_column($calls, 'sql'));
 	expect($sql)->not->toContain('DELETE FROM');
 	expect($sql)->toContain('minute>=1800003600 AND d.minute<1800007200', 'bytes=bytes+VALUES(bytes)', 'SET SESSION max_statement_time=6.25');
 	$checkpoint = array_values(array_filter($calls, fn ($c) => str_contains($c['sql'], 'INSERT INTO plugin_flowview_nbar_days')));
@@ -38,6 +38,7 @@ it('does not publish a day when any daily mutation fails', function ($stage) {
 	plugin_test_queue_db_result('db_fetch_row_prepared', []);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['n' => 1, 'ready' => 1, 'rev' => '7']);
 	plugin_test_queue_db_result('db_fetch_cell', '4.5');
+
 	if ($stage === 'reset') {
 		plugin_test_queue_db_result('db_execute_prepared', false);
 	} elseif ($stage === 'aggregate') {
@@ -92,7 +93,7 @@ it('seeds and publishes closed hours before handing off to the daily worker', fu
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => 4]);
 	expect(fv_nbar_summary_refresh())->toBe(1);
 	$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
-	expect($sql)->toContain('INSERT IGNORE INTO plugin_flowview_nbar_hours', 'SET built=?,connection_built=?', 'RELEASE_LOCK', "flowview_nbar_daily:");
+	expect($sql)->toContain('INSERT IGNORE INTO plugin_flowview_nbar_hours', 'SET built=?,connection_built=?', 'RELEASE_LOCK', 'flowview_nbar_daily:');
 });
 
 it('releases the hourly worker lock when checkpoint seeding fails', function () {
@@ -108,7 +109,11 @@ it('releases the hourly worker lock when checkpoint seeding fails', function () 
 
 it('stops the hourly work queue when its time budget expires', function () {
 	plugin_test_queue_db_result('db_fetch_row', ['acquired' => 1]);
-	plugin_test_queue_db_result('db_fetch_assoc', static function () { usleep(1100000); return []; });
+	plugin_test_queue_db_result('db_fetch_assoc', static function () {
+		usleep(1100000);
+
+		return [];
+	});
 	plugin_test_queue_db_result('db_fetch_assoc', [['listener_id' => 1, 'hour' => time() - 7200, 'revision' => 4]]);
 	expect(fv_nbar_summary_refresh(1))->toBe(0);
 	$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
@@ -118,7 +123,11 @@ it('stops the hourly work queue when its time budget expires', function () {
 
 it('stops daily work after the worker deadline while releasing its lock', function () {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
-	plugin_test_queue_db_result('db_fetch_assoc', static function () { usleep(1100000); return [['listener_id' => 1, 'first_hour' => time() - 7200]]; });
+	plugin_test_queue_db_result('db_fetch_assoc', static function () {
+		usleep(1100000);
+
+		return [['listener_id' => 1, 'first_hour' => time() - 7200]];
+	});
 	plugin_test_queue_db_result('db_fetch_cell_prepared', time() - 7200);
 	expect(fv_nbar_daily_refresh(1))->toBe(0);
 	$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
@@ -134,6 +143,7 @@ it('does not materialize a calendar day that begins before the retention cutoff'
 	expect(fv_nbar_daily_refresh())->toBe(0);
 	$lookups = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($call) => str_starts_with($call['sql'], 'SELECT * FROM plugin_flowview_nbar_days')));
 	expect($lookups)->not->toBe([]);
+
 	foreach ($lookups as $lookup) {
 		expect($lookup['params'][1])->toBeGreaterThanOrEqual($cutoff);
 	}

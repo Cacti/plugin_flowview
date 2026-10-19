@@ -1,21 +1,22 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 
 // Resolver double: these tests never send DNS packets.
 if (!class_exists('Net_DNS2_Resolver')) {
-	class Net_DNS2_Resolver
-	{
+	class Net_DNS2_Resolver {
 		public $timeout;
 		public static array $results = [];
 		public static array $queries = [];
-		public function __construct($options) {
+		public function __construct(array $options) {
 		}
-		public function query($ip, $type) {
+		public function query(string $ip, string $type): mixed {
 			self::$queries[] = [$ip, $type];
-			$result = array_shift(self::$results);
+			$result          = array_shift(self::$results);
+
 			if ($result instanceof Throwable) {
 				throw $result;
 			}
+
 			return (object) ['answer' => $result];
 		}
 	}
@@ -55,6 +56,7 @@ it('expires negative DNS entries and retains at most 512 addresses', function ()
 	plugin_test_reset();
 	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_dns.php');
 	$_SESSION['fv_nbar_dns_negative']['old'] = ['until' => time() - 1, 'name' => 'Old'];
+
 	foreach (range(1, 512) as $i) {
 		$_SESSION['fv_nbar_dns_negative']['host' . $i] = ['until' => time() + 100, 'name' => 'Not resolved'];
 	}
@@ -68,6 +70,7 @@ require_once(dirname(__DIR__) . '/helpers/request.php');
 it('stops further DNS lookups after the report lookup budget is exhausted', function () {
 	$directory = sys_get_temp_dir() . '/flowview-dns-' . bin2hex(random_bytes(8));
 	mkdir($directory, 0700);
+
 	try {
 		[$stdout] = flowview_test_request(dirname(__DIR__) . '/fixtures/nbar-dns-budget.php', 'budget', $directory);
 		expect(json_decode($stdout, true, 512, JSON_THROW_ON_ERROR))->toBe(['name' => 'Not resolved', 'queries' => 1]);

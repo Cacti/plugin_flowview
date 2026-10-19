@@ -1,13 +1,14 @@
 <?php
-/* Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later. */
+// Copyright (C) 2004-2026 The Cacti Group. GPL-2.0-or-later.
 // Run only as a child process of the isolated unit test suite.
 if (PHP_SAPI !== 'cli' || count($argv) !== 3) {
 	exit(1);
 }
 require(dirname(__DIR__) . '/bootstrap-unit.php');
-$scenario = $argv[1];
+$scenario  = $argv[1];
 $directory = $argv[2];
-$driver = function_exists('pcov\\start') ? 'pcov' : (function_exists('xdebug_start_code_coverage') ? 'xdebug' : '');
+$driver    = function_exists('pcov\\start') ? 'pcov' : (function_exists('xdebug_start_code_coverage') ? 'xdebug' : '');
+
 if ($driver === 'pcov') {
 	\pcov\start();
 } elseif ($driver === 'xdebug') {
@@ -15,6 +16,7 @@ if ($driver === 'pcov') {
 }
 register_shutdown_function(static function () use ($directory, $driver) {
 	$coverage = [];
+
 	if ($driver === 'pcov') {
 		\pcov\stop();
 		$coverage = \pcov\collect();
@@ -27,6 +29,7 @@ register_shutdown_function(static function () use ($directory, $driver) {
 flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
 $constants = file_get_contents($config['base_path'] . '/include/global_constants.php');
 preg_match_all("/define\('((?:GT_|GTS_)[A-Z0-9_]+)', ([0-9]+)\);/", $constants, $matches, PREG_SET_ORDER);
+
 foreach ($matches as $match) {
 	if (!defined($match[1])) {
 		define($match[1], (int) $match[2]);
@@ -48,7 +51,7 @@ function csrf_get_tokens(): string {
  * @return void
  */
 function html_start_box(mixed ...$args): void {
-	echo '<table>';
+	print '<table>';
 }
 /**
  * Close the fixture report-box markup.
@@ -58,7 +61,7 @@ function html_start_box(mixed ...$args): void {
  * @return void
  */
 function html_end_box(mixed ...$args): void {
-	echo '</table>';
+	print '</table>';
 }
 /**
  * Record completion without loading Cacti's real page footer.
@@ -68,13 +71,15 @@ function html_end_box(mixed ...$args): void {
 function bottom_footer(): void {
 	$GLOBALS['__test_footer_rendered'] = true;
 }
-$GLOBALS['__test_config']['flowview_nbar_schema_version'] = '2';
+$GLOBALS['__test_config']['flowview_nbar_schema_version']     = '2';
 $GLOBALS['__test_user_settings']['flowview_nbar_preferences'] = json_encode(['prefixes' => ['192.0.2.0/24'], 'listeners' => [], 'dns' => '0']);
-$graph_timespans = [GT_LAST_HALF_HOUR => 'Last Half Hour', GT_LAST_HOUR => 'Last Hour', GT_LAST_DAY => 'Last Day', GT_LAST_YEAR => 'Last Year'];
-$_REQUEST = ['action' => 'view', 'report' => 'nbar', 'mode' => 'apps', 'listener' => '1'];
-$_SERVER['REQUEST_METHOD'] = 'GET';
+$graph_timespans                                              = [GT_LAST_HALF_HOUR => 'Last Half Hour', GT_LAST_HOUR => 'Last Hour', GT_LAST_DAY => 'Last Day', GT_LAST_YEAR => 'Last Year'];
+$_REQUEST                                                     = ['action' => 'view', 'report' => 'nbar', 'mode' => 'apps', 'listener' => '1'];
+$_SERVER['REQUEST_METHOD']                                    = 'GET';
+
 if (str_starts_with($scenario, 'nav-redirect')) {
 	$_REQUEST = in_array($scenario, ['nav-redirect-header', 'nav-redirect-fragment-header'], true) ? ['headercontent' => 'true'] : [];
+
 	if (str_contains($scenario, 'fragment')) {
 		$_REQUEST += ['action' => 'view', 'header' => 'false'];
 	}
@@ -120,15 +125,17 @@ if (str_starts_with($scenario, 'nav-redirect')) {
 	plugin_test_queue_db_result('db_execute', false);
 } elseif ($scenario === 'upgrade') {
 	$GLOBALS['__test_config']['flowview_nbar_schema_version'] = '0';
-	$_SERVER['PHP_SELF'] = 'fixture.php';
+	$_SERVER['PHP_SELF']                                      = 'fixture.php';
 } elseif ($scenario === 'more-pages') {
 	$_REQUEST['mode'] = 'connections';
-	$from = (int) floor(time() / 3600) * 3600 - 3600;
+	$from             = (int) floor(time() / 3600) * 3600 - 3600;
 	$_REQUEST += ['predefined_timespan' => '0', 'date1' => date('Y-m-d H:i', $from), 'date2' => date('Y-m-d H:i', $from + 1200), 'lock_range' => '1'];
+
 	foreach (range(1, 4) as $unused) {
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', []);
 	}
 	$rows = [];
+
 	foreach (range(1, 101) as $i) {
 		$rows[] = ['app_id' => '0d000001', 'src_hex' => bin2hex(inet_pton('192.0.2.' . $i)), 'dst_hex' => bin2hex(inet_pton('198.51.100.20')), 'sport' => $i, 'dport' => 443, 'protocol' => 6, 'bytes' => '10', 'packets' => '1', 'records' => '1', 'first_seen' => $from, 'last_seen' => $from + 60];
 	}
@@ -139,6 +146,7 @@ if (str_starts_with($scenario, 'nav-redirect')) {
 	$_REQUEST += ['prefs_apply' => '1', 'local_prefixes' => ''];
 	$GLOBALS['__test_csrf_valid'] = false;
 }
+
 foreach (range(1, 3) as $unused) {
 	plugin_test_queue_db_result('db_fetch_assoc', []);
 }

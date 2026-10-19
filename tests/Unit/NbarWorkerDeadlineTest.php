@@ -17,31 +17,39 @@ it('does not launch maintenance with a missing PHP binary', function () {
 it('supervises a direct PHP child and releases registration after success or failure', function ($status, $invalidPhp) {
 	global $config;
 	$oldBase = $config['base_path'];
-	$root = sys_get_temp_dir() . "/flowview supervisor '" . bin2hex(random_bytes(8));
+	$root    = sys_get_temp_dir() . "/flowview supervisor '" . bin2hex(random_bytes(8));
 	mkdir($root . '/plugins/flowview/cli', 0700, true);
 	$script = $root . '/plugins/flowview/cli/flowview_upgrade.php';
 	$marker = $root . '/args.json';
 	file_put_contents($script, '<?php file_put_contents(' . var_export($marker, true) . ', json_encode($argv)); exit(' . $status . ');');
+
 	try {
-		$config['base_path'] = $root;
+		$config['base_path']                         = $root;
 		$GLOBALS['__test_config']['path_php_binary'] = $invalidPhp ? $root . '/missing-php' : PHP_BINARY;
-		$GLOBALS['__test_cacti_log'] = [];
+		$GLOBALS['__test_cacti_log']                 = [];
 		fv_nbar_supervise_maintenance();
 		expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->toBe(['register_process_start', 'unregister_process']);
+
 		if ($invalidPhp) {
 			expect(file_exists($marker))->toBeFalse();
 		} else {
 			expect(json_decode(file_get_contents($marker), true))->toBe([$script, '--nbar-worker=build']);
 		}
+
 		if ($invalidPhp || $status !== 0) {
 			expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('failed or exceeded');
 		}
 	} finally {
 		$config['base_path'] = $oldBase;
+
 		if (file_exists($marker)) {
-		unlink($marker);
+			unlink($marker);
 		}
-		unlink($script); rmdir($root . '/plugins/flowview/cli'); rmdir($root . '/plugins/flowview'); rmdir($root . '/plugins'); rmdir($root);
+		unlink($script);
+		rmdir($root . '/plugins/flowview/cli');
+		rmdir($root . '/plugins/flowview');
+		rmdir($root . '/plugins');
+		rmdir($root);
 	}
 })->with([[0, false], [7, false], [0, true]]);
 it('does not start another child while maintenance is registered', function () {
