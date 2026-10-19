@@ -87,7 +87,7 @@ it('resets a queued time-selection exception between tests', function () {
 	expect($span)->toBe(['begin_now' => 200, 'end_now' => 2000]);
 });
 
-it('returns success after preparing an enabled schedule', function () {
+it('distinguishes prepared records, an empty period and a failed query', function ($data, $success) {
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 3, 'title' => 'Fixture', 'format_file' => 'default']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['enabled' => 'on', 'timespan' => 1, 'name' => 'Fixture']);
@@ -97,7 +97,19 @@ it('returns success after preparing an enabled schedule', function () {
 	set_request_var('date1', date('Y-m-d H:i:s', 100));
 	set_request_var('date2', date('Y-m-d H:i:s', 2000));
 	$key = get_flowview_session_key(3, 100, 2000);
-	$_SESSION['sess_flowdata'][$key] = ['timeout' => time() + 60, 'data' => ['table' => 'Fixture', 'data' => [['bytes' => 42]]]];
-	expect(plugin_flowview_run_schedule(7, 51))->toBeTrue();
-	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->toContain('reports_load_format_file');
-});
+	$_SESSION['sess_flowdata'][$key] = ['timeout' => time() + 60, 'data' => $data];
+	$GLOBALS['__test_cacti_log'] = [];
+	expect(plugin_flowview_run_schedule(7, 51))->toBe($success);
+	$formatted = in_array('reports_load_format_file', array_column($GLOBALS['__test_db_calls'], 'fn'), true);
+	expect($formatted)->toBe(!empty($data['data']));
+	if ($data === false || ($data['data'] ?? null) === false) {
+		expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('retry');
+	} elseif (empty($data['data'])) {
+		expect(implode(' ', $GLOBALS['__test_cacti_log']))->toContain('Returned not Data');
+	}
+})->with([
+	[['table' => 'Fixture', 'data' => [['bytes' => 42]]], true],
+	[['table' => 'Fixture', 'data' => []], true],
+	[false, false],
+	[['table' => 'Fixture', 'data' => false], false],
+]);

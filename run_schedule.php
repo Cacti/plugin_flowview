@@ -162,8 +162,8 @@ if ($scheduled == true) {
 
 		if (cacti_sizeof($schedule)) {
 			if (!plugin_flowview_run_schedule($id, $report_id)) {
-				// A later readiness failure must preserve the original occurrence
-				// and its schedule timestamps just like the initial check does.
+				// A deferred or failed preparation must preserve the occurrence
+				// and schedule timestamps just like the initial readiness check.
 				if (!$force) {
 					unregister_process('flowsched', "child_$id", 0);
 				}

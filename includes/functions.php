@@ -1916,7 +1916,7 @@ function get_port_name($port_num, int $port_proto = 6) {
  * @param mixed $id
  * @param mixed $report_id
  *
- * @return bool False when schema readiness requires retry; true otherwise.
+ * @return bool False when schema readiness or query execution requires retry; true otherwise.
  */
 function plugin_flowview_run_schedule($id, $report_id): bool {
 	global $config;
@@ -1960,20 +1960,24 @@ function plugin_flowview_run_schedule($id, $report_id): bool {
 
 	/* get the data and append to the boby */
 	$data = load_data_for_filter($schedule['query_id'], $start, $end);
-	if ($data !== false) {
-		$body .= $data['table'];
+	if ($data === false || ($data['data'] ?? null) === false) {
+		cacti_log('FlowView scheduled report query failed; retaining the occurrence for retry.', false, 'FLOWVIEW');
+		return false;
 	}
+	if (empty($data['data'])) {
+		cacti_log(sprintf('WARNING: Running of Flowview Schedule %s Returned not Data.  Please Check your Flowview Schedule', $report_id), false, 'FLOWVIEW');
+		return true;
+	}
+	$body .= $data['table'];
 
 	$body_text = html_escape($schedule['title']) . PHP_EOL . PHP_EOL;
 	$body_text .= 'From ' . date('Y-m-d H:i:s', $start) . ' to ' . date('Y-m-d H:i:s', $end) . PHP_EOL;
 	$body_text .= 'Using Query \'' . html_escape($query['name']) . '\'' . PHP_EOL . PHP_EOL;
 
-	if ($data !== false) {
-		$body_text .= implode(', ', array_keys($data['data'][0])) . PHP_EOL;
+	$body_text .= implode(', ', array_keys($data['data'][0])) . PHP_EOL;
 
-		foreach($data['data'] as $row) {
-			$body_text .= implode(', ', array_values($row)) . PHP_EOL;
-		}
+	foreach($data['data'] as $row) {
+		$body_text .= implode(', ', array_values($row)) . PHP_EOL;
 	}
 
 	/* process the format file */
@@ -2001,11 +2005,7 @@ function plugin_flowview_run_schedule($id, $report_id): bool {
     $headers['User-Agent'] = 'Cacti-FlowView-v' . $version;
 	$headers['X-Priority'] = '1';
 
-	if (cacti_sizeof($data['data'])) {
-		reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers);
-	} else {
-		cacti_log(sprintf('WARNING: Running of Flowview Schedule %s Returned not Data.  Please Check your Flowview Schedule', $report_id), false, 'FLOWVIEW');
-	}
+	reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers);
 	return true;
 }
 
