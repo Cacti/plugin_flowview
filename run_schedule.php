@@ -124,7 +124,7 @@ if ($scheduled == true) {
 				LIMIT 1',
 				['flowview', 'pending']);
 
-			if (cacti_sizeof($report)) {
+			if (is_array($report) && cacti_sizeof($report)) {
 				reports_run($report['id']);
 
 				$run++;
@@ -155,7 +155,7 @@ if ($scheduled == true) {
 		AND rq.id = ?',
 		['flowview', $report_id]);
 
-	if (cacti_sizeof($report)) {
+	if (is_array($report) && cacti_sizeof($report)) {
 		$id = $report['source_id'];
 
 		/* silently end if the registered process is still running, or process table missing */

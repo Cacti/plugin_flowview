@@ -1968,7 +1968,7 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 	}
 
 	/* process the format file */
-	$report_tag  = '';
+	$report_tag  = false;
 	$theme       = 'modern';
 	$body_html   = '';
 	$format      = $schedule['format_file'] != '' ? $schedule['format_file']:'default';
@@ -4217,7 +4217,7 @@ function parallel_database_query_run($requests) {
 	}
 
 	if ($total_time >= $max_time) {
-		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
+		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), '', MESSAGE_LEVEL_ERROR);
 
 		foreach($requests as $request_id) {
 			parallel_database_query_cleanup($request_id);

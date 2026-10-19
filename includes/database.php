@@ -506,7 +506,7 @@ function flowview_db_get_table_column_types($table, mixed $cnn_id = false) {
 
     $columns = db_fetch_assoc("SHOW COLUMNS FROM $table", false, $flowview_cnn);
     $cols    = [];
-    if (cacti_sizeof($columns)) {
+    if (is_array($columns) && cacti_sizeof($columns)) {
         foreach($columns as $col) {
             $cols[$col['Field']] = ['type' => $col['Type'], 'null' => $col['Null'], 'default' => $col['Default'], 'extra' => $col['Extra']];
         }

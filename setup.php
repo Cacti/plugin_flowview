@@ -883,7 +883,7 @@ function flowview_query_service_run($request_ids): bool {
 		$timeout = 300;
 	}
 
-	$payload = json_encode(array('query_ids' => array_map('intval', $request_ids)));
+	$payload = (string) json_encode(['query_ids' => array_map('intval', $request_ids)]);
 
 	$headers = array('Content-Type: application/json');
 

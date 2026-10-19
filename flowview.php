@@ -174,7 +174,7 @@ function save_filter_as(): void {
 			WHERE id = ?',
 			array(get_request_var('query')));
 
-		if (cacti_sizeof($save)) {
+		if (is_array($save) && cacti_sizeof($save)) {
 			$save['name'] = get_request_var('sname');
 
 			if (isset_request_var('report')) {

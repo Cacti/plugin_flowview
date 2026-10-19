@@ -184,6 +184,10 @@ $unmeasured_allowlist = [
 	'import_flows.php',
 	'repair_tables.php',
 	'run_schedule.php',
+	// Compatibility shim for pre-1.3 Cacti cores (reports_log_and_notify() and
+	// friends). It only loads on those cores and needs the legacy reports,
+	// mailer and process tables, so it cannot run in the isolated unit process.
+	'includes/functions-pre13.php',
 ];
 $unmeasured            = array_values(array_diff(array_keys($changed), array_keys($measured)));
 $unexpected_unmeasured = array_values(array_diff($unmeasured, $unmeasured_allowlist));
