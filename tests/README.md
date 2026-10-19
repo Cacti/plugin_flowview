@@ -38,3 +38,11 @@ connection assertions.
 Security tests validate PHP 8.2 syntax compatibility and the plugin's
 install/version/uninstall structure without executing plugin source.
 
+The filter lifecycle regressions also launch the actual web and upgrade entrypoints
+in subprocesses with isolated core API fixtures. They verify that all three web
+pages defer schema repair, including same-version installations, and that the
+background worker registers before attempting repair. The queue regression uses
+an in-memory SQLite database to check persisted ordering across multiple passes:
+a full failed batch remains pending while healthy rows advance on the next pass.
+This queue test requires PDO SQLite and skips explicitly when it is unavailable;
+it does not validate MariaDB schema syntax or metadata locking.
