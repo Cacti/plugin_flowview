@@ -64,8 +64,11 @@ function set_default_action() {
 	$GLOBALS['calls'][] = ['page-ready'];
 	exit;
 }
+// Capture state after shutdown callbacks registered by the actual entrypoint.
 register_shutdown_function(function () {
-	file_put_contents(getenv('FLOWVIEW_FIXTURE_RESULT'), json_encode(['calls' => $GLOBALS['calls'], 'status' => http_response_code(), 'repair_loaded' => function_exists('flowview_filter_status_upgrade')]));
+	register_shutdown_function(function () {
+		file_put_contents(getenv('FLOWVIEW_FIXTURE_RESULT'), json_encode(['calls' => $GLOBALS['calls'], 'status' => http_response_code(), 'repair_loaded' => function_exists('flowview_filter_status_upgrade'), 'pid' => getmypid()]));
+	});
 });
 function db_fetch_row_prepared($sql, $params = [], ...$args) {
 	$GLOBALS['calls'][] = ['row', $sql, $params];

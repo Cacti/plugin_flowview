@@ -82,11 +82,19 @@ if ($forcever == '') {
 $info            = plugin_flowview_version();
 $current_version = $info['version'];
 
-if (!register_process_start('flowview', 'upgrade', 1, 86400)) {
+$registered = register_process_start('flowview', 'upgrade', 1, 86400);
+if (!$registered) {
 	if (empty($forcever)) {
 		print 'WARNING: Running process detected.  To override use --forcever' . PHP_EOL;
 		exit(1);
 	}
+}
+
+if ($registered) {
+	$upgrade_pid = getmypid();
+	register_shutdown_function(static function () use ($upgrade_pid) {
+		unregister_process('flowview', 'upgrade', 1, $upgrade_pid);
+	});
 }
 
 if (!flowview_filter_status_upgrade()) {
@@ -104,7 +112,6 @@ cacti_log('Upgrading from v' . $old_version . ' to ' . $current_version, true, '
 
 flowview_upgrade($current_version, $old_version);
 
-unregister_process('flowview', 'upgrade', 1);
 
 exit(0);
 

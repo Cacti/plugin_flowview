@@ -60,15 +60,21 @@ it('serves a retry response without DDL from every guarded web entrypoint', func
 		expect($background)->toHaveCount(1)->and($background[0][1][1])->toContain('/plugins/flowview/flowview_upgrade.php');
 	}
 })->with(['flowview.php', 'flowview_filters.php', 'flowview_schedules.php'])->with([false, true]);
-it('repairs same-version schemas only after background registration and reports repair failure', function ($mode, $code, $writes) {
-	[$exit, $output] = ($this->runFixture)([PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/flowview_upgrade.php'], $mode);
+it('repairs same-version schemas only after background registration and reports repair failure', function ($mode, $code, $writes, $force = false) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/flowview_upgrade.php'];
+	if ($force) {
+		$command[] = '--forcever=fixture-version';
+	}
+	[$exit, $output] = ($this->runFixture)($command, $mode);
 	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
 	expect($result)->toBeArray($output);
 	$actions = array_column($result['calls'], 0);
 	expect($exit)->toBe($code)->and($result['repair_loaded'])->toBeTrue()
 		->and($actions[0])->toBe('register')
 		->and(array_filter($actions, fn ($action) => $action === 'ddl'))->toHaveCount($writes);
-})->with([['pending', 0, 1], ['failed', 1, 1], ['ready', 0, 0], ['busy', 1, 0]]);
+	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+	expect($released)->toBe($mode === 'busy' ? [] : [['unregister', ['flowview', 'upgrade', 1, $result['pid']]]]);
+})->with([['pending', 0, 1], ['failed', 1, 1], ['ready', 0, 0], ['busy', 1, 0], ['pending', 0, 1, true], ['busy', 0, 1, true]]);
 it('retains a full failing snapshot while advancing to healthy rows on the next pass', function () {
 	if (!extension_loaded('pdo_sqlite')) {
 		$this->markTestSkipped('PDO SQLite is needed for the persisted queue regression');
