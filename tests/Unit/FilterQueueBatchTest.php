@@ -124,3 +124,15 @@ it('keeps a capacity reservation when a concurrent replacement makes dead-PID de
 	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM processes')));
 	expect($deletes)->toHaveCount(1)->and($deletes[0]['params'])->toBe(['flowsched', 'child_7', 0, 2147483647]);
 });
+
+it('does not launch or reset an occurrence when another dispatcher already owns its claim', function () {
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
+	plugin_test_queue_db_result('db_affected_rows', 0);
+	expect(flowview_reports_run(51))->toBeFalse();
+	$calls = $GLOBALS['__test_db_calls'];
+	expect(array_column($calls, 'fn'))->not->toContain('exec_with_timeout');
+	$writes = array_values(array_filter($calls, fn ($c) => $c['fn'] === 'db_execute_prepared'));
+	expect($writes)->toHaveCount(1)->and($writes[0]['sql'])->toContain('AND status=?')
+		->and($writes[0]['params'][4])->toBe('pending');
+});

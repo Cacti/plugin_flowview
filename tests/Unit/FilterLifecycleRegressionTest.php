@@ -77,6 +77,7 @@ it('retains a full failing snapshot while advancing to healthy rows on the next 
 	$result = json_decode($output, true);
 	expect($exit)->toBe(0)->and($result['first'])->toBe(0)->and($result['second'])->toBe(2)->and($result['third'])->toBe(0)
 		->and($result['attempts'])->toBe([1, 2, 3, 4, 1, 2])
+		->and($result['lostClaim'])->toBeFalse()->and($result['claimedStatus'])->toBe(['status' => 'running'])
 		->and($result['afterFirst'])->toHaveCount(4)
 		->and($result['remaining'])->toBe([['id' => 1, 'status' => 'pending'], ['id' => 2, 'status' => 'pending']]);
 });

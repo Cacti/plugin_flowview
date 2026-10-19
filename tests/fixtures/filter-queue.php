@@ -25,7 +25,12 @@ function db_fetch_row_prepared($sql, $params = [], ...$args) {
 }
 function db_execute_prepared($sql, $params = [], ...$args) {
 	$stmt = $GLOBALS['db']->prepare($sql);
-	return $stmt->execute($params);
+	$result = $stmt->execute($params);
+	$GLOBALS['affected'] = $stmt->rowCount();
+	return $result;
+}
+function db_affected_rows(...$args) {
+	return $GLOBALS['affected'] ?? 0;
 }
 function exec_with_timeout($command, &$output, &$status, $timeout) {
 	preg_match('/--queue-id=(\d+)/', $command, $match);
@@ -46,4 +51,7 @@ $afterFirst = db_fetch_assoc_prepared('SELECT id,status FROM reports_queued ORDE
 $second = flowview_reports_run_pending(1, 2);
 $remaining = db_fetch_assoc_prepared('SELECT id,status FROM reports_queued ORDER BY id');
 $third = flowview_reports_run_pending(1, 2);
-echo json_encode(compact('first', 'second', 'third', 'attempts', 'afterFirst', 'remaining'));
+$db->exec("INSERT INTO reports_queued VALUES (5, 'flowview', 5, 'running', '2026-01-01 00:00:00', '2026-01-01 00:00:00', 'fixture', 1)");
+$lostClaim = flowview_reports_run(5);
+$claimedStatus = db_fetch_row_prepared('SELECT status FROM reports_queued WHERE id=5');
+echo json_encode(compact('first', 'second', 'third', 'attempts', 'afterFirst', 'remaining', 'lostClaim', 'claimedStatus'));

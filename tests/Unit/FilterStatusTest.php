@@ -121,7 +121,7 @@ it('retries failed filter lookups while consuming genuinely absent or disabled f
 	expect(plugin_flowview_run_schedule(7, 51))->toBe($success);
 })->with([[false, false], [[], true], [['enabled' => ''], true]]);
 
-it('distinguishes uncached empty query execution from failure in scheduled preparation', function ($rows, $success, $catalog = 'normal', $details = 'normal') {
+it('distinguishes uncached empty query execution from failure in scheduled preparation', function ($rows, $success, $catalog = 'normal', $details = 'normal', $threads = 1, $parallelResult = '[]') {
 	$start = strtotime('2024-01-01 00:00:00 UTC');
 	$end = $start + 3600;
 	$query = ['id' => 3, 'name' => 'Fixture', 'enabled' => 'on', 'timespan' => 1, 'statistics' => 9, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 100];
@@ -138,10 +138,21 @@ it('distinguishes uncached empty query execution from failure in scheduled prepa
 	plugin_test_queue_db_result('db_fetch_assoc', $catalog === 'normal' ? [['table' => 'plugin_flowview_raw_202400000']] : $catalog);
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', $rows);
 	$GLOBALS['__test_config']['flowview_partition'] = 1;
-	$GLOBALS['__test_config']['flowview_parallel_threads'] = 1;
+	$GLOBALS['__test_config']['flowview_parallel_threads'] = $threads;
+	if ($threads > 1) {
+		$GLOBALS['debug'] = false;
+		$GLOBALS['__test_config']['flowview_parallel_runlimit'] = 5;
+		foreach (['Fixture', 71, 0, $parallelResult, ''] as $value) {
+			plugin_test_queue_db_result('db_fetch_cell_prepared', $value);
+		}
+		plugin_test_queue_db_result('db_fetch_cell', 0);
+	}
 	expect(plugin_flowview_run_schedule(7, 51))->toBe($success);
 	$queries = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_assoc_prepared'));
-	if ($catalog === 'normal' && $details === 'normal') {
+	if ($threads > 1) {
+		$reads = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_cell_prepared' && str_contains($c['sql'], 'SELECT results')));
+		expect($reads)->toHaveCount(1)->and($reads[0]['params'])->toBe([71]);
+	} elseif ($catalog === 'normal' && $details === 'normal') {
 		expect($queries)->toHaveCount(1)->and($queries[0]['sql'])->toContain('FROM plugin_flowview_raw_202400000');
 	} else {
 		expect($queries)->toHaveCount(0);
@@ -153,6 +164,10 @@ it('distinguishes uncached empty query execution from failure in scheduled prepa
 	[[], false, false], [[], true, []],
 	[[], false, 'normal', false], [[], false, 'normal', []],
 	[[], true, 'normal', ['min_date' => null, 'max_date' => null, 'table_partition' => '']],
+	[[], true, 'normal', 'normal', 2, '[]'],
+	[[], false, 'normal', 'normal', 2, false],
+	[[], false, 'normal', 'normal', 2, 'null'],
+	[[], false, 'normal', 'normal', 2, 'invalid-json'],
 ]);
 
 it('distinguishes failed and absent schedule lookups before reading a filter', function ($schedule, $success) {

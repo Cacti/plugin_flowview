@@ -3600,7 +3600,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 			}
 		}
 
-		if ($results === false) {
+		if (!is_array($results)) {
 			return false;
 		}
 		if (!$results) {
@@ -7432,7 +7432,7 @@ function flowview_reports_run(int $id): bool {
 		return false;
 	}
 	require_once $config['base_path'] . '/lib/poller.php';
-	if (!db_execute_prepared('UPDATE reports_queued SET status=?, start_time=? WHERE id=? AND source=?', ['running', date('Y-m-d H:i:s'), $id, 'flowview'])) {
+	if (!db_execute_prepared('UPDATE reports_queued SET status=?, start_time=? WHERE id=? AND source=? AND status=?', ['running', date('Y-m-d H:i:s'), $id, 'flowview', 'pending']) || db_affected_rows() !== 1) {
 		return false;
 	}
 	$output = [];

@@ -532,3 +532,9 @@ if (!function_exists('array_rekey')) {
 		return array_column($rows, $value, $key);
 	}
 }
+
+if (!function_exists('db_debug')) {
+	function db_debug($message) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_debug', 'sql' => '', 'params' => [$message]];
+	}
+}
