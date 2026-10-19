@@ -110,13 +110,22 @@
 	max-width:340px}
 }
 #nbarTable,#nbarConversationTable {
-	table-layout:fixed;
+	table-layout:auto;
 	width:100%}
 #nbarTable th,#nbarTable td,#nbarConversationTable th,#nbarConversationTable td {
 	white-space:normal!important;
 	overflow-wrap:anywhere}
 #nbarTable th .textSubHeaderDark,#nbarConversationTable th .textSubHeaderDark {
 	white-space:normal!important}
+/* Observation dates must never wrap one character per line in a narrow column. */
+#nbarTable th:nth-last-child(-n+2),#nbarTable td:nth-last-child(-n+2),
+#nbarConversationTable th:nth-last-child(-n+2),#nbarConversationTable td:nth-last-child(-n+2) {
+	min-width:136px;
+	white-space:nowrap!important;
+	overflow-wrap:normal}
+#nbarTable th:nth-last-child(-n+2) .textSubHeaderDark,
+#nbarConversationTable th:nth-last-child(-n+2) .textSubHeaderDark {
+	white-space:nowrap!important}
 #nbarCombineDialog {
 	width:min(640px,90vw);
 	max-height:85vh;

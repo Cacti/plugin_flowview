@@ -44,6 +44,25 @@ window.flowviewNbarInitTable = function (spec) {
                 if (!widget || !$.tablesorter.resizable) return;
                 config.widgetOptions = $.extend({}, widget.options, config.widgetOptions);
                 var options = config.widgetOptions;
+                // Old saved widths can exceed the saved table width, leaving the
+                // last column with no space. Repair them before the widget loads.
+                if ($.tablesorter.storage) {
+                    try {
+                        var stored = $.tablesorter.storage(element, 'tablesorter-resizable');
+                        if (Array.isArray(stored) && stored.length) {
+                            var valid = stored.length === columns && stored.every(function (width) {
+                                return typeof width === 'number' && Number.isFinite(width) && width >= 0;
+                            });
+                            var safe = valid ? stored.map(function (width, index) {
+                                if (!config.$headerIndexed[index].is(':visible')) return 0;
+                                return Math.max(index >= columns - 2 ? 136 : 48, width);
+                            }) : [];
+                            $.tablesorter.storage(element, 'tablesorter-resizable', safe);
+                            $.tablesorter.storage(element, 'tablesorter-table-resized-width', safe.length ?
+                                Math.max($(element).parent().width(), safe.reduce(function (sum, width) { return sum + width + 8; }, 0)) : 'auto');
+                        }
+                    } catch (error) {}
+                }
                 $(element).removeClass('hasResizable');
                 $.tablesorter.resizable.init(config, options);
                 config.widgets.push('resizable');
