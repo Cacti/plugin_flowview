@@ -282,14 +282,14 @@ function reports_run($id): bool {
 
 	$start = microtime(true);
 
-	$return_code = 0;
+	$return_code = 1;
 	$output      = [];
 	$command     = $report['run_command'] . " --report-id=$id";
 	$timeout     = $report['run_timeout'];
 
 	cacti_log("The report:$id has command was:$command");
 
-	$last_line = exec_with_timeout($command, $output, $return_code, $timeout);
+	exec_with_timeout($command, $output, $return_code, $timeout);
 
 	$end  = microtime(true);
 
@@ -297,7 +297,7 @@ function reports_run($id): bool {
 
 	cacti_log($stats, false, 'SYSTEM');
 
-	if ($report['source'] === 'flowview' && ($last_line === false || $return_code !== 0)) {
+	if ($report['source'] === 'flowview' && $return_code !== 0) {
 		if (!db_execute_prepared('UPDATE reports_queued SET status = ? WHERE id = ?', ['pending', $id])) {
 			cacti_log('Unable to reset the retained FlowView occurrence; queue repair is required.', false, 'FLOWVIEW');
 		}

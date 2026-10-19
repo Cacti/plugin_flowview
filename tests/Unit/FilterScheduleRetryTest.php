@@ -18,7 +18,7 @@ it('keeps a pending occurrence untouched before either runner claims it', functi
 	expect($legacy ? reports_run(51) : flowview_reports_run(51))->toBeFalse();
 	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('db_execute_prepared', 'exec_with_timeout');
 })->with([false, true]);
-it('retains the original on deferred or failed children and only deletes successful occurrences', function ($status, $reset, $legacy, $startup) {
+it('retains the original on deferred or failed children and only deletes successful occurrences', function ($status, $reset, $legacy, $startup, $warning = false) {
 	global $config;
 	$old = $config['base_path'];
 	$root = sys_get_temp_dir() . '/flowview-shim-' . bin2hex(random_bytes(8));
@@ -28,8 +28,8 @@ it('retains the original on deferred or failed children and only deletes success
 		$config['base_path'] = $root;
 		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'name' => 'Fixture', 'source_id' => 7, 'run_command' => 'fixture-command', 'run_timeout' => $status === 1 ? 0 : 60]);
-		plugin_test_queue_db_result('exec_with_timeout', $status);
-		plugin_test_queue_db_result('exec_with_timeout_result', $startup ? false : null);
+		plugin_test_queue_db_result('exec_with_timeout', $startup ? null : $status);
+		plugin_test_queue_db_result('exec_with_timeout_result', ($startup || $warning) ? false : null);
 		plugin_test_queue_db_result('db_execute_prepared', true);
 		plugin_test_queue_db_result('db_execute_prepared', $reset);
 		$success = $status === 0 && !$startup && $reset;
@@ -44,6 +44,8 @@ it('retains the original on deferred or failed children and only deletes success
 			expect($sql)->toContain('UPDATE reports_queued SET status');
 		} else {
 			expect($sql)->toContain('DELETE FROM reports_queued');
+			$writes = array_values(array_filter($calls, fn ($c) => $c['fn'] === 'db_execute_prepared'));
+			expect($writes)->toHaveCount(2)->and($writes[1]['sql'])->toStartWith('DELETE FROM reports_queued');
 		}
 		if (!$legacy) {
 			$exec = array_values(array_filter($calls, fn ($c) => $c['fn'] === 'exec_with_timeout'))[0];
@@ -57,7 +59,7 @@ it('retains the original on deferred or failed children and only deletes success
 		rmdir($root . '/lib');
 		rmdir($root);
 	}
-})->with([[75, true, false, false], [75, false, false, false], [1, true, false, false], [0, true, false, true], [0, true, false, false], [75, true, true, false], [75, false, true, false], [0, true, true, false]]);
+})->with([[75, true, false, false], [75, false, false, false], [1, true, false, false], [0, true, false, true], [0, true, false, false], [75, true, true, false], [75, false, true, false], [0, true, true, false], [0, true, true, true], [0, true, false, false, true], [0, true, true, false, true]]);
 it('rejects missing queue rows or failed claims without running a child', function ($missing) {
 	global $config;
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);

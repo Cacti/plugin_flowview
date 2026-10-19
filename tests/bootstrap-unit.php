@@ -505,7 +505,10 @@ if (!function_exists('get_timespan')) {
 if (!function_exists('exec_with_timeout')) {
 	function exec_with_timeout($command, &$output, &$status, $timeout = 5) {
 		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_with_timeout', 'sql' => '', 'params' => [$command, $timeout]];
-		$status = plugin_test_db_result('exec_with_timeout', 0);
+		$exit = plugin_test_db_result('exec_with_timeout', 0);
+		if ($exit !== null) {
+			$status = $exit;
+		}
 		return plugin_test_db_result('exec_with_timeout_result', null);
 	}
 }

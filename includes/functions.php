@@ -7460,8 +7460,8 @@ function flowview_reports_run(int $id): bool {
 	if ($timeout <= 0) {
 		$timeout = max(1, (int) read_config_option('scheduler_timeout') ?: 300);
 	}
-	$result = exec_with_timeout($command, $output, $status, $timeout);
-	if ($result === false || $status !== 0) {
+	exec_with_timeout($command, $output, $status, $timeout);
+	if ($status !== 0) {
 		// Keep the original even if resetting its state fails; never delete it.
 		if (!db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=? AND source=?', ['pending', $id, 'flowview'])) {
 			cacti_log('Unable to reset the retained FlowView occurrence; queue repair is required.', false, 'FLOWVIEW');

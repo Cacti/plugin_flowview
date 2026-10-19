@@ -170,3 +170,13 @@ it('recreates shards and launches the same query after a parallel timeout', func
 		->and($result['result'])->toBe([])->and($result['launches'])->toBe([$result['first'], $result['retry']])
 		->and($result['cached'])->toBe($result['retry'])->and($result['cachedResult'])->toBe([]);
 });
+
+it('completes an exit-zero report with stderr using Cactis actual process helper', function ($runner) {
+	global $config;
+	file_put_contents($this->fixtureRoot . '/warning.php', '<?php fwrite(STDERR, "nonfatal fixture warning\n"); echo "delivered\n"; exit(0);');
+	[$exit, $output] = ($this->runFixture)([PHP_BINARY, dirname(__DIR__) . '/fixtures/report-stderr.php', $config['base_path'], dirname(__DIR__, 2), $this->fixtureRoot, $runner]);
+	$result = json_decode($output, true);
+	expect($exit)->toBe(0)->and($result['helperResult'])->toBeFalse()->and($result['status'])->toBe(0)
+		->and($result['success'])->toBeTrue()->and($result['writes'])->toHaveCount(2)
+		->and($result['writes'][1]['sql'])->toStartWith('DELETE FROM reports_queued');
+})->with(['native', 'legacy']);
