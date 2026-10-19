@@ -305,6 +305,12 @@ if (!function_exists('is_realm_allowed')) {
 	}
 }
 
+if (!function_exists('raise_message_javascript')) {
+	function raise_message_javascript(...$args) {
+		raise_message(...$args);
+	}
+}
+
 if (!function_exists('raise_message')) {
 	function raise_message($id, $text = '', $level = 0) {
 		$GLOBALS['__test_messages'][] = array($id, $text, $level);
@@ -529,7 +535,14 @@ if (!function_exists('cacti_session_close')) {
 }
 if (!function_exists('array_rekey')) {
 	function array_rekey($rows, $key, $value) {
-		return array_column($rows, $value, $key);
+		if (!is_array($value)) {
+			return array_column($rows, $value, $key);
+		}
+		$result = [];
+		foreach ($rows as $row) {
+			$result[$row[$key]] = array_intersect_key($row, array_flip($value));
+		}
+		return $result;
 	}
 }
 

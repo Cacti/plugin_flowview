@@ -128,3 +128,32 @@ it('returns retry from the real child when a queue, schedule or filter lookup fa
 		expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0]]]);
 	}
 })->with(['report-read-failure', 'schedule-read-failure', 'filter-read-failure'])->with([false, true]);
+
+it('retains a timed out parallel report through the actual child and parent', function ($native) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
+	if ($native) {
+		$command[] = '--queue-id=51';
+	}
+	[$exit, $output] = ($this->runFixture)($command, 'parallel-timeout');
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	expect($exit)->toBe(75)->and($output)->toBe('');
+	$writes = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'write'));
+	expect(array_filter($writes, fn ($c) => str_contains($c[1], 'UPDATE plugin_flowview_schedules')))->toBe([]);
+	$cleanup = array_values(array_filter($writes, fn ($c) => str_starts_with($c[1], 'DELETE FROM parallel_database_query_shard')));
+	expect(array_column($cleanup, 2))->toBe([[71]]);
+	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+	expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0]]]);
+	global $config;
+	$oldBase = $config['base_path'];
+	$config['base_path'] = $this->fixtureRoot;
+	try {
+		plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+		plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
+		plugin_test_queue_db_result('exec_with_timeout', $exit);
+		expect(flowview_reports_run(51))->toBeFalse();
+		$deletes = array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM reports_queued'));
+		expect($deletes)->toBe([]);
+	} finally {
+		$config['base_path'] = $oldBase;
+	}
+})->with([false, true]);

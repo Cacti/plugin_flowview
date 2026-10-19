@@ -181,3 +181,31 @@ it('fails an uncached query cleanly when its own filter lookup fails or is absen
 	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
 	expect(run_flow_query(false, 3, 1704067200, 1704070800))->toBeFalse();
 })->with([[false], [[]]]);
+
+it('preserves two-request reduce lookup failures and cleans up both requests', function ($reduce, $success, $metadata = 'normal') {
+	$GLOBALS['debug'] = false;
+	$GLOBALS['__test_config']['flowview_parallel_runlimit'] = 5;
+	$query = ['sql_query' => 'SELECT SUM(bytes) bytes', 'sql_where' => '', 'sql_groupby' => '', 'sql_having' => '', 'sql_order' => '', 'sql_limit' => '', 'sql_params' => []];
+	foreach ([0, 0, $reduce === 'valid' ? json_encode($query) : $reduce, '', ''] as $value) {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', $value);
+	}
+	plugin_test_queue_db_result('db_fetch_cell', 0);
+	plugin_test_queue_db_result('db_fetch_assoc', $metadata === 'normal' ? [
+		['map_table' => 'fixture_map_71', 'map_create' => 'CREATE TABLE fixture_map_71 (bytes bigint)', 'results' => '[]'],
+		['map_table' => 'fixture_map_72', 'map_create' => 'CREATE TABLE fixture_map_72 (bytes bigint)', 'results' => '[]'],
+	] : $metadata);
+	expect(parallel_database_query_run([71, 72]))->toBe($success ? [] : false);
+	$cleanup = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM parallel_database_query_shard')));
+	expect(array_column($cleanup, 'params'))->toBe([[71], [72]]);
+})->with([[false, false], ['', false], ['null', false], ['bad-json', false], ['valid', true], ['valid', false, false], ['valid', false, []], ['{}', false]]);
+
+it('returns a failed result after cleaning up timed out parallel requests', function () {
+	$GLOBALS['debug'] = false;
+	$GLOBALS['__test_config']['flowview_parallel_runlimit'] = 0;
+	foreach ([0, 0, '', ''] as $value) {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', $value);
+	}
+	expect(parallel_database_query_run([71, 72]))->toBeFalse();
+	$cleanup = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM parallel_database_query_shard')));
+	expect(array_column($cleanup, 'params'))->toBe([[71], [72]]);
+});

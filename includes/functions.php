@@ -4269,7 +4269,7 @@ function parallel_database_query_run($requests) {
 			parallel_database_query_cleanup($request_id);
 		}
 
-		exit;
+		return false;
 	}
 
 	if (cacti_sizeof($requests) == 1) {
@@ -4283,14 +4283,15 @@ function parallel_database_query_run($requests) {
 			WHERE id = ?',
 			[$requests[0]]);
 
-		$tables = array_rekey(
-			flowview_db_fetch_assoc('SELECT map_table, map_create, results
-				FROM parallel_database_query
-				WHERE id IN(' . implode(', ', $requests) . ')'),
-			'map_table', ['map_create', 'results']
-		);
+		$query = json_decode($reduce_query ?: '', true);
+		$tables = flowview_db_fetch_assoc('SELECT map_table, map_create, results
+			FROM parallel_database_query
+			WHERE id IN(' . implode(', ', $requests) . ')');
 
-		if ($reduce_query != '' && cacti_sizeof($tables)) {
+		// Missing reduction metadata is a failed report, not a successful empty result.
+		if (is_array($query) && isset($query['sql_query'], $query['sql_where'], $query['sql_groupby'], $query['sql_having'], $query['sql_order'], $query['sql_limit'], $query['sql_params'])
+			&& is_array($query['sql_params']) && is_array($tables) && count($tables) === count($requests)) {
+			$tables = array_rekey($tables, 'map_table', ['map_create', 'results']);
 			$i = 0;
 			$temp_table = '';
 
@@ -4340,8 +4341,6 @@ function parallel_database_query_run($requests) {
 				$i++;
 			}
 
-			$query = json_decode($reduce_query, true);
-
 			$final_query = "{$query['sql_query']}
 				FROM $temp_table
 				{$query['sql_where']}
@@ -4358,7 +4357,7 @@ function parallel_database_query_run($requests) {
 
 			flowview_db_execute("DROP TEMPORARY TABLE IF EXISTS $temp_table");
 		} else {
-			$results = [];
+			$results = false;
 		}
 	}
 
