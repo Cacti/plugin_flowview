@@ -105,21 +105,28 @@ $current_version = $info['version'];
 /* do a version check */
 if ($forcever == '' && $old_version == $current_version && (int) read_config_option('flowview_nbar_schema_version') >= 2) {
 	cacti_log('Your Flowview is already up to date (v' . $current_version . ' vs v' . $old_version . ') not upgrading.  Use --forcever to override', true, 'FLOWVIEW');
+
+	unregister_process('flowview', 'upgrade_launch', 0);
+
 	exit(0);
 }
 
-if (!register_process_start('flowview', 'upgrade', 1, 86400)) {
+if (!register_process_start('flowview', 'upgrade', 1, 14400)) {
 	if (empty($forcever)) {
 		print 'WARNING: Running process detected.  To override use --forcever' . PHP_EOL;
 		exit(1);
 	}
 }
 
+// release this run and the web launcher's lock however the script ends, including a fatal error
+register_shutdown_function(static function (): void {
+	unregister_process('flowview', 'upgrade', 1);
+	unregister_process('flowview', 'upgrade_launch', 0);
+});
+
 cacti_log('Upgrading from v' . $old_version . ' to ' . $current_version, true, 'FLOWVIEW');
 
 flowview_upgrade($current_version, $old_version);
-
-unregister_process('flowview', 'upgrade', 1);
 
 exit(0);
 

@@ -166,7 +166,11 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 	if ($current != $old || $force || (int) read_config_option('flowview_nbar_schema_version') < 2) {
 		$php_binary = read_config_option('path_php_binary');
 
-		exec_background($php_binary, '-q ' . $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php');
+		/* This check runs on every page load. Launch the upgrade once; cli/flowview_upgrade.php releases the
+		 * lock when it finishes, and the four hour timeout recovers it if that process dies. */
+		if (register_process_start('flowview', 'upgrade_launch', 0, 14400)) {
+			exec_background($php_binary, '-q ' . $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php');
+		}
 
 		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
 
