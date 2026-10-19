@@ -2,35 +2,38 @@
 
 --- develop ---
 
-* security: Move the plugin's remaining inline event handlers to CSP-safe bindings
-* security: Add a version-safe CSP nonce (`plugin_flowview_csp_nonce()`) to every inline `<script>` tag
-* issue#110: Add NAT (postNAT source/destination IP and port) support to the core raw flow schema, filters, and DNS resolution; see flowview_upgrade_nat_columns.php to backfill existing partitions
-* issue#240: Call to db_table_exists is incorrect in some cases
-* issue#261: Cacti 1.2.x flowview 5.0 update of 16.09 error on call db_check_reconnect inside flow_capture
-* issue: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
-* issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu
-* issue: Create the plugin's config.php from config.php.dist for the flowview install step in the integration-test workflow (removed immediately afterwards so the unit tests still run with no config file), so the install no longer fails with "needs configuration"
-* issue: Load the pre-1.3 report compatibility shims (reports_run/reports_queue/reports_log_and_notify) only when the running Cacti is older than 1.3, decided with cacti_version_compare(CACTI_VERSION, '1.3', ...) rather than a function_exists() probe; because the plugin's functions.php is included during plugin init before core loads lib/reports.php, the function_exists() check ran while the now-native helpers were still absent, declared the shims, and core then fatally redeclared reports_log_and_notify() on 1.3.0 develop builds (falls back to function_exists() only when the Cacti version helpers are unavailable, e.g. the unit tests)
-* issue: Replace the translation-template CI check that regenerated locales/po/cacti.pot and compared it with a diff-based gate (tests/bin/check-i18n-pot.php) requiring cacti.pot to be updated only when a pull request adds, removes, or modifies an i18n function call
-* issue: Prevent flow-capture from fatally erroring (TypeError in spl_object_hash) when flowview_db_check_reconnect() held a null shared-database handle; normalize a non-object connection to false so db_check_reconnect() checks and reconnects the default connection instead
-* issue: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
-* issue: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
-* issue: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
-* issue: Harmonize CI workflow, issue/PR templates, and PHP-compatibility test structure with the shared Cacti plugin baseline
-* issue: Killing processes does not occur when they are in D-State
-* issue: Bring all first-party PHP files to PHPStan level 8 with zero errors and add native parameter/return type declarations throughout (behavior-preserving)
-* issue: run_flow_query() used isset($sql_inner) as the statistical-vs-printed discriminator, but $sql_inner is always initialized so the check was always true and printed reports skipped the issue#110 NAT-safe SQL cleanup; corrected to a value check so printed reports now apply the NAT toggle
-* issue: Flow Collector "unable to open port" FATAL log always showed an empty error because $errno/$errstr were never populated; now sourced from socket_last_error()/socket_strerror()
-* issue: IRR database refresh no longer runs the present=0 cleanup DELETE when a database file download fails (the $files_broken guard was initialized but never engaged)
-* issue: Correct a duplicate 'src_rdomain' array key in the Source/Destination Root Domain report column map that overwrote the Destination Domain column
-* issue: Correct a stray "$" in the Source AS filter that read get_request_var() through an undefined variable-variable
-* issue: TCP flag validation regex used an unescaped delimiter making it always invalid, rejecting every TCP flag filter value
-* issue: load_data_for_filter()'s $start/$end were typed bool during the PHPStan pass, coercing the Unix timestamps passed by plugin_flowview_run_schedule() to true so scheduled reports queried around epoch second 1; restored the int|false contract
-* issue: The DNS Cache list (flowview_databases.php) and Schedules list (flowview_schedules.php) passed include_form=true to html_header_sort_checkbox() while their own chk form was already open, emitting nested forms that could misdirect checkbox submissions and bulk deletes; reverted to false
-* issue: IRR database refresh persisted the per-source serial after each individual file downloaded, so a later file failing left the refresh skipped on the next run (matching serial) with failed sections stuck at present=0; the serial is now advanced only after every file imports cleanly and every cleanup DELETE succeeds, batch insert failures are propagated through flowview_insert_irr_sections()/flowview_update_database(), and empty files are treated as broken
 * feature: Add Cisco Apps (NBAR) reports for application-bearing NetFlow v9 exports, with IPv4/IPv6 application totals, conversations, paged connections, per-account capture/network options, recent-record status, first/last observation dates and a router setup guide
 * feature: Maintain reusable per-capture NBAR hourly/daily summaries through the existing Cacti poller, with raw partial-boundary fallback and a separate retention setting capped at 30 days
+* feature: Store raw NBAR records in time-sliced tables (plugin_flowview_nbar_data_<year><day>[<hour>]) that follow the Database Partitioning Scheme setting, and expire them by dropping whole slices
+* fix: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
+
+* issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu
+* dev: Create the plugin's config.php from config.php.dist for the flowview install step in the integration-test workflow (removed immediately afterwards so the unit tests still run with no config file), so the install no longer fails with "needs configuration"
 * feature: Add an optional FlowView Query Service (a long-running Go service under service/flowview-query) as a selectable Parallel Query Backend under FlowView Settings (default Legacy PHP Runner); when enabled, the parallel query parent runner (flowview_runner.php) delegates the whole query to the service over localhost instead of forking a PHP worker per shard, running the same cache-aware map-reduce (sharing parallel_database_query_shard_cache) and writing results back, with automatic fallback to the legacy runner when the service is unreachable
+
+* bug: Load the pre-1.3 report compatibility shims (reports_run/reports_queue/reports_log_and_notify) only when the running Cacti is older than 1.3, decided with cacti_version_compare(CACTI_VERSION, '1.3', ...) rather than a function_exists() probe; because the plugin's functions.php is included during plugin init before core loads lib/reports.php, the function_exists() check ran while the now-native helpers were still absent, declared the shims, and core then fatally redeclared reports_log_and_notify() on 1.3.0 develop builds (falls back to function_exists() only when the Cacti version helpers are unavailable, e.g. the unit tests)
+* security: Move the plugin's remaining inline event handlers to CSP-safe bindings so the pages no longer trip Cacti's Content-Security-Policy script-src-attr directive: confirmation Cancel buttons use the `cactiReturnTo` class, the database/filter selects are bound via change() in their ready blocks, and the main filter's sort/report selects and time-shift icons are bound in flowview_display_filter's ready block
+* dev: Replace the translation-template CI check that regenerated locales/po/cacti.pot and compared it with a diff-based gate (tests/bin/check-i18n-pot.php) requiring cacti.pot to be updated only when a pull request adds, removes, or modifies an i18n function call
+* issue: Prevent flow-capture from fatally erroring (TypeError in spl_object_hash) when flowview_db_check_reconnect() held a null shared-database handle; normalize a non-object connection to false so db_check_reconnect() checks and reconnects the default connection instead
+* dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
+* dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
+* dev: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
+* issue#110: Add NAT (postNAT source/destination IP and port) support to the core raw flow schema, filters, and DNS resolution; see flowview_upgrade_nat_columns.php to backfill existing partitions
+* security: Add a version-safe CSP nonce (`plugin_flowview_csp_nonce()`) to every inline `<script>` tag so pages stay compatible with Cacti's Content-Security-Policy nonce enforcement, while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
+* chore: Harmonize CI workflow, issue/PR templates, and PHP-compatibility test structure with the shared Cacti plugin baseline
+* issue#261: Cacti 1.2.x flowview 5.0 update of 16.09 error on call db_check_reconnect inside flow_capture
+* issue#240: Call to db_table_exists is incorrect in some cases
+* issue: Killing processes does not occur when they are in D-State
+* chore: Bring all first-party PHP files to PHPStan level 8 with zero errors and add native parameter/return type declarations throughout (behavior-preserving)
+* fix: run_flow_query() used isset($sql_inner) as the statistical-vs-printed discriminator, but $sql_inner is always initialized so the check was always true and printed reports skipped the issue#110 NAT-safe SQL cleanup; corrected to a value check so printed reports now apply the NAT toggle
+* fix: Flow Collector "unable to open port" FATAL log always showed an empty error because $errno/$errstr were never populated; now sourced from socket_last_error()/socket_strerror()
+* fix: IRR database refresh no longer runs the present=0 cleanup DELETE when a database file download fails (the $files_broken guard was initialized but never engaged)
+* fix: Correct a duplicate 'src_rdomain' array key in the Source/Destination Root Domain report column map that overwrote the Destination Domain column
+* fix: Correct a stray "$" in the Source AS filter that read get_request_var() through an undefined variable-variable
+* fix: TCP flag validation regex used an unescaped delimiter making it always invalid, rejecting every TCP flag filter value
+* fix: load_data_for_filter()'s $start/$end were typed bool during the PHPStan pass, coercing the Unix timestamps passed by plugin_flowview_run_schedule() to true so scheduled reports queried around epoch second 1; restored the int|false contract
+* fix: The DNS Cache list (flowview_databases.php) and Schedules list (flowview_schedules.php) passed include_form=true to html_header_sort_checkbox() while their own chk form was already open, emitting nested forms that could misdirect checkbox submissions and bulk deletes; reverted to false
+* fix: IRR database refresh persisted the per-source serial after each individual file downloaded, so a later file failing left the refresh skipped on the next run (matching serial) with failed sections stuck at present=0; the serial is now advanced only after every file imports cleanly and every cleanup DELETE succeeds, batch insert failures are propagated through flowview_insert_irr_sections()/flowview_update_database(), and empty files are treated as broken
 
 --- 5.0 ---
 

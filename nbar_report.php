@@ -99,7 +99,8 @@ if (!empty($GLOBALS['fv_nbar_preferences_saved']) && isset_request_var('combine_
 if ($lid === 0 && !$combined_lids) {
 	$lid = (int) ($valid[0] ?? 0);
 }
-$listener_scope = $lid === 0 ? 'd.listener_id IN (' . implode(',', $combined_lids) . ')' : 'd.listener_id=?';
+// Capture ids start at 1, so 0 matches nothing when no capture device exists and IN () is never built.
+$listener_scope = $lid === 0 ? 'd.listener_id IN (' . implode(',', $combined_lids ?: [0]) . ')' : 'd.listener_id=?';
 $aid            = (string) ($nbar_request['app'] ?? '');
 
 if (!preg_match('/^[a-f0-9]{2,32}$/D', $aid)) {

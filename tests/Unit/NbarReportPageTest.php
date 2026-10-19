@@ -38,12 +38,27 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 			$GLOBALS['__test_footer_rendered'] = true;
 		}
 	}
+	$empty                                                        = $view === 'no-devices';
 	$GLOBALS['__test_config']['flowview_nbar_schema_version']     = '2';
-	$GLOBALS['__test_user_settings']['flowview_nbar_preferences'] = json_encode(['listeners' => [1, 2, 3], 'prefixes' => ['2001:db8::/64'], 'dns' => '0']);
+	$GLOBALS['__test_user_settings']['flowview_nbar_preferences'] = json_encode(['listeners' => $empty ? [] : [1, 2, 3], 'prefixes' => ['2001:db8::/64'], 'dns' => '0']);
 	$graph_timespans                                              = [GT_LAST_HALF_HOUR => 'Last Half Hour', GT_LAST_HOUR => 'Last Hour', GT_LAST_DAY => 'Last Day', GT_LAST_WEEK => 'Last Week'];
 	$now                                                          = (int) floor(time() / 60) * 60;
-	$_REQUEST                                                     = ['mode' => $view, 'page' => '500', 'listener' => '0', 'family' => '6', 'host' => '2001:db8::10', 'app' => '0d000001', 'predefined_timespan' => '0', 'date1' => date('Y-m-d H:i', $now - 1200), 'date2' => date('Y-m-d H:i', $now), 'lock_range' => '1', 'context' => json_encode(['report' => 's10', 'unexpected' => ['nested']])];
+	$_REQUEST                                                     = ['mode' => $empty ? 'apps' : $view, 'page' => '500', 'listener' => '0', 'family' => '6', 'host' => '2001:db8::10', 'app' => '0d000001', 'predefined_timespan' => '0', 'date1' => date('Y-m-d H:i', $now - 1200), 'date2' => date('Y-m-d H:i', $now), 'lock_range' => '1', 'context' => json_encode(['report' => 's10', 'unexpected' => ['nested']])];
 	$_SERVER['REQUEST_METHOD']                                    = 'GET';
+
+	if ($empty) {
+		// No capture device exists: the report must still build valid SQL instead of IN ().
+		ob_start();
+		require_once(dirname(__DIR__, 2) . '/flowview_sections.php');
+		require(dirname(__DIR__, 2) . '/nbar_report.php');
+		ob_end_clean();
+		$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
+		expect($lid)->toBe(0);
+		expect($sql)->not->toContain('IN ()');
+		expect(implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql')))->toContain('d.listener_id IN (0)');
+
+		return;
+	}
 
 	for ($i = 0; $i < 3; $i++) {
 		plugin_test_queue_db_result('db_fetch_assoc', []);
@@ -81,4 +96,4 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 		expect($html)->toContain('Source IP', 'Destination IP', 'TCP', 'Counting total pages', 'Previous', 'nbarPageNumber', 'Back to top applications');
 		expect($html)->not->toContain('All conversations');
 	}
-})->with(['apps', 'connections']);
+})->with(['apps', 'connections', 'no-devices']);
