@@ -136,3 +136,28 @@ it('does not launch or reset an occurrence when another dispatcher already owns 
 	expect($writes)->toHaveCount(1)->and($writes[0]['sql'])->toContain('AND status=?')
 		->and($writes[0]['params'][4])->toBe('pending');
 });
+
+it('retries successful completion cleanup without rerunning or requeuing the delivered report', function ($firstDelete, $retryDelete) {
+	$GLOBALS['__test_cacti_log'] = [];
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
+	plugin_test_queue_db_result('exec_with_timeout', 0);
+	foreach ([true, $firstDelete, $retryDelete] as $result) {
+		plugin_test_queue_db_result('db_execute_prepared', $result);
+	}
+	expect(flowview_reports_run(51))->toBe($firstDelete || $retryDelete);
+	$calls = $GLOBALS['__test_db_calls'];
+	$exec = array_filter($calls, fn ($c) => $c['fn'] === 'exec_with_timeout');
+	$writes = array_values(array_filter($calls, fn ($c) => $c['fn'] === 'db_execute_prepared'));
+	expect($exec)->toHaveCount(1)->and($writes)->toHaveCount($firstDelete ? 2 : 3);
+	foreach (array_slice($writes, 1) as $write) {
+		expect($write['sql'])->toBe('DELETE FROM reports_queued WHERE id=? AND source=?')
+			->and($write['params'])->toBe([51, 'flowview']);
+	}
+	$log = implode(' ', $GLOBALS['__test_cacti_log']);
+	if (!$firstDelete && !$retryDelete) {
+		expect($log)->toContain('queue repair is required', '51', '7', 'already completed');
+	} else {
+		expect($log)->not->toContain('queue repair is required');
+	}
+})->with([[true, true], [false, true], [false, false]]);

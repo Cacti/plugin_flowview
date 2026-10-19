@@ -7461,7 +7461,14 @@ function flowview_reports_run(int $id): bool {
 		}
 		return false;
 	}
-	return db_execute_prepared('DELETE FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']) !== false;
+	// Delivery succeeded: retry only cleanup, never preparation or notification.
+	for ($attempt = 0; $attempt < 2; $attempt++) {
+		if (db_execute_prepared('DELETE FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']) !== false) {
+			return true;
+		}
+	}
+	cacti_log('Unable to remove completed FlowView occurrence ' . $id . ' for schedule ' . (int) $report['source_id'] . '; queue repair is required. The report already completed; remove this reports_queued row without rerunning it.', false, 'FLOWVIEW');
+	return false;
 }
 
 /** Attempt a bounded, fair queue snapshot without retrying failures in the same pass. */

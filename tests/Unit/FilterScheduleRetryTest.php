@@ -57,7 +57,7 @@ it('retains the original on deferred or failed children and only deletes success
 		rmdir($root . '/lib');
 		rmdir($root);
 	}
-})->with([[75, true, false, false], [75, false, false, false], [1, true, false, false], [0, true, false, true], [0, true, false, false], [0, false, false, false], [75, true, true, false], [75, false, true, false], [0, true, true, false]]);
+})->with([[75, true, false, false], [75, false, false, false], [1, true, false, false], [0, true, false, true], [0, true, false, false], [75, true, true, false], [75, false, true, false], [0, true, true, false]]);
 it('rejects missing queue rows or failed claims without running a child', function ($missing) {
 	global $config;
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
