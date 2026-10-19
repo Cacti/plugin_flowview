@@ -125,3 +125,16 @@ it('stops daily work after the worker deadline while releasing its lock', functi
 	expect($sql)->toContain('RELEASE_LOCK');
 	expect($sql)->not->toContain('START TRANSACTION');
 });
+
+it('does not materialize a calendar day that begins before the retention cutoff', function () {
+	$cutoff = time() - fv_nbar_retention_days() * 86400;
+	plugin_test_queue_db_result('db_fetch_cell', 1);
+	plugin_test_queue_db_result('db_fetch_assoc', [['listener_id' => 2, 'first_hour' => $cutoff - 86400]]);
+	plugin_test_queue_db_result('db_fetch_cell_prepared', $cutoff - 86400);
+	expect(fv_nbar_daily_refresh())->toBe(0);
+	$lookups = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($call) => str_starts_with($call['sql'], 'SELECT * FROM plugin_flowview_nbar_days')));
+	expect($lookups)->not->toBe([]);
+	foreach ($lookups as $lookup) {
+		expect($lookup['params'][1])->toBeGreaterThanOrEqual($cutoff);
+	}
+});

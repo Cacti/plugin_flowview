@@ -143,3 +143,12 @@ it('keeps exporter name ranks ahead of endpoints when candidate pages contain ti
 		expect($call['sql'])->not->toContain('OFFSET');
 	}
 });
+
+it('does not add an unrequested tuple returned by a candidate lookup', function () {
+	$unexpected = array_replace($this->tuple, ['sport' => 9999, 'bytes' => '9999999999999999999']);
+	foreach ([[$this->tuple], [], [$this->tuple, $unexpected], []] as $rows) {
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', $rows);
+	}
+	$rows = fv_nbar_connections_direct([1], $this->start, $this->start + 7200, '1=1', [], 1);
+	expect($rows)->toHaveCount(1)->and($rows[0]['sport'])->toBe($this->tuple['sport'])->and($rows[0]['bytes'])->toBe($this->tuple['bytes']);
+});
