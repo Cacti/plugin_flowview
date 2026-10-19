@@ -28,6 +28,7 @@ require('./include/cli_check.php');
 require_once('./plugins/flowview/includes/functions.php');
 require_once('./plugins/flowview/setup.php');
 require_once('./plugins/flowview/includes/database.php');
+require_once('./plugins/flowview/includes/filter_upgrade.php');
 
 flowview_connect();
 

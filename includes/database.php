@@ -519,17 +519,3 @@ function flowview_db_get_table_column_types($table, mixed $cnn_id = false) {
 function flowview_filter_status_ready(): bool {
 	return (bool) flowview_db_fetch_row("SHOW COLUMNS FROM plugin_flowview_queries LIKE 'enabled'", false);
 }
-
-/** Repair legacy state only from the background upgrade process. */
-function flowview_filter_status_upgrade(): bool {
-	if (!flowview_db_table_exists('plugin_flowview_queries')) {
-		return false;
-	}
-	if (flowview_filter_status_ready()) {
-		return true;
-	}
-	if (flowview_db_execute("ALTER TABLE plugin_flowview_queries ADD COLUMN enabled char(2) NOT NULL DEFAULT 'on' AFTER name", false)) {
-		return true;
-	}
-	return flowview_filter_status_ready();
-}

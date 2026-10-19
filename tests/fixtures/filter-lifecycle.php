@@ -55,7 +55,7 @@ function set_default_action() {
 	exit;
 }
 register_shutdown_function(function () {
-	file_put_contents(getenv('FLOWVIEW_FIXTURE_RESULT'), json_encode(['calls' => $GLOBALS['calls'], 'status' => http_response_code()]));
+	file_put_contents(getenv('FLOWVIEW_FIXTURE_RESULT'), json_encode(['calls' => $GLOBALS['calls'], 'status' => http_response_code(), 'repair_loaded' => function_exists('flowview_filter_status_upgrade')]));
 });
 function db_fetch_row_prepared($sql, $params = [], ...$args) {
 	$GLOBALS['calls'][] = ['row', $sql, $params];

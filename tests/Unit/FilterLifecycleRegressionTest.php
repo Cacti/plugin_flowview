@@ -49,7 +49,8 @@ it('serves a retry response without DDL from every guarded web entrypoint', func
 	[$exit, $output] = ($this->runFixture)([PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/' . $page], $ready ? 'ready' : 'pending');
 	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
 	$actions = array_column($result['calls'], 0);
-	expect($exit)->toBe(0)->and($actions)->not->toContain('ddl');
+	expect($exit)->toBe(0)->and($actions)->not->toContain('ddl')
+		->and($result['repair_loaded'])->toBeFalse();
 	if ($ready) {
 		expect($output)->toBe('')->and($actions)->toContain('page-ready')->not->toContain('background');
 	} else {
@@ -64,7 +65,8 @@ it('repairs same-version schemas only after background registration and reports 
 	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
 	expect($result)->toBeArray($output);
 	$actions = array_column($result['calls'], 0);
-	expect($exit)->toBe($code)->and($actions[0])->toBe('register')
+	expect($exit)->toBe($code)->and($result['repair_loaded'])->toBeTrue()
+		->and($actions[0])->toBe('register')
 		->and(array_filter($actions, fn ($action) => $action === 'ddl'))->toHaveCount($writes);
 })->with([['pending', 0, 1], ['failed', 1, 1], ['ready', 0, 0], ['busy', 1, 0]]);
 it('retains a full failing snapshot while advancing to healthy rows on the next pass', function () {

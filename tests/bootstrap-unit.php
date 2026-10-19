@@ -518,3 +518,6 @@ if (!function_exists('reports_load_format_file')) {
 		return true;
 	}
 }
+
+// Schema-mutation helpers are loaded explicitly for isolated upgrade tests.
+require_once dirname(__DIR__) . '/includes/filter_upgrade.php';
