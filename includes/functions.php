@@ -4305,6 +4305,7 @@ function parallel_database_query_run($requests) {
 			$tables = array_rekey($tables, 'map_table', ['map_create', 'results']);
 			$i = 0;
 			$temp_table = '';
+			$materialized = true;
 
 			foreach($tables as $table => $data) {
 				if ($i == 0) {
@@ -4313,7 +4314,10 @@ function parallel_database_query_run($requests) {
 					$create = str_replace($table, $temp_table, $data['map_create']);
 					$create = str_replace('CREATE TABLE', 'CREATE TEMPORARY TABLE', $create);
 
-					flowview_db_execute($create);
+					if (flowview_db_execute($create) === false) {
+						$materialized = false;
+						break;
+					}
 				}
 
 				$results = $data['results'];
@@ -4346,7 +4350,10 @@ function parallel_database_query_run($requests) {
 					//cacti_log($sql_prefix . implode(', ', $sql));
 
 					/* insert entries into the intermediary table */
-					flowview_db_execute($sql_prefix . implode(', ', $sql));
+					if (flowview_db_execute($sql_prefix . implode(', ', $sql)) === false) {
+						$materialized = false;
+						break;
+					}
 				}
 
 				$i++;
@@ -4362,7 +4369,7 @@ function parallel_database_query_run($requests) {
 
 			//cacti_log($final_query);
 
-			$results = flowview_db_fetch_assoc_prepared($final_query, $query['sql_params']);
+			$results = $materialized ? flowview_db_fetch_assoc_prepared($final_query, $query['sql_params']) : false;
 
 			//cacti_log(json_encode($results));
 

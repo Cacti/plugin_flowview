@@ -234,3 +234,29 @@ it('rejects a failed component before reducing any two-request results', functio
 	$reductions = array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_execute' || ($c['fn'] === 'db_fetch_assoc_prepared' && str_contains($c['sql'], 'SUM(bytes)')));
 	expect($reductions)->toBe([]);
 })->with(['false', 'null', 'invalid-json'])->with([0, 1]);
+
+it('fails two-request materialization rather than reducing partial data', function ($writes, $success, $insertCount) {
+	$GLOBALS['debug'] = false;
+	$GLOBALS['__test_config']['flowview_parallel_runlimit'] = 5;
+	$query = ['sql_query' => 'SELECT SUM(bytes) bytes', 'sql_where' => '', 'sql_groupby' => '', 'sql_having' => '', 'sql_order' => '', 'sql_limit' => '', 'sql_params' => []];
+	foreach ([0, 0, json_encode($query), '', ''] as $value) {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', $value);
+	}
+	plugin_test_queue_db_result('db_fetch_cell', 0);
+	plugin_test_queue_db_result('db_fetch_assoc', [
+		['map_table' => 'fixture_map_71', 'map_create' => 'CREATE TABLE fixture_map_71 (bytes bigint)', 'results' => '[{"bytes":123}]'],
+		['map_table' => 'fixture_map_72', 'map_create' => 'CREATE TABLE fixture_map_72 (bytes bigint)', 'results' => '[{"bytes":456}]'],
+	]);
+	foreach ($writes as $result) {
+		plugin_test_queue_db_result('db_execute', $result);
+	}
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['bytes' => 579]]);
+	expect(parallel_database_query_run([71, 72]))->toBe($success ? [['bytes' => 579]] : false);
+	$calls = $GLOBALS['__test_db_calls'];
+	$inserts = array_filter($calls, fn ($c) => $c['fn'] === 'db_execute' && str_starts_with($c['sql'], 'INSERT INTO'));
+	$reductions = array_filter($calls, fn ($c) => $c['fn'] === 'db_fetch_assoc_prepared' && str_contains($c['sql'], 'SUM(bytes)'));
+	$drops = array_filter($calls, fn ($c) => $c['fn'] === 'db_execute' && str_starts_with($c['sql'], 'DROP TEMPORARY TABLE IF EXISTS'));
+	$removed = array_values(array_filter($calls, fn ($c) => preg_match('/^DELETE FROM parallel_database_query\s+WHERE/', $c['sql'])));
+	expect($inserts)->toHaveCount($insertCount)->and($reductions)->toHaveCount($success ? 1 : 0)
+		->and($drops)->toHaveCount(1)->and(array_column($removed, 'params'))->toBe($success ? [] : [[71], [72]]);
+})->with([[[false], false, 0], [[true, false], false, 1], [[true, true, false], false, 2], [[true, true, true], true, 2]]);
