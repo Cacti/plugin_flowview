@@ -192,8 +192,9 @@ it('spans every partition when materializing and pads the bounds so shards are f
 		'plugin_flowview_raw_202400105',
 	));
 
+	// A flow can start before the window of its partition, so the start has a day of room.
 	expect($range)->toBe(array(
-		strtotime('2024-01-02 00:00:00 UTC') - 1,
+		strtotime('2024-01-02 00:00:00 UTC') - 86400,
 		strtotime('2024-01-05 00:00:00 UTC') + 1,
 	));
 });
@@ -589,6 +590,47 @@ it('reports the automatic materialization status of a filter', function ($nat, $
 
 it('is up to date when there are no cold partitions to materialize', function () {
 	expect(flowview_materialization_status(array(), array(), array(), false))->toBe('current');
+});
+
+it('is required when the live partition is cached but an older one is not, and names it', function () {
+	$tables = array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003', 'plugin_flowview_raw_2024004');
+	$cold   = flowview_get_cold_partitions($tables);
+
+	// every partition but the oldest is cached, and that includes the live one
+	$cached = array('plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003', 'plugin_flowview_raw_2024004');
+
+	expect(flowview_materialization_status($cached, $cached, $cold, false))->toBe('required')
+		->and(flowview_get_missing_partitions($cached, $cached, $cold))->toBe(array(
+			'nat'     => array('plugin_flowview_raw_2024001'),
+			'non_nat' => array('plugin_flowview_raw_2024001'),
+		));
+});
+
+it('is up to date when every older partition is cached and only the live one is not', function () {
+	$tables = array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003');
+	$cold   = flowview_get_cold_partitions($tables);
+	$cached = array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002');
+
+	expect(flowview_materialization_status($cached, $cached, $cold, false))->toBe('current')
+		->and(flowview_get_missing_partitions($cached, $cached, $cold))->toBe(array('nat' => array(), 'non_nat' => array()));
+});
+
+it('describes the partitions that are missing in a tip', function ($tables, $expected) {
+	expect(flowview_describe_partitions($tables))->toBe($expected);
+})->with(array(
+	'none'      => array(array(), '0'),
+	'one'       => array(array('plugin_flowview_raw_2024001'), '1 (plugin_flowview_raw_2024001)'),
+	'three'     => array(array('a', 'b', 'c'), '3 (a, b, c)'),
+	'too many'  => array(array('a', 'b', 'c', 'd', 'e'), '5 (a, b, c, ...)'),
+));
+
+it('says which partitions are missing in the tip of a pill that is not up to date', function () {
+	$missing = array('nat' => array('plugin_flowview_raw_2024001'), 'non_nat' => array());
+
+	expect(flowview_get_colored_materialization_status('required', $missing))
+		->toContain("deviceDown' title='Not materialized yet, with NAT: 1 (plugin_flowview_raw_2024001), without NAT: 0.'")
+		->and(flowview_get_colored_materialization_status('running', $missing))->toContain('deviceRecovering\' title=')
+		->and(flowview_get_colored_materialization_status('current', $missing))->not->toContain('title=');
 });
 
 it('shows the status pills in the form of the device status', function ($status, $class, $label) {

@@ -2,6 +2,10 @@
 
 --- develop ---
 
+* bug: Make the earliest partition, and the partitions that rotate, get cached by a materialization.  A shard is only cached when the range starts before the earliest flow in the partition, and a flow can start before the window of the partition it was written to, but the range was padded by only a second, so the oldest partition, or a rotated one on its own, was never cached and its Filter stayed Required.  The start is now padded by a day, which only adds partitions that already exist and are cached, and the summary now shows the first and last partition instead of the padded range.  Run the materializer again to cache what was missed
+
+* feature: Say which partitions a Filter is not materialized for, with NAT and without, in the tip of its Required and Running pill
+
 * bug: Fix the Filters page failing with "3 arguments are required, 2 given" once a query was running.  The Running: N pill and its tip, and the Parallel Query timeout message, passed the text domain where Cacti's __() expects the values to put in the text, so the tip crashed, the pill would have read "Running: flowview", and the timeout would have said 0 seconds.  The values now come before the domain, as elsewhere in the plugin
 
 * bug: Stop cli/materialize_queries.php from reporting each ALTER TABLE twice, once from its own progress line and once from the log message that is also printed.  The alter is still written to the Cacti log, and the schema upgrade, which has no other report, still shows it.  The logged text no longer has the extra space in it

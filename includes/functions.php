@@ -4138,9 +4138,14 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, int $hour = 0
  * Names that are not partition tables are ignored, and false is returned
  * when none qualify.
  *
- * Both bounds are padded by one second.  A shard is only a full scan, and
- * therefore only cached in parallel_database_query_shard_cache, when the
- * requested range lies strictly outside the data in the partition.
+ * A shard is only a full scan, and therefore only cached in
+ * parallel_database_query_shard_cache, when the requested range lies strictly
+ * outside the data in the partition.  The end is padded by a second, as a
+ * flow ends no later than it was captured.  The start is padded by a day,
+ * because a flow can start well before the window of the partition it was
+ * written to, and with less the earliest partition, or one that rotated, is
+ * never treated as a full scan and so is never cached.  A partition that does
+ * not exist in the extra day is simply not there to scan.
  *
  * @param array $tables
  *
@@ -4171,7 +4176,7 @@ function flowview_get_materialize_range(array $tables): array|false {
 		return false;
 	}
 
-	return [$start - 1, $end + 1];
+	return [$start - 86400, $end + 1];
 }
 
 /**
@@ -4757,15 +4762,56 @@ function flowview_materialization_status(array $cached_nat, array $cached_non_na
  *
  * @return string
  */
-function flowview_get_colored_materialization_status(string $status): string {
+function flowview_get_colored_materialization_status(string $status, ?array $missing = null): string {
+	$tip = '';
+
+	/* say which partitions are not materialized, when it is not up to date */
+	if ($missing !== null && $status != 'current') {
+		$tip = " title='" . __esc('Not materialized yet, with NAT: %s, without NAT: %s.', flowview_describe_partitions($missing['nat'] ?? []), flowview_describe_partitions($missing['non_nat'] ?? []), 'flowview') . "'";
+	}
+
 	switch ($status) {
 		case 'current':
 			return "<span class='deviceStatus deviceUp'>" . __('Up to date', 'flowview') . '</span>';
 		case 'running':
-			return "<span class='deviceStatus deviceRecovering'>" . __('Running', 'flowview') . '</span>';
+			return "<span class='deviceStatus deviceRecovering'$tip>" . __('Running', 'flowview') . '</span>';
 		default:
-			return "<span class='deviceStatus deviceDown'>" . __('Required', 'flowview') . '</span>';
+			return "<span class='deviceStatus deviceDown'$tip>" . __('Required', 'flowview') . '</span>';
 	}
+}
+
+/**
+ * flowview_get_missing_partitions - The cold partitions that a filter is not
+ * materialized for, with NAT and without.
+ *
+ * @param array $cached_nat     The partitions cached for the filter with NAT
+ * @param array $cached_non_nat The partitions cached for the filter without NAT
+ * @param array $cold           The cold partitions
+ *
+ * @return array The partitions as nat and non_nat
+ */
+function flowview_get_missing_partitions(array $cached_nat, array $cached_non_nat, array $cold): array {
+	return [
+		'nat'     => array_values(array_diff($cold, $cached_nat)),
+		'non_nat' => array_values(array_diff($cold, $cached_non_nat)),
+	];
+}
+
+/**
+ * flowview_describe_partitions - How many partitions there are and the first
+ * few of them by name, for a tip.
+ *
+ * @param array $tables The partition tables
+ * @param int   $limit  How many to name
+ *
+ * @return string
+ */
+function flowview_describe_partitions(array $tables, int $limit = 3): string {
+	if (!cacti_sizeof($tables)) {
+		return '0';
+	}
+
+	return cacti_sizeof($tables) . ' (' . implode(', ', array_slice($tables, 0, $limit)) . (cacti_sizeof($tables) > $limit ? ', ...' : '') . ')';
 }
 
 /**

@@ -234,8 +234,8 @@ $modes = $nat !== false ? [$nat] : ['on', 'off'];
 
 print sprintf('FlowView Materialization: Partitions:%d From:%s To:%s Queries:%d NAT:%s',
 	cacti_sizeof($tables),
-	date('Y-m-d H:i:s', $start + 1),
-	date('Y-m-d H:i:s', $end - 1),
+	date('Y-m-d H:i:s', flowview_table_name_to_time(reset($tables), 'start_time')),
+	date('Y-m-d H:i:s', flowview_table_name_to_time(end($tables), 'end_time')),
 	cacti_sizeof($queries),
 	implode('/', $modes)) . PHP_EOL;
 
