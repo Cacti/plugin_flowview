@@ -185,7 +185,10 @@ $last_tables = flowview_db_fetch_assoc('SELECT TABLE_NAME, ENGINE
 if (cacti_sizeof($last_tables)) {
 	foreach($last_tables as $table) {
 		if ($table['ENGINE'] != $raw_engine) {
-			flowview_db_execute("ALTER TABLE {$table['TABLE_NAME']} ENGINE=$raw_engine");
+			/* a conversion from an earlier cycle can still be running, and must not be started again */
+			if (!flowview_convert_partition_engine($table['TABLE_NAME'], $raw_engine)) {
+				flowview_debug("An ALTER TABLE is already running on {$table['TABLE_NAME']}, skipping the engine conversion");
+			}
 		}
 	}
 }

@@ -4444,6 +4444,211 @@ function flowview_get_rotated_partitions(array $tables, string $previous): array
 }
 
 /**
+ * flowview_get_partition_alter - What a raw partition table needs altered to
+ * match the current layout: the character set, the keys and columns the
+ * queries use, the ex_addr type, and the storage engine.  This is the single
+ * definition used by the schema upgrade and by the materializer, so a
+ * partition the upgrade has not reached yet is prepared the same way.
+ *
+ * Keys of $info: collation and engine of the table, has_keycol and
+ * has_template_id for those columns, indexes as the names of the indexes
+ * it has, and ex_addr_type as the type of the ex_addr column, or null.
+ *
+ * @param array  $info       What the partition table currently is
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ *
+ * @return array The alter as a string, which is empty when none is needed,
+ *               and whether ex_addr has to be rewritten afterwards
+ */
+function flowview_get_partition_alter(array $info, string $raw_engine): array {
+	$alter     = '';
+	$ex_change = false;
+	$indexes   = $info['indexes'] ?? [];
+
+	if (($info['collation'] ?? '') != 'latin1_swedish_ci') {
+		$alter = 'CONVERT TO CHARACTER SET latin1';
+	}
+
+	if (!empty($info['has_keycol'])) {
+		$alter .= ($alter != '' ? ', ':'') . 'DROP KEY keycol';
+	}
+
+	if (empty($info['has_template_id'])) {
+		$alter .= ($alter != '' ? ', ':'') . 'ADD COLUMN template_id int(11) unsigned NOT NULL default "0" AFTER listener_id';
+	}
+
+	foreach (['template_id', 'start_time', 'end_time'] as $index) {
+		if (!in_array($index, $indexes, true)) {
+			$alter .= ($alter != '' ? ', ':'') . "ADD INDEX $index ($index)";
+		}
+	}
+
+	if (isset($info['ex_addr_type']) && stripos($info['ex_addr_type'], 'VARCHAR') === false) {
+		$alter .= ($alter != '' ? ', ':'') . 'MODIFY COLUMN ex_addr VARCHAR(46) NOT NULL default ""';
+		$ex_change = true;
+	}
+
+	if (!in_array('ex_addr', $indexes, true)) {
+		$alter .= ($alter != '' ? ', ':'') . 'ADD INDEX ex_addr (ex_addr)';
+	}
+
+	if (($info['engine'] ?? '') != $raw_engine) {
+		if ($raw_engine == 'Aria') {
+			$alter .= ($alter != '' ? ',':'') . " ENGINE=$raw_engine ROW_FORMAT=page";
+		} else {
+			$alter .= ($alter != '' ? ',':'') . " ENGINE=$raw_engine ROW_FORMAT=Dynamic";
+		}
+	}
+
+	return ['alter' => $alter, 'ex_change' => $ex_change];
+}
+
+/**
+ * flowview_apply_partition_alter - Alter a raw partition table as planned by
+ * flowview_get_partition_alter().
+ *
+ * @param string $table The raw partition table
+ * @param array  $plan  The plan from flowview_get_partition_alter()
+ *
+ * @return void
+ */
+function flowview_apply_partition_alter(string $table, array $plan): void {
+	cacti_log("Altering Table $table Using this alter {$plan['alter']}.", true, 'FLOWVIEW');
+
+	flowview_db_execute('ALTER TABLE ' . $table . ' ' . $plan['alter']);
+
+	if ($plan['ex_change']) {
+		flowview_db_execute('UPDATE ' . $table . ' SET ex_addr = SUBSTRING_INDEX(ex_addr, ":", 1)');
+	}
+}
+
+/**
+ * flowview_get_pending_partition_alters - The partitions that still need
+ * altering, looked at all at once so that a long list of partitions does not
+ * mean a long list of queries.
+ *
+ * @param array  $tables     The raw partition tables to look at
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ *
+ * @return array The plan from flowview_get_partition_alter() of each
+ *               partition that needs one, by table
+ */
+function flowview_get_pending_partition_alters(array $tables, string $raw_engine): array {
+	if (!cacti_sizeof($tables)) {
+		return [];
+	}
+
+	$info = [];
+
+	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, TABLE_COLLATION, ENGINE
+		FROM information_schema.TABLES
+		WHERE TABLE_SCHEMA = DATABASE()
+		AND TABLE_NAME LIKE "plugin_flowview_raw_%"') as $row) {
+		$info[$row['TABLE_NAME']] = [
+			'collation'       => $row['TABLE_COLLATION'],
+			'engine'          => $row['ENGINE'],
+			'has_keycol'      => false,
+			'has_template_id' => false,
+			'indexes'         => [],
+			'ex_addr_type'    => null,
+		];
+	}
+
+	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, COLUMN_NAME, COLUMN_TYPE
+		FROM information_schema.COLUMNS
+		WHERE TABLE_SCHEMA = DATABASE()
+		AND TABLE_NAME LIKE "plugin_flowview_raw_%"
+		AND COLUMN_NAME IN ("keycol", "template_id", "ex_addr")') as $row) {
+		if (!isset($info[$row['TABLE_NAME']])) {
+			continue;
+		}
+
+		if ($row['COLUMN_NAME'] == 'keycol') {
+			$info[$row['TABLE_NAME']]['has_keycol'] = true;
+		} elseif ($row['COLUMN_NAME'] == 'template_id') {
+			$info[$row['TABLE_NAME']]['has_template_id'] = true;
+		} else {
+			$info[$row['TABLE_NAME']]['ex_addr_type'] = $row['COLUMN_TYPE'];
+		}
+	}
+
+	foreach (flowview_db_fetch_assoc('SELECT DISTINCT TABLE_NAME, INDEX_NAME
+		FROM information_schema.STATISTICS
+		WHERE TABLE_SCHEMA = DATABASE()
+		AND TABLE_NAME LIKE "plugin_flowview_raw_%"
+		AND INDEX_NAME IN ("template_id", "start_time", "end_time", "ex_addr")') as $row) {
+		if (isset($info[$row['TABLE_NAME']])) {
+			$info[$row['TABLE_NAME']]['indexes'][] = $row['INDEX_NAME'];
+		}
+	}
+
+	$pending = [];
+
+	foreach ($tables as $table) {
+		if (!isset($info[$table])) {
+			continue;
+		}
+
+		$plan = flowview_get_partition_alter($info[$table], $raw_engine);
+
+		if ($plan['alter'] != '') {
+			$pending[$table] = $plan;
+		}
+	}
+
+	return $pending;
+}
+
+/**
+ * flowview_get_running_partition_alters - The raw partition tables that an
+ * ALTER TABLE is running on right now, other than from this connection.  A
+ * query against such a table waits for the alter to finish.
+ *
+ * @param array $tables The raw partition tables to look at
+ *
+ * @return array How many seconds each alter has been running, by table
+ */
+function flowview_get_running_partition_alters(array $tables): array {
+	$running = [];
+
+	$processes = flowview_db_fetch_assoc('SELECT TIME, INFO
+		FROM information_schema.PROCESSLIST
+		WHERE ID != CONNECTION_ID()
+		AND INFO LIKE "ALTER TABLE%plugin_flowview_raw_%"');
+
+	foreach ($processes as $process) {
+		if (!preg_match('/^\s*ALTER\s+TABLE\s+(?:`?[A-Za-z0-9_]+`?\.)?`?(plugin_flowview_raw_[0-9]+)`?/i', (string) $process['INFO'], $matches)) {
+			continue;
+		}
+
+		if (in_array($matches[1], $tables, true)) {
+			$running[$matches[1]] = max($running[$matches[1]] ?? 0, (int) $process['TIME']);
+		}
+	}
+
+	return $running;
+}
+
+/**
+ * flowview_get_partitions_without_nat_columns - The raw partition tables that
+ * pre-date the post-NAT columns.  Queries against them still work, but have
+ * no NAT data to show.
+ *
+ * @param array $tables The raw partition tables to look at
+ *
+ * @return array
+ */
+function flowview_get_partitions_without_nat_columns(array $tables): array {
+	$with = array_column(flowview_db_fetch_assoc('SELECT TABLE_NAME
+		FROM information_schema.COLUMNS
+		WHERE TABLE_SCHEMA = DATABASE()
+		AND TABLE_NAME LIKE "plugin_flowview_raw_%"
+		AND COLUMN_NAME = "post_nat_src_addr"'), 'TABLE_NAME');
+
+	return array_values(array_diff($tables, $with));
+}
+
+/**
  * flowview_materialization_running - Whether a materialization is registered
  * as running.  Only one may be active at a time.
  *
@@ -4493,12 +4698,34 @@ function flowview_materialization_status(array $cached_nat, array $cached_non_na
 function flowview_get_colored_materialization_status(string $status): string {
 	switch ($status) {
 		case 'current':
-			return '<span class="deviceUp">' . __('Up to date', 'flowview') . '</span>';
+			return "<span class='deviceStatus deviceUp'>" . __('Up to date', 'flowview') . '</span>';
 		case 'running':
-			return '<span class="deviceRecovering">' . __('Running', 'flowview') . '</span>';
+			return "<span class='deviceStatus deviceRecovering'>" . __('Running', 'flowview') . '</span>';
 		default:
-			return '<span class="deviceDown">' . __('Required', 'flowview') . '</span>';
+			return "<span class='deviceStatus deviceDown'>" . __('Required', 'flowview') . '</span>';
 	}
+}
+
+/**
+ * flowview_convert_partition_engine - Change a raw partition table that has
+ * rotated to the storage engine they use.  Nothing is done while an ALTER
+ * TABLE is already running on it.  Until one finishes the table still shows
+ * its old engine, so without that check every poller cycle would start
+ * another that waits for the first and then rebuilds the table again.
+ *
+ * @param string $table      The raw partition table
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ *
+ * @return bool false when an alter is already running on it
+ */
+function flowview_convert_partition_engine(string $table, string $raw_engine): bool {
+	if (cacti_sizeof(flowview_get_running_partition_alters([$table]))) {
+		return false;
+	}
+
+	flowview_db_execute("ALTER TABLE $table ENGINE=$raw_engine");
+
+	return true;
 }
 
 /**
@@ -4780,6 +5007,19 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 }
 
 /**
+ * flowview_parallel_timeout_message - The message for a parallel query that
+ * did not finish within the Maximum Run Time, worded for the Cacti log and
+ * for a script.
+ *
+ * @param int $seconds The Maximum Run Time in seconds
+ *
+ * @return string
+ */
+function flowview_parallel_timeout_message(int $seconds): string {
+	return sprintf(__('ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE.', 'flowview'), $seconds);
+}
+
+/**
  * parallel_database_query_is_running - Checks to see if an existing parallel
  * database query is currently running and return a true of false.  This prevents
  * multiple simultaneouls run requests from polluting the output.
@@ -4865,13 +5105,24 @@ function parallel_database_query_run($requests) {
 	}
 
 	if ($total_time >= $max_time) {
-		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
+		$timeout_message = flowview_parallel_timeout_message((int) $max_time);
+
+		cacti_log($timeout_message, false, 'FLOWVIEW');
+
+		/* the web page shows the message in the browser, a script has no browser to run it */
+		if (defined('CACTI_WEB') && CACTI_WEB) {
+			raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
+		} else {
+			print $timeout_message . PHP_EOL;
+
+			$GLOBALS['flowview_error_reported'] = true;
+		}
 
 		foreach($requests as $request_id) {
 			parallel_database_query_cleanup($request_id);
 		}
 
-		exit;
+		exit(defined('CACTI_WEB') && CACTI_WEB ? 0 : 1);
 	}
 
 	if (cacti_sizeof($requests) == 1) {

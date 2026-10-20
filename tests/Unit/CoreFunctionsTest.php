@@ -591,14 +591,24 @@ it('is up to date when there are no cold partitions to materialize', function ()
 	expect(flowview_materialization_status(array(), array(), array(), false))->toBe('current');
 });
 
-it('shows the status pills in the colors of the device status', function ($status, $class, $label) {
-	expect(flowview_get_colored_materialization_status($status))->toBe('<span class="' . $class . '">' . $label . '</span>');
+it('shows the status pills in the form of the device status', function ($status, $class, $label) {
+	expect(flowview_get_colored_materialization_status($status))->toBe("<span class='deviceStatus " . $class . "'>" . $label . '</span>');
 })->with(array(
 	'current'  => array('current', 'deviceUp', 'Up to date'),
 	'running'  => array('running', 'deviceRecovering', 'Running'),
 	'required' => array('required', 'deviceDown', 'Required'),
 	'unknown'  => array('anything', 'deviceDown', 'Required'),
 ));
+
+it('words the parallel query timeout for the log and a script, not the browser', function () {
+	$message = flowview_parallel_timeout_message(300);
+
+	expect($message)->toStartWith('ERROR: ')
+		->and($message)->toContain('300 seconds')
+		->and($message)->toContain('Maximum Run Time')
+		->and($message)->not->toContain('<script')
+		->and($message)->not->toContain('DOMPurify');
+});
 
 it('starts a materialization for only the partitions it is given', function () {
 	if (!function_exists('exec_background')) {
@@ -737,5 +747,203 @@ describe('materializing the partitions that rotated', function () {
 
 		expect(flowview_materialize_rotated_partitions())->toBe(array())
 			->and($GLOBALS['__test_config'])->not->toHaveKey('flowview_last_hot_partition');
+	});
+});
+
+describe('preparing the partitions before they are scanned', function () {
+	$current = array(
+		'collation'       => 'latin1_swedish_ci',
+		'engine'          => 'Aria',
+		'has_keycol'      => false,
+		'has_template_id' => true,
+		'indexes'         => array('template_id', 'start_time', 'end_time', 'ex_addr'),
+		'ex_addr_type'    => 'varchar(46)',
+	);
+
+	it('needs no alter for a partition that is already current', function () use ($current) {
+		expect(flowview_get_partition_alter($current, 'Aria'))->toBe(array('alter' => '', 'ex_change' => false));
+	});
+
+	it('alters only the engine of a partition that has rotated but kept the live engine', function ($raw_engine, $expected) use ($current) {
+		$info           = $current;
+		$info['engine'] = 'InnoDB';
+
+		expect(flowview_get_partition_alter($info, $raw_engine))->toBe(array('alter' => $expected, 'ex_change' => false));
+	})->with(array(
+		'aria'   => array('Aria', ' ENGINE=Aria ROW_FORMAT=page'),
+		'myisam' => array('MyISAM', ' ENGINE=MyISAM ROW_FORMAT=Dynamic'),
+	));
+
+	it('plans every alter a partition from an old version needs, as the schema upgrade always did', function () {
+		$info = array(
+			'collation'       => 'utf8mb4_general_ci',
+			'engine'          => 'InnoDB',
+			'has_keycol'      => true,
+			'has_template_id' => false,
+			'indexes'         => array(),
+			'ex_addr_type'    => 'varbinary(16)',
+		);
+
+		expect(flowview_get_partition_alter($info, 'Aria'))->toBe(array(
+			'alter'     => 'CONVERT TO CHARACTER SET latin1, DROP KEY keycol, ADD COLUMN template_id int(11) unsigned NOT NULL default "0" AFTER listener_id, ' .
+				'ADD INDEX template_id (template_id), ADD INDEX start_time (start_time), ADD INDEX end_time (end_time), ' .
+				'MODIFY COLUMN ex_addr VARCHAR(46) NOT NULL default "", ADD INDEX ex_addr (ex_addr), ENGINE=Aria ROW_FORMAT=page',
+			'ex_change' => true,
+		));
+	});
+
+	it('leaves ex_addr alone when it is a varchar in any case or is missing', function ($type) use ($current) {
+		$info                 = $current;
+		$info['ex_addr_type'] = $type;
+
+		expect(flowview_get_partition_alter($info, 'Aria'))->toBe(array('alter' => '', 'ex_change' => false));
+	})->with(array('VARCHAR(46)', 'varchar(20)', null));
+
+	it('adds only the index a partition is missing', function () use ($current) {
+		$info            = $current;
+		$info['indexes'] = array('template_id', 'start_time', 'ex_addr');
+
+		expect(flowview_get_partition_alter($info, 'Aria')['alter'])->toBe('ADD INDEX end_time (end_time)');
+	});
+
+	it('alters a partition and rewrites ex_addr afterwards when it was converted', function () {
+		flowview_apply_partition_alter('plugin_flowview_raw_2024001', array('alter' => 'MODIFY COLUMN ex_addr VARCHAR(46) NOT NULL default ""', 'ex_change' => true));
+
+		$sql = array_column(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute';
+		}), 'sql');
+
+		expect(array_values($sql))->toBe(array(
+			'ALTER TABLE plugin_flowview_raw_2024001 MODIFY COLUMN ex_addr VARCHAR(46) NOT NULL default ""',
+			'UPDATE plugin_flowview_raw_2024001 SET ex_addr = SUBSTRING_INDEX(ex_addr, ":", 1)',
+		));
+	});
+
+	it('does not rewrite ex_addr when it was not converted', function () {
+		flowview_apply_partition_alter('plugin_flowview_raw_2024001', array('alter' => 'ADD INDEX end_time (end_time)', 'ex_change' => false));
+
+		$sql = array_column(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute';
+		}), 'sql');
+
+		expect(array_values($sql))->toBe(array('ALTER TABLE plugin_flowview_raw_2024001 ADD INDEX end_time (end_time)'));
+	});
+
+	it('finds the partitions that still need an alter in a single pass', function () {
+		$table = function ($name, $engine) {
+			return array('TABLE_NAME' => $name, 'TABLE_COLLATION' => 'latin1_swedish_ci', 'ENGINE' => $engine);
+		};
+
+		$columns = function ($name) {
+			return array(
+				array('TABLE_NAME' => $name, 'COLUMN_NAME' => 'template_id', 'COLUMN_TYPE' => 'int(11) unsigned'),
+				array('TABLE_NAME' => $name, 'COLUMN_NAME' => 'ex_addr', 'COLUMN_TYPE' => 'varchar(46)'),
+			);
+		};
+
+		$indexes = function ($name, $names) {
+			return array_map(function ($index) use ($name) {
+				return array('TABLE_NAME' => $name, 'INDEX_NAME' => $index);
+			}, $names);
+		};
+
+		$all = array('template_id', 'start_time', 'end_time', 'ex_addr');
+
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			$table('plugin_flowview_raw_2024001', 'Aria'),
+			$table('plugin_flowview_raw_2024002', 'InnoDB'),
+			$table('plugin_flowview_raw_2024003', 'Aria'),
+		));
+		plugin_test_queue_db_result('db_fetch_assoc', array_merge(
+			$columns('plugin_flowview_raw_2024001'),
+			$columns('plugin_flowview_raw_2024002'),
+			$columns('plugin_flowview_raw_2024003')
+		));
+		plugin_test_queue_db_result('db_fetch_assoc', array_merge(
+			$indexes('plugin_flowview_raw_2024001', $all),
+			$indexes('plugin_flowview_raw_2024002', $all),
+			$indexes('plugin_flowview_raw_2024003', array('template_id', 'start_time', 'ex_addr'))
+		));
+
+		$pending = flowview_get_pending_partition_alters(
+			array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003', 'plugin_flowview_raw_2024009'),
+			'Aria'
+		);
+
+		expect(array_keys($pending))->toBe(array('plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003'))
+			->and($pending['plugin_flowview_raw_2024002']['alter'])->toBe(' ENGINE=Aria ROW_FORMAT=page')
+			->and($pending['plugin_flowview_raw_2024003']['alter'])->toBe('ADD INDEX end_time (end_time)')
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return $call['fn'] == 'db_fetch_assoc';
+			}))->toHaveCount(3);
+	});
+
+	it('looks at nothing when there are no partitions', function () {
+		expect(flowview_get_pending_partition_alters(array(), 'Aria'))->toBe(array())
+			->and($GLOBALS['__test_db_calls'])->toBe(array());
+	});
+
+	it('finds the alters running on the partitions it needs', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('TIME' => 120, 'INFO' => 'ALTER TABLE plugin_flowview_raw_2024001 ADD INDEX end_time (end_time)'),
+			array('TIME' => 5, 'INFO' => 'alter table `plugin_flowview_raw_2024002` ENGINE=Aria'),
+			array('TIME' => 300, 'INFO' => 'ALTER TABLE `flowview`.`plugin_flowview_raw_2024001` ENGINE=Aria'),
+			array('TIME' => 9, 'INFO' => 'ALTER TABLE plugin_flowview_raw_2024099 ENGINE=Aria'),
+			array('TIME' => 3, 'INFO' => 'ALTER TABLE plugin_flowview_arin_information MODIFY COLUMN comments VARCHAR(512)'),
+			array('TIME' => 1, 'INFO' => null),
+		));
+
+		expect(flowview_get_running_partition_alters(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002')))->toBe(array(
+			'plugin_flowview_raw_2024001' => 300,
+			'plugin_flowview_raw_2024002' => 5,
+		));
+	});
+
+	it('finds no running alters when there are none', function () {
+		expect(flowview_get_running_partition_alters(array('plugin_flowview_raw_2024001')))->toBe(array());
+	});
+
+	it('converts the engine of a partition when no alter is running on it', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+
+		expect(flowview_convert_partition_engine('plugin_flowview_raw_202629214', 'Aria'))->toBeTrue();
+
+		$sql = array_column(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute';
+		}), 'sql');
+
+		expect(array_values($sql))->toBe(array('ALTER TABLE plugin_flowview_raw_202629214 ENGINE=Aria'));
+	});
+
+	it('does not start the same engine conversion again while one is running', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('TIME' => 1605, 'INFO' => 'ALTER TABLE plugin_flowview_raw_202629214 ENGINE=Aria'),
+		));
+
+		expect(flowview_convert_partition_engine('plugin_flowview_raw_202629214', 'Aria'))->toBeFalse();
+
+		$writes = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['fn'], 'db_execute') === 0;
+		});
+
+		expect($writes)->toBeEmpty();
+	});
+
+	it('still converts a partition when the alter running is on another one', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('TIME' => 12, 'INFO' => 'ALTER TABLE plugin_flowview_raw_202629213 ENGINE=Aria'),
+		));
+
+		expect(flowview_convert_partition_engine('plugin_flowview_raw_202629214', 'Aria'))->toBeTrue();
+	});
+
+	it('finds the partitions that have no NAT columns', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('TABLE_NAME' => 'plugin_flowview_raw_2024001'),
+			array('TABLE_NAME' => 'plugin_flowview_raw_2024003'),
+		));
+
+		expect(flowview_get_partitions_without_nat_columns(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003')))
+			->toBe(array('plugin_flowview_raw_2024002'));
 	});
 });

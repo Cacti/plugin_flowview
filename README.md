@@ -219,6 +219,16 @@ while partitions that have received more flows since, or have been dropped,
 are rebuilt.  Only one run may be active at a time, for up to 8 hours, unless
 `--force` is used.
 
+Before it scans anything the script gets the partitions ready.  A query waits
+for an ALTER TABLE that is running on the partition it scans, and a long one
+ends the query at the Maximum Run Time.  So the script waits for an alter that
+is already running on a partition it needs, for instance from the schema
+upgrade, and then does the alters that are still due itself, one partition at a
+time.  The partition still receiving flows is left alone.  The post-NAT columns
+are not added, as that is a deliberate choice for large installs.  The script
+notes the partitions that do not have them, and they have no NAT data until
+`flowview_upgrade_nat_columns.php` is run.
+
 You can also start it from the Filters page by selecting one or more Filters
 and choosing the 'Materialize View' action.  It runs in the background after
 you confirm, and the result is written to the Cacti log.  The 'NAT Shards' and

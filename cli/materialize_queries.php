@@ -182,10 +182,15 @@ if (empty($threads) || $threads == 1) {
 
 $tables = flowview_get_partition_tables();
 
+/* the newest partition is still receiving flows, so it is left as it is */
+$cold = flowview_get_cold_partitions($tables);
+
 /* only the partitions asked for, that still exist */
 if (cacti_sizeof($partitions)) {
 	$tables = array_values(array_intersect($tables, $partitions));
 }
+
+$cold = array_values(array_intersect($tables, $cold));
 
 $range = flowview_get_materialize_range($tables);
 
@@ -221,6 +226,13 @@ print sprintf('FlowView Materialization: Partitions:%d From:%s To:%s Queries:%d 
 	date('Y-m-d H:i:s', $end - 1),
 	cacti_sizeof($queries),
 	implode('/', $modes)) . PHP_EOL;
+
+/**
+ * Any alter that is due has to be done before the parallel query starts.  A
+ * query waits for an alter running on the partition it scans, and a long one
+ * ends the query at the Maximum Run Time.
+ */
+materialize_prepare_partitions($cold, $modes, $dry_run);
 
 /* partitions that are still accurate keep their cache, everything else is rebuilt below */
 if (!$dry_run) {
@@ -266,11 +278,110 @@ $time = microtime(true) - $began;
 
 print sprintf('FlowView Materialization Complete: Time:%0.2f Runs:%d Failed:%d', $time, $total, $failed) . PHP_EOL;
 
+if ($failed > 0) {
+	print 'NOTE: Partitions that finished materializing are kept, so run the materializer again to continue.' . PHP_EOL;
+}
+
 if (!$dry_run) {
 	cacti_log(sprintf('FLOWVIEW MATERIALIZE STATS: Time:%0.2f Runs:%d Failed:%d', $time, $total, $failed), false, 'SYSTEM');
 }
 
 exit($failed > 0 ? 1 : 0);
+
+/**
+ * Waits until no ALTER TABLE is running on any of the partitions.  A query
+ * waits for an alter on the partition it scans, so the parallel query must
+ * not start while one is running.
+ *
+ * @param array $tables The partitions to wait for
+ *
+ * @return void
+ */
+function materialize_wait_for_alters(array $tables): void {
+	$last_report = 0;
+
+	while (cacti_sizeof($running = flowview_get_running_partition_alters($tables))) {
+		if (time() - $last_report >= 30) {
+			$last_report = time();
+
+			arsort($running);
+
+			print sprintf('Waiting for an ALTER TABLE to finish on %d partition(s), the longest %s for %d seconds', cacti_sizeof($running), array_key_first($running), reset($running)) . PHP_EOL;
+		}
+
+		sleep(5);
+	}
+}
+
+/**
+ * Gets the partitions ready to be scanned.  It waits for an alter that is
+ * already running on one of them, for instance from the schema upgrade, and
+ * then does the alters that are still due itself, so nothing is altered while
+ * the parallel query runs.  The partition still receiving flows is left alone.
+ *
+ * A partition is looked at again just before it is altered.  If another
+ * process started an alter on it in the meantime, this waits for it and then
+ * only alters what is still due, so a partition is never rebuilt twice.
+ *
+ * @param array $cold    The partitions to prepare
+ * @param array $modes   The NAT modes being materialized, on and off
+ * @param bool  $dry_run Only say what would be done
+ *
+ * @return void
+ */
+function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run): void {
+	if (!cacti_sizeof($cold)) {
+		return;
+	}
+
+	$raw_engine = get_set_default_fast_engine();
+
+	if (!$dry_run) {
+		materialize_wait_for_alters($cold);
+	}
+
+	$pending = flowview_get_pending_partition_alters($cold, $raw_engine);
+
+	if (cacti_sizeof($pending)) {
+		print sprintf('%s %d partition(s) that still need an ALTER TABLE', $dry_run ? 'DRY RUN: Would alter' : 'Altering', cacti_sizeof($pending)) . PHP_EOL;
+
+		$i = 0;
+
+		foreach ($pending as $table => $plan) {
+			$i++;
+
+			if (!$dry_run && cacti_sizeof(flowview_get_running_partition_alters([$table]))) {
+				materialize_wait_for_alters([$table]);
+
+				$again = flowview_get_pending_partition_alters([$table], $raw_engine);
+
+				if (!isset($again[$table])) {
+					print sprintf('Table %s (%d of %d) was altered by another process', $table, $i, cacti_sizeof($pending)) . PHP_EOL;
+
+					continue;
+				}
+
+				$plan = $again[$table];
+			}
+
+			print sprintf('%s Table %s (%d of %d): %s', $dry_run ? 'DRY RUN: Would alter' : 'Altering', $table, $i, cacti_sizeof($pending), trim($plan['alter'])) . PHP_EOL;
+
+			if (!$dry_run) {
+				$began = microtime(true);
+
+				flowview_apply_partition_alter($table, $plan);
+
+				print sprintf('Altered Table %s in %0.2f seconds', $table, microtime(true) - $began) . PHP_EOL;
+			}
+		}
+	}
+
+	$no_nat = in_array('on', $modes, true) ? flowview_get_partitions_without_nat_columns($cold) : [];
+
+	if (cacti_sizeof($no_nat)) {
+		print sprintf('NOTE: %d partition(s) have no NAT columns, so they have no NAT data.  Run flowview_upgrade_nat_columns.php before materializing if they should.', cacti_sizeof($no_nat)) . PHP_EOL;
+	}
+}
 
 /**
  * Materializes one query for one NAT mode across the given range.  The query
@@ -287,10 +398,13 @@ exit($failed > 0 ? 1 : 0);
 function materialize_run_worker(int $query_id, string $nat, int $start, int $end): int {
 	$finished = false;
 
-	/* the run limit ends the process without returning, so report it as a failure */
+	/* the parallel query ends the process on a timeout, after it has said why */
 	register_shutdown_function(function () use (&$finished) {
 		if (!$finished) {
-			print 'ERROR: The materialization did not finish.  Check the Maximum Run Time under the FlowView Settings.' . PHP_EOL;
+			if (empty($GLOBALS['flowview_error_reported'])) {
+				print 'ERROR: The materialization ended before it finished.  See the Cacti log for details.' . PHP_EOL;
+			}
+
 			exit(1);
 		}
 	});
