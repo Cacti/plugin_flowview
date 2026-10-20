@@ -189,12 +189,15 @@ if ($nbar_dates_adjusted) {
 	$nbar_range_notice = __('Dates adjusted to the %s-day NBAR retention window.', $nbar_retention_days, 'flowview');
 }
 // The primary key starts with capture/minute, so each lookup reads its first record.
-$nbar_earliest = null;
+$nbar_earliest   = null;
+$nbar_data_error = false;
 
 foreach ($lid === 0 ? $combined_lids : [$lid] as $nbar_capture_id) {
 	$nbar_first = fv_nbar_data_edge($nbar_capture_id);
 
-	if (isset($nbar_first['minute'])) {
+	if ($nbar_first === false) {
+		$nbar_data_error = true;
+	} elseif (isset($nbar_first['minute'])) {
 		$nbar_first_minute = max($nbar_now - $nbar_retention_days * 86400, (int) $nbar_first['minute']);
 		$nbar_earliest     = $nbar_earliest === null ? $nbar_first_minute : min($nbar_earliest, $nbar_first_minute);
 	}
@@ -281,7 +284,12 @@ if ($nbar_range_notice !== '') {
 }
 fv_nbar_preferences_render($devices, $base, $mode, $aid, $parent_app);
 print '</form>';
-fv_nbar_chart($listener_scope, $lid === 0 ? [$start, $end] : [$lid, $start, $end], $family, $host);
+
+if ($nbar_data_error) {
+	print '<p class="alert">' . fv_nbar_h(__('Unable to read the NBAR records. Please try again.', 'flowview')) . '</p>';
+} else {
+	fv_nbar_chart($listener_scope, $lid === 0 ? [$start, $end] : [$lid, $start, $end], $family, $host);
+}
 print '</div></td></tr>';
 html_end_box();
 include(__DIR__ . '/nbar_setup_guide.php');
@@ -289,6 +297,12 @@ include(__DIR__ . '/nbar_setup_guide.php');
 print '<script src="' . plugin_flowview_escape_attr($config['url_path'] . 'plugins/flowview/js/nbar-report.js') . '"></script>';
 print '<script src="' . $config['url_path'] . 'include/js/jquery.tablesorter.widgets.js"></script>';
 print '<script src="' . plugin_flowview_escape_attr($config['url_path'] . 'plugins/flowview/js/nbar-tables.js') . '"></script>';
+
+if ($nbar_data_error) {
+	bottom_footer();
+
+	return;
+}
 
 if ($mode === 'conversations') {
 	include(__DIR__ . '/nbar_conversations.php');
@@ -339,10 +353,9 @@ if ($mode === 'apps') {
 }
 
 if ($mode === 'connections') {
-	$nbar_count_key = fv_nbar_count_context('', $where, $args, $end, $lid === 0 ? $combined_lids : [$lid], $start);
-
 	try {
-		$rows = fv_nbar_connections_cached($lid === 0 ? $combined_lids : [$lid], $start, $end, $where, $args, $page);
+		$nbar_count_key = fv_nbar_count_context('', $where, $args, $end, $lid === 0 ? $combined_lids : [$lid], $start);
+		$rows           = fv_nbar_connections_cached($lid === 0 ? $combined_lids : [$lid], $start, $end, $where, $args, $page);
 	} catch (Throwable $e) {
 		cacti_log('NBAR connection page: ' . $e->getMessage(), false, 'FLOWVIEW');
 		print '<p class="alert">' . fv_nbar_h(__('Unable to load connections. Try a shorter timespan or filter by IP.', 'flowview')) . '</p>';

@@ -43,7 +43,7 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 	$GLOBALS['__test_user_settings']['flowview_nbar_preferences'] = json_encode(['listeners' => $empty ? [] : [1, 2, 3], 'prefixes' => ['2001:db8::/64'], 'dns' => '0']);
 	$graph_timespans                                              = [GT_LAST_HALF_HOUR => 'Last Half Hour', GT_LAST_HOUR => 'Last Hour', GT_LAST_DAY => 'Last Day', GT_LAST_WEEK => 'Last Week'];
 	$now                                                          = (int) floor(time() / 60) * 60;
-	$_REQUEST                                                     = ['mode' => $empty ? 'apps' : $view, 'page' => '500', 'listener' => '0', 'family' => '6', 'host' => '2001:db8::10', 'app' => '0d000001', 'predefined_timespan' => '0', 'date1' => date('Y-m-d H:i', $now - 1200), 'date2' => date('Y-m-d H:i', $now), 'lock_range' => '1', 'context' => json_encode(['report' => 's10', 'unexpected' => ['nested']])];
+	$_REQUEST                                                     = ['mode' => in_array($view, ['no-devices', 'listing-failed'], true) ? 'apps' : $view, 'page' => '500', 'listener' => '0', 'family' => '6', 'host' => '2001:db8::10', 'app' => '0d000001', 'predefined_timespan' => '0', 'date1' => date('Y-m-d H:i', $now - 1200), 'date2' => date('Y-m-d H:i', $now), 'lock_range' => '1', 'context' => json_encode(['report' => 's10', 'unexpected' => ['nested']])];
 	$_SERVER['REQUEST_METHOD']                                    = 'GET';
 
 	if ($empty) {
@@ -66,13 +66,29 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 	plugin_test_queue_db_result('db_fetch_assoc', [['id' => 1, 'name' => '<router>'], ['id' => 2, 'name' => 'Second'], ['id' => 3, 'name' => 'Third']]);
 
 	for ($i = 0; $i < 3; $i++) {
-		plugin_test_queue_slices([fv_nbar_data_table($now - 60)]);
+		// A failed slice listing must stop the page instead of reading as an empty history.
+		$view === 'listing-failed' ? plugin_test_queue_db_result('db_fetch_assoc', false) : plugin_test_queue_slices([fv_nbar_data_table($now - 60)]);
 	}
 
 	for ($i = 0; $i < 6; $i++) {
 		plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $now - 60]);
 	}
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', [['name' => '<app>', 'bytes' => 1000000]]);
+
+	if ($view === 'listing-failed') {
+		$GLOBALS['__test_footer_rendered'] = false;
+		ob_start();
+		require_once(dirname(__DIR__, 2) . '/flowview_sections.php');
+		require(dirname(__DIR__, 2) . '/nbar_report.php');
+		$html = ob_get_clean();
+		expect($html)->toContain('Unable to read the NBAR records. Please try again.', 'Setup guide');
+		expect($html)->not->toContain('&lt;app&gt;', 'nbarPageNumber');
+		expect($GLOBALS['__test_footer_rendered'])->toBeTrue();
+		$sql = implode(' ', array_column($GLOBALS['__test_db_calls'], 'sql'));
+		expect($sql)->not->toContain('UNION ALL', 'GROUP BY d.app_id');
+
+		return;
+	}
 
 	if ($view === 'connections') {
 		for ($i = 0; $i < 7; $i++) {
@@ -96,4 +112,4 @@ it('renders combined IPv6 reports with protected controls and escaped rows', fun
 		expect($html)->toContain('Source IP', 'Destination IP', 'TCP', 'Counting total pages', 'Previous', 'nbarPageNumber', 'Back to top applications');
 		expect($html)->not->toContain('All conversations');
 	}
-})->with(['apps', 'connections', 'no-devices']);
+})->with(['apps', 'connections', 'no-devices', 'listing-failed']);

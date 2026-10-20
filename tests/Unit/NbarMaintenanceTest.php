@@ -104,6 +104,30 @@ it('rejects an hourly build whose commit fails', function () {
 	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
 });
 
+it('rolls back an hourly build when the raw slices cannot be listed instead of publishing an empty hour', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	expect(fv_nbar_summary_build(3, 1800000000))->toBeFalse();
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect($sql[count($sql) - 2])->toBe('ROLLBACK');
+	expect(end($sql))->toBe('SET SESSION max_statement_time=0');
+	expect(implode(' ', $sql))->not->toContain('DELETE FROM plugin_flowview_nbar_')->not->toContain('built=?');
+});
+
+it('stores the selection criteria so the count rebuilds its source when it runs', function () {
+	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_count.php');
+	$_SESSION['sess_user_id'] = 1;
+	plugin_test_queue_slices([]);
+	$key = fv_nbar_count_context('', 'd.listener_id=?', [1], 1800001800, [1], 1800000000);
+	expect($_SESSION['fv_nbar_counts'][$key]['scope'])->toBe(['where' => 'd.listener_id=?', 'listeners' => [1], 'start' => 1800000000, 'end' => 1800001800]);
+	// A slice that appears later changes the SQL text but must not change the cache key.
+	plugin_test_queue_slices([fv_nbar_data_table(1800000000)]);
+	expect(fv_nbar_count_context('', 'd.listener_id=?', [1], 1800001800, [1], 1800000000))->toBe($key);
+	expect($_SESSION['fv_nbar_counts'])->toHaveCount(1);
+	$other = fv_nbar_count_context('(SELECT fixture)', 'd.listener_id=?', [1], 1800001800);
+	expect($_SESSION['fv_nbar_counts'][$other])->not->toHaveKey('scope');
+});
+
 it('aggregates an hour from only the slices that cover it', function () {
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['revision' => '123']);

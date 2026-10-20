@@ -66,12 +66,6 @@ it('lists the slices oldest first and ignores unrelated tables', function () {
 	expect($GLOBALS['__test_db_calls'][0]['conn'])->toBe('nbar-partition-test');
 });
 
-it('lists no slices when the table list cannot be read', function () {
-	plugin_test_queue_db_result('db_fetch_assoc', false);
-	expect(fv_nbar_data_tables())->toBe([]);
-	expect(fv_nbar_data_tables())->toBe([]);
-});
-
 /**
  * The slice list fv_nbar_data_tables() would return for hourly slices starting at the given UTC hours of 2026-03-01.
  *
@@ -203,78 +197,169 @@ it('does not count a slice whose drop failed', function () {
 	expect(fv_nbar_data_drop_expired(gmmktime(9, 0, 0, 3, 1, 2026)))->toBe(0);
 });
 
-it('finds the oldest record of a capture by scanning slices oldest first and skipping empty ones', function () {
+/**
+ * Hourly slices of 2026-03-01 onwards, one per hour, for as many hours as requested.
+ *
+ * @param int $count Number of consecutive hourly slices.
+ *
+ * @return list<array{table: string, start: int, end: int}>
+ */
+function flowview_test_many_slices(int $count): array {
+	return flowview_test_hourly_slices_from(gmmktime(0, 0, 0, 3, 1, 2026), $count);
+}
+
+/**
+ * @param int $first Unix time of the first slice.
+ * @param int $count Number of consecutive hourly slices.
+ *
+ * @return list<array{table: string, start: int, end: int}>
+ */
+function flowview_test_hourly_slices_from(int $first, int $count): array {
+	$tables = [];
+
+	for ($i = 0; $i < $count; $i++) {
+		$start    = $first + $i * 3600;
+		$tables[] = ['table' => fv_nbar_data_table($start), 'start' => $start, 'end' => $start + 3600];
+	}
+
+	return $tables;
+}
+
+/**
+ * Queue the slice list the way SHOW TABLES returns it.
+ *
+ * @param list<array{table: string, start: int, end: int}> $slices
+ */
+function flowview_test_queue_slice_list(array $slices): void {
+	plugin_test_queue_slices(array_column($slices, 'table'));
+}
+
+/**
+ * @return list<array{sql: string, params: array}>
+ */
+function flowview_test_edge_reads(): array {
+	return array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_row_prepared'));
+}
+
+it('finds the oldest record of a capture with one query for a small set of slices', function () {
 	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(4, 0, 0, 3, 1, 2026)), fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026)), fv_nbar_data_table(gmmktime(6, 0, 0, 3, 1, 2026))]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', []);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => 1772341260]);
 	expect(fv_nbar_data_edge(3))->toBe(['minute' => 1772341260]);
-	$reads = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_row_prepared'));
-	expect($reads)->toHaveCount(2);
-	expect($reads[0]['sql'])->toBe('SELECT minute FROM `plugin_flowview_nbar_data_202605904` WHERE listener_id=? ORDER BY minute LIMIT 1');
-	expect($reads[1]['sql'])->toContain('`plugin_flowview_nbar_data_202605905`');
-	expect($reads[1]['params'])->toBe([3]);
-	expect($reads[1]['conn'])->toBe('nbar-partition-test');
+	$reads = flowview_test_edge_reads();
+	expect($reads)->toHaveCount(1);
+	expect($reads[0]['sql'])->toStartWith('SELECT MIN(minute) minute FROM ((SELECT minute FROM `plugin_flowview_nbar_data_202605904` WHERE listener_id=? ORDER BY minute LIMIT 1) UNION ALL (SELECT minute FROM `plugin_flowview_nbar_data_202605905`');
+	expect($reads[0]['sql'])->toEndWith(') edge');
+	expect($reads[0]['params'])->toBe([3, 3, 3]);
+	expect($reads[0]['conn'])->toBe('nbar-partition-test');
 });
 
-it('finds the newest record of a capture by scanning slices newest first', function () {
+it('finds the newest record of a capture with the slices ordered newest first', function () {
 	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(4, 0, 0, 3, 1, 2026)), fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026))]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => 1772341260]);
 	expect(fv_nbar_data_edge(3, true))->toBe(['minute' => 1772341260]);
-	$reads = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_row_prepared'));
+	$reads = flowview_test_edge_reads();
 	expect($reads)->toHaveCount(1);
-	expect($reads[0]['sql'])->toBe('SELECT minute FROM `plugin_flowview_nbar_data_202605905` WHERE listener_id=? ORDER BY minute DESC LIMIT 1');
+	expect($reads[0]['sql'])->toStartWith('SELECT MAX(minute) minute FROM ((SELECT minute FROM `plugin_flowview_nbar_data_202605905` WHERE listener_id=? ORDER BY minute DESC LIMIT 1) UNION ALL');
 });
 
-it('finds the true oldest record when a daily slice overlaps an earlier hourly slice', function () {
-	$daily  = 'plugin_flowview_nbar_data_2026059';
-	$hourly = fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026));
-	plugin_test_queue_slices([$daily, $hourly]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(6, 30, 0, 3, 1, 2026)]);
+it('resolves a daily slice that overlaps hourly slices inside the query', function () {
+	plugin_test_queue_slices(['plugin_flowview_nbar_data_2026059', fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026))]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(5, 10, 0, 3, 1, 2026)]);
 	expect(fv_nbar_data_edge(3))->toBe(['minute' => gmmktime(5, 10, 0, 3, 1, 2026)]);
+	expect(flowview_test_edge_reads())->toHaveCount(1);
 });
 
-it('keeps the earlier record when an overlapping slice only holds later ones', function () {
-	$daily  = 'plugin_flowview_nbar_data_2026059';
-	$hourly = fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026));
-	plugin_test_queue_slices([$daily, $hourly]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(5, 5, 0, 3, 1, 2026)]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(5, 40, 0, 3, 1, 2026)]);
-	expect(fv_nbar_data_edge(3))->toBe(['minute' => gmmktime(5, 5, 0, 3, 1, 2026)]);
+it('batches a capture with no records into bounded queries instead of one per slice', function ($latest) {
+	$slices = flowview_test_many_slices(720);
+	flowview_test_queue_slice_list($slices);
+
+	for ($i = 0; $i < 23; $i++) {
+		plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => null]);
+	}
+	expect(fv_nbar_data_edge(7, $latest))->toBe([]);
+	$reads = flowview_test_edge_reads();
+	expect($reads)->toHaveCount(23);
+
+	foreach ($reads as $i => $read) {
+		expect(count($read['params']))->toBe($i < 22 ? 32 : 16);
+		expect(substr_count($read['sql'], 'UNION ALL'))->toBe(count($read['params']) - 1);
+	}
+})->with([false, true]);
+
+it('stops probing further batches once no remaining slice can hold an earlier record', function () {
+	flowview_test_queue_slice_list(flowview_test_many_slices(100));
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(0, 5, 0, 3, 1, 2026)]);
+	expect(fv_nbar_data_edge(3))->toBe(['minute' => gmmktime(0, 5, 0, 3, 1, 2026)]);
+	expect(flowview_test_edge_reads())->toHaveCount(1);
 });
 
-it('finds the true newest record when a daily slice overlaps a later hourly slice', function () {
-	$daily  = 'plugin_flowview_nbar_data_2026059';
-	$hourly = fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026));
-	plugin_test_queue_slices([$daily, $hourly]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(5, 30, 0, 3, 1, 2026)]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(5, 50, 0, 3, 1, 2026)]);
-	expect(fv_nbar_data_edge(3, true))->toBe(['minute' => gmmktime(5, 50, 0, 3, 1, 2026)]);
-	$reads = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_row_prepared'));
-	expect($reads)->toHaveCount(2);
+it('stops probing further batches once no remaining slice can hold a later record', function () {
+	flowview_test_queue_slice_list(flowview_test_many_slices(100));
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(0, 0, 0, 3, 1, 2026) + 99 * 3600 + 120]);
+	expect(fv_nbar_data_edge(3, true))->toBe(['minute' => gmmktime(0, 0, 0, 3, 1, 2026) + 99 * 3600 + 120]);
+	expect(flowview_test_edge_reads())->toHaveCount(1);
 });
 
-it('stops scanning for the newest record once no remaining slice can be newer', function () {
-	$daily  = 'plugin_flowview_nbar_data_2026059';
-	$hourly = fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026));
-	plugin_test_queue_slices([$daily, $hourly]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => gmmktime(8, 0, 0, 3, 1, 2026)]);
-	expect(fv_nbar_data_edge(3, true))->toBe(['minute' => gmmktime(8, 0, 0, 3, 1, 2026)]);
-	$reads = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'db_fetch_row_prepared'));
-	expect($reads)->toHaveCount(1);
-	expect($reads[0]['sql'])->toContain('`' . $daily . '`');
+it('keeps looking in later batches when an earlier batch only holds a record that a later slice could beat', function () {
+	// A daily slice sorts by its start, so it can sit ahead of hourly slices that start later but hold older minutes.
+	$slices = flowview_test_many_slices(40);
+	flowview_test_queue_slice_list($slices);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $slices[39]['end'] + 1000]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $slices[33]['start'] + 60]);
+	expect(fv_nbar_data_edge(3))->toBe(['minute' => $slices[33]['start'] + 60]);
+	expect(flowview_test_edge_reads())->toHaveCount(2);
+});
+
+it('ignores a later batch that only holds a newer record when looking for the oldest', function () {
+	$slices = flowview_test_many_slices(40);
+	flowview_test_queue_slice_list($slices);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $slices[39]['end'] + 1000]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $slices[39]['end'] + 5000]);
+	expect(fv_nbar_data_edge(3))->toBe(['minute' => $slices[39]['end'] + 1000]);
+});
+
+it('keeps the newest record found when a later batch only holds an older one', function () {
+	$slices = flowview_test_many_slices(40);
+	flowview_test_queue_slice_list($slices);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $slices[7]['start'] - 100]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => $slices[3]['start'] - 500]);
+	expect(fv_nbar_data_edge(3, true))->toBe(['minute' => $slices[7]['start'] - 100]);
 });
 
 it('reports no record when the capture has none and no slice exists', function () {
+	plugin_test_queue_slices([]);
 	expect(fv_nbar_data_edge(3))->toBe([]);
+	expect(flowview_test_edge_reads())->toBe([]);
 	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(4, 0, 0, 3, 1, 2026))]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', []);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => null]);
 	expect(fv_nbar_data_edge(3))->toBe([]);
 });
 
 it('reports a database failure instead of an empty capture', function () {
-	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(4, 0, 0, 3, 1, 2026)), fv_nbar_data_table(gmmktime(5, 0, 0, 3, 1, 2026))]);
-	plugin_test_queue_db_result('db_fetch_row_prepared', []);
+	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(4, 0, 0, 3, 1, 2026))]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', false);
 	expect(fv_nbar_data_edge(3))->toBeFalse();
+});
+
+it('reports a failure to list the slices as a failure, never as an empty history', function () {
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	expect(fv_nbar_data_edge(3))->toBeFalse();
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	expect(fv_nbar_data_edge(3, true))->toBeFalse();
+	expect(flowview_test_edge_reads())->toBe([]);
+});
+
+it('throws when the slices cannot be listed so no reader sees an empty relation', function () {
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	expect(fn () => fv_nbar_data_tables())->toThrow(RuntimeException::class, 'Cannot list the NBAR raw tables');
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	expect(fn () => fv_nbar_data_source('a', '1=1', 0, 3600))->toThrow(RuntimeException::class);
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	expect(fn () => fv_nbar_hourly_source('apps', [1], 0, 3600))->toThrow(RuntimeException::class);
+});
+
+it('drops nothing and does not fail when the slices cannot be listed', function () {
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	expect(fv_nbar_data_drop_expired(PHP_INT_MAX))->toBe(0);
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('db_execute');
 });

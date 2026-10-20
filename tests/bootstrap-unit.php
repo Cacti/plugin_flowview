@@ -529,8 +529,8 @@ if (!function_exists('csrf_check')) {
 }
 
 if (!function_exists('exec_background')) {
-	function exec_background($command, $args) {
-		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_background', 'sql' => $command, 'params' => [$args]];
+	function exec_background($filename, $args = '', $redirect_args = '') {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_background', 'sql' => $filename, 'params' => [$args]];
 	}
 }
 if (!function_exists('register_process_start')) {

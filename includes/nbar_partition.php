@@ -85,13 +85,19 @@ function fv_nbar_data_bounds(string $table): ?array {
 /**
  * List the slices that exist, oldest first.
  *
+ * @throws RuntimeException When the database cannot list its tables, so a failure is never mistaken for "no slices".
+ *
  * @return list<array{table: string, start: int, end: int}>
  */
 function fv_nbar_data_tables(): array {
-	$rows   = flowview_db_fetch_assoc("SHOW TABLES LIKE 'plugin\\_flowview\\_nbar\\_data\\_%'");
+	$rows = flowview_db_fetch_assoc("SHOW TABLES LIKE 'plugin\\_flowview\\_nbar\\_data\\_%'");
+
+	if (!is_array($rows)) {
+		throw new RuntimeException('Cannot list the NBAR raw tables');
+	}
 	$tables = [];
 
-	foreach (is_array($rows) ? $rows : [] as $row) {
+	foreach ($rows as $row) {
 		$name   = (string) reset($row);
 		$bounds = fv_nbar_data_bounds($name);
 
@@ -196,7 +202,14 @@ function fv_nbar_data_ensure(string $table): bool {
 function fv_nbar_data_drop_expired(int $cutoff): int {
 	$dropped = 0;
 
-	foreach (fv_nbar_data_tables() as $slice) {
+	try {
+		$tables = fv_nbar_data_tables();
+	} catch (RuntimeException $e) {
+		// Nothing is dropped; retention simply runs again on the next maintenance pass.
+		return 0;
+	}
+
+	foreach ($tables as $slice) {
 		if ($slice['end'] <= $cutoff && flowview_db_execute('DROP TABLE IF EXISTS `' . $slice['table'] . '`') !== false) {
 			unset($GLOBALS['fv_nbar_data_known'][$slice['table']]);
 			$dropped++;
@@ -209,13 +222,20 @@ function fv_nbar_data_drop_expired(int $cutoff): int {
 /**
  * The oldest or newest retained record of a capture.
  *
+ * The slices are probed in batches of 32, one query per batch, so a capture with no records does
+ * not cost a query per retained slice.
+ *
  * @param int  $listener Capture identifier.
  * @param bool $latest   True for the newest record instead of the oldest.
  *
- * @return array|false A row with the minute, an empty array when the capture has no records, or false on a database failure.
+ * @return array|false A row with the minute, an empty array when the capture has no records, or false when the database cannot be read.
  */
 function fv_nbar_data_edge(int $listener, bool $latest = false): array|false {
-	$tables = fv_nbar_data_tables();
+	try {
+		$tables = fv_nbar_data_tables();
+	} catch (RuntimeException $e) {
+		return false;
+	}
 
 	// Slices from different schemes overlap, so the first slice with a record is not necessarily the
 	// answer.  Keep going until no remaining slice can hold an earlier (or later) minute.
@@ -224,18 +244,22 @@ function fv_nbar_data_edge(int $listener, bool $latest = false): array|false {
 	}
 	$found = [];
 
-	foreach ($tables as $slice) {
-		if ($found && ($latest ? $slice['end'] <= (int) $found['minute'] : $slice['start'] >= (int) $found['minute'])) {
+	foreach (array_chunk($tables, 32) as $batch) {
+		if ($found && ($latest ? $batch[0]['end'] <= (int) $found['minute'] : $batch[0]['start'] >= (int) $found['minute'])) {
 			break;
 		}
-		$row = flowview_db_fetch_row_prepared('SELECT minute FROM `' . $slice['table'] . '` WHERE listener_id=? ORDER BY minute' . ($latest ? ' DESC' : '') . ' LIMIT 1', [$listener]);
+		$members = array_map(
+			static fn (array $slice): string => '(SELECT minute FROM `' . $slice['table'] . '` WHERE listener_id=? ORDER BY minute' . ($latest ? ' DESC' : '') . ' LIMIT 1)',
+			$batch
+		);
+		$row = flowview_db_fetch_row_prepared('SELECT ' . ($latest ? 'MAX' : 'MIN') . '(minute) minute FROM (' . implode(' UNION ALL ', $members) . ') edge', array_fill(0, cacti_sizeof($batch), $listener));
 
 		if (!is_array($row)) {
 			return false;
 		}
 
 		if (isset($row['minute']) && (!$found || ($latest ? (int) $row['minute'] > (int) $found['minute'] : (int) $row['minute'] < (int) $found['minute']))) {
-			$found = $row;
+			$found = ['minute' => $row['minute']];
 		}
 	}
 

@@ -118,6 +118,12 @@ if (!register_process_start('flowview', 'upgrade', 1, 14400)) {
 	}
 }
 
+// The launcher row holds the web worker's PID.  Hand it to this process so a timeout recovery can only
+// ever signal this upgrade, never a PHP-FPM worker that has since been reused for another request.
+if (db_table_exists('processes')) {
+	db_execute_prepared('UPDATE processes SET pid = ? WHERE tasktype = ? AND taskname = ? AND taskid = ?', [getmypid(), 'flowview', 'upgrade_launch', 0]);
+}
+
 // release this run and the web launcher's lock however the script ends, including a fatal error
 register_shutdown_function(static function (): void {
 	unregister_process('flowview', 'upgrade', 1);

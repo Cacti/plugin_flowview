@@ -50,12 +50,16 @@ function fv_nbar_count_sql(string $source, string $where): string {
  * @return string
  */
 function fv_nbar_count_context(string $source, string $where, array $args, int $end, ?array $listeners = null, ?int $start = null): string {
-	// Guards are evaluated in the count statement, after any intervening refresh.
+	$scope = null;
+
+	// The source is rebuilt when the count runs, because a raw slice created in the meantime would
+	// otherwise be missing from the saved SQL.  Revision guards are evaluated in the count statement.
 	if ($listeners !== null && $start !== null) {
+		$scope  = ['where' => $where, 'listeners' => array_map('intval', $listeners), 'start' => (int) $start, 'end' => (int) $end];
 		$source = fv_nbar_summary_source('connections', $listeners, (int) $start, (int) $end);
 	}
 	$sql   = fv_nbar_count_sql($source, $where);
-	$key   = hash('sha256', serialize([$_SESSION['sess_user_id'] ?? 0, $sql, $args]));
+	$key   = hash('sha256', serialize([$_SESSION['sess_user_id'] ?? 0, $scope ?? $sql, $args]));
 	$cache = $_SESSION['fv_nbar_counts'] ?? [];
 
 	foreach ($cache as $k => $entry) {
@@ -68,7 +72,7 @@ function fv_nbar_count_context(string $source, string $where, array $args, int $
 		while (cacti_sizeof($cache) >= 12) {
 			array_shift($cache);
 		}
-		$cache[$key] = ['sql' => $sql, 'args' => $args, 'expires' => time() + 3600, 'ttl' => $end >= time() - 120 ? 60 : 600];
+		$cache[$key] = ['sql' => $sql, 'args' => $args, 'expires' => time() + 3600, 'ttl' => $end >= time() - 120 ? 60 : 600] + ($scope === null ? [] : ['scope' => $scope]);
 	}
 	$_SESSION['fv_nbar_counts'] = $cache;
 
@@ -134,7 +138,11 @@ function fv_nbar_count_request(): never {
 
 	try {
 		set_time_limit(100);
-		$row = fv_nbar_count_query($entry['sql'], $entry['args']);
+		$sql = isset($entry['scope']) ? fv_nbar_count_sql(fv_nbar_summary_source('connections', $entry['scope']['listeners'], $entry['scope']['start'], $entry['scope']['end']), $entry['scope']['where']) : $entry['sql'];
+		$row = fv_nbar_count_query($sql, $entry['args']);
+	} catch (RuntimeException $e) {
+		// The raw slices could not be listed, so the count is reported as unavailable.
+		cacti_log('NBAR count: ' . $e->getMessage(), false, 'FLOWVIEW');
 	} finally {
 		flowview_db_fetch_cell("SELECT RELEASE_LOCK(CONCAT('flowview_nbar_page_count:',LEFT(SHA2(DATABASE(),256),16)))");
 	}

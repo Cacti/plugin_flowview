@@ -50,6 +50,19 @@ if ($scenario === 'malformed') {
 	$_SESSION['fv_nbar_counts'][$key] += ['total' => 12345, 'until' => time() + 60];
 } elseif ($scenario === 'busy') {
 	plugin_test_queue_db_result('db_fetch_cell', 0);
+} elseif (str_starts_with($scenario, 'scoped')) {
+	// Saved criteria, not saved SQL: the slice list is read again when the count runs.
+	$_SESSION['fv_nbar_counts'][$key]['sql']   = 'SELECT stale FROM before_the_slice_existed';
+	$_SESSION['fv_nbar_counts'][$key]['scope'] = ['where' => 'd.listener_id=?', 'listeners' => [1], 'start' => 1800000000, 'end' => 1800001800];
+	plugin_test_queue_db_result('db_fetch_cell', 1);
+	plugin_test_queue_db_result('db_fetch_cell', '11.8.9-MariaDB');
+
+	if ($scenario === 'scoped-listing-failed') {
+		plugin_test_queue_db_result('db_fetch_assoc', false);
+	} else {
+		plugin_test_queue_slices([fv_nbar_data_table(1800000000)]);
+		plugin_test_queue_db_result('db_fetch_row_prepared', ['total' => 12345]);
+	}
 } else {
 	plugin_test_queue_db_result('db_fetch_cell', 1);
 	plugin_test_queue_db_result('db_fetch_cell', '11.8.9-MariaDB');

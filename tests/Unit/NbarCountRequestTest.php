@@ -14,7 +14,21 @@ it('handles terminating count requests and preserves bounded account cache state
 		$sql   = implode(' ', array_column($result['calls'], 'sql'));
 		$entry = $result['session']['fv_nbar_counts'][str_repeat('a', 64)] ?? [];
 
-		if (in_array($scenario, ['ready', 'failed', 'background-ready', 'background-failed'], true)) {
+		if (in_array($scenario, ['scoped', 'scoped-listing-failed'], true)) {
+			expect($sql)->toContain('GET_LOCK', 'RELEASE_LOCK');
+			$counts = array_values(array_filter($result['calls'], fn ($c) => $c['fn'] === 'db_fetch_row_prepared'));
+
+			if ($scenario === 'scoped') {
+				// The SQL that runs is built from the criteria and the slices that exist now, not the saved text.
+				expect($counts)->toHaveCount(1);
+				expect($counts[0]['sql'])->toContain('max_statement_time=90', 'COUNT(DISTINCT', 'plugin_flowview_nbar_data_2027')->not->toContain('before_the_slice_existed');
+				expect($entry['total'])->toBe(12345);
+			} else {
+				expect($counts)->toBe([]);
+				expect($entry['failed_until'])->toBeGreaterThan(time());
+				expect($entry)->not->toHaveKey('total');
+			}
+		} elseif (in_array($scenario, ['ready', 'failed', 'background-ready', 'background-failed'], true)) {
 			expect($sql)->toContain('GET_LOCK', 'max_statement_time=90', 'RELEASE_LOCK');
 			$counts = array_values(array_filter($result['calls'], fn ($c) => $c['fn'] === 'db_fetch_row_prepared'));
 			expect($counts[0]['params'])->toBe([3]);
@@ -42,5 +56,5 @@ it('handles terminating count requests and preserves bounded account cache state
 })->with([
 	['malformed', 'expired'], ['missing', 'expired'], ['expired', 'expired'], ['retry', 'unavailable'],
 	['cached', 'ready'], ['busy', 'busy'], ['ready', 'ready'], ['failed', 'unavailable'],
-	['background-ready', 'busy'], ['background-failed', 'busy']
+	['background-ready', 'busy'], ['background-failed', 'busy'], ['scoped', 'ready'], ['scoped-listing-failed', 'unavailable']
 ]);
