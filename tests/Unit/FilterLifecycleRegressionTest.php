@@ -19,7 +19,7 @@ beforeEach(function () {
 	foreach (['poller.php', 'time.php', 'timespan_settings.php'] as $file) {
 		file_put_contents($this->fixtureRoot . '/lib/' . $file, '<?php');
 	}
-	$this->runFixture = function ($command, $mode = 'pending', $nativeCore = false) {
+	$this->runFixture = function ($command, $mode = 'pending', $nativeCore = false, $recipients = null) {
 		$env = getenv();
 		if ($nativeCore) {
 			global $config;
@@ -34,6 +34,7 @@ beforeEach(function () {
 			file_put_contents($env['FLOWVIEW_FIXTURE_NATIVE_HELPER'], '<?php ' . substr($text, $start, $end - $start));
 		}
 
+		if ($recipients !== null) { $env['FLOWVIEW_FIXTURE_RECIPIENTS'] = json_encode($recipients); }
 		$env['FLOWVIEW_FIXTURE_MODE'] = $mode;
 		$env['FLOWVIEW_FIXTURE_RESULT'] = $this->fixtureRoot . '/result.json';
 		$process = proc_open($command, [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $this->fixtureRoot . '/plugins/flowview', $env);
@@ -345,3 +346,19 @@ it('exposes lookup outcomes with the official native helper loaded', function ($
 			->and(array_column($result['calls'], 0))->not->toContain('delivery', 'save-log');
 	}
 })->with(['notification-read-failure', 'notification-missing', 'notification-success']);
+
+
+it('completes CC-only and BCC-only lists through the actual schedule child', function ($field, $nativeCore) {
+	$recipients = [$field => 'recipient@example.invalid'];
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=7', '--queue-id=51'];
+	[$exit] = ($this->runFixture)($command, 'notification-success', $nativeCore, $recipients);
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	$writes = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'write'));
+	expect($exit)->toBe(0)->and($result['native_helper_loaded'])->toBe($nativeCore)
+		->and($writes)->toHaveCount(2)->and($writes[0][1])->toContain('UPDATE plugin_flowview_schedules')
+		->and($writes[1][2])->toBe(['complete', 51, 'flowview', 'running']);
+	$delivery = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'delivery'));
+	expect($delivery)->toHaveCount(1)->and($delivery[0][1])->toBe([
+		'', $recipients['cc_emails'] ?? '', $recipients['bcc_emails'] ?? ''
+	]);
+})->with(['cc_emails', 'bcc_emails'])->with([false, true]);

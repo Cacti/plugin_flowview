@@ -86,11 +86,13 @@ function db_fetch_row_prepared($sql, $params = [], ...$args) {
 		if (count($reads) > 1 && $GLOBALS['mode'] === 'notification-read-failure') { return false; }
 		if (count($reads) > 1 && $GLOBALS['mode'] === 'notification-missing') { return []; }
 		if (in_array($GLOBALS['mode'], ['notification-after-delivery', 'notification-mail-error', 'notification-log-error', 'notification-success', 'notification-list-error'], true)) {
-			return ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'name' => 'Fixture', 'notification' => $GLOBALS['mode'] === 'notification-list-error' ? '{"notification_list":{"id":1}}' : '{"email":{"to_email":"fixture@example.invalid"}}', 'request_type' => 'scheduled', 'requested_by' => 'fixture', 'requested_id' => 1];
+			return ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'name' => 'Fixture', 'notification' => ($GLOBALS['mode'] === 'notification-list-error' || getenv('FLOWVIEW_FIXTURE_RECIPIENTS')) ? '{"notification_list":{"id":1}}' : '{"email":{"to_email":"fixture@example.invalid"}}', 'request_type' => 'scheduled', 'requested_by' => 'fixture', 'requested_id' => 1];
 		}
 		return ['id' => 51, 'source' => 'flowview', 'source_id' => 7];
 	}
-	if (str_contains($sql, 'plugin_notification_lists')) { return ['emails' => 'list@example.invalid', 'format_file' => 'default']; }
+	if (str_contains($sql, 'plugin_notification_lists')) {
+		return getenv('FLOWVIEW_FIXTURE_RECIPIENTS') ? json_decode(getenv('FLOWVIEW_FIXTURE_RECIPIENTS'), true) : ['emails' => 'list@example.invalid', 'format_file' => 'default'];
+	}
 	if (str_contains($sql, 'plugin_flowview_schedules')) {
 		return ['id' => 7, 'query_id' => 3, 'title' => 'Fixture', 'format_file' => 'default'];
 	}
@@ -137,7 +139,7 @@ function db_connect_real(...$args) {
 
 function reports_load_format_file($format, &$output, &$tag, &$theme) { $output = '<REPORT>'; $tag = true; return true; }
 function mailer(...$args) {
-	$GLOBALS['calls'][] = ['delivery'];
+	$GLOBALS['calls'][] = ['delivery', array_slice($args, 1, 3)];
 	if ($GLOBALS['mode'] === 'notification-after-delivery') { throw new RuntimeException('Ambiguous delivery failure'); }
 	return in_array($GLOBALS['mode'], ['notification-mail-error', 'notification-list-error'], true) ? 'SMTP delivery failed' : '';
 }

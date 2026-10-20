@@ -28,25 +28,25 @@ function flowview_reports_log_and_notify($id, $start_time, $report_type, $source
 			return flowview_delivery_unresolved($id);
 		}
 		$html = $oput_html;
-		if ($type === 'email' && !empty($data['to_email'])) {
-			$to = $data['to_email'];
+		if ($type === 'email' && (!empty($data['to_email']) || !empty($data['cc_email']) || !empty($data['bcc_email']))) {
+			$to = $data['to_email'] ?? '';
 			$cc = $data['cc_email'] ?? '';
 			$bcc = $data['bcc_email'] ?? '';
 			$reply = $data['reply_to'] ?? '';
 		} elseif ($type === 'notification_list' && !empty($data['id'])) {
 			$list = db_fetch_row_prepared('SELECT * FROM plugin_notification_lists WHERE id = ?', [$data['id']]);
-			if (!$list || empty($list['emails'])) {
+			if (!$list || (empty($list['emails']) && empty($list['cc_emails']) && empty($list['bcc_emails']))) {
 				return flowview_delivery_unresolved($id);
 			}
 			$output = '';
 			$tag = false;
 			$theme = 'modern';
-			if (reports_load_format_file($list['format_file'] ?: 'default', $output, $tag, $theme)) {
+			if (reports_load_format_file(($list['format_file'] ?? '') ?: 'default', $output, $tag, $theme)) {
 				$html = $tag ? str_replace('<REPORT>', $oput_raw, $output) : $output . PHP_EOL . $oput_raw;
 			} else {
 				$html = $oput_raw;
 			}
-			$to = $list['emails'];
+			$to = $list['emails'] ?? '';
 			$cc = $list['cc_emails'] ?? '';
 			$bcc = $list['bcc_emails'] ?? '';
 			$reply = $list['reply_to'] ?? ($data['reply_to'] ?? '');

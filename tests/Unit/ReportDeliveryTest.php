@@ -68,3 +68,29 @@ it('preserves the compatibility entrypoint outcome without hiding lookup failure
 	[false, false], [[], false],
 	[['notification' => '', 'name' => 'Fixture', 'request_type' => 'scheduled', 'requested_by' => 'fixture', 'requested_id' => 1], true]
 ]);
+
+
+it('preserves every supported To CC and BCC recipient combination', function ($type, $mask, $mailError) {
+	$to = ($mask & 1) ? 'to@example.invalid' : '';
+	$cc = ($mask & 2) ? 'cc@example.invalid' : '';
+	$bcc = ($mask & 4) ? 'bcc@example.invalid' : '';
+	$notification = $type === 'email'
+		? ['email' => ['to_email' => $to, 'cc_email' => $cc, 'bcc_email' => $bcc]]
+		: ['notification_list' => ['id' => 1]];
+	plugin_test_queue_db_result('db_fetch_row_prepared', [
+		'name' => 'Fixture', 'notification' => json_encode($notification), 'request_type' => 'scheduled',
+		'requested_by' => 'fixture', 'requested_id' => 1
+	]);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['emails' => $to, 'cc_emails' => $cc, 'bcc_emails' => $bcc, 'format_file' => 'default']);
+	plugin_test_queue_db_result('mailer', $mailError);
+	plugin_test_queue_db_result('sql_save', 1);
+	$data = []; $raw = ''; $html = ''; $text = '';
+	expect(flowview_reports_log_and_notify(51, microtime(true), 'html', 'flowview', 7, 'Fixture', $data, $raw, $html, $text))->toBe($mask && $mailError === '' ? true : null);
+	$mail = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => $c['fn'] === 'mailer'));
+	if ($mask) {
+		expect($mail)->toHaveCount(1)->and(array_slice($mail[0]['params'], 1, 3))->toBe([$to, $cc, $bcc]);
+	} else {
+		expect($mail)->toBe([]);
+	}
+	expect($GLOBALS['__test_saved_rows'])->toHaveCount($mask && $mailError === '' ? 1 : 0);
+})->with(['email', 'notification_list'])->with(range(0, 7))->with(['', 'SMTP failed']);
