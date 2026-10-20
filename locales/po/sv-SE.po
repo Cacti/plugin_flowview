@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-12 14:40-0400\n"
-"PO-Revision-Date: 2026-10-09 17:18+0000\n"
-"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-12 14:40-0400\nPO-Revision-Date: 2026-10-20 08:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -487,7 +475,7 @@ msgstr "Start"
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php
 msgid "Set/Refresh Filters"
-msgstr "Ställ in/uppdatera filter"
+msgstr "Ange/uppdatera filter"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -910,7 +898,7 @@ msgstr "Inga anslutningar"
 
 #: flowview_devices.php includes/arrays.php includes/functions.php
 msgid "N/A"
-msgstr "Ej tillämpligt"
+msgstr "Inte tillämpligt"
 
 #: flowview_devices.php
 msgid "Cacti"
@@ -983,7 +971,7 @@ msgstr "Varje timme"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Varje %d timmar"
+msgstr "Var %d:e timme"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1082,7 +1070,7 @@ msgstr "Formatera fil som ska användas"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "Välj den anpassade HTML-wrapper och CSS-filen som ska användas. Den här filen innehåller både html och CSS för att paketera runt din rapport. Om det innehåller mer än bara CSS, måste du placera en speciell <REPORT> tagga inuti filen. Denna formattag kommer att ersättas med rapportinnehållet. Dessa filer finns i katalogen &quot;format&quot;."
+msgstr "Välj den anpassade HTML-omslutningen och CSS-filen som ska användas. Filen innehåller HTML och CSS som omsluter rapporten. Om den innehåller mer än CSS måste du placera en särskild <REPORT>-tagg i filen. Formattaggen ersätts med rapportens innehåll. Filerna finns i katalogen ”formats”."
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
@@ -1090,7 +1078,7 @@ msgstr "Inställningar för meddelandelista"
 
 #: flowview_schedules.php
 msgid "Notification List"
-msgstr "Notifieringslista"
+msgstr "Aviseringslista"
 
 #: flowview_schedules.php
 msgid "If the Thold Plugin is installed, you may select a Notification List"
@@ -1310,7 +1298,7 @@ msgstr "Ingen källa"
 
 #: includes/arrays.php
 msgid "Destination AS"
-msgstr "Destination"
+msgstr "Mål-AS"
 
 #: includes/arrays.php
 msgid "Source/Destination AS"
@@ -1617,7 +1605,7 @@ msgstr "Använd NAT-data"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr "Visa IP-adress och DNS-namn för källa/mål efter NAT-översättning i rapporten i stället för de ursprungliga värdena före NAT."
+msgstr "Visa IP-/DNS-namnet för källa/destination efter NAT i rapportutdata i stället för de ursprungliga värdena före NAT."
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1629,7 +1617,7 @@ msgstr "Ska tabellpanelen visas som standard."
 
 #: includes/arrays.php
 msgid "Bytes Panel"
-msgstr "Bytes Bar"
+msgstr "Bytepanel"
 
 #: includes/arrays.php
 msgid "Should the Bytes Panel be displayed by default."
@@ -1637,7 +1625,7 @@ msgstr "Ska panelen Byte visas som standard."
 
 #: includes/arrays.php
 msgid "Packets Panel"
-msgstr "Packets Bar"
+msgstr "Paketpanel"
 
 #: includes/arrays.php
 msgid "Should the Packets Panel be displayed by default."
@@ -1645,7 +1633,7 @@ msgstr "Ska paketpanelen visas som standard."
 
 #: includes/arrays.php
 msgid "Flows Panel"
-msgstr "Flöden Bar"
+msgstr "Flödespanel"
 
 #: includes/arrays.php
 msgid "Should the Flows Panel be displayed by default."
@@ -1685,7 +1673,7 @@ msgstr "Filtrera på den valda käll-IP-adressen för i filtret. Detta kan vara 
 
 #: includes/arrays.php
 msgid "Source Ports"
-msgstr "Källport (er)"
+msgstr "Källportar"
 
 #: includes/arrays.php
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
@@ -1709,7 +1697,7 @@ msgstr "Filtrera på den valda mål-IP-adressen för i filtret. Detta kan vara e
 
 #: includes/arrays.php
 msgid "Dest Ports"
-msgstr "Dest Port"
+msgstr "Målportar"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
@@ -1717,7 +1705,7 @@ msgstr "Filtrera på de valda destinationsportarna för i filtret. Detta kan var
 
 #: includes/arrays.php
 msgid "Dest Interface"
-msgstr "Dest-gränssnittet"
+msgstr "Målgränssnitt"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
@@ -1737,7 +1725,7 @@ msgstr "Käll-IP efter NAT"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrera på den valda käll-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
+msgstr "Filtrera på den översatta käll-IP-adressen efter NAT som har registrerats i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
 
 #: includes/arrays.php
 msgid "Post-NAT Source Port"
@@ -1745,7 +1733,7 @@ msgstr "Källport efter NAT"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrera på de valda källportarna för i filtret. Detta kan vara en kommaavgränsad lista över källportar."
+msgstr "Filtrera på den översatta källporten efter NAT i filtret. Detta kan vara en kommaavgränsad lista över portar."
 
 #: includes/arrays.php
 msgid "Post-NAT Dest IP"
@@ -1753,7 +1741,7 @@ msgstr "Mål-IP efter NAT"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrera på den valda mål-IP-adressen för i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser, eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
+msgstr "Filtrera på den översatta mål-IP-adressen efter NAT som har registrerats i filtret. Detta kan vara en kommaavgränsad lista över IPv4- eller IPv6-adresser eller en kommaavgränsad lista över IPv4- eller IPv6-adressintervall i CIDR-format (t.ex. 192.168.1.0/24)."
 
 #: includes/arrays.php
 msgid "Post-NAT Dest Port"
@@ -1761,7 +1749,7 @@ msgstr "Målport efter NAT"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrera på de valda destinationsportarna för i filtret. Detta kan vara en kommaavgränsad lista över Destimation Ports."
+msgstr "Filtrera på den översatta målporten efter NAT i filtret. Detta kan vara en kommaavgränsad lista över portar."
 
 #: includes/arrays.php
 msgid "DNS Cache"
@@ -1773,7 +1761,7 @@ msgstr "CIDR/Rutter"
 
 #: includes/arrays.php
 msgid "Autonomous Numbers"
-msgstr "Nummer"
+msgstr "Autonoma systemnummer"
 
 #: includes/arrays.php
 msgid "AS Blocks"
@@ -1793,7 +1781,7 @@ msgstr "Domäner"
 
 #: includes/arrays.php
 msgid "Filter Sets"
-msgstr "Filtret sparat"
+msgstr "Filteruppsättningar"
 
 #: includes/arrays.php
 msgid "Peering Sets"
@@ -1801,7 +1789,7 @@ msgstr "Peering-uppsättningar"
 
 #: includes/arrays.php
 msgid "Internet Routers"
-msgstr "Internetkontroll"
+msgstr "Internetroutrar"
 
 #: includes/arrays.php
 msgid "Incident Response Teams"
@@ -2224,7 +2212,7 @@ msgstr "Dest Prefix"
 
 #: includes/functions.php
 msgid "Type of Service"
-msgstr "Typ av service"
+msgstr "Typ av tjänst"
 
 #: includes/functions.php
 msgid "Bytes/Packet"
@@ -2442,7 +2430,7 @@ msgstr "Databaser"
 
 #: setup.php
 msgid "Normal User"
-msgstr "Normal användare"
+msgstr "Vanlig användare"
 
 #: setup.php
 msgid "System Administration"
@@ -2458,7 +2446,7 @@ msgstr "Instrumentpanel"
 
 #: setup.php
 msgid "(save)"
-msgstr "Spara"
+msgstr "(spara)"
 
 #: setup.php
 msgid "(edit)"
@@ -2676,48 +2664,44 @@ msgid "Parallel Queries"
 msgstr "Parallella frågor"
 
 #: setup.php
-#, fuzzy
-#| msgid "Parallel Queries"
 msgid "Parallel Query Backend"
-msgstr "Parallella frågor"
+msgstr "Bakände för parallella frågor"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr ""
+msgstr "Välj hur parallella FlowView-frågor körs. Den äldre PHP-köraren startar processen flowview_runner.php för varje fråga och delning. FlowViews frågetjänst skickar samma map-reduce-arbete till en långvarig Go-tjänst via localhost. Därmed undviks start av en process för varje fråga och fördröjning vid databasavläsning. Kräver att tjänsten flowview-query (se plugins/flowview/service/flowview-query) är installerad och körs."
 
 #: setup.php
 msgid "Legacy PHP Runner"
-msgstr ""
+msgstr "Äldre PHP-körare"
 
 #: setup.php
-#, fuzzy
-#| msgid "Flow Viewer"
 msgid "FlowView Query Service"
-msgstr "Flow Viewer"
+msgstr "FlowViews frågetjänst"
 
 #: setup.php
 msgid "Query Service URL"
-msgstr ""
+msgstr "Webbadress till frågetjänsten"
 
 #: setup.php
 msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
-msgstr ""
+msgstr "Baswebbadress för FlowViews frågetjänst, till exempel http://127.0.0.1:8699. Lämna tomt för att automatiskt hitta den tillfälliga porten i tjänstens portfil."
 
 #: setup.php
 msgid "Query Service Port File"
-msgstr ""
+msgstr "Portfil för frågetjänsten"
 
 #: setup.php
 msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
-msgstr ""
+msgstr "Sökväg till den portfil där FlowViews frågetjänst skriver sin bundna adress. Används för att hitta tjänstens slutpunkt när webbadressen till frågetjänsten ovan är tom."
 
 #: setup.php
 msgid "Query Service Token"
-msgstr ""
+msgstr "Token för frågetjänsten"
 
 #: setup.php
 msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
-msgstr ""
+msgstr "Valfri delad hemlighet. När den är angiven skickar Cacti den till FlowViews frågetjänst som huvudet ”Authorization: Bearer”. Tjänsten avvisar varje tillståndsändrande begäran som inte har samma token. Ange motsvarande värde i tjänstens konfigurationsfil (auth_token) eller miljövariabeln FLOWVIEW_QUERY_TOKEN. Rekommenderas när tjänsten kan nås av något annat än betrodda lokala processer."
 
 #: setup.php
 msgid "Max Concurrent Threads"
@@ -2765,7 +2749,7 @@ msgstr "%d Dag"
 #: setup.php
 #, php-format
 msgid "%d Days"
-msgstr "%d dygn"
+msgstr "%d dagar"
 
 #: setup.php
 msgid "MaxScale Sharding"
@@ -2796,9 +2780,8 @@ msgid "Flowview"
 msgstr "FlowView"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow"
-msgstr "Nytt flöde"
+msgstr "NetFlow"
 
 #~ msgid "View NetFlow Traffic In Range"
 #~ msgstr "Visa NetFlow-trafik inom intervall"
