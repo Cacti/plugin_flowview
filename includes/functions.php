@@ -1852,6 +1852,14 @@ function flowview_display_filter(): void {
 		}
 	}
 
+	function setCustomTimespan() {
+		$('#predefined_timespan').val('0');
+
+		if ($('#predefined_timespan').selectmenu('instance') !== undefined) {
+			$('#predefined_timespan').selectmenu('refresh');
+		}
+	}
+
 	function timeshiftFilter(direction) {
 		$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
 			'?action=timeshift' +
@@ -1862,10 +1870,7 @@ function flowview_display_filter(): void {
 			if (data['current_value_date1'] !== undefined) {
 				$('#date1').val(data['current_value_date1']);
 				$('#date2').val(data['current_value_date2']);
-				$('#predefined_timespan').val('0');
-				<?php if (get_selected_theme() != 'classic') {?>
-				$('#predefined_timespan').selectmenu('refresh');
-				<?php }?>
+				setCustomTimespan();
 				applyFilter();
 			}
 		});
@@ -1925,10 +1930,7 @@ function flowview_display_filter(): void {
 	}
 
 	$('#date1, #date2').on('change', function() {
-		$('#predefined_timespan').val('0');
-		<?php if (get_selected_theme() != 'classic') {?>
-		$('#predefined_timespan').selectmenu('refresh');
-		<?php }?>
+		setCustomTimespan();
 	});
 
 	</script>
