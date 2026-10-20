@@ -183,3 +183,114 @@ it('returns an empty range when the time shift dates cannot be parsed', function
 
 	expect(json_decode(ob_get_clean(), true))->toBe(array());
 });
+
+it('spans every partition when materializing and pads the bounds so shards are full scans', function () {
+	$range = flowview_get_materialize_range(array(
+		'plugin_flowview_raw_2024003',
+		'not_a_partition_table',
+		'plugin_flowview_raw_2024001',
+		'plugin_flowview_raw_202400105',
+	));
+
+	expect($range)->toBe(array(
+		strtotime('2024-01-02 00:00:00 UTC') - 1,
+		strtotime('2024-01-05 00:00:00 UTC') + 1,
+	));
+});
+
+it('has no materialization range without a valid partition table', function ($tables) {
+	expect(flowview_get_materialize_range($tables))->toBeFalse();
+})->with(array(
+	'no tables'        => array(array()),
+	'not partitions'   => array(array('plugin_flowview_queries', 'plugin_flowview_raw_abc')),
+));
+
+it('treats a cached partition shard as current only while the partition bounds match', function ($cached, $current, $expected) {
+	expect(flowview_shard_cache_is_current($cached, $current))->toBe($expected);
+})->with(array(
+	'identical bounds'          => array(
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:59:59'),
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:59:59'),
+		true,
+	),
+	'microsecond precision'     => array(
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:59:59'),
+		array('min_date' => '2026-10-20 12:00:00.400000', 'max_date' => '2026-10-20 12:59:59.900000'),
+		true,
+	),
+	'partition has more data'   => array(
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:30:00'),
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:45:00'),
+		false,
+	),
+	'partition starts earlier'  => array(
+		array('min_date' => '2026-10-20 12:05:00', 'max_date' => '2026-10-20 12:30:00'),
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:30:00'),
+		false,
+	),
+	'empty partition'           => array(
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:30:00'),
+		array('min_date' => null, 'max_date' => null),
+		false,
+	),
+	'unset cached bounds'       => array(
+		array('min_date' => '0000-00-00', 'max_date' => '0000-00-00'),
+		array('min_date' => '2026-10-20 12:00:00', 'max_date' => '2026-10-20 12:30:00'),
+		false,
+	),
+));
+
+it('keeps accurate cached partitions and removes ones that changed or were dropped', function () {
+	plugin_test_queue_db_result('db_fetch_assoc', array(
+		array('md5sum' => 'aaa', 'map_table' => 'plugin_flowview_raw_2024001', 'map_partition' => '', 'min_date' => '2024-01-02 00:00:00', 'max_date' => '2024-01-02 23:00:00'),
+		array('md5sum' => 'bbb', 'map_table' => 'plugin_flowview_raw_2024001', 'map_partition' => '', 'min_date' => '2024-01-02 00:00:00', 'max_date' => '2024-01-02 23:00:00'),
+		array('md5sum' => 'aaa', 'map_table' => 'plugin_flowview_raw_2024002', 'map_partition' => '', 'min_date' => '2024-01-03 00:00:00', 'max_date' => '2024-01-03 12:00:00'),
+		array('md5sum' => 'aaa', 'map_table' => 'plugin_flowview_raw_2024009', 'map_partition' => '', 'min_date' => '2024-01-10 00:00:00', 'max_date' => '2024-01-10 23:00:00'),
+	));
+
+	// Each distinct partition table is checked once: it exists, then its current bounds.
+	plugin_test_queue_db_result('db_fetch_cell', 1);
+	plugin_test_queue_db_result('db_fetch_row', array('min_date' => '2024-01-02 00:00:00.120000', 'max_date' => '2024-01-02 23:00:00.480000'));
+	plugin_test_queue_db_result('db_fetch_cell', 1);
+	plugin_test_queue_db_result('db_fetch_row', array('min_date' => '2024-01-03 00:00:00', 'max_date' => '2024-01-03 20:00:00'));
+	plugin_test_queue_db_result('db_fetch_cell', 0);
+
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 9)));
+
+	expect(flowview_invalidate_stale_shard_cache())->toBe(array('kept' => 2, 'removed' => 2));
+
+	$deleted = array();
+	foreach ($GLOBALS['__test_db_calls'] as $call) {
+		if ($call['fn'] == 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM parallel_database_query_shard_cache') === 0) {
+			$deleted[] = $call['params'];
+		}
+	}
+
+	expect($deleted)->toBe(array(
+		array('aaa', 'plugin_flowview_raw_2024002', ''),
+		array('aaa', 'plugin_flowview_raw_2024009', ''),
+	));
+
+	$requests = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] == 'db_execute_prepared' && preg_match('/^DELETE FROM parallel_database_query\s+WHERE id = \?/', $call['sql']) === 1;
+	}));
+
+	expect($requests)->toHaveCount(1)
+		->and($requests[0]['params'])->toBe(array(9));
+});
+
+it('leaves finished requests alone when every cached partition is still accurate', function () {
+	plugin_test_queue_db_result('db_fetch_assoc', array(
+		array('md5sum' => 'aaa', 'map_table' => 'plugin_flowview_raw_2024001', 'map_partition' => '', 'min_date' => '2024-01-02 00:00:00', 'max_date' => '2024-01-02 23:00:00'),
+	));
+	plugin_test_queue_db_result('db_fetch_cell', 1);
+	plugin_test_queue_db_result('db_fetch_row', array('min_date' => '2024-01-02 00:00:00', 'max_date' => '2024-01-02 23:00:00'));
+
+	expect(flowview_invalidate_stale_shard_cache())->toBe(array('kept' => 1, 'removed' => 0));
+
+	$writes = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return strpos($call['fn'], 'db_execute') === 0;
+	});
+
+	expect($writes)->toBeEmpty();
+});

@@ -44,7 +44,11 @@ flowview/                               # Repository root (install to plugins/fl
 ├── flowview_upgrade.php                # Background schema upgrade runner
 ├── flow_collector.php                  # NetFlow v5/v9/v10 collector daemon
 ├── functions.php / functions-pre13.php # Core UI + protocol decode helpers
-├── import_flows.php                    # CLI flow file importer
+├── cli/                                # CLI utilities (importer, repair, materializer)
+│   ├── fixprivate.php                  # CLI: repair domains of private-range addresses
+│   ├── import_flows.php                # CLI flow file importer
+│   ├── materialize_queries.php         # CLI: pre-build each query's partition cache (NAT on/off)
+│   └── repair_tables.php               # CLI: widen the raw partition table columns
 ├── run_schedule.php                    # CLI scheduled-report executor
 ├── INFO                                # Plugin metadata (name, version, compat)
 ├── README.md

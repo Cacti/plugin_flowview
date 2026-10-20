@@ -3998,6 +3998,145 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, int $hour = 0
 		'end_time'   => $end_time
 	];
 }
+
+/**
+ * flowview_get_materialize_range - Given a list of raw partition table
+ * names, return the Unix start and end timestamps spanning every partition.
+ * Names that are not partition tables are ignored, and false is returned
+ * when none qualify.
+ *
+ * Both bounds are padded by one second.  A shard is only a full scan, and
+ * therefore only cached in parallel_database_query_shard_cache, when the
+ * requested range lies strictly outside the data in the partition.
+ *
+ * @param array $tables
+ *
+ * @return array|false
+ */
+function flowview_get_materialize_range(array $tables): array|false {
+	$start = false;
+	$end   = false;
+
+	foreach ($tables as $table) {
+		$table_start = flowview_table_name_to_time($table, 'start_time');
+		$table_end   = flowview_table_name_to_time($table, 'end_time');
+
+		if ($table_start === false || $table_end === false) {
+			continue;
+		}
+
+		if ($start === false || $table_start < $start) {
+			$start = $table_start;
+		}
+
+		if ($end === false || $table_end > $end) {
+			$end = $table_end;
+		}
+	}
+
+	if ($start === false || $end === false) {
+		return false;
+	}
+
+	return [$start - 1, $end + 1];
+}
+
+/**
+ * flowview_shard_cache_is_current - Decide whether a cached partition shard
+ * still reflects its partition.  The cache stores the partition's
+ * MIN(start_time) and MAX(end_time) from when it was built, so it is current
+ * only while the partition still reports the same bounds.
+ *
+ * The raw tables keep microseconds but the cache keeps whole seconds, which
+ * the database either rounds or truncates, so a difference of one second is
+ * treated as equal.
+ *
+ * @param array $cached  The min_date and max_date stored with the cached shard
+ * @param array $current The min_date and max_date the partition reports now
+ *
+ * @return bool
+ */
+function flowview_shard_cache_is_current(array $cached, array $current): bool {
+	foreach (['min_date', 'max_date'] as $column) {
+		if (empty($cached[$column]) || empty($current[$column])) {
+			return false;
+		}
+
+		$cached_time  = strtotime($cached[$column]);
+		$current_time = strtotime($current[$column]);
+
+		if ($cached_time === false || $current_time === false || abs($cached_time - $current_time) > 1) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * flowview_invalidate_stale_shard_cache - Remove cached partition shards that
+ * no longer match their partition, either because more flows arrived or
+ * because the partition table is gone.  Shards that are still current are
+ * left alone so they are never materialized a second time.
+ *
+ * When anything is removed, the finished CLI requests (user 0) are dropped
+ * as well so their results are rebuilt from the refreshed shards.
+ *
+ * @return array The number of shards kept and removed
+ */
+function flowview_invalidate_stale_shard_cache(): array {
+	$kept    = 0;
+	$removed = 0;
+	$current = [];
+
+	$cache = flowview_db_fetch_assoc('SELECT md5sum, map_table, map_partition, min_date, max_date
+		FROM parallel_database_query_shard_cache
+		ORDER BY map_table');
+
+	if (cacti_sizeof($cache)) {
+		foreach ($cache as $entry) {
+			$table = $entry['map_table'];
+
+			if (!isset($current[$table])) {
+				if (preg_match('/^plugin_flowview_raw_[0-9]+$/', $table) && flowview_db_table_exists($table)) {
+					$current[$table] = flowview_db_fetch_row("SELECT MIN(start_time) AS min_date, MAX(end_time) AS max_date
+						FROM $table");
+				} else {
+					$current[$table] = [];
+				}
+			}
+
+			if (cacti_sizeof($current[$table]) && flowview_shard_cache_is_current($entry, $current[$table])) {
+				$kept++;
+
+				continue;
+			}
+
+			flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+				WHERE md5sum = ?
+				AND map_table = ?
+				AND map_partition = ?',
+				[$entry['md5sum'], $entry['map_table'], $entry['map_partition']]);
+
+			$removed++;
+		}
+	}
+
+	if ($removed > 0) {
+		$requests = flowview_db_fetch_assoc_prepared('SELECT id
+			FROM parallel_database_query
+			WHERE user_id = 0
+			AND status = ?',
+			['complete']);
+
+		foreach ($requests as $request) {
+			parallel_database_query_cleanup($request['id'], true);
+		}
+	}
+
+	return ['kept' => $kept, 'removed' => $removed];
+}
+
 /**
  * parallel_database_query_request - Given a series of tables and
  * and inner (map phase) and outer (reduce phase) SQL queries,

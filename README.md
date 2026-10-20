@@ -194,10 +194,29 @@ this migration, ensure that your Cacti system, has enough space to handle all
 the flow data.  You should check the size of your existing flows, and then
 verify that you have enough space to handle the data inside of a MySQL database.
 
-Once you have done this, simply run the 'import_flows.php' script and all your
+Once you have done this, simply run the 'cli/import_flows.php' script and all your
 legacy flow data will be imported.  Remember, it's important that you define
 your partitioning scheme ahead of time, especially if you have large quantities
 of flow data streaming into the Cacti server.
+
+## Pre-Building Query Results
+
+The Parallel Query caches the result of each fully covered partition, so
+reports over older data open quickly once a partition has been scanned.  To
+build that cache ahead of time, run the following from the plugin's `cli`
+directory with the Parallel Query enabled (Max Concurrent Threads of 2 or
+more under the FlowView Settings):
+
+```
+php cli/materialize_queries.php
+```
+
+The script runs every saved query over the entire range of flow partitions,
+once with NAT on and once with NAT off.  Use `--query-id=ID` or `--nat=on|off`
+to narrow the run, and `--dry-run` to see what would be run.  Partitions that
+are already cached and still match their data are skipped, while partitions
+that have received more flows since, or have been dropped, are rebuilt.  Only
+one run may be active at a time, for up to 8 hours, unless `--force` is used.
 
 # Possible Bugs?
 

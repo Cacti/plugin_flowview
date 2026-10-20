@@ -2,6 +2,10 @@
 
 --- develop ---
 
+* feature: Add cli/materialize_queries.php, which runs every saved FlowView query through the parallel query for the entire range of flow partitions, once with NAT on and once with NAT off (--query-id, --nat, --dry-run and --force are optional), so the partition results are already cached when a report is opened; it registers with register_process_start() for 8 hours so only one run is active at a time, reuses cached partitions that still match their partition's data bounds, rebuilds the ones that have since gained flows or been dropped, and runs each query and NAT mode in its own process so one that reaches the Maximum Run Time does not end the rest
+
+* dev: Move fixprivate.php, import_flows.php and repair_tables.php into the plugin's cli/ directory (listed as tombstones in manifest.json so upgrades remove the old copies); they now locate the Cacti root relative to their own location
+
 * bug: Fix "Uncaught ReferenceError: timeshiftFilterLeft is not defined" when using the Shift Time Backward/Forward icons on the flow report filter; the plugin relied on undefined global functions, so the icons now call a plugin-owned timeshiftFilter() that shifts the From/To range by the selected interval through a new `timeshift` action and reloads the report
 
 * fix: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
