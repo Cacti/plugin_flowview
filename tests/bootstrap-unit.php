@@ -95,6 +95,9 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_db_results'] = array();
 		$GLOBALS['__test_config']     = array();
 		$GLOBALS['__test_messages']   = array();
+		$GLOBALS['__test_user_settings'] = array();
+		$GLOBALS['__test_csrf_valid'] = true;
+		$GLOBALS['__test_translations'] = array();
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -114,7 +117,8 @@ if (!function_exists('plugin_test_queue_db_result')) {
 if (!function_exists('plugin_test_db_result')) {
 	function plugin_test_db_result($function, $default) {
 		if (!empty($GLOBALS['__test_db_results'][$function])) {
-			return array_shift($GLOBALS['__test_db_results'][$function]);
+			$result = array_shift($GLOBALS['__test_db_results'][$function]);
+			return $result instanceof Closure ? $result() : $result;
 		}
 		return $default;
 	}
@@ -123,14 +127,14 @@ if (!function_exists('plugin_test_db_result')) {
 if (!function_exists('db_execute')) {
 	function db_execute($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute', true);
 	}
 }
 
 if (!function_exists('db_execute_prepared')) {
 	function db_execute_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute_prepared', true);
 	}
 }
 
@@ -165,7 +169,7 @@ if (!function_exists('db_fetch_row_prepared')) {
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql, $column = '', $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		return plugin_test_db_result('db_fetch_cell', '');
+		return plugin_test_db_result('db_fetch_cell', str_contains($sql, '@@session.max_statement_time') ? '0' : '');
 	}
 }
 
@@ -196,6 +200,13 @@ if (!function_exists('db_check_reconnect')) {
 if (!function_exists('db_index_exists')) {
 	function db_index_exists($table, $index) {
 		return false;
+	}
+}
+
+if (!function_exists('db_add_column')) {
+	function db_add_column($table, $column, $log = true, $conn = false) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_add_column', 'sql' => $table, 'params' => $column, 'conn' => $conn);
+		return plugin_test_db_result('db_add_column', true);
 	}
 }
 
@@ -267,8 +278,12 @@ if (!function_exists('html_escape')) {
 }
 
 if (!function_exists('__')) {
-	function __($text, $domain = '') {
-		return $text;
+	function __($text, ...$args) {
+		if ($args) {
+			$domain = array_pop($args); // Cacti passes the text domain last.
+			$text = $GLOBALS['__test_translations'][$domain][$text] ?? $text;
+		}
+		return $args ? vsprintf($text, $args) : $text;
 	}
 }
 
@@ -310,14 +325,14 @@ if (!function_exists('raise_message')) {
 }
 
 if (!function_exists('get_request_var')) {
-	function get_request_var($name) {
-		return isset($_REQUEST[$name]) ? $_REQUEST[$name] : '';
+	function get_request_var($name, $default = '') {
+		return isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
 	}
 }
 
 if (!function_exists('get_nfilter_request_var')) {
-	function get_nfilter_request_var($name) {
-		return get_request_var($name);
+	function get_nfilter_request_var($name, $default = '') {
+		return get_request_var($name, $default);
 	}
 }
 
@@ -363,6 +378,16 @@ if (!function_exists('cacti_pton')) {
 		}
 		$mask = str_pad($mask, strlen($ip), "\0");
 		return array('ip' => $ip, 'subnet' => $mask);
+	}
+}
+
+if (!function_exists('array_rekey')) {
+	function array_rekey($array, $key, $value) {
+		$out = [];
+		foreach (is_array($array) ? $array : [] as $row) {
+			$out[$row[$key]] = is_array($value) ? array_intersect_key($row, array_flip($value)) : $row[$value];
+		}
+		return $out;
 	}
 }
 
@@ -471,3 +496,50 @@ function flowview_test_load($path) {
 
 require_once dirname(__DIR__) . '/includes/functions.php';
 require_once dirname(__DIR__) . '/includes/database.php';
+
+// Account preferences and CSRF use configurable fixtures, never a real account.
+if (!function_exists('read_user_setting')) {
+    function read_user_setting($name, $default = '', $force = false) {
+        return $GLOBALS['__test_user_settings'][$name] ?? $default;
+    }
+}
+if (!function_exists('set_user_setting')) {
+    function set_user_setting($name, $value) {
+        $GLOBALS['__test_user_settings'][$name] = $value;
+    }
+}
+if (!function_exists('csrf_check')) {
+    function csrf_check($fatal = true) {
+        return $GLOBALS['__test_csrf_valid'] ?? true;
+    }
+}
+
+if (!function_exists('exec_background')) {
+	function exec_background($command, $args) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_background', 'sql' => $command, 'params' => [$args]];
+	}
+}
+if (!function_exists('register_process_start')) {
+	function register_process_start($name, $type, $id, $timeout) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'register_process_start', 'sql' => $name, 'params' => [$type, $id, $timeout]];
+		return plugin_test_db_result('register_process_start', true);
+	}
+}
+if (!function_exists('unregister_process')) {
+	function unregister_process($name, $type, $id = 0, $pid = -1) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'unregister_process', 'sql' => $name, 'params' => [$type, $id, $pid]];
+	}
+}
+if (!function_exists('exec_with_timeout')) {
+	function exec_with_timeout($command, &$output, &$status, $timeout = 5) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_with_timeout', 'sql' => '', 'params' => [$command, $timeout]];
+		$status = plugin_test_db_result('exec_with_timeout', 0);
+		return plugin_test_db_result('exec_with_timeout_result', null);
+	}
+}
+
+if (!function_exists('db_affected_rows')) {
+	function db_affected_rows($conn = false) {
+		return plugin_test_db_result('db_affected_rows', 0);
+	}
+}

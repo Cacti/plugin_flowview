@@ -1275,6 +1275,8 @@ function process_fv9($p, $ex_addr): void {
 	global $templates, $tlengths, $allfields, $pacmap, $listener_id;
 
 	flowview_connect();
+	require_once __DIR__ . '/nbar_collector.php';
+	fv_nbar_packet($p, $ex_addr);
 
 	if (!isset($templates[$ex_addr])) {
 		$templates[$ex_addr] = [];
@@ -1422,6 +1424,10 @@ function process_fv9($p, $ex_addr): void {
 
 						$field = substr($p, $h, $t['length']);
 
+						// Decode Cisco reduced-length three-byte unsigned integers.
+						if ($t['unpack'] === 'N' && $t['length'] == 3 && strlen($field) == 3) {
+							$field = chr(0) . $field;
+						}
 						$field = unpack($t['unpack'], $field) ?: [];
 
 						if ($t['pack'] == 'ipv4Address') {
@@ -1729,6 +1735,10 @@ function process_fv10($p, $ex_addr): void {
 						$id    = $t['field_id'];
 
 						$field = substr($p, $h, $t['length']);
+						// Decode Cisco reduced-length three-byte unsigned integers.
+						if ($t['unpack'] === 'N' && $t['length'] == 3 && strlen($field) == 3) {
+							$field = chr(0) . $field;
+						}
 						$field = unpack($t['unpack'], $field) ?: [];
 
 						if ($t['pack'] == 'ipv4Address') {

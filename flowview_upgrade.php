@@ -23,7 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
+chdir(__DIR__ . '/../../');
 require('./include/cli_check.php');
 require_once('./plugins/flowview/includes/functions.php');
 require_once('./plugins/flowview/setup.php');
@@ -38,6 +38,7 @@ $parms = $_SERVER['argv'];
 array_shift($parms);
 
 $forcever    = '';
+$nbar_worker = '';
 
 if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
@@ -49,6 +50,12 @@ if (cacti_sizeof($parms)) {
 		}
 
 		switch ($arg) {
+			case '--nbar-worker':
+				if (!in_array($value, ['supervise', 'build'], true)) {
+					exit(1);
+				}
+				$nbar_worker = $value;
+				break;
 			case '--forcever':
 				$forcever = $value;
 				break;
@@ -71,6 +78,19 @@ if (cacti_sizeof($parms)) {
 }
 
 
+// Internal maintenance modes never enter the schema-upgrade path.
+if ($nbar_worker !== '') {
+	require_once __DIR__ . '/nbar_common.php';
+	require_once $config['base_path'] . '/lib/poller.php';
+	if ($nbar_worker === 'supervise') {
+		fv_nbar_supervise_maintenance();
+	} elseif ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
+		fv_nbar_cleanup();
+		fv_nbar_summary_refresh(20, true);
+	}
+	exit(0);
+}
+
 /* we need to rerun the upgrade, force the current version */
 if ($forcever == '') {
 	$old_version = db_fetch_cell('SELECT version FROM plugin_config WHERE directory = "flowview"');
@@ -82,7 +102,7 @@ $info            = plugin_flowview_version();
 $current_version = $info['version'];
 
 /* do a version check */
-if ($forcever == '' && $old_version == $current_version) {
+if ($forcever == '' && $old_version == $current_version && (int) read_config_option('flowview_nbar_schema_version') >= 2) {
 	cacti_log('Your Flowview is already up to date (v' . $current_version . ' vs v' . $old_version . ') not upgrading.  Use --forcever to override', true, 'FLOWVIEW');
 	exit(0);
 }
@@ -119,6 +139,13 @@ exit(0);
  * @return void
  */
 function flowview_upgrade($current, $old): void {
+	require_once __DIR__ . '/nbar_common.php';
+	if (!fv_nbar_schema_install()) {
+		throw new RuntimeException('Unable to upgrade NBAR history schema');
+	}
+	set_config_option('flowview_nbar_schema_version', '2');
+
+
 	global $config, $info;
 
 	if ($current != $old) {

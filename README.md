@@ -209,5 +209,91 @@ an issue.
 Got any ideas or complaints, please see the Cacti forums or GitHub for a
 resolution.
 
+
+## Cisco Apps (NBAR)
+
+Cisco Apps is a separate application report within FlowView. The current NBAR
+integration reads application IDs and names from NetFlow v9 data and options
+templates, including IPv4 and IPv6 records. IPFIX application decoding is not
+implemented by this integration. Existing FlowView reports retain their normal
+collector and report paths.
+
+Configure a FlowView listener for each export stream and configure the router to
+export application-bearing records to it. The report's Setup guide contains a
+Cisco 1100 Series example with placeholders for the collector, UDP port and router
+interfaces. Check Cisco documentation for the exact platform and IOS XE release.
+Creating a listener alone does not enable NBAR on the router.
+
+The report offers Top applications, Conversations and Connections. Filter by IP
+matches either endpoint. Conversations requires the account's Internal Networks
+settings to identify hosts and upload/download direction. Combine Options accepts
+two or three captures; leave them all unselected to save networks without combining.
+Choose one observation point per traffic path: overlapping LAN/WAN captures add
+both copies and can overcount traffic.
+
+STATUS describes recent retained application records for each selected capture,
+independently of historical report filters. A quiet capture can show no recent
+NBAR despite a working exporter. It is not a connectivity test.
+
+First seen and Last seen are the earliest/latest retained observation minutes in
+the selected period. They do not prove continuous activity, or give exact connection
+start/end times. Missing dates are shown as Unavailable. Average bandwidth divides
+data volume by the full selected period. Column sorting applies to the displayed
+page; resizing is saved in that browser.
+
+NBAR History Retention is separate from the existing FlowView Data Retention Policy.
+It offers 1, 3, 7, 14 or 30 days, with a seven-day default. Timespan choices and custom
+ranges respect this setting. The existing Cacti poller maintains summaries and
+performs bounded cleanup; no extra scheduled task is required. A shorter retention
+setting cannot be undone to recover deleted history. If polling stops, maintenance
+and cleanup stop too. Shared maintenance locks are scoped to the FlowView database.
+
+## Cisco Apps (NBAR) historical Connections
+
+Connections reads the automatically maintained daily history for each selected capture.
+Opening a report or changing its IP filter does not queue a new complete connection build.
+The normal FlowView poller maintains this history; no additional cron job is required.
+
+Pages contain up to 100 connections, ordered by total data volume across the selected
+captures and period. Indexed candidates are checked against every selected daily segment
+so byte, packet and record totals remain exact. Partial days use hourly or raw data.
+Previous, Next and a numeric page field provide navigation without a large dropdown or
+an expensive full-result count. Very deep pages or broadly tied results can still require
+more work; a shorter period or IP filter reduces that work.
+
+A small account-scoped session cache holds nearby pages for 120 seconds for past periods
+and 30 seconds for periods including current data. This is separate from retained history.
+The existing authenticated FlowView realm controls access; capture selections and filters are included in cache keys.
+
+## Reusable NBAR daily summaries
+
+Top Applications, Conversations and Connections share daily summaries built automatically
+per capture, independently of report filters and Cacti accounts. Calendar days run from
+local midnight to the following midnight in the Cacti server timezone, including daylight
+saving changes. Completed hours are added to today's summary in bounded transactions.
+Completed days are reused; late exports invalidate affected summaries and trigger a rebuild.
+Partial days and unpublished or changed intervals fall back to hourly summaries or raw records.
+IP, application and IP-version filters are applied to the preserved summary fields.
+
+Daily history follows Cisco Apps (NBAR) History Retention, currently selectable up to
+30 days. Retention is a rolling data window, not a new retention period beginning each time
+a report is opened. Daily summaries are shared source data and are reused for different
+periods, filters and users, subject to listener permissions. Connections reads pages from
+this history rather than preparing another full copy for every selection.
+
 -----------------------------------------------
 Copyright (c) 2004-2026 - The Cacti Group, Inc.
+
+NBAR daily summary materialization and observation-date backfill require MariaDB statement deadlines. On MySQL 8, these workers safely defer their DML rather than running without a bound; reports continue through hourly/raw sources. Exact counts use the MySQL SELECT execution-time hint.
+
+New NBAR records retain the actual exporter address through hourly and daily summaries. Legacy rows keep their counters with an unknown exporter; an exact single-address listener may still resolve their names, but earlier multi-exporter rows cannot be attributed retrospectively.
+
+NBAR maintenance is launched independently of the poller. A registered supervisor runs the PHP maintenance child with a 90-second process deadline. MariaDB hourly mutations also set and restore a verified 20-second statement deadline. MySQL hourly builds remain available only inside the supervised child; raw records remain the fallback until a checkpoint is published.
+
+NBAR timespan requests keep their session state separate from Flow Reports. Conversation totals exclude IPv4 and IPv6 multicast endpoints, and feed lookup failures are shown separately from empty captures. Retention maintenance drains additional batches across raw, hourly and daily tables within a shared ten-second cleanup budget, under the supervised worker deadline.
+
+Template decoding rejects zero-length fields and invalidates the affected cached template until a valid refresh arrives. Chart fallback labels are grouped by their complete expression, so applications without learned names keep separate slices.
+
+The NBAR template cache retains at most 256 templates / 8,192 field definitions in total and 64 templates / 2,048 fields per exporter, across all source IDs. Least recently used entries are evicted and inactive templates expire after 30 minutes (removed lazily on packet activity). Evicted templates are learned again from the next exporter refresh. Numeric data fields must fit unsigned 64-bit values; options scope fields are decoded separately and are not treated as counters.
+
+NBAR maintenance supervision uses PHP's direct argv-array process API rather than Cacti's version-dependent timeout command interface, so startup and hard child termination work on the minimum supported Cacti 1.2.29 and newer releases. Both output pipes are drained in bounded chunks.
