@@ -87,7 +87,7 @@ it('resets a queued time-selection exception between tests', function () {
 	expect($span)->toBe(['begin_now' => 200, 'end_now' => 2000]);
 });
 
-it('distinguishes prepared records, an empty period and a failed query', function ($data, $success) {
+it('distinguishes prepared records, an empty period and a failed query', function ($data, $success, $notificationReport = 'valid') {
 	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['query_id' => 3, 'title' => 'Fixture', 'format_file' => 'default']);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['enabled' => 'on', 'timespan' => 1, 'name' => 'Fixture']);
@@ -98,6 +98,7 @@ it('distinguishes prepared records, an empty period and a failed query', functio
 	set_request_var('date2', date('Y-m-d H:i:s', 2000));
 	$key = get_flowview_session_key(3, 100, 2000);
 	$_SESSION['sess_flowdata'][$key] = ['timeout' => time() + 60, 'data' => $data];
+	plugin_test_queue_db_result('db_fetch_row_prepared', $notificationReport === 'valid' ? ['name' => 'Fixture', 'notification' => '', 'request_type' => 'scheduled', 'requested_by' => 'fixture', 'requested_id' => 1] : $notificationReport);
 	$GLOBALS['__test_cacti_log'] = [];
 	expect(plugin_flowview_run_schedule(7, 51))->toBe($success);
 	$formatted = in_array('reports_load_format_file', array_column($GLOBALS['__test_db_calls'], 'fn'), true);
@@ -109,6 +110,8 @@ it('distinguishes prepared records, an empty period and a failed query', functio
 	}
 })->with([
 	[['table' => 'Fixture', 'data' => [['bytes' => 42]]], true],
+	[['table' => 'Fixture', 'data' => [['bytes' => 42]]], false, false],
+	[['table' => 'Fixture', 'data' => [['bytes' => 42]]], false, []],
 	[['table' => 'Fixture', 'data' => []], true],
 	[false, false],
 	[['table' => 'Fixture', 'data' => false], false],

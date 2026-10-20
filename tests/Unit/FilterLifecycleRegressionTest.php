@@ -259,3 +259,27 @@ it('runs pending work beyond a full snapshot of undeletable completed occurrence
 		->and($result['deletes'])->toHaveCount(201)->and($result['remaining'])->toHaveCount(100)
 		->and(array_unique(array_column($result['remaining'], 'status')))->toBe(['complete']);
 });
+
+
+it('retries only a pre-delivery notification lookup failure in the actual child', function ($native, $mode) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
+	if ($native) { $command[] = '--queue-id=51'; }
+	// The post-delivery fixture deliberately throws; suppress its expected fatal diagnostic.
+	if ($mode === 'notification-after-delivery') {
+		array_splice($command, 1, 0, ['-d', 'display_errors=0', '-d', 'log_errors=0']);
+	}
+	[$exit] = ($this->runFixture)($command, $mode);
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	$writes = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'write'));
+	$actions = array_column($result['calls'], 0);
+	$queueReads = array_filter($result['calls'], fn ($c) => $c[0] === 'row' && str_contains($c[1], 'reports_queued'));
+	expect($queueReads)->toHaveCount(2);
+	if ($mode === 'notification-after-delivery') {
+		expect($exit)->toBe(255, json_encode($result))->and($actions)->toContain('delivery')->and($writes)->toBe([]);
+	} else {
+		expect($exit)->toBe(75)->and($actions)->not->toContain('delivery', 'save-log')
+			->and($writes)->toHaveCount(1)->and($writes[0][2])->toBe(['retry', 51, 'flowview', 'running']);
+	}
+	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+	expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0, $result['pid']]]]);
+})->with([false, true])->with(['notification-read-failure', 'notification-missing', 'notification-after-delivery']);

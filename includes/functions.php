@@ -2016,8 +2016,9 @@ function plugin_flowview_run_schedule($id, $report_id): bool {
     $headers['User-Agent'] = 'Cacti-FlowView-v' . $version;
 	$headers['X-Priority'] = '1';
 
-	reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers);
-	return true;
+	// Native Cacti returns void; only the compatibility shim's explicit false
+	// certifies a pre-delivery failure that is safe to retry.
+	return reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers) !== false;
 }
 
 /**

@@ -44,13 +44,18 @@
  * @param array  $attachments  Optional list of file attachments to include.
  * @param array  $headers      Optional extra email headers to include.
  *
- * @return void
+ * @return bool False only when the queue lookup fails before any delivery.
  */
-function reports_log_and_notify($id, $start_time, $report_type, $source, $source_id, $subject, &$raw_data, &$oput_raw, &$oput_html, &$oput_text, $attachments = [], $headers = []): void {
+function reports_log_and_notify($id, $start_time, $report_type, $source, $source_id, $subject, &$raw_data, &$oput_raw, &$oput_html, &$oput_text, $attachments = [], $headers = []): bool {
 	$report = db_fetch_row_prepared('SELECT *
 		FROM reports_queued
 		WHERE id = ?',
 		[$id]);
+
+	if ($report === false || !$report) {
+		cacti_log('FlowView notification queue lookup failed before delivery; retaining the occurrence for retry.', false, 'FLOWVIEW');
+		return false;
+	}
 
 	if ($oput_text == null) {
 		$oput_text = '';
@@ -176,6 +181,8 @@ function reports_log_and_notify($id, $start_time, $report_type, $source, $source
 
 		sql_save($save, 'reports_log');
 	}
+
+	return true;
 }
 
 /**

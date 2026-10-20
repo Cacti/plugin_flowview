@@ -7,7 +7,7 @@ $mode = getenv('FLOWVIEW_FIXTURE_MODE');
 if ($mode === 'connection-failure') {
 	define('FLOWVIEW_CONFIG', dirname(__DIR__) . '/connection.php');
 }
-$ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure', 'parallel-timeout', 'timestamp-failure', 'master-busy'], true);
+$ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure', 'parallel-timeout', 'timestamp-failure', 'master-busy', 'notification-read-failure', 'notification-missing', 'notification-after-delivery'], true);
 $metadataReads = 0;
 $calls = [];
 const MESSAGE_LEVEL_INFO = 1;
@@ -22,6 +22,7 @@ function cacti_sizeof($value) {
 	return is_array($value) ? count($value) : 0;
 }
 function read_config_option($name) {
+	if (str_starts_with($GLOBALS['mode'], 'notification-') && $name === 'flowview_parallel_threads') { return 1; }
 	return ['path_php_binary' => PHP_BINARY, 'reports_concurrent' => 1, 'flowview_parallel_threads' => 2, 'flowview_partition' => 1, 'flowview_parallel_time_to_live' => 21600, 'flowview_parallel_runlimit' => 0][$name] ?? '';
 }
 function cacti_log(...$args) {
@@ -81,12 +82,18 @@ function db_fetch_row_prepared($sql, $params = [], ...$args) {
 		return false;
 	}
 	if (str_contains($sql, 'reports_queued')) {
+		$reads = array_filter($GLOBALS['calls'], fn ($c) => $c[0] === 'row' && str_contains($c[1], 'reports_queued'));
+		if (count($reads) > 1 && $GLOBALS['mode'] === 'notification-read-failure') { return false; }
+		if (count($reads) > 1 && $GLOBALS['mode'] === 'notification-missing') { return []; }
+		if ($GLOBALS['mode'] === 'notification-after-delivery') {
+			return ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'name' => 'Fixture', 'notification' => '{"email":{"to_email":"fixture@example.invalid"}}'];
+		}
 		return ['id' => 51, 'source' => 'flowview', 'source_id' => 7];
 	}
 	if (str_contains($sql, 'plugin_flowview_schedules')) {
 		return ['id' => 7, 'query_id' => 3, 'title' => 'Fixture', 'format_file' => 'default'];
 	}
-	return $GLOBALS['mode'] === 'parallel-timeout'
+	return ($GLOBALS['mode'] === 'parallel-timeout' || str_starts_with($GLOBALS['mode'], 'notification-'))
 		? ['id' => 3, 'name' => 'Fixture', 'enabled' => 'on', 'timespan' => 1, 'statistics' => 9, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 100]
 		: ['enabled' => ''];
 }
@@ -99,14 +106,19 @@ function db_fetch_assoc($sql, ...$args) {
 	return str_contains($sql, 'information_schema') ? [['table' => 'plugin_flowview_raw_202400000']] : [];
 }
 function db_fetch_assoc_prepared(...$args) {
-	return [];
+	return str_starts_with($GLOBALS['mode'], 'notification-') ? [['bytes' => 42]] : [];
 }
 function get_timespan(&$span, ...$args) {
 	$span = ['begin_now' => 1704067200, 'end_now' => 1704070800];
+	if (str_starts_with($GLOBALS['mode'], 'notification-')) {
+		$span = ['begin_now' => 0, 'end_now' => 2000];
+		$key = get_flowview_session_key(3, 100, 2000);
+		$_SESSION['sess_flowdata'][$key] = ['timeout' => time() + 60, 'data' => ['table' => 'Fixture', 'data' => [['bytes' => 42]]]];
+	}
 }
 function read_user_setting(...$args) { return ''; }
-function isset_request_var(...$args) { return false; }
-function get_request_var(...$args) { return null; }
+function isset_request_var(...$args) { return str_starts_with($GLOBALS['mode'], 'notification-') && in_array($args[0], ['timespan', 'query', 'date1', 'date2'], true); }
+function get_request_var(...$args) { return ['timespan' => 'custom', 'query' => 3, 'date1' => date('Y-m-d H:i:s', 100), 'date2' => date('Y-m-d H:i:s', 2000)][$args[0]] ?? null; }
 function get_nfilter_request_var(...$args) { return null; }
 function get_filter_request_var(...$args) { return null; }
 function cacti_session_close() {}
@@ -121,3 +133,7 @@ function db_connect_real(...$args) {
 	$GLOBALS['calls'][] = ['connect'];
 	return false;
 }
+
+function reports_load_format_file($format, &$output, &$tag, &$theme) { $output = '<REPORT>'; $tag = true; return true; }
+function mailer(...$args) { $GLOBALS['calls'][] = ['delivery']; throw new RuntimeException('Ambiguous delivery failure'); }
+function sql_save(...$args) { $GLOBALS['calls'][] = ['save-log']; return 1; }
