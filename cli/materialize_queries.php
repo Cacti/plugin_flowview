@@ -44,6 +44,7 @@ const MATERIALIZE_RUNTIME_LIMIT = 28800;
 $debug     = false;
 $force     = false;
 $dry_run   = false;
+$status    = false;
 $worker    = false;
 $query_ids = [];
 $partitions = [];
@@ -61,6 +62,7 @@ $longopts  = [
 	'debug',
 	'force',
 	'dry-run',
+	'status',
 	'worker',
 	'version',
 	'help',
@@ -131,6 +133,10 @@ foreach ($options as $arg => $value) {
 			$dry_run = true;
 
 			break;
+		case 'status':
+			$status = true;
+
+			break;
 		case 'worker':
 			$worker = true;
 
@@ -150,6 +156,12 @@ foreach ($options as $arg => $value) {
 			display_help();
 			exit(1);
 	}
+}
+
+if ($status) {
+	materialize_show_status();
+
+	exit(0);
 }
 
 /* a worker materializes exactly one query and NAT mode for the range its parent chose */
@@ -287,6 +299,55 @@ if (!$dry_run) {
 }
 
 exit($failed > 0 ? 1 : 0);
+
+/**
+ * Shows the parallel queries that are running and the Filter each one is for.
+ * The process table only has the id of the request, so the Filter is found
+ * from the cache key of the request.
+ *
+ * @return void
+ */
+function materialize_show_status(): void {
+	$running = flowview_get_running_requests();
+
+	if (!cacti_sizeof($running)) {
+		print 'No parallel queries are running.' . PHP_EOL;
+
+		return;
+	}
+
+	$names   = [];
+	$md5sums = [];
+
+	foreach (flowview_db_fetch_assoc('SELECT id, name FROM plugin_flowview_queries ORDER BY id') as $filter) {
+		$names[(int) $filter['id']]   = $filter['name'];
+		$md5sums[(int) $filter['id']] = flowview_get_filter_md5sums((int) $filter['id']);
+	}
+
+	$requests = array_column(flowview_db_fetch_assoc_prepared('SELECT id, status, total_shards, finished_shards, cached_shards
+		FROM parallel_database_query
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($running), '?')) . ')',
+		array_keys($running)), null, 'id');
+
+	print sprintf('%d parallel queries are running:', cacti_sizeof($running)) . PHP_EOL;
+
+	foreach ($running as $id => $md5sum) {
+		$for = [];
+
+		foreach (flowview_find_request_filters($md5sums, $md5sum) as $match) {
+			$mode  = $match['nat'] && $match['non_nat'] ? 'on/off' : ($match['nat'] ? 'on' : 'off');
+			$for[] = sprintf('Query:%d [%s] NAT:%s', $match['id'], $names[$match['id']], $mode);
+		}
+
+		if (isset($requests[$id])) {
+			$progress = sprintf('Shards:%d of %d, Already Materialized:%d, State:%s', $requests[$id]['finished_shards'], $requests[$id]['total_shards'], $requests[$id]['cached_shards'], $requests[$id]['status']);
+		} else {
+			$progress = 'The request no longer exists, its processes are still registered';
+		}
+
+		print sprintf('Request:%d %s  %s', $id, cacti_sizeof($for) ? implode(', ', $for) : 'No Filter matches it, it may be an ad hoc report or a Filter that has changed', $progress) . PHP_EOL;
+	}
+}
 
 /**
  * Waits until no ALTER TABLE is running on any of the partitions.  A query
@@ -470,7 +531,7 @@ function display_version(): void {
 function display_help(): void {
 	display_version();
 
-	print PHP_EOL . 'usage: materialize_queries.php [--query-id=ID[,ID...]] [--partitions=TABLE[,TABLE...]] [--nat=on|off] [--dry-run] [--force] [--debug]' . PHP_EOL . PHP_EOL;
+	print PHP_EOL . 'usage: materialize_queries.php [--query-id=ID[,ID...]] [--partitions=TABLE[,TABLE...]] [--nat=on|off] [--dry-run] [--status] [--force] [--debug]' . PHP_EOL . PHP_EOL;
 
 	print 'Materializes each FlowView query into the parallel query cache for the' . PHP_EOL;
 	print 'entire range of flow partitions, once with NAT on and once with NAT off.' . PHP_EOL;
@@ -483,6 +544,7 @@ function display_help(): void {
 	print '                        partitions that have rotated.' . PHP_EOL;
 	print '    --nat=on|off        Only materialize this NAT mode.' . PHP_EOL;
 	print '    --dry-run           List what would be materialized and exit.' . PHP_EOL;
+	print '    --status            List the parallel queries that are running and the Filter each is for.' . PHP_EOL;
 	print '    --force             Run even if another materialization is running.' . PHP_EOL;
 	print '    --debug             Provide some debug output during the run.' . PHP_EOL . PHP_EOL;
 }

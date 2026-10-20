@@ -2,9 +2,11 @@
 
 --- develop ---
 
-* feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page.  A running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, so the number is for that Filter and for NAT and non-NAT together, and there is no pill when none are running
+* feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page, with how many are with NAT and without in its tip.  The process table only has the id of a running request, so a running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, and there is no pill when none are running
 
-* bug: Show the Running status on the Filters page while the parallel query started by cli/materialize_queries.php is still working, not only while the script itself is registered.  The query keeps going after the script has ended, for instance when it timed out, and the status now looks for the runner and shard worker processes of the requests a script made, ignoring rows left behind by processes that are gone.  A new materialization is not started while one is running
+* feature: Add --status to cli/materialize_queries.php to list the parallel queries that are running and the Filter each one is for, with its progress
+
+* bug: Show the Running status on the Filters page while a parallel query is still working, not only while cli/materialize_queries.php itself is registered.  The query keeps going after the script has ended, for instance when it timed out, so the status now comes from the runner and shard worker (db_query_<id> and db_shard_<id>) registrations in the process table, whoever started them.  A registration counts while it is recent, or when its process is still alive, so a row left behind by a killed process does not.  A new materialization is not started while one is running
 
 * bug: Make the Parallel Query timeout actually stop the runner and shard workers.  They register as db_query_<id> and db_shard_<id>, but the cleanup, and the runner's own termination handler, looked for db_query<id> and db_shard<id>, so they were never found: a timed out query left its processes running and a terminated one left its row in the process table
 

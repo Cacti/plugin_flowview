@@ -4649,52 +4649,53 @@ function flowview_get_partitions_without_nat_columns(array $tables): array {
 }
 
 /**
- * flowview_get_running_materialization_requests - The parallel query requests
- * made by a script, as the materializer makes them, that still have a runner
- * or shard worker process alive.  They keep going after the script that
- * started them has ended, for instance when it timed out.  A request made
- * from a web page belongs to its user, so it is not one of these.
+ * flowview_get_running_requests - The parallel query requests that have a
+ * runner or shard worker registered in the process table, as db_query_<id> or
+ * db_shard_<id>.  They keep going after the script that started them has
+ * ended, for instance when it timed out.
  *
- * @return array The cache key (md5sum_tables) of each request, by request id
+ * A registration counts when it is recent, or when its process is still
+ * alive.  A recent one is trusted as the web server may not be able to see
+ * the process of another user, and an old one is checked, as a process that
+ * was killed can leave its row behind.
+ *
+ * @return array The cache key (md5sum_tables) of each request, by request id,
+ *               which is empty for a request that no longer exists
  */
-function flowview_get_running_materialization_requests(): array {
-	$processes = db_fetch_assoc_prepared('SELECT pid, taskname
+function flowview_get_running_requests(): array {
+	$recent = max(60, (int) read_config_option('flowview_parallel_runlimit'));
+
+	$processes = db_fetch_assoc_prepared('SELECT pid, taskname, UNIX_TIMESTAMP() - UNIX_TIMESTAMP(started) AS age
 		FROM processes
 		WHERE tasktype = ?
 		AND (taskname LIKE ? OR taskname LIKE ?)',
 		['flowview', 'db\_query\_%', 'db\_shard\_%']);
 
-	$pids = [];
+	$ids = [];
 
 	foreach ($processes as $process) {
-		if (preg_match('/^db_(?:query|shard)_([0-9]+)$/', $process['taskname'], $matches)) {
-			$pids[(int) $matches[1]][] = (int) $process['pid'];
+		if (!preg_match('/^db_(?:query|shard)_([0-9]+)$/', $process['taskname'], $matches)) {
+			continue;
+		}
+
+		if ((int) $process['age'] <= $recent || !function_exists('cacti_process_still_running') || cacti_process_still_running((int) $process['pid'])) {
+			$ids[(int) $matches[1]] = true;
 		}
 	}
 
-	if (!cacti_sizeof($pids)) {
+	if (!cacti_sizeof($ids)) {
 		return [];
 	}
 
-	$ids = array_keys($pids);
-
 	$requests = flowview_db_fetch_assoc_prepared('SELECT id, md5sum_tables
 		FROM parallel_database_query
-		WHERE user_id = 0
-		AND id IN (' . implode(', ', array_fill(0, cacti_sizeof($ids), '?')) . ')',
-		$ids);
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($ids), '?')) . ')',
+		array_keys($ids));
 
-	$running = [];
+	$running = array_fill_keys(array_keys($ids), '');
 
 	foreach ($requests as $request) {
-		foreach ($pids[(int) $request['id']] as $pid) {
-			/* a process that was killed can leave its row behind */
-			if (!function_exists('cacti_process_still_running') || cacti_process_still_running($pid)) {
-				$running[(int) $request['id']] = (string) $request['md5sum_tables'];
-
-				break;
-			}
-		}
+		$running[(int) $request['id']] = (string) $request['md5sum_tables'];
 	}
 
 	return $running;
@@ -4703,7 +4704,7 @@ function flowview_get_running_materialization_requests(): array {
 /**
  * flowview_materialization_running - Whether a materialization is running.
  * That is when one is registered as running, since only one may be active at
- * a time, or when the parallel query it started still has processes alive.
+ * a time, or when a parallel query still has processes registered.
  *
  * @return bool
  */
@@ -4719,7 +4720,7 @@ function flowview_materialization_running(): bool {
 		return true;
 	}
 
-	return cacti_sizeof(flowview_get_running_materialization_requests()) > 0;
+	return cacti_sizeof(flowview_get_running_requests()) > 0;
 }
 
 /**
@@ -4770,16 +4771,24 @@ function flowview_get_colored_materialization_status(string $status): string {
  * of a filter that are running now, in the gray of a disabled device.  There
  * is none when nothing is running.
  *
- * @param int $count The number of queries running
+ * @param int        $count   The number of queries running
+ * @param array|null $by_mode How many of them are with NAT and without, as
+ *                            nat and non_nat, to say so in the tip
  *
  * @return string
  */
-function flowview_get_colored_running_queries(int $count): string {
+function flowview_get_colored_running_queries(int $count, ?array $by_mode = null): string {
 	if ($count < 1) {
 		return '';
 	}
 
-	return "<span class='deviceStatus deviceDisabled' title='" . __esc('The number of queries of this Filter that are running now.', 'flowview') . "'>" . sprintf(__('Running: %s', 'flowview'), number_format_i18n($count, 0)) . '</span>';
+	$tip = __esc('The number of queries of this Filter that are running now.', 'flowview');
+
+	if ($by_mode !== null) {
+		$tip .= ' ' . sprintf(__esc('With NAT: %d, without NAT: %d.', 'flowview'), $by_mode['nat'] ?? 0, $by_mode['non_nat'] ?? 0);
+	}
+
+	return "<span class='deviceStatus deviceDisabled' title='" . $tip . "'>" . sprintf(__('Running: %s', 'flowview'), number_format_i18n($count, 0)) . '</span>';
 }
 
 /**
@@ -4884,7 +4893,7 @@ function flowview_get_filter_md5sums(int $query_id): array {
  * queries of a filter, with NAT or without.
  *
  * @param array $md5sums The cache keys of the filter from flowview_get_filter_md5sums()
- * @param array $running The running requests from flowview_get_running_materialization_requests()
+ * @param array $running The running requests from flowview_get_running_requests()
  *
  * @return int
  */
@@ -4894,6 +4903,53 @@ function flowview_count_running_queries(array $md5sums, array $running): int {
 	return cacti_sizeof(array_filter($running, function ($md5sum) use ($keys) {
 		return in_array($md5sum, $keys, true);
 	}));
+}
+
+/**
+ * flowview_count_running_queries_by_mode - How many of the running requests
+ * are queries of a filter with NAT, and how many without.  A request whose
+ * cache key is the same in both, as for a report that has no address to
+ * translate, is counted in both.
+ *
+ * @param array $md5sums The cache keys of the filter from flowview_get_filter_md5sums()
+ * @param array $running The running requests from flowview_get_running_requests()
+ *
+ * @return array The counts as nat and non_nat
+ */
+function flowview_count_running_queries_by_mode(array $md5sums, array $running): array {
+	return [
+		'nat'     => flowview_count_running_queries(['nat' => $md5sums['nat'] ?? []], $running),
+		'non_nat' => flowview_count_running_queries(['non_nat' => $md5sums['non_nat'] ?? []], $running),
+	];
+}
+
+/**
+ * flowview_find_request_filters - The filters a running request belongs to,
+ * and whether it is with NAT or without.  The process table only knows the id
+ * of the request, so it is the cache key of the request that finds them.
+ *
+ * @param array  $filter_md5sums The cache keys from flowview_get_filter_md5sums(), by filter id
+ * @param string $md5sum         The cache key of the request
+ *
+ * @return array The id of each filter, with whether it matches as nat and non_nat
+ */
+function flowview_find_request_filters(array $filter_md5sums, string $md5sum): array {
+	$found = [];
+
+	if ($md5sum === '') {
+		return $found;
+	}
+
+	foreach ($filter_md5sums as $id => $md5sums) {
+		$nat     = in_array($md5sum, $md5sums['nat'] ?? [], true);
+		$non_nat = in_array($md5sum, $md5sums['non_nat'] ?? [], true);
+
+		if ($nat || $non_nat) {
+			$found[] = ['id' => (int) $id, 'nat' => $nat, 'non_nat' => $non_nat];
+		}
+	}
+
+	return $found;
 }
 
 /**

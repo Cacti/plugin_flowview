@@ -217,7 +217,8 @@ once with NAT on and once with NAT off.  Use `--query-id=ID[,ID...]` or
 Partitions that are already cached and still match their data are skipped,
 while partitions that have received more flows since, or have been dropped,
 are rebuilt.  Only one run may be active at a time, for up to 8 hours, unless
-`--force` is used.
+`--force` is used.  `--status` lists the parallel queries that are running now
+and the Filter each one is for, with its progress.
 
 Before it scans anything the script gets the partitions ready.  A query waits
 for an ALTER TABLE that is running on the partition it scans, and a long one

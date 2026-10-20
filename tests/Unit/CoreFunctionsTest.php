@@ -986,36 +986,70 @@ describe('finding a materialization that is still running', function () {
 			->and(array_column($removed, 'params'))->toBe(array(array(4999999), array(4999998)));
 	});
 
-	it('finds a request made by a script that still has a live process', function () {
+	it('finds the running requests from the process table', function () {
 		$GLOBALS['__test_live_pids'] = array(222);
 
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
-			array('pid' => 111, 'taskname' => 'db_query_991'),
-			array('pid' => 222, 'taskname' => 'db_shard_991'),
-			array('pid' => 333, 'taskname' => 'db_shard_992'),
-			array('pid' => 444, 'taskname' => 'db_shard_abc'),
+			// old, and the process is gone
+			array('pid' => 111, 'taskname' => 'db_query_990', 'age' => 5000),
+			// old, but the process is alive
+			array('pid' => 222, 'taskname' => 'db_shard_991', 'age' => 5000),
+			array('pid' => 223, 'taskname' => 'db_shard_991', 'age' => 5000),
+			// recent, so it is trusted even though the process cannot be seen
+			array('pid' => 333, 'taskname' => 'db_shard_992', 'age' => 10),
+			array('pid' => 444, 'taskname' => 'db_shard_abc', 'age' => 10),
 		));
-		// 992 belongs to a web user, so it is not one of these.
-		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 991, 'md5sum_tables' => 'aaaa')));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+			array('id' => 991, 'md5sum_tables' => 'aaaa'),
+			array('id' => 992, 'md5sum_tables' => 'bbbb'),
+		));
 
-		expect(flowview_get_running_materialization_requests())->toBe(array(991 => 'aaaa'));
+		expect(flowview_get_running_requests())->toBe(array(991 => 'aaaa', 992 => 'bbbb'));
+
+		$lookup = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['sql'], 'FROM parallel_database_query') !== false;
+		}));
+
+		// it is not limited to the requests of one user
+		expect($lookup[0]['sql'])->not->toContain('user_id')
+			->and($lookup[0]['params'])->toBe(array(991, 992));
+	});
+
+	it('keeps a running request whose row is gone, without a cache key', function () {
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('pid' => 111, 'taskname' => 'db_query_991', 'age' => 5)));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+		expect(flowview_get_running_requests())->toBe(array(991 => ''));
 	});
 
 	it('ignores the rows left behind by processes that are gone', function () {
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
-			array('pid' => 111, 'taskname' => 'db_query_991'),
-			array('pid' => 222, 'taskname' => 'db_shard_991'),
+			array('pid' => 111, 'taskname' => 'db_query_991', 'age' => 9000),
+			array('pid' => 222, 'taskname' => 'db_shard_991', 'age' => 9000),
 		));
-		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 991, 'md5sum_tables' => 'aaaa')));
 
-		expect(flowview_get_running_materialization_requests())->toBe(array());
+		expect(flowview_get_running_requests())->toBe(array())
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['sql'], 'FROM parallel_database_query') !== false;
+			}))->toBeEmpty();
 	});
 
 	it('finds nothing without any runner processes', function () {
-		expect(flowview_get_running_materialization_requests())->toBe(array())
+		expect(flowview_get_running_requests())->toBe(array())
 			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
-				return strpos($call['sql'], 'parallel_database_query') !== false;
+				return strpos($call['sql'], 'FROM parallel_database_query') !== false;
 			}))->toBeEmpty();
+	});
+
+	it('looks for the runner and shard worker names in the process table', function () {
+		flowview_get_running_requests();
+
+		$lookup = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['sql'], 'FROM processes') !== false;
+		}));
+
+		expect($lookup)->toHaveCount(1)
+			->and($lookup[0]['params'])->toBe(array('flowview', 'db\_query\_%', 'db\_shard\_%'));
 	});
 
 	it('is running while a materialization is registered', function () {
@@ -1023,21 +1057,19 @@ describe('finding a materialization that is still running', function () {
 
 		expect(flowview_materialization_running())->toBeTrue()
 			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
-				return strpos($call['sql'], 'db\_query\_') !== false || ($call['params'][1] ?? '') === 'db\_query\_%';
+				return strpos($call['sql'], 'FROM processes') !== false && ($call['params'][1] ?? '') === 'db\_query\_%';
 			}))->toBeEmpty();
 	});
 
 	it('is still running after the script that started it has ended', function () {
-		$GLOBALS['__test_live_pids'] = array(222);
-
 		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
-		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('pid' => 222, 'taskname' => 'db_shard_991')));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('pid' => 222, 'taskname' => 'db_shard_991', 'age' => 12)));
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 991, 'md5sum_tables' => 'aaaa')));
 
 		expect(flowview_materialization_running())->toBeTrue();
 	});
 
-	it('is not running when nothing is registered and no runner is alive', function () {
+	it('is not running when nothing is registered and no runner is registered', function () {
 		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
 
 		expect(flowview_materialization_running())->toBeFalse();
@@ -1110,6 +1142,34 @@ describe('showing the queries of a filter that are running', function () {
 
 	it('counts nothing for a filter that has no cache keys', function () {
 		expect(flowview_count_running_queries(array('nat' => array(), 'non_nat' => array()), array(991 => 'aaaa')))->toBe(0);
+	});
+
+	it('counts the running queries of a filter with NAT and without', function () {
+		$md5sums = array('nat' => array('aaaa'), 'non_nat' => array('bbbb'));
+
+		expect(flowview_count_running_queries_by_mode($md5sums, array(991 => 'aaaa', 992 => 'bbbb', 993 => 'bbbb', 994 => 'zzzz')))
+			->toBe(array('nat' => 1, 'non_nat' => 2));
+	});
+
+	it('finds the filter a running request belongs to, by its cache key', function () {
+		$filters = array(
+			1  => array('nat' => array('aaaa'), 'non_nat' => array('bbbb')),
+			15 => array('nat' => array('cccc'), 'non_nat' => array('cccc', 'dddd')),
+			16 => array('nat' => array(), 'non_nat' => array()),
+		);
+
+		expect(flowview_find_request_filters($filters, 'aaaa'))->toBe(array(array('id' => 1, 'nat' => true, 'non_nat' => false)))
+			->and(flowview_find_request_filters($filters, 'bbbb'))->toBe(array(array('id' => 1, 'nat' => false, 'non_nat' => true)))
+			->and(flowview_find_request_filters($filters, 'cccc'))->toBe(array(array('id' => 15, 'nat' => true, 'non_nat' => true)))
+			->and(flowview_find_request_filters($filters, 'zzzz'))->toBe(array())
+			->and(flowview_find_request_filters($filters, ''))->toBe(array());
+	});
+
+	it('says how many running queries are with NAT and without in the tip', function () {
+		$pill = flowview_get_colored_running_queries(3, array('nat' => 1, 'non_nat' => 2));
+
+		expect($pill)->toContain('Running: 3')
+			->and($pill)->toContain('With NAT: 1, without NAT: 2.');
 	});
 
 	it('shows the number of running queries in a pill like a disabled device', function () {
