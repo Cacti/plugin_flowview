@@ -195,11 +195,12 @@ function fv_nbar_data_ensure(string $table): bool {
 /**
  * Drop the slices that ended before the retention cutoff.
  *
- * @param int $cutoff Unix time before which records are no longer retained.
+ * @param int        $cutoff   Unix time before which records are no longer retained.
+ * @param float|null $deadline Unix time with microseconds after which no further slice is dropped, or null for no limit.
  *
  * @return int The number of slices dropped.
  */
-function fv_nbar_data_drop_expired(int $cutoff): int {
+function fv_nbar_data_drop_expired(int $cutoff, ?float $deadline = null): int {
 	$dropped = 0;
 
 	try {
@@ -209,7 +210,12 @@ function fv_nbar_data_drop_expired(int $cutoff): int {
 		return 0;
 	}
 
+	// Oldest slices first, so an interrupted pass leaves only the newest expired slices for the next one.
 	foreach ($tables as $slice) {
+		if ($deadline !== null && microtime(true) >= $deadline) {
+			break;
+		}
+
 		if ($slice['end'] <= $cutoff && flowview_db_execute('DROP TABLE IF EXISTS `' . $slice['table'] . '`') !== false) {
 			unset($GLOBALS['fv_nbar_data_known'][$slice['table']]);
 			$dropped++;

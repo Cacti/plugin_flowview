@@ -46,10 +46,46 @@ it('renders an explicit empty status when no capture is selected', function () {
 });
 
 it('does not mark future-dated records as a receiving feed', function () {
+	plugin_test_queue_slices([fv_nbar_data_table(time() + 600)]);
 	plugin_test_queue_db_result('db_fetch_row_prepared', ['minute' => time() + 600]);
 	ob_start();
 	fv_nbar_feed_status([['id' => 1, 'name' => 'Router']], [1]);
-	expect(ob_get_clean())->toContain('No recent NBAR');
+	$html = ob_get_clean();
+	// The record is read (a slice exists and the lookup runs) but must not count as recent.
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->toContain('db_fetch_row_prepared');
+	expect($html)->toContain('No recent NBAR')->not->toContain('Receiving', 'No retained NBAR records');
+});
+
+it('shows the chart error instead of aborting when the raw slices cannot be listed', function () {
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	ob_start();
+	fv_nbar_chart('d.listener_id=?', [1, 1800000000, 1800001800], 'all');
+	$html = ob_get_clean();
+	expect($html)->toContain('Unable to load application chart. Please try again.')->not->toContain('conic-gradient');
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('db_fetch_assoc_prepared');
+	expect(end($GLOBALS['__test_cacti_log']))->toBe('NBAR chart: Cannot list the NBAR raw tables');
+});
+
+it('shows the conversations error and returns to the caller when the raw slices cannot be listed', function () {
+	$nbar_preferences               = ['prefixes' => ['2001:db8::/64']];
+	$GLOBALS['fv_nbar_preferences'] = $nbar_preferences;
+	$listener_scope                 = 'd.listener_id=?';
+	$lid                            = 1;
+	$start                          = 1800000000;
+	$end                            = 1800001800;
+	$seconds                        = 1800;
+	$family                         = 'all';
+	$aid                            = '';
+	$host                           = '';
+	$base                           = 'flowview.php?action=view&report=nbar';
+	$combined_lids                  = [1];
+	plugin_test_queue_db_result('db_fetch_assoc', false);
+	ob_start();
+	include(dirname(__DIR__, 2) . '/nbar_conversations.php');
+	$html = ob_get_clean();
+	expect($html)->toContain('Unable to load conversations. Please try again.')->not->toContain('nbarConversationTable');
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('db_fetch_assoc_prepared');
+	expect(end($GLOBALS['__test_cacti_log']))->toBe('NBAR conversations: Cannot list the NBAR raw tables');
 });
 
 it('shows the top five application totals plus Other without exposing application markup', function () {

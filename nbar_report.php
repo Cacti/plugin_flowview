@@ -345,7 +345,19 @@ if ($mode === 'connections') {
 	$fields .= ',INET6_NTOA(d.src) src,INET6_NTOA(d.dst) dst,d.sport,d.dport,d.protocol';
 	$group .= ',d.src,d.dst,d.sport,d.dport,d.protocol';
 }
-$nbar_source = $mode === 'apps' ? fv_nbar_summary_source($mode === 'apps' && $host === '' ? 'apps' : ($mode === 'apps' ? 'pairs' : 'connections'), $lid === 0 ? $combined_lids : [$lid], $start, $end) : null;
+$nbar_source = null;
+
+if ($mode === 'apps') {
+	try {
+		$nbar_source = fv_nbar_summary_source($host === '' ? 'apps' : 'pairs', $lid === 0 ? $combined_lids : [$lid], $start, $end);
+	} catch (RuntimeException $e) {
+		cacti_log('NBAR applications: ' . $e->getMessage(), false, 'FLOWVIEW');
+		print '<p class="alert">' . fv_nbar_h(__('Unable to load applications. Please try again.', 'flowview')) . '</p>';
+		bottom_footer();
+
+		return;
+	}
+}
 
 if ($mode === 'apps') {
 	// Resolve names after reducing raw records to one row per capture/application.

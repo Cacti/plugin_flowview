@@ -62,16 +62,19 @@ function fv_nbar_retention_days(): int {
  * @return void
  */
 function fv_nbar_cleanup(int|float $budget = 10): void {
-	$cutoff  = (int) (floor((time() - fv_nbar_retention_days() * 86400) / 3600) * 3600);
-	$queries = [];
+	// One deadline for the raw slice drops and every summary deletion batch, so dropping a large
+	// backlog of slices cannot use up the supervisor's time before the summaries are maintained.
+	$deadline = microtime(true) + max(0, (float) $budget);
+	$cutoff   = (int) (floor((time() - fv_nbar_retention_days() * 86400) / 3600) * 3600);
+	$queries  = [];
 
-	fv_nbar_data_drop_expired(time() - fv_nbar_retention_days() * 86400);
+	fv_nbar_data_drop_expired(time() - fv_nbar_retention_days() * 86400, $deadline);
 
 	foreach (['apps', 'pairs', 'connections', 'hours'] as $table) {
 		$queries[] = ["DELETE FROM plugin_flowview_nbar_$table WHERE hour<$cutoff LIMIT 50000", 50000];
 	}
 	$queries = array_merge($queries, fv_nbar_daily_cleanup_queries());
-	fv_nbar_cleanup_batches($queries, microtime(true) + max(0, (float) $budget));
+	fv_nbar_cleanup_batches($queries, $deadline);
 }
 
 /** Drain every retention level fairly until empty or the shared deadline expires. */

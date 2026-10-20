@@ -40,7 +40,15 @@ function fv_nbar_chart(string $scope, array $args, string $family, string $host 
 		$where .= ' AND LENGTH(d.src)=' . ($family === '6' ? 16 : 4);
 	}
 	global $lid, $combined_lids;
-	$source = fv_nbar_summary_source($host === '' ? 'apps' : 'pairs', $lid === 0 ? $combined_lids : [$lid], $args[cacti_sizeof($args) - 2], $args[cacti_sizeof($args) - 1]);
+
+	try {
+		$source = fv_nbar_summary_source($host === '' ? 'apps' : 'pairs', $lid === 0 ? $combined_lids : [$lid], $args[cacti_sizeof($args) - 2], $args[cacti_sizeof($args) - 1]);
+	} catch (RuntimeException $e) {
+		cacti_log('NBAR chart: ' . $e->getMessage(), false, 'FLOWVIEW');
+		print '<aside class="nbarChart"><p>' . fv_nbar_h(__('Unable to load application chart. Please try again.', 'flowview')) . '</p></aside>';
+
+		return;
+	}
 
 	if ($host !== '' && filter_var($host, FILTER_VALIDATE_IP)) {
 		$where .= ' AND (d.src=INET6_ATON(?) OR d.dst=INET6_ATON(?))';

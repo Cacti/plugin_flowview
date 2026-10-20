@@ -216,6 +216,29 @@ it('expires all summary levels with bounded database deletions and drops raw sli
 	}
 });
 
+it('stops dropping raw slices and summary batches once the maintenance deadline passes', function () {
+	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(0, 0, 0, 1, 1, 2000)), fv_nbar_data_table(gmmktime(1, 0, 0, 1, 1, 2000))]);
+	fv_nbar_cleanup(0);
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect($sql)->toBe(["SHOW TABLES LIKE 'plugin\\_flowview\\_nbar\\_data\\_%'"]);
+});
+
+it('shares one deadline between the raw slice drops and the summary deletions', function () {
+	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(0, 0, 0, 1, 1, 2000)), fv_nbar_data_table(gmmktime(1, 0, 0, 1, 1, 2000))]);
+	fv_nbar_cleanup(30);
+	$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+	expect(array_slice($sql, 1, 2))->toBe(['DROP TABLE IF EXISTS `plugin_flowview_nbar_data_200000000`', 'DROP TABLE IF EXISTS `plugin_flowview_nbar_data_200000001`']);
+	expect(implode(' ', array_slice($sql, 3)))->toContain('DELETE FROM plugin_flowview_nbar_apps');
+});
+
+it('drops expired slices oldest first and leaves the rest for the next pass at the deadline', function () {
+	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(0, 0, 0, 1, 1, 2000)), fv_nbar_data_table(gmmktime(1, 0, 0, 1, 1, 2000))]);
+	expect(fv_nbar_data_drop_expired(PHP_INT_MAX, microtime(true) - 1))->toBe(0);
+	expect(array_column($GLOBALS['__test_db_calls'], 'fn'))->not->toContain('db_execute');
+	plugin_test_queue_slices([fv_nbar_data_table(gmmktime(0, 0, 0, 1, 1, 2000)), fv_nbar_data_table(gmmktime(1, 0, 0, 1, 1, 2000))]);
+	expect(fv_nbar_data_drop_expired(PHP_INT_MAX, microtime(true) + 60))->toBe(2);
+});
+
 it('rejects unknown summary types before constructing SQL', function () {
 	expect(fn () => fv_nbar_hourly_source('untrusted', [1], 0, 3600))->toThrow(InvalidArgumentException::class);
 	expect(fn () => fv_nbar_summary_source('untrusted', [1], 0, 3600))->toThrow(InvalidArgumentException::class);
