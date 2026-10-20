@@ -675,6 +675,38 @@ function flowview_gettimespan(): void {
 }
 
 /**
+ * Shifts the current date1/date2 range backward or forward by the interval
+ * selected in the predefined_timeshift dropdown and returns the new range as
+ * JSON.  Uses the same interval strings as Cacti's graph time shifting.
+ *
+ * @return void
+ */
+function flowview_timeshift(): void {
+	global $graph_timeshifts_vals;
+
+	$direction = get_nfilter_request_var('direction') == 'left' ? '-' : '+';
+	$shift     = get_filter_request_var('predefined_timeshift');
+	$date1     = strtotime(get_nfilter_request_var('date1'));
+	$date2     = strtotime(get_nfilter_request_var('date2'));
+	$span      = [];
+
+	if (!isset($graph_timeshifts_vals[$shift])) {
+		$shift = GTS_1_DAY;
+	}
+
+	if ($date1 !== false && $date2 !== false) {
+		$interval = $graph_timeshifts_vals[$shift];
+
+		$span['begin_now']           = strtotime($direction . $interval, $date1);
+		$span['end_now']             = strtotime($direction . $interval, $date2);
+		$span['current_value_date1'] = date('Y-m-d H:i', $span['begin_now']);
+		$span['current_value_date2'] = date('Y-m-d H:i', $span['end_now']);
+	}
+
+	print json_encode($span);
+}
+
+/**
  * @param mixed $data
  *
  * @return void
@@ -1191,11 +1223,11 @@ function flowview_display_filter(): void {
 		});
 
 		$('.timeshiftBackward').off('click').on('click', function() {
-			timeshiftFilterLeft();
+			timeshiftFilter('left');
 		});
 
 		$('.timeshiftForward').off('click').on('click', function() {
-			timeshiftFilterRight();
+			timeshiftFilter('right');
 		});
 
 		$('#flowview_filter').on('submit', function(event) {
@@ -1818,6 +1850,25 @@ function flowview_display_filter(): void {
 				applyFilter();
 			});
 		}
+	}
+
+	function timeshiftFilter(direction) {
+		$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
+			'?action=timeshift' +
+			'&direction='           + direction +
+			'&predefined_timeshift=' + $('#predefined_timeshift').val() +
+			'&date1='               + encodeURIComponent($('#date1').val()) +
+			'&date2='               + encodeURIComponent($('#date2').val()), function(data) {
+			if (data['current_value_date1'] !== undefined) {
+				$('#date1').val(data['current_value_date1']);
+				$('#date2').val(data['current_value_date2']);
+				$('#predefined_timespan').val('0');
+				<?php if (get_selected_theme() != 'classic') {?>
+				$('#predefined_timespan').selectmenu('refresh');
+				<?php }?>
+				applyFilter();
+			}
+		});
 	}
 
 	function changeQuery() {

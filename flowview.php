@@ -82,6 +82,10 @@ switch(get_request_var('action')) {
 		flowview_gettimespan();
 
 		break;
+	case 'timeshift':
+		flowview_timeshift();
+
+		break;
 	case 'query':
 		load_session_for_filter();
 

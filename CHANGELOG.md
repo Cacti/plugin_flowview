@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* bug: Fix "Uncaught ReferenceError: timeshiftFilterLeft is not defined" when using the Shift Time Backward/Forward icons on the flow report filter; the plugin relied on undefined global functions, so the icons now call a plugin-owned timeshiftFilter() that shifts the From/To range by the selected interval through a new `timeshift` action and reloads the report
+
 * fix: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
 
 * issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu

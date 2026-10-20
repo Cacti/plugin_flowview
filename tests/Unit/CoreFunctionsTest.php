@@ -146,3 +146,40 @@ it('formats nonzero epoch bounds into the flow date range filter', function () {
 	expect($sql)->toBe('(`start_time` BETWEEN ? AND ?)')
 		->and($params)->toBe(array('2024-01-01 00:00:00', '2024-01-02 00:00:00'));
 });
+
+it('shifts the date range backward and forward by the selected interval', function ($direction, $shift, $date1, $date2, $expected1, $expected2) {
+	if (!defined('GTS_1_DAY')) {
+		define('GTS_1_DAY', 7);
+	}
+
+	$GLOBALS['graph_timeshifts_vals'] = array(7 => '1 Day', 11 => '1 Week', 13 => '1 Month');
+
+	$_REQUEST['direction']            = $direction;
+	$_REQUEST['predefined_timeshift'] = $shift;
+	$_REQUEST['date1']                = $date1;
+	$_REQUEST['date2']                = $date2;
+
+	ob_start();
+	flowview_timeshift();
+	$span = json_decode(ob_get_clean(), true);
+
+	expect($span['current_value_date1'])->toBe($expected1)
+		->and($span['current_value_date2'])->toBe($expected2);
+})->with(array(
+	'left one week'            => array('left',  11, '2026-10-13 12:02', '2026-10-20 12:02', '2026-10-06 12:02', '2026-10-13 12:02'),
+	'right one week'           => array('right', 11, '2026-10-13 12:02', '2026-10-20 12:02', '2026-10-20 12:02', '2026-10-27 12:02'),
+	'right one month'          => array('right', 13, '2026-09-01 00:00', '2026-09-30 23:59', '2026-10-01 00:00', '2026-10-30 23:59'),
+	'unknown interval is 1day' => array('left',  99, '2026-10-13 12:02', '2026-10-20 12:02', '2026-10-12 12:02', '2026-10-19 12:02'),
+));
+
+it('returns an empty range when the time shift dates cannot be parsed', function () {
+	$_REQUEST['direction']            = 'left';
+	$_REQUEST['predefined_timeshift'] = 7;
+	$_REQUEST['date1']                = 'not a date';
+	$_REQUEST['date2']                = '';
+
+	ob_start();
+	flowview_timeshift();
+
+	expect(json_decode(ob_get_clean(), true))->toBe(array());
+});
