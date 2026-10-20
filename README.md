@@ -212,11 +212,21 @@ php cli/materialize_queries.php
 ```
 
 The script runs every saved query over the entire range of flow partitions,
-once with NAT on and once with NAT off.  Use `--query-id=ID` or `--nat=on|off`
-to narrow the run, and `--dry-run` to see what would be run.  Partitions that
-are already cached and still match their data are skipped, while partitions
-that have received more flows since, or have been dropped, are rebuilt.  Only
-one run may be active at a time, for up to 8 hours, unless `--force` is used.
+once with NAT on and once with NAT off.  Use `--query-id=ID[,ID...]` or
+`--nat=on|off` to narrow the run, and `--dry-run` to see what would be run.
+Partitions that are already cached and still match their data are skipped,
+while partitions that have received more flows since, or have been dropped,
+are rebuilt.  Only one run may be active at a time, for up to 8 hours, unless
+`--force` is used.
+
+You can also start it from the Filters page by selecting one or more Filters
+and choosing the 'Materialize View' action.  It runs in the background after
+you confirm, and the result is written to the Cacti log.  The 'NAT Shards' and
+'Non-NAT Shards' columns on that page show how many partitions of each Filter
+are already cached, with NAT on and with NAT off.  When you save a
+Filter in a way that changes the data it materializes, such as its report,
+device, exporter, or any address, port, interface, AS, protocol, flag or TOS
+restriction, you are advised to re-materialize it.
 
 # Possible Bugs?
 

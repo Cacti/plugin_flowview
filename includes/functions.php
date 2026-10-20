@@ -452,6 +452,82 @@ function edit_filter(): void {
 }
 
 /**
+ * flowview_filter_change_is_material - Decide whether a saved change to a
+ * filter alters the data it materializes.  Cached partition results are
+ * keyed on the map query, which is built from the report type and the
+ * device, exporter, address, port, interface, AS, protocol, flag and TOS
+ * restrictions.  Display only settings, the time range, the cutoffs and the
+ * NAT mode do not count, as both NAT modes are always materialized.  The
+ * sort field counts only for printed reports, where it orders the map query.
+ *
+ * Only the fields present in $new are compared, so a partial save can be
+ * checked against the stored filter.  A filter with no stored version is
+ * new and has nothing materialized yet.
+ *
+ * @param array $old The filter as stored before the save
+ * @param array $new The values being saved
+ *
+ * @return bool
+ */
+function flowview_filter_change_is_material(array $old, array $new): bool {
+	if (!cacti_sizeof($old)) {
+		return false;
+	}
+
+	$fields = [
+		'device_id', 'template_id', 'ex_addr', 'statistics', 'printed',
+		'tosfields', 'tcpflags', 'protocols',
+		'sourceip', 'sourceport', 'sourceinterface', 'sourceas',
+		'destip', 'destport', 'destinterface', 'destas',
+		'postnatsourceip', 'postnatsourceport', 'postnatdestip', 'postnatdestport',
+	];
+
+	/* these mean no restriction, however they were saved */
+	$unrestricted = ['device_id', 'template_id', 'ex_addr', 'statistics', 'printed', 'protocols'];
+
+	$normalize = function ($field, $value) use ($unrestricted) {
+		$value = trim((string) $value);
+
+		if (in_array($field, $unrestricted, true) && ($value === '0' || $value === '-1')) {
+			return '';
+		}
+
+		return $value;
+	};
+
+	foreach ($fields as $field) {
+		if (!array_key_exists($field, $new)) {
+			continue;
+		}
+
+		$old_value = $normalize($field, $old[$field] ?? '');
+		$new_value = $normalize($field, $new[$field]);
+
+		if ($old_value !== $new_value) {
+			return true;
+		}
+	}
+
+	$printed = $new['printed'] ?? ($old['printed'] ?? 0);
+
+	if ($printed > 0 && array_key_exists('sortfield', $new)) {
+		return trim((string) ($old['sortfield'] ?? '')) !== trim((string) $new['sortfield']);
+	}
+
+	return false;
+}
+
+/**
+ * flowview_rematerialize_recommendation - The text recommending that a
+ * filter be materialized again after a material change.
+ *
+ * @return string
+ */
+function flowview_rematerialize_recommendation(): string {
+	return __('The changes to this Filter affect its cached results.  A forced re-materialization of this Filter is recommended.  To do so, select the Filter on the Filters page and choose the \'Materialize View\' action.', 'flowview');
+}
+
+/**
  * @return void
  */
 function save_filter_form(): void {
@@ -480,6 +556,21 @@ function save_filter_form(): void {
 		$printed     = $report;
 		$statistical = 0;
 	}
+
+	$old = flowview_db_fetch_row_prepared('SELECT *
+		FROM plugin_flowview_queries
+		WHERE id = ?',
+		array(get_request_var('query')));
+
+	$material = flowview_filter_change_is_material(
+		is_array($old) ? $old : [],
+		[
+			'device_id'  => get_request_var('device_id'),
+			'statistics' => $statistical,
+			'printed'    => $printed,
+			'sortfield'  => get_nfilter_request_var('sortfield'),
+		]
+	);
 
 	flowview_db_execute_prepared('UPDATE plugin_flowview_queries
 		SET timespan = ?,
@@ -515,6 +606,8 @@ function save_filter_form(): void {
 			get_request_var('query')
 		)
 	);
+
+	print json_encode(['rematerialize' => $material]);
 }
 
 /**
@@ -587,6 +680,15 @@ function save_filter(): void {
 		$save['panel_table'] = 'on';
 	}
 
+	$old = [];
+
+	if (!empty($save['id'])) {
+		$old = flowview_db_fetch_row_prepared('SELECT *
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array($save['id']));
+	}
+
 	$id = flowview_sql_save($save, 'plugin_flowview_queries', 'id', true);
 
 	if (is_error_message()) {
@@ -602,6 +704,10 @@ function save_filter(): void {
 	}
 
 	raise_message(1);
+
+	if (flowview_filter_change_is_material(is_array($old) ? $old : [], $save)) {
+		raise_message('flowview_rematerialize', flowview_rematerialize_recommendation(), MESSAGE_LEVEL_WARN);
+	}
 
 	flowview_purge_query_caches($id);
 
@@ -1791,7 +1897,7 @@ function flowview_display_filter(): void {
 	}
 
 	function saveFilter() {
-		$.get(urlPath + 'plugins/flowview/flowview.php' +
+		$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
 			'?action=savefilter' +
 			'&query='        + $('#query').val() +
 			'&domains='      + $('#domains').is(':checked') +
@@ -1809,9 +1915,14 @@ function flowview_display_filter(): void {
 			'&flows='        + $('#flows').is(':checked') +
 			'&exclude='      + $('#exclude').val() +
 			'&graph_type='   + $('#graph_type').val() +
-			'&graph_height=' + $('#graph_height').val(), function() {
+			'&graph_height=' + $('#graph_height').val(), function(data) {
 			Pace.stop();
-			$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
+
+			if (data['rematerialize']) {
+				$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize View action on the Filters page.', 'flowview');?> ]').fadeOut(10000);
+			} else {
+				$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
+			}
 		});
 	}
 
@@ -2780,14 +2891,21 @@ function get_category_columns($statistics, $domain) {
  * filter table
  * an error.
  *
- * @param mixed $session
- * @param mixed $query_id
- * @param mixed $start
- * @param mixed $end
+ * When $plan_only is true nothing is run.  The function returns the
+ * md5sum_tables of each map query the parallel query would cache
+ * against, which is how the cached shards of the query are found.
+ * $force_nat then decides the NAT mode instead of the request variables.
+ *
+ * @param mixed     $session
+ * @param mixed     $query_id
+ * @param mixed     $start
+ * @param mixed     $end
+ * @param bool      $plan_only
+ * @param bool|null $force_nat
  *
  * @return mixed
  */
-function run_flow_query($session, $query_id, $start, $end) {
+function run_flow_query($session, $query_id, $start, $end, bool $plan_only = false, ?bool $force_nat = null) {
 	global $stat_columns_array;
 
 	global $config, $graph_timespans;
@@ -2809,7 +2927,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 	}
 
 	/* close session to allow offpage navigation */
-	cacti_session_close();
+	if (!$plan_only) {
+		cacti_session_close();
+	}
 
 	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
@@ -2817,6 +2937,10 @@ function run_flow_query($session, $query_id, $start, $end) {
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		[$query_id]);
+
+	if ($plan_only && !cacti_sizeof($data)) {
+		return false;
+	}
 
 	$title = flowview_db_fetch_cell_prepared('SELECT name
 		FROM plugin_flowview_queries
@@ -3413,11 +3537,18 @@ function run_flow_query($session, $query_id, $start, $end) {
 					(preg_match('/^(bytes|packets|flows)$/i', $data['sortfield']) ? ' DESC':' ASC');
 			}
 		} else {
-			cacti_log(sprintf('WARNING: The Flowview Query %s [%s] does not include either a Statistical or Printed Report.', $data['name'], $data['id']), false, 'FLOWVIEW');
+			if (!$plan_only) {
+				cacti_log(sprintf('WARNING: The Flowview Query %s [%s] does not include either a Statistical or Printed Report.', $data['name'], $data['id']), false, 'FLOWVIEW');
+			}
+
 			return false;
 		}
 
 		if ($sql_outer == '' || ($sql_inner == '' && $sql_inner1 == '')) {
+			if ($plan_only) {
+				return false;
+			}
+
 			if ($data['statistics'] > 0) {
 				$message = __('The Statistical Report %s is not known.  Please open a bug on GitHub', $data['statistics'], 'flowview');
 			} elseif($data['printed'] > 0) {
@@ -3434,7 +3565,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 		}
 
 		/* use post-NAT data instead of the original src/dst values - issue#110 */
-		if (isset_request_var('usenat')) {
+		if ($force_nat !== null) {
+			$use_nat = $force_nat;
+		} elseif (isset_request_var('usenat')) {
 			$use_nat = (get_request_var('usenat') == 'true');
 		} else {
 			$use_nat = (isset($data['usenat']) && $data['usenat'] == 'on');
@@ -3472,6 +3605,83 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$sql_inner2         = flowview_apply_nat_toggle($sql_inner2, $use_nat, true);
 			$sql_inner_groupby1 = flowview_apply_nat_toggle($sql_inner_groupby1, $use_nat, false);
 			$sql_inner_groupby2 = flowview_apply_nat_toggle($sql_inner_groupby2, $use_nat, false);
+		}
+
+		/**
+		 * The map (inner) structures cache their shards by an md5 of the
+		 * query without the time range, so they can be built before the
+		 * tables are known.
+		 */
+		if ($sql_inner1 != '') {
+			$stru_outer = [
+				'sql_query'   => $sql_outer,
+				'sql_where'   => '',
+				'sql_groupby' => $sql_groupby,
+				'sql_having'  => $sql_having,
+				'sql_order'   => $sql_order,
+				'sql_limit'   => $sql_limit,
+				'sql_params'  => []
+			];
+
+			$stru_inners = [];
+
+			foreach ([[$sql_inner1, $sql_inner_groupby1], [$sql_inner2, $sql_inner_groupby2]] as $inner) {
+				$stru_inner = [
+					'sql_query'        => $inner[0],
+					'sql_where'        => $sql_where,
+					'sql_range'        => $sql_range,
+					'sql_groupby'      => $inner[1],
+					'sql_having'       => '',
+					'sql_order'        => '',
+					'sql_limit'        => '',
+					'sql_params'       => $sql_params,
+					'sql_range_params' => $sql_range_params,
+					'sql_start_time'   => $start,
+					'sql_end_time'     => $end
+				];
+
+				if ($request_type == 'printed') {
+					$stru_inner['sql_limit'] = 'LIMIT 100';
+					$stru_inner['sql_order'] = $sql_order;
+				}
+
+				$stru_inners[] = $stru_inner;
+			}
+		} else {
+			$stru_inner = [
+				'sql_query'        => $sql_inner,
+				'sql_where'        => $sql_where,
+				'sql_range'        => $sql_range,
+				'sql_having'       => '',
+				'sql_order'        => '',
+				'sql_limit'        => '',
+				'sql_groupby'      => $sql_inner_groupby,
+				'sql_params'       => $sql_params,
+				'sql_range_params' => $sql_range_params,
+				'sql_start_time'   => $start,
+				'sql_end_time'     => $end
+			];
+
+			if ($request_type == 'printed') {
+				$stru_inner['sql_limit'] = 'LIMIT 100';
+				$stru_inner['sql_order'] = $sql_order;
+			}
+
+			$stru_outer = [
+				'sql_query'        => $sql_outer,
+				'sql_where'        => '',
+				'sql_having'       => $sql_having,
+				'sql_groupby'      => $sql_groupby,
+				'sql_order'        => $sql_order,
+				'sql_limit'        => $sql_limit,
+				'sql_params'       => []
+			];
+
+			$stru_inners = [$stru_inner];
+		}
+
+		if ($plan_only) {
+			return array_map('parallel_database_query_table_md5', $stru_inners);
 		}
 
 		$tables     = get_tables_for_query($start, $end);
@@ -3541,84 +3751,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 				cacti_log(sprintf('PARALLEL STATS: Time:%0.3f Threads:%d Shards:%d', $end - $start, $threads, $shards), false, 'FLOWVIEW');
 			} else {
-				if ($sql_inner1 != '') {
-					$stru_inner1 = [
-						'sql_query'        => $sql_inner1,
-						'sql_where'        => $sql_where,
-						'sql_range'        => $sql_range,
-						'sql_groupby'      => $sql_inner_groupby1,
-						'sql_having'       => '',
-						'sql_order'        => '',
-						'sql_limit'        => '',
-						'sql_params'       => $sql_params,
-						'sql_range_params' => $sql_range_params,
-						'sql_start_time'   => $start,
-						'sql_end_time'     => $end
-					];
-
-					$stru_inner2 = [
-						'sql_query'        => $sql_inner2,
-						'sql_where'        => $sql_where,
-						'sql_range'        => $sql_range,
-						'sql_groupby'      => $sql_inner_groupby2,
-						'sql_having'       => '',
-						'sql_order'        => '',
-						'sql_limit'        => '',
-						'sql_params'       => $sql_params,
-						'sql_range_params' => $sql_range_params,
-						'sql_start_time'   => $start,
-						'sql_end_time'     => $end
-					];
-
-					$stru_outer = [
-						'sql_query'   => $sql_outer,
-						'sql_where'   => '',
-						'sql_groupby' => $sql_groupby,
-						'sql_having'  => $sql_having,
-						'sql_order'   => $sql_order,
-						'sql_limit'   => $sql_limit,
-						'sql_params'  => []
-					];
-
-					if ($request_type == 'printed') {
-						$stru_inner1['sql_limit'] = 'LIMIT 100';
-						$stru_inner1['sql_order'] = $sql_order;
-						$stru_inner2['sql_limit'] = 'LIMIT 100';
-						$stru_inner2['sql_order'] = $sql_order;
-					}
-
-					$requests[] = parallel_database_query_request($tables, $stru_inner1, $stru_outer);
-					$requests[] = parallel_database_query_request($tables, $stru_inner2, $stru_outer);
-				} else {
-					$stru_inner = [
-						'sql_query'        => $sql_inner,
-						'sql_where'        => $sql_where,
-						'sql_range'        => $sql_range,
-						'sql_having'       => '',
-						'sql_order'        => '',
-						'sql_limit'        => '',
-						'sql_groupby'      => $sql_inner_groupby,
-						'sql_params'       => $sql_params,
-						'sql_range_params' => $sql_range_params,
-						'sql_start_time'   => $start,
-						'sql_end_time'     => $end
-					];
-
-					if ($request_type == 'printed') {
-						$stru_inner['sql_limit'] = 'LIMIT 100';
-						$stru_inner['sql_order'] = $sql_order;
-					}
-
-					$stru_outer = [
-						'sql_query'        => $sql_outer,
-						'sql_where'        => '',
-						'sql_having'       => $sql_having,
-						'sql_groupby'      => $sql_groupby,
-						'sql_order'        => $sql_order,
-						'sql_limit'        => $sql_limit,
-						'sql_params'       => []
-					];
-
+				foreach ($stru_inners as $stru_inner) {
 					$requests[] = parallel_database_query_request($tables, $stru_inner, $stru_outer);
 				}
 
@@ -4138,6 +4271,107 @@ function flowview_invalidate_stale_shard_cache(): array {
 }
 
 /**
+ * flowview_launch_materialize - Start cli/materialize_queries.php in the
+ * background for the given FlowView queries.  Nothing is started when a
+ * materialization is already registered as running, since only one may be
+ * active at a time.
+ *
+ * @param array $query_ids The FlowView query ids to materialize
+ *
+ * @return bool false when a materialization is already running
+ */
+function flowview_launch_materialize(array $query_ids): bool {
+	global $config;
+
+	$running = db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?
+		AND taskid = ?',
+		['flowview', 'materialize', 0]);
+
+	if ($running > 0) {
+		return false;
+	}
+
+	$script = $config['base_path'] . '/plugins/flowview/cli/materialize_queries.php';
+
+	exec_background(
+		read_config_option('path_php_binary'),
+		cacti_escapeshellarg($script) . ' --query-id=' . implode(',', array_map('intval', $query_ids))
+	);
+
+	return true;
+}
+
+/**
+ * parallel_database_query_map_query - The map query of a request as the JSON
+ * that is stored and hashed.  The time range is left out, so the same query
+ * over a different range shares the same cached partition shards.
+ *
+ * @param array $stru_inner The map structure of a parallel query request
+ *
+ * @return string
+ */
+function parallel_database_query_map_query(array $stru_inner): string {
+	unset($stru_inner['sql_range']);
+	unset($stru_inner['sql_range_params']);
+	unset($stru_inner['sql_start_time']);
+	unset($stru_inner['sql_end_time']);
+
+	return (string) json_encode($stru_inner);
+}
+
+/**
+ * parallel_database_query_table_md5 - The md5sum_tables of a map structure,
+ * which is the key the partition shards are cached under.
+ *
+ * @param array $stru_inner The map structure of a parallel query request
+ *
+ * @return string
+ */
+function parallel_database_query_table_md5(array $stru_inner): string {
+	return md5(parallel_database_query_map_query($stru_inner));
+}
+
+/**
+ * flowview_count_cached_shards - Count the partitions of a filter that are
+ * stored in the parallel query cache, with NAT and without.  Some reports
+ * use two map queries, and a partition only counts once every one of them is
+ * cached.  Nothing is run, the cache keys are worked out from the filter.
+ *
+ * @param int $query_id The FlowView query to count the cached shards of
+ *
+ * @return array The partition counts as nat and non_nat
+ */
+function flowview_count_cached_shards(int $query_id): array {
+	$counts = ['nat' => 0, 'non_nat' => 0];
+	$now    = time();
+
+	foreach (['nat' => true, 'non_nat' => false] as $mode => $use_nat) {
+		$md5sums = run_flow_query(false, $query_id, $now, $now, true, $use_nat);
+
+		if (!is_array($md5sums) || !cacti_sizeof($md5sums)) {
+			continue;
+		}
+
+		$md5sums = array_values(array_unique($md5sums));
+
+		$counts[$mode] = (int) flowview_db_fetch_cell_prepared('SELECT COUNT(*)
+			FROM (
+				SELECT map_table
+				FROM parallel_database_query_shard_cache
+				WHERE md5sum IN (' . implode(', ', array_fill(0, cacti_sizeof($md5sums), '?')) . ')
+				GROUP BY map_table, map_partition
+				HAVING COUNT(DISTINCT md5sum) = ?
+			) AS cached',
+			array_merge($md5sums, [cacti_sizeof($md5sums)]));
+	}
+
+	return $counts;
+}
+
+/**
  * parallel_database_query_request - Given a series of tables and
  * and inner (map phase) and outer (reduce phase) SQL queries,
  * create a series of shards requests to break the larger query into multiple
@@ -4202,19 +4436,13 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	 */
 	$map_range        = $stru_inner['sql_range'];
 	$map_range_params = $stru_inner['sql_range_params'];
-	$map_query        = $stru_inner;
 	$sql_start_time   = $stru_inner['sql_start_time'];
 	$sql_end_time     = $stru_inner['sql_end_time'];
 	$md5_array        = [$stru_inner, $stru_outer];
 	$query_md5        = md5((string) json_encode($md5_array));
 
-	unset($map_query['sql_range']);
-	unset($map_query['sql_range_params']);
-	unset($map_query['sql_start_time']);
-	unset($map_query['sql_end_time']);
-
 	$reduce_query = json_encode($stru_outer);
-	$map_query    = (string) json_encode($map_query);
+	$map_query    = parallel_database_query_map_query($stru_inner);
 
 	$table_md5 = md5($map_query);
 

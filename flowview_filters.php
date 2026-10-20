@@ -41,7 +41,8 @@ $sched_actions = array(
 /*	2 => __('Send Now', 'flowview'), */
 	1 => __('Delete', 'flowview'),
 	3 => __('Disable', 'flowview'),
-	4 => __('Enable', 'flowview')
+	4 => __('Enable', 'flowview'),
+	5 => __('Materialize View', 'flowview')
 );
 
 switch (get_request_var('action')) {
@@ -110,6 +111,12 @@ function actions_filters(): void {
 				for ($i=0; $i<cacti_count($selected_items); $i++) {
 					flowview_db_execute("UPDATE plugin_flowview_queries SET enabled='on' WHERE id = " . $selected_items[$i]);
 				}
+			} elseif (get_nfilter_request_var('drp_action') == '5') {
+				if (flowview_launch_materialize($selected_items)) {
+					raise_message('flowview_materialize', __('Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log.', cacti_count($selected_items), 'flowview'), MESSAGE_LEVEL_INFO);
+				} else {
+					raise_message('flowview_materialize', __('A Materialization is already running.  Please try again once it has finished.', 'flowview'), MESSAGE_LEVEL_WARN);
+				}
 /*			} elseif (get_nfilter_request_var('drp_action') == '2') {
 				for ($i=0; $i<cacti_count($selected_items); $i++) {
 					plugin_flowview_run_schedule($selected_items[$i]);
@@ -161,6 +168,13 @@ function actions_filters(): void {
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to Enable the following Filters(s).', 'flowview') . "</p>
+				<ul>$filter_list</ul>
+			</td>
+		</tr>";
+	} elseif (get_nfilter_request_var('drp_action') == '5') { /* Materialize */
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>" . __('Click \'Continue\' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets, and only one Materialization can run at a time.', 'flowview') . "</p>
 				<ul>$filter_list</ul>
 			</td>
 		</tr>";
@@ -377,6 +391,16 @@ function show_filters(): void {
 			'align' => 'right',
 			'sort' => 'ASC'
 		),
+		'nosort2' => array(
+			'display' => __('NAT Shards', 'flowview'),
+			'align' => 'right',
+			'tip' => __('The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on.', 'flowview')
+		),
+		'nosort3' => array(
+			'display' => __('Non-NAT Shards', 'flowview'),
+			'align' => 'right',
+			'tip' => __('The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off.', 'flowview')
+		),
 		'sortfield' => array(
 			'display' => __('Sort Field', 'flowview'),
 			'align' => 'right',
@@ -420,6 +444,11 @@ function show_filters(): void {
 
 			form_selectable_cell($type, $filter['id']);
 			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
+
+			$shards = flowview_count_cached_shards((int) $filter['id']);
+
+			form_selectable_cell($shards['nat'], $filter['id'], '', 'right');
+			form_selectable_cell($shards['non_nat'], $filter['id'], '', 'right');
 			form_selectable_cell($sort, $filter['id'], '', 'right');
 			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');
 			form_checkbox_cell($filter['name'], $filter['id']);

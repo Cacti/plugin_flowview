@@ -2,6 +2,12 @@
 
 --- develop ---
 
+* feature: Show the number of partitions each Filter has stored in the Parallel Query cache, with NAT and without, as the NAT Shards and Non-NAT Shards columns next to the ID on the Filters page; the cache keys are worked out from the Filter without running it (run_flow_query() gained a plan-only mode, and the map query hashing is shared with the parallel query request)
+
+* feature: Add a 'Materialize View' action to the Filters page that, after confirmation, starts cli/materialize_queries.php in the background for the selected Filters (--query-id now accepts a comma separated list), and tells you when a materialization is already running
+
+* feature: Recommend a forced re-materialization when a Filter is saved, from either the Filter form or the report page, with a change that alters what it materializes (report type, device, exporter, template, or any address, port, interface, AS, protocol, TCP flag or TOS restriction, plus the sort field of printed reports); display settings, the time range, cutoffs and NAT mode do not count
+
 * feature: Add cli/materialize_queries.php, which runs every saved FlowView query through the parallel query for the entire range of flow partitions, once with NAT on and once with NAT off (--query-id, --nat, --dry-run and --force are optional), so the partition results are already cached when a report is opened; it registers with register_process_start() for 8 hours so only one run is active at a time, reuses cached partitions that still match their partition's data bounds, rebuilds the ones that have since gained flows or been dropped, and runs each query and NAT mode in its own process so one that reaches the Maximum Run Time does not end the rest
 
 * dev: Move fixprivate.php, import_flows.php and repair_tables.php into the plugin's cli/ directory (listed as tombstones in manifest.json so upgrades remove the old copies); they now locate the Cacti root relative to their own location

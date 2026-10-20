@@ -294,3 +294,211 @@ it('leaves finished requests alone when every cached partition is still accurate
 
 	expect($writes)->toBeEmpty();
 });
+
+it('flags only changes that alter what a filter materializes', function ($old, $new, $expected) {
+	expect(flowview_filter_change_is_material($old, $new))->toBe($expected);
+})->with(array(
+	'new filter'                   => array(
+		array(),
+		array('sourceip' => '10.0.0.1', 'statistics' => 10),
+		false,
+	),
+	'nothing changed'              => array(
+		array('device_id' => '3', 'sourceip' => '10.0.0.1', 'statistics' => '10', 'printed' => '0'),
+		array('device_id' => '3', 'sourceip' => '10.0.0.1', 'statistics' => '10', 'printed' => '0'),
+		false,
+	),
+	'display and time settings'    => array(
+		array('name' => 'Top Talkers', 'timespan' => '3', 'graph_type' => 'bar', 'cutofflines' => '20', 'usenat' => '', 'statistics' => '10'),
+		array('name' => 'Renamed', 'timespan' => '5', 'graph_type' => 'pie', 'cutofflines' => '50', 'usenat' => 'on', 'statistics' => '10'),
+		false,
+	),
+	'source address changed'       => array(
+		array('sourceip' => '10.0.0.1'),
+		array('sourceip' => '10.0.0.2'),
+		true,
+	),
+	'protocol added'               => array(
+		array('protocols' => ''),
+		array('protocols' => '6, 17'),
+		true,
+	),
+	'report type changed'          => array(
+		array('statistics' => '10', 'printed' => '0'),
+		array('statistics' => '11', 'printed' => '0'),
+		true,
+	),
+	'device restricted'            => array(
+		array('device_id' => '0'),
+		array('device_id' => '3'),
+		true,
+	),
+	'unrestricted saved differently' => array(
+		array('device_id' => '0', 'ex_addr' => '-1', 'protocols' => '0', 'template_id' => ''),
+		array('device_id' => '', 'ex_addr' => '', 'protocols' => '', 'template_id' => '0'),
+		false,
+	),
+	'sort field on printed report' => array(
+		array('printed' => '2', 'statistics' => '0', 'sortfield' => 'bytes'),
+		array('printed' => '2', 'statistics' => '0', 'sortfield' => 'packets'),
+		true,
+	),
+	'sort field on statistics report' => array(
+		array('printed' => '0', 'statistics' => '10', 'sortfield' => 'bytes'),
+		array('printed' => '0', 'statistics' => '10', 'sortfield' => 'packets'),
+		false,
+	),
+	'partial save only compares what it carries' => array(
+		array('device_id' => '3', 'sourceip' => '10.0.0.1', 'statistics' => '10'),
+		array('device_id' => '3'),
+		false,
+	),
+));
+
+it('recommends a forced re-materialization pointing at the Materialize View action', function () {
+	expect(flowview_rematerialize_recommendation())->toContain('re-materialization')
+		->and(flowview_rematerialize_recommendation())->toContain('Materialize View');
+});
+
+it('starts the materialization in the background for the given queries', function () {
+	if (!function_exists('exec_background')) {
+		function exec_background($filename, $args = '', $redirect_args = '') {
+			$GLOBALS['__test_exec'][] = array($filename, $args);
+		}
+	}
+
+	if (!function_exists('cacti_escapeshellarg')) {
+		function cacti_escapeshellarg($string) {
+			return escapeshellarg($string);
+		}
+	}
+
+	$GLOBALS['__test_exec']             = array();
+	$original_base_path                = $GLOBALS['config']['base_path'];
+	$GLOBALS['config']['base_path']     = '/var/www/cacti';
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+
+	plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+
+	try {
+		$started = flowview_launch_materialize(array('3', 5, '7; rm -rf /'));
+	} finally {
+		$GLOBALS['config']['base_path'] = $original_base_path;
+	}
+
+	expect($started)->toBeTrue()
+		->and($GLOBALS['__test_exec'])->toBe(array(
+			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=3,5,7"),
+		))
+		->and($GLOBALS['__test_db_calls'][0]['params'])->toBe(array('flowview', 'materialize', 0));
+});
+
+it('does not start another materialization while one is registered', function () {
+	$GLOBALS['__test_exec'] = array();
+
+	plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+
+	expect(flowview_launch_materialize(array(3)))->toBeFalse()
+		->and($GLOBALS['__test_exec'])->toBe(array());
+});
+
+it('keys the cached shards on the map query without the time range', function () {
+	$inner = array(
+		'sql_query'        => 'SELECT src_addr, SUM(bytes) AS bytes',
+		'sql_where'        => 'WHERE protocol IN (?)',
+		'sql_range'        => '(`start_time` BETWEEN ? AND ?)',
+		'sql_groupby'      => 'GROUP BY src_addr',
+		'sql_params'       => array(6),
+		'sql_range_params' => array('2024-01-01 00:00:00', '2024-01-02 00:00:00'),
+		'sql_start_time'   => 1704067200,
+		'sql_end_time'     => 1704153600,
+	);
+
+	$later = $inner;
+	$later['sql_range_params'] = array('2024-02-01 00:00:00', '2024-02-02 00:00:00');
+	$later['sql_start_time']   = 1706745600;
+	$later['sql_end_time']     = 1706832000;
+
+	$other = $inner;
+	$other['sql_where'] = 'WHERE protocol IN (?, ?)';
+
+	expect(parallel_database_query_table_md5($inner))->toBe(md5(parallel_database_query_map_query($inner)))
+		->and(parallel_database_query_table_md5($later))->toBe(parallel_database_query_table_md5($inner))
+		->and(parallel_database_query_table_md5($other))->not->toBe(parallel_database_query_table_md5($inner))
+		->and(parallel_database_query_map_query($inner))->not->toContain('sql_range');
+});
+
+it('plans the cache keys of a filter for each NAT mode without running it', function () {
+	if (!function_exists('array_rekey')) {
+		function array_rekey($array, $key, $value) {
+			return array();
+		}
+	}
+
+	$filter = array(
+		'id' => 4, 'name' => 'Top Talkers', 'device_id' => 0, 'ex_addr' => '', 'template_id' => -1,
+		'statistics' => 10, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 20, 'cutoffoctets' => 0,
+		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
+	);
+
+	$plan = function ($nat) use ($filter) {
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+
+		return run_flow_query(false, 4, 1704067200, 1704153600, true, $nat);
+	};
+
+	$nat     = $plan(true);
+	$non_nat = $plan(false);
+
+	expect($nat)->toBeArray()->toHaveCount(1)
+		->and($nat[0])->toMatch('/^[0-9a-f]{32}$/')
+		->and($non_nat[0])->toMatch('/^[0-9a-f]{32}$/')
+		->and($nat[0])->not->toBe($non_nat[0])
+		->and($plan(true))->toBe($nat);
+
+	$writes = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return strpos($call['fn'], 'db_execute') === 0;
+	});
+
+	expect($writes)->toBeEmpty();
+});
+
+it('counts the partitions of a filter that are cached with and without NAT', function () {
+	if (!function_exists('array_rekey')) {
+		function array_rekey($array, $key, $value) {
+			return array();
+		}
+	}
+
+	$filter = array(
+		'id' => 4, 'name' => 'Top Talkers', 'device_id' => 0, 'ex_addr' => '', 'template_id' => -1,
+		'statistics' => 10, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 20, 'cutoffoctets' => 0,
+		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
+	);
+
+	// Each mode plans the filter (a row and the name) and then counts its cache rows.
+	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+	plugin_test_queue_db_result('db_fetch_cell_prepared', 'Top Talkers');
+	plugin_test_queue_db_result('db_fetch_cell_prepared', '12');
+	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+	plugin_test_queue_db_result('db_fetch_cell_prepared', 'Top Talkers');
+	plugin_test_queue_db_result('db_fetch_cell_prepared', '7');
+
+	expect(flowview_count_cached_shards(4))->toBe(array('nat' => 12, 'non_nat' => 7));
+
+	$counts = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return strpos($call['sql'] ?? '', 'FROM parallel_database_query_shard_cache') !== false;
+	}));
+
+	expect($counts)->toHaveCount(2)
+		->and($counts[0]['params'])->toHaveCount(2)
+		->and($counts[0]['params'][1])->toBe(1)
+		->and($counts[0]['params'][0])->not->toBe($counts[1]['params'][0]);
+});
+
+it('counts nothing for a filter that cannot be planned', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', array());
+	plugin_test_queue_db_result('db_fetch_row_prepared', array());
+
+	expect(flowview_count_cached_shards(99))->toBe(array('nat' => 0, 'non_nat' => 0));
+});

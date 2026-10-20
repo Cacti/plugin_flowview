@@ -45,7 +45,7 @@ $debug    = false;
 $force    = false;
 $dry_run  = false;
 $worker   = false;
-$query_id = false;
+$query_ids = [];
 $nat      = false;
 $start    = false;
 $end      = false;
@@ -71,12 +71,18 @@ foreach ($options as $arg => $value) {
 
 	switch ($arg) {
 		case 'query-id':
-			if (!ctype_digit((string) $value) || $value < 1) {
-				print 'ERROR: --query-id must be a positive integer' . PHP_EOL;
-				exit(1);
+			$query_ids = [];
+
+			foreach (explode(',', (string) $value) as $id) {
+				if (!ctype_digit($id) || $id < 1) {
+					print 'ERROR: --query-id must be a positive integer or a comma separated list of them' . PHP_EOL;
+					exit(1);
+				}
+
+				$query_ids[(int) $id] = (int) $id;
 			}
 
-			$query_id = (int) $value;
+			$query_ids = array_values($query_ids);
 
 			break;
 		case 'nat':
@@ -131,12 +137,12 @@ foreach ($options as $arg => $value) {
 
 /* a worker materializes exactly one query and NAT mode for the range its parent chose */
 if ($worker) {
-	if ($query_id === false || $nat === false || $start === false || $end === false) {
-		print 'ERROR: --worker requires --query-id, --nat, --start and --end' . PHP_EOL;
+	if (cacti_sizeof($query_ids) != 1 || $nat === false || $start === false || $end === false) {
+		print 'ERROR: --worker requires one --query-id, --nat, --start and --end' . PHP_EOL;
 		exit(1);
 	}
 
-	exit(materialize_run_worker($query_id, $nat, $start, $end));
+	exit(materialize_run_worker($query_ids[0], $nat, $start, $end));
 }
 
 if (!$force && !$dry_run) {
@@ -170,11 +176,12 @@ if ($range === false) {
 
 list($start, $end) = $range;
 
-if ($query_id !== false) {
+if (cacti_sizeof($query_ids)) {
 	$queries = flowview_db_fetch_assoc_prepared('SELECT id, name
 		FROM plugin_flowview_queries
-		WHERE id = ?',
-		[$query_id]);
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($query_ids), '?')) . ')
+		ORDER BY id',
+		$query_ids);
 } else {
 	$queries = flowview_db_fetch_assoc('SELECT id, name
 		FROM plugin_flowview_queries
@@ -329,7 +336,7 @@ function display_version(): void {
 function display_help(): void {
 	display_version();
 
-	print PHP_EOL . 'usage: materialize_queries.php [--query-id=ID] [--nat=on|off] [--dry-run] [--force] [--debug]' . PHP_EOL . PHP_EOL;
+	print PHP_EOL . 'usage: materialize_queries.php [--query-id=ID[,ID...]] [--nat=on|off] [--dry-run] [--force] [--debug]' . PHP_EOL . PHP_EOL;
 
 	print 'Materializes each FlowView query into the parallel query cache for the' . PHP_EOL;
 	print 'entire range of flow partitions, once with NAT on and once with NAT off.' . PHP_EOL;
@@ -337,7 +344,7 @@ function display_help(): void {
 	print 'Only one run may be active at a time, for up to 8 hours.' . PHP_EOL . PHP_EOL;
 
 	print 'Options:' . PHP_EOL;
-	print '    --query-id=ID Only materialize this query.' . PHP_EOL;
+	print '    --query-id=ID Only materialize this query, or a comma separated list of them.' . PHP_EOL;
 	print '    --nat=on|off  Only materialize this NAT mode.' . PHP_EOL;
 	print '    --dry-run     List what would be materialized and exit.' . PHP_EOL;
 	print '    --force       Run even if another materialization is running.' . PHP_EOL;
