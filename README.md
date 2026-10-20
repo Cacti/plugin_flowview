@@ -243,3 +243,5 @@ Do not reset an unresolved row merely because its process has disappeared.
 Completion cleanup and executable reports use separate bounded snapshots, so
 persistent cleanup failures cannot consume the pending-work budget. Cleanup
 still runs first and does not require a free execution slot.
+
+Scheduled FlowView notifications use one observable delivery helper on Cacti 1.2 and 1.3. A failed queue lookup before delivery requests retry. A returned mailer error, invalid notification configuration, or failed report-log write holds the occurrence for manual reconciliation without advancing schedule timestamps. This includes partial delivery to multiple notification targets; it is never automatically resent.

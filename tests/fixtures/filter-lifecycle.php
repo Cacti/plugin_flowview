@@ -7,7 +7,7 @@ $mode = getenv('FLOWVIEW_FIXTURE_MODE');
 if ($mode === 'connection-failure') {
 	define('FLOWVIEW_CONFIG', dirname(__DIR__) . '/connection.php');
 }
-$ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure', 'parallel-timeout', 'timestamp-failure', 'master-busy', 'notification-read-failure', 'notification-missing', 'notification-after-delivery'], true);
+$ready = in_array($mode, ['ready', 'late', 'child-disabled', 'report-read-failure', 'schedule-read-failure', 'filter-read-failure', 'parallel-timeout', 'timestamp-failure', 'master-busy', 'notification-read-failure', 'notification-missing', 'notification-after-delivery', 'notification-mail-error', 'notification-list-error', 'notification-log-error', 'notification-success'], true);
 $metadataReads = 0;
 $calls = [];
 const MESSAGE_LEVEL_INFO = 1;
@@ -71,7 +71,7 @@ function set_default_action() {
 // Capture state after shutdown callbacks registered by the actual entrypoint.
 register_shutdown_function(function () {
 	register_shutdown_function(function () {
-		file_put_contents(getenv('FLOWVIEW_FIXTURE_RESULT'), json_encode(['calls' => $GLOBALS['calls'], 'status' => http_response_code(), 'repair_loaded' => function_exists('flowview_filter_status_upgrade'), 'pid' => getmypid()]));
+		file_put_contents(getenv('FLOWVIEW_FIXTURE_RESULT'), json_encode(['calls' => $GLOBALS['calls'], 'status' => http_response_code(), 'repair_loaded' => function_exists('flowview_filter_status_upgrade'), 'pid' => getmypid(), 'native_helper_loaded' => getenv('FLOWVIEW_FIXTURE_NATIVE_HELPER') ? realpath((new ReflectionFunction('reports_log_and_notify'))->getFileName()) === realpath(getenv('FLOWVIEW_FIXTURE_NATIVE_HELPER')) : false]));
 	});
 });
 function db_fetch_row_prepared($sql, $params = [], ...$args) {
@@ -85,11 +85,12 @@ function db_fetch_row_prepared($sql, $params = [], ...$args) {
 		$reads = array_filter($GLOBALS['calls'], fn ($c) => $c[0] === 'row' && str_contains($c[1], 'reports_queued'));
 		if (count($reads) > 1 && $GLOBALS['mode'] === 'notification-read-failure') { return false; }
 		if (count($reads) > 1 && $GLOBALS['mode'] === 'notification-missing') { return []; }
-		if ($GLOBALS['mode'] === 'notification-after-delivery') {
-			return ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'name' => 'Fixture', 'notification' => '{"email":{"to_email":"fixture@example.invalid"}}'];
+		if (in_array($GLOBALS['mode'], ['notification-after-delivery', 'notification-mail-error', 'notification-log-error', 'notification-success', 'notification-list-error'], true)) {
+			return ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'name' => 'Fixture', 'notification' => $GLOBALS['mode'] === 'notification-list-error' ? '{"notification_list":{"id":1}}' : '{"email":{"to_email":"fixture@example.invalid"}}', 'request_type' => 'scheduled', 'requested_by' => 'fixture', 'requested_id' => 1];
 		}
 		return ['id' => 51, 'source' => 'flowview', 'source_id' => 7];
 	}
+	if (str_contains($sql, 'plugin_notification_lists')) { return ['emails' => 'list@example.invalid', 'format_file' => 'default']; }
 	if (str_contains($sql, 'plugin_flowview_schedules')) {
 		return ['id' => 7, 'query_id' => 3, 'title' => 'Fixture', 'format_file' => 'default'];
 	}
@@ -135,5 +136,15 @@ function db_connect_real(...$args) {
 }
 
 function reports_load_format_file($format, &$output, &$tag, &$theme) { $output = '<REPORT>'; $tag = true; return true; }
-function mailer(...$args) { $GLOBALS['calls'][] = ['delivery']; throw new RuntimeException('Ambiguous delivery failure'); }
-function sql_save(...$args) { $GLOBALS['calls'][] = ['save-log']; return 1; }
+function mailer(...$args) {
+	$GLOBALS['calls'][] = ['delivery'];
+	if ($GLOBALS['mode'] === 'notification-after-delivery') { throw new RuntimeException('Ambiguous delivery failure'); }
+	return in_array($GLOBALS['mode'], ['notification-mail-error', 'notification-list-error'], true) ? 'SMTP delivery failed' : '';
+}
+function sql_save(...$args) { $GLOBALS['calls'][] = ['save-log']; return $GLOBALS['mode'] === 'notification-log-error' ? false : 1; }
+
+if (getenv('FLOWVIEW_FIXTURE_NATIVE_HELPER')) {
+	define('CACTI_VERSION', '1.3.0');
+	function cacti_version_compare($a, $b, $op) { return version_compare($a, $b, $op); }
+	require getenv('FLOWVIEW_FIXTURE_NATIVE_HELPER');
+}

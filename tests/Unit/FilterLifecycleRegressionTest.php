@@ -19,8 +19,21 @@ beforeEach(function () {
 	foreach (['poller.php', 'time.php', 'timespan_settings.php'] as $file) {
 		file_put_contents($this->fixtureRoot . '/lib/' . $file, '<?php');
 	}
-	$this->runFixture = function ($command, $mode = 'pending') {
+	$this->runFixture = function ($command, $mode = 'pending', $nativeCore = false) {
 		$env = getenv();
+		if ($nativeCore) {
+			global $config;
+			$source = getenv('FLOWVIEW_NATIVE_REPORTS_SOURCE') ?: $config['base_path'] . '/lib/reports.php';
+			$text = file_get_contents($source);
+			$start = strpos($text, 'function reports_log_and_notify(');
+			if ($start === false) { $this->markTestSkipped('Native Cacti notification helper not available'); }
+			// Load the actual official helper in isolation, without core's unrelated declarations.
+			$end = strpos($text, "\nfunction reports_queue(", $start);
+			expect($end)->not->toBeFalse();
+			$env['FLOWVIEW_FIXTURE_NATIVE_HELPER'] = $this->fixtureRoot . '/native-notify.php';
+			file_put_contents($env['FLOWVIEW_FIXTURE_NATIVE_HELPER'], '<?php ' . substr($text, $start, $end - $start));
+		}
+
 		$env['FLOWVIEW_FIXTURE_MODE'] = $mode;
 		$env['FLOWVIEW_FIXTURE_RESULT'] = $this->fixtureRoot . '/result.json';
 		$process = proc_open($command, [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $this->fixtureRoot . '/plugins/flowview', $env);
@@ -283,3 +296,52 @@ it('retries only a pre-delivery notification lookup failure in the actual child'
 	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
 	expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0, $result['pid']]]]);
 })->with([false, true])->with(['notification-read-failure', 'notification-missing', 'notification-after-delivery']);
+
+
+it('holds returned notification errors instead of retrying or completing', function ($native, $mode, $nativeCore) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=' . ($native ? 7 : 51)];
+	if ($native) { $command[] = '--queue-id=51'; }
+	[$exit] = ($this->runFixture)($command, $mode, $nativeCore);
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	$writes = array_filter($result['calls'], fn ($c) => $c[0] === 'write');
+	expect($exit)->toBe(76)->and($writes)->toBe([])
+		->and(array_column($result['calls'], 0))->toContain('delivery');
+	expect($result['native_helper_loaded'])->toBe($nativeCore);
+	// The parent must retain the held child outcome, regardless of launch form.
+	plugin_test_reset();
+	plugin_test_queue_db_result('db_fetch_row', ['Field' => 'enabled']);
+	plugin_test_queue_db_result('db_fetch_row_prepared', ['id' => 51, 'source' => 'flowview', 'source_id' => 7, 'run_command' => 'fixture', 'run_timeout' => 60]);
+	plugin_test_queue_db_result('exec_with_timeout', $exit);
+	plugin_test_queue_db_result('report_outcome', ['status' => 'running']);
+	global $config;
+	$oldBase = $config['base_path'];
+	$config['base_path'] = $this->fixtureRoot;
+	try {
+		expect($native ? flowview_reports_run(51) : reports_run(51))->toBeFalse();
+	} finally {
+		$config['base_path'] = $oldBase;
+	}
+
+	$mutations = array_values(array_filter($GLOBALS['__test_db_calls'], fn ($c) => str_starts_with($c['sql'], 'DELETE FROM reports_queued') || ($c['params'][0] ?? '') === 'pending'));
+	expect($mutations)->toBe([]);
+
+	$released = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'unregister'));
+	expect($released)->toBe([['unregister', ['flowsched', 'child_7', 0, $result['pid']]]]);
+})->with([false, true])->with(['notification-mail-error', 'notification-list-error', 'notification-log-error'])->with([false, true]);
+
+it('exposes lookup outcomes with the official native helper loaded', function ($mode) {
+	$command = [PHP_BINARY, $this->fixtureRoot . '/plugins/flowview/run_schedule.php', '--report-id=7', '--queue-id=51'];
+	[$exit] = ($this->runFixture)($command, $mode, true);
+	$result = json_decode(file_get_contents($this->fixtureRoot . '/result.json'), true);
+	$queueReads = array_filter($result['calls'], fn ($c) => $c[0] === 'row' && str_contains($c[1], 'reports_queued'));
+	$writes = array_values(array_filter($result['calls'], fn ($c) => $c[0] === 'write'));
+	expect($queueReads)->toHaveCount(2)->and($result['native_helper_loaded'])->toBeTrue();
+	if ($mode === 'notification-success') {
+		expect($exit)->toBe(0)->and($writes)->toHaveCount(2)
+			->and(end($writes)[2])->toBe(['complete', 51, 'flowview', 'running']);
+	} else {
+		expect($exit)->toBe(75)->and($writes)->toHaveCount(1)
+			->and($writes[0][2])->toBe(['retry', 51, 'flowview', 'running'])
+			->and(array_column($result['calls'], 0))->not->toContain('delivery', 'save-log');
+	}
+})->with(['notification-read-failure', 'notification-missing', 'notification-success']);

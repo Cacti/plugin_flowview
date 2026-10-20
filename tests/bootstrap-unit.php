@@ -535,8 +535,8 @@ if (!function_exists('reports_load_format_file')) {
 	function reports_load_format_file($format, &$output, &$report_tag, &$theme) {
 		$GLOBALS['__test_db_calls'][] = ['fn' => 'reports_load_format_file', 'sql' => '', 'params' => [$format]];
 		$output = '<REPORT>';
-		$report_tag = true;
-		return true;
+		$report_tag = plugin_test_db_result('delivery_format_tag', true);
+		return plugin_test_db_result('delivery_format_ok', true);
 	}
 }
 
@@ -564,5 +564,12 @@ if (!function_exists('array_rekey')) {
 if (!function_exists('db_debug')) {
 	function db_debug($message) {
 		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_debug', 'sql' => '', 'params' => [$message]];
+	}
+}
+
+if (!function_exists('mailer')) {
+	function mailer(...$args) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'mailer', 'sql' => '', 'params' => $args];
+		return plugin_test_db_result('mailer', '');
 	}
 }

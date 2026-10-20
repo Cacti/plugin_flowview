@@ -23,6 +23,8 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once(__DIR__ . '/report_delivery.php');
+
 // reports_run()/reports_queue()/reports_log_and_notify() became native in
 // Cacti 1.3. Whether core will declare them is fixed by the Cacti version at
 // bootstrap, so gate the pre-1.3 shims on that rather than on function_exists():
@@ -1916,9 +1918,9 @@ function get_port_name($port_num, int $port_proto = 6) {
  * @param mixed $id
  * @param mixed $report_id
  *
- * @return bool False when schema readiness or query execution requires retry; true otherwise.
+ * @return bool|null False permits retry; null holds uncertain delivery for repair; true completes.
  */
-function plugin_flowview_run_schedule($id, $report_id): bool {
+function plugin_flowview_run_schedule($id, $report_id): ?bool {
 	global $config;
 
 	if (!flowview_filter_status_ready()) {
@@ -2016,9 +2018,8 @@ function plugin_flowview_run_schedule($id, $report_id): bool {
     $headers['User-Agent'] = 'Cacti-FlowView-v' . $version;
 	$headers['X-Priority'] = '1';
 
-	// Native Cacti returns void; only the compatibility shim's explicit false
-	// certifies a pre-delivery failure that is safe to retry.
-	return reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers) !== false;
+	// Core's void notification helper cannot expose lookup or delivery failures.
+	return flowview_reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers);
 }
 
 /**

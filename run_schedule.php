@@ -188,7 +188,12 @@ if ($scheduled == true) {
 		}
 
 		if (cacti_sizeof($schedule)) {
-			if (!plugin_flowview_run_schedule($id, $report_id)) {
+			$delivery = plugin_flowview_run_schedule($id, $report_id);
+			if ($delivery === null) {
+				cacti_log('FlowView occurrence ' . $report_id . ' has an unresolved notification or log failure; verify delivery before repairing the queue.', false, 'FLOWVIEW');
+				exit(76);
+			}
+			if ($delivery === false) {
 				// A deferred or failed preparation must preserve the occurrence
 				// and schedule timestamps just like the initial readiness check.
 				$outcome = 'retry';

@@ -99,6 +99,7 @@ it('distinguishes prepared records, an empty period and a failed query', functio
 	$key = get_flowview_session_key(3, 100, 2000);
 	$_SESSION['sess_flowdata'][$key] = ['timeout' => time() + 60, 'data' => $data];
 	plugin_test_queue_db_result('db_fetch_row_prepared', $notificationReport === 'valid' ? ['name' => 'Fixture', 'notification' => '', 'request_type' => 'scheduled', 'requested_by' => 'fixture', 'requested_id' => 1] : $notificationReport);
+	plugin_test_queue_db_result('sql_save', 1);
 	$GLOBALS['__test_cacti_log'] = [];
 	expect(plugin_flowview_run_schedule(7, 51))->toBe($success);
 	$formatted = in_array('reports_load_format_file', array_column($GLOBALS['__test_db_calls'], 'fn'), true);
