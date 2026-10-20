@@ -438,14 +438,16 @@ function show_filters(): void {
 		$cold       = flowview_get_cold_partitions($tables);
 		$partitions = cacti_sizeof($tables);
 		$running    = flowview_materialization_running();
+		$requests   = flowview_get_running_materialization_requests();
 
 		foreach ($filters as $filter) {
-			$cached = flowview_get_cached_shard_tables((int) $filter['id']);
-			$status = flowview_materialization_status($cached['nat'], $cached['non_nat'], $cold, $running);
+			$md5sums = flowview_get_filter_md5sums((int) $filter['id']);
+			$cached  = flowview_get_cached_shard_tables((int) $filter['id'], $md5sums);
+			$status  = flowview_materialization_status($cached['nat'], $cached['non_nat'], $cold, $running);
 
 			form_alternate_row('line' . $filter['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_filters.php?action=edit&id=' . $filter['id']) . '">' . html_escape($filter['name']) . '</a>', $filter['id']);
-			form_selectable_cell(flowview_get_colored_materialization_status($status), $filter['id'], '', 'center');
+			form_selectable_cell(trim(flowview_get_colored_materialization_status($status) . ' ' . flowview_get_colored_running_queries(flowview_count_running_queries($md5sums, $requests))), $filter['id'], '', 'center');
 
 			if (empty($filter['device'])) {
 				form_selectable_cell(__('All', 'flowview'), $filter['id']);

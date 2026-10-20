@@ -2,6 +2,12 @@
 
 --- develop ---
 
+* feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page.  A running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, so the number is for that Filter and for NAT and non-NAT together, and there is no pill when none are running
+
+* bug: Show the Running status on the Filters page while the parallel query started by cli/materialize_queries.php is still working, not only while the script itself is registered.  The query keeps going after the script has ended, for instance when it timed out, and the status now looks for the runner and shard worker processes of the requests a script made, ignoring rows left behind by processes that are gone.  A new materialization is not started while one is running
+
+* bug: Make the Parallel Query timeout actually stop the runner and shard workers.  They register as db_query_<id> and db_shard_<id>, but the cleanup, and the runner's own termination handler, looked for db_query<id> and db_shard<id>, so they were never found: a timed out query left its processes running and a terminated one left its row in the process table
+
 * bug: Stop the poller from starting the same ALTER TABLE ENGINE conversion on a partition every cycle.  Until a long conversion finishes the partition still reports its old engine, so each cycle started another that waited for the first and then rebuilt the table again, which also held up every query scanning that partition.  The conversion is skipped while an ALTER TABLE is already running on the partition, and cli/materialize_queries.php checks a partition again just before altering it, so it is never rebuilt twice
 
 * bug: Make a Parallel Query that reaches the Maximum Run Time report it in words when run from a script, such as cli/materialize_queries.php, instead of printing the JavaScript meant for the web page; the message is also written to the Cacti log, a script now exits with a failure, and the web page is unchanged

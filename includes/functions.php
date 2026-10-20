@@ -4649,18 +4649,77 @@ function flowview_get_partitions_without_nat_columns(array $tables): array {
 }
 
 /**
- * flowview_materialization_running - Whether a materialization is registered
- * as running.  Only one may be active at a time.
+ * flowview_get_running_materialization_requests - The parallel query requests
+ * made by a script, as the materializer makes them, that still have a runner
+ * or shard worker process alive.  They keep going after the script that
+ * started them has ended, for instance when it timed out.  A request made
+ * from a web page belongs to its user, so it is not one of these.
+ *
+ * @return array The cache key (md5sum_tables) of each request, by request id
+ */
+function flowview_get_running_materialization_requests(): array {
+	$processes = db_fetch_assoc_prepared('SELECT pid, taskname
+		FROM processes
+		WHERE tasktype = ?
+		AND (taskname LIKE ? OR taskname LIKE ?)',
+		['flowview', 'db\_query\_%', 'db\_shard\_%']);
+
+	$pids = [];
+
+	foreach ($processes as $process) {
+		if (preg_match('/^db_(?:query|shard)_([0-9]+)$/', $process['taskname'], $matches)) {
+			$pids[(int) $matches[1]][] = (int) $process['pid'];
+		}
+	}
+
+	if (!cacti_sizeof($pids)) {
+		return [];
+	}
+
+	$ids = array_keys($pids);
+
+	$requests = flowview_db_fetch_assoc_prepared('SELECT id, md5sum_tables
+		FROM parallel_database_query
+		WHERE user_id = 0
+		AND id IN (' . implode(', ', array_fill(0, cacti_sizeof($ids), '?')) . ')',
+		$ids);
+
+	$running = [];
+
+	foreach ($requests as $request) {
+		foreach ($pids[(int) $request['id']] as $pid) {
+			/* a process that was killed can leave its row behind */
+			if (!function_exists('cacti_process_still_running') || cacti_process_still_running($pid)) {
+				$running[(int) $request['id']] = (string) $request['md5sum_tables'];
+
+				break;
+			}
+		}
+	}
+
+	return $running;
+}
+
+/**
+ * flowview_materialization_running - Whether a materialization is running.
+ * That is when one is registered as running, since only one may be active at
+ * a time, or when the parallel query it started still has processes alive.
  *
  * @return bool
  */
 function flowview_materialization_running(): bool {
-	return db_fetch_cell_prepared('SELECT COUNT(*)
+	$registered = db_fetch_cell_prepared('SELECT COUNT(*)
 		FROM processes
 		WHERE tasktype = ?
 		AND taskname = ?
 		AND taskid = ?',
-		['flowview', 'materialize', 0]) > 0;
+		['flowview', 'materialize', 0]);
+
+	if ($registered > 0) {
+		return true;
+	}
+
+	return cacti_sizeof(flowview_get_running_materialization_requests()) > 0;
 }
 
 /**
@@ -4704,6 +4763,23 @@ function flowview_get_colored_materialization_status(string $status): string {
 		default:
 			return "<span class='deviceStatus deviceDown'>" . __('Required', 'flowview') . '</span>';
 	}
+}
+
+/**
+ * flowview_get_colored_running_queries - The pill for the number of queries
+ * of a filter that are running now, in the gray of a disabled device.  There
+ * is none when nothing is running.
+ *
+ * @param int $count The number of queries running
+ *
+ * @return string
+ */
+function flowview_get_colored_running_queries(int $count): string {
+	if ($count < 1) {
+		return '';
+	}
+
+	return "<span class='deviceStatus deviceDisabled' title='" . __esc('The number of queries of this Filter that are running now.', 'flowview') . "'>" . sprintf(__('Running: %s', 'flowview'), number_format_i18n($count, 0)) . '</span>';
 }
 
 /**
@@ -4779,34 +4855,79 @@ function flowview_materialize_rotated_partitions(): array {
 }
 
 /**
+ * flowview_get_filter_md5sums - The cache keys (md5sum_tables) the parallel
+ * query stores the partitions of a filter under, with NAT and without.  Some
+ * reports use two map queries and so have two.  Nothing is run, they are
+ * worked out from the filter.
+ *
+ * @param int $query_id The FlowView query to work the cache keys out for
+ *
+ * @return array The cache keys as nat and non_nat
+ */
+function flowview_get_filter_md5sums(int $query_id): array {
+	$md5sums = ['nat' => [], 'non_nat' => []];
+	$now     = time();
+
+	foreach (['nat' => true, 'non_nat' => false] as $mode => $use_nat) {
+		$planned = run_flow_query(false, $query_id, $now, $now, true, $use_nat);
+
+		if (is_array($planned) && cacti_sizeof($planned)) {
+			$md5sums[$mode] = array_values(array_unique($planned));
+		}
+	}
+
+	return $md5sums;
+}
+
+/**
+ * flowview_count_running_queries - How many of the running requests are
+ * queries of a filter, with NAT or without.
+ *
+ * @param array $md5sums The cache keys of the filter from flowview_get_filter_md5sums()
+ * @param array $running The running requests from flowview_get_running_materialization_requests()
+ *
+ * @return int
+ */
+function flowview_count_running_queries(array $md5sums, array $running): int {
+	$keys = array_merge($md5sums['nat'] ?? [], $md5sums['non_nat'] ?? []);
+
+	return cacti_sizeof(array_filter($running, function ($md5sum) use ($keys) {
+		return in_array($md5sum, $keys, true);
+	}));
+}
+
+/**
  * flowview_get_cached_shard_tables - The partitions of a filter that are
  * stored in the parallel query cache, with NAT and without.  Some reports
  * use two map queries, and a partition only counts once every one of them is
  * cached.  Nothing is run, the cache keys are worked out from the filter.
  *
- * @param int $query_id The FlowView query to find the cached shards of
+ * @param int        $query_id The FlowView query to find the cached shards of
+ * @param array|null $md5sums  The cache keys of the filter when they are
+ *                             already known, otherwise they are worked out
  *
  * @return array The partition tables cached as nat and non_nat
  */
-function flowview_get_cached_shard_tables(int $query_id): array {
+function flowview_get_cached_shard_tables(int $query_id, ?array $md5sums = null): array {
 	$cached = ['nat' => [], 'non_nat' => []];
-	$now    = time();
 
-	foreach (['nat' => true, 'non_nat' => false] as $mode => $use_nat) {
-		$md5sums = run_flow_query(false, $query_id, $now, $now, true, $use_nat);
+	if ($md5sums === null) {
+		$md5sums = flowview_get_filter_md5sums($query_id);
+	}
 
-		if (!is_array($md5sums) || !cacti_sizeof($md5sums)) {
+	foreach (['nat', 'non_nat'] as $mode) {
+		$keys = $md5sums[$mode] ?? [];
+
+		if (!cacti_sizeof($keys)) {
 			continue;
 		}
 
-		$md5sums = array_values(array_unique($md5sums));
-
 		$tables = flowview_db_fetch_assoc_prepared('SELECT map_table
 			FROM parallel_database_query_shard_cache
-			WHERE md5sum IN (' . implode(', ', array_fill(0, cacti_sizeof($md5sums), '?')) . ')
+			WHERE md5sum IN (' . implode(', ', array_fill(0, cacti_sizeof($keys), '?')) . ')
 			GROUP BY map_table, map_partition
 			HAVING COUNT(DISTINCT md5sum) = ?',
-			array_merge($md5sums, [cacti_sizeof($md5sums)]));
+			array_merge($keys, [cacti_sizeof($keys)]));
 
 		$cached[$mode] = array_column($tables, 'map_table');
 	}
@@ -5365,10 +5486,11 @@ function parallel_database_query_cleanup($request_id, bool $remove = false): voi
 		WHERE query_id = ?',
 		[$request_id]);
 
+	/* the runner and its shard workers register as db_query_<id> and db_shard_<id> */
 	$processes = db_fetch_assoc_prepared('SELECT *
 		FROM processes WHERE tasktype = ?
-		AND taskname LIKE ?',
-		['flowview', "db_query{$request_id}"]);
+		AND taskname IN (?, ?)',
+		['flowview', "db_query_{$request_id}", "db_shard_{$request_id}"]);
 
 	if (cacti_sizeof($processes)) {
 		foreach($processes as $p) {
