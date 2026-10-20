@@ -376,6 +376,11 @@ function show_filters(): void {
 			'align' => 'left',
 			'sort' => 'ASC'
 		),
+		'id' => array(
+			'display' => __('ID', 'flowview'),
+			'align' => 'right',
+			'sort' => 'ASC'
+		),
 		'nosort5' => array(
 			'display' => __('Materialization', 'flowview'),
 			'align' => 'center',
@@ -389,11 +394,6 @@ function show_filters(): void {
 		'nosort0' => array(
 			'display' => __('Report Type', 'flowview'),
 			'align' => 'left',
-			'sort' => 'ASC'
-		),
-		'id' => array(
-			'display' => __('ID', 'flowview'),
-			'align' => 'right',
 			'sort' => 'ASC'
 		),
 		'nosort2' => array(
@@ -448,6 +448,7 @@ function show_filters(): void {
 
 			form_alternate_row('line' . $filter['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_filters.php?action=edit&id=' . $filter['id']) . '">' . html_escape($filter['name']) . '</a>', $filter['id']);
+			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
 			form_selectable_cell(trim(flowview_get_colored_materialization_status($status) . ' ' . flowview_get_colored_running_queries($queries, flowview_count_running_queries_by_mode($md5sums, $requests))), $filter['id'], '', 'center');
 
 			if (empty($filter['device'])) {
@@ -465,7 +466,6 @@ function show_filters(): void {
 			}
 
 			form_selectable_cell($type, $filter['id']);
-			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
 
 			form_selectable_cell(number_format_i18n(cacti_sizeof($cached['nat']), 0), $filter['id'], '', 'right');
 			form_selectable_cell(number_format_i18n(cacti_sizeof($cached['non_nat']), 0), $filter['id'], '', 'right');
