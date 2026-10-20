@@ -454,9 +454,9 @@ function show_filters(): void {
 
 			$shards = flowview_count_cached_shards((int) $filter['id']);
 
-			form_selectable_cell($shards['nat'], $filter['id'], '', 'right');
-			form_selectable_cell($shards['non_nat'], $filter['id'], '', 'right');
-			form_selectable_cell($partitions, $filter['id'], '', 'right');
+			form_selectable_cell(number_format_i18n($shards['nat'], 0), $filter['id'], '', 'right');
+			form_selectable_cell(number_format_i18n($shards['non_nat'], 0), $filter['id'], '', 'right');
+			form_selectable_cell(number_format_i18n($partitions, 0), $filter['id'], '', 'right');
 			form_selectable_cell($sort, $filter['id'], '', 'right');
 			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');
 			form_checkbox_cell($filter['name'], $filter['id']);
