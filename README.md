@@ -223,7 +223,8 @@ You can also start it from the Filters page by selecting one or more Filters
 and choosing the 'Materialize View' action.  It runs in the background after
 you confirm, and the result is written to the Cacti log.  The 'NAT Shards' and
 'Non-NAT Shards' columns on that page show how many partitions of each Filter
-are already cached, with NAT on and with NAT off.  When you save a
+are already cached, with NAT on and with NAT off, out of the total shown in the
+'Partitions' column.  When you save a
 Filter in a way that changes the data it materializes, such as its report,
 device, exporter, or any address, port, interface, AS, protocol, flag or TOS
 restriction, you are advised to re-materialize it.

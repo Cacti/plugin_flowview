@@ -163,11 +163,9 @@ if (empty($threads) || $threads == 1) {
 	exit(1);
 }
 
-$tables = flowview_db_fetch_assoc('SELECT TABLE_NAME AS `table`
-	FROM information_schema.TABLES
-	WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
+$tables = flowview_get_partition_tables();
 
-$range = flowview_get_materialize_range(array_column($tables, 'table'));
+$range = flowview_get_materialize_range($tables);
 
 if ($range === false) {
 	print 'NOTE: There are no flow partitions to materialize.' . PHP_EOL;

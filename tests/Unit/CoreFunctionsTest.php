@@ -502,3 +502,19 @@ it('counts nothing for a filter that cannot be planned', function () {
 
 	expect(flowview_count_cached_shards(99))->toBe(array('nat' => 0, 'non_nat' => 0));
 });
+
+it('lists only genuine raw partition tables', function () {
+	plugin_test_queue_db_result('db_fetch_assoc', array(
+		array('table' => 'plugin_flowview_raw_2024001'),
+		array('table' => 'plugin_flowview_raw_202400105'),
+		array('table' => 'plugin_flowview_raw_abc'),
+		array('table' => 'plugin_flowview_rawX2024001'),
+		array('table' => 'plugin_flowview_raw_2024001_bak'),
+	));
+
+	expect(flowview_get_partition_tables())->toBe(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_202400105'));
+});
+
+it('lists no partition tables when none exist', function () {
+	expect(flowview_get_partition_tables())->toBe(array());
+});

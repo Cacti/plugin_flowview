@@ -401,6 +401,11 @@ function show_filters(): void {
 			'align' => 'right',
 			'tip' => __('The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off.', 'flowview')
 		),
+		'nosort4' => array(
+			'display' => __('Partitions', 'flowview'),
+			'align' => 'right',
+			'tip' => __('The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT.', 'flowview')
+		),
 		'sortfield' => array(
 			'display' => __('Sort Field', 'flowview'),
 			'align' => 'right',
@@ -424,6 +429,8 @@ function show_filters(): void {
 	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	if (cacti_sizeof($filters)) {
+		$partitions = cacti_sizeof(flowview_get_partition_tables());
+
 		foreach ($filters as $filter) {
 			form_alternate_row('line' . $filter['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_filters.php?action=edit&id=' . $filter['id']) . '">' . html_escape($filter['name']) . '</a>', $filter['id']);
@@ -449,6 +456,7 @@ function show_filters(): void {
 
 			form_selectable_cell($shards['nat'], $filter['id'], '', 'right');
 			form_selectable_cell($shards['non_nat'], $filter['id'], '', 'right');
+			form_selectable_cell($partitions, $filter['id'], '', 'right');
 			form_selectable_cell($sort, $filter['id'], '', 'right');
 			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');
 			form_checkbox_cell($filter['name'], $filter['id']);

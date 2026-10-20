@@ -4335,6 +4335,29 @@ function parallel_database_query_table_md5(array $stru_inner): string {
 }
 
 /**
+ * flowview_get_partition_tables - The names of the raw flow partition tables
+ * that exist.  Anything that merely looks like a partition table, such as
+ * plugin_flowview_raw_abc, is left out.
+ *
+ * @return array
+ */
+function flowview_get_partition_tables(): array {
+	$tables = flowview_db_fetch_assoc('SELECT TABLE_NAME AS `table`
+		FROM information_schema.TABLES
+		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
+
+	$partitions = [];
+
+	foreach ($tables as $table) {
+		if (preg_match('/^plugin_flowview_raw_[0-9]{7}([0-9]{2})?$/', $table['table'])) {
+			$partitions[] = $table['table'];
+		}
+	}
+
+	return $partitions;
+}
+
+/**
  * flowview_count_cached_shards - Count the partitions of a filter that are
  * stored in the parallel query cache, with NAT and without.  Some reports
  * use two map queries, and a partition only counts once every one of them is
