@@ -4787,10 +4787,10 @@ function flowview_get_colored_running_queries(int $count, ?array $by_mode = null
 	$tip = __esc('The number of queries of this Filter that are running now.', 'flowview');
 
 	if ($by_mode !== null) {
-		$tip .= ' ' . sprintf(__esc('With NAT: %d, without NAT: %d.', 'flowview'), $by_mode['nat'] ?? 0, $by_mode['non_nat'] ?? 0);
+		$tip .= ' ' . __esc('With NAT: %d, without NAT: %d.', $by_mode['nat'] ?? 0, $by_mode['non_nat'] ?? 0, 'flowview');
 	}
 
-	return "<span class='deviceStatus deviceDisabled' title='" . $tip . "'>" . sprintf(__('Running: %s', 'flowview'), number_format_i18n($count, 0)) . '</span>';
+	return "<span class='deviceStatus deviceDisabled' title='" . $tip . "'>" . __('Running: %s', number_format_i18n($count, 0), 'flowview') . '</span>';
 }
 
 /**
@@ -5195,7 +5195,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
  * @return string
  */
 function flowview_parallel_timeout_message(int $seconds): string {
-	return sprintf(__('ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE.', 'flowview'), $seconds);
+	return __('ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE.', $seconds, 'flowview');
 }
 
 /**

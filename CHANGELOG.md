@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* bug: Fix the Filters page failing with "3 arguments are required, 2 given" once a query was running.  The Running: N pill and its tip, and the Parallel Query timeout message, passed the text domain where Cacti's __() expects the values to put in the text, so the tip crashed, the pill would have read "Running: flowview", and the timeout would have said 0 seconds.  The values now come before the domain, as elsewhere in the plugin
+
 * bug: Stop cli/materialize_queries.php from reporting each ALTER TABLE twice, once from its own progress line and once from the log message that is also printed.  The alter is still written to the Cacti log, and the schema upgrade, which has no other report, still shows it.  The logged text no longer has the extra space in it
 
 * feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page, with how many are with NAT and without in its tip.  The process table only has the id of a running request, so a running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, and there is no pill when none are running

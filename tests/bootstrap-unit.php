@@ -266,21 +266,21 @@ if (!function_exists('html_escape')) {
 	}
 }
 
+/*
+ * Like Cacti's __(), every argument after the text is a sprintf() argument
+ * unless the last one is a registered text domain.  The plugin's domain is
+ * not, so a text with placeholders and only a domain fails in Cacti, and the
+ * stub must fail the same way.
+ */
 if (!function_exists('__')) {
-	function __($text, $domain = '') {
-		return $text;
+	function __($text, ...$args) {
+		return empty($args) ? $text : vsprintf($text, $args);
 	}
 }
 
 if (!function_exists('__esc')) {
 	function __esc($text, ...$args) {
-		if (!empty($args)) {
-			array_pop($args);
-		}
-		if (!empty($args)) {
-			$text = vsprintf($text, $args);
-		}
-		return htmlspecialchars($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		return htmlspecialchars(__($text, ...$args), ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	}
 }
 
