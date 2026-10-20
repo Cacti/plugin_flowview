@@ -41,18 +41,20 @@ flowview_connect();
 /* another materialization may not start until this one ends or this many seconds pass */
 const MATERIALIZE_RUNTIME_LIMIT = 28800;
 
-$debug    = false;
-$force    = false;
-$dry_run  = false;
-$worker   = false;
+$debug     = false;
+$force     = false;
+$dry_run   = false;
+$worker    = false;
 $query_ids = [];
-$nat      = false;
-$start    = false;
-$end      = false;
+$partitions = [];
+$nat       = false;
+$start     = false;
+$end       = false;
 
 $shortopts = 'VvHh';
 $longopts  = [
 	'query-id:',
+	'partitions:',
 	'nat:',
 	'start:',
 	'end:',
@@ -83,6 +85,21 @@ foreach ($options as $arg => $value) {
 			}
 
 			$query_ids = array_values($query_ids);
+
+			break;
+		case 'partitions':
+			$partitions = [];
+
+			foreach (explode(',', (string) $value) as $table) {
+				if (flowview_partition_sort_key($table) === '') {
+					print 'ERROR: --partitions must be a comma separated list of raw partition tables' . PHP_EOL;
+					exit(1);
+				}
+
+				$partitions[$table] = $table;
+			}
+
+			$partitions = array_values($partitions);
 
 			break;
 		case 'nat':
@@ -165,6 +182,11 @@ if (empty($threads) || $threads == 1) {
 
 $tables = flowview_get_partition_tables();
 
+/* only the partitions asked for, that still exist */
+if (cacti_sizeof($partitions)) {
+	$tables = array_values(array_intersect($tables, $partitions));
+}
+
 $range = flowview_get_materialize_range($tables);
 
 if ($range === false) {
@@ -202,7 +224,7 @@ print sprintf('FlowView Materialization: Partitions:%d From:%s To:%s Queries:%d 
 
 /* partitions that are still accurate keep their cache, everything else is rebuilt below */
 if (!$dry_run) {
-	$cache = flowview_invalidate_stale_shard_cache();
+	$cache = flowview_invalidate_stale_shard_cache(cacti_sizeof($partitions) ? $tables : []);
 
 	print sprintf('Cached Partitions Still Accurate:%d, Stale Partitions Removed:%d', $cache['kept'], $cache['removed']) . PHP_EOL;
 }
@@ -334,7 +356,7 @@ function display_version(): void {
 function display_help(): void {
 	display_version();
 
-	print PHP_EOL . 'usage: materialize_queries.php [--query-id=ID[,ID...]] [--nat=on|off] [--dry-run] [--force] [--debug]' . PHP_EOL . PHP_EOL;
+	print PHP_EOL . 'usage: materialize_queries.php [--query-id=ID[,ID...]] [--partitions=TABLE[,TABLE...]] [--nat=on|off] [--dry-run] [--force] [--debug]' . PHP_EOL . PHP_EOL;
 
 	print 'Materializes each FlowView query into the parallel query cache for the' . PHP_EOL;
 	print 'entire range of flow partitions, once with NAT on and once with NAT off.' . PHP_EOL;
@@ -342,9 +364,11 @@ function display_help(): void {
 	print 'Only one run may be active at a time, for up to 8 hours.' . PHP_EOL . PHP_EOL;
 
 	print 'Options:' . PHP_EOL;
-	print '    --query-id=ID Only materialize this query, or a comma separated list of them.' . PHP_EOL;
-	print '    --nat=on|off  Only materialize this NAT mode.' . PHP_EOL;
-	print '    --dry-run     List what would be materialized and exit.' . PHP_EOL;
-	print '    --force       Run even if another materialization is running.' . PHP_EOL;
-	print '    --debug       Provide some debug output during the run.' . PHP_EOL . PHP_EOL;
+	print '    --query-id=ID       Only materialize this query, or a comma separated list of them.' . PHP_EOL;
+	print '    --partitions=TABLE  Only materialize these partition tables, as the poller does for the' . PHP_EOL;
+	print '                        partitions that have rotated.' . PHP_EOL;
+	print '    --nat=on|off        Only materialize this NAT mode.' . PHP_EOL;
+	print '    --dry-run           List what would be materialized and exit.' . PHP_EOL;
+	print '    --force             Run even if another materialization is running.' . PHP_EOL;
+	print '    --debug             Provide some debug output during the run.' . PHP_EOL . PHP_EOL;
 }

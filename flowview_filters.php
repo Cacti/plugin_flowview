@@ -376,6 +376,11 @@ function show_filters(): void {
 			'align' => 'left',
 			'sort' => 'ASC'
 		),
+		'nosort5' => array(
+			'display' => __('Status', 'flowview'),
+			'align' => 'left',
+			'tip' => __('The automatic materialization status of the Filter.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized with NAT on and off.  The partition still receiving flows is not materialized automatically.', 'flowview')
+		),
 		'device' => array(
 			'display' => __('Listener', 'flowview'),
 			'align' => 'left',
@@ -429,11 +434,18 @@ function show_filters(): void {
 	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	if (cacti_sizeof($filters)) {
-		$partitions = cacti_sizeof(flowview_get_partition_tables());
+		$tables     = flowview_get_partition_tables();
+		$cold       = flowview_get_cold_partitions($tables);
+		$partitions = cacti_sizeof($tables);
+		$running    = flowview_materialization_running();
 
 		foreach ($filters as $filter) {
+			$cached = flowview_get_cached_shard_tables((int) $filter['id']);
+			$status = flowview_materialization_status($cached['nat'], $cached['non_nat'], $cold, $running);
+
 			form_alternate_row('line' . $filter['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_filters.php?action=edit&id=' . $filter['id']) . '">' . html_escape($filter['name']) . '</a>', $filter['id']);
+			form_selectable_cell(flowview_get_colored_materialization_status($status), $filter['id']);
 
 			if (empty($filter['device'])) {
 				form_selectable_cell(__('All', 'flowview'), $filter['id']);
@@ -452,10 +464,8 @@ function show_filters(): void {
 			form_selectable_cell($type, $filter['id']);
 			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
 
-			$shards = flowview_count_cached_shards((int) $filter['id']);
-
-			form_selectable_cell(number_format_i18n($shards['nat'], 0), $filter['id'], '', 'right');
-			form_selectable_cell(number_format_i18n($shards['non_nat'], 0), $filter['id'], '', 'right');
+			form_selectable_cell(number_format_i18n(cacti_sizeof($cached['nat']), 0), $filter['id'], '', 'right');
+			form_selectable_cell(number_format_i18n(cacti_sizeof($cached['non_nat']), 0), $filter['id'], '', 'right');
 			form_selectable_cell(number_format_i18n($partitions, 0), $filter['id'], '', 'right');
 			form_selectable_cell($sort, $filter['id'], '', 'right');
 			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');

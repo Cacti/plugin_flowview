@@ -224,7 +224,18 @@ and choosing the 'Materialize View' action.  It runs in the background after
 you confirm, and the result is written to the Cacti log.  The 'NAT Shards' and
 'Non-NAT Shards' columns on that page show how many partitions of each Filter
 are already cached, with NAT on and with NAT off, out of the total shown in the
-'Partitions' column.  When you save a
+'Partitions' column.
+
+New partitions are materialized automatically.  Each poller cycle records the
+newest partition, which is the one still receiving flows, and materializes the
+partitions that have rotated since the previous cycle for every Filter, with
+NAT on and off, in the background.  The first cycle only records the newest
+partition, so run the script once to materialize the existing ones.  The
+'Status' column on the Filters page shows the result for each Filter, as
+Required, Running or Up to date.  The partition still receiving flows is not
+materialized automatically, so it does not count.
+
+When you save a
 Filter in a way that changes the data it materializes, such as its report,
 device, exporter, or any address, port, interface, AS, protocol, flag or TOS
 restriction, you are advised to re-materialize it.

@@ -463,7 +463,7 @@ it('plans the cache keys of a filter for each NAT mode without running it', func
 	expect($writes)->toBeEmpty();
 });
 
-it('counts the partitions of a filter that are cached with and without NAT', function () {
+it('finds the partitions of a filter that are cached with and without NAT', function () {
 	if (!function_exists('array_rekey')) {
 		function array_rekey($array, $key, $value) {
 			return array();
@@ -476,45 +476,266 @@ it('counts the partitions of a filter that are cached with and without NAT', fun
 		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
 	);
 
-	// Each mode plans the filter (a row and the name) and then counts its cache rows.
+	// Each mode plans the filter (a row and the name) and then looks up its cache rows.
 	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
 	plugin_test_queue_db_result('db_fetch_cell_prepared', 'Top Talkers');
-	plugin_test_queue_db_result('db_fetch_cell_prepared', '12');
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('map_table' => 'plugin_flowview_raw_2024001'),
+		array('map_table' => 'plugin_flowview_raw_2024002'),
+	));
 	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
 	plugin_test_queue_db_result('db_fetch_cell_prepared', 'Top Talkers');
-	plugin_test_queue_db_result('db_fetch_cell_prepared', '7');
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('map_table' => 'plugin_flowview_raw_2024001'),
+	));
 
-	expect(flowview_count_cached_shards(4))->toBe(array('nat' => 12, 'non_nat' => 7));
+	expect(flowview_get_cached_shard_tables(4))->toBe(array(
+		'nat'     => array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'),
+		'non_nat' => array('plugin_flowview_raw_2024001'),
+	));
 
-	$counts = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+	$lookups = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
 		return strpos($call['sql'] ?? '', 'FROM parallel_database_query_shard_cache') !== false;
 	}));
 
-	expect($counts)->toHaveCount(2)
-		->and($counts[0]['params'])->toHaveCount(2)
-		->and($counts[0]['params'][1])->toBe(1)
-		->and($counts[0]['params'][0])->not->toBe($counts[1]['params'][0]);
+	expect($lookups)->toHaveCount(2)
+		->and($lookups[0]['params'])->toHaveCount(2)
+		->and($lookups[0]['params'][1])->toBe(1)
+		->and($lookups[0]['params'][0])->not->toBe($lookups[1]['params'][0]);
 });
 
-it('counts nothing for a filter that cannot be planned', function () {
+it('finds nothing cached for a filter that cannot be planned', function () {
 	plugin_test_queue_db_result('db_fetch_row_prepared', array());
 	plugin_test_queue_db_result('db_fetch_row_prepared', array());
 
-	expect(flowview_count_cached_shards(99))->toBe(array('nat' => 0, 'non_nat' => 0));
+	expect(flowview_get_cached_shard_tables(99))->toBe(array('nat' => array(), 'non_nat' => array()));
 });
 
-it('lists only genuine raw partition tables', function () {
+it('lists only genuine raw partition tables, oldest first', function () {
 	plugin_test_queue_db_result('db_fetch_assoc', array(
-		array('table' => 'plugin_flowview_raw_2024001'),
 		array('table' => 'plugin_flowview_raw_202400105'),
+		array('table' => 'plugin_flowview_raw_2024001'),
 		array('table' => 'plugin_flowview_raw_abc'),
 		array('table' => 'plugin_flowview_rawX2024001'),
 		array('table' => 'plugin_flowview_raw_2024001_bak'),
+		array('table' => 'plugin_flowview_raw_2023364'),
 	));
 
-	expect(flowview_get_partition_tables())->toBe(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_202400105'));
+	expect(flowview_get_partition_tables())->toBe(array(
+		'plugin_flowview_raw_2023364',
+		'plugin_flowview_raw_2024001',
+		'plugin_flowview_raw_202400105',
+	));
 });
 
 it('lists no partition tables when none exist', function () {
 	expect(flowview_get_partition_tables())->toBe(array());
+});
+
+it('keys daily and hourly partitions so they sort in time order', function () {
+	expect(flowview_partition_sort_key('plugin_flowview_raw_2024001'))->toBe('202400100')
+		->and(flowview_partition_sort_key('plugin_flowview_raw_202400105'))->toBe('202400105')
+		->and(flowview_partition_sort_key('plugin_flowview_raw_abc'))->toBe('')
+		->and(flowview_partition_sort_key('plugin_flowview_queries'))->toBe('');
+});
+
+it('treats every partition but the newest as cold', function ($tables, $expected) {
+	expect(flowview_get_cold_partitions($tables))->toBe($expected);
+})->with(array(
+	'none'            => array(array(), array()),
+	'only the hot one' => array(array('plugin_flowview_raw_2024003'), array()),
+	'several'         => array(
+		array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003'),
+		array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'),
+	),
+	'hourly'          => array(
+		array('plugin_flowview_raw_202400105', 'plugin_flowview_raw_202400106'),
+		array('plugin_flowview_raw_202400105'),
+	),
+));
+
+it('finds the partitions that rotated since the previous newest one', function ($previous, $expected) {
+	$tables = array(
+		'plugin_flowview_raw_2024001',
+		'plugin_flowview_raw_2024002',
+		'plugin_flowview_raw_2024003',
+		'plugin_flowview_raw_2024004',
+	);
+
+	expect(flowview_get_rotated_partitions($tables, $previous))->toBe($expected);
+})->with(array(
+	'nothing recorded'      => array('', array()),
+	'not a partition'       => array('whatever', array()),
+	'newest is unchanged'   => array('plugin_flowview_raw_2024004', array()),
+	'one rotated'           => array('plugin_flowview_raw_2024003', array('plugin_flowview_raw_2024003')),
+	'several rotated'       => array('plugin_flowview_raw_2024002', array('plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003')),
+	'previous is gone'      => array('plugin_flowview_raw_2024002_old', array()),
+	'recorded is ahead'     => array('plugin_flowview_raw_2024009', array()),
+));
+
+it('reports the automatic materialization status of a filter', function ($nat, $non_nat, $running, $expected) {
+	$cold = array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002');
+
+	expect(flowview_materialization_status($nat, $non_nat, $cold, $running))->toBe($expected);
+})->with(array(
+	'both complete'         => array(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'), array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'), false, 'current'),
+	'complete while running' => array(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'), array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'), true, 'current'),
+	'hot one cached too'    => array(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003'), array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'), false, 'current'),
+	'nat missing one'       => array(array('plugin_flowview_raw_2024001'), array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'), false, 'required'),
+	'non nat missing'       => array(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002'), array(), false, 'required'),
+	'incomplete and running' => array(array(), array(), true, 'running'),
+	'nothing cached'        => array(array(), array(), false, 'required'),
+));
+
+it('is up to date when there are no cold partitions to materialize', function () {
+	expect(flowview_materialization_status(array(), array(), array(), false))->toBe('current');
+});
+
+it('shows the status pills in the colors of the device status', function ($status, $class, $label) {
+	expect(flowview_get_colored_materialization_status($status))->toBe('<span class="' . $class . '">' . $label . '</span>');
+})->with(array(
+	'current'  => array('current', 'deviceUp', 'Up to date'),
+	'running'  => array('running', 'deviceRecovering', 'Running'),
+	'required' => array('required', 'deviceDown', 'Required'),
+	'unknown'  => array('anything', 'deviceDown', 'Required'),
+));
+
+it('starts a materialization for only the partitions it is given', function () {
+	if (!function_exists('exec_background')) {
+		function exec_background($filename, $args = '', $redirect_args = '') {
+			$GLOBALS['__test_exec'][] = array($filename, $args);
+		}
+	}
+
+	if (!function_exists('cacti_escapeshellarg')) {
+		function cacti_escapeshellarg($string) {
+			return escapeshellarg($string);
+		}
+	}
+
+	$GLOBALS['__test_exec']                      = array();
+	$original_base_path                          = $GLOBALS['config']['base_path'];
+	$GLOBALS['config']['base_path']              = '/var/www/cacti';
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+
+	plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+
+	try {
+		$started = flowview_launch_materialize(array(), array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024001; rm', 'plugin_flowview_raw_2024002'));
+	} finally {
+		$GLOBALS['config']['base_path'] = $original_base_path;
+	}
+
+	expect($started)->toBeTrue()
+		->and($GLOBALS['__test_exec'])->toBe(array(
+			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --partitions=plugin_flowview_raw_2024001,plugin_flowview_raw_2024002"),
+		));
+});
+
+it('only checks the cache of the partitions it is limited to', function () {
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('md5sum' => 'aaa', 'map_table' => 'plugin_flowview_raw_2024001', 'map_partition' => '', 'min_date' => '2024-01-02 00:00:00', 'max_date' => '2024-01-02 23:00:00'),
+	));
+	plugin_test_queue_db_result('db_fetch_cell', 1);
+	plugin_test_queue_db_result('db_fetch_row', array('min_date' => '2024-01-02 00:00:00', 'max_date' => '2024-01-02 23:00:00'));
+
+	expect(flowview_invalidate_stale_shard_cache(array('plugin_flowview_raw_2024001')))->toBe(array('kept' => 1, 'removed' => 0));
+
+	$lookups = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] == 'db_fetch_assoc_prepared' && strpos($call['sql'], 'map_table IN (?)') !== false;
+	}));
+
+	expect($lookups)->toHaveCount(1)
+		->and($lookups[0]['params'])->toBe(array('plugin_flowview_raw_2024001'));
+});
+
+describe('materializing the partitions that rotated', function () {
+	beforeEach(function () {
+		if (!function_exists('exec_background')) {
+			function exec_background($filename, $args = '', $redirect_args = '') {
+				$GLOBALS['__test_exec'][] = array($filename, $args);
+			}
+		}
+
+		if (!function_exists('cacti_escapeshellarg')) {
+			function cacti_escapeshellarg($string) {
+				return escapeshellarg($string);
+			}
+		}
+
+		$GLOBALS['__test_exec']                          = array();
+		$GLOBALS['__test_config']['flowview_parallel_threads'] = 4;
+		$GLOBALS['__test_config']['path_php_binary']     = '/usr/bin/php';
+
+		$this->tables = array(
+			array('table' => 'plugin_flowview_raw_2024001'),
+			array('table' => 'plugin_flowview_raw_2024002'),
+			array('table' => 'plugin_flowview_raw_2024003'),
+		);
+	});
+
+	it('only records the newest partition on the first cycle', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', $this->tables);
+
+		expect(flowview_materialize_rotated_partitions())->toBe(array())
+			->and($GLOBALS['__test_config']['flowview_last_hot_partition'])->toBe('plugin_flowview_raw_2024003')
+			->and($GLOBALS['__test_exec'])->toBe(array());
+	});
+
+	it('does nothing when no partition has rotated', function () {
+		$GLOBALS['__test_config']['flowview_last_hot_partition'] = 'plugin_flowview_raw_2024003';
+		plugin_test_queue_db_result('db_fetch_assoc', $this->tables);
+
+		expect(flowview_materialize_rotated_partitions())->toBe(array())
+			->and($GLOBALS['__test_config']['flowview_last_hot_partition'])->toBe('plugin_flowview_raw_2024003')
+			->and($GLOBALS['__test_exec'])->toBe(array());
+	});
+
+	it('starts a materialization for the partitions that rotated and records the newest', function () {
+		$GLOBALS['__test_config']['flowview_last_hot_partition'] = 'plugin_flowview_raw_2024002';
+		plugin_test_queue_db_result('db_fetch_assoc', $this->tables);
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+
+		$original_base_path             = $GLOBALS['config']['base_path'];
+		$GLOBALS['config']['base_path'] = '/var/www/cacti';
+
+		try {
+			$started = flowview_materialize_rotated_partitions();
+		} finally {
+			$GLOBALS['config']['base_path'] = $original_base_path;
+		}
+
+		expect($started)->toBe(array('plugin_flowview_raw_2024002'))
+			->and($GLOBALS['__test_config']['flowview_last_hot_partition'])->toBe('plugin_flowview_raw_2024003')
+			->and($GLOBALS['__test_exec'])->toBe(array(
+				array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --partitions=plugin_flowview_raw_2024002"),
+			));
+	});
+
+	it('leaves the record alone while a materialization is running so it is caught up later', function () {
+		$GLOBALS['__test_config']['flowview_last_hot_partition'] = 'plugin_flowview_raw_2024001';
+		plugin_test_queue_db_result('db_fetch_assoc', $this->tables);
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+
+		expect(flowview_materialize_rotated_partitions())->toBe(array())
+			->and($GLOBALS['__test_config']['flowview_last_hot_partition'])->toBe('plugin_flowview_raw_2024001')
+			->and($GLOBALS['__test_exec'])->toBe(array());
+	});
+
+	it('leaves the record alone when the parallel query is not enabled', function () {
+		$GLOBALS['__test_config']['flowview_parallel_threads']   = 1;
+		$GLOBALS['__test_config']['flowview_last_hot_partition'] = 'plugin_flowview_raw_2024001';
+		plugin_test_queue_db_result('db_fetch_assoc', $this->tables);
+
+		expect(flowview_materialize_rotated_partitions())->toBe(array())
+			->and($GLOBALS['__test_config']['flowview_last_hot_partition'])->toBe('plugin_flowview_raw_2024001')
+			->and($GLOBALS['__test_exec'])->toBe(array());
+	});
+
+	it('does nothing without any partitions', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+
+		expect(flowview_materialize_rotated_partitions())->toBe(array())
+			->and($GLOBALS['__test_config'])->not->toHaveKey('flowview_last_hot_partition');
+	});
 });

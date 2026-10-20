@@ -2,6 +2,10 @@
 
 --- develop ---
 
+* feature: Materialize the partitions that have gone cold automatically.  Each poller cycle flowview_process.php records the newest partition, which is the one still receiving flows, and starts cli/materialize_queries.php in the background for the partitions that have rotated since the previous cycle, for every Filter with NAT on and off.  Partitions that are already materialized and accurate are skipped.  When a materialization is already running, or the Parallel Query is not enabled, the record is left alone so a later cycle catches up.  The first cycle only records the newest partition, so older partitions are still materialized with cli/materialize_queries.php.  The script gained a --partitions option for this
+
+* feature: Add a Status column, to the right of the Filter Name on the Filters page, showing the automatic materialization status as a pill: Required (down) when rotated partitions are not materialized yet, Running (recovering) while a materialization is in progress, and Up to date (up) once every cold partition is materialized with NAT on and off
+
 * feature: Show the number of partitions each Filter has stored in the Parallel Query cache, with NAT and without, as the NAT Shards and Non-NAT Shards columns next to the ID on the Filters page, along with a Partitions column holding the total number of flow partitions so the progress of a materialization can be followed; the cache keys are worked out from the Filter without running it (run_flow_query() gained a plan-only mode, and the map query hashing is shared with the parallel query request)
 
 * feature: Add a 'Materialize View' action to the Filters page that, after confirmation, starts cli/materialize_queries.php in the background for the selected Filters (--query-id now accepts a comma separated list), and tells you when a materialization is already running

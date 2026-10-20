@@ -4215,16 +4215,27 @@ function flowview_shard_cache_is_current(array $cached, array $current): bool {
  * When anything is removed, the finished CLI requests (user 0) are dropped
  * as well so their results are rebuilt from the refreshed shards.
  *
+ * @param array $only Only check the cache of these partition tables, or all
+ *                    of it when empty
+ *
  * @return array The number of shards kept and removed
  */
-function flowview_invalidate_stale_shard_cache(): array {
+function flowview_invalidate_stale_shard_cache(array $only = []): array {
 	$kept    = 0;
 	$removed = 0;
 	$current = [];
 
-	$cache = flowview_db_fetch_assoc('SELECT md5sum, map_table, map_partition, min_date, max_date
-		FROM parallel_database_query_shard_cache
-		ORDER BY map_table');
+	if (cacti_sizeof($only)) {
+		$cache = flowview_db_fetch_assoc_prepared('SELECT md5sum, map_table, map_partition, min_date, max_date
+			FROM parallel_database_query_shard_cache
+			WHERE map_table IN (' . implode(', ', array_fill(0, cacti_sizeof($only), '?')) . ')
+			ORDER BY map_table',
+			array_values($only));
+	} else {
+		$cache = flowview_db_fetch_assoc('SELECT md5sum, map_table, map_partition, min_date, max_date
+			FROM parallel_database_query_shard_cache
+			ORDER BY map_table');
+	}
 
 	if (cacti_sizeof($cache)) {
 		foreach ($cache as $entry) {
@@ -4272,34 +4283,38 @@ function flowview_invalidate_stale_shard_cache(): array {
 
 /**
  * flowview_launch_materialize - Start cli/materialize_queries.php in the
- * background for the given FlowView queries.  Nothing is started when a
+ * background, for the given FlowView queries and the given partitions, or
+ * all of them when none are given.  Nothing is started when a
  * materialization is already registered as running, since only one may be
  * active at a time.
  *
- * @param array $query_ids The FlowView query ids to materialize
+ * @param array $query_ids  The FlowView query ids to materialize
+ * @param array $partitions The partition tables to materialize
  *
  * @return bool false when a materialization is already running
  */
-function flowview_launch_materialize(array $query_ids): bool {
+function flowview_launch_materialize(array $query_ids = [], array $partitions = []): bool {
 	global $config;
 
-	$running = db_fetch_cell_prepared('SELECT COUNT(*)
-		FROM processes
-		WHERE tasktype = ?
-		AND taskname = ?
-		AND taskid = ?',
-		['flowview', 'materialize', 0]);
-
-	if ($running > 0) {
+	if (flowview_materialization_running()) {
 		return false;
 	}
 
-	$script = $config['base_path'] . '/plugins/flowview/cli/materialize_queries.php';
+	$arguments = cacti_escapeshellarg($config['base_path'] . '/plugins/flowview/cli/materialize_queries.php');
 
-	exec_background(
-		read_config_option('path_php_binary'),
-		cacti_escapeshellarg($script) . ' --query-id=' . implode(',', array_map('intval', $query_ids))
-	);
+	if (cacti_sizeof($query_ids)) {
+		$arguments .= ' --query-id=' . implode(',', array_map('intval', $query_ids));
+	}
+
+	$partitions = array_filter($partitions, function ($table) {
+		return flowview_partition_sort_key($table) !== '';
+	});
+
+	if (cacti_sizeof($partitions)) {
+		$arguments .= ' --partitions=' . implode(',', $partitions);
+	}
+
+	exec_background(read_config_option('path_php_binary'), $arguments);
 
 	return true;
 }
@@ -4335,9 +4350,27 @@ function parallel_database_query_table_md5(array $stru_inner): string {
 }
 
 /**
+ * flowview_partition_sort_key - The partition of a raw table name as a
+ * fixed length key that sorts in time order, whether the partitions are
+ * daily or hourly.  An empty key is returned for anything that is not a
+ * raw partition table.
+ *
+ * @param string $table
+ *
+ * @return string
+ */
+function flowview_partition_sort_key(string $table): string {
+	if (!preg_match('/^plugin_flowview_raw_([0-9]{7})([0-9]{2})?$/', $table, $matches)) {
+		return '';
+	}
+
+	return $matches[1] . ($matches[2] ?? '00');
+}
+
+/**
  * flowview_get_partition_tables - The names of the raw flow partition tables
- * that exist.  Anything that merely looks like a partition table, such as
- * plugin_flowview_raw_abc, is left out.
+ * that exist, oldest first.  Anything that merely looks like a partition
+ * table, such as plugin_flowview_raw_abc, is left out.
  *
  * @return array
  */
@@ -4349,26 +4382,187 @@ function flowview_get_partition_tables(): array {
 	$partitions = [];
 
 	foreach ($tables as $table) {
-		if (preg_match('/^plugin_flowview_raw_[0-9]{7}([0-9]{2})?$/', $table['table'])) {
+		if (flowview_partition_sort_key($table['table']) !== '') {
 			$partitions[] = $table['table'];
 		}
 	}
+
+	usort($partitions, function ($a, $b) {
+		return strcmp(flowview_partition_sort_key($a), flowview_partition_sort_key($b));
+	});
 
 	return $partitions;
 }
 
 /**
- * flowview_count_cached_shards - Count the partitions of a filter that are
+ * flowview_get_cold_partitions - The partitions that have rotated.  The
+ * newest partition is the one still receiving flows, every older one is cold.
+ *
+ * @param array $tables The partition tables
+ *
+ * @return array
+ */
+function flowview_get_cold_partitions(array $tables): array {
+	$keys = array_map('flowview_partition_sort_key', $tables);
+
+	if (!cacti_sizeof($keys)) {
+		return [];
+	}
+
+	$newest = max($keys);
+
+	return array_values(array_filter($tables, function ($table) use ($newest) {
+		return flowview_partition_sort_key($table) < $newest;
+	}));
+}
+
+/**
+ * flowview_get_rotated_partitions - The partitions that went cold since the
+ * previous newest partition was recorded.  That partition was still hot then,
+ * so it is the first of them, and the newest partition is still hot now.
+ *
+ * @param array  $tables   The partition tables
+ * @param string $previous The newest partition recorded by the previous cycle
+ *
+ * @return array
+ */
+function flowview_get_rotated_partitions(array $tables, string $previous): array {
+	$previous_key = flowview_partition_sort_key($previous);
+	$keys         = array_map('flowview_partition_sort_key', $tables);
+
+	if ($previous_key === '' || !cacti_sizeof($keys)) {
+		return [];
+	}
+
+	$newest = max($keys);
+
+	return array_values(array_filter($tables, function ($table) use ($previous_key, $newest) {
+		$key = flowview_partition_sort_key($table);
+
+		return $key >= $previous_key && $key < $newest;
+	}));
+}
+
+/**
+ * flowview_materialization_running - Whether a materialization is registered
+ * as running.  Only one may be active at a time.
+ *
+ * @return bool
+ */
+function flowview_materialization_running(): bool {
+	return db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?
+		AND taskid = ?',
+		['flowview', 'materialize', 0]) > 0;
+}
+
+/**
+ * flowview_materialization_status - The automatic materialization status of
+ * a filter.  It is current once every cold partition is cached with NAT and
+ * without.  The hot partition is not materialized automatically, so it does
+ * not count.  Otherwise it is running while a materialization is active, and
+ * required when none is.
+ *
+ * @param array $cached_nat     The partitions cached for the filter with NAT
+ * @param array $cached_non_nat The partitions cached for the filter without NAT
+ * @param array $cold           The cold partitions
+ * @param bool  $running        Whether a materialization is running
+ *
+ * @return string current, running or required
+ */
+function flowview_materialization_status(array $cached_nat, array $cached_non_nat, array $cold, bool $running): string {
+	if (!cacti_sizeof(array_diff($cold, $cached_nat)) && !cacti_sizeof(array_diff($cold, $cached_non_nat))) {
+		return 'current';
+	}
+
+	return $running ? 'running' : 'required';
+}
+
+/**
+ * flowview_get_colored_materialization_status - The pill for the automatic
+ * materialization status of a filter, using the same colors as the device
+ * status in Cacti: down when it is required, recovering while it is running
+ * and up once it is up to date.
+ *
+ * @param string $status current, running or required
+ *
+ * @return string
+ */
+function flowview_get_colored_materialization_status(string $status): string {
+	switch ($status) {
+		case 'current':
+			return '<span class="deviceUp">' . __('Up to date', 'flowview') . '</span>';
+		case 'running':
+			return '<span class="deviceRecovering">' . __('Running', 'flowview') . '</span>';
+		default:
+			return '<span class="deviceDown">' . __('Required', 'flowview') . '</span>';
+	}
+}
+
+/**
+ * flowview_materialize_rotated_partitions - Called every poller cycle to
+ * materialize the partitions that went cold since the previous cycle, for
+ * every filter with NAT and without.  Partitions that are already
+ * materialized and still accurate are skipped by the materializer itself.
+ *
+ * The newest partition is recorded each cycle.  The record is left alone
+ * while nothing can be started, so a later cycle picks up what was missed.
+ * The first cycle only records it, as the older partitions are materialized
+ * with cli/materialize_queries.php.
+ *
+ * @return array The partitions a materialization was started for
+ */
+function flowview_materialize_rotated_partitions(): array {
+	$tables = flowview_get_partition_tables();
+
+	if (!cacti_sizeof($tables)) {
+		return [];
+	}
+
+	$newest   = end($tables);
+	$previous = (string) read_config_option('flowview_last_hot_partition');
+
+	if ($previous == '') {
+		set_config_option('flowview_last_hot_partition', $newest);
+
+		return [];
+	}
+
+	$rotated = flowview_get_rotated_partitions($tables, $previous);
+
+	if (!cacti_sizeof($rotated)) {
+		if ($previous != $newest) {
+			set_config_option('flowview_last_hot_partition', $newest);
+		}
+
+		return [];
+	}
+
+	$threads = read_config_option('flowview_parallel_threads');
+
+	if (empty($threads) || $threads == 1 || !flowview_launch_materialize([], $rotated)) {
+		return [];
+	}
+
+	set_config_option('flowview_last_hot_partition', $newest);
+
+	return $rotated;
+}
+
+/**
+ * flowview_get_cached_shard_tables - The partitions of a filter that are
  * stored in the parallel query cache, with NAT and without.  Some reports
  * use two map queries, and a partition only counts once every one of them is
  * cached.  Nothing is run, the cache keys are worked out from the filter.
  *
- * @param int $query_id The FlowView query to count the cached shards of
+ * @param int $query_id The FlowView query to find the cached shards of
  *
- * @return array The partition counts as nat and non_nat
+ * @return array The partition tables cached as nat and non_nat
  */
-function flowview_count_cached_shards(int $query_id): array {
-	$counts = ['nat' => 0, 'non_nat' => 0];
+function flowview_get_cached_shard_tables(int $query_id): array {
+	$cached = ['nat' => [], 'non_nat' => []];
 	$now    = time();
 
 	foreach (['nat' => true, 'non_nat' => false] as $mode => $use_nat) {
@@ -4380,18 +4574,17 @@ function flowview_count_cached_shards(int $query_id): array {
 
 		$md5sums = array_values(array_unique($md5sums));
 
-		$counts[$mode] = (int) flowview_db_fetch_cell_prepared('SELECT COUNT(*)
-			FROM (
-				SELECT map_table
-				FROM parallel_database_query_shard_cache
-				WHERE md5sum IN (' . implode(', ', array_fill(0, cacti_sizeof($md5sums), '?')) . ')
-				GROUP BY map_table, map_partition
-				HAVING COUNT(DISTINCT md5sum) = ?
-			) AS cached',
+		$tables = flowview_db_fetch_assoc_prepared('SELECT map_table
+			FROM parallel_database_query_shard_cache
+			WHERE md5sum IN (' . implode(', ', array_fill(0, cacti_sizeof($md5sums), '?')) . ')
+			GROUP BY map_table, map_partition
+			HAVING COUNT(DISTINCT md5sum) = ?',
 			array_merge($md5sums, [cacti_sizeof($md5sums)]));
+
+		$cached[$mode] = array_column($tables, 'map_table');
 	}
 
-	return $counts;
+	return $cached;
 }
 
 /**

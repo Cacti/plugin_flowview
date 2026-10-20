@@ -196,6 +196,9 @@ set_config_option('flowview_last_table', $nlast_table);
 /* prune expired query results */
 parallel_database_query_expire();
 
+/* partitions that went cold this cycle are materialized for every filter */
+flowview_materialize_rotated_partitions();
+
 if ($maint) {
 	flowview_debug('Performing Table Maintenance');
 
