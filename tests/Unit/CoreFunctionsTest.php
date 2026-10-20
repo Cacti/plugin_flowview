@@ -829,6 +829,26 @@ describe('preparing the partitions before they are scanned', function () {
 		expect(array_values($sql))->toBe(array('ALTER TABLE plugin_flowview_raw_2024001 ADD INDEX end_time (end_time)'));
 	});
 
+	it('logs an alter and shows it too, as the schema upgrade always did', function () {
+		$GLOBALS['__test_cacti_log']       = array();
+		$GLOBALS['__test_cacti_log_print'] = array();
+
+		flowview_apply_partition_alter('plugin_flowview_raw_2024001', array('alter' => 'ADD INDEX end_time (end_time)', 'ex_change' => false));
+
+		expect($GLOBALS['__test_cacti_log'])->toBe(array('Altering Table plugin_flowview_raw_2024001 Using this alter ADD INDEX end_time (end_time).'))
+			->and($GLOBALS['__test_cacti_log_print'])->toBe(array(true));
+	});
+
+	it('only logs an alter when the caller reports it itself, so it is not said twice', function () {
+		$GLOBALS['__test_cacti_log']       = array();
+		$GLOBALS['__test_cacti_log_print'] = array();
+
+		flowview_apply_partition_alter('plugin_flowview_raw_2024001', array('alter' => ' ENGINE=Aria ROW_FORMAT=page', 'ex_change' => false), false);
+
+		expect($GLOBALS['__test_cacti_log'])->toBe(array('Altering Table plugin_flowview_raw_2024001 Using this alter ENGINE=Aria ROW_FORMAT=page.'))
+			->and($GLOBALS['__test_cacti_log_print'])->toBe(array(false));
+	});
+
 	it('finds the partitions that still need an alter in a single pass', function () {
 		$table = function ($name, $engine) {
 			return array('TABLE_NAME' => $name, 'TABLE_COLLATION' => 'latin1_swedish_ci', 'ENGINE' => $engine);

@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* bug: Stop cli/materialize_queries.php from reporting each ALTER TABLE twice, once from its own progress line and once from the log message that is also printed.  The alter is still written to the Cacti log, and the schema upgrade, which has no other report, still shows it.  The logged text no longer has the extra space in it
+
 * feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page, with how many are with NAT and without in its tip.  The process table only has the id of a running request, so a running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, and there is no pill when none are running
 
 * feature: Add --status to cli/materialize_queries.php to list the parallel queries that are running and the Filter each one is for, with its progress
@@ -18,7 +20,7 @@
 
 * feature: Materialize the partitions that have gone cold automatically.  Each poller cycle flowview_process.php records the newest partition, which is the one still receiving flows, and starts cli/materialize_queries.php in the background for the partitions that have rotated since the previous cycle, for every Filter with NAT on and off.  Partitions that are already materialized and accurate are skipped.  When a materialization is already running, or the Parallel Query is not enabled, the record is left alone so a later cycle catches up.  The first cycle only records the newest partition, so older partitions are still materialized with cli/materialize_queries.php.  The script gained a --partitions option for this
 
-* feature: Add a Status column, to the right of the Filter Name on the Filters page, showing the automatic materialization status as a pill in the form of the device status: Required (down) when rotated partitions are not materialized yet, Running (recovering) while a materialization is in progress, and Up to date (up) once every cold partition is materialized with NAT on and off
+* feature: Add a Materialization column, to the right of the Filter Name on the Filters page, with a tip explaining what materialization is, showing the automatic materialization status as a pill in the form of the device status: Required (down) when rotated partitions are not materialized yet, Running (recovering) while a materialization is in progress, and Up to date (up) once every cold partition is materialized with NAT on and off
 
 * feature: Show the number of partitions each Filter has stored in the Parallel Query cache, with NAT and without, as the NAT Shards and Non-NAT Shards columns next to the ID on the Filters page, along with a Partitions column holding the total number of flow partitions so the progress of a materialization can be followed; the cache keys are worked out from the Filter without running it (run_flow_query() gained a plan-only mode, and the map query hashing is shared with the parallel query request)
 

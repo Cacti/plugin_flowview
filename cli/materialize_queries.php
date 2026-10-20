@@ -430,7 +430,7 @@ function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run
 			if (!$dry_run) {
 				$began = microtime(true);
 
-				flowview_apply_partition_alter($table, $plan);
+				flowview_apply_partition_alter($table, $plan, false);
 
 				print sprintf('Altered Table %s in %0.2f seconds', $table, microtime(true) - $began) . PHP_EOL;
 			}

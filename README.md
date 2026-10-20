@@ -242,8 +242,8 @@ newest partition, which is the one still receiving flows, and materializes the
 partitions that have rotated since the previous cycle for every Filter, with
 NAT on and off, in the background.  The first cycle only records the newest
 partition, so run the script once to materialize the existing ones.  The
-'Status' column on the Filters page shows the result for each Filter, as
-Required, Running or Up to date.  The partition still receiving flows is not
+'Materialization' column on the Filters page shows the result for each Filter,
+as Required, Running or Up to date.  The partition still receiving flows is not
 materialized automatically, so it does not count.
 
 When you save a

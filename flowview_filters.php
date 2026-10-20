@@ -377,9 +377,9 @@ function show_filters(): void {
 			'sort' => 'ASC'
 		),
 		'nosort5' => array(
-			'display' => __('Status', 'flowview'),
+			'display' => __('Materialization', 'flowview'),
 			'align' => 'center',
-			'tip' => __('The automatic materialization status of the Filter.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized with NAT on and off.  The partition still receiving flows is not materialized automatically.', 'flowview')
+			'tip' => __('Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count.', 'flowview')
 		),
 		'device' => array(
 			'display' => __('Listener', 'flowview'),

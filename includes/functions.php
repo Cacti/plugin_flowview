@@ -4509,11 +4509,13 @@ function flowview_get_partition_alter(array $info, string $raw_engine): array {
  *
  * @param string $table The raw partition table
  * @param array  $plan  The plan from flowview_get_partition_alter()
+ * @param bool   $print Also show what is being altered, as well as logging it.
+ *                      A script that reports it itself passes false.
  *
  * @return void
  */
-function flowview_apply_partition_alter(string $table, array $plan): void {
-	cacti_log("Altering Table $table Using this alter {$plan['alter']}.", true, 'FLOWVIEW');
+function flowview_apply_partition_alter(string $table, array $plan, bool $print = true): void {
+	cacti_log("Altering Table $table Using this alter " . trim($plan['alter']) . '.', $print, 'FLOWVIEW');
 
 	flowview_db_execute('ALTER TABLE ' . $table . ' ' . $plan['alter']);
 
