@@ -211,8 +211,10 @@ more under the FlowView Settings):
 php cli/materialize_queries.php
 ```
 
-The script runs every saved query over the entire range of flow partitions,
-once with NAT on and once with NAT off.  Use `--query-id=ID[,ID...]` or
+The script runs every saved query over every flow partition that has rotated,
+once with NAT on and once with NAT off.  The partition still receiving flows is
+never cached, as a result cached for it would be wrong as soon as more flows
+arrive.  Use `--query-id=ID[,ID...]` or
 `--nat=on|off` to narrow the run, and `--dry-run` to see what would be run.
 Partitions that are already cached and still match their data are skipped,
 while partitions that have received more flows since, or have been dropped,

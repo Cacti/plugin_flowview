@@ -192,17 +192,15 @@ if (empty($threads) || $threads == 1) {
 	exit(1);
 }
 
-$tables = flowview_get_partition_tables();
-
-/* the newest partition is still receiving flows, so it is left as it is */
-$cold = flowview_get_cold_partitions($tables);
+/* the live partition is still receiving flows, so it is never materialized */
+$tables = flowview_get_cold_partitions(flowview_get_partition_tables());
 
 /* only the partitions asked for, that still exist */
 if (cacti_sizeof($partitions)) {
 	$tables = array_values(array_intersect($tables, $partitions));
 }
 
-$cold = array_values(array_intersect($tables, $cold));
+$cold = $tables;
 
 $range = flowview_get_materialize_range($tables);
 
@@ -248,6 +246,12 @@ materialize_prepare_partitions($cold, $modes, $dry_run);
 
 /* partitions that are still accurate keep their cache, everything else is rebuilt below */
 if (!$dry_run) {
+	$live = flowview_remove_live_partition_cache();
+
+	if ($live > 0) {
+		print sprintf('Removed %d cached result(s) of the live partition, as it is still receiving flows', $live) . PHP_EOL;
+	}
+
 	$cache = flowview_invalidate_stale_shard_cache(cacti_sizeof($partitions) ? $tables : []);
 
 	print sprintf('Cached Partitions Still Accurate:%d, Stale Partitions Removed:%d', $cache['kept'], $cache['removed']) . PHP_EOL;
@@ -533,9 +537,10 @@ function display_help(): void {
 
 	print PHP_EOL . 'usage: materialize_queries.php [--query-id=ID[,ID...]] [--partitions=TABLE[,TABLE...]] [--nat=on|off] [--dry-run] [--status] [--force] [--debug]' . PHP_EOL . PHP_EOL;
 
-	print 'Materializes each FlowView query into the parallel query cache for the' . PHP_EOL;
-	print 'entire range of flow partitions, once with NAT on and once with NAT off.' . PHP_EOL;
-	print 'Partitions that are already materialized and still accurate are skipped.' . PHP_EOL;
+	print 'Materializes each FlowView query into the parallel query cache for every' . PHP_EOL;
+	print 'flow partition that has rotated, once with NAT on and once with NAT off.' . PHP_EOL;
+	print 'The partition still receiving flows is never cached.  Partitions that are' . PHP_EOL;
+	print 'already materialized and still accurate are skipped.' . PHP_EOL;
 	print 'Only one run may be active at a time, for up to 8 hours.' . PHP_EOL . PHP_EOL;
 
 	print 'Options:' . PHP_EOL;

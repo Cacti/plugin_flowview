@@ -4400,6 +4400,68 @@ function flowview_get_partition_tables(): array {
 }
 
 /**
+ * flowview_get_live_partition - The raw partition table that is still
+ * receiving flows, which is the newest one.
+ *
+ * @return string The table, or an empty string when there are no partitions
+ */
+function flowview_get_live_partition(): string {
+	$tables = flowview_get_partition_tables();
+
+	return cacti_sizeof($tables) ? (string) end($tables) : '';
+}
+
+/**
+ * flowview_is_full_scan - Whether a shard scans the whole of its partition,
+ * which is when the range starts before the earliest flow in it and ends
+ * after the last.  Such a shard does not depend on the range, so its result
+ * is cached and reused by any query that covers the partition.
+ *
+ * The live partition is never a full scan.  It is still receiving flows, so
+ * a result cached for it would be wrong as soon as more arrive.
+ *
+ * @param int  $start           The start of the range
+ * @param int  $end             The end of the range
+ * @param int  $partition_start The time of the earliest flow in the partition
+ * @param int  $partition_end   The time of the latest flow in the partition
+ * @param bool $live            Whether it is the live partition
+ *
+ * @return bool
+ */
+function flowview_is_full_scan(int $start, int $end, int $partition_start, int $partition_end, bool $live): bool {
+	return !$live && $start < $partition_start && $end > $partition_end;
+}
+
+/**
+ * flowview_remove_live_partition_cache - Remove anything cached for the live
+ * partition, from before it was kept out of the cache.  It would never be
+ * used, as the live partition is no longer scanned as a full scan, but it
+ * would be counted as materialized.
+ *
+ * @return int How many cached results were removed
+ */
+function flowview_remove_live_partition_cache(): int {
+	$live = flowview_get_live_partition();
+
+	if ($live == '') {
+		return 0;
+	}
+
+	$cached = (int) flowview_db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM parallel_database_query_shard_cache
+		WHERE map_table = ?',
+		[$live]);
+
+	if ($cached > 0) {
+		flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+			WHERE map_table = ?',
+			[$live]);
+	}
+
+	return $cached;
+}
+
+/**
  * flowview_get_cold_partitions - The partitions that have rotated.  The
  * newest partition is the one still receiving flows, every older one is cold.
  *
@@ -5164,6 +5226,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		$start = $sql_start_time;
 		$end   = $sql_end_time;
 		$index = 0;
+		$live  = flowview_get_live_partition();
 
 		foreach($tables as $table => $details) {
 			if (!empty($details['min_date'])) {
@@ -5181,11 +5244,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 			$fsql_where  = '';
 			$fsql_params = [];
 
-			if ($start < $start_time && $end > $end_time) {
-				$full_scan = true;
-			} else {
-				$full_scan = false;
-			}
+			$full_scan = flowview_is_full_scan($start, $end, $start_time, $end_time, $table == $live);
 
 			if (!$full_scan) {
 				$fsql_where  = $stru_inner['sql_where'] . ($stru_inner['sql_where'] != '' ? ' AND ':'WHERE ') . $stru_inner['sql_range'];

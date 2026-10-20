@@ -1246,3 +1246,66 @@ describe('showing the queries of a filter that are running', function () {
 		expect(flowview_get_colored_running_queries($count))->toBe('');
 	})->with(array(0, -1));
 });
+
+describe('keeping the live partition out of the cache', function () {
+	it('scans the whole of a partition only when the range covers all of it', function ($start, $end, $live, $expected) {
+		// the partition holds flows from 1000 to 2000
+		expect(flowview_is_full_scan($start, $end, 1000, 2000, $live))->toBe($expected);
+	})->with(array(
+		'covers it'                  => array(500, 3000, false, true),
+		'starts after its first flow' => array(1500, 3000, false, false),
+		'ends before its last flow'  => array(500, 1500, false, false),
+		'starts at its first flow'   => array(1000, 3000, false, false),
+		'ends at its last flow'      => array(500, 2000, false, false),
+		'covers it but is live'      => array(500, 3000, true, false),
+	));
+
+	it('finds the live partition as the newest one', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('table' => 'plugin_flowview_raw_202400105'),
+			array('table' => 'plugin_flowview_raw_202400107'),
+			array('table' => 'plugin_flowview_raw_202400106'),
+			array('table' => 'plugin_flowview_raw_abc'),
+		));
+
+		expect(flowview_get_live_partition())->toBe('plugin_flowview_raw_202400107');
+	});
+
+	it('has no live partition when there are no partitions', function () {
+		expect(flowview_get_live_partition())->toBe('');
+	});
+
+	it('removes what was cached for the live partition', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('table' => 'plugin_flowview_raw_2024001'),
+			array('table' => 'plugin_flowview_raw_2024002'),
+		));
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 3);
+
+		expect(flowview_remove_live_partition_cache())->toBe(3);
+
+		$deleted = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM parallel_database_query_shard_cache') === 0;
+		}));
+
+		expect($deleted)->toHaveCount(1)
+			->and($deleted[0]['params'])->toBe(array('plugin_flowview_raw_2024002'));
+	});
+
+	it('removes nothing when the live partition has nothing cached', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('table' => 'plugin_flowview_raw_2024001')));
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+
+		expect(flowview_remove_live_partition_cache())->toBe(0)
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['fn'], 'db_execute') === 0;
+			}))->toBeEmpty();
+	});
+
+	it('does nothing without any partitions', function () {
+		expect(flowview_remove_live_partition_cache())->toBe(0)
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['sql'] ?? '', 'parallel_database_query_shard_cache') !== false;
+			}))->toBeEmpty();
+	});
+});

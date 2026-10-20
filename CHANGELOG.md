@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* bug: Never cache the partition that is still receiving flows.  A full run included it, and as its flows ended before the end of the range it was scanned as a full scan and its result was cached, which was wrong as soon as more flows arrived, and counted it as materialized.  Whether a shard is a full scan is now decided in flowview_is_full_scan(), which refuses the newest partition, so a report that covers it cannot cache it either, and it is scanned for the range as it is asked for.  cli/materialize_queries.php only materializes the partitions that have rotated, and removes what was cached for the live partition before, so NAT Shards and Non-NAT Shards can no longer equal the number of Partitions
+
 * bug: Make the earliest partition, and the partitions that rotate, get cached by a materialization.  A shard is only cached when the range starts before the earliest flow in the partition, and a flow can start before the window of the partition it was written to, but the range was padded by only a second, so the oldest partition, or a rotated one on its own, was never cached and its Filter stayed Required.  The start is now padded by a day, which only adds partitions that already exist and are cached, and the summary now shows the first and last partition instead of the padded range.  Run the materializer again to cache what was missed
 
 * feature: Say which partitions a Filter is not materialized for, with NAT and without, in the tip of its Required and Running pill
