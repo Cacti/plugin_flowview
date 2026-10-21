@@ -1828,4 +1828,37 @@ describe('stopping the processes of a parallel query', function () {
 	it('cancels nothing when no request is in flight', function () {
 		expect(flowview_cancel_requests_in_flight())->toBe(array());
 	});
+
+	it('removes a finished request so the same query is run again', function () {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 'complete');
+
+		expect(flowview_discard_completed_request(991))->toBeTrue();
+
+		$removed = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute_prepared' && preg_match('/^DELETE FROM parallel_database_query\s+WHERE id = \?/', $call['sql']) === 1;
+		}));
+
+		expect(array_column($removed, 'params'))->toBe(array(array(991)));
+	});
+
+	it('leaves a request that is still being run, as another process is using it', function ($status) {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', $status);
+
+		expect(flowview_discard_completed_request(991))->toBeFalse()
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['fn'], 'db_execute') === 0;
+			}))->toBeEmpty();
+	})->with(array('pending', 'scheduled', 'running', ''));
+
+	it('offers pruning in the actions of the Filters page, for the whole cache', function () {
+		$source = plugin_test_read_source('flowview_filters.php');
+
+		expect($source)->toContain("6 => __('Prune Cached Shards'")
+			->and($source)->toMatch("/drp_action'\) == '6'\) \{[^}]*confirm_prune_shards\(\)/s");
+	});
+
+	it('runs the shards of a materialization instead of reusing an earlier request', function () {
+		expect(plugin_test_read_source('cli/materialize_queries.php'))->toContain("\$GLOBALS['flowview_fresh_requests'] = true")
+			->and(plugin_test_read_source('includes/functions.php'))->toContain("!empty(\$GLOBALS['flowview_fresh_requests']) && flowview_discard_completed_request");
+	});
 });

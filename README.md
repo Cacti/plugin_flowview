@@ -269,7 +269,7 @@ simply stop matching the Filter.  The line under the Filters table says how many
 cached shards match a Filter, which is told by their md5 value, and how many
 match none, such as those of a Filter before it was changed, of a deleted
 Filter, or of a report with its settings changed on the report page.  The
-'Prune' button on the Filters page removes the ones that match no Filter, after
+'Prune' button on the Filters page, or the 'Prune Cached Shards' action, removes the ones that match no Filter, after
 you confirm.  It keeps everything that matches a Filter, and does nothing when
 the cache keys of a Filter that has a report can not be worked out.
 

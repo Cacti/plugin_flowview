@@ -689,7 +689,9 @@ function materialize_run_worker(int $query_id, string $nat, int $start, int $end
 
 	set_request_var('usenat', $nat == 'on' ? 'true' : 'false');
 
-	$GLOBALS['flowview_requests_made'] = [];
+	/* run the shards, even if the same query was run before, as it is the cached shards that are wanted */
+	$GLOBALS['flowview_fresh_requests'] = true;
+	$GLOBALS['flowview_requests_made']  = [];
 
 	materialize_say(sprintf('Materializing Query:%d NAT:%s', $query_id, $nat));
 

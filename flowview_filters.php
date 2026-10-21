@@ -42,7 +42,8 @@ $sched_actions = array(
 	1 => __('Delete', 'flowview'),
 	3 => __('Disable', 'flowview'),
 	4 => __('Enable', 'flowview'),
-	5 => __('Materialize View', 'flowview')
+	5 => __('Materialize View', 'flowview'),
+	6 => __('Prune Cached Shards', 'flowview')
 );
 
 switch (get_request_var('action')) {
@@ -164,6 +165,17 @@ function actions_filters(): void {
 	/* ================= input validation ================= */
 	get_filter_request_var('drp_action');
 	/* ==================================================== */
+
+	/* pruning is for the whole cache, so it does not depend on which Filters are selected */
+	if (get_nfilter_request_var('drp_action') == '6') {
+		general_header();
+
+		confirm_prune_shards();
+
+		bottom_footer();
+
+		return;
+	}
 
 	if (isset_request_var('selected_items')) {
 		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));

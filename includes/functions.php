@@ -5540,6 +5540,10 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		AND user_id = ?',
 		[$query_md5, $user_id]);
 
+	/* a materialization has to run the shards, not be given the result of an earlier request */
+	if (!empty($request_id) && !empty($GLOBALS['flowview_fresh_requests']) && flowview_discard_completed_request((int) $request_id)) {
+		$request_id = 0;
+	}
 	$time_to_live = read_config_option('flowview_parallel_time_to_live');
 
 	if (empty($time_to_live)) {
@@ -5643,6 +5647,34 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	flowview_track_request((int) $request_id);
 
 	return $request_id;
+}
+
+/**
+ * flowview_discard_completed_request - Remove a parallel query request that
+ * has finished, so the same query is run again.  A request is reused for the
+ * same query and range until it expires, and a finished one is never run
+ * again, it only hands back its result.  That result does not mean the cached
+ * shards are there: they may have been pruned, or removed because the
+ * partition changed.  A request that is still running is left alone, as
+ * another process is using it.
+ *
+ * @param int $request_id
+ *
+ * @return bool Whether it was finished and was removed
+ */
+function flowview_discard_completed_request(int $request_id): bool {
+	$status = flowview_db_fetch_cell_prepared('SELECT status
+		FROM parallel_database_query
+		WHERE id = ?',
+		[$request_id]);
+
+	if ($status != 'complete') {
+		return false;
+	}
+
+	parallel_database_query_cleanup($request_id, true);
+
+	return true;
 }
 
 /**
