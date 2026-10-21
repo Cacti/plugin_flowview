@@ -1741,3 +1741,60 @@ describe('keeping the report of a filter fixed and pruning what no filter caches
 			}))->toBeEmpty();
 	});
 });
+
+describe('stopping the processes of a parallel query', function () {
+	beforeEach(function () {
+		plugin_test_reset();
+		$GLOBALS['flowview_requests_in_flight'] = array();
+	});
+
+	it('names signals without needing the pcntl constants', function () {
+		expect(flowview_signal_number('SIGTERM'))->toBe(15)
+			->and(flowview_signal_number('SIGKILL'))->toBe(9)
+			->and(flowview_signal_number('SIGINT'))->toBe(2)
+			->and(flowview_signal_number('SIGNOTREAL'))->toBe(15);
+	});
+
+	it('does not signal something that is not a process', function () {
+		if (!function_exists('posix_kill')) {
+			$this->markTestSkipped('The posix extension is not available.');
+		}
+
+		expect(flowview_signal_process(0))->toBeFalse()
+			->and(flowview_signal_process(-5))->toBeFalse()
+			->and(flowview_signal_process(4999999))->toBeFalse();
+	});
+
+	it('does not use a signal constant that the web server does not have in the clean up', function () {
+		$source = plugin_test_read_source('includes/functions.php');
+
+		expect($source)->not->toMatch('/posix_kill\([^)]*\bSIG[A-Z]+\b/');
+	});
+
+	it('remembers a request until it is cleaned up', function () {
+		flowview_track_request(991);
+		flowview_track_request(992);
+
+		parallel_database_query_cleanup(991);
+
+		expect($GLOBALS['flowview_requests_in_flight'])->toBe(array(992 => 992));
+	});
+
+	it('cancels the requests that are not finished, removing their rows', function () {
+		flowview_track_request(991);
+		flowview_track_request(992);
+
+		expect(flowview_cancel_requests_in_flight())->toBe(array(991, 992))
+			->and($GLOBALS['flowview_requests_in_flight'])->toBe(array());
+
+		$removed = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute_prepared' && preg_match('/^DELETE FROM parallel_database_query\s+WHERE id = \?/', $call['sql']) === 1;
+		}));
+
+		expect(array_column($removed, 'params'))->toBe(array(array(991), array(992)));
+	});
+
+	it('cancels nothing when no request is in flight', function () {
+		expect(flowview_cancel_requests_in_flight())->toBe(array());
+	});
+});

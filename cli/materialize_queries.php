@@ -36,6 +36,11 @@ require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 ini_set('max_execution_time', 0);
 ini_set('memory_limit', '-1');
 
+/* signals are handled as they arrive, not when the script next ticks */
+if (function_exists('pcntl_async_signals')) {
+	pcntl_async_signals(true);
+}
+
 flowview_connect();
 
 /* another materialization may not start until this one ends or this many seconds pass */
@@ -46,6 +51,10 @@ $force     = false;
 $dry_run   = false;
 $status    = false;
 $worker    = false;
+
+/* what the signal handler has to clean up: the process registration, and the worker being run */
+$materialize_registered = false;
+$materialize_child      = null;
 $query_ids = [];
 $partitions = [];
 $nat       = false;
@@ -171,6 +180,8 @@ if ($worker) {
 		exit(1);
 	}
 
+	materialize_install_signal_handlers();
+
 	exit(materialize_run_worker($query_ids[0], $nat, $start, $end));
 }
 
@@ -180,14 +191,15 @@ if (!$force && !$dry_run) {
 		exit(0);
 	}
 
-	register_shutdown_function(function () {
-		flowview_set_materialization_scope([]);
-		unregister_process('flowview', 'materialize', 0);
-	});
+	$materialize_registered = true;
+
+	register_shutdown_function('materialize_release');
 
 	/* the Filters page shows only these filters as running */
 	flowview_set_materialization_scope($query_ids);
 }
+
+materialize_install_signal_handlers();
 
 $threads = read_config_option('flowview_parallel_threads');
 
@@ -284,7 +296,7 @@ foreach ($queries as $query) {
 			' --end=' . $end .
 			($debug ? ' --debug' : '');
 
-		passthru($command, $status);
+		$status = materialize_run_command($command);
 
 		if ($status != 0) {
 			$failed++;
@@ -450,6 +462,149 @@ function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run
 	if (cacti_sizeof($no_nat)) {
 		print sprintf('NOTE: %d partition(s) have no NAT columns, so they have no NAT data.  Run flowview_upgrade_nat_columns.php before materializing if they should.', cacti_sizeof($no_nat)) . PHP_EOL;
 	}
+}
+
+/**
+ * Makes SIGTERM and SIGINT end the script through materialize_sig_handler(),
+ * so what it registered is cleaned up, as the flow collector does.
+ *
+ * @return void
+ */
+function materialize_install_signal_handlers(): void {
+	if (function_exists('pcntl_signal')) {
+		pcntl_signal(SIGTERM, 'materialize_sig_handler');
+		pcntl_signal(SIGINT, 'materialize_sig_handler');
+	}
+}
+
+/**
+ * Cleans up on SIGTERM and SIGINT and exits.  The script that runs the
+ * materialization stops the worker it started, and removes its registration
+ * from the process table.  A worker cancels the parallel queries it started,
+ * which stops their runner and shard workers and removes their registrations.
+ *
+ * @param int $signo
+ *
+ * @return void
+ */
+function materialize_sig_handler($signo): void {
+	global $worker;
+
+	static $handling = false;
+
+	switch ($signo) {
+		case SIGTERM:
+		case SIGINT:
+			if ($handling) {
+				return;
+			}
+
+			$handling = true;
+
+			if ($worker) {
+				cacti_log('WARNING: FlowView Materialization worker is shutting down by signal!', false, 'FLOWVIEW');
+
+				flowview_cancel_requests_in_flight();
+
+				/* the shutdown function must not report this as a failure to finish */
+				$GLOBALS['flowview_error_reported'] = true;
+			} else {
+				cacti_log('WARNING: FlowView Materialization is shutting down by signal!', false, 'FLOWVIEW');
+
+				materialize_stop_child();
+				materialize_release();
+			}
+
+			exit(1);
+		default:
+			/* ignore all other signals */
+	}
+}
+
+/**
+ * Removes the registration of this materialization from the process table,
+ * and which Filters it was for.  It does nothing the second time it is called.
+ *
+ * @return void
+ */
+function materialize_release(): void {
+	global $materialize_registered;
+
+	if ($materialize_registered) {
+		$materialize_registered = false;
+
+		flowview_set_materialization_scope([]);
+		unregister_process('flowview', 'materialize', 0, (int) getmypid());
+	}
+}
+
+/**
+ * Runs a worker and waits for it, with its output shown as it is written.
+ * The worker is kept so a signal can stop it.
+ *
+ * @param string $command The command to run
+ *
+ * @return int The exit status, 0 on success
+ */
+function materialize_run_command(string $command): int {
+	global $materialize_child;
+
+	$process = proc_open($command, [0 => STDIN, 1 => STDOUT, 2 => STDERR], $pipes);
+
+	if (!is_resource($process)) {
+		return 1;
+	}
+
+	$materialize_child = $process;
+	$status            = 1;
+
+	while (true) {
+		$info = proc_get_status($process);
+
+		if (!$info['running']) {
+			/* the exit status can only be read the first time it is asked for */
+			$status = $info['exitcode'] >= 0 ? $info['exitcode'] : 1;
+
+			break;
+		}
+
+		usleep(100000);
+	}
+
+	$materialize_child = null;
+
+	proc_close($process);
+
+	return $status;
+}
+
+/**
+ * Stops the worker being run, giving it time to cancel its queries first.
+ *
+ * @return void
+ */
+function materialize_stop_child(): void {
+	global $materialize_child;
+
+	if (!is_resource($materialize_child)) {
+		return;
+	}
+
+	proc_terminate($materialize_child, SIGTERM);
+
+	$deadline = microtime(true) + 15;
+
+	while (microtime(true) < $deadline) {
+		$info = proc_get_status($materialize_child);
+
+		if (!$info['running']) {
+			return;
+		}
+
+		usleep(100000);
+	}
+
+	proc_terminate($materialize_child, SIGKILL);
 }
 
 /**

@@ -5629,7 +5629,40 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		}
 	}
 
+	flowview_track_request((int) $request_id);
+
 	return $request_id;
+}
+
+/**
+ * flowview_track_request - Remember a parallel query request this process
+ * made and has not cleaned up, so a script that is told to stop can cancel
+ * it.  It is forgotten by parallel_database_query_cleanup().
+ *
+ * @param int $request_id
+ *
+ * @return void
+ */
+function flowview_track_request(int $request_id): void {
+	$GLOBALS['flowview_requests_in_flight'][$request_id] = $request_id;
+}
+
+/**
+ * flowview_cancel_requests_in_flight - Cancel the parallel query requests
+ * this process made that are not finished.  The runner and shard workers are
+ * told to stop, which unregisters them from the process table, and the request
+ * and its tables are removed.  Meant for a signal handler.
+ *
+ * @return array The requests that were cancelled
+ */
+function flowview_cancel_requests_in_flight(): array {
+	$requests = array_values($GLOBALS['flowview_requests_in_flight'] ?? []);
+
+	foreach ($requests as $request_id) {
+		parallel_database_query_cleanup($request_id, true);
+	}
+
+	return $requests;
 }
 
 /**
@@ -5975,6 +6008,8 @@ function parallel_database_query_expire(): void {
  * @return void
  */
 function parallel_database_query_cleanup($request_id, bool $remove = false): void {
+	unset($GLOBALS['flowview_requests_in_flight'][(int) $request_id]);
+
 	$table = flowview_db_fetch_cell_prepared('SELECT map_table
 		FROM parallel_database_query
 		WHERE id = ?',
@@ -6001,9 +6036,7 @@ function parallel_database_query_cleanup($request_id, bool $remove = false): voi
 
 	if (cacti_sizeof($processes)) {
 		foreach($processes as $p) {
-			if (posix_kill($p['pid'], 0)) {
-				posix_kill($p['pid'], SIGTERM);
-			}
+			flowview_signal_process((int) $p['pid'], 'SIGTERM');
 
 			db_execute_prepared('DELETE FROM processes
 				WHERE pid = ?',
@@ -6016,6 +6049,44 @@ function parallel_database_query_cleanup($request_id, bool $remove = false): voi
 			WHERE id = ?',
 			[$request_id]);
 	}
+}
+
+/**
+ * flowview_signal_number - The number of a signal.  The SIG constants only
+ * exist when the pcntl extension is loaded, which it is not for the web
+ * server, so using one there is a fatal error.  The numbers are those of
+ * Linux.
+ *
+ * @param string $signal SIGTERM, SIGKILL or SIGINT
+ *
+ * @return int
+ */
+function flowview_signal_number(string $signal): int {
+	if (defined($signal)) {
+		return (int) constant($signal);
+	}
+
+	$numbers = ['SIGINT' => 2, 'SIGKILL' => 9, 'SIGTERM' => 15];
+
+	return $numbers[$signal] ?? 15;
+}
+
+/**
+ * flowview_signal_process - Send a signal to a process, from a script or from
+ * the web server.  A process of another user can not be signalled from the web
+ * server, which is not an error here.
+ *
+ * @param int    $pid    The process
+ * @param string $signal SIGTERM, SIGKILL or SIGINT
+ *
+ * @return bool Whether the signal was sent
+ */
+function flowview_signal_process(int $pid, string $signal = 'SIGTERM'): bool {
+	if ($pid <= 0 || !function_exists('posix_kill')) {
+		return false;
+	}
+
+	return posix_kill($pid, flowview_signal_number($signal));
 }
 
 /**
@@ -6035,7 +6106,7 @@ function parallel_database_query_cancel($query_id): void {
 		foreach($processes as $p) {
 			cacti_log("WARNING: Killing FlowView Query Process with Task Name:{$p['taskname']} and PID:{$p['pid']}", false, 'FLOWVIEW');
 
-			posix_kill($p['pid'], SIGKILL);
+			flowview_signal_process((int) $p['pid'], 'SIGKILL');
 
 			db_execute_prepared('DELETE FROM processes WHERE id = ?', [$p['id']]);
 		}
