@@ -859,7 +859,7 @@ function flowview_display_filter(): void {
 			if ($row['statistics'] > 0) {
 				$title = __esc('Statistical Report: %s [ Including overrides as specified below ]', $stat_report_array[$row['statistics']]);
 			} elseif ($row['printed'] > 0) {
-				$title = __esc('Printed Report: %s [ Including overrides as specified below ]', $print_report_array[$row['statistics']]);
+				$title = __esc('Printed Report: %s [ Including overrides as specified below ]', $print_report_array[$row['printed']]);
 			}
 		}
 	}
@@ -958,11 +958,19 @@ function flowview_display_filter(): void {
 			</table>
 			<table class='filterTable'>
 				<tr>
-					<td<?php print $report_fixed ? " title='" . __esc('The Report is part of the Filter, and what is cached for it.  To change it, Edit the Filter, and then Materialize it again.', 'flowview') . "'" : '';?>>
+					<?php
+					/* the Report is part of the Filter and what is cached for it, so it is not shown unless the Filter has none */
+					$report_shown = get_request_var('query') > 0 && !$report_fixed;
+
+					if (!$report_shown) {
+						print "<td hidden><input type='hidden' id='report' name='report' value='" . html_escape(get_nfilter_request_var('report')) . "'></td>";
+					} else {
+					?>
+					<td>
 						<?php print __('Report', 'flowview');?>
 					</td>
 					<td>
-						<select id='report' name='report'<?php print $report_fixed ? ' disabled' : '';?>>
+						<select id='report' name='report'>
 							<?php
 							$reports = [];
 
@@ -991,6 +999,7 @@ function flowview_display_filter(): void {
 							?>
 						</select>
 					</td>
+					<?php } ?>
 					<td>
 						<?php print __('Sort Field', 'flowview');?>
 					</td>
