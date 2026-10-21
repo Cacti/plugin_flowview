@@ -312,23 +312,14 @@ foreach ($queries as $query) {
 		$total++;
 
 		if ($dry_run) {
-			print sprintf('DRY RUN: Would materialize Query:%d [%s] NAT:%s', $query['id'], $query['name'], $mode) . PHP_EOL;
+			$todo = flowview_get_uncached_partitions((int) $query['id'], $mode, $cold);
+
+			print sprintf('DRY RUN: Would materialize Query:%d [%s] NAT:%s, %d of %d partition(s) are not cached', $query['id'], $query['name'], $mode, cacti_sizeof($todo), cacti_sizeof($cold)) . PHP_EOL;
 
 			continue;
 		}
 
-		/* a separate process keeps one query hitting the run limit from ending the rest */
-		$command = escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__FILE__) .
-			' --worker' .
-			' --query-id=' . (int) $query['id'] .
-			' --nat=' . $mode .
-			' --start=' . $start .
-			' --end=' . $end .
-			($debug ? ' --debug' : '');
-
-		$status = materialize_run_command($command);
-
-		if ($status != 0) {
+		if (!materialize_query_mode($query, $mode, $cold, (int) $threads, $debug)) {
 			$failed++;
 
 			materialize_say(sprintf('ERROR: Query:%d [%s] NAT:%s failed to materialize', $query['id'], $query['name'], $mode));
@@ -430,6 +421,85 @@ function materialize_wait_for_alters(array $tables): void {
 
 		sleep(5);
 	}
+}
+
+/**
+ * Materializes one query for one NAT mode, a batch of the partitions that are
+ * not cached yet at a time.  One parallel query for every partition can not
+ * finish within the Maximum Run Time, and what it did not finish would be lost
+ * with it, so each batch is its own query, and the next one follows from what
+ * is cached after it.  A batch that did not finish is followed by a smaller
+ * one, and the work is given up when a small one gets nowhere.
+ *
+ * @param array  $query   The FlowView query, with its id and name
+ * @param string $mode    on for NAT, off for without
+ * @param array  $cold    The partitions to materialize, oldest first
+ * @param int    $threads The number of Max Concurrent Threads
+ * @param bool   $debug   Whether to pass --debug on
+ *
+ * @return bool Whether everything that can be cached is
+ */
+function materialize_query_mode(array $query, string $mode, array $cold, int $threads, bool $debug): bool {
+	$id          = (int) $query['id'];
+	$size        = 0;
+	$timed_out   = false;
+	$uncacheable = [];
+
+	$missing = flowview_get_uncached_partitions($id, $mode, $cold);
+
+	if (!cacti_sizeof($missing)) {
+		materialize_say(sprintf('Query:%d NAT:%s Already Materialized and Accurate', $id, $mode));
+
+		return true;
+	}
+
+	materialize_say(sprintf('Query:%d NAT:%s has %d of %d partition(s) to materialize', $id, $mode, cacti_sizeof($missing), cacti_sizeof($cold)));
+
+	while (cacti_sizeof($missing)) {
+		$size  = flowview_materialize_batch_size($size, $timed_out, $threads);
+		$batch = array_slice($missing, 0, $size);
+		$range = flowview_get_materialize_range($batch);
+
+		if ($range === false) {
+			return false;
+		}
+
+		/* a separate process keeps a batch that hits the run limit from ending the rest */
+		$status = materialize_run_command(escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__FILE__) .
+			' --worker' .
+			' --query-id=' . $id .
+			' --nat=' . $mode .
+			' --start=' . $range[0] .
+			' --end=' . $range[1] .
+			($debug ? ' --debug' : ''));
+
+		$timed_out = $status != 0;
+		$remaining = flowview_get_uncached_partitions($id, $mode, array_values(array_diff($cold, $uncacheable)));
+		$progress  = cacti_sizeof($missing) - cacti_sizeof($remaining);
+
+		materialize_say(sprintf('Query:%d NAT:%s Batch:%d Cached:%d Remaining:%d', $id, $mode, cacti_sizeof($batch), $progress, cacti_sizeof($remaining)));
+
+		if ($timed_out && $progress <= 0 && $size <= 4) {
+			return false;
+		}
+
+		/* a batch that ran and still did not cache a partition has one that can not be cached */
+		if (!$timed_out) {
+			foreach (array_intersect($batch, $remaining) as $partition) {
+				$uncacheable[] = $partition;
+			}
+
+			$remaining = array_values(array_diff($remaining, $uncacheable));
+		}
+
+		$missing = $remaining;
+	}
+
+	if (cacti_sizeof($uncacheable)) {
+		materialize_say(sprintf('NOTE: Query:%d NAT:%s %d partition(s) could not be cached, as their flows are not all within their range, such as %s', $id, $mode, cacti_sizeof($uncacheable), reset($uncacheable)));
+	}
+
+	return true;
 }
 
 /**

@@ -1862,3 +1862,104 @@ describe('stopping the processes of a parallel query', function () {
 			->and(plugin_test_read_source('includes/functions.php'))->toContain("!empty(\$GLOBALS['flowview_fresh_requests']) && flowview_discard_completed_request");
 	});
 });
+
+describe('materializing a part of the partitions at a time', function () {
+	$filter = array(
+		'id' => 4, 'name' => 'Top Talkers', 'device_id' => 0, 'ex_addr' => '', 'template_id' => -1,
+		'statistics' => 10, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 20, 'cutoffoctets' => 0,
+		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
+	);
+
+	beforeEach(function () {
+		plugin_test_reset();
+
+		if (!function_exists('cacti_process_still_running')) {
+			function cacti_process_still_running($pid) {
+				return in_array($pid, $GLOBALS['__test_live_pids'], true);
+			}
+		}
+
+		$GLOBALS['__test_live_pids'] = array();
+	});
+
+	it('finds the partitions a filter has not cached with NAT', function () use ($filter) {
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('map_table' => 'plugin_flowview_raw_2024001'), array('map_table' => 'plugin_flowview_raw_2024003')));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('map_table' => 'plugin_flowview_raw_2024002')));
+
+		$cold = array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003', 'plugin_flowview_raw_2024004');
+
+		expect(flowview_get_uncached_partitions(4, 'on', $cold))->toBe(array('plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024004'));
+	});
+
+	it('finds the partitions a filter has not cached without NAT', function () use ($filter) {
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('map_table' => 'plugin_flowview_raw_2024001'), array('map_table' => 'plugin_flowview_raw_2024003')));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('map_table' => 'plugin_flowview_raw_2024002')));
+
+		$cold = array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003');
+
+		expect(flowview_get_uncached_partitions(4, 'off', $cold))->toBe(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024003'));
+	});
+
+	it('runs a filter for everything when its cache keys are not known', function () {
+		$cold = array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002');
+
+		expect(flowview_get_uncached_partitions(99, 'on', $cold))->toBe($cold);
+	});
+
+	it('sizes the batches by the threads, and halves one that did not finish', function ($current, $timed_out, $threads, $expected) {
+		expect(flowview_materialize_batch_size($current, $timed_out, $threads))->toBe($expected);
+	})->with(array(
+		'first with the default threads' => array(0, false, 4, 100),
+		'first with few threads'         => array(0, false, 1, 40),
+		'first with many threads'        => array(0, false, 20, 500),
+		'that finished'                  => array(100, false, 4, 100),
+		'that did not finish'            => array(100, true, 4, 50),
+		'that did not finish again'      => array(9, true, 4, 4),
+		'at the least'                   => array(4, true, 4, 4),
+	));
+
+	it('does not remove a request that is finished, or that does not exist', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('status' => 'complete', 'created' => date('Y-m-d H:i:s', time() - 9999)));
+
+		expect(flowview_discard_abandoned_request(991))->toBeFalse()
+			->and(flowview_discard_abandoned_request(992))->toBeFalse();
+	});
+
+	it('does not remove a request that was only just made, as its runner has not registered yet', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('status' => 'scheduled', 'created' => date('Y-m-d H:i:s', time() - 5)));
+
+		expect(flowview_discard_abandoned_request(991))->toBeFalse();
+	});
+
+	it('does not remove a request that a runner is working on', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('status' => 'scheduled', 'created' => date('Y-m-d H:i:s', time() - 600)));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('pid' => 222, 'taskname' => 'db_query_991', 'age' => 5)));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 991, 'md5sum_tables' => 'aaaa')));
+
+		expect(flowview_discard_abandoned_request(991))->toBeFalse();
+	});
+
+	it('removes a request that was left behind by a query that timed out', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('status' => 'scheduled', 'created' => date('Y-m-d H:i:s', time() - 600)));
+
+		expect(flowview_discard_abandoned_request(991))->toBeTrue();
+
+		$removed = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute_prepared' && preg_match('/^DELETE FROM parallel_database_query\s+WHERE id = \?/', $call['sql']) === 1;
+		}));
+
+		expect(array_column($removed, 'params'))->toBe(array(array(991)));
+	});
+
+	it('runs a part of the partitions at a time in the materializer', function () {
+		$source = plugin_test_read_source('cli/materialize_queries.php');
+
+		expect($source)->toContain('function materialize_query_mode(')
+			->and($source)->toContain('flowview_materialize_batch_size(')
+			->and($source)->toContain('flowview_get_uncached_partitions(');
+	});
+});

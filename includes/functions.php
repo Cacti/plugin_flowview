@@ -31,6 +31,8 @@ if (!defined('FLOWVIEW_LIVE_SHARD_MARKER')) {
 	define('FLOWVIEW_LIVE_SHARD_TTL', 60);
 	define('FLOWVIEW_LIVE_SHARD_LOCK', 'flowview_live_');
 	define('FLOWVIEW_LIVE_SHARD_LOCK_WAIT', 120);
+	/* a request that is not finished and has no runner after this many seconds was abandoned */
+	define('FLOWVIEW_ABANDONED_REQUEST_AGE', 120);
 }
 
 // reports_run()/reports_queue()/reports_log_and_notify() became native in
@@ -4645,6 +4647,52 @@ function flowview_get_cold_partitions(array $tables): array {
 }
 
 /**
+ * flowview_get_uncached_partitions - The cold partitions that a filter does
+ * not have cached yet, with NAT or without.  What a materialization still has
+ * to do, so it can be done a part at a time and be continued.
+ *
+ * @param int    $query_id The FlowView query
+ * @param string $mode     on for NAT, off for without
+ * @param array  $cold     The cold partitions, oldest first
+ *
+ * @return array The partitions that are not cached, oldest first
+ */
+function flowview_get_uncached_partitions(int $query_id, string $mode, array $cold): array {
+	$key     = $mode == 'on' ? 'nat' : 'non_nat';
+	$md5sums = flowview_get_filter_md5sums($query_id);
+
+	/* without its cache keys all that can be done is to run it for everything */
+	if (!cacti_sizeof($md5sums[$key])) {
+		return array_values($cold);
+	}
+
+	$cached = flowview_get_cached_shard_tables($query_id, $md5sums);
+
+	return array_values(array_diff($cold, $cached[$key]));
+}
+
+/**
+ * flowview_materialize_batch_size - How many partitions a materialization
+ * runs through one parallel query.  The query has to finish within the
+ * Maximum Run Time, and every year of partitions can not, so it is run for a
+ * part of them at a time.  A batch that did not finish is followed by a
+ * smaller one.
+ *
+ * @param int  $current   The size of the last batch, or 0 for the first
+ * @param bool $timed_out Whether the last batch did not finish
+ * @param int  $threads   The number of Max Concurrent Threads
+ *
+ * @return int
+ */
+function flowview_materialize_batch_size(int $current, bool $timed_out, int $threads): int {
+	if ($current <= 0) {
+		return max(40, $threads * 25);
+	}
+
+	return $timed_out ? max(4, intdiv($current, 2)) : $current;
+}
+
+/**
  * flowview_get_rotated_partitions - The partitions that went cold since the
  * previous newest partition was recorded.  That partition was still hot then,
  * so it is the first of them, and the newest partition is still hot now.
@@ -5575,6 +5623,11 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		AND user_id = ?',
 		[$query_md5, $user_id]);
 
+	/* a request left over from a query that timed out would be waited on for nothing */
+	if (!empty($request_id) && flowview_discard_abandoned_request((int) $request_id)) {
+		$request_id = 0;
+	}
+
 	/* a materialization has to run the shards, not be given the result of an earlier request */
 	if (!empty($request_id) && !empty($GLOBALS['flowview_fresh_requests']) && flowview_discard_completed_request((int) $request_id)) {
 		$request_id = 0;
@@ -5682,6 +5735,46 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	flowview_track_request((int) $request_id);
 
 	return $request_id;
+}
+
+/**
+ * flowview_discard_abandoned_request - Remove a parallel query request that
+ * was started and then abandoned.  When a query reaches the Maximum Run Time
+ * its shards and processes are cleaned up, but the request itself stays as
+ * scheduled.  As a request is reused for the same query and range, the next
+ * run would find it, see it is not pending, start nothing and wait for the
+ * Maximum Run Time again, for as long as the request lasts.
+ *
+ * A request is abandoned when it is not finished, nothing is running it, and
+ * it is old enough that a runner would have registered by now.
+ *
+ * @param int $request_id
+ *
+ * @return bool Whether it was abandoned and was removed
+ */
+function flowview_discard_abandoned_request(int $request_id): bool {
+	$request = flowview_db_fetch_row_prepared('SELECT status, created
+		FROM parallel_database_query
+		WHERE id = ?',
+		[$request_id]);
+
+	if (!cacti_sizeof($request) || $request['status'] == 'complete') {
+		return false;
+	}
+
+	$created = strtotime((string) $request['created']);
+
+	if ($created === false || time() - $created < FLOWVIEW_ABANDONED_REQUEST_AGE) {
+		return false;
+	}
+
+	if (array_key_exists($request_id, flowview_get_running_requests())) {
+		return false;
+	}
+
+	parallel_database_query_cleanup($request_id, true);
+
+	return true;
 }
 
 /**

@@ -230,6 +230,12 @@ for instance from the Filters page or by the poller, its progress is written to
 the Cacti log.  Sending it SIGTERM or SIGINT stops its workers and removes
 its registrations from the process table.
 
+Only the partitions a Filter does not have cached are run, a batch of them at a
+time, each as its own Parallel Query, as one query for every partition can not
+finish within the Maximum Run Time.  A batch that does not finish is followed by
+a smaller one, and what a batch cached is kept, so a run that is stopped, or
+timed out, carries on from there when it is run again.
+
 Before it scans anything the script gets the partitions ready.  A query waits
 for an ALTER TABLE that is running on the partition it scans, and a long one
 ends the query at the Maximum Run Time.  So the script waits for an alter that
