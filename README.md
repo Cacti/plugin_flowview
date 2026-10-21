@@ -219,9 +219,16 @@ whose result is reused for 60 seconds and then discarded.  Use `--query-id=ID[,I
 `--nat=on|off` to narrow the run, and `--dry-run` to see what would be run.
 Partitions that are already cached and still match their data are skipped,
 while partitions that have received more flows since, or have been dropped,
-are rebuilt.  Only one run may be active at a time, for up to 8 hours, unless
-`--force` is used.  `--status` lists the parallel queries that are running now
-and the Filter each one is for, with its progress.
+are rebuilt.  Each Filter being materialized is registered in the Cacti process
+table as `materialize`, with the id of the Filter as the task id, for up to 8
+hours, so Filters can be materialized separately and at the same time.  A Filter
+that is already being materialized is skipped, unless `--force` is used.  The
+Filters page shows only those Filters as Running.  `--status` lists the Filters
+being materialized, and the parallel queries that are running now with the
+Filter each one is for, with its progress.  When it is not run from a terminal,
+for instance from the Filters page or by the poller, its progress is written to
+the Cacti log.  Sending it SIGTERM or SIGINT stops its workers and removes
+its registrations from the process table.
 
 Before it scans anything the script gets the partitions ready.  A query waits
 for an ALTER TABLE that is running on the partition it scans, and a long one

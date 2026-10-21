@@ -52,8 +52,8 @@ $dry_run   = false;
 $status    = false;
 $worker    = false;
 
-/* what the signal handler has to clean up: the process registration, and the worker being run */
-$materialize_registered = false;
+/* what the signal handler has to clean up: the filters registered, and the worker being run */
+$materialize_registered = [];
 $materialize_child      = null;
 $query_ids = [];
 $partitions = [];
@@ -185,18 +185,48 @@ if ($worker) {
 	exit(materialize_run_worker($query_ids[0], $nat, $start, $end));
 }
 
+/* the filters to materialize, all of them unless some were asked for */
+if (!cacti_sizeof($query_ids)) {
+	$query_ids = array_map('intval', array_column(flowview_db_fetch_assoc('SELECT id
+		FROM plugin_flowview_queries
+		ORDER BY id'), 'id'));
+}
+
+if (!cacti_sizeof($query_ids)) {
+	print 'NOTE: There are no FlowView queries to materialize.' . PHP_EOL;
+	exit(0);
+}
+
+/**
+ * Each filter is registered in the process table as its own materialize
+ * process, with the filter id as the task id, so the filters can be
+ * materialized separately and what is being done can be seen there.  A filter
+ * that already has one is left to it.
+ */
 if (!$force && !$dry_run) {
-	if (!register_process_start('flowview', 'materialize', 0, MATERIALIZE_RUNTIME_LIMIT)) {
-		print 'NOTE: A materialization is already running.  To override use --force' . PHP_EOL;
+	flowview_purge_dead_materializations();
+
+	$skipped = [];
+
+	foreach ($query_ids as $query_id) {
+		if (register_process_start('flowview', 'materialize', $query_id, MATERIALIZE_RUNTIME_LIMIT)) {
+			$materialize_registered[$query_id] = $query_id;
+		} else {
+			$skipped[] = $query_id;
+		}
+	}
+
+	if (cacti_sizeof($skipped)) {
+		materialize_say(sprintf('NOTE: Query(s) %s are already being materialized, so they are skipped.  To override use --force', implode(', ', $skipped)));
+	}
+
+	if (!cacti_sizeof($materialize_registered)) {
 		exit(0);
 	}
 
-	$materialize_registered = true;
-
 	register_shutdown_function('materialize_release');
 
-	/* the Filters page shows only these filters as running */
-	flowview_set_materialization_scope($query_ids);
+	$query_ids = array_values($materialize_registered);
 }
 
 materialize_install_signal_handlers();
@@ -246,12 +276,12 @@ if (!cacti_sizeof($queries)) {
 
 $modes = $nat !== false ? [$nat] : ['on', 'off'];
 
-print sprintf('FlowView Materialization: Partitions:%d From:%s To:%s Queries:%d NAT:%s',
+materialize_say(sprintf('FlowView Materialization: Partitions:%d From:%s To:%s Queries:%d NAT:%s',
 	cacti_sizeof($tables),
 	date('Y-m-d H:i:s', flowview_table_name_to_time(reset($tables), 'start_time')),
 	date('Y-m-d H:i:s', flowview_table_name_to_time(end($tables), 'end_time')),
 	cacti_sizeof($queries),
-	implode('/', $modes)) . PHP_EOL;
+	implode('/', $modes)));
 
 /**
  * Any alter that is due has to be done before the parallel query starts.  A
@@ -265,12 +295,12 @@ if (!$dry_run) {
 	$live = flowview_remove_live_partition_cache();
 
 	if ($live > 0) {
-		print sprintf('Removed %d cached result(s) of the live partition, as it is still receiving flows', $live) . PHP_EOL;
+		materialize_say(sprintf('Removed %d cached result(s) of the live partition, as it is still receiving flows', $live));
 	}
 
 	$cache = flowview_invalidate_stale_shard_cache(cacti_sizeof($partitions) ? $tables : []);
 
-	print sprintf('Cached Partitions Still Accurate:%d, Stale Partitions Removed:%d', $cache['kept'], $cache['removed']) . PHP_EOL;
+	materialize_say(sprintf('Cached Partitions Still Accurate:%d, Stale Partitions Removed:%d', $cache['kept'], $cache['removed']));
 }
 
 $began  = microtime(true);
@@ -301,14 +331,14 @@ foreach ($queries as $query) {
 		if ($status != 0) {
 			$failed++;
 
-			print sprintf('ERROR: Query:%d [%s] NAT:%s failed to materialize', $query['id'], $query['name'], $mode) . PHP_EOL;
+			materialize_say(sprintf('ERROR: Query:%d [%s] NAT:%s failed to materialize', $query['id'], $query['name'], $mode));
 		}
 	}
 }
 
 $time = microtime(true) - $began;
 
-print sprintf('FlowView Materialization Complete: Time:%0.2f Runs:%d Failed:%d', $time, $total, $failed) . PHP_EOL;
+materialize_say(sprintf('FlowView Materialization Complete: Time:%0.2f Runs:%d Failed:%d', $time, $total, $failed));
 
 if ($failed > 0) {
 	print 'NOTE: Partitions that finished materializing are kept, so run the materializer again to continue.' . PHP_EOL;
@@ -328,6 +358,14 @@ exit($failed > 0 ? 1 : 0);
  * @return void
  */
 function materialize_show_status(): void {
+	$materializing = flowview_get_materializing_filters();
+
+	if (cacti_sizeof($materializing)) {
+		print sprintf('Materializing Query(s): %s', implode(', ', $materializing)) . PHP_EOL;
+	} else {
+		print 'No Query is being materialized.' . PHP_EOL;
+	}
+
 	$running = flowview_get_running_requests();
 
 	if (!cacti_sizeof($running)) {
@@ -387,7 +425,7 @@ function materialize_wait_for_alters(array $tables): void {
 
 			arsort($running);
 
-			print sprintf('Waiting for an ALTER TABLE to finish on %d partition(s), the longest %s for %d seconds', cacti_sizeof($running), array_key_first($running), reset($running)) . PHP_EOL;
+			materialize_say(sprintf('Waiting for an ALTER TABLE to finish on %d partition(s), the longest %s for %d seconds', cacti_sizeof($running), array_key_first($running), reset($running)));
 		}
 
 		sleep(5);
@@ -424,7 +462,7 @@ function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run
 	$pending = flowview_get_pending_partition_alters($cold, $raw_engine);
 
 	if (cacti_sizeof($pending)) {
-		print sprintf('%s %d partition(s) that still need an ALTER TABLE', $dry_run ? 'DRY RUN: Would alter' : 'Altering', cacti_sizeof($pending)) . PHP_EOL;
+		materialize_say(sprintf('%s %d partition(s) that still need an ALTER TABLE', $dry_run ? 'DRY RUN: Would alter' : 'Altering', cacti_sizeof($pending)));
 
 		$i = 0;
 
@@ -437,7 +475,7 @@ function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run
 				$again = flowview_get_pending_partition_alters([$table], $raw_engine);
 
 				if (!isset($again[$table])) {
-					print sprintf('Table %s (%d of %d) was altered by another process', $table, $i, cacti_sizeof($pending)) . PHP_EOL;
+					materialize_say(sprintf('Table %s (%d of %d) was altered by another process', $table, $i, cacti_sizeof($pending)));
 
 					continue;
 				}
@@ -445,14 +483,14 @@ function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run
 				$plan = $again[$table];
 			}
 
-			print sprintf('%s Table %s (%d of %d): %s', $dry_run ? 'DRY RUN: Would alter' : 'Altering', $table, $i, cacti_sizeof($pending), trim($plan['alter'])) . PHP_EOL;
+			materialize_say(sprintf('%s Table %s (%d of %d): %s', $dry_run ? 'DRY RUN: Would alter' : 'Altering', $table, $i, cacti_sizeof($pending), trim($plan['alter'])));
 
 			if (!$dry_run) {
 				$began = microtime(true);
 
 				flowview_apply_partition_alter($table, $plan, false);
 
-				print sprintf('Altered Table %s in %0.2f seconds', $table, microtime(true) - $began) . PHP_EOL;
+				materialize_say(sprintf('Altered Table %s in %0.2f seconds', $table, microtime(true) - $began));
 			}
 		}
 	}
@@ -460,7 +498,7 @@ function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run
 	$no_nat = in_array('on', $modes, true) ? flowview_get_partitions_without_nat_columns($cold) : [];
 
 	if (cacti_sizeof($no_nat)) {
-		print sprintf('NOTE: %d partition(s) have no NAT columns, so they have no NAT data.  Run flowview_upgrade_nat_columns.php before materializing if they should.', cacti_sizeof($no_nat)) . PHP_EOL;
+		materialize_say(sprintf('NOTE: %d partition(s) have no NAT columns, so they have no NAT data.  Run flowview_upgrade_nat_columns.php before materializing if they should.', cacti_sizeof($no_nat)));
 	}
 }
 
@@ -522,19 +560,35 @@ function materialize_sig_handler($signo): void {
 }
 
 /**
- * Removes the registration of this materialization from the process table,
- * and which Filters it was for.  It does nothing the second time it is called.
+ * Removes the registration of each filter of this materialization from the
+ * process table.  It does nothing the second time it is called.
  *
  * @return void
  */
 function materialize_release(): void {
 	global $materialize_registered;
 
-	if ($materialize_registered) {
-		$materialize_registered = false;
+	foreach ($materialize_registered as $query_id) {
+		unregister_process('flowview', 'materialize', $query_id, (int) getmypid());
+	}
 
-		flowview_set_materialization_scope([]);
-		unregister_process('flowview', 'materialize', 0, (int) getmypid());
+	$materialize_registered = [];
+}
+
+/**
+ * Says something, on the screen, and also in the Cacti log when the output is
+ * not a terminal.  A materialization started from the Filters page, or by the
+ * poller, has nowhere to show it otherwise.
+ *
+ * @param string $text
+ *
+ * @return void
+ */
+function materialize_say(string $text): void {
+	print $text . PHP_EOL;
+
+	if (!function_exists('posix_isatty') || !posix_isatty(STDOUT)) {
+		cacti_log($text, false, 'FLOWVIEW');
 	}
 }
 
@@ -635,8 +689,9 @@ function materialize_run_worker(int $query_id, string $nat, int $start, int $end
 
 	set_request_var('usenat', $nat == 'on' ? 'true' : 'false');
 
-	$last_request = (int) flowview_db_fetch_cell('SELECT COALESCE(MAX(id), 0)
-		FROM parallel_database_query');
+	$GLOBALS['flowview_requests_made'] = [];
+
+	materialize_say(sprintf('Materializing Query:%d NAT:%s', $query_id, $nat));
 
 	$began = microtime(true);
 
@@ -645,29 +700,31 @@ function materialize_run_worker(int $query_id, string $nat, int $start, int $end
 	$finished = true;
 
 	if ($data === false) {
-		print sprintf('ERROR: Query:%d NAT:%s did not return a report.  See the Cacti log for details.', $query_id, $nat) . PHP_EOL;
+		materialize_say(sprintf('ERROR: Query:%d NAT:%s did not return a report.  See the Cacti log for details.', $query_id, $nat));
 
 		return 1;
 	}
 
-	$stats = flowview_db_fetch_row_prepared('SELECT COUNT(*) AS requests,
+	/* only the requests of this worker, as the workers of other filters can run at the same time */
+	$made = array_map('intval', array_values($GLOBALS['flowview_requests_made']));
+
+	$stats = cacti_sizeof($made) ? flowview_db_fetch_row_prepared('SELECT COUNT(*) AS requests,
 		COALESCE(SUM(total_shards), 0) AS shards,
 		COALESCE(SUM(cached_shards), 0) AS cached
 		FROM parallel_database_query
-		WHERE user_id = 0
-		AND id > ?',
-		[$last_request]);
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($made), '?')) . ')',
+		$made) : [];
 
 	if (cacti_sizeof($stats) && $stats['requests'] > 0) {
-		print sprintf('Query:%d NAT:%s Partitions:%d AlreadyMaterialized:%d Materialized:%d Time:%0.2f',
+		materialize_say(sprintf('Query:%d NAT:%s Partitions:%d AlreadyMaterialized:%d Materialized:%d Time:%0.2f',
 			$query_id,
 			$nat,
 			$stats['shards'],
 			$stats['cached'],
 			$stats['shards'] - $stats['cached'],
-			microtime(true) - $began) . PHP_EOL;
+			microtime(true) - $began));
 	} else {
-		print sprintf('Query:%d NAT:%s Already Materialized and Accurate Time:%0.2f', $query_id, $nat, microtime(true) - $began) . PHP_EOL;
+		materialize_say(sprintf('Query:%d NAT:%s Already Materialized and Accurate Time:%0.2f', $query_id, $nat, microtime(true) - $began));
 	}
 
 	return 0;
@@ -700,7 +757,9 @@ function display_help(): void {
 	print 'flow partition that has rotated, once with NAT on and once with NAT off.' . PHP_EOL;
 	print 'The partition still receiving flows is never cached.  Partitions that are' . PHP_EOL;
 	print 'already materialized and still accurate are skipped.' . PHP_EOL;
-	print 'Only one run may be active at a time, for up to 8 hours.' . PHP_EOL . PHP_EOL;
+	print 'Each Filter is registered in the process table as materialize, with its id as the task id,' . PHP_EOL;
+	print 'so Filters can be materialized separately.  A Filter that is already being materialized' . PHP_EOL;
+	print 'is skipped.  Registrations last up to 8 hours.' . PHP_EOL . PHP_EOL;
 
 	print 'Options:' . PHP_EOL;
 	print '    --query-id=ID       Only materialize this query, or a comma separated list of them.' . PHP_EOL;
@@ -709,6 +768,6 @@ function display_help(): void {
 	print '    --nat=on|off        Only materialize this NAT mode.' . PHP_EOL;
 	print '    --dry-run           List what would be materialized and exit.' . PHP_EOL;
 	print '    --status            List the parallel queries that are running and the Filter each is for.' . PHP_EOL;
-	print '    --force             Run even if another materialization is running.' . PHP_EOL;
+	print '    --force             Run even if a Filter is already being materialized.' . PHP_EOL;
 	print '    --debug             Provide some debug output during the run.' . PHP_EOL . PHP_EOL;
 }

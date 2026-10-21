@@ -4305,28 +4305,37 @@ function flowview_invalidate_stale_shard_cache(array $only = []): array {
 
 /**
  * flowview_launch_materialize - Start cli/materialize_queries.php in the
- * background, for the given FlowView queries and the given partitions, or
- * all of them when none are given.  Nothing is started when a
- * materialization is already registered as running, since only one may be
- * active at a time.
+ * background, for the given FlowView queries, or all of them when none are
+ * given, and for the given partitions, or all of them when none are given.
+ * A filter that is already being materialized is left to the run that has
+ * it, so the filters can be materialized separately.
  *
  * @param array $query_ids  The FlowView query ids to materialize
  * @param array $partitions The partition tables to materialize
  *
- * @return bool false when a materialization is already running
+ * @return array The filters a materialization was started for
  */
-function flowview_launch_materialize(array $query_ids = [], array $partitions = []): bool {
+function flowview_launch_materialize(array $query_ids = [], array $partitions = []): array {
 	global $config;
 
-	if (flowview_materialization_running()) {
-		return false;
-	}
-
-	$arguments = cacti_escapeshellarg($config['base_path'] . '/plugins/flowview/cli/materialize_queries.php');
-
 	if (cacti_sizeof($query_ids)) {
-		$arguments .= ' --query-id=' . implode(',', array_map('intval', $query_ids));
+		$targets = array_map('intval', $query_ids);
+	} else {
+		$targets = array_map('intval', array_column(flowview_db_fetch_assoc('SELECT id
+			FROM plugin_flowview_queries
+			ORDER BY id'), 'id'));
 	}
+
+	$targets = array_values(array_diff(array_unique(array_filter($targets, function ($id) {
+		return $id > 0;
+	})), flowview_get_materializing_filters()));
+
+	if (!cacti_sizeof($targets)) {
+		return [];
+	}
+
+	$arguments = cacti_escapeshellarg($config['base_path'] . '/plugins/flowview/cli/materialize_queries.php') .
+		' --query-id=' . implode(',', $targets);
 
 	$partitions = array_filter($partitions, function ($table) {
 		return flowview_partition_sort_key($table) !== '';
@@ -4338,7 +4347,7 @@ function flowview_launch_materialize(array $query_ids = [], array $partitions = 
 
 	exec_background(read_config_option('path_php_binary'), $arguments);
 
-	return true;
+	return $targets;
 }
 
 /**
@@ -4895,14 +4904,7 @@ function flowview_get_running_requests(): array {
  * @return bool
  */
 function flowview_materialization_running(): bool {
-	$registered = db_fetch_cell_prepared('SELECT COUNT(*)
-		FROM processes
-		WHERE tasktype = ?
-		AND taskname = ?
-		AND taskid = ?',
-		['flowview', 'materialize', 0]);
-
-	if ($registered > 0) {
+	if (cacti_sizeof(flowview_get_materializing_filters())) {
 		return true;
 	}
 
@@ -4910,55 +4912,59 @@ function flowview_materialization_running(): bool {
 }
 
 /**
- * flowview_set_materialization_scope - Record which filters the
- * materialization that is starting is for, so the Filters page only shows
- * those as running.  It only counts while the materialization is registered
- * as running.
+ * flowview_get_materializing_filters - The filters that are being
+ * materialized.  Each filter a materialization works on is registered in the
+ * process table as materialize, with the id of the filter as the task id, so
+ * the filters can be materialized separately and what is being done is
+ * visible from the process table.
  *
- * @param array $query_ids The FlowView query ids, or none for all of them
- *
- * @return void
+ * @return array The filter ids
  */
-function flowview_set_materialization_scope(array $query_ids): void {
-	set_config_option('flowview_materialize_queries', implode(',', array_map('intval', $query_ids)));
-}
-
-/**
- * flowview_get_materialization_scope - Which filters the registered
- * materialization is for.
- *
- * @return array|null null when no materialization is registered, an empty
- *                    array when it is for every filter, otherwise the ids of
- *                    the filters it is for
- */
-function flowview_get_materialization_scope(): ?array {
-	$registered = db_fetch_cell_prepared('SELECT COUNT(*)
+function flowview_get_materializing_filters(): array {
+	$rows = db_fetch_assoc_prepared('SELECT taskid
 		FROM processes
 		WHERE tasktype = ?
 		AND taskname = ?
-		AND taskid = ?',
-		['flowview', 'materialize', 0]);
+		AND taskid > 0
+		ORDER BY taskid',
+		['flowview', 'materialize']);
 
-	if ($registered < 1) {
-		return null;
-	}
-
-	$ids = array_filter(array_map('intval', explode(',', (string) read_config_option('flowview_materialize_queries', true))));
-
-	return array_values(array_unique($ids));
+	return array_values(array_unique(array_map('intval', array_column($rows, 'taskid'))));
 }
 
 /**
- * flowview_filter_is_materializing - Whether the registered materialization
- * is working on a filter.
+ * flowview_purge_dead_materializations - Remove the registrations of a
+ * materialization whose process is gone, such as one that was killed and could
+ * not clean up.  Without this the filter would show as running, and could not
+ * be materialized, until the registration timed out.  Meant for a script, as the
+ * web server may not be able to see the process.
  *
- * @param int        $query_id The FlowView query
- * @param array|null $scope    From flowview_get_materialization_scope()
- *
- * @return bool
+ * @return int The registrations removed
  */
-function flowview_filter_is_materializing(int $query_id, ?array $scope): bool {
-	return $scope !== null && (!cacti_sizeof($scope) || in_array($query_id, $scope, true));
+function flowview_purge_dead_materializations(): int {
+	if (!function_exists('cacti_process_still_running')) {
+		return 0;
+	}
+
+	$removed = 0;
+
+	$rows = db_fetch_assoc_prepared('SELECT id, pid
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?',
+		['flowview', 'materialize']);
+
+	foreach ($rows as $row) {
+		if (!cacti_process_still_running((int) $row['pid'])) {
+			db_execute_prepared('DELETE FROM processes
+				WHERE id = ?',
+				[$row['id']]);
+
+			$removed++;
+		}
+	}
+
+	return $removed;
 }
 
 /**
@@ -5184,7 +5190,12 @@ function flowview_materialize_rotated_partitions(): array {
 
 	$threads = read_config_option('flowview_parallel_threads');
 
-	if (empty($threads) || $threads == 1 || !flowview_launch_materialize([], $rotated)) {
+	/* a filter is left alone while it is being materialized, so this waits for a quiet moment to catch them all up */
+	if (empty($threads) || $threads == 1 || flowview_materialization_running()) {
+		return [];
+	}
+
+	if (!cacti_sizeof(flowview_launch_materialize([], $rotated))) {
 		return [];
 	}
 
@@ -5645,6 +5656,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
  */
 function flowview_track_request(int $request_id): void {
 	$GLOBALS['flowview_requests_in_flight'][$request_id] = $request_id;
+	$GLOBALS['flowview_requests_made'][$request_id]      = $request_id;
 }
 
 /**

@@ -379,28 +379,49 @@ it('starts the materialization in the background for the given queries', functio
 	$GLOBALS['config']['base_path']     = '/var/www/cacti';
 	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
 
-	plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 4)));
 
 	try {
-		$started = flowview_launch_materialize(array('3', 5, '7; rm -rf /'));
+		$started = flowview_launch_materialize(array('3', 5, '7; rm -rf /', 4, 0, 5));
 	} finally {
 		$GLOBALS['config']['base_path'] = $original_base_path;
 	}
 
-	expect($started)->toBeTrue()
+	expect($started)->toBe(array(3, 5, 7))
 		->and($GLOBALS['__test_exec'])->toBe(array(
 			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=3,5,7"),
 		))
-		->and($GLOBALS['__test_db_calls'][0]['params'])->toBe(array('flowview', 'materialize', 0));
+		->and($GLOBALS['__test_db_calls'][0]['params'])->toBe(array('flowview', 'materialize'));
 });
 
-it('does not start another materialization while one is registered', function () {
+it('does not start a materialization for filters that are already being materialized', function () {
 	$GLOBALS['__test_exec'] = array();
 
-	plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 3)));
 
-	expect(flowview_launch_materialize(array(3)))->toBeFalse()
+	expect(flowview_launch_materialize(array(3)))->toBe(array())
 		->and($GLOBALS['__test_exec'])->toBe(array());
+});
+
+it('materializes every filter that is not already being materialized when none are given', function () {
+	$GLOBALS['__test_exec']                      = array();
+	$original_base_path                          = $GLOBALS['config']['base_path'];
+	$GLOBALS['config']['base_path']              = '/var/www/cacti';
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+
+	plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 1), array('id' => 4), array('id' => 9)));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 4)));
+
+	try {
+		$started = flowview_launch_materialize();
+	} finally {
+		$GLOBALS['config']['base_path'] = $original_base_path;
+	}
+
+	expect($started)->toBe(array(1, 9))
+		->and($GLOBALS['__test_exec'])->toBe(array(
+			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=1,9"),
+		));
 });
 
 it('keys the cached shards on the map query without the time range', function () {
@@ -670,7 +691,7 @@ it('starts a materialization for only the partitions it is given', function () {
 	$GLOBALS['config']['base_path']              = '/var/www/cacti';
 	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
 
-	plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+	plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 1), array('id' => 2)));
 
 	try {
 		$started = flowview_launch_materialize(array(), array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024001; rm', 'plugin_flowview_raw_2024002'));
@@ -678,9 +699,9 @@ it('starts a materialization for only the partitions it is given', function () {
 		$GLOBALS['config']['base_path'] = $original_base_path;
 	}
 
-	expect($started)->toBeTrue()
+	expect($started)->toBe(array(1, 2))
 		->and($GLOBALS['__test_exec'])->toBe(array(
-			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --partitions=plugin_flowview_raw_2024001,plugin_flowview_raw_2024002"),
+			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=1,2 --partitions=plugin_flowview_raw_2024001,plugin_flowview_raw_2024002"),
 		));
 });
 
@@ -746,7 +767,7 @@ describe('materializing the partitions that rotated', function () {
 	it('starts a materialization for the partitions that rotated and records the newest', function () {
 		$GLOBALS['__test_config']['flowview_last_hot_partition'] = 'plugin_flowview_raw_2024002';
 		plugin_test_queue_db_result('db_fetch_assoc', $this->tables);
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 1), array('id' => 2)));
 
 		$original_base_path             = $GLOBALS['config']['base_path'];
 		$GLOBALS['config']['base_path'] = '/var/www/cacti';
@@ -760,14 +781,14 @@ describe('materializing the partitions that rotated', function () {
 		expect($started)->toBe(array('plugin_flowview_raw_2024002'))
 			->and($GLOBALS['__test_config']['flowview_last_hot_partition'])->toBe('plugin_flowview_raw_2024003')
 			->and($GLOBALS['__test_exec'])->toBe(array(
-				array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --partitions=plugin_flowview_raw_2024002"),
+				array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=1,2 --partitions=plugin_flowview_raw_2024002"),
 			));
 	});
 
 	it('leaves the record alone while a materialization is running so it is caught up later', function () {
 		$GLOBALS['__test_config']['flowview_last_hot_partition'] = 'plugin_flowview_raw_2024001';
 		plugin_test_queue_db_result('db_fetch_assoc', $this->tables);
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 3)));
 
 		expect(flowview_materialize_rotated_partitions())->toBe(array())
 			->and($GLOBALS['__test_config']['flowview_last_hot_partition'])->toBe('plugin_flowview_raw_2024001')
@@ -1114,8 +1135,8 @@ describe('finding a materialization that is still running', function () {
 			->and($lookup[0]['params'])->toBe(array('flowview', 'db\_query\_%', 'db\_shard\_%'));
 	});
 
-	it('is running while a materialization is registered', function () {
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+	it('is running while a filter is registered as being materialized', function () {
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 3)));
 
 		expect(flowview_materialization_running())->toBeTrue()
 			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
@@ -1124,7 +1145,7 @@ describe('finding a materialization that is still running', function () {
 	});
 
 	it('is still running after the script that started it has ended', function () {
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('pid' => 222, 'taskname' => 'db_shard_991', 'age' => 12)));
 		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 991, 'md5sum_tables' => 'aaaa')));
 
@@ -1132,8 +1153,6 @@ describe('finding a materialization that is still running', function () {
 	});
 
 	it('is not running when nothing is registered and no runner is registered', function () {
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
-
 		expect(flowview_materialization_running())->toBeFalse();
 	});
 });
@@ -1538,45 +1557,57 @@ describe('converting the partitions that have rotated', function () {
 describe('showing only the filters being materialized as running', function () {
 	beforeEach(function () {
 		plugin_test_reset();
+
+		if (!function_exists('cacti_process_still_running')) {
+			function cacti_process_still_running($pid) {
+				return in_array($pid, $GLOBALS['__test_live_pids'], true);
+			}
+		}
+
+		$GLOBALS['__test_live_pids'] = array();
 	});
 
-	it('records the filters a materialization is for, or all of them', function () {
-		flowview_set_materialization_scope(array(3, '7'));
+	it('finds the filters being materialized from their task ids', function () {
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+			array('taskid' => 3),
+			array('taskid' => '7'),
+			array('taskid' => 3),
+		));
 
-		expect(read_config_option('flowview_materialize_queries'))->toBe('3,7');
+		expect(flowview_get_materializing_filters())->toBe(array(3, 7));
 
-		flowview_set_materialization_scope(array());
+		$lookup = $GLOBALS['__test_db_calls'][0];
 
-		expect(read_config_option('flowview_materialize_queries'))->toBe('');
+		expect($lookup['params'])->toBe(array('flowview', 'materialize'))
+			->and($lookup['sql'])->toContain('taskid > 0');
 	});
 
-	it('has no scope when no materialization is registered', function () {
-		set_config_option('flowview_materialize_queries', '3');
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
-
-		expect(flowview_get_materialization_scope())->toBeNull();
+	it('finds no filter being materialized when none is registered', function () {
+		expect(flowview_get_materializing_filters())->toBe(array());
 	});
 
-	it('is for the filters that were chosen while it is registered', function () {
-		set_config_option('flowview_materialize_queries', '3,7,3');
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+	it('removes the registrations of a materialization whose process is gone', function () {
+		$GLOBALS['__test_live_pids'] = array(222);
 
-		expect(flowview_get_materialization_scope())->toBe(array(3, 7));
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+			array('id' => 10, 'pid' => 111),
+			array('id' => 11, 'pid' => 222),
+			array('id' => 12, 'pid' => '333'),
+		));
+
+		expect(flowview_purge_dead_materializations())->toBe(2);
+
+		$deleted = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM processes') === 0;
+		}));
+
+		expect(array_column($deleted, 'params'))->toBe(array(array(10), array(12)));
 	});
 
-	it('is for every filter when none were chosen', function () {
-		set_config_option('flowview_materialize_queries', '');
-		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+	it('is not running for a filter that is not registered, while another is', function () {
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 3)));
 
-		expect(flowview_get_materialization_scope())->toBe(array());
-	});
-
-	it('marks only the chosen filters as being materialized', function () {
-		expect(flowview_filter_is_materializing(3, array(3, 7)))->toBeTrue()
-			->and(flowview_filter_is_materializing(7, array(3, 7)))->toBeTrue()
-			->and(flowview_filter_is_materializing(1, array(3, 7)))->toBeFalse()
-			->and(flowview_filter_is_materializing(1, array()))->toBeTrue()
-			->and(flowview_filter_is_materializing(1, null))->toBeFalse();
+		expect(in_array(1, flowview_get_materializing_filters(), true))->toBeFalse();
 	});
 });
 

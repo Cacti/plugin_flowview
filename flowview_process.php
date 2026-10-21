@@ -176,9 +176,17 @@ foreach($tables as $table) {
 
 $raw_engine = get_set_default_fast_engine();
 
-/* every partition that has rotated, so ones missed while the poller was not running are caught up */
-foreach (flowview_convert_cold_partitions($raw_engine) as $table) {
-	flowview_debug("Converted partition {$table} to {$raw_engine}");
+/*
+ * A materialization gets the partitions ready itself, and waits for any alter
+ * that is running on them, so it is left to do that, rather than starting more.
+ */
+flowview_purge_dead_materializations();
+
+if (!cacti_sizeof(flowview_get_materializing_filters())) {
+	/* every partition that has rotated, so ones missed while the poller was not running are caught up */
+	foreach (flowview_convert_cold_partitions($raw_engine) as $table) {
+		flowview_debug("Converted partition {$table} to {$raw_engine}");
+	}
 }
 
 set_config_option('flowview_last_sequence', $sequence);

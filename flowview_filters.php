@@ -182,10 +182,15 @@ function actions_filters(): void {
 					flowview_db_execute("UPDATE plugin_flowview_queries SET enabled='on' WHERE id = " . $selected_items[$i]);
 				}
 			} elseif (get_nfilter_request_var('drp_action') == '5') {
-				if (flowview_launch_materialize($selected_items)) {
-					raise_message('flowview_materialize', __('Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log.', cacti_count($selected_items), 'flowview'), MESSAGE_LEVEL_INFO);
+				$started = flowview_launch_materialize($selected_items);
+				$skipped = cacti_count($selected_items) - cacti_sizeof($started);
+
+				if (cacti_sizeof($started) && $skipped > 0) {
+					raise_message('flowview_materialize', __('Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log.', cacti_sizeof($started), $skipped, 'flowview'), MESSAGE_LEVEL_INFO);
+				} elseif (cacti_sizeof($started)) {
+					raise_message('flowview_materialize', __('Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log.', cacti_sizeof($started), 'flowview'), MESSAGE_LEVEL_INFO);
 				} else {
-					raise_message('flowview_materialize', __('A Materialization is already running.  Please try again once it has finished.', 'flowview'), MESSAGE_LEVEL_WARN);
+					raise_message('flowview_materialize', __('The selected Filter(s) are already being materialized.  Please try again once that has finished.', 'flowview'), MESSAGE_LEVEL_WARN);
 				}
 /*			} elseif (get_nfilter_request_var('drp_action') == '2') {
 				for ($i=0; $i<cacti_count($selected_items); $i++) {
@@ -244,7 +249,7 @@ function actions_filters(): void {
 	} elseif (get_nfilter_request_var('drp_action') == '5') { /* Materialize */
 		print "<tr>
 			<td colspan='2' class='textArea'>
-				<p>" . __('Click \'Continue\' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets, and only one Materialization can run at a time.', 'flowview') . "</p>
+				<p>" . __('Click \'Continue\' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped.', 'flowview') . "</p>
 				<ul>$filter_list</ul>
 			</td>
 		</tr>";
@@ -512,7 +517,7 @@ function show_filters(): void {
 		$tables     = flowview_get_partition_tables();
 		$cold       = flowview_get_cold_partitions($tables);
 		$partitions = cacti_sizeof($tables);
-		$scope      = flowview_get_materialization_scope();
+		$materializing = flowview_get_materializing_filters();
 		$requests   = flowview_get_running_requests();
 
 		foreach ($filters as $filter) {
@@ -521,7 +526,7 @@ function show_filters(): void {
 			$queries = flowview_count_running_queries($md5sums, $requests);
 
 			/* only the filters being materialized, or with a query running, are running */
-			$running = flowview_filter_is_materializing((int) $filter['id'], $scope) || $queries > 0;
+			$running = in_array((int) $filter['id'], $materializing, true) || $queries > 0;
 			$status  = flowview_materialization_status($cached['nat'], $cached['non_nat'], $cold, $running);
 			$missing = flowview_get_missing_partitions($cached['nat'], $cached['non_nat'], $cold);
 
