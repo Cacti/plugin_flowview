@@ -32,6 +32,7 @@ require_once($config['base_path'] . '/plugins/flowview/setup.php');
 require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 
 flowview_connect();
+flowview_require_filter_status();
 
 set_default_action();
 
@@ -56,12 +57,7 @@ $sendinterval_arr = array(
 
 $formats = reports_get_format_files();
 
-$query_array = array_rekey(
-	flowview_db_fetch_assoc('SELECT id, name
-		FROM plugin_flowview_queries
-		ORDER BY name'),
-	'id', 'name'
-);
+$query_array = flowview_schedule_filters((int) get_filter_request_var('id'));
 
 if (db_table_exists('plugin_notification_lists')) {
 	$notification_lists = array_rekey(
@@ -1038,7 +1034,8 @@ function show_schedules(): void {
 				form_selectable_cell('-', $row['id'], '', 'right');
 			}
 
-			form_selectable_cell(($row['enabled'] == 'on' ? "<span class='deviceUp'><b>" . __('Yes', 'flowview') . "</b></span>":"<span class='deviceDown'><b>" . __('No', 'flowview') . "</b></span>"), $row['id'], '', 'right');
+			$status = flowview_filter_status($row);
+			form_selectable_cell('<span class="' . $status['class'] . '">' . $status['label'] . '</span>', $row['id'], '', 'right');
 			form_checkbox_cell($row['name'], $row['id']);
 
 			form_end_row();

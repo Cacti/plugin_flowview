@@ -211,3 +211,37 @@ resolution.
 
 -----------------------------------------------
 Copyright (c) 2004-2026 - The Cacti Group, Inc.
+
+### Filter and schedule status
+
+Filters and schedules show Enabled in green and Disabled in grey, using the Cacti theme status classes. A disabled filter is excluded from report and schedule selectors and does not run scheduled reports. Disabling a filter does not stop its listener or delete history. Installations missing the filter state column retain existing filters as enabled when the column is created.
+
+Missing filter-state columns are repaired by the background upgrade process, including same-version repairs. Pages return a retry message until repair completes; scheduled reports defer without issuing schema changes. Editing a schedule retains its existing disabled filter and labels it Disabled.
+
+Pending filter-state migration leaves scheduled queue entries and lastsent/start timestamps unchanged. FlowView uses its own dispatcher on both Cacti versions: deferred or failed children retain their original occurrence, without saving a replacement. Native queue IDs and the older report-ID convention are both accepted. If resetting the retained row to pending fails, the row is kept and a queue-repair error is logged.
+
+Queue dispatch processes a bounded snapshot, attempting each occurrence once per pass. A failed occurrence stays retained while healthy entries continue; previously attempted rows sort behind new work so repeated failures cannot monopolize the next snapshot. Schema loss or exhausted concurrency stops the pass.
+
+Scheduler capacity checks remove exact child registrations only when the operating system confirms that their PID no longer exists. Live or uncertain processes (including permission errors and platforms without POSIX liveness probes) retain their capacity reservation. Failed legacy queue resets now log an explicit queue-repair error while retaining the original occurrence.
+
+
+FlowView uses one dispatcher on both supported Cacti versions. A child records
+`complete` after successful preparation/delivery and saved schedule timestamps,
+or `retry` only for a known pre-delivery deferral. These markers let a later
+poller reconcile a child that finishes after its parent's timeout. Completed
+occurrences are deleted without executing them again. Only pending work or an
+explicit retry marker can start a new child.
+
+Every started child requires a recorded outcome, including an exit code of zero.
+A timeout, crash or early exit with no recorded outcome leaves the occurrence `running` and
+logs its queue ID instead of automatically resending it. If it remains unresolved,
+check the child process and report/notification logs, then reconcile the specific
+`reports_queued` row: remove an already-delivered occurrence only after repairing
+its schedule timestamps, or return a confirmed undelivered occurrence to pending.
+Do not reset an unresolved row merely because its process has disappeared.
+
+Completion cleanup and executable reports use separate bounded snapshots, so
+persistent cleanup failures cannot consume the pending-work budget. Cleanup
+still runs first and does not require a free execution slot.
+
+Scheduled FlowView notifications use one observable delivery helper on Cacti 1.2 and 1.3. A failed queue lookup before delivery requests retry. A returned mailer error, invalid notification configuration, or failed report-log write holds the occurrence for manual reconciliation without advancing schedule timestamps. This includes partial delivery to multiple notification targets; it is never automatically resent.

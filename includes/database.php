@@ -514,3 +514,8 @@ function flowview_db_get_table_column_types($table, mixed $cnn_id = false) {
 
     return $cols;
 }
+
+/** Check live metadata without Cacti's per-request column cache. */
+function flowview_filter_status_ready(): bool {
+	return (bool) flowview_db_fetch_row("SHOW COLUMNS FROM plugin_flowview_queries LIKE 'enabled'", false);
+}

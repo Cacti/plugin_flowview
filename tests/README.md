@@ -38,3 +38,26 @@ connection assertions.
 Security tests validate PHP 8.2 syntax compatibility and the plugin's
 install/version/uninstall structure without executing plugin source.
 
+The filter lifecycle regressions also launch the actual web and upgrade entrypoints
+in subprocesses with isolated core API fixtures. They verify that all three web
+pages do not load the schema-mutation helper and defer repair, including
+same-version installations, and that the
+background worker registers before attempting repair. The queue regression uses
+an in-memory SQLite database to check persisted ordering across multiple passes:
+a full failed batch remains pending while healthy rows advance on the next pass.
+This queue test requires PDO SQLite and skips explicitly when it is unavailable;
+it does not validate MariaDB schema syntax or metadata locking.
+
+
+Timeout regressions load Cacti's actual process helper and persist queue state in
+SQLite while a worker writes stderr and completes after the parent timeout. Both
+legacy and native entrypoints must avoid requeueing and reconcile late completion
+without a second delivery. Separate actual-child tests cover durable outcome
+markers, PID-scoped shutdown cleanup, deferred preparation and timestamp-write
+failure after completion. Fixtures adapt database APIs and worker delivery; they
+do not test SMTP or replace live MariaDB concurrency validation.
+
+Successful-dispatch doubles explicitly supply recorded child completion; an exit
+code alone never synthesizes that outcome. Regressions exercise an actual child
+connection failure that exits zero before its outcome callback, and a persistent
+queue with 100 undeletable completed rows followed by executable work.

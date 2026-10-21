@@ -23,6 +23,8 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once(__DIR__ . '/report_delivery.php');
+
 // reports_run()/reports_queue()/reports_log_and_notify() became native in
 // Cacti 1.3. Whether core will declare them is fixed by the Cacti version at
 // bootstrap, so gate the pre-1.3 shims on that rather than on function_exists():
@@ -730,6 +732,7 @@ function flowview_display_filter(): void {
 							<?php
 							$queries = flowview_db_fetch_assoc('SELECT id, name
 								FROM plugin_flowview_queries
+								WHERE enabled = "on"
 								ORDER BY name');
 
 							if (cacti_sizeof($queries)) {
@@ -1915,10 +1918,14 @@ function get_port_name($port_num, int $port_proto = 6) {
  * @param mixed $id
  * @param mixed $report_id
  *
- * @return void
+ * @return bool|null False permits retry; null holds uncertain delivery for repair; true completes.
  */
-function plugin_flowview_run_schedule($id, $report_id): void {
+function plugin_flowview_run_schedule($id, $report_id): ?bool {
 	global $config;
+
+	if (!flowview_filter_status_ready()) {
+		return false;
+	}
 
 	$start_time = microtime(true);
 
@@ -1927,10 +1934,25 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 		WHERE id = ?',
 		[$id]);
 
+	if ($schedule === false) {
+		return false;
+	}
+	if (!$schedule) {
+		return true;
+	}
+
 	$query = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		[$schedule['query_id']]);
+
+	if ($query === false) {
+		return false;
+	}
+
+	if (empty($query) || ($query['enabled'] ?? '') !== 'on') {
+		return true;
+	}
 
 	/* get the timespan from the query */
 	$span = [];
@@ -1951,20 +1973,24 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 
 	/* get the data and append to the boby */
 	$data = load_data_for_filter($schedule['query_id'], $start, $end);
-	if ($data !== false) {
-		$body .= $data['table'];
+	if ($data === false || ($data['data'] ?? null) === false) {
+		cacti_log('FlowView scheduled report query failed; retaining the occurrence for retry.', false, 'FLOWVIEW');
+		return false;
 	}
+	if (empty($data['data'])) {
+		cacti_log(sprintf('WARNING: Running of Flowview Schedule %s Returned not Data.  Please Check your Flowview Schedule', $report_id), false, 'FLOWVIEW');
+		return true;
+	}
+	$body .= $data['table'];
 
 	$body_text = html_escape($schedule['title']) . PHP_EOL . PHP_EOL;
 	$body_text .= 'From ' . date('Y-m-d H:i:s', $start) . ' to ' . date('Y-m-d H:i:s', $end) . PHP_EOL;
 	$body_text .= 'Using Query \'' . html_escape($query['name']) . '\'' . PHP_EOL . PHP_EOL;
 
-	if ($data !== false) {
-		$body_text .= implode(', ', array_keys($data['data'][0])) . PHP_EOL;
+	$body_text .= implode(', ', array_keys($data['data'][0])) . PHP_EOL;
 
-		foreach($data['data'] as $row) {
-			$body_text .= implode(', ', array_values($row)) . PHP_EOL;
-		}
+	foreach($data['data'] as $row) {
+		$body_text .= implode(', ', array_values($row)) . PHP_EOL;
 	}
 
 	/* process the format file */
@@ -1992,11 +2018,8 @@ function plugin_flowview_run_schedule($id, $report_id): void {
     $headers['User-Agent'] = 'Cacti-FlowView-v' . $version;
 	$headers['X-Priority'] = '1';
 
-	if (cacti_sizeof($data['data'])) {
-		reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers);
-	} else {
-		cacti_log(sprintf('WARNING: Running of Flowview Schedule %s Returned not Data.  Please Check your Flowview Schedule', $report_id), false, 'FLOWVIEW');
-	}
+	// Core's void notification helper cannot expose lookup or delivery failures.
+	return flowview_reports_log_and_notify($report_id, $start_time, 'html', 'flowview', $id, $subject, $data['data'], $body, $body_html, $body_text, [], $headers);
 }
 
 /**
@@ -2318,7 +2341,7 @@ function get_date_filter($sql_range, &$sql_range_params, $start, $end, int $rang
  * @param mixed $start
  * @param mixed $end
  *
- * @return mixed
+ * @return array|false Matching partitions, or false when metadata discovery fails.
  */
 function get_tables_for_query($start, $end = null) {
 	global $config, $graph_timespans;
@@ -2344,6 +2367,10 @@ function get_tables_for_query($start, $end = null) {
 		FROM information_schema.TABLES
 		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
 
+	if ($tables === false) {
+		return false;
+	}
+
 	if (cacti_sizeof($tables)) {
 		foreach($tables as $t) {
 			$parts = explode('_', $t['table']);
@@ -2355,19 +2382,26 @@ function get_tables_for_query($start, $end = null) {
 			}
 
 			if ($partition >= $start_part && $partition <= $end_part) {
-				$inc_tables[$t['table']]['table_name'] = $t['table'];
-
 				if (!isset($_SESSION['sess_flowview_table_details'][$t['table']])) {
 					$details = flowview_db_fetch_row("SELECT MIN(start_time) AS min_date, MAX(end_time) AS max_date, '' AS table_partition FROM {$t['table']}");
 
-					if (!cacti_sizeof($details)) {
-						cacti_log("WARNING: No Details for {$t['table']} returned");
-					}
-
-					$_SESSION['sess_flowview_table_details'][$t['table']] = $details;
 				} else {
 					$details = $_SESSION['sess_flowview_table_details'][$t['table']];
 				}
+
+				if (!$details) {
+					unset($_SESSION['sess_flowview_table_details'][$t['table']]);
+					cacti_log("WARNING: No Details for {$t['table']} returned");
+					return false;
+				}
+				// MIN/MAX return NULL for an empty partition. Recheck it on the
+				// next request rather than caching empty bounds while it grows.
+				if ($details['min_date'] === null && $details['max_date'] === null) {
+					unset($_SESSION['sess_flowview_table_details'][$t['table']]);
+					continue;
+				}
+				$_SESSION['sess_flowview_table_details'][$t['table']] = $details;
+				$inc_tables[$t['table']]['table_name'] = $t['table'];
 
 				$inc_tables[$t['table']]['table_partition'] = $details['table_partition'];
 				$inc_tables[$t['table']]['min_date']        = $details['min_date'];
@@ -2752,6 +2786,10 @@ function run_flow_query($session, $query_id, $start, $end) {
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		[$query_id]);
+
+	if (!$data) {
+		return false;
+	}
 
 	$title = flowview_db_fetch_cell_prepared('SELECT name
 		FROM plugin_flowview_queries
@@ -3410,6 +3448,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 		}
 
 		$tables     = get_tables_for_query($start, $end);
+		if ($tables === false) {
+			return false;
+		}
 		$sql        = '';
 		$all_params = [];
 		$results    = [];
@@ -3559,6 +3600,13 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 				$results = parallel_database_query_run($requests);
 			}
+		}
+
+		if (!is_array($results)) {
+			return false;
+		}
+		if (!$results) {
+			return ['data' => [], 'table' => '', 'title' => $title];
 		}
 
 		$output         = $data;
@@ -4220,10 +4268,10 @@ function parallel_database_query_run($requests) {
 		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
 
 		foreach($requests as $request_id) {
-			parallel_database_query_cleanup($request_id);
+			parallel_database_query_cleanup($request_id, true);
 		}
 
-		exit;
+		return false;
 	}
 
 	if (cacti_sizeof($requests) == 1) {
@@ -4237,16 +4285,29 @@ function parallel_database_query_run($requests) {
 			WHERE id = ?',
 			[$requests[0]]);
 
-		$tables = array_rekey(
-			flowview_db_fetch_assoc('SELECT map_table, map_create, results
-				FROM parallel_database_query
-				WHERE id IN(' . implode(', ', $requests) . ')'),
-			'map_table', ['map_create', 'results']
-		);
+		$query = json_decode($reduce_query ?: '', true);
+		$tables = flowview_db_fetch_assoc('SELECT map_table, map_create, results
+			FROM parallel_database_query
+			WHERE id IN(' . implode(', ', $requests) . ')');
 
-		if ($reduce_query != '' && cacti_sizeof($tables)) {
+		$valid_results = is_array($tables) && count($tables) === count($requests);
+		if ($valid_results) {
+			foreach ($tables as $index => $data) {
+				$tables[$index]['results'] = json_decode($data['results'] ?: '', true);
+				if (!is_array($tables[$index]['results'])) {
+					$valid_results = false;
+					break;
+				}
+			}
+		}
+
+		// Every component must succeed before any results are materialized or reduced.
+		if (is_array($query) && isset($query['sql_query'], $query['sql_where'], $query['sql_groupby'], $query['sql_having'], $query['sql_order'], $query['sql_limit'], $query['sql_params'])
+			&& is_array($query['sql_params']) && $valid_results) {
+			$tables = array_rekey($tables, 'map_table', ['map_create', 'results']);
 			$i = 0;
 			$temp_table = '';
+			$materialized = true;
 
 			foreach($tables as $table => $data) {
 				if ($i == 0) {
@@ -4255,10 +4316,13 @@ function parallel_database_query_run($requests) {
 					$create = str_replace($table, $temp_table, $data['map_create']);
 					$create = str_replace('CREATE TABLE', 'CREATE TEMPORARY TABLE', $create);
 
-					flowview_db_execute($create);
+					if (flowview_db_execute($create) === false) {
+						$materialized = false;
+						break;
+					}
 				}
 
-				$results = json_decode($data['results'], true);
+				$results = $data['results'];
 
 				if (cacti_sizeof($results)) {
 					$sql     = [];
@@ -4288,13 +4352,14 @@ function parallel_database_query_run($requests) {
 					//cacti_log($sql_prefix . implode(', ', $sql));
 
 					/* insert entries into the intermediary table */
-					flowview_db_execute($sql_prefix . implode(', ', $sql));
+					if (flowview_db_execute($sql_prefix . implode(', ', $sql)) === false) {
+						$materialized = false;
+						break;
+					}
 				}
 
 				$i++;
 			}
-
-			$query = json_decode($reduce_query, true);
 
 			$final_query = "{$query['sql_query']}
 				FROM $temp_table
@@ -4306,18 +4371,19 @@ function parallel_database_query_run($requests) {
 
 			//cacti_log($final_query);
 
-			$results = flowview_db_fetch_assoc_prepared($final_query, $query['sql_params']);
+			$results = $materialized ? flowview_db_fetch_assoc_prepared($final_query, $query['sql_params']) : false;
 
 			//cacti_log(json_encode($results));
 
 			flowview_db_execute("DROP TEMPORARY TABLE IF EXISTS $temp_table");
 		} else {
-			$results = [];
+			$results = false;
 		}
 	}
 
 	foreach($requests as $request_id) {
-		parallel_database_query_cleanup($request_id);
+		// Failed cached requests must be recreated, with new shards, on retry.
+		parallel_database_query_cleanup($request_id, !is_array($results));
 	}
 
 	return $results;
@@ -7336,4 +7402,179 @@ function get_set_default_fast_engine() {
 	}
 
 	return $myengine;
+}
+
+/**
+ * Return the theme status class and translated state without missing-key warnings.
+ *
+ * @param array $record Filter or schedule row.
+ * @return array
+ */
+function flowview_filter_status(array $record): array {
+	if (!array_key_exists('enabled', $record)) {
+		return ['class' => 'deviceDisabled', 'label' => __('Unavailable', 'flowview')];
+	}
+
+	return $record['enabled'] === 'on'
+		? ['class' => 'deviceUp', 'label' => __('Enabled', 'flowview')]
+		: ['class' => 'deviceDisabled', 'label' => __('Disabled', 'flowview')];
+}
+
+/** Enabled choices plus the existing association when editing a schedule. */
+function flowview_schedule_filters(int $schedule_id): array {
+	$rows = flowview_db_fetch_assoc_prepared('SELECT id, name, enabled FROM plugin_flowview_queries
+		WHERE enabled = "on" OR id = (SELECT query_id FROM plugin_flowview_schedules WHERE id = ?)
+		ORDER BY name', [$schedule_id]);
+	$options = [];
+	foreach ($rows ?: [] as $row) {
+		$options[$row['id']] = $row['enabled'] === 'on' ? $row['name'] : $row['name'] . ' (' . __('Disabled', 'flowview') . ')';
+	}
+	return $options;
+}
+
+/** Resolve native queue IDs and the pre-1.3 report-ID convention. */
+function flowview_schedule_queue_id(array $options) {
+	$value = $options['queue-id'] ?? false;
+	if ($value === false) {
+		$value = $options['report-id'] ?? false;
+	}
+	return filter_var($value, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]) ?: false;
+}
+
+/** Own FlowView dispatch so failed/deferred children cannot consume queue rows. */
+function flowview_reports_run(int $id, ?array $report = null): bool {
+	global $config;
+	if (!flowview_filter_status_ready()) {
+		return false;
+	}
+	$report ??= db_fetch_row_prepared('SELECT * FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']);
+	if (!$report) {
+		return false;
+	}
+	if (($report['status'] ?? '') === 'complete') {
+		return flowview_reports_complete($id, (int) $report['source_id']);
+	}
+	if (($report['status'] ?? '') === 'retry') {
+		if (!db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=? AND source=? AND status=?', ['pending', $id, 'flowview', 'retry'])) {
+			return false;
+		}
+	}
+	require_once $config['base_path'] . '/lib/poller.php';
+	if (!db_execute_prepared('UPDATE reports_queued SET status=?, start_time=? WHERE id=? AND source=? AND status=?', ['running', date('Y-m-d H:i:s'), $id, 'flowview', 'pending']) || db_affected_rows() !== 1) {
+		return false;
+	}
+	$output = [];
+	$status = -2; // Sentinel: unchanged only when no process could be started.
+	$command = $report['run_command'] . ' --report-id=' . (int) $report['source_id'] . ' --queue-id=' . $id;
+	$timeout = (int) $report['run_timeout'];
+	if ($timeout <= 0) {
+		$timeout = max(1, (int) read_config_option('scheduler_timeout') ?: 300);
+	}
+	exec_with_timeout($command, $output, $status, $timeout);
+	$expected = 'running';
+	if ($status !== -2) {
+		// Exit status alone cannot prove completion, even when it is zero.
+		$outcome = db_fetch_row_prepared('SELECT status FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']);
+		if (($outcome['status'] ?? '') === 'complete') {
+			return flowview_reports_complete($id, (int) $report['source_id']);
+		}
+		if (($outcome['status'] ?? '') !== 'retry') {
+			cacti_log('FlowView occurrence ' . $id . ' has an unresolved child outcome (exit ' . $status . '); retained without retry to prevent duplicate delivery. Check the child and reconcile reports_queued before retrying.', false, 'FLOWVIEW');
+			return false;
+		}
+		$expected = 'retry';
+	}
+	// Never overwrite a retry another dispatcher has already claimed.
+	if (!db_execute_prepared('UPDATE reports_queued SET status=? WHERE id=? AND source=? AND status=?', ['pending', $id, 'flowview', $expected])) {
+		cacti_log('Unable to reset the retained FlowView occurrence; queue repair is required.', false, 'FLOWVIEW');
+	}
+	return false;
+}
+
+/** Delete a delivered occurrence without executing its child again. */
+function flowview_reports_complete(int $id, int $schedule_id): bool {
+	// Delivery succeeded: retry only cleanup, never preparation or notification.
+	for ($attempt = 0; $attempt < 2; $attempt++) {
+		if (db_execute_prepared('DELETE FROM reports_queued WHERE id=? AND source=?', [$id, 'flowview']) !== false) {
+			return true;
+		}
+	}
+	cacti_log('Unable to remove completed FlowView occurrence ' . $id . ' for schedule ' . $schedule_id . '; queue repair is required. The report already completed; remove this reports_queued row without rerunning it.', false, 'FLOWVIEW');
+	return false;
+}
+
+/** Attempt a bounded, fair queue snapshot without retrying failures in the same pass. */
+function flowview_reports_run_pending(int $concurrency = 1, int $limit = 100): int {
+	if (!flowview_filter_status_ready()) {
+		return 0;
+	}
+	$limit = max(1, min(1000, $limit));
+	$done = 0;
+	// Cleanup has its own budget: persistent deletion failures cannot starve execution.
+	$completed = db_fetch_assoc_prepared('SELECT id,source_id FROM reports_queued WHERE source=? AND status=? ORDER BY start_time,id LIMIT ' . $limit, ['flowview', 'complete']);
+	if (is_array($completed)) {
+		foreach ($completed as $report) {
+			if (flowview_reports_complete((int) $report['id'], (int) $report['source_id'])) {
+				$done++;
+			}
+		}
+	} else {
+		cacti_log('Unable to read completed FlowView occurrences for cleanup.', false, 'FLOWVIEW');
+	}
+	// Executable work has an independent bounded, fair snapshot.
+	$reports = db_fetch_assoc_prepared('SELECT id FROM reports_queued WHERE source=? AND status IN (?, ?) ORDER BY start_time,scheduled_time,id LIMIT ' . $limit, ['flowview', 'pending', 'retry']);
+	if (!is_array($reports)) {
+		cacti_log('Unable to read pending FlowView occurrences.', false, 'FLOWVIEW');
+		return $done;
+	}
+	foreach ($reports as $report) {
+		if (!flowview_filter_status_ready()) {
+			break;
+		}
+		$running = flowview_running_schedule_children();
+		if ($running === null || (int) $running >= max(1, $concurrency)) {
+			break;
+		}
+		if (flowview_reports_run((int) $report['id'])) {
+			$done++;
+		}
+	}
+	return $done;
+}
+
+/** Count live/uncertain children, removing only exact registrations confirmed dead. */
+function flowview_running_schedule_children(): ?int {
+	$rows = db_fetch_assoc_prepared('SELECT taskname,taskid,pid FROM processes WHERE tasktype=? AND taskname LIKE ?', ['flowsched', 'child%']);
+	if (!is_array($rows)) {
+		return null;
+	}
+	$running = 0;
+	foreach ($rows as $row) {
+		if (flowview_schedule_pid_alive($row['pid']) !== false) {
+			$running++;
+			continue;
+		}
+		// A concurrent registration with another PID must survive this cleanup.
+		$deleted = db_execute_prepared('DELETE FROM processes WHERE tasktype=? AND taskname=? AND taskid=? AND pid=?', ['flowsched', $row['taskname'], $row['taskid'], $row['pid']]);
+		if (!$deleted) {
+			$running++;
+			cacti_log('Unable to remove a dead FlowView child registration.', false, 'FLOWVIEW');
+		} elseif ((int) db_affected_rows() !== 1) {
+			// A replacement PID may now own the reservation; do not grant its slot.
+			$running++;
+		}
+	}
+	return $running;
+}
+
+/** Null means liveness cannot be established; permission errors never mean dead. */
+function flowview_schedule_pid_alive($pid): ?bool {
+	$valid = filter_var($pid, FILTER_VALIDATE_INT, ['options' => ['min_range' => 2, 'max_range' => 2147483647]]);
+	if (!$valid || !function_exists('posix_kill') || !function_exists('posix_get_last_error')) {
+		return null;
+	}
+	if (@posix_kill($valid, 0)) {
+		return true;
+	}
+	return posix_get_last_error() === 3 ? false : null;
 }

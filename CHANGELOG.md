@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* fix: Persist filter enabled state on fresh and existing installations, show enabled/disabled filter and schedule status using theme colours, and exclude disabled filters from report and schedule selection
 * fix: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
 
 * issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu

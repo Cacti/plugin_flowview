@@ -95,6 +95,8 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_db_results'] = array();
 		$GLOBALS['__test_config']     = array();
 		$GLOBALS['__test_messages']   = array();
+		$GLOBALS['__test_saved_rows'] = [];
+		$GLOBALS['__test_user_settings'] = [];
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -120,17 +122,23 @@ if (!function_exists('plugin_test_db_result')) {
 	}
 }
 
+if (!function_exists('db_qstr')) {
+	function db_qstr($value) {
+		return "'" . str_replace("'", "''", (string) $value) . "'";
+	}
+}
+
 if (!function_exists('db_execute')) {
 	function db_execute($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute', true);
 	}
 }
 
 if (!function_exists('db_execute_prepared')) {
 	function db_execute_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute_prepared', true);
 	}
 }
 
@@ -144,6 +152,9 @@ if (!function_exists('db_fetch_assoc')) {
 if (!function_exists('db_fetch_assoc_prepared')) {
 	function db_fetch_assoc_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
+		if (str_starts_with($sql, 'SELECT id,source_id FROM reports_queued')) {
+			return plugin_test_db_result('completed_reports', []);
+		}
 		return plugin_test_db_result('db_fetch_assoc_prepared', array());
 	}
 }
@@ -158,6 +169,9 @@ if (!function_exists('db_fetch_row')) {
 if (!function_exists('db_fetch_row_prepared')) {
 	function db_fetch_row_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_row_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
+		if (str_starts_with($sql, 'SELECT status FROM reports_queued')) {
+			return plugin_test_db_result('report_outcome', []);
+		}
 		return plugin_test_db_result('db_fetch_row_prepared', array());
 	}
 }
@@ -201,7 +215,7 @@ if (!function_exists('db_index_exists')) {
 
 if (!function_exists('db_column_exists')) {
 	function db_column_exists($table, $column) {
-		return false;
+		return plugin_test_db_result('db_column_exists', false);
 	}
 }
 
@@ -303,6 +317,12 @@ if (!function_exists('is_realm_allowed')) {
 	}
 }
 
+if (!function_exists('raise_message_javascript')) {
+	function raise_message_javascript(...$args) {
+		raise_message(...$args);
+	}
+}
+
 if (!function_exists('raise_message')) {
 	function raise_message($id, $text = '', $level = 0) {
 		$GLOBALS['__test_messages'][] = array($id, $text, $level);
@@ -394,7 +414,8 @@ if (!function_exists('is_error_message')) {
 
 if (!function_exists('sql_save')) {
 	function sql_save($array, $table, $key = 'id') {
-		return isset($array['id']) ? $array['id'] : 1;
+		$GLOBALS['__test_saved_rows'][] = ['table' => $table, 'row' => $array];
+		return plugin_test_db_result('sql_save', isset($array['id']) ? $array['id'] : 1);
 	}
 }
 
@@ -471,3 +492,84 @@ function flowview_test_load($path) {
 
 require_once dirname(__DIR__) . '/includes/functions.php';
 require_once dirname(__DIR__) . '/includes/database.php';
+
+// Core helper doubles are reset through plugin_test_reset(), never test collection.
+if (!function_exists('read_user_setting')) {
+	function read_user_setting($name, $default = false) {
+		return $GLOBALS['__test_user_settings'][$name] ?? $default;
+	}
+}
+if (!function_exists('get_timespan')) {
+	function get_timespan(&$span, $now, $timespan, $weekday) {
+		$result = plugin_test_db_result('get_timespan', ['begin_now' => $now - 1800, 'end_now' => $now]);
+		if ($result instanceof Throwable) {
+			throw $result;
+		}
+		$span = $result;
+	}
+}
+if (!function_exists('exec_with_timeout')) {
+	function exec_with_timeout($command, &$output, &$status, $timeout = 5) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_with_timeout', 'sql' => '', 'params' => [$command, $timeout]];
+		$exit = plugin_test_db_result('exec_with_timeout', 0);
+		if ($exit !== null) {
+			$status = $exit;
+		}
+		return plugin_test_db_result('exec_with_timeout_result', null);
+	}
+}
+
+if (!function_exists('db_affected_rows')) {
+	function db_affected_rows($conn = false) {
+		return plugin_test_db_result('db_affected_rows', 1);
+	}
+}
+if (!function_exists('register_process_start')) {
+	function register_process_start($type, $name, $id = 0, $timeout = 300) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'register_process_start', 'sql' => '', 'params' => [$type, $name, $id, $timeout]];
+		return plugin_test_db_result('register_process_start', true);
+	}
+}
+
+if (!function_exists('reports_load_format_file')) {
+	function reports_load_format_file($format, &$output, &$report_tag, &$theme) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'reports_load_format_file', 'sql' => '', 'params' => [$format]];
+		$output = '<REPORT>';
+		$report_tag = plugin_test_db_result('delivery_format_tag', true);
+		return plugin_test_db_result('delivery_format_ok', true);
+	}
+}
+
+// Schema-mutation helpers are loaded explicitly for isolated upgrade tests.
+require_once dirname(__DIR__) . '/includes/filter_upgrade.php';
+
+if (!function_exists('cacti_session_close')) {
+	function cacti_session_close() {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'cacti_session_close', 'sql' => '', 'params' => []];
+	}
+}
+if (!function_exists('array_rekey')) {
+	function array_rekey($rows, $key, $value) {
+		if (!is_array($value)) {
+			return array_column($rows, $value, $key);
+		}
+		$result = [];
+		foreach ($rows as $row) {
+			$result[$row[$key]] = array_intersect_key($row, array_flip($value));
+		}
+		return $result;
+	}
+}
+
+if (!function_exists('db_debug')) {
+	function db_debug($message) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_debug', 'sql' => '', 'params' => [$message]];
+	}
+}
+
+if (!function_exists('mailer')) {
+	function mailer(...$args) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'mailer', 'sql' => '', 'params' => $args];
+		return plugin_test_db_result('mailer', '');
+	}
+}

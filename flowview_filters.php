@@ -34,6 +34,7 @@ require_once($config['base_path'] . '/lib/time.php');
 require_once($config['base_path'] . '/lib/timespan_settings.php');
 
 flowview_connect();
+flowview_require_filter_status();
 
 set_default_action();
 
@@ -382,6 +383,10 @@ function show_filters(): void {
 			'align' => 'right',
 			'sort' => 'ASC'
 		),
+		'nosort2' => array(
+			'display' => __('Status', 'flowview'),
+			'align' => 'center'
+		),
 		'nosort1' => array(
 			'display' => __('Resolution', 'flowview'),
 			'align' => 'right',
@@ -421,6 +426,8 @@ function show_filters(): void {
 			form_selectable_cell($type, $filter['id']);
 			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
 			form_selectable_cell($sort, $filter['id'], '', 'right');
+			$status = flowview_filter_status($filter);
+			form_selectable_cell('<span class="' . $status['class'] . '">' . $status['label'] . '</span>', $filter['id'], '', 'center');
 			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');
 			form_checkbox_cell($filter['name'], $filter['id']);
 

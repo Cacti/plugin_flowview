@@ -34,6 +34,7 @@ require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 require_once($config['base_path'] . '/lib/time.php');
 
 flowview_connect();
+flowview_require_filter_status();
 
 set_default_action();
 
@@ -321,7 +322,7 @@ function load_session_for_filter() {
 			WHERE id = ?',
 			array(get_request_var('query')));
 
-		if (cacti_sizeof($query)) {
+		if (cacti_sizeof($query) && ($query['enabled'] ?? '') === 'on') {
 			foreach($query as $column => $value) {
 				switch($column) {
 					case 'name':
