@@ -23,6 +23,8 @@
  +-------------------------------------------------------------------------+
 */
 
+require_once(__DIR__ . '/includes/nbar_common.php');
+
 /**
  * Return the CSP nonce attribute for inline <script> tags, safely across
  * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
@@ -37,6 +39,21 @@ function plugin_flowview_csp_nonce(): string {
 	}
 
 	return '';
+}
+
+/**
+ * Escape an HTML attribute on supported Cacti 1.2 and newer installations.
+ *
+ * @param mixed $value Attribute value.
+ *
+ * @return string Escaped attribute value.
+ */
+function plugin_flowview_escape_attr(mixed $value): string {
+	if (function_exists('html_escape_attr')) {
+		return html_escape_attr($value);
+	}
+
+	return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
 /**
@@ -146,10 +163,15 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 		FROM plugin_config
 		WHERE directory = ?', array('flowview'));
 
-	if ($current != $old || $force) {
+	if ($current != $old || $force || (int) read_config_option('flowview_nbar_schema_version') < 2) {
 		$php_binary = read_config_option('path_php_binary');
 
-		exec_background($php_binary, '-q ' .$config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
+		/* This check runs on every page load. Launch the upgrade once; cli/flowview_upgrade.php takes over this
+		 * registration's PID and releases it when it finishes, and the four hour timeout recovers it if that
+		 * process dies. */
+		if (register_process_start('flowview', 'upgrade_launch', 0, 14400)) {
+			exec_background($php_binary, '-q ' . $config['base_path'] . '/plugins/flowview/cli/flowview_upgrade.php');
+		}
 
 		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
 
@@ -228,6 +250,8 @@ function flowview_draw_navigation_text($nav) {
 		'url' => 'flowview.php',
 		'level' => '0'
 	);
+
+	$nav['flowview.php:applications'] = $nav['flowview.php:'];
 
 	$nav['flowview.php:view'] = array(
 		'title' => __('Dashboard', 'flowview'),
@@ -620,6 +644,12 @@ function flowview_config_settings(): void {
 			),
 			'default' => 30
 		),
+	'flowview_nbar_retention_days' => array(
+        'friendly_name' => __('Cisco Apps (NBAR) History Retention', 'flowview'),
+        'description' => __('Days of application history to retain. Reducing this removes older history during scheduled cleanup; increasing it cannot restore expired data.', 'flowview'),
+        'method' => 'drop_array', 'default' => '7',
+        'array' => array(1 => __('1 Day', 'flowview'), 3 => __('3 Days', 'flowview'), 7 => __('7 Days', 'flowview'), 14 => __('14 Days', 'flowview'), 30 => __('30 Days', 'flowview'))
+    ),
 		'flowview_partition' => array(
 			'friendly_name' => __('Database Partitioning Scheme', 'flowview'),
 			'description' => __('Depending on the number of flows per minute, you may require more tables per day.', 'flowview'),
@@ -772,6 +802,10 @@ function flowview_poller_bottom(): void {
 
 	flowview_connect();
 
+	if ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
+		fv_nbar_launch_maintenance();
+	}
+
 	$retention_days = read_config_option('flowview_retention');
 
 	if (empty($retention_days)) {
@@ -850,7 +884,7 @@ function flowview_query_service_run($request_ids): bool {
 		$timeout = 300;
 	}
 
-	$payload = json_encode(array('query_ids' => array_map('intval', $request_ids)));
+	$payload = (string) json_encode(['query_ids' => array_map('intval', $request_ids)]);
 
 	$headers = array('Content-Type: application/json');
 
@@ -1069,6 +1103,12 @@ function flowview_setup_table(): void {
 	global $config, $settings, $flowviewdb_default;
 
 	flowview_connect();
+
+	if (!flowview_db_create_nbar_tables()) {
+		throw new RuntimeException('Unable to install NBAR history schema');
+	}
+
+	set_config_option('flowview_nbar_schema_version', '2');
 
 	flowview_db_execute("CREATE TABLE IF NOT EXISTS `plugin_flowview_dnscache` (
 		`id` int(11) unsigned NOT NULL AUTO_INCREMENT,

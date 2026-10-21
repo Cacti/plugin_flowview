@@ -23,11 +23,13 @@
  +-------------------------------------------------------------------------+
 */
 
-chdir('../../');
+chdir(__DIR__ . '/../../../');
 require('./include/cli_check.php');
+require_once('./lib/poller.php');
 require_once('./plugins/flowview/includes/functions.php');
 require_once('./plugins/flowview/setup.php');
 require_once('./plugins/flowview/includes/database.php');
+require_once('./plugins/flowview/includes/nbar_common.php');
 
 flowview_connect();
 
@@ -38,6 +40,7 @@ $parms = $_SERVER['argv'];
 array_shift($parms);
 
 $forcever    = '';
+$nbar_worker = '';
 
 if (cacti_sizeof($parms)) {
 	foreach($parms as $parameter) {
@@ -49,6 +52,13 @@ if (cacti_sizeof($parms)) {
 		}
 
 		switch ($arg) {
+			case '--nbar-worker':
+				if (!in_array($value, ['supervise', 'build'], true)) {
+					exit(1);
+				}
+				$nbar_worker = $value;
+
+				break;
 			case '--forcever':
 				$forcever = $value;
 				break;
@@ -71,6 +81,17 @@ if (cacti_sizeof($parms)) {
 }
 
 
+// Internal maintenance modes never enter the schema-upgrade path.
+if ($nbar_worker !== '') {
+	if ($nbar_worker === 'supervise') {
+		fv_nbar_supervise_maintenance();
+	} elseif ((int) read_config_option('flowview_nbar_schema_version') >= 2) {
+		fv_nbar_cleanup();
+		fv_nbar_summary_refresh(20, true);
+	}
+	exit(0);
+}
+
 /* we need to rerun the upgrade, force the current version */
 if ($forcever == '') {
 	$old_version = db_fetch_cell('SELECT version FROM plugin_config WHERE directory = "flowview"');
@@ -82,23 +103,36 @@ $info            = plugin_flowview_version();
 $current_version = $info['version'];
 
 /* do a version check */
-if ($forcever == '' && $old_version == $current_version) {
+if ($forcever == '' && $old_version == $current_version && (int) read_config_option('flowview_nbar_schema_version') >= 2) {
 	cacti_log('Your Flowview is already up to date (v' . $current_version . ' vs v' . $old_version . ') not upgrading.  Use --forcever to override', true, 'FLOWVIEW');
+
+	unregister_process('flowview', 'upgrade_launch', 0);
+
 	exit(0);
 }
 
-if (!register_process_start('flowview', 'upgrade', 1, 86400)) {
+if (!register_process_start('flowview', 'upgrade', 1, 14400)) {
 	if (empty($forcever)) {
 		print 'WARNING: Running process detected.  To override use --forcever' . PHP_EOL;
 		exit(1);
 	}
 }
 
+// The launcher row holds the web worker's PID.  Hand it to this process so a timeout recovery can only
+// ever signal this upgrade, never a PHP-FPM worker that has since been reused for another request.
+if (db_table_exists('processes')) {
+	db_execute_prepared('UPDATE processes SET pid = ? WHERE tasktype = ? AND taskname = ? AND taskid = ?', [getmypid(), 'flowview', 'upgrade_launch', 0]);
+}
+
+// release this run and the web launcher's lock however the script ends, including a fatal error
+register_shutdown_function(static function (): void {
+	unregister_process('flowview', 'upgrade', 1);
+	unregister_process('flowview', 'upgrade_launch', 0);
+});
+
 cacti_log('Upgrading from v' . $old_version . ' to ' . $current_version, true, 'FLOWVIEW');
 
 flowview_upgrade($current_version, $old_version);
-
-unregister_process('flowview', 'upgrade', 1);
 
 exit(0);
 
@@ -119,6 +153,11 @@ exit(0);
  * @return void
  */
 function flowview_upgrade($current, $old): void {
+	if (!flowview_db_create_nbar_tables()) {
+		throw new RuntimeException('Unable to upgrade NBAR history schema');
+	}
+	set_config_option('flowview_nbar_schema_version', '2');
+
 	global $config, $info;
 
 	if ($current != $old) {

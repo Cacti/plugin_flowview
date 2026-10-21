@@ -64,7 +64,7 @@ ini_set('display_errors', '0');
 
 class CactiSecureHeaders {
 	public static function getNonceAttribute(): string {
-		return ' nonce="pest-controlled-double"';
+		return 'nonce="pest-controlled-double"';
 	}
 }
 
@@ -86,8 +86,16 @@ CHILD;
 
 		preg_match('/<<<(.*)>>>/s', (string) $output, $matches);
 		expect($matches)->toHaveKey(1);
-		expect($matches[1])->toBe(' nonce="pest-controlled-double"');
+		expect($matches[1])->toBe('nonce="pest-controlled-double"');
 	} finally {
 		@unlink($tmp);
+	}
+});
+
+
+test('inline script tags separate the nonce attribute from the tag name', function () {
+	foreach (glob(dirname(__DIR__, 2) . '/*.php') as $file) {
+		$source = file_get_contents($file);
+		expect(preg_match('/[\'"]<script[\'"]\s*\.\s*plugin_flowview_csp_nonce/', $source))->toBe(0, basename($file));
 	}
 });

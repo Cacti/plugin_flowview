@@ -31,9 +31,24 @@ require('./include/auth.php');
 global $config;
 require_once($config['base_path'] . '/plugins/flowview/setup.php');
 require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/nbar_common.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/nbar_count.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/nbar_timespan.php');
+require_once($config['base_path'] . '/plugins/flowview/flowview_sections.php');
 require_once($config['base_path'] . '/lib/time.php');
 
 flowview_connect();
+
+if (get_nfilter_request_var('action') === 'nbar_count') {
+	fv_nbar_count_request();
+}
+
+if (get_nfilter_request_var('action') === 'applications' ||
+	(get_nfilter_request_var('action') === 'view' && get_nfilter_request_var('report') === 'nbar')) {
+	general_header();
+	include($config['base_path'] . '/plugins/flowview/nbar_report.php');
+	exit;
+}
 
 set_default_action();
 
@@ -78,6 +93,10 @@ switch(get_request_var('action')) {
 
 		break;
 	case 'gettimespan':
+		if (fv_nbar_timespan_request()) {
+			break;
+		}
+
 		flowview_request_vars();
 		flowview_gettimespan();
 
@@ -88,6 +107,8 @@ switch(get_request_var('action')) {
 	default:
 		general_header();
 
+		fv_section_save('flows', fv_section_request_params());
+		fv_section_navigation('flows');
 		flowview_request_vars();
 
 		$title = load_session_for_filter();
@@ -153,7 +174,7 @@ function save_filter_as(): void {
 			WHERE id = ?',
 			array(get_request_var('query')));
 
-		if (cacti_sizeof($save)) {
+		if (is_array($save) && cacti_sizeof($save)) {
 			$save['name'] = get_request_var('sname');
 
 			if (isset_request_var('report')) {

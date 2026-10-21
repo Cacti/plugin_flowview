@@ -184,7 +184,7 @@ function export_template(): void {
 
 		exit;
 	} else {
-		raise_message_javascript('notemplate', __('No Flow Template was found for Device ID:%s and Template ID:%s', $device_id, $template_id, 'flowview'), MESSAGE_LEVEL_ERROR);
+		raise_message_javascript('notemplate', __('No Flow Template was found for Device ID:%s and Template ID:%s', $device_id, $template_id, 'flowview'), '', MESSAGE_LEVEL_ERROR);
 
 		exit;
 	}

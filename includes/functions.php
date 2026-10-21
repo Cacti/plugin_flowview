@@ -944,12 +944,16 @@ function flowview_display_filter(): void {
 						</select>
 					</td>
 					<td class='nowrap' title='<?php print __esc('Show only Domains on Charts Below');?>'>
-						<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
-						<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
+							<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap' title='<?php print __esc('Show the post-NAT (translated) IP/DNS name instead of the original values', 'flowview');?>'>
-						<input type='checkbox' id='usenat' name='usenat' <?php print (get_request_var('usenat') == 'true' ? 'checked':'');?>>
-						<label for='usenat'><?php print __('Use NAT Data', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='usenat' name='usenat' <?php print (get_request_var('usenat') == 'true' ? 'checked':'');?>>
+							<label for='usenat'><?php print __('Use NAT Data', 'flowview');?></label>
+						</span>
 					</td>
 				</tr>
 			</table>
@@ -1037,20 +1041,28 @@ function flowview_display_filter(): void {
 						<?php print __('Show/Hide', 'flowview');?>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='table' name='table' <?php print (get_request_var('table') == 'true' ? 'checked':'');?>>
-						<label for='table'><?php print __('Table', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='table' name='table' <?php print (get_request_var('table') == 'true' ? 'checked':'');?>>
+							<label for='table'><?php print __('Table', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='bytes' name='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'');?>>
-						<label for='bytes'><?php print __('Bytes', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='bytes' name='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'');?>>
+							<label for='bytes'><?php print __('Bytes', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='packets' name='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'');?>>
-						<label for='packets'><?php print __('Packets', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='packets' name='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'');?>>
+							<label for='packets'><?php print __('Packets', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='flows' name='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'');?>>
-						<label for='flows'><?php print __('Flows', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='flows' name='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'');?>>
+							<label for='flows'><?php print __('Flows', 'flowview');?></label>
+						</span>
 					</td>
 					<td>
 						<span>
@@ -1968,7 +1980,7 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 	}
 
 	/* process the format file */
-	$report_tag  = '';
+	$report_tag  = false;
 	$theme       = 'modern';
 	$body_html   = '';
 	$format      = $schedule['format_file'] != '' ? $schedule['format_file']:'default';
@@ -2832,7 +2844,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$data['printed']    = $nreport;
 			$data['statistics'] = 0;
 		}
-	} elseif (!sizeof($data)) {
+	} elseif (!cacti_sizeof($data)) {
 		return false;
 	}
 
@@ -4217,7 +4229,7 @@ function parallel_database_query_run($requests) {
 	}
 
 	if ($total_time >= $max_time) {
-		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
+		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), '', MESSAGE_LEVEL_ERROR);
 
 		foreach($requests as $request_id) {
 			parallel_database_query_cleanup($request_id);
