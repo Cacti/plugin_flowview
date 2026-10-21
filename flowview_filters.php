@@ -42,8 +42,7 @@ $sched_actions = array(
 	1 => __('Delete', 'flowview'),
 	3 => __('Disable', 'flowview'),
 	4 => __('Enable', 'flowview'),
-	5 => __('Materialize View', 'flowview'),
-	6 => __('Prune Cached Shards', 'flowview')
+	5 => __('Materialize View', 'flowview')
 );
 
 switch (get_request_var('action')) {
@@ -56,14 +55,10 @@ switch (get_request_var('action')) {
 	case 'sort_filter':
 		sort_filter();
 		break;
-	case 'prune':
-		top_header();
-		confirm_prune_shards();
-		bottom_footer();
-		break;
 	case 'prune_shards':
 		prune_shards();
 		break;
+	case 'edit':
 		if (!isset_request_var('embed')) {
 			top_header();
 		}
@@ -83,56 +78,19 @@ switch (get_request_var('action')) {
 }
 
 /**
- * Asks for confirmation to prune the cached shards that match no Filter,
- * saying how many there are and how much space they take, and posts to
- * prune_shards().  Called from this script's main request-dispatch switch
- * when action=prune.
- *
- * @return void
- */
-function confirm_prune_shards(): void {
-	$summary = flowview_get_shard_cache_summary();
-
-	form_start('flowview_filters.php');
-
-	html_start_box(__('Prune Cached Shards', 'flowview'), '60%', false, 3, 'center', '');
-
-	if ($summary === null) {
-		print "<tr><td colspan='2' class='textArea'><span class='textError'>" . __('The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report.', 'flowview') . '</span></td></tr>';
-		$save_html = '';
-	} elseif ($summary['other']['shards'] == 0) {
-		print "<tr><td colspan='2' class='textArea'><p>" . __('Every cached shard matches a Filter.  There is nothing to prune.', 'flowview') . '</p></td></tr>';
-		$save_html = '';
-	} else {
-		print "<tr>
-			<td colspan='2' class='textArea'>
-				<p>" . __('Click \'Continue\' to remove %s cached shard(s) that do not match any Filter.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.', number_format_i18n($summary['other']['shards'], 0), number_format_i18n($summary['matching']['shards'], 0), 'flowview') . "</p>
-			</td>
-		</tr>";
-		$save_html = "<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'flowview') . '</button>';
-	}
-
-	print "<tr>
-		<td colspan='2' class='saveRow'>
-			<input type='hidden' name='action' value='prune_shards'>
-			<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Cancel', 'flowview') . "</button>
-			$save_html
-		</td>
-	</tr>";
-
-	html_end_box();
-
-	form_end();
-}
-
-/**
  * Removes the cached shards that match no Filter and returns to the Filters
- * page.  Called from this script's main request-dispatch switch when
- * action=prune_shards.
+ * page.  It is posted by the confirmation dialog of the Prune button.  Called
+ * from this script's main request-dispatch switch when action=prune_shards.
  *
  * @return void
  */
 function prune_shards(): void {
+	/* it removes data, so it is only done when posted from the dialog */
+	if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+		header('Location: flowview_filters.php?header=false');
+		exit;
+	}
+
 	$pruned = flowview_prune_shard_cache();
 
 	if ($pruned === null) {
@@ -165,17 +123,6 @@ function actions_filters(): void {
 	/* ================= input validation ================= */
 	get_filter_request_var('drp_action');
 	/* ==================================================== */
-
-	/* pruning is for the whole cache, so it does not depend on which Filters are selected */
-	if (get_nfilter_request_var('drp_action') == '6') {
-		general_header();
-
-		confirm_prune_shards();
-
-		bottom_footer();
-
-		return;
-	}
 
 	if (isset_request_var('selected_items')) {
 		$selected_items = sanitize_unserialize_selected_items(get_nfilter_request_var('selected_items'));
@@ -418,10 +365,6 @@ function show_filters(): void {
 				clearFilter();
 			});
 
-			$('#prune').on('click', function() {
-				loadPageNoHeader('flowview_filters.php?action=prune&header=false');
-			});
-
 			$('#rows').on('change', function() {
 				applyFilter();
 			});
@@ -595,17 +538,77 @@ function show_filters(): void {
  */
 function show_shard_cache_summary(): void {
 	$summary = flowview_get_shard_cache_summary();
+	$prune   = false;
 
 	html_start_box('', '100%', false, 3, 'center', '');
 
 	if ($summary === null) {
-		$text = __('The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out.', 'flowview');
+		$text   = __('The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out.', 'flowview');
+		$dialog = __('The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report.', 'flowview');
 	} else {
 		$text = __('Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes.', number_format_i18n($summary['matching']['shards'], 0), number_format_i18n($summary['other']['shards'], 0), 'flowview');
+
+		if ($summary['other']['shards'] > 0) {
+			$prune  = true;
+			$dialog = __('This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone.', number_format_i18n($summary['other']['shards'], 0), number_format_i18n($summary['matching']['shards'], 0), 'flowview');
+		} else {
+			$dialog = __('Every cached shard matches a Filter.  There is nothing to prune.', 'flowview');
+		}
 	}
 
 	print "<tr class='even'><td>" . html_escape($text) . '</td></tr>';
 
 	html_end_box();
+
+	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+	print "<div id='prune_dialog' style='display:none;' title='" . __esc('Prune Cached Shards', 'flowview') . "'><p>" . html_escape($dialog) . '</p></div>';
+
+	?>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
+	$(function() {
+		var canPrune = <?php print $prune ? 'true' : 'false';?>;
+
+		function pruneShards() {
+			var data = { action: 'prune_shards' };
+
+			if (typeof csrfMagicToken != 'undefined') {
+				data['__csrf_magic'] = csrfMagicToken;
+			}
+
+			$.post('flowview_filters.php', data).always(function() {
+				loadPageNoHeader('flowview_filters.php?header=false');
+			});
+		}
+
+		$('#prune').off('click').on('click', function() {
+			var buttons = [{
+				text: <?php print json_encode($prune ? __('Cancel', 'flowview') : __('Close', 'flowview'), $js);?>,
+				click: function() {
+					$(this).dialog('close');
+				}
+			}];
+
+			if (canPrune) {
+				buttons.push({
+					text: <?php print json_encode(__('Prune', 'flowview'), $js);?>,
+					'class': 'ui-state-active',
+					click: function() {
+						$(this).dialog('close');
+						pruneShards();
+					}
+				});
+			}
+
+			$('#prune_dialog').dialog({
+				modal: true,
+				resizable: false,
+				width: 500,
+				buttons: buttons
+			});
+		});
+	});
+	</script>
+	<?php
 }
 

@@ -1850,11 +1850,21 @@ describe('stopping the processes of a parallel query', function () {
 			}))->toBeEmpty();
 	})->with(array('pending', 'scheduled', 'running', ''));
 
-	it('offers pruning in the actions of the Filters page, for the whole cache', function () {
+	it('prunes from a button with a confirmation dialog and a post, not from the actions', function () {
 		$source = plugin_test_read_source('flowview_filters.php');
 
-		expect($source)->toContain("6 => __('Prune Cached Shards'")
-			->and($source)->toMatch("/drp_action'\) == '6'\) \{[^}]*confirm_prune_shards\(\)/s");
+		expect($source)->not->toContain("6 => __('Prune Cached Shards'")
+			->and($source)->not->toContain("drp_action') == '6'")
+			->and($source)->not->toContain('function confirm_prune_shards')
+			->and($source)->toContain("id='prune_dialog'")
+			->and($source)->toContain("\$('#prune_dialog').dialog(")
+			->and($source)->toContain("\$.post('flowview_filters.php', data)")
+			->and($source)->toMatch("/function prune_shards\(\): void \{.*?REQUEST_METHOD'\] \?\? 'GET'\) !== 'POST'/s")
+			->and($source)->toMatch("/id='clear'[^\n]*\n\s*<button type='button' id='prune'/");
+	});
+
+	it('still opens the Filter editor from the Filters page', function () {
+		expect(plugin_test_read_source('flowview_filters.php'))->toMatch("/case 'edit':\s*\n\s*if \(!isset_request_var\('embed'\)\)/");
 	});
 
 	it('runs the shards of a materialization instead of reusing an earlier request', function () {
