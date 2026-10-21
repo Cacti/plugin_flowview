@@ -846,6 +846,8 @@ function flowview_display_filter(): void {
 
 	$title  = __esc('Undefined Filter [ Select Filter to get Details ]', 'flowview');
 
+	$report_fixed = false;
+
 	if (get_filter_request_var('query') > 0) {
 		$row = flowview_db_fetch_row_prepared('SELECT name, statistics, printed
 			FROM plugin_flowview_queries
@@ -853,6 +855,7 @@ function flowview_display_filter(): void {
 			array(get_request_var('query')));
 
 		if (cacti_sizeof($row)) {
+			$report_fixed = flowview_filter_report_key($row) != '';
 			if ($row['statistics'] > 0) {
 				$title = __esc('Statistical Report: %s [ Including overrides as specified below ]', $stat_report_array[$row['statistics']]);
 			} elseif ($row['printed'] > 0) {
@@ -955,11 +958,11 @@ function flowview_display_filter(): void {
 			</table>
 			<table class='filterTable'>
 				<tr>
-					<td>
+					<td<?php print $report_fixed ? " title='" . __esc('The Report is part of the Filter, and what is cached for it.  To change it, Edit the Filter, and then Materialize it again.', 'flowview') . "'" : '';?>>
 						<?php print __('Report', 'flowview');?>
 					</td>
 					<td>
-						<select id='report' name='report'>
+						<select id='report' name='report'<?php print $report_fixed ? ' disabled' : '';?>>
 							<?php
 							$reports = [];
 
@@ -3018,18 +3021,20 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 		$sql_params[] = $data['ex_addr'];
 	}
 
-	/* report override */
+	/* report override, unless the filter has a report, as it is part of what is cached */
 	$report = '';
 
 	if (isset_request_var('report')) {
-		$report  = get_nfilter_request_var('report');
-		$nreport = trim(get_nfilter_request_var('report'), 'sp');
-		if (strpos($report, 's') !== false && is_numeric($nreport)) {
-			$data['statistics'] = $nreport;
-			$data['printed']    = 0;
-		} elseif (strpos($report, 'p') !== false && is_numeric($nreport)) {
-			$data['printed']    = $nreport;
-			$data['statistics'] = 0;
+		if (flowview_filter_report_key($data) == '') {
+			$report  = get_nfilter_request_var('report');
+			$nreport = trim(get_nfilter_request_var('report'), 'sp');
+			if (strpos($report, 's') !== false && is_numeric($nreport)) {
+				$data['statistics'] = $nreport;
+				$data['printed']    = 0;
+			} elseif (strpos($report, 'p') !== false && is_numeric($nreport)) {
+				$data['printed']    = $nreport;
+				$data['statistics'] = 0;
+			}
 		}
 	} elseif (!sizeof($data)) {
 		return false;
@@ -5211,6 +5216,128 @@ function flowview_get_filter_md5sums(int $query_id): array {
 	}
 
 	return $md5sums;
+}
+
+/**
+ * flowview_filter_report_key - The report a filter is for, in the form the
+ * Report selector of the report page uses, s<n> for a statistical report and
+ * p<n> for a printed one.  The report is part of the cache key of the filter.
+ *
+ * @param array $filter The filter, with its statistics and printed columns
+ *
+ * @return string The report, or an empty string when the filter has none
+ */
+function flowview_filter_report_key(array $filter): string {
+	if ((int) ($filter['statistics'] ?? 0) > 0) {
+		return 's' . (int) $filter['statistics'];
+	}
+
+	if ((int) ($filter['printed'] ?? 0) > 0) {
+		return 'p' . (int) $filter['printed'];
+	}
+
+	return '';
+}
+
+/**
+ * flowview_get_filter_shard_keys - Every cache key (md5sum_tables) that a
+ * filter, with NAT or without, stores its partitions under.
+ *
+ * @return array|null The keys as the array keys, or null when the keys of a
+ *                    filter that has a report could not be worked out, as
+ *                    what belongs to which filter is not known then
+ */
+function flowview_get_filter_shard_keys(): ?array {
+	$keys = [];
+
+	foreach (flowview_db_fetch_assoc('SELECT id, statistics, printed
+		FROM plugin_flowview_queries') as $filter) {
+		$md5sums = flowview_get_filter_md5sums((int) $filter['id']);
+
+		foreach (['nat', 'non_nat'] as $mode) {
+			if (!cacti_sizeof($md5sums[$mode])) {
+				/* a filter with no report has nothing cached */
+				if (flowview_filter_report_key($filter) != '') {
+					return null;
+				}
+
+				continue;
+			}
+
+			foreach ($md5sums[$mode] as $key) {
+				$keys[$key] = true;
+			}
+		}
+	}
+
+	return $keys;
+}
+
+/**
+ * flowview_get_shard_cache_summary - What is in the shard cache, told apart
+ * by whether it matches a filter.  A cached partition matches when its
+ * md5sum is the cache key of a filter, with NAT or without.  The rest comes
+ * from queries that no filter has, such as a filter before it was changed, a
+ * deleted filter, or a report with settings changed on the report page.  The
+ * short lived results of the live partition are not counted.
+ *
+ * @return array|null matching and other, each with the number of cached
+ *                    shards, and the md5sums of the other; null when the
+ *                    keys of the filters are not known
+ */
+function flowview_get_shard_cache_summary(): ?array {
+	/* the size of the results is not looked at, as that reads every cached result */
+	$cached = flowview_db_fetch_assoc('SELECT md5sum, COUNT(*) AS shards
+		FROM parallel_database_query_shard_cache
+		WHERE map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'
+		GROUP BY md5sum');
+
+	$keys = flowview_get_filter_shard_keys();
+
+	if ($keys === null) {
+		return null;
+	}
+
+	$summary = [
+		'matching' => ['shards' => 0],
+		'other'    => ['shards' => 0, 'md5sums' => []],
+	];
+
+	foreach ($cached as $row) {
+		if (isset($keys[$row['md5sum']])) {
+			$summary['matching']['shards'] += (int) $row['shards'];
+		} else {
+			$summary['other']['shards']   += (int) $row['shards'];
+			$summary['other']['md5sums'][] = $row['md5sum'];
+		}
+	}
+
+	return $summary;
+}
+
+/**
+ * flowview_prune_shard_cache - Remove the cached shards that match no filter.
+ * Whatever matches a filter is kept, even when the filter is not materialized
+ * for every partition.
+ *
+ * @return int|null The number of shards removed, or null when nothing was
+ *                  removed because the keys of the filters are not known
+ */
+function flowview_prune_shard_cache(): ?int {
+	$summary = flowview_get_shard_cache_summary();
+
+	if ($summary === null) {
+		return null;
+	}
+
+	foreach ($summary['other']['md5sums'] as $md5sum) {
+		flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+			WHERE md5sum = ?
+			AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'',
+			[$md5sum]);
+	}
+
+	return $summary['other']['shards'];
 }
 
 /**

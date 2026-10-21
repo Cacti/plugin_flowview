@@ -307,6 +307,21 @@ function load_session_for_filter() {
 	 * settings first, and then overlay others only if they are set
 	 */
 	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+		$query = flowview_db_fetch_row_prepared('SELECT *
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('query')));
+
+		/**
+		 * The report of a filter can not be changed here, as it is part of
+		 * what is cached for it.  It is changed by editing the filter.
+		 */
+		$report = cacti_sizeof($query) ? flowview_filter_report_key($query) : '';
+
+		if ($report != '') {
+			set_request_var('report', $report);
+		}
+
 		// Handle Report Column
 		if (isset_request_var('report')) {
 			if (get_nfilter_request_var('report') != '0' && trim(get_nfilter_request_var('report'), 'sp') != '0') {
@@ -319,11 +334,6 @@ function load_session_for_filter() {
 				}
 			}
 		}
-
-		$query = flowview_db_fetch_row_prepared('SELECT *
-			FROM plugin_flowview_queries
-			WHERE id = ?',
-			array(get_request_var('query')));
 
 		if (cacti_sizeof($query)) {
 			foreach($query as $column => $value) {

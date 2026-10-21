@@ -55,7 +55,14 @@ switch (get_request_var('action')) {
 	case 'sort_filter':
 		sort_filter();
 		break;
-	case 'edit':
+	case 'prune':
+		top_header();
+		confirm_prune_shards();
+		bottom_footer();
+		break;
+	case 'prune_shards':
+		prune_shards();
+		break;
 		if (!isset_request_var('embed')) {
 			top_header();
 		}
@@ -72,6 +79,69 @@ switch (get_request_var('action')) {
 		show_filters();
 		bottom_footer();
 		break;
+}
+
+/**
+ * Asks for confirmation to prune the cached shards that match no Filter,
+ * saying how many there are and how much space they take, and posts to
+ * prune_shards().  Called from this script's main request-dispatch switch
+ * when action=prune.
+ *
+ * @return void
+ */
+function confirm_prune_shards(): void {
+	$summary = flowview_get_shard_cache_summary();
+
+	form_start('flowview_filters.php');
+
+	html_start_box(__('Prune Cached Shards', 'flowview'), '60%', false, 3, 'center', '');
+
+	if ($summary === null) {
+		print "<tr><td colspan='2' class='textArea'><span class='textError'>" . __('The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report.', 'flowview') . '</span></td></tr>';
+		$save_html = '';
+	} elseif ($summary['other']['shards'] == 0) {
+		print "<tr><td colspan='2' class='textArea'><p>" . __('Every cached shard matches a Filter.  There is nothing to prune.', 'flowview') . '</p></td></tr>';
+		$save_html = '';
+	} else {
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>" . __('Click \'Continue\' to remove %s cached shard(s) that do not match any Filter.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.', number_format_i18n($summary['other']['shards'], 0), number_format_i18n($summary['matching']['shards'], 0), 'flowview') . "</p>
+			</td>
+		</tr>";
+		$save_html = "<button type='submit' class='ui-button ui-corner-all ui-widget ui-state-active'>" . __esc('Continue', 'flowview') . '</button>';
+	}
+
+	print "<tr>
+		<td colspan='2' class='saveRow'>
+			<input type='hidden' name='action' value='prune_shards'>
+			<button type='button' class='ui-button ui-corner-all ui-widget cactiReturnTo'>" . __esc('Cancel', 'flowview') . "</button>
+			$save_html
+		</td>
+	</tr>";
+
+	html_end_box();
+
+	form_end();
+}
+
+/**
+ * Removes the cached shards that match no Filter and returns to the Filters
+ * page.  Called from this script's main request-dispatch switch when
+ * action=prune_shards.
+ *
+ * @return void
+ */
+function prune_shards(): void {
+	$pruned = flowview_prune_shard_cache();
+
+	if ($pruned === null) {
+		raise_message('flowview_prune', __('The cache keys of the Filters could not be worked out, so nothing was pruned.', 'flowview'), MESSAGE_LEVEL_ERROR);
+	} else {
+		raise_message('flowview_prune', __('Pruned %s cached shard(s) that did not match any Filter.', number_format_i18n($pruned, 0), 'flowview'), MESSAGE_LEVEL_INFO);
+	}
+
+	header('Location: flowview_filters.php?header=false');
+	exit;
 }
 
 /**
@@ -307,6 +377,7 @@ function show_filters(): void {
 						<span>
 							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
 							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
+							<button type='button' id='prune' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Remove the cached shards that do not match any Filter', 'flowview');?>'><?php print __esc('Prune', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>
@@ -328,6 +399,10 @@ function show_filters(): void {
 		$(function() {
 			$('#clear').on('click', function() {
 				clearFilter();
+			});
+
+			$('#prune').on('click', function() {
+				loadPageNoHeader('flowview_filters.php?action=prune&header=false');
 			});
 
 			$('#rows').on('change', function() {
@@ -491,5 +566,29 @@ function show_filters(): void {
 	draw_actions_dropdown($sched_actions);
 
 	form_end();
+
+	show_shard_cache_summary();
+}
+
+/**
+ * Shows how much of the Parallel Query cache matches a Filter and how much
+ * does not, which is what the Prune button removes.
+ *
+ * @return void
+ */
+function show_shard_cache_summary(): void {
+	$summary = flowview_get_shard_cache_summary();
+
+	html_start_box('', '100%', false, 3, 'center', '');
+
+	if ($summary === null) {
+		$text = __('The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out.', 'flowview');
+	} else {
+		$text = __('Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes.', number_format_i18n($summary['matching']['shards'], 0), number_format_i18n($summary['other']['shards'], 0), 'flowview');
+	}
+
+	print "<tr class='even'><td>" . html_escape($text) . '</td></tr>';
+
+	html_end_box();
 }
 

@@ -254,6 +254,18 @@ Filter in a way that changes the data it materializes, such as its report,
 device, exporter, or any address, port, interface, AS, protocol, flag or TOS
 restriction, you are advised to re-materialize it.
 
+The report of a Filter is part of what is cached for it, so it can not be
+changed on the report page: the Report selector is disabled once the Filter has
+one.  To change it, Edit the Filter and then materialize it again.  Saving a
+Filter does not remove anything from the cache.  The results of the old settings
+simply stop matching the Filter.  The line under the Filters table says how many
+cached shards match a Filter, which is told by their md5 value, and how many
+match none, such as those of a Filter before it was changed, of a deleted
+Filter, or of a report with its settings changed on the report page.  The
+'Prune' button on the Filters page removes the ones that match no Filter, after
+you confirm.  It keeps everything that matches a Filter, and does nothing when
+the cache keys of a Filter that has a report can not be worked out.
+
 # Possible Bugs?
 
 If you figure out this problem, goto GitHub and create a pulls request or open

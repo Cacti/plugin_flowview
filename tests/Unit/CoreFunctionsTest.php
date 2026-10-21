@@ -1579,3 +1579,165 @@ describe('showing only the filters being materialized as running', function () {
 			->and(flowview_filter_is_materializing(1, null))->toBeFalse();
 	});
 });
+
+describe('keeping the report of a filter fixed and pruning what no filter caches', function () {
+	$filter = array(
+		'id' => 4, 'name' => 'Top Talkers', 'device_id' => 0, 'ex_addr' => '', 'template_id' => -1,
+		'statistics' => 10, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 20, 'cutoffoctets' => 0,
+		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
+	);
+
+	beforeEach(function () {
+		plugin_test_reset();
+	});
+
+	/* queue the lookups of one filter for each NAT mode, and return its cache keys */
+	$keys_of = function (array $filter) {
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+
+		$keys = flowview_get_filter_md5sums((int) $filter['id']);
+
+		plugin_test_reset();
+
+		return $keys;
+	};
+
+	it('names the report of a filter the way the report selector does', function ($filter, $expected) {
+		expect(flowview_filter_report_key($filter))->toBe($expected);
+	})->with(array(
+		'statistical' => array(array('statistics' => 10, 'printed' => 0), 's10'),
+		'printed'     => array(array('statistics' => '0', 'printed' => '2'), 'p2'),
+		'none'        => array(array('statistics' => 0, 'printed' => 0), ''),
+		'missing'     => array(array(), ''),
+	));
+
+	it('does not let the request change the report of a filter', function () use ($filter) {
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		$plain = run_flow_query(false, 4, 1704067200, 1704153600, true, true);
+
+		$_REQUEST['report'] = 's11';
+
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+
+		expect(run_flow_query(false, 4, 1704067200, 1704153600, true, true))->toBe($plain);
+	});
+
+	it('still lets the request pick the report of a filter that has none', function () use ($filter) {
+		$none = array_merge($filter, array('statistics' => 0, 'printed' => 0));
+
+		plugin_test_queue_db_result('db_fetch_row_prepared', $none);
+
+		expect(run_flow_query(false, 4, 1704067200, 1704153600, true, true))->toBeFalse();
+
+		$_REQUEST['report'] = 's10';
+
+		plugin_test_queue_db_result('db_fetch_row_prepared', $none);
+
+		expect(run_flow_query(false, 4, 1704067200, 1704153600, true, true))->toBeArray()->toHaveCount(1);
+	});
+
+	it('knows the cache keys of every filter', function () use ($filter, $keys_of) {
+		$keys = $keys_of($filter);
+
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('id' => 4, 'statistics' => 10, 'printed' => 0),
+			array('id' => 5, 'statistics' => 10, 'printed' => 0),
+		));
+
+		foreach (range(1, 4) as $unused) {
+			plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		}
+
+		expect(flowview_get_filter_shard_keys())->toBe(array(
+			$keys['nat'][0] => true,
+			$keys['non_nat'][0] => true,
+		));
+	});
+
+	it('does not know the cache keys when a filter that has a report cannot be planned', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 4, 'statistics' => 10, 'printed' => 0)));
+
+		expect(flowview_get_filter_shard_keys())->toBeNull();
+	});
+
+	it('knows the cache keys when only a filter that has no report cannot be planned', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 4, 'statistics' => 0, 'printed' => 0)));
+
+		expect(flowview_get_filter_shard_keys())->toBe(array());
+	});
+
+	it('tells the cached shards of the filters from the others', function () use ($filter, $keys_of) {
+		$keys = $keys_of($filter);
+
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('md5sum' => $keys['nat'][0], 'shards' => 40),
+			array('md5sum' => $keys['non_nat'][0], 'shards' => 38),
+			array('md5sum' => 'old1', 'shards' => 12),
+			array('md5sum' => 'old2', 'shards' => 3),
+		));
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 4, 'statistics' => 10, 'printed' => 0)));
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+
+		expect(flowview_get_shard_cache_summary())->toBe(array(
+			'matching' => array('shards' => 78),
+			'other'    => array('shards' => 15, 'md5sums' => array('old1', 'old2')),
+		));
+
+		$lookup = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['sql'], 'FROM parallel_database_query_shard_cache') !== false;
+		}));
+
+		expect($lookup[0]['sql'])->toContain("map_partition != 'live'");
+	});
+
+	it('removes only the cached shards that match no filter', function () use ($filter, $keys_of) {
+		$keys = $keys_of($filter);
+
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('md5sum' => $keys['nat'][0], 'shards' => 40),
+			array('md5sum' => 'old1', 'shards' => 12),
+			array('md5sum' => 'old2', 'shards' => 3),
+		));
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 4, 'statistics' => 10, 'printed' => 0)));
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+
+		expect(flowview_prune_shard_cache())->toBe(15);
+
+		$deleted = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return $call['fn'] == 'db_execute_prepared';
+		}));
+
+		expect($deleted)->toHaveCount(2)
+			->and($deleted[0]['params'])->toBe(array('old1'))
+			->and($deleted[1]['params'])->toBe(array('old2'))
+			->and($deleted[0]['sql'])->toContain('DELETE FROM parallel_database_query_shard_cache')
+			->and($deleted[0]['sql'])->toContain("map_partition != 'live'");
+	});
+
+	it('removes nothing when there is nothing to prune', function () use ($filter, $keys_of) {
+		$keys = $keys_of($filter);
+
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('md5sum' => $keys['nat'][0], 'shards' => 40)));
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 4, 'statistics' => 10, 'printed' => 0)));
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+
+		expect(flowview_prune_shard_cache())->toBe(0)
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['fn'], 'db_execute') === 0;
+			}))->toBeEmpty();
+	});
+
+	it('removes nothing when the cache keys of the filters are not known', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('md5sum' => 'old1', 'shards' => 12)));
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('id' => 4, 'statistics' => 10, 'printed' => 0)));
+
+		expect(flowview_prune_shard_cache())->toBeNull()
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['fn'], 'db_execute') === 0;
+			}))->toBeEmpty();
+	});
+});
