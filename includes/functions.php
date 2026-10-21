@@ -572,6 +572,11 @@ function save_filter_form(): void {
 		WHERE id = ?',
 		array(get_request_var('query')));
 
+	/* the report of a Filter is not on the page, so it is not changed from here */
+	if (is_array($old) && flowview_filter_report_key($old) != '') {
+		$statistical = (int) $old['statistics'];
+		$printed     = (int) $old['printed'];
+	}
 	$material = flowview_filter_change_is_material(
 		is_array($old) ? $old : [],
 		[
@@ -846,7 +851,8 @@ function flowview_display_filter(): void {
 
 	$title  = __esc('Undefined Filter [ Select Filter to get Details ]', 'flowview');
 
-	$report_fixed = false;
+	$report_fixed   = false;
+	$report_printed = substr((string) get_nfilter_request_var('report'), 0, 1) == 'p';
 
 	if (get_filter_request_var('query') > 0) {
 		$row = flowview_db_fetch_row_prepared('SELECT name, statistics, printed
@@ -959,12 +965,10 @@ function flowview_display_filter(): void {
 			<table class='filterTable'>
 				<tr>
 					<?php
-					/* the Report is part of the Filter and what is cached for it, so it is not shown unless the Filter has none */
+					/* the Report is part of the Filter and what is cached for it, so it is only on the page when the Filter has none */
 					$report_shown = get_request_var('query') > 0 && !$report_fixed;
 
-					if (!$report_shown) {
-						print "<td hidden><input type='hidden' id='report' name='report' value='" . html_escape(get_nfilter_request_var('report')) . "'></td>";
-					} else {
+					if ($report_shown) {
 					?>
 					<td>
 						<?php print __('Report', 'flowview');?>
@@ -1208,19 +1212,19 @@ function flowview_display_filter(): void {
 					</td>
 					<td class='nowrap'>
 						<span>
-							<input type='checkbox' id='bytes' name='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'');?>>
+							<input type='checkbox' id='bytes' name='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'') . ($report_printed ? ' disabled':'');?>>
 							<label for='bytes'><?php print __('Bytes', 'flowview');?></label>
 						</span>
 					</td>
 					<td class='nowrap'>
 						<span>
-							<input type='checkbox' id='packets' name='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'');?>>
+							<input type='checkbox' id='packets' name='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'') . ($report_printed ? ' disabled':'');?>>
 							<label for='packets'><?php print __('Packets', 'flowview');?></label>
 						</span>
 					</td>
 					<td class='nowrap'>
 						<span>
-							<input type='checkbox' id='flows' name='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'');?>>
+							<input type='checkbox' id='flows' name='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'') . ($report_printed ? ' disabled':'');?>>
 							<label for='flows'><?php print __('Flows', 'flowview');?></label>
 						</span>
 					</td>
@@ -1643,14 +1647,16 @@ function flowview_display_filter(): void {
 			initTimespan();
 		}
 
-		if ($('#report').val().indexOf('p') >= 0) {
-			$('#bytes').prop('disabled', true);
-			$('#flows').prop('disabled', true);
-			$('#packets').prop('disabled', true);
-		} else {
-			$('#bytes').prop('disabled', false);
-			$('#flows').prop('disabled', false);
-			$('#packets').prop('disabled', false);
+		if ($('#report').length) {
+			if ($('#report').val().indexOf('p') >= 0) {
+				$('#bytes').prop('disabled', true);
+				$('#flows').prop('disabled', true);
+				$('#packets').prop('disabled', true);
+			} else {
+				$('#bytes').prop('disabled', false);
+				$('#flows').prop('disabled', false);
+				$('#packets').prop('disabled', false);
+			}
 		}
 
 		// Setup the charts
@@ -1693,12 +1699,17 @@ function flowview_display_filter(): void {
 		});
 	});
 
+	/* the Report is not on the page when the Filter has one, as the server knows it from the Filter */
+	function reportParam() {
+		return $('#report').length ? '&report=' + $('#report').val() : '';
+	}
+
 	function renderBarChart(type, bindto, title, label, height, width) {
 		$.getJSON('flowview.php?action=chartdata&type=' + type +
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1763,7 +1774,7 @@ function flowview_display_filter(): void {
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1829,7 +1840,7 @@ function flowview_display_filter(): void {
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1925,7 +1936,7 @@ function flowview_display_filter(): void {
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&timespan='     + $('#predefined_timespan').val() +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -2024,18 +2035,21 @@ function flowview_display_filter(): void {
 	}
 
 	function applyFilter(reset) {
+		var report = '';
+		var extra  = '';
+
 		if (reset) {
-			var report = 0;
+			report = '&report=0';
 			var device_id = 0;
 		} else {
-			var report = $('#report').val();
-			var device_id = $('#device_id').val();
-		}
+			/* only a Filter that has no Report has one on the page */
+			report = reportParam();
 
-		if (report.indexOf('p') >= 0) {
-			var extra='&table=true&bytes=false&packets=false&flows=false';
-		} else {
-			var extra='';
+			if ($('#report').length && $('#report').val().indexOf('p') >= 0) {
+				extra = '&table=true&bytes=false&packets=false&flows=false';
+			}
+
+			var device_id = $('#device_id').val();
 		}
 
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
@@ -2044,7 +2058,7 @@ function flowview_display_filter(): void {
 			'&usenat='             + $('#usenat').is(':checked') +
 			'&query='               + $('#query').val() +
 			'&predefined_timespan=' + $('#predefined_timespan').val() +
-			'&report='              + report +
+			report +
 			'&device_id='           + device_id +
 			'&ex_addr='             + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='           + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -2713,8 +2727,20 @@ function flowview_get_chartdata(): void {
 	$start    = strtotime(get_nfilter_request_var('date1'));
 	$end      = strtotime(get_nfilter_request_var('date2'));
 
+	/* the report is not sent for a Filter that has one, as it is part of the Filter */
+	if ($query_id > 0) {
+		$filter_report = flowview_filter_report_key(flowview_db_fetch_row_prepared('SELECT statistics, printed
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			[$query_id]) ?: []);
+
+		if ($filter_report != '') {
+			$report = $filter_report;
+		}
+	}
+
 	if (!empty($report) && substr($report, 0, 1) == 's') {
-		$report = trim(get_nfilter_request_var('report'), 'sp');
+		$report = trim($report, 'sp');
 
 		$output = run_flow_query(true, $query_id, $start, $end);
 

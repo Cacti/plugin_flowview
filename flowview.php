@@ -320,6 +320,14 @@ function load_session_for_filter() {
 
 		if ($report != '') {
 			set_request_var('report', $report);
+
+			/* a printed report is a table, there is nothing to chart */
+			if (substr($report, 0, 1) == 'p') {
+				set_request_var('table', 'true');
+				set_request_var('bytes', 'false');
+				set_request_var('packets', 'false');
+				set_request_var('flows', 'false');
+			}
 		}
 
 		// Handle Report Column
@@ -500,6 +508,18 @@ function flowview_request_vars(): void {
 			if (isset_request_var('graph_link')) {
 				set_request_var('predefined_timespan', '0');
 			}
+		}
+	}
+
+	/* the report is not sent for a Filter that has one, as it is part of the Filter */
+	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+		$filter_report = flowview_filter_report_key(flowview_db_fetch_row_prepared('SELECT statistics, printed
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('query'))) ?: []);
+
+		if ($filter_report != '') {
+			set_request_var('report', $filter_report);
 		}
 	}
 
