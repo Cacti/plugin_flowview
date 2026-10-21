@@ -1858,6 +1858,7 @@ describe('stopping the processes of a parallel query', function () {
 			->and($source)->not->toContain('function confirm_prune_shards')
 			->and($source)->toContain("id='prune_dialog'")
 			->and($source)->toContain("\$('#prune_dialog').dialog(")
+			->and($source)->toMatch("/\\\$\('#prune_dialog'\)\.dialog\(\{\s*modal: false,/")
 			->and($source)->toContain("\$.post('flowview_filters.php', data)")
 			->and($source)->toMatch("/function prune_shards\(\): void \{.*?REQUEST_METHOD'\] \?\? 'GET'\) !== 'POST'/s")
 			->and($source)->toMatch("/id='clear'[^\n]*\n\s*<button type='button' id='prune'/");

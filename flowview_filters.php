@@ -601,7 +601,7 @@ function show_shard_cache_summary(): void {
 			}
 
 			$('#prune_dialog').dialog({
-				modal: true,
+				modal: false,
 				resizable: false,
 				width: 500,
 				buttons: buttons
