@@ -55,6 +55,9 @@ switch (get_request_var('action')) {
 	case 'sort_filter':
 		sort_filter();
 		break;
+	case 'check_material':
+		flowview_check_filter_save();
+		break;
 	case 'prune_shards':
 		prune_shards();
 		break;

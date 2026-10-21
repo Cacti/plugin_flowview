@@ -332,11 +332,62 @@ function edit_filter(): void {
 
 	form_save_button($page, 'return');
 
+	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+	print "<div id='flowview_save_warning' style='display:none;' title='" . __esc('Cached Results Affected', 'flowview') . "'><p>" .
+		__esc('These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press \'Continue\' to save the Filter, or \'Cancel\' to keep editing it.', 'flowview') .
+		'</p></div>';
+
+	flowview_show_saved_dialog();
+
 	?>
 	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 	var date1Open  = false;
 	var date2Open  = false;
 	var returnPage = '<?php print $page;?>';
+	var saveConfirmed = false;
+
+	/* Cacti's own form handler posts the form, so this goes through it */
+	function saveFilterForm() {
+		saveConfirmed = true;
+		$('#chk').trigger('submit');
+	}
+
+	/* warn before a save that changes what is cached for the Filter */
+	function checkFilterSave() {
+		var data = $.grep($('#chk').serializeArray(), function(item) {
+			return item.name != 'action';
+		});
+
+		data.push({ name: 'action', value: 'check_material' });
+
+		$.post(urlPath + 'plugins/flowview/flowview_filters.php', data, null, 'json').done(function(response) {
+			if (response && response.material) {
+				$('#flowview_save_warning').dialog({
+					modal: false,
+					resizable: false,
+					width: 500,
+					buttons: [{
+						text: typeof sessionMessageCancel != 'undefined' ? sessionMessageCancel : <?php print json_encode(__('Cancel', 'flowview'), $js);?>,
+						click: function() {
+							$(this).dialog('close');
+						}
+					}, {
+						text: typeof sessionMessageContinue != 'undefined' ? sessionMessageContinue : <?php print json_encode(__('Continue', 'flowview'), $js);?>,
+						'class': 'ui-state-active',
+						click: function() {
+							$(this).dialog('close');
+							saveFilterForm();
+						}
+					}]
+				});
+			} else {
+				saveFilterForm();
+			}
+		}).fail(function() {
+			saveFilterForm();
+		});
+	}
 
 	function applyTimespan() {
 		$.getJSON(returnPage+'?action=gettimespan&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
@@ -390,6 +441,17 @@ function edit_filter(): void {
 	});
 
 	$(function() {
+		/* a click on Save, or Enter in a field, comes here before the form is posted */
+		$('#chk #submit').off('click.flowview').on('click.flowview', function(event) {
+			if (saveConfirmed) {
+				return true;
+			}
+
+			event.preventDefault();
+
+			checkFilterSave();
+		});
+
 		$('#startDate').on('click', function() {
 			if (date1Open) {
 				date1Open = false;
@@ -530,13 +592,160 @@ function flowview_filter_change_is_material(array $old, array $new): bool {
 }
 
 /**
- * flowview_rematerialize_recommendation - The text recommending that a
- * filter be materialized again after a material change.
+ * flowview_rematerialize_recommendation - The note, once a filter is saved
+ * with a material change, that it has to be materialized again.
  *
  * @return string
  */
 function flowview_rematerialize_recommendation(): string {
-	return __('The changes to this Filter affect its cached results.  A forced re-materialization of this Filter is recommended.  To do so, select the Filter on the Filters page and choose the \'Materialize View\' action.', 'flowview');
+	return __('The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the \'Materialize View\' action.', 'flowview');
+}
+
+/**
+ * flowview_filter_form_values - The values of the filter form as they are
+ * saved.
+ *
+ * @return array
+ */
+function flowview_filter_form_values(): array {
+	/* ================= input validation ================= */
+	get_filter_request_var('id');
+	get_filter_request_var('device_id');
+	get_filter_request_var('template_id');
+	get_filter_request_var('timespan');
+	get_filter_request_var('statistics');
+	get_filter_request_var('printed');
+	get_filter_request_var('includeif');
+	/* ==================================================== */
+
+	$save['id']              = get_nfilter_request_var('id');
+	$save['name']            = get_nfilter_request_var('name');
+	$save['device_id']       = get_nfilter_request_var('device_id');
+	$save['template_id']     = get_nfilter_request_var('template_id');
+	$save['ex_addr']         = get_nfilter_request_var('ex_addr');
+
+	$save['timespan']        = get_nfilter_request_var('timespan');
+	$save['startdate']       = get_nfilter_request_var('date1');
+	$save['enddate']         = get_nfilter_request_var('date2');
+
+	$save['tosfields']       = get_nfilter_request_var('tosfields');
+	$save['tcpflags']        = get_nfilter_request_var('tcpflags');
+
+	if (is_array(get_nfilter_request_var('protocols')) && cacti_sizeof(get_nfilter_request_var('protocols'))) {
+		$save['protocols']   = implode(', ', get_nfilter_request_var('protocols'));
+	} else {
+		$save['protocols']   = '';
+	}
+
+	$save['sourceip']        = get_nfilter_request_var('sourceip');
+	$save['sourceport']      = get_nfilter_request_var('sourceport');
+	$save['sourceinterface'] = get_nfilter_request_var('sourceinterface');
+	$save['sourceas']        = get_nfilter_request_var('sourceas');
+
+	$save['destip']          = get_nfilter_request_var('destip');
+	$save['destport']        = get_nfilter_request_var('destport');
+	$save['destinterface']   = get_nfilter_request_var('destinterface');
+	$save['destas']          = get_nfilter_request_var('destas');
+
+	$save['postnatsourceip']   = get_nfilter_request_var('postnatsourceip');
+	$save['postnatsourceport'] = get_nfilter_request_var('postnatsourceport');
+	$save['postnatdestip']     = get_nfilter_request_var('postnatdestip');
+	$save['postnatdestport']   = get_nfilter_request_var('postnatdestport');
+
+	$save['statistics']      = get_nfilter_request_var('statistics');
+	$save['printed']         = get_nfilter_request_var('printed');
+	$save['includeif']       = get_nfilter_request_var('includeif');
+	$save['sortfield']       = get_nfilter_request_var('sortfield');
+	$save['cutofflines']     = get_nfilter_request_var('cutofflines');
+	$save['cutoffoctets']    = get_nfilter_request_var('cutoffoctets');
+	$save['resolve']         = get_nfilter_request_var('resolve');
+
+	$save['graph_type']      = get_nfilter_request_var('graph_type');
+	$save['graph_height']    = get_nfilter_request_var('graph_height');
+	$save['panel_table']     = isset_request_var('panel_table') ? 'on':'';
+	$save['panel_bytes']     = isset_request_var('panel_bytes') ? 'on':'';
+	$save['panel_packets']   = isset_request_var('panel_packets') ? 'on':'';
+	$save['panel_flows']     = isset_request_var('panel_flows') ? 'on':'';
+	$save['usenat']          = isset_request_var('usenat') ? 'on':'';
+
+	if ($save['panel_table'] == '' && $save['panel_bytes'] == '' && $save['panel_packets'] == '' && $save['panel_flows'] == '') {
+		$save['panel_table'] = 'on';
+	}
+
+	return $save;
+}
+
+/**
+ * flowview_filter_form_is_material - Whether saving the filter form would
+ * change what is cached for the filter.  A new filter has nothing cached.
+ *
+ * @param array $save The values from flowview_filter_form_values()
+ *
+ * @return bool
+ */
+function flowview_filter_form_is_material(array $save): bool {
+	if (empty($save['id'])) {
+		return false;
+	}
+
+	$old = flowview_db_fetch_row_prepared('SELECT *
+		FROM plugin_flowview_queries
+		WHERE id = ?',
+		array($save['id']));
+
+	return flowview_filter_change_is_material(is_array($old) ? $old : [], $save);
+}
+
+/**
+ * flowview_check_filter_save - Says, as JSON, whether saving the filter form
+ * that is posted would change what is cached for the filter, so the form can
+ * warn before it is saved.  Nothing is saved.
+ *
+ * @return void
+ */
+function flowview_check_filter_save(): void {
+	print json_encode(['material' => flowview_filter_form_is_material(flowview_filter_form_values())]);
+}
+
+/**
+ * flowview_show_saved_dialog - Once a filter was saved with a change to what
+ * is cached for it, says the save succeeded and that it has to be
+ * materialized again, in a jQuery UI dialog.  It is shown once.
+ *
+ * @return void
+ */
+function flowview_show_saved_dialog(): void {
+	if (empty($_SESSION['flowview_rematerialize_saved'])) {
+		return;
+	}
+
+	unset($_SESSION['flowview_rematerialize_saved']);
+
+	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+	print "<div id='flowview_saved_dialog' style='display:none;' title='" . __esc('Save Succeeded', 'flowview') . "'>" .
+		'<p>' . __esc('Save Succeeded.', 'flowview') . '</p>' .
+		'<p>' . html_escape(flowview_rematerialize_recommendation()) . '</p>' .
+		'</div>';
+
+	?>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
+	$(function() {
+		$('#flowview_saved_dialog').dialog({
+			modal: false,
+			resizable: false,
+			width: 500,
+			buttons: [{
+				text: <?php print json_encode(__('OK', 'flowview'), $js);?>,
+				'class': 'ui-state-active',
+				click: function() {
+					$(this).dialog('close');
+				}
+			}]
+		});
+	});
+	</script>
+	<?php
 }
 
 /**
@@ -633,78 +842,10 @@ function save_filter_form(): void {
 function save_filter(): void {
 	global $config;
 
-	/* ================= input validation ================= */
-	get_filter_request_var('id');
-	get_filter_request_var('device_id');
-	get_filter_request_var('template_id');
-	get_filter_request_var('timespan');
-	get_filter_request_var('statistics');
-	get_filter_request_var('printed');
-	get_filter_request_var('includeif');
-	/* ==================================================== */
+	$save = flowview_filter_form_values();
 
-	$save['id']              = get_nfilter_request_var('id');
-	$save['name']            = get_nfilter_request_var('name');
-	$save['device_id']       = get_nfilter_request_var('device_id');
-	$save['template_id']     = get_nfilter_request_var('template_id');
-	$save['ex_addr']         = get_nfilter_request_var('ex_addr');
-
-	$save['timespan']        = get_nfilter_request_var('timespan');
-	$save['startdate']       = get_nfilter_request_var('date1');
-	$save['enddate']         = get_nfilter_request_var('date2');
-
-	$save['tosfields']       = get_nfilter_request_var('tosfields');
-	$save['tcpflags']        = get_nfilter_request_var('tcpflags');
-
-	if (is_array(get_nfilter_request_var('protocols')) && cacti_sizeof(get_nfilter_request_var('protocols'))) {
-		$save['protocols']   = implode(', ', get_nfilter_request_var('protocols'));
-	} else {
-		$save['protocols']   = '';
-	}
-
-	$save['sourceip']        = get_nfilter_request_var('sourceip');
-	$save['sourceport']      = get_nfilter_request_var('sourceport');
-	$save['sourceinterface'] = get_nfilter_request_var('sourceinterface');
-	$save['sourceas']        = get_nfilter_request_var('sourceas');
-
-	$save['destip']          = get_nfilter_request_var('destip');
-	$save['destport']        = get_nfilter_request_var('destport');
-	$save['destinterface']   = get_nfilter_request_var('destinterface');
-	$save['destas']          = get_nfilter_request_var('destas');
-
-	$save['postnatsourceip']   = get_nfilter_request_var('postnatsourceip');
-	$save['postnatsourceport'] = get_nfilter_request_var('postnatsourceport');
-	$save['postnatdestip']     = get_nfilter_request_var('postnatdestip');
-	$save['postnatdestport']   = get_nfilter_request_var('postnatdestport');
-
-	$save['statistics']      = get_nfilter_request_var('statistics');
-	$save['printed']         = get_nfilter_request_var('printed');
-	$save['includeif']       = get_nfilter_request_var('includeif');
-	$save['sortfield']       = get_nfilter_request_var('sortfield');
-	$save['cutofflines']     = get_nfilter_request_var('cutofflines');
-	$save['cutoffoctets']    = get_nfilter_request_var('cutoffoctets');
-	$save['resolve']         = get_nfilter_request_var('resolve');
-
-	$save['graph_type']      = get_nfilter_request_var('graph_type');
-	$save['graph_height']    = get_nfilter_request_var('graph_height');
-	$save['panel_table']     = isset_request_var('panel_table') ? 'on':'';
-	$save['panel_bytes']     = isset_request_var('panel_bytes') ? 'on':'';
-	$save['panel_packets']   = isset_request_var('panel_packets') ? 'on':'';
-	$save['panel_flows']     = isset_request_var('panel_flows') ? 'on':'';
-	$save['usenat']          = isset_request_var('usenat') ? 'on':'';
-
-	if ($save['panel_table'] == '' && $save['panel_bytes'] == '' && $save['panel_packets'] == '' && $save['panel_flows'] == '') {
-		$save['panel_table'] = 'on';
-	}
-
-	$old = [];
-
-	if (!empty($save['id'])) {
-		$old = flowview_db_fetch_row_prepared('SELECT *
-			FROM plugin_flowview_queries
-			WHERE id = ?',
-			array($save['id']));
-	}
+	/* worked out before the save, as it compares with the Filter as it was */
+	$material = flowview_filter_form_is_material($save);
 
 	$id = flowview_sql_save($save, 'plugin_flowview_queries', 'id', true);
 
@@ -720,10 +861,11 @@ function save_filter(): void {
 		exit;
 	}
 
-	raise_message(1);
-
-	if (flowview_filter_change_is_material(is_array($old) ? $old : [], $save)) {
-		raise_message('flowview_rematerialize', flowview_rematerialize_recommendation(), MESSAGE_LEVEL_WARN);
+	/* a change to what is cached is said in a dialog, with the note to materialize it again */
+	if ($material) {
+		$_SESSION['flowview_rematerialize_saved'] = (int) $id;
+	} else {
+		raise_message(1);
 	}
 
 	flowview_purge_query_caches($id);
@@ -871,6 +1013,9 @@ function flowview_display_filter(): void {
 			}
 		}
 	}
+
+	/* a Filter saved from its editor, that was opened from this page, comes back here */
+	flowview_show_saved_dialog();
 
 	html_start_box($title . '&nbsp;<span id="text"></span>', '100%', false, 3, 'center', '');
 

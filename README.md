@@ -265,7 +265,9 @@ materialized automatically, so it does not count.
 When you save a
 Filter in a way that changes the data it materializes, such as its report,
 device, exporter, or any address, port, interface, AS, protocol, flag or TOS
-restriction, you are advised to re-materialize it.
+restriction, a dialog warns you first, and you can Cancel to keep editing or
+Continue to save.  Once it is saved, a 'Save Succeeded' dialog reminds you to
+start a materialization of the Filter with the 'Materialize View' action.
 
 The report of a Filter is part of what is cached for it, so it can not be
 changed on the report page: the Report selector is disabled once the Filter has

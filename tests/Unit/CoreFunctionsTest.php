@@ -356,9 +356,90 @@ it('flags only changes that alter what a filter materializes', function ($old, $
 	),
 ));
 
-it('recommends a forced re-materialization pointing at the Materialize View action', function () {
-	expect(flowview_rematerialize_recommendation())->toContain('re-materialization')
+it('tells the user to start a materialization with the Materialize View action', function () {
+	expect(flowview_rematerialize_recommendation())->toContain('materialized again')
 		->and(flowview_rematerialize_recommendation())->toContain('Materialize View');
+});
+
+describe('warning before a Filter is saved with a change to what is cached', function () {
+	beforeEach(function () {
+		plugin_test_reset();
+
+		/* the dialog uses the CSP nonce of setup.php */
+		require_once __DIR__ . '/../../setup.php';
+	});
+
+	it('does not warn for a new Filter, as it has nothing cached', function () {
+		expect(flowview_filter_form_is_material(array('id' => '', 'sourceip' => '10.0.0.1')))->toBeFalse()
+			->and($GLOBALS['__test_db_calls'])->toBe(array());
+	});
+
+	it('warns when the change alters what is cached', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('id' => 4, 'sourceip' => '10.0.0.1', 'statistics' => '10', 'printed' => '0'));
+
+		expect(flowview_filter_form_is_material(array('id' => '4', 'sourceip' => '10.0.0.2', 'statistics' => '10', 'printed' => '0')))->toBeTrue();
+	});
+
+	it('does not warn for a change of how it is shown', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('id' => 4, 'name' => 'Old', 'sourceip' => '10.0.0.1', 'statistics' => '10', 'printed' => '0', 'graph_type' => 'bar'));
+
+		expect(flowview_filter_form_is_material(array('id' => '4', 'name' => 'New', 'sourceip' => '10.0.0.1', 'statistics' => '10', 'printed' => '0', 'graph_type' => 'pie')))->toBeFalse();
+	});
+
+	it('answers the form with JSON, without saving anything', function () {
+		$_REQUEST = array('id' => '4', 'name' => 'Top', 'sourceip' => '10.0.0.2', 'statistics' => '10', 'printed' => '0');
+
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('id' => 4, 'sourceip' => '10.0.0.1', 'statistics' => '10', 'printed' => '0'));
+
+		ob_start();
+		flowview_check_filter_save();
+		$output = ob_get_clean();
+
+		expect(json_decode($output, true))->toBe(array('material' => true))
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['fn'], 'db_execute') === 0;
+			}))->toBeEmpty();
+	});
+
+	it('says the save succeeded and to materialize again, once, in a dialog', function () {
+		$_SESSION['flowview_rematerialize_saved'] = 4;
+
+		ob_start();
+		flowview_show_saved_dialog();
+		$first = ob_get_clean();
+
+		ob_start();
+		flowview_show_saved_dialog();
+		$second = ob_get_clean();
+
+		expect($first)->toContain("id='flowview_saved_dialog'")
+			->and($first)->toContain('Save Succeeded')
+			->and($first)->toContain('Materialize View')
+			->and($first)->toContain("\$('#flowview_saved_dialog').dialog(")
+			->and($first)->toContain('modal: false')
+			->and($second)->toBe('')
+			->and(isset($_SESSION['flowview_rematerialize_saved']))->toBeFalse();
+	});
+
+	it('shows nothing when nothing was saved with a change to what is cached', function () {
+		ob_start();
+		flowview_show_saved_dialog();
+
+		expect(ob_get_clean())->toBe('');
+	});
+
+	it('warns from the Save button with Cancel and Continue, and no longer raises a warning message', function () {
+		$source = plugin_test_read_source('includes/functions.php');
+
+		expect($source)->toContain("id='flowview_save_warning'")
+			->and($source)->toContain("\$('#chk #submit').off('click.flowview').on('click.flowview'")
+			->and($source)->toContain("{ name: 'action', value: 'check_material' }")
+			->and($source)->toContain("\$('#flowview_save_warning').dialog(")
+			->and($source)->toContain('sessionMessageCancel')
+			->and($source)->toContain('sessionMessageContinue')
+			->and($source)->not->toContain("raise_message('flowview_rematerialize'")
+			->and(plugin_test_read_source('flowview_filters.php'))->toContain("case 'check_material':");
+	});
 });
 
 it('starts the materialization in the background for the given queries', function () {
