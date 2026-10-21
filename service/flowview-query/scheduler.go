@@ -103,22 +103,28 @@ func (s *Scheduler) expireQueries(ctx context.Context) error {
 	return nil
 }
 
-// expireShardCache ages out cached partition results older than the configured
-// time-to-live so hot partitions stay cached while cold data is reclaimed.
-func (s *Scheduler) expireShardCache(ctx context.Context) error {
-	ttl := int64(s.eng.settings.TimeToLive().Seconds())
-	if ttl <= 0 {
-		return nil
-	}
+// Live partition shard results (map_partition = 'live') are written by the PHP
+// workers so the panels of one report share a single scan of the partition that
+// is still receiving flows.  They are only good for a short time.
+const (
+	liveShardMarker     = "live"
+	liveShardTTLSeconds = 60
+)
 
+// expireShardCache removes the short lived results of the live partition.
+// Cached results of a cold partition are never aged out: they stay until the
+// partition is dropped (see dropOrphanCache) or no longer matches its data,
+// as the materialization of a filter is built from them.
+func (s *Scheduler) expireShardCache(ctx context.Context) error {
 	res, err := s.eng.flow.ExecContext(ctx,
 		`DELETE FROM parallel_database_query_shard_cache
-		 WHERE date_created < (NOW() - INTERVAL ? SECOND)`, ttl)
+		 WHERE map_partition = ?
+		 AND date_created < (NOW() - INTERVAL ? SECOND)`, liveShardMarker, liveShardTTLSeconds)
 	if err != nil {
 		return err
 	}
 	if n, _ := res.RowsAffected(); n > 0 {
-		logf("scheduler: expired %d cached shards", n)
+		logf("scheduler: expired %d live shard results", n)
 	}
 	return nil
 }

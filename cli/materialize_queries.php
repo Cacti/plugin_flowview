@@ -181,8 +181,12 @@ if (!$force && !$dry_run) {
 	}
 
 	register_shutdown_function(function () {
+		flowview_set_materialization_scope([]);
 		unregister_process('flowview', 'materialize', 0);
 	});
+
+	/* the Filters page shows only these filters as running */
+	flowview_set_materialization_scope($query_ids);
 }
 
 $threads = read_config_option('flowview_parallel_threads');

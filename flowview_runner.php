@@ -37,6 +37,8 @@ require('./include/cli_check.php');
 global $config;
 
 require_once($config['base_path'] . '/lib/poller.php');
+require_once($config['base_path'] . '/plugins/flowview/setup.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 
 flowview_connect();
 

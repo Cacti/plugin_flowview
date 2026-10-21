@@ -1424,3 +1424,158 @@ describe('sharing one scan of the live partition', function () {
 		expect(array_filter($sql, fn ($s) => strpos($s, "DELETE FROM parallel_database_query_shard_cache") === 0))->toHaveCount(1);
 	});
 });
+
+describe('converting the partitions that have rotated', function () {
+	beforeEach(function () {
+		plugin_test_reset();
+
+		$this->partitions = function (array $engines) {
+			plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table) {
+				return array('table' => $table);
+			}, array_keys($engines)));
+		};
+
+		$this->alters = function () {
+			return array_values(array_column(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return $call['fn'] == 'db_execute';
+			}), 'sql'));
+		};
+	});
+
+	it('converts every cold partition that is not on the fast engine, newest first, and never the live one', function () {
+		$engines = array(
+			'plugin_flowview_raw_202629214' => 'InnoDB',
+			'plugin_flowview_raw_202629215' => 'Aria',
+			'plugin_flowview_raw_202629216' => 'InnoDB',
+			'plugin_flowview_raw_202629217' => 'InnoDB',
+		);
+
+		($this->partitions)($engines);
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table, $engine) {
+			return array('TABLE_NAME' => $table, 'ENGINE' => $engine);
+		}, array_keys($engines), $engines));
+
+		expect(flowview_convert_cold_partitions('Aria'))->toBe(array('plugin_flowview_raw_202629216', 'plugin_flowview_raw_202629214'))
+			->and(($this->alters)())->toBe(array(
+				'ALTER TABLE plugin_flowview_raw_202629216 ENGINE=Aria',
+				'ALTER TABLE plugin_flowview_raw_202629214 ENGINE=Aria',
+			));
+	});
+
+	it('catches up on partitions that were missed for more than a few hours', function () {
+		$engines = array();
+
+		foreach (range(10, 20) as $hour) {
+			$engines['plugin_flowview_raw_2026292' . $hour] = 'InnoDB';
+		}
+
+		($this->partitions)($engines);
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table, $engine) {
+			return array('TABLE_NAME' => $table, 'ENGINE' => $engine);
+		}, array_keys($engines), $engines));
+
+		expect(flowview_convert_cold_partitions('Aria', 100))->toHaveCount(10);
+	});
+
+	it('converts only as many as it is allowed to in one go', function () {
+		$engines = array(
+			'plugin_flowview_raw_202629214' => 'InnoDB',
+			'plugin_flowview_raw_202629215' => 'InnoDB',
+			'plugin_flowview_raw_202629216' => 'InnoDB',
+			'plugin_flowview_raw_202629217' => 'InnoDB',
+			'plugin_flowview_raw_202629218' => 'InnoDB',
+		);
+
+		($this->partitions)($engines);
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table, $engine) {
+			return array('TABLE_NAME' => $table, 'ENGINE' => $engine);
+		}, array_keys($engines), $engines));
+
+		expect(flowview_convert_cold_partitions('Aria', 2))->toBe(array('plugin_flowview_raw_202629217', 'plugin_flowview_raw_202629216'));
+	});
+
+	it('does nothing while an alter is running on any cold partition', function () {
+		($this->partitions)(array(
+			'plugin_flowview_raw_202629214' => 'InnoDB',
+			'plugin_flowview_raw_202629215' => 'InnoDB',
+			'plugin_flowview_raw_202629216' => 'InnoDB',
+		));
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('TIME' => 14, 'INFO' => 'ALTER TABLE plugin_flowview_raw_202629214 ENGINE=Aria ROW_FORMAT=page'),
+		));
+
+		expect(flowview_convert_cold_partitions('Aria'))->toBe(array())
+			->and(($this->alters)())->toBe(array());
+	});
+
+	it('does nothing when the cold partitions are all on the fast engine', function () {
+		$engines = array(
+			'plugin_flowview_raw_202629214' => 'Aria',
+			'plugin_flowview_raw_202629215' => 'Aria',
+			'plugin_flowview_raw_202629216' => 'InnoDB',
+		);
+
+		($this->partitions)($engines);
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table, $engine) {
+			return array('TABLE_NAME' => $table, 'ENGINE' => $engine);
+		}, array_keys($engines), $engines));
+
+		expect(flowview_convert_cold_partitions('Aria'))->toBe(array())
+			->and(($this->alters)())->toBe(array());
+	});
+
+	it('does nothing when there is no cold partition', function () {
+		($this->partitions)(array('plugin_flowview_raw_202629216' => 'InnoDB'));
+
+		expect(flowview_convert_cold_partitions('Aria'))->toBe(array());
+	});
+});
+
+describe('showing only the filters being materialized as running', function () {
+	beforeEach(function () {
+		plugin_test_reset();
+	});
+
+	it('records the filters a materialization is for, or all of them', function () {
+		flowview_set_materialization_scope(array(3, '7'));
+
+		expect(read_config_option('flowview_materialize_queries'))->toBe('3,7');
+
+		flowview_set_materialization_scope(array());
+
+		expect(read_config_option('flowview_materialize_queries'))->toBe('');
+	});
+
+	it('has no scope when no materialization is registered', function () {
+		set_config_option('flowview_materialize_queries', '3');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 0);
+
+		expect(flowview_get_materialization_scope())->toBeNull();
+	});
+
+	it('is for the filters that were chosen while it is registered', function () {
+		set_config_option('flowview_materialize_queries', '3,7,3');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+
+		expect(flowview_get_materialization_scope())->toBe(array(3, 7));
+	});
+
+	it('is for every filter when none were chosen', function () {
+		set_config_option('flowview_materialize_queries', '');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+
+		expect(flowview_get_materialization_scope())->toBe(array());
+	});
+
+	it('marks only the chosen filters as being materialized', function () {
+		expect(flowview_filter_is_materializing(3, array(3, 7)))->toBeTrue()
+			->and(flowview_filter_is_materializing(7, array(3, 7)))->toBeTrue()
+			->and(flowview_filter_is_materializing(1, array(3, 7)))->toBeFalse()
+			->and(flowview_filter_is_materializing(1, array()))->toBeTrue()
+			->and(flowview_filter_is_materializing(1, null))->toBeFalse();
+	});
+});

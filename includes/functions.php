@@ -4905,6 +4905,58 @@ function flowview_materialization_running(): bool {
 }
 
 /**
+ * flowview_set_materialization_scope - Record which filters the
+ * materialization that is starting is for, so the Filters page only shows
+ * those as running.  It only counts while the materialization is registered
+ * as running.
+ *
+ * @param array $query_ids The FlowView query ids, or none for all of them
+ *
+ * @return void
+ */
+function flowview_set_materialization_scope(array $query_ids): void {
+	set_config_option('flowview_materialize_queries', implode(',', array_map('intval', $query_ids)));
+}
+
+/**
+ * flowview_get_materialization_scope - Which filters the registered
+ * materialization is for.
+ *
+ * @return array|null null when no materialization is registered, an empty
+ *                    array when it is for every filter, otherwise the ids of
+ *                    the filters it is for
+ */
+function flowview_get_materialization_scope(): ?array {
+	$registered = db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?
+		AND taskid = ?',
+		['flowview', 'materialize', 0]);
+
+	if ($registered < 1) {
+		return null;
+	}
+
+	$ids = array_filter(array_map('intval', explode(',', (string) read_config_option('flowview_materialize_queries', true))));
+
+	return array_values(array_unique($ids));
+}
+
+/**
+ * flowview_filter_is_materializing - Whether the registered materialization
+ * is working on a filter.
+ *
+ * @param int        $query_id The FlowView query
+ * @param array|null $scope    From flowview_get_materialization_scope()
+ *
+ * @return bool
+ */
+function flowview_filter_is_materializing(int $query_id, ?array $scope): bool {
+	return $scope !== null && (!cacti_sizeof($scope) || in_array($query_id, $scope, true));
+}
+
+/**
  * flowview_materialization_status - The automatic materialization status of
  * a filter.  It is current once every cold partition is cached with NAT and
  * without.  The hot partition is not materialized automatically, so it does
@@ -5033,6 +5085,57 @@ function flowview_convert_partition_engine(string $table, string $raw_engine): b
 	flowview_db_execute("ALTER TABLE $table ENGINE=$raw_engine");
 
 	return true;
+}
+
+/**
+ * flowview_convert_cold_partitions - Change the raw partition tables that
+ * have rotated, and are not yet using the fast engine, to it.  Every
+ * partition that has rotated is looked at, not just the last few, so
+ * partitions missed while the poller was not running, or while the plugin was
+ * disabled, are converted as well, newest first.
+ *
+ * Only $limit are converted per call, as each ALTER TABLE is run in turn and
+ * takes a while.  Nothing is converted while an ALTER TABLE is running on any
+ * of them, so the conversions of one poller cycle never pile up on those of
+ * the previous one.
+ *
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ * @param int    $limit      The most partitions to convert
+ *
+ * @return array The partitions that were converted
+ */
+function flowview_convert_cold_partitions(string $raw_engine, int $limit = 3): array {
+	$cold = flowview_get_cold_partitions(flowview_get_partition_tables());
+
+	if (!cacti_sizeof($cold) || cacti_sizeof(flowview_get_running_partition_alters($cold))) {
+		return [];
+	}
+
+	$engines = [];
+
+	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, ENGINE
+		FROM information_schema.TABLES
+		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"') as $row) {
+		$engines[$row['TABLE_NAME']] = $row['ENGINE'];
+	}
+
+	$converted = [];
+
+	foreach (array_reverse($cold) as $table) {
+		if (cacti_sizeof($converted) >= $limit) {
+			break;
+		}
+
+		if (!isset($engines[$table]) || $engines[$table] == $raw_engine) {
+			continue;
+		}
+
+		if (flowview_convert_partition_engine($table, $raw_engine)) {
+			$converted[] = $table;
+		}
+	}
+
+	return $converted;
 }
 
 /**

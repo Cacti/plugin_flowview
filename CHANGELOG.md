@@ -2,29 +2,11 @@
 
 --- develop ---
 
-* bug: Scan the partition that is still receiving flows once per report, not once per panel.  Since it is no longer cached, the table and each chart of a report page scanned it again with the same query.  The workers that run the same map query, with the same range, against it now take a named lock, and the first one keeps its result for 60 seconds for the others.  It is kept in parallel_database_query_shard_cache under map_partition 'live', never as a full scan, so it is never counted as materialized, is not checked by the stale cache cleanup, and is purged by the poller once it is a minute old.  A report can therefore show live data up to 60 seconds old
-
-* bug: Never cache the partition that is still receiving flows.  A full run included it, and as its flows ended before the end of the range it was scanned as a full scan and its result was cached, which was wrong as soon as more flows arrived, and counted it as materialized.  Whether a shard is a full scan is now decided in flowview_is_full_scan(), which refuses the newest partition, so a report that covers it cannot cache it either, and it is scanned for the range as it is asked for.  cli/materialize_queries.php only materializes the partitions that have rotated, and removes what was cached for the live partition before, so NAT Shards and Non-NAT Shards can no longer equal the number of Partitions
-
-* bug: Make the earliest partition, and the partitions that rotate, get cached by a materialization.  A shard is only cached when the range starts before the earliest flow in the partition, and a flow can start before the window of the partition it was written to, but the range was padded by only a second, so the oldest partition, or a rotated one on its own, was never cached and its Filter stayed Required.  The start is now padded by a day, which only adds partitions that already exist and are cached, and the summary now shows the first and last partition instead of the padded range.  Run the materializer again to cache what was missed
-
 * feature: Say which partitions a Filter is not materialized for, with NAT and without, in the tip of its Required and Running pill
-
-* bug: Fix the Filters page failing with "3 arguments are required, 2 given" once a query was running.  The Running: N pill and its tip, and the Parallel Query timeout message, passed the text domain where Cacti's __() expects the values to put in the text, so the tip crashed, the pill would have read "Running: flowview", and the timeout would have said 0 seconds.  The values now come before the domain, as elsewhere in the plugin
-
-* bug: Stop cli/materialize_queries.php from reporting each ALTER TABLE twice, once from its own progress line and once from the log message that is also printed.  The alter is still written to the Cacti log, and the schema upgrade, which has no other report, still shows it.  The logged text no longer has the extra space in it
 
 * feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page, with how many are with NAT and without in its tip.  The process table only has the id of a running request, so a running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, and there is no pill when none are running
 
 * feature: Add --status to cli/materialize_queries.php to list the parallel queries that are running and the Filter each one is for, with its progress
-
-* bug: Show the Running status on the Filters page while a parallel query is still working, not only while cli/materialize_queries.php itself is registered.  The query keeps going after the script has ended, for instance when it timed out, so the status now comes from the runner and shard worker (db_query_<id> and db_shard_<id>) registrations in the process table, whoever started them.  A registration counts while it is recent, or when its process is still alive, so a row left behind by a killed process does not.  A new materialization is not started while one is running
-
-* bug: Make the Parallel Query timeout actually stop the runner and shard workers.  They register as db_query_<id> and db_shard_<id>, but the cleanup, and the runner's own termination handler, looked for db_query<id> and db_shard<id>, so they were never found: a timed out query left its processes running and a terminated one left its row in the process table
-
-* bug: Stop the poller from starting the same ALTER TABLE ENGINE conversion on a partition every cycle.  Until a long conversion finishes the partition still reports its old engine, so each cycle started another that waited for the first and then rebuilt the table again, which also held up every query scanning that partition.  The conversion is skipped while an ALTER TABLE is already running on the partition, and cli/materialize_queries.php checks a partition again just before altering it, so it is never rebuilt twice
-
-* bug: Make a Parallel Query that reaches the Maximum Run Time report it in words when run from a script, such as cli/materialize_queries.php, instead of printing the JavaScript meant for the web page; the message is also written to the Cacti log, a script now exits with a failure, and the web page is unchanged
 
 * feature: Have cli/materialize_queries.php get the partitions ready before it starts the Parallel Query.  It waits for an ALTER TABLE that is already running on a partition it needs, such as from the schema upgrade, since a query waits for it and then ends at the Maximum Run Time, and then does the alters that are still due itself, one partition at a time with progress shown.  The partition still receiving flows is left alone.  It also notes the partitions that have no NAT columns, as they have no NAT data.  What a partition needs altered is now decided in one place, flowview_get_partition_alter(), which the schema upgrade also uses, so the ALTER it issues is unchanged
 
@@ -41,8 +23,6 @@
 * feature: Add cli/materialize_queries.php, which runs every saved FlowView query through the parallel query for the entire range of flow partitions, once with NAT on and once with NAT off (--query-id, --nat, --dry-run and --force are optional), so the partition results are already cached when a report is opened; it registers with register_process_start() for 8 hours so only one run is active at a time, reuses cached partitions that still match their partition's data bounds, rebuilds the ones that have since gained flows or been dropped, and runs each query and NAT mode in its own process so one that reaches the Maximum Run Time does not end the rest
 
 * dev: Move fixprivate.php, import_flows.php and repair_tables.php into the plugin's cli/ directory (listed as tombstones in manifest.json so upgrades remove the old copies); they now locate the Cacti root relative to their own location
-
-* bug: Fix "Uncaught ReferenceError: timeshiftFilterLeft is not defined" when using the Shift Time Backward/Forward icons on the flow report filter; the plugin relied on undefined global functions, so the icons now call a plugin-owned timeshiftFilter() that shifts the From/To range by the selected interval through a new `timeshift` action and reloads the report
 
 * fix: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
 

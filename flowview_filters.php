@@ -437,14 +437,17 @@ function show_filters(): void {
 		$tables     = flowview_get_partition_tables();
 		$cold       = flowview_get_cold_partitions($tables);
 		$partitions = cacti_sizeof($tables);
-		$running    = flowview_materialization_running();
+		$scope      = flowview_get_materialization_scope();
 		$requests   = flowview_get_running_requests();
 
 		foreach ($filters as $filter) {
 			$md5sums = flowview_get_filter_md5sums((int) $filter['id']);
 			$cached  = flowview_get_cached_shard_tables((int) $filter['id'], $md5sums);
-			$status  = flowview_materialization_status($cached['nat'], $cached['non_nat'], $cold, $running);
 			$queries = flowview_count_running_queries($md5sums, $requests);
+
+			/* only the filters being materialized, or with a query running, are running */
+			$running = flowview_filter_is_materializing((int) $filter['id'], $scope) || $queries > 0;
+			$status  = flowview_materialization_status($cached['nat'], $cached['non_nat'], $cold, $running);
 			$missing = flowview_get_missing_partitions($cached['nat'], $cached['non_nat'], $cold);
 
 			form_alternate_row('line' . $filter['id'], true);
