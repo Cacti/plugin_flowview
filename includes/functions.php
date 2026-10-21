@@ -23,6 +23,16 @@
  +-------------------------------------------------------------------------+
 */
 
+// The live partition is never materialized.  The workers of one report page
+// share a single scan of it for a short time, kept in the shard cache table
+// under this marker in map_partition, behind a named lock.
+if (!defined('FLOWVIEW_LIVE_SHARD_MARKER')) {
+	define('FLOWVIEW_LIVE_SHARD_MARKER', 'live');
+	define('FLOWVIEW_LIVE_SHARD_TTL', 60);
+	define('FLOWVIEW_LIVE_SHARD_LOCK', 'flowview_live_');
+	define('FLOWVIEW_LIVE_SHARD_LOCK_WAIT', 120);
+}
+
 // reports_run()/reports_queue()/reports_log_and_notify() became native in
 // Cacti 1.3. Whether core will declare them is fixed by the Cacti version at
 // bootstrap, so gate the pre-1.3 shims on that rather than on function_exists():
@@ -4234,11 +4244,13 @@ function flowview_invalidate_stale_shard_cache(array $only = []): array {
 		$cache = flowview_db_fetch_assoc_prepared('SELECT md5sum, map_table, map_partition, min_date, max_date
 			FROM parallel_database_query_shard_cache
 			WHERE map_table IN (' . implode(', ', array_fill(0, cacti_sizeof($only), '?')) . ')
+			AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'
 			ORDER BY map_table',
 			array_values($only));
 	} else {
 		$cache = flowview_db_fetch_assoc('SELECT md5sum, map_table, map_partition, min_date, max_date
 			FROM parallel_database_query_shard_cache
+			WHERE map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'
 			ORDER BY map_table');
 	}
 
@@ -4449,16 +4461,116 @@ function flowview_remove_live_partition_cache(): int {
 
 	$cached = (int) flowview_db_fetch_cell_prepared('SELECT COUNT(*)
 		FROM parallel_database_query_shard_cache
-		WHERE map_table = ?',
+		WHERE map_table = ?
+		AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'',
 		[$live]);
 
 	if ($cached > 0) {
 		flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
-			WHERE map_table = ?',
+			WHERE map_table = ?
+			AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'',
 			[$live]);
 	}
 
 	return $cached;
+}
+
+/**
+ * flowview_live_shard_key - The key a live partition shard result is shared
+ * under.  Requests that run the same map query, with the same range, against
+ * the same partition get the same key, such as the table and the charts of a
+ * single report page.  It is derived from the map query, so it never matches
+ * the key of a materialized shard.
+ *
+ * @param array $query The parallel query request
+ * @param array $shard The shard of the live partition
+ *
+ * @return string
+ */
+function flowview_live_shard_key(array $query, array $shard): string {
+	return md5($query['md5sum_tables'] . '|' . $shard['map_table'] . '|' . $shard['map_params']);
+}
+
+/**
+ * flowview_live_shard_lock - Take the lock that makes the workers of one
+ * live shard key run the map query one at a time, so the rest can reuse the
+ * result of the first.
+ *
+ * @param string $key The live shard key
+ *
+ * @return bool Whether the lock was taken within the wait time
+ */
+function flowview_live_shard_lock(string $key): bool {
+	return (int) flowview_db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)',
+		[FLOWVIEW_LIVE_SHARD_LOCK . $key, FLOWVIEW_LIVE_SHARD_LOCK_WAIT]) === 1;
+}
+
+/**
+ * flowview_live_shard_unlock - Release the lock of flowview_live_shard_lock().
+ *
+ * @param string $key The live shard key
+ *
+ * @return void
+ */
+function flowview_live_shard_unlock(string $key): void {
+	flowview_db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [FLOWVIEW_LIVE_SHARD_LOCK . $key]);
+}
+
+/**
+ * flowview_live_shard_get - The result of a live shard that was run in the
+ * last FLOWVIEW_LIVE_SHARD_TTL seconds.
+ *
+ * @param string $key   The live shard key
+ * @param string $table The live partition table
+ *
+ * @return array|null null when there is no recent result
+ */
+function flowview_live_shard_get(string $key, string $table): ?array {
+	$row = flowview_db_fetch_row_prepared('SELECT results
+		FROM parallel_database_query_shard_cache
+		WHERE md5sum = ?
+		AND map_table = ?
+		AND map_partition = ?
+		AND date_created >= DATE_SUB(NOW(), INTERVAL ? SECOND)',
+		[$key, $table, FLOWVIEW_LIVE_SHARD_MARKER, FLOWVIEW_LIVE_SHARD_TTL]);
+
+	if (!cacti_sizeof($row)) {
+		return null;
+	}
+
+	$results = json_decode($row['results'], true);
+
+	return is_array($results) ? $results : null;
+}
+
+/**
+ * flowview_live_shard_save - Keep the result of a live shard for
+ * FLOWVIEW_LIVE_SHARD_TTL seconds.
+ *
+ * @param string $key     The live shard key
+ * @param string $table   The live partition table
+ * @param array  $results The result of the map query
+ *
+ * @return void
+ */
+function flowview_live_shard_save(string $key, string $table, array $results): void {
+	flowview_db_execute_prepared('REPLACE INTO parallel_database_query_shard_cache
+		(md5sum, map_table, map_partition, min_date, max_date, results, date_created)
+		VALUES (?, ?, ?, NOW(), NOW(), ?, NOW())',
+		[$key, $table, FLOWVIEW_LIVE_SHARD_MARKER, json_encode($results)]);
+}
+
+/**
+ * flowview_live_shard_expire - Remove the live shard results that are no
+ * longer reusable.
+ *
+ * @return void
+ */
+function flowview_live_shard_expire(): void {
+	flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+		WHERE map_partition = ?
+		AND date_created < DATE_SUB(NOW(), INTERVAL ? SECOND)',
+		[FLOWVIEW_LIVE_SHARD_MARKER, FLOWVIEW_LIVE_SHARD_TTL]);
 }
 
 /**
@@ -5277,7 +5389,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 					$index,
 					$full_scan ? '1':'0',
 					$details['table_name'],
-					$details['table_partition'],
+					($table == $live && !$full_scan) ? FLOWVIEW_LIVE_SHARD_MARKER : $details['table_partition'],
 					$map_query,
 					json_encode($fsql_params)
 				)
@@ -5605,6 +5717,8 @@ function parallel_database_query_create_reduce_table($request_id, $sql_query, $t
 function parallel_database_query_expire(): void {
 	$ttl = read_config_option('flowview_parallel_time_to_live');
 
+	flowview_live_shard_expire();
+
 	if (empty($ttl)) {
 		set_config_option('flowview_parallel_time_to_live', '21600');
 		$ttl = 21600;
@@ -5928,15 +6042,36 @@ function parallel_database_child_runner($query_id, $shard_id): void {
 				$exists = [];
 			}
 
-			if (!cacti_sizeof($exists)) {
+			$live_key    = '';
+			$live_locked = false;
+			$live_reused = false;
+
+			if (!cacti_sizeof($exists) && $shard['map_partition'] == FLOWVIEW_LIVE_SHARD_MARKER) {
+				$live_key    = flowview_live_shard_key($query, $shard);
+				$live_locked = flowview_live_shard_lock($live_key);
+				$results     = flowview_live_shard_get($live_key, $shard['map_table']);
+				$live_reused = $results !== null;
+			}
+
+			if (!cacti_sizeof($exists) && !$live_reused) {
 				$results = flowview_db_fetch_assoc_prepared("{$shard['map_query']}", json_decode($shard['map_params']), false, $max_cnn);
-			} else {
+
+				if ($live_key != '') {
+					if (is_array($results)) {
+						flowview_live_shard_save($live_key, $shard['map_table'], $results);
+					}
+				}
+			} elseif (cacti_sizeof($exists)) {
 				flowview_db_execute_prepared('UPDATE parallel_database_query
 					SET cached_shards = cached_shards + 1
 					WHERE id = ?',
 					[$query_id]);
 
 				$results = json_decode($exists['results'], true);
+			}
+
+			if ($live_locked) {
+				flowview_live_shard_unlock($live_key);
 			}
 
 			if ($shard['full_scan'] == 1 && !cacti_sizeof($exists)) {

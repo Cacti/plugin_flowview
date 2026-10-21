@@ -214,7 +214,8 @@ php cli/materialize_queries.php
 The script runs every saved query over every flow partition that has rotated,
 once with NAT on and once with NAT off.  The partition still receiving flows is
 never cached, as a result cached for it would be wrong as soon as more flows
-arrive.  Use `--query-id=ID[,ID...]` or
+arrive.  Instead, the table and charts of one report share a single scan of it,
+whose result is reused for 60 seconds and then discarded.  Use `--query-id=ID[,ID...]` or
 `--nat=on|off` to narrow the run, and `--dry-run` to see what would be run.
 Partitions that are already cached and still match their data are skipped,
 while partitions that have received more flows since, or have been dropped,

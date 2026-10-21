@@ -1308,4 +1308,119 @@ describe('keeping the live partition out of the cache', function () {
 				return strpos($call['sql'] ?? '', 'parallel_database_query_shard_cache') !== false;
 			}))->toBeEmpty();
 	});
+
+	it('keeps the short lived live shard results out of the removal and the staleness checks', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array(array('table' => 'plugin_flowview_raw_2024001')));
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 1);
+
+		flowview_remove_live_partition_cache();
+		flowview_invalidate_stale_shard_cache();
+		flowview_invalidate_stale_shard_cache(array('plugin_flowview_raw_2024001'));
+
+		$selects = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['sql'] ?? '', 'FROM parallel_database_query_shard_cache') !== false;
+		}));
+
+		expect($selects)->not->toBeEmpty();
+
+		foreach ($selects as $call) {
+			expect($call['sql'])->toContain("map_partition != 'live'");
+		}
+	});
+});
+
+describe('sharing one scan of the live partition', function () {
+	beforeEach(function () {
+		plugin_test_reset();
+	});
+
+	$query = array('md5sum_tables' => 'abc');
+	$shard = array('map_table' => 'plugin_flowview_raw_2024001', 'map_params' => '["x"]');
+
+	it('derives one key for the same map query, table and range', function () use ($query, $shard) {
+		$key = flowview_live_shard_key($query, $shard);
+
+		expect($key)->toHaveLength(32)
+			->and(flowview_live_shard_key($query, $shard))->toBe($key)
+			->and(flowview_live_shard_key(array('md5sum_tables' => 'def'), $shard))->not->toBe($key)
+			->and(flowview_live_shard_key($query, array_merge($shard, array('map_params' => '["y"]'))))->not->toBe($key)
+			->and(flowview_live_shard_key($query, array_merge($shard, array('map_table' => 'plugin_flowview_raw_2024002'))))->not->toBe($key)
+			->and($key)->not->toBe('abc');
+	});
+
+	it('takes and releases a named lock on that key', function () {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+
+		expect(flowview_live_shard_lock('k1'))->toBeTrue();
+
+		flowview_live_shard_unlock('k1');
+
+		$calls = array_values($GLOBALS['__test_db_calls']);
+
+		expect($calls[0]['sql'])->toContain('GET_LOCK')
+			->and($calls[0]['params'])->toBe(array('flowview_live_k1', FLOWVIEW_LIVE_SHARD_LOCK_WAIT))
+			->and($calls[1]['sql'])->toContain('RELEASE_LOCK')
+			->and($calls[1]['params'])->toBe(array('flowview_live_k1'));
+	});
+
+	it('reports a lock that was not obtained in time', function () {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '0');
+
+		expect(flowview_live_shard_lock('k1'))->toBeFalse();
+	});
+
+	it('reuses a recent live result', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('results' => json_encode(array(array('bytes' => 5)))));
+
+		expect(flowview_live_shard_get('k1', 'plugin_flowview_raw_2024001'))->toBe(array(array('bytes' => 5)));
+
+		$call = $GLOBALS['__test_db_calls'][0];
+
+		expect($call['params'])->toBe(array('k1', 'plugin_flowview_raw_2024001', 'live', FLOWVIEW_LIVE_SHARD_TTL))
+			->and($call['sql'])->toContain('date_created >= DATE_SUB(NOW(), INTERVAL ? SECOND)');
+	});
+
+	it('reuses an empty live result', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('results' => '[]'));
+
+		expect(flowview_live_shard_get('k1', 'plugin_flowview_raw_2024001'))->toBe(array());
+	});
+
+	it('has nothing to reuse without a recent live result', function () {
+		expect(flowview_live_shard_get('k1', 'plugin_flowview_raw_2024001'))->toBeNull();
+	});
+
+	it('has nothing to reuse when the stored result is unreadable', function () {
+		plugin_test_queue_db_result('db_fetch_row_prepared', array('results' => 'not json'));
+
+		expect(flowview_live_shard_get('k1', 'plugin_flowview_raw_2024001'))->toBeNull();
+	});
+
+	it('keeps a live result under the live marker', function () {
+		flowview_live_shard_save('k1', 'plugin_flowview_raw_2024001', array(array('bytes' => 5)));
+
+		$call = $GLOBALS['__test_db_calls'][0];
+
+		expect($call['sql'])->toStartWith('REPLACE INTO parallel_database_query_shard_cache')
+			->and($call['params'])->toBe(array('k1', 'plugin_flowview_raw_2024001', 'live', json_encode(array(array('bytes' => 5)))));
+	});
+
+	it('removes only expired live results', function () {
+		flowview_live_shard_expire();
+
+		$call = $GLOBALS['__test_db_calls'][0];
+
+		expect($call['sql'])->toContain('map_partition = ?')
+			->and($call['sql'])->toContain('date_created < DATE_SUB(NOW(), INTERVAL ? SECOND)')
+			->and($call['params'])->toBe(array('live', FLOWVIEW_LIVE_SHARD_TTL));
+	});
+
+	it('expires them with the poller clean up of parallel queries', function () {
+		parallel_database_query_expire();
+
+		$sql = array_column($GLOBALS['__test_db_calls'], 'sql');
+
+		expect(array_filter($sql, fn ($s) => strpos($s, "DELETE FROM parallel_database_query_shard_cache") === 0))->toHaveCount(1);
+	});
 });
