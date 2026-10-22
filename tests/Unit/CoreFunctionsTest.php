@@ -549,7 +549,7 @@ it('plans the cache keys of a filter for each NAT mode without running it', func
 	$plan = function ($nat) use ($filter) {
 		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
 
-		return run_flow_query(false, 4, 1704067200, 1704153600, true, $nat);
+		return flowview_plan_filter(4, $nat);
 	};
 
 	$nat     = $plan(true);
@@ -567,6 +567,56 @@ it('plans the cache keys of a filter for each NAT mode without running it', func
 
 	expect($writes)->toBeEmpty();
 });
+
+it('gives the plan of a filter only through its out parameter, never as what the report returns', function () {
+	$filter = array(
+		'id' => 4, 'name' => 'Top Talkers', 'device_id' => 0, 'ex_addr' => '', 'template_id' => -1,
+		'statistics' => 10, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 20, 'cutoffoctets' => 0,
+		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
+	);
+
+	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+
+	$plan   = array();
+	$result = run_flow_query(false, 4, 1704067200, 1704153600, true, true, $plan);
+
+	expect($result)->toBeTrue()
+		->and($plan)->toHaveCount(1)
+		->and($plan[0])->toMatch('/^[0-9a-f]{32}$/');
+});
+
+it('has no plan for a filter that can not be planned', function () {
+	expect(flowview_plan_filter(99, true))->toBe(array());
+});
+
+it('only takes an exporter address as the stream override', function ($value, $used) {
+	$filter = array(
+		'id' => 4, 'name' => 'Top Talkers', 'device_id' => 0, 'ex_addr' => '', 'template_id' => -1,
+		'statistics' => 10, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 20, 'cutoffoctets' => 0,
+		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
+	);
+
+	plugin_test_reset();
+
+	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+	$none = flowview_plan_filter(4, true);
+
+	$_REQUEST['ex_addr'] = $value;
+
+	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+	$with = flowview_plan_filter(4, true);
+
+	plugin_test_reset();
+
+	expect($none)->toHaveCount(1)
+		->and($with != $none)->toBe($used);
+})->with(array(
+	'an IPv4 address'   => array('10.1.2.3', true),
+	'an IPv6 address'   => array('2001:db8::1', true),
+	'markup'            => array('<script>alert(1)</script>', false),
+	'All'               => array('0', false),
+	'a host and a port' => array('10.1.2.3:2055', false),
+));
 
 it('finds the partitions of a filter that are cached with and without NAT', function () {
 	if (!function_exists('array_rekey')) {
@@ -1928,13 +1978,13 @@ describe('keeping the report of a filter fixed and pruning what no filter caches
 
 	it('does not let the request change the report of a filter', function () use ($filter) {
 		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
-		$plain = run_flow_query(false, 4, 1704067200, 1704153600, true, true);
+		$plain = flowview_plan_filter(4, true);
 
 		$_REQUEST['report'] = 's11';
 
 		plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
 
-		expect(run_flow_query(false, 4, 1704067200, 1704153600, true, true))->toBe($plain);
+		expect(flowview_plan_filter(4, true))->toBe($plain);
 	});
 
 	it('still lets the request pick the report of a filter that has none', function () use ($filter) {
@@ -1942,13 +1992,13 @@ describe('keeping the report of a filter fixed and pruning what no filter caches
 
 		plugin_test_queue_db_result('db_fetch_row_prepared', $none);
 
-		expect(run_flow_query(false, 4, 1704067200, 1704153600, true, true))->toBeFalse();
+		expect(flowview_plan_filter(4, true))->toBe(array());
 
 		$_REQUEST['report'] = 's10';
 
 		plugin_test_queue_db_result('db_fetch_row_prepared', $none);
 
-		expect(run_flow_query(false, 4, 1704067200, 1704153600, true, true))->toBeArray()->toHaveCount(1);
+		expect(flowview_plan_filter(4, true))->toBeArray()->toHaveCount(1);
 	});
 
 	it('knows the cache keys of every filter', function () use ($filter, $keys_of) {

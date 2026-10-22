@@ -3123,21 +3123,24 @@ function get_category_columns($statistics, $domain) {
  * filter table
  * an error.
  *
- * When $plan_only is true nothing is run.  The function returns the
- * md5sum_tables of each map query the parallel query would cache
- * against, which is how the cached shards of the query are found.
+ * When $plan_only is true nothing is run.  The md5sum_tables of each map
+ * query the parallel query would cache against, which is how the cached
+ * shards of the query are found, are put in $plan, and true is returned.
+ * They are not returned, so what this returns is only ever the report.
  * $force_nat then decides the NAT mode instead of the request variables.
+ * Use flowview_plan_filter() rather than calling this for a plan.
  *
- * @param mixed     $session
- * @param mixed     $query_id
- * @param mixed     $start
- * @param mixed     $end
- * @param bool      $plan_only
- * @param bool|null $force_nat
+ * @param mixed      $session
+ * @param mixed      $query_id
+ * @param mixed      $start
+ * @param mixed      $end
+ * @param bool       $plan_only
+ * @param bool|null  $force_nat
+ * @param array|null $plan      Set to the cache keys when $plan_only is true
  *
  * @return mixed
  */
-function run_flow_query($session, $query_id, $start, $end, bool $plan_only = false, ?bool $force_nat = null) {
+function run_flow_query($session, $query_id, $start, $end, bool $plan_only = false, ?bool $force_nat = null, ?array &$plan = null) {
 	global $stat_columns_array;
 
 	global $config, $graph_timespans;
@@ -3231,10 +3234,12 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['device_id'], 'listener_id');
 	}
 
-	/* ex_addr override */
-	if (isset_request_var('ex_addr') && get_nfilter_request_var('ex_addr') != '0' && get_nfilter_request_var('ex_addr') != '-1') {
+	/* ex_addr override, an exporter address, so anything else is not one */
+	$ex_addr = isset_request_var('ex_addr') ? filter_var(get_nfilter_request_var('ex_addr'), FILTER_VALIDATE_IP) : false;
+
+	if ($ex_addr !== false) {
 		$sql_where .= ($sql_where != '' ? ' AND ':'') . 'ex_addr = ?';
-		$sql_params[] = get_request_var('ex_addr');
+		$sql_params[] = $ex_addr;
 	} elseif (isset($data['ex_addr']) && $data['ex_addr'] != '-1' && $data['ex_addr'] != '' && $data['ex_addr'] != '0') {
 		$sql_where .= ($sql_where != '' ? ' AND ':'') . 'ex_addr = ?';
 		$sql_params[] = $data['ex_addr'];
@@ -3915,7 +3920,9 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 		}
 
 		if ($plan_only) {
-			return array_map('parallel_database_query_table_md5', $stru_inners);
+			$plan = array_map('parallel_database_query_table_md5', $stru_inners);
+
+			return true;
 		}
 
 		$tables     = get_tables_for_query($start, $end);
@@ -5543,6 +5550,26 @@ function flowview_materialize_rotated_partitions(): array {
 }
 
 /**
+ * flowview_plan_filter - The cache keys (md5sum_tables) of the map queries a
+ * filter runs, with NAT or without.  Nothing is run.
+ *
+ * @param int  $query_id The FlowView query
+ * @param bool $use_nat  Whether it is with NAT
+ *
+ * @return array The cache keys, empty when the filter can not be planned
+ */
+function flowview_plan_filter(int $query_id, bool $use_nat): array {
+	$plan = [];
+	$now  = time();
+
+	if (run_flow_query(false, $query_id, $now, $now, true, $use_nat, $plan) !== true) {
+		return [];
+	}
+
+	return $plan;
+}
+
+/**
  * flowview_get_filter_md5sums - The cache keys (md5sum_tables) the parallel
  * query stores the partitions of a filter under, with NAT and without.  Some
  * reports use two map queries and so have two.  Nothing is run, they are
@@ -5554,12 +5581,11 @@ function flowview_materialize_rotated_partitions(): array {
  */
 function flowview_get_filter_md5sums(int $query_id): array {
 	$md5sums = ['nat' => [], 'non_nat' => []];
-	$now     = time();
 
 	foreach (['nat' => true, 'non_nat' => false] as $mode => $use_nat) {
-		$planned = run_flow_query(false, $query_id, $now, $now, true, $use_nat);
+		$planned = flowview_plan_filter($query_id, $use_nat);
 
-		if (is_array($planned) && cacti_sizeof($planned)) {
+		if (cacti_sizeof($planned)) {
 			$md5sums[$mode] = array_values(array_unique($planned));
 		}
 	}
