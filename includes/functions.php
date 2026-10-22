@@ -232,15 +232,7 @@ function sort_filter(): void {
  * @return bool
  */
 function flowview_cacti_uses_select2(): bool {
-	if (!defined('CACTI_VERSION')) {
-		return false;
-	}
-
-	if (function_exists('cacti_version_compare')) {
-		return (bool) cacti_version_compare(CACTI_VERSION, '1.2.32', '>=');
-	}
-
-	return version_compare(CACTI_VERSION, '1.2.32', '>=');
+	return defined('CACTI_VERSION') && version_compare(CACTI_VERSION, '1.2.32', '>=');
 }
 
 /**
@@ -888,7 +880,7 @@ function save_filter(): void {
 			header('Location: ' . html_escape(get_nfilter_request_var('return') . '?query=' . (empty($id) ? get_filter_request_var('id') : $id)));
 		}
 
-		exit;
+		flowview_exit();
 	}
 
 	/* a change to what is cached is said in a dialog, with the note to materialize it again */
@@ -906,7 +898,7 @@ function save_filter(): void {
 		header('Location: ' . html_escape(get_nfilter_request_var('return') . '?query=' . (empty($id) ? get_filter_request_var('id') : $id)));
 	}
 
-	exit;
+	flowview_exit();
 }
 
 /**
@@ -3001,12 +2993,12 @@ function flowview_get_chartdata(): void {
 			];
 
 			print json_encode($chartData, JSON_NUMERIC_CHECK);
-			exit;
+			flowview_exit();
 		}
 	}
 
 	print json_encode([]);
-	exit;
+	flowview_exit();
 }
 
 /**
@@ -3790,10 +3782,8 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 
 			if ($data['statistics'] > 0) {
 				$message = __('The Statistical Report %s is not known.  Please open a bug on GitHub', $data['statistics'], 'flowview');
-			} elseif($data['printed'] > 0) {
-				$message = __('The Printed Report %s is not known.  Please open a bug on GitHub', $data['printed'], 'flowview');
 			} else {
-				$message = __('No valid report was selected.  Please open a bug on GitHub', 'flowview');
+				$message = __('The Printed Report %s is not known.  Please open a bug on GitHub', $data['printed'], 'flowview');
 			}
 
 			raise_message('bad_report', $message, MESSAGE_LEVEL_ERROR);
@@ -3879,11 +3869,7 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 					'sql_end_time'     => $end
 				];
 
-				if ($request_type == 'printed') {
-					$stru_inner['sql_limit'] = 'LIMIT 100';
-					$stru_inner['sql_order'] = $sql_order;
-				}
-
+				/* only statistical reports have two map queries, so there is no printed limit or order here */
 				$stru_inners[] = $stru_inner;
 			}
 		} else {
@@ -5268,17 +5254,14 @@ function flowview_get_materializing_filters(): array {
  * @return int The registrations removed
  */
 function flowview_purge_dead_materializations(): int {
-	if (!function_exists('cacti_process_still_running')) {
-		return 0;
-	}
-
 	$removed = 0;
 
-	$rows = db_fetch_assoc_prepared('SELECT id, pid
+	/* without a way to tell whether a process is alive nothing is removed */
+	$rows = function_exists('cacti_process_still_running') ? db_fetch_assoc_prepared('SELECT id, pid
 		FROM processes
 		WHERE tasktype = ?
 		AND taskname = ?',
-		['flowview', 'materialize']);
+		['flowview', 'materialize']) : [];
 
 	foreach ($rows as $row) {
 		if (!cacti_process_still_running((int) $row['pid'])) {
@@ -6234,7 +6217,7 @@ function parallel_database_query_run($requests) {
 			parallel_database_query_cleanup($request_id);
 		}
 
-		exit(defined('CACTI_WEB') && CACTI_WEB ? 0 : 1);
+		flowview_exit(defined('CACTI_WEB') && CACTI_WEB ? 0 : 1);
 	}
 
 	if (cacti_sizeof($requests) == 1) {

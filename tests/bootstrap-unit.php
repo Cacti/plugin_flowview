@@ -389,13 +389,25 @@ if (!function_exists('form_input_validate')) {
 
 if (!function_exists('is_error_message')) {
 	function is_error_message() {
-		return false;
+		return !empty($GLOBALS['__test_error_message']);
 	}
 }
 
 if (!function_exists('sql_save')) {
 	function sql_save($array, $table, $key = 'id') {
 		return isset($array['id']) ? $array['id'] : 1;
+	}
+}
+
+if (!class_exists('FlowviewTestExit')) {
+	/* thrown by the flowview_exit() stand in, so a test sees where a request ends */
+	class FlowviewTestExit extends RuntimeException {
+	}
+}
+
+if (!function_exists('flowview_exit')) {
+	function flowview_exit(int $status = 0): void {
+		throw new FlowviewTestExit('flowview_exit', $status);
 	}
 }
 
