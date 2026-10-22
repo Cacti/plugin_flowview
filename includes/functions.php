@@ -6115,6 +6115,30 @@ function flowview_parallel_timeout_message(int $seconds): string {
 }
 
 /**
+ * flowview_report_parallel_timeout - Log that a parallel query did not finish
+ * within the Maximum Run Time, and say so.  The web page shows the message in
+ * the browser, a script has no browser to run it, so it is printed.
+ *
+ * @param int  $seconds The Maximum Run Time
+ * @param bool $web     Whether this is a web request
+ *
+ * @return void
+ */
+function flowview_report_parallel_timeout(int $seconds, bool $web): void {
+	$timeout_message = flowview_parallel_timeout_message($seconds);
+
+	cacti_log($timeout_message, false, 'FLOWVIEW');
+
+	if ($web) {
+		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
+	} else {
+		print $timeout_message . PHP_EOL;
+
+		$GLOBALS['flowview_error_reported'] = true;
+	}
+}
+
+/**
  * parallel_database_query_is_running - Checks to see if an existing parallel
  * database query is currently running and return a true of false.  This prevents
  * multiple simultaneouls run requests from polluting the output.
@@ -6200,24 +6224,15 @@ function parallel_database_query_run($requests) {
 	}
 
 	if ($total_time >= $max_time) {
-		$timeout_message = flowview_parallel_timeout_message((int) $max_time);
+		$web = defined('CACTI_WEB') && CACTI_WEB;
 
-		cacti_log($timeout_message, false, 'FLOWVIEW');
-
-		/* the web page shows the message in the browser, a script has no browser to run it */
-		if (defined('CACTI_WEB') && CACTI_WEB) {
-			raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
-		} else {
-			print $timeout_message . PHP_EOL;
-
-			$GLOBALS['flowview_error_reported'] = true;
-		}
+		flowview_report_parallel_timeout((int) $max_time, $web);
 
 		foreach($requests as $request_id) {
 			parallel_database_query_cleanup($request_id);
 		}
 
-		flowview_exit(defined('CACTI_WEB') && CACTI_WEB ? 0 : 1);
+		flowview_exit($web ? 0 : 1);
 	}
 
 	if (cacti_sizeof($requests) == 1) {

@@ -21,6 +21,12 @@ beforeAll(function () {
 	if (!function_exists('db_qstr'))             { function db_qstr($value) { return "'" . addslashes((string) $value) . "'"; } }
 	if (!function_exists('number_format_i18n'))  { function number_format_i18n($number, $decimals = 0) { return number_format($number, $decimals); } }
 
+	if (!function_exists('raise_message_javascript')) {
+		function raise_message_javascript($title, $message, $level) {
+			$GLOBALS['__test_javascript_messages'][] = array($title, $message, $level);
+		}
+	}
+
 	if (!function_exists('unregister_process')) {
 		function unregister_process($tasktype, $taskname, $taskid = 0, $pid = 0) {
 			$GLOBALS['__test_unregistered'][] = array($tasktype, $taskname, $taskid);
@@ -45,7 +51,7 @@ beforeEach(function () {
 	$GLOBALS['__test_cacti_log']           = array();
 	$GLOBALS['__test_unregistered']        = array();
 	$GLOBALS['flowview_requests_in_flight'] = array();
-	unset($GLOBALS['flowview_fresh_requests'], $GLOBALS['flowview_partition_allowlist']);
+	unset($GLOBALS['flowview_fresh_requests'], $GLOBALS['flowview_partition_allowlist'], $GLOBALS['flowview_error_reported']);
 });
 
 function plugin_test_query_filter(array $override = array()): array {
@@ -320,6 +326,31 @@ describe('a parallel query request', function () {
 			->and(plugin_test_db_calls('db_fetch_assoc', 'SELECT map_table, map_create, results'))->toHaveCount(1);
 	});
 
+	it('drops the table a request reduced its shards into when it is cleaned up', function () {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 'parallel_database_query_map_5');
+
+		parallel_database_query_cleanup(5, true);
+
+		expect(plugin_test_db_calls('db_execute_prepared', 'DROP TABLE IF EXISTS parallel_database_query_map_5'))->toHaveCount(1);
+	});
+
+	it('logs the progress of a shard only when debugging', function () {
+		global $debug;
+
+		$saved = $debug;
+
+		$debug = false;
+		db_debug('Query 5 and Shard 2 Complete');
+
+		$debug = true;
+		db_debug('Query 6 and Shard 1 Complete');
+
+		$debug = $saved;
+
+		expect($GLOBALS['__test_cacti_log'])->toHaveCount(1)
+			->and(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('Query 6 and Shard 1 Complete');
+	});
+
 	it('removes the requests that have expired', function () {
 		$GLOBALS['__test_config']['flowview_parallel_time_to_live'] = 21600;
 
@@ -346,6 +377,20 @@ describe('the summary of a report', function () {
 });
 
 describe('a parallel query that does not finish in time', function () {
+	it('says so in the browser of a web page, and logs it', function () {
+		$GLOBALS['__test_javascript_messages'] = array();
+
+		ob_start();
+		flowview_report_parallel_timeout(30, true);
+		$printed = ob_get_clean();
+
+		expect($printed)->toBe('')
+			->and($GLOBALS['__test_javascript_messages'])->toHaveCount(1)
+			->and($GLOBALS['__test_javascript_messages'][0][0])->toBe('parallel_query_timeout')
+			->and($GLOBALS['__test_javascript_messages'][0][2])->toBe(MESSAGE_LEVEL_ERROR)
+			->and(isset($GLOBALS['flowview_error_reported']))->toBeFalse()
+			->and(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('Maximum Run Time of 30 seconds');
+	});
 	it('says so in words from a script, cleans up, and ends with a failure', function () {
 		$GLOBALS['__test_config']['flowview_parallel_runlimit'] = 0;
 		$GLOBALS['flowview_requests_in_flight'] = array(5 => 5);

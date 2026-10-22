@@ -17,7 +17,7 @@ beforeAll(function () {
 	require_once __DIR__ . '/../../includes/functions.php';
 
 	if (!function_exists('isempty_request_var'))   { function isempty_request_var($name) { return empty($_REQUEST[$name]); } }
-	if (!function_exists('form_start'))            { function form_start($action, $id = '') { print "<form id='$id' action='$action'>"; } }
+	if (!function_exists('form_start'))            { function form_start($action, $id = '') { $GLOBALS['__test_form_start'] = array($action, $id); } }
 	if (!function_exists('html_start_box'))        { function html_start_box(...$args) {} }
 	if (!function_exists('html_end_box'))          { function html_end_box(...$args) {} }
 	if (!function_exists('read_user_setting'))     { function read_user_setting($name, $default = false) { return $default; } }
@@ -87,6 +87,7 @@ describe('the Filter editor', function () {
 			->and($output)->toContain("\$('#protocols').multiselect();")
 			->and($output)->toContain("id='flowview_saved_dialog'")
 			->and(isset($_SESSION['flowview_rematerialize_saved']))->toBeFalse()
+			->and($GLOBALS['__test_form_start'][1])->toBe('chk')
 			->and($GLOBALS['__test_edit_form']['fields']['protocols']['select_all_text'])->toBe('All Protocols');
 	});
 
