@@ -6891,13 +6891,17 @@ function db_debug($string): void {
 }
 
 /**
+ * display_domain - A DNS name for the report table.  It comes from reverse
+ * lookups of the flow data, which anyone who controls a reverse zone can set,
+ * so it is escaped.
+ *
  * @param mixed $domain
  *
- * @return mixed
+ * @return string
  */
 function display_domain($domain) {
 	if ($domain != '') {
-		return $domain;
+		return html_escape($domain);
 	} else {
 		return __('unresolved', 'flowview');
 	}

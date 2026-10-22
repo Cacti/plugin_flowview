@@ -27,6 +27,8 @@ it('maps type-of-service bits to their precedence and service labels', function 
 it('formats display helpers deterministically', function () {
 	expect(display_domain(''))->toBe('unresolved')
 		->and(display_domain('example.net'))->toBe('example.net')
+		->and(display_domain('<img src=x onerror=alert(1)>.example.net'))->toBe('&lt;img src=x onerror=alert(1)&gt;.example.net')
+		->and(display_domain("it's\".example.net"))->not->toContain("'")
 		->and(get_column_alignment('Bytes'))->toBe('right')
 		->and(get_column_alignment('Source'))->toBe('left')
 		->and(flowview_altrow(0))->toBe('even')
