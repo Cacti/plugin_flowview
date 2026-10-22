@@ -1949,6 +1949,10 @@ describe('stopping the processes of a parallel query', function () {
 		expect(plugin_test_read_source('flowview_filters.php'))->toMatch("/case 'edit':\s*\n\s*if \(!isset_request_var\('embed'\)\)/");
 	});
 
+	it('waits two seconds after starting a materialization before the page is shown again', function () {
+		expect(plugin_test_read_source('flowview_filters.php'))->toMatch('/\$started = flowview_launch_materialize\(\$selected_items\);.*?if \(cacti_sizeof\(\$started\)\) \{\s*sleep\(2\);/s');
+	});
+
 	it('runs the shards of a materialization instead of reusing an earlier request', function () {
 		expect(plugin_test_read_source('cli/materialize_queries.php'))->toContain("\$GLOBALS['flowview_fresh_requests'] = true")
 			->and(plugin_test_read_source('includes/functions.php'))->toContain("!empty(\$GLOBALS['flowview_fresh_requests']) && flowview_discard_completed_request");

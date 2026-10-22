@@ -147,6 +147,11 @@ function actions_filters(): void {
 				$started = flowview_launch_materialize($selected_items);
 				$skipped = cacti_count($selected_items) - cacti_sizeof($started);
 
+				/* give the materialization time to register, so the page shows it as running */
+				if (cacti_sizeof($started)) {
+					sleep(2);
+				}
+
 				if (cacti_sizeof($started) && $skipped > 0) {
 					raise_message('flowview_materialize', __('Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log.', cacti_sizeof($started), $skipped, 'flowview'), MESSAGE_LEVEL_INFO);
 				} elseif (cacti_sizeof($started)) {
