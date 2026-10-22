@@ -1069,6 +1069,9 @@ describe('preparing the partitions before they are scanned', function () {
 
 	it('converts the engine of a partition when no alter is running on it', function () {
 		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 'InnoDB');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
 
 		expect(flowview_convert_partition_engine('plugin_flowview_raw_202629214', 'Aria'))->toBeTrue();
 
@@ -1076,7 +1079,36 @@ describe('preparing the partitions before they are scanned', function () {
 			return $call['fn'] == 'db_execute';
 		}), 'sql');
 
-		expect(array_values($sql))->toBe(array('ALTER TABLE plugin_flowview_raw_202629214 ENGINE=Aria'));
+		$locks = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['sql'], '_LOCK(') !== false;
+		}));
+
+		expect(array_values($sql))->toBe(array('ALTER TABLE plugin_flowview_raw_202629214 ENGINE=Aria'))
+			->and($locks[0]['sql'])->toContain('GET_LOCK')
+			->and($locks[0]['params'])->toBe(array('flowview_alter_plugin_flowview_raw_202629214', 0))
+			->and($locks[1]['sql'])->toContain('RELEASE_LOCK');
+	});
+
+	it('does not wait for, or repeat, an alter another process holds the lock for', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '0');
+
+		expect(flowview_convert_partition_engine('plugin_flowview_raw_202629214', 'Aria'))->toBeFalse()
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return $call['fn'] == 'db_execute';
+			}))->toBeEmpty();
+	});
+
+	it('does not convert a partition that was converted while it waited for the lock', function () {
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 'Aria');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+
+		expect(flowview_convert_partition_engine('plugin_flowview_raw_202629214', 'Aria'))->toBeTrue()
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return $call['fn'] == 'db_execute';
+			}))->toBeEmpty();
 	});
 
 	it('does not start the same engine conversion again while one is running', function () {
@@ -1097,6 +1129,9 @@ describe('preparing the partitions before they are scanned', function () {
 		plugin_test_queue_db_result('db_fetch_assoc', array(
 			array('TIME' => 12, 'INFO' => 'ALTER TABLE plugin_flowview_raw_202629213 ENGINE=Aria'),
 		));
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', 'InnoDB');
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
 
 		expect(flowview_convert_partition_engine('plugin_flowview_raw_202629214', 'Aria'))->toBeTrue();
 	});
@@ -1529,6 +1564,15 @@ describe('converting the partitions that have rotated', function () {
 	beforeEach(function () {
 		plugin_test_reset();
 
+		/* each conversion takes the table's alter lock, checks its engine and releases the lock */
+		$this->granted = function (int $conversions) {
+			for ($i = 0; $i < $conversions; $i++) {
+				plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+				plugin_test_queue_db_result('db_fetch_cell_prepared', 'InnoDB');
+				plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+			}
+		};
+
 		$this->partitions = function (array $engines) {
 			plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table) {
 				return array('table' => $table);
@@ -1555,6 +1599,7 @@ describe('converting the partitions that have rotated', function () {
 		plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table, $engine) {
 			return array('TABLE_NAME' => $table, 'ENGINE' => $engine);
 		}, array_keys($engines), $engines));
+		($this->granted)(2);
 
 		expect(flowview_convert_cold_partitions('Aria'))->toBe(array('plugin_flowview_raw_202629216', 'plugin_flowview_raw_202629214'))
 			->and(($this->alters)())->toBe(array(
@@ -1575,6 +1620,7 @@ describe('converting the partitions that have rotated', function () {
 		plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table, $engine) {
 			return array('TABLE_NAME' => $table, 'ENGINE' => $engine);
 		}, array_keys($engines), $engines));
+		($this->granted)(10);
 
 		expect(flowview_convert_cold_partitions('Aria', 100))->toHaveCount(10);
 	});
@@ -1593,6 +1639,7 @@ describe('converting the partitions that have rotated', function () {
 		plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($table, $engine) {
 			return array('TABLE_NAME' => $table, 'ENGINE' => $engine);
 		}, array_keys($engines), $engines));
+		($this->granted)(2);
 
 		expect(flowview_convert_cold_partitions('Aria', 2))->toBe(array('plugin_flowview_raw_202629217', 'plugin_flowview_raw_202629216'));
 	});
@@ -1632,6 +1679,159 @@ describe('converting the partitions that have rotated', function () {
 		($this->partitions)(array('plugin_flowview_raw_202629216' => 'InnoDB'));
 
 		expect(flowview_convert_cold_partitions('Aria'))->toBe(array());
+	});
+});
+
+describe('altering a partition under its lock, from the table as it is then', function () {
+	beforeEach(function () {
+		plugin_test_reset();
+
+		/* the schema of one partition, read after the lock is taken */
+		$this->schema = function (string $table, string $engine) {
+			plugin_test_queue_db_result('db_fetch_assoc', array(array('TABLE_NAME' => $table, 'TABLE_COLLATION' => 'latin1_swedish_ci', 'ENGINE' => $engine)));
+			plugin_test_queue_db_result('db_fetch_assoc', array(
+				array('TABLE_NAME' => $table, 'COLUMN_NAME' => 'template_id', 'COLUMN_TYPE' => 'int(11) unsigned'),
+				array('TABLE_NAME' => $table, 'COLUMN_NAME' => 'ex_addr', 'COLUMN_TYPE' => 'varchar(46)'),
+			));
+			plugin_test_queue_db_result('db_fetch_assoc', array_map(function ($index) use ($table) {
+				return array('TABLE_NAME' => $table, 'INDEX_NAME' => $index);
+			}, array('template_id', 'start_time', 'end_time', 'ex_addr')));
+		};
+
+		$this->alters = function () {
+			return array_values(array_column(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return $call['fn'] == 'db_execute';
+			}), 'sql'));
+		};
+	});
+
+	it('applies the plan it works out after it has the lock, and releases the lock', function () {
+		$table = 'plugin_flowview_raw_202629214';
+		$seen  = array();
+
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+		($this->schema)($table, 'InnoDB');
+
+		$result = flowview_alter_partition($table, 'Aria', false, 60, function ($plan) use (&$seen) {
+			$seen[] = trim($plan['alter']);
+		});
+
+		$lock = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['sql'], '_LOCK(') !== false;
+		}));
+
+		expect($result)->toBe('altered')
+			->and($seen)->toBe(array('ENGINE=Aria ROW_FORMAT=page'))
+			->and(($this->alters)())->toBe(array("ALTER TABLE $table  ENGINE=Aria ROW_FORMAT=page"))
+			->and($lock[0]['params'])->toBe(array("flowview_alter_$table", 60))
+			->and($lock[1]['sql'])->toContain('RELEASE_LOCK');
+	});
+
+	it('does not alter a table another process already altered', function () {
+		$table = 'plugin_flowview_raw_202629214';
+
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '1');
+		($this->schema)($table, 'Aria');
+
+		expect(flowview_alter_partition($table, 'Aria', false, 60))->toBe('current')
+			->and(($this->alters)())->toBe(array())
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['sql'], 'RELEASE_LOCK') !== false;
+			}))->toHaveCount(1);
+	});
+
+	it('leaves a table alone when the lock is not had in time', function () {
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '0');
+
+		expect(flowview_alter_partition('plugin_flowview_raw_202629214', 'Aria', false, 1))->toBe('busy')
+			->and(($this->alters)())->toBe(array())
+			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return strpos($call['sql'], 'information_schema') !== false;
+			}))->toBeEmpty();
+	});
+
+	it('reads only the partitions it is asked about, when there are few', function () {
+		flowview_get_pending_partition_alters(array('plugin_flowview_raw_202629214', 'plugin_flowview_raw_202629215'), 'Aria');
+
+		$reads = array_column(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+			return strpos($call['sql'], 'information_schema') !== false;
+		}), 'sql');
+
+		expect($reads)->toHaveCount(3);
+
+		foreach ($reads as $sql) {
+			expect($sql)->toContain('AND TABLE_NAME IN ("plugin_flowview_raw_202629214", "plugin_flowview_raw_202629215")')
+				->and($sql)->not->toContain('LIKE');
+		}
+	});
+
+	it('is how the materializer, the poller and the schema upgrade alter a partition', function () {
+		expect(plugin_test_read_source('cli/materialize_queries.php'))->toContain('flowview_alter_partition($table, $raw_engine, false, FLOWVIEW_ALTER_LOCK_WAIT')
+			->and(plugin_test_read_source('cli/materialize_queries.php'))->not->toContain('flowview_apply_partition_alter(')
+			->and(plugin_test_read_source('flowview_upgrade.php'))->toContain("flowview_alter_partition(\$t['TABLE_NAME'], \$raw_engine)")
+			->and(plugin_test_read_source('flowview_upgrade.php'))->not->toContain('flowview_apply_partition_alter(')
+			->and(plugin_test_read_source('includes/functions.php'))->toMatch('/function flowview_convert_partition_engine.*?GET_LOCK\(\?, \?\)\', \[\$lock, 0\]/s');
+	});
+});
+
+describe('materializing only the partitions of a batch', function () {
+	beforeEach(function () {
+		plugin_test_reset();
+
+		if (!function_exists('array_rekey')) {
+			function array_rekey($array, $key, $value) {
+				return array();
+			}
+		}
+
+		unset($GLOBALS['flowview_partition_allowlist']);
+	});
+
+	afterEach(function () {
+		unset($GLOBALS['flowview_partition_allowlist']);
+	});
+
+	$tables = function () {
+		/* includes/arrays.php reads three lists first */
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_assoc', array());
+		plugin_test_queue_db_result('db_fetch_assoc', array(
+			array('table' => 'plugin_flowview_raw_2024001'),
+			array('table' => 'plugin_flowview_raw_2024002'),
+			array('table' => 'plugin_flowview_raw_2024003'),
+		));
+
+		foreach (range(1, 3) as $unused) {
+			plugin_test_queue_db_result('db_fetch_row', array('min_date' => '2024-01-02 00:00:00', 'max_date' => '2024-01-02 23:00:00', 'table_partition' => ''));
+		}
+
+		return get_tables_for_query(strtotime('2024-01-01 00:00:00'), strtotime('2024-01-10 00:00:00'));
+	};
+
+	it('scans every partition in the range for a report', function () use ($tables) {
+		expect(array_keys($tables()))->toBe(array('plugin_flowview_raw_2024001', 'plugin_flowview_raw_2024002', 'plugin_flowview_raw_2024003'));
+	});
+
+	it('scans only the partitions of the batch for a materialization worker', function () use ($tables) {
+		$GLOBALS['flowview_partition_allowlist'] = array('plugin_flowview_raw_2024002' => true);
+
+		expect(array_keys($tables()))->toBe(array('plugin_flowview_raw_2024002'));
+	});
+
+	it('passes the batch to the worker, which starts without a shell', function () {
+		$source = plugin_test_read_source('cli/materialize_queries.php');
+
+		expect($source)->toContain("'--partitions=' . implode(',', \$batch),")
+			->and($source)->toContain("\$GLOBALS['flowview_partition_allowlist'] = array_fill_keys(\$partitions, true);")
+			->and($source)->toContain('function materialize_run_command(array $command): int {')
+			->and($source)->not->toContain('escapeshellarg(PHP_BINARY)');
+	});
+});
+
+describe('showing a printed report as a table', function () {
+	it('makes the saved panels agree before they are merged into the request', function () {
+		expect(plugin_test_read_source('flowview.php'))->toMatch("/set_request_var\('flows', 'false'\);\s*\n(\s*\/\*[^\n]*\*\/\n)?\s*\\\$query\['panel_table'\]\s*= 'on';\s*\n\s*\\\$query\['panel_bytes'\]\s*= '';\s*\n\s*\\\$query\['panel_packets'\] = '';\s*\n\s*\\\$query\['panel_flows'\]\s*= '';/");
 	});
 });
 

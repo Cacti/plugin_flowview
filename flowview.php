@@ -327,6 +327,12 @@ function load_session_for_filter() {
 				set_request_var('bytes', 'false');
 				set_request_var('packets', 'false');
 				set_request_var('flows', 'false');
+
+				/* the saved panels are merged in below, so they have to say the same */
+				$query['panel_table']   = 'on';
+				$query['panel_bytes']   = '';
+				$query['panel_packets'] = '';
+				$query['panel_flows']   = '';
 			}
 		}
 

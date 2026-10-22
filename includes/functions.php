@@ -33,6 +33,9 @@ if (!defined('FLOWVIEW_LIVE_SHARD_MARKER')) {
 	define('FLOWVIEW_LIVE_SHARD_LOCK_WAIT', 120);
 	/* a request that is not finished and has no runner after this many seconds was abandoned */
 	define('FLOWVIEW_ABANDONED_REQUEST_AGE', 120);
+	/* every alter of a raw partition holds this lock on it, see flowview_alter_partition() */
+	define('FLOWVIEW_ALTER_LOCK', 'flowview_alter_');
+	define('FLOWVIEW_ALTER_LOCK_WAIT', 7200);
 }
 
 // reports_run()/reports_queue()/reports_log_and_notify() became native in
@@ -2731,7 +2734,14 @@ function get_tables_for_query($start, $end = null) {
 		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
 
 	if (cacti_sizeof($tables)) {
+		/* a materialization worker scans only the partitions of its batch */
+		$allowed = $GLOBALS['flowview_partition_allowlist'] ?? null;
+
 		foreach($tables as $t) {
+			if (is_array($allowed) && !isset($allowed[$t['table']])) {
+				continue;
+			}
+
 			$parts = explode('_', $t['table']);
 			$partition = trim($parts[3]);
 
@@ -4990,10 +5000,21 @@ function flowview_get_pending_partition_alters(array $tables, string $raw_engine
 
 	$info = [];
 
+	/* when only a few partitions are asked about, only they are read */
+	$names = array_values(array_filter($tables, function ($table) {
+		return preg_match('/^plugin_flowview_raw_[0-9]+$/', $table) === 1;
+	}));
+
+	if (cacti_sizeof($names) && cacti_sizeof($names) <= 100) {
+		$which = 'AND TABLE_NAME IN ("' . implode('", "', $names) . '")';
+	} else {
+		$which = 'AND TABLE_NAME LIKE "plugin_flowview_raw_%"';
+	}
+
 	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, TABLE_COLLATION, ENGINE
 		FROM information_schema.TABLES
 		WHERE TABLE_SCHEMA = DATABASE()
-		AND TABLE_NAME LIKE "plugin_flowview_raw_%"') as $row) {
+		' . $which) as $row) {
 		$info[$row['TABLE_NAME']] = [
 			'collation'       => $row['TABLE_COLLATION'],
 			'engine'          => $row['ENGINE'],
@@ -5007,7 +5028,7 @@ function flowview_get_pending_partition_alters(array $tables, string $raw_engine
 	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, COLUMN_NAME, COLUMN_TYPE
 		FROM information_schema.COLUMNS
 		WHERE TABLE_SCHEMA = DATABASE()
-		AND TABLE_NAME LIKE "plugin_flowview_raw_%"
+		' . $which . '
 		AND COLUMN_NAME IN ("keycol", "template_id", "ex_addr")') as $row) {
 		if (!isset($info[$row['TABLE_NAME']])) {
 			continue;
@@ -5025,7 +5046,7 @@ function flowview_get_pending_partition_alters(array $tables, string $raw_engine
 	foreach (flowview_db_fetch_assoc('SELECT DISTINCT TABLE_NAME, INDEX_NAME
 		FROM information_schema.STATISTICS
 		WHERE TABLE_SCHEMA = DATABASE()
-		AND TABLE_NAME LIKE "plugin_flowview_raw_%"
+		' . $which . '
 		AND INDEX_NAME IN ("template_id", "start_time", "end_time", "ex_addr")') as $row) {
 		if (isset($info[$row['TABLE_NAME']])) {
 			$info[$row['TABLE_NAME']]['indexes'][] = $row['INDEX_NAME'];
@@ -5047,6 +5068,49 @@ function flowview_get_pending_partition_alters(array $tables, string $raw_engine
 	}
 
 	return $pending;
+}
+
+/**
+ * flowview_alter_partition - Alter a raw partition table to what it should
+ * be, holding a lock on the table while it does.  The plan is worked out
+ * after the lock is taken, from the table as it is then, so a table that
+ * another materialization, the poller or the schema upgrade altered in the
+ * meantime is not altered again with a plan that is out of date.  Every
+ * place that alters a partition goes through here.
+ *
+ * @param string        $table      The raw partition table
+ * @param string        $raw_engine The engine a partition table that has rotated uses
+ * @param bool          $print      Also show the alter, as well as logging it
+ * @param int           $wait       How many seconds to wait for the lock
+ * @param callable|null $before     Called with the plan just before it is applied
+ *
+ * @return string altered, current when there was nothing to do, or busy when
+ *                the lock was not had in time
+ */
+function flowview_alter_partition(string $table, string $raw_engine, bool $print = true, int $wait = FLOWVIEW_ALTER_LOCK_WAIT, ?callable $before = null): string {
+	$lock = FLOWVIEW_ALTER_LOCK . $table;
+
+	if ((int) flowview_db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock, $wait]) !== 1) {
+		return 'busy';
+	}
+
+	try {
+		$pending = flowview_get_pending_partition_alters([$table], $raw_engine);
+
+		if (!isset($pending[$table])) {
+			return 'current';
+		}
+
+		if ($before !== null) {
+			$before($pending[$table]);
+		}
+
+		flowview_apply_partition_alter($table, $pending[$table], $print);
+
+		return 'altered';
+	} finally {
+		flowview_db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$lock]);
+	}
 }
 
 /**
@@ -5348,7 +5412,26 @@ function flowview_convert_partition_engine(string $table, string $raw_engine): b
 		return false;
 	}
 
-	flowview_db_execute("ALTER TABLE $table ENGINE=$raw_engine");
+	/* the poller does not wait for another process altering it, and checks it again under the lock */
+	$lock = FLOWVIEW_ALTER_LOCK . $table;
+
+	if ((int) flowview_db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock, 0]) !== 1) {
+		return false;
+	}
+
+	try {
+		$engine = flowview_db_fetch_cell_prepared('SELECT ENGINE
+			FROM information_schema.TABLES
+			WHERE TABLE_SCHEMA = DATABASE()
+			AND TABLE_NAME = ?',
+			[$table]);
+
+		if ($engine != '' && $engine != $raw_engine) {
+			flowview_db_execute("ALTER TABLE $table ENGINE=$raw_engine");
+		}
+	} finally {
+		flowview_db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$lock]);
+	}
 
 	return true;
 }

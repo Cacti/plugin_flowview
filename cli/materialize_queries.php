@@ -182,6 +182,11 @@ if ($worker) {
 
 	materialize_install_signal_handlers();
 
+	/* only the partitions of the batch are scanned, not every partition in its padded range */
+	if (cacti_sizeof($partitions)) {
+		$GLOBALS['flowview_partition_allowlist'] = array_fill_keys($partitions, true);
+	}
+
 	exit(materialize_run_worker($query_ids[0], $nat, $start, $end));
 }
 
@@ -465,13 +470,23 @@ function materialize_query_mode(array $query, string $mode, array $cold, int $th
 		}
 
 		/* a separate process keeps a batch that hits the run limit from ending the rest */
-		$status = materialize_run_command(escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__FILE__) .
-			' --worker' .
-			' --query-id=' . $id .
-			' --nat=' . $mode .
-			' --start=' . $range[0] .
-			' --end=' . $range[1] .
-			($debug ? ' --debug' : ''));
+		$command = [
+			PHP_BINARY,
+			__FILE__,
+			'--worker',
+			'--query-id=' . $id,
+			'--nat=' . $mode,
+			'--start=' . $range[0],
+			'--end=' . $range[1],
+			/* the range is padded so the batch is covered, only the batch's own partitions are scanned */
+			'--partitions=' . implode(',', $batch),
+		];
+
+		if ($debug) {
+			$command[] = '--debug';
+		}
+
+		$status = materialize_run_command($command);
 
 		$timed_out = $status != 0;
 		$remaining = flowview_get_uncached_partitions($id, $mode, array_values(array_diff($cold, $uncacheable)));
@@ -508,9 +523,10 @@ function materialize_query_mode(array $query, string $mode, array $cold, int $th
  * then does the alters that are still due itself, so nothing is altered while
  * the parallel query runs.  The partition still receiving flows is left alone.
  *
- * A partition is looked at again just before it is altered.  If another
- * process started an alter on it in the meantime, this waits for it and then
- * only alters what is still due, so a partition is never rebuilt twice.
+ * A partition is looked at again just before it is altered, under a lock on
+ * it that every process altering a partition takes, so a partition that
+ * another materialization, the poller or the schema upgrade altered in the
+ * meantime is never rebuilt with a plan that is out of date.
  *
  * @param array $cold    The partitions to prepare
  * @param array $modes   The NAT modes being materialized, on and off
@@ -539,28 +555,26 @@ function materialize_prepare_partitions(array $cold, array $modes, bool $dry_run
 		foreach ($pending as $table => $plan) {
 			$i++;
 
-			if (!$dry_run && cacti_sizeof(flowview_get_running_partition_alters([$table]))) {
-				materialize_wait_for_alters([$table]);
+			if ($dry_run) {
+				materialize_say(sprintf('DRY RUN: Would alter Table %s (%d of %d): %s', $table, $i, cacti_sizeof($pending), trim($plan['alter'])));
 
-				$again = flowview_get_pending_partition_alters([$table], $raw_engine);
-
-				if (!isset($again[$table])) {
-					materialize_say(sprintf('Table %s (%d of %d) was altered by another process', $table, $i, cacti_sizeof($pending)));
-
-					continue;
-				}
-
-				$plan = $again[$table];
+				continue;
 			}
 
-			materialize_say(sprintf('%s Table %s (%d of %d): %s', $dry_run ? 'DRY RUN: Would alter' : 'Altering', $table, $i, cacti_sizeof($pending), trim($plan['alter'])));
+			$began = microtime(true);
+			$count = cacti_sizeof($pending);
 
-			if (!$dry_run) {
-				$began = microtime(true);
+			/* the plan is worked out again under the table's lock, as another process may have altered it since */
+			$result = flowview_alter_partition($table, $raw_engine, false, FLOWVIEW_ALTER_LOCK_WAIT, function ($plan) use ($table, $i, $count) {
+				materialize_say(sprintf('Altering Table %s (%d of %d): %s', $table, $i, $count, trim($plan['alter'])));
+			});
 
-				flowview_apply_partition_alter($table, $plan, false);
-
+			if ($result == 'altered') {
 				materialize_say(sprintf('Altered Table %s in %0.2f seconds', $table, microtime(true) - $began));
+			} elseif ($result == 'current') {
+				materialize_say(sprintf('Table %s (%d of %d) was altered by another process', $table, $i, $count));
+			} else {
+				materialize_say(sprintf('WARNING: Table %s (%d of %d) is still being altered by another process, it is left to it', $table, $i, $count));
 			}
 		}
 	}
@@ -664,13 +678,14 @@ function materialize_say(string $text): void {
 
 /**
  * Runs a worker and waits for it, with its output shown as it is written.
- * The worker is kept so a signal can stop it.
+ * The worker is kept so a signal can stop it.  It is started directly, not
+ * through a shell, so a signal sent to it reaches the worker itself.
  *
- * @param string $command The command to run
+ * @param array $command The program and its arguments
  *
  * @return int The exit status, 0 on success
  */
-function materialize_run_command(string $command): int {
+function materialize_run_command(array $command): int {
 	global $materialize_child;
 
 	$process = proc_open($command, [0 => STDIN, 1 => STDOUT, 2 => STDERR], $pipes);

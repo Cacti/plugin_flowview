@@ -535,32 +535,8 @@ function flowview_upgrade($current, $old): void {
 		$raw_engine = get_set_default_fast_engine();
 
 		foreach($raw_tables as $t) {
-			$columns = array_rekey(
-				flowview_db_fetch_assoc('SHOW COLUMNS FROM ' . $t['TABLE_NAME']),
-				'Field', ['Type', 'Null', 'Key', 'Default', 'Extra']
-			);
-
-			$indexes = [];
-
-			foreach (['template_id', 'start_time', 'end_time', 'ex_addr'] as $index) {
-				if (flowview_db_index_exists($t['TABLE_NAME'], $index)) {
-					$indexes[] = $index;
-				}
-			}
-
-			/* the same plan the materializer uses to prepare the partitions it scans */
-			$plan = flowview_get_partition_alter([
-				'collation'       => $t['TABLE_COLLATION'],
-				'engine'          => $t['ENGINE'],
-				'has_keycol'      => flowview_db_column_exists($t['TABLE_NAME'], 'keycol', false),
-				'has_template_id' => flowview_db_column_exists($t['TABLE_NAME'], 'template_id', false),
-				'indexes'         => $indexes,
-				'ex_addr_type'    => isset($columns['ex_addr']) ? $columns['ex_addr']['Type'] : null,
-			], $raw_engine);
-
-			if ($plan['alter'] != '') {
-				flowview_apply_partition_alter($t['TABLE_NAME'], $plan);
-			}
+			/* the same locked plan the materializer and poller use, worked out from the table as it is now */
+			flowview_alter_partition($t['TABLE_NAME'], $raw_engine);
 
 			flowview_db_execute('ALTER TABLE plugin_flowview_arin_information
 				MODIFY COLUMN comments VARCHAR(512) NOT NULL default ""');
