@@ -167,7 +167,10 @@ $unmeasured_allowlist = [
 	// Web/CLI entry points (chdir + require auth.php or top-level execution)
 	// that cannot load in the isolated unit process. Changed here only by the
 	// includes/ library relocation + include_once -> require_once sweep.
-	'fixprivate.php',
+	'cli/fixprivate.php',
+	'cli/import_flows.php',
+	'cli/materialize_queries.php',
+	'cli/repair_tables.php',
 	'flow_collector.php',
 	'flowview.php',
 	'flowview_bulkarin.php',
@@ -181,8 +184,6 @@ $unmeasured_allowlist = [
 	'flowview_schedules.php',
 	'flowview_upgrade.php',
 	'flowview_upgrade_nat_columns.php',
-	'import_flows.php',
-	'repair_tables.php',
 	'run_schedule.php',
 ];
 $unmeasured            = array_values(array_diff(array_keys($changed), array_keys($measured)));

@@ -41,7 +41,8 @@ $sched_actions = array(
 /*	2 => __('Send Now', 'flowview'), */
 	1 => __('Delete', 'flowview'),
 	3 => __('Disable', 'flowview'),
-	4 => __('Enable', 'flowview')
+	4 => __('Enable', 'flowview'),
+	5 => __('Materialize', 'flowview')
 );
 
 switch (get_request_var('action')) {
@@ -53,6 +54,12 @@ switch (get_request_var('action')) {
 		break;
 	case 'sort_filter':
 		sort_filter();
+		break;
+	case 'check_material':
+		flowview_check_filter_save();
+		break;
+	case 'prune_shards':
+		prune_shards();
 		break;
 	case 'edit':
 		if (!isset_request_var('embed')) {
@@ -71,6 +78,32 @@ switch (get_request_var('action')) {
 		show_filters();
 		bottom_footer();
 		break;
+}
+
+/**
+ * Removes the cached shards that match no Filter and returns to the Filters
+ * page.  It is posted by the confirmation dialog of the Prune button.  Called
+ * from this script's main request-dispatch switch when action=prune_shards.
+ *
+ * @return void
+ */
+function prune_shards(): void {
+	/* it removes data, so it is only done when posted from the dialog */
+	if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+		header('Location: flowview_filters.php?header=false');
+		exit;
+	}
+
+	$pruned = flowview_prune_shard_cache();
+
+	if ($pruned === null) {
+		raise_message('flowview_prune', __('The cache keys of the Filters could not be worked out, so nothing was pruned.', 'flowview'), MESSAGE_LEVEL_ERROR);
+	} else {
+		raise_message('flowview_prune', __('Pruned %s cached shard(s) that did not match any Filter.', number_format_i18n($pruned, 0), 'flowview'), MESSAGE_LEVEL_INFO);
+	}
+
+	header('Location: flowview_filters.php?header=false');
+	exit;
 }
 
 /**
@@ -109,6 +142,22 @@ function actions_filters(): void {
 			} elseif (get_nfilter_request_var('drp_action') == '4') {
 				for ($i=0; $i<cacti_count($selected_items); $i++) {
 					flowview_db_execute("UPDATE plugin_flowview_queries SET enabled='on' WHERE id = " . $selected_items[$i]);
+				}
+			} elseif (get_nfilter_request_var('drp_action') == '5') {
+				$started = flowview_launch_materialize($selected_items);
+				$skipped = cacti_count($selected_items) - cacti_sizeof($started);
+
+				/* give the materialization time to register, so the page shows it as running */
+				if (cacti_sizeof($started)) {
+					sleep(2);
+				}
+
+				if (cacti_sizeof($started) && $skipped > 0) {
+					raise_message('flowview_materialize', __('Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log.', cacti_sizeof($started), $skipped, 'flowview'), MESSAGE_LEVEL_INFO);
+				} elseif (cacti_sizeof($started)) {
+					raise_message('flowview_materialize', __('Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log.', cacti_sizeof($started), 'flowview'), MESSAGE_LEVEL_INFO);
+				} else {
+					raise_message('flowview_materialize', __('The selected Filter(s) are already being materialized.  Please try again once that has finished.', 'flowview'), MESSAGE_LEVEL_WARN);
 				}
 /*			} elseif (get_nfilter_request_var('drp_action') == '2') {
 				for ($i=0; $i<cacti_count($selected_items); $i++) {
@@ -161,6 +210,13 @@ function actions_filters(): void {
 		print "<tr>
 			<td colspan='2' class='textArea'>
 				<p>" . __('Click \'Continue\' to Enable the following Filters(s).', 'flowview') . "</p>
+				<ul>$filter_list</ul>
+			</td>
+		</tr>";
+	} elseif (get_nfilter_request_var('drp_action') == '5') { /* Materialize */
+		print "<tr>
+			<td colspan='2' class='textArea'>
+				<p>" . __('Click \'Continue\' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped.', 'flowview') . "</p>
 				<ul>$filter_list</ul>
 			</td>
 		</tr>";
@@ -293,6 +349,7 @@ function show_filters(): void {
 						<span>
 							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Set/Refresh Filters', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
 							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filters', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
+							<button type='button' id='prune' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Remove the cached shards that do not match any Filter', 'flowview');?>'><?php print __esc('Prune', 'flowview');?></button>
 						</span>
 					</td>
 				</tr>
@@ -362,6 +419,16 @@ function show_filters(): void {
 			'align' => 'left',
 			'sort' => 'ASC'
 		),
+		'id' => array(
+			'display' => __('ID', 'flowview'),
+			'align' => 'right',
+			'sort' => 'ASC'
+		),
+		'nosort5' => array(
+			'display' => __('Materialization', 'flowview'),
+			'align' => 'center',
+			'tip' => __('Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count.', 'flowview')
+		),
 		'device' => array(
 			'display' => __('Listener', 'flowview'),
 			'align' => 'left',
@@ -372,10 +439,20 @@ function show_filters(): void {
 			'align' => 'left',
 			'sort' => 'ASC'
 		),
-		'id' => array(
-			'display' => __('ID', 'flowview'),
+		'nosort2' => array(
+			'display' => __('NAT Shards', 'flowview'),
 			'align' => 'right',
-			'sort' => 'ASC'
+			'tip' => __('The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on.', 'flowview')
+		),
+		'nosort3' => array(
+			'display' => __('Non-NAT Shards', 'flowview'),
+			'align' => 'right',
+			'tip' => __('The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off.', 'flowview')
+		),
+		'nosort4' => array(
+			'display' => __('Partitions', 'flowview'),
+			'align' => 'right',
+			'tip' => __('The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT.', 'flowview')
 		),
 		'sortfield' => array(
 			'display' => __('Sort Field', 'flowview'),
@@ -400,9 +477,26 @@ function show_filters(): void {
 	html_header_sort_checkbox($display_array, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
 	if (cacti_sizeof($filters)) {
+		$tables     = flowview_get_partition_tables();
+		$cold       = flowview_get_cold_partitions($tables);
+		$partitions = cacti_sizeof($tables);
+		$materializing = flowview_get_materializing_filters();
+		$requests   = flowview_get_running_requests();
+
 		foreach ($filters as $filter) {
+			$md5sums = flowview_get_filter_md5sums((int) $filter['id']);
+			$cached  = flowview_get_cached_shard_tables((int) $filter['id'], $md5sums);
+			$queries = flowview_count_running_queries($md5sums, $requests);
+
+			/* only the filters being materialized, or with a query running, are running */
+			$running = in_array((int) $filter['id'], $materializing, true) || $queries > 0;
+			$status  = flowview_materialization_status($cached['nat'], $cached['non_nat'], $cold, $running);
+			$missing = flowview_get_missing_partitions($cached['nat'], $cached['non_nat'], $cold);
+
 			form_alternate_row('line' . $filter['id'], true);
 			form_selectable_cell('<a class="linkEditMain" href="' . html_escape('flowview_filters.php?action=edit&id=' . $filter['id']) . '">' . html_escape($filter['name']) . '</a>', $filter['id']);
+			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
+			form_selectable_cell(trim(flowview_get_colored_materialization_status($status, $missing) . ' ' . flowview_get_colored_running_queries($queries, flowview_count_running_queries_by_mode($md5sums, $requests))), $filter['id'], '', 'center');
 
 			if (empty($filter['device'])) {
 				form_selectable_cell(__('All', 'flowview'), $filter['id']);
@@ -419,7 +513,10 @@ function show_filters(): void {
 			}
 
 			form_selectable_cell($type, $filter['id']);
-			form_selectable_cell($filter['id'], $filter['id'], '', 'right');
+
+			form_selectable_cell(number_format_i18n(cacti_sizeof($cached['nat']), 0), $filter['id'], '', 'right');
+			form_selectable_cell(number_format_i18n(cacti_sizeof($cached['non_nat']), 0), $filter['id'], '', 'right');
+			form_selectable_cell(number_format_i18n($partitions, 0), $filter['id'], '', 'right');
 			form_selectable_cell($sort, $filter['id'], '', 'right');
 			form_selectable_cell($filter['resolve'], $filter['id'], '', 'right');
 			form_checkbox_cell($filter['name'], $filter['id']);
@@ -437,5 +534,89 @@ function show_filters(): void {
 	draw_actions_dropdown($sched_actions);
 
 	form_end();
+
+	show_shard_cache_summary();
+}
+
+/**
+ * Shows how much of the Parallel Query cache matches a Filter and how much
+ * does not, which is what the Prune button removes.
+ *
+ * @return void
+ */
+function show_shard_cache_summary(): void {
+	$summary = flowview_get_shard_cache_summary();
+	$prune   = false;
+
+	html_start_box('', '100%', false, 3, 'center', '');
+
+	if ($summary === null) {
+		$text   = __('The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out.', 'flowview');
+		$dialog = __('The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report.', 'flowview');
+	} else {
+		$text = __('Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes.', number_format_i18n($summary['matching']['shards'], 0), number_format_i18n($summary['other']['shards'], 0), 'flowview');
+
+		if ($summary['other']['shards'] > 0) {
+			$prune  = true;
+			$dialog = __('This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone.', number_format_i18n($summary['other']['shards'], 0), number_format_i18n($summary['matching']['shards'], 0), 'flowview');
+		} else {
+			$dialog = __('Every cached shard matches a Filter.  There is nothing to prune.', 'flowview');
+		}
+	}
+
+	print "<tr class='even'><td>" . html_escape($text) . '</td></tr>';
+
+	html_end_box();
+
+	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+	print "<div id='prune_dialog' style='display:none;' title='" . __esc('Prune Cached Shards', 'flowview') . "'><p>" . html_escape($dialog) . '</p></div>';
+
+	?>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
+	$(function() {
+		var canPrune = <?php print $prune ? 'true' : 'false';?>;
+
+		function pruneShards() {
+			var data = { action: 'prune_shards' };
+
+			if (typeof csrfMagicToken != 'undefined') {
+				data['__csrf_magic'] = csrfMagicToken;
+			}
+
+			$.post('flowview_filters.php', data).always(function() {
+				loadPageNoHeader('flowview_filters.php?header=false');
+			});
+		}
+
+		$('#prune').off('click').on('click', function() {
+			var buttons = [{
+				text: <?php print json_encode($prune ? __('Cancel', 'flowview') : __('Close', 'flowview'), $js);?>,
+				click: function() {
+					$(this).dialog('close');
+				}
+			}];
+
+			if (canPrune) {
+				buttons.push({
+					text: <?php print json_encode(__('Prune', 'flowview'), $js);?>,
+					'class': 'ui-state-active',
+					click: function() {
+						$(this).dialog('close');
+						pruneShards();
+					}
+				});
+			}
+
+			$('#prune_dialog').dialog({
+				modal: false,
+				resizable: false,
+				width: 500,
+				buttons: buttons
+			});
+		});
+	});
+	</script>
+	<?php
 }
 

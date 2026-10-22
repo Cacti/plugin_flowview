@@ -39,6 +39,21 @@ function plugin_flowview_csp_nonce(): string {
 	return '';
 }
 
+if (!function_exists('flowview_exit')) {
+	/**
+	 * Ends the request, with the exit status given.  The places in
+	 * includes/functions.php that end a request do it through here, so the
+	 * unit tests can stand in for it and see the request end instead of ending.
+	 *
+	 * @param int $status
+	 *
+	 * @return void
+	 */
+	function flowview_exit(int $status = 0): void {
+		exit($status);
+	}
+}
+
 /**
  * @return bool
  */

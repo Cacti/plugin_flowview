@@ -49,30 +49,38 @@ func TestExpireQueriesKeepsRowOnDropFailure(t *testing.T) {
 	}
 }
 
-func TestExpireShardCache(t *testing.T) {
+func TestExpireShardCacheOnlyExpiresLiveResults(t *testing.T) {
 	flow, mock, cleanup := newMock(t)
 	defer cleanup()
 	eng := NewEngine(flow, nil, nil, defaultSettings())
 	s := &Scheduler{eng: eng}
 
-	mock.ExpectExec("DELETE FROM parallel_database_query_shard_cache").
-		WithArgs(int64(eng.settings.TimeToLive().Seconds())).
+	// Only the short lived live partition results go, whatever the time to
+	// live is: a cold partition stays cached until it is dropped.
+	mock.ExpectExec("DELETE FROM parallel_database_query_shard_cache\\s+WHERE map_partition = \\?").
+		WithArgs("live", liveShardTTLSeconds).
 		WillReturnResult(sqlmock.NewResult(0, 3))
 
 	if err := s.expireShardCache(context.Background()); err != nil {
 		t.Fatalf("expireShardCache: %v", err)
 	}
+	if err := mock.ExpectationsWereMet(); err != nil {
+		t.Fatalf("unmet expectations: %v", err)
+	}
 }
 
-func TestExpireShardCacheSkippedWhenTTLZero(t *testing.T) {
-	flow, _, cleanup := newMock(t)
+func TestExpireShardCacheIgnoresTimeToLive(t *testing.T) {
+	flow, mock, cleanup := newMock(t)
 	defer cleanup()
 	settings := defaultSettings()
 	settings.timeToLive = 0
 	eng := NewEngine(flow, nil, nil, settings)
 	s := &Scheduler{eng: eng}
 
-	// No expectations: a zero TTL must skip the delete entirely.
+	mock.ExpectExec("DELETE FROM parallel_database_query_shard_cache").
+		WithArgs("live", liveShardTTLSeconds).
+		WillReturnResult(sqlmock.NewResult(0, 0))
+
 	if err := s.expireShardCache(context.Background()); err != nil {
 		t.Fatalf("expireShardCache: %v", err)
 	}

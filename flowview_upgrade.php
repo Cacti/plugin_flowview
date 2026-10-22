@@ -535,65 +535,8 @@ function flowview_upgrade($current, $old): void {
 		$raw_engine = get_set_default_fast_engine();
 
 		foreach($raw_tables as $t) {
-			$alter = '';
-
-			if ($t['TABLE_COLLATION'] != 'latin1_swedish_ci') {
-				$alter = 'CONVERT TO CHARACTER SET latin1';
-			}
-
-			if (flowview_db_column_exists($t['TABLE_NAME'], 'keycol', false)) {
-				$alter .= ($alter != '' ? ', ':'') . 'DROP KEY keycol';
-			}
-
-			if (!flowview_db_column_exists($t['TABLE_NAME'], 'template_id', false)) {
-				$alter .= ($alter != '' ? ', ':'') . 'ADD COLUMN template_id int(11) unsigned NOT NULL default "0" AFTER listener_id';
-			}
-
-			if (!flowview_db_index_exists($t['TABLE_NAME'], 'template_id')) {
-				$alter .= ($alter != '' ? ', ':'') . 'ADD INDEX template_id (template_id)';
-			}
-
-			if (!flowview_db_index_exists($t['TABLE_NAME'], 'start_time')) {
-				$alter .= ($alter != '' ? ', ':'') . 'ADD INDEX start_time (start_time)';
-			}
-
-			if (!flowview_db_index_exists($t['TABLE_NAME'], 'end_time')) {
-				$alter .= ($alter != '' ? ', ':'') . 'ADD INDEX end_time (end_time)';
-			}
-
-			$columns = array_rekey(
-				flowview_db_fetch_assoc('SHOW COLUMNS FROM ' . $t['TABLE_NAME']),
-				'Field', ['Type', 'Null', 'Key', 'Default', 'Extra']
-			);
-
-			if (isset($columns['ex_addr']) && stripos($columns['ex_addr']['Type'], 'VARCHAR') === false) {
-				$alter .= ($alter != '' ? ', ':'') . 'MODIFY COLUMN ex_addr VARCHAR(46) NOT NULL default ""';
-				$ex_change = true;
-			} else {
-				$ex_change = false;
-			}
-
-			if (!flowview_db_index_exists($t['TABLE_NAME'], 'ex_addr')) {
-				$alter .= ($alter != '' ? ', ':'') . 'ADD INDEX ex_addr (ex_addr)';
-			}
-
-			if ($t['ENGINE'] != $raw_engine) {
-				if ($raw_engine == 'Aria') {
-					$alter .= ($alter != '' ? ',':'') . " ENGINE=$raw_engine ROW_FORMAT=page";
-				} else {
-					$alter .= ($alter != '' ? ',':'') . " ENGINE=$raw_engine ROW_FORMAT=Dynamic";
-				}
-			}
-
-			if ($alter != '') {
-				cacti_log("Altering Table {$t['TABLE_NAME']} Using this alter $alter.", true, 'FLOWVIEW');
-
-				flowview_db_execute('ALTER TABLE ' . $t['TABLE_NAME'] . ' ' . $alter);
-
-				if ($ex_change) {
-					flowview_db_execute('UPDATE ' . $t['TABLE_NAME'] . ' SET ex_addr = SUBSTRING_INDEX(ex_addr, ":", 1)');
-				}
-			}
+			/* the same locked plan the materializer and poller use, worked out from the table as it is now */
+			flowview_alter_partition($t['TABLE_NAME'], $raw_engine);
 
 			flowview_db_execute('ALTER TABLE plugin_flowview_arin_information
 				MODIFY COLUMN comments VARCHAR(512) NOT NULL default ""');

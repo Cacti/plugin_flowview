@@ -82,6 +82,10 @@ switch(get_request_var('action')) {
 		flowview_gettimespan();
 
 		break;
+	case 'timeshift':
+		flowview_timeshift();
+
+		break;
 	case 'query':
 		load_session_for_filter();
 
@@ -303,6 +307,35 @@ function load_session_for_filter() {
 	 * settings first, and then overlay others only if they are set
 	 */
 	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+		$query = flowview_db_fetch_row_prepared('SELECT *
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('query')));
+
+		/**
+		 * The report of a filter can not be changed here, as it is part of
+		 * what is cached for it.  It is changed by editing the filter.
+		 */
+		$report = cacti_sizeof($query) ? flowview_filter_report_key($query) : '';
+
+		if ($report != '') {
+			set_request_var('report', $report);
+
+			/* a printed report is a table, there is nothing to chart */
+			if (substr($report, 0, 1) == 'p') {
+				set_request_var('table', 'true');
+				set_request_var('bytes', 'false');
+				set_request_var('packets', 'false');
+				set_request_var('flows', 'false');
+
+				/* the saved panels are merged in below, so they have to say the same */
+				$query['panel_table']   = 'on';
+				$query['panel_bytes']   = '';
+				$query['panel_packets'] = '';
+				$query['panel_flows']   = '';
+			}
+		}
+
 		// Handle Report Column
 		if (isset_request_var('report')) {
 			if (get_nfilter_request_var('report') != '0' && trim(get_nfilter_request_var('report'), 'sp') != '0') {
@@ -315,11 +348,6 @@ function load_session_for_filter() {
 				}
 			}
 		}
-
-		$query = flowview_db_fetch_row_prepared('SELECT *
-			FROM plugin_flowview_queries
-			WHERE id = ?',
-			array(get_request_var('query')));
 
 		if (cacti_sizeof($query)) {
 			foreach($query as $column => $value) {
@@ -486,6 +514,18 @@ function flowview_request_vars(): void {
 			if (isset_request_var('graph_link')) {
 				set_request_var('predefined_timespan', '0');
 			}
+		}
+	}
+
+	/* the report is not sent for a Filter that has one, as it is part of the Filter */
+	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+		$filter_report = flowview_filter_report_key(flowview_db_fetch_row_prepared('SELECT statistics, printed
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('query'))) ?: []);
+
+		if ($filter_report != '') {
+			set_request_var('report', $filter_report);
 		}
 	}
 

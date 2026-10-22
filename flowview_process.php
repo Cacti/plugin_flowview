@@ -174,19 +174,18 @@ foreach($tables as $table) {
 	}
 }
 
-$raw_engine  = get_set_default_fast_engine();
+$raw_engine = get_set_default_fast_engine();
 
-$last_tables = flowview_db_fetch_assoc('SELECT TABLE_NAME, ENGINE
-	FROM information_schema.TABLES
-	WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"
-	ORDER BY TABLE_NAME DESC
-	LIMIT 1, 3');
+/*
+ * A materialization gets the partitions ready itself, and waits for any alter
+ * that is running on them, so it is left to do that, rather than starting more.
+ */
+flowview_purge_dead_materializations();
 
-if (cacti_sizeof($last_tables)) {
-	foreach($last_tables as $table) {
-		if ($table['ENGINE'] != $raw_engine) {
-			flowview_db_execute("ALTER TABLE {$table['TABLE_NAME']} ENGINE=$raw_engine");
-		}
+if (!cacti_sizeof(flowview_get_materializing_filters())) {
+	/* every partition that has rotated, so ones missed while the poller was not running are caught up */
+	foreach (flowview_convert_cold_partitions($raw_engine) as $table) {
+		flowview_debug("Converted partition {$table} to {$raw_engine}");
 	}
 }
 
@@ -195,6 +194,9 @@ set_config_option('flowview_last_table', $nlast_table);
 
 /* prune expired query results */
 parallel_database_query_expire();
+
+/* partitions that went cold this cycle are materialized for every filter */
+flowview_materialize_rotated_partitions();
 
 if ($maint) {
 	flowview_debug('Performing Table Maintenance');

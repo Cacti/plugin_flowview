@@ -2,6 +2,28 @@
 
 --- develop ---
 
+* feature: Say which partitions a Filter is not materialized for, with NAT and without, in the tip of its Required and Running pill
+
+* feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page, with how many are with NAT and without in its tip.  The process table only has the id of a running request, so a running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, and there is no pill when none are running
+
+* feature: Add --status to cli/materialize_queries.php to list the parallel queries that are running and the Filter each one is for, with its progress
+
+* feature: Have cli/materialize_queries.php get the partitions ready before it starts the Parallel Query.  It waits for an ALTER TABLE that is already running on a partition it needs, such as from the schema upgrade, since a query waits for it and then ends at the Maximum Run Time, and then does the alters that are still due itself, one partition at a time with progress shown.  The partition still receiving flows is left alone.  It also notes the partitions that have no NAT columns, as they have no NAT data.  What a partition needs altered is now decided in one place, flowview_get_partition_alter(), which the schema upgrade also uses, so the ALTER it issues is unchanged
+
+* feature: Materialize the partitions that have gone cold automatically.  Each poller cycle flowview_process.php records the newest partition, which is the one still receiving flows, and starts cli/materialize_queries.php in the background for the partitions that have rotated since the previous cycle, for every Filter with NAT on and off.  Partitions that are already materialized and accurate are skipped.  When a materialization is already running, or the Parallel Query is not enabled, the record is left alone so a later cycle catches up.  The first cycle only records the newest partition, so older partitions are still materialized with cli/materialize_queries.php.  The script gained a --partitions option for this
+
+* feature: Add a Materialization column, to the right of the Filter Name and its ID on the Filters page, with a tip explaining what materialization is, showing the automatic materialization status as a pill in the form of the device status: Required (down) when rotated partitions are not materialized yet, Running (recovering) while a materialization is in progress, and Up to date (up) once every cold partition is materialized with NAT on and off.  The ID column now follows the Filter Name
+
+* feature: Show the number of partitions each Filter has stored in the Parallel Query cache, with NAT and without, as the NAT Shards and Non-NAT Shards columns next to the ID on the Filters page, along with a Partitions column holding the total number of flow partitions so the progress of a materialization can be followed; the cache keys are worked out from the Filter without running it (run_flow_query() gained a plan-only mode, and the map query hashing is shared with the parallel query request)
+
+* feature: Add a 'Materialize' action to the Filters page that, after confirmation, starts cli/materialize_queries.php in the background for the selected Filters (--query-id now accepts a comma separated list), and tells you when a materialization is already running
+
+* feature: Recommend a forced re-materialization when a Filter is saved, from either the Filter form or the report page, with a change that alters what it materializes (report type, device, exporter, template, or any address, port, interface, AS, protocol, TCP flag or TOS restriction, plus the sort field of printed reports); display settings, the time range, cutoffs and NAT mode do not count
+
+* feature: Add cli/materialize_queries.php, which runs every saved FlowView query through the parallel query for the entire range of flow partitions, once with NAT on and once with NAT off (--query-id, --nat, --dry-run and --force are optional), so the partition results are already cached when a report is opened; it registers with register_process_start() for 8 hours so only one run is active at a time, reuses cached partitions that still match their partition's data bounds, rebuilds the ones that have since gained flows or been dropped, and runs each query and NAT mode in its own process so one that reaches the Maximum Run Time does not end the rest
+
+* dev: Move fixprivate.php, import_flows.php and repair_tables.php into the plugin's cli/ directory (listed as tombstones in manifest.json so upgrades remove the old copies); they now locate the Cacti root relative to their own location
+
 * fix: Make bundled Net_DNS2 constructor nullability explicit for PHP 8.4 without changing accepted arguments
 
 * issue: Shorten the graph drilldown button title from 'View NetFlow Traffic In Range' to 'NetFlow' so it reads cleanly as a label in Cacti's graph action menu

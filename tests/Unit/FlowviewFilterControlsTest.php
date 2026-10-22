@@ -61,3 +61,72 @@ expect($output)->toContain('timeshiftBackward');
 expect($output)->toContain('timeshiftForward');
 expect($output)->not->toMatch('/\son(?:click|change)\s*=/i');
 });
+
+it('does not put the Report on the report page for a filter that has one', function ($query, $row) {
+	plugin_test_reset();
+
+	$_REQUEST['query'] = $query;
+	$_REQUEST['report'] = 's10';
+
+	plugin_test_queue_db_result('db_fetch_row_prepared', $row);
+
+	ob_start();
+
+	try {
+		flowview_display_filter();
+	} catch (\Throwable $e) {
+		// as above, the part of the form that is checked is emitted first
+	}
+
+	$output = ob_get_clean();
+
+	expect($output)->not->toContain("id='report'")
+		->and($output)->not->toContain('>Report<')
+		->and($output)->toContain('function reportParam()');
+})->with(array(
+	'a filter with a report' => array(4, array('name' => 'Top Talkers', 'statistics' => 10, 'printed' => 0)),
+	'no filter selected'     => array(-1, array()),
+));
+
+it('has the byte, packet and flow panels disabled in the page for a printed report', function () {
+	plugin_test_reset();
+
+	$_REQUEST['query']  = 4;
+	$_REQUEST['report'] = 'p1';
+
+	plugin_test_queue_db_result('db_fetch_row_prepared', array('name' => 'Printed', 'statistics' => 0, 'printed' => 1));
+
+	ob_start();
+
+	try {
+		flowview_display_filter();
+	} catch (\Throwable $e) {
+		// as above, the part of the form that is checked is emitted first
+	}
+
+	$output = ob_get_clean();
+
+	expect($output)->toMatch("/id='bytes' name='bytes' [^>]*disabled>/")
+		->and($output)->toMatch("/id='packets' name='packets' [^>]*disabled>/")
+		->and($output)->toMatch("/id='flows' name='flows' [^>]*disabled>/");
+});
+
+it('shows the Report only for a filter that has none, as it needs one', function () {
+	plugin_test_reset();
+
+	$_REQUEST['query'] = 4;
+
+	plugin_test_queue_db_result('db_fetch_row_prepared', array('name' => 'Empty', 'statistics' => 0, 'printed' => 0));
+
+	ob_start();
+
+	try {
+		flowview_display_filter();
+	} catch (\Throwable $e) {
+		// as above, the part of the form that is checked is emitted first
+	}
+
+	$output = ob_get_clean();
+
+	expect($output)->toContain("<select id='report' name='report'>");
+});

@@ -194,10 +194,92 @@ this migration, ensure that your Cacti system, has enough space to handle all
 the flow data.  You should check the size of your existing flows, and then
 verify that you have enough space to handle the data inside of a MySQL database.
 
-Once you have done this, simply run the 'import_flows.php' script and all your
+Once you have done this, simply run the 'cli/import_flows.php' script and all your
 legacy flow data will be imported.  Remember, it's important that you define
 your partitioning scheme ahead of time, especially if you have large quantities
 of flow data streaming into the Cacti server.
+
+## Pre-Building Query Results
+
+The Parallel Query caches the result of each fully covered partition, so
+reports over older data open quickly once a partition has been scanned.  To
+build that cache ahead of time, run the following from the plugin's `cli`
+directory with the Parallel Query enabled (Max Concurrent Threads of 2 or
+more under the FlowView Settings):
+
+```
+php cli/materialize_queries.php
+```
+
+The script runs every saved query over every flow partition that has rotated,
+once with NAT on and once with NAT off.  The partition still receiving flows is
+never cached, as a result cached for it would be wrong as soon as more flows
+arrive.  Instead, the table and charts of one report share a single scan of it,
+whose result is reused for 60 seconds and then discarded.  Use `--query-id=ID[,ID...]` or
+`--nat=on|off` to narrow the run, and `--dry-run` to see what would be run.
+Partitions that are already cached and still match their data are skipped,
+while partitions that have received more flows since, or have been dropped,
+are rebuilt.  Each Filter being materialized is registered in the Cacti process
+table as `materialize`, with the id of the Filter as the task id, for up to 8
+hours, so Filters can be materialized separately and at the same time.  A Filter
+that is already being materialized is skipped, unless `--force` is used.  The
+Filters page shows only those Filters as Running.  `--status` lists the Filters
+being materialized, and the parallel queries that are running now with the
+Filter each one is for, with its progress.  When it is not run from a terminal,
+for instance from the Filters page or by the poller, its progress is written to
+the Cacti log.  Sending it SIGTERM or SIGINT stops its workers and removes
+its registrations from the process table.
+
+Only the partitions a Filter does not have cached are run, a batch of them at a
+time, each as its own Parallel Query, as one query for every partition can not
+finish within the Maximum Run Time.  A batch that does not finish is followed by
+a smaller one, and what a batch cached is kept, so a run that is stopped, or
+timed out, carries on from there when it is run again.
+
+Before it scans anything the script gets the partitions ready.  A query waits
+for an ALTER TABLE that is running on the partition it scans, and a long one
+ends the query at the Maximum Run Time.  So the script waits for an alter that
+is already running on a partition it needs, for instance from the schema
+upgrade, and then does the alters that are still due itself, one partition at a
+time.  The partition still receiving flows is left alone.  The post-NAT columns
+are not added, as that is a deliberate choice for large installs.  The script
+notes the partitions that do not have them, and they have no NAT data until
+`flowview_upgrade_nat_columns.php` is run.
+
+You can also start it from the Filters page by selecting one or more Filters
+and choosing the 'Materialize' action.  It runs in the background after
+you confirm, and the result is written to the Cacti log.  The 'NAT Shards' and
+'Non-NAT Shards' columns on that page show how many partitions of each Filter
+are already cached, with NAT on and with NAT off, out of the total shown in the
+'Partitions' column.
+
+New partitions are materialized automatically.  Each poller cycle records the
+newest partition, which is the one still receiving flows, and materializes the
+partitions that have rotated since the previous cycle for every Filter, with
+NAT on and off, in the background.  The first cycle only records the newest
+partition, so run the script once to materialize the existing ones.  The
+'Materialization' column on the Filters page shows the result for each Filter,
+as Required, Running or Up to date.  The partition still receiving flows is not
+materialized automatically, so it does not count.
+
+When you save a
+Filter in a way that changes the data it materializes, such as its report,
+device, exporter, or any address, port, interface, AS, protocol, flag or TOS
+restriction, a dialog warns you first, and you can Cancel to keep editing or
+Continue to save.  Once it is saved, a 'Save Succeeded' dialog reminds you to
+start a materialization of the Filter with the 'Materialize' action.
+
+The report of a Filter is part of what is cached for it, so it can not be
+changed on the report page: the Report selector is disabled once the Filter has
+one.  To change it, Edit the Filter and then materialize it again.  Saving a
+Filter does not remove anything from the cache.  The results of the old settings
+simply stop matching the Filter.  The line under the Filters table says how many
+cached shards match a Filter, which is told by their md5 value, and how many
+match none, such as those of a Filter before it was changed, of a deleted
+Filter, or of a report with its settings changed on the report page.  The
+'Prune' button on the Filters page, after Clear, removes the ones that match no
+Filter, after you confirm in its dialog.  It keeps everything that matches a Filter, and does nothing when
+the cache keys of a Filter that has a report can not be worked out.
 
 # Possible Bugs?
 

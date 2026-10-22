@@ -23,6 +23,21 @@
  +-------------------------------------------------------------------------+
 */
 
+// The live partition is never materialized.  The workers of one report page
+// share a single scan of it for a short time, kept in the shard cache table
+// under this marker in map_partition, behind a named lock.
+if (!defined('FLOWVIEW_LIVE_SHARD_MARKER')) {
+	define('FLOWVIEW_LIVE_SHARD_MARKER', 'live');
+	define('FLOWVIEW_LIVE_SHARD_TTL', 60);
+	define('FLOWVIEW_LIVE_SHARD_LOCK', 'flowview_live_');
+	define('FLOWVIEW_LIVE_SHARD_LOCK_WAIT', 120);
+	/* a request that is not finished and has no runner after this many seconds was abandoned */
+	define('FLOWVIEW_ABANDONED_REQUEST_AGE', 120);
+	/* every alter of a raw partition holds this lock on it, see flowview_alter_partition() */
+	define('FLOWVIEW_ALTER_LOCK', 'flowview_alter_');
+	define('FLOWVIEW_ALTER_LOCK_WAIT', 7200);
+}
+
 // reports_run()/reports_queue()/reports_log_and_notify() became native in
 // Cacti 1.3. Whether core will declare them is fixed by the Cacti version at
 // bootstrap, so gate the pre-1.3 shims on that rather than on function_exists():
@@ -210,6 +225,17 @@ function sort_filter(): void {
 }
 
 /**
+ * flowview_cacti_uses_select2 - Whether Cacti draws a multi-select as a
+ * select2 control itself, which it does from 1.2.32.  Earlier versions leave
+ * the page to make it a jquery-multiselect.
+ *
+ * @return bool
+ */
+function flowview_cacti_uses_select2(): bool {
+	return defined('CACTI_VERSION') && version_compare(CACTI_VERSION, '1.2.32', '>=');
+}
+
+/**
  * @return void
  */
 function edit_filter(): void {
@@ -320,11 +346,63 @@ function edit_filter(): void {
 
 	form_save_button($page, 'return');
 
+	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+	print "<div id='flowview_save_warning' style='display:none;' title='" . __esc('Cached Results Affected', 'flowview') . "'><p>" .
+		__esc('These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press \'Continue\' to save the Filter, or \'Cancel\' to keep editing it.', 'flowview') .
+		'</p></div>';
+
+	flowview_show_saved_dialog();
+
 	?>
 	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
 	var date1Open  = false;
 	var date2Open  = false;
 	var returnPage = '<?php print $page;?>';
+	var saveConfirmed = false;
+	var useSelect2 = <?php print flowview_cacti_uses_select2() ? 'true' : 'false';?>;
+
+	/* Cacti's own form handler posts the form, so this goes through it */
+	function saveFilterForm() {
+		saveConfirmed = true;
+		$('#chk').trigger('submit');
+	}
+
+	/* warn before a save that changes what is cached for the Filter */
+	function checkFilterSave() {
+		var data = $.grep($('#chk').serializeArray(), function(item) {
+			return item.name != 'action';
+		});
+
+		data.push({ name: 'action', value: 'check_material' });
+
+		$.post(urlPath + 'plugins/flowview/flowview_filters.php', data, null, 'json').done(function(response) {
+			if (response && response.material) {
+				$('#flowview_save_warning').dialog({
+					modal: false,
+					resizable: false,
+					width: 500,
+					buttons: [{
+						text: typeof sessionMessageCancel != 'undefined' ? sessionMessageCancel : <?php print json_encode(__('Cancel', 'flowview'), $js);?>,
+						click: function() {
+							$(this).dialog('close');
+						}
+					}, {
+						text: typeof sessionMessageContinue != 'undefined' ? sessionMessageContinue : <?php print json_encode(__('Continue', 'flowview'), $js);?>,
+						'class': 'ui-state-active',
+						click: function() {
+							$(this).dialog('close');
+							saveFilterForm();
+						}
+					}]
+				});
+			} else {
+				saveFilterForm();
+			}
+		}).fail(function() {
+			saveFilterForm();
+		});
+	}
 
 	function applyTimespan() {
 		$.getJSON(returnPage+'?action=gettimespan&predefined_timespan='+$('#predefined_timespan').val(), function(data) {
@@ -378,6 +456,17 @@ function edit_filter(): void {
 	});
 
 	$(function() {
+		/* a click on Save, or Enter in a field, comes here before the form is posted */
+		$('#chk #submit').off('click.flowview').on('click.flowview', function(event) {
+			if (saveConfirmed) {
+				return true;
+			}
+
+			event.preventDefault();
+
+			checkFilterSave();
+		});
+
 		$('#startDate').on('click', function() {
 			if (date1Open) {
 				date1Open = false;
@@ -418,7 +507,14 @@ function edit_filter(): void {
 			showButtonPanel: false
 		});
 
-		$('#protocols').multiselect();
+		/*
+		 * Cacti 1.2.32 and later draw a multi-select as a select2 'N Selected'
+		 * control themselves.  Earlier versions leave it to the page, which
+		 * uses jquery-multiselect.  Doing both draws two controls.
+		 */
+		if (!(useSelect2 && $.fn.select2 && $('#protocols').hasClass('select2-multi-count'))) {
+			$('#protocols').multiselect();
+		}
 
 		function changeRType() {
 			if ($('#rtype').val() == 0) {
@@ -452,77 +548,88 @@ function edit_filter(): void {
 }
 
 /**
- * @return void
+ * flowview_filter_change_is_material - Decide whether a saved change to a
+ * filter alters the data it materializes.  Cached partition results are
+ * keyed on the map query, which is built from the report type and the
+ * device, exporter, address, port, interface, AS, protocol, flag and TOS
+ * restrictions.  Display only settings, the time range, the cutoffs and the
+ * NAT mode do not count, as both NAT modes are always materialized.  The
+ * sort field counts only for printed reports, where it orders the map query.
+ *
+ * Only the fields present in $new are compared, so a partial save can be
+ * checked against the stored filter.  A filter with no stored version is
+ * new and has nothing materialized yet.
+ *
+ * @param array $old The filter as stored before the save
+ * @param array $new The values being saved
+ *
+ * @return bool
  */
-function save_filter_form(): void {
-	global $config;
-
-	/* ================= input validation ================= */
-	get_filter_request_var('timespan');
-	get_filter_request_var('cutofflines');
-	get_filter_request_var('cutoffoctets');
-	get_filter_request_var('query');
-	get_filter_request_var('device_id');
-	get_filter_request_var('graph_height');
-	/* ==================================================== */
-
-	$report = get_nfilter_request_var('report');
-
-	$printed     = 0;
-	$statistical = 0;
-
-	if (substr($report, 0, 1) == 's') {
-		$report      = intval(trim($report, 's'));
-		$printed     = 0;
-		$statistical = $report;
-	} elseif (substr($report, 0, 1) == 'p') {
-		$report      = intval(trim($report, 'p'));
-		$printed     = $report;
-		$statistical = 0;
+function flowview_filter_change_is_material(array $old, array $new): bool {
+	if (!cacti_sizeof($old)) {
+		return false;
 	}
 
-	flowview_db_execute_prepared('UPDATE plugin_flowview_queries
-		SET timespan = ?,
-		device_id = ?,
-		statistics = ?,
-		printed = ?,
-		sortfield = ?,
-		cutofflines = ?,
-		cutoffoctets = ?,
-		graph_type = ?,
-		graph_height = ?,
-		panel_table = ?,
-		panel_bytes = ?,
-		panel_packets = ?,
-		panel_flows = ?,
-		usenat = ?
-		WHERE id = ?',
-		array(
-			get_request_var('timespan'),
-			get_request_var('device_id'),
-			$statistical,
-			$printed,
-			get_nfilter_request_var('sortfield'),
-			get_request_var('cutofflines'),
-			get_request_var('cutoffoctets'),
-			get_nfilter_request_var('graph_type'),
-			get_request_var('graph_height'),
-			get_nfilter_request_var('table') == 'true' ? 'on':'',
-			get_nfilter_request_var('bytes') == 'true' ? 'on':'',
-			get_nfilter_request_var('packets') == 'true' ? 'on':'',
-			get_nfilter_request_var('flows') == 'true' ? 'on':'',
-			get_nfilter_request_var('usenat') == 'true' ? 'on':'',
-			get_request_var('query')
-		)
-	);
+	$fields = [
+		'device_id', 'template_id', 'ex_addr', 'statistics', 'printed',
+		'tosfields', 'tcpflags', 'protocols',
+		'sourceip', 'sourceport', 'sourceinterface', 'sourceas',
+		'destip', 'destport', 'destinterface', 'destas',
+		'postnatsourceip', 'postnatsourceport', 'postnatdestip', 'postnatdestport',
+	];
+
+	/* these mean no restriction, however they were saved */
+	$unrestricted = ['device_id', 'template_id', 'ex_addr', 'statistics', 'printed', 'protocols'];
+
+	$normalize = function ($field, $value) use ($unrestricted) {
+		$value = trim((string) $value);
+
+		if (in_array($field, $unrestricted, true) && ($value === '0' || $value === '-1')) {
+			return '';
+		}
+
+		return $value;
+	};
+
+	foreach ($fields as $field) {
+		if (!array_key_exists($field, $new)) {
+			continue;
+		}
+
+		$old_value = $normalize($field, $old[$field] ?? '');
+		$new_value = $normalize($field, $new[$field]);
+
+		if ($old_value !== $new_value) {
+			return true;
+		}
+	}
+
+	$printed = $new['printed'] ?? ($old['printed'] ?? 0);
+
+	if ($printed > 0 && array_key_exists('sortfield', $new)) {
+		return trim((string) ($old['sortfield'] ?? '')) !== trim((string) $new['sortfield']);
+	}
+
+	return false;
 }
 
 /**
- * @return void
+ * flowview_rematerialize_recommendation - The note, once a filter is saved
+ * with a material change, that it has to be materialized again.
+ *
+ * @return string
  */
-function save_filter(): void {
-	global $config;
+function flowview_rematerialize_recommendation(): string {
+	return __('The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the \'Materialize\' action.', 'flowview');
+}
 
+/**
+ * flowview_filter_form_values - The values of the filter form as they are
+ * saved.
+ *
+ * @return array
+ */
+function flowview_filter_form_values(): array {
 	/* ================= input validation ================= */
 	get_filter_request_var('id');
 	get_filter_request_var('device_id');
@@ -587,6 +694,181 @@ function save_filter(): void {
 		$save['panel_table'] = 'on';
 	}
 
+	return $save;
+}
+
+/**
+ * flowview_filter_form_is_material - Whether saving the filter form would
+ * change what is cached for the filter.  A new filter has nothing cached.
+ *
+ * @param array $save The values from flowview_filter_form_values()
+ *
+ * @return bool
+ */
+function flowview_filter_form_is_material(array $save): bool {
+	if (empty($save['id'])) {
+		return false;
+	}
+
+	$old = flowview_db_fetch_row_prepared('SELECT *
+		FROM plugin_flowview_queries
+		WHERE id = ?',
+		array($save['id']));
+
+	return flowview_filter_change_is_material(is_array($old) ? $old : [], $save);
+}
+
+/**
+ * flowview_check_filter_save - Says, as JSON, whether saving the filter form
+ * that is posted would change what is cached for the filter, so the form can
+ * warn before it is saved.  Nothing is saved.
+ *
+ * @return void
+ */
+function flowview_check_filter_save(): void {
+	print json_encode(['material' => flowview_filter_form_is_material(flowview_filter_form_values())]);
+}
+
+/**
+ * flowview_show_saved_dialog - Once a filter was saved with a change to what
+ * is cached for it, says the save succeeded and that it has to be
+ * materialized again, in a jQuery UI dialog.  It is shown once.
+ *
+ * @return void
+ */
+function flowview_show_saved_dialog(): void {
+	if (empty($_SESSION['flowview_rematerialize_saved'])) {
+		return;
+	}
+
+	unset($_SESSION['flowview_rematerialize_saved']);
+
+	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+	print "<div id='flowview_saved_dialog' style='display:none;' title='" . __esc('Save Succeeded', 'flowview') . "'>" .
+		'<p>' . __esc('Save Succeeded.', 'flowview') . '</p>' .
+		'<p>' . html_escape(flowview_rematerialize_recommendation()) . '</p>' .
+		'</div>';
+
+	?>
+	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
+	$(function() {
+		$('#flowview_saved_dialog').dialog({
+			modal: false,
+			resizable: false,
+			width: 500,
+			buttons: [{
+				text: <?php print json_encode(__('OK', 'flowview'), $js);?>,
+				'class': 'ui-state-active',
+				click: function() {
+					$(this).dialog('close');
+				}
+			}]
+		});
+	});
+	</script>
+	<?php
+}
+
+/**
+ * @return void
+ */
+function save_filter_form(): void {
+	global $config;
+
+	/* ================= input validation ================= */
+	get_filter_request_var('timespan');
+	get_filter_request_var('cutofflines');
+	get_filter_request_var('cutoffoctets');
+	get_filter_request_var('query');
+	get_filter_request_var('device_id');
+	get_filter_request_var('graph_height');
+	/* ==================================================== */
+
+	$report = get_nfilter_request_var('report');
+
+	$printed     = 0;
+	$statistical = 0;
+
+	if (substr($report, 0, 1) == 's') {
+		$report      = intval(trim($report, 's'));
+		$printed     = 0;
+		$statistical = $report;
+	} elseif (substr($report, 0, 1) == 'p') {
+		$report      = intval(trim($report, 'p'));
+		$printed     = $report;
+		$statistical = 0;
+	}
+
+	$old = flowview_db_fetch_row_prepared('SELECT *
+		FROM plugin_flowview_queries
+		WHERE id = ?',
+		array(get_request_var('query')));
+
+	/* the report of a Filter is not on the page, so it is not changed from here */
+	if (is_array($old) && flowview_filter_report_key($old) != '') {
+		$statistical = (int) $old['statistics'];
+		$printed     = (int) $old['printed'];
+	}
+	$material = flowview_filter_change_is_material(
+		is_array($old) ? $old : [],
+		[
+			'device_id'  => get_request_var('device_id'),
+			'statistics' => $statistical,
+			'printed'    => $printed,
+			'sortfield'  => get_nfilter_request_var('sortfield'),
+		]
+	);
+
+	flowview_db_execute_prepared('UPDATE plugin_flowview_queries
+		SET timespan = ?,
+		device_id = ?,
+		statistics = ?,
+		printed = ?,
+		sortfield = ?,
+		cutofflines = ?,
+		cutoffoctets = ?,
+		graph_type = ?,
+		graph_height = ?,
+		panel_table = ?,
+		panel_bytes = ?,
+		panel_packets = ?,
+		panel_flows = ?,
+		usenat = ?
+		WHERE id = ?',
+		array(
+			get_request_var('timespan'),
+			get_request_var('device_id'),
+			$statistical,
+			$printed,
+			get_nfilter_request_var('sortfield'),
+			get_request_var('cutofflines'),
+			get_request_var('cutoffoctets'),
+			get_nfilter_request_var('graph_type'),
+			get_request_var('graph_height'),
+			get_nfilter_request_var('table') == 'true' ? 'on':'',
+			get_nfilter_request_var('bytes') == 'true' ? 'on':'',
+			get_nfilter_request_var('packets') == 'true' ? 'on':'',
+			get_nfilter_request_var('flows') == 'true' ? 'on':'',
+			get_nfilter_request_var('usenat') == 'true' ? 'on':'',
+			get_request_var('query')
+		)
+	);
+
+	print json_encode(['rematerialize' => $material]);
+}
+
+/**
+ * @return void
+ */
+function save_filter(): void {
+	global $config;
+
+	$save = flowview_filter_form_values();
+
+	/* worked out before the save, as it compares with the Filter as it was */
+	$material = flowview_filter_form_is_material($save);
+
 	$id = flowview_sql_save($save, 'plugin_flowview_queries', 'id', true);
 
 	if (is_error_message()) {
@@ -598,10 +880,15 @@ function save_filter(): void {
 			header('Location: ' . html_escape(get_nfilter_request_var('return') . '?query=' . (empty($id) ? get_filter_request_var('id') : $id)));
 		}
 
-		exit;
+		flowview_exit();
 	}
 
-	raise_message(1);
+	/* a change to what is cached is said in a dialog, with the note to materialize it again */
+	if ($material) {
+		$_SESSION['flowview_rematerialize_saved'] = (int) $id;
+	} else {
+		raise_message(1);
+	}
 
 	flowview_purge_query_caches($id);
 
@@ -611,7 +898,7 @@ function save_filter(): void {
 		header('Location: ' . html_escape(get_nfilter_request_var('return') . '?query=' . (empty($id) ? get_filter_request_var('id') : $id)));
 	}
 
-	exit;
+	flowview_exit();
 }
 
 /**
@@ -675,6 +962,38 @@ function flowview_gettimespan(): void {
 }
 
 /**
+ * Shifts the current date1/date2 range backward or forward by the interval
+ * selected in the predefined_timeshift dropdown and returns the new range as
+ * JSON.  Uses the same interval strings as Cacti's graph time shifting.
+ *
+ * @return void
+ */
+function flowview_timeshift(): void {
+	global $graph_timeshifts_vals;
+
+	$direction = get_nfilter_request_var('direction') == 'left' ? '-' : '+';
+	$shift     = get_filter_request_var('predefined_timeshift');
+	$date1     = strtotime(get_nfilter_request_var('date1'));
+	$date2     = strtotime(get_nfilter_request_var('date2'));
+	$span      = [];
+
+	if (!isset($graph_timeshifts_vals[$shift])) {
+		$shift = GTS_1_DAY;
+	}
+
+	if ($date1 !== false && $date2 !== false) {
+		$interval = $graph_timeshifts_vals[$shift];
+
+		$span['begin_now']           = strtotime($direction . $interval, $date1);
+		$span['end_now']             = strtotime($direction . $interval, $date2);
+		$span['current_value_date1'] = date('Y-m-d H:i', $span['begin_now']);
+		$span['current_value_date2'] = date('Y-m-d H:i', $span['end_now']);
+	}
+
+	print json_encode($span);
+}
+
+/**
  * @param mixed $data
  *
  * @return void
@@ -698,6 +1017,9 @@ function flowview_display_filter(): void {
 
 	$title  = __esc('Undefined Filter [ Select Filter to get Details ]', 'flowview');
 
+	$report_fixed   = false;
+	$report_printed = substr((string) get_nfilter_request_var('report'), 0, 1) == 'p';
+
 	if (get_filter_request_var('query') > 0) {
 		$row = flowview_db_fetch_row_prepared('SELECT name, statistics, printed
 			FROM plugin_flowview_queries
@@ -705,13 +1027,17 @@ function flowview_display_filter(): void {
 			array(get_request_var('query')));
 
 		if (cacti_sizeof($row)) {
+			$report_fixed = flowview_filter_report_key($row) != '';
 			if ($row['statistics'] > 0) {
 				$title = __esc('Statistical Report: %s [ Including overrides as specified below ]', $stat_report_array[$row['statistics']]);
 			} elseif ($row['printed'] > 0) {
-				$title = __esc('Printed Report: %s [ Including overrides as specified below ]', $print_report_array[$row['statistics']]);
+				$title = __esc('Printed Report: %s [ Including overrides as specified below ]', $print_report_array[$row['printed']]);
 			}
 		}
 	}
+
+	/* a Filter saved from its editor, that was opened from this page, comes back here */
+	flowview_show_saved_dialog();
 
 	html_start_box($title . '&nbsp;<span id="text"></span>', '100%', false, 3, 'center', '');
 
@@ -807,6 +1133,12 @@ function flowview_display_filter(): void {
 			</table>
 			<table class='filterTable'>
 				<tr>
+					<?php
+					/* the Report is part of the Filter and what is cached for it, so it is only on the page when the Filter has none */
+					$report_shown = get_request_var('query') > 0 && !$report_fixed;
+
+					if ($report_shown) {
+					?>
 					<td>
 						<?php print __('Report', 'flowview');?>
 					</td>
@@ -840,6 +1172,7 @@ function flowview_display_filter(): void {
 							?>
 						</select>
 					</td>
+					<?php } ?>
 					<td>
 						<?php print __('Sort Field', 'flowview');?>
 					</td>
@@ -944,12 +1277,16 @@ function flowview_display_filter(): void {
 						</select>
 					</td>
 					<td class='nowrap' title='<?php print __esc('Show only Domains on Charts Below');?>'>
-						<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
-						<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
+							<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap' title='<?php print __esc('Show the post-NAT (translated) IP/DNS name instead of the original values', 'flowview');?>'>
-						<input type='checkbox' id='usenat' name='usenat' <?php print (get_request_var('usenat') == 'true' ? 'checked':'');?>>
-						<label for='usenat'><?php print __('Use NAT Data', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='usenat' name='usenat' <?php print (get_request_var('usenat') == 'true' ? 'checked':'');?>>
+							<label for='usenat'><?php print __('Use NAT Data', 'flowview');?></label>
+						</span>
 					</td>
 				</tr>
 			</table>
@@ -1037,20 +1374,28 @@ function flowview_display_filter(): void {
 						<?php print __('Show/Hide', 'flowview');?>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='table' name='table' <?php print (get_request_var('table') == 'true' ? 'checked':'');?>>
-						<label for='table'><?php print __('Table', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='table' name='table' <?php print (get_request_var('table') == 'true' ? 'checked':'');?>>
+							<label for='table'><?php print __('Table', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='bytes' name='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'');?>>
-						<label for='bytes'><?php print __('Bytes', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='bytes' name='bytes' <?php print (get_request_var('bytes') == 'true' ? 'checked':'') . ($report_printed ? ' disabled':'');?>>
+							<label for='bytes'><?php print __('Bytes', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='packets' name='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'');?>>
-						<label for='packets'><?php print __('Packets', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='packets' name='packets' <?php print (get_request_var('packets') == 'true' ? 'checked':'') . ($report_printed ? ' disabled':'');?>>
+							<label for='packets'><?php print __('Packets', 'flowview');?></label>
+						</span>
 					</td>
 					<td class='nowrap'>
-						<input type='checkbox' id='flows' name='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'');?>>
-						<label for='flows'><?php print __('Flows', 'flowview');?></label>
+						<span>
+							<input type='checkbox' id='flows' name='flows' <?php print (get_request_var('flows') == 'true' ? 'checked':'') . ($report_printed ? ' disabled':'');?>>
+							<label for='flows'><?php print __('Flows', 'flowview');?></label>
+						</span>
 					</td>
 					<td>
 						<span>
@@ -1179,11 +1524,11 @@ function flowview_display_filter(): void {
 		});
 
 		$('.timeshiftBackward').off('click').on('click', function() {
-			timeshiftFilterLeft();
+			timeshiftFilter('left');
 		});
 
 		$('.timeshiftForward').off('click').on('click', function() {
-			timeshiftFilterRight();
+			timeshiftFilter('right');
 		});
 
 		$('#flowview_filter').on('submit', function(event) {
@@ -1471,14 +1816,16 @@ function flowview_display_filter(): void {
 			initTimespan();
 		}
 
-		if ($('#report').val().indexOf('p') >= 0) {
-			$('#bytes').prop('disabled', true);
-			$('#flows').prop('disabled', true);
-			$('#packets').prop('disabled', true);
-		} else {
-			$('#bytes').prop('disabled', false);
-			$('#flows').prop('disabled', false);
-			$('#packets').prop('disabled', false);
+		if ($('#report').length) {
+			if ($('#report').val().indexOf('p') >= 0) {
+				$('#bytes').prop('disabled', true);
+				$('#flows').prop('disabled', true);
+				$('#packets').prop('disabled', true);
+			} else {
+				$('#bytes').prop('disabled', false);
+				$('#flows').prop('disabled', false);
+				$('#packets').prop('disabled', false);
+			}
 		}
 
 		// Setup the charts
@@ -1521,12 +1868,17 @@ function flowview_display_filter(): void {
 		});
 	});
 
+	/* the Report is not on the page when the Filter has one, as the server knows it from the Filter */
+	function reportParam() {
+		return $('#report').length ? '&report=' + $('#report').val() : '';
+	}
+
 	function renderBarChart(type, bindto, title, label, height, width) {
 		$.getJSON('flowview.php?action=chartdata&type=' + type +
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1591,7 +1943,7 @@ function flowview_display_filter(): void {
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1657,7 +2009,7 @@ function flowview_display_filter(): void {
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1747,13 +2099,13 @@ function flowview_display_filter(): void {
 	}
 
 	function saveFilter() {
-		$.get(urlPath + 'plugins/flowview/flowview.php' +
+		$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
 			'?action=savefilter' +
 			'&query='        + $('#query').val() +
 			'&domains='      + $('#domains').is(':checked') +
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&timespan='     + $('#predefined_timespan').val() +
-			'&report='       + $('#report').val() +
+			reportParam() +
 			'&device_id='    + $('#device_id').val() +
 			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1765,9 +2117,14 @@ function flowview_display_filter(): void {
 			'&flows='        + $('#flows').is(':checked') +
 			'&exclude='      + $('#exclude').val() +
 			'&graph_type='   + $('#graph_type').val() +
-			'&graph_height=' + $('#graph_height').val(), function() {
+			'&graph_height=' + $('#graph_height').val(), function(data) {
 			Pace.stop();
-			$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
+
+			if (data['rematerialize']) {
+				$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page.', 'flowview');?> ]').fadeOut(10000);
+			} else {
+				$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
+			}
 		});
 	}
 
@@ -1808,6 +2165,30 @@ function flowview_display_filter(): void {
 		}
 	}
 
+	function setCustomTimespan() {
+		$('#predefined_timespan').val('0');
+
+		if ($('#predefined_timespan').selectmenu('instance') !== undefined) {
+			$('#predefined_timespan').selectmenu('refresh');
+		}
+	}
+
+	function timeshiftFilter(direction) {
+		$.getJSON(urlPath + 'plugins/flowview/flowview.php' +
+			'?action=timeshift' +
+			'&direction='           + direction +
+			'&predefined_timeshift=' + $('#predefined_timeshift').val() +
+			'&date1='               + encodeURIComponent($('#date1').val()) +
+			'&date2='               + encodeURIComponent($('#date2').val()), function(data) {
+			if (data['current_value_date1'] !== undefined) {
+				$('#date1').val(data['current_value_date1']);
+				$('#date2').val(data['current_value_date2']);
+				setCustomTimespan();
+				applyFilter();
+			}
+		});
+	}
+
 	function changeQuery() {
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
 			'?action=query'         +
@@ -1823,18 +2204,21 @@ function flowview_display_filter(): void {
 	}
 
 	function applyFilter(reset) {
+		var report = '';
+		var extra  = '';
+
 		if (reset) {
-			var report = 0;
+			report = '&report=0';
 			var device_id = 0;
 		} else {
-			var report = $('#report').val();
-			var device_id = $('#device_id').val();
-		}
+			/* only a Filter that has no Report has one on the page */
+			report = reportParam();
 
-		if (report.indexOf('p') >= 0) {
-			var extra='&table=true&bytes=false&packets=false&flows=false';
-		} else {
-			var extra='';
+			if ($('#report').length && $('#report').val().indexOf('p') >= 0) {
+				extra = '&table=true&bytes=false&packets=false&flows=false';
+			}
+
+			var device_id = $('#device_id').val();
 		}
 
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
@@ -1843,7 +2227,7 @@ function flowview_display_filter(): void {
 			'&usenat='             + $('#usenat').is(':checked') +
 			'&query='               + $('#query').val() +
 			'&predefined_timespan=' + $('#predefined_timespan').val() +
-			'&report='              + report +
+			report +
 			'&device_id='           + device_id +
 			'&ex_addr='             + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='           + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
@@ -1862,10 +2246,7 @@ function flowview_display_filter(): void {
 	}
 
 	$('#date1, #date2').on('change', function() {
-		$('#predefined_timespan').val('0');
-		<?php if (get_selected_theme() != 'classic') {?>
-		$('#predefined_timespan').selectmenu('refresh');
-		<?php }?>
+		setCustomTimespan();
 	});
 
 	</script>
@@ -2345,7 +2726,14 @@ function get_tables_for_query($start, $end = null) {
 		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
 
 	if (cacti_sizeof($tables)) {
+		/* a materialization worker scans only the partitions of its batch */
+		$allowed = $GLOBALS['flowview_partition_allowlist'] ?? null;
+
 		foreach($tables as $t) {
+			if (is_array($allowed) && !isset($allowed[$t['table']])) {
+				continue;
+			}
+
 			$parts = explode('_', $t['table']);
 			$partition = trim($parts[3]);
 
@@ -2515,8 +2903,20 @@ function flowview_get_chartdata(): void {
 	$start    = strtotime(get_nfilter_request_var('date1'));
 	$end      = strtotime(get_nfilter_request_var('date2'));
 
+	/* the report is not sent for a Filter that has one, as it is part of the Filter */
+	if ($query_id > 0) {
+		$filter_report = flowview_filter_report_key(flowview_db_fetch_row_prepared('SELECT statistics, printed
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			[$query_id]) ?: []);
+
+		if ($filter_report != '') {
+			$report = $filter_report;
+		}
+	}
+
 	if (!empty($report) && substr($report, 0, 1) == 's') {
-		$report = trim(get_nfilter_request_var('report'), 'sp');
+		$report = trim($report, 'sp');
 
 		$output = run_flow_query(true, $query_id, $start, $end);
 
@@ -2593,12 +2993,12 @@ function flowview_get_chartdata(): void {
 			];
 
 			print json_encode($chartData, JSON_NUMERIC_CHECK);
-			exit;
+			flowview_exit();
 		}
 	}
 
 	print json_encode([]);
-	exit;
+	flowview_exit();
 }
 
 /**
@@ -2715,14 +3115,24 @@ function get_category_columns($statistics, $domain) {
  * filter table
  * an error.
  *
- * @param mixed $session
- * @param mixed $query_id
- * @param mixed $start
- * @param mixed $end
+ * When $plan_only is true nothing is run.  The md5sum_tables of each map
+ * query the parallel query would cache against, which is how the cached
+ * shards of the query are found, are put in $plan, and true is returned.
+ * They are not returned, so what this returns is only ever the report.
+ * $force_nat then decides the NAT mode instead of the request variables.
+ * Use flowview_plan_filter() rather than calling this for a plan.
+ *
+ * @param mixed      $session
+ * @param mixed      $query_id
+ * @param mixed      $start
+ * @param mixed      $end
+ * @param bool       $plan_only
+ * @param bool|null  $force_nat
+ * @param array|null $plan      Set to the cache keys when $plan_only is true
  *
  * @return mixed
  */
-function run_flow_query($session, $query_id, $start, $end) {
+function run_flow_query($session, $query_id, $start, $end, bool $plan_only = false, ?bool $force_nat = null, ?array &$plan = null) {
 	global $stat_columns_array;
 
 	global $config, $graph_timespans;
@@ -2744,7 +3154,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 	}
 
 	/* close session to allow offpage navigation */
-	cacti_session_close();
+	if (!$plan_only) {
+		cacti_session_close();
+	}
 
 	require($config['base_path'] . '/plugins/flowview/includes/arrays.php');
 
@@ -2752,6 +3164,10 @@ function run_flow_query($session, $query_id, $start, $end) {
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		[$query_id]);
+
+	if ($plan_only && !cacti_sizeof($data)) {
+		return false;
+	}
 
 	$title = flowview_db_fetch_cell_prepared('SELECT name
 		FROM plugin_flowview_queries
@@ -2810,27 +3226,31 @@ function run_flow_query($session, $query_id, $start, $end) {
 		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['device_id'], 'listener_id');
 	}
 
-	/* ex_addr override */
-	if (isset_request_var('ex_addr') && get_nfilter_request_var('ex_addr') != '0' && get_nfilter_request_var('ex_addr') != '-1') {
+	/* ex_addr override, an exporter address, so anything else is not one */
+	$ex_addr = isset_request_var('ex_addr') ? filter_var(get_nfilter_request_var('ex_addr'), FILTER_VALIDATE_IP) : false;
+
+	if ($ex_addr !== false) {
 		$sql_where .= ($sql_where != '' ? ' AND ':'') . 'ex_addr = ?';
-		$sql_params[] = get_request_var('ex_addr');
+		$sql_params[] = $ex_addr;
 	} elseif (isset($data['ex_addr']) && $data['ex_addr'] != '-1' && $data['ex_addr'] != '' && $data['ex_addr'] != '0') {
 		$sql_where .= ($sql_where != '' ? ' AND ':'') . 'ex_addr = ?';
 		$sql_params[] = $data['ex_addr'];
 	}
 
-	/* report override */
+	/* report override, unless the filter has a report, as it is part of what is cached */
 	$report = '';
 
 	if (isset_request_var('report')) {
-		$report  = get_nfilter_request_var('report');
-		$nreport = trim(get_nfilter_request_var('report'), 'sp');
-		if (strpos($report, 's') !== false && is_numeric($nreport)) {
-			$data['statistics'] = $nreport;
-			$data['printed']    = 0;
-		} elseif (strpos($report, 'p') !== false && is_numeric($nreport)) {
-			$data['printed']    = $nreport;
-			$data['statistics'] = 0;
+		if (flowview_filter_report_key($data) == '') {
+			$report  = get_nfilter_request_var('report');
+			$nreport = trim(get_nfilter_request_var('report'), 'sp');
+			if (strpos($report, 's') !== false && is_numeric($nreport)) {
+				$data['statistics'] = $nreport;
+				$data['printed']    = 0;
+			} elseif (strpos($report, 'p') !== false && is_numeric($nreport)) {
+				$data['printed']    = $nreport;
+				$data['statistics'] = 0;
+			}
 		}
 	} elseif (!sizeof($data)) {
 		return false;
@@ -3348,17 +3768,22 @@ function run_flow_query($session, $query_id, $start, $end) {
 					(preg_match('/^(bytes|packets|flows)$/i', $data['sortfield']) ? ' DESC':' ASC');
 			}
 		} else {
-			cacti_log(sprintf('WARNING: The Flowview Query %s [%s] does not include either a Statistical or Printed Report.', $data['name'], $data['id']), false, 'FLOWVIEW');
+			if (!$plan_only) {
+				cacti_log(sprintf('WARNING: The Flowview Query %s [%s] does not include either a Statistical or Printed Report.', $data['name'], $data['id']), false, 'FLOWVIEW');
+			}
+
 			return false;
 		}
 
 		if ($sql_outer == '' || ($sql_inner == '' && $sql_inner1 == '')) {
+			if ($plan_only) {
+				return false;
+			}
+
 			if ($data['statistics'] > 0) {
 				$message = __('The Statistical Report %s is not known.  Please open a bug on GitHub', $data['statistics'], 'flowview');
-			} elseif($data['printed'] > 0) {
-				$message = __('The Printed Report %s is not known.  Please open a bug on GitHub', $data['printed'], 'flowview');
 			} else {
-				$message = __('No valid report was selected.  Please open a bug on GitHub', 'flowview');
+				$message = __('The Printed Report %s is not known.  Please open a bug on GitHub', $data['printed'], 'flowview');
 			}
 
 			raise_message('bad_report', $message, MESSAGE_LEVEL_ERROR);
@@ -3369,7 +3794,9 @@ function run_flow_query($session, $query_id, $start, $end) {
 		}
 
 		/* use post-NAT data instead of the original src/dst values - issue#110 */
-		if (isset_request_var('usenat')) {
+		if ($force_nat !== null) {
+			$use_nat = $force_nat;
+		} elseif (isset_request_var('usenat')) {
 			$use_nat = (get_request_var('usenat') == 'true');
 		} else {
 			$use_nat = (isset($data['usenat']) && $data['usenat'] == 'on');
@@ -3407,6 +3834,81 @@ function run_flow_query($session, $query_id, $start, $end) {
 			$sql_inner2         = flowview_apply_nat_toggle($sql_inner2, $use_nat, true);
 			$sql_inner_groupby1 = flowview_apply_nat_toggle($sql_inner_groupby1, $use_nat, false);
 			$sql_inner_groupby2 = flowview_apply_nat_toggle($sql_inner_groupby2, $use_nat, false);
+		}
+
+		/**
+		 * The map (inner) structures cache their shards by an md5 of the
+		 * query without the time range, so they can be built before the
+		 * tables are known.
+		 */
+		if ($sql_inner1 != '') {
+			$stru_outer = [
+				'sql_query'   => $sql_outer,
+				'sql_where'   => '',
+				'sql_groupby' => $sql_groupby,
+				'sql_having'  => $sql_having,
+				'sql_order'   => $sql_order,
+				'sql_limit'   => $sql_limit,
+				'sql_params'  => []
+			];
+
+			$stru_inners = [];
+
+			foreach ([[$sql_inner1, $sql_inner_groupby1], [$sql_inner2, $sql_inner_groupby2]] as $inner) {
+				$stru_inner = [
+					'sql_query'        => $inner[0],
+					'sql_where'        => $sql_where,
+					'sql_range'        => $sql_range,
+					'sql_groupby'      => $inner[1],
+					'sql_having'       => '',
+					'sql_order'        => '',
+					'sql_limit'        => '',
+					'sql_params'       => $sql_params,
+					'sql_range_params' => $sql_range_params,
+					'sql_start_time'   => $start,
+					'sql_end_time'     => $end
+				];
+
+				/* only statistical reports have two map queries, so there is no printed limit or order here */
+				$stru_inners[] = $stru_inner;
+			}
+		} else {
+			$stru_inner = [
+				'sql_query'        => $sql_inner,
+				'sql_where'        => $sql_where,
+				'sql_range'        => $sql_range,
+				'sql_having'       => '',
+				'sql_order'        => '',
+				'sql_limit'        => '',
+				'sql_groupby'      => $sql_inner_groupby,
+				'sql_params'       => $sql_params,
+				'sql_range_params' => $sql_range_params,
+				'sql_start_time'   => $start,
+				'sql_end_time'     => $end
+			];
+
+			if ($request_type == 'printed') {
+				$stru_inner['sql_limit'] = 'LIMIT 100';
+				$stru_inner['sql_order'] = $sql_order;
+			}
+
+			$stru_outer = [
+				'sql_query'        => $sql_outer,
+				'sql_where'        => '',
+				'sql_having'       => $sql_having,
+				'sql_groupby'      => $sql_groupby,
+				'sql_order'        => $sql_order,
+				'sql_limit'        => $sql_limit,
+				'sql_params'       => []
+			];
+
+			$stru_inners = [$stru_inner];
+		}
+
+		if ($plan_only) {
+			$plan = array_map('parallel_database_query_table_md5', $stru_inners);
+
+			return true;
 		}
 
 		$tables     = get_tables_for_query($start, $end);
@@ -3476,84 +3978,7 @@ function run_flow_query($session, $query_id, $start, $end) {
 
 				cacti_log(sprintf('PARALLEL STATS: Time:%0.3f Threads:%d Shards:%d', $end - $start, $threads, $shards), false, 'FLOWVIEW');
 			} else {
-				if ($sql_inner1 != '') {
-					$stru_inner1 = [
-						'sql_query'        => $sql_inner1,
-						'sql_where'        => $sql_where,
-						'sql_range'        => $sql_range,
-						'sql_groupby'      => $sql_inner_groupby1,
-						'sql_having'       => '',
-						'sql_order'        => '',
-						'sql_limit'        => '',
-						'sql_params'       => $sql_params,
-						'sql_range_params' => $sql_range_params,
-						'sql_start_time'   => $start,
-						'sql_end_time'     => $end
-					];
-
-					$stru_inner2 = [
-						'sql_query'        => $sql_inner2,
-						'sql_where'        => $sql_where,
-						'sql_range'        => $sql_range,
-						'sql_groupby'      => $sql_inner_groupby2,
-						'sql_having'       => '',
-						'sql_order'        => '',
-						'sql_limit'        => '',
-						'sql_params'       => $sql_params,
-						'sql_range_params' => $sql_range_params,
-						'sql_start_time'   => $start,
-						'sql_end_time'     => $end
-					];
-
-					$stru_outer = [
-						'sql_query'   => $sql_outer,
-						'sql_where'   => '',
-						'sql_groupby' => $sql_groupby,
-						'sql_having'  => $sql_having,
-						'sql_order'   => $sql_order,
-						'sql_limit'   => $sql_limit,
-						'sql_params'  => []
-					];
-
-					if ($request_type == 'printed') {
-						$stru_inner1['sql_limit'] = 'LIMIT 100';
-						$stru_inner1['sql_order'] = $sql_order;
-						$stru_inner2['sql_limit'] = 'LIMIT 100';
-						$stru_inner2['sql_order'] = $sql_order;
-					}
-
-					$requests[] = parallel_database_query_request($tables, $stru_inner1, $stru_outer);
-					$requests[] = parallel_database_query_request($tables, $stru_inner2, $stru_outer);
-				} else {
-					$stru_inner = [
-						'sql_query'        => $sql_inner,
-						'sql_where'        => $sql_where,
-						'sql_range'        => $sql_range,
-						'sql_having'       => '',
-						'sql_order'        => '',
-						'sql_limit'        => '',
-						'sql_groupby'      => $sql_inner_groupby,
-						'sql_params'       => $sql_params,
-						'sql_range_params' => $sql_range_params,
-						'sql_start_time'   => $start,
-						'sql_end_time'     => $end
-					];
-
-					if ($request_type == 'printed') {
-						$stru_inner['sql_limit'] = 'LIMIT 100';
-						$stru_inner['sql_order'] = $sql_order;
-					}
-
-					$stru_outer = [
-						'sql_query'        => $sql_outer,
-						'sql_where'        => '',
-						'sql_having'       => $sql_having,
-						'sql_groupby'      => $sql_groupby,
-						'sql_order'        => $sql_order,
-						'sql_limit'        => $sql_limit,
-						'sql_params'       => []
-					];
-
+				foreach ($stru_inners as $stru_inner) {
 					$requests[] = parallel_database_query_request($tables, $stru_inner, $stru_outer);
 				}
 
@@ -3933,6 +4358,1449 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, int $hour = 0
 		'end_time'   => $end_time
 	];
 }
+
+/**
+ * flowview_get_materialize_range - Given a list of raw partition table
+ * names, return the Unix start and end timestamps spanning every partition.
+ * Names that are not partition tables are ignored, and false is returned
+ * when none qualify.
+ *
+ * A shard is only a full scan, and therefore only cached in
+ * parallel_database_query_shard_cache, when the requested range lies strictly
+ * outside the data in the partition.  The end is padded by a second, as a
+ * flow ends no later than it was captured.  The start is padded by a day,
+ * because a flow can start well before the window of the partition it was
+ * written to, and with less the earliest partition, or one that rotated, is
+ * never treated as a full scan and so is never cached.  A partition that does
+ * not exist in the extra day is simply not there to scan.
+ *
+ * @param array $tables
+ *
+ * @return array|false
+ */
+function flowview_get_materialize_range(array $tables): array|false {
+	$start = false;
+	$end   = false;
+
+	foreach ($tables as $table) {
+		$table_start = flowview_table_name_to_time($table, 'start_time');
+		$table_end   = flowview_table_name_to_time($table, 'end_time');
+
+		if ($table_start === false || $table_end === false) {
+			continue;
+		}
+
+		if ($start === false || $table_start < $start) {
+			$start = $table_start;
+		}
+
+		if ($end === false || $table_end > $end) {
+			$end = $table_end;
+		}
+	}
+
+	if ($start === false || $end === false) {
+		return false;
+	}
+
+	return [$start - 86400, $end + 1];
+}
+
+/**
+ * flowview_shard_cache_is_current - Decide whether a cached partition shard
+ * still reflects its partition.  The cache stores the partition's
+ * MIN(start_time) and MAX(end_time) from when it was built, so it is current
+ * only while the partition still reports the same bounds.
+ *
+ * The raw tables keep microseconds but the cache keeps whole seconds, which
+ * the database either rounds or truncates, so a difference of one second is
+ * treated as equal.
+ *
+ * @param array $cached  The min_date and max_date stored with the cached shard
+ * @param array $current The min_date and max_date the partition reports now
+ *
+ * @return bool
+ */
+function flowview_shard_cache_is_current(array $cached, array $current): bool {
+	foreach (['min_date', 'max_date'] as $column) {
+		if (empty($cached[$column]) || empty($current[$column])) {
+			return false;
+		}
+
+		$cached_time  = strtotime($cached[$column]);
+		$current_time = strtotime($current[$column]);
+
+		if ($cached_time === false || $current_time === false || abs($cached_time - $current_time) > 1) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * flowview_invalidate_stale_shard_cache - Remove cached partition shards that
+ * no longer match their partition, either because more flows arrived or
+ * because the partition table is gone.  Shards that are still current are
+ * left alone so they are never materialized a second time.
+ *
+ * When anything is removed, the finished CLI requests (user 0) are dropped
+ * as well so their results are rebuilt from the refreshed shards.
+ *
+ * @param array $only Only check the cache of these partition tables, or all
+ *                    of it when empty
+ *
+ * @return array The number of shards kept and removed
+ */
+function flowview_invalidate_stale_shard_cache(array $only = []): array {
+	$kept    = 0;
+	$removed = 0;
+	$current = [];
+
+	if (cacti_sizeof($only)) {
+		$cache = flowview_db_fetch_assoc_prepared('SELECT md5sum, map_table, map_partition, min_date, max_date
+			FROM parallel_database_query_shard_cache
+			WHERE map_table IN (' . implode(', ', array_fill(0, cacti_sizeof($only), '?')) . ')
+			AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'
+			ORDER BY map_table',
+			array_values($only));
+	} else {
+		$cache = flowview_db_fetch_assoc('SELECT md5sum, map_table, map_partition, min_date, max_date
+			FROM parallel_database_query_shard_cache
+			WHERE map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'
+			ORDER BY map_table');
+	}
+
+	if (cacti_sizeof($cache)) {
+		foreach ($cache as $entry) {
+			$table = $entry['map_table'];
+
+			if (!isset($current[$table])) {
+				if (preg_match('/^plugin_flowview_raw_[0-9]+$/', $table) && flowview_db_table_exists($table)) {
+					$current[$table] = flowview_db_fetch_row("SELECT MIN(start_time) AS min_date, MAX(end_time) AS max_date
+						FROM $table");
+				} else {
+					$current[$table] = [];
+				}
+			}
+
+			if (cacti_sizeof($current[$table]) && flowview_shard_cache_is_current($entry, $current[$table])) {
+				$kept++;
+
+				continue;
+			}
+
+			flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+				WHERE md5sum = ?
+				AND map_table = ?
+				AND map_partition = ?',
+				[$entry['md5sum'], $entry['map_table'], $entry['map_partition']]);
+
+			$removed++;
+		}
+	}
+
+	if ($removed > 0) {
+		$requests = flowview_db_fetch_assoc_prepared('SELECT id
+			FROM parallel_database_query
+			WHERE user_id = 0
+			AND status = ?',
+			['complete']);
+
+		foreach ($requests as $request) {
+			parallel_database_query_cleanup($request['id'], true);
+		}
+	}
+
+	return ['kept' => $kept, 'removed' => $removed];
+}
+
+/**
+ * flowview_launch_materialize - Start cli/materialize_queries.php in the
+ * background, for the given FlowView queries, or all of them when none are
+ * given, and for the given partitions, or all of them when none are given.
+ * A filter that is already being materialized is left to the run that has
+ * it, so the filters can be materialized separately.
+ *
+ * @param array $query_ids  The FlowView query ids to materialize
+ * @param array $partitions The partition tables to materialize
+ *
+ * @return array The filters a materialization was started for
+ */
+function flowview_launch_materialize(array $query_ids = [], array $partitions = []): array {
+	global $config;
+
+	if (cacti_sizeof($query_ids)) {
+		$targets = array_map('intval', $query_ids);
+	} else {
+		$targets = array_map('intval', array_column(flowview_db_fetch_assoc('SELECT id
+			FROM plugin_flowview_queries
+			ORDER BY id'), 'id'));
+	}
+
+	$targets = array_values(array_diff(array_unique(array_filter($targets, function ($id) {
+		return $id > 0;
+	})), flowview_get_materializing_filters()));
+
+	if (!cacti_sizeof($targets)) {
+		return [];
+	}
+
+	$arguments = cacti_escapeshellarg($config['base_path'] . '/plugins/flowview/cli/materialize_queries.php') .
+		' --query-id=' . implode(',', $targets);
+
+	$partitions = array_filter($partitions, function ($table) {
+		return flowview_partition_sort_key($table) !== '';
+	});
+
+	if (cacti_sizeof($partitions)) {
+		$arguments .= ' --partitions=' . implode(',', $partitions);
+	}
+
+	exec_background(read_config_option('path_php_binary'), $arguments);
+
+	return $targets;
+}
+
+/**
+ * parallel_database_query_map_query - The map query of a request as the JSON
+ * that is stored and hashed.  The time range is left out, so the same query
+ * over a different range shares the same cached partition shards.
+ *
+ * @param array $stru_inner The map structure of a parallel query request
+ *
+ * @return string
+ */
+function parallel_database_query_map_query(array $stru_inner): string {
+	unset($stru_inner['sql_range']);
+	unset($stru_inner['sql_range_params']);
+	unset($stru_inner['sql_start_time']);
+	unset($stru_inner['sql_end_time']);
+
+	return (string) json_encode($stru_inner);
+}
+
+/**
+ * parallel_database_query_table_md5 - The md5sum_tables of a map structure,
+ * which is the key the partition shards are cached under.
+ *
+ * @param array $stru_inner The map structure of a parallel query request
+ *
+ * @return string
+ */
+function parallel_database_query_table_md5(array $stru_inner): string {
+	return md5(parallel_database_query_map_query($stru_inner));
+}
+
+/**
+ * flowview_partition_sort_key - The partition of a raw table name as a
+ * fixed length key that sorts in time order, whether the partitions are
+ * daily or hourly.  An empty key is returned for anything that is not a
+ * raw partition table.
+ *
+ * @param string $table
+ *
+ * @return string
+ */
+function flowview_partition_sort_key(string $table): string {
+	if (!preg_match('/^plugin_flowview_raw_([0-9]{7})([0-9]{2})?$/', $table, $matches)) {
+		return '';
+	}
+
+	return $matches[1] . ($matches[2] ?? '00');
+}
+
+/**
+ * flowview_get_partition_tables - The names of the raw flow partition tables
+ * that exist, oldest first.  Anything that merely looks like a partition
+ * table, such as plugin_flowview_raw_abc, is left out.
+ *
+ * @return array
+ */
+function flowview_get_partition_tables(): array {
+	$tables = flowview_db_fetch_assoc('SELECT TABLE_NAME AS `table`
+		FROM information_schema.TABLES
+		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"');
+
+	$partitions = [];
+
+	foreach ($tables as $table) {
+		if (flowview_partition_sort_key($table['table']) !== '') {
+			$partitions[] = $table['table'];
+		}
+	}
+
+	usort($partitions, function ($a, $b) {
+		return strcmp(flowview_partition_sort_key($a), flowview_partition_sort_key($b));
+	});
+
+	return $partitions;
+}
+
+/**
+ * flowview_get_live_partition - The raw partition table that is still
+ * receiving flows, which is the newest one.
+ *
+ * @return string The table, or an empty string when there are no partitions
+ */
+function flowview_get_live_partition(): string {
+	$tables = flowview_get_partition_tables();
+
+	return cacti_sizeof($tables) ? (string) end($tables) : '';
+}
+
+/**
+ * flowview_is_full_scan - Whether a shard scans the whole of its partition,
+ * which is when the range starts before the earliest flow in it and ends
+ * after the last.  Such a shard does not depend on the range, so its result
+ * is cached and reused by any query that covers the partition.
+ *
+ * The live partition is never a full scan.  It is still receiving flows, so
+ * a result cached for it would be wrong as soon as more arrive.
+ *
+ * @param int  $start           The start of the range
+ * @param int  $end             The end of the range
+ * @param int  $partition_start The time of the earliest flow in the partition
+ * @param int  $partition_end   The time of the latest flow in the partition
+ * @param bool $live            Whether it is the live partition
+ *
+ * @return bool
+ */
+function flowview_is_full_scan(int $start, int $end, int $partition_start, int $partition_end, bool $live): bool {
+	return !$live && $start < $partition_start && $end > $partition_end;
+}
+
+/**
+ * flowview_remove_live_partition_cache - Remove anything cached for the live
+ * partition, from before it was kept out of the cache.  It would never be
+ * used, as the live partition is no longer scanned as a full scan, but it
+ * would be counted as materialized.
+ *
+ * @return int How many cached results were removed
+ */
+function flowview_remove_live_partition_cache(): int {
+	$live = flowview_get_live_partition();
+
+	if ($live == '') {
+		return 0;
+	}
+
+	$cached = (int) flowview_db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM parallel_database_query_shard_cache
+		WHERE map_table = ?
+		AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'',
+		[$live]);
+
+	if ($cached > 0) {
+		flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+			WHERE map_table = ?
+			AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'',
+			[$live]);
+	}
+
+	return $cached;
+}
+
+/**
+ * flowview_live_shard_key - The key a live partition shard result is shared
+ * under.  Requests that run the same map query, with the same range, against
+ * the same partition get the same key, such as the table and the charts of a
+ * single report page.  It is derived from the map query, so it never matches
+ * the key of a materialized shard.
+ *
+ * @param array $query The parallel query request
+ * @param array $shard The shard of the live partition
+ *
+ * @return string
+ */
+function flowview_live_shard_key(array $query, array $shard): string {
+	return md5($query['md5sum_tables'] . '|' . $shard['map_table'] . '|' . $shard['map_params']);
+}
+
+/**
+ * flowview_live_shard_lock - Take the lock that makes the workers of one
+ * live shard key run the map query one at a time, so the rest can reuse the
+ * result of the first.
+ *
+ * @param string $key The live shard key
+ *
+ * @return bool Whether the lock was taken within the wait time
+ */
+function flowview_live_shard_lock(string $key): bool {
+	return (int) flowview_db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)',
+		[FLOWVIEW_LIVE_SHARD_LOCK . $key, FLOWVIEW_LIVE_SHARD_LOCK_WAIT]) === 1;
+}
+
+/**
+ * flowview_live_shard_unlock - Release the lock of flowview_live_shard_lock().
+ *
+ * @param string $key The live shard key
+ *
+ * @return void
+ */
+function flowview_live_shard_unlock(string $key): void {
+	flowview_db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [FLOWVIEW_LIVE_SHARD_LOCK . $key]);
+}
+
+/**
+ * flowview_live_shard_get - The result of a live shard that was run in the
+ * last FLOWVIEW_LIVE_SHARD_TTL seconds.
+ *
+ * @param string $key   The live shard key
+ * @param string $table The live partition table
+ *
+ * @return array|null null when there is no recent result
+ */
+function flowview_live_shard_get(string $key, string $table): ?array {
+	$row = flowview_db_fetch_row_prepared('SELECT results
+		FROM parallel_database_query_shard_cache
+		WHERE md5sum = ?
+		AND map_table = ?
+		AND map_partition = ?
+		AND date_created >= DATE_SUB(NOW(), INTERVAL ? SECOND)',
+		[$key, $table, FLOWVIEW_LIVE_SHARD_MARKER, FLOWVIEW_LIVE_SHARD_TTL]);
+
+	if (!cacti_sizeof($row)) {
+		return null;
+	}
+
+	$results = json_decode($row['results'], true);
+
+	return is_array($results) ? $results : null;
+}
+
+/**
+ * flowview_live_shard_save - Keep the result of a live shard for
+ * FLOWVIEW_LIVE_SHARD_TTL seconds.
+ *
+ * @param string $key     The live shard key
+ * @param string $table   The live partition table
+ * @param array  $results The result of the map query
+ *
+ * @return void
+ */
+function flowview_live_shard_save(string $key, string $table, array $results): void {
+	flowview_db_execute_prepared('REPLACE INTO parallel_database_query_shard_cache
+		(md5sum, map_table, map_partition, min_date, max_date, results, date_created)
+		VALUES (?, ?, ?, NOW(), NOW(), ?, NOW())',
+		[$key, $table, FLOWVIEW_LIVE_SHARD_MARKER, json_encode($results)]);
+}
+
+/**
+ * flowview_live_shard_expire - Remove the live shard results that are no
+ * longer reusable.
+ *
+ * @return void
+ */
+function flowview_live_shard_expire(): void {
+	flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+		WHERE map_partition = ?
+		AND date_created < DATE_SUB(NOW(), INTERVAL ? SECOND)',
+		[FLOWVIEW_LIVE_SHARD_MARKER, FLOWVIEW_LIVE_SHARD_TTL]);
+}
+
+/**
+ * flowview_get_cold_partitions - The partitions that have rotated.  The
+ * newest partition is the one still receiving flows, every older one is cold.
+ *
+ * @param array $tables The partition tables
+ *
+ * @return array
+ */
+function flowview_get_cold_partitions(array $tables): array {
+	$keys = array_map('flowview_partition_sort_key', $tables);
+
+	if (!cacti_sizeof($keys)) {
+		return [];
+	}
+
+	$newest = max($keys);
+
+	return array_values(array_filter($tables, function ($table) use ($newest) {
+		return flowview_partition_sort_key($table) < $newest;
+	}));
+}
+
+/**
+ * flowview_get_uncached_partitions - The cold partitions that a filter does
+ * not have cached yet, with NAT or without.  What a materialization still has
+ * to do, so it can be done a part at a time and be continued.
+ *
+ * @param int    $query_id The FlowView query
+ * @param string $mode     on for NAT, off for without
+ * @param array  $cold     The cold partitions, oldest first
+ *
+ * @return array The partitions that are not cached, oldest first
+ */
+function flowview_get_uncached_partitions(int $query_id, string $mode, array $cold): array {
+	$key     = $mode == 'on' ? 'nat' : 'non_nat';
+	$md5sums = flowview_get_filter_md5sums($query_id);
+
+	/* without its cache keys all that can be done is to run it for everything */
+	if (!cacti_sizeof($md5sums[$key])) {
+		return array_values($cold);
+	}
+
+	$cached = flowview_get_cached_shard_tables($query_id, $md5sums);
+
+	return array_values(array_diff($cold, $cached[$key]));
+}
+
+/**
+ * flowview_materialize_batch_size - How many partitions a materialization
+ * runs through one parallel query.  The query has to finish within the
+ * Maximum Run Time, and every year of partitions can not, so it is run for a
+ * part of them at a time.  A batch that did not finish is followed by a
+ * smaller one.
+ *
+ * @param int  $current   The size of the last batch, or 0 for the first
+ * @param bool $timed_out Whether the last batch did not finish
+ * @param int  $threads   The number of Max Concurrent Threads
+ *
+ * @return int
+ */
+function flowview_materialize_batch_size(int $current, bool $timed_out, int $threads): int {
+	if ($current <= 0) {
+		return max(40, $threads * 25);
+	}
+
+	return $timed_out ? max(4, intdiv($current, 2)) : $current;
+}
+
+/**
+ * flowview_get_rotated_partitions - The partitions that went cold since the
+ * previous newest partition was recorded.  That partition was still hot then,
+ * so it is the first of them, and the newest partition is still hot now.
+ *
+ * @param array  $tables   The partition tables
+ * @param string $previous The newest partition recorded by the previous cycle
+ *
+ * @return array
+ */
+function flowview_get_rotated_partitions(array $tables, string $previous): array {
+	$previous_key = flowview_partition_sort_key($previous);
+	$keys         = array_map('flowview_partition_sort_key', $tables);
+
+	if ($previous_key === '' || !cacti_sizeof($keys)) {
+		return [];
+	}
+
+	$newest = max($keys);
+
+	return array_values(array_filter($tables, function ($table) use ($previous_key, $newest) {
+		$key = flowview_partition_sort_key($table);
+
+		return $key >= $previous_key && $key < $newest;
+	}));
+}
+
+/**
+ * flowview_get_partition_alter - What a raw partition table needs altered to
+ * match the current layout: the character set, the keys and columns the
+ * queries use, the ex_addr type, and the storage engine.  This is the single
+ * definition used by the schema upgrade and by the materializer, so a
+ * partition the upgrade has not reached yet is prepared the same way.
+ *
+ * Keys of $info: collation and engine of the table, has_keycol and
+ * has_template_id for those columns, indexes as the names of the indexes
+ * it has, and ex_addr_type as the type of the ex_addr column, or null.
+ *
+ * @param array  $info       What the partition table currently is
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ *
+ * @return array The alter as a string, which is empty when none is needed,
+ *               and whether ex_addr has to be rewritten afterwards
+ */
+function flowview_get_partition_alter(array $info, string $raw_engine): array {
+	$alter     = '';
+	$ex_change = false;
+	$indexes   = $info['indexes'] ?? [];
+
+	if (($info['collation'] ?? '') != 'latin1_swedish_ci') {
+		$alter = 'CONVERT TO CHARACTER SET latin1';
+	}
+
+	if (!empty($info['has_keycol'])) {
+		$alter .= ($alter != '' ? ', ':'') . 'DROP KEY keycol';
+	}
+
+	if (empty($info['has_template_id'])) {
+		$alter .= ($alter != '' ? ', ':'') . 'ADD COLUMN template_id int(11) unsigned NOT NULL default "0" AFTER listener_id';
+	}
+
+	foreach (['template_id', 'start_time', 'end_time'] as $index) {
+		if (!in_array($index, $indexes, true)) {
+			$alter .= ($alter != '' ? ', ':'') . "ADD INDEX $index ($index)";
+		}
+	}
+
+	if (isset($info['ex_addr_type']) && stripos($info['ex_addr_type'], 'VARCHAR') === false) {
+		$alter .= ($alter != '' ? ', ':'') . 'MODIFY COLUMN ex_addr VARCHAR(46) NOT NULL default ""';
+		$ex_change = true;
+	}
+
+	if (!in_array('ex_addr', $indexes, true)) {
+		$alter .= ($alter != '' ? ', ':'') . 'ADD INDEX ex_addr (ex_addr)';
+	}
+
+	if (($info['engine'] ?? '') != $raw_engine) {
+		if ($raw_engine == 'Aria') {
+			$alter .= ($alter != '' ? ',':'') . " ENGINE=$raw_engine ROW_FORMAT=page";
+		} else {
+			$alter .= ($alter != '' ? ',':'') . " ENGINE=$raw_engine ROW_FORMAT=Dynamic";
+		}
+	}
+
+	return ['alter' => $alter, 'ex_change' => $ex_change];
+}
+
+/**
+ * flowview_apply_partition_alter - Alter a raw partition table as planned by
+ * flowview_get_partition_alter().
+ *
+ * @param string $table The raw partition table
+ * @param array  $plan  The plan from flowview_get_partition_alter()
+ * @param bool   $print Also show what is being altered, as well as logging it.
+ *                      A script that reports it itself passes false.
+ *
+ * @return void
+ */
+function flowview_apply_partition_alter(string $table, array $plan, bool $print = true): void {
+	cacti_log("Altering Table $table Using this alter " . trim($plan['alter']) . '.', $print, 'FLOWVIEW');
+
+	flowview_db_execute('ALTER TABLE ' . $table . ' ' . $plan['alter']);
+
+	if ($plan['ex_change']) {
+		flowview_db_execute('UPDATE ' . $table . ' SET ex_addr = SUBSTRING_INDEX(ex_addr, ":", 1)');
+	}
+}
+
+/**
+ * flowview_get_pending_partition_alters - The partitions that still need
+ * altering, looked at all at once so that a long list of partitions does not
+ * mean a long list of queries.
+ *
+ * @param array  $tables     The raw partition tables to look at
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ *
+ * @return array The plan from flowview_get_partition_alter() of each
+ *               partition that needs one, by table
+ */
+function flowview_get_pending_partition_alters(array $tables, string $raw_engine): array {
+	if (!cacti_sizeof($tables)) {
+		return [];
+	}
+
+	$info = [];
+
+	/* when only a few partitions are asked about, only they are read */
+	$names = array_values(array_filter($tables, function ($table) {
+		return preg_match('/^plugin_flowview_raw_[0-9]+$/', $table) === 1;
+	}));
+
+	if (cacti_sizeof($names) && cacti_sizeof($names) <= 100) {
+		$which = 'AND TABLE_NAME IN ("' . implode('", "', $names) . '")';
+	} else {
+		$which = 'AND TABLE_NAME LIKE "plugin_flowview_raw_%"';
+	}
+
+	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, TABLE_COLLATION, ENGINE
+		FROM information_schema.TABLES
+		WHERE TABLE_SCHEMA = DATABASE()
+		' . $which) as $row) {
+		$info[$row['TABLE_NAME']] = [
+			'collation'       => $row['TABLE_COLLATION'],
+			'engine'          => $row['ENGINE'],
+			'has_keycol'      => false,
+			'has_template_id' => false,
+			'indexes'         => [],
+			'ex_addr_type'    => null,
+		];
+	}
+
+	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, COLUMN_NAME, COLUMN_TYPE
+		FROM information_schema.COLUMNS
+		WHERE TABLE_SCHEMA = DATABASE()
+		' . $which . '
+		AND COLUMN_NAME IN ("keycol", "template_id", "ex_addr")') as $row) {
+		if (!isset($info[$row['TABLE_NAME']])) {
+			continue;
+		}
+
+		if ($row['COLUMN_NAME'] == 'keycol') {
+			$info[$row['TABLE_NAME']]['has_keycol'] = true;
+		} elseif ($row['COLUMN_NAME'] == 'template_id') {
+			$info[$row['TABLE_NAME']]['has_template_id'] = true;
+		} else {
+			$info[$row['TABLE_NAME']]['ex_addr_type'] = $row['COLUMN_TYPE'];
+		}
+	}
+
+	foreach (flowview_db_fetch_assoc('SELECT DISTINCT TABLE_NAME, INDEX_NAME
+		FROM information_schema.STATISTICS
+		WHERE TABLE_SCHEMA = DATABASE()
+		' . $which . '
+		AND INDEX_NAME IN ("template_id", "start_time", "end_time", "ex_addr")') as $row) {
+		if (isset($info[$row['TABLE_NAME']])) {
+			$info[$row['TABLE_NAME']]['indexes'][] = $row['INDEX_NAME'];
+		}
+	}
+
+	$pending = [];
+
+	foreach ($tables as $table) {
+		if (!isset($info[$table])) {
+			continue;
+		}
+
+		$plan = flowview_get_partition_alter($info[$table], $raw_engine);
+
+		if ($plan['alter'] != '') {
+			$pending[$table] = $plan;
+		}
+	}
+
+	return $pending;
+}
+
+/**
+ * flowview_alter_partition - Alter a raw partition table to what it should
+ * be, holding a lock on the table while it does.  The plan is worked out
+ * after the lock is taken, from the table as it is then, so a table that
+ * another materialization, the poller or the schema upgrade altered in the
+ * meantime is not altered again with a plan that is out of date.  Every
+ * place that alters a partition goes through here.
+ *
+ * @param string        $table      The raw partition table
+ * @param string        $raw_engine The engine a partition table that has rotated uses
+ * @param bool          $print      Also show the alter, as well as logging it
+ * @param int           $wait       How many seconds to wait for the lock
+ * @param callable|null $before     Called with the plan just before it is applied
+ *
+ * @return string altered, current when there was nothing to do, or busy when
+ *                the lock was not had in time
+ */
+function flowview_alter_partition(string $table, string $raw_engine, bool $print = true, int $wait = FLOWVIEW_ALTER_LOCK_WAIT, ?callable $before = null): string {
+	$lock = FLOWVIEW_ALTER_LOCK . $table;
+
+	if ((int) flowview_db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock, $wait]) !== 1) {
+		return 'busy';
+	}
+
+	try {
+		$pending = flowview_get_pending_partition_alters([$table], $raw_engine);
+
+		if (!isset($pending[$table])) {
+			return 'current';
+		}
+
+		if ($before !== null) {
+			$before($pending[$table]);
+		}
+
+		flowview_apply_partition_alter($table, $pending[$table], $print);
+
+		return 'altered';
+	} finally {
+		flowview_db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$lock]);
+	}
+}
+
+/**
+ * flowview_get_running_partition_alters - The raw partition tables that an
+ * ALTER TABLE is running on right now, other than from this connection.  A
+ * query against such a table waits for the alter to finish.
+ *
+ * @param array $tables The raw partition tables to look at
+ *
+ * @return array How many seconds each alter has been running, by table
+ */
+function flowview_get_running_partition_alters(array $tables): array {
+	$running = [];
+
+	$processes = flowview_db_fetch_assoc('SELECT TIME, INFO
+		FROM information_schema.PROCESSLIST
+		WHERE ID != CONNECTION_ID()
+		AND INFO LIKE "ALTER TABLE%plugin_flowview_raw_%"');
+
+	foreach ($processes as $process) {
+		if (!preg_match('/^\s*ALTER\s+TABLE\s+(?:`?[A-Za-z0-9_]+`?\.)?`?(plugin_flowview_raw_[0-9]+)`?/i', (string) $process['INFO'], $matches)) {
+			continue;
+		}
+
+		if (in_array($matches[1], $tables, true)) {
+			$running[$matches[1]] = max($running[$matches[1]] ?? 0, (int) $process['TIME']);
+		}
+	}
+
+	return $running;
+}
+
+/**
+ * flowview_get_partitions_without_nat_columns - The raw partition tables that
+ * pre-date the post-NAT columns.  Queries against them still work, but have
+ * no NAT data to show.
+ *
+ * @param array $tables The raw partition tables to look at
+ *
+ * @return array
+ */
+function flowview_get_partitions_without_nat_columns(array $tables): array {
+	$with = array_column(flowview_db_fetch_assoc('SELECT TABLE_NAME
+		FROM information_schema.COLUMNS
+		WHERE TABLE_SCHEMA = DATABASE()
+		AND TABLE_NAME LIKE "plugin_flowview_raw_%"
+		AND COLUMN_NAME = "post_nat_src_addr"'), 'TABLE_NAME');
+
+	return array_values(array_diff($tables, $with));
+}
+
+/**
+ * flowview_get_running_requests - The parallel query requests that have a
+ * runner or shard worker registered in the process table, as db_query_<id> or
+ * db_shard_<id>.  They keep going after the script that started them has
+ * ended, for instance when it timed out.
+ *
+ * A registration counts when it is recent, or when its process is still
+ * alive.  A recent one is trusted as the web server may not be able to see
+ * the process of another user, and an old one is checked, as a process that
+ * was killed can leave its row behind.
+ *
+ * @return array The cache key (md5sum_tables) of each request, by request id,
+ *               which is empty for a request that no longer exists
+ */
+function flowview_get_running_requests(): array {
+	$recent = max(60, (int) read_config_option('flowview_parallel_runlimit'));
+
+	$processes = db_fetch_assoc_prepared('SELECT pid, taskname, UNIX_TIMESTAMP() - UNIX_TIMESTAMP(started) AS age
+		FROM processes
+		WHERE tasktype = ?
+		AND (taskname LIKE ? OR taskname LIKE ?)',
+		['flowview', 'db\_query\_%', 'db\_shard\_%']);
+
+	$ids = [];
+
+	foreach ($processes as $process) {
+		if (!preg_match('/^db_(?:query|shard)_([0-9]+)$/', $process['taskname'], $matches)) {
+			continue;
+		}
+
+		if ((int) $process['age'] <= $recent || !function_exists('cacti_process_still_running') || cacti_process_still_running((int) $process['pid'])) {
+			$ids[(int) $matches[1]] = true;
+		}
+	}
+
+	if (!cacti_sizeof($ids)) {
+		return [];
+	}
+
+	$requests = flowview_db_fetch_assoc_prepared('SELECT id, md5sum_tables
+		FROM parallel_database_query
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($ids), '?')) . ')',
+		array_keys($ids));
+
+	$running = array_fill_keys(array_keys($ids), '');
+
+	foreach ($requests as $request) {
+		$running[(int) $request['id']] = (string) $request['md5sum_tables'];
+	}
+
+	return $running;
+}
+
+/**
+ * flowview_materialization_running - Whether a materialization is running.
+ * That is when one is registered as running, since only one may be active at
+ * a time, or when a parallel query still has processes registered.
+ *
+ * @return bool
+ */
+function flowview_materialization_running(): bool {
+	if (cacti_sizeof(flowview_get_materializing_filters())) {
+		return true;
+	}
+
+	return cacti_sizeof(flowview_get_running_requests()) > 0;
+}
+
+/**
+ * flowview_get_materializing_filters - The filters that are being
+ * materialized.  Each filter a materialization works on is registered in the
+ * process table as materialize, with the id of the filter as the task id, so
+ * the filters can be materialized separately and what is being done is
+ * visible from the process table.
+ *
+ * @return array The filter ids
+ */
+function flowview_get_materializing_filters(): array {
+	$rows = db_fetch_assoc_prepared('SELECT taskid
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?
+		AND taskid > 0
+		ORDER BY taskid',
+		['flowview', 'materialize']);
+
+	return array_values(array_unique(array_map('intval', array_column($rows, 'taskid'))));
+}
+
+/**
+ * flowview_purge_dead_materializations - Remove the registrations of a
+ * materialization whose process is gone, such as one that was killed and could
+ * not clean up.  Without this the filter would show as running, and could not
+ * be materialized, until the registration timed out.  Meant for a script, as the
+ * web server may not be able to see the process.
+ *
+ * @return int The registrations removed
+ */
+function flowview_purge_dead_materializations(): int {
+	$removed = 0;
+
+	/* without a way to tell whether a process is alive nothing is removed */
+	$rows = function_exists('cacti_process_still_running') ? db_fetch_assoc_prepared('SELECT id, pid
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?',
+		['flowview', 'materialize']) : [];
+
+	foreach ($rows as $row) {
+		if (!cacti_process_still_running((int) $row['pid'])) {
+			db_execute_prepared('DELETE FROM processes
+				WHERE id = ?',
+				[$row['id']]);
+
+			$removed++;
+		}
+	}
+
+	return $removed;
+}
+
+/**
+ * flowview_materialization_status - The automatic materialization status of
+ * a filter.  It is current once every cold partition is cached with NAT and
+ * without.  The hot partition is not materialized automatically, so it does
+ * not count.  Otherwise it is running while a materialization is active, and
+ * required when none is.
+ *
+ * @param array $cached_nat     The partitions cached for the filter with NAT
+ * @param array $cached_non_nat The partitions cached for the filter without NAT
+ * @param array $cold           The cold partitions
+ * @param bool  $running        Whether a materialization is running
+ *
+ * @return string current, running or required
+ */
+function flowview_materialization_status(array $cached_nat, array $cached_non_nat, array $cold, bool $running): string {
+	if (!cacti_sizeof(array_diff($cold, $cached_nat)) && !cacti_sizeof(array_diff($cold, $cached_non_nat))) {
+		return 'current';
+	}
+
+	return $running ? 'running' : 'required';
+}
+
+/**
+ * flowview_get_colored_materialization_status - The pill for the automatic
+ * materialization status of a filter, using the same colors as the device
+ * status in Cacti: down when it is required, recovering while it is running
+ * and up once it is up to date.
+ *
+ * @param string $status current, running or required
+ *
+ * @return string
+ */
+function flowview_get_colored_materialization_status(string $status, ?array $missing = null): string {
+	$tip = '';
+
+	/* say which partitions are not materialized, when it is not up to date */
+	if ($missing !== null && $status != 'current') {
+		$tip = " title='" . __esc('Not materialized yet, with NAT: %s, without NAT: %s.', flowview_describe_partitions($missing['nat'] ?? []), flowview_describe_partitions($missing['non_nat'] ?? []), 'flowview') . "'";
+	}
+
+	switch ($status) {
+		case 'current':
+			return "<span class='deviceStatus deviceUp'>" . __('Up to date', 'flowview') . '</span>';
+		case 'running':
+			return "<span class='deviceStatus deviceRecovering'$tip>" . __('Running', 'flowview') . '</span>';
+		default:
+			return "<span class='deviceStatus deviceDown'$tip>" . __('Required', 'flowview') . '</span>';
+	}
+}
+
+/**
+ * flowview_get_missing_partitions - The cold partitions that a filter is not
+ * materialized for, with NAT and without.
+ *
+ * @param array $cached_nat     The partitions cached for the filter with NAT
+ * @param array $cached_non_nat The partitions cached for the filter without NAT
+ * @param array $cold           The cold partitions
+ *
+ * @return array The partitions as nat and non_nat
+ */
+function flowview_get_missing_partitions(array $cached_nat, array $cached_non_nat, array $cold): array {
+	return [
+		'nat'     => array_values(array_diff($cold, $cached_nat)),
+		'non_nat' => array_values(array_diff($cold, $cached_non_nat)),
+	];
+}
+
+/**
+ * flowview_describe_partitions - How many partitions there are and the first
+ * few of them by name, for a tip.
+ *
+ * @param array $tables The partition tables
+ * @param int   $limit  How many to name
+ *
+ * @return string
+ */
+function flowview_describe_partitions(array $tables, int $limit = 3): string {
+	if (!cacti_sizeof($tables)) {
+		return '0';
+	}
+
+	return cacti_sizeof($tables) . ' (' . implode(', ', array_slice($tables, 0, $limit)) . (cacti_sizeof($tables) > $limit ? ', ...' : '') . ')';
+}
+
+/**
+ * flowview_get_colored_running_queries - The pill for the number of queries
+ * of a filter that are running now, in the gray of a disabled device.  There
+ * is none when nothing is running.
+ *
+ * @param int        $count   The number of queries running
+ * @param array|null $by_mode How many of them are with NAT and without, as
+ *                            nat and non_nat, to say so in the tip
+ *
+ * @return string
+ */
+function flowview_get_colored_running_queries(int $count, ?array $by_mode = null): string {
+	if ($count < 1) {
+		return '';
+	}
+
+	$tip = __esc('The number of queries of this Filter that are running now.', 'flowview');
+
+	if ($by_mode !== null) {
+		$tip .= ' ' . __esc('With NAT: %d, without NAT: %d.', $by_mode['nat'] ?? 0, $by_mode['non_nat'] ?? 0, 'flowview');
+	}
+
+	return "<span class='deviceStatus deviceDisabled' title='" . $tip . "'>" . __('Running: %s', number_format_i18n($count, 0), 'flowview') . '</span>';
+}
+
+/**
+ * flowview_convert_partition_engine - Change a raw partition table that has
+ * rotated to the storage engine they use.  Nothing is done while an ALTER
+ * TABLE is already running on it.  Until one finishes the table still shows
+ * its old engine, so without that check every poller cycle would start
+ * another that waits for the first and then rebuilds the table again.
+ *
+ * @param string $table      The raw partition table
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ *
+ * @return bool false when an alter is already running on it
+ */
+function flowview_convert_partition_engine(string $table, string $raw_engine): bool {
+	if (cacti_sizeof(flowview_get_running_partition_alters([$table]))) {
+		return false;
+	}
+
+	/* the poller does not wait for another process altering it, and checks it again under the lock */
+	$lock = FLOWVIEW_ALTER_LOCK . $table;
+
+	if ((int) flowview_db_fetch_cell_prepared('SELECT GET_LOCK(?, ?)', [$lock, 0]) !== 1) {
+		return false;
+	}
+
+	try {
+		$engine = flowview_db_fetch_cell_prepared('SELECT ENGINE
+			FROM information_schema.TABLES
+			WHERE TABLE_SCHEMA = DATABASE()
+			AND TABLE_NAME = ?',
+			[$table]);
+
+		if ($engine != '' && $engine != $raw_engine) {
+			flowview_db_execute("ALTER TABLE $table ENGINE=$raw_engine");
+		}
+	} finally {
+		flowview_db_fetch_cell_prepared('SELECT RELEASE_LOCK(?)', [$lock]);
+	}
+
+	return true;
+}
+
+/**
+ * flowview_convert_cold_partitions - Change the raw partition tables that
+ * have rotated, and are not yet using the fast engine, to it.  Every
+ * partition that has rotated is looked at, not just the last few, so
+ * partitions missed while the poller was not running, or while the plugin was
+ * disabled, are converted as well, newest first.
+ *
+ * Only $limit are converted per call, as each ALTER TABLE is run in turn and
+ * takes a while.  Nothing is converted while an ALTER TABLE is running on any
+ * of them, so the conversions of one poller cycle never pile up on those of
+ * the previous one.
+ *
+ * @param string $raw_engine The engine a partition table that has rotated uses
+ * @param int    $limit      The most partitions to convert
+ *
+ * @return array The partitions that were converted
+ */
+function flowview_convert_cold_partitions(string $raw_engine, int $limit = 3): array {
+	$cold = flowview_get_cold_partitions(flowview_get_partition_tables());
+
+	if (!cacti_sizeof($cold) || cacti_sizeof(flowview_get_running_partition_alters($cold))) {
+		return [];
+	}
+
+	$engines = [];
+
+	foreach (flowview_db_fetch_assoc('SELECT TABLE_NAME, ENGINE
+		FROM information_schema.TABLES
+		WHERE TABLE_NAME LIKE "plugin_flowview_raw_%"') as $row) {
+		$engines[$row['TABLE_NAME']] = $row['ENGINE'];
+	}
+
+	$converted = [];
+
+	foreach (array_reverse($cold) as $table) {
+		if (cacti_sizeof($converted) >= $limit) {
+			break;
+		}
+
+		if (!isset($engines[$table]) || $engines[$table] == $raw_engine) {
+			continue;
+		}
+
+		if (flowview_convert_partition_engine($table, $raw_engine)) {
+			$converted[] = $table;
+		}
+	}
+
+	return $converted;
+}
+
+/**
+ * flowview_materialize_rotated_partitions - Called every poller cycle to
+ * materialize the partitions that went cold since the previous cycle, for
+ * every filter with NAT and without.  Partitions that are already
+ * materialized and still accurate are skipped by the materializer itself.
+ *
+ * The newest partition is recorded each cycle.  The record is left alone
+ * while nothing can be started, so a later cycle picks up what was missed.
+ * The first cycle only records it, as the older partitions are materialized
+ * with cli/materialize_queries.php.
+ *
+ * @return array The partitions a materialization was started for
+ */
+function flowview_materialize_rotated_partitions(): array {
+	$tables = flowview_get_partition_tables();
+
+	if (!cacti_sizeof($tables)) {
+		return [];
+	}
+
+	$newest   = end($tables);
+	$previous = (string) read_config_option('flowview_last_hot_partition');
+
+	if ($previous == '') {
+		set_config_option('flowview_last_hot_partition', $newest);
+
+		return [];
+	}
+
+	$rotated = flowview_get_rotated_partitions($tables, $previous);
+
+	if (!cacti_sizeof($rotated)) {
+		if ($previous != $newest) {
+			set_config_option('flowview_last_hot_partition', $newest);
+		}
+
+		return [];
+	}
+
+	$threads = read_config_option('flowview_parallel_threads');
+
+	/* a filter is left alone while it is being materialized, so this waits for a quiet moment to catch them all up */
+	if (empty($threads) || $threads == 1 || flowview_materialization_running()) {
+		return [];
+	}
+
+	if (!cacti_sizeof(flowview_launch_materialize([], $rotated))) {
+		return [];
+	}
+
+	set_config_option('flowview_last_hot_partition', $newest);
+
+	return $rotated;
+}
+
+/**
+ * flowview_plan_filter - The cache keys (md5sum_tables) of the map queries a
+ * filter runs, with NAT or without.  Nothing is run.
+ *
+ * @param int  $query_id The FlowView query
+ * @param bool $use_nat  Whether it is with NAT
+ *
+ * @return array The cache keys, empty when the filter can not be planned
+ */
+function flowview_plan_filter(int $query_id, bool $use_nat): array {
+	$plan = [];
+	$now  = time();
+
+	if (run_flow_query(false, $query_id, $now, $now, true, $use_nat, $plan) !== true) {
+		return [];
+	}
+
+	return $plan;
+}
+
+/**
+ * flowview_get_filter_md5sums - The cache keys (md5sum_tables) the parallel
+ * query stores the partitions of a filter under, with NAT and without.  Some
+ * reports use two map queries and so have two.  Nothing is run, they are
+ * worked out from the filter.
+ *
+ * @param int $query_id The FlowView query to work the cache keys out for
+ *
+ * @return array The cache keys as nat and non_nat
+ */
+function flowview_get_filter_md5sums(int $query_id): array {
+	$md5sums = ['nat' => [], 'non_nat' => []];
+
+	foreach (['nat' => true, 'non_nat' => false] as $mode => $use_nat) {
+		$planned = flowview_plan_filter($query_id, $use_nat);
+
+		if (cacti_sizeof($planned)) {
+			$md5sums[$mode] = array_values(array_unique($planned));
+		}
+	}
+
+	return $md5sums;
+}
+
+/**
+ * flowview_filter_report_key - The report a filter is for, in the form the
+ * Report selector of the report page uses, s<n> for a statistical report and
+ * p<n> for a printed one.  The report is part of the cache key of the filter.
+ *
+ * @param array $filter The filter, with its statistics and printed columns
+ *
+ * @return string The report, or an empty string when the filter has none
+ */
+function flowview_filter_report_key(array $filter): string {
+	if ((int) ($filter['statistics'] ?? 0) > 0) {
+		return 's' . (int) $filter['statistics'];
+	}
+
+	if ((int) ($filter['printed'] ?? 0) > 0) {
+		return 'p' . (int) $filter['printed'];
+	}
+
+	return '';
+}
+
+/**
+ * flowview_get_filter_shard_keys - Every cache key (md5sum_tables) that a
+ * filter, with NAT or without, stores its partitions under.
+ *
+ * @return array|null The keys as the array keys, or null when the keys of a
+ *                    filter that has a report could not be worked out, as
+ *                    what belongs to which filter is not known then
+ */
+function flowview_get_filter_shard_keys(): ?array {
+	$keys = [];
+
+	foreach (flowview_db_fetch_assoc('SELECT id, statistics, printed
+		FROM plugin_flowview_queries') as $filter) {
+		$md5sums = flowview_get_filter_md5sums((int) $filter['id']);
+
+		foreach (['nat', 'non_nat'] as $mode) {
+			if (!cacti_sizeof($md5sums[$mode])) {
+				/* a filter with no report has nothing cached */
+				if (flowview_filter_report_key($filter) != '') {
+					return null;
+				}
+
+				continue;
+			}
+
+			foreach ($md5sums[$mode] as $key) {
+				$keys[$key] = true;
+			}
+		}
+	}
+
+	return $keys;
+}
+
+/**
+ * flowview_get_shard_cache_summary - What is in the shard cache, told apart
+ * by whether it matches a filter.  A cached partition matches when its
+ * md5sum is the cache key of a filter, with NAT or without.  The rest comes
+ * from queries that no filter has, such as a filter before it was changed, a
+ * deleted filter, or a report with settings changed on the report page.  The
+ * short lived results of the live partition are not counted.
+ *
+ * @return array|null matching and other, each with the number of cached
+ *                    shards, and the md5sums of the other; null when the
+ *                    keys of the filters are not known
+ */
+function flowview_get_shard_cache_summary(): ?array {
+	/* the size of the results is not looked at, as that reads every cached result */
+	$cached = flowview_db_fetch_assoc('SELECT md5sum, COUNT(*) AS shards
+		FROM parallel_database_query_shard_cache
+		WHERE map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'
+		GROUP BY md5sum');
+
+	$keys = flowview_get_filter_shard_keys();
+
+	if ($keys === null) {
+		return null;
+	}
+
+	$summary = [
+		'matching' => ['shards' => 0],
+		'other'    => ['shards' => 0, 'md5sums' => []],
+	];
+
+	foreach ($cached as $row) {
+		if (isset($keys[$row['md5sum']])) {
+			$summary['matching']['shards'] += (int) $row['shards'];
+		} else {
+			$summary['other']['shards']   += (int) $row['shards'];
+			$summary['other']['md5sums'][] = $row['md5sum'];
+		}
+	}
+
+	return $summary;
+}
+
+/**
+ * flowview_prune_shard_cache - Remove the cached shards that match no filter.
+ * Whatever matches a filter is kept, even when the filter is not materialized
+ * for every partition.
+ *
+ * @return int|null The number of shards removed, or null when nothing was
+ *                  removed because the keys of the filters are not known
+ */
+function flowview_prune_shard_cache(): ?int {
+	$summary = flowview_get_shard_cache_summary();
+
+	if ($summary === null) {
+		return null;
+	}
+
+	foreach ($summary['other']['md5sums'] as $md5sum) {
+		flowview_db_execute_prepared('DELETE FROM parallel_database_query_shard_cache
+			WHERE md5sum = ?
+			AND map_partition != \'' . FLOWVIEW_LIVE_SHARD_MARKER . '\'',
+			[$md5sum]);
+	}
+
+	return $summary['other']['shards'];
+}
+
+/**
+ * flowview_count_running_queries - How many of the running requests are
+ * queries of a filter, with NAT or without.
+ *
+ * @param array $md5sums The cache keys of the filter from flowview_get_filter_md5sums()
+ * @param array $running The running requests from flowview_get_running_requests()
+ *
+ * @return int
+ */
+function flowview_count_running_queries(array $md5sums, array $running): int {
+	$keys = array_merge($md5sums['nat'] ?? [], $md5sums['non_nat'] ?? []);
+
+	return cacti_sizeof(array_filter($running, function ($md5sum) use ($keys) {
+		return in_array($md5sum, $keys, true);
+	}));
+}
+
+/**
+ * flowview_count_running_queries_by_mode - How many of the running requests
+ * are queries of a filter with NAT, and how many without.  A request whose
+ * cache key is the same in both, as for a report that has no address to
+ * translate, is counted in both.
+ *
+ * @param array $md5sums The cache keys of the filter from flowview_get_filter_md5sums()
+ * @param array $running The running requests from flowview_get_running_requests()
+ *
+ * @return array The counts as nat and non_nat
+ */
+function flowview_count_running_queries_by_mode(array $md5sums, array $running): array {
+	return [
+		'nat'     => flowview_count_running_queries(['nat' => $md5sums['nat'] ?? []], $running),
+		'non_nat' => flowview_count_running_queries(['non_nat' => $md5sums['non_nat'] ?? []], $running),
+	];
+}
+
+/**
+ * flowview_find_request_filters - The filters a running request belongs to,
+ * and whether it is with NAT or without.  The process table only knows the id
+ * of the request, so it is the cache key of the request that finds them.
+ *
+ * @param array  $filter_md5sums The cache keys from flowview_get_filter_md5sums(), by filter id
+ * @param string $md5sum         The cache key of the request
+ *
+ * @return array The id of each filter, with whether it matches as nat and non_nat
+ */
+function flowview_find_request_filters(array $filter_md5sums, string $md5sum): array {
+	$found = [];
+
+	if ($md5sum === '') {
+		return $found;
+	}
+
+	foreach ($filter_md5sums as $id => $md5sums) {
+		$nat     = in_array($md5sum, $md5sums['nat'] ?? [], true);
+		$non_nat = in_array($md5sum, $md5sums['non_nat'] ?? [], true);
+
+		if ($nat || $non_nat) {
+			$found[] = ['id' => (int) $id, 'nat' => $nat, 'non_nat' => $non_nat];
+		}
+	}
+
+	return $found;
+}
+
+/**
+ * flowview_get_cached_shard_tables - The partitions of a filter that are
+ * stored in the parallel query cache, with NAT and without.  Some reports
+ * use two map queries, and a partition only counts once every one of them is
+ * cached.  Nothing is run, the cache keys are worked out from the filter.
+ *
+ * @param int        $query_id The FlowView query to find the cached shards of
+ * @param array|null $md5sums  The cache keys of the filter when they are
+ *                             already known, otherwise they are worked out
+ *
+ * @return array The partition tables cached as nat and non_nat
+ */
+function flowview_get_cached_shard_tables(int $query_id, ?array $md5sums = null): array {
+	$cached = ['nat' => [], 'non_nat' => []];
+
+	if ($md5sums === null) {
+		$md5sums = flowview_get_filter_md5sums($query_id);
+	}
+
+	foreach (['nat', 'non_nat'] as $mode) {
+		$keys = $md5sums[$mode] ?? [];
+
+		if (!cacti_sizeof($keys)) {
+			continue;
+		}
+
+		$tables = flowview_db_fetch_assoc_prepared('SELECT map_table
+			FROM parallel_database_query_shard_cache
+			WHERE md5sum IN (' . implode(', ', array_fill(0, cacti_sizeof($keys), '?')) . ')
+			GROUP BY map_table, map_partition
+			HAVING COUNT(DISTINCT md5sum) = ?',
+			array_merge($keys, [cacti_sizeof($keys)]));
+
+		$cached[$mode] = array_column($tables, 'map_table');
+	}
+
+	return $cached;
+}
+
 /**
  * parallel_database_query_request - Given a series of tables and
  * and inner (map phase) and outer (reduce phase) SQL queries,
@@ -3998,19 +5866,13 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 	 */
 	$map_range        = $stru_inner['sql_range'];
 	$map_range_params = $stru_inner['sql_range_params'];
-	$map_query        = $stru_inner;
 	$sql_start_time   = $stru_inner['sql_start_time'];
 	$sql_end_time     = $stru_inner['sql_end_time'];
 	$md5_array        = [$stru_inner, $stru_outer];
 	$query_md5        = md5((string) json_encode($md5_array));
 
-	unset($map_query['sql_range']);
-	unset($map_query['sql_range_params']);
-	unset($map_query['sql_start_time']);
-	unset($map_query['sql_end_time']);
-
 	$reduce_query = json_encode($stru_outer);
-	$map_query    = (string) json_encode($map_query);
+	$map_query    = parallel_database_query_map_query($stru_inner);
 
 	$table_md5 = md5($map_query);
 
@@ -4025,6 +5887,15 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		AND user_id = ?',
 		[$query_md5, $user_id]);
 
+	/* a request left over from a query that timed out would be waited on for nothing */
+	if (!empty($request_id) && flowview_discard_abandoned_request((int) $request_id)) {
+		$request_id = 0;
+	}
+
+	/* a materialization has to run the shards, not be given the result of an earlier request */
+	if (!empty($request_id) && !empty($GLOBALS['flowview_fresh_requests']) && flowview_discard_completed_request((int) $request_id)) {
+		$request_id = 0;
+	}
 	$time_to_live = read_config_option('flowview_parallel_time_to_live');
 
 	if (empty($time_to_live)) {
@@ -4064,6 +5935,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		$start = $sql_start_time;
 		$end   = $sql_end_time;
 		$index = 0;
+		$live  = flowview_get_live_partition();
 
 		foreach($tables as $table => $details) {
 			if (!empty($details['min_date'])) {
@@ -4081,11 +5953,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 			$fsql_where  = '';
 			$fsql_params = [];
 
-			if ($start < $start_time && $end > $end_time) {
-				$full_scan = true;
-			} else {
-				$full_scan = false;
-			}
+			$full_scan = flowview_is_full_scan($start, $end, $start_time, $end_time, $table == $live);
 
 			if (!$full_scan) {
 				$fsql_where  = $stru_inner['sql_where'] . ($stru_inner['sql_where'] != '' ? ' AND ':'WHERE ') . $stru_inner['sql_range'];
@@ -4118,7 +5986,7 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 					$index,
 					$full_scan ? '1':'0',
 					$details['table_name'],
-					$details['table_partition'],
+					($table == $live && !$full_scan) ? FLOWVIEW_LIVE_SHARD_MARKER : $details['table_partition'],
 					$map_query,
 					json_encode($fsql_params)
 				)
@@ -4128,7 +5996,146 @@ function parallel_database_query_request($tables, $stru_inner, $stru_outer) {
 		}
 	}
 
+	flowview_track_request((int) $request_id);
+
 	return $request_id;
+}
+
+/**
+ * flowview_discard_abandoned_request - Remove a parallel query request that
+ * was started and then abandoned.  When a query reaches the Maximum Run Time
+ * its shards and processes are cleaned up, but the request itself stays as
+ * scheduled.  As a request is reused for the same query and range, the next
+ * run would find it, see it is not pending, start nothing and wait for the
+ * Maximum Run Time again, for as long as the request lasts.
+ *
+ * A request is abandoned when it is not finished, nothing is running it, and
+ * it is old enough that a runner would have registered by now.
+ *
+ * @param int $request_id
+ *
+ * @return bool Whether it was abandoned and was removed
+ */
+function flowview_discard_abandoned_request(int $request_id): bool {
+	$request = flowview_db_fetch_row_prepared('SELECT status, created
+		FROM parallel_database_query
+		WHERE id = ?',
+		[$request_id]);
+
+	if (!cacti_sizeof($request) || $request['status'] == 'complete') {
+		return false;
+	}
+
+	$created = strtotime((string) $request['created']);
+
+	if ($created === false || time() - $created < FLOWVIEW_ABANDONED_REQUEST_AGE) {
+		return false;
+	}
+
+	if (array_key_exists($request_id, flowview_get_running_requests())) {
+		return false;
+	}
+
+	parallel_database_query_cleanup($request_id, true);
+
+	return true;
+}
+
+/**
+ * flowview_discard_completed_request - Remove a parallel query request that
+ * has finished, so the same query is run again.  A request is reused for the
+ * same query and range until it expires, and a finished one is never run
+ * again, it only hands back its result.  That result does not mean the cached
+ * shards are there: they may have been pruned, or removed because the
+ * partition changed.  A request that is still running is left alone, as
+ * another process is using it.
+ *
+ * @param int $request_id
+ *
+ * @return bool Whether it was finished and was removed
+ */
+function flowview_discard_completed_request(int $request_id): bool {
+	$status = flowview_db_fetch_cell_prepared('SELECT status
+		FROM parallel_database_query
+		WHERE id = ?',
+		[$request_id]);
+
+	if ($status != 'complete') {
+		return false;
+	}
+
+	parallel_database_query_cleanup($request_id, true);
+
+	return true;
+}
+
+/**
+ * flowview_track_request - Remember a parallel query request this process
+ * made and has not cleaned up, so a script that is told to stop can cancel
+ * it.  It is forgotten by parallel_database_query_cleanup().
+ *
+ * @param int $request_id
+ *
+ * @return void
+ */
+function flowview_track_request(int $request_id): void {
+	$GLOBALS['flowview_requests_in_flight'][$request_id] = $request_id;
+	$GLOBALS['flowview_requests_made'][$request_id]      = $request_id;
+}
+
+/**
+ * flowview_cancel_requests_in_flight - Cancel the parallel query requests
+ * this process made that are not finished.  The runner and shard workers are
+ * told to stop, which unregisters them from the process table, and the request
+ * and its tables are removed.  Meant for a signal handler.
+ *
+ * @return array The requests that were cancelled
+ */
+function flowview_cancel_requests_in_flight(): array {
+	$requests = array_values($GLOBALS['flowview_requests_in_flight'] ?? []);
+
+	foreach ($requests as $request_id) {
+		parallel_database_query_cleanup($request_id, true);
+	}
+
+	return $requests;
+}
+
+/**
+ * flowview_parallel_timeout_message - The message for a parallel query that
+ * did not finish within the Maximum Run Time, worded for the Cacti log and
+ * for a script.
+ *
+ * @param int $seconds The Maximum Run Time in seconds
+ *
+ * @return string
+ */
+function flowview_parallel_timeout_message(int $seconds): string {
+	return __('ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE.', $seconds, 'flowview');
+}
+
+/**
+ * flowview_report_parallel_timeout - Log that a parallel query did not finish
+ * within the Maximum Run Time, and say so.  The web page shows the message in
+ * the browser, a script has no browser to run it, so it is printed.
+ *
+ * @param int  $seconds The Maximum Run Time
+ * @param bool $web     Whether this is a web request
+ *
+ * @return void
+ */
+function flowview_report_parallel_timeout(int $seconds, bool $web): void {
+	$timeout_message = flowview_parallel_timeout_message($seconds);
+
+	cacti_log($timeout_message, false, 'FLOWVIEW');
+
+	if ($web) {
+		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
+	} else {
+		print $timeout_message . PHP_EOL;
+
+		$GLOBALS['flowview_error_reported'] = true;
+	}
 }
 
 /**
@@ -4217,13 +6224,15 @@ function parallel_database_query_run($requests) {
 	}
 
 	if ($total_time >= $max_time) {
-		raise_message_javascript('parallel_query_timeout', __('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'), MESSAGE_LEVEL_ERROR);
+		$web = defined('CACTI_WEB') && CACTI_WEB;
+
+		flowview_report_parallel_timeout((int) $max_time, $web);
 
 		foreach($requests as $request_id) {
 			parallel_database_query_cleanup($request_id);
 		}
 
-		exit;
+		flowview_exit($web ? 0 : 1);
 	}
 
 	if (cacti_sizeof($requests) == 1) {
@@ -4422,6 +6431,8 @@ function parallel_database_query_create_reduce_table($request_id, $sql_query, $t
 function parallel_database_query_expire(): void {
 	$ttl = read_config_option('flowview_parallel_time_to_live');
 
+	flowview_live_shard_expire();
+
 	if (empty($ttl)) {
 		set_config_option('flowview_parallel_time_to_live', '21600');
 		$ttl = 21600;
@@ -4448,6 +6459,8 @@ function parallel_database_query_expire(): void {
  * @return void
  */
 function parallel_database_query_cleanup($request_id, bool $remove = false): void {
+	unset($GLOBALS['flowview_requests_in_flight'][(int) $request_id]);
+
 	$table = flowview_db_fetch_cell_prepared('SELECT map_table
 		FROM parallel_database_query
 		WHERE id = ?',
@@ -4466,16 +6479,15 @@ function parallel_database_query_cleanup($request_id, bool $remove = false): voi
 		WHERE query_id = ?',
 		[$request_id]);
 
+	/* the runner and its shard workers register as db_query_<id> and db_shard_<id> */
 	$processes = db_fetch_assoc_prepared('SELECT *
 		FROM processes WHERE tasktype = ?
-		AND taskname LIKE ?',
-		['flowview', "db_query{$request_id}"]);
+		AND taskname IN (?, ?)',
+		['flowview', "db_query_{$request_id}", "db_shard_{$request_id}"]);
 
 	if (cacti_sizeof($processes)) {
 		foreach($processes as $p) {
-			if (posix_kill($p['pid'], 0)) {
-				posix_kill($p['pid'], SIGTERM);
-			}
+			flowview_signal_process((int) $p['pid'], 'SIGTERM');
 
 			db_execute_prepared('DELETE FROM processes
 				WHERE pid = ?',
@@ -4488,6 +6500,44 @@ function parallel_database_query_cleanup($request_id, bool $remove = false): voi
 			WHERE id = ?',
 			[$request_id]);
 	}
+}
+
+/**
+ * flowview_signal_number - The number of a signal.  The SIG constants only
+ * exist when the pcntl extension is loaded, which it is not for the web
+ * server, so using one there is a fatal error.  The numbers are those of
+ * Linux.
+ *
+ * @param string $signal SIGTERM, SIGKILL or SIGINT
+ *
+ * @return int
+ */
+function flowview_signal_number(string $signal): int {
+	if (defined($signal)) {
+		return (int) constant($signal);
+	}
+
+	$numbers = ['SIGINT' => 2, 'SIGKILL' => 9, 'SIGTERM' => 15];
+
+	return $numbers[$signal] ?? 15;
+}
+
+/**
+ * flowview_signal_process - Send a signal to a process, from a script or from
+ * the web server.  A process of another user can not be signalled from the web
+ * server, which is not an error here.
+ *
+ * @param int    $pid    The process
+ * @param string $signal SIGTERM, SIGKILL or SIGINT
+ *
+ * @return bool Whether the signal was sent
+ */
+function flowview_signal_process(int $pid, string $signal = 'SIGTERM'): bool {
+	if ($pid <= 0 || !function_exists('posix_kill')) {
+		return false;
+	}
+
+	return posix_kill($pid, flowview_signal_number($signal));
 }
 
 /**
@@ -4507,7 +6557,7 @@ function parallel_database_query_cancel($query_id): void {
 		foreach($processes as $p) {
 			cacti_log("WARNING: Killing FlowView Query Process with Task Name:{$p['taskname']} and PID:{$p['pid']}", false, 'FLOWVIEW');
 
-			posix_kill($p['pid'], SIGKILL);
+			flowview_signal_process((int) $p['pid'], 'SIGKILL');
 
 			db_execute_prepared('DELETE FROM processes WHERE id = ?', [$p['id']]);
 		}
@@ -4744,15 +6794,36 @@ function parallel_database_child_runner($query_id, $shard_id): void {
 				$exists = [];
 			}
 
-			if (!cacti_sizeof($exists)) {
+			$live_key    = '';
+			$live_locked = false;
+			$live_reused = false;
+
+			if (!cacti_sizeof($exists) && $shard['map_partition'] == FLOWVIEW_LIVE_SHARD_MARKER) {
+				$live_key    = flowview_live_shard_key($query, $shard);
+				$live_locked = flowview_live_shard_lock($live_key);
+				$results     = flowview_live_shard_get($live_key, $shard['map_table']);
+				$live_reused = $results !== null;
+			}
+
+			if (!cacti_sizeof($exists) && !$live_reused) {
 				$results = flowview_db_fetch_assoc_prepared("{$shard['map_query']}", json_decode($shard['map_params']), false, $max_cnn);
-			} else {
+
+				if ($live_key != '') {
+					if (is_array($results)) {
+						flowview_live_shard_save($live_key, $shard['map_table'], $results);
+					}
+				}
+			} elseif (cacti_sizeof($exists)) {
 				flowview_db_execute_prepared('UPDATE parallel_database_query
 					SET cached_shards = cached_shards + 1
 					WHERE id = ?',
 					[$query_id]);
 
 				$results = json_decode($exists['results'], true);
+			}
+
+			if ($live_locked) {
+				flowview_live_shard_unlock($live_key);
 			}
 
 			if ($shard['full_scan'] == 1 && !cacti_sizeof($exists)) {
@@ -4844,13 +6915,17 @@ function db_debug($string): void {
 }
 
 /**
+ * display_domain - A DNS name for the report table.  It comes from reverse
+ * lookups of the flow data, which anyone who controls a reverse zone can set,
+ * so it is escaped.
+ *
  * @param mixed $domain
  *
- * @return mixed
+ * @return string
  */
 function display_domain($domain) {
 	if ($domain != '') {
-		return $domain;
+		return html_escape($domain);
 	} else {
 		return __('unresolved', 'flowview');
 	}
