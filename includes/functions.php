@@ -625,7 +625,7 @@ function flowview_filter_change_is_material(array $old, array $new): bool {
  * @return string
  */
 function flowview_rematerialize_recommendation(): string {
-	return __('The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the \'Materialize View\' action.', 'flowview');
+	return __('The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the \'Materialize\' action.', 'flowview');
 }
 
 /**
@@ -2126,7 +2126,7 @@ function flowview_display_filter(): void {
 			Pace.stop();
 
 			if (data['rematerialize']) {
-				$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize View action on the Filters page.', 'flowview');?> ]').fadeOut(10000);
+				$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page.', 'flowview');?> ]').fadeOut(10000);
 			} else {
 				$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
 			}

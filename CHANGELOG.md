@@ -16,7 +16,7 @@
 
 * feature: Show the number of partitions each Filter has stored in the Parallel Query cache, with NAT and without, as the NAT Shards and Non-NAT Shards columns next to the ID on the Filters page, along with a Partitions column holding the total number of flow partitions so the progress of a materialization can be followed; the cache keys are worked out from the Filter without running it (run_flow_query() gained a plan-only mode, and the map query hashing is shared with the parallel query request)
 
-* feature: Add a 'Materialize View' action to the Filters page that, after confirmation, starts cli/materialize_queries.php in the background for the selected Filters (--query-id now accepts a comma separated list), and tells you when a materialization is already running
+* feature: Add a 'Materialize' action to the Filters page that, after confirmation, starts cli/materialize_queries.php in the background for the selected Filters (--query-id now accepts a comma separated list), and tells you when a materialization is already running
 
 * feature: Recommend a forced re-materialization when a Filter is saved, from either the Filter form or the report page, with a change that alters what it materializes (report type, device, exporter, template, or any address, port, interface, AS, protocol, TCP flag or TOS restriction, plus the sort field of printed reports); display settings, the time range, cutoffs and NAT mode do not count
 

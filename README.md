@@ -247,7 +247,7 @@ notes the partitions that do not have them, and they have no NAT data until
 `flowview_upgrade_nat_columns.php` is run.
 
 You can also start it from the Filters page by selecting one or more Filters
-and choosing the 'Materialize View' action.  It runs in the background after
+and choosing the 'Materialize' action.  It runs in the background after
 you confirm, and the result is written to the Cacti log.  The 'NAT Shards' and
 'Non-NAT Shards' columns on that page show how many partitions of each Filter
 are already cached, with NAT on and with NAT off, out of the total shown in the
@@ -267,7 +267,7 @@ Filter in a way that changes the data it materializes, such as its report,
 device, exporter, or any address, port, interface, AS, protocol, flag or TOS
 restriction, a dialog warns you first, and you can Cancel to keep editing or
 Continue to save.  Once it is saved, a 'Save Succeeded' dialog reminds you to
-start a materialization of the Filter with the 'Materialize View' action.
+start a materialization of the Filter with the 'Materialize' action.
 
 The report of a Filter is part of what is cached for it, so it can not be
 changed on the report page: the Report selector is disabled once the Filter has

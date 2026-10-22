@@ -356,9 +356,9 @@ it('flags only changes that alter what a filter materializes', function ($old, $
 	),
 ));
 
-it('tells the user to start a materialization with the Materialize View action', function () {
+it('tells the user to start a materialization with the Materialize action', function () {
 	expect(flowview_rematerialize_recommendation())->toContain('materialized again')
-		->and(flowview_rematerialize_recommendation())->toContain('Materialize View');
+		->and(flowview_rematerialize_recommendation())->toContain("'Materialize' action");
 });
 
 describe('warning before a Filter is saved with a change to what is cached', function () {
@@ -414,7 +414,7 @@ describe('warning before a Filter is saved with a change to what is cached', fun
 
 		expect($first)->toContain("id='flowview_saved_dialog'")
 			->and($first)->toContain('Save Succeeded')
-			->and($first)->toContain('Materialize View')
+			->and($first)->toContain('Materialize')
 			->and($first)->toContain("\$('#flowview_saved_dialog').dialog(")
 			->and($first)->toContain('modal: false')
 			->and($second)->toBe('')

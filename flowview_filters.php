@@ -42,7 +42,7 @@ $sched_actions = array(
 	1 => __('Delete', 'flowview'),
 	3 => __('Disable', 'flowview'),
 	4 => __('Enable', 'flowview'),
-	5 => __('Materialize View', 'flowview')
+	5 => __('Materialize', 'flowview')
 );
 
 switch (get_request_var('action')) {
