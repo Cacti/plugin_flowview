@@ -222,6 +222,25 @@ function sort_filter(): void {
 }
 
 /**
+ * flowview_cacti_uses_select2 - Whether Cacti draws a multi-select as a
+ * select2 control itself, which it does from 1.2.32.  Earlier versions leave
+ * the page to make it a jquery-multiselect.
+ *
+ * @return bool
+ */
+function flowview_cacti_uses_select2(): bool {
+	if (!defined('CACTI_VERSION')) {
+		return false;
+	}
+
+	if (function_exists('cacti_version_compare')) {
+		return (bool) cacti_version_compare(CACTI_VERSION, '1.2.32', '>=');
+	}
+
+	return version_compare(CACTI_VERSION, '1.2.32', '>=');
+}
+
+/**
  * @return void
  */
 function edit_filter(): void {
@@ -346,6 +365,7 @@ function edit_filter(): void {
 	var date2Open  = false;
 	var returnPage = '<?php print $page;?>';
 	var saveConfirmed = false;
+	var useSelect2 = <?php print flowview_cacti_uses_select2() ? 'true' : 'false';?>;
 
 	/* Cacti's own form handler posts the form, so this goes through it */
 	function saveFilterForm() {
@@ -492,7 +512,14 @@ function edit_filter(): void {
 			showButtonPanel: false
 		});
 
-		$('#protocols').multiselect();
+		/*
+		 * Cacti 1.2.32 and later draw a multi-select as a select2 'N Selected'
+		 * control themselves.  Earlier versions leave it to the page, which
+		 * uses jquery-multiselect.  Doing both draws two controls.
+		 */
+		if (!(useSelect2 && $.fn.select2 && $('#protocols').hasClass('select2-multi-count'))) {
+			$('#protocols').multiselect();
+		}
 
 		function changeRType() {
 			if ($('#rtype').val() == 0) {

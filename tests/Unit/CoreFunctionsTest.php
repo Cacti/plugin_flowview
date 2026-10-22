@@ -1953,6 +1953,17 @@ describe('stopping the processes of a parallel query', function () {
 		expect(plugin_test_read_source('flowview_filters.php'))->toMatch('/\$started = flowview_launch_materialize\(\$selected_items\);.*?if \(cacti_sizeof\(\$started\)\) \{\s*sleep\(2\);/s');
 	});
 
+	it('uses select2 for the Protocols from Cacti 1.2.32 and jquery-multiselect before it', function () {
+		expect(flowview_cacti_uses_select2())->toBe(version_compare(CACTI_VERSION, '1.2.32', '>='));
+
+		$source = plugin_test_read_source('includes/functions.php');
+
+		expect($source)->toContain("var useSelect2 = <?php print flowview_cacti_uses_select2() ? 'true' : 'false';?>;")
+			->and($source)->toMatch("/if \(!\(useSelect2 && \\\$\.fn\.select2 && \\\$\('#protocols'\)\.hasClass\('select2-multi-count'\)\)\) \{\s*\\\$\('#protocols'\)\.multiselect\(\);\s*\}/")
+			->and(substr_count($source, ".multiselect("))->toBe(1)
+			->and(plugin_test_read_source('includes/arrays.php'))->toContain("'select_all_text' => __('All Protocols', 'flowview')");
+	});
+
 	it('runs the shards of a materialization instead of reusing an earlier request', function () {
 		expect(plugin_test_read_source('cli/materialize_queries.php'))->toContain("\$GLOBALS['flowview_fresh_requests'] = true")
 			->and(plugin_test_read_source('includes/functions.php'))->toContain("!empty(\$GLOBALS['flowview_fresh_requests']) && flowview_discard_completed_request");
