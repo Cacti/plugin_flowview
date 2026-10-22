@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-12 14:40-0400\n"
+"POT-Creation-Date: 2026-10-22 09:18-0400\n"
 "PO-Revision-Date: 2024-07-14 20:37-0400\n"
 "Last-Translator: San IPE <sanipe1949@krunsea.com>\n"
 "Language-Team: Turkish <http://translate.cacti.net/projects/cacti/flowview/tr/>\n"
@@ -931,6 +931,33 @@ msgid "No Flowview Listeners"
 msgstr "FlowView Dinleyicileri"
 
 #: flowview_filters.php
+msgid "Materialize"
+msgstr ""
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr ""
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr ""
+
+#: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
 msgstr "Aşağıdaki Programları silmek için 'Devam Et'i tıklayın."
 
@@ -941,6 +968,10 @@ msgstr "Aşağıdaki Programları Kaldırmak için 'Devam Et'i tıklayın."
 #: flowview_filters.php
 msgid "Click 'Continue' to Enable the following Filters(s)."
 msgstr "Aşağıdaki Programları Etkinleştirmek için 'Devam Et'i tıklayın."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr ""
 
 #: flowview_filters.php
 msgid "You must select at least one Filter."
@@ -958,9 +989,31 @@ msgstr "FlowView Filtreleri [Cihazları Filtrelerden Önce Ekle]"
 msgid "Filters"
 msgstr "Filtreler"
 
+#: flowview_filters.php
+msgid "Prune"
+msgstr ""
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr ""
+
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
 msgstr "Filtre Adı"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "ID"
+
+#: flowview_filters.php
+#, fuzzy
+#| msgid "Organization"
+msgid "Materialization"
+msgstr "Organizasyon"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr ""
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Listener"
@@ -971,8 +1024,30 @@ msgid "Report Type"
 msgstr "Rapor Tipi"
 
 #: flowview_filters.php
-msgid "ID"
-msgstr "ID"
+msgid "NAT Shards"
+msgstr ""
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr ""
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr ""
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr ""
+
+#: flowview_filters.php
+#, fuzzy
+#| msgid "Charting Options"
+msgid "Partitions"
+msgstr "Grafik Seçenekleri"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr ""
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
@@ -981,6 +1056,36 @@ msgstr "Alan Sırala:"
 #: flowview_filters.php
 msgid "Resolution"
 msgstr "Çözünürlük"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr ""
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr ""
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr ""
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr ""
+
+#: flowview_filters.php
+msgid "Close"
+msgstr ""
 
 #: flowview_schedules.php
 msgid "Send Now"
@@ -1687,6 +1792,12 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr "Filtre için Özel Protokolü seçin."
 
 #: includes/arrays.php
+#, fuzzy
+#| msgid "Protocols"
+msgid "All Protocols"
+msgstr "İletişim Kuralları"
+
+#: includes/arrays.php
 msgid "TCP Flags"
 msgstr "TCP Bayrakları"
 
@@ -1897,6 +2008,30 @@ msgstr "Rapor: [düzenle: %s]"
 #: includes/functions.php
 msgid "Filter: [new]"
 msgstr "Rapor: [yeni]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr ""
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr ""
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the 'Materialize' action."
+msgstr ""
+
+#: includes/functions.php
+msgid "Save Succeeded"
+msgstr ""
+
+#: includes/functions.php
+msgid "Save Succeeded."
+msgstr ""
+
+#: includes/functions.php
+msgid "OK"
+msgstr ""
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -2168,6 +2303,10 @@ msgid " <new>"
 msgstr " <new>"
 
 #: includes/functions.php
+msgid "Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page."
+msgstr ""
+
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "Kayıtlı Filtre Ayarları"
 
@@ -2226,10 +2365,6 @@ msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
 #: includes/functions.php
-msgid "No valid report was selected.  Please open a bug on GitHub"
-msgstr ""
-
-#: includes/functions.php
 msgid "Source DNS"
 msgstr "Kaynak Türü"
 
@@ -2272,6 +2407,42 @@ msgstr "Servis tipi"
 #: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "paketler"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr ""
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr ""
+
+#: includes/functions.php
+msgid "Running"
+msgstr ""
+
+#: includes/functions.php
+msgid "Required"
+msgstr ""
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr ""
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr ""
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr ""
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr ""
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
