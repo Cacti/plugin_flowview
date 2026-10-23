@@ -4537,12 +4537,15 @@ function flowview_convert_yeardayhour_to_date($range, $year, $day, int $hour = 0
  *
  * A shard is only a full scan, and therefore only cached in
  * parallel_database_query_shard_cache, when the requested range lies strictly
- * outside the data in the partition.  The end is padded by a second, as a
- * flow ends no later than it was captured.  The start is padded by a day,
- * because a flow can start well before the window of the partition it was
- * written to, and with less the earliest partition, or one that rotated, is
- * never treated as a full scan and so is never cached.  A partition that does
- * not exist in the extra day is simply not there to scan.
+ * outside the data in the partition.  Both bounds are padded by a day, as a
+ * flow is written to the partition of the time it was captured, but can start
+ * before that partition's window and end after it: a flow still open as the
+ * partition rotates is captured in it yet ends in the next one, and an
+ * exporter whose clock is ahead reports an end time past the window too.  With
+ * a tighter end the newest partition that rotated, which is the one most
+ * likely to hold such a flow, is never treated as a full scan and so is never
+ * cached, leaving its Filter forever Required.  A partition that does not
+ * exist in the extra day is simply not there to scan.
  *
  * @param array $tables
  *
@@ -4573,7 +4576,7 @@ function flowview_get_materialize_range(array $tables): array|false {
 		return false;
 	}
 
-	return [$start - 86400, $end + 1];
+	return [$start - 86400, $end + 86400];
 }
 
 /**
