@@ -7,8 +7,8 @@ This folder contains files for control plugin flowview services:
 
 # Features
 
-There are two types of collectors for flowview, one requires only Cacti and the
-second requires flow-tools binary package.
+The flowview collector is flow_collector.php, which runs under Cacti's PHP and
+does not require the flow-tools binary package.
 
 Before you start any of the flow-capture services, ensure you have added at 
 least on listener otherwise the flow capture service will not start.  Also
