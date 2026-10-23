@@ -194,11 +194,29 @@ it('spans every partition when materializing and pads the bounds so shards are f
 		'plugin_flowview_raw_202400105',
 	));
 
-	// A flow can start before the window of its partition, so the start has a day of room.
+	// A flow is written to the partition of its capture time but can start before
+	// and end after that window, so both bounds have a day of room.  A tighter end
+	// left the newest rotated partition, the one most likely to hold such a flow,
+	// perpetually uncached and its Filter forever Required.
 	expect($range)->toBe(array(
 		strtotime('2024-01-02 00:00:00 UTC') - 86400,
-		strtotime('2024-01-05 00:00:00 UTC') + 1,
+		strtotime('2024-01-05 00:00:00 UTC') + 86400,
 	));
+});
+
+it('covers a partition whose newest flow ends after its window as a full scan', function () {
+	// The newest cold partition held a flow captured near the boundary that ends
+	// in the next partition's window.  With the old one second end pad its max_date
+	// fell outside the range, so it was never a full scan and never cached.
+	$table = 'plugin_flowview_raw_2024001';
+	$range = flowview_get_materialize_range(array($table));
+
+	$partition_start = strtotime('2024-01-02 00:00:00 UTC');
+	$partition_end   = strtotime('2024-01-03 00:05:00 UTC'); // five minutes into the next day
+
+	expect(flowview_is_full_scan($range[0], $range[1], $partition_start, $partition_end, false))->toBeTrue()
+		// the live partition is never a full scan, however wide the range
+		->and(flowview_is_full_scan($range[0], $range[1], $partition_start, $partition_end, true))->toBeFalse();
 });
 
 it('has no materialization range without a valid partition table', function ($tables) {
