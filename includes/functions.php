@@ -880,6 +880,9 @@ function save_filter_form(): void {
 		)
 	);
 
+	/* the next visit takes the Filter as it is saved, such as dates saved without pressing Go */
+	flowview_reset_filter_session(get_request_var('query'));
+
 	print json_encode(['rematerialize' => $material]);
 }
 
@@ -1063,6 +1066,11 @@ function flowview_seed_filter_request_vars(array $filter): void {
 	if (!isset_request_var('predefined_timespan') && isset($filter['timespan']) && $filter['timespan'] !== '') {
 		set_request_var('predefined_timespan', $filter['timespan']);
 
+		/**
+		 * Only the dates of a custom timespan are taken.  A preset leaves them
+		 * empty, so load_data_for_filter() works them out on every visit and
+		 * the window moves with the preset instead of being kept in the session.
+		 */
 		if ($filter['timespan'] == 0) {
 			if (!isset_request_var('date1') && !empty($filter['startdate'])) {
 				set_request_var('date1', strtoupper($filter['startdate']));
@@ -1071,13 +1079,6 @@ function flowview_seed_filter_request_vars(array $filter): void {
 			if (!isset_request_var('date2') && !empty($filter['enddate'])) {
 				set_request_var('date2', strtoupper($filter['enddate']));
 			}
-		} elseif (!isset_request_var('date1') && !isset_request_var('date2')) {
-			$span = [];
-
-			get_timespan($span, time(), $filter['timespan'], read_user_setting('first_weekdayid'));
-
-			set_request_var('date1', $span['current_value_date1']);
-			set_request_var('date2', $span['current_value_date2']);
 		}
 	}
 }

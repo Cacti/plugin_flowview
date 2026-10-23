@@ -2,7 +2,7 @@
 
 --- develop ---
 
-* issue: Show a Filter on the FlowView tab as it is saved.  The page only took the saved settings when the session held none for the Filter, but it looked for a session entry that Cacti never writes, so it fell back to the session or its defaults instead, and a saved Sort Field, Listener, Stream, cutoffs, timespan or chart panel did not appear.  Saving a Filter from its editor now forgets the page settings the session holds for it, and the page takes the saved settings whenever the session has none for the Filter
+* issue: Show a Filter on the FlowView tab as it is saved.  The page only took the saved settings when the session held none for the Filter, but it looked for a session entry that Cacti never writes, so it fell back to the session or its defaults instead, and a saved Sort Field, Listener, Stream, cutoffs, timespan or chart panel did not appear.  Saving a Filter, from its editor or from the FlowView tab, now forgets the page settings and cached results the session holds for it, and the page takes the saved settings whenever the session has none for the Filter.  The dates of a preset timespan are left to be worked out on each visit, so the window moves with the preset instead of staying where it was first shown
 
 * issue: Selecting a Filter on the FlowView tab now shows its own Listener, Stream and NAT setting, rather than keeping the ones of the Filter shown before, so a report is not run for the wrong Listener
 

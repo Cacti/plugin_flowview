@@ -245,6 +245,32 @@ describe('saving a Filter from the report page', function () {
 		expect($params['startdate'])->toBe('2026-10-01 00:00')
 			->and($params['enddate'])->toBe('2026-10-02 00:00');
 	});
+
+	it('shows the saved dates on the next visit when they were saved without pressing Go', function () use ($save) {
+		/* what the page last stored for the Filter, before the dates were changed */
+		$_SESSION = array(
+			'sess_fv_4_predefined_timespan' => '3',
+			'sess_fv_4_date1'               => '2026-10-01 00:00',
+			'sess_fv_4_date2'               => '2026-10-02 00:00',
+			'sess_flowdata'                 => array('4_old' => array('data' => 1)),
+		);
+
+		list(, $params) = $save(array('timespan' => '0', 'date1' => '2026-10-20 00:00', 'date2' => '2026-10-21 00:00'), plugin_test_stored_filter());
+
+		expect(flowview_filter_session_exists(4))->toBeFalse()
+			->and($_SESSION['sess_flowdata'])->toBe(array());
+
+		/* the next visit has no session for the Filter, so it takes it as it was saved */
+		$_REQUEST = array('query' => '4');
+
+		flowview_seed_filter_request_vars(plugin_test_stored_filter(array(
+			'timespan' => $params['timespan'], 'startdate' => $params['startdate'], 'enddate' => $params['enddate'],
+		)));
+
+		expect($_REQUEST['predefined_timespan'])->toBe('0')
+			->and($_REQUEST['date1'])->toBe('2026-10-20 00:00')
+			->and($_REQUEST['date2'])->toBe('2026-10-21 00:00');
+	});
 });
 
 describe('the report page settings of a Filter', function () {
@@ -307,8 +333,68 @@ describe('the report page settings of a Filter', function () {
 			->and($_REQUEST['flows'])->toBe('false')
 			->and($_REQUEST['usenat'])->toBe('true')
 			->and($_REQUEST['predefined_timespan'])->toBe('3')
+			->and(isset($_REQUEST['date1']))->toBeFalse()
+			->and(isset($_REQUEST['date2']))->toBeFalse();
+	});
+
+	it('leaves the dates of a preset timespan to be worked out on every visit', function () {
+		$filter = plugin_test_stored_filter(array('timespan' => '3', 'startdate' => '2026-10-01 00:00', 'enddate' => '2026-10-02 00:00'));
+
+		/* the first visit, where the session holds nothing for the Filter */
+		flowview_seed_filter_request_vars($filter);
+
+		expect(isset($_REQUEST['date1']))->toBeFalse()
+			->and(isset($_REQUEST['date2']))->toBeFalse();
+
+		/* validate_store_request_vars() keeps the empty default, so a later visit works the window out again */
+		$_SESSION['sess_fv_4_predefined_timespan'] = $_REQUEST['predefined_timespan'];
+		$_SESSION['sess_fv_4_date1']               = '';
+		$_SESSION['sess_fv_4_date2']               = '';
+
+		$_REQUEST = array('query' => '4', 'predefined_timespan' => '3', 'date1' => '', 'date2' => '');
+
+		$start    = strtotime('2026-10-22 00:00');
+		$end      = strtotime('2026-10-22 01:00');
+		$sentinel = array('id' => 4, 'table' => 'current-window');
+
+		$_SESSION['sess_flowdata'] = array(
+			get_flowview_session_key(4, $start, $end) => array('data' => $sentinel, 'timeout' => time() + 60),
+		);
+
+		plugin_test_queue_db_result('db_fetch_cell_prepared', '3');
+
+		expect(flowview_filter_session_exists(4))->toBeTrue()
+			->and(load_data_for_filter())->toBe($sentinel)
 			->and($_REQUEST['date1'])->toBe('2026-10-22 00:00')
 			->and($_REQUEST['date2'])->toBe('2026-10-22 01:00');
+	});
+
+	it('does nothing without a session or a Filter', function () {
+		$session = $_SESSION;
+		unset($_SESSION);
+
+		expect(flowview_filter_session_exists(4))->toBeFalse();
+
+		flowview_reset_filter_session(4);
+
+		expect(isset($_SESSION))->toBeFalse();
+
+		$_SESSION = $session;
+
+		$_SESSION['sess_fv_4_sortfield'] = 'flows';
+
+		flowview_reset_filter_session(0);
+		flowview_seed_filter_request_vars(array());
+
+		expect($_SESSION['sess_fv_4_sortfield'])->toBe('flows')
+			->and($_REQUEST)->toBe(array());
+	});
+
+	it('leaves a setting the Filter has no value for to the page default', function () {
+		flowview_seed_filter_request_vars(plugin_test_stored_filter(array('sortfield' => '', 'ex_addr' => '')));
+
+		expect(isset($_REQUEST['sortfield']))->toBeFalse()
+			->and($_REQUEST['ex_addr'])->toBe('0');
 	});
 
 	it('keeps what the request asks for over the saved Filter', function () {
