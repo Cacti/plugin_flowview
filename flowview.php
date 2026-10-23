@@ -178,6 +178,7 @@ function save_filter_as(): void {
 
 			$overrides = [
 				'device_id',
+				'ex_addr',
 				'excluded',
 				'sortfield',
 				'cutofflines',
@@ -416,6 +417,13 @@ function load_session_for_filter() {
 						}
 
 						break;
+					case 'ex_addr':
+						/* the page lists no Stream as 'All' */
+						if (!isset_request_var('ex_addr') || get_nfilter_request_var('ex_addr') == '') {
+							set_request_var('ex_addr', ($value === '' || $value == '-1') ? '0' : $value);
+						}
+
+						break;
 					case 'panel_table':
 					case 'panel_bytes':
 					case 'panel_packets':
@@ -477,39 +485,20 @@ function flowview_request_vars(): void {
 		$_SESSION['sess_fview_query_last'] = get_filter_request_var('query');
 	}
 
-	/* initialize settings from the database if they are not set already */
-	if (isset_request_var('query') && !isset($_SESSION['sess_fv_' . get_filter_request_var('query')])) {
+	/**
+	 * Take the settings from the Filter as it is saved when the session holds
+	 * none for it yet, such as the first time it is shown or after it was
+	 * edited.  Otherwise validate_store_request_vars() would fall back to its
+	 * defaults below, and the saved settings would never be shown.
+	 */
+	if (isset_request_var('query') && get_filter_request_var('query') > 0 && !flowview_filter_session_exists(get_request_var('query'))) {
 		$listener = flowview_db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
 			WHERE id = ?',
 			array(get_request_var('query')));
 
-		$columns = [
-			'graph_type',
-			'graph_height',
-			'panel_table',
-			'panel_bytes',
-			'panel_packets',
-			'panel_flows',
-			'usenat'
-		];
-
 		if (cacti_sizeof($listener)) {
-			foreach($columns as $c) {
-				if ($c == 'usenat') {
-					if (!isset_request_var($c)) {
-						set_request_var($c, $listener[$c] == 'on' ? 'true':'false');
-					}
-				} elseif (strpos($c, 'panel')) {
-					$rv  = str_replace('panel_', '', $c);
-
-					if (!isset_request_var($rv)) {
-						set_request_var($rv, $listener[$c] == 'on' ? 'true':'false');
-					}
-				} elseif (!isset_request_var($c)) {
-					set_request_var($c, $listener[$c]);
-				}
-			}
+			flowview_seed_filter_request_vars($listener);
 
 			if (isset_request_var('graph_link')) {
 				set_request_var('predefined_timespan', '0');

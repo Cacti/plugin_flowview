@@ -2,6 +2,14 @@
 
 --- develop ---
 
+* issue: Show a Filter on the FlowView tab as it is saved.  The page only took the saved settings when the session held none for the Filter, but it looked for a session entry that Cacti never writes, so it fell back to the session or its defaults instead, and a saved Sort Field, Listener, Stream, cutoffs, timespan or chart panel did not appear.  Saving a Filter, from its editor or from the FlowView tab, now forgets the page settings and cached results the session holds for it, and the page takes the saved settings whenever the session has none for the Filter.  The dates of a preset timespan are left to be worked out on each visit, so the window moves with the preset instead of staying where it was first shown
+
+* issue: Selecting a Filter on the FlowView tab now shows its own Listener, Stream and NAT setting, rather than keeping the ones of the Filter shown before, so a report is not run for the wrong Listener
+
+* issue: Save the Stream and the dates of a custom timespan when a Filter is saved from the FlowView tab, keep the Stream with Save As, and save the timespan picked in the Filter editor, which was always stored as Custom
+
+* issue: Have the Edit and New buttons on the FlowView tab build their link without a doubled slash, and have Edit fall back to the Filter the page was drawn for, so it opens that Filter rather than a new one
+
 * feature: Say which partitions a Filter is not materialized for, with NAT and without, in the tip of its Required and Running pill
 
 * feature: Show the number of queries of each Filter that are running now in a second pill, in the style of a disabled device and reading Running: N, beside the status pill on the Filters page, with how many are with NAT and without in its tip.  The process table only has the id of a running request, so a running query is matched to a Filter by the cache key its map query is stored under, which is worked out from the Filter, and there is no pill when none are running
