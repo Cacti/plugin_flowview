@@ -114,6 +114,13 @@ describe('saving a Filter from its editor', function () {
 			->and($GLOBALS['__test_messages'])->toBe(array());
 	});
 
+	it('saves the timespan that is picked in the editor', function () {
+		unset($_REQUEST['timespan']);
+		$_REQUEST['predefined_timespan'] = '5';
+
+		expect(flowview_filter_form_values()['timespan'])->toBe('5');
+	});
+
 	it('says it was saved, as Cacti always does, when the cache is not affected', function () {
 		$_REQUEST['name'] = 'Renamed';
 
@@ -172,36 +179,188 @@ describe('saving a Filter from the report page', function () {
 			return $call['fn'] == 'db_execute_prepared' && strpos($call['sql'], 'UPDATE plugin_flowview_queries') === 0;
 		}));
 
-		return array(json_decode($output, true), $update[0]['params']);
+		/* the parameters by the column they are saved in */
+		preg_match_all('/(\w+) = \?/', $update[0]['sql'], $columns);
+
+		return array(json_decode($output, true), array_combine($columns[1], $update[0]['params']));
 	};
 
 	it('keeps the report of a Filter that has one', function () use ($save) {
 		list($answer, $params) = $save(array('report' => 'p1'), plugin_test_stored_filter());
 
-		expect($params[2])->toBe(10)
-			->and($params[3])->toBe(0)
+		expect($params['statistics'])->toBe(10)
+			->and($params['printed'])->toBe(0)
 			->and($answer)->toBe(array('rematerialize' => false));
 	});
 
 	it('takes a statistical report for a Filter that has none', function () use ($save) {
 		list($answer, $params) = $save(array('report' => 's11'), plugin_test_stored_filter(array('statistics' => '0')));
 
-		expect($params[2])->toBe(11)
-			->and($params[3])->toBe(0)
+		expect($params['statistics'])->toBe(11)
+			->and($params['printed'])->toBe(0)
 			->and($answer)->toBe(array('rematerialize' => true));
 	});
 
 	it('takes a printed report for a Filter that has none', function () use ($save) {
 		list($answer, $params) = $save(array('report' => 'p1'), plugin_test_stored_filter(array('statistics' => '0')));
 
-		expect($params[2])->toBe(0)
-			->and($params[3])->toBe(1);
+		expect($params['statistics'])->toBe(0)
+			->and($params['printed'])->toBe(1);
 	});
 
 	it('says to materialize again when the listener changes', function () use ($save) {
 		list($answer) = $save(array('device_id' => '3'), plugin_test_stored_filter());
 
 		expect($answer)->toBe(array('rematerialize' => true));
+	});
+
+	it('saves the listener, sort field and stream that are on the page', function () use ($save) {
+		list($answer, $params) = $save(array('device_id' => '0', 'sortfield' => 'flows', 'ex_addr' => '10.1.1.1'), plugin_test_stored_filter(array('device_id' => '1')));
+
+		expect($params['device_id'])->toBe('0')
+			->and($params['sortfield'])->toBe('flows')
+			->and($params['ex_addr'])->toBe('10.1.1.1')
+			->and($params['id'])->toBe('4')
+			->and($answer)->toBe(array('rematerialize' => true));
+	});
+
+	it('saves no stream as All, and that is not a change to the cache', function () use ($save) {
+		list($answer, $params) = $save(array('ex_addr' => '-1'), plugin_test_stored_filter(array('ex_addr' => '')));
+
+		expect($params['ex_addr'])->toBe('0')
+			->and($answer)->toBe(array('rematerialize' => false));
+	});
+
+	it('saves the dates of a custom timespan', function () use ($save) {
+		list(, $params) = $save(array('timespan' => '0', 'date1' => '2026-10-20 00:00', 'date2' => '2026-10-21 00:00'), plugin_test_stored_filter());
+
+		expect($params['timespan'])->toBe('0')
+			->and($params['startdate'])->toBe('2026-10-20 00:00')
+			->and($params['enddate'])->toBe('2026-10-21 00:00');
+	});
+
+	it('keeps the saved dates when the page does not send them', function () use ($save) {
+		list(, $params) = $save(array(), plugin_test_stored_filter(array('startdate' => '2026-10-01 00:00', 'enddate' => '2026-10-02 00:00')));
+
+		expect($params['startdate'])->toBe('2026-10-01 00:00')
+			->and($params['enddate'])->toBe('2026-10-02 00:00');
+	});
+});
+
+describe('the report page settings of a Filter', function () {
+	beforeEach(function () {
+		$_REQUEST = array();
+		$_SESSION = array();
+	});
+
+	it('knows when the session holds the settings of a Filter', function () {
+		$_SESSION['sess_fv_10_sortfield'] = 'bytes';
+
+		expect(flowview_filter_session_exists(1))->toBeFalse()
+			->and(flowview_filter_session_exists(10))->toBeTrue()
+			->and(flowview_filter_session_exists('10'))->toBeTrue();
+	});
+
+	it('forgets the settings and cached results of only the Filter that was saved', function () {
+		$_SESSION = array(
+			'sess_fv_4_sortfield'       => 'flows',
+			'sess_fv_4_device_id'       => '1',
+			'sess_fv_40_sortfield'      => 'bytes',
+			'sess_fview_query_last'     => '4',
+			'sess_last_flowview_filter' => array('query' => '4', 'sortfield' => 'flows'),
+			'sess_flowdata'             => array('4_abc' => array('data' => 1), '40_abc' => array('data' => 2)),
+		);
+
+		flowview_reset_filter_session(4);
+
+		expect(flowview_filter_session_exists(4))->toBeFalse()
+			->and($_SESSION['sess_fv_40_sortfield'])->toBe('bytes')
+			->and($_SESSION['sess_fview_query_last'])->toBe('4')
+			->and(isset($_SESSION['sess_last_flowview_filter']))->toBeFalse()
+			->and(array_keys($_SESSION['sess_flowdata']))->toBe(array('40_abc'));
+	});
+
+	it('keeps the last settings of the page when another Filter was saved', function () {
+		$_SESSION['sess_last_flowview_filter'] = array('query' => '2');
+
+		flowview_reset_filter_session(4);
+
+		expect($_SESSION['sess_last_flowview_filter'])->toBe(array('query' => '2'));
+	});
+
+	it('shows the Filter as it is saved', function () {
+		flowview_seed_filter_request_vars(plugin_test_stored_filter(array(
+			'device_id' => '1', 'ex_addr' => '-1', 'sortfield' => 'flows', 'cutofflines' => '50', 'cutoffoctets' => '1024',
+			'graph_type' => 'pie', 'graph_height' => '300', 'panel_packets' => 'on', 'usenat' => 'on', 'timespan' => '3',
+		)));
+
+		expect($_REQUEST['device_id'])->toBe('1')
+			->and($_REQUEST['ex_addr'])->toBe('0')
+			->and($_REQUEST['sortfield'])->toBe('flows')
+			->and($_REQUEST['cutofflines'])->toBe('50')
+			->and($_REQUEST['cutoffoctets'])->toBe('1024')
+			->and($_REQUEST['graph_type'])->toBe('pie')
+			->and($_REQUEST['graph_height'])->toBe('300')
+			->and($_REQUEST['table'])->toBe('true')
+			->and($_REQUEST['bytes'])->toBe('true')
+			->and($_REQUEST['packets'])->toBe('true')
+			->and($_REQUEST['flows'])->toBe('false')
+			->and($_REQUEST['usenat'])->toBe('true')
+			->and($_REQUEST['predefined_timespan'])->toBe('3')
+			->and($_REQUEST['date1'])->toBe('2026-10-22 00:00')
+			->and($_REQUEST['date2'])->toBe('2026-10-22 01:00');
+	});
+
+	it('keeps what the request asks for over the saved Filter', function () {
+		$_REQUEST = array('device_id' => '0', 'sortfield' => 'packets', 'predefined_timespan' => '5', 'date1' => 'a', 'date2' => 'b');
+
+		flowview_seed_filter_request_vars(plugin_test_stored_filter(array('device_id' => '1', 'sortfield' => 'flows')));
+
+		expect($_REQUEST['device_id'])->toBe('0')
+			->and($_REQUEST['sortfield'])->toBe('packets')
+			->and($_REQUEST['predefined_timespan'])->toBe('5')
+			->and($_REQUEST['date1'])->toBe('a');
+	});
+
+	it('shows the dates of a Filter saved with a custom timespan', function () {
+		flowview_seed_filter_request_vars(plugin_test_stored_filter(array('timespan' => '0', 'startdate' => '2026-10-20 00:00', 'enddate' => '2026-10-21 00:00')));
+
+		expect($_REQUEST['predefined_timespan'])->toBe('0')
+			->and($_REQUEST['date1'])->toBe('2026-10-20 00:00')
+			->and($_REQUEST['date2'])->toBe('2026-10-21 00:00');
+	});
+
+	it('forgets the page settings of a Filter once it is saved from its editor', function () {
+		$_SESSION['sess_fv_4_sortfield'] = 'flows';
+		$_REQUEST = array_merge(plugin_test_stored_filter(), array('id' => '4', 'name' => 'Renamed', 'date1' => '', 'date2' => '', 'panel_table' => 'on'));
+
+		plugin_test_queue_db_result('db_fetch_row_prepared', plugin_test_stored_filter());
+
+		expect(fn () => save_filter())->toThrow(FlowviewTestExit::class);
+
+		expect(flowview_filter_session_exists(4))->toBeFalse();
+	});
+
+	it('takes the saved settings when the session has none for the Filter, and the Listener and Stream from the selected Filter', function () {
+		$page = plugin_test_read_source('flowview.php');
+		$js   = plugin_test_read_source('includes/functions.php');
+
+		preg_match('/function changeQuery\(\) \{.*?\n\t\}/s', $js, $change);
+
+		expect($page)->toContain("!flowview_filter_session_exists(get_request_var('query'))")
+			->and($page)->toContain('flowview_seed_filter_request_vars($listener);')
+			->and($page)->not->toContain("!isset(\$_SESSION['sess_fv_' . get_filter_request_var('query')])")
+			->and($change[0])->not->toContain('device_id')
+			->and($change[0])->not->toContain('ex_addr')
+			->and($change[0])->not->toContain('usenat');
+	});
+
+	it('opens the selected Filter from the Edit button', function () {
+		$js = plugin_test_read_source('includes/functions.php');
+
+		expect($js)->toContain("var flowviewQueryId = <?php print (int) get_request_var('query');?>;")
+			->and($js)->toContain("var query = \$('#query').val() > 0 ? \$('#query').val() : flowviewQueryId;")
+			->and($js)->not->toContain("urlPath + '/plugins/flowview/flowview_filters.php'");
 	});
 });
 

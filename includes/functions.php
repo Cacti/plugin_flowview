@@ -635,6 +635,7 @@ function flowview_filter_form_values(): array {
 	get_filter_request_var('device_id');
 	get_filter_request_var('template_id');
 	get_filter_request_var('timespan');
+	get_filter_request_var('predefined_timespan');
 	get_filter_request_var('statistics');
 	get_filter_request_var('printed');
 	get_filter_request_var('includeif');
@@ -646,7 +647,12 @@ function flowview_filter_form_values(): array {
 	$save['template_id']     = get_nfilter_request_var('template_id');
 	$save['ex_addr']         = get_nfilter_request_var('ex_addr');
 
-	$save['timespan']        = get_nfilter_request_var('timespan');
+	/* the editor names the timespan predefined_timespan, as the report page does */
+	if (isset_request_var('predefined_timespan')) {
+		$save['timespan']    = get_nfilter_request_var('predefined_timespan');
+	} else {
+		$save['timespan']    = get_nfilter_request_var('timespan');
+	}
 	$save['startdate']       = get_nfilter_request_var('date1');
 	$save['enddate']         = get_nfilter_request_var('date2');
 
@@ -810,10 +816,23 @@ function save_filter_form(): void {
 		$statistical = (int) $old['statistics'];
 		$printed     = (int) $old['printed'];
 	}
+
+	/* the page lists no Stream as 'All' */
+	$ex_addr = trim((string) get_nfilter_request_var('ex_addr'));
+
+	if ($ex_addr === '' || $ex_addr == '-1') {
+		$ex_addr = '0';
+	}
+
+	/* a custom timespan is only kept with its dates */
+	$startdate = isset_request_var('date1') ? get_nfilter_request_var('date1') : (is_array($old) ? (string) ($old['startdate'] ?? '') : '');
+	$enddate   = isset_request_var('date2') ? get_nfilter_request_var('date2') : (is_array($old) ? (string) ($old['enddate'] ?? '') : '');
+
 	$material = flowview_filter_change_is_material(
 		is_array($old) ? $old : [],
 		[
 			'device_id'  => get_request_var('device_id'),
+			'ex_addr'    => $ex_addr,
 			'statistics' => $statistical,
 			'printed'    => $printed,
 			'sortfield'  => get_nfilter_request_var('sortfield'),
@@ -822,7 +841,10 @@ function save_filter_form(): void {
 
 	flowview_db_execute_prepared('UPDATE plugin_flowview_queries
 		SET timespan = ?,
+		startdate = ?,
+		enddate = ?,
 		device_id = ?,
+		ex_addr = ?,
 		statistics = ?,
 		printed = ?,
 		sortfield = ?,
@@ -838,7 +860,10 @@ function save_filter_form(): void {
 		WHERE id = ?',
 		array(
 			get_request_var('timespan'),
+			$startdate,
+			$enddate,
 			get_request_var('device_id'),
+			$ex_addr,
 			$statistical,
 			$printed,
 			get_nfilter_request_var('sortfield'),
@@ -890,7 +915,8 @@ function save_filter(): void {
 		raise_message(1);
 	}
 
-	flowview_purge_query_caches($id);
+	/* the report page shows the Filter as it is saved now, not as it was last viewed */
+	flowview_reset_filter_session($id);
 
 	if (!isset_request_var('return') || get_request_var('return') == '') {
 		header('Location: flowview_filters.php?action=edit&id=' . $id . '&header=false');
@@ -914,6 +940,144 @@ function flowview_purge_query_caches($id): void {
 			if ($parts[0] == $id) {
 				unset($_SESSION['sess_flowdata'][$key]);
 			}
+		}
+	}
+}
+
+/**
+ * flowview_filter_session_exists - Whether the report page has stored its
+ * settings for a Filter in the session yet.  validate_store_request_vars()
+ * keeps each setting as its own 'sess_fv_<id>_<name>' entry, so there is
+ * no single entry for the Filter to look for.
+ *
+ * @param mixed $id The Filter id
+ *
+ * @return bool
+ */
+function flowview_filter_session_exists($id): bool {
+	if (!isset($_SESSION) || !is_array($_SESSION)) {
+		return false;
+	}
+
+	$prefix = 'sess_fv_' . (int) $id . '_';
+
+	foreach (array_keys($_SESSION) as $key) {
+		if (strpos((string) $key, $prefix) === 0) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * flowview_reset_filter_session - Forget the report page settings and the
+ * cached results that the session holds for a Filter, so the page takes the
+ * Filter as it is saved the next time it is shown.
+ *
+ * @param mixed $id The Filter id
+ *
+ * @return void
+ */
+function flowview_reset_filter_session($id): void {
+	$id = (int) $id;
+
+	if ($id <= 0 || !isset($_SESSION) || !is_array($_SESSION)) {
+		return;
+	}
+
+	$prefix = 'sess_fv_' . $id . '_';
+
+	foreach (array_keys($_SESSION) as $key) {
+		if (strpos((string) $key, $prefix) === 0) {
+			unset($_SESSION[$key]);
+		}
+	}
+
+	if (isset($_SESSION['sess_last_flowview_filter']['query']) && (int) $_SESSION['sess_last_flowview_filter']['query'] == $id) {
+		unset($_SESSION['sess_last_flowview_filter']);
+	}
+
+	flowview_purge_query_caches($id);
+}
+
+/**
+ * flowview_seed_filter_request_vars - Fill the report page settings that
+ * the request does not carry from the Filter as it is saved.  It is used
+ * when the session holds nothing for the Filter, otherwise the page falls
+ * back to its defaults instead of the saved Listener, Stream, Sort Field,
+ * cutoffs, timespan and display settings.
+ *
+ * @param array $filter The Filter row from plugin_flowview_queries
+ *
+ * @return void
+ */
+function flowview_seed_filter_request_vars(array $filter): void {
+	if (!cacti_sizeof($filter)) {
+		return;
+	}
+
+	$columns = [
+		'device_id'    => 'device_id',
+		'ex_addr'      => 'ex_addr',
+		'sortfield'    => 'sortfield',
+		'cutofflines'  => 'cutofflines',
+		'cutoffoctets' => 'cutoffoctets',
+		'graph_type'   => 'graph_type',
+		'graph_height' => 'graph_height',
+	];
+
+	foreach ($columns as $variable => $column) {
+		if (isset_request_var($variable) || !isset($filter[$column])) {
+			continue;
+		}
+
+		$value = $filter[$column];
+
+		/* the page lists no Stream as 'All' */
+		if ($variable == 'ex_addr' && ($value === '' || $value == '-1')) {
+			$value = '0';
+		}
+
+		if ($value === '' && $variable != 'ex_addr') {
+			continue;
+		}
+
+		set_request_var($variable, $value);
+	}
+
+	$switches = [
+		'table'   => 'panel_table',
+		'bytes'   => 'panel_bytes',
+		'packets' => 'panel_packets',
+		'flows'   => 'panel_flows',
+		'usenat'  => 'usenat',
+	];
+
+	foreach ($switches as $variable => $column) {
+		if (!isset_request_var($variable) && isset($filter[$column])) {
+			set_request_var($variable, $filter[$column] == 'on' ? 'true':'false');
+		}
+	}
+
+	if (!isset_request_var('predefined_timespan') && isset($filter['timespan']) && $filter['timespan'] !== '') {
+		set_request_var('predefined_timespan', $filter['timespan']);
+
+		if ($filter['timespan'] == 0) {
+			if (!isset_request_var('date1') && !empty($filter['startdate'])) {
+				set_request_var('date1', strtoupper($filter['startdate']));
+			}
+
+			if (!isset_request_var('date2') && !empty($filter['enddate'])) {
+				set_request_var('date2', strtoupper($filter['enddate']));
+			}
+		} elseif (!isset_request_var('date1') && !isset_request_var('date2')) {
+			$span = [];
+
+			get_timespan($span, time(), $filter['timespan'], read_user_setting('first_weekdayid'));
+
+			set_request_var('date1', $span['current_value_date1']);
+			set_request_var('date2', $span['current_value_date2']);
 		}
 	}
 }
@@ -1438,6 +1602,9 @@ function flowview_display_filter(): void {
 	var date2Open = false;
 	var graphType = '<?php print get_request_var('graph_type');?>';
 
+	/* the Filter the page was drawn for, should the Filter select have lost it */
+	var flowviewQueryId = <?php print (int) get_request_var('query');?>;
+
 	var byteLabel       = '<?php print __('Bytes', 'flowview');?>';
 	var byteBarTitle    = '<?php print __('Top %s Distribution Chart of Bytes', get_request_var('cutofflines'), 'flowview');?>';
 	var bytePieTitle    = '<?php print __('Top %s Pie Chart of Bytes', get_request_var('cutofflines'), 'flowview');?>';
@@ -1549,16 +1716,18 @@ function flowview_display_filter(): void {
 		});
 
 		$('#edit').off('click').on('click', function() {
-			strURL = urlPath + '/plugins/flowview/flowview_filters.php' +
+			var query = $('#query').val() > 0 ? $('#query').val() : flowviewQueryId;
+
+			strURL = urlPath + 'plugins/flowview/flowview_filters.php' +
 				'?action=edit&header=false' +
-				($('#query').val() > 0 ? '&id='+$('#query').val():'') +
+				(query > 0 ? '&id=' + query : '') +
 				'&return=flowview.php';
 
 			loadPageNoHeader(strURL);
 		});
 
 		$('#new').off('click').on('click', function() {
-			strURL = urlPath + '/plugins/flowview/flowview_filters.php' +
+			strURL = urlPath + 'plugins/flowview/flowview_filters.php' +
 				'?action=edit&header=false' +
 				'&return=flowview.php';
 
@@ -2111,6 +2280,8 @@ function flowview_display_filter(): void {
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
 			'&cutofflines='  + $('#cutofflines').val() +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
+			'&date1='        + encodeURIComponent($('#date1').val()) +
+			'&date2='        + encodeURIComponent($('#date2').val()) +
 			'&table='        + $('#table').is(':checked') +
 			'&bytes='        + $('#bytes').is(':checked') +
 			'&packets='      + $('#packets').is(':checked') +
@@ -2189,13 +2360,11 @@ function flowview_display_filter(): void {
 		});
 	}
 
+	/* the Listener, Stream and NAT setting are part of the Filter, so they come from the one selected */
 	function changeQuery() {
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
 			'?action=query'         +
 			'&domains='             + $('#domains').is(':checked') +
-			'&usenat='             + $('#usenat').is(':checked') +
-			'&device_id='           + $('#device_id').val() +
-			'&ex_addr='             + $('#ex_addr').val() +
 			'&query='               + $('#query').val() +
 			'&predefined_timespan=' + $('#predefined_timespan').val() +
 			'&date1='               + $('#date1').val() +
