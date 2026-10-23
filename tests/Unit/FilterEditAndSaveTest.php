@@ -71,7 +71,6 @@ function plugin_test_stored_filter(array $override = array()): array {
 describe('the Filter editor', function () {
 	it('warns before a save that changes the cache, says when it succeeded, and picks the multi-select', function () {
 		$_REQUEST['id'] = 4;
-		$_SESSION['flowview_rematerialize_saved'] = 4;
 
 		plugin_test_queue_db_result('db_fetch_row_prepared', plugin_test_stored_filter());
 
@@ -81,12 +80,11 @@ describe('the Filter editor', function () {
 
 		expect($output)->toContain("id='flowview_save_warning'")
 			->and($output)->toContain('Cached Results Affected')
+			->and($output)->toContain('a materialization in the background')
 			->and($output)->toContain("var useSelect2 = " . (version_compare(CACTI_VERSION, '1.2.32', '>=') ? 'true' : 'false') . ';')
 			->and($output)->toContain("\$('#chk #submit').off('click.flowview').on('click.flowview'")
 			->and($output)->toContain("{ name: 'action', value: 'check_material' }")
 			->and($output)->toContain("\$('#protocols').multiselect();")
-			->and($output)->toContain("id='flowview_saved_dialog'")
-			->and(isset($_SESSION['flowview_rematerialize_saved']))->toBeFalse()
 			->and($GLOBALS['__test_form_start'][1])->toBe('chk')
 			->and($GLOBALS['__test_edit_form']['fields']['protocols']['select_all_text'])->toBe('All Protocols');
 	});
@@ -103,15 +101,19 @@ describe('saving a Filter from its editor', function () {
 		unset($_REQUEST['panel_bytes'], $_REQUEST['panel_packets'], $_REQUEST['panel_flows'], $_REQUEST['usenat']);
 	});
 
-	it('leaves a dialog to say it was saved and has to be materialized again when the cache is affected', function () {
+	it('starts a materialization in the background and says so when the cache is affected', function () {
 		$_REQUEST['sourceip'] = '10.0.0.2';
 
 		plugin_test_queue_db_result('db_fetch_row_prepared', plugin_test_stored_filter());
 
 		expect(fn () => save_filter())->toThrow(FlowviewTestExit::class);
 
-		expect($_SESSION['flowview_rematerialize_saved'])->toBe(4)
-			->and($GLOBALS['__test_messages'])->toBe(array());
+		/* the materialization of the saved Filter was launched */
+		expect($GLOBALS['__test_exec'])->toHaveCount(1)
+			->and($GLOBALS['__test_exec'][0][1])->toContain('--query-id=4')
+			->and($GLOBALS['__test_messages'][0][0])->toBe('flowview_materialize_started')
+			->and($GLOBALS['__test_messages'][0][1])->toContain('materialization')
+			->and(isset($_SESSION['flowview_rematerialize_saved']))->toBeFalse();
 	});
 
 	it('saves the timespan that is picked in the editor', function () {
@@ -208,27 +210,27 @@ describe('saving a Filter from the report page', function () {
 			->and($params['printed'])->toBe(1);
 	});
 
-	it('says to materialize again when the listener changes', function () use ($save) {
-		list($answer) = $save(array('device_id' => '3'), plugin_test_stored_filter());
+	it('starts a materialization when the printed sort field changes, as it is part of the cache', function () use ($save) {
+		$GLOBALS['__test_exec'] = array();
 
-		expect($answer)->toBe(array('rematerialize' => true));
+		list($answer) = $save(array('sortfield' => 'packets'), plugin_test_stored_filter(array('statistics' => '0', 'printed' => '1', 'sortfield' => 'bytes')));
+
+		expect($answer)->toBe(array('rematerialize' => true))
+			->and($GLOBALS['__test_exec'])->toHaveCount(1)
+			->and($GLOBALS['__test_exec'][0][1])->toContain('--query-id=4');
 	});
 
-	it('saves the listener, sort field and stream that are on the page', function () use ($save) {
-		list($answer, $params) = $save(array('device_id' => '0', 'sortfield' => 'flows', 'ex_addr' => '10.1.1.1'), plugin_test_stored_filter(array('device_id' => '1')));
+	it('saves the sort field and never the Listener or Stream, which are not on the page', function () use ($save) {
+		$GLOBALS['__test_exec'] = array();
 
-		expect($params['device_id'])->toBe('0')
-			->and($params['sortfield'])->toBe('flows')
-			->and($params['ex_addr'])->toBe('10.1.1.1')
+		list($answer, $params) = $save(array('device_id' => '3', 'ex_addr' => '10.1.1.1', 'sortfield' => 'flows'), plugin_test_stored_filter(array('device_id' => '1', 'ex_addr' => '10.9.9.9')));
+
+		expect($params['sortfield'])->toBe('flows')
 			->and($params['id'])->toBe('4')
-			->and($answer)->toBe(array('rematerialize' => true));
-	});
-
-	it('saves no stream as All, and that is not a change to the cache', function () use ($save) {
-		list($answer, $params) = $save(array('ex_addr' => '-1'), plugin_test_stored_filter(array('ex_addr' => '')));
-
-		expect($params['ex_addr'])->toBe('0')
-			->and($answer)->toBe(array('rematerialize' => false));
+			->and(array_key_exists('device_id', $params))->toBeFalse()
+			->and(array_key_exists('ex_addr', $params))->toBeFalse()
+			->and($answer)->toBe(array('rematerialize' => false))
+			->and($GLOBALS['__test_exec'])->toBe(array());
 	});
 
 	it('saves the dates of a custom timespan', function () use ($save) {
@@ -320,8 +322,9 @@ describe('the report page settings of a Filter', function () {
 			'graph_type' => 'pie', 'graph_height' => '300', 'panel_packets' => 'on', 'usenat' => 'on', 'timespan' => '3',
 		)));
 
-		expect($_REQUEST['device_id'])->toBe('1')
-			->and($_REQUEST['ex_addr'])->toBe('0')
+		/* the Listener and Stream are read from the saved Filter at query time, not seeded onto the page */
+		expect(isset($_REQUEST['device_id']))->toBeFalse()
+			->and(isset($_REQUEST['ex_addr']))->toBeFalse()
 			->and($_REQUEST['sortfield'])->toBe('flows')
 			->and($_REQUEST['cutofflines'])->toBe('50')
 			->and($_REQUEST['cutoffoctets'])->toBe('1024')
@@ -391,10 +394,9 @@ describe('the report page settings of a Filter', function () {
 	});
 
 	it('leaves a setting the Filter has no value for to the page default', function () {
-		flowview_seed_filter_request_vars(plugin_test_stored_filter(array('sortfield' => '', 'ex_addr' => '')));
+		flowview_seed_filter_request_vars(plugin_test_stored_filter(array('sortfield' => '')));
 
-		expect(isset($_REQUEST['sortfield']))->toBeFalse()
-			->and($_REQUEST['ex_addr'])->toBe('0');
+		expect(isset($_REQUEST['sortfield']))->toBeFalse();
 	});
 
 	it('keeps what the request asks for over the saved Filter', function () {
