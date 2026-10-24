@@ -176,9 +176,8 @@ function save_filter_as(): void {
 				}
 			}
 
+			/* the Listener and Stream stay as the source Filter has them, they are not on the page */
 			$overrides = [
-				'device_id',
-				'ex_addr',
 				'excluded',
 				'sortfield',
 				'cutofflines',
@@ -412,17 +411,8 @@ function load_session_for_filter() {
 
 						break;
 					case 'device_id':
-						if (!isset_request_var('device_id') || get_nfilter_request_var('device_id') == '-1') {
-							set_request_var('device_id', $value);
-						}
-
-						break;
 					case 'ex_addr':
-						/* the page lists no Stream as 'All' */
-						if (!isset_request_var('ex_addr') || get_nfilter_request_var('ex_addr') == '') {
-							set_request_var('ex_addr', ($value === '' || $value == '-1') ? '0' : $value);
-						}
-
+						/* the Listener and Stream are read straight from the saved Filter, not the page */
 						break;
 					case 'panel_table':
 					case 'panel_bytes':
@@ -519,11 +509,8 @@ function flowview_request_vars(): void {
 	}
 
     /* ================= input validation and session storage ================= */
+    /* the Listener and Stream are part of the Filter, so the report page neither shows nor sends them */
     $filters = array(
-		'device_id' => [
-			'filter' => FILTER_VALIDATE_INT,
-			'default' => '0'
-		],
 		'sortfield' => array(
 			'filter' => FILTER_CALLBACK,
 			'options' => ['options' => 'sanitize_search_string'],
@@ -559,11 +546,6 @@ function flowview_request_vars(): void {
 			'filter' => FILTER_CALLBACK,
 			'options' => ['options' => 'sanitize_search_string'],
 			'default' => ''
-		),
-		'ex_addr' => array(
-			'filter' => FILTER_CALLBACK,
-			'options' => ['options' => 'sanitize_search_string'],
-			'default' => '0'
 		),
 		'domains' => array(
 			'filter' => FILTER_VALIDATE_REGEXP,

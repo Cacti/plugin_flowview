@@ -2,6 +2,10 @@
 
 --- develop ---
 
+* issue: Remove the Listener and Stream from the report page.  They are part of what a Filter materializes, so changing them there ran the report against data that was never materialized.  They are now set only in the Filter editor, and the report page reads them straight from the saved Filter.  The New button now follows Edit.
+
+* issue: Start a materialization automatically when a Filter is saved with a change that affects its cached results, from either the Filter editor or the FlowView tab, and say so, instead of asking the user to start one by hand from the Filters page.
+
 * issue: Materialize the newest partition that has rotated.  A partition is only cached as a full scan when the materialization range covers all of its flows, but the range ended only a second past the last partition's nominal window, while a flow is written to the partition of the time it was captured and can end after that window (a flow still open as the partition rotates, or an exporter whose clock is ahead).  The newest rotated partition, the one most likely to hold such a flow and still on the InnoDB engine, was therefore never a full scan and never cached, so its Filter stayed Required even right after a materialization.  The range now pads the end by a day, as it already did the start
 
 * issue: Show a Filter on the FlowView tab as it is saved.  The page only took the saved settings when the session held none for the Filter, but it looked for a session entry that Cacti never writes, so it fell back to the session or its defaults instead, and a saved Sort Field, Listener, Stream, cutoffs, timespan or chart panel did not appear.  Saving a Filter, from its editor or from the FlowView tab, now forgets the page settings and cached results the session holds for it, and the page takes the saved settings whenever the session has none for the Filter.  The dates of a preset timespan are left to be worked out on each visit, so the window moves with the preset instead of staying where it was first shown
