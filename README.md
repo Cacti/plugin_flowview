@@ -53,12 +53,7 @@ and Enable the plugin.
 There are a number of settings that are important that you can find under
 Console > Configuration > Settings > Flowview.
 
-The minimum version of Cacti required for this plugin will be Cacti 1.2.27.
-However, you will have to install the patch to Cacti's database API in this
-commit: c11405e584c012f675fb420acf78bcecc7d02d9f.
-
-If you are running an older version of Cacti, you may run Flowview, but you
-will not be able to leverage the MaxScale Shard Query feature.
+The minimum version of Cacti required for this plugin is Cacti 1.2.29.
 
 If you are wanting to take advantage of the Shard Query implementation of 
 Flowview, you must setup your Database so that it replicates itself to
@@ -182,9 +177,9 @@ you should add more listeners to spread the load.
 
 The flow-capture script will receive the flow data, and attempt to resolve the
 domain names of the flows.  In the case that an IP Address does not properly
-resolve to a domain, Cacti automatically queries IANA to find the owner and
-assigned as 'assumed' domain for those flows.  If your Cacti server can not
-reach IANA, then those IP's will simply not be resolved.
+resolve to a domain, Cacti automatically queries ARIN's whois service to find
+the owner and assigned as 'assumed' domain for those flows.  If your Cacti
+server can not reach ARIN, then those IP's will simply not be resolved.
 
 ## Upgrading from Prior Versions
 
@@ -203,7 +198,7 @@ of flow data streaming into the Cacti server.
 
 The Parallel Query caches the result of each fully covered partition, so
 reports over older data open quickly once a partition has been scanned.  To
-build that cache ahead of time, run the following from the plugin's `cli`
+build that cache ahead of time, run the following from the plugin's
 directory with the Parallel Query enabled (Max Concurrent Threads of 2 or
 more under the FlowView Settings):
 
