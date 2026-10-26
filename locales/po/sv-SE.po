@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-22 09:18-0400\n"
-"PO-Revision-Date: 2026-10-21 18:18+0000\n"
-"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-22 09:18-0400\nPO-Revision-Date: 2026-10-26 10:43+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -367,7 +355,7 @@ msgstr "RESFful-länk"
 
 #: flowview_databases.php
 msgid "Peer"
-msgstr "Jämlike"
+msgstr "Motpart"
 
 #: flowview_databases.php
 msgid "Zone Contact"
@@ -447,7 +435,7 @@ msgstr "Underskrift"
 
 #: flowview_databases.php
 msgid "Geo Location"
-msgstr "Geo-plats"
+msgstr "Geografisk plats"
 
 #: flowview_databases.php
 msgid "Local AS"
@@ -703,7 +691,7 @@ msgstr "Tillåtet värdintervall"
 
 #: flowview_devices.php
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
-msgstr "IP-adress för den enhet som får skicka till denna flödessamlare.  Lämna som 0.0.0.0 för alla värdar.  Observera att PHP är petig med vad den tillåter.  CIDR-syntax stöds såväl som intervallsyntax, till exempel 192.168.1.0 eller 192.168.1.0/24.  Om du vill ha specifika IP-adresser, separera dem med ett kommatecken."
+msgstr "IP-adressen för den enhet som får skicka till flödesinsamlaren. Ange 0.0.0.0 för att tillåta alla värdar. Observera att PHP har särskilda krav på tillåtna värden. Både CIDR- och intervallsyntax stöds, till exempel 192.168.1.0 eller 192.168.1.0/24. Avgränsa specifika IP-adresser med kommatecken."
 
 #: flowview_devices.php includes/arrays.php
 msgid "Port"
@@ -711,7 +699,7 @@ msgstr "Port"
 
 #: flowview_devices.php
 msgid "Port this collector will listen on."
-msgstr "Port den här samlaren lyssnar på."
+msgstr "Porten som flödesinsamlaren lyssnar på."
 
 #: flowview_devices.php includes/arrays.php includes/functions.php
 msgid "Protocol"
@@ -922,30 +910,30 @@ msgstr "Inga FlowView-lyssnare"
 
 #: flowview_filters.php
 msgid "Materialize"
-msgstr ""
+msgstr "Materialisera"
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
-msgstr ""
+msgstr "Filtrens cachenycklar kunde inte beräknas, så inget rensades."
 
 #: flowview_filters.php
 #, php-format
 msgid "Pruned %s cached shard(s) that did not match any Filter."
-msgstr ""
+msgstr "Rensade %s cachade fragment som inte matchade något filter."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "Materialisering av %d filter startades i bakgrunden.  %d filter håller redan på att materialiseras.  Resultaten rapporteras i Cacti-loggen."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "Materialisering av %d filter startades i bakgrunden.  Resultaten rapporteras i Cacti-loggen."
 
 #: flowview_filters.php
 msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
-msgstr ""
+msgstr "De valda filtren håller redan på att materialiseras.  Försök igen när det är klart."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
@@ -961,7 +949,7 @@ msgstr "Klicka på \"Fortsätt\" för att aktivera följande filter."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
-msgstr ""
+msgstr "Klicka på ”Fortsätt” för att materialisera följande filter i bakgrunden, med och utan NAT, för hela intervallet med flödesdata.  Partitioner som redan är materialiserade och aktuella hoppas över.  Det kan ta lång tid för stora datamängder.  Filter som redan håller på att materialiseras hoppas över."
 
 #: flowview_filters.php
 msgid "You must select at least one Filter."
@@ -981,11 +969,11 @@ msgstr "Filter"
 
 #: flowview_filters.php
 msgid "Prune"
-msgstr ""
+msgstr "Rensa cache"
 
 #: flowview_filters.php
 msgid "Remove the cached shards that do not match any Filter"
-msgstr ""
+msgstr "Ta bort de cachade fragment som inte matchar något filter"
 
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
@@ -996,14 +984,12 @@ msgid "ID"
 msgstr "ID"
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Organization"
 msgid "Materialization"
-msgstr "Organisation"
+msgstr "Materialisering"
 
 #: flowview_filters.php
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
-msgstr ""
+msgstr "Materialisering beräknar i förväg resultaten av ett filter för varje flödespartition med och utan NAT och lagrar dem i cachen för parallella frågor. Då öppnas rapporter över äldre data snabbt.  Nya partitioner materialiseras automatiskt när de slutar ta emot flöden.  Krävs betyder att roterade partitioner ännu inte har materialiserats, Pågår betyder att materialisering pågår och Aktuell betyder att alla roterade partitioner har materialiserats.  Pågår: N anger hur många frågor för filtret som körs just nu.  Partitionen som fortfarande tar emot flöden materialiseras inte och räknas därför inte med."
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Listener"
@@ -1015,29 +1001,27 @@ msgstr "Typ av rapport"
 
 #: flowview_filters.php
 msgid "NAT Shards"
-msgstr ""
+msgstr "NAT-fragment"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
-msgstr ""
+msgstr "Antalet partitioner för detta filter som lagras i cachen för parallella frågor med NAT aktiverat."
 
 #: flowview_filters.php
 msgid "Non-NAT Shards"
-msgstr ""
+msgstr "Fragment utan NAT"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
-msgstr ""
+msgstr "Antalet partitioner för detta filter som lagras i cachen för parallella frågor med NAT inaktiverat."
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Charting Options"
 msgid "Partitions"
-msgstr "Alternativ för diagram"
+msgstr "Partitioner"
 
 #: flowview_filters.php
 msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
-msgstr ""
+msgstr "Det totala antalet flödespartitioner, vilket är det högsta antal fragment ett filter kan ha i cachen med eller utan NAT."
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
@@ -1049,33 +1033,33 @@ msgstr "Upplösning"
 
 #: flowview_filters.php
 msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
-msgstr ""
+msgstr "Filtrens cachade fragment kunde inte skiljas från de andra eftersom cachenycklarna för ett filter inte kunde beräknas."
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
-msgstr ""
+msgstr "Filtrens cachenycklar kunde inte beräknas, så inget kan rensas just nu.  Kontrollera att varje filter har en giltig rapport."
 
 #: flowview_filters.php
 #, php-format
 msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
-msgstr ""
+msgstr "Cachade fragment: %s matchar ett filter.  %s matchar inget filter och tas bort vid rensning."
 
 #: flowview_filters.php
 #, php-format
 msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
-msgstr ""
+msgstr "Detta tar bort %s cachade fragment som inte matchar något filter, för alla filter och användare.  De kommer från filter som har ändrats eller tagits bort och från rapporter vars inställningar har ändrats på rapportsidan.  Filtrens %s cachade fragment behålls.  Detta kan inte ångras."
 
 #: flowview_filters.php
 msgid "Every cached shard matches a Filter.  There is nothing to prune."
-msgstr ""
+msgstr "Alla cachade fragment matchar ett filter.  Det finns inget att rensa."
 
 #: flowview_filters.php
 msgid "Prune Cached Shards"
-msgstr ""
+msgstr "Rensa cachade fragment"
 
 #: flowview_filters.php
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 #: flowview_schedules.php
 msgid "Send Now"
@@ -1088,7 +1072,7 @@ msgstr "Varje timme"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Var %d:e timme"
+msgstr "Med %d timmars mellanrum"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1355,15 +1339,15 @@ msgstr "Sammanfattning"
 
 #: includes/arrays.php
 msgid "Source Root Domain"
-msgstr "Källdomän"
+msgstr "Källans rotdomän"
 
 #: includes/arrays.php
 msgid "Destination Root Domain"
-msgstr "Måldomän"
+msgstr "Målets rotdomän"
 
 #: includes/arrays.php
 msgid "Source/Destination Root Domain"
-msgstr "Käll-/måldomän"
+msgstr "Källans/målets rotdomän"
 
 #: includes/arrays.php
 msgid "UDP/TCP Destination Port"
@@ -1610,7 +1594,7 @@ msgstr "Strömmens IP-adress eller värdnamn från listan över registrerade str
 
 #: includes/arrays.php
 msgid "Presets"
-msgstr "Förval"
+msgstr "Förinställningar"
 
 #: includes/arrays.php
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
@@ -1690,7 +1674,7 @@ msgstr "Alternativ för diagram"
 
 #: includes/arrays.php
 msgid "Graph Type"
-msgstr "Typ av diagram"
+msgstr "Graftyp"
 
 #: includes/arrays.php
 msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
@@ -1722,7 +1706,7 @@ msgstr "Använd NAT-data"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr "Visa IP-/DNS-namnet för källa/destination efter NAT i rapportutdata i stället för de ursprungliga värdena före NAT."
+msgstr "Visa källans och målets IP-adresser och DNS-namn efter NAT-översättning i rapporten i stället för de ursprungliga värdena före NAT."
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1769,10 +1753,8 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr "Välj det specifika protokollet för filtret."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Protocols"
 msgid "All Protocols"
-msgstr "Protokoll"
+msgstr "Alla protokoll"
 
 #: includes/arrays.php
 msgid "TCP Flags"
@@ -1951,7 +1933,7 @@ msgstr "Rapporten '%s' från källa %s med ID %s kunde inte schemaläggas på gr
 
 #: includes/functions.php
 msgid "General"
-msgstr "Allmän"
+msgstr "Allmänt"
 
 #: includes/functions.php
 msgid "Logs"
@@ -1972,27 +1954,27 @@ msgstr "Filter: [nytt]"
 
 #: includes/functions.php
 msgid "Cached Results Affected"
-msgstr ""
+msgstr "Cachade resultat påverkas"
 
 #: includes/functions.php
 msgid "These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
-msgstr ""
+msgstr "Ändringarna påverkar filtrets cachade resultat.  När filtret sparas matchar resultaten det inte längre och filtret måste materialiseras igen.  Klicka på ”Fortsätt” för att spara filtret eller på ”Avbryt” för att fortsätta redigera det."
 
 #: includes/functions.php
 msgid "The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the 'Materialize' action."
-msgstr ""
+msgstr "Ändringarna i filtret påverkar dess cachade resultat, så det måste materialiseras igen.  För att starta materialiseringen, välj filtret på sidan Filter och välj åtgärden ”Materialisera”."
 
 #: includes/functions.php
 msgid "Save Succeeded"
-msgstr ""
+msgstr "Sparandet lyckades"
 
 #: includes/functions.php
 msgid "Save Succeeded."
-msgstr ""
+msgstr "Sparandet lyckades."
 
 #: includes/functions.php
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -2046,7 +2028,7 @@ msgstr "Redigera"
 
 #: includes/functions.php
 msgid "Edit the Flow Filter"
-msgstr "Redigera nuvarande filter"
+msgstr "Redigera flödesfiltret"
 
 #: includes/functions.php
 msgid "Save"
@@ -2096,7 +2078,7 @@ msgstr "Välj först ett filter"
 
 #: includes/functions.php
 msgid "Lines"
-msgstr "Linjer"
+msgstr "Rader"
 
 #: includes/functions.php
 msgid "Exclude"
@@ -2104,12 +2086,12 @@ msgstr "Uteslut"
 
 #: includes/functions.php
 msgid "Top Sample"
-msgstr "Högsta provet"
+msgstr "Den översta raden"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %d Samples"
-msgstr "Topp %d exempel"
+msgstr "De %d översta raderna"
 
 #: includes/functions.php
 msgid "Octets"
@@ -2121,7 +2103,7 @@ msgstr "Visa endast domäner i diagram nedan"
 
 #: includes/functions.php
 msgid "Domains/Hostnames Only"
-msgstr "Endast domäner"
+msgstr "Endast domäner/värdnamn"
 
 #: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
@@ -2145,7 +2127,7 @@ msgstr "Till"
 
 #: includes/functions.php
 msgid "End Date Selector"
-msgstr "Slutdatumväljare"
+msgstr "Slutdatumsväljare"
 
 #: includes/functions.php
 msgid "Shift Time Backward"
@@ -2161,7 +2143,7 @@ msgstr "Flytta tiden framåt"
 
 #: includes/functions.php
 msgid "Graph"
-msgstr "Diagram"
+msgstr "Graf"
 
 #: includes/functions.php
 msgid "Bar"
@@ -2210,47 +2192,47 @@ msgstr "För att ta bort detta flödesfilter, tryck på Fortsätt.  Om flödesfi
 #: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
-msgstr "Topp %s fördelningsdiagram över byte"
+msgstr "Fördelning av byte för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
-msgstr "Topp %s cirkeldiagram över byte"
+msgstr "Cirkeldiagram över byte för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
-msgstr "Topp %s trädkartediagram över byte"
+msgstr "Trädkarta över byte för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
-msgstr "Topp %s distributionsdiagram över paket"
+msgstr "Fördelning av paket för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
-msgstr "Topp %s cirkeldiagram över paket"
+msgstr "Cirkeldiagram över paket för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
-msgstr "Topp %s trädkartediagram över paket"
+msgstr "Trädkarta över paket för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
-msgstr "Topp %s distributionsdiagram över flöden"
+msgstr "Fördelning av flöden för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
-msgstr "Topp %s cirkeldiagram över flöden"
+msgstr "Cirkeldiagram över flöden för de %s främsta"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
-msgstr "Topp %s trädkartediagram över flöden"
+msgstr "Trädkarta över flöden för de %s främsta"
 
 #: includes/functions.php
 msgid "Rename Layout"
@@ -2262,7 +2244,7 @@ msgstr " <ny>"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page."
-msgstr ""
+msgstr "Filterinställningarna har sparats.  En påtvingad ommaterialisering av filtret rekommenderas. Använd åtgärden Materialisera på sidan Filter."
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
@@ -2271,7 +2253,7 @@ msgstr "Filtreringsinställningar sparade"
 #: includes/functions.php
 #, php-format
 msgid "Client/Private (%s)"
-msgstr "Kund/privat (%s)"
+msgstr "Klient/privat (%s)"
 
 #: includes/functions.php
 msgid "icmp (0)"
@@ -2314,12 +2296,12 @@ msgstr "> %d byte"
 #: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
-msgstr "Statistikrapporten %s är okänd. Öppna en felrapport på GitHub"
+msgstr "Statistikrapporten %s är okänd. Skapa en felrapport på GitHub"
 
 #: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
-msgstr "Utskriftsrapporten %s är okänd. Öppna en felrapport på GitHub"
+msgstr "Utskriftsrapporten %s är okänd. Skapa en felrapport på GitHub"
 
 #: includes/functions.php
 msgid "Source DNS"
@@ -2368,38 +2350,38 @@ msgstr "Byte/paket"
 #: includes/functions.php
 #, php-format
 msgid "Not materialized yet, with NAT: %s, without NAT: %s."
-msgstr ""
+msgstr "Ännu inte materialiserade, med NAT: %s, utan NAT: %s."
 
 #: includes/functions.php
 msgid "Up to date"
-msgstr ""
+msgstr "Aktuell"
 
 #: includes/functions.php
 msgid "Running"
-msgstr ""
+msgstr "Pågår"
 
 #: includes/functions.php
 msgid "Required"
-msgstr ""
+msgstr "Krävs"
 
 #: includes/functions.php
 msgid "The number of queries of this Filter that are running now."
-msgstr ""
+msgstr "Antalet frågor för detta filter som körs just nu."
 
 #: includes/functions.php
 #, php-format
 msgid "With NAT: %d, without NAT: %d."
-msgstr ""
+msgstr "Med NAT: %d, utan NAT: %d."
 
 #: includes/functions.php
 #, php-format
 msgid "Running: %s"
-msgstr ""
+msgstr "Pågår: %s"
 
 #: includes/functions.php
 #, php-format
 msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
-msgstr ""
+msgstr "FEL: Den parallella frågan slutfördes inte inom den maximala körtiden på %d sekunder.  Kontrollera den maximala körtiden i Flowview-inställningarna och att databasen inte är upptagen med en annan åtgärd, till exempel ALTER TABLE."
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
@@ -2424,11 +2406,11 @@ msgstr "Tillförlitlighet"
 
 #: includes/functions.php
 msgid "Mincost"
-msgstr "Mincost"
+msgstr "Lägsta kostnad"
 
 #: includes/functions.php
 msgid "Net Control"
-msgstr "Nettokontroll"
+msgstr "Nätverkskontroll"
 
 #: includes/functions.php
 msgid "Internet Control"
@@ -2601,7 +2583,7 @@ msgstr "Filtret har uppdaterats"
 
 #: setup.php
 msgid "Import/Export"
-msgstr "Importera/exportera"
+msgstr "Import/export"
 
 #: setup.php
 msgid "FlowView"
@@ -2651,7 +2633,7 @@ msgstr "%d processer"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
-msgstr "Rapportera samtidiga processer (endast FlowView)"
+msgstr "Samtidiga rapportprocesser (endast FlowView)"
 
 #: setup.php
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
@@ -2659,11 +2641,11 @@ msgstr "Välj hur många rapportprocesser som högst får köras samtidigt."
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Inställningar för Internet-proxy"
+msgstr "Inställningar för internetproxy"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "Proxy-adress för Internet"
+msgstr "Adress till internetproxy"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2936,7 +2918,7 @@ msgstr "%d dagar"
 
 #: setup.php
 msgid "MaxScale Sharding"
-msgstr "MaxScale Sharding"
+msgstr "MaxScale-partitionering"
 
 #: setup.php
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
