@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-22 09:18-0400\nPO-Revision-Date: 2026-10-26 11:58+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-22 09:18-0400\nPO-Revision-Date: 2026-10-26 12:08+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -12,11 +12,11 @@ msgstr "Det går inte att hitta rådata att exportera"
 
 #: flowview.php
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
-msgstr "Flowview-frågan som tillhandahålls finns inte.  Skicka med en giltig fråga."
+msgstr "Den angivna Flowview-frågan finns inte. Ange en giltig fråga."
 
 #: flowview.php
 msgid "Invalid source Query provided.  Please submit with a valid query."
-msgstr "Ogiltig källförfrågan angiven.  Skicka med en giltig fråga."
+msgstr "Ogiltig källfråga. Ange en giltig fråga."
 
 #: flowview.php
 #, php-format
@@ -383,7 +383,7 @@ msgstr "MNT-domäner"
 
 #: flowview_databases.php
 msgid "Origin AS"
-msgstr "Ursprung AS"
+msgstr "Ursprungs-AS"
 
 #: flowview_databases.php
 msgid "MP Export"
@@ -555,11 +555,11 @@ msgstr "DNS-namnet som tilldelats IP-adressen."
 
 #: flowview_databases.php
 msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
-msgstr "Källan till DNS-värdnamnet.  Det kan antingen vara DNS, Static Lookup eller ARIN."
+msgstr "Källan till DNS-värdnamnet: DNS, statisk uppslagning eller ARIN."
 
 #: flowview_databases.php
 msgid "Arin Verified"
-msgstr "ARIN verifierad"
+msgstr "ARIN-verifierad"
 
 #: flowview_databases.php
 msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
@@ -587,7 +587,7 @@ msgstr "Uppdateringstid"
 
 #: flowview_databases.php
 msgid "This is the time that the DNS cache was entered or last updated."
-msgstr "Detta är den tid då DNS-cachen angavs eller senast uppdaterades."
+msgstr "Tidpunkten då DNS-cacheposten skapades eller senast uppdaterades."
 
 #: flowview_databases.php
 msgid "No DNS Cache Entries Found"
@@ -643,7 +643,7 @@ msgstr "Underhålls av"
 
 #: flowview_databases.php
 msgid "The Internet Carrier who is maintaining the route for the customer."
-msgstr "Den Internetoperatör som underhåller rutten för kunden."
+msgstr "Internetoperatören som underhåller rutten för kunden."
 
 #: flowview_databases.php
 msgid "The last time the information on this route was modified."
@@ -663,7 +663,7 @@ msgstr "Inaktivera"
 
 #: flowview_devices.php
 msgid "Listener Name"
-msgstr "Lyssnare"
+msgstr "Lyssnarens namn"
 
 #: flowview_devices.php
 msgid "Name of the device to be displayed."
@@ -858,15 +858,15 @@ msgstr "Observerad lyssning"
 
 #: flowview_devices.php
 msgid "The port security actually observed on the listeners port."
-msgstr "Portsäkerheten observerades faktiskt på lyssnarporten."
+msgstr "Den portsäkerhet som observeras på lyssnarens port."
 
 #: flowview_devices.php
 msgid "Backlog"
-msgstr "Backlog"
+msgstr "Kö"
 
 #: flowview_devices.php
 msgid "The Size of the UDP backlog in bytes."
-msgstr "Storleken på UDP-backloggen i byte."
+msgstr "Storleken på UDP-kön i byte."
 
 #: flowview_devices.php
 msgid "Streams"
@@ -1155,7 +1155,7 @@ msgstr "%d minuter"
 
 #: flowview_schedules.php
 msgid "Legacy Email Settings"
-msgstr "Inställningar för äldre e-post"
+msgstr "Äldre e-postinställningar"
 
 #: flowview_schedules.php
 msgid "Email Addresses"
@@ -1175,7 +1175,7 @@ msgstr "Välj den anpassade HTML-omslutningen och CSS-filen som ska användas. F
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
-msgstr "Inställningar för meddelandelista"
+msgstr "Inställningar för aviseringslista"
 
 #: flowview_schedules.php
 msgid "Notification List"
@@ -1216,7 +1216,7 @@ msgstr "Det går inte att hitta rådata för rapport-ID %s"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
-msgstr "Du måste ange e-post, en notifieringslista eller båda!"
+msgstr "Du måste ange e-postadresser, en aviseringslista eller båda!"
 
 #: flowview_schedules.php
 #, php-format
@@ -1226,7 +1226,7 @@ msgstr "Schemalagd rapport: [redigera: %s]"
 #: flowview_schedules.php
 #, php-format
 msgid "Scheduled Report History: [edit: %s]"
-msgstr "Schemalagd rapporthistorik: [redigera: %s]"
+msgstr "Historik för schemalagd rapport: [redigera: %s]"
 
 #: flowview_schedules.php
 msgid "Scheduled Report: [new]"
@@ -1383,15 +1383,15 @@ msgstr "IP-protokoll"
 
 #: includes/arrays.php
 msgid "Input Interface"
-msgstr "Inmatningsgränssnitt"
+msgstr "Inkommande gränssnitt"
 
 #: includes/arrays.php
 msgid "Output Interface"
-msgstr "Utmatningsgränssnitt"
+msgstr "Utgående gränssnitt"
 
 #: includes/arrays.php
 msgid "Input/Output Interface"
-msgstr "In-/utmatningsgränssnitt"
+msgstr "Inkommande/utgående gränssnitt"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source AS"
@@ -1658,7 +1658,7 @@ msgstr "Max antal rader"
 
 #: includes/arrays.php
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr "Maximala rader som ska anges i filtret. Denna inställning kommer att tillämpas för alla schemalagda rapporter."
+msgstr "Det högsta antal rader som filtret ska visa. Inställningen tillämpas på alla schemalagda rapporter."
 
 #: includes/arrays.php
 msgid "Minimum Bytes"
@@ -1666,7 +1666,7 @@ msgstr "Minsta byte"
 
 #: includes/arrays.php
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr "Minsta totala byte som ska beaktas för filtret. Alla flödessummor som är mindre än så många byte ignoreras."
+msgstr "Det minsta totala antalet byte som ska beaktas av filtret. Flöden med färre byte ignoreras."
 
 #: includes/arrays.php
 msgid "Charting Options"
