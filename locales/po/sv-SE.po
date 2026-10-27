@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-22 09:18-0400\nPO-Revision-Date: 2026-10-26 12:08+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-22 09:18-0400\nPO-Revision-Date: 2026-10-27 12:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -35,7 +35,7 @@ msgstr "Ta bort"
 
 #: flowview_databases.php
 msgid "DNS Cache has been purged.  It will refill as records come in."
-msgstr "DNS-cachen har rensats.  Den kommer att fyllas på när poster kommer in."
+msgstr "DNS-cachen har rensats. Den fylls på när nya poster kommer in."
 
 #: flowview_databases.php
 msgid "Internet Route Registry Details"
@@ -51,7 +51,7 @@ msgstr "Inga detaljer hittades"
 
 #: flowview_databases.php
 msgid "CIDR/Route"
-msgstr "CIDR/Rutter"
+msgstr "CIDR/rutt"
 
 #: flowview_databases.php
 msgid "Autonomous Number"
@@ -79,7 +79,7 @@ msgstr "Filteruppsättning"
 
 #: flowview_databases.php
 msgid "Peering Set"
-msgstr "Peering-uppsättning"
+msgstr "Peeringuppsättning"
 
 #: flowview_databases.php includes/arrays.php
 msgid "Network"
@@ -187,7 +187,7 @@ msgstr "Status"
 
 #: flowview_databases.php
 msgid "Members By Fef"
-msgstr "Medlemmar av Fef"
+msgstr "Medlemmar via referens"
 
 #: flowview_databases.php
 msgid "Abuse Contacts"
@@ -271,7 +271,7 @@ msgstr "Hål"
 
 #: flowview_databases.php
 msgid "MP Default"
-msgstr "Standard"
+msgstr "MP-standard"
 
 #: flowview_databases.php
 msgid "Components"
@@ -419,7 +419,7 @@ msgstr "Namnservrar"
 
 #: flowview_databases.php
 msgid "Ping Handle"
-msgstr "Ping handtag"
+msgstr "Kontakt-ID för ping"
 
 #: flowview_databases.php
 msgid "Interface"
@@ -724,7 +724,7 @@ msgstr "Om den är markerad startas lyssnartjänsten och väntar på inkommande 
 #: flowview_devices.php
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
-msgstr "Ingen flödesmall hittades för Enhets-ID:%s och Mall-ID:%s"
+msgstr "Ingen flödesmall hittades för enhets-ID %s och mall-ID %s"
 
 #: flowview_devices.php
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
@@ -740,7 +740,7 @@ msgstr "Du måste välja minst en lyssnare."
 
 #: flowview_devices.php
 msgid "The listener port must be a numeric value between 1 and 65535."
-msgstr "Lyssnarporten måste vara ett numeriskt värde mellan 1 och 65535."
+msgstr "Lyssnarporten måste vara ett tal mellan 1 och 65 535."
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
@@ -886,7 +886,7 @@ msgstr "De trafikflödesversioner som observeras."
 
 #: flowview_devices.php
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
-msgstr "Den maximala uppdateringstiden från alla strömmar som samlas in.  Det här värdet uppdateras var 5:e minut."
+msgstr "Den senaste uppdateringstiden bland alla insamlade strömmar. Värdet uppdateras var femte minut."
 
 #: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
@@ -1187,7 +1187,7 @@ msgstr "Om tillägget Thold är installerat kan du välja en aviseringslista"
 
 #: flowview_schedules.php
 msgid "The Report will arrive once complete."
-msgstr "Rapporten kommer att skickas när den är klar."
+msgstr "Rapporten skickas när den är klar."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to delete the following Schedule(s)."
@@ -1598,7 +1598,7 @@ msgstr "Förinställningar"
 
 #: includes/arrays.php
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr "Om detta filter är baserat på en fördefinierad tidsperiod, välj det här."
+msgstr "Om filtret baseras på en fördefinierad tidsperiod väljer du den här."
 
 #: includes/arrays.php
 msgid "Detailed Filter Criteria"
@@ -1646,7 +1646,7 @@ msgstr "Slå upp IP-adresser"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Slå upp IP-adresser till domännamn."
+msgstr "Slå upp domännamn för IP-adresser."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1662,7 +1662,7 @@ msgstr "Det högsta antal rader som filtret ska visa. Inställningen tillämpas 
 
 #: includes/arrays.php
 msgid "Minimum Bytes"
-msgstr "Minsta byte"
+msgstr "Minsta antal byte"
 
 #: includes/arrays.php
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
@@ -1794,7 +1794,7 @@ msgstr "Filtrera på det valda källgränssnittet i filtret. Detta kan vara en k
 
 #: includes/arrays.php
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr "Filtrera på valt mål-AS i filtret. Detta kan vara en kommaavgränsad lista över käll-AS-nummer"
+msgstr "Filtrera på käll-AS. Ange en kommaseparerad lista med AS-nummer."
 
 #: includes/arrays.php
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
@@ -1890,7 +1890,7 @@ msgstr "Filteruppsättningar"
 
 #: includes/arrays.php
 msgid "Peering Sets"
-msgstr "Peering-uppsättningar"
+msgstr "Peeringuppsättningar"
 
 #: includes/arrays.php
 msgid "Internet Routers"
@@ -2155,7 +2155,7 @@ msgstr "Cirkel"
 
 #: includes/functions.php
 msgid "Treemap"
-msgstr "Trädkarta"
+msgstr "Träddiagram"
 
 #: includes/functions.php
 msgid "Height"
@@ -2187,7 +2187,7 @@ msgstr "Ta bort flödesfilter"
 
 #: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
-msgstr "För att ta bort detta flödesfilter, tryck på Fortsätt.  Om flödesfiltret används i en schemalagd rapport kommer operationen att blockeras."
+msgstr "Klicka på Fortsätt för att ta bort flödesfiltret. Om filtret används i en schemalagd rapport kan det inte tas bort."
 
 #: includes/functions.php
 #, php-format
@@ -2202,7 +2202,7 @@ msgstr "Cirkeldiagram över byte för de %s främsta"
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
-msgstr "Trädkarta över byte för de %s främsta"
+msgstr "Träddiagram över byte för de %s främsta"
 
 #: includes/functions.php
 #, php-format
@@ -2217,7 +2217,7 @@ msgstr "Cirkeldiagram över paket för de %s främsta"
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
-msgstr "Trädkarta över paket för de %s främsta"
+msgstr "Träddiagram över paket för de %s främsta"
 
 #: includes/functions.php
 #, php-format
@@ -2232,7 +2232,7 @@ msgstr "Cirkeldiagram över flöden för de %s främsta"
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
-msgstr "Trädkarta över flöden för de %s främsta"
+msgstr "Träddiagram över flöden för de %s främsta"
 
 #: includes/functions.php
 msgid "Rename Layout"
@@ -2390,7 +2390,7 @@ msgstr "Tidsgränsen för den parallella frågan överskreds. Kontakta din admin
 #: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr "Boolesk: %s, numerisk: %s, hexadecimalt: %s"
+msgstr "Booleskt: %s, numeriskt: %s, hexadecimalt: %s"
 
 #: includes/functions.php
 msgid "Low Delay"
@@ -2486,11 +2486,11 @@ msgstr "Ogiltigt delnät för källadressen!<br>(Måste ha formen \"192.168.0.1/
 
 #: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr "Ogiltig IP-adress för destinationsadressen!<br>(Måste ha formen \"192.168.0.1\")"
+msgstr "Ogiltig IP-adress för måladressen!<br>(Måste ha formen \"192.168.0.1\")"
 
 #: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "Ogiltigt delnät för destinationsadressen!<br>(Måste ha formen \"192.168.0.1/255.255.255.0\" eller \"192.168.0.1/24\")"
+msgstr "Ogiltigt delnät för måladressen!<br>(Måste ha formen \"192.168.0.1/255.255.255.0\" eller \"192.168.0.1/24\")"
 
 #: includes/functions.php
 msgid "Invalid value for Source Interface!"
@@ -2506,7 +2506,7 @@ msgstr "Ogiltigt värde för käll-AS! (0 till 65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Interface!"
-msgstr "Ogiltigt värde för destinationsgränssnittet!"
+msgstr "Ogiltigt värde för målgränssnittet!"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
@@ -2649,7 +2649,7 @@ msgstr "Adress till internetproxy"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr "För Cactis kärntjänster eller tillägg som behöver internetåtkomst anger du proxyservern och porten i formatet IP:PORT. Till exempel: 192.168.1.1:8080."
+msgstr "För Cactis kärntjänster eller insticksmoduler som behöver internetåtkomst anger du proxyservern och porten i formatet IP:PORT. Till exempel: 192.168.1.1:8080."
 
 #: setup.php
 msgid "Internet Proxy User"
@@ -2838,7 +2838,7 @@ msgstr "Välj hur parallella FlowView-frågor körs. Den äldre PHP-köraren sta
 
 #: setup.php
 msgid "Legacy PHP Runner"
-msgstr "Äldre PHP-körning"
+msgstr "Äldre PHP-körare"
 
 #: setup.php
 msgid "FlowView Query Service"
