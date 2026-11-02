@@ -225,6 +225,14 @@ describe('running a report', function () {
 		expect(run_flow_query(false, 99, 1704067200, 1704153600))->toBeFalse();
 	});
 
+	it('bails out for a gone Filter before touching any of its columns', function () {
+		// Regression guard: a deleted Filter returns an empty row, so reading
+		// $data['cutofflines'] (and friends) warned with "Undefined array key".
+		// Daily scheduled reports referencing a removed query hit this path.
+		expect(run_flow_query(false, 99, 1704067200, 1704153600))->toBeFalse()
+			->and(plugin_test_db_calls('db_fetch_cell_prepared', 'SELECT name'))->toBeEmpty();
+	});
+
 	it('plans the exporter of the Filter, and the same cache whatever the sort order of the request', function () {
 		$plan_for = function (array $filter, array $request) {
 			$_REQUEST = $request;
