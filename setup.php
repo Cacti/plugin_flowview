@@ -1521,16 +1521,20 @@ function flowview_graph_button($data): bool {
 			$query_data = $flow_hosts_map[$host_id];
 		}
 
-		if ($query_data === false) {
+		if ($query_data === false || empty($query_data['id'])) {
 			return false;
 		}
 
-		$url = $config['url_path'] . "plugins/flowview/flowview.php?action=view&query=$flowview_default_filter&timespan=session&ex_addr={$query_data['ex_addr']}";
+		/* Link to the saved Filter that is scoped to this graph's exporter.  The
+		 * report page now reads the Listener and Stream from the Filter itself,
+		 * so the old ex_addr/device_id overrides are no longer sent, and the link
+		 * is omitted above when no Filter matches rather than showing every
+		 * exporter under the default Filter. */
+		$url = $config['url_path'] . "plugins/flowview/flowview.php?action=view&query={$query_data['id']}&timespan=session";
 
 		/* initialize settings from the database if they are not set already */
 		if (cacti_sizeof($query_data)) {
 			$columns = [
-				'device_id',
 				'includeif',
 				'sortfield',
 				'cutofflines',

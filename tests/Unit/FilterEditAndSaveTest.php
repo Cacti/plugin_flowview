@@ -116,6 +116,25 @@ describe('saving a Filter from its editor', function () {
 			->and(isset($_SESSION['flowview_rematerialize_saved']))->toBeFalse();
 	});
 
+	it('queues a fresh materialization and says so when one is already running for the Filter', function () {
+		$_REQUEST['sourceip'] = '10.0.0.2';
+
+		plugin_test_queue_db_result('db_fetch_row_prepared', plugin_test_stored_filter());
+
+		/* the Filter already has a materialization, so launching is left to it */
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 4)));
+
+		$GLOBALS['__test_exec'] = array();
+
+		expect(fn () => save_filter())->toThrow(FlowviewTestExit::class);
+
+		/* nothing was launched, the Filter was queued, and the message says so */
+		expect($GLOBALS['__test_exec'])->toBe(array())
+			->and($GLOBALS['__test_messages'][0][0])->toBe('flowview_materialize_queued')
+			->and($GLOBALS['__test_messages'][0][1])->toContain('queued')
+			->and(flowview_get_queued_rematerializations())->toBe(array(4));
+	});
+
 	it('saves the timespan that is picked in the editor', function () {
 		unset($_REQUEST['timespan']);
 		$_REQUEST['predefined_timespan'] = '5';
@@ -192,7 +211,7 @@ describe('saving a Filter from the report page', function () {
 
 		expect($params['statistics'])->toBe(10)
 			->and($params['printed'])->toBe(0)
-			->and($answer)->toBe(array('rematerialize' => false));
+			->and($answer)->toBe(array('rematerialize' => false, 'queued' => false));
 	});
 
 	it('takes a statistical report for a Filter that has none', function () use ($save) {
@@ -200,7 +219,7 @@ describe('saving a Filter from the report page', function () {
 
 		expect($params['statistics'])->toBe(11)
 			->and($params['printed'])->toBe(0)
-			->and($answer)->toBe(array('rematerialize' => true));
+			->and($answer)->toBe(array('rematerialize' => true, 'queued' => false));
 	});
 
 	it('takes a printed report for a Filter that has none', function () use ($save) {
@@ -215,9 +234,22 @@ describe('saving a Filter from the report page', function () {
 
 		list($answer) = $save(array('sortfield' => 'packets'), plugin_test_stored_filter(array('statistics' => '0', 'printed' => '1', 'sortfield' => 'bytes')));
 
-		expect($answer)->toBe(array('rematerialize' => true))
+		expect($answer)->toBe(array('rematerialize' => true, 'queued' => false))
 			->and($GLOBALS['__test_exec'])->toHaveCount(1)
 			->and($GLOBALS['__test_exec'][0][1])->toContain('--query-id=4');
+	});
+
+	it('queues a fresh materialization when one is already running for the Filter', function () use ($save) {
+		$GLOBALS['__test_exec'] = array();
+
+		/* the Filter already has a materialization, so launching is left to it */
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 4)));
+
+		list($answer) = $save(array('sortfield' => 'packets'), plugin_test_stored_filter(array('statistics' => '0', 'printed' => '1', 'sortfield' => 'bytes')));
+
+		expect($answer)->toBe(array('rematerialize' => true, 'queued' => true))
+			->and($GLOBALS['__test_exec'])->toBe(array())
+			->and(flowview_get_queued_rematerializations())->toBe(array(4));
 	});
 
 	it('saves the sort field and never the Listener or Stream, which are not on the page', function () use ($save) {
@@ -229,7 +261,7 @@ describe('saving a Filter from the report page', function () {
 			->and($params['id'])->toBe('4')
 			->and(array_key_exists('device_id', $params))->toBeFalse()
 			->and(array_key_exists('ex_addr', $params))->toBeFalse()
-			->and($answer)->toBe(array('rematerialize' => false))
+			->and($answer)->toBe(array('rematerialize' => false, 'queued' => false))
 			->and($GLOBALS['__test_exec'])->toBe(array());
 	});
 

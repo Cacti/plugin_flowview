@@ -493,6 +493,75 @@ it('materializes every filter that is not already being materialized when none a
 		));
 });
 
+it('queues a Filter for a fresh materialization and never lists it twice', function () {
+	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '';
+
+	flowview_queue_rematerialize(4);
+	flowview_queue_rematerialize(4);
+	flowview_queue_rematerialize(7);
+
+	expect($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('4,7')
+		->and(flowview_get_queued_rematerializations())->toBe(array(4, 7));
+});
+
+it('starts the queued Filters once no materialization is running, and clears the queue', function () {
+	$original_base_path                          = $GLOBALS['config']['base_path'];
+	$GLOBALS['config']['base_path']              = '/var/www/cacti';
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '4,7';
+	$GLOBALS['__test_exec']                      = array();
+
+	/* nothing is materializing (filters, then running requests), the queued
+	 * Filters still exist, and the launch finds nothing materializing either */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 4), array('id' => 7)));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+	try {
+		$started = flowview_launch_queued_rematerializations();
+	} finally {
+		$GLOBALS['config']['base_path'] = $original_base_path;
+	}
+
+	expect($started)->toBe(array(4, 7))
+		->and($GLOBALS['__test_exec'])->toBe(array(
+			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=4,7"),
+		))
+		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('');
+});
+
+it('leaves the queue alone while a materialization is still running', function () {
+	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '4';
+	$GLOBALS['__test_exec']                                   = array();
+
+	/* a materialization is registered, so the queued rebuild waits */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 4)));
+
+	$started = flowview_launch_queued_rematerializations();
+
+	expect($started)->toBe(array())
+		->and($GLOBALS['__test_exec'])->toBe(array())
+		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('4');
+});
+
+it('drops a queued Filter that was deleted rather than retrying it forever', function () {
+	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '8';
+	$GLOBALS['__test_exec']                                   = array();
+
+	/* nothing is materializing (filters, then running requests), and the Filter
+	 * is gone, so the existence lookup returns nothing */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+	$started = flowview_launch_queued_rematerializations();
+
+	expect($started)->toBe(array())
+		->and($GLOBALS['__test_exec'])->toBe(array())
+		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('');
+});
+
 it('keys the cached shards on the map query without the time range', function () {
 	$inner = array(
 		'sql_query'        => 'SELECT src_addr, SUM(bytes) AS bytes',

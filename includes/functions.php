@@ -818,11 +818,20 @@ function save_filter_form(): void {
 	flowview_reset_filter_session(get_request_var('query'));
 
 	/* a change to what is cached starts a materialization of the Filter in the background */
+	$queued = false;
+
 	if ($material) {
-		flowview_launch_materialize([(int) get_request_var('query')]);
+		/* a Filter that is already being materialized is left to the active run,
+		 * which is working from the old settings, so queue a fresh rebuild that
+		 * the poller starts once that run finishes */
+		if (!cacti_sizeof(flowview_launch_materialize([(int) get_request_var('query')]))) {
+			flowview_queue_rematerialize((int) get_request_var('query'));
+
+			$queued = true;
+		}
 	}
 
-	print json_encode(['rematerialize' => $material]);
+	print json_encode(['rematerialize' => $material, 'queued' => $queued]);
 }
 
 /**
@@ -852,9 +861,16 @@ function save_filter(): void {
 
 	/* a change to what is cached starts a materialization of the Filter in the background, and says so */
 	if ($material) {
-		flowview_launch_materialize([(int) $id]);
+		/* a Filter that is already being materialized is left to the active run,
+		 * which is working from the old settings, so queue a fresh rebuild that
+		 * the poller starts once that run finishes, and say which happened */
+		if (cacti_sizeof(flowview_launch_materialize([(int) $id]))) {
+			raise_message('flowview_materialize_started', __('The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log.', 'flowview'), MESSAGE_LEVEL_INFO);
+		} else {
+			flowview_queue_rematerialize((int) $id);
 
-		raise_message('flowview_materialize_started', __('The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log.', 'flowview'), MESSAGE_LEVEL_INFO);
+			raise_message('flowview_materialize_queued', __('The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log.', 'flowview'), MESSAGE_LEVEL_INFO);
+		}
 	} else {
 		raise_message(1);
 	}
@@ -2166,7 +2182,11 @@ function flowview_display_filter(): void {
 			Pace.stop();
 
 			if (data['rematerialize']) {
-				$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A materialization of this Filter has been started in the background.', 'flowview');?> ]').fadeOut(10000);
+				if (data['queued']) {
+					$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes.', 'flowview');?> ]').fadeOut(10000);
+				} else {
+					$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A materialization of this Filter has been started in the background.', 'flowview');?> ]').fadeOut(10000);
+				}
 			} else {
 				$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
 			}
@@ -4602,6 +4622,97 @@ function flowview_launch_materialize(array $query_ids = [], array $partitions = 
 	exec_background(read_config_option('path_php_binary'), $arguments);
 
 	return $targets;
+}
+
+/**
+ * flowview_queue_rematerialize - Record that a Filter needs a fresh
+ * materialization once the run that currently has it finishes.  A save that
+ * changes what a Filter caches starts a materialization for it, but
+ * flowview_launch_materialize() leaves a Filter that is already being
+ * materialized to the active run, which is working from the settings as they
+ * were.  The Filter is queued here so the poller rebuilds it under the new
+ * settings once no materialization is running.
+ *
+ * @param int $query_id The FlowView query id to rematerialize
+ *
+ * @return void
+ */
+function flowview_queue_rematerialize(int $query_id): void {
+	if ($query_id <= 0) {
+		return;
+	}
+
+	$pending = flowview_get_queued_rematerializations();
+
+	if (!in_array($query_id, $pending, true)) {
+		$pending[] = $query_id;
+
+		set_config_option('flowview_rematerialize_queue', implode(',', $pending));
+	}
+}
+
+/**
+ * flowview_get_queued_rematerializations - The Filter ids that are waiting for
+ * a fresh materialization once the runs that currently have them finish.
+ *
+ * @return array The queued FlowView query ids
+ */
+function flowview_get_queued_rematerializations(): array {
+	$raw = (string) read_config_option('flowview_rematerialize_queue');
+
+	if ($raw === '') {
+		return [];
+	}
+
+	return array_values(array_unique(array_filter(array_map('intval', explode(',', $raw)), function ($id) {
+		return $id > 0;
+	})));
+}
+
+/**
+ * flowview_launch_queued_rematerializations - Start the Filters that were
+ * queued for a fresh materialization while an earlier run had them.  Called
+ * from the poller, it waits for a moment when no materialization is running so
+ * the whole Filter is rebuilt under its saved settings, drops any queued
+ * Filter that no longer exists, and leaves a Filter whose run has not yet
+ * ended queued for a later cycle.
+ *
+ * @return array The Filter ids a materialization was started for
+ */
+function flowview_launch_queued_rematerializations(): array {
+	$pending = flowview_get_queued_rematerializations();
+
+	if (!cacti_sizeof($pending)) {
+		return [];
+	}
+
+	/* wait for a quiet moment so the Filter is rebuilt in full, not raced */
+	if (flowview_materialization_running()) {
+		return [];
+	}
+
+	/* a Filter that was deleted while queued is dropped rather than retried forever */
+	$existing = array_map('intval', array_column(flowview_db_fetch_assoc_prepared('SELECT id
+		FROM plugin_flowview_queries
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($pending), '?')) . ')',
+		$pending), 'id'));
+
+	$pending = array_values(array_intersect($pending, $existing));
+
+	if (!cacti_sizeof($pending)) {
+		set_config_option('flowview_rematerialize_queue', '');
+
+		return [];
+	}
+
+	$started = flowview_launch_materialize($pending);
+
+	/* keep the ones that could not start yet for the next cycle */
+	$remaining = array_values(array_diff($pending, $started));
+
+	set_config_option('flowview_rematerialize_queue', implode(',', $remaining));
+
+	return $started;
 }
 
 /**
