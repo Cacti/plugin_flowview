@@ -1495,6 +1495,8 @@ function flowview_graph_button($data): bool {
 
 		/* if the setting is not already cached, search */
 		if (!isset($flow_hosts_map[$host_id])) {
+			$flow_hosts_map[$host_id] = false;
+
 			foreach($host_data as $ex_addr => $hd_host_id) {
 				/* trim the domains from the ex_addr */
 				if (!is_ipaddress($ex_addr)) {
@@ -1503,20 +1505,25 @@ function flowview_graph_button($data): bool {
 
 				foreach($flow_hosts as $host) {
 					if ($host['ex_addr'] == $ex_addr) {
-						$flow_hosts_map[$host_id] = flowview_db_fetch_row_prepared('SELECT *
-							FROM plugin_flowview_queries
-							WHERE device_id = ?
-							LIMIT 1',
-							[$host['id']]);
+						/* scope the drilldown to this host's Listener and Stream, not
+						 * just any Filter for the Listener, and leave it false when no
+						 * scoped Filter matches so the link is omitted below */
+						$filter = flowview_graph_button_filter((int) $host['id'], (string) $host['ex_addr']);
 
-						$flow_hosts_map[$host_id]['ex_addr'] = $ex_addr;
-
-						$query_data = $flow_hosts_map[$host_id];
+						if (cacti_sizeof($filter)) {
+							$flow_hosts_map[$host_id] = $filter;
+						}
 
 						break;
 					}
 				}
+
+				if ($flow_hosts_map[$host_id] !== false) {
+					break;
+				}
 			}
+
+			$query_data = $flow_hosts_map[$host_id];
 		} else {
 			$query_data = $flow_hosts_map[$host_id];
 		}

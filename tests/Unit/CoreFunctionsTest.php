@@ -493,26 +493,68 @@ it('materializes every filter that is not already being materialized when none a
 		));
 });
 
-it('queues a Filter for a fresh materialization and never lists it twice', function () {
-	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '';
+it('scopes the graph drilldown Filter to both the listener and the exporter', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', array('id' => 9, 'device_id' => 3, 'ex_addr' => '10.1.1.1'));
 
-	flowview_queue_rematerialize(4);
+	$filter = flowview_graph_button_filter(3, '10.1.1.1');
+
+	$call = $GLOBALS['__test_db_calls'][0];
+
+	/* the match is on both the listener and the exporter (plus the All-stream
+	 * sentinels), and is deterministic, so a second Filter on the same listener
+	 * for a different stream is never chosen, and the exact exporter wins */
+	expect($filter)->toBe(array('id' => 9, 'device_id' => 3, 'ex_addr' => '10.1.1.1'))
+		->and($call['fn'])->toBe('db_fetch_row_prepared')
+		->and($call['sql'])->toContain('(device_id = ? OR device_id = 0)')
+		->and($call['sql'])->toContain('(ex_addr = ? OR ex_addr = ? OR ex_addr = ? OR ex_addr = ?)')
+		->and($call['sql'])->toContain('ORDER BY (device_id = ?) DESC, (ex_addr = ?) DESC, id ASC')
+		->and($call['sql'])->toContain('LIMIT 1')
+		->and($call['params'])->toBe(array(3, '10.1.1.1', '-1', '', '0', 3, '10.1.1.1'));
+});
+
+it('omits the graph drilldown when no Filter is scoped to the host', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', array());
+
+	expect(flowview_graph_button_filter(3, '10.1.1.1'))->toBe(array());
+});
+
+it('queues a Filter for a fresh materialization under its own settings row', function () {
 	flowview_queue_rematerialize(4);
 	flowview_queue_rematerialize(7);
 
-	expect($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('4,7')
-		->and(flowview_get_queued_rematerializations())->toBe(array(4, 7));
+	$inserts = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'INSERT INTO settings') === 0;
+	}));
+
+	expect($inserts)->toHaveCount(2)
+		->and($inserts[0]['sql'])->toContain('ON DUPLICATE KEY UPDATE')
+		->and($inserts[0]['params'][0])->toBe('flowview_rematerialize_queue_4')
+		->and($inserts[1]['params'][0])->toBe('flowview_rematerialize_queue_7')
+		->and($inserts[0]['params'][1])->not->toBe($inserts[1]['params'][1]);
 });
 
-it('starts the queued Filters once no materialization is running, and clears the queue', function () {
+it('lists each queued Filter once, in id order, from its settings rows', function () {
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_7', 'value' => 'tok7'),
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+	));
+
+	expect(flowview_get_queued_rematerializations())->toBe(array(4, 7));
+});
+
+it('starts the queued Filters once no materialization is running, and clears their entries', function () {
 	$original_base_path                          = $GLOBALS['config']['base_path'];
 	$GLOBALS['config']['base_path']              = '/var/www/cacti';
 	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
-	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '4,7';
 	$GLOBALS['__test_exec']                      = array();
 
-	/* nothing is materializing (filters, then running requests), the queued
-	 * Filters still exist, and the launch finds nothing materializing either */
+	/* the queued entries, then: nothing materializing (filters, then running
+	 * requests), the queued Filters still exist, and the launch finds nothing
+	 * materializing either */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+		array('name' => 'flowview_rematerialize_queue_7', 'value' => 'tok7'),
+	));
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 4), array('id' => 7)));
@@ -524,56 +566,111 @@ it('starts the queued Filters once no materialization is running, and clears the
 		$GLOBALS['config']['base_path'] = $original_base_path;
 	}
 
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
 	expect($started)->toBe(array(4, 7))
 		->and($GLOBALS['__test_exec'])->toBe(array(
 			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=4,7"),
 		))
-		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('');
+		->and($deletes)->toHaveCount(2)
+		->and($deletes[0]['params'])->toBe(array('flowview_rematerialize_queue_4', 'tok4'))
+		->and($deletes[1]['params'])->toBe(array('flowview_rematerialize_queue_7', 'tok7'));
+});
+
+it('clears started entries with a compare-and-delete so a re-queue after the read survives', function () {
+	$original_base_path                          = $GLOBALS['config']['base_path'];
+	$GLOBALS['config']['base_path']              = '/var/www/cacti';
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+	$GLOBALS['__test_exec']                      = array();
+
+	/* the poller reads Filter 4 holding the token tok4-old; a concurrent save
+	 * that re-queues 4 after this read writes a new token, so the delete keyed
+	 * on tok4-old no longer matches and the rebuild is kept for the next cycle */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4-old'),
+	));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 4)));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+	try {
+		$started = flowview_launch_queued_rematerializations();
+	} finally {
+		$GLOBALS['config']['base_path'] = $original_base_path;
+	}
+
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
+	expect($started)->toBe(array(4))
+		->and($deletes)->toHaveCount(1)
+		->and($deletes[0]['sql'])->toContain('AND value = ?')
+		->and($deletes[0]['params'])->toBe(array('flowview_rematerialize_queue_4', 'tok4-old'));
 });
 
 it('leaves the queue alone while a materialization is still running', function () {
-	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '4';
-	$GLOBALS['__test_exec']                                   = array();
+	$GLOBALS['__test_exec'] = array();
 
-	/* a materialization is registered, so the queued rebuild waits */
+	/* the queued entry, then a materialization is registered, so the rebuild waits */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+	));
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 4)));
 
 	$started = flowview_launch_queued_rematerializations();
 
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
 	expect($started)->toBe(array())
 		->and($GLOBALS['__test_exec'])->toBe(array())
-		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('4');
+		->and($deletes)->toBe(array());
 });
 
 it('drops a queued Filter that was deleted rather than retrying it forever', function () {
-	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '8';
-	$GLOBALS['__test_exec']                                   = array();
+	$GLOBALS['__test_exec'] = array();
 
-	/* nothing is materializing (filters, then running requests), and the Filter
-	 * is gone, so the existence lookup returns nothing */
+	/* the queued entry, then nothing materializing (filters, then running
+	 * requests), and the Filter is gone, so the existence lookup returns nothing */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_8', 'value' => 'tok8'),
+	));
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
 	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
 
 	$started = flowview_launch_queued_rematerializations();
 
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
 	expect($started)->toBe(array())
 		->and($GLOBALS['__test_exec'])->toBe(array())
-		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('');
+		->and($deletes)->toHaveCount(1)
+		->and($deletes[0]['params'])->toBe(array('flowview_rematerialize_queue_8', 'tok8'));
 });
 
 it('ignores a non-positive id when queueing a rematerialization', function () {
-	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '';
-
 	flowview_queue_rematerialize(0);
 
-	expect(flowview_get_queued_rematerializations())->toBe(array())
-		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('');
+	$inserts = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'INSERT INTO settings') === 0;
+	}));
+
+	expect($inserts)->toBe(array())
+		->and(flowview_get_queued_rematerializations())->toBe(array());
 });
 
 it('does nothing when no Filter is queued for rematerialization', function () {
-	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '';
-	$GLOBALS['__test_exec']                                   = array();
+	$GLOBALS['__test_exec'] = array();
+
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
 
 	expect(flowview_launch_queued_rematerializations())->toBe(array())
 		->and($GLOBALS['__test_exec'])->toBe(array());

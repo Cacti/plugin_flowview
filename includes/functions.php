@@ -4625,6 +4625,51 @@ function flowview_launch_materialize(array $query_ids = [], array $partitions = 
 }
 
 /**
+ * flowview_graph_button_filter - The saved Filter the NetFlow graph button
+ * drills into for a graph host, scoped to both the host's Listener and its
+ * Stream.  The report page now reads the Listener and Stream from the Filter
+ * itself, so the drilldown has to land on a Filter that is actually scoped to
+ * that host rather than any Filter for the right Listener.
+ *
+ * A Filter matches when its Listener is the host's Listener or the All-listener
+ * sentinel (0), and its Stream is the host's Stream or an All-stream sentinel
+ * ('-1', '' or '0').  A Filter scoped to a different specific Stream is not a
+ * match, so the button no longer silently points at the wrong exporter.  When
+ * more than one Filter matches, the most specific one wins deterministically:
+ * an exact Listener first, then an exact Stream, then the lowest id.  An empty
+ * array is returned when nothing matches, so the caller can omit the link.
+ *
+ * @param int    $device_id The graph host's Listener (device) id
+ * @param string $ex_addr   The graph host's Stream (exporter) address
+ *
+ * @return array The matching Filter row, or an empty array when none matches
+ */
+function flowview_graph_button_filter(int $device_id, string $ex_addr): array {
+	$filter = flowview_db_fetch_row_prepared('SELECT *
+		FROM plugin_flowview_queries
+		WHERE (device_id = ? OR device_id = 0)
+		AND (ex_addr = ? OR ex_addr = ? OR ex_addr = ? OR ex_addr = ?)
+		ORDER BY (device_id = ?) DESC, (ex_addr = ?) DESC, id ASC
+		LIMIT 1',
+		[$device_id, $ex_addr, '-1', '', '0', $device_id, $ex_addr]);
+
+	return is_array($filter) ? $filter : [];
+}
+
+/**
+ * flowview_rematerialize_queue_key - The settings row name that a single
+ * queued Filter is stored under.  Each Filter has its own row so concurrent
+ * saves never race on one shared value.
+ *
+ * @param int $query_id The FlowView query id
+ *
+ * @return string
+ */
+function flowview_rematerialize_queue_key(int $query_id): string {
+	return 'flowview_rematerialize_queue_' . $query_id;
+}
+
+/**
  * flowview_queue_rematerialize - Record that a Filter needs a fresh
  * materialization once the run that currently has it finishes.  A save that
  * changes what a Filter caches starts a materialization for it, but
@@ -4632,6 +4677,12 @@ function flowview_launch_materialize(array $query_ids = [], array $partitions = 
  * materialized to the active run, which is working from the settings as they
  * were.  The Filter is queued here so the poller rebuilds it under the new
  * settings once no materialization is running.
+ *
+ * Each Filter is stored as its own settings row whose value is a fresh token,
+ * rather than as one shared comma-separated list.  Two saves can therefore
+ * queue different Filters at once without overwriting one another, and a save
+ * that re-queues a Filter after the poller has read it writes a new token that
+ * the poller's compare-and-delete will not clear, so the rebuild is never lost.
  *
  * @param int $query_id The FlowView query id to rematerialize
  *
@@ -4642,13 +4693,61 @@ function flowview_queue_rematerialize(int $query_id): void {
 		return;
 	}
 
-	$pending = flowview_get_queued_rematerializations();
+	db_execute_prepared('INSERT INTO settings (name, value)
+		VALUES (?, ?)
+		ON DUPLICATE KEY UPDATE value = VALUES(value)',
+		[flowview_rematerialize_queue_key($query_id), uniqid('', true)]);
+}
 
-	if (!in_array($query_id, $pending, true)) {
-		$pending[] = $query_id;
+/**
+ * flowview_dequeue_rematerialize - Clear a Filter's queue entry, but only when
+ * its token still matches the one that was read.  A save that re-queued the
+ * Filter after the read has replaced the token, so its entry is left in place
+ * for the next cycle rather than being cleared out from under it.
+ *
+ * @param int    $query_id The FlowView query id to clear
+ * @param string $token    The token that was read for the entry
+ *
+ * @return void
+ */
+function flowview_dequeue_rematerialize(int $query_id, string $token): void {
+	db_execute_prepared('DELETE FROM settings
+		WHERE name = ?
+		AND value = ?',
+		[flowview_rematerialize_queue_key($query_id), $token]);
+}
 
-		set_config_option('flowview_rematerialize_queue', implode(',', $pending));
+/**
+ * flowview_get_queued_rematerialization_tokens - The queued Filters as a map of
+ * Filter id to the token its entry currently holds.  The token is what the
+ * poller compares against when it clears an entry, so a Filter that was
+ * re-queued after the read is not dropped.
+ *
+ * @return array The queued FlowView query ids mapped to their tokens
+ */
+function flowview_get_queued_rematerialization_tokens(): array {
+	$rows = db_fetch_assoc_prepared('SELECT name, value
+		FROM settings
+		WHERE name LIKE ?',
+		['flowview\_rematerialize\_queue\_%']);
+
+	$tokens = [];
+
+	foreach ($rows as $row) {
+		if (strncmp($row['name'], 'flowview_rematerialize_queue_', 29) !== 0) {
+			continue;
+		}
+
+		$id = (int) substr($row['name'], 29);
+
+		if ($id > 0) {
+			$tokens[$id] = (string) $row['value'];
+		}
 	}
+
+	ksort($tokens);
+
+	return $tokens;
 }
 
 /**
@@ -4658,15 +4757,7 @@ function flowview_queue_rematerialize(int $query_id): void {
  * @return array The queued FlowView query ids
  */
 function flowview_get_queued_rematerializations(): array {
-	$raw = (string) read_config_option('flowview_rematerialize_queue');
-
-	if ($raw === '') {
-		return [];
-	}
-
-	return array_values(array_unique(array_filter(array_map('intval', explode(',', $raw)), function ($id) {
-		return $id > 0;
-	})));
+	return array_keys(flowview_get_queued_rematerialization_tokens());
 }
 
 /**
@@ -4680,7 +4771,7 @@ function flowview_get_queued_rematerializations(): array {
  * @return array The Filter ids a materialization was started for
  */
 function flowview_launch_queued_rematerializations(): array {
-	$pending = flowview_get_queued_rematerializations();
+	$pending = flowview_get_queued_rematerialization_tokens();
 
 	if (!cacti_sizeof($pending)) {
 		return [];
@@ -4691,26 +4782,31 @@ function flowview_launch_queued_rematerializations(): array {
 		return [];
 	}
 
+	$ids = array_keys($pending);
+
 	/* a Filter that was deleted while queued is dropped rather than retried forever */
 	$existing = array_map('intval', array_column(flowview_db_fetch_assoc_prepared('SELECT id
 		FROM plugin_flowview_queries
-		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($pending), '?')) . ')',
-		$pending), 'id'));
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($ids), '?')) . ')',
+		$ids), 'id'));
 
-	$pending = array_values(array_intersect($pending, $existing));
+	foreach (array_diff($ids, $existing) as $gone) {
+		flowview_dequeue_rematerialize((int) $gone, $pending[$gone]);
+	}
 
-	if (!cacti_sizeof($pending)) {
-		set_config_option('flowview_rematerialize_queue', '');
+	$ids = array_values(array_intersect($ids, $existing));
 
+	if (!cacti_sizeof($ids)) {
 		return [];
 	}
 
-	$started = flowview_launch_materialize($pending);
+	$started = flowview_launch_materialize($ids);
 
-	/* keep the ones that could not start yet for the next cycle */
-	$remaining = array_values(array_diff($pending, $started));
-
-	set_config_option('flowview_rematerialize_queue', implode(',', $remaining));
+	/* clear only the entries actually started, and only when the token still
+	 * matches, so a save that re-queued a Filter after the read is kept */
+	foreach ($started as $id) {
+		flowview_dequeue_rematerialize((int) $id, $pending[$id]);
+	}
 
 	return $started;
 }

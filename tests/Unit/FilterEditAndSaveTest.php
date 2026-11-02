@@ -132,7 +132,11 @@ describe('saving a Filter from its editor', function () {
 		expect($GLOBALS['__test_exec'])->toBe(array())
 			->and($GLOBALS['__test_messages'][0][0])->toBe('flowview_materialize_queued')
 			->and($GLOBALS['__test_messages'][0][1])->toContain('queued')
-			->and(flowview_get_queued_rematerializations())->toBe(array(4));
+			->and(array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return $call['fn'] === 'db_execute_prepared'
+					&& strpos($call['sql'], 'INSERT INTO settings') === 0
+					&& $call['params'][0] === 'flowview_rematerialize_queue_4';
+			})))->toHaveCount(1);
 	});
 
 	it('saves the timespan that is picked in the editor', function () {
@@ -249,7 +253,11 @@ describe('saving a Filter from the report page', function () {
 
 		expect($answer)->toBe(array('rematerialize' => true, 'queued' => true))
 			->and($GLOBALS['__test_exec'])->toBe(array())
-			->and(flowview_get_queued_rematerializations())->toBe(array(4));
+			->and(array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+				return $call['fn'] === 'db_execute_prepared'
+					&& strpos($call['sql'], 'INSERT INTO settings') === 0
+					&& $call['params'][0] === 'flowview_rematerialize_queue_4';
+			})))->toHaveCount(1);
 	});
 
 	it('saves the sort field and never the Listener or Stream, which are not on the page', function () use ($save) {
