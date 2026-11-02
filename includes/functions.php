@@ -2478,10 +2478,20 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 		WHERE id = ?',
 		[$id]);
 
+	if (!cacti_sizeof($schedule)) {
+		cacti_log(sprintf('WARNING: Flowview Schedule %s no longer exists.  Skipping report generation.', $id), false, 'FLOWVIEW');
+		return;
+	}
+
 	$query = flowview_db_fetch_row_prepared('SELECT *
 		FROM plugin_flowview_queries
 		WHERE id = ?',
 		[$schedule['query_id']]);
+
+	if (!cacti_sizeof($query)) {
+		cacti_log(sprintf('WARNING: Flowview Schedule %s references Query %s which no longer exists.  Skipping report generation.', $id, $schedule['query_id']), false, 'FLOWVIEW');
+		return;
+	}
 
 	/* get the timespan from the query */
 	$span = [];
@@ -3335,7 +3345,7 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 		WHERE id = ?',
 		[$query_id]);
 
-	if ($plan_only && !cacti_sizeof($data)) {
+	if (!cacti_sizeof($data)) {
 		return false;
 	}
 
