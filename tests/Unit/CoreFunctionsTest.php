@@ -562,6 +562,23 @@ it('drops a queued Filter that was deleted rather than retrying it forever', fun
 		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('');
 });
 
+it('ignores a non-positive id when queueing a rematerialization', function () {
+	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '';
+
+	flowview_queue_rematerialize(0);
+
+	expect(flowview_get_queued_rematerializations())->toBe(array())
+		->and($GLOBALS['__test_config']['flowview_rematerialize_queue'])->toBe('');
+});
+
+it('does nothing when no Filter is queued for rematerialization', function () {
+	$GLOBALS['__test_config']['flowview_rematerialize_queue'] = '';
+	$GLOBALS['__test_exec']                                   = array();
+
+	expect(flowview_launch_queued_rematerializations())->toBe(array())
+		->and($GLOBALS['__test_exec'])->toBe(array());
+});
+
 it('keys the cached shards on the map query without the time range', function () {
 	$inner = array(
 		'sql_query'        => 'SELECT src_addr, SUM(bytes) AS bytes',
