@@ -542,6 +542,18 @@ it('lists each queued Filter once, in id order, from its settings rows', functio
 	expect(flowview_get_queued_rematerializations())->toBe(array(4, 7));
 });
 
+it('skips a settings row that matches the case-insensitive query but not the exact prefix', function () {
+	/* the SQL LIKE can match case-insensitively, so a row whose name only
+	 * differs in case passes the query but must be rejected by the stricter
+	 * case-sensitive prefix guard rather than being treated as a queue entry */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'FLOWVIEW_REMATERIALIZE_QUEUE_9', 'value' => 'tok9'),
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+	));
+
+	expect(flowview_get_queued_rematerializations())->toBe(array(4));
+});
+
 it('starts the queued Filters once no materialization is running, and clears their entries', function () {
 	$original_base_path                          = $GLOBALS['config']['base_path'];
 	$GLOBALS['config']['base_path']              = '/var/www/cacti';
