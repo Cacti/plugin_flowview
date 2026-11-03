@@ -95,10 +95,23 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_db_results'] = array();
 		$GLOBALS['__test_config']     = array();
 		$GLOBALS['__test_messages']   = array();
+		$GLOBALS['__test_exec']       = array();
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
 		$_SESSION = array();
+	}
+}
+
+if (!function_exists('exec_background')) {
+	function exec_background($filename, $args = '', $redirect_args = '') {
+		$GLOBALS['__test_exec'][] = array($filename, $args);
+	}
+}
+
+if (!function_exists('cacti_escapeshellarg')) {
+	function cacti_escapeshellarg($string) {
+		return "'" . str_replace("'", "'\\''", (string) $string) . "'";
 	}
 }
 

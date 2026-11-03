@@ -198,6 +198,9 @@ parallel_database_query_expire();
 /* partitions that went cold this cycle are materialized for every filter */
 flowview_materialize_rotated_partitions();
 
+/* Filters saved while a materialization had them are rebuilt now the queue is quiet */
+flowview_launch_queued_rematerializations();
+
 if ($maint) {
 	flowview_debug('Performing Table Maintenance');
 

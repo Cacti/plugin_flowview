@@ -376,11 +376,6 @@ it('flags only changes that alter what a filter materializes', function ($old, $
 	),
 ));
 
-it('tells the user to start a materialization with the Materialize action', function () {
-	expect(flowview_rematerialize_recommendation())->toContain('materialized again')
-		->and(flowview_rematerialize_recommendation())->toContain("'Materialize' action");
-});
-
 describe('warning before a Filter is saved with a change to what is cached', function () {
 	beforeEach(function () {
 		plugin_test_reset();
@@ -419,33 +414,6 @@ describe('warning before a Filter is saved with a change to what is cached', fun
 			->and(array_filter($GLOBALS['__test_db_calls'], function ($call) {
 				return strpos($call['fn'], 'db_execute') === 0;
 			}))->toBeEmpty();
-	});
-
-	it('says the save succeeded and to materialize again, once, in a dialog', function () {
-		$_SESSION['flowview_rematerialize_saved'] = 4;
-
-		ob_start();
-		flowview_show_saved_dialog();
-		$first = ob_get_clean();
-
-		ob_start();
-		flowview_show_saved_dialog();
-		$second = ob_get_clean();
-
-		expect($first)->toContain("id='flowview_saved_dialog'")
-			->and($first)->toContain('Save Succeeded')
-			->and($first)->toContain('Materialize')
-			->and($first)->toContain("\$('#flowview_saved_dialog').dialog(")
-			->and($first)->toContain('modal: false')
-			->and($second)->toBe('')
-			->and(isset($_SESSION['flowview_rematerialize_saved']))->toBeFalse();
-	});
-
-	it('shows nothing when nothing was saved with a change to what is cached', function () {
-		ob_start();
-		flowview_show_saved_dialog();
-
-		expect(ob_get_clean())->toBe('');
 	});
 
 	it('warns from the Save button with Cancel and Continue, and no longer raises a warning message', function () {
@@ -523,6 +491,201 @@ it('materializes every filter that is not already being materialized when none a
 		->and($GLOBALS['__test_exec'])->toBe(array(
 			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=1,9"),
 		));
+});
+
+it('scopes the graph drilldown Filter to both the listener and the exporter', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', array('id' => 9, 'device_id' => 3, 'ex_addr' => '10.1.1.1'));
+
+	$filter = flowview_graph_button_filter(3, '10.1.1.1');
+
+	$call = $GLOBALS['__test_db_calls'][0];
+
+	/* the match is on both the listener and the exporter (plus the All-stream
+	 * sentinels), and is deterministic, so a second Filter on the same listener
+	 * for a different stream is never chosen, and the exact exporter wins */
+	expect($filter)->toBe(array('id' => 9, 'device_id' => 3, 'ex_addr' => '10.1.1.1'))
+		->and($call['fn'])->toBe('db_fetch_row_prepared')
+		->and($call['sql'])->toContain('(device_id = ? OR device_id = 0)')
+		->and($call['sql'])->toContain('(ex_addr = ? OR ex_addr = ? OR ex_addr = ? OR ex_addr = ?)')
+		->and($call['sql'])->toContain('ORDER BY (device_id = ?) DESC, (ex_addr = ?) DESC, id ASC')
+		->and($call['sql'])->toContain('LIMIT 1')
+		->and($call['params'])->toBe(array(3, '10.1.1.1', '-1', '', '0', 3, '10.1.1.1'));
+});
+
+it('omits the graph drilldown when no Filter is scoped to the host', function () {
+	plugin_test_queue_db_result('db_fetch_row_prepared', array());
+
+	expect(flowview_graph_button_filter(3, '10.1.1.1'))->toBe(array());
+});
+
+it('queues a Filter for a fresh materialization under its own settings row', function () {
+	flowview_queue_rematerialize(4);
+	flowview_queue_rematerialize(7);
+
+	$inserts = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'INSERT INTO settings') === 0;
+	}));
+
+	expect($inserts)->toHaveCount(2)
+		->and($inserts[0]['sql'])->toContain('ON DUPLICATE KEY UPDATE')
+		->and($inserts[0]['params'][0])->toBe('flowview_rematerialize_queue_4')
+		->and($inserts[1]['params'][0])->toBe('flowview_rematerialize_queue_7')
+		->and($inserts[0]['params'][1])->not->toBe($inserts[1]['params'][1]);
+});
+
+it('lists each queued Filter once, in id order, from its settings rows', function () {
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_7', 'value' => 'tok7'),
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+	));
+
+	expect(flowview_get_queued_rematerializations())->toBe(array(4, 7));
+});
+
+it('skips a settings row that matches the case-insensitive query but not the exact prefix', function () {
+	/* the SQL LIKE can match case-insensitively, so a row whose name only
+	 * differs in case passes the query but must be rejected by the stricter
+	 * case-sensitive prefix guard rather than being treated as a queue entry */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'FLOWVIEW_REMATERIALIZE_QUEUE_9', 'value' => 'tok9'),
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+	));
+
+	expect(flowview_get_queued_rematerializations())->toBe(array(4));
+});
+
+it('starts the queued Filters once no materialization is running, and clears their entries', function () {
+	$original_base_path                          = $GLOBALS['config']['base_path'];
+	$GLOBALS['config']['base_path']              = '/var/www/cacti';
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+	$GLOBALS['__test_exec']                      = array();
+
+	/* the queued entries, then: nothing materializing (filters, then running
+	 * requests), the queued Filters still exist, and the launch finds nothing
+	 * materializing either */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+		array('name' => 'flowview_rematerialize_queue_7', 'value' => 'tok7'),
+	));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 4), array('id' => 7)));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+	try {
+		$started = flowview_launch_queued_rematerializations();
+	} finally {
+		$GLOBALS['config']['base_path'] = $original_base_path;
+	}
+
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
+	expect($started)->toBe(array(4, 7))
+		->and($GLOBALS['__test_exec'])->toBe(array(
+			array('/usr/bin/php', "'/var/www/cacti/plugins/flowview/cli/materialize_queries.php' --query-id=4,7"),
+		))
+		->and($deletes)->toHaveCount(2)
+		->and($deletes[0]['params'])->toBe(array('flowview_rematerialize_queue_4', 'tok4'))
+		->and($deletes[1]['params'])->toBe(array('flowview_rematerialize_queue_7', 'tok7'));
+});
+
+it('clears started entries with a compare-and-delete so a re-queue after the read survives', function () {
+	$original_base_path                          = $GLOBALS['config']['base_path'];
+	$GLOBALS['config']['base_path']              = '/var/www/cacti';
+	$GLOBALS['__test_config']['path_php_binary'] = '/usr/bin/php';
+	$GLOBALS['__test_exec']                      = array();
+
+	/* the poller reads Filter 4 holding the token tok4-old; a concurrent save
+	 * that re-queues 4 after this read writes a new token, so the delete keyed
+	 * on tok4-old no longer matches and the rebuild is kept for the next cycle */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4-old'),
+	));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('id' => 4)));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+	try {
+		$started = flowview_launch_queued_rematerializations();
+	} finally {
+		$GLOBALS['config']['base_path'] = $original_base_path;
+	}
+
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
+	expect($started)->toBe(array(4))
+		->and($deletes)->toHaveCount(1)
+		->and($deletes[0]['sql'])->toContain('AND value = ?')
+		->and($deletes[0]['params'])->toBe(array('flowview_rematerialize_queue_4', 'tok4-old'));
+});
+
+it('leaves the queue alone while a materialization is still running', function () {
+	$GLOBALS['__test_exec'] = array();
+
+	/* the queued entry, then a materialization is registered, so the rebuild waits */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_4', 'value' => 'tok4'),
+	));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(array('taskid' => 4)));
+
+	$started = flowview_launch_queued_rematerializations();
+
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
+	expect($started)->toBe(array())
+		->and($GLOBALS['__test_exec'])->toBe(array())
+		->and($deletes)->toBe(array());
+});
+
+it('drops a queued Filter that was deleted rather than retrying it forever', function () {
+	$GLOBALS['__test_exec'] = array();
+
+	/* the queued entry, then nothing materializing (filters, then running
+	 * requests), and the Filter is gone, so the existence lookup returns nothing */
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+		array('name' => 'flowview_rematerialize_queue_8', 'value' => 'tok8'),
+	));
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+	$started = flowview_launch_queued_rematerializations();
+
+	$deletes = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'DELETE FROM settings') === 0;
+	}));
+
+	expect($started)->toBe(array())
+		->and($GLOBALS['__test_exec'])->toBe(array())
+		->and($deletes)->toHaveCount(1)
+		->and($deletes[0]['params'])->toBe(array('flowview_rematerialize_queue_8', 'tok8'));
+});
+
+it('ignores a non-positive id when queueing a rematerialization', function () {
+	flowview_queue_rematerialize(0);
+
+	$inserts = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared' && strpos($call['sql'], 'INSERT INTO settings') === 0;
+	}));
+
+	expect($inserts)->toBe(array())
+		->and(flowview_get_queued_rematerializations())->toBe(array());
+});
+
+it('does nothing when no Filter is queued for rematerialization', function () {
+	$GLOBALS['__test_exec'] = array();
+
+	plugin_test_queue_db_result('db_fetch_assoc_prepared', array());
+
+	expect(flowview_launch_queued_rematerializations())->toBe(array())
+		->and($GLOBALS['__test_exec'])->toBe(array());
 });
 
 it('keys the cached shards on the map query without the time range', function () {
@@ -607,8 +770,8 @@ it('has no plan for a filter that can not be planned', function () {
 	expect(flowview_plan_filter(99, true))->toBe(array());
 });
 
-it('only takes an exporter address as the stream override', function ($value, $used) {
-	$filter = array(
+it('takes the exporter address from the saved Filter, not the page', function () {
+	$base = array(
 		'id' => 4, 'name' => 'Top Talkers', 'device_id' => 0, 'ex_addr' => '', 'template_id' => -1,
 		'statistics' => 10, 'printed' => 0, 'sortfield' => 'bytes', 'cutofflines' => 20, 'cutoffoctets' => 0,
 		'includeif' => 0, 'usenat' => '', 'protocols' => '', 'tosfields' => '', 'tcpflags' => '',
@@ -616,25 +779,26 @@ it('only takes an exporter address as the stream override', function ($value, $u
 
 	plugin_test_reset();
 
-	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+	plugin_test_queue_db_result('db_fetch_row_prepared', $base);
 	$none = flowview_plan_filter(4, true);
 
-	$_REQUEST['ex_addr'] = $value;
+	/* a Stream on the page is ignored, it is no longer a filter field */
+	$_REQUEST['ex_addr'] = '10.1.2.3';
+	plugin_test_queue_db_result('db_fetch_row_prepared', $base);
+	$ignored = flowview_plan_filter(4, true);
 
-	plugin_test_queue_db_result('db_fetch_row_prepared', $filter);
+	plugin_test_reset();
+
+	/* the Stream saved on the Filter does change the plan */
+	plugin_test_queue_db_result('db_fetch_row_prepared', array_merge($base, array('ex_addr' => '10.1.2.3')));
 	$with = flowview_plan_filter(4, true);
 
 	plugin_test_reset();
 
 	expect($none)->toHaveCount(1)
-		->and($with != $none)->toBe($used);
-})->with(array(
-	'an IPv4 address'   => array('10.1.2.3', true),
-	'an IPv6 address'   => array('2001:db8::1', true),
-	'markup'            => array('<script>alert(1)</script>', false),
-	'All'               => array('0', false),
-	'a host and a port' => array('10.1.2.3:2055', false),
-));
+		->and($ignored)->toBe($none)
+		->and($with != $none)->toBeTrue();
+});
 
 it('finds the partitions of a filter that are cached with and without NAT', function () {
 	if (!function_exists('array_rekey')) {

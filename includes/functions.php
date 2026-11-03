@@ -349,10 +349,8 @@ function edit_filter(): void {
 	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
 
 	print "<div id='flowview_save_warning' style='display:none;' title='" . __esc('Cached Results Affected', 'flowview') . "'><p>" .
-		__esc('These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press \'Continue\' to save the Filter, or \'Cancel\' to keep editing it.', 'flowview') .
+		__esc('These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press \'Continue\' to save the Filter, or \'Cancel\' to keep editing it.', 'flowview') .
 		'</p></div>';
-
-	flowview_show_saved_dialog();
 
 	?>
 	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
@@ -614,16 +612,6 @@ function flowview_filter_change_is_material(array $old, array $new): bool {
 }
 
 /**
- * flowview_rematerialize_recommendation - The note, once a filter is saved
- * with a material change, that it has to be materialized again.
- *
- * @return string
- */
-function flowview_rematerialize_recommendation(): string {
-	return __('The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the \'Materialize\' action.', 'flowview');
-}
-
-/**
  * flowview_filter_form_values - The values of the filter form as they are
  * saved.
  *
@@ -736,47 +724,6 @@ function flowview_check_filter_save(): void {
 }
 
 /**
- * flowview_show_saved_dialog - Once a filter was saved with a change to what
- * is cached for it, says the save succeeded and that it has to be
- * materialized again, in a jQuery UI dialog.  It is shown once.
- *
- * @return void
- */
-function flowview_show_saved_dialog(): void {
-	if (empty($_SESSION['flowview_rematerialize_saved'])) {
-		return;
-	}
-
-	unset($_SESSION['flowview_rematerialize_saved']);
-
-	$js = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
-
-	print "<div id='flowview_saved_dialog' style='display:none;' title='" . __esc('Save Succeeded', 'flowview') . "'>" .
-		'<p>' . __esc('Save Succeeded.', 'flowview') . '</p>' .
-		'<p>' . html_escape(flowview_rematerialize_recommendation()) . '</p>' .
-		'</div>';
-
-	?>
-	<script type='text/javascript' <?php print plugin_flowview_csp_nonce(); ?>>
-	$(function() {
-		$('#flowview_saved_dialog').dialog({
-			modal: false,
-			resizable: false,
-			width: 500,
-			buttons: [{
-				text: <?php print json_encode(__('OK', 'flowview'), $js);?>,
-				'class': 'ui-state-active',
-				click: function() {
-					$(this).dialog('close');
-				}
-			}]
-		});
-	});
-	</script>
-	<?php
-}
-
-/**
  * @return void
  */
 function save_filter_form(): void {
@@ -787,7 +734,6 @@ function save_filter_form(): void {
 	get_filter_request_var('cutofflines');
 	get_filter_request_var('cutoffoctets');
 	get_filter_request_var('query');
-	get_filter_request_var('device_id');
 	get_filter_request_var('graph_height');
 	/* ==================================================== */
 
@@ -817,22 +763,14 @@ function save_filter_form(): void {
 		$printed     = (int) $old['printed'];
 	}
 
-	/* the page lists no Stream as 'All' */
-	$ex_addr = trim((string) get_nfilter_request_var('ex_addr'));
-
-	if ($ex_addr === '' || $ex_addr == '-1') {
-		$ex_addr = '0';
-	}
-
 	/* a custom timespan is only kept with its dates */
 	$startdate = isset_request_var('date1') ? get_nfilter_request_var('date1') : (is_array($old) ? (string) ($old['startdate'] ?? '') : '');
 	$enddate   = isset_request_var('date2') ? get_nfilter_request_var('date2') : (is_array($old) ? (string) ($old['enddate'] ?? '') : '');
 
+	/* the Listener and Stream are not on this page, so only the sort field of a printed report can change what is cached */
 	$material = flowview_filter_change_is_material(
 		is_array($old) ? $old : [],
 		[
-			'device_id'  => get_request_var('device_id'),
-			'ex_addr'    => $ex_addr,
 			'statistics' => $statistical,
 			'printed'    => $printed,
 			'sortfield'  => get_nfilter_request_var('sortfield'),
@@ -843,8 +781,6 @@ function save_filter_form(): void {
 		SET timespan = ?,
 		startdate = ?,
 		enddate = ?,
-		device_id = ?,
-		ex_addr = ?,
 		statistics = ?,
 		printed = ?,
 		sortfield = ?,
@@ -862,8 +798,6 @@ function save_filter_form(): void {
 			get_request_var('timespan'),
 			$startdate,
 			$enddate,
-			get_request_var('device_id'),
-			$ex_addr,
 			$statistical,
 			$printed,
 			get_nfilter_request_var('sortfield'),
@@ -883,7 +817,21 @@ function save_filter_form(): void {
 	/* the next visit takes the Filter as it is saved, such as dates saved without pressing Go */
 	flowview_reset_filter_session(get_request_var('query'));
 
-	print json_encode(['rematerialize' => $material]);
+	/* a change to what is cached starts a materialization of the Filter in the background */
+	$queued = false;
+
+	if ($material) {
+		/* a Filter that is already being materialized is left to the active run,
+		 * which is working from the old settings, so queue a fresh rebuild that
+		 * the poller starts once that run finishes */
+		if (!cacti_sizeof(flowview_launch_materialize([(int) get_request_var('query')]))) {
+			flowview_queue_rematerialize((int) get_request_var('query'));
+
+			$queued = true;
+		}
+	}
+
+	print json_encode(['rematerialize' => $material, 'queued' => $queued]);
 }
 
 /**
@@ -911,9 +859,18 @@ function save_filter(): void {
 		flowview_exit();
 	}
 
-	/* a change to what is cached is said in a dialog, with the note to materialize it again */
+	/* a change to what is cached starts a materialization of the Filter in the background, and says so */
 	if ($material) {
-		$_SESSION['flowview_rematerialize_saved'] = (int) $id;
+		/* a Filter that is already being materialized is left to the active run,
+		 * which is working from the old settings, so queue a fresh rebuild that
+		 * the poller starts once that run finishes, and say which happened */
+		if (cacti_sizeof(flowview_launch_materialize([(int) $id]))) {
+			raise_message('flowview_materialize_started', __('The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log.', 'flowview'), MESSAGE_LEVEL_INFO);
+		} else {
+			flowview_queue_rematerialize((int) $id);
+
+			raise_message('flowview_materialize_queued', __('The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log.', 'flowview'), MESSAGE_LEVEL_INFO);
+		}
 	} else {
 		raise_message(1);
 	}
@@ -1020,9 +977,8 @@ function flowview_seed_filter_request_vars(array $filter): void {
 		return;
 	}
 
+	/* the Listener and Stream are read from the saved Filter at query time, so they are not seeded here */
 	$columns = [
-		'device_id'    => 'device_id',
-		'ex_addr'      => 'ex_addr',
 		'sortfield'    => 'sortfield',
 		'cutofflines'  => 'cutofflines',
 		'cutoffoctets' => 'cutoffoctets',
@@ -1037,12 +993,7 @@ function flowview_seed_filter_request_vars(array $filter): void {
 
 		$value = $filter[$column];
 
-		/* the page lists no Stream as 'All' */
-		if ($variable == 'ex_addr' && ($value === '' || $value == '-1')) {
-			$value = '0';
-		}
-
-		if ($value === '' && $variable != 'ex_addr') {
+		if ($value === '') {
 			continue;
 		}
 
@@ -1201,9 +1152,6 @@ function flowview_display_filter(): void {
 		}
 	}
 
-	/* a Filter saved from its editor, that was opened from this page, comes back here */
-	flowview_show_saved_dialog();
-
 	html_start_box($title . '&nbsp;<span id="text"></span>', '100%', false, 3, 'center', '');
 
 	?>
@@ -1232,62 +1180,11 @@ function flowview_display_filter(): void {
 						</select>
 					</td>
 					<td>
-						<?php print __('Listener', 'flowview');?>
-					</td>
-					<td>
-						<select id='device_id' name='device_id'>
-							<option value='-1'><?php print __('Select a Listener', 'flowview');?></option>
-							<?php
-							$listeners = flowview_db_fetch_assoc('SELECT DISTINCT id, name
-								FROM (
-									SELECT 0 AS id, "' . __esc('All', 'flowview') . '" AS name
-									UNION
-									SELECT id, name
-									FROM plugin_flowview_devices
-								) AS rs
-								ORDER BY name');
-
-							if (cacti_sizeof($listeners)) {
-								foreach($listeners as $l) {
-									print "<option value='" . $l['id'] . "'" . (get_request_var('device_id') == $l['id'] ? ' selected':'') . '>' . html_escape($l['name']) . '</option>';
-								}
-							}
-							?>
-						</select>
-					</td>
-					<td>
-						<?php print __('Stream', 'flowview');?>
-					</td>
-					<td>
-						<select id='ex_addr' name='ex_addr'>
-							<option value='-1'><?php print __('Select a Stream Host', 'flowview');?></option>
-							<option value='0'<?php print (get_request_var('ex_addr') == 0 ? ' selected':'');?>><?php print __('All', 'flowview');?></option>
-							<?php
-							if (get_request_var('device_id') > 0) {
-								$sql_where = 'WHERE device_id = ' . get_filter_request_var('device_id');
-							} else {
-								$sql_where = '';
-							}
-
-							$streams = flowview_db_fetch_assoc("SELECT ex_addr AS id, CONCAT(name, ' (', ex_addr, ')') AS name
-								FROM plugin_flowview_device_streams
-								$sql_where
-								ORDER BY name ASC");
-
-							if (cacti_sizeof($streams)) {
-								foreach($streams as $s) {
-									print "<option value='" . $s['id'] . "'" . (get_request_var('ex_addr') == $s['id'] ? ' selected':'') . '>' . html_escape($s['name']) . '</option>';
-								}
-							}
-							?>
-						</select>
-					</td>
-					<td>
 						<span>
 							<button type='submit' id='go' class='ui-button ui-corner-all ui-widget ui-state-active' title='<?php print __esc('Apply Filter', 'flowview');?>'><?php print __esc('Go', 'flowview');?></button>
 							<button type='button' id='clear' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Clear Filter', 'flowview');?>'><?php print __esc('Clear', 'flowview');?></button>
-							<button type='button' id='new' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Create new Flow Filter', 'flowview');?>'><?php print __esc('New', 'flowview');?></button>
 							<button type='button' id='edit' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Edit the Flow Filter', 'flowview');?>'><?php print __esc('Edit', 'flowview');?></button>
+							<button type='button' id='new' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Create new Flow Filter', 'flowview');?>'><?php print __esc('New', 'flowview');?></button>
 							<button type='button' id='save' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Save the Flow Filter', 'flowview');?>'><?php print __esc('Save', 'flowview');?></button>
 							<button type='button' id='saveas' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Save the existing Flow Filter as new Filter', 'flowview');?>'><?php print __esc('Save As', 'flowview');?></button>
 							<button type='button' id='rename' class='ui-button ui-corner-all ui-widget' title='<?php print __esc('Rename the Flow Filter', 'flowview');?>'><?php print __esc('Rename', 'flowview');?></button>
@@ -1683,7 +1580,7 @@ function flowview_display_filter(): void {
 			changeQuery(true);
 		});
 
-		$('#domains, #usenat, #exclude, #graph_type, #graph_height, #device_id, #ex_addr, #report, #sortfield, #cutofflines, #cutoffoctets').off('change').on('change', function() {
+		$('#domains, #usenat, #exclude, #graph_type, #graph_height, #report, #sortfield, #cutofflines, #cutoffoctets').off('change').on('change', function() {
 			applyFilter(false);
 		});
 
@@ -2049,8 +1946,6 @@ function flowview_display_filter(): void {
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
 			reportParam() +
-			'&device_id='    + $('#device_id').val() +
-			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
 			'&cutofflines='  + $('#cutofflines').val()  +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
@@ -2114,8 +2009,6 @@ function flowview_display_filter(): void {
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
 			reportParam() +
-			'&device_id='    + $('#device_id').val() +
-			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
 			'&cutofflines='  + $('#cutofflines').val()  +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
@@ -2180,8 +2073,6 @@ function flowview_display_filter(): void {
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&query='        + $('#query').val()  +
 			reportParam() +
-			'&device_id='    + $('#device_id').val() +
-			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
 			'&cutofflines='  + $('#cutofflines').val()  +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
@@ -2276,8 +2167,6 @@ function flowview_display_filter(): void {
 			'&usenat='      + $('#usenat').is(':checked') +
 			'&timespan='     + $('#predefined_timespan').val() +
 			reportParam() +
-			'&device_id='    + $('#device_id').val() +
-			'&ex_addr='      + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='    + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
 			'&cutofflines='  + $('#cutofflines').val() +
 			'&cutoffoctets=' + $('#cutoffoctets').val() +
@@ -2293,7 +2182,11 @@ function flowview_display_filter(): void {
 			Pace.stop();
 
 			if (data['rematerialize']) {
-				$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page.', 'flowview');?> ]').fadeOut(10000);
+				if (data['queued']) {
+					$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes.', 'flowview');?> ]').fadeOut(10000);
+				} else {
+					$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A materialization of this Filter has been started in the background.', 'flowview');?> ]').fadeOut(10000);
+				}
 			} else {
 				$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
 			}
@@ -2379,7 +2272,6 @@ function flowview_display_filter(): void {
 
 		if (reset) {
 			report = '&report=0';
-			var device_id = 0;
 		} else {
 			/* only a Filter that has no Report has one on the page */
 			report = reportParam();
@@ -2387,10 +2279,9 @@ function flowview_display_filter(): void {
 			if ($('#report').length && $('#report').val().indexOf('p') >= 0) {
 				extra = '&table=true&bytes=false&packets=false&flows=false';
 			}
-
-			var device_id = $('#device_id').val();
 		}
 
+		/* the Listener and Stream are part of the Filter, so they are not sent from the page */
 		loadPageNoHeader(urlPath+'plugins/flowview/flowview.php' +
 			'?action=view'          +
 			'&domains='             + $('#domains').is(':checked') +
@@ -2398,8 +2289,6 @@ function flowview_display_filter(): void {
 			'&query='               + $('#query').val() +
 			'&predefined_timespan=' + $('#predefined_timespan').val() +
 			report +
-			'&device_id='           + device_id +
-			'&ex_addr='             + ($('#ex_addr').val() != null ? $('#ex_addr').val():'') +
 			'&sortfield='           + ($('#sortfield').val() != null ? $('#sortfield').val():'') +
 			'&cutofflines='         + $('#cutofflines').val() +
 			'&cutoffoctets='        + $('#cutoffoctets').val() +
@@ -2585,7 +2474,6 @@ function get_flowview_session_key($id, $start, $end) {
 		$key = $id . '_' . $start . '_' . $end . '_' .
 			get_request_var('report')        . '_' .
 			get_request_var('timespan')      . '_' .
-			get_request_var('device_id')     . '_' .
 			get_request_var('sortfield')     . '_' .
 			get_request_var('cutofflines')   . '_' .
 			get_request_var('cutoffoctets')  . '_' .
@@ -3397,22 +3285,13 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 		$sql_having = '';
 	}
 
-	/* device id override */
-	if (isset_request_var('device_id') && get_filter_request_var('device_id') >= 0) {
-		if (get_request_var('device_id') > 0) {
-			$sql_where = get_numeric_filter($sql_where, $sql_params, get_request_var('device_id'), 'listener_id');
-		}
-	} elseif (isset($data['device_id']) && $data['device_id'] > 0) {
+	/* the Listener is part of the Filter and what is materialized, so it is taken from the saved Filter, not the page */
+	if (isset($data['device_id']) && $data['device_id'] > 0) {
 		$sql_where = get_numeric_filter($sql_where, $sql_params, $data['device_id'], 'listener_id');
 	}
 
-	/* ex_addr override, an exporter address, so anything else is not one */
-	$ex_addr = isset_request_var('ex_addr') ? filter_var(get_nfilter_request_var('ex_addr'), FILTER_VALIDATE_IP) : false;
-
-	if ($ex_addr !== false) {
-		$sql_where .= ($sql_where != '' ? ' AND ':'') . 'ex_addr = ?';
-		$sql_params[] = $ex_addr;
-	} elseif (isset($data['ex_addr']) && $data['ex_addr'] != '-1' && $data['ex_addr'] != '' && $data['ex_addr'] != '0') {
+	/* the Stream is part of the Filter too, so it is also taken from the saved Filter */
+	if (isset($data['ex_addr']) && $data['ex_addr'] != '-1' && $data['ex_addr'] != '' && $data['ex_addr'] != '0') {
 		$sql_where .= ($sql_where != '' ? ' AND ':'') . 'ex_addr = ?';
 		$sql_params[] = $data['ex_addr'];
 	}
@@ -4743,6 +4622,193 @@ function flowview_launch_materialize(array $query_ids = [], array $partitions = 
 	exec_background(read_config_option('path_php_binary'), $arguments);
 
 	return $targets;
+}
+
+/**
+ * flowview_graph_button_filter - The saved Filter the NetFlow graph button
+ * drills into for a graph host, scoped to both the host's Listener and its
+ * Stream.  The report page now reads the Listener and Stream from the Filter
+ * itself, so the drilldown has to land on a Filter that is actually scoped to
+ * that host rather than any Filter for the right Listener.
+ *
+ * A Filter matches when its Listener is the host's Listener or the All-listener
+ * sentinel (0), and its Stream is the host's Stream or an All-stream sentinel
+ * ('-1', '' or '0').  A Filter scoped to a different specific Stream is not a
+ * match, so the button no longer silently points at the wrong exporter.  When
+ * more than one Filter matches, the most specific one wins deterministically:
+ * an exact Listener first, then an exact Stream, then the lowest id.  An empty
+ * array is returned when nothing matches, so the caller can omit the link.
+ *
+ * @param int    $device_id The graph host's Listener (device) id
+ * @param string $ex_addr   The graph host's Stream (exporter) address
+ *
+ * @return array The matching Filter row, or an empty array when none matches
+ */
+function flowview_graph_button_filter(int $device_id, string $ex_addr): array {
+	$filter = flowview_db_fetch_row_prepared('SELECT *
+		FROM plugin_flowview_queries
+		WHERE (device_id = ? OR device_id = 0)
+		AND (ex_addr = ? OR ex_addr = ? OR ex_addr = ? OR ex_addr = ?)
+		ORDER BY (device_id = ?) DESC, (ex_addr = ?) DESC, id ASC
+		LIMIT 1',
+		[$device_id, $ex_addr, '-1', '', '0', $device_id, $ex_addr]);
+
+	return is_array($filter) ? $filter : [];
+}
+
+/**
+ * flowview_rematerialize_queue_key - The settings row name that a single
+ * queued Filter is stored under.  Each Filter has its own row so concurrent
+ * saves never race on one shared value.
+ *
+ * @param int $query_id The FlowView query id
+ *
+ * @return string
+ */
+function flowview_rematerialize_queue_key(int $query_id): string {
+	return 'flowview_rematerialize_queue_' . $query_id;
+}
+
+/**
+ * flowview_queue_rematerialize - Record that a Filter needs a fresh
+ * materialization once the run that currently has it finishes.  A save that
+ * changes what a Filter caches starts a materialization for it, but
+ * flowview_launch_materialize() leaves a Filter that is already being
+ * materialized to the active run, which is working from the settings as they
+ * were.  The Filter is queued here so the poller rebuilds it under the new
+ * settings once no materialization is running.
+ *
+ * Each Filter is stored as its own settings row whose value is a fresh token,
+ * rather than as one shared comma-separated list.  Two saves can therefore
+ * queue different Filters at once without overwriting one another, and a save
+ * that re-queues a Filter after the poller has read it writes a new token that
+ * the poller's compare-and-delete will not clear, so the rebuild is never lost.
+ *
+ * @param int $query_id The FlowView query id to rematerialize
+ *
+ * @return void
+ */
+function flowview_queue_rematerialize(int $query_id): void {
+	if ($query_id <= 0) {
+		return;
+	}
+
+	db_execute_prepared('INSERT INTO settings (name, value)
+		VALUES (?, ?)
+		ON DUPLICATE KEY UPDATE value = VALUES(value)',
+		[flowview_rematerialize_queue_key($query_id), uniqid('', true)]);
+}
+
+/**
+ * flowview_dequeue_rematerialize - Clear a Filter's queue entry, but only when
+ * its token still matches the one that was read.  A save that re-queued the
+ * Filter after the read has replaced the token, so its entry is left in place
+ * for the next cycle rather than being cleared out from under it.
+ *
+ * @param int    $query_id The FlowView query id to clear
+ * @param string $token    The token that was read for the entry
+ *
+ * @return void
+ */
+function flowview_dequeue_rematerialize(int $query_id, string $token): void {
+	db_execute_prepared('DELETE FROM settings
+		WHERE name = ?
+		AND value = ?',
+		[flowview_rematerialize_queue_key($query_id), $token]);
+}
+
+/**
+ * flowview_get_queued_rematerialization_tokens - The queued Filters as a map of
+ * Filter id to the token its entry currently holds.  The token is what the
+ * poller compares against when it clears an entry, so a Filter that was
+ * re-queued after the read is not dropped.
+ *
+ * @return array The queued FlowView query ids mapped to their tokens
+ */
+function flowview_get_queued_rematerialization_tokens(): array {
+	$rows = db_fetch_assoc_prepared('SELECT name, value
+		FROM settings
+		WHERE name LIKE ?',
+		['flowview\_rematerialize\_queue\_%']);
+
+	$tokens = [];
+
+	foreach ($rows as $row) {
+		if (strncmp($row['name'], 'flowview_rematerialize_queue_', 29) !== 0) {
+			continue;
+		}
+
+		$id = (int) substr($row['name'], 29);
+
+		if ($id > 0) {
+			$tokens[$id] = (string) $row['value'];
+		}
+	}
+
+	ksort($tokens);
+
+	return $tokens;
+}
+
+/**
+ * flowview_get_queued_rematerializations - The Filter ids that are waiting for
+ * a fresh materialization once the runs that currently have them finish.
+ *
+ * @return array The queued FlowView query ids
+ */
+function flowview_get_queued_rematerializations(): array {
+	return array_keys(flowview_get_queued_rematerialization_tokens());
+}
+
+/**
+ * flowview_launch_queued_rematerializations - Start the Filters that were
+ * queued for a fresh materialization while an earlier run had them.  Called
+ * from the poller, it waits for a moment when no materialization is running so
+ * the whole Filter is rebuilt under its saved settings, drops any queued
+ * Filter that no longer exists, and leaves a Filter whose run has not yet
+ * ended queued for a later cycle.
+ *
+ * @return array The Filter ids a materialization was started for
+ */
+function flowview_launch_queued_rematerializations(): array {
+	$pending = flowview_get_queued_rematerialization_tokens();
+
+	if (!cacti_sizeof($pending)) {
+		return [];
+	}
+
+	/* wait for a quiet moment so the Filter is rebuilt in full, not raced */
+	if (flowview_materialization_running()) {
+		return [];
+	}
+
+	$ids = array_keys($pending);
+
+	/* a Filter that was deleted while queued is dropped rather than retried forever */
+	$existing = array_map('intval', array_column(flowview_db_fetch_assoc_prepared('SELECT id
+		FROM plugin_flowview_queries
+		WHERE id IN (' . implode(', ', array_fill(0, cacti_sizeof($ids), '?')) . ')',
+		$ids), 'id'));
+
+	foreach (array_diff($ids, $existing) as $gone) {
+		flowview_dequeue_rematerialize((int) $gone, $pending[$gone]);
+	}
+
+	$ids = array_values(array_intersect($ids, $existing));
+
+	if (!cacti_sizeof($ids)) {
+		return [];
+	}
+
+	$started = flowview_launch_materialize($ids);
+
+	/* clear only the entries actually started, and only when the token still
+	 * matches, so a save that re-queued a Filter after the read is kept */
+	foreach ($started as $id) {
+		flowview_dequeue_rematerialize((int) $id, $pending[$id]);
+	}
+
+	return $started;
 }
 
 /**

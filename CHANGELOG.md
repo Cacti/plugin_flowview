@@ -2,6 +2,14 @@
 
 --- develop ---
 
+* issue: Remove the Listener and Stream from the report page.  They are part of what a Filter materializes, so changing them there ran the report against data that was never materialized.  They are now set only in the Filter editor, and the report page reads them straight from the saved Filter.  The New button now follows Edit.
+
+* issue: Start a materialization automatically when a Filter is saved with a change that affects its cached results, from either the Filter editor or the FlowView tab, and say so, instead of asking the user to start one by hand from the Filters page.
+
+* issue: Queue a fresh materialization when a Filter is saved while one is already running for it.  The active run is working from the settings as they were, so leaving the save to it left the new settings uncached; the save now says the rebuild is queued rather than started, and the poller launches it once no materialization is running.  Each queued Filter is kept in its own settings row with a token the poller compare-and-deletes, so concurrent saves never overwrite one another and a Filter re-queued while the poller is draining is not dropped.
+
+* issue: Point the NetFlow graph drilldown at a saved Filter scoped to the graph's exporter.  The report page now reads the Listener and Stream from the Filter, so the icon's old ex_addr and listener overrides were ignored and it showed every exporter under the default Filter; it now links to a saved Filter matching both the graph's Listener and Stream, picks the most specific one deterministically when a Listener has more than one, and is omitted when none matches rather than pointing at a Filter for the wrong Stream.
+
 * issue: Stop a scheduled report whose saved Filter has been deleted from filling the PHP log with warnings on every run.  The schedule poller read the timespan and name of a query that was no longer there, and ran the empty result through the report, so each run logged a burst of "Undefined array key" and "array offset on bool" warnings.  The runner now logs one warning naming the schedule and the missing query and stops, and run_flow_query() returns nothing for a Filter that is gone before reading any of its columns
 
 * issue: Materialize the newest partition that has rotated.  A partition is only cached as a full scan when the materialization range covers all of its flows, but the range ended only a second past the last partition's nominal window, while a flow is written to the partition of the time it was captured and can end after that window (a flow still open as the partition rotates, or an exporter whose clock is ahead).  The newest rotated partition, the one most likely to hold such a flow and still on the InnoDB engine, was therefore never a full scan and never cached, so its Filter stayed Required even right after a materialization.  The range now pads the end by a day, as it already did the start

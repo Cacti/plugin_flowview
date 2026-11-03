@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-22 09:18-0400\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -804,7 +804,6 @@ msgid "Ex Addr"
 msgstr ""
 
 #: flowview_devices.php flowview_filters.php includes/arrays.php
-#: includes/functions.php
 msgid "All"
 msgstr ""
 
@@ -1003,7 +1002,7 @@ msgstr ""
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
 msgstr ""
 
-#: flowview_filters.php includes/arrays.php includes/functions.php
+#: flowview_filters.php includes/arrays.php
 msgid "Listener"
 msgstr ""
 
@@ -1969,23 +1968,11 @@ msgid "Cached Results Affected"
 msgstr ""
 
 #: includes/functions.php
-msgid "These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
 msgstr ""
 
 #: includes/functions.php
-msgid "The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the 'Materialize' action."
-msgstr ""
-
-#: includes/functions.php
-msgid "Save Succeeded"
-msgstr ""
-
-#: includes/functions.php
-msgid "Save Succeeded."
-msgstr ""
-
-#: includes/functions.php
-msgid "OK"
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
 msgstr ""
 
 #: includes/functions.php
@@ -2007,18 +1994,6 @@ msgid "Select a Filter"
 msgstr ""
 
 #: includes/functions.php
-msgid "Select a Listener"
-msgstr ""
-
-#: includes/functions.php
-msgid "Stream"
-msgstr ""
-
-#: includes/functions.php
-msgid "Select a Stream Host"
-msgstr ""
-
-#: includes/functions.php
 msgid "Apply Filter"
 msgstr ""
 
@@ -2027,19 +2002,19 @@ msgid "Clear Filter"
 msgstr ""
 
 #: includes/functions.php
-msgid "Create new Flow Filter"
-msgstr ""
-
-#: includes/functions.php
-msgid "New"
-msgstr ""
-
-#: includes/functions.php
 msgid "Edit"
 msgstr ""
 
 #: includes/functions.php
 msgid "Edit the Flow Filter"
+msgstr ""
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr ""
+
+#: includes/functions.php
+msgid "New"
 msgstr ""
 
 #: includes/functions.php
@@ -2255,7 +2230,7 @@ msgid " <new>"
 msgstr ""
 
 #: includes/functions.php
-msgid "Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page."
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
 msgstr ""
 
 #: includes/functions.php

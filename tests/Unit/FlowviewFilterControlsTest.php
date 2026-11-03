@@ -62,6 +62,30 @@ expect($output)->toContain('timeshiftForward');
 expect($output)->not->toMatch('/\son(?:click|change)\s*=/i');
 });
 
+it('does not show the Listener or Stream, which are part of the Filter, and orders New after Edit', function () {
+	plugin_test_reset();
+
+	$_REQUEST['query'] = 4;
+
+	plugin_test_queue_db_result('db_fetch_row_prepared', array('name' => 'Top Talkers', 'statistics' => 10, 'printed' => 0));
+
+	ob_start();
+
+	try {
+		flowview_display_filter();
+	} catch (\Throwable $e) {
+		// the controls that are checked are emitted before any optional helper
+	}
+
+	$output = ob_get_clean();
+
+	expect($output)->not->toContain("id='device_id'")
+		->and($output)->not->toContain("id='ex_addr'")
+		->and($output)->not->toContain('>Listener<')
+		->and($output)->not->toContain('>Stream<')
+		->and(strpos($output, "id='edit'"))->toBeLessThan(strpos($output, "id='new'"));
+});
+
 it('does not put the Report on the report page for a filter that has one', function ($query, $row) {
 	plugin_test_reset();
 
