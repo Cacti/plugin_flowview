@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-22 09:18-0400\nPO-Revision-Date: 2026-10-27 12:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-10-27 12:18+0000\n"
+"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
+"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\n"
+"Language: sv-SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -792,7 +804,6 @@ msgid "Ex Addr"
 msgstr "Ex Addr"
 
 #: flowview_devices.php flowview_filters.php includes/arrays.php
-#: includes/functions.php
 msgid "All"
 msgstr "Alla"
 
@@ -991,7 +1002,7 @@ msgstr "Materialisering"
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
 msgstr "Materialisering beräknar i förväg resultaten av ett filter för varje flödespartition med och utan NAT och lagrar dem i cachen för parallella frågor. Då öppnas rapporter över äldre data snabbt.  Nya partitioner materialiseras automatiskt när de slutar ta emot flöden.  Krävs betyder att roterade partitioner ännu inte har materialiserats, Pågår betyder att materialisering pågår och Aktuell betyder att alla roterade partitioner har materialiserats.  Pågår: N anger hur många frågor för filtret som körs just nu.  Partitionen som fortfarande tar emot flöden materialiseras inte och räknas därför inte med."
 
-#: flowview_filters.php includes/arrays.php includes/functions.php
+#: flowview_filters.php includes/arrays.php
 msgid "Listener"
 msgstr "Lyssnare"
 
@@ -1957,24 +1968,16 @@ msgid "Cached Results Affected"
 msgstr "Cachade resultat påverkas"
 
 #: includes/functions.php
-msgid "These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+#, fuzzy
+#| msgid "These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
 msgstr "Ändringarna påverkar filtrets cachade resultat.  När filtret sparas matchar resultaten det inte längre och filtret måste materialiseras igen.  Klicka på ”Fortsätt” för att spara filtret eller på ”Avbryt” för att fortsätta redigera det."
 
 #: includes/functions.php
-msgid "The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the 'Materialize' action."
+#, fuzzy
+#| msgid "The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the 'Materialize' action."
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
 msgstr "Ändringarna i filtret påverkar dess cachade resultat, så det måste materialiseras igen.  För att starta materialiseringen, välj filtret på sidan Filter och välj åtgärden ”Materialisera”."
-
-#: includes/functions.php
-msgid "Save Succeeded"
-msgstr "Sparandet lyckades"
-
-#: includes/functions.php
-msgid "Save Succeeded."
-msgstr "Sparandet lyckades."
-
-#: includes/functions.php
-msgid "OK"
-msgstr "OK"
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -1995,18 +1998,6 @@ msgid "Select a Filter"
 msgstr "Välj ett filter"
 
 #: includes/functions.php
-msgid "Select a Listener"
-msgstr "Välj en lyssnare"
-
-#: includes/functions.php
-msgid "Stream"
-msgstr "Ström"
-
-#: includes/functions.php
-msgid "Select a Stream Host"
-msgstr "Välj en strömvärd"
-
-#: includes/functions.php
 msgid "Apply Filter"
 msgstr "Använd filter"
 
@@ -2015,20 +2006,20 @@ msgid "Clear Filter"
 msgstr "Rensa filter"
 
 #: includes/functions.php
-msgid "Create new Flow Filter"
-msgstr "Skapa nytt flödesfilter"
-
-#: includes/functions.php
-msgid "New"
-msgstr "Ny"
-
-#: includes/functions.php
 msgid "Edit"
 msgstr "Redigera"
 
 #: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "Redigera flödesfiltret"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "Skapa nytt flödesfilter"
+
+#: includes/functions.php
+msgid "New"
+msgstr "Ny"
 
 #: includes/functions.php
 msgid "Save"
@@ -2243,7 +2234,9 @@ msgid " <new>"
 msgstr " <ny>"
 
 #: includes/functions.php
-msgid "Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page."
+#, fuzzy
+#| msgid "Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page."
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
 msgstr "Filterinställningarna har sparats.  En påtvingad ommaterialisering av filtret rekommenderas. Använd åtgärden Materialisera på sidan Filter."
 
 #: includes/functions.php
@@ -2947,6 +2940,24 @@ msgstr "FlowView"
 #: setup.php
 msgid "NetFlow"
 msgstr "NetFlow"
+
+#~ msgid "Save Succeeded"
+#~ msgstr "Sparandet lyckades"
+
+#~ msgid "Save Succeeded."
+#~ msgstr "Sparandet lyckades."
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Select a Listener"
+#~ msgstr "Välj en lyssnare"
+
+#~ msgid "Stream"
+#~ msgstr "Ström"
+
+#~ msgid "Select a Stream Host"
+#~ msgstr "Välj en strömvärd"
 
 #~ msgid "No valid report was selected.  Please open a bug on GitHub"
 #~ msgstr "Ingen giltig rapport valdes. Öppna en felrapport på GitHub"
