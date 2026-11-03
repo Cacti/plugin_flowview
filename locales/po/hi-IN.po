@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-22 09:18-0400\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
 "PO-Revision-Date: 2024-07-14 20:24-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -812,7 +812,6 @@ msgid "Ex Addr"
 msgstr "पूर्व Addr"
 
 #: flowview_devices.php flowview_filters.php includes/arrays.php
-#: includes/functions.php
 msgid "All"
 msgstr "所有"
 
@@ -1015,7 +1014,7 @@ msgstr "संगठन"
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
 msgstr ""
 
-#: flowview_filters.php includes/arrays.php includes/functions.php
+#: flowview_filters.php includes/arrays.php
 msgid "Listener"
 msgstr "श्रोता"
 
@@ -2014,23 +2013,11 @@ msgid "Cached Results Affected"
 msgstr ""
 
 #: includes/functions.php
-msgid "These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
 msgstr ""
 
 #: includes/functions.php
-msgid "The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the 'Materialize' action."
-msgstr ""
-
-#: includes/functions.php
-msgid "Save Succeeded"
-msgstr ""
-
-#: includes/functions.php
-msgid "Save Succeeded."
-msgstr ""
-
-#: includes/functions.php
-msgid "OK"
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
 msgstr ""
 
 #: includes/functions.php
@@ -2052,20 +2039,6 @@ msgid "Select a Filter"
 msgstr "प्रिंट रिपोर्ट"
 
 #: includes/functions.php
-msgid "Select a Listener"
-msgstr "प्रिंट रिपोर्ट"
-
-#: includes/functions.php
-#, fuzzy
-msgid "Stream"
-msgstr "धाराओं"
-
-#: includes/functions.php
-#, fuzzy
-msgid "Select a Stream Host"
-msgstr "प्रिंट रिपोर्ट"
-
-#: includes/functions.php
 msgid "Apply Filter"
 msgstr "फ़िल्टर्स लागू करें (p) View - >"
 
@@ -2074,20 +2047,20 @@ msgid "Clear Filter"
 msgstr "साफ फिल्टर"
 
 #: includes/functions.php
-msgid "Create new Flow Filter"
-msgstr "एक नई फ़्लो फ़ाइल बनाने के लिए कितनी बार।"
-
-#: includes/functions.php
-msgid "New"
-msgstr "नया"
-
-#: includes/functions.php
 msgid "Edit"
 msgstr "संपादित करें"
 
 #: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr "वर्तमान फ़िल्टर संपादित करें"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "एक नई फ़्लो फ़ाइल बनाने के लिए कितनी बार।"
+
+#: includes/functions.php
+msgid "New"
+msgstr "नया"
 
 #: includes/functions.php
 msgid "Save"
@@ -2303,7 +2276,7 @@ msgid " <new>"
 msgstr " <new>"
 
 #: includes/functions.php
-msgid "Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page."
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
 msgstr ""
 
 #: includes/functions.php
@@ -3025,6 +2998,17 @@ msgstr "FlowView"
 #, fuzzy
 msgid "NetFlow"
 msgstr "नया प्रवाह"
+
+#~ msgid "Select a Listener"
+#~ msgstr "प्रिंट रिपोर्ट"
+
+#, fuzzy
+#~ msgid "Stream"
+#~ msgstr "धाराओं"
+
+#, fuzzy
+#~ msgid "Select a Stream Host"
+#~ msgstr "प्रिंट रिपोर्ट"
 
 #, fuzzy
 #~ msgid "XTP"
