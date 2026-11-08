@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue: Remove the Listener and Stream from the report page.  They are part of what a Filter materializes, so changing them there ran the report against data that was never materialized.  They are now set only in the Filter editor, and the report page reads them straight from the saved Filter.  The New button now follows Edit.
 
 * issue: Start a materialization automatically when a Filter is saved with a change that affects its cached results, from either the Filter editor or the FlowView tab, and say so, instead of asking the user to start one by hand from the Filters page.
