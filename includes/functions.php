@@ -2708,12 +2708,10 @@ function get_date_filter($sql_range, &$sql_range_params, $start, $end, int $rang
 
 	switch($range_type) {
 		case 1: // Any part in specified time span
-			$sql_range = '(`start_time` BETWEEN ? AND ? OR `end_time` BETWEEN ? AND ?)';
+			$sql_range = '(`start_time` <= ? AND `end_time` >= ?)';
 
-			$sql_range_params[] = $date1;
 			$sql_range_params[] = $date2;
 			$sql_range_params[] = $date1;
-			$sql_range_params[] = $date2;
 
 			break;
 		case 2: // End Time in Specified Time Span
