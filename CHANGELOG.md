@@ -2,7 +2,7 @@
 
 --- develop ---
 
-* issue#306: Include flows spanning the entire report time window
+* issue#306: Match flows that start before and end after the report time window; flows are still read only from the partitions inside that window
 * dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue: Remove the Listener and Stream from the report page.  They are part of what a Filter materializes, so changing them there ran the report against data that was never materialized.  They are now set only in the Filter editor, and the report page reads them straight from the saved Filter.  The New button now follows Edit.
 
