@@ -328,14 +328,17 @@ if (!function_exists('__esc')) {
 }
 
 /*
- * Deterministic stand-in for Cacti's lib/time.php get_timespan().  Tests that
- * exercise FlowView's timespan handling only care that the span is populated
- * (current_value_date1/2 for the Filter editor, begin_now/end_now for the NBAR
- * JSON responses), not the real relative-window arithmetic, so a fixed window
- * keeps those tests deterministic and lets the Filter-editor and NBAR suites
- * share one definition instead of colliding over lib/time.php.
+ * Deterministic stand-in for Cacti's lib/time.php get_timespan().  In-process
+ * tests only care that the span is populated (current_value_date1/2 for the
+ * Filter editor, begin_now/end_now for the NBAR JSON responses), not the real
+ * relative-window arithmetic, so a fixed window keeps those tests deterministic
+ * and lets the Filter-editor and NBAR suites share one definition instead of
+ * colliding over lib/time.php.  Isolated request fixtures that render real
+ * pages need the genuine relative-window labels, so they define
+ * FLOWVIEW_TEST_REAL_TIMESPAN before loading this bootstrap to opt out of the
+ * stub and let nbar_report.php pull in the real lib/time.php.
  */
-if (!function_exists('get_timespan')) {
+if (!defined('FLOWVIEW_TEST_REAL_TIMESPAN') && !function_exists('get_timespan')) {
 	function get_timespan(&$span, $now, $timespan, $first_weekdayid) {
 		$span['current_value_date1'] = '2026-10-22 00:00';
 		$span['current_value_date2'] = '2026-10-22 01:00';

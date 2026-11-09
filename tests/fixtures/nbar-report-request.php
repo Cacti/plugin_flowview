@@ -4,6 +4,9 @@
 if (PHP_SAPI !== 'cli' || count($argv) !== 3) {
 	exit(1);
 }
+// This fixture renders real report pages, so it needs genuine relative-window
+// timespan labels from lib/time.php rather than the bootstrap's fixed stub.
+define('FLOWVIEW_TEST_REAL_TIMESPAN', true);
 require(dirname(__DIR__) . '/bootstrap-unit.php');
 $scenario  = $argv[1];
 $directory = $argv[2];
