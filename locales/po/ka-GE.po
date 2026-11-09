@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-12 14:40-0400\n"
-"PO-Revision-Date: 2026-09-24 21:59+0000\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-10-24 02:18+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/flowview/ka/>\n"
 "Language: ka-GE\n"
@@ -781,7 +781,7 @@ msgstr "ვერსია"
 
 #: flowview_devices.php includes/functions.php
 msgid "Templates"
-msgstr "შაბლონები"
+msgstr "ნიმუშები"
 
 #: flowview_devices.php
 msgid "Last Updated"
@@ -804,7 +804,6 @@ msgid "Ex Addr"
 msgstr "Ex Addr"
 
 #: flowview_devices.php flowview_filters.php includes/arrays.php
-#: includes/functions.php
 msgid "All"
 msgstr "ყველა"
 
@@ -921,6 +920,33 @@ msgid "No Flowview Listeners"
 msgstr "Flowview-ის მსმენელების გარეშე"
 
 #: flowview_filters.php
+msgid "Materialize"
+msgstr ""
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr ""
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr ""
+
+#: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
 msgstr ""
 
@@ -930,6 +956,10 @@ msgstr ""
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr ""
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
 msgstr ""
 
 #: flowview_filters.php
@@ -948,11 +978,33 @@ msgstr ""
 msgid "Filters"
 msgstr "ფილტრები"
 
+#: flowview_filters.php
+msgid "Prune"
+msgstr ""
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr ""
+
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
 msgstr "ფილტრის სახელი"
 
-#: flowview_filters.php includes/arrays.php includes/functions.php
+#: flowview_filters.php
+msgid "ID"
+msgstr "ID"
+
+#: flowview_filters.php
+#, fuzzy
+#| msgid "Organization"
+msgid "Materialization"
+msgstr "ორგანიზაცია"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr ""
+
+#: flowview_filters.php includes/arrays.php
 msgid "Listener"
 msgstr "მსმენელი"
 
@@ -961,8 +1013,30 @@ msgid "Report Type"
 msgstr "ანგარიშის ტიპი"
 
 #: flowview_filters.php
-msgid "ID"
-msgstr "ID"
+msgid "NAT Shards"
+msgstr ""
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr ""
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr ""
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr ""
+
+#: flowview_filters.php
+#, fuzzy
+#| msgid "Charting Options"
+msgid "Partitions"
+msgstr "გრაფიკის აგების პარამეტრები"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr ""
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
@@ -971,6 +1045,36 @@ msgstr "ველის დალაგება"
 #: flowview_filters.php
 msgid "Resolution"
 msgstr "გაფართოება"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr ""
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr ""
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr ""
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr ""
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr ""
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "დახურვა"
 
 #: flowview_schedules.php
 msgid "Send Now"
@@ -1664,6 +1768,12 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr ""
 
 #: includes/arrays.php
+#, fuzzy
+#| msgid "Protocols"
+msgid "All Protocols"
+msgstr "პროტოკოლები"
+
+#: includes/arrays.php
 msgid "TCP Flags"
 msgstr "TCP ალმები"
 
@@ -1868,6 +1978,18 @@ msgid "Filter: [new]"
 msgstr "ფილტრი: [ახალი]"
 
 #: includes/functions.php
+msgid "Cached Results Affected"
+msgstr ""
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr ""
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr ""
+
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr ""
 
@@ -1886,18 +2008,6 @@ msgid "Select a Filter"
 msgstr "აირჩიეთ ფილტრი"
 
 #: includes/functions.php
-msgid "Select a Listener"
-msgstr "აირჩიეთ მსმენელი"
-
-#: includes/functions.php
-msgid "Stream"
-msgstr "ნაკადი"
-
-#: includes/functions.php
-msgid "Select a Stream Host"
-msgstr "აირჩიეთ ნაკადის ჰოსტი"
-
-#: includes/functions.php
 msgid "Apply Filter"
 msgstr "ფილტრის გადატარება"
 
@@ -1906,20 +2016,20 @@ msgid "Clear Filter"
 msgstr "ფილტრის გასუფთავება"
 
 #: includes/functions.php
-msgid "Create new Flow Filter"
-msgstr ""
-
-#: includes/functions.php
-msgid "New"
-msgstr "ახალი"
-
-#: includes/functions.php
 msgid "Edit"
 msgstr "ჩასწორება"
 
 #: includes/functions.php
 msgid "Edit the Flow Filter"
 msgstr ""
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr ""
+
+#: includes/functions.php
+msgid "New"
+msgstr "ახალი"
 
 #: includes/functions.php
 msgid "Save"
@@ -2134,6 +2244,10 @@ msgid " <new>"
 msgstr " <ახალი>"
 
 #: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr ""
+
+#: includes/functions.php
 msgid "Filter Settings Saved"
 msgstr "ფილტრის პარამეტრები შენახულია"
 
@@ -2191,10 +2305,6 @@ msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
 msgstr ""
 
 #: includes/functions.php
-msgid "No valid report was selected.  Please open a bug on GitHub"
-msgstr ""
-
-#: includes/functions.php
 msgid "Source DNS"
 msgstr "წყარო DNS"
 
@@ -2237,6 +2347,42 @@ msgstr "სერვისის ტიპი"
 #: includes/functions.php
 msgid "Bytes/Packet"
 msgstr "ბაიტი/პაკეტი"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr ""
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr ""
+
+#: includes/functions.php
+msgid "Running"
+msgstr "გაშვებულია"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "აუცილებელია"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr ""
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr ""
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr ""
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr ""
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
@@ -2810,6 +2956,18 @@ msgstr "Flowview"
 #| msgid "NetFlow User"
 msgid "NetFlow"
 msgstr "NetFlow-ის მომხმარებელი"
+
+#~ msgid "OK"
+#~ msgstr "დიახ"
+
+#~ msgid "Select a Listener"
+#~ msgstr "აირჩიეთ მსმენელი"
+
+#~ msgid "Stream"
+#~ msgstr "ნაკადი"
+
+#~ msgid "Select a Stream Host"
+#~ msgstr "აირჩიეთ ნაკადის ჰოსტი"
 
 #~ msgid "Packets Examined"
 #~ msgstr "შემოწმებული პაკეტები"

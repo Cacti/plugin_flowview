@@ -37,6 +37,8 @@ require('./include/cli_check.php');
 global $config;
 
 require_once($config['base_path'] . '/lib/poller.php');
+require_once($config['base_path'] . '/plugins/flowview/setup.php');
+require_once($config['base_path'] . '/plugins/flowview/includes/functions.php');
 
 flowview_connect();
 
@@ -205,9 +207,9 @@ function sig_handler($signo): void {
 			cacti_log('WARNING: Flowview Database Parallel Poller terminated by user', false, 'BOOST');
 
 			if ($shard_id) {
-				unregister_process('flowview', "db_shard{$query_id}", $shard_id, (int) getmypid());
+				unregister_process('flowview', "db_shard_{$query_id}", $shard_id, (int) getmypid());
 			} else {
-				unregister_process('flowview', "db_query{$query_id}", 0, (int) getmypid());
+				unregister_process('flowview', "db_query_{$query_id}", 0, (int) getmypid());
 			}
 
 			exit;

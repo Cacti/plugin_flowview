@@ -41,6 +41,21 @@ function plugin_flowview_csp_nonce(): string {
 	return '';
 }
 
+if (!function_exists('flowview_exit')) {
+	/**
+	 * Ends the request, with the exit status given.  The places in
+	 * includes/functions.php that end a request do it through here, so the
+	 * unit tests can stand in for it and see the request end instead of ending.
+	 *
+	 * @param int $status
+	 *
+	 * @return void
+	 */
+	function flowview_exit(int $status = 0): void {
+		exit($status);
+	}
+}
+
 /**
  * Escape an HTML attribute on supported Cacti 1.2 and newer installations.
  *
@@ -1520,6 +1535,8 @@ function flowview_graph_button($data): bool {
 
 		/* if the setting is not already cached, search */
 		if (!isset($flow_hosts_map[$host_id])) {
+			$flow_hosts_map[$host_id] = false;
+
 			foreach($host_data as $ex_addr => $hd_host_id) {
 				/* trim the domains from the ex_addr */
 				if (!is_ipaddress($ex_addr)) {
@@ -1528,34 +1545,43 @@ function flowview_graph_button($data): bool {
 
 				foreach($flow_hosts as $host) {
 					if ($host['ex_addr'] == $ex_addr) {
-						$flow_hosts_map[$host_id] = flowview_db_fetch_row_prepared('SELECT *
-							FROM plugin_flowview_queries
-							WHERE device_id = ?
-							LIMIT 1',
-							[$host['id']]);
+						/* scope the drilldown to this host's Listener and Stream, not
+						 * just any Filter for the Listener, and leave it false when no
+						 * scoped Filter matches so the link is omitted below */
+						$filter = flowview_graph_button_filter((int) $host['id'], (string) $host['ex_addr']);
 
-						$flow_hosts_map[$host_id]['ex_addr'] = $ex_addr;
-
-						$query_data = $flow_hosts_map[$host_id];
+						if (cacti_sizeof($filter)) {
+							$flow_hosts_map[$host_id] = $filter;
+						}
 
 						break;
 					}
 				}
+
+				if ($flow_hosts_map[$host_id] !== false) {
+					break;
+				}
 			}
+
+			$query_data = $flow_hosts_map[$host_id];
 		} else {
 			$query_data = $flow_hosts_map[$host_id];
 		}
 
-		if ($query_data === false) {
+		if ($query_data === false || empty($query_data['id'])) {
 			return false;
 		}
 
-		$url = $config['url_path'] . "plugins/flowview/flowview.php?action=view&query=$flowview_default_filter&timespan=session&ex_addr={$query_data['ex_addr']}";
+		/* Link to the saved Filter that is scoped to this graph's exporter.  The
+		 * report page now reads the Listener and Stream from the Filter itself,
+		 * so the old ex_addr/device_id overrides are no longer sent, and the link
+		 * is omitted above when no Filter matches rather than showing every
+		 * exporter under the default Filter. */
+		$url = $config['url_path'] . "plugins/flowview/flowview.php?action=view&query={$query_data['id']}&timespan=session";
 
 		/* initialize settings from the database if they are not set already */
 		if (cacti_sizeof($query_data)) {
 			$columns = [
-				'device_id',
 				'includeif',
 				'sortfield',
 				'cutofflines',

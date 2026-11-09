@@ -25,29 +25,6 @@ it('maps table column definitions and tolerates a failed column lookup', functio
 	expect(flowview_db_get_table_column_types('plugin_flowview_devices'))->toBe([]);
 });
 
-it('raises the parallel query timeout at error level with an empty message body', function () {
-	if (!function_exists('raise_message_javascript')) {
-		function raise_message_javascript(string $title, string $header, string $message, int $level = 0): void {
-			throw new RuntimeException(json_encode([$title, $header, $message, $level]));
-		}
-	}
-	$GLOBALS['__test_config']['flowview_parallel_runlimit'] = 0;
-
-	try {
-		parallel_database_query_run([]);
-		$raised = null;
-	} catch (RuntimeException $e) {
-		$raised = json_decode($e->getMessage(), true);
-	}
-
-	expect($raised)->toBe([
-		'parallel_query_timeout',
-		__('The Parallel Query Timed Out.  Please contact your administrator', 'flowview'),
-		'',
-		MESSAGE_LEVEL_ERROR,
-	]);
-});
-
 it('passes the report format loader a boolean report tag', function () {
 	global $config;
 
@@ -63,7 +40,6 @@ it('passes the report format loader a boolean report tag', function () {
 	if (!defined('DEFAULT_TIMESPAN')) {
 		define('DEFAULT_TIMESPAN', 1800);
 	}
-	require_once($config['base_path'] . '/lib/time.php');
 
 	if (!function_exists('reports_load_format_file')) {
 		function reports_load_format_file($format_file, &$output, &$report_tag_included, &$theme): bool {

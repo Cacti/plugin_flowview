@@ -28,7 +28,9 @@ if (!isset($config) || !function_exists('flowview_connect')) {
 	exit;
 }
 
-require_once($config['base_path'] . '/lib/time.php');
+if (!function_exists('get_timespan')) {
+	require_once($config['base_path'] . '/lib/time.php');
+}
 require_once(__DIR__ . '/includes/nbar_common.php');
 require_once(__DIR__ . '/includes/nbar_dns.php');
 require_once(__DIR__ . '/includes/nbar_preferences.php');

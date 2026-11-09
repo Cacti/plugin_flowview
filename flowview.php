@@ -101,6 +101,10 @@ switch(get_request_var('action')) {
 		flowview_gettimespan();
 
 		break;
+	case 'timeshift':
+		flowview_timeshift();
+
+		break;
 	case 'query':
 		load_session_for_filter();
 
@@ -193,8 +197,8 @@ function save_filter_as(): void {
 				}
 			}
 
+			/* the Listener and Stream stay as the source Filter has them, they are not on the page */
 			$overrides = [
-				'device_id',
 				'excluded',
 				'sortfield',
 				'cutofflines',
@@ -324,6 +328,35 @@ function load_session_for_filter() {
 	 * settings first, and then overlay others only if they are set
 	 */
 	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+		$query = flowview_db_fetch_row_prepared('SELECT *
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('query')));
+
+		/**
+		 * The report of a filter can not be changed here, as it is part of
+		 * what is cached for it.  It is changed by editing the filter.
+		 */
+		$report = cacti_sizeof($query) ? flowview_filter_report_key($query) : '';
+
+		if ($report != '') {
+			set_request_var('report', $report);
+
+			/* a printed report is a table, there is nothing to chart */
+			if (substr($report, 0, 1) == 'p') {
+				set_request_var('table', 'true');
+				set_request_var('bytes', 'false');
+				set_request_var('packets', 'false');
+				set_request_var('flows', 'false');
+
+				/* the saved panels are merged in below, so they have to say the same */
+				$query['panel_table']   = 'on';
+				$query['panel_bytes']   = '';
+				$query['panel_packets'] = '';
+				$query['panel_flows']   = '';
+			}
+		}
+
 		// Handle Report Column
 		if (isset_request_var('report')) {
 			if (get_nfilter_request_var('report') != '0' && trim(get_nfilter_request_var('report'), 'sp') != '0') {
@@ -336,11 +369,6 @@ function load_session_for_filter() {
 				}
 			}
 		}
-
-		$query = flowview_db_fetch_row_prepared('SELECT *
-			FROM plugin_flowview_queries
-			WHERE id = ?',
-			array(get_request_var('query')));
 
 		if (cacti_sizeof($query)) {
 			foreach($query as $column => $value) {
@@ -404,10 +432,8 @@ function load_session_for_filter() {
 
 						break;
 					case 'device_id':
-						if (!isset_request_var('device_id') || get_nfilter_request_var('device_id') == '-1') {
-							set_request_var('device_id', $value);
-						}
-
+					case 'ex_addr':
+						/* the Listener and Stream are read straight from the saved Filter, not the page */
 						break;
 					case 'panel_table':
 					case 'panel_bytes':
@@ -470,39 +496,20 @@ function flowview_request_vars(): void {
 		$_SESSION['sess_fview_query_last'] = get_filter_request_var('query');
 	}
 
-	/* initialize settings from the database if they are not set already */
-	if (isset_request_var('query') && !isset($_SESSION['sess_fv_' . get_filter_request_var('query')])) {
+	/**
+	 * Take the settings from the Filter as it is saved when the session holds
+	 * none for it yet, such as the first time it is shown or after it was
+	 * edited.  Otherwise validate_store_request_vars() would fall back to its
+	 * defaults below, and the saved settings would never be shown.
+	 */
+	if (isset_request_var('query') && get_filter_request_var('query') > 0 && !flowview_filter_session_exists(get_request_var('query'))) {
 		$listener = flowview_db_fetch_row_prepared('SELECT *
 			FROM plugin_flowview_queries
 			WHERE id = ?',
 			array(get_request_var('query')));
 
-		$columns = [
-			'graph_type',
-			'graph_height',
-			'panel_table',
-			'panel_bytes',
-			'panel_packets',
-			'panel_flows',
-			'usenat'
-		];
-
 		if (cacti_sizeof($listener)) {
-			foreach($columns as $c) {
-				if ($c == 'usenat') {
-					if (!isset_request_var($c)) {
-						set_request_var($c, $listener[$c] == 'on' ? 'true':'false');
-					}
-				} elseif (strpos($c, 'panel')) {
-					$rv  = str_replace('panel_', '', $c);
-
-					if (!isset_request_var($rv)) {
-						set_request_var($rv, $listener[$c] == 'on' ? 'true':'false');
-					}
-				} elseif (!isset_request_var($c)) {
-					set_request_var($c, $listener[$c]);
-				}
-			}
+			flowview_seed_filter_request_vars($listener);
 
 			if (isset_request_var('graph_link')) {
 				set_request_var('predefined_timespan', '0');
@@ -510,12 +517,21 @@ function flowview_request_vars(): void {
 		}
 	}
 
+	/* the report is not sent for a Filter that has one, as it is part of the Filter */
+	if (isset_request_var('query') && get_filter_request_var('query') > 0) {
+		$filter_report = flowview_filter_report_key(flowview_db_fetch_row_prepared('SELECT statistics, printed
+			FROM plugin_flowview_queries
+			WHERE id = ?',
+			array(get_request_var('query'))) ?: []);
+
+		if ($filter_report != '') {
+			set_request_var('report', $filter_report);
+		}
+	}
+
     /* ================= input validation and session storage ================= */
+    /* the Listener and Stream are part of the Filter, so the report page neither shows nor sends them */
     $filters = array(
-		'device_id' => [
-			'filter' => FILTER_VALIDATE_INT,
-			'default' => '0'
-		],
 		'sortfield' => array(
 			'filter' => FILTER_CALLBACK,
 			'options' => ['options' => 'sanitize_search_string'],
@@ -551,11 +567,6 @@ function flowview_request_vars(): void {
 			'filter' => FILTER_CALLBACK,
 			'options' => ['options' => 'sanitize_search_string'],
 			'default' => ''
-		),
-		'ex_addr' => array(
-			'filter' => FILTER_CALLBACK,
-			'options' => ['options' => 'sanitize_search_string'],
-			'default' => '0'
 		),
 		'domains' => array(
 			'filter' => FILTER_VALIDATE_REGEXP,

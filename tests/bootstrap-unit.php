@@ -99,10 +99,24 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_csrf_valid'] = true;
 		$GLOBALS['__test_translations'] = array();
 		$GLOBALS['fv_nbar_data_known']  = array();
+		$GLOBALS['__test_exec']       = array();
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
 		$_SESSION = array();
+	}
+}
+
+if (!function_exists('exec_background')) {
+	function exec_background($filename, $args = '', $redirect_args = '') {
+		$GLOBALS['__test_exec'][]     = array($filename, $args);
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_background', 'sql' => $filename, 'params' => [$args]];
+	}
+}
+
+if (!function_exists('cacti_escapeshellarg')) {
+	function cacti_escapeshellarg($string) {
+		return "'" . str_replace("'", "'\\''", (string) $string) . "'";
 	}
 }
 
@@ -285,11 +299,23 @@ if (!function_exists('html_escape')) {
 	}
 }
 
+/*
+ * Like Cacti's __(), every argument after the text is a sprintf() argument
+ * unless the last one is a registered text domain.  The plugin's domain is
+ * not, so a text with placeholders and only a domain fails in Cacti, and the
+ * stub must fail the same way.
+ */
 if (!function_exists('__')) {
 	function __($text, ...$args) {
 		if ($args) {
-			$domain = array_pop($args); // Cacti passes the text domain last.
-			$text = $GLOBALS['__test_translations'][$domain][$text] ?? $text;
+			$maybe_domain = end($args);
+			// Cacti passes the text domain last; treat it as a domain only
+			// when the test has registered translations for it, otherwise it
+			// is a sprintf() argument like any other.
+			if (is_string($maybe_domain) && isset($GLOBALS['__test_translations'][$maybe_domain])) {
+				array_pop($args);
+				$text = $GLOBALS['__test_translations'][$maybe_domain][$text] ?? $text;
+			}
 		}
 		return $args ? vsprintf($text, $args) : $text;
 	}
@@ -297,13 +323,24 @@ if (!function_exists('__')) {
 
 if (!function_exists('__esc')) {
 	function __esc($text, ...$args) {
-		if (!empty($args)) {
-			array_pop($args);
-		}
-		if (!empty($args)) {
-			$text = vsprintf($text, $args);
-		}
-		return htmlspecialchars($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		return htmlspecialchars(__($text, ...$args), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+	}
+}
+
+/*
+ * Deterministic stand-in for Cacti's lib/time.php get_timespan().  Tests that
+ * exercise FlowView's timespan handling only care that the span is populated
+ * (current_value_date1/2 for the Filter editor, begin_now/end_now for the NBAR
+ * JSON responses), not the real relative-window arithmetic, so a fixed window
+ * keeps those tests deterministic and lets the Filter-editor and NBAR suites
+ * share one definition instead of colliding over lib/time.php.
+ */
+if (!function_exists('get_timespan')) {
+	function get_timespan(&$span, $now, $timespan, $first_weekdayid) {
+		$span['current_value_date1'] = '2026-10-22 00:00';
+		$span['current_value_date2'] = '2026-10-22 01:00';
+		$span['begin_now']           = strtotime('2026-10-22 00:00');
+		$span['end_now']             = strtotime('2026-10-22 01:00');
 	}
 }
 
@@ -311,6 +348,7 @@ if (!function_exists('cacti_log')) {
 	function cacti_log($message, $also_print = false, $log_type = '', $level = 0) {
 		$args = func_get_args();
 		$GLOBALS["__test_cacti_log"][] = isset($args[0]) ? (string) $args[0] : "";
+		$GLOBALS["__test_cacti_log_print"][] = (bool) $also_print;
 	}
 }
 
@@ -427,13 +465,25 @@ if (!function_exists('form_input_validate')) {
 
 if (!function_exists('is_error_message')) {
 	function is_error_message() {
-		return false;
+		return !empty($GLOBALS['__test_error_message']);
 	}
 }
 
 if (!function_exists('sql_save')) {
 	function sql_save($array, $table, $key = 'id') {
 		return isset($array['id']) ? $array['id'] : 1;
+	}
+}
+
+if (!class_exists('FlowviewTestExit')) {
+	/* thrown by the flowview_exit() stand in, so a test sees where a request ends */
+	class FlowviewTestExit extends RuntimeException {
+	}
+}
+
+if (!function_exists('flowview_exit')) {
+	function flowview_exit(int $status = 0): void {
+		throw new FlowviewTestExit('flowview_exit', $status);
 	}
 }
 
@@ -528,11 +578,6 @@ if (!function_exists('csrf_check')) {
     }
 }
 
-if (!function_exists('exec_background')) {
-	function exec_background($filename, $args = '', $redirect_args = '') {
-		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_background', 'sql' => $filename, 'params' => [$args]];
-	}
-}
 if (!function_exists('register_process_start')) {
 	function register_process_start($name, $type, $id, $timeout) {
 		$GLOBALS['__test_db_calls'][] = ['fn' => 'register_process_start', 'sql' => $name, 'params' => [$type, $id, $timeout]];
@@ -541,7 +586,8 @@ if (!function_exists('register_process_start')) {
 }
 if (!function_exists('unregister_process')) {
 	function unregister_process($name, $type, $id = 0, $pid = -1) {
-		$GLOBALS['__test_db_calls'][] = ['fn' => 'unregister_process', 'sql' => $name, 'params' => [$type, $id, $pid]];
+		$GLOBALS['__test_db_calls'][]     = ['fn' => 'unregister_process', 'sql' => $name, 'params' => [$type, $id, $pid]];
+		$GLOBALS['__test_unregistered'][] = array($name, $type, $id);
 	}
 }
 if (!function_exists('exec_with_timeout')) {

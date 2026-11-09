@@ -813,6 +813,8 @@ $filter_edit = array(
 		'method' => 'drop_multi',
 		'value' => '|arg1:protocols|',
 		'default' => '0',
+		/* the select2 control of Cacti 1.2.32 and later shows this when none are picked */
+		'select_all_text' => __('All Protocols', 'flowview'),
 		'array' => $ip_protocols_array
 	),
 	'tcpflags' => array(

@@ -2,10 +2,13 @@
     "tombstones": [
         "arrays.php",
         "database.php",
+        "fixprivate.php",
         "flowview_security.php",
         "flowview_upgrade.php",
         "functions-pre13.php",
         "functions.php",
+        "import_flows.php",
+        "repair_tables.php",
         "themes/"
     ],
     "expected": [
@@ -17,7 +20,6 @@
         "cli/",
         "config.php.dist",
         "css/",
-        "fixprivate.php",
         "flow_collector.php",
         "flowview.php",
         "flowview_bulkarin.php",
@@ -32,7 +34,6 @@
         "flowview_sections.php",
         "flowview_upgrade_nat_columns.php",
         "images/",
-        "import_flows.php",
         "includes/",
         "index.php",
         "irr_tables.php",
@@ -44,7 +45,6 @@
         "nbar_report.php",
         "nbar_setup_guide.php",
         "plugin_flowview_ports.sql",
-        "repair_tables.php",
         "run_schedule.php",
         "service/",
         "setup.php"

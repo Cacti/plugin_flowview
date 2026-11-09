@@ -15,7 +15,6 @@ beforeEach(function () {
 	if (!defined('DEFAULT_TIMESPAN')) {
 		define('DEFAULT_TIMESPAN', 1800);
 	}
-	require_once($config['base_path'] . '/lib/time.php');
 	flowview_test_load(dirname(__DIR__, 2) . '/setup.php');
 	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_common.php');
 	flowview_test_load(dirname(__DIR__, 2) . '/includes/nbar_timespan.php');

@@ -87,8 +87,10 @@ spawning processes and polling tables can be seconds.
   pool; when `flowview_use_maxscale` is on, map (read) queries are routed through
   the MaxScale read/write-split port so shards round-robin across backends.
 - **Maintenance off the critical path.** A scheduler goroutine expires queries
-  past their `time_to_live`, ages out cached partitions, and drops cache rows for
-  partitions that have been rolled off — the work PHP does inline today.
+  past their `time_to_live`, drops cache rows for partitions that have been rolled
+  off, and expires the short lived live-partition results; cached results of a
+  cold partition are kept until the partition is dropped, the work PHP does
+  inline today.
 
 ### Map-reduce reduction (unchanged contract)
 
@@ -261,9 +263,11 @@ A goroutine runs every `scheduler_interval` (and once at startup):
 
 - expires `parallel_database_query` rows past `time_to_live` and drops their
   intermediary map tables;
-- ages out `parallel_database_query_shard_cache` rows older than
-  `flowview_parallel_time_to_live`;
-- drops cache rows whose partition table no longer exists (rolled-off data).
+- drops cache rows whose partition table no longer exists (rolled-off data);
+- expires the short lived (60 second) live-partition results that the PHP
+  workers store with `map_partition = 'live'`.  Cached results of a cold
+  partition are never aged out, as the materialization of a filter is built
+  from them.
 
 Deleting a saved query or filter should call `POST /cache/invalidate` with that
 signature so its cache does not linger until TTL.
