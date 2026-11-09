@@ -100,6 +100,7 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_translations'] = array();
 		$GLOBALS['fv_nbar_data_known']  = array();
 		$GLOBALS['__test_exec']       = array();
+		$GLOBALS['__test_get_timespan'] = null;
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -336,10 +337,17 @@ if (!function_exists('__esc')) {
  * colliding over lib/time.php.  Isolated request fixtures that render real
  * pages need the genuine relative-window labels, so they define
  * FLOWVIEW_TEST_REAL_TIMESPAN before loading this bootstrap to opt out of the
- * stub and let nbar_report.php pull in the real lib/time.php.
+ * stub and let nbar_report.php pull in the real lib/time.php.  A test that needs
+ * to drive a specific window (for example to exercise the retention-boundary
+ * branches of fv_nbar_timespan_options) can assign a callable to
+ * $GLOBALS['__test_get_timespan'] to compute the span itself.
  */
 if (!defined('FLOWVIEW_TEST_REAL_TIMESPAN') && !function_exists('get_timespan')) {
 	function get_timespan(&$span, $now, $timespan, $first_weekdayid) {
+		if (isset($GLOBALS['__test_get_timespan']) && is_callable($GLOBALS['__test_get_timespan'])) {
+			($GLOBALS['__test_get_timespan'])($span, $now, $timespan, $first_weekdayid);
+			return;
+		}
 		$span['current_value_date1'] = '2026-10-22 00:00';
 		$span['current_value_date2'] = '2026-10-22 01:00';
 		$span['begin_now']           = strtotime('2026-10-22 00:00');
