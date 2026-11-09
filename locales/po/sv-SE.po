@@ -4,19 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-23 16:08-0400\n"
-"PO-Revision-Date: 2026-10-27 12:18+0000\n"
-"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
-"Language-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\n"
-"Language: sv-SE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-09 22:18+0000\nLast-Translator: Daniel Nylander <daniel@danielnylander.se>\nLanguage-Team: Swedish <https://translate.cacti.net/projects/cacti/flowview/sv/>\nLanguage: sv-SE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -469,7 +457,7 @@ msgstr "Sök"
 
 #: flowview_databases.php
 msgid "Any"
-msgstr "Vilken som helst"
+msgstr "Valfri"
 
 #: flowview_databases.php
 msgid "Entries"
@@ -482,7 +470,7 @@ msgstr "Standard"
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
 msgid "Go"
-msgstr "Start"
+msgstr "Gå"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php
@@ -1083,7 +1071,7 @@ msgstr "Varje timme"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Med %d timmars mellanrum"
+msgstr "Var %d:e timme"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1968,16 +1956,12 @@ msgid "Cached Results Affected"
 msgstr "Cachade resultat påverkas"
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "These changes affect the cached results of this Filter.  Once it is saved they no longer match it, and the Filter has to be materialized again.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
 msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
-msgstr "Ändringarna påverkar filtrets cachade resultat.  När filtret sparas matchar resultaten det inte längre och filtret måste materialiseras igen.  Klicka på ”Fortsätt” för att spara filtret eller på ”Avbryt” för att fortsätta redigera det."
+msgstr "De här ändringarna påverkar filtrets cachade resultat. När du sparar startas en materialisering i bakgrunden som bygger om dem. Klicka på ”Fortsätt” för att spara filtret eller på ”Avbryt” för att fortsätta redigera det."
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "The changes to this Filter affect its cached results, so it has to be materialized again.  To start a materialization, select the Filter on the Filters page and choose the 'Materialize' action."
 msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
-msgstr "Ändringarna i filtret påverkar dess cachade resultat, så det måste materialiseras igen.  För att starta materialiseringen, välj filtret på sidan Filter och välj åtgärden ”Materialisera”."
+msgstr "Ändringarna i det här filtret påverkar dess cachade resultat, därför har en materialisering startats i bakgrunden. Förloppet visas på sidan Filter och resultaten rapporteras i Cacti-loggen."
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -2234,10 +2218,8 @@ msgid " <new>"
 msgstr " <ny>"
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "Filter Settings Saved.  A forced re-materialization of this Filter is recommended, use the Materialize action on the Filters page."
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
-msgstr "Filterinställningarna har sparats.  En påtvingad ommaterialisering av filtret rekommenderas. Använd åtgärden Materialisera på sidan Filter."
+msgstr "Filterinställningarna har sparats. En materialisering av det här filtret har startats i bakgrunden."
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
