@@ -71,17 +71,24 @@ it('computes the full IPv6 CIDR range', function () {
 	expect($params)->toBe(array(16, '2001:db8::', '2001:db8::ffff:ffff:ffff:ffff'));
 });
 
-it('builds each supported temporal overlap contract', function ($rangeType, $expectedSql, $expectedCount) {
+it('builds each supported temporal filter contract', function ($rangeType, $expectedSql, $expectedParams) {
 	$params = array();
 	$sql = get_date_filter('', $params, 1704067200, 1704070800, $rangeType);
 
 	expect($sql)->toBe($expectedSql)
-		->and($params)->toHaveCount($expectedCount)
-		->and($params[0])->toBe('2024-01-01 00:00:00')
-		->and($params[1])->toBe('2024-01-01 01:00:00');
+		->and($params)->toBe($expectedParams);
 })->with(array(
-	array(1, '(`start_time` BETWEEN ? AND ? OR `end_time` BETWEEN ? AND ?)', 4),
-	array(2, '(`end_time` BETWEEN ? AND ?)', 2),
-	array(3, '(`start_time` BETWEEN ? AND ?)', 2),
-	array(4, '(`start_time` BETWEEN ? AND ? AND `end_time` BETWEEN ? AND ?)', 4),
+	array(1, '(`end_time` >= ? AND `start_time` <= ?)', array('2024-01-01 00:00:00', '2024-01-01 01:00:00')),
+	array(2, '(`end_time` BETWEEN ? AND ?)', array('2024-01-01 00:00:00', '2024-01-01 01:00:00')),
+	array(3, '(`start_time` BETWEEN ? AND ?)', array('2024-01-01 00:00:00', '2024-01-01 01:00:00')),
+	array(4, '(`start_time` BETWEEN ? AND ? AND `end_time` BETWEEN ? AND ?)', array('2024-01-01 00:00:00', '2024-01-01 01:00:00', '2024-01-01 00:00:00', '2024-01-01 01:00:00')),
 ));
+
+it('stores every temporal filter with the window start and end first', function ($rangeType) {
+	// The run statistics query reads map_range_params[0] and [1] as the
+	// window bounds for the shard cache lookup.
+	$params = array();
+	get_date_filter('', $params, 1704067200, 1704070800, $rangeType);
+
+	expect(array_slice($params, 0, 2))->toBe(array('2024-01-01 00:00:00', '2024-01-01 01:00:00'));
+})->with(array(1, 2, 3, 4));
