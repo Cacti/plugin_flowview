@@ -95,7 +95,12 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_db_results'] = array();
 		$GLOBALS['__test_config']     = array();
 		$GLOBALS['__test_messages']   = array();
+		$GLOBALS['__test_user_settings'] = array();
+		$GLOBALS['__test_csrf_valid'] = true;
+		$GLOBALS['__test_translations'] = array();
+		$GLOBALS['fv_nbar_data_known']  = array();
 		$GLOBALS['__test_exec']       = array();
+		$GLOBALS['__test_get_timespan'] = null;
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -105,7 +110,8 @@ if (!function_exists('plugin_test_reset')) {
 
 if (!function_exists('exec_background')) {
 	function exec_background($filename, $args = '', $redirect_args = '') {
-		$GLOBALS['__test_exec'][] = array($filename, $args);
+		$GLOBALS['__test_exec'][]     = array($filename, $args);
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_background', 'sql' => $filename, 'params' => [$args]];
 	}
 }
 
@@ -124,10 +130,18 @@ if (!function_exists('plugin_test_queue_db_result')) {
 	}
 }
 
+if (!function_exists('plugin_test_queue_slices')) {
+	// Queue the answer to the SHOW TABLES that lists the raw NBAR slices.
+	function plugin_test_queue_slices(array $tables) {
+		plugin_test_queue_db_result('db_fetch_assoc', array_map(fn ($table) => array('Tables_in_cacti (plugin_flowview_nbar_data_%)' => $table), $tables));
+	}
+}
+
 if (!function_exists('plugin_test_db_result')) {
 	function plugin_test_db_result($function, $default) {
 		if (!empty($GLOBALS['__test_db_results'][$function])) {
-			return array_shift($GLOBALS['__test_db_results'][$function]);
+			$result = array_shift($GLOBALS['__test_db_results'][$function]);
+			return $result instanceof Closure ? $result() : $result;
 		}
 		return $default;
 	}
@@ -136,14 +150,14 @@ if (!function_exists('plugin_test_db_result')) {
 if (!function_exists('db_execute')) {
 	function db_execute($sql, $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute', true);
 	}
 }
 
 if (!function_exists('db_execute_prepared')) {
 	function db_execute_prepared($sql, $params = array(), $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params, 'conn' => $conn);
-		return true;
+		return plugin_test_db_result('db_execute_prepared', true);
 	}
 }
 
@@ -178,7 +192,7 @@ if (!function_exists('db_fetch_row_prepared')) {
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql, $column = '', $log = true, $conn = false) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_cell', 'sql' => $sql, 'params' => array(), 'conn' => $conn);
-		return plugin_test_db_result('db_fetch_cell', '');
+		return plugin_test_db_result('db_fetch_cell', str_contains($sql, '@@session.max_statement_time') ? '0' : '');
 	}
 }
 
@@ -209,6 +223,13 @@ if (!function_exists('db_check_reconnect')) {
 if (!function_exists('db_index_exists')) {
 	function db_index_exists($table, $index) {
 		return false;
+	}
+}
+
+if (!function_exists('db_add_column')) {
+	function db_add_column($table, $column, $log = true, $conn = false) {
+		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_add_column', 'sql' => $table, 'params' => $column, 'conn' => $conn);
+		return plugin_test_db_result('db_add_column', true);
 	}
 }
 
@@ -287,13 +308,50 @@ if (!function_exists('html_escape')) {
  */
 if (!function_exists('__')) {
 	function __($text, ...$args) {
-		return empty($args) ? $text : vsprintf($text, $args);
+		if ($args) {
+			$maybe_domain = end($args);
+			// Cacti passes the text domain last; treat it as a domain only
+			// when the test has registered translations for it, otherwise it
+			// is a sprintf() argument like any other.
+			if (is_string($maybe_domain) && isset($GLOBALS['__test_translations'][$maybe_domain])) {
+				array_pop($args);
+				$text = $GLOBALS['__test_translations'][$maybe_domain][$text] ?? $text;
+			}
+		}
+		return $args ? vsprintf($text, $args) : $text;
 	}
 }
 
 if (!function_exists('__esc')) {
 	function __esc($text, ...$args) {
 		return htmlspecialchars(__($text, ...$args), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+	}
+}
+
+/*
+ * Deterministic stand-in for Cacti's lib/time.php get_timespan().  In-process
+ * tests only care that the span is populated (current_value_date1/2 for the
+ * Filter editor, begin_now/end_now for the NBAR JSON responses), not the real
+ * relative-window arithmetic, so a fixed window keeps those tests deterministic
+ * and lets the Filter-editor and NBAR suites share one definition instead of
+ * colliding over lib/time.php.  Isolated request fixtures that render real
+ * pages need the genuine relative-window labels, so they define
+ * FLOWVIEW_TEST_REAL_TIMESPAN before loading this bootstrap to opt out of the
+ * stub and let nbar_report.php pull in the real lib/time.php.  A test that needs
+ * to drive a specific window (for example to exercise the retention-boundary
+ * branches of fv_nbar_timespan_options) can assign a callable to
+ * $GLOBALS['__test_get_timespan'] to compute the span itself.
+ */
+if (!defined('FLOWVIEW_TEST_REAL_TIMESPAN') && !function_exists('get_timespan')) {
+	function get_timespan(&$span, $now, $timespan, $first_weekdayid) {
+		if (isset($GLOBALS['__test_get_timespan']) && is_callable($GLOBALS['__test_get_timespan'])) {
+			($GLOBALS['__test_get_timespan'])($span, $now, $timespan, $first_weekdayid);
+			return;
+		}
+		$span['current_value_date1'] = '2026-10-22 00:00';
+		$span['current_value_date2'] = '2026-10-22 01:00';
+		$span['begin_now']           = strtotime('2026-10-22 00:00');
+		$span['end_now']             = strtotime('2026-10-22 01:00');
 	}
 }
 
@@ -311,6 +369,12 @@ if (!function_exists('cacti_sizeof')) {
 	}
 }
 
+if (!function_exists('cacti_count')) {
+	function cacti_count($array) {
+		return is_array($array) ? count($array) : 0;
+	}
+}
+
 if (!function_exists('is_realm_allowed')) {
 	function is_realm_allowed($realm) {
 		return true;
@@ -324,14 +388,14 @@ if (!function_exists('raise_message')) {
 }
 
 if (!function_exists('get_request_var')) {
-	function get_request_var($name) {
-		return isset($_REQUEST[$name]) ? $_REQUEST[$name] : '';
+	function get_request_var($name, $default = '') {
+		return isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
 	}
 }
 
 if (!function_exists('get_nfilter_request_var')) {
-	function get_nfilter_request_var($name) {
-		return get_request_var($name);
+	function get_nfilter_request_var($name, $default = '') {
+		return get_request_var($name, $default);
 	}
 }
 
@@ -377,6 +441,16 @@ if (!function_exists('cacti_pton')) {
 		}
 		$mask = str_pad($mask, strlen($ip), "\0");
 		return array('ip' => $ip, 'subnet' => $mask);
+	}
+}
+
+if (!function_exists('array_rekey')) {
+	function array_rekey($array, $key, $value) {
+		$out = [];
+		foreach (is_array($array) ? $array : [] as $row) {
+			$out[$row[$key]] = is_array($value) ? array_intersect_key($row, array_flip($value)) : $row[$value];
+		}
+		return $out;
 	}
 }
 
@@ -497,3 +571,46 @@ function flowview_test_load($path) {
 
 require_once dirname(__DIR__) . '/includes/functions.php';
 require_once dirname(__DIR__) . '/includes/database.php';
+
+// Account preferences and CSRF use configurable fixtures, never a real account.
+if (!function_exists('read_user_setting')) {
+    function read_user_setting($name, $default = '', $force = false) {
+        return $GLOBALS['__test_user_settings'][$name] ?? $default;
+    }
+}
+if (!function_exists('set_user_setting')) {
+    function set_user_setting($name, $value) {
+        $GLOBALS['__test_user_settings'][$name] = $value;
+    }
+}
+if (!function_exists('csrf_check')) {
+    function csrf_check($fatal = true) {
+        return $GLOBALS['__test_csrf_valid'] ?? true;
+    }
+}
+
+if (!function_exists('register_process_start')) {
+	function register_process_start($name, $type, $id, $timeout) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'register_process_start', 'sql' => $name, 'params' => [$type, $id, $timeout]];
+		return plugin_test_db_result('register_process_start', true);
+	}
+}
+if (!function_exists('unregister_process')) {
+	function unregister_process($name, $type, $id = 0, $pid = -1) {
+		$GLOBALS['__test_db_calls'][]     = ['fn' => 'unregister_process', 'sql' => $name, 'params' => [$type, $id, $pid]];
+		$GLOBALS['__test_unregistered'][] = array($name, $type, $id);
+	}
+}
+if (!function_exists('exec_with_timeout')) {
+	function exec_with_timeout($command, &$output, &$status, $timeout = 5) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'exec_with_timeout', 'sql' => '', 'params' => [$command, $timeout]];
+		$status = plugin_test_db_result('exec_with_timeout', 0);
+		return plugin_test_db_result('exec_with_timeout_result', null);
+	}
+}
+
+if (!function_exists('db_affected_rows')) {
+	function db_affected_rows($conn = false) {
+		return plugin_test_db_result('db_affected_rows', 0);
+	}
+}

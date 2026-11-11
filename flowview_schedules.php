@@ -364,7 +364,7 @@ function view_log_data(): void {
 
 	$log_data = db_fetch_row_prepared('SELECT * FROM reports_log WHERE id = ?', [$id]);
 
-	if (cacti_sizeof($log_data)) {
+	if (is_array($log_data) && cacti_sizeof($log_data)) {
 		$data    = json_decode($log_data['report_raw_data'], true);
 		$columns = array_keys($data[0]);
 
@@ -390,7 +390,7 @@ function download_log_data(): void {
 
 	$log_data = db_fetch_row_prepared('SELECT * FROM reports_log WHERE id = ?', [$id]);
 
-	if (cacti_sizeof($log_data)) {
+	if (is_array($log_data) && cacti_sizeof($log_data)) {
 		$data    = json_decode($log_data['report_raw_data'], true);
 		$columns = array_keys($data[0]);
 

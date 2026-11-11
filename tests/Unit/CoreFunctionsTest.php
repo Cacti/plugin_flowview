@@ -2002,8 +2002,8 @@ describe('altering a partition under its lock, from the table as it is then', fu
 	it('is how the materializer, the poller and the schema upgrade alter a partition', function () {
 		expect(plugin_test_read_source('cli/materialize_queries.php'))->toContain('flowview_alter_partition($table, $raw_engine, false, FLOWVIEW_ALTER_LOCK_WAIT')
 			->and(plugin_test_read_source('cli/materialize_queries.php'))->not->toContain('flowview_apply_partition_alter(')
-			->and(plugin_test_read_source('flowview_upgrade.php'))->toContain("flowview_alter_partition(\$t['TABLE_NAME'], \$raw_engine)")
-			->and(plugin_test_read_source('flowview_upgrade.php'))->not->toContain('flowview_apply_partition_alter(')
+			->and(plugin_test_read_source('cli/flowview_upgrade.php'))->toContain("flowview_alter_partition(\$t['TABLE_NAME'], \$raw_engine)")
+			->and(plugin_test_read_source('cli/flowview_upgrade.php'))->not->toContain('flowview_apply_partition_alter(')
 			->and(plugin_test_read_source('includes/functions.php'))->toMatch('/function flowview_convert_partition_engine.*?GET_LOCK\(\?, \?\)\', \[\$lock, 0\]/s');
 	});
 });

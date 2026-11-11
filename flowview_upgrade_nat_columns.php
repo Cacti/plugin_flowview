@@ -29,7 +29,7 @@
  * 'plugin_flowview_raw_*' partition tables.
  *
  * This is deliberately a standalone CLI rather than part of the automatic
- * background schema upgrade (flowview_upgrade.php): a busy install can have
+ * background schema upgrade (cli/flowview_upgrade.php): a busy install can have
  * hundreds of large raw partition tables, and altering all of them can take
  * a long time.  Run this manually (or on a schedule) after upgrading the
  * plugin to backfill existing partitions; new partitions created going

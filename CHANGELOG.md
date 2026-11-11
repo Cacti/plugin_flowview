@@ -2,6 +2,9 @@
 
 --- develop ---
 
+* feature: Add Cisco Apps (NBAR) reports for application-bearing NetFlow v9 exports, with IPv4/IPv6 application totals, conversations, paged connections, per-account capture/network options, recent-record status, first/last observation dates and a router setup guide
+* feature: Maintain reusable per-capture NBAR hourly/daily summaries through the existing Cacti poller, with raw partial-boundary fallback and a separate retention setting capped at 30 days
+* feature: Store raw NBAR records in time-sliced tables (plugin_flowview_nbar_data_<year><day>[<hour>]) that follow the Database Partitioning Scheme setting, and expire them by dropping whole slices
 * dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue: Remove the Listener and Stream from the report page.  They are part of what a Filter materializes, so changing them there ran the report against data that was never materialized.  They are now set only in the Filter editor, and the report page reads them straight from the saved Filter.  The New button now follows Edit.
 

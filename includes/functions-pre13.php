@@ -40,7 +40,7 @@
  * @param array  $raw_data     Reference, the report's raw result data.
  * @param mixed  $oput_raw     Reference, the raw rendered output.
  * @param string $oput_html    Reference, the HTML-rendered output body.
- * @param string|null $oput_text Reference, the plain-text output body (defaulted to '' if null).
+ * @param string $oput_text Reference, the plain-text output body.
  * @param array  $attachments  Optional list of file attachments to include.
  * @param array  $headers      Optional extra email headers to include.
  *
@@ -69,7 +69,7 @@ function reports_log_and_notify($id, $start_time, $report_type, $source, $source
 	$from[0] = $fromemail;
 	$from[1] = $fromname;
 
-	if (cacti_sizeof($report)) {
+	if (is_array($report) && cacti_sizeof($report)) {
 		if ($report['notification'] != '') {
 			$notifications = json_decode($report['notification'], true);
 
@@ -114,9 +114,9 @@ function reports_log_and_notify($id, $start_time, $report_type, $source, $source
 								WHERE id = ?',
 								[$data['id']]);
 
-							if (cacti_sizeof($list)) {
+							if (is_array($list) && cacti_sizeof($list)) {
 								/* process the format file */
-								$report_tag  = '';
+								$report_tag  = false;
 								$theme       = 'modern';
 								$output_html = '';
 								$format      = $list['format_file'] != '' ? $list['format_file']:'default';
@@ -269,7 +269,7 @@ function reports_run($id): bool {
 		WHERE id = ?',
 		[$id]);
 
-	if (cacti_sizeof($report)) {
+	if (is_array($report) && cacti_sizeof($report)) {
 		db_execute_prepared('UPDATE reports_queued
 			SET status = ?, start_time = ?
 			WHERE id = ?',

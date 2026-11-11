@@ -2418,7 +2418,7 @@ function plugin_flowview_run_schedule($id, $report_id): void {
 	}
 
 	/* process the format file */
-	$report_tag  = '';
+	$report_tag  = false;
 	$theme       = 'modern';
 	$body_html   = '';
 	$format      = $schedule['format_file'] != '' ? $schedule['format_file']:'default';
@@ -3311,7 +3311,7 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 				$data['statistics'] = 0;
 			}
 		}
-	} elseif (!sizeof($data)) {
+	} elseif (!cacti_sizeof($data)) {
 		return false;
 	}
 
