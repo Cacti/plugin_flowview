@@ -2,7 +2,7 @@
 
 --- develop ---
 
-* issue#308: Whitelist the customer-created config.php in manifest.json so upgrade pruning never touches it, and run flowview_upgrade.php via __DIR__ so it works when invoked from outside the Cacti root
+* issue#308: Launch the background database upgrade only once and raise the "upgrading in the background" notice a single time, instead of relaunching the CLI and repeating the notice on every Plugins page visit while the recorded version still lags the code. A crashed upgrade past its process timeout is relaunched, and the CLI clears the notice and records the new version when it finishes. Whitelist the customer-created config.php in manifest.json so upgrade pruning never touches it, and run flowview_upgrade.php via __DIR__ so it works when invoked from outside the Cacti root
 * issue#306: Match flows that start before and end after the report time window; flows are still read only from the partitions inside that window
 * dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue: Remove the Listener and Stream from the report page.  They are part of what a Filter materializes, so changing them there ran the report against data that was never materialized.  They are now set only in the Filter editor, and the report page reads them straight from the saved Filter.  The New button now follows Edit.

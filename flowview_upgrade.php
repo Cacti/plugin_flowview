@@ -98,6 +98,14 @@ cacti_log('Upgrading from v' . $old_version . ' to ' . $current_version, true, '
 
 flowview_upgrade($current_version, $old_version);
 
+// Remove files tombstoned in manifest.json plus the dev-only tests/ tree.
+flowview_prune_files();
+
+// Clear the operator notice flag so a later upgrade can raise it again. The
+// web hook (flowview_launch_background_upgrade()) stops relaunching this CLI
+// once flowview_upgrade() records the new version in plugin_config.
+set_config_option('flowview_db_upgrade_notified', 'off');
+
 unregister_process('flowview', 'upgrade', 1);
 
 exit(0);

@@ -162,15 +162,78 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 		WHERE directory = ?', array('flowview'));
 
 	if ($current != $old || $force) {
+		flowview_launch_background_upgrade($force);
+	}
+}
+
+/**
+ * Launches the background upgrade CLI (flowview_upgrade.php) once and raises a
+ * single operator notice while it runs, rather than relaunching it and
+ * re-raising the notice on every page load. The CLI's register_process_start()
+ * is the authoritative double-run guard; this only avoids a needless relaunch
+ * and keeps the notice from repeating. The CLI records the new plugin version
+ * and clears the notice flag when it finishes, which stops this hook from
+ * relaunching it.
+ *
+ * @param bool $force Launch even when an upgrade run is already registered.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to locate the
+ *                       CLI script.
+ */
+function flowview_launch_background_upgrade(bool $force = false): void {
+	global $config;
+
+	if ($force || !flowview_background_upgrade_running()) {
 		$php_binary = read_config_option('path_php_binary');
 
-		exec_background($php_binary, '-q ' .$config['base_path'] . '/plugins/flowview/flowview_upgrade.php');
+		if ($php_binary != '') {
+			exec_background($php_binary, '-q ' . cacti_escapeshellarg($config['base_path'] . '/plugins/flowview/flowview_upgrade.php'));
+		}
+	}
 
+	// Raise the notice only once. The CLI clears this flag when it finishes, so
+	// a future upgrade notifies again.
+	if (read_config_option('flowview_db_upgrade_notified', true) != 'on') {
 		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
 
-		// Remove files tombstoned in manifest.json plus the dev-only tests/ tree.
-		flowview_prune_files();
+		set_config_option('flowview_db_upgrade_notified', 'on');
 	}
+}
+
+/**
+ * Reports whether a background FlowView upgrade process is currently
+ * registered and has not outlived its timeout. The web launcher uses it to
+ * avoid spawning a second copy and re-raising the operator notice on every
+ * page load; a run that crashed past its timeout is treated as not running so
+ * it is relaunched. Matches the registration flowview_upgrade.php makes with
+ * register_process_start('flowview', 'upgrade', 1, 86400).
+ *
+ * @return bool True when a non-stale upgrade process is registered.
+ */
+function flowview_background_upgrade_running(): bool {
+	if (!db_table_exists('processes')) {
+		return false;
+	}
+
+	$process = db_fetch_row_prepared('SELECT
+		UNIX_TIMESTAMP(started) AS started,
+		UNIX_TIMESTAMP() AS `now`,
+		timeout
+		FROM processes
+		WHERE tasktype = ?
+		AND taskname = ?
+		AND taskid = 1',
+		['flowview', 'upgrade']);
+
+	if (!cacti_sizeof($process)) {
+		return false;
+	}
+
+	// A registration that has outlived its timeout is stale; treat a crashed
+	// upgrade as not running so the launcher relaunches it.
+	return ((int) $process['now'] - (int) $process['started']) <= (int) $process['timeout'];
 }
 
 /**

@@ -88,6 +88,7 @@ $GLOBALS['__test_db_calls']   = array();
 $GLOBALS['__test_db_results'] = array();
 $GLOBALS['__test_config']     = array();
 $GLOBALS['__test_messages']   = array();
+$GLOBALS['__test_tables']     = array();
 
 if (!function_exists('plugin_test_reset')) {
 	function plugin_test_reset() {
@@ -96,6 +97,7 @@ if (!function_exists('plugin_test_reset')) {
 		$GLOBALS['__test_config']     = array();
 		$GLOBALS['__test_messages']   = array();
 		$GLOBALS['__test_exec']       = array();
+		$GLOBALS['__test_tables']     = array();
 		$_GET     = array();
 		$_POST    = array();
 		$_REQUEST = array();
@@ -264,6 +266,12 @@ if (!function_exists('api_plugin_register_realm')) {
 if (!function_exists('read_config_option')) {
 	function read_config_option($name, $force = false) {
 		return isset($GLOBALS['__test_config'][$name]) ? $GLOBALS['__test_config'][$name] : '';
+	}
+}
+
+if (!function_exists('db_table_exists')) {
+	function db_table_exists($table, $log = true, $conn = false) {
+		return isset($GLOBALS['__test_tables'][$table]) ? (bool) $GLOBALS['__test_tables'][$table] : true;
 	}
 }
 
