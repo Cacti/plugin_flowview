@@ -185,6 +185,16 @@ function plugin_flowview_check_upgrade(bool $force = false): void {
 function flowview_launch_background_upgrade(bool $force = false): void {
 	global $config;
 
+	// Persist the notice flag before spawning the CLI, and raise the notice
+	// only once. A fast-finishing child clears this flag when it completes;
+	// writing it here first keeps this request from overwriting that completion
+	// write, which would leave the next upgrade without its operator notice.
+	if (read_config_option('flowview_db_upgrade_notified', true) != 'on') {
+		set_config_option('flowview_db_upgrade_notified', 'on');
+
+		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
+	}
+
 	if ($force || !flowview_background_upgrade_running()) {
 		$php_binary = read_config_option('path_php_binary');
 
@@ -192,32 +202,25 @@ function flowview_launch_background_upgrade(bool $force = false): void {
 			exec_background($php_binary, '-q ' . cacti_escapeshellarg($config['base_path'] . '/plugins/flowview/flowview_upgrade.php'));
 		}
 	}
-
-	// Raise the notice only once. The CLI clears this flag when it finishes, so
-	// a future upgrade notifies again.
-	if (read_config_option('flowview_db_upgrade_notified', true) != 'on') {
-		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
-
-		set_config_option('flowview_db_upgrade_notified', 'on');
-	}
 }
 
 /**
  * Reports whether a background FlowView upgrade process is currently
- * registered and has not outlived its timeout. The web launcher uses it to
- * avoid spawning a second copy and re-raising the operator notice on every
- * page load; a run that crashed past its timeout is treated as not running so
- * it is relaunched. Matches the registration flowview_upgrade.php makes with
+ * registered and is still alive. The web launcher uses it to avoid spawning a
+ * second copy and re-raising the operator notice on every page load. A run
+ * that outlived its timeout, or whose recorded PID has exited, is treated as
+ * not running so the upgrade is relaunched rather than blocked for the rest of
+ * the 24-hour timeout. Matches the registration flowview_upgrade.php makes with
  * register_process_start('flowview', 'upgrade', 1, 86400).
  *
- * @return bool True when a non-stale upgrade process is registered.
+ * @return bool True when a non-stale, live upgrade process is registered.
  */
 function flowview_background_upgrade_running(): bool {
 	if (!db_table_exists('processes')) {
 		return false;
 	}
 
-	$process = db_fetch_row_prepared('SELECT
+	$process = db_fetch_row_prepared('SELECT pid,
 		UNIX_TIMESTAMP(started) AS started,
 		UNIX_TIMESTAMP() AS `now`,
 		timeout
@@ -231,9 +234,31 @@ function flowview_background_upgrade_running(): bool {
 		return false;
 	}
 
-	// A registration that has outlived its timeout is stale; treat a crashed
-	// upgrade as not running so the launcher relaunches it.
-	return ((int) $process['now'] - (int) $process['started']) <= (int) $process['timeout'];
+	// A registration that has outlived its timeout is stale.
+	if (((int) $process['now'] - (int) $process['started']) > (int) $process['timeout']) {
+		return false;
+	}
+
+	// A crashed CLI can leave a fresh registration for a full day, so probe the
+	// recorded PID: a dead worker is recovered immediately. The CLI's own
+	// register_process_start() guard replaces the registration, so the web
+	// request only decides whether to relaunch and must not delete it.
+	$pid = (int) $process['pid'];
+
+	if ($pid <= 0 || $pid > (PHP_OS_FAMILY === 'Windows' ? 4294967295 : 2147483647)) {
+		return false;
+	}
+
+	if (function_exists('posix_kill') && !posix_kill($pid, 0)) {
+		// Only ESRCH proves the process exited. EPERM can mean the web server
+		// does not own the CLI process, and an unavailable probe is
+		// inconclusive too, so both are treated as still running.
+		$esrch = defined('SOCKET_ESRCH') ? SOCKET_ESRCH : 3;
+
+		return !function_exists('posix_get_last_error') || posix_get_last_error() !== $esrch;
+	}
+
+	return true;
 }
 
 /**

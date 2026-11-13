@@ -53,8 +53,10 @@ it('launches the CLI and raises the notice once when no upgrade is running', fun
 it('does not relaunch or re-notify while a non-stale run is registered', function () {
 	$GLOBALS['__test_config']['flowview_db_upgrade_notified'] = 'on';
 
-	// A registered run that is well within its timeout.
+	// A registered run that is well within its timeout, owned by a live PID
+	// (this test process is guaranteed alive).
 	plugin_test_queue_db_result('db_fetch_row_prepared', array(
+		'pid'     => getmypid(),
 		'started' => 1000,
 		'now'     => 1050,
 		'timeout' => 86400,
@@ -102,10 +104,29 @@ it('treats a missing processes table as not running', function () {
 
 it('reports a non-stale registered run as running', function () {
 	plugin_test_queue_db_result('db_fetch_row_prepared', array(
+		'pid'     => getmypid(),
 		'started' => 1000,
 		'now'     => 1050,
 		'timeout' => 86400,
 	));
 
 	expect(flowview_background_upgrade_running())->toBeTrue();
+});
+
+it('recovers a non-stale registration whose worker PID has exited', function () {
+	if (!function_exists('posix_kill')) {
+		$this->markTestSkipped('posix_kill is required to probe PID liveness');
+	}
+
+	// A registration well within its timeout but owned by a PID that is not
+	// running must be treated as not running so the upgrade is relaunched
+	// instead of being blocked for the rest of the 24-hour timeout.
+	plugin_test_queue_db_result('db_fetch_row_prepared', array(
+		'pid'     => 2147483646,
+		'started' => 1000,
+		'now'     => 1050,
+		'timeout' => 86400,
+	));
+
+	expect(flowview_background_upgrade_running())->toBeFalse();
 });
