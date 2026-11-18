@@ -3,6 +3,24 @@
 This plugin allows you to view NetFlow data from inside of Cacti and 
 to generate Email based reports of the data.
 
+## Versions and compatibility
+
+This README describes the `develop` source branch.
+
+| Code | Plugin version | Minimum Cacti declared in `INFO` |
+| --- | --- | --- |
+| [Source branch](INFO) | 5.1 | 1.2.29 |
+| [Published v4.8](https://github.com/Cacti/plugin_flowview/releases/tag/v4.8) | 4.8 | 1.2.28 |
+
+Use the published release’s assets and tagged documentation when installing that
+package. Branch code can include later changes, even when its version number
+matches the release. Cacti’s own PHP and database requirements also apply.
+
+Install this plugin in **`<cacti-root>/plugins/flowview`**, using the directory
+name `flowview` rather than `plugin_flowview`.
+
+See [CHANGELOG.md](CHANGELOG.md) for the version history.
+
 # Features
 
 * Ability to view Flow Data in Table Form or three Chart Forms.
@@ -13,8 +31,7 @@ to generate Email based reports of the data.
   whois service.
 * Customizable Scheduled Reports.
 * Starting with the 4.x version, the ARIA database format will be the default
-  for historical raw tables.  The ARIA format is crash safe, and almost
-  5x faster than InnoDB.  The live raw table will always be InnoDB to support
+  for historical raw tables. The live raw table uses InnoDB to support
   multiple concurrent inserts, but once that table ages out, it will be
   converted to the ARIA engine by default.
 * Starting with the 4.x version, the DNS cache will be manageable.  Therefore,
@@ -100,7 +117,9 @@ MariaDB Galera Cluster (10.6.0+) offers `wsrep_mode=REPLICATE_ARIA`, which enabl
 replication of DML updates to Aria tables. However, **MariaDB's own documentation
 still marks this option as experimental and states it should not be relied upon in
 production systems.** There is currently no MariaDB version that officially/fully
-supports Aria table replication under Galera. See
+supports production Aria table replication under Galera. The
+[MariaDB `wsrep_mode` reference](https://mariadb.com/docs/galera-cluster/reference/galera-cluster-system-variables#wsrep_mode)
+still labels `REPLICATE_ARIA` experimental. See
 [Cacti/plugin_flowview#253](https://github.com/Cacti/plugin_flowview/issues/253)
 for background and current tracking status.
 
