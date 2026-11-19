@@ -1,5 +1,8 @@
 # Changelog
 
+Documentation update (unreleased): Refresh README release/source compatibility,
+installation guidance and source-checked behavior.
+
 --- develop ---
 
 * issue#308: Launch the background database upgrade only once and raise the "upgrading in the background" notice a single time, instead of relaunching the CLI and repeating the notice on every Plugins page visit while the recorded version still lags the code. A crashed upgrade past its process timeout is relaunched, and the CLI clears the notice and records the new version when it finishes. Whitelist the customer-created config.php in manifest.json so upgrade pruning never touches it, and run flowview_upgrade.php via __DIR__ so it works when invoked from outside the Cacti root

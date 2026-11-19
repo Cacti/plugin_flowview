@@ -3,6 +3,24 @@
 This plugin allows you to view NetFlow data from inside of Cacti and 
 to generate Email based reports of the data.
 
+## Versions and compatibility
+
+This README describes the `develop` source branch.
+
+| Code | Plugin version | Minimum Cacti declared in `INFO` |
+| --- | --- | --- |
+| [Source branch](https://github.com/Cacti/plugin_flowview/blob/develop/INFO) | 5.1 | 1.2.29 |
+| [Published v4.8](https://github.com/Cacti/plugin_flowview/releases/tag/v4.8) | 4.8 | 1.2.28 |
+
+Use the published release’s assets and tagged documentation when installing that
+package. Branch code can include later changes, even when its version number
+matches the release. Cacti’s own PHP and database requirements also apply.
+
+Install this plugin in **`<cacti-root>/plugins/flowview`**, using the directory
+name `flowview` rather than `plugin_flowview`.
+
+See [CHANGELOG.md](https://github.com/Cacti/plugin_flowview/blob/develop/CHANGELOG.md) for the version history.
+
 # Features
 
 * Ability to view Flow Data in Table Form or three Chart Forms.
@@ -13,8 +31,7 @@ to generate Email based reports of the data.
   whois service.
 * Customizable Scheduled Reports.
 * Starting with the 4.x version, the ARIA database format will be the default
-  for historical raw tables.  The ARIA format is crash safe, and almost
-  5x faster than InnoDB.  The live raw table will always be InnoDB to support
+  for historical raw tables. The live raw table uses InnoDB to support
   multiple concurrent inserts, but once that table ages out, it will be
   converted to the ARIA engine by default.
 * Starting with the 4.x version, the DNS cache will be manageable.  Therefore,
@@ -100,7 +117,9 @@ MariaDB Galera Cluster (10.6.0+) offers `wsrep_mode=REPLICATE_ARIA`, which enabl
 replication of DML updates to Aria tables. However, **MariaDB's own documentation
 still marks this option as experimental and states it should not be relied upon in
 production systems.** There is currently no MariaDB version that officially/fully
-supports Aria table replication under Galera. See
+supports production Aria table replication under Galera. The
+[MariaDB `wsrep_mode` reference](https://mariadb.com/docs/galera-cluster/reference/galera-cluster-system-variables#wsrep_mode)
+still labels `REPLICATE_ARIA` experimental. See
 [Cacti/plugin_flowview#253](https://github.com/Cacti/plugin_flowview/issues/253)
 for background and current tracking status.
 
@@ -112,7 +131,7 @@ OpenFlashCharts.  In fact the entire import and reporting process is handled
 through php and uses JavaScript based charting already available in Cacti.
 
 Note that additionally, you must install the Linux utility `ss` if it is
-not already installed.  Netstat will help Cacti determine if the `flow-capture`
+not already installed.  `ss` will help Cacti determine if the `flow-capture`
 service in question is actually running.
 
 After installing, you should set your partitioning and retention settings from
@@ -275,6 +294,36 @@ Filter, or of a report with its settings changed on the report page.  The
 'Prune' button on the Filters page, after Clear, removes the ones that match no
 Filter, after you confirm in its dialog.  It keeps everything that matches a Filter, and does nothing when
 the cache keys of a Filter that has a report can not be worked out.
+
+## Realms and Menus
+
+The plugin registers two realms, which you grant under Plugin Permissions on the
+Permissions tab of a user or group:
+
+* **NetFlow User** - allows viewing flow reports (`flowview.php`).
+* **NetFlow Admin** - allows managing Listeners, Filters, Schedules and
+  Databases.
+
+Administrators manage the plugin from the **FlowView** menu in the Console,
+which has the entries Listeners, Filters, Schedules and Databases.
+
+## Command Line Utilities
+
+* `cli/import_flows.php` - imports legacy flow data; see Upgrading from Prior
+  Versions above.
+* `cli/repair_tables.php` - alters the `plugin_flowview_raw` tables so the
+  domain, remote domain, remote port and next hop columns have the current
+  column sizes.
+* `cli/fixprivate.php` - repairs the domain and remote domain of flows in the
+  `plugin_flowview_raw` tables whose source or destination address starts with
+  `192.` but is not in `192.168.`, by looking the address up again in DNS.
+* `flowview_bulkarin.php [--proceed] [--ips] [--origins]` - bulk resolves
+  unverified ARIN details and locates the Origin AS via whois when ARIN does
+  not provide it.  `--proceed` is required to run it.
+* `flowview_cleanup.php [--proceed]` - kills lingering parallel query
+  processes, drops leftover map tables and purges the parallel query cache and
+  orphaned shards.  It is meant for developers who want to reset their
+  database, must be run as a super user, and requires `--proceed`.
 
 # Possible Bugs?
 
