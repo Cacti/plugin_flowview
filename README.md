@@ -9,7 +9,7 @@ This README describes the `develop` source branch.
 
 | Code | Plugin version | Minimum Cacti declared in `INFO` |
 | --- | --- | --- |
-| [Source branch](INFO) | 5.1 | 1.2.29 |
+| [Source branch](https://github.com/Cacti/plugin_flowview/blob/develop/INFO) | 5.1 | 1.2.29 |
 | [Published v4.8](https://github.com/Cacti/plugin_flowview/releases/tag/v4.8) | 4.8 | 1.2.28 |
 
 Use the published release’s assets and tagged documentation when installing that
@@ -19,7 +19,7 @@ matches the release. Cacti’s own PHP and database requirements also apply.
 Install this plugin in **`<cacti-root>/plugins/flowview`**, using the directory
 name `flowview` rather than `plugin_flowview`.
 
-See [CHANGELOG.md](CHANGELOG.md) for the version history.
+See [CHANGELOG.md](https://github.com/Cacti/plugin_flowview/blob/develop/CHANGELOG.md) for the version history.
 
 # Features
 
