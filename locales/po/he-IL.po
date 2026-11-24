@@ -20,15 +20,15 @@ msgstr ""
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
-msgstr ""
+msgstr "לא ניתן למצוא נתונים גולמיים לייצוא"
 
 #: flowview.php
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
-msgstr ""
+msgstr "שאילתת FlowView שסופקה אינה קיימת. אנא שלח שאילתה חוקית."
 
 #: flowview.php
 msgid "Invalid source Query provided.  Please submit with a valid query."
-msgstr ""
+msgstr "סופקה שאילתת מקור לא חוקית. אנא שלח שאילתה חוקית."
 
 #: flowview.php
 #, php-format
@@ -58,9 +58,8 @@ msgid "Authorized Agent Details"
 msgstr "פרטי סוכן מורשה"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "No Details Found"
-msgstr "לא נמצאו ערכי מטמון DNS"
+msgstr "לא נמצאו פרטים"
 
 #: flowview_databases.php
 msgid "CIDR/Route"
@@ -72,11 +71,11 @@ msgstr "מספרים"
 
 #: flowview_databases.php
 msgid "AS Block"
-msgstr "כבלוקים"
+msgstr "בלוק AS"
 
 #: flowview_databases.php
 msgid "AS Set"
-msgstr "לא מוגדר"
+msgstr "קבוצת AS"
 
 #: flowview_databases.php
 msgid "Route Set"
@@ -100,7 +99,7 @@ msgstr "רשת"
 
 #: flowview_databases.php
 msgid "Internet Router"
-msgstr "בקרת אינטרנט"
+msgstr "נתב אינטרנט"
 
 #: flowview_databases.php
 msgid "Incident Response Team"
@@ -248,7 +247,7 @@ msgstr "MNT Irt"
 
 #: flowview_databases.php
 msgid "MP Members"
-msgstr "מספרים"
+msgstr "חברי MP"
 
 #: flowview_databases.php
 msgid "Sub Domain"
@@ -256,7 +255,7 @@ msgstr "מקור דומיין"
 
 #: flowview_databases.php
 msgid "Pingable"
-msgstr "אפשר"
+msgstr "ניתן ל-Ping"
 
 #: flowview_databases.php
 msgid "Alias"
@@ -316,7 +315,7 @@ msgstr "Aggr MTD"
 
 #: flowview_databases.php
 msgid "AS Type"
-msgstr "כסוג"
+msgstr "סוג AS"
 
 #: flowview_databases.php
 msgid "MP Filter"
@@ -332,7 +331,7 @@ msgstr "גודל המשימה"
 
 #: flowview_databases.php
 msgid "Export Comps"
-msgstr "דו\"ח"
+msgstr "רכיבי ייצוא"
 
 #: flowview_databases.php
 msgid "RS In"
@@ -340,7 +339,7 @@ msgstr "RS ב"
 
 #: flowview_databases.php
 msgid "Net Name"
-msgstr "שדה שם"
+msgstr "שם רשת"
 
 #: flowview_databases.php
 msgid "DS Rdata"
@@ -380,7 +379,7 @@ msgstr "להזריק"
 
 #: flowview_databases.php
 msgid "MP Peer"
-msgstr "חבר פרלמנט עמית"
+msgstr "עמית MP"
 
 #: flowview_databases.php
 msgid "Referral By"
@@ -400,12 +399,11 @@ msgstr "מקור כ"
 
 #: flowview_databases.php
 msgid "MP Export"
-msgstr "דו\"ח"
+msgstr "ייצוא MP"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Encryption"
-msgstr "תאריך תפוגה"
+msgstr "הצפנה"
 
 #: flowview_databases.php
 msgid "Geo Feed"
@@ -421,7 +419,7 @@ msgstr "ממשק"
 
 #: flowview_databases.php
 msgid "Export Via"
-msgstr "דו\"ח"
+msgstr "ייצוא באמצעות"
 
 #: flowview_databases.php
 msgid "Trouble"
@@ -449,7 +447,7 @@ msgstr "חתימה"
 
 #: flowview_databases.php
 msgid "Geo Location"
-msgstr "סיבוב"
+msgstr "מיקום גאוגרפי"
 
 #: flowview_databases.php
 msgid "Local AS"
@@ -514,13 +512,12 @@ msgid "No Matching Entries Found"
 msgstr "לא נמצאו ערכים תואמים"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "לחץ על 'המשך' כדי למחוק את התזמונים הבאים."
-msgstr[1] "לחץ על 'המשך' כדי למחוק את התזמונים הבאים."
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "לחץ על 'המשך' כדי למחוק את ערך מטמון ה-DNS הבא."
+msgstr[1] "לחץ על 'המשך' כדי למחוק את כל ערכי מטמון ה-DNS הבאים."
+msgstr[2] "לחץ על 'המשך' כדי למחוק את כל ערכי מטמון ה-DNS הבאים."
+msgstr[3] "לחץ על 'המשך' כדי למחוק את כל ערכי מטמון ה-DNS הבאים."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -536,13 +533,13 @@ msgstr "המשך"
 msgid "Delete DNS Entry"
 msgid_plural "Delete DNS Entries"
 msgstr[0] "מחיקת ערך DNS"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[1] "מחיקת ערכי DNS"
+msgstr[2] "מחיקת ערכי DNS"
+msgstr[3] "מחיקת ערכי DNS"
 
 #: flowview_databases.php
 msgid "Flowview DNS Cache Entries"
-msgstr "לוחות זמנים של זרימה"
+msgstr "רשומות מטמון DNS של Flowview"
 
 #: flowview_databases.php
 msgid "Verified"
@@ -614,7 +611,7 @@ msgstr "לא נמצאו ערכי מטמון DNS"
 
 #: flowview_databases.php
 msgid "Flowview Internet Routes"
-msgstr "FlowView מאזינים"
+msgstr "נתיבי אינטרנט של Flowview"
 
 #: flowview_databases.php
 msgid "IP Version"
@@ -630,7 +627,7 @@ msgstr "IPv6"
 
 #: flowview_databases.php
 msgid "Route"
-msgstr "אין מסלול נמצאה התאמת השיטה URL ובקשה"
+msgstr "נתיב"
 
 #: flowview_databases.php
 msgid "This is the published Internet Route."
@@ -638,7 +635,7 @@ msgstr "זהו מסלול האינטרנט שפורסם."
 
 #: flowview_databases.php
 msgid "AS Number"
-msgstr "מספר הכרטיס"
+msgstr "מספר AS"
 
 #: flowview_databases.php
 msgid "The Autonomous System Number for the route."
@@ -649,9 +646,8 @@ msgid "Route Description"
 msgstr "תיאור המסלול"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "The Description logged by the Route Maintainer."
-msgstr "ה- Descrption נרשם על ידי מתחזק המסלול."
+msgstr "התיאור שנרשם ביומן על ידי מתחזק הניתוב."
 
 #: flowview_databases.php
 msgid "The source database used to publish the route."
@@ -699,20 +695,19 @@ msgstr "ישנן שתי שיטות איסוף תמיכה, הראשונה משת�
 
 #: flowview_devices.php
 msgid "Bind to address"
-msgstr ""
+msgstr "קשור לכתובת"
 
 #: flowview_devices.php
 msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
-msgstr ""
+msgstr "אם לשרת Cacti יש יותר מכתובת IP אחת, ניתן לציין ממשק מסוים. השאר 0.0.0.0 עבור הממשק הראשי."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Allowed Host Range"
-msgstr "מארח מורשה"
+msgstr "טווח מארחים מורשה"
 
 #: flowview_devices.php
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
-msgstr ""
+msgstr "כתובת ה-IP של ההתקן המורשה לשלוח לאוסף זרימות (flow collector) זה. השאר 0.0.0.0 עבור כל מארח. שים לב ש-PHP בררנית לגבי מה שהיא מאפשרת. תחביר CIDR נתמך וכן תחביר טווחים, לדוגמה 192.168.1.0 או 192.168.1.0/24. אם ברצונך לציין כתובות IP מסוימות, הפרד ביניהן בפסיק."
 
 #: flowview_devices.php includes/arrays.php
 msgid "Port"
@@ -740,7 +735,7 @@ msgstr "מאופשר"
 
 #: flowview_devices.php
 msgid "If checked, the Listener service will be started and will wait on incoming data."
-msgstr ""
+msgstr "אם מסומן, שירות ההאזנה יופעל וימתין לנתונים נכנסים."
 
 #: flowview_devices.php
 #, php-format
@@ -748,23 +743,20 @@ msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "לא נמצאה תבנית זרימה עבור מזהה התקן:%s ומזהה תבנית:%s"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "לחץ על 'המשך' כדי למחוק את מאזיני הזרימה הזמינים. לאחר מכן, תצטרך להפעיל מחדש את זרימת שירות לכידת."
+msgstr "לחץ על 'המשך' כדי למחוק את מאזיני ה-NetFlow הבאים. לאחר מכן, Cacti ינסה להפעיל מחדש את שירות ה-Flow-Capture."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "לחץ על 'המשך' כדי למחוק את מאזיני הזרימה הזמינים. לאחר מכן, תצטרך להפעיל מחדש את זרימת שירות לכידת."
+msgstr "לחץ על 'המשך' כדי להפעיל את מאזיני ה-NetFlow הבאים. לאחר מכן, Cacti ינסה להפעיל מחדש את שירות ה-Flow-Capture."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "You must select at least one Listener."
-msgstr "עליך לבחור לפחות מכשיר אחד."
+msgstr "עליך לבחור לפחות מאזין אחד."
 
 #: flowview_devices.php
 msgid "The listener port must be a numeric value between 1 and 65535."
-msgstr ""
+msgstr "פורט ההאזנה חייב להיות ערך מספרי בין 1 ל-65535."
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
@@ -777,11 +769,11 @@ msgstr "שמור בהצלחה.  מאזין תצוגת הזרימה נשמר.  ע
 #: flowview_devices.php
 #, php-format
 msgid "Listener [edit: %s]"
-msgstr "דוח: [עריכה: %s]"
+msgstr "מאזין [עריכה: %s]"
 
 #: flowview_devices.php
 msgid "Listener [new]"
-msgstr "דוח: [חדש]"
+msgstr "מאזין [חדש]"
 
 #: flowview_devices.php
 msgid "Name"
@@ -868,9 +860,8 @@ msgid "Method"
 msgstr "שיטה"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Bind address"
-msgstr "כתובת IP"
+msgstr "כתובת האזנה (Bind)"
 
 #: flowview_devices.php
 msgid "Allowed From"
@@ -886,11 +877,11 @@ msgstr "אבטחת הנמל למעשה נצפתה ביציאת המאזינים.
 
 #: flowview_devices.php
 msgid "Backlog"
-msgstr ""
+msgstr "צבר המתנה"
 
 #: flowview_devices.php
 msgid "The Size of the UDP backlog in bytes."
-msgstr ""
+msgstr "גודל תור ההמתנה (backlog) של UDP בבתים."
 
 #: flowview_devices.php
 msgid "Streams"
@@ -917,9 +908,8 @@ msgid "None"
 msgstr "ללא"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "No Connections"
-msgstr "סיבוב"
+msgstr "אין חיבורים"
 
 #: flowview_devices.php includes/arrays.php includes/functions.php
 msgid "N/A"
@@ -927,42 +917,42 @@ msgstr "לא זמין"
 
 #: flowview_devices.php
 msgid "Cacti"
-msgstr "צבריים"
+msgstr "Cacti"
 
 #: flowview_devices.php
 msgid "No Flowview Listeners"
-msgstr "FlowView מאזינים"
+msgstr "אין מאזיני Flowview"
 
 #: flowview_filters.php
 msgid "Materialize"
-msgstr ""
+msgstr "ממש"
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
-msgstr ""
+msgstr "לא ניתן היה לחשב את מפתחות המטמון של המסננים, ולכן דבר לא נוקה."
 
 #: flowview_filters.php
 #, php-format
 msgid "Pruned %s cached shard(s) that did not match any Filter."
-msgstr ""
+msgstr "צומצמו %s רסיסי מטמון שלא תאמו לאף מסנן."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "מימוש של %d מסננים הופעל ברקע. %d מסננים כבר נמצאים בתהליך מימוש. התוצאות מדווחות ביומן Cacti."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "מימוש של %d מסננים הופעל ברקע. התוצאות מדווחות ביומן Cacti."
 
 #: flowview_filters.php
 msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
-msgstr ""
+msgstr "המסננים שנבחרו כבר נמצאים בתהליך בנייה (materialization). אנא נסה שוב לאחר שהתהליך יסתיים."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
-msgstr "לחץ על 'המשך' כדי למחוק את התזמונים הבאים."
+msgstr "לחץ על 'המשך' כדי למחוק את המסנן (המסננים) הבאים ואת כל המסנן התואם."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
@@ -974,7 +964,7 @@ msgstr "לחץ על 'המשך' כדי להפעיל את התזמונים הבא�
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
-msgstr ""
+msgstr "לחץ על 'המשך' כדי לממש (Materialize) ברקע את המסננים הבאים, עם NAT פעיל וכבוי, עבור כל טווח נתוני הזרימה. מחיצות שכבר מומשו והן מדויקות ידולגו. פעולה זו עשויה להימשך זמן רב במערכי נתונים גדולים. מסנן שכבר נמצא בתהליך מימוש ידולג."
 
 #: flowview_filters.php
 msgid "You must select at least one Filter."
@@ -994,11 +984,11 @@ msgstr "מסננים"
 
 #: flowview_filters.php
 msgid "Prune"
-msgstr ""
+msgstr "צמצם"
 
 #: flowview_filters.php
 msgid "Remove the cached shards that do not match any Filter"
-msgstr ""
+msgstr "הסר את מקטעי המטמון שאינם תואמים לאף מסנן"
 
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
@@ -1009,14 +999,13 @@ msgid "ID"
 msgstr "מזהה"
 
 #: flowview_filters.php
-#, fuzzy
 #| msgid "Organization"
 msgid "Materialization"
-msgstr "ארגון"
+msgstr "מימוש"
 
 #: flowview_filters.php
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
-msgstr ""
+msgstr "מימוש (Materialization) מחשב מראש את התוצאות של מסנן עבור כל מחיצת זרימה, עם NAT מופעל וכבוי, ושומר אותן במטמון השאילתות המקביליות, כך שדוחות על נתונים ישנים יותר נפתחים במהירות. מחיצות חדשות ממומשות אוטומטית ברגע שהן מפסיקות לקבל זרימות. 'נדרש' (Required) מציין שמחיצות שסובבו טרם מומשו, 'פועל' (Running) מציין שמימוש נמצא בתהליך, ו'מעודכן' (Up to date) מציין שכל מחיצה שסובבה מומשה. 'Running: N' מציין כמה שאילתות של המסנן פועלות כעת. המחיצה שעדיין מקבלת זרימות אינה ממומשת, ולכן אינה נספרת."
 
 #: flowview_filters.php includes/arrays.php
 msgid "Listener"
@@ -1028,29 +1017,28 @@ msgstr "סוג דוח"
 
 #: flowview_filters.php
 msgid "NAT Shards"
-msgstr ""
+msgstr "מקטעי NAT"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
-msgstr ""
+msgstr "מספר המחיצות של מסנן זה המאוחסנות במטמון Parallel Query כאשר NAT מופעל."
 
 #: flowview_filters.php
 msgid "Non-NAT Shards"
-msgstr ""
+msgstr "מקטעים ללא NAT"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
-msgstr ""
+msgstr "מספר המחיצות של מסנן זה המאוחסנות במטמון Parallel Query כאשר NAT כבוי."
 
 #: flowview_filters.php
-#, fuzzy
 #| msgid "Charting Options"
 msgid "Partitions"
-msgstr "אפשרויות יצירת תרשימים"
+msgstr "מחיצות"
 
 #: flowview_filters.php
 msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
-msgstr ""
+msgstr "המספר הכולל של מחיצות זרימה (flow), שהוא המספר המרבי של חלקים (shards) שמסנן יכול לשמור במטמון עם או בלי NAT."
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
@@ -1062,33 +1050,33 @@ msgstr "רזולוציה"
 
 #: flowview_filters.php
 msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
-msgstr ""
+msgstr "לא ניתן היה להבחין בין החלקים (shards) השמורים במטמון של המסננים לבין האחרים, מאחר שלא ניתן היה לחשב את מפתחות המטמון של מסנן."
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
-msgstr ""
+msgstr "לא ניתן היה לחשב את מפתחות המטמון של המסננים, ולכן לא ניתן לנקות דבר כעת. בדוק שלכל מסנן יש דוח תקין."
 
 #: flowview_filters.php
 #, php-format
 msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
-msgstr ""
+msgstr "רסיסים במטמון: %s תואמים למסנן. %s אינם תואמים לאף מסנן, אותם פעולת הניקוי (Prune) מסירה."
 
 #: flowview_filters.php
 #, php-format
 msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
-msgstr ""
+msgstr "פעולה זו מסירה %s חלקי מטמון (shards) שאינם תואמים לאף מסנן, עבור כל מסנן וכל משתמש. הם נובעים ממסננים ששונו או נמחקו, ומדוחות שהגדרותיהם שונו בדף הדוח. %s חלקי המטמון של המסננים נשמרים. לא ניתן לבטל פעולה זו."
 
 #: flowview_filters.php
 msgid "Every cached shard matches a Filter.  There is nothing to prune."
-msgstr ""
+msgstr "כל מקטע (shard) במטמון תואם למסנן. אין מה לנקות."
 
 #: flowview_filters.php
 msgid "Prune Cached Shards"
-msgstr ""
+msgstr "צמצם רסיסי מטמון"
 
 #: flowview_filters.php
 msgid "Close"
-msgstr ""
+msgstr "סגור"
 
 #: flowview_schedules.php
 msgid "Send Now"
@@ -1101,7 +1089,7 @@ msgstr "כל שעה"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "כל% d שעות"
+msgstr "כל %d שעות"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1114,16 +1102,15 @@ msgstr "כל שבוע"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Weeks, 2"
-msgstr "כל% d שבועות, 2"
+msgstr "כל %d שבועות, 2"
 
 #: flowview_schedules.php
 msgid "Every Month"
 msgstr "כל חודש"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "General Settings"
-msgstr "מחיקת מסננים"
+msgstr "הגדרות כלליות"
 
 #: flowview_schedules.php
 msgid "Title"
@@ -1146,9 +1133,8 @@ msgid "Name of the query to run."
 msgstr "שם השאילתה להפעלה."
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Send Settings"
-msgstr "ערכות AS"
+msgstr "הגדרות שליחה"
 
 #: flowview_schedules.php
 msgid "Send Interval"
@@ -1159,9 +1145,8 @@ msgid "How often to send this NetFlow Report?"
 msgstr "באיזו תדירות יש לשלוח דוח NetFlow זה?"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Base Time"
-msgstr "כותרת התזמון"
+msgstr "זמן בסיס מתוזמן"
 
 #: flowview_schedules.php
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
@@ -1169,11 +1154,11 @@ msgstr "זהו התאריך והשעה הראשונים לשליחת דוא\"ל 
 
 #: flowview_schedules.php
 msgid "Max Allowed Runtime"
-msgstr ""
+msgstr "זמן ריצה מרבי מותר"
 
 #: flowview_schedules.php
 msgid "How long should the report be allowed to execute before exiting?"
-msgstr ""
+msgstr "כמה זמן יורשה הדוח לרוץ לפני יציאה?"
 
 #: flowview_schedules.php setup.php
 #, php-format
@@ -1187,7 +1172,7 @@ msgstr "דקות %d"
 
 #: flowview_schedules.php
 msgid "Legacy Email Settings"
-msgstr ""
+msgstr "הגדרות דוא\"ל מדור קודם"
 
 #: flowview_schedules.php
 msgid "Email Addresses"
@@ -1207,20 +1192,19 @@ msgstr "בחר את עטיפת ה- HTML המותאמת אישית ואת קוב�
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
-msgstr ""
+msgstr "הגדרות רשימת התראות"
 
 #: flowview_schedules.php
 msgid "Notification List"
-msgstr ""
+msgstr "רשימת התראות"
 
 #: flowview_schedules.php
 msgid "If the Thold Plugin is installed, you may select a Notification List"
-msgstr ""
+msgstr "אם התוסף Thold מותקן, ניתן לבחור רשימת התראות"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "The Report will arrive once complete."
-msgstr "הדוחות יגיעו לאחר השלמתם."
+msgstr "הדוח יגיע לאחר השלמתו."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to delete the following Schedule(s)."
@@ -1245,89 +1229,82 @@ msgstr "עליך לבחור לפחות לוח זמנים אחד."
 #: flowview_schedules.php
 #, php-format
 msgid "Unable to find Report Raw Data for Report ID %s"
-msgstr ""
+msgstr "לא ניתן למצוא נתונים גולמיים של הדוח עבור מזהה דוח %s"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
-msgstr ""
+msgstr "יש לציין כתובות דוא\"ל, רשימת התראות או את שניהם!"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report: [edit: %s]"
-msgstr "דוח: [עריכה: %s]"
+msgstr "דוח מתוזמן: [עריכה: %s]"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report History: [edit: %s]"
-msgstr "דוח: [עריכה: %s]"
+msgstr "היסטוריית דוח מתוזמן: [עריכה: %s]"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Report: [new]"
-msgstr "דוח: [חדש]"
+msgstr "דוח מתוזמן: [חדש]"
 
 #: flowview_schedules.php setup.php
 msgid "Schedules"
 msgstr "תזמונים"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Title"
-msgstr "סוג דוח"
+msgstr "כותרת דו\"ח"
 
 #: flowview_schedules.php
 msgid "Id"
-msgstr ""
+msgstr "מזהה"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Output Type"
-msgstr "תבנית פלט"
+msgstr "סוג פלט"
 
 #: flowview_schedules.php
 msgid "Sent By"
-msgstr ""
+msgstr "נשלח על ידי"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Date Sent"
-msgstr "ערכות מסלולים"
+msgstr "תאריך שליחה"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Run Time"
-msgstr "שעת סיום"
+msgstr "מגבלת הפעלה"
 
 #: flowview_schedules.php
 msgid "Download Data"
-msgstr ""
+msgstr "הורד נתונים"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Logs"
-msgstr "דו\"ח"
+msgstr "יומני דוחות"
 
 #: flowview_schedules.php
 msgid " [View Report Raw]"
-msgstr ""
+msgstr " [הצג דוח גולמי]"
 
 #: flowview_schedules.php
 msgid " [View Report with CSS]"
-msgstr ""
+msgstr " [הצג דוח עם CSS]"
 
 #: flowview_schedules.php
 msgid "Manual Send"
-msgstr ""
+msgstr "שליחה ידנית"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled"
-msgstr "תזמונים"
+msgstr "מתוזמן"
 
 #: flowview_schedules.php
 #, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s שניות"
 
 #: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
@@ -1347,20 +1324,19 @@ msgstr "מרווח"
 
 #: flowview_schedules.php
 msgid "Last Sent"
-msgstr ""
+msgstr "שליחה אחרונה"
 
 #: flowview_schedules.php
 msgid "Next Send"
 msgstr "שלח"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Email/List"
-msgstr "אימייל"
+msgstr "דוא\"ל/רשימה"
 
 #: flowview_schedules.php
 msgid "Logged Sends"
-msgstr ""
+msgstr "שליחות מתועדות ביומן"
 
 #: flowview_schedules.php includes/arrays.php
 msgid "No"
@@ -1372,7 +1348,7 @@ msgstr "כן"
 
 #: includes/arrays.php includes/functions.php
 msgid "Select a Report"
-msgstr "הדפס דוחות"
+msgstr "בחר דוח"
 
 #: includes/arrays.php
 msgid "Summary"
@@ -1380,7 +1356,7 @@ msgstr "סיכום"
 
 #: includes/arrays.php
 msgid "Source Root Domain"
-msgstr "כתובת IP של מקור או יעד"
+msgstr "דומיין שורש מקור"
 
 #: includes/arrays.php
 msgid "Destination Root Domain"
@@ -1388,7 +1364,7 @@ msgstr "כתובת IP יעד"
 
 #: includes/arrays.php
 msgid "Source/Destination Root Domain"
-msgstr "כתובת IP של מקור / יעד"
+msgstr "דומיין שורש מקור/יעד"
 
 #: includes/arrays.php
 msgid "UDP/TCP Destination Port"
@@ -1505,7 +1481,7 @@ msgstr "החזר את כל השורות"
 #: includes/arrays.php
 #, php-format
 msgid "Top %d"
-msgstr "למעלה% d"
+msgstr "%d המובילים"
 
 #: includes/arrays.php
 msgid "No Limit"
@@ -1603,7 +1579,7 @@ msgstr "%d פיקסלים"
 
 #: includes/arrays.php
 msgid "General Filters"
-msgstr "מחיקת מסננים"
+msgstr "מסננים כלליים"
 
 #: includes/arrays.php
 msgid "The Saved Filter to display."
@@ -1738,17 +1714,16 @@ msgid "Graph Height"
 msgstr "גובה גרף"
 
 #: includes/arrays.php
-#, fuzzy
 msgid "The Graph Height to use by default."
-msgstr "רמת הגרף לשימוש כברירת מחדל."
+msgstr "גובה הגרף לשימוש כברירת מחדל."
 
 #: includes/arrays.php includes/functions.php
 msgid "Use NAT Data"
-msgstr ""
+msgstr "השתמש בנתוני NAT"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
+msgstr "הצג בפלט הדוח את כתובת ה-IP ושם ה-DNS של המקור/יעד לאחר NAT (מתורגמים) במקום הערכים המקוריים שלפני ה-NAT."
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1795,10 +1770,9 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr "בחר את הפרוטוקול הספציפי עבור המסנן."
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Protocols"
 msgid "All Protocols"
-msgstr "פרוטוקולים"
+msgstr "כל הפרוטוקולים"
 
 #: includes/arrays.php
 msgid "TCP Flags"
@@ -1869,52 +1843,44 @@ msgid "Filter on the select Destination AS for in the Filter.  This can be a com
 msgstr "סנן לפי היעד AS שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של Destimation AS"
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Source IP"
 msgid "Post-NAT Source IP"
-msgstr "מקור IP"
+msgstr "כתובת IP מקור לאחר NAT"
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "סנן ב- IP המקור הנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
+msgstr "סנן לפי כתובת ה-IP של המקור המתורגם (post-NAT) המתועדת במסנן. זו יכולה להיות רשימה מופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה מופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "UDP/TCP Source Port"
 msgid "Post-NAT Source Port"
-msgstr "UDP / יציאת מקור TCP"
+msgstr "יציאת מקור לאחר NAT"
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "סנן ביציאות המקור שנבחרו במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות מקור."
+msgstr "סנן לפי יציאת המקור המתורגמת (post-NAT) במסנן. זו יכולה להיות רשימה מופרדת בפסיקים של יציאות."
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Dest IP"
 msgid "Post-NAT Dest IP"
-msgstr "כתובת IP של Dest"
+msgstr "כתובת IP יעד לאחר NAT"
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "סנן ב- IP היעד שנבחר עבור במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה המופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
+msgstr "סנן לפי כתובת ה-IP של היעד המתורגם (post-NAT) המתועדת במסנן. זו יכולה להיות רשימה מופרדת בפסיקים של כתובות IPv4 או IPv6, או רשימה מופרדת בפסיקים של טווחי כתובות IPv4 או IPv6 בפורמט CIDR (למשל, 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Dest Port"
 msgid "Post-NAT Dest Port"
-msgstr "נמל דסט"
+msgstr "יציאת יעד לאחר NAT"
 
 #: includes/arrays.php
-#, fuzzy
 #| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "סנן ביציאת היעד שבחרת במסנן. זו יכולה להיות רשימה המופרדת בפסיקים של יציאות Destimation."
+msgstr "סנן לפי יציאת היעד המתורגמת (post-NAT) במסנן. זו יכולה להיות רשימה מופרדת בפסיקים של יציאות."
 
 #: includes/arrays.php
 msgid "DNS Cache"
@@ -1930,7 +1896,7 @@ msgstr "מספרים"
 
 #: includes/arrays.php
 msgid "AS Blocks"
-msgstr "כבלוקים"
+msgstr "בלוקי AS"
 
 #: includes/arrays.php
 msgid "AS Sets"
@@ -1954,7 +1920,7 @@ msgstr "ערכות עמיתים"
 
 #: includes/arrays.php
 msgid "Internet Routers"
-msgstr "בקרת אינטרנט"
+msgstr "נתבי אינטרנט"
 
 #: includes/arrays.php
 msgid "Incident Response Teams"
@@ -1977,19 +1943,19 @@ msgid "Persons"
 msgstr "אנשים"
 
 #: includes/functions-pre13.php
-#, fuzzy, php-format
+#, php-format
 msgid "Cacti %s"
-msgstr "צבריים"
+msgstr "Cacti %s"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
-msgstr ""
+msgstr "הדוח '%s' ממקור %s עם מזהה %s מתוזמן להרצה!"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
-msgstr ""
+msgstr "הדוח '%s' ממקור %s עם מזהה %s לא תוזמן להרצה עקב שגיאה!"
 
 #: includes/functions.php
 msgid "General"
@@ -1997,11 +1963,11 @@ msgstr "כללי"
 
 #: includes/functions.php
 msgid "Logs"
-msgstr ""
+msgstr "יומני רישום"
 
 #: includes/functions.php
 msgid "Select a Report Type First"
-msgstr "הדפס דוחות"
+msgstr "בחר סוג דוח תחילה"
 
 #: includes/functions.php
 #, php-format
@@ -2014,15 +1980,15 @@ msgstr "דוח: [חדש]"
 
 #: includes/functions.php
 msgid "Cached Results Affected"
-msgstr ""
+msgstr "תוצאות מטמון שהושפעו"
 
 #: includes/functions.php
 msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
-msgstr ""
+msgstr "שינויים אלה משפיעים על תוצאות המטמון של מסנן זה. שמירתו מתחילה בנייה (materialization) ברקע כדי לבנות אותן מחדש. לחץ על 'המשך' כדי לשמור את המסנן, או על 'ביטול' כדי להמשיך לערוך אותו."
 
 #: includes/functions.php
 msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
-msgstr ""
+msgstr "השינויים במסנן זה משפיעים על תוצאות המטמון שלו, ולכן הופעלה בנייה (materialization) שלו ברקע. ההתקדמות מוצגת בדף המסננים והתוצאות מדווחות ביומן Cacti."
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -2040,7 +2006,7 @@ msgstr "דוח מודפס: %s [כולל עקיפות כמפורט להלן]"
 
 #: includes/functions.php
 msgid "Select a Filter"
-msgstr "הדפס דוחות"
+msgstr "בחר מסנן"
 
 #: includes/functions.php
 msgid "Apply Filter"
@@ -2060,7 +2026,7 @@ msgstr "ערוך את המסנן הנוכחי"
 
 #: includes/functions.php
 msgid "Create new Flow Filter"
-msgstr "כמה פעמים ליצור קובץ זרימה חדש."
+msgstr "צור מסנן זרימה חדש"
 
 #: includes/functions.php
 msgid "New"
@@ -2072,7 +2038,7 @@ msgstr "שמור"
 
 #: includes/functions.php
 msgid "Save the Flow Filter"
-msgstr "הדפס דוחות"
+msgstr "שמור את מסנן ה-Flow"
 
 #: includes/functions.php
 msgid "Save As"
@@ -2080,7 +2046,7 @@ msgstr "שמירה בשם"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
-msgstr "הדפס דוחות"
+msgstr "שמור את מסנן ה-Flow הקיים כמסנן חדש"
 
 #: includes/functions.php
 msgid "Rename"
@@ -2092,7 +2058,7 @@ msgstr "שינוי שם מסנן הזרימה"
 
 #: includes/functions.php
 msgid "Delete the Flow Filter"
-msgstr "הדפס דוחות"
+msgstr "מחק את מסנן הזרימה"
 
 #: includes/functions.php
 msgid "Report"
@@ -2110,7 +2076,7 @@ msgstr "נדפס: %s"
 
 #: includes/functions.php
 msgid "Select a Filter First"
-msgstr "הדפס דוחות"
+msgstr "בחר מסנן תחילה"
 
 #: includes/functions.php
 msgid "Lines"
@@ -2143,7 +2109,7 @@ msgstr "תחומים בלבד"
 
 #: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
-msgstr ""
+msgstr "הצג את כתובת ה-IP/שם ה-DNS לאחר NAT (מתורגמים) במקום הערכים המקוריים"
 
 #: includes/functions.php
 msgid "Timespan"
@@ -2179,7 +2145,7 @@ msgstr "משמרת זמן קדימה"
 
 #: includes/functions.php
 msgid "Graph"
-msgstr "Symbol for file attachment annotations"
+msgstr "גרף"
 
 #: includes/functions.php
 msgid "Bar"
@@ -2206,9 +2172,8 @@ msgid "Table"
 msgstr "טבלה"
 
 #: includes/functions.php
-#, fuzzy
 msgid "Export Raw Data"
-msgstr "דו\"ח"
+msgstr "ייצא נתונים גולמיים"
 
 #: includes/functions.php
 msgid "Save Flow Filter"
@@ -2216,11 +2181,11 @@ msgstr "סינון"
 
 #: includes/functions.php
 msgid "New Name"
-msgstr "שדה שם"
+msgstr "שם חדש"
 
 #: includes/functions.php
 msgid "Delete Flow Filter"
-msgstr "הדפס דוחות"
+msgstr "מחק מסנן זרימה"
 
 #: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
@@ -2281,7 +2246,7 @@ msgstr " <new>"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
-msgstr ""
+msgstr "הגדרות המסנן נשמרו. מימוש (materialization) של מסנן זה החל ברקע."
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
@@ -2312,10 +2277,10 @@ msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "מסנן רשת משנה: %s אינו פורמט CIDR ערכי"
 
 #: includes/functions.php
-#, fuzzy, php-format
+#, php-format
 #| msgid "Subnet Filter: %s is not a value CIDR format"
 msgid "IP Filter: %s is not a valid IP address"
-msgstr "מסנן רשת משנה: %s אינו פורמט CIDR ערכי"
+msgstr "מסנן IP: %s אינה כתובת IP חוקית"
 
 #: includes/functions.php
 msgid "unresolved"
@@ -2334,20 +2299,20 @@ msgstr "> %d בייט"
 #: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "הדוח הסטטיסטי %s אינו מוכר. אנא פתח דיווח תקלה (bug) ב-GitHub"
 
 #: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "הדוח המודפס %s אינו מוכר. אנא פתח דיווח תקלה (bug) ב-GitHub"
 
 #: includes/functions.php
 msgid "Source DNS"
-msgstr "מקור AS"
+msgstr "DNS מקור"
 
 #: includes/functions.php
 msgid "Source Root DNS"
-msgstr "מקור AS"
+msgstr "DNS שורש מקור"
 
 #: includes/functions.php
 msgid "Dest DNS"
@@ -2355,11 +2320,11 @@ msgstr "Dest AS"
 
 #: includes/functions.php
 msgid "Dest Root DNS"
-msgstr "נמל דסט"
+msgstr "DNS שורש יעד"
 
 #: includes/functions.php
 msgid "DNS"
-msgstr "DSR"
+msgstr "DNS"
 
 #: includes/functions.php
 msgid "Root DNS"
@@ -2388,38 +2353,38 @@ msgstr "מנות"
 #: includes/functions.php
 #, php-format
 msgid "Not materialized yet, with NAT: %s, without NAT: %s."
-msgstr ""
+msgstr "טרם מומש, עם NAT: %s, ללא NAT: %s."
 
 #: includes/functions.php
 msgid "Up to date"
-msgstr ""
+msgstr "מעודכן"
 
 #: includes/functions.php
 msgid "Running"
-msgstr ""
+msgstr "פועל"
 
 #: includes/functions.php
 msgid "Required"
-msgstr ""
+msgstr "נדרש"
 
 #: includes/functions.php
 msgid "The number of queries of this Filter that are running now."
-msgstr ""
+msgstr "מספר השאילתות של מסנן זה הרצות כעת."
 
 #: includes/functions.php
 #, php-format
 msgid "With NAT: %d, without NAT: %d."
-msgstr ""
+msgstr "עם NAT: %d, ללא NAT: %d."
 
 #: includes/functions.php
 #, php-format
 msgid "Running: %s"
-msgstr ""
+msgstr "פועל: %s"
 
 #: includes/functions.php
 #, php-format
 msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
-msgstr ""
+msgstr "שגיאה: השאילתה המקבילית לא הסתיימה בתוך זמן הריצה המרבי של %d שניות. בדוק את זמן הריצה המרבי תחת הגדרות FlowView, וודא שמסד הנתונים אינו עסוק בפעולה אחרת כגון ALTER TABLE."
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
@@ -2576,19 +2541,17 @@ msgid "FlowView Chart for %s Type is %s"
 msgstr "תרשים זרימה עבור סוג %s הוא %s"
 
 #: includes/functions.php
-#, fuzzy
 #| msgid "Supported"
 msgid "Supported (NAT)"
-msgstr "נתמך"
+msgstr "נתמך (NAT)"
 
 #: includes/functions.php
 msgid "Not Supported"
 msgstr "לא נתמך"
 
 #: includes/functions.php setup.php
-#, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
-msgstr "Aria (מהיר, בטוח להתרסקות)"
+msgstr "MyISAM (מהיר, אינו עמיד לקריסות)"
 
 #: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
@@ -2599,14 +2562,12 @@ msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (איטי, מקבילי גבוה)"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow User"
-msgstr "גרסה NetFlow"
+msgstr "משתמש NetFlow"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow Admin"
-msgstr "גרסה NetFlow"
+msgstr "מנהל NetFlow"
 
 #: setup.php
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
@@ -2665,53 +2626,50 @@ msgid "(actions)"
 msgstr "פעולות"
 
 #: setup.php
-#, fuzzy, php-format
+#, php-format
 msgid "%d Process"
-msgstr "%d פיקסלים"
+msgstr "תהליך %d"
 
 #: setup.php
 #, php-format
 msgid "%d Processes"
-msgstr ""
+msgstr "%d תהליכים"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
-msgstr ""
+msgstr "תהליכים מקביליים של דוחות (FlowView בלבד)"
 
 #: setup.php
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
-msgstr ""
+msgstr "בחר את המספר המרבי של תהליכי דוחות מקביליים שיכולים לפעול בו-זמנית."
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Settings"
-msgstr "בקרת אינטרנט"
+msgstr "הגדרות פרוקסי אינטרנט"
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Address"
-msgstr "בקרת אינטרנט"
+msgstr "הזן את כתובת האתר"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "עבור שירותי Cacti הליבה או תוספים הדורשים גישה לאינטרנט, הזן את שרת ה - proxy ואת היציאה כאן בפורמט הבא IP:PORT.  לדוגמה 192.168.1.1:8080."
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy User"
-msgstr "בקרת אינטרנט"
+msgstr "משתמש פרוקסי אינטרנטי"
 
 #: setup.php
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "אם פרוקסי האינטרנט שלך דורש שם משתמש, הזן אותו כאן."
 
 #: setup.php
 msgid "Internet Proxy Password"
-msgstr ""
+msgstr "סיסמת שרת Proxy באינטרנט"
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "אם שרת ה - Proxy של האינטרנט דורש סיסמה, יש להזין אותה כאן."
 
 #: setup.php
 msgid "Name Resolution"
@@ -2738,13 +2696,12 @@ msgid "Don't Resolve DNS"
 msgstr "אין לפתור DNS"
 
 #: setup.php
-#, fuzzy
 msgid "Download the Internet Registry Daily"
-msgstr "פרטי הרישום של נתיב האינטרנט"
+msgstr "הורד את מרשם האינטרנט מדי יום"
 
 #: setup.php
 msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
-msgstr ""
+msgstr "אם ברצונך לקבל מידע הזמין לציבור על האינטרנט כולו, ניתן לבחור באפשרות זו. Cacti יפנה לרשמי האינטרנט ברחבי העולם פעם ביום, יבדוק שינויים בנתיבים של האינטרנט כולו ויטען את המידע ל-Cacti. שים לב שפעולה זו תיצור מסד נתונים גדול למדי של מעל 3GB נתונים."
 
 #: setup.php
 msgid "Local Domain Name"
@@ -2759,9 +2716,8 @@ msgid "Local IP Range"
 msgstr "טווח IP מקומי"
 
 #: setup.php
-#, fuzzy
 msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
-msgstr "ספק את טווח כתובות ה- IP של IPv4 עבור הרשת המקומית שלך עבור מארחים שייתכן שאינם רשומים ב- DNS.  מארחים אלה ימופו לשם הדומיין המקומי לעיל.  זה יותר עבור משתמשים ביתיים.  ניתן להשתמש בתבניות CIDR או שאינן CIDR.  לבחינה: 192.168.11.0 או 192.168.11.0/24"
+msgstr "ספק את טווח כתובות ה-IPv4 עבור הרשת המקומית שלך למארחים שייתכן שאינם רשומים ב-DNS. מארחים אלה ימופו לשם הדומיין המקומי שלמעלה. אפשרות זו מיועדת בעיקר למשתמשים ביתיים. ניתן להשתמש בתבנית CIDR או ללא CIDR. לדוגמה: 192.168.11.0 או 192.168.11.0/24"
 
 #: setup.php
 msgid "Use CIDR or Non-CIDR"
@@ -2769,11 +2725,11 @@ msgstr "שימוש ב-CIDR או ללא CIDR"
 
 #: setup.php
 msgid "Use Arin to find Domains and AS Numbers"
-msgstr "שימוש ב-Arin לאיתור דומיינים לא רשומים"
+msgstr "השתמש ב-Arin לאיתור דומיינים ומספרי AS"
 
 #: setup.php
 msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
-msgstr "שירותי איסוף נתונים רבים של ביג טק אוהבים להסוות את בעלותם על דומיינים כדי לטשטש את העובדה שהם אוספים את המידע האישי שלך.  אם אתה מודאג מכך ולהתקנת הקקטוסים שלך יש גישה לאינטרנט, אתה יכול להשתמש בארין כדי להסיר את המסכה מאותן חברות ביג טק."
+msgstr "שירותי איסוף נתונים רבים של חברות הטכנולוגיה הגדולות נוהגים להסוות את בעלותם על דומיינים כדי לטשטש את העובדה שהם אוספים את המידע האישי שלך. אם הדבר מדאיג אותך ולהתקנת ה-Cacti שלך יש גישה לאינטרנט, תוכל להשתמש ב-Arin כדי להסיר את המסווה מאותן חברות טכנולוגיה גדולות."
 
 #: setup.php
 msgid "Whois Provider Host"
@@ -2789,7 +2745,7 @@ msgstr "whois.radb.net"
 
 #: setup.php
 msgid "Whois Binary Path"
-msgstr "זרימת כלים נתיב בינארי"
+msgstr "נתיב הקובץ הבינארי של Whois"
 
 #: setup.php
 msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
@@ -2801,15 +2757,15 @@ msgstr "הזן נתיב בינארי"
 
 #: setup.php
 msgid "Graph Drilldown Settings"
-msgstr ""
+msgstr "הגדרות פירוט גרף"
 
 #: setup.php
 msgid "Default Search Filter for Graph Drilldowns"
-msgstr ""
+msgstr "מסנן חיפוש ברירת מחדל עבור ירידה לפרטים בגרף"
 
 #: setup.php
 msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
-msgstr ""
+msgstr "בחר מסנן חיפוש קיים של FlowView לשימוש עבור פירוט מעמיק בגרפים (Graph Drilldowns)."
 
 #: setup.php
 msgid "Data Retention and Report Generation"
@@ -2821,22 +2777,22 @@ msgstr "מדיניות שמירת נתונים"
 
 #: setup.php
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr "משך הזמן שקקטוסים ישמור על טבלאות הזרימה המחולקות."
+msgstr "משך הזמן שבו Cacti ישמור על טבלאות הזרימה המחולקות למחיצות."
 
 #: setup.php
 #, php-format
 msgid "%d Week"
-msgstr "% d בשבוע"
+msgstr "%d שבוע"
 
 #: setup.php
 #, php-format
 msgid "%d Weeks"
-msgstr "% d שבועות"
+msgstr "%d שבועות"
 
 #: setup.php
 #, php-format
 msgid "%d Month"
-msgstr "% d חודש"
+msgstr "%d חודש"
 
 #: setup.php
 #, php-format
@@ -2846,7 +2802,7 @@ msgstr "%d חודשים"
 #: setup.php
 #, php-format
 msgid "%d Year"
-msgstr "% d שנה"
+msgstr "%d שנה"
 
 #: setup.php
 msgid "Database Partitioning Scheme"
@@ -2877,48 +2833,46 @@ msgid "Parallel Queries"
 msgstr "שאילתות מקבילות"
 
 #: setup.php
-#, fuzzy
 #| msgid "Parallel Queries"
 msgid "Parallel Query Backend"
-msgstr "שאילתות מקבילות"
+msgstr "מנוע שאילתות מקבילי"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr ""
+msgstr "בחר כיצד יופעלו שאילתות FlowView מקביליות. מריץ ה-PHP המורשת מפצל תהליך flowview_runner.php עבור כל שאילתה ו-shard. שירות השאילתות FlowView מעביר את אותה עבודת map-reduce לשירות Go ארוך-טווח דרך localhost, ובכך מונע את השהיית הפעלת התהליך לכל שאילתה והשהיית התשאול של מסד הנתונים. מחייב שהשירות flowview-query (ראה plugins/flowview/service/flowview-query) יהיה מותקן ופעיל."
 
 #: setup.php
 msgid "Legacy PHP Runner"
-msgstr ""
+msgstr "מריץ PHP מדור קודם"
 
 #: setup.php
-#, fuzzy
 #| msgid "Flow Viewer"
 msgid "FlowView Query Service"
-msgstr "מציג זרימה"
+msgstr "שירות שאילתות FlowView"
 
 #: setup.php
 msgid "Query Service URL"
-msgstr ""
+msgstr "כתובת URL של Query Service"
 
 #: setup.php
 msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
-msgstr ""
+msgstr "כתובת URL בסיסית של שירות השאילתות של FlowView, לדוגמה http://127.0.0.1:8699. השאר ריק לגילוי אוטומטי של היציאה הארעית מקובץ היציאות של השירות."
 
 #: setup.php
 msgid "Query Service Port File"
-msgstr ""
+msgstr "קובץ פורט של Query Service"
 
 #: setup.php
 msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
-msgstr ""
+msgstr "הנתיב לקובץ הפורט שאליו FlowView Query Service כותב את כתובת הקישור שלו. משמש לגילוי נקודת הקצה של השירות כאשר כתובת ה-URL של Query Service למעלה ריקה."
 
 #: setup.php
 msgid "Query Service Token"
-msgstr ""
+msgstr "אסימון של Query Service"
 
 #: setup.php
 msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
-msgstr ""
+msgstr "סוד משותף אופציונלי. כאשר הוא מוגדר, Cacti שולח אותו אל FlowView Query Service ככותרת \"Authorization: Bearer\" והשירות דוחה כל בקשה המשנה מצב שאינה מציגה את אותו אסימון. הגדר את הערך התואם בקובץ התצורה של השירות (auth_token) או במשתנה הסביבה FLOWVIEW_QUERY_TOKEN. מומלץ בכל עת שהשירות נגיש לכל דבר מלבד תהליכים מקומיים מהימנים."
 
 #: setup.php
 msgid "Max Concurrent Threads"
@@ -2939,7 +2893,7 @@ msgstr "%d אשכולות"
 
 #: setup.php
 msgid "Maximum Run Time"
-msgstr "מקסימום שורות"
+msgstr "זמן ריצה מרבי"
 
 #: setup.php
 msgid "If the Parallel Query does not finish in this time, exit."
@@ -2956,7 +2910,7 @@ msgstr "כמה זמן על FlowView לשמור על תוצאות שאילתת Ca
 #: setup.php
 #, php-format
 msgid "%d Hours"
-msgstr "%d לפני מספר ימים"
+msgstr "%d שעות"
 
 #: setup.php
 #, php-format
@@ -2974,7 +2928,7 @@ msgstr "שיתוף MaxScale"
 
 #: setup.php
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
-msgstr ""
+msgstr "דבר זה נדרש רק אם חיבור מסד הנתונים של FlowView במערכת Cacti שלך אינו משתמש כבר בפורט Read-Write Split התומך ב-MaxScale."
 
 #: setup.php
 msgid "Leverage MaxScale to Distribute Query Shards"
@@ -2985,23 +2939,20 @@ msgid "If you have multiple service acting as slaves for MaxScale, you can incre
 msgstr "אם יש לך שירותים מרובים הפועלים כעבדים עבור MaxScale, באפשרותך להגביר את מהירות השאילתות על ידי הפצת השאילתות המקבילות לשרתי קצה עורפיים מרובים של MariaDB."
 
 #: setup.php
-#, fuzzy
 msgid "MaxScale Read-Write Split Port"
-msgstr "יציאת MaxScale לקריאה בלבד"
+msgstr "פורט פיצול קריאה-כתיבה של MaxScale"
 
 #: setup.php
-#, fuzzy
 msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
-msgstr "זו צריכה להיות היציאה של שירות לקריאה בלבד (readconnroute) ונתב."
+msgstr "זו צריכה להיות היציאה של שירות פיצול קריאה-כתיבה (readwrite) ושל הנתב."
 
 #: setup.php
 msgid "Flowview"
 msgstr "תזרים"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow"
-msgstr "זרימה חדשה"
+msgstr "NetFlow"
 
 #~ msgid "Select a Listener"
 #~ msgstr "הדפס דוחות"
