@@ -1,0 +1,2944 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Arabic (Morocco)\n"
+"Language: ar-MA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "تعذر العثور على بيانات أولية للتصدير"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "استعلام Flowview المقدم غير موجود. يرجى الإرسال باستعلام صالح."
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "تم تقديم استعلام مصدر غير صالح. يرجى الإرسال باستعلام صالح."
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "غير قادر على حذف عامل تصفية التدفق '%s' كما هو قيد الاستخدام في تقرير مجدول."
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "تم حذف عامل تصفية التدفق \"%s\"."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "حذف"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "تم مسح ذاكرة التخزين المؤقت لنظام أسماء النطاقات.  سيتم إعادة ملئها مع ورود السجلات."
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "تفاصيل سجل مسار الإنترنت"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "تفاصيل الوكيل المعتمد"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "لم يتم العثور على تفاصيل"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR / الطرق"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "رقم النظام المستقل"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "كتل AS"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "لم يتم التعيين"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "مجموعات الطريق"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "الموقع"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "تم حفظ الفلتر"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "مجموعات التناظر"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "الشبكة"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "التحكم في الإنترنت"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "فرق الاستجابة للحوادث"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "وكلاء المصادقة"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "منظمة"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "الصلاحيات"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "الاشخاص"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "مجموعات الطريق"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "ملاحظات"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "آخر تعديل"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "المصدر"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "عنوان الانترنت المطلوب"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT بواسطة"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "جهة اتصال المسؤول"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "تم اكتشاف التغييرات غير المحفوظة"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "ذكرنى"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "الوصف"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "الاتصال التقني"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "MNT السفلى"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "الدولة"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "البريد الإلكتروني"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "رقم الفاكس"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "الهاتف"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "العنوان"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "الحالة"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "الأعضاء بواسطة Fef"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "إساءة استخدام جهات الاتصال"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "مرجع MNT"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "الطلاب"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "إخطار MNT"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "إذن"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "مسارات MNT"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "عضو في"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "تحديث"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "مقبض شهادة عدم الممانعة"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "المنظمة الراعية"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT Irt"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "أعضاء MP"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "سب دومين"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "تفعيل"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "اسم مستعار"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "نوع الجراف"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "الرجوع إلى"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "النائب النظير"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "تصدير"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "الثقوب"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "الافتراضي"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "المكونات"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "مخرج RS"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "اسم المنظمة"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "الاسم:"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "المؤلف"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "إخطار IRT"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "Aggr MTD"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "هذا النوع"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "فلتر"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "الافتراضي"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "حجم المهمة"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "تقرير"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "آر إس إن"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "اسم الحقل"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "DS Rdata"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "حدود Aggr"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "فلتر"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "النائب للاستيراد"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "اللغة"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "رابط ريسففول"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "نظير"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "الاتصال بالمنطقة"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "حقن"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "النائب النظير"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "الإحالة عن طريق"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "نموذج"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "نطاقات MNT"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "الأصل AS"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "تقرير"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "التشفير"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "تغذية جغرافية"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "المؤشر الجغرافي"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "جهة تعامل"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "تقرير"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "تعب"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "خوادم الأسماء"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "مقبض بينغ"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "سطح بيني، سطح فاصل"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "استيراد"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "التوقيع"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "دوران"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "محلي"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "الاستيراد عبر"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "FATAL: قاعدة بيانات غير معروفة الجدول %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "بحث"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "الجميع"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "مقالات"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "الافتراضي"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "انتقال"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "مجموعة / تحديث الفلاتر"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "مسح"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "مسح الفلتر"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "تطهير ذاكرة التخزين المؤقت لنظام أسماء النطاقات"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "فشل في تطبيق الفاصل الزمني cron المحدد"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "لم يتم العثور على إدخالات مطابقة"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "انقر على 'إستمرار' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
+msgstr[1] "انقر على 'إستمرار' لحذف إدخال ذاكرة التخزين المؤقت لـ DNS التالي."
+msgstr[2] "انقر على 'إستمرار' لحذف إدخالي ذاكرة التخزين المؤقت لـ DNS التاليين."
+msgstr[3] "انقر على 'إستمرار' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
+msgstr[4] "انقر على 'إستمرار' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
+msgstr[5] "انقر على 'إستمرار' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "إستمرار"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "حذف إدخالات DNS"
+msgstr[1] "حذف إدخال DNS"
+msgstr[2] "حذف إدخالي DNS"
+msgstr[3] "حذف إدخالات DNS"
+msgstr[4] "حذف إدخالات DNS"
+msgstr[5] "حذف إدخالات DNS"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "جداول FlowView"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "موثق"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "لم يتم التحقق منه"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "تطهير"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "عنوان الIP"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "هذا هو عنوان IP لإدخال ذاكرة التخزين المؤقت."
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "اسم مضيف DNS"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "اسم DNS المعين لعنوان IP."
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "مصدر اسم مضيف DNS.  يمكن أن يكون إما DNS أو بحث ثابت أو ARIN."
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "عرين تم التحقق منه"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "يتم التحقق من معلومات Arin لعنوان IP هذا ، أو أنه عنوان IP للمجال المحلي."
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "معرف CIDR"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "مفتاح Arin الأساسي.  هذه ليست معلومات آرين الرسمية."
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "معرف النظام المستقل"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "أصل آرين AS.  هذه هي معلومات Arin AS الرسمية."
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "تحديث"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "هذا هو الوقت الذي تم فيه إدخال ذاكرة التخزين المؤقت لنظام أسماء النطاقات أو آخر تحديث."
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "لم يتم العثور على إدخالات ذاكرة التخزين المؤقت لنظام أسماء النطاقات"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "مستمع FlowView"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "الإصدار"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "آي بي في 4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "الإصدار IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "نمط"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "هذا هو مسار الإنترنت المنشور."
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "رقم المنفذ"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "رقم النظام المستقل للمسار."
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "وصف الطريق"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "الوصف المسجل بواسطة مسؤول صيانة المسار."
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "قاعدة البيانات المصدر المستخدمة لنشر المسار."
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "تتم صيانته بواسطة"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "مشغل شبكة الإنترنت الذي يحافظ على المسار للعميل."
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "آخر مرة تم فيها تعديل المعلومات على هذا الطريق."
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "لم يتم العثور على طرق مطابقة"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "تفعيل"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "تعطيل"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "مستمع"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "اسم الجهاز ليتم عرضها."
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "منوعات Medhod"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "هناك طريقتان لجمع الدعم ، الأولى تستخدم ثنائيات أدوات التدفق القديمة والثانية تستخدم خادم تدفق التدفق المستند إلى PHP من Cacti."
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "الربط بعنوان"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "إذا كان لخادم Cacti أكثر من عنوان IP، يمكنك تحديد واجهة معينة. اتركه 0.0.0.0 للواجهة الأساسية."
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "نطاق المستضيف Host المسموح به"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "عنوان IP للجهاز المسموح له بالإرسال إلى مجمّع التدفقات هذا. اتركه 0.0.0.0 للسماح لأي مستضيف Host. لاحظ أن PHP دقيق جداً فيما يسمح به. يتم دعم صيغة CIDR بالإضافة إلى صيغة النطاق، مثل 192.168.1.0 أو 192.168.1.0/24. إذا أردت تحديد عناوين IP معينة، فافصل بينها بفاصلة."
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "منفذ"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "ميناء هذا جامع سوف يستمع على."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "بروتوكول"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "المستمع المراد استخدامه للتصفية."
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "بروتوكول IP"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "مفعل"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "إذا تم تحديده، فسيتم بدء خدمة المستمع (Listener) وستنتظر البيانات الواردة."
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "لم يتم العثور على قالب تدفق لمعرف الجهاز: %s ومعرف القالب: %s"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "انقر على 'إستمرار' لحذف مستمعي NetFlow التاليين. بعد ذلك، سيحاول Cacti إعادة تشغيل خدمة Flow-Capture لديك."
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "انقر على 'إستمرار' لتفعيل مستمعي NetFlow التاليين. بعد ذلك، سيحاول Cacti إعادة تشغيل خدمة Flow-Capture لديك."
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "يجب تحديد مستمع واحد على الأقل."
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "يجب أن يكون منفذ الاستماع قيمة رقمية بين 1 و65535."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "حفظ ناجح.  تم حفظ مستمع Flowview، وإعادة تشغيل الخدمة."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "حفظ ناجح.  تم حفظ مستمع Flowview.  ومع ذلك، لا يتم تشغيل التقاط تدفق الخدمة."
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "المستمع [عدل: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "تقرير: [جديد]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "الاسم"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "الإصدار"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "القوالب"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "آخر تحديث"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "يتم تحديث أحداث البث النشطة كل 5 دقائق"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "لم يتم الكشف عن تدفقات واردة"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "قوالب المستمع المكتشفة"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "الأفعى السابقين"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "الكل"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "قالب"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "معرف القالب"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "اسم الحقل"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "مدعوم"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "معرف الحقل"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "نوع الحقل"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "الطول"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "فك"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "لم يتم اكتشاف قوالب دفق واردة"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "مستمع FlowView"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "المستمعين"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "طريقة"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "عنوان الربط"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "مسموح من"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "لاحظ الاستماع"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "لاحظ أمن الميناء بالفعل على منفذ المستمعين."
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "قائمة الانتظار"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "حجم قائمة انتظار UDP بالبايت."
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "تيارات"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "عدد الاتصالات الواردة من مصادر مختلفة."
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "الإصدار"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "إصدارات تدفق حركة المرور التي تتم ملاحظتها."
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "الحد الأقصى لوقت التحديث من جميع التدفقات التي يتم جمعها.  يتم تحديث هذه القيمة كل 5 دقائق."
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "لا شيء"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "لا توجد اتصالات"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "N/A"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "صبار"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "مستمع FlowView"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "تجسيد مادي"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "تعذر تحديد مفاتيح ذاكرة التخزين المؤقت للفلاتر، لذا لم يتم تنظيف أي شيء."
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "تم تنظيف %s من الأجزاء المخزنة مؤقتاً التي لم تطابق أي فلتر."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "بدأ التجسيد المادي لعدد %d فلتر (فلاتر) في الخلفية. يوجد بالفعل %d فلتر (فلاتر) قيد التجسيد المادي. يتم الإبلاغ عن نتائجه في سجل Cacti."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "بدأ التجسيد المادي لعدد %d فلتر (فلاتر) في الخلفية. يتم الإبلاغ عن نتائجه في سجل Cacti."
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "تتم بالفعل تهيئة الفلتر (الفلاتر) المحدد. يرجى المحاولة مرة أخرى بعد انتهاء العملية."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "انقر فوق \"متابعة\" لحذف الجدول (الجداول) التالي."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "انقر فوق \"متابعة\" لتعطيل الجدول (الجداول) التالي."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "انقر فوق \"متابعة\" لتمكين الجدول (الجداول) التالي."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "انقر على 'إستمرار' لتجسيد الفلتر (الفلاتر) التالية في الخلفية، مع تشغيل NAT وإيقافه، لكامل نطاق بيانات التدفق. يتم تخطي الأقسام المجسدة والدقيقة بالفعل. قد يستغرق هذا وقتاً طويلاً مع مجموعات البيانات الكبيرة. يتم تخطي أي فلتر يجري تجسيده بالفعل."
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "يجب عليك اختيار جهاز واحد على الأقل."
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "مرشحات التدفق"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "مرشحات FlowView [إضافة أجهزة قبل عوامل التصفية]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "التصفيات"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "تنظيف"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "إزالة الأجزاء المخزنة مؤقتًا التي لا تطابق أي فلتر"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "اسم عامل التصفية"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "الهویة الشخصیة"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "التجسيد"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "يحسب التجسيد المادي مسبقًا نتائج الفلتر لكل قسم تدفق، مع تفعيل NAT وإيقافه، ويخزنها في ذاكرة التخزين المؤقت للاستعلام المتوازي، بحيث تفتح التقارير الخاصة بالبيانات الأقدم بسرعة. يتم تجسيد الأقسام الجديدة ماديًا تلقائيًا بمجرد توقفها عن استقبال التدفقات. تعني «مطلوب» أن الأقسام التي تم تدويرها لم يتم تجسيدها ماديًا بعد، وتعني «قيد التشغيل» أن التجسيد المادي جارٍ، وتعني «محدّث» أن كل قسم تم تدويره قد تم تجسيده ماديًا. يشير «قيد التشغيل: N» إلى عدد استعلامات الفلتر التي تعمل الآن. لا يتم تجسيد القسم الذي لا يزال يستقبل التدفقات ماديًا، ولذلك لا يُحتسب."
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "مستمع"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "نوع التقرير"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "شظايا NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "عدد أقسام هذا الفلتر المخزنة في ذاكرة التخزين المؤقت للاستعلام المتوازي مع تشغيل NAT."
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "أجزاء بدون NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "عدد أقسام هذا الفلتر المخزنة في ذاكرة التخزين المؤقت للاستعلام المتوازي مع إيقاف تشغيل NAT."
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "الأقسام"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "إجمالي عدد أقسام التدفق، وهو الحد الأقصى لعدد الأجزاء (shards) التي يمكن أن يخزنها الفلتر مؤقتًا مع NAT أو بدونه."
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "خطأ: حقل فرز جديد غير مناسب. حقل الفرز لن يتغير."
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "اسم المضيف القرار"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "تعذر التمييز بين الأجزاء المخزنة مؤقتًا للفلاتر والأجزاء الأخرى، نظرًا لتعذر تحديد مفاتيح ذاكرة التخزين المؤقت لأحد الفلاتر."
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "تعذر تحديد مفاتيح ذاكرة التخزين المؤقت للفلاتر، لذا لا يمكن تنظيف أي شيء حاليًا. تحقق من أن كل فلتر يمتلك تقريرًا صالحًا."
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "الأجزاء المخزنة مؤقتًا: %s تطابق الفلتر.  %s لا تطابق أي فلتر، وسيتم إزالتها بواسطة التنظيف (Prune)."
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "يزيل هذا %s من الأجزاء (shards) المخزنة مؤقتًا التي لا تطابق أي فلتر، وذلك لكل فلتر ولكل مستخدم. تأتي هذه الأجزاء من فلاتر تم تغييرها أو حذفها، ومن تقارير تم تغيير إعداداتها في صفحة التقرير. يتم الاحتفاظ بـ %s من الأجزاء المخزنة مؤقتًا الخاصة بالفلاتر. لا يمكن التراجع عن هذا الإجراء."
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "كل جزء مخزن مؤقتاً يطابق فلتراً. لا يوجد شيء لتقليمه."
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "تنظيف الأجزاء المخزنة مؤقتاً"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "إغلاق"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "أرسل الآن"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "كل ساعة"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "كل %d ساعة"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "كل يوم"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "كل أسبوع"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "كل %d أسابيع، 2"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "شهريًا"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "الاعدادات العامة"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "العنوان"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "جدول جديد"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "أدخل عنوان التقرير لجدول FlowView."
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "ما إذا كان سيتم إرسال فحص NetFlow هذا أم لا."
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "اسم الاستعلام المطلوب تشغيله."
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "إعدادات الإرسال"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "إرسال الفاصل الزمني"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "كم مرة ترسل تقرير NetFlow هذا؟"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "الوقت الأساسي المجدول"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "هذا هو التاريخ / الوقت الأول لإرسال البريد الإلكتروني إلى NetFlow Scan. سيتم حساب جميع رسائل البريد الإلكتروني المستقبلية في هذا الوقت بالإضافة إلى الفاصل الزمني المذكور أعلاه."
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "أقصى وقت تشغيل مسموح به"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "ما المدة المسموح بها لتنفيذ التقرير قبل إنهائه؟"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "دقيقة %d"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d دقيقة (دقائق)"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "إعدادات البريد الإلكتروني القديمة"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "عنواين البريد الالكترونى"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "عناوين البريد الإلكتروني (تم تحديد الأمر) لإرسال مسح NetFlow إلى."
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "تنسيق ملف للاستخدام"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "اختر ملف html المخصص وملف CSS لاستخدامه. يحتوي هذا الملف على كل من html و CSS للتفاف حول تقريرك. إذا كان يحتوي على أكثر من مجرد CSS ، فستحتاج إلى وضع خاص <REPORT> علامة داخل الملف. سيتم استبدال علامة التنسيق هذه بمحتوى التقرير. توجد هذه الملفات في دليل &quot;التنسيقات&quot;."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "إعدادات قائمة الإشعارات"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "قائمة الإشعارات"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "إذا كانت إضافة Thold مثبتة، يمكنك اختيار قائمة إشعارات"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "سيصل التقرير بمجرد اكتماله."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "انقر فوق \"متابعة\" لحذف الجدول (الجداول) التالي."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "انقر فوق \"متابعة\" لإرسال الجدول (الجداول) التالي الآن."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "انقر فوق \"متابعة\" لتعطيل الجدول (الجداول) التالي."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "انقر فوق \"متابعة\" لتمكين الجدول (الجداول) التالي."
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "يجب عليك تحديد جدول واحد على الأقل."
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "تعذر العثور على البيانات الأولية للتقرير لمعرف التقرير %s"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "يجب تحديد عناوين البريد الإلكتروني أو قائمة إشعارات أو كليهما!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "التقرير المجدول: [تحرير: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "سجل التقرير المجدول: [تحرير: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "التقرير المجدول: [جديد]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "جداول"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "عنوان التقرير"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "الهویة الشخصیة"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "نوع الإخراج"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "أُرسل بواسطة"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "تاريخ الإرسال"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "وقت التشغيل"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "تنزيل البيانات"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "سجلات التقارير"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [عرض التقرير الخام]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [عرض التقرير باستخدام CSS]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "إرسال يدوي"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "مجدول"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s ثوانٍ"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "محدد تاريخ البدء"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "جداول FlowView"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "جداول FlowView [إضافة الأجهزة قبل الجداول]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "الفترة"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "آخر إرسال"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "إرسال التالي"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "البريد الإلكتروني/القائمة"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "عمليات الإرسال المسجلة"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "لا"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "نعم"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "تقارير الطباعة"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "ملخص"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "المصدر أو الوجهة IP"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "عنوان الانترنت المطلوب"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "المصدر / الوجهة IP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "منفذ الوجهة UDP / TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "منفذ مصدر UDP / TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "منفذ UDP / TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "IP المصدر"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "عنوان الانترنت المطلوب"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "المصدر / الوجهة IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "المصدر أو الوجهة IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "بروتوكول IP"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "واجهة الإدخال"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "واجهة الانتاج"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "الإدخال / الإخراج واجهة"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "المصدر"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "سجل الوجهة"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "المصدر / الوجهة AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "بادئة المصدر"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "بادئة الوجهة"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "بادئة المصدر / الوجهة"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "تدفق مرات"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "المصدر / الوجهة IP"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "أرقام AS"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 عمود"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "إظهار محاكاة محاسبة IP"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "أي جزء في النطاق"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "وقت النهاية"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "وقت البدء"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "بالكامل في النطاق"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "إرجاع كافة الأسطر"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "أعلى %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "تشغيل الحد"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s بايت"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "منفذ المصدر (المنافذ)"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "يطفو"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "بايت"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "الحزم"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "عنوان الانترنت المطلوب"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "منفذ المصدر (المنافذ)"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "عنوان الانترنت المطلوب"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Dest IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "المصدر"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "سجل الوجهة"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "الشروط و الأحكام"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "بادئة الوجهة"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "وقت البدء"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "وقت الإنتهاء"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "نشط"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B / كيه"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "الخبر"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "فلوريدا"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "أعلام"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "سجل الوجهة"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d بكسل"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "مرشحات واضحة"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "المرشح المحفوظ المراد عرضه."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "فلتر"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "المستمع المراد استخدامه للتصفية."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "معرف القالب"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "معرف قالب التدفق لتدفقات v9 وIPFIX فقط.  لاحظ أن معرف النموذج قد يختلف من مصنع لآخر."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "عنوان الIP"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "عنوان IP للبث أو اسم المضيف من قائمة التدفقات المسجلة."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "إعدادات مسبقة"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "إذا كان هذا المرشح يعتمد على فترة زمنية محددة مسبقًا ، فحدده هنا."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "معايير التصفية التفصيلية"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "نوع التقرير المراد استخدامه بشكل افتراضي لهذا الفلتر عند إنشاء تقرير."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "المطبوعة:"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "الإحصائيات"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "تقارير الاحصائيات"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "عرض نوع التقرير المراد استخدامه بشكل افتراضي لهذا الفلتر عند إنشاء تقرير."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "تقارير الطباعة"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "نوع التقرير المطبوع المراد استخدامه افتراضيًا لهذا المرشح عند إنشاء تقرير مطبوع."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "إدارة الجداول"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "تقييد تصفية البيانات من خلال قواعد تصفية الوقت هذه."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "حل العناوين:"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "حل العناوين:"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "حقل الفرز الافتراضي لعامل التصفية. سيتم تطبيق هذا الإعداد على أي تقارير مجدولة."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "أقصى عدد من الصفوف"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "الصفوف القصوى المطلوب توفيرها في عامل التصفية. سيتم تطبيق هذا الإعداد على أي تقارير مجدولة."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "البايت الأدنى:"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "الحد الأدنى لإجمالي البايت الذي يجب مراعاته لعامل التصفية. سيتم تجاهل أي إجماليات تدفق أقل من هذا العدد من البايت."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "خيارات الرسوم البيانية"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "نوع الجراف"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "نوع الرسم البياني المراد عرضه بشكل افتراضي.  وهي تشمل بار ، فطيرة ، و Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "مخطط شريطي"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "مخطط دائري"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "مخطط الشجرة"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "ارتفاع الرسم البياني"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "ارتفاع الرسم البياني المراد استخدامه افتراضيًا."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "استخدام بيانات NAT"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "إظهار عنوان IP المصدر/الوجهة واسم DNS بعد NAT (المترجم) في مخرجات التقرير بدلاً من القيم الأصلية قبل NAT."
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "جدول"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "يجب عرض لوحة الجدول افتراضيا."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "بايت بايت"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "يجب عرض لوحة البايت افتراضيا."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "شريط الحزم"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "يجب عرض لوحة الحزم افتراضيا."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "شريط التدفقات"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "يجب أن يتم عرض لوحة التدفقات افتراضيا."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "بروتوكولات"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "بروتوكولات"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "حدد البروتوكول المحدد لعامل التصفية."
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "جميع البروتوكولات"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "أعلام TCP"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "إشارات TCP المطلوب البحث عنها في عامل التصفية. يمكن أن تكون هذه قائمة محددة بفواصل لأعلام TCP"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "حقول TOS"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "حقول شروط الخدمة للبحث عنها في عامل التصفية. يمكن أن تكون هذه قائمة بحقول TOS محددة بفواصل"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "قم بالتصفية على عنوان IP المصدر المحدد في عامل التصفية. يمكن أن تكون هذه قائمة محددة بفواصل لعناوين IPv4 أو IPv6 ، أو قائمة محددة بفواصل لنطاقات عناوين IPv4 أو IPv6 بتنسيق CIDR (على سبيل المثال ، 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "منفذ المصدر (المنافذ)"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "قم بالتصفية على تحديد منافذ المصدر في عامل التصفية. يمكن أن تكون هذه قائمة محددة بفواصل لمنافذ المصدر."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "واجهة المصدر"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "تصفية على واجهة المصدر المحددة في عامل التصفية. يمكن أن تكون هذه قائمة محددة بفواصل من واجهات المصدر"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "تصفية على تحديد الوجهة AS في عامل التصفية. يمكن أن تكون هذه قائمة محددة بفواصل من المصدر AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "تصفية على تحديد الوجهة IP في عامل التصفية. يمكن أن تكون هذه قائمة محددة بفواصل لعناوين IPv4 أو IPv6 ، أو قائمة محددة بفواصل لنطاقات عناوين IPv4 أو IPv6 بتنسيق CIDR (على سبيل المثال ، 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "ميناء ميناء"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "قم بالتصفية على تحديد منافذ الوجهة في عامل التصفية. يمكن أن تكون هذه قائمة محددة بفواصل لمنافذ الوجهة."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "واجهة السد"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "قم بالتصفية على واجهة الوجهة المحددة في عامل التصفية. يمكن أن تكون هذه قائمة بواجهات الوجهة ذات الفاصلة."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Dest AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "تصفية على تحديد الوجهة AS في عامل التصفية. يمكن أن تكون هذه قائمة مفصولة بفواصل من Destimation AS's"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "عنوان IP المصدر بعد NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "التصفية بناءً على عنوان IP المصدر المترجم (بعد NAT) المسجل في الفلتر. يمكن أن يكون هذا قائمة مفصولة بفواصل من عناوين IPv4 أو IPv6، أو قائمة مفصولة بفواصل من نطاقات عناوين IPv4 أو IPv6 بتنسيق CIDR (مثل 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "منفذ المصدر بعد NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "التصفية بناءً على منفذ المصدر المترجم (بعد NAT) في الفلتر. يمكن أن يكون هذا قائمة مفصولة بفواصل من المنافذ."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "عنوان IP الوجهة بعد NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "التصفية بناءً على عنوان IP الوجهة المترجم (بعد NAT) المسجل في الفلتر. يمكن أن يكون هذا قائمة مفصولة بفواصل من عناوين IPv4 أو IPv6، أو قائمة مفصولة بفواصل من نطاقات عناوين IPv4 أو IPv6 بتنسيق CIDR (مثل 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "منفذ الوجهة بعد NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "التصفية بناءً على منفذ الوجهة المترجم (بعد NAT) في الفلتر. يمكن أن يكون هذا قائمة مفصولة بفواصل من المنافذ."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "ذاكرة التخزين المؤقت لنظام أسماء النطاقات"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR / الطرق"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "أرقام الأنظمة المستقلة"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "كتل AS"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "مجموعات AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "مجموعات الطريق"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "المواقع"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "تم حفظ الفلتر"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "مجموعات التناظر"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "التحكم في الإنترنت"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "فرق الاستجابة للحوادث"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "وكلاء المصادقة"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "المنظمات"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "الأدوار"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "الاشخاص"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "التقرير '%1$s' من المصدر %2$s بالمعرّف %3$s مجدول للتشغيل!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "لم تتم جدولة التقرير '%1$s' من المصدر %2$s بالمعرّف %3$s للتشغيل بسبب خطأ!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "عام"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "السجل"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "تقارير الطباعة"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "الفلتر: [عدل: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "تقرير: [جديد]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "النتائج المخزنة مؤقتًا المتأثرة"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "تؤثر هذه التغييرات على النتائج المخزنة مؤقتًا لهذا الفلتر. يؤدي حفظه إلى بدء عملية التهيئة في الخلفية لإعادة بنائها. اضغط على 'إستمرار' لحفظ الفلتر، أو 'إلغاء' لمواصلة تحريره."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "تؤثر التغييرات على هذا الفلتر في نتائجه المخزنة مؤقتًا، لذا بدأ تجسيدها في الخلفية. يظهر تقدمه في صفحة الفلاتر ويتم الإبلاغ عن نتائجه في سجل Cacti."
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "مرشح غير محدد [اختر الفلتر للحصول على التفاصيل]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "التقرير الإحصائي: %s [بما في ذلك الإلغاء كما هو محدد أدناه]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "تقرير مطبوع: %s [بما في ذلك الإلغاء كما هو محدد أدناه]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "تقارير الطباعة"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "إبدأ الفرز"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "مرشح واضح"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "تحرير"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "تحرير عامل التصفية الحالي"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "عدد مرات إنشاء ملف التدفق الجديد."
+
+#: includes/functions.php
+msgid "New"
+msgstr "جديد"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "حفظ"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "تقارير الطباعة"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "حفظ باسم"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "تقارير الطباعة"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "إعادة التسمية"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "إعادة تسمية مرشح التدفق"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "تقارير الطباعة"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "تقرير"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "إحصائية: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "طبع: %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "تقارير الطباعة"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "سطور"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "استبعد"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "أعلى عينة"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "أعلى عينات %d"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "ثماني"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "عرض المجالات في المخططات أدناه فقط"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "المجالات فقط"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "إظهار عنوان IP/اسم DNS بعد NAT (المترجم) بدلاً من القيم الأصلية"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "زمن"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "مخصص"
+
+#: includes/functions.php
+msgid "From"
+msgstr "من"
+
+#: includes/functions.php
+msgid "To"
+msgstr "إلى"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "محدد تاريخ النهاية"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "التحول مرة الى الوراء"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "تحديد الفاصل الزمني للتحويل"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "التحول إلى الأمام"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "الرسم البياني"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "شريط"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "مخطط دائري"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "خريطة الشجرة"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "ارتفاع"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "اظهر المخفي"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "جدول"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "تصدير البيانات الأولية"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "فلتر"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "اسم الحقل"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "تقارير الطباعة"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "لحذف عامل تصفية التدفق هذا، اضغط على متابعة.  إذا كان عامل تصفية التدفق قيد الاستخدام في تقرير مجدول، حظر العملية."
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "أعلى %s مخطط توزيع بايت"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "أعلى %s مخطط دائري للبايت"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "أعلى %s مخطط مخطط الشجرة للبايت"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "أعلى %s مخطط توزيع الحزم"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "أعلى %s مخطط دائري للحزم"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "أعلى %s مخطط الشجرة للحزم"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "أعلى %s مخطط توزيع التدفقات"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "أعلى %s مخطط دائري للتدفقات"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "أعلى %s مخطط التدفقات الشجري"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "إعادة تسمية التخطيط"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "تم حفظ إعدادات الفلتر. تم بدء تجهيز هذا الفلتر في الخلفية."
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "تصفية الإعدادات المحفوظة"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "العميل / الخاص (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "غير معروف (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "نت فلو - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "عامل تصفية الشبكة الفرعية: %s ليس تنسيق CIDR بقيمة"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "فلتر IP: %s ليس عنوان IP صالحاً"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "-- لم تحل --"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d -- %d بايت"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d بايت"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "التقرير الإحصائي %s غير معروف. يرجى الإبلاغ عن خطأ برمجي على GitHub"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "التقرير المطبوع %s غير معروف. يرجى الإبلاغ عن خطأ برمجي على GitHub"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "مصدر AS"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "مصدر AS"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "Dest AS"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "ميناء ميناء"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "خوادم DNS البديلة"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "DNS الجذر"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "ميناء ميناء"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "Dest IF"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "البادئة"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "نوع الخدمة"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "الحزم"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "لم يتم إنشاؤه فعلياً بعد، مع NAT: %s، وبدون NAT: %s."
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "محدَّث"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "مفتوح"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "مطلوب"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "عدد استعلامات هذا الفلتر التي تعمل الآن."
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "مع NAT: %d، وبدون NAT: %d."
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "قيد التشغيل: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "خطأ: لم ينتهِ الاستعلام المتوازي خلال الحد الأقصى لوقت التشغيل البالغ %d ثانية. تحقق من الحد الأقصى لوقت التشغيل ضمن إعدادات FlowView، وتأكد من أن قاعدة البيانات غير مشغولة بعملية أخرى مثل ALTER TABLE."
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "انتهت مهلة الاستعلام المتوازي.  الرجاء الاتصال بالمسؤول"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "منطقي: %s ، رقمي: %s ، سداسي عشري: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "تأخير منخفض"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "الإنتاجية"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "الموثوقية"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "مينكوست"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "صافي التحكم"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "التحكم في الإنترنت"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "الناقد ECP"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "تجاوز الفلاش"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "فلاش"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "فوري"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "الأولوية"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "نمط"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "احصائيات ملخصة"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "توزيع حجم حزم IP (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "توزيع الحزم لكل تدفق (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "توزيع الثمانيات لكل تدفق (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "توزيع وقت التدفق (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "يجب عليك تحديد تقرير إحصائي أو تقرير مطبوع!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "يجب عليك فقط تحديد تقرير إحصائي أو تقرير مطبوع (وليس كلاهما)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "تواريخ غير صالحة ، تاريخ / وقت الانتهاء أقدم من تاريخ / وقت البدء!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "عنوان IP غير صالح لعنوان المصدر! <br> (يجب أن يكون في شكل \"192.168.0.1\")"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "شبكة فرعية غير صالحة لعنوان المصدر! <br> (يجب أن يكون في شكل \"192.168.0.1/255.255.255.0\" أو \"192.168.0.1/24\")"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "عنوان IP غير صالح لعنوان الوجهة! <br> (يجب أن يكون في شكل \"192.168.0.1\")"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "شبكة فرعية غير صالحة لعنوان الوجهة! <br> (يجب أن يكون في شكل \"192.168.0.1/255.255.255.0\" أو \"192.168.0.1/24\")"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "قيمة غير صالحة للواجهة المصدر!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "قيمة غير صالحة لمصدر المصدر! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "قيمة غير صالحة للمصدر AS! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "قيمة غير صالحة لواجهة الوجهة!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "قيمة غير صالحة لمنفذ الوجهة (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "قيمة غير صالحة لـ Destination AS! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "قيمة غير صالحة للبروتوكول! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "قيمة غير صالحة لعلم TCP! (على سبيل المثال: 0x1b أو 0x1b / SA أو SA / SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "قيمة غير صالحة لثمانية قطع!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "قيمة غير صالحة لخطوط القطع!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "مخطط FlowView لنوع %s هو %s"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "مدعوم (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "تشفير يدعم الخادم. لا يتم دعم TLS إلا من خلال بروتوكول الإصدار 3."
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (سريع، غير آمن ضد الأعطال)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (سريع ، آمن من الاصطدام)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (تزامن بطيء ومرتفع)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "مستخدم NetFlow"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "مسؤول NetFlow"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "الرجاء إعادة تسمية ملفات config.php.dist أو config_local.php.dist في دليل flowview ، وتغيير إعداد قاعدة البيانات الخاصة بك قبل التثبيت."
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "يرجى العلم أنه يتم ترقية جداول المكونات الإضافية ل Flowview في الخلفية.  قد يستغرق هذا بعض الوقت. تحقق من سجل الصبار لمزيد من المعلومات"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "تم حذف المرشح"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "تم تحديث الفلتر"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "استيراد و تصدير"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "قواعد البيانات"
+
+#: setup.php
+msgid "Normal User"
+msgstr "المستخدم العادي"
+
+#: setup.php
+msgid "System Administration"
+msgstr "إدارة النظام"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "عارض التدفق"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "لوحة المؤشرات"
+
+#: setup.php
+msgid "(save)"
+msgstr "حفظ"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(تعديل)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "أفعال"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "عملية %d"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "العمليات %d"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "العمليات المتزامنة للتقرير (FlowView فقط)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "اختر الحد الأقصى لعمليات التقارير المتزامنة التي يمكن تشغيلها في وقت واحد."
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "إعدادات وكيل الإنترنت"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "عنوان وكيل الإنترنت"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "بالنسبة لخدمات Cacti الأساسية أو الإضافات التي تتطلب وصولاً إلى الإنترنت، أدخل خادم الوكيل والمنفذ هنا بالتنسيق التالي IP:PORT. على سبيل المثال 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "مستخدم وكيل الإنترنت"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "إذا كان وكيل الإنترنت الخاص بك يتطلب اسم مستخدم، فأدخله هنا."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "كلمة مرور وكيل الإنترنت"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "إذا كان وكيل الإنترنت الخاص بك يتطلب كلمة مرور، فأدخله هنا."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "اسم المضيف القرار"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "اسم المضيف القرار"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "الطريقة التي ترغب في حل أسماء المضيفين بها."
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "استخدام خادم محلي"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "استخدام خادم DNS أدناه"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "لا تحل DNS"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "تنزيل سجل الإنترنت يوميًا"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "إذا كنت مهتماً بالمعلومات المتاحة للعامة حول الإنترنت بالكامل، يمكنك تحديد هذا الخيار. سيتواصل Cacti مع سجلات الإنترنت في جميع أنحاء العالم مرة واحدة يومياً للتحقق من التغييرات في مسارات الإنترنت بالكامل وتحميل تلك المعلومات إلى Cacti. لاحظ أن هذا سينشئ قاعدة بيانات كبيرة نسبياً تتجاوز 3 جيجابايت من البيانات."
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "أسماء المجال قطاع"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "بالنسبة لعناوين IPv4 على الشبكة المحلية التي لا يتم حلها محليا، قم بإلحاق هذه اللاحقة بعنوان IP الناتج."
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "نطاق IP المحلي"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "أدخل نطاق عناوين IPv4 لشبكتك المحلية للمستضيفين الذين قد لا يكونون مسجلين في DNS. سيتم ربط هؤلاء المستضيفين باسم النطاق المحلي أعلاه. هذا مخصص أكثر للمستخدمين المنزليين. يمكنك استخدام تنسيق CIDR أو غير CIDR. على سبيل المثال: 192.168.11.0 أو 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "استخدم CIDR أو غير CIDR"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "استخدم Arin للعثور على النطاقات غير المسجلة"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "ترغب العديد من خدمات جمع البيانات في مجال التكنولوجيا الكبرى في إخفاء ملكيتها للنطاقات للتعتيم على حقيقة أنها تجمع معلوماتك الشخصية.  إذا كنت مهتما بهذا الأمر وكان تثبيت Cacti الخاص بك لديه حق الوصول إلى الإنترنت ، فيمكنك استخدام Arin لإزالة القناع من شركات التكنولوجيا الكبرى هذه."
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "مضيف مزود Whois"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "يرجى تقديم اسم المضيف لحل مكالمات whois.  إذا لم يكن فارغا ، فيجب أن يكون لديك whois الثنائي في مسار النظام الخاص بك."
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "أدوات التدفق المسار الثنائي"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "يرجى تقديم اسم المسار للثنائي \"whois\".  سيتم استخدام ثنائي \"whois\" للعثور على معلومات AS المكملة ل Arin."
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "أدخل المسار الثنائي"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "إعدادات التنقل التفصيلي في الرسم البياني"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "فلتر البحث الافتراضي للتفصيل في الرسم البياني"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "اختر فلتر بحث Flowview حالي لاستخدامه في التعمق بالرسم البياني."
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "الاحتفاظ بالبيانات وإنشاء التقارير"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "سياسة الاحتفاظ بالبيانات"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "مقدار الوقت الذي سيحتفظ فيه Cacti بجداول التدفق المقسمة."
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "%d أسبوع"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d أسابيع"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d شهر"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d أشهر"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d سنة"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "نظام تقسيم قاعدة البيانات"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "بناءً على عدد التدفقات في الدقيقة ، قد تحتاج إلى المزيد من الجداول في اليوم."
+
+#: setup.php
+msgid "Daily"
+msgstr "يومي"
+
+#: setup.php
+msgid "Hourly"
+msgstr "كل ساعة"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "محرك تخزين للجداول الخام"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "محرك Aria مثالي للجميع باستثناء الطاولة الخام الحية.  سيكون الجدول الخام المباشر دائما InnoDB.  اختر ما يناسبك."
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "الاستعلامات المتوازية"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "خلفية الاستعلام المتوازي"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "اختر كيفية تنفيذ استعلامات FlowView المتوازية.  يقوم مشغّل PHP القديم بتفريع عملية flowview_runner.php لكل استعلام وجزء.  تقوم خدمة استعلامات FlowView بإرسال نفس عمل map-reduce إلى خدمة Go طويلة التشغيل عبر localhost، مما يتجنب زمن بدء العملية لكل استعلام وزمن استطلاع قاعدة البيانات.  يتطلب تثبيت خدمة flowview-query وتشغيلها (راجع plugins/flowview/service/flowview-query)."
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "مشغل PHP القديم"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "خدمة استعلام FlowView"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "عنوان URL لخدمة الاستعلام"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "عنوان URL الأساسي لخدمة استعلام FlowView، على سبيل المثال http://127.0.0.1:8699. اتركه فارغًا للاكتشاف التلقائي للمنفذ المؤقت من ملف منفذ الخدمة."
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "ملف منفذ خدمة الاستعلام"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "المسار إلى ملف المنفذ الذي تكتب فيه خدمة استعلام FlowView عنوانها المرتبط. يُستخدم لاكتشاف نقطة نهاية الخدمة عندما يكون عنوان URL لخدمة الاستعلام أعلاه فارغًا."
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "رمز خدمة الاستعلام"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "سر مشترك اختياري. عند تعيينه، يرسله Cacti إلى خدمة استعلام FlowView كترويسة \"Authorization: Bearer\" وترفض الخدمة أي طلب يغيّر الحالة ولا يقدم نفس الرمز. عيّن القيمة المطابقة في ملف تكوين الخدمة (auth_token) أو متغير البيئة FLOWVIEW_QUERY_TOKEN. يُنصح به متى أمكن الوصول إلى الخدمة من أي شيء آخر غير العمليات المحلية الموثوقة."
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "ماكس المواضيع المتزامنة"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "الحد الأقصى لعدد مؤشرات الترابط التي سيتم إرسالها لتشغيل استعلامات FlowView.  لاحظ أنه يمكن أن يكون لديك على الأكثر 1 مؤشر ترابط لكل قسم قاعدة بيانات ، ويجب أن تكون حريصا على عدم التحميل الزائد على خادم قاعدة البيانات الخاص بك مع وجود عدد كبير جدا من مؤشرات الترابط المتزامنة قيد التشغيل."
+
+#: setup.php
+msgid "Disabled"
+msgstr "معطل"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "%d المواضيع"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "أقصى عدد من الصفوف"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "إذا لم ينته الاستعلام المتوازي في هذا الوقت، قم بإنهاء."
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "وقت البيانات المخزنة مؤقتا للعيش"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "كم من الوقت يجب أن يحتفظ FlowView بنتائج الاستعلام المخزنة مؤقتا قبل إزالتها؟"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ساعات"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "يوم %d"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d من الأيام"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "ماكس سكيل شاردينج"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "هذا مطلوب فقط إذا كان اتصال قاعدة بيانات Flowview في نظام Cacti لا يستخدم بالفعل منفذ تقسيم القراءة والكتابة (Read-Write Split) المفعّل عليه MaxScale."
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "الاستفادة من MaxScale لتوزيع أجزاء الاستعلام"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "إذا كان لديك خدمة متعددة تعمل كعبيد ل MaxScale ، فيمكنك زيادة سرعة الاستعلام عن طريق توزيع الاستعلامات المتوازية على خوادم MariaDB الخلفية المتعددة."
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "منفذ تقسيم القراءة والكتابة في MaxScale"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "يجب أن يكون هذا هو منفذ خدمة Read-Write-Split-Service (readwrite) والموجّه."
+
+#: setup.php
+msgid "Flowview"
+msgstr "FlowView"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
+

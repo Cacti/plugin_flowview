@@ -1,0 +1,2936 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Afrikaans\n"
+"Language: af-ZA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "Kan nie rou data vind om uit te voer nie"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "Die verskafde Flowview-navraag bestaan nie. Dien asseblief 'n geldige navraag in."
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "Ongeldige bronnavraag verskaf. Dien asseblief met 'n geldige navraag in."
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "Kan nie vloeifilter '%s' skrap nie omdat dit in 'n geskeduleerde verslag gebruik word."
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "Vloeifilter '%s' geskrap."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "Skrap"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "DNS-kas is skoongemaak. Dit sal weer aangevul word namate rekords inkom."
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "Internetroeteregister-besonderhede"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "Besonderhede van gemagtigde agent"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "Geen besonderhede gevind nie"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR/Roete"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "Outonome nommer"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "AS-blok"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "AS-stel"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "Roetestel"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "Domein"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "Filterstel"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "Eweknie-stel"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Netwerk"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "Internetroeteerder"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "Insidentreaksiespan"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "Stawingsagent"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "Organisasie"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "Rol"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "Persoon"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "Roeteerderstel"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "Opmerkings"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "Laas gewysig"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Bron"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "Registrasiedatum"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT Deur"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "Admin-kontak"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "Veranderinge"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "Stel in kennis"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "Beskrywing"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "Tegniese kontak"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "MNT Laer"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "Land"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "Misbruik-e-pos"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "Faksnommer"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "Telefoon"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "E-pos"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "Adres"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "Status"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "Lede volgens Fef"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "Misbruikkontakte"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "MNT Verwysing"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "Lede"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "MNT Kennisgewing"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "Magtiging"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "MNT Roetes"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "Lid van"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "Opdaterings-e-pos"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "NOC-handvatsel"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "Borgorganisasie"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT Irt"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "MP Lede"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "Subdomein"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "Pingbaar"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "Alias"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "Organisasietipe"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "Verwys na"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "MP Ewekniekoppeling"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "Voer uit"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "Gate"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "MP Verstek"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "Komponente"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "RS Uit"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "Organisasienaam"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "AS-naam"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "Outeur"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "IRT-kennisgewing"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "Aggr MTD"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "AS-tipe"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "MP Filter"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "Verstekroete"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "Toewysingsgrootte"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "Voer komponente uit"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "RS In"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "Netnaam"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "DS Rdata"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "Aggr-grens"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Filter"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "MP Invoer"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "Taal"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "RESTful-skakel"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "Eweknie"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "Sone-kontak"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "Spuit in"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "MP Eweknie"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "Verwysing deur"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "Vorm"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "MNT Domeine"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "Oorsprong-AS"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "MP Uitvoer"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "Enkripsie"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "Geo-voer"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "Geo-indeks"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "Koppelvlakadres"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "Uitvoer via"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "Probleem"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "Naambedieners"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "Ping-handvatsel"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "Koppelvlak"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "Voer in"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "Handtekening"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "Geoligging"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "Plaaslike AS"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "Voer in via"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "FATAAL: Onbekende databasistabel %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "Soek"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "Enige"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "Inskrywings"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "Verstek"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "Gaan"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "Stel/verfris filters"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "Maak skoon"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "Maak filters skoon"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "Wis die DNS-kas uit"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "Nie gespesifiseer nie"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "Geen ooreenstemmende inskrywings gevind nie"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "Klik 'Gaan voort' om die volgende DNS-kasinskrywing te skrap."
+msgstr[1] "Klik 'Gaan voort' om al die volgende DNS-kasinskrywings te skrap."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "Kanselleer"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "Gaan voort"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "Skrap DNS-inskrywing"
+msgstr[1] "Skrap DNS-inskrywings"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "Flowview DNS-kasinskrywings"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "Geverifieer"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "Ongeverifieer"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "Wis uit"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP-adres"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "Dit is die IP-adres van die Kas-inskrywing."
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "DNS-gasheernaam"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "Die DNS-naam wat aan die IP-adres toegewys is."
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "Die bron van die DNS-gasheernaam.  Dit kan óf DNS, Statiese Opsoek óf ARIN wees."
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "Arin-geverifieer"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "Die Arin-inligting vir hierdie IP-adres is geverifieer, of dit is 'n plaaslike domein-IP-adres."
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "CIDR-ID"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "Die Arin primêre sleutel.  Dit is nie amptelike Arin-inligting nie."
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "Outonome stelsel-ID"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "Die Arin-oorsprong-AS.  Dit is amptelike Arin AS-inligting."
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "Bygewerkte tyd"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "Dit is die tyd waarop die DNS-kas ingevoer of laas bygewerk is."
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "Geen DNS-kasinskrywings gevind nie"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "Flowview-internetroetes"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "IP-weergawe"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "IPv4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "Roete"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "Dit is die gepubliseerde internetroete."
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "AS-nommer"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "Die Outonome Stelselnommer vir die roete."
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "Roetebeskrywing"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "Die beskrywing wat deur die roete-onderhouer aangeteken is."
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "Die brondatabasis wat gebruik word om die roete te publiseer."
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "Onderhou deur"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "Die internetdiensverskaffer wat die roete vir die kliënt onderhou."
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "Die laaste keer dat die inligting oor hierdie roete gewysig is."
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "Geen ooreenstemmende roetes gevind nie"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "Aktiveer"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "Deaktiveer"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "Luisteraarnaam"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "Naam van die toestel wat vertoon moet word."
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "Insamelingsmetode"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "Daar is twee ondersteuningsinsamelingsmetodes: die eerste gebruik die ouer flow-tools-binêre lêers en die tweede maak gebruik van Cacti se eie PHP-gebaseerde vloedstroombediener."
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "Bind aan adres"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "As die Cacti-bediener meer IP-adresse het, kan u 'n spesifieke koppelvlak spesifiseer. Laat as 0.0.0.0 vir die primêre koppelvlak."
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "Toegelate gasheerreeks"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "IP-adres van die toestel wat toegelaat word om na hierdie vloeiversamelaar te stuur.  Laat as 0.0.0.0 vir enige gasheer.  Let daarop dat PHP kieskeurig is oor wat dit toelaat.  CIDR-sintaksis word ondersteun sowel as reekssintaksis, byvoorbeeld 192.168.1.0 of 192.168.1.0/24.  As u spesifieke IP-adresse wil hê, skei hulle met 'n komma."
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Poort"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "Poort waarop hierdie versamelaar sal luister."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Protokol"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "Die IP-protokol om vir hierdie luisteraar te gebruik."
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "UDP-protokol"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "Geaktiveer"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "Indien gemerk, sal die Luisteraar-diens begin word en op inkomende data wag."
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "Geen vloeisjabloon gevind vir Toestel-ID:%s en Sjabloon-ID:%s nie"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Klik 'Gaan voort' om die volgende NetFlow-luisteraars te skrap. Daarna sal Cacti probeer om jou Flow-Capture-diens te herbegin."
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Klik 'Gaan voort' om die volgende NetFlow-luisteraars te aktiveer. Daarna sal Cacti probeer om jou Flow-Capture-diens te herbegin."
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "Jy moet ten minste een Luisteraar kies."
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "Die luisterpoort moet 'n numeriese waarde tussen 1 en 65535 wees."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "Stoor suksesvol. Die Flowview Listener is gestoor en die diens is herbegin."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "Stoor suksesvol. Die Flowview Listener is gestoor. Die diens flow-capture loop egter nie."
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "Luisteraar [wysig: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "Luisteraar [nuut]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "Naam"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "Weergawe"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "Sjablone"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "Laas Opgedateer"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "Aktiewe strome word elke 5 minute bygewerk"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "Geen inkomende strome bespeur nie"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "Luisteraar-bespeurde sjablone"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "Ekst Adres"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "Almal"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "Sjabloon"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "Sjabloon-ID"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "Veldnaam"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "Ondersteun"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "Veld-ID"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "Veldtipe"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "Lengte"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "Pak uit"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "Geen inkomendestroom-sjablone bespeur nie"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "FlowView-luisteraars"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "Luisteraars"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "Metode"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "Bindadres"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "Toegelaat vanaf"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "Waargenome luister"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "Die poortsekuriteit wat werklik op die luisteraar se poort waargeneem is."
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "Agterstand"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "Die grootte van die UDP-agterstand in grepe."
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "Strome"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "Die aantal inkomende verbindings vanaf verskeie bronne."
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "Stroomweergawes"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "Die verkeersvloei-weergawes wat waargeneem word."
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "Die maksimum bywerkingstyd van alle strome wat ingesamel word. Hierdie waarde word elke 5 minute bygewerk."
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "Geen"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "Geen verbindings nie"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "N.v.t"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "Cacti"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "Geen Flowview-luisteraars nie"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "Materialiseer"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "Die kassleutels van die Filters kon nie bepaal word nie, dus is niks gesnoei nie."
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "%s gekasde fragment(e) gesnoei wat nie met enige Filter ooreengestem het nie."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "Materialisering van %d Filter(s) is in die agtergrond begin.  %d Filter(s) word reeds gematerialiseer.  Die resultate word in die Cacti-logboek gerapporteer."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "Materialisering van %d Filter(s) is in die agtergrond begin.  Die resultate word in die Cacti-logboek gerapporteer."
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "Die gekose Filter(s) word reeds gematerialiseer.  Probeer asseblief weer sodra dit klaar is."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "Klik 'Gaan voort' om die volgende Filter(s) en alle ooreenstemmende Filters te skrap."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "Klik 'Gaan voort' om die volgende Filter(s) en alle ooreenstemmende Filters te deaktiveer."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "Klik 'Gaan voort' om die volgende Filter(s) te aktiveer."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "Klik 'Gaan voort' om die volgende Filter(s) in die agtergrond te materialiseer, met NAT aan en af, vir die hele reeks vloeidata. Partisies wat reeds gematerialiseer en akkuraat is, word oorgeslaan. Dit kan lank neem op groot datastelle. 'n Filter wat reeds gematerialiseer word, word oorgeslaan."
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "Jy moet ten minste een Filter kies."
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "FlowView-filters"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "FlowView-filters [ Voeg Toestelle by voor Filters ]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "Filters"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "Snoei"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "Verwyder die gekasde skerwe wat nie by enige Filter pas nie"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "Filternaam"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "ID"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "Materialisering"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "Materialisering voorbereken die resultate van 'n Filter vir elke vloeipartisie, met NAT aan en af, en stoor dit in die Parallelle Navraag-kasgeheue sodat verslae oor ouer data vinnig oopmaak.  Nuwe partisies word outomaties gematerialiseer sodra hulle ophou om vloeie te ontvang.  Vereis beteken partisies wat geroteer het, is nog nie gematerialiseer nie, Loop tans beteken 'n materialisering is aan die gang, en Op datum beteken elke geroteerde partisie is gematerialiseer.  Loop tans: N dui aan hoeveel navrae van die Filter tans werk.  Die partisie wat steeds vloeie ontvang, word nie gematerialiseer nie, dus tel dit nie."
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "Luisteraar"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Verslagtipe"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "NAT-skerwe"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "Die aantal partisies van hierdie Filter wat in die Parallelle Navraag-kasgeheue gestoor word met NAT aan."
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "Nie-NAT-skerwe"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "Die aantal partisies van hierdie Filter wat in die Parallelle Navraag-kasgeheue gestoor word met NAT af."
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "Partisies"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "Die totale aantal vloeipartisies, wat die meeste skerwe is wat 'n Filter met of sonder NAT in die kas kan hê."
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Sorteerveld"
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "Resolusie"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "Die gekaste fragmente van die Filters kon nie van die ander onderskei word nie, omdat die kassleutels van 'n Filter nie bepaal kon word nie."
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "Die kassleutels van die Filters kon nie bepaal word nie, dus kan niks nou gesnoei word nie. Kontroleer dat elke Filter 'n geldige verslag het."
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "Gekaste skerwe: %s stem ooreen met 'n Filter.  %s stem nie met enige Filter ooreen nie, wat Snoei verwyder."
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "Dit verwyder %s gekaste fragment(e) wat nie met enige Filter ooreenstem nie, vir elke Filter en elke gebruiker. Dit kom van Filters wat gewysig of geskrap is, en van verslae waarvan instellings op die verslagbladsy gewysig is. Die %s gekaste fragment(e) van die Filters word behou. Dit kan nie ongedaan gemaak word nie."
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "Elke gekaste fragment stem ooreen met 'n Filter.  Daar is niks om te snoei nie."
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "Snoei gekasde fragmente"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "Sluit"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "Stuur nou"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "Elke uur"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Elke %d ure"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "Elke dag"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "Elke week"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "Elke %d weke, 2"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "Elke maand"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "Algemene instellings"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "Titel"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "Nuwe skedule"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "Voer 'n Verslagtitel vir die FlowView-skedule in."
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "Of hierdie NetFlow-skandering gestuur sal word al dan nie."
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "Naam van die navraag om uit te voer."
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "Stuurinstellings"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "Stuurinterval"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "Hoe gereeld moet hierdie NetFlow-verslag gestuur word?"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "Geskeduleerde basistyd"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "Dit is die eerste datum / tyd om die NetFlow-skandering-e-pos te stuur. Alle toekomstige E-posse sal bereken word vanaf hierdie tyd plus die interval hierbo gegee."
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "Maks. toegelate looptyd"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "Hoe lank moet die verslag toegelaat word om uit te voer voordat dit afsluit?"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minuut"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minute"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "Verouderde e-pos-instellings"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "E-posadresse"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "E-posadresse (kommageskeid) waarheen hierdie NetFlow-skandering gestuur moet word."
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "Formaatlêer om te gebruik"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Kies die pasgemaakte HTML-omhulsel en CSS-lêer om te gebruik. Hierdie lêer bevat beide HTML en CSS om rondom u verslag te draai. As dit meer as net CSS bevat, moet u 'n spesiale <REPORT>-merker binne die lêer plaas. Hierdie formaatmerker sal deur die verslaginhoud vervang word. Hierdie lêers is in die 'formats'-gids geleë."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "Kennisgewinglys-instellings"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "Kennisgewingslys"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "Indien die Thold-inprop geïnstalleer is, kan u 'n Kennisgewinglys kies"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "Die verslag sal aankom sodra dit voltooi is."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Klik 'Gaan voort' om die volgende Skedule(s) te skrap."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Klik 'Gaan voort' om die volgende Skedule(s) nou te stuur."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Klik 'Gaan voort' om die volgende skedule(s) te deaktiveer."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Klik 'Gaan voort' om die volgende skedule(s) te aktiveer."
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "Jy moet ten minste een skedule kies."
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "Kan nie verslag se rou data vir verslag-ID %s vind nie"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "Jy moet E-posse, 'n Kennisgewingslys of beide spesifiseer!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Geskeduleerde verslag: [wysig: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Geskeduleerde verslaggeskiedenis: [wysig: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "Geskeduleerde verslag: [nuut]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "Skedules"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "Verslagtitel"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "ID"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "Uitvoertipe"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "Gestuur Deur"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "Datum gestuur"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "Looptyd"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "Laai data af"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "Verslaglogboeke"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [Bekyk rou verslag]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [Bekyk verslag met CSS]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "Handmatige versending"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "Geskeduleer"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s Sekondes"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "Begindatumkieser"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "FlowView-skedules"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "FlowView-skedules [ Voeg Toestelle by voor skedules ]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "Interval"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "Laaste gestuur"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "Volgende versending"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "E-pos/lys"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "Gelogde versendings"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Nee"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Ja"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Kies 'n Verslag"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Opsomming"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Bron-worteldomein"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Bestemming-worteldomein"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Bron-/Bestemmingsworteldomein"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP/TCP-bestemmingspoort"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP/TCP-bronpoort"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP/TCP-poort"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Bron-IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Bestemmings-IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Bron-/Bestemmings-IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Bron- of Bestemmings-IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP-protokol"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Invoerkoppelvlak"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Uitvoerkoppelvlak"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Invoer-/uitvoerkoppelvlak"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Bron-AS"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Bestemmings-AS"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Bron-/Bestemmings-AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Bronvoorvoegsel"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Bestemmingsvoorvoegsel"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Bron-/Bestemmingsvoorvoegsel"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Vloeitye"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Bron-/Bestemmings-IP's en -poorte"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "AS-nommers"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 Kolomme"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Wys IP-rekeningkunde-emulasie"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Enige deel in reeks (stadig)"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Eindtyd binne reeks (vinnig)"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Begintyd in reeks (vinnig)"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Heeltemal binne reeks (stadig)"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Gee alle reëls terug"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Top %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Geen limiet"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Grepe"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Brondomein"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Vloeie"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Grepe"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Pakkies"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Bestemmingsdomein"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Bronpoort"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Bestemmingspoort"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Bestemming-IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Bron-IF"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Bestemmings-IF"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Bestemmingsvoorvoegsel"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Begintyd"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Eindtyd"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Aktief"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Vlae"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Bestemming"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d piksels"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Algemene filters"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Die gestoorde Filter om te vertoon."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Nuwe filter"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Die luisteraar om vir die Filter te gebruik."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "Vloeisjabloon-ID"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "Die vloeisjabloon-ID slegs vir v9- en IPFIX-vloeie.  Let daarop dat Sjabloon-ID's van vervaardiger tot vervaardiger kan verskil."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Stroomadres"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Die stroom-IP-adres of Gasheernaam uit die lys geregistreerde strome."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Voorafinstellings"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Indien hierdie Filter op 'n vooraf gedefinieerde Tydperk gebaseer is, kies dit hier."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Gedetailleerde filterkriteria"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Die verslagtipe om by verstek vir hierdie Filter te gebruik wanneer 'n verslag geskep word."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Gedruk"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Statisties"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Statistiese verslag"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Die vertoonverslagtipe om as verstek vir hierdie Filter te gebruik wanneer 'n verslag geskep word."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Gedrukte verslag"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Die tipe gedrukte verslag om by verstek vir hierdie Filter te gebruik wanneer 'n gedrukte verslag geskep word."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Reeksreëls"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Beperk die filterdata volgens hierdie tydfilterreëls."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Los IP's op"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Los IP-adresse op na domeinname."
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Die versteksorteerveld vir die Filter. Hierdie instelling sal vir enige geskeduleerde verslae toegepas word."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Maksimum rye"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Die maksimum rye om in die Filter te verskaf.  Hierdie instelling sal vir enige geskeduleerde verslae toegepas word."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Minimum grepe"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Die minimum totale grepe om vir die Filter te oorweeg.  Enige vloeitotale wat minder as hierdie aantal grepe is, sal geïgnoreer word."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Diagramopsies"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Grafiektipe"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Die Grafiektipe om as verstek te vertoon.  Dit sluit Staaf, Sirkel en Boomkaart in."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Staafgrafiek"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Sirkeldiagram"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Boomkaartgrafiek"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Grafiekhoogte"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "Die Grafiekhoogte om as verstek te gebruik."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "Gebruik NAT-data"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "Wys die na-NAT (vertaalde) bron-/bestemming-IP en DNS-naam in verslagafvoer in plaas van die oorspronklike, voor-NAT waardes."
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Tabelpaneel"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Moet die Tabel-paneel by verstek vertoon word."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Grepe-paneel"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Moet die Grepe-paneel by verstek vertoon word."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Pakkiespaneel"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Moet die Pakkies-paneel by verstek vertoon word."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Vloeie-paneel"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Moet die Vloeie-paneel by verstek vertoon word."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Protokolfilters"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Protokolle"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Kies die Spesifieke Protokol vir die Filter."
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "Alle protokolle"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP-vlae"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "Die TCP-vlae waarna in die Filter gesoek moet word. Dit kan 'n kommageskeide lys van TCP-vlae wees"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "TOS-velde"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Die TOS-velde waarna in die Filter gesoek moet word. Dit kan 'n kommageskeide lys van TOS-velde wees"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filter op die gekose Bron-IP in die Filter. Dit kan 'n kommageskeide lys van IPv4- of IPv6-adresse wees, of 'n kommageskeide lys van IPv4- of IPv6-adresreekse in CIDR-formaat (bv. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Bronpoorte"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Filter op die gekose Bronpoorte in die Filter. Dit kan 'n kommageskeide lys van Bronpoorte wees."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Bronkoppelvlak"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Filter op die gekose Bronkoppelvlak in die Filter. Dit kan 'n kommageskeide lys van Bronkoppelvlakke wees"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Filter op die gekose Bestemming-AS in die Filter. Dit kan 'n kommageskeide lys van Bron-AS'e wees"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filter op die gekose Bestemming-IP in die Filter. Dit kan 'n kommageskeide lys van IPv4- of IPv6-adresse wees, of 'n kommageskeide lys van IPv4- of IPv6-adresreekse in CIDR-formaat (bv. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Bestemmingspoorte"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Filter op die gekose Bestemmingspoorte in die Filter. Dit kan 'n kommageskeide lys van Bestemmingspoorte wees."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Bestemmingkoppelvlak"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Filter op die gekose Bestemmingskoppelvlak in die Filter. Dit kan 'n kommageskeide lys van Bestemmingskoppelvlakke wees."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Bestemming-AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Filter op die gekose Bestemming-AS in die Filter. Dit kan 'n kommageskeide lys van Bestemming-AS'e wees"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "Na-NAT-bron-IP"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filter op die vertaalde (post-NAT) Bron-IP wat in die Filter aangeteken is. Dit kan 'n kommageskeide lys van IPv4- of IPv6-adresse wees, of 'n kommageskeide lys van IPv4- of IPv6-adresreekse in CIDR-formaat (bv. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "Na-NAT-bronpoort"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filter op die vertaalde (post-NAT) Bronpoort in die Filter. Dit kan 'n kommageskeide lys van Poorte wees."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "Na-NAT-bestemmings-IP"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filter op die vertaalde (post-NAT) Bestemming-IP wat in die Filter aangeteken is. Dit kan 'n kommageskeide lys van IPv4- of IPv6-adresse wees, of 'n kommageskeide lys van IPv4- of IPv6-adresreekse in CIDR-formaat (bv. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "Na-NAT-bestemmingspoort"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filter op die vertaalde (post-NAT) Bestemmingspoort in die Filter. Dit kan 'n kommageskeide lys van Poorte wees."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS-kas"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Roetes"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Outonome nommers"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS-blokke"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS-stelle"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Roetestelle"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Domeine"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Filterstelle"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Eweknie-stelle"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Internetroeteerders"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Insidentreaksiespanne"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Stawingsagente"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Organisasies"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Rolle"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Persone"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "Die Verslag '%1$s' vanaf bron %2$s met ID %3$s is geskeduleer om uit te voer!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "Die Verslag '%1$s' vanaf bron %2$s met ID %3$s is nie geskeduleer om uit te voer nie weens 'n fout!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "Algemeen"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "Logboeke"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "Kies eers 'n Verslagtipe"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Filter: [wysig: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "Filter: [nuut]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "Gekaste resultate geraak"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "Hierdie veranderinge beïnvloed die gekaste resultate van hierdie Filter. As u dit Stoor, begin 'n materialisering in die agtergrond om dit te herbou. Druk 'Gaan voort' om die Filter te Stoor, of 'Kanselleer' om dit aan te hou Wysig."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Die wysigings aan hierdie Filter raak sy gekaste resultate, dus is 'n materialisasie daarvan in die agtergrond begin. Die vordering word op die Filters-bladsy gewys en die resultate word in die Cacti-log aangemeld."
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Ongedefinieerde filter [ Kies filter om besonderhede te kry ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Statistiese verslag: %s [ Insluitend oorheersings soos hieronder gespesifiseer ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Gedrukte verslag: %s [ Insluitend oorheersings soos hieronder gespesifiseer ]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "Kies 'n filter"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "Pas filter toe"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "Maak filter skoon"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "Wysig"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "Wysig die vloeifilter"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "Skep nuwe Vloeifilter"
+
+#: includes/functions.php
+msgid "New"
+msgstr "Nuut"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "Stoor"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "Stoor die vloeifilter"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "Stoor as"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Stoor die bestaande vloeifilter as 'n nuwe filter"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "Hernoem"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "Hernoem die Flow-filter"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "Skrap die vloeifilter"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "Verslag"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "Statisties: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "Gedruk: %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "Kies eers 'n Filter"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "Lyne"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "Sluit uit"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "Top-monster"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "Top %d monsters"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "Oktette"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "Wys slegs domeine op kaarte hieronder"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "Slegs domeine/gasheername"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "Wys die na-NAT (vertaalde) IP/DNS-naam in plaas van die oorspronklike waardes"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "Tydspan"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "Pasgemaak"
+
+#: includes/functions.php
+msgid "From"
+msgstr "Vanaf"
+
+#: includes/functions.php
+msgid "To"
+msgstr "Tot"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "Einddatumkieser"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "Skuif tyd terug"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "Definieer skuifinterval"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "Skuif tyd vorentoe"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "Grafiek"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "Staaf"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "Sirkel"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "Boomkaart"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "Hoogte"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "Wys/Versteek"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "Tabel"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "Voer rou data uit"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "Stoor vloeifilter"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "Nuwe naam"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "Skrap Vloeifilter"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "Om hierdie Vloei-filter te skrap, druk Gaan voort.  As die Vloei-filter in 'n geskeduleerde verslag gebruik word, sal die bewerking geblokkeer word."
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Top %s verspreidingsgrafiek van grepe"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "Top %s Sirkelgrafiek van grepe"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Top %s Boomkaartgrafiek van grepe"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Top %s verspreidingsgrafiek van pakkies"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "Top %s Sirkelgrafiek van pakkies"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Top %s Boomkaartgrafiek van pakkies"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Top %s verspreidingsgrafiek van vloeie"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Top %s Sirkelgrafiek van vloeie"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Top %s Boomkaartgrafiek van vloeie"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "Hernoem uitleg"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "Filter-instellings gestoor. 'n Materialisering van hierdie Filter is in die agtergrond begin."
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "Filterinstellings Gestoor"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Kliënt/Privaat (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Onbekend (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Subnetfilter: %s is nie 'n geldige CIDR-formaat nie"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "IP-filter: %s is nie 'n geldige IP-adres nie"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "onopgelos"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d grepe"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d Grepe"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "Die statistiese verslag %s is nie bekend nie. Open asseblief 'n foutverslag op GitHub"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "Die gedrukte verslag %s is nie bekend nie. Open asseblief 'n foutverslag op GitHub"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "Bron-DNS"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "Bron-wortel-DNS"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "Bestemming-DNS"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "Bestemming-wortel-DNS"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "DNS"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "Wortel-DNS"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "Bestemmingspoort"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "Bestemming-IF"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "Bestemmingsvoorvoegsel"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "Tipe diens"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "Grepe/pakket"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "Nog nie gematerialiseer nie, met NAT: %s, sonder NAT: %s."
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "Op datum"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "Loop"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "Vereis"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "Die aantal navrae van hierdie Filter wat nou loop."
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "Met NAT: %d, sonder NAT: %d."
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "Loop: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "FOUT: Die parallelle navraag het nie binne die maksimum looptyd van %d sekondes voltooi nie. Gaan die maksimum looptyd onder FlowView-instellings na, en maak seker dat die databasis nie besig is met 'n ander bewerking soos 'n ALTER TABLE nie."
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Die parallelle navraag het uitgetel. Kontak asseblief u administrateur"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Boolese waarde: %s, Numeries: %s, Heks: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "Lae vertraging"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "Deurvoer"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "Betroubaarheid"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "Minkoste"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "Netwerkbeheer"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "Internetbeheer"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "Kritieke ECP"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "Flash-oorskryding"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "Flash"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "Onmiddellik"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "Prioriteit"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "Roetine"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "Opsommende statistiek"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "IP-pakkiegrootte-verspreiding (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Pakkies per vloeiverspreiding (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Oktette per vloei-verspreiding (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Vloeitydverspreiding (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Jy moet 'n Statistiekverslag of Gedrukte Verslag kies!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Jy moet slegs 'n Statistiekverslag of 'n Gedrukte Verslag kies (nie beide nie)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Ongeldige datums, Einddatum/-tyd is vroeër as Begindatum/-tyd!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Ongeldige IP vir die bronadres!<br>(Moet in die vorm van '192.168.0.1' wees)"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Ongeldige subnet vir die bronadres!<br>(Moet in die vorm van '192.168.0.1/255.255.255.0' of '192.168.0.1/24' wees)"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Ongeldige IP vir die bestemmingsadres!<br>(Moet in die vorm van '192.168.0.1' wees)"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Ongeldige subnet vir die bestemmingsadres!<br>(Moet in die vorm van '192.168.0.1/255.255.255.0' of '192.168.0.1/24' wees)"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "Ongeldige waarde vir bronkoppelvlak!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Ongeldige waarde vir bronpoort! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Ongeldige waarde vir bron-AS! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "Ongeldige waarde vir bestemmingskoppelvlak!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Ongeldige waarde vir bestemmingspoort! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Ongeldige waarde vir bestemming-AS! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Ongeldige waarde vir protokol! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Ongeldige waarde vir TCP-vlag! (bv: 0x1b of 0x1b/SA of SA/SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Ongeldige waarde vir afsny-oktette!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Ongeldige waarde vir afsnylyne!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "FlowView-grafiek vir %s-tipe is %s"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "Ondersteun (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "Nie ondersteun nie"
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (Vinnig, nie omvalveilig nie)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (Vinnig, Omvalbestand)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (Stadig, hoë gelyktydigheid)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "NetFlow-gebruiker"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "NetFlow-administrateur"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Hernoem asseblief óf jou config.php.dist- óf config_local.php.dist-lêers in die flowview-gids, en stel jou databasis op voordat jy installeer."
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Neem asseblief kennis dat die Flowview-inproppe se tabelle in die agtergrond opgegradeer word. Dit kan 'n rukkie neem. Gaan die Cacti-logboek na vir meer inligting"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "Die Filter is geskrap"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "Die Filter is opgedateer"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "Invoer/Uitvoer"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "Databasisse"
+
+#: setup.php
+msgid "Normal User"
+msgstr "Gewone gebruiker"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Stelseladministrasie"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "Vloeibeskouer"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "Kontroleskerm"
+
+#: setup.php
+msgid "(save)"
+msgstr "(stoor)"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(wysig)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "(aksies)"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "%d Proses"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "%d prosesse"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "Rapporteer gelyktydige prosesse (Slegs FlowView)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "Kies die maksimum gelyktydige verslagprosesse wat op enige gegewe tydstip kan loop."
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Internet-instaanbedienerinstellings"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Internet-instaanbedieneradres"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Vir óf kern-Cacti-dienste óf inproppe wat internettoegang benodig, voer die instaanbediener en poort hier in die volgende formaat in: IP:PORT. Byvoorbeeld 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Internet-instaanbedienergebruiker"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "As u internet-instaanbediener 'n gebruikersnaam vereis, voer dit hier in."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Internet-instaanbedienerwagwoord"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "As u internet-instaanbediener 'n wagwoord vereis, voer dit hier in."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "Naamomsetting"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "Gasheernaamoplossing"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Die metode waarmee jy gasheername wil oplos."
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "Gebruik plaaslike bediener"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Gebruik DNS-bedieners onder Pos/Verslagdoening/DNS"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "Moenie DNS oplos nie"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "Laai die internetregister daagliks af"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "Indien u belangstel in die publiek beskikbare inligting oor die hele internet, kan u hierdie opsie kies.  Cacti sal een keer per dag na die Internet-registers regoor die wêreld uitreik, vir veranderinge in die roetes vir die hele internet kyk en daardie inligting in Cacti laai.  Let daarop dat dit 'n taamlik groot databasis van meer as 3 GBytes data sal skep."
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "Plaaslike domeinnaam"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "Vir IPv4-adresse op die plaaslike netwerk wat nie plaaslik opgelos word nie, voeg hierdie agtervoegsel by die gevolglike IP-adres aan."
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "Plaaslike IP-reeks"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Verskaf die IPv4-IP-adresreeks vir jou plaaslike netwerk vir Gashere wat dalk nie in DNS geregistreer is nie. Hierdie Gashere sal aan die plaaslike domeinnaam hierbo gekoppel word. Dit is meer vir tuisgebruikers. Jy kan óf CIDR- óf nie-CIDR-formate gebruik. Byvoorbeeld: 192.168.11.0 of 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "Gebruik CIDR of Nie-CIDR"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Gebruik ARIN om domeine en AS-nommers te vind"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Baie groot tegnologiemaatskappye se data-insamelingsdienste hou daarvan om hul eienaarskap van domeine te verbloem om die feit te verdoesel dat hulle jou persoonlike inligting insamel. As jy hieroor bekommerd is en jou Cacti-installasie toegang tot die internet het, kan jy Arin gebruik om die masker van daardie groot tegnologiemaatskappye te verwyder."
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "Whois-verskaffergasheer"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Verskaf asseblief die gasheernaam vir die oplossing van whois-oproepe. Indien nie leeg nie, moet u die whois-binêre lêer in u stelselpad hê."
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "Whois-binêre pad"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Verskaf asseblief die padnaam vir die 'whois'-binêre lêer. Die 'whois'-binêre lêer sal gebruik word om AS-inligting te vind wat Arin aanvul."
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "Voer binêre pad in"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "Grafiek-inboorinstellings"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "Verstek-soekfilter vir grafiek-detailontleding"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "Kies 'n bestaande Flowview-soekfilter om vir Grafiek-deurdringing te gebruik."
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "Databewaring en verslaggenerering"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "Databewaringsbeleid"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Die tydperk wat Cacti die gepartisioneerde Flow-tabelle sal behou."
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "%d week"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d weke"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d maand"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d maande"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d jaar"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "Databasis-partisioneringskema"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Afhangende van die aantal vloeie per minuut, mag jy meer tabelle per dag benodig."
+
+#: setup.php
+msgid "Daily"
+msgstr "Daagliks"
+
+#: setup.php
+msgid "Hourly"
+msgstr "Uurliks"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "Bergingenjin vir rou tabelle"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Die Aria-enjin is perfek vir alles behalwe die Live-rou tabel.  Die Live-rou tabel sal altyd InnoDB wees.  Kies gerus."
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "Parallelle navrae"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "Parallelle navraag-agterkant"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "Kies hoe parallelle FlowView-navrae uitgevoer word.  Die Verouderde PHP-loper vurk die flowview_runner.php-proses per navraag en skerf.  Die FlowView-navraagdiens stuur dieselfde map-reduce-werk na 'n langlopende Go-diens oor localhost, wat proses-opstart per navraag en databasispeiling-latensie vermy.  Vereis dat die flowview-query-diens (sien plugins/flowview/service/flowview-query) geïnstalleer en aktief is."
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "Verouderde PHP-uitvoerder"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "FlowView-navraagdiens"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "Navraagdiens-URL"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "Basis-URL van die FlowView-navraagdiens, byvoorbeeld http://127.0.0.1:8699.  Laat leeg om die efemere poort outomaties vanaf die diens se poortlêer te ontdek."
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "Navraagdiens-poortlêer"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "Pad na die poortlêer waarna die FlowView-navraagdiens sy gebonde adres skryf. Word gebruik om die dienseindpunt te ontdek wanneer die Navraagdiens-URL hierbo leeg is."
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "Navraagdiens-token"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "Opsionele gedeelde geheim.  Wanneer dit gestel is, stuur Cacti dit aan die FlowView-navraagdiens as 'n \"Authorization: Bearer\"-opskrif en die diens verwerp enige staatveranderende versoek wat nie dieselfde teken aanbied nie.  Stel die ooreenstemmende waarde in die diens se konfigurasielêer (auth_token) of die FLOWVIEW_QUERY_TOKEN-omgewingsveranderlike.  Aanbeveel wanneer die diens bereikbaar is deur enigiets anders as vertroude plaaslike prosesse."
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "Maks. gelyktydige drade"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Die maksimum aantal drade wat uitgestuur sal word om die FlowView-navrae uit te voer. Let daarop dat jy hoogstens 1 draad per databasispartisie kan hê, en jy moet versigtig wees om nie jou databasisbediener te oorlaai deur te veel gelyktydige drade te laat loop nie."
+
+#: setup.php
+msgid "Disabled"
+msgstr "Gedeaktiveer"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "%d drade"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "Maksimum looptyd"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Indien die Parallelle Navraag nie binne hierdie tyd voltooi nie, sluit af."
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "Leeftyd van gekaste data"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "Hoe lank moet FlowView navraagresultate in die kasgeheue behou voordat dit uitgewis word?"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ure"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d dag"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d dae"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "MaxScale-skerwing"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "Dit word slegs vereis as u Cacti-stelsel se Flowview-databasisverbinding nie reeds 'n MaxScale-geaktiveerde Lees-Skryf-verdelingspoort gebruik nie."
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "Benut MaxScale om navraagskerwe te versprei"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "Indien u verskeie dienste het wat as slawe vir MaxScale optree, kan u die navraagspoed verhoog deur die parallelle navrae na verskeie MariaDB-agtergrondbedieners te versprei."
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "MaxScale lees-skryf-verdelingspoort"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "Dit moet die poort van die Read-Write-Split-Service (readwrite)-diens en -roeteerder wees."
+
+#: setup.php
+msgid "Flowview"
+msgstr "Flowview"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
+

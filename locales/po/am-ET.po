@@ -1,0 +1,2936 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Amharic\n"
+"Language: am-ET\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "ወደ ውጭ ለመላክ ጥሬ ውሂብ ማግኘት አልተቻለም"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "የቀረበው የFlowview መጠይቅ የለም። እባክዎ ትክክለኛ መጠይቅ ያስገቡ።"
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "ልክ ያልሆነ የምንጭ መጠይቅ ቀርቧል። እባክዎ ትክክለኛ መጠይቅ ያስገቡ።"
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "የፍሰት ማጣሪያ '%s' በታቀደ ሪፖርት ውስጥ ጥቅም ላይ ስለዋለ መሰረዝ አልተቻለም።"
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "የፍሰት ማጣሪያ '%s' ተሰርዟል።"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "ሰርዝ"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "የDNS መሸጎጫ ጸድቷል። መዝገቦች ሲገቡ እንደገና ይሞላል።"
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "የኢንተርኔት መስመር መዝገብ ዝርዝሮች"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "የተፈቀደለት ወኪል ዝርዝሮች"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "ምንም ዝርዝሮች አልተገኙም"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR/መስመር"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "ራስ-ገዝ ቁጥር"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "AS ብሎክ"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "AS ስብስብ"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "የመስመር ስብስብ"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "ዶሜይን"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "የማጣሪያ ስብስብ"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "የአቻነት ስብስብ"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "አውታረ መረብ"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "የኢንተርኔት ራውተር"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "የክስተት ምላሽ ቡድን"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "የማረጋገጫ ወኪል"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "ድርጅት"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "ሚና"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "ሰው"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "የራውተር ስብስብ"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "አስተያየቶች"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "መጨረሻ የተሻሻለው"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "ምንጭ"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "የምዝገባ ቀን"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT በ"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "የአስተዳዳሪ እውቂያ"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "ለውጦች"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "አሳውቅ"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "መግለጫ"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "የቴክኒክ እውቂያ"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "MNT ዝቅተኛ"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "ሀገር"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "የአላግባብ መጠቀም ኢሜይል"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "የፋክስ ቁጥር"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "ስልክ"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "ኢሜይል"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "አድራሻ"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "ሁኔታ"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "አባላት በFef"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "የአላግባብ መጠቀም እውቂያዎች"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "MNT ማጣቀሻ"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "አባላት"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "MNT አሳውቅ"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "ፈቃድ አሰጣጥ"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "የMNT መንገዶች"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "አባል የሆነበት"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "የዝማኔዎች ኢሜይል"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "የNOC መለያ"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "ስፖንሰር ድርጅት"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT Irt"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "የMP አባላት"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "ንዑስ ጎራ"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "Ping የሚደረግ"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "ተለዋጭ ስም"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "የድርጅት ዓይነት"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "ወደዚህ ምራ"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "የMP አቻ ግንኙነት"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "ወደ ውጭ ላክ"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "ቀዳዳዎች"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "MP ነባሪ"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "አካላት"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "RS ወጪ"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "የድርጅት ስም"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "የAS ስም"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "ደራሲ"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "የIRT ማሳወቂያ"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "የወር እስከ ዛሬ ድምር (Aggr MTD)"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "የAS ዓይነት"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "MP ማጣሪያ"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "ነባሪ መንገድ"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "የምደባ መጠን"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "አካላትን ላክ"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "RS ገቢ"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "የአውታረ መረብ ስም"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "DS Rdata"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "የድምር ወሰን"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "ማጣሪያ"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "MP አስመጣ"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "ቋንቋ"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "RESTful አገናኝ"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "አቻ"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "የዞን እውቂያ"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "አስገባ"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "የMP አቻ"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "የተመራው በ"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "ቅጽ"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "የMNT ጎራዎች"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "መነሻ AS"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "MP ወደ ውጭ ላክ"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "ምስጠራ"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "የጂኦ ምግብ"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "የጂኦ መረጃ ጠቋሚ"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "የበይነገጽ አድራሻ"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "መላኪያ መንገድ"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "ችግር"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "የስም አገልጋዮች"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "የPing መያዣ"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "በይነገጽ"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "አስመጣ"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "ፊርማ"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "ጂኦግራፊያዊ መገኛ"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "አካባቢያዊ AS"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "በሚከተለው በኩል አስመጣ"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "ከባድ ስህተት: ያልታወቀ የውሂብ ጎታ ሰንጠረዥ %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "ፈልግ"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "ማንኛውም"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "ግቤቶች"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "ነባሪ"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "ሂድ"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "ማጣሪያዎችን አዘጋጅ/አድስ"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "አጽዳ"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "ማጣሪያዎችን አጽዳ"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "የDNS መሸጎጫን አጥፋ"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "ያልተገለጸ"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "ምንም የሚዛመዱ ግቤቶች አልተገኙም"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "የሚከተለውን የDNS መሸጎጫ ግቤት ለመሰረዝ 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+msgstr[1] "የሚከተሉትን ሁሉንም የDNS መሸጎጫ ግቤቶች ለመሰረዝ 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "ይቅር"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "ቀጥል"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "የDNS ግቤት ሰርዝ"
+msgstr[1] "የDNS ግቤቶችን ሰርዝ"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "የFlowview DNS መሸጎጫ ግቤቶች"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "ተረጋግጧል"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "ያልተረጋገጠ"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "ሙሉ በሙሉ አጽዳ"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "የIP አድራሻ"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "ይህ የመሸጎጫ ግቤቱ የIP አድራሻ ነው።"
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "የDNS አስተናጋጅ ስም"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "ለIP አድራሻው የተመደበው የDNS ስም።"
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "የDNS አስተናጋጅ ስም ምንጭ።  DNS፣ ቋሚ ፍለጋ (Static Lookup) ወይም ARIN ሊሆን ይችላል።"
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "በArin የተረጋገጠ"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "የዚህ IP አድራሻ የArin መረጃ ተረጋግጧል፣ ወይም የአካባቢ ጎራ IP አድራሻ ነው።"
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "የ CIDR መታወቂያ"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "የArin ዋና ቁልፍ። ይህ ይፋዊ የArin መረጃ አይደለም።"
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "የራስ-ገዝ ስርዓት መለያ"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "የArin መነሻ AS። ይህ ይፋዊ የArin AS መረጃ ነው።"
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "የዘመነበት ጊዜ"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "ይህ የDNS መሸጎጫ የገባበት ወይም ለመጨረሻ ጊዜ የዘመነበት ጊዜ ነው።"
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "ምንም የDNS መሸጎጫ ግቤቶች አልተገኙም"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "የFlowview የበይነመረብ መስመሮች"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "የIP ስሪት"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "IPv4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "መስመር"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "ይህ የታተመው የበይነመረብ መስመር ነው።"
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "የAS ቁጥር"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "የመንገዱ Autonomous System ቁጥር።"
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "የመስመር መግለጫ"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "በመንገድ ተንከባካቢው የተመዘገበው መግለጫ።"
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "መስመሩን ለማተም ጥቅም ላይ የዋለው የምንጭ ውሂብ ጎታ።"
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "የሚጠበቀው በ"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "ለደንበኛው መንገዱን የሚንከባከበው የኢንተርኔት አቅራቢ።"
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "የዚህ መስመር መረጃ የተሻሻለበት የመጨረሻ ጊዜ።"
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "ምንም የሚዛመዱ መንገዶች አልተገኙም"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "አንቃ"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "አሰናክል"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "የአዳማጭ ስም"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "የሚታየው የመሣሪያ ስም።"
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "የስብስብ ዘዴ"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "ሁለት የሚደገፉ የመሰብሰቢያ ዘዴዎች አሉ፤ የመጀመሪያው የድሮውን flow-tools ሁለትዮሽ ፋይሎችን የሚጠቀም ሲሆን ሁለተኛው ደግሞ የCactiን በPHP የተሠራ የflow stream አገልጋይ ይጠቀማል።"
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "ከአድራሻ ጋር አስር"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "የCacti አገልጋይ ተጨማሪ የIP አድራሻዎች ካሉት፣ የተወሰነ በይነገጽ መግለጽ ይችላሉ። ለዋናው በይነገጽ እንደ 0.0.0.0 ይተዉት።"
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "የተፈቀደ የአስተናጋጅ ክልል"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "ወደዚህ የፍሰት ሰብሳቢ (flow collector) እንዲልክ የተፈቀደለት መሣሪያ IP አድራሻ። ለማንኛውም አስተናጋጅ እንደ 0.0.0.0 ይተዉት። PHP በሚፈቅደው ላይ ጥንቁቅ መሆኑን ልብ ይበሉ። የCIDR አገባብ እንዲሁም የክልል አገባብ ይደገፋል፤ ለምሳሌ 192.168.1.0 ወይም 192.168.1.0/24። የተወሰኑ IP አድራሻዎችን ከፈለጉ በኮማ ይለዩዋቸው።"
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "ወደብ"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "ይህ ሰብሳቢ የሚያዳምጥበት ወደብ።"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "ፕሮቶኮል"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "ለዚህ አድማጭ የሚያገለግል የIP ፕሮቶኮል።"
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "የUDP ፕሮቶኮል"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "ነቅቷል"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "ምልክት ከተደረገበት፣ የአዳማጭ (Listener) አገልግሎት ይጀመራል እና ገቢ ውሂብን ይጠብቃል።"
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "ለመሣሪያ መለያ:%s እና ለአብነት መለያ:%s ምንም የፍሰት አብነት አልተገኘም"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "የሚከተሉትን የNetFlow አድማጮች ለመሰረዝ 'ቀጥል' የሚለውን ጠቅ ያድርጉ። ከዚያ በኋላ Cacti የFlow-Capture አገልግሎትዎን እንደገና ለማስጀመር ይሞክራል።"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "የሚከተሉትን የNetFlow አድማጮች ለማንቃት 'ቀጥል' የሚለውን ጠቅ ያድርጉ። ከዚያ በኋላ Cacti የFlow-Capture አገልግሎትዎን እንደገና ለማስጀመር ይሞክራል።"
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "ቢያንስ አንድ አድማጭ (Listener) መምረጥ አለብዎት።"
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "የአድማጭ ወደብ በ 1 እና በ 65535 መካከል ያለ የቁጥር እሴት መሆን አለበት።"
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "በተሳካ ሁኔታ ተቀምጧል። የFlowview አድማጭ ተቀምጧል፣ እና አገልግሎቱ እንደገና ተጀምሯል።"
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "በተሳካ ሁኔታ ተቀምጧል። የFlowview አድማጭ ተቀምጧል። ሆኖም ግን የflow-capture አገልግሎት እየሰራ አይደለም።"
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "አዳማጭ [አርትዕ: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "አዳማጭ [አዲስ]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "ስም"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "ስሪት"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "አብነቶች"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "መጨረሻ የዘመነው"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "ንቁ ዥረቶች በየ5 ደቂቃው ይዘምናሉ"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "ምንም የገቢ ዥረቶች አልተገኙም"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "በአዳማጭ የተገኙ አብነቶች"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "Ex አድራሻ"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "ሁሉም"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "አብነት"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "የአብነት መታወቂያ"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "የመስክ ስም"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "የሚደገፍ"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "የመስክ መታወቂያ"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "የመስክ ዓይነት"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "ርዝመት"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "ፍታ"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "ምንም የገቢ ዥረት አብነቶች አልተገኙም"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "የFlowView አድማጮች"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "አዳማጮች"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "ዘዴ"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "የማሰሪያ አድራሻ"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "የተፈቀደው ከ"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "የታየ ማዳመጥ"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "በአዳማጩ ወደብ (port) ላይ በተጨባጭ የታየው የወደብ ደህንነት።"
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "የተጠራቀመ ስራ"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "የUDP backlog መጠን በባይት።"
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "ዥረቶች"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "ከተለያዩ ምንጮች የሚመጡ የገቢ ግንኙነቶች ብዛት።"
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "የዥረት ስሪቶች"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "እየተከታተሉ ያሉት የትራፊክ ፍሰት (Traffic Flow) ስሪቶች።"
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "እየተሰበሰቡ ካሉ ሁሉም ዥረቶች ከፍተኛው የማዘመኛ ጊዜ። ይህ እሴት በየ 5 ደቂቃው ይዘምናል።"
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "ምንም"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "ምንም ግንኙነቶች የሉም"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "አይመለከትም"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "Cacti"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "ምንም የFlowview አድማጮች የሉም"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "ቁሳዊ አድርግ"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "የማጣሪያዎቹ የመሸጎጫ ቁልፎች (cache keys) ሊሰሉ ስላልቻሉ ምንም ነገር አልጸዳም።"
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "ከማንኛውም ማጣሪያ ጋር የማይዛመዱ %s የተሸጎጡ ሻርድ(ዶች) ጸድተዋል።"
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "የ%d ማጣሪያ(ዎች) ቁሳዊ ማድረግ ከበስተጀርባ ተጀምሯል።  %d ማጣሪያ(ዎች) አስቀድመው ቁሳዊ እየተደረጉ ናቸው።  ውጤቶቹ በCacti ምዝግብ ማስታወሻ ውስጥ ሪፖርት ተደርገዋል።"
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "የ%d ማጣሪያ(ዎች) ቁሳዊ ማድረግ ከበስተጀርባ ተጀምሯል።  ውጤቶቹ በCacti ምዝግብ ማስታወሻ ውስጥ ሪፖርት ተደርገዋል።"
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "የተመረጠው ማጣሪያ(ዎች) ቀድሞውኑ እየተተገበሩ ነው።  ያ ካለቀ በኋላ እባክዎ እንደገና ይሞክሩ።"
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "የሚከተሉትን ማጣሪያ(ዎች) እና ሁሉንም ተዛማጅ ማጣሪያ ለመሰረዝ 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "የሚከተሉትን ማጣሪያ(ዎች) እና ሁሉንም ተዛማጅ ማጣሪያ ለማሰናከል 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "የሚከተሉትን ማጣሪያ(ዎች) ለማንቃት 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "ለሙሉው የፍሰት ውሂብ ክልል፣ NAT በርቶ እና ጠፍቶ፣ የሚከተሉትን ማጣሪያ(ዎች) ከበስተጀርባ ለማዘጋጀት 'ቀጥል' የሚለውን ጠቅ ያድርጉ። አስቀድመው የተዘጋጁ እና ትክክለኛ የሆኑ ክፍልፋዮች ይዘለላሉ። ይህ በትላልቅ የውሂብ ስብስቦች ላይ ረጅም ጊዜ ሊወስድ ይችላል። አስቀድሞ በመዘጋጀት ላይ ያለ ማጣሪያ ይዘለላል።"
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "ቢያንስ አንድ ማጣሪያ መምረጥ አለብዎት።"
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "የFlowView ማጣሪያዎች"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "የFlowView ማጣሪያዎች [ ከማጣሪያዎች በፊት መሳሪያዎችን ያክሉ ]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "ማጣሪያዎች"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "አጽዳ"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "ከማንኛውም ማጣሪያ ጋር የማይዛመዱ የተሸጎጡ ቁርጥራጮችን (shards) አስወግድ"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "የማጣሪያ ስም"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "መለያ"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "ቁሳዊ ማድረግ"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "ቁሳዊ ማድረግ ለእያንዳንዱ የፍሰት ክፍልፋይ፣ NAT በርቶ እና ጠፍቶ የማጣሪያ ውጤቶችን አስቀድሞ ያሰላል እና በትይዩ መጠይቅ መሸጎጫ ውስጥ ያከማቻቸዋል፣ ስለዚህ በአሮጌ ውሂብ ላይ ያሉ ሪፖርቶች በፍጥነት ይከፈታሉ።  አዳዲስ ክፍልፋዮች ፍሰቶችን መቀበል ሲያቆሙ በራስ-ሰር ቁሳዊ ይደረጋሉ።  ያስፈልጋል ማለት የዞሩ ክፍልፋዮች ገና ቁሳዊ አልተደረጉም ማለት ነው፣ በሂደት ላይ ማለት ቁሳዊ ማድረግ በመካሄድ ላይ ነው ማለት ነው፣ እና የዘመነ ማለት እያንዳንዱ የዞረ ክፍልፋይ ቁሳዊ ተደርጓል ማለት ነው።  በሂደት ላይ: N ማለት አሁን ስንት የማጣሪያ መጠይቆች እየሰሩ እንዳሉ ነው።  አሁንም ፍሰቶችን እየተቀበለ ያለው ክፍልፋይ ቁሳዊ አይደረግም፣ ስለዚህ አይቆጠርም።"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "አዳማጭ"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "የሪፖርት አይነት"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "የNAT ሻርዶች"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "NAT በርቶ በትይዩ መጠይቅ መሸጎጫ ውስጥ የተከማቹ የዚህ ማጣሪያ ክፍልፋዮች ብዛት።"
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "NAT-ያልሆኑ ሻርዶች"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "NAT ጠፍቶ በትይዩ መጠይቅ መሸጎጫ ውስጥ የተከማቹ የዚህ ማጣሪያ ክፍልፋዮች ብዛት።"
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "ክፍልፋዮች"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "አጠቃላይ የፍሰት (flow) ክፍልፍሎች ብዛት፤ ይህም አንድ ማጣሪያ ከNAT ጋር ወይም ያለNAT በመሸጎጫ (cached) ሊይዛቸው የሚችላቸው ከፍተኛው የክፍሎች (shards) ብዛት ነው።"
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "የመደርደሪያ መስክ"
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "ጥራት"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "የአንድ ማጣሪያ የመሸጎጫ ቁልፎች ሊሰሉ ስላልቻሉ፣ የተሸጎጡ የማጣሪያዎቹ ክፍሎች (shards) ከሌሎቹ ተለይተው ሊታወቁ አልቻሉም።"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "የማጣሪያዎቹ የመሸጎጫ ቁልፎች (cache keys) ሊሰሉ ስላልቻሉ አሁን ምንም ነገር ሊጸዳ አይችልም። እያንዳንዱ ማጣሪያ ትክክለኛ ሪፖርት እንዳለው ያረጋግጡ።"
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "የተሸጎጡ ክፍሎች (Shards): %s ከማጣሪያ ጋር የሚዛመድ።  %s ከማንኛውም ማጣሪያ ጋር የማይዛመድ፣ Prune የሚያስወግደው።"
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "ይህ ለእያንዳንዱ ማጣሪያ እና ለእያንዳንዱ ተጠቃሚ ከማንኛውም ማጣሪያ ጋር የማይዛመዱትን %s የተሸጎጡ ቁርጥራጮች ያስወግዳል። እነዚህ ከተቀየሩ ወይም ከተሰረዙ ማጣሪያዎች እና በሪፖርት ገጹ ላይ ቅንብሮቻቸው ከተቀየሩ ሪፖርቶች የመጡ ናቸው። የማጣሪያዎቹ %s የተሸጎጡ ቁርጥራጮች ይቀመጣሉ። ይህ ሊቀለበስ አይችልም።"
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "እያንዳንዱ በመሸጎጫ የተቀመጠ ሻርድ ከማጣሪያ ጋር ይዛመዳል። የሚቀነስ ምንም ነገር የለም።"
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "የተሸጎጡ ሻርዶችን አጽዳ"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "ዝጋ"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "አሁን ላክ"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "በየሰዓቱ"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "በየ %d ሰዓታት"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "በየቀኑ"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "በየሳምንቱ"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "በየ %d ሳምንታት፣ 2"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "በየወሩ"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "አጠቃላይ ቅንብሮች"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "ርዕስ"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "አዲስ መርሐግብር"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "ለFlowView መርሐግብር የሪፖርት ርዕስ ያስገቡ።"
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "ይህ የNetFlow ቅኝት ይላክ እንደሆነ ወይም እንዳልሆነ።"
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "የሚካሄደው መጠይቅ ስም።"
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "የመላኪያ ቅንብሮች"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "የመላኪያ ክፍተት"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "ይህ የNetFlow ሪፖርት ምን ያህል ጊዜ ይላክ?"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "በመርሐግብር የተያዘ መነሻ ጊዜ"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "ይህ የNetFlow ቅኝት ኢሜይል የሚላክበት የመጀመሪያው ቀን / ሰዓት ነው። ሁሉም የወደፊት ኢሜይሎች ከዚህ ጊዜ እና ከላይ ከተሰጠው ክፍተት ተደምረው ይሰላሉ።"
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "ከፍተኛ የተፈቀደ የሩጫ ጊዜ"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "ሪፖርቱ ከመውጣቱ በፊት ለምን ያህል ጊዜ እንዲሰራ መፈቀድ አለበት?"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d ደቂቃ"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d ደቂቃዎች"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "ቀደምት የኢሜይል ቅንብሮች"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "የኢሜይል አድራሻዎች"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "ይህ የNetFlow ቅኝት የሚላክባቸው የኢሜይል አድራሻዎች (በኮማ የተለዩ)።"
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "የሚጠቀሙበት የቅርጸት ፋይል"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "የሚጠቀሙበትን ብጁ የhtml መጠቅለያ እና CSS ፋይል ይምረጡ። ይህ ፋይል በሪፖርትዎ ዙሪያ የሚጠቀለሉ html እና CSS ሁለቱንም ይዟል። ከCSS በላይ ከያዘ፣ በፋይሉ ውስጥ ልዩ የሆነ <REPORT> መለያ ማስቀመጥ አለብዎት። ይህ የቅርጸት መለያ በሪፖርቱ ይዘት ይተካል። እነዚህ ፋይሎች በ'formats' ማውጫ ውስጥ ይገኛሉ."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "የማሳወቂያ ዝርዝር ቅንብሮች"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "የማሳወቂያ ዝርዝር"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "የThold ተሰኪው ከተጫነ፣ የማሳወቂያ ዝርዝር መምረጥ ይችላሉ"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "ሪፖርቱ እንደተጠናቀቀ ይደርሳል።"
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "የሚከተሉትን መርሐግብር(ሮች) ለመሰረዝ 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "የሚከተሉትን መርሐግብር(ሮች) አሁን ለመላክ 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "የሚከተሉትን መርሐግብር(ሮች) ለማሰናከል 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "የሚከተሉትን መርሐግብር(ሮች) ለማንቃት 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "ቢያንስ አንድ መርሐግብር መምረጥ አለብዎት።"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "ለሪፖርት መታወቂያ %s የሪፖርት ጥሬ ውሂብ ማግኘት አልተቻለም"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "ኢሜይሎችን፣ የማሳወቂያ ዝርዝርን ወይም ሁለቱንም መግለጽ አለብዎት!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "በመርሐግብር የተያዘ ሪፖርት፦ [አርትዕ: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "በመርሐግብር የተያዘ የሪፖርት ታሪክ፦ [አርትዕ: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "በመርሐግብር የተያዘ ሪፖርት፦ [አዲስ]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "መርሐግብሮች"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "የሪፖርት ርዕስ"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "መታወቂያ"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "የውጤት ዓይነት"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "የተላከው በ"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "የተላከበት ቀን"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "የማስኬጃ ጊዜ"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "ውሂብ አውርድ"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "የሪፖርት ምዝግብ ማስታወሻዎች"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [ሪፖርቱን በጥሬው ይመልከቱ]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [ሪፖርቱን ከCSS ጋር ይመልከቱ]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "በእጅ መላክ"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "በመርሐግብር የተያዘ"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s ሰከንዶች"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "የመጀመሪያ ቀን መምረጫ"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "የFlowView መርሃ ግብሮች"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "የFlowView መርሃ ግብሮች [ ከመርሃ ግብሮች በፊት መሳሪያዎችን ያክሉ ]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "የጊዜ ክፍተት"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "መጨረሻ የተላከበት"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "ቀጣይ መላኪያ"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "ኢሜይል/ዝርዝር"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "የተመዘገቡ መላኪያዎች"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "አይ"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "አዎ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "ሪፖርት ይምረጡ"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "ማጠቃለያ"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "የምንጭ ሥር ጎራ"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "መድረሻ ስር ጎራ"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "የምንጭ/መድረሻ ሥር ጎራ"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "የUDP/TCP መድረሻ ወደብ"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "የUDP/TCP ምንጭ ወደብ"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "የUDP/TCP ወደብ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "የምንጭ IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "መድረሻ IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "የምንጭ/መድረሻ IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "የምንጭ ወይም የመድረሻ IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "የIP ፕሮቶኮል"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "የግብዓት በይነገጽ"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "የውጤት በይነገጽ"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "የግብዓት/ውጤት በይነገጽ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "የምንጭ AS"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "መድረሻ AS"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "የምንጭ/መድረሻ AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "የምንጭ ቅድመ-ቅጥያ"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "መድረሻ ቅድመ-ቅጥያ"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "የምንጭ/መድረሻ ቅድመ-ቅጥያ"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "የፍሰት ጊዜያት"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "የምንጭ/መድረሻ IPዎች እና ወደቦች"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "የAS ቁጥሮች"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 አምዶች"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "የIP ሂሳብ አያያዝ ማስመሰልን አሳይ"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "ማንኛውም ክፍል በክልል ውስጥ (ቀርፋፋ)"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "በክልል ውስጥ የመጨረሻ ሰዓት (ፈጣን)"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "በክልል ውስጥ የመጀመሪያ ጊዜ (ፈጣን)"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "ሙሉ በሙሉ በክልል ውስጥ (ቀርፋፋ)"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "ሁሉንም መስመሮች መልስ"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "ከፍተኛ %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "ገደብ የለም"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s ባይት"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "የምንጭ ጎራ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "ፍሰቶች"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "ባይቶች"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "ፓኬቶች"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "መድረሻ ጎራ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "የምንጭ ወደብ"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "መድረሻ ወደብ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "መድረሻ IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "የምንጭ በይነገጽ (IF)"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "መድረሻ IF"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "መድረሻ ቅድመ-ቅጥያ"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "የመጀመሪያ ጊዜ"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "የመጨረሻ ሰዓት"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "ንቁ"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "የጊዜ ማህተም"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "ባን"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "ባንዲራዎች"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "መድረሻ"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d ፒክስሎች"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "አጠቃላይ ማጣሪያዎች"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "የሚታየው የተቀመጠ ማጣሪያ።"
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "አዲስ ማጣሪያ"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "ለማጣሪያው የሚያገለግል አድማጭ።"
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "የፍሰት አብነት መታወቂያ"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "ለv9 እና IPFIX ፍሰቶች ብቻ የፍሰት አብነት መታወቂያ። የአብነት መታወቂያዎች ከአምራች ወደ አምራች ሊለያዩ እንደሚችሉ ልብ ይበሉ።"
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "የዥረት አድራሻ"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "ከተመዘገቡ ዥረቶች (streams) ዝርዝር ውስጥ የዥረቱ IP አድራሻ ወይም አስተናጋጅ ስም።"
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "ቅድመ-ቅንብሮች"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "ይህ ማጣሪያ ቀድሞ በተገለጸ የጊዜ ገደብ ላይ የተመሰረተ ከሆነ፣ እዚህ ይምረጡት።"
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "ዝርዝር የማጣሪያ መስፈርት"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "ሪፖርት በሚፈጥሩበት ጊዜ ለዚህ ማጣሪያ በነባሪነት ጥቅም ላይ የሚውለው የሪፖርት ዓይነት።"
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "ታትሟል"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "ስታቲስቲካዊ"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "ስታቲስቲካዊ ሪፖርት"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "ሪፖርት ሲፈጥሩ ለዚህ ማጣሪያ በነባሪነት የሚያገለግል የማሳያ ሪፖርት አይነት።"
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "የታተመ ሪፖርት"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "የታተመ ሪፖርት በሚፈጥሩበት ጊዜ ለዚህ ማጣሪያ በነባሪነት ጥቅም ላይ የሚውለው የታተመ ሪፖርት ዓይነት።"
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "የክልል ደንቦች"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "የማጣሪያ ውሂቡን በእነዚህ የጊዜ ማጣሪያ ደንቦች ይገድቡ።"
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "IPዎችን ፍታ"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "የIP አድራሻዎችን ወደ የጎራ ስሞች ፍታ።"
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "ለማጣሪያው ነባሪ የመደርደሪያ መስክ። ይህ ቅንብር ለማንኛውም የታቀዱ ሪፖርቶች ተግባራዊ ይሆናል።"
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "ከፍተኛ ረድፎች"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "በማጣሪያው ውስጥ የሚቀርቡ ከፍተኛ ረድፎች። ይህ ቅንብር ለማንኛውም የታቀዱ ሪፖርቶች ተግባራዊ ይሆናል።"
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "ዝቅተኛ ባይቶች"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "ለማጣሪያው ግምት ውስጥ የሚገቡ ዝቅተኛ ጠቅላላ ባይቶች። ከዚህ ያነሱ ባይቶች ያላቸው ማንኛውም የፍሰት ድምሮች ችላ ይባላሉ።"
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "የቻርት አማራጮች"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "የግራፍ ዓይነት"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "በነባሪነት የሚታይ የግራፍ አይነት። እነዚህም Bar፣ Pie እና Treemap ያካትታሉ።"
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "የአሞሌ ገበታ"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "የፓይ ቻርት"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "የዛፍ ካርታ ገበታ"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "የግራፍ ቁመት"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "በነባሪነት የሚያገለግል የግራፍ ቁመት።"
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "የ NAT ውሂብ ይጠቀሙ"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "በሪፖርት ውጤቱ ውስጥ ከመጀመሪያዎቹ ከNAT በፊት ከነበሩት እሴቶች ይልቅ ከNAT በኋላ ያለውን (የተተረጎመውን) የምንጭ/መድረሻ IP እና DNS ስም አሳይ።"
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "የሠንጠረዥ ፓነል"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "የሰንጠረዥ ፓነል በነባሪነት መታየት አለበት?"
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "የባይቶች ፓነል"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "የባይቶች ፓነል በነባሪነት መታየት አለበት?"
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "የፓኬቶች ፓነል"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "የፓኬቶች ፓነል በነባሪነት መታየት አለበት?"
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "የፍሰቶች ፓነል"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "የፍሰቶች ፓነል በነባሪነት መታየት አለበት?"
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "የፕሮቶኮል ማጣሪያዎች"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "ፕሮቶኮሎች"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "ለማጣሪያው የተወሰነውን ፕሮቶኮል ይምረጡ።"
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "ሁሉም ፕሮቶኮሎች"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "የTCP ባንዲራዎች"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "በማጣሪያው ውስጥ የሚፈለጉት የTCP Flags። ይህ በኮማ የተለየ የTCP Flags ዝርዝር ሊሆን ይችላል"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "የTOS መስኮች"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "በማጣሪያው ውስጥ የሚፈለጉት የTOS መስኮች። ይህ በኮማ የተለየ የTOS መስኮች ዝርዝር ሊሆን ይችላል"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "በማጣሪያው ውስጥ በተመረጠው ምንጭ IP ላይ ያጣሩ። ይህ በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻዎች ዝርዝር፣ ወይም በCIDR ቅርጸት (ለምሳሌ 192.168.1.0/24) በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻ ክልሎች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "የምንጭ ወደቦች"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "በማጣሪያው ውስጥ በተመረጠው ምንጭ ወደቦች ላይ ያጣሩ። ይህ በኮማ የተለየ የምንጭ ወደቦች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "የምንጭ በይነገጽ"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "በማጣሪያው ውስጥ በተመረጠው ምንጭ በይነገጽ ላይ ያጣሩ። ይህ በኮማ የተለየ የምንጭ በይነገጾች ዝርዝር ሊሆን ይችላል"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "በማጣሪያው ውስጥ በተመረጠው መድረሻ AS ላይ ያጣሩ። ይህ በኮማ የተለየ የምንጭ ASዎች ዝርዝር ሊሆን ይችላል"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "በማጣሪያው ውስጥ በተመረጠው መድረሻ IP ላይ ያጣሩ። ይህ በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻዎች ዝርዝር፣ ወይም በCIDR ቅርጸት (ለምሳሌ 192.168.1.0/24) በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻ ክልሎች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "መድረሻ ወደቦች"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "በማጣሪያው ውስጥ በተመረጠው መድረሻ ወደቦች ላይ ያጣሩ። ይህ በኮማ የተለየ የመድረሻ ወደቦች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "መድረሻ በይነገጽ"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "በማጣሪያው ውስጥ በተመረጠው መድረሻ በይነገጽ ላይ ያጣሩ። ይህ በኮማ የተለየ የመድረሻ በይነገጾች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "መድረሻ AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "በማጣሪያው ውስጥ በተመረጠው መድረሻ AS ላይ ያጣሩ። ይህ በኮማ የተለየ የመድረሻ ASዎች ዝርዝር ሊሆን ይችላል"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "ከNAT በኋላ የምንጭ IP"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "በማጣሪያው ውስጥ በተመዘገበው በተተረጎመው (ከNAT በኋላ) ምንጭ IP ላይ ያጣሩ። ይህ በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻዎች ዝርዝር፣ ወይም በCIDR ቅርጸት (ለምሳሌ 192.168.1.0/24) በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻ ክልሎች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "ከNAT በኋላ የምንጭ ወደብ"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "በማጣሪያው ውስጥ በተተረጎመው (ከNAT በኋላ) ምንጭ ወደብ ላይ ያጣሩ። ይህ በኮማ የተለየ የወደቦች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "ከNAT በኋላ የመድረሻ IP"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "በማጣሪያው ውስጥ በተመዘገበው በተተረጎመው (ከNAT በኋላ) መድረሻ IP ላይ ያጣሩ። ይህ በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻዎች ዝርዝር፣ ወይም በCIDR ቅርጸት (ለምሳሌ 192.168.1.0/24) በኮማ የተለየ የIPv4 ወይም IPv6 አድራሻ ክልሎች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "ከNAT በኋላ የመድረሻ ወደብ"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "በማጣሪያው ውስጥ በተተረጎመው (ከNAT በኋላ) መድረሻ ወደብ ላይ ያጣሩ። ይህ በኮማ የተለየ የወደቦች ዝርዝር ሊሆን ይችላል።"
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "የDNS መሸጎጫ"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/መስመሮች"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "ራስ-ገዝ ቁጥሮች"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS ብሎኮች"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS ስብስቦች"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "የመስመር ስብስቦች"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "ጎራዎች"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "የማጣሪያ ስብስቦች"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "የአቻነት ስብስቦች"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "የኢንተርኔት ራውተሮች"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "የክስተት ምላሽ ቡድኖች"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "የማረጋገጫ ወኪሎች"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "ድርጅቶች"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "ሚናዎች"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "ሰዎች"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "ከምንጭ %2$s መለያ %3$s ያለው ሪፖርት '%1$s' እንዲሄድ መርሐግብር ተይዞለታል!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "በስህተት ምክንያት ከምንጭ %2$s መለያ %3$s ያለው ሪፖርት '%1$s' እንዲሄድ መርሐግብር አልተያዘለትም!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "አጠቃላይ"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "ምዝግብ ማስታወሻዎች"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "መጀመሪያ የሪፖርት አይነት ይምረጡ"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "ማጣሪያ: [አርትዕ: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "ማጣሪያ: [አዲስ]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "የተጎዱ የተሸጎጡ ውጤቶች"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "እነዚህ ለውጦች የዚህን ማጣሪያ በመሸጎጫ የተቀመጡ ውጤቶች ይነካሉ። ማስቀመጡ እነሱን እንደገና ለመገንባት ከበስተጀርባ ቁሳቁሳዊ ሂደትን ይጀምራል። ማጣሪያውን ለማስቀመጥ 'ቀጥል'ን ይጫኑ፣ ወይም አርትዖቱን ለመቀጠል 'ይቅር'ን ይጫኑ።"
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "በዚህ ማጣሪያ ላይ የተደረጉት ለውጦች በተሸጎጡ ውጤቶቹ ላይ ተጽዕኖ ስለሚያሳድሩ፣ ውጤቱን የማዘጋጀት (materialization) ሂደት ከጀርባ ተጀምሯል። ሂደቱ በማጣሪያዎች ገጽ ላይ የሚታይ ሲሆን ውጤቶቹም በCacti መዝገብ (log) ውስጥ ሪፖርት ይደረጋሉ።"
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "ያልተገለጸ ማጣሪያ [ ዝርዝሮችን ለማግኘት ማጣሪያ ይምረጡ ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "ስታቲስቲካዊ ሪፖርት: %s [ ከዚህ በታች የተገለጹትን መሻሪያዎች ጨምሮ ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "የታተመ ሪፖርት፦ %s [ ከዚህ በታች የተገለጹትን መሻሪያዎች ጨምሮ ]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "ማጣሪያ ምረጥ"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "ማጣሪያ ተግብር"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "ማጣሪያውን አጽዳ"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "አርትዕ"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "የFlow ማጣሪያን አርትዕ"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "አዲስ የFlow ማጣሪያ ፍጠር"
+
+#: includes/functions.php
+msgid "New"
+msgstr "አዲስ"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "አስቀምጥ"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "የፍሎው ማጣሪያውን አስቀምጥ"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "በሌላ ስም አስቀምጥ"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "ነባሩን የፍሎው ማጣሪያ እንደ አዲስ ማጣሪያ አስቀምጥ"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "እንደገና ሰይም"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "የፍሰት ማጣሪያውን እንደገና ሰይም"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "የፍሰት ማጣሪያውን ሰርዝ"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "ሪፖርት"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "ስታቲስቲካዊ: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "የታተመው፦ %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "መጀመሪያ ማጣሪያ ይምረጡ"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "መስመሮች"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "አግልል"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "ከፍተኛ ናሙና"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "ከፍተኛ %d ናሙናዎች"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "ኦክቴቶች"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "ከዚህ በታች ባሉት ገበታዎች ላይ ጎራዎችን ብቻ አሳይ"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "ጎራዎች/የአስተናጋጅ ስሞች ብቻ"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "ከመጀመሪያዎቹ እሴቶች ይልቅ ከNAT በኋላ ያለውን (የተተረጎመውን) IP/DNS ስም አሳይ"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "የጊዜ ክፍተት"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "ብጁ"
+
+#: includes/functions.php
+msgid "From"
+msgstr "ከ"
+
+#: includes/functions.php
+msgid "To"
+msgstr "እስከ"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "የመጨረሻ ቀን መምረጫ"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "ጊዜን ወደ ኋላ አሸጋግር"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "የማሸጋገሪያ ክፍተት ግለጽ"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "ጊዜን ወደ ፊት አሸጋግር"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "ግራፍ"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "አሞሌ"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "ፓይ"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "የዛፍ ካርታ"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "ቁመት"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "አሳይ/ደብቅ"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "ሠንጠረዥ"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "ጥሬ ውሂብን ላክ"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "የፍሎው ማጣሪያን አስቀምጥ"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "አዲስ ስም"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "የፍሰት ማጣሪያ ሰርዝ"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "ይህን የፍሰት ማጣሪያ ለመሰረዝ ቀጥል የሚለውን ይጫኑ። የፍሰት ማጣሪያው በታቀደ ሪፖርት ውስጥ ጥቅም ላይ ከዋለ፣ ክዋኔው ይታገዳል።"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "ከፍተኛ %s የባይቶች ስርጭት ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "ከፍተኛ %s የባይቶች ክብ ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "ከፍተኛ %s የባይቶች የዛፍ ካርታ ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "ከፍተኛ %s የፓኬቶች ስርጭት ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "ከፍተኛ %s የፓኬቶች ክብ ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "ከፍተኛ %s የፓኬቶች የዛፍ ካርታ ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "ከፍተኛ %s የፍሰቶች ስርጭት ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "ከፍተኛ %s የፍሰቶች ክብ ገበታ"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "ከፍተኛ %s የፍሰቶች የዛፍ ካርታ ገበታ"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "አቀማመጥን እንደገና ሰይም"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "የማጣሪያ ቅንብሮች ተቀምጠዋል።  የዚህ ማጣሪያ ግንባታ ከበስተጀርባ ተጀምሯል።"
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "የማጣሪያ ቅንብሮች ተቀምጠዋል"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "ደንበኛ/ግላዊ (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "ያልታወቀ (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "የንዑስ መረብ ማጣሪያ: %s ትክክለኛ የCIDR ቅርጸት አይደለም"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "የIP ማጣሪያ: %s ትክክለኛ የIP አድራሻ አይደለም"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "ያልተፈታ"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d ባይቶች"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d ባይቶች"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "ስታቲስቲካዊ ሪፖርቱ %s አይታወቅም። እባክዎ በGitHub ላይ የስህተት ሪፖርት (bug) ይክፈቱ"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "የታተመው ሪፖርት %s አይታወቅም። እባክዎ በGitHub ላይ የስህተት ሪፖርት (bug) ይክፈቱ"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "የምንጭ DNS"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "የምንጭ ሥር DNS"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "መድረሻ DNS"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "መድረሻ ስር DNS"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "DNS"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "ስር DNS"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "መድረሻ ወደብ"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "መድረሻ IF"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "መድረሻ ቅድመ-ቅጥያ"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "የአገልግሎት ዓይነት"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "ባይቶች/ፓኬት"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "ገና አልተፈጠረም፣ ከ NAT ጋር: %s፣ ያለ NAT: %s።"
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "ወቅታዊ"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "በመካሄድ ላይ"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "አስፈላጊ"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "አሁን እየሄዱ ያሉ የዚህ ማጣሪያ መጠይቆች ብዛት።"
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "ከNAT ጋር፦ %d፣ ያለ NAT፦ %d።"
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "እየሄደ ነው: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "ስህተት፦ ትይዩ መጠይቁ በ%d ሰከንዶች ከፍተኛ የማስኬጃ ጊዜ ውስጥ አላለቀም። በFlowView ቅንብሮች ስር ከፍተኛ የማስኬጃ ጊዜን ያረጋግጡ፣ እንዲሁም የውሂብ ጎታው እንደ ALTER TABLE ባለ ሌላ ክዋኔ ስራ አለመበዛቱን ያረጋግጡ።"
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "ትይዩ ጥያቄው ጊዜው አልፎበታል። እባክዎ አስተዳዳሪዎን ያነጋግሩ"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "ቡሊያን: %s፣ ቁጥራዊ: %s፣ ሄክስ: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "ዝቅተኛ መዘግየት"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "የውሂብ ፍሰት መጠን"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "አስተማማኝነት"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "ዝቅተኛ ወጪ"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "የአውታረ መረብ ቁጥጥር"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "የኢንተርኔት ቁጥጥር"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "ወሳኝ ECP"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "የፍላሽ መሻር"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "ፍላሽ"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "ወዲያውኑ"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "ቅድሚያ"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "መደበኛ ተግባር"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "የማጠቃለያ ስታቲስቲክስ"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "የIP ፓኬት መጠን ስርጭት (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "በአንድ ፍሰት የፓኬቶች ስርጭት (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "በአንድ ፍሰት የኦክቴቶች ስርጭት (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "የፍሰት ጊዜ ስርጭት (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "የስታቲስቲክስ ሪፖርት ወይም የታተመ ሪፖርት መምረጥ አለብዎት!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "የስታቲስቲክስ ሪፖርት ወይም የታተመ ሪፖርት ብቻ መምረጥ አለብዎት (ሁለቱንም አይደለም)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "ልክ ያልሆኑ ቀኖች፤ የመጨረሻው ቀን/ሰዓት ከመጀመሪያው ቀን/ሰዓት ይቀድማል!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "ለምንጭ አድራሻ ልክ ያልሆነ IP!<br>(በ'192.168.0.1' መልክ መሆን አለበት)"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "ለምንጭ አድራሻ ልክ ያልሆነ ንዑስ አውታረ መረብ!<br>(በ'192.168.0.1/255.255.255.0' ወይም '192.168.0.1/24' መልክ መሆን አለበት)"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "ለመድረሻ አድራሻ ልክ ያልሆነ IP!<br>(በ'192.168.0.1' መልክ መሆን አለበት)"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "ለመድረሻ አድራሻ ልክ ያልሆነ ንዑስ አውታረ መረብ!<br>(በ'192.168.0.1/255.255.255.0' ወይም '192.168.0.1/24' መልክ መሆን አለበት)"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "ለምንጭ በይነገጽ ልክ ያልሆነ ዋጋ!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "ለምንጭ ወደብ ልክ ያልሆነ ዋጋ! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "ለምንጭ AS ልክ ያልሆነ ዋጋ! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "ለመድረሻ በይነገጽ ልክ ያልሆነ ዋጋ!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "ለመድረሻ ወደብ ልክ ያልሆነ ዋጋ! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "ለመድረሻ AS ልክ ያልሆነ ዋጋ! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "ለፕሮቶኮል ልክ ያልሆነ ዋጋ! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "ለTCP ባንዲራ ልክ ያልሆነ ዋጋ! (ምሳሌ፦ 0x1b ወይም 0x1b/SA ወይም SA/SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "ለመቁረጫ ኦክቴቶች ልክ ያልሆነ ዋጋ!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "ለመቁረጫ መስመሮች ልክ ያልሆነ ዋጋ!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "የFlowView ቻርት ለ%s ዓይነት %s ነው"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "የሚደገፍ (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "የማይደገፍ"
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (ፈጣን፣ ከብልሽት ያልተጠበቀ)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (ፈጣን፣ ከብልሽት የተጠበቀ)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (ቀርፋፋ፣ ከፍተኛ ተመሳሳይ አፈጻጸም)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "የNetFlow ተጠቃሚ"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "የNetFlow አስተዳዳሪ"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "እባክዎ ከመጫንዎ በፊት በflowview ማውጫ ውስጥ ያሉትን የconfig.php.dist ወይም config_local.php.dist ፋይሎችዎን አንዱን እንደገና ይሰይሙ እና የውሂብ ጎታዎን ማዋቀር ይቀይሩ።"
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "የFlowview ተሰኪዎች ሰንጠረዦች ከበስተጀርባ እየተሻሻሉ መሆናቸውን እባክዎ ይወቁ። ይህ የተወሰነ ጊዜ ሊወስድ ይችላል። ለበለጠ መረጃ የCacti ምዝግብ ማስታወሻን ይመልከቱ"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "ማጣሪያው ተሰርዟል"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "ማጣሪያው ዘምኗል"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "ማስገባት/ማውጣት"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "የውሂብ ጎታዎች"
+
+#: setup.php
+msgid "Normal User"
+msgstr "መደበኛ ተጠቃሚ"
+
+#: setup.php
+msgid "System Administration"
+msgstr "የስርዓት አስተዳደር"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "የፍሰት መመልከቻ"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "ዳሽቦርድ"
+
+#: setup.php
+msgid "(save)"
+msgstr "(አስቀምጥ)"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(አርትዕ)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "(ተግባራት)"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "%d ሂደት"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "%d ሂደቶች"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "ተመሳሳይ የሪፖርት ሂደቶች (FlowView ብቻ)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "በአንድ ጊዜ ሊሰሩ የሚችሉ ከፍተኛውን ተደራራቢ የሪፖርት ሂደቶች ብዛት ይምረጡ።"
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "የበይነመረብ ፕሮክሲ ቅንብሮች"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "የበይነመረብ ፕሮክሲ አድራሻ"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "የበይነመረብ መዳረሻ ለሚያስፈልጋቸው ዋና የCacti አገልግሎቶች ወይም ተሰኪዎች የፕሮክሲ አገልጋዩን እና ወደቡን እዚህ በሚከተለው ቅርጸት IP:PORT ያስገቡ። ለምሳሌ 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "የበይነመረብ ፕሮክሲ ተጠቃሚ"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "የበይነመረብ ፕሮክሲዎ የተጠቃሚ ስም የሚጠይቅ ከሆነ እዚህ ያስገቡት."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "የበይነመረብ ፕሮክሲ የይለፍ ቃል"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "የበይነመረብ ፕሮክሲዎ የይለፍ ቃል የሚጠይቅ ከሆነ እዚህ ያስገቡት."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "የስም መፍታት"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "የአስተናጋጅ ስም መፍቻ"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "የአስተናጋጅ ስሞችን ለመፍታት የሚፈልጉበት ዘዴ።"
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "አካባቢያዊ አገልጋይ ይጠቀሙ"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "በመልእክት/ሪፖርት/DNS ስር ያሉ የ DNS አገልጋዮችን ይጠቀሙ"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "DNSን አትፍታ"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "የበይነመረብ መዝገብን በየቀኑ አውርድ"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "ስለ መላው ኢንተርኔት በይፋ የሚገኝ መረጃ ላይ ፍላጎት ካለዎት፣ ይህን አማራጭ መምረጥ ይችላሉ። Cacti በቀን አንድ ጊዜ በዓለም ዙሪያ ያሉትን የኢንተርኔት መዝገቦችን በማግኘት ለመላው ኢንተርኔት የመንገድ ለውጦችን ይፈትሻል እና ያንን መረጃ ወደ Cacti ይጭናል። ይህ ከ3GBytes በላይ ውሂብ ያለው በጣም ትልቅ የውሂብ ጎታ እንደሚፈጥር ልብ ይበሉ።"
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "አካባቢያዊ የጎራ ስም"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "በአካባቢያዊ አውታረ መረብ ላይ ለሚገኙ በአካባቢው የማይፈቱ የIPv4 አድራሻዎች፣ ይህን ቅጥያ በውጤቱ የIP አድራሻ ላይ ያክሉ።"
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "አካባቢያዊ የIP ክልል"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "በDNS ውስጥ ላልተመዘገቡ አስተናጋጆች የአካባቢያዊ አውታረ መረብዎን የIPv4 አድራሻ ክልል ያቅርቡ። እነዚህ አስተናጋጆች ከላይ ከተጠቀሰው የአካባቢያዊ ጎራ ስም (Local Domain Name) ጋር ይዛመዳሉ። ይህ በዋናነት ለቤት ተጠቃሚዎች ነው። CIDR ወይም CIDR ያልሆኑ ቅርጸቶችን መጠቀም ይችላሉ። ለምሳሌ፦ 192.168.11.0 ወይም 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "CIDR ወይም CIDR-ያልሆነ ይጠቀሙ"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "ዶሜይኖችን እና AS ቁጥሮችን ለማግኘት Arin ይጠቀሙ"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "ብዙ ትላልቅ የቴክኖሎጂ የውሂብ መሰብሰቢያ አገልግሎቶች የግል መረጃዎን እየሰበሰቡ መሆኑን ለመደበቅ የጎራዎችን ባለቤትነት መሸፈን ይወዳሉ። ይህ የሚያሳስብዎት ከሆነ እና የእርስዎ የCacti ጭነት የበይነመረብ መዳረሻ ካለው፣ ከእነዚያ ትላልቅ የቴክኖሎጂ ኩባንያዎች ሽፋኑን ለማስወገድ Arinን መጠቀም ይችላሉ።"
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "የWhois አቅራቢ አስተናጋጅ"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "እባክዎ የwhois ጥሪዎችን ለመፍታት የአስተናጋጅ ስሙን ያቅርቡ። ባዶ ካልሆነ፣ በስርዓትዎ መንገድ ውስጥ የwhois ባይነሪ ሊኖርዎት ይገባል።"
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "የWhois ባይነሪ መንገድ"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "እባክዎ ለ'whois' ባይነሪ የመንገድ ስሙን ያቅርቡ። የ'whois' ባይነሪ Arin ን የሚያሟላ የAS መረጃን ለማግኘት ጥቅም ላይ ይውላል።"
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "የሁለትዮሽ (binary) ዱካ ያስገቡ"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "የግራፍ ዝርዝር እይታ ቅንብሮች"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "ለግራፍ ዝርዝር ፍለጋዎች ነባሪ የፍለጋ ማጣሪያ"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "ለግራፍ ጥልቅ እይታዎች (Drilldowns) የሚያገለግል ነባር የFlowview ፍለጋ ማጣሪያ ይምረጡ።"
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "የውሂብ ማቆያ እና ሪፖርት ማመንጨት"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "የውሂብ ማቆያ መመሪያ"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Cacti የተከፋፈሉ Flow ሠንጠረዦችን የሚያቆይበት የጊዜ መጠን።"
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "%d ሳምንት"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d ሳምንታት"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d ወር"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d ወራት"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d ዓመት"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "የውሂብ ጎታ ክፍፍል እቅድ"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "በደቂቃ ባሉት የፍሰቶች ብዛት ላይ በመመስረት፣ በቀን ተጨማሪ ሠንጠረዦች ሊያስፈልጉዎት ይችላሉ።"
+
+#: setup.php
+msgid "Daily"
+msgstr "ዕለታዊ"
+
+#: setup.php
+msgid "Hourly"
+msgstr "በየሰዓቱ"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "ለጥሬ ሠንጠረዦች የማከማቻ ሞተር"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "የAria ሞተር ከLive ጥሬ ሠንጠረዥ በስተቀር ለሁሉም ተስማሚ ነው። የLive ጥሬ ሠንጠረዥ ሁልጊዜ InnoDB ይሆናል። ምርጫዎን ይምረጡ።"
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "ትይዩ ጥያቄዎች"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "የትይዩ ጥያቄ ጀርባ (Backend)"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "ትይዩ የFlowView መጠይቆች እንዴት እንደሚፈጸሙ ይምረጡ። የቆየው PHP Runner ለእያንዳንዱ መጠይቅ እና ሻርድ የflowview_runner.php ሂደትን ይከፍላል። የFlowView Query Service ያንኑ የmap-reduce ስራ በlocalhost ላይ ለረጅም ጊዜ ወደሚሰራ የGo አገልግሎት ይልካል፣ ይህም የእያንዳንዱን መጠይቅ ሂደት መጀመሪያ እና የውሂብ ጎታ መጠየቂያ መዘግየትን ያስቀራል። የflowview-query አገልግሎት (plugins/flowview/service/flowview-query ይመልከቱ) ተጭኖ እየሰራ መሆን አለበት።"
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "ቀደምት PHP አስኬጅ"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "የFlowView መጠይቅ አገልግሎት"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "የመጠይቅ አገልግሎት URL"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "የFlowView መጠይቅ አገልግሎት መሰረታዊ URL፣ ለምሳሌ http://127.0.0.1:8699። ጊዜያዊ ወደቡን ከአገልግሎቱ የወደብ ፋይል በራስ-ሰር ለማግኘት ባዶ ይተዉት።"
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "የመጠይቅ አገልግሎት ወደብ ፋይል"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "የFlowView ጥያቄ አገልግሎት የታሰረበትን አድራሻ የሚጽፍበት የወደብ ፋይል መንገድ። ከላይ ያለው የጥያቄ አገልግሎት URL ባዶ ሲሆን የአገልግሎት መጨረሻ ነጥቡን ለማግኘት ያገለግላል።"
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "የመጠይቅ አገልግሎት ቶከን"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "አማራጭ የተጋራ ምስጢር። ሲዋቀር፣ Cacti ወደ FlowView Query Service እንደ \"Authorization: Bearer\" ራስጌ ይልከዋል እና አገልግሎቱ ተመሳሳዩን ቶከን የማያቀርብ ማንኛውንም ሁኔታ የሚቀይር ጥያቄ ውድቅ ያደርጋል። ተዛማጁን እሴት በአገልግሎቱ የውቅር ፋይል (auth_token) ወይም በFLOWVIEW_QUERY_TOKEN የአካባቢ ተለዋዋጭ ውስጥ ያዋቅሩ። አገልግሎቱ ከታመኑ አካባቢያዊ ሂደቶች ውጭ በማንኛውም ነገር ተደራሽ በሆነበት ጊዜ ሁሉ ይመከራል።"
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "ከፍተኛ ተጓዳኝ ክሮች"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "የ FlowView መጠይቆችን ለማስኬድ የሚላኩ ከፍተኛው የክሮች ብዛት። በአንድ የውሂብ ጎታ ክፍልፋይ ቢበዛ 1 ክር ብቻ ሊኖርዎት እንደሚችል ልብ ይበሉ፤ እንዲሁም በተመሳሳይ ጊዜ ብዙ ክሮች በማስኬድ የውሂብ ጎታ አገልጋይዎን እንዳይጫኑ መጠንቀቅ አለብዎት።"
+
+#: setup.php
+msgid "Disabled"
+msgstr "ተሰናክሏል"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "%d ክሮች"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "ከፍተኛ የሩጫ ጊዜ"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "ትይዩ መጠይቁ በዚህ ጊዜ ውስጥ ካልተጠናቀቀ፣ ውጣ።"
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "የተሸጎጠ ውሂብ የቆይታ ጊዜ (TTL)"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "FlowView የተሸጎጡ የመጠይቅ ውጤቶችን ከማጽዳቱ በፊት ለምን ያህል ጊዜ መያዝ አለበት?"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ሰዓታት"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d ቀን"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d ቀናት"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "MaxScale ሻርዲንግ"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "ይህ የሚያስፈልገው የCacti ስርዓትዎ የFlowview የውሂብ ጎታ ግንኙነት አስቀድሞ MaxScale የነቃ የማንበብ-መጻፍ መከፋፈያ ወደብ እየተጠቀመ ካልሆነ ብቻ ነው።"
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "የመጠይቅ ክፍልፋዮችን ለማሰራጨት MaxScale ይጠቀሙ"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "ለMaxScale እንደ ተከታይ (slave) ሆነው የሚያገለግሉ ብዙ አገልግሎቶች ካሉዎት፣ ትይዩ መጠይቆችን ወደ ብዙ የMariaDB የኋላ አገልጋዮች በማሰራጨት የመጠይቅ ፍጥነትን መጨመር ይችላሉ።"
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "የMaxScale ንባብ-ጽሑፍ መከፋፈያ ወደብ"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "ይህ የRead-Write-Split-Service (readwrite) አገልግሎት እና ራውተር ወደብ መሆን አለበት።"
+
+#: setup.php
+msgid "Flowview"
+msgstr "Flowview"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
+

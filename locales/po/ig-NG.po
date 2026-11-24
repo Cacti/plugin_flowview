@@ -1,0 +1,2934 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Igbo\n"
+"Language: ig-NG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "Enweghị ike ịchọta Data Mbụ iji Bupụ"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "Ajụjụ Flowview enyere adịghị.  Biko nyefee ajụjụ ziri ezi."
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "Enyere Ajụjụ isi iyi na-ezighị ezi.  Biko nyefee ya na ajụjụ ziri ezi."
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "Enweghị ike ịhichapụ Nzacha Flow '%s' maka na a na-eji ya na Mkpesa A Haziri."
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "Ehichapụla Nzacha Nrịba '%s'."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "Hichapụ"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "Ekpochapụla Cache DNS.  Ọ ga-ejupụta ọzọ ka ndekọ na-abata."
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "Nkọwa Ndebanye Aha Ụzọ Ịntanetị"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "Nkọwa Onye Nnọchi Enyere Ikike"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "Ahụghị Nkọwa Ọ bụla"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR/Ụzọ"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "Nọmba Nnwere Onwe"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "Ngọngọ AS"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "Nchịkọta AS"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "Ntọala Ụzọ"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "Dọmen"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "Nhazi Nzacha"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "Otu Mmekọrịta"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Netwọk"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "Rauta Ịntanetị"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "Ndị Otu Nzaghachi Ihe Mere Eme"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "Onye Nnọchi Nkwenye"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "Nzukọ"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "Ọrụ"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "Onye"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "Ntọala Rauta"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "Nkwupụta"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "Mgbanwe Ikpeazụ"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Isi Iyi"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "Ụbọchị Ndebanye Aha"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT Site na"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "Kọntaktị Onye Nchịkwa"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "Mgbanwe Gasị"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "Zipu Ọkwa"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "Nkọwa"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "Kọntaktị Nka"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "MNT Ala"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "Mba"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "Ozi-e Mmegbu"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "Nọmba Faksị"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "Ekwentị"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "Ozi-e"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "Adreesị"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "Ọnọdụ"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "Ndị Otu Site na Fef"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "Ndị Nkwukọrịta Maka Mmegbu"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "Ntụaka MNT"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "Ndị Otu"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "Ọkwa MNT"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "Ikike"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "Ụzọ MNT"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "Onye otu"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "Ozi-e Mmelite"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "Njirimara NOC"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "Òtù Na-akwado"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT Irt"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "Ndị Otu MP"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "Domini Nta"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "Nwere ike i-ping"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "Aha ọzọ"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "Ụdị Nzukọ"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "Zoro aka na"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "Njikọ MP"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "Bupụ"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "Oghere"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "MP Nke Ndabara"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "Akụkụ Gasị"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "RS Nsonaazụ"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "Aha Nzukọ"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "Aha AS"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "Onye dere ya"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "Ọkwa IRT"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "Nchịkọta MTD"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "Ụdị AS"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "Nzacha MP"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "Ụzọ Nke Ndabara"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "Oke Nkenye"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "Bupụ Akụkụ"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "RS Ntinye"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "Aha Net"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "DS Rdata"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "Oke Nchịkọta"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Nzacha"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "Mbubata MP"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "Asụsụ"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "Njikọ RESTful"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "Onye mmekọ"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "Kọntaktị Mpaghara"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "Tụnye"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "Onye Otu MP"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "Ntụnye Aka Site Na"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "Fọọmụ"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "Ngalaba MNT"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "AS Mmalite"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "Mbupụ MP"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "Nzuzo Ozi (Encryption)"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "Nnyefe Geo"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "Ndekọ Geo"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "Adreesị Ọnụ njikọ"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "Bupụ Site Na"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "Nsogbu"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "Sava Aha"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "Njikwa Ping"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "Ọnụ njikọ"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "Bubata"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "Mbinye aka"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "Ebe Geo"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "AS Mpaghara"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "Bubata Site na"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "NJỌ UKWU: Tebụlụ Nchekwa Data A Na-amaghị %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "Chọọ"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "Ọ Bụla"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "Ntinye"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "Nke Ndabere"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "Gaa"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "Tọọ/Megharịa Ihe nzacha"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "Kpochapụ"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "Kpochapụ Ihe nzacha"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "Kpochapụ Ebe Nchekwa DNS"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "Akọwapụtaghị"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "Ahụghị Ntinye Dabara Adaba Ọ bụla"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "Pịa 'Gaa n'ihu' iji hichapụ Ntinye Cache DNS niile na-esonụ."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "Kagbuo"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "Gaa n'ihu"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "Hichapụ Ntinye DNS Gasị"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "Ntinye Cache DNS Flowview"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "Ekwenyere"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "A kwadobeghị"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "Kpochapụ"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "Adreesị IP"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "Nke a bụ Adreesị IP nke ndenye Cache ahụ."
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "Aha Onye nnabata DNS"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "Aha DNS e nyere Adreesị IP ahụ."
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "Isi iyi nke Aha onye nnabata DNS. O nwere ike ịbụ DNS, Nchọta kwụ ọtọ maọbụ ARIN."
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "Arin Kwadoro"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "Enyochala ozi Arin maka Adreesị IP a, ma ọ bụ na ọ bụ Adreesị IP nke Ngalaba Obodo."
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "ID CIDR"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "Igodo izizi Arin.  Nke a abụghị ozi Arin gọọmentị."
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "ID Sistemụ Nnwere Onwe"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "Arin Origin AS.  Nke a bụ ozi Arin AS gọọmentị."
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "Oge Emelitere"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "Nke a bụ oge e tinyere ma ọ bụ melite nchekwa nwa oge DNS ikpeazụ."
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "Ahụghị Ntinye Cache DNS Ọ Bụla"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "Ụzọ Ịntanetị Flowview"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "Ụdị IP"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "IPv4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "Ụzọ"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "Nke a bụ Ụzọ Ịntanetị e bipụtara."
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "Nọmba AS"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "Nọmba Sistemụ Nnwere Onwe maka ụzọ ahụ."
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "Nkọwa Ụzọ"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "Nkọwa nke Onye Nlekọta Ụzọ debanyere."
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "Nchekwa data isi iyi e ji bipụta ụzọ ahụ."
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "Onye Na-elekọta Ya"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "Onye Na-ebu Ịntanetị nke na-elekọta ụzọ maka onye ahịa."
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "Oge ikpeazụ e dezigharịrị ozi dị n'ụzọ a."
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "Ahụghị Ụzọ Dabara Adaba Ọ bụla"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "Gbanye"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "Gbanyụọ"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "Aha Onye na-ege ntị"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "Aha ngwaọrụ a ga-egosi."
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "Ụzọ Nchịkọta"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "E nwere ụzọ nchịkọta nkwado abụọ, nke mbụ na-eji faịlụ flow-tools ochie ebe nke abụọ na-eji sava flow stream nke PHP nke Cacti n'onwe ya."
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "Jikọọ na adreesị"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "Ọ bụrụ na sava Cacti nwere ọtụtụ Adreesị IP, ị nwere ike ịkọwapụta interface kpọmkwem. Hapụ ya ka ọ bụrụ 0.0.0.0 maka interface mbụ."
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "Oke Onye nnabata Ekwere"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "Adreesị IP nke Ngwaọrụ ekwere ka o ziga na onye nchịkọta flow a.  Hapụ ya ka ọ bụrụ 0.0.0.0 maka onye nnabata ọ bụla.  Rịba ama na PHP na-ahọrọ nke ọma ihe ọ na-ekwe.  A na-akwado usoro edemede CIDR yana usoro oke dịka 192.168.1.0 ma ọ bụ 192.168.1.0/24.  Ọ bụrụ na ị chọrọ adreesị IP akọwapụtara, jiri rikọm kewaa ha."
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Ọdụ"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "Port nke onye nnakọta a ga-ege ntị na ya."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Prọtokọl"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "Usoro IP a ga-eji maka onye na-ege ntị a."
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "Ụkpụrụ UDP"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "Gbanyere"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "Ọ bụrụ na akaa ya, a ga-amalite ọrụ Onye Nlere (Listener) ma ọ ga-eche data na-abata."
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "Ahụghị Nlereanya Flow ọ bụla maka ID Ngwaọrụ:%s na ID Nlereanya:%s"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Pịa 'Gaa n'ihu' iji Hichapụ Ndị Na-ege NetFlow ndị na-esonụ.  Mgbe nke ahụ gasịrị, Cacti ga-anwa ịmalitegharị Ọrụ Flow-Capture gị."
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Pịa 'Gaa n'ihu' iji Gbanye Ndị Na-ege NetFlow ndị na-esonụ.  Mgbe nke ahụ gasịrị, Cacti ga-anwa ịmalitegharị Ọrụ Flow-Capture gị."
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "Ị ga-ahọrọ opekata mpe otu Onye Na-ege Ntị."
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "Ọdụ ụgbọ mmiri na-ege ntị ga-abụrịrị ọnụọgụgụ dị n'etiti 1 na 65535."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "Nchekwa Gara Nke Ọma.  E chekwaala Onye Na-ege Ntị Flowview, ma malitegharịa ọrụ ahụ."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "Nchekwa Gara Nke Ọma.  E chekwaala Onye Na-ege Ntị Flowview.  Otú ọ dị, ọrụ flow-capture anaghị agba ọsọ."
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "Onye na-ege ntị [dezie: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "Onye na-ege ntị [ọhụrụ]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "Aha"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "Ụdị"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "Nlereanya Gasị"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "Mmelite Ikpeazụ"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "Nnyefe na-arụ ọrụ na-emelite kwa nkeji 5"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "Achọpụtaghị Iyi Na-abata Ọ bụla"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "Nlereanya Gasị Onye na-ege ntị Chọpụtara"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "Adreesị Mbupụ"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "Niile"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "Nlereanya"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "Njirimara Templeeti"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "Aha Ogige"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "A na-akwado ya"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "ID Ubi"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "Ụdị Mpaghara"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "Ogologo"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "Tọghe"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "Achọpụtaghị Nlereanya Gasị nke Iyi Na-abata"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "Ihe Na-ege Ntị FlowView"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "Ndị na-ege ntị"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "Ụzọ"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "Adreesị njikọ"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "Ekwere Site Na"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "Nge ntị Ahụrụ"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "Nchekwa ọdụ a hụrụ n'ezie n'ọdụ ndị na-ege ntị."
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "Ọrụ fọdụrụnụ"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "Ogo nke nkwụsị azụ UDP na bytes."
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "Iyi Gasị"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "Ọnụọgụgụ njikọ mbata sitere n'isi iyi dị iche iche."
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "Ụdị Iyi Gasị"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "Ụdị Traffic Flow a na-eleba anya."
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "Oge mmelite kachasị elu site na iyi niile a na-achịkọta.  A na-emelite uru a kwa nkeji 5."
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "Ọ Dịghị Nke Ọ Bụla"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "Enweghị Njikọ"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "Ọ dịghị"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "Cacti"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "Enweghị Ndị na-ege ntị Flowview"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "Mejupụta"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "Enweghị ike ịchọpụta igodo cache nke Nzacha ndị ahụ, ya mere e bipụghị ihe ọ bụla."
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "Kpachara shard echekwara %s na-adabaghị na Nzacha ọ bụla."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "Amalitela mmejupụta nke Nzacha %d n'azụ.  A na-emejupụta Nzacha %d ugbu a.  A na-akọ nsonaazụ ya na ndekọ Cacti."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "Amalitela mmejupụta nke Nzacha %d n'azụ.  A na-akọ nsonaazụ ya na ndekọ Cacti."
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "A na-emepụtarị Nzacha ahọpụtara. Biko nwaa ọzọ ozugbo nke ahụ gwụchara."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "Pịa 'Gaa n'ihu' iji hichapụ Nzacha ndị na-esonụ na Nzacha niile dakọtara."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "Pịa 'Gaa n'ihu' iji Gbanyụọ Nzacha ndị na-esonụ na Nzacha niile dakọtara."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "Pịa 'Gaa n'ihu' iji Gbanye Nzacha ndị na-esonụ."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "Pịa 'Gaa n'ihu' iji mepụta Nzacha ndị na-esonụ n'azụ, na NAT gbanyere na gbanyụrụ, maka oke data flow niile.  A ga-amafe nkebi ndị e mepụtalarị ma dịkwa zie ezie.  Nke a nwere ike iwe ogologo oge na nnukwu mkpokọta data.  A ga-amafe Nzacha a na-emepụtalarị ugbu a."
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "Ị ga-ahọrọ opekata mpe otu Nzacha."
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "Nzacha FlowView"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "Nzacha FlowView [ Tinye Ngwaọrụ tupu Nzacha ]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "Nzacha Gasị"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "Kpachaa"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "Wepụ akụkụ echekwara na cache ndị na-adabaghị na Nzacha ọ bụla"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "Aha Nzacha"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "Njirimara"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "Mmejupụta"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "Mmejupụta na-agbakọ nsonaazụ nke Nzacha tupu oge eruo maka nkebi mmiri ozi ọ bụla, mgbe NAT gbanyere na mgbe ọ gbanyụrụ, ma chekwaa ha na nchekwa Parallel Query, ka akụkọ banyere data ochie wee mepee ngwa ngwa.  A na-emejupụta nkebi ọhụrụ na-akpaghị aka ozugbo ha kwụsịrị ịnata mmiri ozi.  Achọrọ pụtara na emejupụtabeghị nkebi tụgharịrị, Na-aga n'ihu pụtara na mmejupụta na-aga n'ihu, ebe Emelitere pụtara na emejupụtala nkebi ọ bụla tụgharịrị.  Na-aga n'ihu: N bụ ọnụọgụgụ ajụjụ nke Nzacha na-arụ ọrụ ugbu a.  A naghị emejupụta nkebi ka na-anata mmiri ozi, yabụ na a naghị agụ ya."
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "Onye na-ege ntị"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Ụdị Mkpesa"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "Mpempe NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "Ọnụọgụgụ nkewa nke Nzacha a echekwara na nchekwa nwa oge Ajụjụ Yiri ya na NAT gbanyere."
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "Shard Na-abụghị NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "Ọnụọgụgụ nkewa nke Nzacha a echekwara na nchekwa nwa oge Ajụjụ Yiri ya na NAT gbanyụrụ."
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "Nkewa gasị"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "Mkpokọta ọnụọgụ nke nkewa usoro, nke bụ ọtụtụ shards Nzacha nwere ike ịchekwa na maọbụ na-enweghị NAT."
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Ogige Nhazi"
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "Mkpebi"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "Enweghị ike ịmata ọdịiche dị n'etiti akụkụ cache nke Nzacha ndị ahụ na ndị ọzọ, ebe ọ bụ na enweghị ike ịchọpụta igodo cache nke Nzacha."
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "Enweghị ike ịchọpụta igodo cache nke Nzacha ndị ahụ, ya mere enweghị ihe a ga-ebipụ ugbu a.  Lelee na Nzacha ọ bụla nwere Akụkọ dị ire."
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "Shards Echekwara na Cache: %s kwekọrọ na Nzacha.  %s ekwekọghị na Nzacha ọ bụla, nke Mkpochapụ (Prune) na-ewepụ."
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "Nke a na-ewepụ shard echekwara %s nke na-ekwekọghị na Nzacha ọ bụla, maka Nzacha ọ bụla na onye ọrụ ọ bụla. Ha na-esi na Nzacha a gbanwere ma ọ bụ hichapụ, yana site na akụkọ nwere ntọala gbanwere na peeji akụkọ. A na-edobe shard echekwara %s nke Nzacha ndị ahụ. Enweghị ike iweghachi nke a."
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "Shard echekwara ọ bụla dabara na Nzacha.  Ọ dịghị ihe a ga-ebipụ."
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "Kpachaa Shard Echekwara"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "Mechie"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "Zipu Ugbu A"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "Elekere Ọ bụla"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Elekere %d Ọ bụla"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "Kwa Ụbọchị"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "Kwa Izu"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "Izu %d Ọ Bụla, 2"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "Ọnwa Ọ Bụla"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "Ntọala Izugbe"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "Isiokwu"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "Nhazi Oge Ọhụrụ"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "Tinye Isiokwu Mkpesa maka Nhazi Oge FlowView."
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "Ma a ga-ezipu Nyocha NetFlow a ma ọ bụ na agaghị."
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "Aha ajụjụ a ga-agba."
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "Ntọala Nzipu"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "Ogologo Oge Nzipu"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "Ugboro ole ka a ga-eziga Mkpesa NetFlow a?"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "Oge Ntọala E Haziri"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "Nke a bụ ụbọchị / oge mbụ iji zipu ozi-e Nnyocha NetFlow. A ga-agbakọ Ozi-e niile n'ọdịnihu site n'oge a tinyere oge etiti enyere n'elu."
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "Oge Ọrụ Kacha Enyere Ikike"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "Ogologo oge ole ka a ga-ekwe ka akụkọ rụọ ọrụ tupu ya apụọ?"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Nkeji %d"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Nkeji %d"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "Ntọala Ozi-e Ochie"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "Adreesị Ozi-e"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "Adreesị ozi-e (nke iwu kewara) iji ziga Nyocha NetFlow a."
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "Faịlụ Nhazi A Ga-eji"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Họrọ faịlụ mkpuchi html ahaziri na CSS a ga-eji. Faịlụ a nwere ma html ma CSS iji kechie akụkọ gị. Ọ bụrụ na o nwere ihe karịrị naanị CSS, ị kwesịrị itinye mkpado <REPORT> pụrụ iche n'ime faịlụ ahụ. A ga-eji ọdịnaya akụkọ dochie mkpado nhazi a. Faịlụ ndị a dị na ndekọ 'formats'."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "Ntọala Ndepụta Ọkwa"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "Ndepụta Ọkwa"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "Ọ bụrụ na etinyere Thold Plugin, ị nwere ike ịhọrọ Ndepụta Ọkwa"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "Akụkọ ahụ ga-abịa ozugbo ọ gwụchara."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Pịa 'Gaa n'ihu' iji hichapụ Nhazi Oge ndị na-esonụ."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Pịa 'Gaa n'ihu' iji zipu Nhazi Oge ndị na-esonụ ugbu a."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Pịa 'Gaa n'ihu' iji Gbanyụọ Usoro Oge ndị na-esonụ."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Pịa 'Gaa n'ihu' iji Gbanye Usoro Oge ndị na-esonụ."
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "Ị ga-ahọrọ opekata mpe otu usoro oge."
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "Enweghị ike ịchọta Data Mbụ Mkpesa maka NJ Mkpesa %s"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "Ị ga-akọwapụta Ozi-e, Ndepụta Ọkwa ma ọ bụ ha abụọ!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Mkpesa E Haziri Oge: [dezie: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Akụkọ Mkpesa E Haziri Oge: [dezie: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "Mkpesa E Haziri Oge: [ọhụrụ]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "Nhazi Oge Gasị"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "Aha Mkpesa"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "Id"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "Ụdị Mmepụta"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "Onye Zigara"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "Ụbọchị Ezigara"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "Oge Ọrụ"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "Budata Data"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "Ndekọ Mkpesa"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [Lee Akụkọ Dị Ka Ọ Dị]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [Lee Akụkọ na CSS]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "Nzipu Aka"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "Haziri oge"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "Sekọnd %s"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "Nhọrọ Ụbọchị Mmalite"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "Nhazi Oge FlowView"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "Nhazi Oge FlowView [ Tinye Ngwaọrụ tupu Nhazi Oge ]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "Oge etiti"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "Ezipụrụ Ikpeazụ"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "Nzipu Na-esote"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "Ozi-e/Ndepụta"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "Nzipu E Dekọrọ"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Mba"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Ee"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Họrọ Mkpesa"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Nchịkọta"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Domịn Mgbọrọgwụ Isi Iyi"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Root Domịn Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Domịn Mgbọrọgwụ Isi Iyi/Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "Ọdụ Njedebe UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "Ọdụ Isi Iyi UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "Ọdụ UDP/TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Isi Iyi IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "IP Ebe Njedebe"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Isi Iyi/Ebe Njedebe IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Isi Iyi ma ọ bụ Ebe Njedebe IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "Usoro IP"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Ọnụ njikọ Ntinye"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Interface Mmepụta"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Ọnụ njikọ Ntinye/Mpụta"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Isi Iyi AS"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "AS Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Isi Iyi/Ebe Njedebe AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Prefix Isi Iyi"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Mmalite Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Prefix Isi Iyi/Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Oge Nrịba"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "IP na Port Gasị nke Isi Iyi/Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Nọmba AS"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "Ogidi 132"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Gosi Nṅomi Ngụkọta IP"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Akụkụ Ọ Bụla N'ime Oke (nwayọ)"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Oge njedebe n'ime oke (ọsọ)"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Oge Mmalite n'Oke (ọsịsọ)"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Kpamkpam n'ime oke (nwayọọ)"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Weghachi Ahịrị Niile"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Nke Kachasị %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Enweghị Oke"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Bytes"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Domịn Isi Iyi"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Nrịba Gasị"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Ngwugwu data"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Domịn Ebe Njedebe"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Port Isi Iyi"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Port Ebe Njedebe"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "IP Ebe Njedebe"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Isi Iyi IF"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "IF Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Mmalite Ebe Njedebe"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Oge Mmalite"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Oge njedebe"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Na-arụ Ọrụ"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Ọkọlọtọ"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Ebe Njedebe"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "Piksụl %d"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Nzacha Izugbe"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Nzacha E Chekwara nke a ga-egosi."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Nzacha Ọhụrụ"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Onye Na-ege Ntị a ga-eji maka Nzacha ahụ."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "ID Nlereanya Nrịba"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "ID Nlereanya Flow maka v9 na IPFIX Flows naanị.  Rịba ama na ID Nlereanya Gasị nwere ike ịdị iche site n'aka onye nrụpụta ruo onye nrụpụta."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Adreesị Iyi"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Adreesị IP ma ọ bụ Aha Onye nnabata nke Stream site na ndepụta streams e debanyere aha."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Nhazi Edebere"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Ọ bụrụ na Nzacha a dabere na Oge E Kọwapụtara Tupu Oge Eruo, họrọ ya ebe a."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Ntụaka Nzacha Zuru Ezu"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Ụdị Akụkọ a ga-eji na ndabara maka Nzacha a mgbe a na-emepụta Akụkọ."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "E bipụtara"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Nke Ndekọ Ọnụọgụgụ"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Akụkọ Ndekọ Ọnụọgụgụ"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Ụdị Ngosipụta Mkpesa a ga-eji na ndabara maka Nzacha a mgbe a na-emepụta Mkpesa."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Akụkọ E Bipụtara"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Ụdị Akụkọ E Bipụtara a ga-eji na ndabara maka Nzacha a mgbe a na-emepụta Akụkọ E Bipụtara."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Iwu Oke"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Machibido Data Nzacha site na iwu nzacha oge ndị a."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Tọghata IP Gasị"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Tọghata Adreesị IP ka ọ bụrụ Aha Ngalaba."
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Ogige Nhazi ndabara maka Nzacha.  A ga-etinye ntọala a maka Akụkọ A Haziri Oge ọ bụla."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Ahịrị Kacha Elu"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Ahịrị Kachasị a ga-enye na Nzacha ahụ.  A ga-etinye ntọala a maka Mkpesa Edebere n'Oge ọ bụla."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Bayt Kachasị Nta"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Ngụkọta Byte Kacha Nta a ga-atụle maka Nzacha ahụ.  A ga-eleghara ngụkọta flow ọ bụla na-erughị ọtụtụ byte a anya."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Nhọrọ Chaatị"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Ụdị Eserese"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Ụdị Eserese a ga-egosipụta na ndabara.  Ha gụnyere Bar, Pie, na Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Chaatị Ogwe"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Chaatị Paị"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Chaatị Treemap"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Ogo Eserese"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "Ogo Eserese a ga-eji na ndabara."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "Jiri Data NAT"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "Gosi IP Isi Iyi/Ebe Aga na aha DNS post-NAT (atụgharịrị) na nsonaazụ mkpesa kama ịbụ ọnụ ahịa mbụ, pre-NAT."
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Ogwe Tebụl"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Ekwesịrị igosi Ogwe Tebụl na ndabere."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Ogwe Bytes"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Ekwesịrị igosi Ogwe Bytes na ndabere."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Ogwe Ngwugwu Data"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Ekwesịrị igosi Ogwe Packets na ndabere."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Ogwe Nrịba Gasị"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Ekwesịrị igosi Ogwe Flows na ndabere."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Nzacha Prọtokọl"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Prọtokọl Gasị"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Họrọ Ụkpụrụ Kpọmkwem maka Nzacha ahụ."
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "Protokọl Niile"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "Ọkọlọtọ TCP"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "TCP Flags a ga-achọ na Nzacha.  Nke a nwere ike ịbụ ndepụta TCP Flags nke rikoma kewara"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "Ogige TOS"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Ogige TOS a ga-achọ na Nzacha.  Nke a nwere ike ịbụ ndepụta Ogige TOS nke rikoma kewara"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Zaa na IP Isi Iyi ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta adreesị IPv4 maọbụ IPv6 ndị e ji rikọm kewaa, maọbụ ndepụta oke adreesị IPv4 maọbụ IPv6 n'ụdị CIDR ndị e ji rikọm kewaa (dịka 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Port Gasị Isi Iyi"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Zaa na Ọdụ Isi Iyi ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta Ọdụ Isi Iyi ndị e ji rikọm kewaa."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Njikọ Isi Iyi"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Zaa na Njikọ Isi Iyi ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta Njikọ Isi Iyi ndị e ji rikọm kewaa"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Zaa na AS Ebe Aga ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta AS Isi Iyi ndị e ji rikọm kewaa"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Zaa na IP Ebe Aga ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta adreesị IPv4 maọbụ IPv6 ndị e ji rikọm kewaa, maọbụ ndepụta oke adreesị IPv4 maọbụ IPv6 n'ụdị CIDR ndị e ji rikọm kewaa (dịka 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Port Gasị Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Zaa na Ọdụ Ebe Aga ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta Ọdụ Ebe Aga ndị e ji rikọm kewaa."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Njikọ Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Zaa na Njikọ Ebe Aga ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta Njikọ Ebe Aga ndị e ji rikọm kewaa."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "AS Ebe Njedebe"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Zaa na AS Ebe Aga ahọpụtara n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta AS Ebe Aga ndị e ji rikọm kewaa"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "IP Isi Iyi Mgbe NAT Gasịrị"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Zaa na IP Isi Iyi atụgharịrị (post-NAT) edere n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta adreesị IPv4 maọbụ IPv6 ndị e ji rikọm kewaa, maọbụ ndepụta oke adreesị IPv4 maọbụ IPv6 n'ụdị CIDR ndị e ji rikọm kewaa (dịka 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "Port Isi Iyi Mgbe NAT Gasịrị"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Zaa na Ọdụ Isi Iyi atụgharịrị (post-NAT) n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta Ọdụ ndị e ji rikọm kewaa."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "IP Ebe A Na-aga Mgbe NAT Gasịrị"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Zaa na IP Ebe Aga atụgharịrị (post-NAT) edere n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta adreesị IPv4 maọbụ IPv6 ndị e ji rikọm kewaa, maọbụ ndepụta oke adreesị IPv4 maọbụ IPv6 n'ụdị CIDR ndị e ji rikọm kewaa (dịka 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "Port Ebe A Na-aga Mgbe NAT Gasịrị"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Zaa na Ọdụ Ebe Aga atụgharịrị (post-NAT) n'ime Nzacha.  Nke a nwere ike ịbụ ndepụta Ọdụ ndị e ji rikọm kewaa."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "Cache DNS"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Ụzọ Gasị"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Nọmba Nnwere Onwe Gasị"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "Ngọngọ AS Gasị"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "Nchịkọta AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Ntọala Ụzọ Gasị"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Domịn"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Nhazi Nzacha Gasị"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Otu Mmekọrịta Gasị"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Rauta Ịntanetị Gasị"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Ndị Otu Nzaghachi Ihe Mere Eme Gasị"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Ndị Nnọchi Nkwenye"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Nzukọ Gasị"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Ọrụ Gasị"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Ndị mmadụ"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "Ehaziela Mkpesa '%1$s' sitere na isi mmalite %2$s nwere id %3$s ka ọ gbaa!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "Ehazighị Mkpesa '%1$s' sitere na isi mmalite %2$s nwere id %3$s ka ọ gbaa n'ihi njehie!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "Izugbe"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "Ndekọ"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "Họrọ Ụdị Mkpesa Mbụ"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Nzacha: [dezie: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "Nzacha: [ọhụrụ]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "Nsonaazụ Echekwara na Cache Metụtara"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "Mgbanwe ndị a na-emetụta nsonaazụ echekwara na nwa oge nke Nzacha a. Ichekwa ya na-amalite nhazi na ndabere iji wughachi ha. Pịa 'Gaa n'ihu' iji chekwaa Nzacha ahụ, ma ọ bụ 'Kagbuo' iji gaa n'ihu na-edezi ya."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Mgbanwe na Nzacha a na-emetụta nsonaazụ cache ya, ya mere ebidola mmepụta ya na ndabere.  A na-egosi ọganihu ya na peeji Nzacha ma na-akọwa nsonaazụ ya na ndekọ Cacti."
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Nzacha A Kọwapụtaghị [ Họrọ Nzacha iji nweta Nkọwa ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Akụkọ Ndekọ Ọnụọgụgụ: %s [ Gụnyere ndochi ndị akọwapụtara n'okpuru ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Akụkọ E Bipụtara: %s [ Gụnyere mgbanwe ndị e depụtara n'okpuru ]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "Họrọ Nzacha"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "Tinye Nzacha"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "Kpochapụ Nzacha"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "Dezie"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "Dezie Nzacha Flow"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "Mepụta Nzacha Flow ọhụrụ"
+
+#: includes/functions.php
+msgid "New"
+msgstr "Ọhụrụ"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "Chekwaa"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "Chekwaa Nzacha Flow ahụ"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "Chekwaa Dịka"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Chekwaa Nzacha Flow dị ugbu a dị ka Nzacha ọhụrụ"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "Gbanwee aha"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "Gbanwee Aha Nzacha Flow"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "Hichapụ Nzacha Flow"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "Akụkọ"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "Ndekọ Ọnụọgụgụ: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "E bipụtara: %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "Họrọ Nzacha Mbụ"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "Ahịrị gasị"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "Wepụ"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "Nlele kacha elu"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "Ihe Nlele %d Kachasị"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "Octets"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "Gosi naanị Dọmenị Gasị na Chaatị Dị n'Okpuru"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "Domịn/Aha Onye Nnabata Naanị"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "Gosi aha IP/DNS post-NAT (atụgharịrị) kama ịbụ ọnụ ahịa mbụ"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "Ogologo Oge"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "Ahaziri"
+
+#: includes/functions.php
+msgid "From"
+msgstr "Site na"
+
+#: includes/functions.php
+msgid "To"
+msgstr "Ruo"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "Nhọrọ Ụbọchị Njedebe"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "Kpụgharịa Oge Azụ"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "Kọwaa Oge Mkpụgharị"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "Kpụgharịa Oge n'Ihu"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "Eserese"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "Ogwe"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "Paị"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "Treemap"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "Ogo"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "Gosi/Zoo"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "Tebụl"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "Bupụ Data Mbụ"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "Chekwaa Nzacha Flow"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "Aha Ọhụrụ"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "Hichapụ Nzacha Ọsọ"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "Iji Hichapụ Nzacha Flow a, pịa Gaa n'ihu. Ọ bụrụ na a na-eji Nzacha Flow ahụ na Mkpesa A Haziri Ahazi, a ga-egbochi ọrụ ahụ."
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Eserese Nkesa Bytes %s Kachasị"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "Chaatị Pie nke Bytes %s kacha elu"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Chaatị Treemap nke Bytes %s kacha elu"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Eserese Nkesa Packets %s Kachasị"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "Chaatị Pie nke Packets %s kacha elu"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Chaatị Treemap nke Packets %s kacha elu"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Eserese Nkesa Flows %s Kachasị"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Chaatị Pie nke Flows %s kacha elu"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Chaatị Treemap nke Flows %s kacha elu"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "Gbanwee Aha Nhazi"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "Echekwara Ntọala Nzacha.  Amalitela mmezu nke Nzacha a n'azụ."
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "Echekwara Ntọala Ihe Nzacha"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Onye Ahịa/Nkeonwe (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Amaghị (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Nzacha Subnet: %s abụghị usoro CIDR ziri ezi"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "Nzacha IP: %s abụghị adreesị IP ziri ezi"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "edozibeghị"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d Baịtị"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d Baịtị"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "Amaghị Akụkọ Ndekọ Ọnụọgụ %s.  Biko meghee akụkọ njehie na GitHub"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "Amaghị Akụkọ E Bipụtara %s.  Biko meghee akụkọ njehie na GitHub"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "Isi Iyi DNS"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "Isi Iyi Root DNS"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "DNS Ebe Njedebe"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "Root DNS Ebe Njedebe"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "DNS"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "DNS Mgbọrọgwụ"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "Port Ebe Njedebe"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "IF Ebe Njedebe"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "Mmalite Ebe Njedebe"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "Ụdị Ọrụ"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "Bytes/Packet"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "Emezubebeghị ya, nwere NAT: %s, enweghị NAT: %s."
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "Emelitere ọhụrụ"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "Na-agba"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "Achọrọ"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "Ọnụọgụgụ ajụjụ nke Nzacha a na-agba ugbu a."
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "Nwere NAT: %d, enweghị NAT: %d."
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "Na-agba: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "NJỌ: Ajụjụ Parallel emechaghị n'ime Oge Nọrọ Kacha Elu nke sekọnd %d.  Lelee Oge Nọrọ Kacha Elu n'okpuru Ntọala FlowView, nakwa na nchekwa data anọghị n'ọrụ ọzọ dịka ALTER TABLE."
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Ajụjụ Yiri Onwe Ya Agwụla Oge.  Biko kpọtụrụ onye nlekọta gị"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Bụlịan: %s, Ọnụọgụgụ: %s, Hex: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "Nkwụsịtụ Dị Ala"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "Ọsọ Nfefe"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "Ntụkwasị Obi"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "Ọnụahịa Kachasị Nta"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "Njikwa Net"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "Njikwa Ịntanetị"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "ECP Dị Oke Mkpa"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "Mmụke Karịrị"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "Mmụke"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "Ozugbo"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "Ọkwa mkpa"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "Usoro"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "Ndekọ Ọnụọgụgụ Nchịkọta"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "Nkesa Nha Ngwugwu IP (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Nkesa Ngwugwu Data kwa Nrugharị (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Nkesa Octets kwa Flow (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Nkesa Oge Nrịba (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Ị ga-ahọrọ Mkpesa Ndekọ Ọnụọgụgụ ma ọ bụ Mkpesa E Bipụtara!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Ị ga-ahọrọ naanị Mkpesa Ndekọ Ọnụọgụgụ ma ọ bụ Mkpesa E Bipụtara (ọ bụghị ha abụọ)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Ụbọchị ndị na-ezighị ezi, Ụbọchị/Oge Njedebe dị tupu Ụbọchị/Oge Mmalite!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP adịghị mma maka Adreesị Isi Iyi!<br>(Ọ ga-adịrịrị n'ụdị '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Subnet adịghị mma maka Adreesị Isi Iyi!<br>(Ọ ga-adịrịrị n'ụdị '192.168.0.1/255.255.255.0' ma ọ bụ '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP adịghị mma maka Adreesị Ebe A Na-aga!<br>(Ọ ga-adịrịrị n'ụdị '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Subnet adịghị mma maka Adreesị Ebe A Na-aga!<br>(Ọ ga-adịrịrị n'ụdị '192.168.0.1/255.255.255.0' ma ọ bụ '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "Ọnụọgụ na-ezighị ezi maka Ọnụ njikọ Isi Iyi!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Ọnụọgụ na-ezighị ezi maka Pọtụ Isi Iyi! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Ọnụọgụ na-ezighị ezi maka AS Isi Iyi! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "Ọnụọgụ na-ezighị ezi maka Ọnụ njikọ Ebe A Na-aga!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Ọnụọgụ na-ezighị ezi maka Pọtụ Ebe A Na-aga! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Ọnụọgụ na-ezighị ezi maka AS Ebe A Na-aga! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Ọnụọgụ na-ezighị ezi maka Protocol! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Ọnụọgụ na-ezighị ezi maka Ọkọlọtọ TCP! (dịka: 0x1b ma ọ bụ 0x1b/SA ma ọ bụ SA/SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Ọnụọgụ na-ezighị ezi maka Octets Nkwụsị!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Ọnụọgụ na-ezighị ezi maka Ahịrị Nkwụsị!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "Chaatị FlowView maka Ụdị %s bụ %s"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "Akwadoro (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "Akwadoghị"
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (Ọsọ ọsọ, Anaghị echebe mgbe ọ dara)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (Ngwa ngwa, Echekwara pụọ na mmebi)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (Na-eji nwayọọ, Njikọta dị elu)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "Onye Ọrụ NetFlow"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "Onye Nchịkwa NetFlow"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Biko gbanwee aha faịlụ config.php.dist ma ọ bụ config_local.php.dist gị n'ime ndekọ flowview, ma gbanwee ntọala nchekwa data gị tupu ịwụnye."
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Biko mara na a na-eme ka tebụl plọgịn Flowview dị elu n'azụ.  Nke a nwere ike iwe oge ụfọdụ. Lelee ndekọ Cacti maka ozi ndị ọzọ"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "Ehichapụla Nzacha ahụ"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "Emelitela Nzacha ahụ"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "Nbubata/Mbupụ"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "Nchekwa Data Gasị"
+
+#: setup.php
+msgid "Normal User"
+msgstr "Onye Ọrụ Nkịtị"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Nchịkwa Sistemụ"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "Ihe Nlere Nrịba"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "Bọọdụ njikwa"
+
+#: setup.php
+msgid "(save)"
+msgstr "(chekwaa)"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(dezie)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "(omume)"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "%d Usoro"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "Usoro %d"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "Mkpesa Usoro Na-aga N'otu Oge (FlowView Naanị)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "Họrọ ọnụọgụ kachasị nke usoro mkpesa nwere ike ịna-agba n'otu oge."
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Ntọala Proxy Ịntanetị"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Adreesị Proxy Ịntanetị"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Maka Ọrụ Cacti isi ma ọ bụ Plọgịn ndị chọrọ njikọ ịntanetị, tinye sava proxy na port ebe a n'ụdị a IP:PORT. Dịka ọmụmaatụ 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Onye Ọrụ Proxy Ịntanetị"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Ọ bụrụ na Proxy Ịntanetị gị chọrọ aha onye ọrụ, tinye ya ebe a."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Okwuntụghe Proxy Ịntanetị"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Ọ bụrụ na Proxy Ịntanetị gị chọrọ okwuntụghe, tinye ya ebe a."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "Nchọpụta Aha"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "Nchọpụta Aha Onye nnabata"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Ụzọ ịchọrọ iji dozie aha onye nnabata."
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "Jiri Sava Mpaghara"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Jiri Sava DNS n'okpuru Ozi/Mkpesa/DNS"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "Edozila DNS"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "Budata Ndebanye Aha Ịntanetị Kwa Ụbọchị"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "Ọ bụrụ na ị nwere mmasị na ozi dị maka ọha na eze gbasara ịntanetị dum, ị nwere ike ịhọrọ nhọrọ a.  Cacti ga-ejikọta na Ndebanye Aha Ịntanetị gburugburu ụwa otu ugboro n'ụbọchị ma lelee mgbanwe n'ụzọ maka ịntanetị dum wee buo ozi ahụ n'ime Cacti.  Rịba ama na nke a ga-eke nchekwa data buru ibu karịa 3GBytes nke data."
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "Aha Ngalaba Mpaghara"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "Maka adreesị IPv4 dị na netwọk mpaghara ndị na-adịghị edozi na mpaghara, tinye mgbakwunye njedebe a na adreesị IP sitere na ya."
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "Oke IP Mpaghara"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Nye oke adreesị IP nke IPv4 maka netwọkụ mpaghara gị maka ndị nnabata ndị nwere ike ịbụ na edebanyeghị ha na DNS.  A ga-ejikọta ndị nnabata ndị a na Aha Domain Mpaghara dị n'elu.  Nke a bụ karịsịa maka ndị ọrụ ụlọ.  Ị nwere ike iji usoro CIDR ma ọ bụ nke na-abụghị CIDR.  Dịka ọmụmaatụ: 192.168.11.0 ma ọ bụ 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "Jiri CIDR ma ọ bụ Nke Na-abụghị CIDR"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Jiri Arin chọta Ngalaba na Nọmba AS"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Ọtụtụ ọrụ nnakọta data nke Big Tech na-amasị ikpuchi nwe ha nke ngalaba iji zoo eziokwu ahụ bụ na ha na-anakọta ozi gị nke onwe. Ọ bụrụ na nke a na-echegbu gị ma nrụnye Cacti gị nwere njikọ Ịntanetị, ị nwere ike iji Arin wepụ mkpuchi ahụ na ụlọ ọụ Big Tech ndị ahụ."
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "Onye nnabata Onye na-eweta Whois"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Biko nye aha onye nnabata maka idozi oku whois.  Ọ bụrụ na ọ bụghị ihe efu, ị ga-enwerịrị baịnarị whois n'ụzọ sistemụ gị."
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "Ụzọ Binary Whois"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Biko nye aha ụzọ maka baịnarị 'whois'.  A ga-eji baịnarị 'whois' chọta ozi AS na-akwado Arin."
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "Tinye ụzọ binary"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "Ntọala Nleba Anya N'ime Eserese"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "Nzacha Ọchụchọ Nke Ndabara maka Nnyocha Miriemi Eserese"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "Họrọ Nzacha Ọchụchọ Flowview dị adị iji mee ihe maka Nchọpụta Mkpụrụ Eserese."
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "Nchekwa Data na Mmepụta Mkpesa"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "Iwu Nchekwa Data"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Oge Cacti ga-echekwa tebụl Flow nwere nkewa."
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "Izu %d"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "Izu %d"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "Ọnwa %d"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "Ọnwa %d"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "Afọ %d"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "Atụmatụ Nkewa Nchekwa Data"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Dabere na ọnụọgụgụ flows kwa nkeji, ị nwere ike ịchọ tebụl ndị ọzọ kwa ụbọchị."
+
+#: setup.php
+msgid "Daily"
+msgstr "Kwa Ụbọchị"
+
+#: setup.php
+msgid "Hourly"
+msgstr "Kwa Awa"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "Injịn Nchekwa maka Tebụl Mbụ"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Njịn Aria zuru oke maka ihe niile ma e wezụga tebụl raw Live.  Tebụl raw Live ga-abụ InnoDB mgbe niile.  Họrọ nke gị."
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "Ajụjụ Ndị Na-agba n'Otu Oge"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "Sistemụ Azụ Maka Ajụjụ Na-agba Otu Oge"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "Họrọ otu a ga-esi rụọ ajụjụ FlowView yiri onwe ha. Legacy PHP Runner na-ekewa usoro flowview_runner.php maka ajụjụ na shard nke ọ bụla. FlowView Query Service na-eziga otu ọrụ map-reduce ahụ na ọrụ Go na-agba ogologo oge na localhost, na-ezere igbu oge mmalite usoro na nchịkọta nchekwa data maka ajụjụ nke ọ bụla. Chọrọ ka etinye ma na-agba ọrụ flowview-query (lee plugins/flowview/service/flowview-query)."
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "Ngwa PHP Ochie"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "Ọrụ Ajụjụ FlowView"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "URL Ọrụ Ajụjụ"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "URL Ntọala nke Ọrụ Ajụjụ FlowView, dịka ọmụmaatụ http://127.0.0.1:8699.  Hapụ ya n'efu ka ọ chọpụta ọdụ ụgbọ nwa oge na-akpaghị aka site na faịlụ ọdụ ụgbọ nke ọrụ ahụ."
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "Faịlụ Pọtụ Ọrụ Ajụjụ"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "Ụzọ ebe faịlụ ọdụ njikọ dị nke FlowView Query Service na-ede adreesị ya ejikọtara.  A na-eji ya chọpụta njedebe ọrụ mgbe Query Service URL dị n'elu tọgbọ chakoo."
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "Token Ọrụ Ajụjụ"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "Ihe nzuzo ekekọrịtara nhọrọ.  Mgbe edobere ya, Cacti na-eziga ya na FlowView Query Service dịka isiokwu \"Authorization: Bearer\" ma ọrụ ahụ na-ajụ arịrịọ ọ bụla na-agbanwe ọnọdụ nke na-egosighi otu token ahụ.  Tọọ uru dakọtara na faịlụ nhazi ọrụ ahụ (auth_token) ma ọ bụ mgbanwe gburugburu FLOWVIEW_QUERY_TOKEN.  A na-atụ aro ya mgbe ọ bụla ihe ọ bụla ọzọ na-abụghị usoro mpaghara ntụkwasị obi nwere ike iru ọrụ ahụ."
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "Eriri Ọrụ Otu Oge Kacha Elu"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Ọnụọgụgụ kachasị elu nke eriri a ga-ezipụ iji mee ajụjụ FlowView.  Rịba ama na ị nwere ike ịnwe naanị 1 eriri maka nkewa nchekwa data ọ bụla, ma ị kwesịrị ịkpachara anya ka ị ghara ibufe sava nchekwa data gị ibu karịa site n'inwe ọtụtụ eriri na-agba n'otu oge."
+
+#: setup.php
+msgid "Disabled"
+msgstr "Gbanyụrụ"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "Thread %d"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "Oge Ọrụ Kacha Elu"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Ọ bụrụ na Ajụjụ Yiri Onwe ya agwụghị n'ime oge a, pụọ."
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "Oge Ndụ Data Echekwara na Cache"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "Ogologo oge ole ka FlowView ga-ejide nsonaazụ Ajụjụ echekwara tupu ya ehichapụ ha?"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "Elekere %d"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "Ụbọchị %d"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "Ụbọchị %d"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "Nkebi MaxScale"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "A chọrọ nke a naanị ma ọ bụrụ na njikọ Nchekwa Data Flowview nke Sistemụ Cacti gị anaghị eji ọdụ ụgbọ mmiri Read-Write Split nke MaxScale gbanyere ugbua."
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "Jiri MaxScale Kesaa Query Shards"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "Ọ bụrụ na ị nwere ọtụtụ ọrụ na-arụ ọrụ dị ka ohu maka MaxScale, ị nwere ike ịbawanye ọsọ nke ajụjụ site n'ikesa ajụjụ ndị yiri onwe ha n'ọtụtụ sava azụ MariaDB."
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "Pọtụ Nkewa Ọgụgụ-Odide MaxScale"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "Nke a kwesịrị ịbụ pọtụ nke ọrụ na rọta Read-Write-Split-Service (readwrite)."
+
+#: setup.php
+msgid "Flowview"
+msgstr "Flowview"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
+
