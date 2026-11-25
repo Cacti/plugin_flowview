@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Brazil) <https://translate.cacti.net/projects/cacti/flowview/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Brazil) <https://translate.cacti.net/projects/cacti/flowview/pt_BR/>\nLanguage: pt-BR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,11 +500,10 @@ msgid "No Matching Entries Found"
 msgstr "Nenhuma entrada correspondente encontrada"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Clique em 'Continuar' para eliminar o(s) seguinte(s) horário(s)."
-msgstr[1] "Clique em 'Continuar' para eliminar o(s) seguinte(s) horário(s)."
+msgstr[0] "Clique em 'Continuar' para excluir a seguinte Entrada de Cache DNS."
+msgstr[1] "Clique em 'Continuar' para excluir todas as seguintes Entradas de Cache DNS."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -1167,7 +1166,7 @@ msgstr "Endereços de e-mail (delimitados por comandos) para onde enviar este Ne
 
 #: flowview_schedules.php setup.php
 msgid "Format File to Use"
-msgstr "Formatar arquivo para usar"
+msgstr "Arquivo de formato a usar"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
@@ -1646,7 +1645,7 @@ msgstr "Resolver Endereços"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Resolver Endereços:"
+msgstr "Resolver endereços IP para nomes de domínio."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -2087,7 +2086,7 @@ msgstr "Exibir o IP/nome DNS pós-NAT (traduzido) em vez dos valores originais"
 
 #: includes/functions.php
 msgid "Timespan"
-msgstr "Adicionar Intervalo de Tempo"
+msgstr "Tempo de duração"
 
 #: includes/functions.php
 msgid "Custom"
@@ -2107,7 +2106,7 @@ msgstr "Seletor de data final"
 
 #: includes/functions.php
 msgid "Shift Time Backward"
-msgstr "Tempo de turnos para trás"
+msgstr "Deslocar Tempo para Trás"
 
 #: includes/functions.php
 msgid "Define Shifting Interval"
@@ -2617,11 +2616,11 @@ msgstr "Selecione o número máximo de processos de relatórios simultâneos que
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Configurações de Proxy da Internet"
+msgstr "Configurações do Proxy de Internet"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "Endereço de Proxy da Internet"
+msgstr "Endereço do Proxy de Internet"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2790,7 +2789,7 @@ msgstr "Diariamente"
 
 #: setup.php
 msgid "Hourly"
-msgstr "Por hora"
+msgstr "De hora em hora"
 
 #: setup.php
 msgid "Storage Engine for Raw Tables"
@@ -2859,7 +2858,7 @@ msgstr "Desativado"
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "%d Tópicos"
+msgstr "%d Threads"
 
 #: setup.php
 msgid "Maximum Run Time"
