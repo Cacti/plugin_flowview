@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -83,7 +83,7 @@ msgstr "對等互連集"
 
 #: flowview_databases.php includes/arrays.php
 msgid "Network"
-msgstr "網路"
+msgstr "網絡"
 
 #: flowview_databases.php
 msgid "Internet Router"
@@ -123,7 +123,7 @@ msgstr "最後修改"
 
 #: flowview_databases.php includes/arrays.php
 msgid "Source"
-msgstr "來源"
+msgstr "資料來源"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -159,7 +159,7 @@ msgstr "MNT較低"
 
 #: flowview_databases.php
 msgid "Country"
-msgstr "國家/地區"
+msgstr "國家"
 
 #: flowview_databases.php
 msgid "Abuse Email"
@@ -199,7 +199,7 @@ msgstr "MNT 參考"
 
 #: flowview_databases.php
 msgid "Members"
-msgstr "成員"
+msgstr "會員"
 
 #: flowview_databases.php
 msgid "MNT Notify"
@@ -493,17 +493,16 @@ msgstr "清除 DNS 快取"
 
 #: flowview_databases.php
 msgid "Not Specified"
-msgstr "未指定外掛"
+msgstr "未指定"
 
 #: flowview_databases.php
 msgid "No Matching Entries Found"
 msgstr "未找到匹配的條目"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "單擊“繼續”以刪除以下計劃。"
+msgstr[0] "按一下「繼續」以刪除下列 DNS 快取項目。"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -694,7 +693,7 @@ msgstr "允許傳送資料至此流量收集器的裝置 IP 位址。若允許�
 
 #: flowview_devices.php includes/arrays.php
 msgid "Port"
-msgstr "連接埠"
+msgstr "端口"
 
 #: flowview_devices.php
 msgid "Port this collector will listen on."
@@ -714,7 +713,7 @@ msgstr "UDP 通訊協定"
 
 #: flowview_devices.php flowview_schedules.php
 msgid "Enabled"
-msgstr "已啟用"
+msgstr "啟用"
 
 #: flowview_devices.php
 msgid "If checked, the Listener service will be started and will wait on incoming data."
@@ -768,7 +767,7 @@ msgstr "版本"
 
 #: flowview_devices.php includes/functions.php
 msgid "Templates"
-msgstr "範本"
+msgstr "模板"
 
 #: flowview_devices.php
 msgid "Last Updated"
@@ -796,7 +795,7 @@ msgstr "全部"
 
 #: flowview_devices.php
 msgid "Template"
-msgstr "範本"
+msgstr "模板"
 
 #: flowview_devices.php
 msgid "Template ID"
@@ -804,7 +803,7 @@ msgstr "範本 ID"
 
 #: flowview_devices.php
 msgid "Field Name"
-msgstr "欄位名稱"
+msgstr "字段名稱"
 
 #: flowview_devices.php includes/functions.php
 msgid "Supported"
@@ -816,7 +815,7 @@ msgstr "欄位 ID"
 
 #: flowview_devices.php
 msgid "Field Type"
-msgstr "欄位類型"
+msgstr "字段類型"
 
 #: flowview_devices.php
 msgid "Length"
@@ -1061,16 +1060,16 @@ msgstr "關閉"
 
 #: flowview_schedules.php
 msgid "Send Now"
-msgstr "立即傳送"
+msgstr "立刻寄出"
 
 #: flowview_schedules.php
 msgid "Every Hour"
-msgstr "每小時"
+msgstr "每隔一小時"
 
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "每 %d 小時"
+msgstr "每個 %d 小時"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1169,7 +1168,7 @@ msgstr "要使用的格式檔案"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "選擇要使用的自訂 HTML 包裝與 CSS 檔案。此檔案包含用於包覆報表的 HTML 與 CSS。若檔案內容不僅止於 CSS，您必須在檔案內放入一個特殊的 <REPORT> 標籤，此格式標籤將會被替換為報表內容。這些檔案位於「formats」目錄中。"
+msgstr "選擇要使用的自定義html包裝器和CSS文件。此文件包含用於包裝報表的html和CSS。如果它不僅包含CSS，那麼您需要放置一個特殊的<REPORT>標籤裡面的文件。此格式標記將替換為報告內容。這些文件位於“formats”目錄中。"
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
@@ -1531,7 +1530,7 @@ msgstr "結束時間"
 
 #: includes/arrays.php
 msgid "Active"
-msgstr "作用中"
+msgstr "啟用"
 
 #: includes/arrays.php
 msgid "B/Pk"
@@ -1592,7 +1591,7 @@ msgstr "已註冊流清單中的流IP位址或主機名。"
 
 #: includes/arrays.php
 msgid "Presets"
-msgstr "預設集"
+msgstr "預設"
 
 #: includes/arrays.php
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
@@ -1692,7 +1691,7 @@ msgstr "樹狀圖"
 
 #: includes/arrays.php
 msgid "Graph Height"
-msgstr "圖表高度"
+msgstr "圖形高度"
 
 #: includes/arrays.php
 msgid "The Graph Height to use by default."
@@ -1935,7 +1934,7 @@ msgstr "一般"
 
 #: includes/functions.php
 msgid "Logs"
-msgstr "日誌"
+msgstr "記錄"
 
 #: includes/functions.php
 msgid "Select a Report Type First"
@@ -2014,7 +2013,7 @@ msgstr "儲存流量篩選器"
 
 #: includes/functions.php
 msgid "Save As"
-msgstr "另存為"
+msgstr "另存新檔"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
@@ -2034,7 +2033,7 @@ msgstr "刪除此流量篩選器"
 
 #: includes/functions.php
 msgid "Report"
-msgstr "報表"
+msgstr "報告"
 
 #: includes/functions.php
 #, php-format
@@ -2085,7 +2084,7 @@ msgstr "顯示 NAT 後（已轉譯）的 IP/DNS 名稱，而非原始值"
 
 #: includes/functions.php
 msgid "Timespan"
-msgstr "時間範圍"
+msgstr "時間跨度"
 
 #: includes/functions.php
 msgid "Custom"
@@ -2105,15 +2104,15 @@ msgstr "結束日期選擇器"
 
 #: includes/functions.php
 msgid "Shift Time Backward"
-msgstr "將時間往回移"
+msgstr "轉移時間倒退"
 
 #: includes/functions.php
 msgid "Define Shifting Interval"
-msgstr "定義偏移間隔"
+msgstr "定義移位間隔"
 
 #: includes/functions.php
 msgid "Shift Time Forward"
-msgstr "將時間往前移"
+msgstr "將時間向前推移"
 
 #: includes/functions.php
 msgid "Graph"
@@ -2121,7 +2120,7 @@ msgstr "圖表"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "橫條"
+msgstr "長條圖"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2141,7 +2140,7 @@ msgstr "顯示/隱藏"
 
 #: includes/functions.php
 msgid "Table"
-msgstr "表格"
+msgstr "資料表"
 
 #: includes/functions.php
 msgid "Export Raw Data"
@@ -2222,7 +2221,7 @@ msgstr "已儲存篩選設定。已在背景啟動此篩選條件的具體化處
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
-msgstr "已儲存篩選設定"
+msgstr "過濾器設置已保存"
 
 #: includes/functions.php
 #, php-format
@@ -2332,7 +2331,7 @@ msgstr "已是最新"
 
 #: includes/functions.php
 msgid "Running"
-msgstr "執行中"
+msgstr "運行"
 
 #: includes/functions.php
 msgid "Required"
@@ -2569,7 +2568,7 @@ msgstr "資料庫"
 
 #: setup.php
 msgid "Normal User"
-msgstr "一般使用者"
+msgstr "普通用戶"
 
 #: setup.php
 msgid "System Administration"
@@ -2603,7 +2602,7 @@ msgstr "%d 個處理程序"
 #: setup.php
 #, php-format
 msgid "%d Processes"
-msgstr "%d 個處理程序"
+msgstr "%d進程"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
@@ -2752,27 +2751,27 @@ msgstr "Cacti 保留分割 Flow 資料表的時間長度。"
 #: setup.php
 #, php-format
 msgid "%d Week"
-msgstr "%d 週"
+msgstr "%d週"
 
 #: setup.php
 #, php-format
 msgid "%d Weeks"
-msgstr "%d 週"
+msgstr "%d週"
 
 #: setup.php
 #, php-format
 msgid "%d Month"
-msgstr "%d 個月"
+msgstr "%d月"
 
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d 個月"
+msgstr "%d個月"
 
 #: setup.php
 #, php-format
 msgid "%d Year"
-msgstr "%d 年"
+msgstr "%d年"
 
 #: setup.php
 msgid "Database Partitioning Scheme"
@@ -2852,7 +2851,7 @@ msgstr "為運行 FlowView 查詢而調度的最大線程數。 請注意，每�
 
 #: setup.php
 msgid "Disabled"
-msgstr "已停用"
+msgstr "停用"
 
 #: setup.php
 #, php-format
