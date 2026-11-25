@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Turkish <https://translate.cacti.net/projects/cacti/flowview/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Turkish <https://translate.cacti.net/projects/cacti/flowview/tr/>\nLanguage: tr-TR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,11 +500,10 @@ msgid "No Matching Entries Found"
 msgstr "Eşleşen Giriş Bulunamadı"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Aşağıdaki Programları silmek için 'Devam Et'i tıklayın."
-msgstr[1] "Aşağıdaki Programları silmek için 'Devam Et'i tıklayın."
+msgstr[0] "Aşağıdaki DNS Önbellek Kaydını silmek için 'Devam Et'e tıklayın."
+msgstr[1] "Aşağıdaki tüm DNS Önbellek Kayıtlarını silmek için 'Devam Et'e tıklayın."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -676,7 +675,7 @@ msgstr "Medhod Koleksiyonu"
 
 #: flowview_devices.php
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr "İki destek toplama yöntemi vardır, birincisi eski akış araçları ikili dosyalarını kullanır ve ikincisi Cacti'nin kendi PHP tabanlı akış akış sunucusundan yararlanır."
+msgstr "İki destek toplama yöntemi vardır, birincisi eski flow-tools ikili dosyalarını kullanır ve ikincisi Cacti'nin kendi PHP tabanlı akış sunucusundan yararlanır."
 
 #: flowview_devices.php
 msgid "Bind to address"
@@ -1525,7 +1524,7 @@ msgstr "Hedef Öneki"
 
 #: includes/arrays.php includes/functions.php
 msgid "Start Time"
-msgstr "Başlama Zamanı"
+msgstr "Başlangıç Zamanı"
 
 #: includes/arrays.php includes/functions.php
 msgid "End Time"
@@ -1646,7 +1645,7 @@ msgstr "Adresleri Çöz"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Adresleri Çöz:"
+msgstr "IP Adreslerini Alan Adlarına Çözümle."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -2107,15 +2106,15 @@ msgstr "Bitiş Tarihi Seçicisi"
 
 #: includes/functions.php
 msgid "Shift Time Backward"
-msgstr "Vardiya Süresi Geri"
+msgstr "Zamanı Geri Kaydır"
 
 #: includes/functions.php
 msgid "Define Shifting Interval"
-msgstr "Vites Değiştirme Aralığını Tanımla"
+msgstr "Kaydırma Aralığını Tanımla"
 
 #: includes/functions.php
 msgid "Shift Time Forward"
-msgstr "Vardiya Süresi İleri"
+msgstr "Zamanı İleri Kaydır"
 
 #: includes/functions.php
 msgid "Graph"
@@ -2617,11 +2616,11 @@ msgstr "Aynı anda çalışabilecek en fazla eşzamanlı rapor işlemini seçin.
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "İnternet Vekil Sunucu (Proxy) Ayarları"
+msgstr "İnternet Proxy Ayarları"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "İnternet Vekil Sunucu (Proxy) Adresi"
+msgstr "İnternet Proxy Adresi"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2859,7 +2858,7 @@ msgstr "Devre dışı"
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "%d Konular"
+msgstr "%d İş Parçacığı"
 
 #: setup.php
 msgid "Maximum Run Time"
