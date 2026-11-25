@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/cacti/flowview/ar_SA/>\nLanguage: ar-SA\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/cacti/flowview/ar_SA/>\nLanguage: ar-SA\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,15 +500,14 @@ msgid "No Matching Entries Found"
 msgstr "لم يتم العثور على إدخالات مطابقة"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "انقر فوق \"متابعة\" لحذف الجدول (الجداول) التالي."
-msgstr[1] "انقر فوق \"متابعة\" لحذف الجدول (الجداول) التالي."
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "انقر فوق 'متابعة' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
+msgstr[1] "انقر فوق 'متابعة' لحذف إدخال ذاكرة التخزين المؤقت لـ DNS التالي."
+msgstr[2] "انقر فوق 'متابعة' لحذف إدخالي ذاكرة التخزين المؤقت لـ DNS التاليين."
+msgstr[3] "انقر فوق 'متابعة' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
+msgstr[4] "انقر فوق 'متابعة' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
+msgstr[5] "انقر فوق 'متابعة' لحذف جميع إدخالات ذاكرة التخزين المؤقت لـ DNS التالية."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -782,7 +781,7 @@ msgstr "القوالب"
 
 #: flowview_devices.php
 msgid "Last Updated"
-msgstr "أخر تحديث"
+msgstr "اخر تحديث"
 
 #: flowview_devices.php
 msgid "Active Streams update every 5 minutes"
@@ -1080,7 +1079,7 @@ msgstr "كل ساعة"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "كل %d ساعة"
+msgstr "كل %d ساعات"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1154,7 +1153,7 @@ msgstr "ما المدة المسموح بها لتنفيذ التقرير قبل
 #: flowview_schedules.php setup.php
 #, php-format
 msgid "%d Minute"
-msgstr "دقيقة %d"
+msgstr "%d دقيقة"
 
 #: flowview_schedules.php setup.php
 #, php-format
@@ -1654,7 +1653,7 @@ msgstr "حل العناوين"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "حل العناوين:"
+msgstr "حل عناوين IP إلى أسماء النطاقات."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1726,7 +1725,7 @@ msgstr "يجب عرض لوحة الجدول افتراضيا."
 
 #: includes/arrays.php
 msgid "Bytes Panel"
-msgstr "بايت بايت"
+msgstr "لوحة البايت"
 
 #: includes/arrays.php
 msgid "Should the Bytes Panel be displayed by default."
@@ -2066,7 +2065,7 @@ msgstr "سطور"
 
 #: includes/functions.php
 msgid "Exclude"
-msgstr "استبعد"
+msgstr "استبعاد"
 
 #: includes/functions.php
 msgid "Top Sample"
@@ -2131,7 +2130,7 @@ msgstr "الرسم البياني"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "شريط"
+msgstr "شريطي"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2151,7 +2150,7 @@ msgstr "اظهر المخفي"
 
 #: includes/functions.php
 msgid "Table"
-msgstr "جدول"
+msgstr "الجدول"
 
 #: includes/functions.php
 msgid "Export Raw Data"
@@ -2186,7 +2185,7 @@ msgstr "أعلى %s مخطط دائري للبايت"
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
-msgstr "أعلى %s مخطط مخطط الشجرة للبايت"
+msgstr "أعلى %s مخطط الشجرة للبايت"
 
 #: includes/functions.php
 #, php-format
@@ -2305,7 +2304,7 @@ msgstr "DNS الجذر للوجهة"
 
 #: includes/functions.php
 msgid "DNS"
-msgstr "خوادم DNS البديلة"
+msgstr "DNS"
 
 #: includes/functions.php
 msgid "Root DNS"
@@ -2613,7 +2612,7 @@ msgstr "%d عملية"
 #: setup.php
 #, php-format
 msgid "%d Processes"
-msgstr "العمليات %d"
+msgstr "%d عمليات"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
@@ -2867,7 +2866,7 @@ msgstr "معطل"
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "%d المواضيع"
+msgstr "%d مؤشرات ترابط"
 
 #: setup.php
 msgid "Maximum Run Time"
@@ -2893,7 +2892,7 @@ msgstr "%d د ساعات"
 #: setup.php
 #, php-format
 msgid "%d Day"
-msgstr "يوم %d"
+msgstr "%d يوم"
 
 #: setup.php
 #, php-format
