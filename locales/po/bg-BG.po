@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Bulgarian <https://translate.cacti.net/projects/cacti/flowview/bg/>\nLanguage: bg-BG\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Bulgarian <https://translate.cacti.net/projects/cacti/flowview/bg/>\nLanguage: bg-BG\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,11 +500,10 @@ msgid "No Matching Entries Found"
 msgstr "Не са намерени съвпадащи записи"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Кликнете върху „Напред“, за да изтриете следните графици."
-msgstr[1] "Кликнете върху „Напред“, за да изтриете следните графици."
+msgstr[0] "Щракнете върху „Продължи“, за да изтриете следния запис в DNS кеша."
+msgstr[1] "Щракнете върху „Продължи“, за да изтриете всички следни записи в DNS кеша."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -774,7 +773,7 @@ msgstr "Шаблони"
 
 #: flowview_devices.php
 msgid "Last Updated"
-msgstr "Последно актуализирано"
+msgstr "Последно обновено"
 
 #: flowview_devices.php
 msgid "Active Streams update every 5 minutes"
@@ -1258,7 +1257,7 @@ msgstr "Дата на изпращане"
 
 #: flowview_schedules.php
 msgid "Run Time"
-msgstr "Време за изпълнение"
+msgstr "Време на изпълнение"
 
 #: flowview_schedules.php
 msgid "Download Data"
@@ -1525,7 +1524,7 @@ msgstr "Целеви префикс"
 
 #: includes/arrays.php includes/functions.php
 msgid "Start Time"
-msgstr "Начален час"
+msgstr "Начално време"
 
 #: includes/arrays.php includes/functions.php
 msgid "End Time"
@@ -1646,7 +1645,7 @@ msgstr "Разрешаване на адреси"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Разрешаване на адреси:"
+msgstr "Разрешаване на IP адреси до имена на домейни."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1814,7 +1813,7 @@ msgstr "Интерфейс за достъп"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr "Филтрирайте върху избрания интерфейс за дестинация във във Филтъра. Това може да бъде списък с интерфейси за дестимиране, разделен със запетая."
+msgstr "Филтрирайте върху избрания интерфейс за дестинация във Филтъра. Това може да бъде списък с интерфейси за дестинация, разделен със запетая."
 
 #: includes/arrays.php includes/functions.php
 msgid "Dest AS"
@@ -1984,7 +1983,7 @@ msgstr "Изберете филтър"
 
 #: includes/functions.php
 msgid "Apply Filter"
-msgstr "Прилагане на филтър"
+msgstr "Приложи филтъра"
 
 #: includes/functions.php
 msgid "Clear Filter"
@@ -2016,7 +2015,7 @@ msgstr "Запазване на филтъра за потоци"
 
 #: includes/functions.php
 msgid "Save As"
-msgstr "Запис като"
+msgstr "Запазване като"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
@@ -2123,7 +2122,7 @@ msgstr "Графика"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "Бар"
+msgstr "Стълбовидна"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2591,7 +2590,7 @@ msgstr "Запази"
 
 #: setup.php
 msgid "(edit)"
-msgstr "Редактиране..."
+msgstr "(Редактирай)"
 
 #: setup.php
 msgid "(actions)"
@@ -2790,7 +2789,7 @@ msgstr "Ежедневно"
 
 #: setup.php
 msgid "Hourly"
-msgstr "Почасово"
+msgstr "На всеки час"
 
 #: setup.php
 msgid "Storage Engine for Raw Tables"
@@ -2854,12 +2853,12 @@ msgstr "Максималният брой нишки, които ще бъдат
 
 #: setup.php
 msgid "Disabled"
-msgstr "деактивиран"
+msgstr "Изключен"
 
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "%d Теми"
+msgstr "%d нишки"
 
 #: setup.php
 msgid "Maximum Run Time"
