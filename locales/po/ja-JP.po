@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/flowview/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/flowview/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,10 +500,9 @@ msgid "No Matching Entries Found"
 msgstr "一致するエントリが見つかりません"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "次のスケジュールを削除するには、[続行]をクリックしてください。"
+msgstr[0] "「続行」をクリックして、次の DNS キャッシュエントリを削除します。"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -534,7 +533,7 @@ msgstr "未承認"
 
 #: flowview_databases.php
 msgid "Purge"
-msgstr "粛清"
+msgstr "パージ"
 
 #: flowview_databases.php includes/arrays.php
 msgid "IP Address"
@@ -1070,7 +1069,7 @@ msgstr "1時間ごと"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "%d時間ごと"
+msgstr "%d 時間ごと"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -2014,7 +2013,7 @@ msgstr "フローフィルタを保存"
 
 #: includes/functions.php
 msgid "Save As"
-msgstr "保存する"
+msgstr "名前を付けて保存"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
@@ -2056,7 +2055,7 @@ msgstr "直線"
 
 #: includes/functions.php
 msgid "Exclude"
-msgstr "除外する"
+msgstr "除外"
 
 #: includes/functions.php
 msgid "Top Sample"
@@ -2788,7 +2787,7 @@ msgstr "毎日"
 
 #: setup.php
 msgid "Hourly"
-msgstr "一時間ごと"
+msgstr "毎時"
 
 #: setup.php
 msgid "Storage Engine for Raw Tables"
