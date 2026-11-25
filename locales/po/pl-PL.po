@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Polish <https://translate.cacti.net/projects/cacti/flowview/pl/>\nLanguage: pl-PL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Polish <https://translate.cacti.net/projects/cacti/flowview/pl/>\nLanguage: pl-PL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -475,7 +475,7 @@ msgstr "Idź"
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php
 msgid "Set/Refresh Filters"
-msgstr "Ustaw / odśwież filtry"
+msgstr "Ustawianie/odświeżanie filtrów"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -500,12 +500,11 @@ msgid "No Matching Entries Found"
 msgstr "Nie znaleziono pasujących wpisów"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Kliknąć 'Kontynuuj', aby usunąć następujący(-e) harmonogram(y)."
-msgstr[1] "Kliknąć 'Kontynuuj', aby usunąć następujący(-e) harmonogram(y)."
-msgstr[2] "Kliknąć 'Kontynuuj', aby usunąć następujący(-e) harmonogram(y)."
+msgstr[0] "Kliknij „Kontynuuj”, aby usunąć następujący wpis pamięci podręcznej DNS."
+msgstr[1] "Kliknij „Kontynuuj”, aby usunąć wszystkie następujące wpisy pamięci podręcznej DNS."
+msgstr[2] "Kliknij „Kontynuuj”, aby usunąć wszystkie następujące wpisy pamięci podręcznej DNS."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -1153,7 +1152,7 @@ msgstr "%d minuta"
 #: flowview_schedules.php setup.php
 #, php-format
 msgid "%d Minutes"
-msgstr "%d Minuty"
+msgstr "%d minut"
 
 #: flowview_schedules.php
 msgid "Legacy Email Settings"
@@ -1181,11 +1180,11 @@ msgstr "Ustawienia listy powiadomień"
 
 #: flowview_schedules.php
 msgid "Notification List"
-msgstr "Lista powiadomień"
+msgstr "Powiadomienia"
 
 #: flowview_schedules.php
 msgid "If the Thold Plugin is installed, you may select a Notification List"
-msgstr "Jeśli wtyczka Thold jest zainstalowana, możesz wybrać listę powiadomień."
+msgstr "Jeśli wtyczka Thold jest zainstalowana, możesz wybrać listę powiadomień"
 
 #: flowview_schedules.php
 msgid "The Report will arrive once complete."
@@ -1475,7 +1474,7 @@ msgstr "Bez limitu"
 #: includes/arrays.php
 #, php-format
 msgid "%s Bytes"
-msgstr "%s Bajty"
+msgstr "%s bajtów"
 
 #: includes/arrays.php
 msgid "Source Domain"
@@ -1648,7 +1647,7 @@ msgstr "Rozwiąż adresy"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Rozwiąż adresy:"
+msgstr "Rozwiąż adresy IP na nazwy domen."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1952,7 +1951,7 @@ msgstr "Filtr: [edytuj: %s]"
 
 #: includes/functions.php
 msgid "Filter: [new]"
-msgstr "Raport: nowy] [nowy]"
+msgstr "Filtr: [nowy]"
 
 #: includes/functions.php
 msgid "Cached Results Affected"
@@ -2060,7 +2059,7 @@ msgstr "Linie"
 
 #: includes/functions.php
 msgid "Exclude"
-msgstr "Pomiń"
+msgstr "Wyklucz"
 
 #: includes/functions.php
 msgid "Top Sample"
@@ -2125,7 +2124,7 @@ msgstr "Wykres"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "Pasek"
+msgstr "Słupkowy"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2771,7 +2770,7 @@ msgstr "%d miesiąc"
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d miesiące"
+msgstr "%d miesięcy"
 
 #: setup.php
 #, php-format
