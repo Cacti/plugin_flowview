@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Korean <https://translate.cacti.net/projects/cacti/flowview/ko/>\nLanguage: ko-KR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Korean <https://translate.cacti.net/projects/cacti/flowview/ko/>\nLanguage: ko-KR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,10 +500,9 @@ msgid "No Matching Entries Found"
 msgstr "일치하는 항목을 찾을 수 없습니다"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "다음 일정을 삭제하려면 '계속'을 클릭하십시오."
+msgstr[0] "다음 DNS 캐시 항목을 삭제하려면 '계속'을 클릭하십시오."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -1210,7 +1209,7 @@ msgstr "하나 이상의 일정을 선택해야합니다."
 #: flowview_schedules.php
 #, php-format
 msgid "Unable to find Report Raw Data for Report ID %s"
-msgstr "보고서 ID %s에 대한 보고서 원시 데이터를 찾을 수 없습니다."
+msgstr "보고서 ID %s에 대한 보고서 원시 데이터를 찾을 수 없습니다"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
@@ -1644,7 +1643,7 @@ msgstr "주소 해결 :"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "주소 해결 :"
+msgstr "IP 주소를 도메인 이름으로 확인합니다."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -2121,7 +2120,7 @@ msgstr "그래프"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "Bar"
+msgstr "막대"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2603,7 +2602,7 @@ msgstr "프로세스 %d개"
 #: setup.php
 #, php-format
 msgid "%d Processes"
-msgstr "프로세스 %d개"
+msgstr "%d개 프로세스"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
@@ -2788,7 +2787,7 @@ msgstr "매일"
 
 #: setup.php
 msgid "Hourly"
-msgstr "매시간 마다"
+msgstr "매시간"
 
 #: setup.php
 msgid "Storage Engine for Raw Tables"
@@ -2852,12 +2851,12 @@ msgstr "FlowView 쿼리를 실행하기 위해 디스패치될 최대 스레드 
 
 #: setup.php
 msgid "Disabled"
-msgstr "비활성화됨"
+msgstr "비활성화"
 
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "스레드 %d 개"
+msgstr "%d개 스레드"
 
 #: setup.php
 msgid "Maximum Run Time"
