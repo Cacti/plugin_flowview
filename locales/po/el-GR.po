@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Greek <https://translate.cacti.net/projects/cacti/flowview/el/>\nLanguage: el-GR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Greek <https://translate.cacti.net/projects/cacti/flowview/el/>\nLanguage: el-GR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -493,18 +493,17 @@ msgstr "Εκκαθάριση της προσωρινής μνήμης DNS"
 
 #: flowview_databases.php
 msgid "Not Specified"
-msgstr "Δεν προσδιορίζεται"
+msgstr "Δεν καθορίστηκε"
 
 #: flowview_databases.php
 msgid "No Matching Entries Found"
 msgstr "Δεν βρέθηκαν αντίστοιχες καταχωρήσεις"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τα παρακάτω χρονοδιαγράμματα."
-msgstr[1] "Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαγράψετε τα παρακάτω χρονοδιαγράμματα."
+msgstr[0] "Κάντε κλικ στο 'Συνέχεια' για να διαγράψετε την ακόλουθη καταχώριση προσωρινής μνήμης DNS."
+msgstr[1] "Κάντε κλικ στο 'Συνέχεια' για να διαγράψετε όλες τις ακόλουθες καταχωρίσεις προσωρινής μνήμης DNS."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -676,7 +675,7 @@ msgstr "Συλλογή Medhod"
 
 #: flowview_devices.php
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr "Υπάρχουν δύο μέθοδοι συλλογής υποστήριξης, η πρώτη χρησιμοποιεί τα δυαδικά εργαλεία ροής-εργαλείων παλαιού τύπου και η δεύτερη αξιοποιεί τον διακομιστή ροής ροής που βασίζεται στην PHP της Cacti."
+msgstr "Υπάρχουν δύο μέθοδοι συλλογής υποστήριξης, η πρώτη χρησιμοποιεί τα παλαιού τύπου δυαδικά αρχεία flow-tools και η δεύτερη αξιοποιεί τον διακομιστή ροής δεδομένων που βασίζεται στην PHP της Cacti."
 
 #: flowview_devices.php
 msgid "Bind to address"
@@ -997,7 +996,7 @@ msgstr "Ακροατής"
 
 #: flowview_filters.php includes/arrays.php
 msgid "Report Type"
-msgstr "Είδος Αναφοράς"
+msgstr "Τύπος αναφοράς"
 
 #: flowview_filters.php
 msgid "NAT Shards"
@@ -1646,7 +1645,7 @@ msgstr "Επίλυση διευθύνσεων"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Επίλυση διευθύνσεων:"
+msgstr "Επίλυση διευθύνσεων IP σε ονόματα τομέα."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1714,7 +1713,7 @@ msgstr "Πίνακας"
 
 #: includes/arrays.php
 msgid "Should the Table Panel be displayed by default."
-msgstr "Θα πρέπει ο πίνακας πίνακα πίνακα να εμφανίζεται από προεπιλογή."
+msgstr "Θα πρέπει το πλαίσιο πίνακα να εμφανίζεται από προεπιλογή."
 
 #: includes/arrays.php
 msgid "Bytes Panel"
@@ -2591,7 +2590,7 @@ msgstr "Αποθήκευση"
 
 #: setup.php
 msgid "(edit)"
-msgstr "(επεξεργασία)"
+msgstr "(Eπεξεργασία)"
 
 #: setup.php
 msgid "(actions)"
@@ -2790,7 +2789,7 @@ msgstr "Καθημερινά"
 
 #: setup.php
 msgid "Hourly"
-msgstr "Aνά ώρα"
+msgstr "Ωριαία"
 
 #: setup.php
 msgid "Storage Engine for Raw Tables"
