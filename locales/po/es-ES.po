@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Spanish <https://translate.cacti.net/projects/cacti/flowview/es/>\nLanguage: es-ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Spanish <https://translate.cacti.net/projects/cacti/flowview/es/>\nLanguage: es-ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -123,7 +123,7 @@ msgstr "Ultima modificación"
 
 #: flowview_databases.php includes/arrays.php
 msgid "Source"
-msgstr "Fuente"
+msgstr "Origen"
 
 #: flowview_databases.php
 msgid "Registration Date"
@@ -500,11 +500,10 @@ msgid "No Matching Entries Found"
 msgstr "No se encontraron entradas coincidentes"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Haga clic en'Continuar' para eliminar el siguiente Horario(s)."
-msgstr[1] "Haga clic en'Continuar' para eliminar el siguiente Horario(s)."
+msgstr[0] "Haga clic en 'Continuar' para eliminar la siguiente entrada de caché DNS."
+msgstr[1] "Haga clic en 'Continuar' para eliminar todas las siguientes entradas de caché DNS."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -548,7 +547,7 @@ msgstr "Esta es la dirección IP de la entrada de caché."
 
 #: flowview_databases.php
 msgid "DNS Hostname"
-msgstr "El nombre de equipo DNS o dirección IP del servidor."
+msgstr "Nombre de equipo DNS"
 
 #: flowview_databases.php
 msgid "The DNS Name assigned to the IP Address."
@@ -1646,7 +1645,7 @@ msgstr "Resolver direcciones"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Resolver direcciones:"
+msgstr "Resolver direcciones IP a nombres de dominio."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1924,12 +1923,12 @@ msgstr "Cacti %s"
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
-msgstr "El informe '%s' del origen %s con ID %s está programado para ejecutarse."
+msgstr "¡El informe '%s' del origen %s con ID %s está programado para ejecutarse!"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
-msgstr "El informe '%s' del origen %s con ID %s no se programó para ejecutarse debido a un error."
+msgstr "¡El informe '%s' del origen %s con ID %s no se programó para ejecutarse debido a un error!"
 
 #: includes/functions.php
 msgid "General"
@@ -2123,7 +2122,7 @@ msgstr "Gráfico"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "Barra"
+msgstr "Barras"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2178,7 +2177,7 @@ msgstr "Gráfico circular de bytes de los %s principales"
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
-msgstr "Gráfico de %s de rectángulos de bytes"
+msgstr "Gráfico de rectángulos de los %s principales de bytes"
 
 #: includes/functions.php
 #, php-format
