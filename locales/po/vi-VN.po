@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Vietnamese <https://translate.cacti.net/projects/cacti/flowview/vi/>\nLanguage: vi-VN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Vietnamese <https://translate.cacti.net/projects/cacti/flowview/vi/>\nLanguage: vi-VN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -493,17 +493,16 @@ msgstr "Xóa bộ nhớ cache DNS"
 
 #: flowview_databases.php
 msgid "Not Specified"
-msgstr "Không được chỉ định"
+msgstr "Không xác định"
 
 #: flowview_databases.php
 msgid "No Matching Entries Found"
 msgstr "Không tìm thấy mục nhập phù hợp"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Nhấp vào 'Tiếp tục' để xóa (các) Lịch biểu sau."
+msgstr[0] "Nhấp vào 'Tiếp tục' để xóa (các) Mục bộ nhớ đệm DNS sau."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -674,7 +673,7 @@ msgstr "Bộ sưu tập Medhod"
 
 #: flowview_devices.php
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr "Có hai phương pháp thu thập hỗ trợ, phương pháp thứ nhất sử dụng các mã nhị phân luồng công cụ kế thừa và phương pháp thứ hai tận dụng máy chủ luồng luồng dựa trên PHP của riêng Cacti."
+msgstr "Có hai phương pháp thu thập hỗ trợ, phương pháp thứ nhất sử dụng các mã nhị phân flow-tools kế thừa và phương pháp thứ hai tận dụng máy chủ luồng dữ liệu dựa trên PHP của riêng Cacti."
 
 #: flowview_devices.php
 msgid "Bind to address"
@@ -772,7 +771,7 @@ msgstr "Giao diện"
 
 #: flowview_devices.php
 msgid "Last Updated"
-msgstr "Cập nhật mới nhất"
+msgstr "Cập nhật Cuối cùng"
 
 #: flowview_devices.php
 msgid "Active Streams update every 5 minutes"
@@ -800,7 +799,7 @@ msgstr "Mẫu"
 
 #: flowview_devices.php
 msgid "Template ID"
-msgstr "Mã ID mẫu, template"
+msgstr "ID mẫu"
 
 #: flowview_devices.php
 msgid "Field Name"
@@ -1644,7 +1643,7 @@ msgstr "Giải quyết các địa chỉ"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Giải quyết các địa chỉ:"
+msgstr "Phân giải địa chỉ IP thành tên miền."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1692,7 +1691,7 @@ msgstr "Biểu đồ cây"
 
 #: includes/arrays.php
 msgid "Graph Height"
-msgstr "Chiều cao biểu đồ"
+msgstr "Chiều cao đồ thị"
 
 #: includes/arrays.php
 msgid "The Graph Height to use by default."
@@ -2121,7 +2120,7 @@ msgstr "Biểu đồ"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "Bar"
+msgstr "Biểu đồ cột"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2589,7 +2588,7 @@ msgstr "Lưu"
 
 #: setup.php
 msgid "(edit)"
-msgstr "(chinnhr sửa)"
+msgstr "(Sửa)"
 
 #: setup.php
 msgid "(actions)"
@@ -2852,12 +2851,12 @@ msgstr "Số lượng luồng tối đa sẽ được gửi đi để chạy cá
 
 #: setup.php
 msgid "Disabled"
-msgstr "đã vô hiệu hóa"
+msgstr "Vô hiệu hóa"
 
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "%d Chủ đề"
+msgstr "%d luồng"
 
 #: setup.php
 msgid "Maximum Run Time"
