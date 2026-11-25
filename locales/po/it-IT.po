@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/flowview/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/flowview/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -475,7 +475,7 @@ msgstr "Vai"
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php
 msgid "Set/Refresh Filters"
-msgstr "Impostazione/Rifresh Filtri"
+msgstr "Imposta/Aggiorna filtri"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -500,11 +500,10 @@ msgid "No Matching Entries Found"
 msgstr "Nessuna voce corrispondente trovata"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Fare clic su \"Continua\" per eliminare il seguente/i Programma(i)."
-msgstr[1] "Fare clic su \"Continua\" per eliminare il seguente/i Programma(i)."
+msgstr[0] "Fare clic su \"Continua\" per eliminare la seguente voce della cache DNS."
+msgstr[1] "Fare clic su \"Continua\" per eliminare tutte le seguenti voci della cache DNS."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -997,7 +996,7 @@ msgstr "Ascoltatore"
 
 #: flowview_filters.php includes/arrays.php
 msgid "Report Type"
-msgstr "Tipo di Rapporto"
+msgstr "Tipo di report"
 
 #: flowview_filters.php
 msgid "NAT Shards"
@@ -1473,7 +1472,7 @@ msgstr "Nessun limite"
 #: includes/arrays.php
 #, php-format
 msgid "%s Bytes"
-msgstr "%s Bytes"
+msgstr "%s Byte"
 
 #: includes/arrays.php
 msgid "Source Domain"
@@ -1646,7 +1645,7 @@ msgstr "Risolvere Indirizzi"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Risolvere Indirizzi:"
+msgstr "Risolvere gli indirizzi IP in nomi di dominio."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -2016,7 +2015,7 @@ msgstr "Salva il filtro flussi"
 
 #: includes/functions.php
 msgid "Save As"
-msgstr "Salva come"
+msgstr "Salva con nome"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
@@ -2123,7 +2122,7 @@ msgstr "Grafico"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "Barra"
+msgstr "Barre"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2591,7 +2590,7 @@ msgstr "Salva"
 
 #: setup.php
 msgid "(edit)"
-msgstr "(modificare)"
+msgstr "(Modifica)"
 
 #: setup.php
 msgid "(actions)"
@@ -2625,7 +2624,7 @@ msgstr "Inserisci l'indirizzo del sito"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr "Per i servizi principali di Cacti o i plugin che richiedono l'accesso a Internet, inserire qui il server proxy e la porta nel formato IP:PORTA.  Ad esempio 192.168.1.1:8080."
+msgstr "Per i servizi principali di Cacti o i plugin che richiedono l'accesso a Internet, inserisci qui il server proxy e la porta nel formato IP:PORTA. Ad esempio 192.168.1.1:8080."
 
 #: setup.php
 msgid "Internet Proxy User"
