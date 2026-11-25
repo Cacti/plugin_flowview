@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/flowview/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/flowview/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,12 +500,11 @@ msgid "No Matching Entries Found"
 msgstr "Совпадающие записи не найдены"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "Нажмите кнопку \"Продолжить\", чтобы удалить следующие Расписания."
-msgstr[1] "Нажмите кнопку \"Продолжить\", чтобы удалить следующие Расписания."
-msgstr[2] "Нажмите кнопку \"Продолжить\", чтобы удалить следующие Расписания."
+msgstr[0] "Нажмите «Продолжить», чтобы удалить следующую запись кэша DNS."
+msgstr[1] "Нажмите «Продолжить», чтобы удалить все следующие записи кэша DNS."
+msgstr[2] "Нажмите «Продолжить», чтобы удалить все следующие записи кэша DNS."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -1353,7 +1352,7 @@ msgstr "IP-адрес источника/назначения"
 
 #: includes/arrays.php
 msgid "UDP/TCP Destination Port"
-msgstr "UDP/TCP Порт назначения назначения"
+msgstr "UDP/TCP Порт назначения"
 
 #: includes/arrays.php
 msgid "UDP/TCP Source Port"
@@ -1527,7 +1526,7 @@ msgstr "Префикс пункта назначения"
 
 #: includes/arrays.php includes/functions.php
 msgid "Start Time"
-msgstr "Время начала"
+msgstr "Время запуска"
 
 #: includes/arrays.php includes/functions.php
 msgid "End Time"
@@ -1535,7 +1534,7 @@ msgstr "Время окончания"
 
 #: includes/arrays.php
 msgid "Active"
-msgstr "Активный"
+msgstr "Активно"
 
 #: includes/arrays.php
 msgid "B/Pk"
@@ -1648,7 +1647,7 @@ msgstr "Урегулировать адреса"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "Урегулировать адреса:"
+msgstr "Разрешать IP-адреса в доменные имена."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -2125,7 +2124,7 @@ msgstr "График"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "Бар"
+msgstr "Столбчатая"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2761,7 +2760,7 @@ msgstr "%d Неделя"
 #: setup.php
 #, php-format
 msgid "%d Weeks"
-msgstr "%d Недели"
+msgstr "%d нед."
 
 #: setup.php
 #, php-format
@@ -2771,7 +2770,7 @@ msgstr "%d Месяц"
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d Месяца"
+msgstr "%d мес."
 
 #: setup.php
 #, php-format
@@ -2792,7 +2791,7 @@ msgstr "Ежедневно"
 
 #: setup.php
 msgid "Hourly"
-msgstr "Каждый час"
+msgstr "Ежечасно"
 
 #: setup.php
 msgid "Storage Engine for Raw Tables"
@@ -2856,7 +2855,7 @@ msgstr "Максимальное количество потоков, котор
 
 #: setup.php
 msgid "Disabled"
-msgstr "отключено"
+msgstr "Выключен"
 
 #: setup.php
 #, php-format
