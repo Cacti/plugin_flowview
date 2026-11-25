@@ -4,31 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-23 16:08-0400\n"
-"PO-Revision-Date: 2024-11-22 02:12+0000\n"
-"Last-Translator: Nakayama Kito <nakayamakito@icloud.com>\n"
-"Language-Team: Japanese <http://translate.cacti.net/projects/cacti/flowview/ja/>\n"
-"Language: ja-JP\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.8.1\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/flowview/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
-msgstr ""
+msgstr "エクスポート用の生データが見つかりません"
 
 #: flowview.php
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
-msgstr ""
+msgstr "指定された FlowView クエリは存在しません。有効なクエリを指定して送信してください。"
 
 #: flowview.php
 msgid "Invalid source Query provided.  Please submit with a valid query."
-msgstr ""
+msgstr "無効なソースクエリが指定されました。有効なクエリを送信してください。"
 
 #: flowview.php
 #, php-format
@@ -58,9 +46,8 @@ msgid "Authorized Agent Details"
 msgstr "認定エージェントの詳細"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "No Details Found"
-msgstr "DNS キャッシュ エントリが見つかりませんでした"
+msgstr "詳細が見つかりません"
 
 #: flowview_databases.php
 msgid "CIDR/Route"
@@ -76,7 +63,7 @@ msgstr "ASブロック"
 
 #: flowview_databases.php
 msgid "AS Set"
-msgstr "未設定"
+msgstr "AS セット"
 
 #: flowview_databases.php
 msgid "Route Set"
@@ -100,7 +87,7 @@ msgstr "ネットワーク"
 
 #: flowview_databases.php
 msgid "Internet Router"
-msgstr "インターネット制御"
+msgstr "インターネットルーター"
 
 #: flowview_databases.php
 msgid "Incident Response Team"
@@ -228,7 +215,7 @@ msgstr "MNTルート"
 
 #: flowview_databases.php
 msgid "Member of"
-msgstr "メンバー: "
+msgstr "メンバー:"
 
 #: flowview_databases.php
 msgid "Updates Email"
@@ -248,7 +235,7 @@ msgstr "MNT Irt"
 
 #: flowview_databases.php
 msgid "MP Members"
-msgstr "AS番号"
+msgstr "MP メンバー"
 
 #: flowview_databases.php
 msgid "Sub Domain"
@@ -256,7 +243,7 @@ msgstr "サブ ドメイン"
 
 #: flowview_databases.php
 msgid "Pingable"
-msgstr "有効"
+msgstr "Ping 可能"
 
 #: flowview_databases.php
 msgid "Alias"
@@ -332,7 +319,7 @@ msgstr "割り当てサイズ"
 
 #: flowview_databases.php
 msgid "Export Comps"
-msgstr "レポート"
+msgstr "エクスポートコンポーネント"
 
 #: flowview_databases.php
 msgid "RS In"
@@ -400,12 +387,11 @@ msgstr "オリジンAS"
 
 #: flowview_databases.php
 msgid "MP Export"
-msgstr "レポート"
+msgstr "MP エクスポート"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Encryption"
-msgstr "有効期限"
+msgstr "暗号化"
 
 #: flowview_databases.php
 msgid "Geo Feed"
@@ -421,7 +407,7 @@ msgstr "インタフェース"
 
 #: flowview_databases.php
 msgid "Export Via"
-msgstr "レポート"
+msgstr "エクスポート方法"
 
 #: flowview_databases.php
 msgid "Trouble"
@@ -449,7 +435,7 @@ msgstr "署名"
 
 #: flowview_databases.php
 msgid "Geo Location"
-msgstr "ローテーション"
+msgstr "ジオロケーション"
 
 #: flowview_databases.php
 msgid "Local AS"
@@ -536,7 +522,7 @@ msgstr[0] "DNS エントリの削除"
 
 #: flowview_databases.php
 msgid "Flowview DNS Cache Entries"
-msgstr "FlowViewスケジュール"
+msgstr "Flowview DNS キャッシュエントリ"
 
 #: flowview_databases.php
 msgid "Verified"
@@ -608,7 +594,7 @@ msgstr "DNS キャッシュ エントリが見つかりませんでした"
 
 #: flowview_databases.php
 msgid "Flowview Internet Routes"
-msgstr "FlowViewリスナー"
+msgstr "Flowview インターネットルート"
 
 #: flowview_databases.php
 msgid "IP Version"
@@ -632,7 +618,7 @@ msgstr "これは、公開されているインターネットルートです。
 
 #: flowview_databases.php
 msgid "AS Number"
-msgstr "ポート番号"
+msgstr "AS 番号"
 
 #: flowview_databases.php
 msgid "The Autonomous System Number for the route."
@@ -643,9 +629,8 @@ msgid "Route Description"
 msgstr "ルートの説明"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "The Description logged by the Route Maintainer."
-msgstr "ルートメンテナによって記録された説明。"
+msgstr "ルートメンテナーによって記録された説明。"
 
 #: flowview_databases.php
 msgid "The source database used to publish the route."
@@ -681,7 +666,7 @@ msgstr "リスナー"
 
 #: flowview_devices.php
 msgid "Name of the device to be displayed."
-msgstr "表示されるデバイスの名前"
+msgstr "表示されるデバイスの名前。"
 
 #: flowview_devices.php
 msgid "Collection Method"
@@ -693,20 +678,19 @@ msgstr "2つのサポート収集方法があります。1つはレガシーフ�
 
 #: flowview_devices.php
 msgid "Bind to address"
-msgstr ""
+msgstr "バインド先アドレス"
 
 #: flowview_devices.php
 msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
-msgstr ""
+msgstr "Cacti サーバーに複数の IP アドレスがある場合、特定のインターフェースを指定できます。プライマリインターフェースを使用する場合は 0.0.0.0 のままにしてください。"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Allowed Host Range"
-msgstr "許可されたホスト"
+msgstr "許可されたホスト範囲"
 
 #: flowview_devices.php
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
-msgstr ""
+msgstr "このフローコレクターへの送信を許可するデバイスの IP アドレスです。すべてのホストを許可する場合は 0.0.0.0 のままにしてください。PHP は許可する形式に厳密である点に注意してください。192.168.1.0 や 192.168.1.0/24 などの CIDR 構文および範囲構文がサポートされています。特定の IP アドレスを指定する場合はカンマで区切ってください。"
 
 #: flowview_devices.php includes/arrays.php
 msgid "Port"
@@ -722,11 +706,11 @@ msgstr "プロトコル"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
-msgstr "フィルタに使用するリスナー。"
+msgstr "このリスナーで使用する IP プロトコル。"
 
 #: flowview_devices.php
 msgid "UDP Protocol"
-msgstr "IPプロトコル"
+msgstr "UDP プロトコル"
 
 #: flowview_devices.php flowview_schedules.php
 msgid "Enabled"
@@ -734,31 +718,28 @@ msgstr "有効"
 
 #: flowview_devices.php
 msgid "If checked, the Listener service will be started and will wait on incoming data."
-msgstr ""
+msgstr "チェックすると、リスナーサービスが開始され、受信データを待機します。"
 
 #: flowview_devices.php
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
-msgstr "デバイス ID:%s とテンプレート ID:%s のフロー テンプレートが見つかりませんでした。"
+msgstr "デバイス ID:%s とテンプレート ID:%s のフロー テンプレートが見つかりませんでした"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "[続行]をクリックして、次のNet-Flow Listenersを削除します。その後、Flow-Capture Serviceを再起動する必要があります。"
+msgstr "「続行」をクリックして、次の NetFlow リスナーを削除します。その後、Cacti は Flow-Capture サービスの再起動を試みます。"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "[続行]をクリックして、次のNet-Flow Listenersを削除します。その後、Flow-Capture Serviceを再起動する必要があります。"
+msgstr "「続行」をクリックして、次の NetFlow リスナーを有効にします。その後、Cacti は Flow-Capture サービスの再起動を試みます。"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "You must select at least one Listener."
-msgstr "少なくとも1つのデバイスを選択する必要があります。"
+msgstr "少なくとも1つのリスナーを選択する必要があります。"
 
 #: flowview_devices.php
 msgid "The listener port must be a numeric value between 1 and 65535."
-msgstr ""
+msgstr "リスナーポートは 1 から 65535 までの数値である必要があります。"
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
@@ -862,9 +843,8 @@ msgid "Method"
 msgstr "方法"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Bind address"
-msgstr "IPアドレス"
+msgstr "バインドアドレス"
 
 #: flowview_devices.php
 msgid "Allowed From"
@@ -880,11 +860,11 @@ msgstr "リスナー ポートで実際に観察されたポート セキュリ�
 
 #: flowview_devices.php
 msgid "Backlog"
-msgstr ""
+msgstr "バックログ"
 
 #: flowview_devices.php
 msgid "The Size of the UDP backlog in bytes."
-msgstr ""
+msgstr "UDP バックログのサイズ (バイト単位) です。"
 
 #: flowview_devices.php
 msgid "Streams"
@@ -911,9 +891,8 @@ msgid "None"
 msgstr "なし"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "No Connections"
-msgstr "ローテーション"
+msgstr "接続なし"
 
 #: flowview_devices.php includes/arrays.php includes/functions.php
 msgid "N/A"
@@ -921,42 +900,42 @@ msgstr "該当なし"
 
 #: flowview_devices.php
 msgid "Cacti"
-msgstr "サボテン"
+msgstr "Cacti"
 
 #: flowview_devices.php
 msgid "No Flowview Listeners"
-msgstr "FlowViewリスナー"
+msgstr "Flowview リスナーがありません"
 
 #: flowview_filters.php
 msgid "Materialize"
-msgstr ""
+msgstr "マテリアライズ"
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
-msgstr ""
+msgstr "フィルターのキャッシュキーを特定できなかったため、何も削除されませんでした。"
 
 #: flowview_filters.php
 #, php-format
 msgid "Pruned %s cached shard(s) that did not match any Filter."
-msgstr ""
+msgstr "フィルターに一致しない %s 個のキャッシュされたシャードを整理しました。"
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "%d 個のフィルターのマテリアライズをバックグラウンドで開始しました。%d 個のフィルターはすでにマテリアライズ中です。結果は Cacti ログに報告されます。"
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "%d 個のフィルターのマテリアライズをバックグラウンドで開始しました。結果は Cacti ログに報告されます。"
 
 #: flowview_filters.php
 msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
-msgstr ""
+msgstr "選択されたフィルターはすでにマテリアライズ中です。完了後に再試行してください。"
 
 #: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
-msgstr "次のスケジュールを削除するには、[続行]をクリックしてください。"
+msgstr "次のフィルターと一致するすべてのフィルターを削除するには、「続行」をクリックしてください。"
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
@@ -968,11 +947,11 @@ msgstr "次のスケジュールを有効にするには、[続行]をクリッ�
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
-msgstr ""
+msgstr "「続行」をクリックすると、フローデータの全範囲に対して NAT オンおよびオフの状態で以下のフィルターをバックグラウンドでマテリアライズします。すでにマテリアライズ済みで正確なパーティションはスキップされます。大規模なデータセットでは長時間かかる場合があります。すでにマテリアライズ中のフィルターはスキップされます。"
 
 #: flowview_filters.php
 msgid "You must select at least one Filter."
-msgstr "少なくとも1つのデバイスを選択する必要があります。"
+msgstr "少なくとも 1 つのフィルタを選択する必要があります。"
 
 #: flowview_filters.php
 msgid "FlowView Filters"
@@ -988,11 +967,11 @@ msgstr "フィルター"
 
 #: flowview_filters.php
 msgid "Prune"
-msgstr ""
+msgstr "整理"
 
 #: flowview_filters.php
 msgid "Remove the cached shards that do not match any Filter"
-msgstr ""
+msgstr "どのフィルターにも一致しないキャッシュ済みシャードを削除"
 
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
@@ -1003,14 +982,12 @@ msgid "ID"
 msgstr "ID"
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Organization"
 msgid "Materialization"
-msgstr "組織"
+msgstr "実体化"
 
 #: flowview_filters.php
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
-msgstr ""
+msgstr "マテリアライズは、NAT のオンとオフの両方について各フローパーティションのフィルター結果を事前計算し、並列クエリキャッシュに保存することで、古いデータに対するレポートをすばやく開けるようにします。新しいパーティションはフローの受信を停止すると自動的にマテリアライズされます。「必須」はローテーション済みのパーティションがまだマテリアライズされていないことを意味し、「実行中」はマテリアライズが進行中であることを意味し、「最新」はローテーション済みのすべてのパーティションがマテリアライズされていることを意味します。「実行中: N」は現在処理中のフィルターのクエリ数です。現在フローを受信中のパーティションはマテリアライズされないため、カウントされません。"
 
 #: flowview_filters.php includes/arrays.php
 msgid "Listener"
@@ -1022,29 +999,27 @@ msgstr "レポートのタイプ"
 
 #: flowview_filters.php
 msgid "NAT Shards"
-msgstr ""
+msgstr "NAT シャード"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
-msgstr ""
+msgstr "NAT オンで並列クエリキャッシュに保存されているこのフィルターのパーティション数です。"
 
 #: flowview_filters.php
 msgid "Non-NAT Shards"
-msgstr ""
+msgstr "非 NAT シャード"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
-msgstr ""
+msgstr "NAT オフで並列クエリキャッシュに保存されているこのフィルターのパーティション数です。"
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Charting Options"
 msgid "Partitions"
-msgstr "チャート作成オプション"
+msgstr "パーティション"
 
 #: flowview_filters.php
 msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
-msgstr ""
+msgstr "フローパーティションの総数です。これは NAT の有無にかかわらずフィルターがキャッシュできる最大シャード数です。"
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
@@ -1056,41 +1031,41 @@ msgstr "解像度"
 
 #: flowview_filters.php
 msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
-msgstr ""
+msgstr "フィルターのキャッシュキーを特定できなかったため、フィルターのキャッシュ済みシャードを他のシャードと区別できませんでした。"
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
-msgstr ""
+msgstr "フィルターのキャッシュキーを特定できなかったため、現在は何も削除できません。各フィルターに有効なレポートが設定されているか確認してください。"
 
 #: flowview_filters.php
 #, php-format
 msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
-msgstr ""
+msgstr "キャッシュ済みシャード: フィルターに一致するもの %s 件。いずれのフィルターにも一致しないもの %s 件（プルーニングで削除されます）。"
 
 #: flowview_filters.php
 #, php-format
 msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
-msgstr ""
+msgstr "すべてのフィルターおよびすべてのユーザーについて、どのフィルターにも一致しない %s 個のキャッシュ済みシャードを削除します。これらは変更または削除されたフィルターや、レポートページで設定が変更されたレポートに由来するものです。フィルターの %s 個のキャッシュ済みシャードは保持されます。この操作は元に戻せません。"
 
 #: flowview_filters.php
 msgid "Every cached shard matches a Filter.  There is nothing to prune."
-msgstr ""
+msgstr "キャッシュされたすべてのシャードがフィルターに一致しています。削除対象はありません。"
 
 #: flowview_filters.php
 msgid "Prune Cached Shards"
-msgstr ""
+msgstr "キャッシュされたシャードを整理"
 
 #: flowview_filters.php
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: flowview_schedules.php
 msgid "Send Now"
-msgstr "今すぐ送信します。"
+msgstr "今すぐ送信します"
 
 #: flowview_schedules.php
 msgid "Every Hour"
-msgstr "毎時"
+msgstr "1時間ごと"
 
 #: flowview_schedules.php
 #, php-format
@@ -1115,9 +1090,8 @@ msgid "Every Month"
 msgstr "毎月"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "General Settings"
-msgstr "絞り込み条件を解除する"
+msgstr "一般設定"
 
 #: flowview_schedules.php
 msgid "Title"
@@ -1137,12 +1111,11 @@ msgstr "このNetFlowスキャンが送信されるかどうか。"
 
 #: flowview_schedules.php
 msgid "Name of the query to run."
-msgstr "実行するクエリの名前"
+msgstr "実行するクエリの名前。"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Send Settings"
-msgstr "ASセット"
+msgstr "送信設定"
 
 #: flowview_schedules.php
 msgid "Send Interval"
@@ -1150,12 +1123,11 @@ msgstr "送信間隔"
 
 #: flowview_schedules.php
 msgid "How often to send this NetFlow Report?"
-msgstr "このNetFlowレポートを送信する頻度"
+msgstr "このNetFlowレポートを送信する頻度？"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Base Time"
-msgstr "スケジュールタイトル"
+msgstr "スケジュール基準時刻"
 
 #: flowview_schedules.php
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
@@ -1163,14 +1135,14 @@ msgstr "これは、NetFlowスキャンEメールを送信する最初の日時�
 
 #: flowview_schedules.php
 msgid "Max Allowed Runtime"
-msgstr ""
+msgstr "最大許容実行時間"
 
 #: flowview_schedules.php
 msgid "How long should the report be allowed to execute before exiting?"
-msgstr ""
+msgstr "レポートの実行が終了するまでに許可される最大時間を指定します。"
 
 #: flowview_schedules.php setup.php
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minute"
 msgstr "%d分"
 
@@ -1181,7 +1153,7 @@ msgstr "%d 分"
 
 #: flowview_schedules.php
 msgid "Legacy Email Settings"
-msgstr ""
+msgstr "レガシーメール設定"
 
 #: flowview_schedules.php
 msgid "Email Addresses"
@@ -1193,26 +1165,25 @@ msgstr "このNetFlowスキャンを送信する電子メールアドレス（�
 
 #: flowview_schedules.php setup.php
 msgid "Format File to Use"
-msgstr "使用するファイルのフォーマット"
+msgstr "使用するフォーマットファイル"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "使用するカスタムhtmlラッパーとCSSファイルを選択します。このファイルには、レポートをラップアラウンドするためのhtmlとCSSの両方が含まれています。単なるCSS以外のものが含まれている場合は、特別なものを配置する必要があります<REPORT>ファイル内のタグ。このフォーマットタグは、レポートの内容に置き換えられます。これらのファイルは「formats」ディレクトリにあります。"
+msgstr "使用するカスタムHTMLラッパーとCSSファイルを選択します。このファイルには、レポートをまとめるためのHTMLとCSSの両方が含まれています。それが単なるCSS以上のものを含んでいるなら、特別なものを置く必要があります<REPORT>ファイル内のタグ。このフォーマットタグはレポートの内容に置き換えられます。これらのファイルは &#39;format&#39;ディレクトリにあります。"
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
-msgstr ""
+msgstr "通知リスト設定"
 
 #: flowview_schedules.php
 msgid "Notification List"
-msgstr ""
+msgstr "通知リスト"
 
 #: flowview_schedules.php
 msgid "If the Thold Plugin is installed, you may select a Notification List"
-msgstr ""
+msgstr "Thold プラグインがインストールされている場合、通知リストを選択できます"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "The Report will arrive once complete."
 msgstr "完了するとレポートが届きます。"
 
@@ -1239,89 +1210,82 @@ msgstr "少なくとも1つのスケジュールを選択する必要があり�
 #: flowview_schedules.php
 #, php-format
 msgid "Unable to find Report Raw Data for Report ID %s"
-msgstr ""
+msgstr "レポート ID %s のレポート生データが見つかりません"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
-msgstr ""
+msgstr "メールアドレス、通知リスト、またはその両方を指定する必要があります。"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report: [edit: %s]"
-msgstr "報告: [編集: %s]"
+msgstr "スケジュールレポート: [編集: %s]"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report History: [edit: %s]"
-msgstr "報告: [編集: %s]"
+msgstr "スケジュールレポート履歴: [編集: %s]"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Report: [new]"
-msgstr "報告：[新]"
+msgstr "スケジュールレポート: [新規]"
 
 #: flowview_schedules.php setup.php
 msgid "Schedules"
 msgstr "スケジュール"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Title"
-msgstr "レポートのタイプ"
+msgstr "レポートのタイトル"
 
 #: flowview_schedules.php
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Output Type"
-msgstr "出力項目"
+msgstr "出力タイプ"
 
 #: flowview_schedules.php
 msgid "Sent By"
-msgstr ""
+msgstr "送信者"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Date Sent"
-msgstr "ルート セット"
+msgstr "送信日時"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Run Time"
-msgstr "終了時間"
+msgstr "実行制限"
 
 #: flowview_schedules.php
 msgid "Download Data"
-msgstr ""
+msgstr "データをダウンロード"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Logs"
-msgstr "レポート"
+msgstr "レポートログ"
 
 #: flowview_schedules.php
 msgid " [View Report Raw]"
-msgstr ""
+msgstr " [レポートを Raw 表示]"
 
 #: flowview_schedules.php
 msgid " [View Report with CSS]"
-msgstr ""
+msgstr " [レポートを CSS 付きで表示]"
 
 #: flowview_schedules.php
 msgid "Manual Send"
-msgstr ""
+msgstr "手動送信"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled"
-msgstr "スケジュール"
+msgstr "スケジュール済み"
 
 #: flowview_schedules.php
 #, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s 秒"
 
 #: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
@@ -1341,20 +1305,19 @@ msgstr "間隔"
 
 #: flowview_schedules.php
 msgid "Last Sent"
-msgstr ""
+msgstr "最終送信"
 
 #: flowview_schedules.php
 msgid "Next Send"
 msgstr "次に送る"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Email/List"
-msgstr "メールアドレス"
+msgstr "メール/リスト"
 
 #: flowview_schedules.php
 msgid "Logged Sends"
-msgstr ""
+msgstr "記録済み送信"
 
 #: flowview_schedules.php includes/arrays.php
 msgid "No"
@@ -1366,7 +1329,7 @@ msgstr "はい"
 
 #: includes/arrays.php includes/functions.php
 msgid "Select a Report"
-msgstr "印刷レポート"
+msgstr "レポートを選択"
 
 #: includes/arrays.php
 msgid "Summary"
@@ -1374,15 +1337,15 @@ msgstr "概要"
 
 #: includes/arrays.php
 msgid "Source Root Domain"
-msgstr "送信元または宛先IP"
+msgstr "送信元ルートドメイン"
 
 #: includes/arrays.php
 msgid "Destination Root Domain"
-msgstr "宛先IP"
+msgstr "宛先ルートドメイン"
 
 #: includes/arrays.php
 msgid "Source/Destination Root Domain"
-msgstr "送信元/宛先IP"
+msgstr "送信元/宛先ルートドメイン"
 
 #: includes/arrays.php
 msgid "UDP/TCP Destination Port"
@@ -1430,7 +1393,7 @@ msgstr "入出力インターフェース"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source AS"
-msgstr "ソースなし"
+msgstr "送信元 AS"
 
 #: includes/arrays.php
 msgid "Destination AS"
@@ -1503,7 +1466,7 @@ msgstr "トップ%d"
 
 #: includes/arrays.php
 msgid "No Limit"
-msgstr "制限"
+msgstr "無制限"
 
 #: includes/arrays.php
 #, php-format
@@ -1568,7 +1531,7 @@ msgstr "終了時間"
 
 #: includes/arrays.php
 msgid "Active"
-msgstr "操作"
+msgstr "アクティブ"
 
 #: includes/arrays.php
 msgid "B/Pk"
@@ -1597,7 +1560,7 @@ msgstr "%dピクセル"
 
 #: includes/arrays.php
 msgid "General Filters"
-msgstr "絞り込み条件を解除する"
+msgstr "一般フィルター"
 
 #: includes/arrays.php
 msgid "The Saved Filter to display."
@@ -1732,17 +1695,16 @@ msgid "Graph Height"
 msgstr "グラフの高さ"
 
 #: includes/arrays.php
-#, fuzzy
 msgid "The Graph Height to use by default."
 msgstr "デフォルトで使用するグラフの高さ。"
 
 #: includes/arrays.php includes/functions.php
 msgid "Use NAT Data"
-msgstr ""
+msgstr "NAT データを使用"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
+msgstr "レポート出力で元の NAT 変換前（pre-NAT）の値の代わりに、NAT 変換後（post-NAT）の送信元/宛先 IP および DNS 名を表示します。"
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1789,10 +1751,8 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr "フィルタの特定のプロトコルを選択します。"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Protocols"
 msgid "All Protocols"
-msgstr "プロトコル"
+msgstr "すべてのプロトコル"
 
 #: includes/arrays.php
 msgid "TCP Flags"
@@ -1863,52 +1823,36 @@ msgid "Filter on the select Destination AS for in the Filter.  This can be a com
 msgstr "フィルタで選択した宛先ASでフィルタリングします。これは、DestimationASのコンマ区切りリストにすることができます"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Source IP"
 msgid "Post-NAT Source IP"
-msgstr "送信元IP"
+msgstr "NAT後送信元IP"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "フィルタで選択したソースIPでフィルタリングします。これは、IPv4またはIPv6アドレスのコンマ区切りリスト、またはCIDR形式（例：192.168.1.0/24）のIPv4またはIPv6アドレス範囲のコンマ区切りリストにすることができます。"
+msgstr "フィルターに記録された変換後（NAT後）の送信元IPでフィルタリングします。IPv4またはIPv6アドレスのカンマ区切りリスト、あるいはCIDR形式（例: 192.168.1.0/24）のIPv4またはIPv6アドレス範囲のカンマ区切りリストを指定できます。"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
 msgid "Post-NAT Source Port"
-msgstr "UDP / TCP送信元ポート"
+msgstr "NAT後送信元ポート"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "フィルタで選択した送信元ポートでフィルタリングします。これは、送信元ポートのコンマ区切りのリストにすることができます。"
+msgstr "フィルター内の変換後（NAT後）の送信元ポートでフィルタリングします。ポート番号のカンマ区切りリストを指定できます。"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest IP"
 msgid "Post-NAT Dest IP"
-msgstr "宛先IP"
+msgstr "NAT後宛先IP"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "フィルタで選択した宛先IPでフィルタリングします。これは、IPv4またはIPv6アドレスのコンマ区切りリスト、またはCIDR形式（例：192.168.1.0/24）のIPv4またはIPv6アドレス範囲のコンマ区切りリストにすることができます。"
+msgstr "フィルターに記録された変換後（NAT後）の宛先IPでフィルタリングします。IPv4またはIPv6アドレスのカンマ区切りリスト、あるいはCIDR形式（例: 192.168.1.0/24）のIPv4またはIPv6アドレス範囲のカンマ区切りリストを指定できます。"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest Port"
 msgid "Post-NAT Dest Port"
-msgstr "宛先ポート"
+msgstr "NAT後宛先ポート"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "フィルタで選択した宛先ポートでフィルタリングします。これは、推定ポートのコンマ区切りリストにすることができます。"
+msgstr "フィルター内の変換後（NAT後）の宛先ポートでフィルタリングします。ポート番号のカンマ区切りリストを指定できます。"
 
 #: includes/arrays.php
 msgid "DNS Cache"
@@ -1948,7 +1892,7 @@ msgstr "ピアリング セット"
 
 #: includes/arrays.php
 msgid "Internet Routers"
-msgstr "インターネット制御"
+msgstr "インターネットルーター"
 
 #: includes/arrays.php
 msgid "Incident Response Teams"
@@ -1971,19 +1915,19 @@ msgid "Persons"
 msgstr "人数"
 
 #: includes/functions-pre13.php
-#, fuzzy, php-format
+#, php-format
 msgid "Cacti %s"
-msgstr "サボテン"
+msgstr "Cacti %s"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
-msgstr ""
+msgstr "レポート '%s' (ソース %s、ID %s) の実行がスケジュールされました！"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
-msgstr ""
+msgstr "レポート '%s' (ソース %s、ID %s) はエラーのため実行がスケジュールされませんでした！"
 
 #: includes/functions.php
 msgid "General"
@@ -1991,11 +1935,11 @@ msgstr "一般"
 
 #: includes/functions.php
 msgid "Logs"
-msgstr ""
+msgstr "ログ"
 
 #: includes/functions.php
 msgid "Select a Report Type First"
-msgstr "印刷レポート"
+msgstr "最初にレポートタイプを選択してください"
 
 #: includes/functions.php
 #, php-format
@@ -2004,19 +1948,19 @@ msgstr "フィルター: [編集: %s]"
 
 #: includes/functions.php
 msgid "Filter: [new]"
-msgstr "報告：[新]"
+msgstr "フィルター: [新規]"
 
 #: includes/functions.php
 msgid "Cached Results Affected"
-msgstr ""
+msgstr "影響を受けるキャッシュ済み結果"
 
 #: includes/functions.php
 msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
-msgstr ""
+msgstr "これらの変更はこのフィルターのキャッシュ結果に影響します。保存すると、キャッシュを再構築するためにバックグラウンドでマテリアライゼーションが開始されます。フィルターを保存するには「続行」を、編集を続けるには「キャンセル」を押してください。"
 
 #: includes/functions.php
 msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
-msgstr ""
+msgstr "このフィルターへの変更はキャッシュ結果に影響するため、バックグラウンドでマテリアライゼーションが開始されました。進行状況はフィルターページに表示され、結果は Cacti ログに報告されます。"
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -2034,7 +1978,7 @@ msgstr "印刷されたレポート：%s [以下に指定されているオー�
 
 #: includes/functions.php
 msgid "Select a Filter"
-msgstr "印刷レポート"
+msgstr "フィルタを選択"
 
 #: includes/functions.php
 msgid "Apply Filter"
@@ -2054,7 +1998,7 @@ msgstr "現在のフィルターを編集する"
 
 #: includes/functions.php
 msgid "Create new Flow Filter"
-msgstr "新しいフローファイルを作成する頻度。"
+msgstr "新しいフローフィルターを作成"
 
 #: includes/functions.php
 msgid "New"
@@ -2066,7 +2010,7 @@ msgstr "保存"
 
 #: includes/functions.php
 msgid "Save the Flow Filter"
-msgstr "印刷レポート"
+msgstr "フローフィルタを保存"
 
 #: includes/functions.php
 msgid "Save As"
@@ -2074,7 +2018,7 @@ msgstr "保存する"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
-msgstr "印刷レポート"
+msgstr "既存のフローフィルタを新しいフィルタとして保存"
 
 #: includes/functions.php
 msgid "Rename"
@@ -2086,7 +2030,7 @@ msgstr "フロー フィルターの名前を変更する"
 
 #: includes/functions.php
 msgid "Delete the Flow Filter"
-msgstr "印刷レポート"
+msgstr "フローフィルターを削除"
 
 #: includes/functions.php
 msgid "Report"
@@ -2104,7 +2048,7 @@ msgstr "印刷:%s"
 
 #: includes/functions.php
 msgid "Select a Filter First"
-msgstr "印刷レポート"
+msgstr "最初にフィルタを選択してください"
 
 #: includes/functions.php
 msgid "Lines"
@@ -2137,7 +2081,7 @@ msgstr "ドメインのみ"
 
 #: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
-msgstr ""
+msgstr "元の値の代わりに NAT 変換後（post-NAT）の IP/DNS 名を表示する"
 
 #: includes/functions.php
 msgid "Timespan"
@@ -2165,11 +2109,11 @@ msgstr "時間を後方にシフト"
 
 #: includes/functions.php
 msgid "Define Shifting Interval"
-msgstr "シフト間隔を定義する"
+msgstr "シフト間隔の定義"
 
 #: includes/functions.php
 msgid "Shift Time Forward"
-msgstr "時間を前にシフト"
+msgstr "前にシフト"
 
 #: includes/functions.php
 msgid "Graph"
@@ -2200,9 +2144,8 @@ msgid "Table"
 msgstr "テーブル"
 
 #: includes/functions.php
-#, fuzzy
 msgid "Export Raw Data"
-msgstr "レポート"
+msgstr "生データをエクスポート"
 
 #: includes/functions.php
 msgid "Save Flow Filter"
@@ -2214,7 +2157,7 @@ msgstr "新しい名前"
 
 #: includes/functions.php
 msgid "Delete Flow Filter"
-msgstr "印刷レポート"
+msgstr "フローフィルターを削除"
 
 #: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
@@ -2271,11 +2214,11 @@ msgstr "レイアウト名の変更"
 
 #: includes/functions.php
 msgid " <new>"
-msgstr "新規"
+msgstr " 新規"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
-msgstr ""
+msgstr "フィルター設定を保存しました。このフィルターのマテリアライズをバックグラウンドで開始しました。"
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
@@ -2306,10 +2249,9 @@ msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "サブネットフィルター：%sは値CIDR形式ではありません"
 
 #: includes/functions.php
-#, fuzzy, php-format
-#| msgid "Subnet Filter: %s is not a value CIDR format"
+#, php-format
 msgid "IP Filter: %s is not a valid IP address"
-msgstr "サブネットフィルター：%sは値CIDR形式ではありません"
+msgstr "IP フィルター: %s は有効な IP アドレスではありません"
 
 #: includes/functions.php
 msgid "unresolved"
@@ -2328,20 +2270,20 @@ msgstr "> %d バイト"
 #: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "統計レポート %s は不明です。GitHub でバグ報告を作成してください"
 
 #: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "印刷レポート %s は不明です。GitHub でバグ報告を作成してください"
 
 #: includes/functions.php
 msgid "Source DNS"
-msgstr "データソース"
+msgstr "送信元 DNS"
 
 #: includes/functions.php
 msgid "Source Root DNS"
-msgstr "データソース"
+msgstr "送信元ルート DNS"
 
 #: includes/functions.php
 msgid "Dest DNS"
@@ -2349,11 +2291,11 @@ msgstr "Dest AS"
 
 #: includes/functions.php
 msgid "Dest Root DNS"
-msgstr "宛先ポート"
+msgstr "宛先ルート DNS"
 
 #: includes/functions.php
 msgid "DNS"
-msgstr "DSR"
+msgstr "DNS"
 
 #: includes/functions.php
 msgid "Root DNS"
@@ -2382,38 +2324,38 @@ msgstr "パケット"
 #: includes/functions.php
 #, php-format
 msgid "Not materialized yet, with NAT: %s, without NAT: %s."
-msgstr ""
+msgstr "まだマテリアライズされていません (NAT あり: %s、NAT なし: %s)。"
 
 #: includes/functions.php
 msgid "Up to date"
-msgstr ""
+msgstr "最新"
 
 #: includes/functions.php
 msgid "Running"
-msgstr ""
+msgstr "実行中"
 
 #: includes/functions.php
 msgid "Required"
-msgstr ""
+msgstr "必須"
 
 #: includes/functions.php
 msgid "The number of queries of this Filter that are running now."
-msgstr ""
+msgstr "現在実行中のこのフィルターのクエリ数です。"
 
 #: includes/functions.php
 #, php-format
 msgid "With NAT: %d, without NAT: %d."
-msgstr ""
+msgstr "NAT あり: %d、NAT なし: %d。"
 
 #: includes/functions.php
 #, php-format
 msgid "Running: %s"
-msgstr ""
+msgstr "実行中: %s"
 
 #: includes/functions.php
 #, php-format
 msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
-msgstr ""
+msgstr "エラー: 並列クエリが最大実行時間 (%d 秒) 以内に完了しませんでした。FlowView 設定の最大実行時間を確認し、ALTER TABLE などの別の操作でデータベースがビジー状態でないか確認してください。"
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
@@ -2479,22 +2421,22 @@ msgstr "要約統計量"
 #: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
-msgstr "IPパケットサイズ分布（％）"
+msgstr "IPパケットサイズ分布 (%%)"
 
 #: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
-msgstr "フロー分布あたりのパケット数（％）"
+msgstr "フローあたりのパケット数分布 (%%)"
 
 #: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
-msgstr "フロー分布ごとのオクテット（％）"
+msgstr "フローあたりのオクテット数分布 (%%)"
 
 #: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
-msgstr "流動時間分布（％）"
+msgstr "フロー時間分布 (%%)"
 
 #: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
@@ -2530,11 +2472,11 @@ msgstr "ソースインタフェースの値が無効です。"
 
 #: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
-msgstr "送信元ポートの値が無効です。 （0  -  65535）"
+msgstr "送信元ポートの値が無効です。 （0 - 65535）"
 
 #: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
-msgstr "Source ASの値が無効です。 （0  -  65535）"
+msgstr "Source ASの値が無効です。 （0 - 65535）"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Interface!"
@@ -2542,11 +2484,11 @@ msgstr "宛先インタフェースの値が無効です。"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
-msgstr "宛先ポートの値が無効です。 （0  -  65535）"
+msgstr "宛先ポートの値が無効です。 （0 - 65535）"
 
 #: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
-msgstr "宛先ASの値が無効です。 （0  -  65535）"
+msgstr "宛先ASの値が無効です。 （0 - 65535）"
 
 #: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
@@ -2570,19 +2512,16 @@ msgid "FlowView Chart for %s Type is %s"
 msgstr "%sタイプのフロービューチャートは%s"
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "Supported"
 msgid "Supported (NAT)"
-msgstr "サポートされています"
+msgstr "サポート済み (NAT)"
 
 #: includes/functions.php
 msgid "Not Supported"
 msgstr "サポートされていません"
 
 #: includes/functions.php setup.php
-#, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
-msgstr "アリア(高速、衝突安全)"
+msgstr "MyISAM (高速、クラッシュセーフ非対応)"
 
 #: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
@@ -2593,14 +2532,12 @@ msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (低速、高同時実行性)"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow User"
-msgstr "NetFlowバージョン"
+msgstr "NetFlow ユーザー"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow Admin"
-msgstr "NetFlowバージョン"
+msgstr "NetFlow 管理者"
 
 #: setup.php
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
@@ -2608,7 +2545,7 @@ msgstr "インストールする前に、flowview ディレクトリ内の confi
 
 #: setup.php
 msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
-msgstr "Flowviewプラグインのテーブルはバックグラウンドでアップグレードされていることに注意してください。 これには時間がかかる場合があります。詳細については、Cacti ログを確認してください。"
+msgstr "Flowviewプラグインのテーブルはバックグラウンドでアップグレードされていることに注意してください。 これには時間がかかる場合があります。詳細については、Cacti ログを確認してください"
 
 #: setup.php
 msgid "The Filter has been Deleted"
@@ -2656,56 +2593,53 @@ msgstr "(編集)"
 
 #: setup.php
 msgid "(actions)"
-msgstr "操作"
+msgstr "(操作)"
 
 #: setup.php
-#, fuzzy, php-format
+#, php-format
 msgid "%d Process"
-msgstr "%dピクセル"
+msgstr "%d プロセス"
 
 #: setup.php
 #, php-format
 msgid "%d Processes"
-msgstr ""
+msgstr "%d プロセス"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
-msgstr ""
+msgstr "レポート同時実行プロセス数 (FlowView 専用)"
 
 #: setup.php
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
-msgstr ""
+msgstr "同時に実行できるレポートプロセスの最大同時実行数を選択してください。"
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Settings"
-msgstr "インターネット制御"
+msgstr "インターネットプロキシ設定"
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Address"
-msgstr "インターネット制御"
+msgstr "インターネットプロキシアドレス"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "インターネットアクセスを必要とするコアCactiサービスまたはプラグインのいずれかについては、ここに次の形式のIP: portでプロキシサーバーとポートを入力します。たとえば、192.168.1.1: 8080です。"
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy User"
-msgstr "インターネット制御"
+msgstr "インターネットプロキシユーザー"
 
 #: setup.php
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "インターネットプロキシにユーザー名が必要な場合は、ここに入力してください。"
 
 #: setup.php
 msgid "Internet Proxy Password"
-msgstr ""
+msgstr "インターネットプロキシパスワード"
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "インターネットプロキシにパスワードが必要な場合は、ここに入力してください。"
 
 #: setup.php
 msgid "Name Resolution"
@@ -2732,17 +2666,16 @@ msgid "Don't Resolve DNS"
 msgstr "DNSを解決しない"
 
 #: setup.php
-#, fuzzy
 msgid "Download the Internet Registry Daily"
-msgstr "インターネットルートレジストリの詳細"
+msgstr "インターネットレジストリを毎日ダウンロード"
 
 #: setup.php
 msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
-msgstr ""
+msgstr "インターネット全体に関する公開情報が必要な場合は、このオプションを選択できます。Cacti は 1 日 1 回、世界中のインターネットレジストリにアクセスしてインターネット全体のルート変更を確認し、その情報を Cacti に読み込みます。これにより 3GB を超える非常に大きなデータベースが作成される点に注意してください。"
 
 #: setup.php
 msgid "Local Domain Name"
-msgstr "ドメイン名を削除する"
+msgstr "ローカルドメイン名"
 
 #: setup.php
 msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
@@ -2753,9 +2686,8 @@ msgid "Local IP Range"
 msgstr "ローカル IP 範囲"
 
 #: setup.php
-#, fuzzy
 msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
-msgstr "DNS に登録されていない可能性のあるホストのローカル ネットワークの IPv4 IP アドレス範囲を指定します。 これらのホストは、上記のローカルドメイン名にマッピングされます。 これはホームユーザー向けです。 CIDR 形式または非 CIDR 形式のいずれかを使用できます。 例:192.168.11.0または192.168.11.0/24"
+msgstr "DNS に登録されていない可能性のあるホスト用に、ローカルネットワークの IPv4 IP アドレス範囲を指定します。これらのホストは上記のローカルドメイン名にマッピングされます。これは主にホームユーザー向けです。CIDR 形式または非 CIDR 形式のいずれかを使用できます。例: 192.168.11.0 または 192.168.11.0/24"
 
 #: setup.php
 msgid "Use CIDR or Non-CIDR"
@@ -2783,7 +2715,7 @@ msgstr "whois.radb.net"
 
 #: setup.php
 msgid "Whois Binary Path"
-msgstr "フローツールバイナリパス"
+msgstr "Whois バイナリパス"
 
 #: setup.php
 msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
@@ -2795,15 +2727,15 @@ msgstr "バイナリパスを入力"
 
 #: setup.php
 msgid "Graph Drilldown Settings"
-msgstr ""
+msgstr "グラフドリルダウン設定"
 
 #: setup.php
 msgid "Default Search Filter for Graph Drilldowns"
-msgstr ""
+msgstr "グラフドリルダウンのデフォルト検索フィルター"
 
 #: setup.php
 msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
-msgstr ""
+msgstr "グラフのドリルダウンに使用する既存の FlowView 検索フィルターを選択してください。"
 
 #: setup.php
 msgid "Data Retention and Report Generation"
@@ -2871,48 +2803,44 @@ msgid "Parallel Queries"
 msgstr "並列クエリ"
 
 #: setup.php
-#, fuzzy
-#| msgid "Parallel Queries"
 msgid "Parallel Query Backend"
-msgstr "並列クエリ"
+msgstr "並列クエリバックエンド"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr ""
+msgstr "並列 FlowView クエリの実行方法を選択します。レガシー PHP ランナーは、クエリおよびシャードごとに flowview_runner.php プロセスをフォークします。FlowView クエリサービスは、同じ MapReduce 処理を localhost 経由で常駐の Go サービスにディスパッチし、クエリごとのプロセス起動やデータベースポーリングの遅延を回避します。flowview-query サービス（plugins/flowview/service/flowview-query を参照）がインストールされ実行されている必要があります。"
 
 #: setup.php
 msgid "Legacy PHP Runner"
-msgstr ""
+msgstr "レガシー PHP ランナー"
 
 #: setup.php
-#, fuzzy
-#| msgid "Flow Viewer"
 msgid "FlowView Query Service"
-msgstr "フロービューア"
+msgstr "FlowViewクエリサービス"
 
 #: setup.php
 msgid "Query Service URL"
-msgstr ""
+msgstr "クエリサービス URL"
 
 #: setup.php
 msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
-msgstr ""
+msgstr "FlowView クエリサービスのベース URL（例: http://127.0.0.1:8699）。サービスのポートファイルからエフェメラルポートを自動検出する場合は空欄のままにしてください。"
 
 #: setup.php
 msgid "Query Service Port File"
-msgstr ""
+msgstr "クエリサービスポートファイル"
 
 #: setup.php
 msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
-msgstr ""
+msgstr "FlowView クエリサービスがバインド済みアドレスを書き込むポートファイルのパス。上記のクエリサービス URL が空欄の場合にサービスエンドポイントを検出するために使用されます。"
 
 #: setup.php
 msgid "Query Service Token"
-msgstr ""
+msgstr "クエリサービストークン"
 
 #: setup.php
 msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
-msgstr ""
+msgstr "任意の共有シークレット。設定すると、Cacti は FlowView クエリサービスに「Authorization: Bearer」ヘッダーとしてこの値を送信し、サービスは同じトークンを提示しない状態変更リクエストをすべて拒否します。サービスの設定ファイル (auth_token) または環境変数 FLOWVIEW_QUERY_TOKEN に一致する値を設定してください。信頼できるローカルプロセス以外からサービスにアクセス可能な場合は常に設定することを推奨します。"
 
 #: setup.php
 msgid "Max Concurrent Threads"
@@ -2933,7 +2861,7 @@ msgstr "%d スレッド"
 
 #: setup.php
 msgid "Maximum Run Time"
-msgstr "最大行数"
+msgstr "最大実行時間"
 
 #: setup.php
 msgid "If the Parallel Query does not finish in this time, exit."
@@ -2968,7 +2896,7 @@ msgstr "MaxScale シャーディング"
 
 #: setup.php
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
-msgstr ""
+msgstr "これは、Cacti システムの Flowview データベース接続で MaxScale が有効な読み取り/書き込み分割ポートをまだ使用していない場合にのみ必要です。"
 
 #: setup.php
 msgid "Leverage MaxScale to Distribute Query Shards"
@@ -2979,23 +2907,20 @@ msgid "If you have multiple service acting as slaves for MaxScale, you can incre
 msgstr "MaxScale のスレーブとして機能する複数のサービスがある場合は、並列クエリを複数の MariaDB バックエンドサーバーに分散することで、クエリの速度を上げることができます。"
 
 #: setup.php
-#, fuzzy
 msgid "MaxScale Read-Write Split Port"
-msgstr "MaxScale 読み取り専用ポート"
+msgstr "MaxScale 読み書き分割ポート"
 
 #: setup.php
-#, fuzzy
 msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
-msgstr "これは、Read-Only-Service(readconnroute)サービスとルータのポートである必要があります。"
+msgstr "Read-Write-Split-Service (readwrite) サービスおよびルーターのポートである必要があります。"
 
 #: setup.php
 msgid "Flowview"
 msgstr "FlowView"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow"
-msgstr "新しい流れ"
+msgstr "NetFlow"
 
 #~ msgid "Select a Listener"
 #~ msgstr "印刷レポート"
