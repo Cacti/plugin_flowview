@@ -4,31 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-23 16:08-0400\n"
-"PO-Revision-Date: 2024-07-14 20:25-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: it_IT\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/flowview/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
-msgstr ""
+msgstr "Impossibile trovare i dati grezzi da esportare"
 
 #: flowview.php
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
-msgstr ""
+msgstr "La query FlowView fornita non esiste. Invia una query valida."
 
 #: flowview.php
 msgid "Invalid source Query provided.  Please submit with a valid query."
-msgstr ""
+msgstr "Query di origine fornita non valida. Inviare una query valida."
 
 #: flowview.php
 #, php-format
@@ -58,9 +46,8 @@ msgid "Authorized Agent Details"
 msgstr "Dettagli dell'agente autorizzato"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "No Details Found"
-msgstr "Nessuna voce della cache DNS trovata"
+msgstr "Nessun dettaglio trovato"
 
 #: flowview_databases.php
 msgid "CIDR/Route"
@@ -100,7 +87,7 @@ msgstr "Rete"
 
 #: flowview_databases.php
 msgid "Internet Router"
-msgstr "Controllo di Internet"
+msgstr "Router Internet"
 
 #: flowview_databases.php
 msgid "Incident Response Team"
@@ -232,7 +219,7 @@ msgstr "Membro di"
 
 #: flowview_databases.php
 msgid "Updates Email"
-msgstr "Aggiorna"
+msgstr "Email per gli aggiornamenti"
 
 #: flowview_databases.php
 msgid "NOC Handle"
@@ -248,11 +235,11 @@ msgstr "MNT Irt"
 
 #: flowview_databases.php
 msgid "MP Members"
-msgstr "Numeri"
+msgstr "Membri MP"
 
 #: flowview_databases.php
 msgid "Sub Domain"
-msgstr "Porta(i) di origine"
+msgstr "Sottodominio"
 
 #: flowview_databases.php
 msgid "Pingable"
@@ -300,7 +287,7 @@ msgstr "Nome dell’Organizzazione"
 
 #: flowview_databases.php
 msgid "AS Name"
-msgstr "Nome: "
+msgstr "Nome"
 
 #: flowview_databases.php
 msgid "Author"
@@ -332,7 +319,7 @@ msgstr "Dimensione dell'incarico"
 
 #: flowview_databases.php
 msgid "Export Comps"
-msgstr "Segnala"
+msgstr "Esporta confronti"
 
 #: flowview_databases.php
 msgid "RS In"
@@ -400,12 +387,11 @@ msgstr "Origine AS"
 
 #: flowview_databases.php
 msgid "MP Export"
-msgstr "Segnala"
+msgstr "Esportazione MP"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Encryption"
-msgstr "Scadenza"
+msgstr "Crittografia"
 
 #: flowview_databases.php
 msgid "Geo Feed"
@@ -421,7 +407,7 @@ msgstr "Interfaccia"
 
 #: flowview_databases.php
 msgid "Export Via"
-msgstr "Segnala"
+msgstr "Esporta tramite"
 
 #: flowview_databases.php
 msgid "Trouble"
@@ -538,7 +524,7 @@ msgstr[1] "Elimina voci DNS"
 
 #: flowview_databases.php
 msgid "Flowview DNS Cache Entries"
-msgstr "Orari FlowView"
+msgstr "Voci cache DNS di Flowview"
 
 #: flowview_databases.php
 msgid "Verified"
@@ -598,7 +584,7 @@ msgstr "L'Arin Origin AS.  Queste sono informazioni ufficiali di Arin AS."
 
 #: flowview_databases.php
 msgid "Updated Time"
-msgstr "Aggiorna"
+msgstr "Ora di aggiornamento"
 
 #: flowview_databases.php
 msgid "This is the time that the DNS cache was entered or last updated."
@@ -610,7 +596,7 @@ msgstr "Nessuna voce della cache DNS trovata"
 
 #: flowview_databases.php
 msgid "Flowview Internet Routes"
-msgstr "Ascoltatori FlowView"
+msgstr "Rotte Internet di Flowview"
 
 #: flowview_databases.php
 msgid "IP Version"
@@ -634,7 +620,7 @@ msgstr "Questa è la rotta Internet pubblicata."
 
 #: flowview_databases.php
 msgid "AS Number"
-msgstr "Porta Numero"
+msgstr "Numero AS"
 
 #: flowview_databases.php
 msgid "The Autonomous System Number for the route."
@@ -645,9 +631,8 @@ msgid "Route Description"
 msgstr "Descrizione del percorso"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "The Description logged by the Route Maintainer."
-msgstr "La descrizione registrata dal manutentore della rotta."
+msgstr "La descrizione registrata dal gestore della rotta."
 
 #: flowview_databases.php
 msgid "The source database used to publish the route."
@@ -695,20 +680,19 @@ msgstr "Esistono due metodi di raccolta del supporto, il primo utilizza i file b
 
 #: flowview_devices.php
 msgid "Bind to address"
-msgstr ""
+msgstr "Associa all'indirizzo"
 
 #: flowview_devices.php
 msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
-msgstr ""
+msgstr "Se il server Cacti dispone di più indirizzi IP, è possibile specificare un'interfaccia dedicata. Lasciare 0.0.0.0 per l'interfaccia primaria."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Allowed Host Range"
-msgstr "Ospite consentito"
+msgstr "Intervallo host consentito"
 
 #: flowview_devices.php
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
-msgstr ""
+msgstr "Indirizzo IP del dispositivo autorizzato a inviare dati a questo raccoglitore di flussi. Lasciare 0.0.0.0 per qualsiasi host. Nota: PHP è molto rigoroso su ciò che consente. Sono supportate sia la sintassi CIDR sia la sintassi a intervalli, ad esempio 192.168.1.0 o 192.168.1.0/24. Per specificare più indirizzi IP, separarli con una virgola."
 
 #: flowview_devices.php includes/arrays.php
 msgid "Port"
@@ -736,7 +720,7 @@ msgstr "Abilitato"
 
 #: flowview_devices.php
 msgid "If checked, the Listener service will be started and will wait on incoming data."
-msgstr ""
+msgstr "Se selezionato, il servizio Listener verrà avviato e resterà in attesa dei dati in ingresso."
 
 #: flowview_devices.php
 #, php-format
@@ -744,23 +728,20 @@ msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "Non è stato trovato alcun modello di flusso per ID dispositivo:%s e ID modello:%s"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "Fare clic su 'Continua' per eliminare i seguenti ascoltatori Net-Flow.  Dopo di che, sarà necessario riavviare il servizio di Flow-Capture."
+msgstr "Fare clic su 'Continua' per eliminare i seguenti listener NetFlow. Successivamente, Cacti tenterà di riavviare il servizio Flow-Capture."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "Fare clic su 'Continua' per eliminare i seguenti ascoltatori Net-Flow.  Dopo di che, sarà necessario riavviare il servizio di Flow-Capture."
+msgstr "Fare clic su 'Continua' per abilitare i seguenti listener NetFlow. Successivamente, Cacti tenterà di riavviare il servizio Flow-Capture."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "You must select at least one Listener."
-msgstr "È necessario selezionare almeno un dispositivo."
+msgstr "Devi selezionare almeno un listener."
 
 #: flowview_devices.php
 msgid "The listener port must be a numeric value between 1 and 65535."
-msgstr ""
+msgstr "La porta di ascolto deve essere un valore numerico compreso tra 1 e 65535."
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
@@ -773,11 +754,11 @@ msgstr "Salvataggio riuscito.  Il listener Flowview è stato salvato.  Tuttavia,
 #: flowview_devices.php
 #, php-format
 msgid "Listener [edit: %s]"
-msgstr "Rapporto: [modifica: %s]"
+msgstr "Listener [modifica: %s]"
 
 #: flowview_devices.php
 msgid "Listener [new]"
-msgstr "Rapporto: [nuovo]"
+msgstr "Listener [nuovo]"
 
 #: flowview_devices.php
 msgid "Name"
@@ -864,9 +845,8 @@ msgid "Method"
 msgstr "Metodo"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Bind address"
-msgstr "Indirizzo IP"
+msgstr "Indirizzo di bind"
 
 #: flowview_devices.php
 msgid "Allowed From"
@@ -882,15 +862,15 @@ msgstr "La sicurezza della porta effettivamente osservata sulla porta dei listen
 
 #: flowview_devices.php
 msgid "Backlog"
-msgstr ""
+msgstr "Backlog"
 
 #: flowview_devices.php
 msgid "The Size of the UDP backlog in bytes."
-msgstr ""
+msgstr "La dimensione della coda UDP in byte."
 
 #: flowview_devices.php
 msgid "Streams"
-msgstr "Contenuti"
+msgstr "Flussi"
 
 #: flowview_devices.php
 msgid "The number of inbound connections from various sources."
@@ -913,9 +893,8 @@ msgid "None"
 msgstr "Nessuno"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "No Connections"
-msgstr "Geolocalizzazione"
+msgstr "Nessuna connessione"
 
 #: flowview_devices.php includes/arrays.php includes/functions.php
 msgid "N/A"
@@ -923,42 +902,42 @@ msgstr "N/A"
 
 #: flowview_devices.php
 msgid "Cacti"
-msgstr "Cactus"
+msgstr "Cacti"
 
 #: flowview_devices.php
 msgid "No Flowview Listeners"
-msgstr "Ascoltatori FlowView"
+msgstr "Nessun listener Flowview"
 
 #: flowview_filters.php
 msgid "Materialize"
-msgstr ""
+msgstr "Materializza"
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
-msgstr ""
+msgstr "Impossibile determinare le chiavi di cache dei filtri, quindi non è stato eliminato nulla."
 
 #: flowview_filters.php
 #, php-format
 msgid "Pruned %s cached shard(s) that did not match any Filter."
-msgstr ""
+msgstr "Rimossi %s shard nella cache che non corrispondevano ad alcun filtro."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "La materializzazione di %d filtro/i è stata avviata in background.  %d filtro/i sono già in fase di materializzazione.  I risultati sono riportati nel log di Cacti."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "La materializzazione di %d filtro/i è stata avviata in background.  I risultati sono riportati nel log di Cacti."
 
 #: flowview_filters.php
 msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
-msgstr ""
+msgstr "I filtri selezionati sono già in fase di materializzazione. Riprova una volta terminata l'operazione."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
-msgstr "Fare clic su \"Continua\" per eliminare il seguente/i Programma(i)."
+msgstr "Fare clic su 'Continua' per eliminare il/i seguente/i filtro/i e tutti i filtri corrispondenti."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
@@ -970,11 +949,11 @@ msgstr "Fare clic su 'Continua' per attivare il seguente programma(i)."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
-msgstr ""
+msgstr "Fare clic su 'Continua' per materializzare i seguenti filtri in background, con NAT attivo e disattivo, per l'intero intervallo dei dati di flusso. Le partizioni già materializzate e accurate vengono saltate. Questa operazione può richiedere molto tempo su set di dati di grandi dimensioni. Un filtro già in fase di materializzazione viene saltato."
 
 #: flowview_filters.php
 msgid "You must select at least one Filter."
-msgstr "È necessario selezionare almeno un dispositivo."
+msgstr "È necessario selezionare almeno un filtro."
 
 #: flowview_filters.php
 msgid "FlowView Filters"
@@ -990,11 +969,11 @@ msgstr "Filtri"
 
 #: flowview_filters.php
 msgid "Prune"
-msgstr ""
+msgstr "Sfoltisci"
 
 #: flowview_filters.php
 msgid "Remove the cached shards that do not match any Filter"
-msgstr ""
+msgstr "Rimuovi gli shard nella cache che non corrispondono ad alcun filtro"
 
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
@@ -1005,14 +984,12 @@ msgid "ID"
 msgstr "ID"
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Organization"
 msgid "Materialization"
-msgstr "Organizzazione"
+msgstr "Materializzazione"
 
 #: flowview_filters.php
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
-msgstr ""
+msgstr "La materializzazione precalcola i risultati di un filtro per ciascuna partizione di flusso, con NAT attivo e disattivo, e li archivia nella cache delle query parallele in modo che i report sui dati meno recenti si aprano rapidamente.  Le nuove partizioni vengono materializzate automaticamente non appena smettono di ricevere flussi.  Richiesto indica che le partizioni ruotate non sono ancora materializzate, In esecuzione indica che è in corso una materializzazione e Aggiornato indica che ogni partizione ruotata è materializzata.  In esecuzione: N indica quante query del filtro sono attive al momento.  La partizione che sta ancora ricevendo flussi non viene materializzata, pertanto non viene conteggiata."
 
 #: flowview_filters.php includes/arrays.php
 msgid "Listener"
@@ -1024,33 +1001,31 @@ msgstr "Tipo di Rapporto"
 
 #: flowview_filters.php
 msgid "NAT Shards"
-msgstr ""
+msgstr "Shard NAT"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
-msgstr ""
+msgstr "Il numero di partizioni di questo filtro memorizzate nella cache delle query parallele con NAT attivato."
 
 #: flowview_filters.php
 msgid "Non-NAT Shards"
-msgstr ""
+msgstr "Shard non-NAT"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
-msgstr ""
+msgstr "Il numero di partizioni di questo filtro memorizzate nella cache delle query parallele con NAT disattivato."
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Charting Options"
 msgid "Partitions"
-msgstr "Opzioni per i grafici"
+msgstr "Partizioni"
 
 #: flowview_filters.php
 msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
-msgstr ""
+msgstr "Il numero totale di partizioni di flusso, ovvero il numero massimo di shard che un filtro può avere memorizzati nella cache con o senza NAT."
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
-msgstr "Ordina campo:"
+msgstr "Ordina campo"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1058,33 +1033,33 @@ msgstr "Risoluzione"
 
 #: flowview_filters.php
 msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
-msgstr ""
+msgstr "Impossibile distinguere gli shard in cache dei filtri dagli altri, poiché non è stato possibile determinare le chiavi di cache di un filtro."
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
-msgstr ""
+msgstr "Impossibile determinare le chiavi di cache dei filtri, quindi al momento non è possibile eseguire alcuna pulizia. Verifica che ogni filtro abbia un report valido."
 
 #: flowview_filters.php
 #, php-format
 msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
-msgstr ""
+msgstr "Shard nella cache: %s corrispondenti a un filtro. %s non corrispondenti ad alcun filtro, che vengono rimossi da Prune."
 
 #: flowview_filters.php
 #, php-format
 msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
-msgstr ""
+msgstr "Questa operazione rimuove %s shard memorizzati nella cache che non corrispondono ad alcun filtro, per ogni filtro e ogni utente. Provengono da filtri modificati o eliminati e da report con impostazioni modificate nella pagina del report. I %s shard memorizzati nella cache dei filtri vengono mantenuti. Questa operazione non può essere annullata."
 
 #: flowview_filters.php
 msgid "Every cached shard matches a Filter.  There is nothing to prune."
-msgstr ""
+msgstr "Ogni shard nella cache corrisponde a un filtro. Non c'è nulla da eliminare."
 
 #: flowview_filters.php
 msgid "Prune Cached Shards"
-msgstr ""
+msgstr "Sfoltisci shard nella cache"
 
 #: flowview_filters.php
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #: flowview_schedules.php
 msgid "Send Now"
@@ -1097,7 +1072,7 @@ msgstr "Ogni Ora"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Ogni % di ore"
+msgstr "Ogni %d ore"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1117,9 +1092,8 @@ msgid "Every Month"
 msgstr "Ogni mese"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "General Settings"
-msgstr "Filtri Genrali"
+msgstr "Impostazioni generali"
 
 #: flowview_schedules.php
 msgid "Title"
@@ -1142,9 +1116,8 @@ msgid "Name of the query to run."
 msgstr "Nome della query da eseguire."
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Send Settings"
-msgstr "Set AS"
+msgstr "Impostazioni di invio"
 
 #: flowview_schedules.php
 msgid "Send Interval"
@@ -1155,9 +1128,8 @@ msgid "How often to send this NetFlow Report?"
 msgstr "Con quale frequenza inviare questo rapporto NetFlow?"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Base Time"
-msgstr "Titolo programma"
+msgstr "Ora base pianificata"
 
 #: flowview_schedules.php
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
@@ -1165,11 +1137,11 @@ msgstr "Questa è la prima data / ora di invio dell'e-mail NetFlow Scan.  Tutte 
 
 #: flowview_schedules.php
 msgid "Max Allowed Runtime"
-msgstr ""
+msgstr "Durata massima consentita"
 
 #: flowview_schedules.php
 msgid "How long should the report be allowed to execute before exiting?"
-msgstr ""
+msgstr "Per quanto tempo il report può essere eseguito prima di terminare?"
 
 #: flowview_schedules.php setup.php
 #, php-format
@@ -1183,7 +1155,7 @@ msgstr "%d Minuti"
 
 #: flowview_schedules.php
 msgid "Legacy Email Settings"
-msgstr ""
+msgstr "Impostazioni email legacy"
 
 #: flowview_schedules.php
 msgid "Email Addresses"
@@ -1195,28 +1167,27 @@ msgstr "Indirizzi e-mail (delimitati dal comando) a cui inviare questa scansione
 
 #: flowview_schedules.php setup.php
 msgid "Format File to Use"
-msgstr "Formato file da utilizzare"
+msgstr "Formato del file da utilizzare"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "Scegli il wrapper html personalizzato e il file CSS da utilizzare. Questo file contiene sia html che CSS per avvolgere il tuo rapporto. Se contiene più del semplice CSS, è necessario inserire un file speciale<REPORT> tag all'interno del file. Questo tag di formato verrà sostituito dal contenuto del report. Questi file si trovano nella directory \"formati\"."
+msgstr "Scegliere il wrapper html personalizzato e il file CSS da utilizzare.  Questo file contiene sia html che CSS per avvolgere il tuo report.  Se contiene più di un semplice CSS, è necessario inserire uno speciale tag <REPORT> all'interno del file.  Questo tag di formato sarà sostituito dal contenuto del report.  Questi file si trovano nella directory \"formati\"."
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
-msgstr ""
+msgstr "Impostazioni elenco notifiche"
 
 #: flowview_schedules.php
 msgid "Notification List"
-msgstr ""
+msgstr "Elenco notifiche"
 
 #: flowview_schedules.php
 msgid "If the Thold Plugin is installed, you may select a Notification List"
-msgstr ""
+msgstr "Se il plugin Thold è installato, è possibile selezionare un elenco di notifica"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "The Report will arrive once complete."
-msgstr "I rapporti arriveranno una volta completato."
+msgstr "Il report arriverà una volta completato."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to delete the following Schedule(s)."
@@ -1241,89 +1212,82 @@ msgstr "È necessario selezionare almeno un programma."
 #: flowview_schedules.php
 #, php-format
 msgid "Unable to find Report Raw Data for Report ID %s"
-msgstr ""
+msgstr "Impossibile trovare i dati grezzi del report per l'ID report %s"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
-msgstr ""
+msgstr "È necessario specificare gli indirizzi email, una lista di notifica o entrambi!"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report: [edit: %s]"
-msgstr "Rapporto: [modifica: %s]"
+msgstr "Report pianificato: [modifica: %s]"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report History: [edit: %s]"
-msgstr "Rapporto: [modifica: %s]"
+msgstr "Cronologia report pianificati: [modifica: %s]"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Report: [new]"
-msgstr "Rapporto: [nuovo]"
+msgstr "Report pianificato: [nuovo]"
 
 #: flowview_schedules.php setup.php
 msgid "Schedules"
 msgstr "Pianificazioni"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Title"
-msgstr "Tipo di Rapporto"
+msgstr "Titolo del report"
 
 #: flowview_schedules.php
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Output Type"
-msgstr "Campo di output"
+msgstr "Tipo di output"
 
 #: flowview_schedules.php
 msgid "Sent By"
-msgstr ""
+msgstr "Inviato da"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Date Sent"
-msgstr "Set di percorsi"
+msgstr "Data invio"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Run Time"
-msgstr "Ora di fine"
+msgstr "Durata"
 
 #: flowview_schedules.php
 msgid "Download Data"
-msgstr ""
+msgstr "Scarica dati"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Logs"
-msgstr "Segnala"
+msgstr "Log dei report"
 
 #: flowview_schedules.php
 msgid " [View Report Raw]"
-msgstr ""
+msgstr " [Visualizza report grezzo]"
 
 #: flowview_schedules.php
 msgid " [View Report with CSS]"
-msgstr ""
+msgstr " [Visualizza report con CSS]"
 
 #: flowview_schedules.php
 msgid "Manual Send"
-msgstr ""
+msgstr "Invio manuale"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled"
-msgstr "Pianificazioni"
+msgstr "Pianificato"
 
 #: flowview_schedules.php
 #, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s secondi"
 
 #: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
@@ -1343,20 +1307,19 @@ msgstr "Intervallo"
 
 #: flowview_schedules.php
 msgid "Last Sent"
-msgstr ""
+msgstr "Ultimo invio"
 
 #: flowview_schedules.php
 msgid "Next Send"
 msgstr "Prossimo invio"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Email/List"
-msgstr "Email"
+msgstr "Email/Elenco"
 
 #: flowview_schedules.php
 msgid "Logged Sends"
-msgstr ""
+msgstr "Invii registrati"
 
 #: flowview_schedules.php includes/arrays.php
 msgid "No"
@@ -1368,7 +1331,7 @@ msgstr "Si"
 
 #: includes/arrays.php includes/functions.php
 msgid "Select a Report"
-msgstr "Stampa i rapporti"
+msgstr "Seleziona un report"
 
 #: includes/arrays.php
 msgid "Summary"
@@ -1376,15 +1339,15 @@ msgstr "Sommario"
 
 #: includes/arrays.php
 msgid "Source Root Domain"
-msgstr "IP di origine o di destinazione"
+msgstr "Dominio radice di origine"
 
 #: includes/arrays.php
 msgid "Destination Root Domain"
-msgstr "IP di destinazione"
+msgstr "Dominio radice di destinazione"
 
 #: includes/arrays.php
 msgid "Source/Destination Root Domain"
-msgstr "Fonte/Destinazione IP"
+msgstr "Dominio radice di origine/destinazione"
 
 #: includes/arrays.php
 msgid "UDP/TCP Destination Port"
@@ -1432,7 +1395,7 @@ msgstr "Interfaccia ingresso/uscita"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source AS"
-msgstr "Nessuna Fonte"
+msgstr "AS sorgente"
 
 #: includes/arrays.php
 msgid "Destination AS"
@@ -1514,7 +1477,7 @@ msgstr "%s Bytes"
 
 #: includes/arrays.php
 msgid "Source Domain"
-msgstr "Porta(i) di origine"
+msgstr "Dominio di origine"
 
 #: includes/arrays.php includes/functions.php
 msgid "Flows"
@@ -1530,7 +1493,7 @@ msgstr "Pacchetti"
 
 #: includes/arrays.php
 msgid "Destination Domain"
-msgstr "IP di destinazione"
+msgstr "Dominio di destinazione"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source Port"
@@ -1538,7 +1501,7 @@ msgstr "Porta(i) di origine"
 
 #: includes/arrays.php
 msgid "Destination Port"
-msgstr "IP di destinazione"
+msgstr "Porta di destinazione"
 
 #: includes/arrays.php includes/functions.php
 msgid "Dest IP"
@@ -1546,7 +1509,7 @@ msgstr "IP di destinazione"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source IF"
-msgstr "Nessuna Fonte"
+msgstr "Interfaccia di origine"
 
 #: includes/arrays.php
 msgid "Destination IF"
@@ -1671,7 +1634,7 @@ msgstr "Il tipo di rapporto stampato da utilizzare per impostazione predefinita 
 
 #: includes/arrays.php
 msgid "Range Rules"
-msgstr "Gestire gli orari"
+msgstr "Regole di intervallo"
 
 #: includes/arrays.php
 msgid "Constrain the Filter Data by these time filter rules."
@@ -1679,7 +1642,7 @@ msgstr "Vincola i dati del filtro in base a queste regole di filtro temporale."
 
 #: includes/arrays.php
 msgid "Resolve IP's"
-msgstr "Risolvere Indirizzi:"
+msgstr "Risolvere Indirizzi"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
@@ -1699,7 +1662,7 @@ msgstr "Il numero massimo di righe da fornire nel filtro. Questa impostazione ve
 
 #: includes/arrays.php
 msgid "Minimum Bytes"
-msgstr "Bytes minimi:"
+msgstr "Bytes minimi"
 
 #: includes/arrays.php
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
@@ -1734,17 +1697,16 @@ msgid "Graph Height"
 msgstr "Altezza grafico"
 
 #: includes/arrays.php
-#, fuzzy
 msgid "The Graph Height to use by default."
 msgstr "L'altezza del grafico da utilizzare per impostazione predefinita."
 
 #: includes/arrays.php includes/functions.php
 msgid "Use NAT Data"
-msgstr ""
+msgstr "Usa dati NAT"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
+msgstr "Mostra l'indirizzo IP e il nome DNS di origine/destinazione post-NAT (tradotti) nell'output del report invece dei valori originali pre-NAT."
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1791,10 +1753,8 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr "Seleziona il protocollo specifico per il filtro."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Protocols"
 msgid "All Protocols"
-msgstr "Protocolli"
+msgstr "Tutti i protocolli"
 
 #: includes/arrays.php
 msgid "TCP Flags"
@@ -1865,56 +1825,40 @@ msgid "Filter on the select Destination AS for in the Filter.  This can be a com
 msgstr "Filtrare sulla destinazione selezionata AS per nel filtro. Può essere un elenco delimitato da virgole di Destimation AS"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Source IP"
 msgid "Post-NAT Source IP"
-msgstr "Origine IP"
+msgstr "IP sorgente post-NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtra in base all'IP di origine selezionato per nel filtro. Può essere un elenco delimitato da virgole di indirizzi IPv4 o IPv6 oppure un elenco delimitato da virgole di intervalli di indirizzi IPv4 o IPv6 in formato CIDR (ad es. 192.168.1.0/24)."
+msgstr "Filtra in base all'IP di origine tradotto (post-NAT) registrato nel filtro. Può essere un elenco separato da virgole di indirizzi IPv4 o IPv6 oppure un elenco separato da virgole di intervalli di indirizzi IPv4 o IPv6 in formato CIDR (ad es. 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
 msgid "Post-NAT Source Port"
-msgstr "Porta sorgente UDP/TCP"
+msgstr "Porta sorgente post-NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrare sulle porte di origine selezionate per nel filtro. Può essere un elenco delimitato da virgole di porte di origine."
+msgstr "Filtra in base alla porta di origine tradotta (post-NAT) nel filtro. Può essere un elenco di porte separato da virgole."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest IP"
 msgid "Post-NAT Dest IP"
-msgstr "IP di destinazione"
+msgstr "IP di destinazione post-NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Filtrare in base all'IP di destinazione selezionato per nel filtro. Può essere un elenco delimitato da virgole di indirizzi IPv4 o IPv6 oppure un elenco delimitato da virgole di intervalli di indirizzi IPv4 o IPv6 in formato CIDR (ad es. 192.168.1.0/24)."
+msgstr "Filtra in base all'IP di destinazione tradotto (post-NAT) registrato nel filtro. Può essere un elenco separato da virgole di indirizzi IPv4 o IPv6 oppure un elenco separato da virgole di intervalli di indirizzi IPv4 o IPv6 in formato CIDR (ad es. 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest Port"
 msgid "Post-NAT Dest Port"
-msgstr "Porta di destinazione"
+msgstr "Porta di destinazione post-NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Filtrare sulle porte di destinazione selezionate per nel filtro. Può essere un elenco delimitato da virgole di porte di destinazione."
+msgstr "Filtra in base alla porta di destinazione tradotta (post-NAT) nel filtro. Può essere un elenco di porte separato da virgole."
 
 #: includes/arrays.php
 msgid "DNS Cache"
-msgstr "DNS Cache"
+msgstr "Cache DNS"
 
 #: includes/arrays.php
 msgid "CIDR/Routes"
@@ -1950,7 +1894,7 @@ msgstr "Set di peering"
 
 #: includes/arrays.php
 msgid "Internet Routers"
-msgstr "Controllo di Internet"
+msgstr "Router Internet"
 
 #: includes/arrays.php
 msgid "Incident Response Teams"
@@ -1973,19 +1917,19 @@ msgid "Persons"
 msgstr "Persone"
 
 #: includes/functions-pre13.php
-#, fuzzy, php-format
+#, php-format
 msgid "Cacti %s"
-msgstr "Cactus"
+msgstr "Cacti %s"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
-msgstr ""
+msgstr "L'esecuzione del report '%s' dall'origine %s con ID %s è pianificata!"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
-msgstr ""
+msgstr "L'esecuzione del report '%s' dall'origine %s con ID %s non è stata pianificata a causa di un errore!"
 
 #: includes/functions.php
 msgid "General"
@@ -1993,11 +1937,11 @@ msgstr "Generale"
 
 #: includes/functions.php
 msgid "Logs"
-msgstr ""
+msgstr "Logs"
 
 #: includes/functions.php
 msgid "Select a Report Type First"
-msgstr "Stampa i rapporti"
+msgstr "Seleziona prima un tipo di report"
 
 #: includes/functions.php
 #, php-format
@@ -2010,15 +1954,15 @@ msgstr "Rapporto: [nuovo]"
 
 #: includes/functions.php
 msgid "Cached Results Affected"
-msgstr ""
+msgstr "Risultati nella cache interessati"
 
 #: includes/functions.php
 msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
-msgstr ""
+msgstr "Queste modifiche influiscono sui risultati memorizzati nella cache di questo filtro. Il salvataggio avvia una materializzazione in background per ricostruirli. Premi 'Continua' per salvare il filtro oppure 'Annulla' per continuare a modificarlo."
 
 #: includes/functions.php
 msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
-msgstr ""
+msgstr "Le modifiche a questo filtro influiscono sui relativi risultati memorizzati nella cache, pertanto è stata avviata una materializzazione in background. L'avanzamento viene mostrato nella pagina Filtri e i risultati sono riportati nel registro di Cacti."
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -2036,7 +1980,7 @@ msgstr "Rapporto stampato: %s [comprese le sostituzioni come specificato di segu
 
 #: includes/functions.php
 msgid "Select a Filter"
-msgstr "Stampa i rapporti"
+msgstr "Seleziona un filtro"
 
 #: includes/functions.php
 msgid "Apply Filter"
@@ -2056,7 +2000,7 @@ msgstr "Modifica filtro corrente"
 
 #: includes/functions.php
 msgid "Create new Flow Filter"
-msgstr "Con quale frequenza creare un nuovo file di flusso."
+msgstr "Crea nuovo filtro di flusso"
 
 #: includes/functions.php
 msgid "New"
@@ -2068,7 +2012,7 @@ msgstr "Salva"
 
 #: includes/functions.php
 msgid "Save the Flow Filter"
-msgstr "Stampa i rapporti"
+msgstr "Salva il filtro flussi"
 
 #: includes/functions.php
 msgid "Save As"
@@ -2076,7 +2020,7 @@ msgstr "Salva come"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
-msgstr "Stampa i rapporti"
+msgstr "Salva il filtro flussi esistente come nuovo filtro"
 
 #: includes/functions.php
 msgid "Rename"
@@ -2088,7 +2032,7 @@ msgstr "Rinominare il filtro di flusso"
 
 #: includes/functions.php
 msgid "Delete the Flow Filter"
-msgstr "Stampa i rapporti"
+msgstr "Elimina il filtro di flusso"
 
 #: includes/functions.php
 msgid "Report"
@@ -2106,7 +2050,7 @@ msgstr "Stampato: %s"
 
 #: includes/functions.php
 msgid "Select a Filter First"
-msgstr "Stampa i rapporti"
+msgstr "Seleziona prima un filtro"
 
 #: includes/functions.php
 msgid "Lines"
@@ -2139,7 +2083,7 @@ msgstr "Solo domini"
 
 #: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
-msgstr ""
+msgstr "Mostra l'indirizzo IP/nome DNS post-NAT (tradotto) invece dei valori originali"
 
 #: includes/functions.php
 msgid "Timespan"
@@ -2163,15 +2107,15 @@ msgstr "Selettore della data di fine"
 
 #: includes/functions.php
 msgid "Shift Time Backward"
-msgstr "Sposta il tempo indietro"
+msgstr "Spostare il tempo all'indietro"
 
 #: includes/functions.php
 msgid "Define Shifting Interval"
-msgstr "Definisci intervallo di cambio"
+msgstr "Definire l'intervallo di cambio"
 
 #: includes/functions.php
 msgid "Shift Time Forward"
-msgstr "Sposta il tempo in avanti"
+msgstr "Tempo di spostamento in avanti"
 
 #: includes/functions.php
 msgid "Graph"
@@ -2202,13 +2146,12 @@ msgid "Table"
 msgstr "Tabella"
 
 #: includes/functions.php
-#, fuzzy
 msgid "Export Raw Data"
-msgstr "Segnala"
+msgstr "Esporta dati grezzi"
 
 #: includes/functions.php
 msgid "Save Flow Filter"
-msgstr "Nuovo filtro"
+msgstr "Salva filtro flussi"
 
 #: includes/functions.php
 msgid "New Name"
@@ -2216,7 +2159,7 @@ msgstr "Campo Nome"
 
 #: includes/functions.php
 msgid "Delete Flow Filter"
-msgstr "Stampa i rapporti"
+msgstr "Elimina filtro di flusso"
 
 #: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
@@ -2273,11 +2216,11 @@ msgstr "Rinomina layout"
 
 #: includes/functions.php
 msgid " <new>"
-msgstr "new"
+msgstr " new"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
-msgstr ""
+msgstr "Impostazioni del filtro salvate. La materializzazione di questo filtro è stata avviata in background."
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
@@ -2308,10 +2251,9 @@ msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Filtro sottorete: %s non è un formato CIDR di valori"
 
 #: includes/functions.php
-#, fuzzy, php-format
-#| msgid "Subnet Filter: %s is not a value CIDR format"
+#, php-format
 msgid "IP Filter: %s is not a valid IP address"
-msgstr "Filtro sottorete: %s non è un formato CIDR di valori"
+msgstr "Filtro IP: %s non è un indirizzo IP valido"
 
 #: includes/functions.php
 msgid "unresolved"
@@ -2330,12 +2272,12 @@ msgstr "> %d byte"
 #: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "Il report statistico %s non è riconosciuto. Apri una segnalazione di bug su GitHub"
 
 #: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "Il report stampato %s non è riconosciuto. Apri una segnalazione di bug su GitHub"
 
 #: includes/functions.php
 msgid "Source DNS"
@@ -2351,11 +2293,11 @@ msgstr "Destinazione AS"
 
 #: includes/functions.php
 msgid "Dest Root DNS"
-msgstr "Porta di destinazione"
+msgstr "Root DNS di destinazione"
 
 #: includes/functions.php
 msgid "DNS"
-msgstr "DSR"
+msgstr "DNS"
 
 #: includes/functions.php
 msgid "Root DNS"
@@ -2384,38 +2326,38 @@ msgstr "Pacchetti"
 #: includes/functions.php
 #, php-format
 msgid "Not materialized yet, with NAT: %s, without NAT: %s."
-msgstr ""
+msgstr "Non ancora materializzato, con NAT: %s, senza NAT: %s."
 
 #: includes/functions.php
 msgid "Up to date"
-msgstr ""
+msgstr "Aggiornato"
 
 #: includes/functions.php
 msgid "Running"
-msgstr ""
+msgstr "Corsa"
 
 #: includes/functions.php
 msgid "Required"
-msgstr ""
+msgstr "Richiesto"
 
 #: includes/functions.php
 msgid "The number of queries of this Filter that are running now."
-msgstr ""
+msgstr "Il numero di query di questo filtro attualmente in esecuzione."
 
 #: includes/functions.php
 #, php-format
 msgid "With NAT: %d, without NAT: %d."
-msgstr ""
+msgstr "Con NAT: %d, senza NAT: %d."
 
 #: includes/functions.php
 #, php-format
 msgid "Running: %s"
-msgstr ""
+msgstr "In esecuzione: %s"
 
 #: includes/functions.php
 #, php-format
 msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
-msgstr ""
+msgstr "ERRORE: la query parallela non è terminata entro il tempo massimo di esecuzione di %d secondi. Verificare il tempo massimo di esecuzione nelle impostazioni di FlowView e che il database non sia occupato con un'altra operazione come ALTER TABLE."
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
@@ -2516,7 +2458,7 @@ msgstr "IP non valido per l'indirizzo sorgente <br>(deve essere nella forma di '
 
 #: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "Sottorete non valida per l'indirizzo sorgente <br>(Deve essere nella forma di '192.168.0.1/255.255.255.255.255.255.0' o '192.168.0.0.1/24')."
+msgstr "Sottorete non valida per l'indirizzo sorgente <br>(Deve essere nella forma di '192.168.0.1/255.255.255.255.255.255.0' o '192.168.0.0.1/24')"
 
 #: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
@@ -2524,7 +2466,7 @@ msgstr "IP non valido per l'indirizzo di destinazione <br>(deve essere nella for
 
 #: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr "Sottorete non valida per l'indirizzo di destinazione <br>(Deve essere nella forma di '192.168.0.1/255.255.255.255.255.255.0' o '192.168.0.0.1/24')."
+msgstr "Sottorete non valida per l'indirizzo di destinazione <br>(Deve essere nella forma di '192.168.0.1/255.255.255.255.255.255.0' o '192.168.0.0.1/24')"
 
 #: includes/functions.php
 msgid "Invalid value for Source Interface!"
@@ -2572,19 +2514,16 @@ msgid "FlowView Chart for %s Type is %s"
 msgstr "Diagramma di visualizzazione del flusso per %s Tipo è %s"
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "Supported"
 msgid "Supported (NAT)"
-msgstr "Sostenuto"
+msgstr "Supportato (NAT)"
 
 #: includes/functions.php
 msgid "Not Supported"
 msgstr "Non supportato"
 
 #: includes/functions.php setup.php
-#, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
-msgstr "Aria (veloce, a prova di incidente)"
+msgstr "MyISAM (veloce, non resistente ai crash)"
 
 #: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
@@ -2595,14 +2534,12 @@ msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (concorrenza lenta e alta)"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow User"
-msgstr "Versione NetFlow"
+msgstr "Utente NetFlow"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow Admin"
-msgstr "Versione NetFlow"
+msgstr "Amministratore NetFlow"
 
 #: setup.php
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
@@ -2610,7 +2547,7 @@ msgstr "Rinominare i file config.php.dist o config_local.php.dist nella director
 
 #: setup.php
 msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
-msgstr "Tieni presente che le tabelle dei plug-in Flowview vengono aggiornate in background.  Questo potrebbe richiedere del tempo. Per ulteriori informazioni, consulta il registro dei cactus"
+msgstr "Si informa che le tabelle del plugin FlowView sono in fase di aggiornamento in background. L'operazione potrebbe richiedere del tempo. Controlla il log di Cacti per ulteriori informazioni"
 
 #: setup.php
 msgid "The Filter has been Deleted"
@@ -2646,7 +2583,7 @@ msgstr "Visualizzatore di flusso"
 
 #: setup.php
 msgid "Dashboard"
-msgstr "Bacheca"
+msgstr "Dashboard"
 
 #: setup.php
 msgid "(save)"
@@ -2658,56 +2595,53 @@ msgstr "(modificare)"
 
 #: setup.php
 msgid "(actions)"
-msgstr "Azioni"
+msgstr "(azioni)"
 
 #: setup.php
-#, fuzzy, php-format
+#, php-format
 msgid "%d Process"
-msgstr "%d pixel"
+msgstr "%d processo"
 
 #: setup.php
 #, php-format
 msgid "%d Processes"
-msgstr ""
+msgstr "%d Processi"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
-msgstr ""
+msgstr "Processi simultanei report (solo FlowView)"
 
 #: setup.php
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
-msgstr ""
+msgstr "Seleziona il numero massimo di processi di report simultanei eseguibili contemporaneamente."
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Settings"
-msgstr "Controllo di Internet"
+msgstr "Impostazioni generali"
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Address"
-msgstr "Controllo di Internet"
+msgstr "Inserisci l'indirizzo del sito"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "Per i servizi principali di Cacti o i plugin che richiedono l'accesso a Internet, inserire qui il server proxy e la porta nel formato IP:PORTA.  Ad esempio 192.168.1.1:8080."
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy User"
-msgstr "Controllo di Internet"
+msgstr "Utente proxy Internet"
 
 #: setup.php
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "Se il tuo proxy Internet richiede un nome utente, inseriscilo qui."
 
 #: setup.php
 msgid "Internet Proxy Password"
-msgstr ""
+msgstr "Password proxy Internet"
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "Se il tuo proxy Internet richiede una password, inseriscila qui."
 
 #: setup.php
 msgid "Name Resolution"
@@ -2734,17 +2668,16 @@ msgid "Don't Resolve DNS"
 msgstr "Non risolvere i DNS"
 
 #: setup.php
-#, fuzzy
 msgid "Download the Internet Registry Daily"
-msgstr "Dettagli del Registro di sistema delle route Internet"
+msgstr "Scarica giornalmente il registro Internet"
 
 #: setup.php
 msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
-msgstr ""
+msgstr "Se si desidera ottenere le informazioni disponibili pubblicamente sull'intera rete Internet, è possibile selezionare questa opzione. Cacti contatterà gli Internet Registry di tutto il mondo una volta al giorno, verificherà le modifiche alle rotte dell'intera rete Internet e caricherà tali informazioni in Cacti. Nota: ciò creerà un database piuttosto grande, superiore a 3 GB di dati."
 
 #: setup.php
 msgid "Local Domain Name"
-msgstr "Nomi a dominio di striscia"
+msgstr "Nome di dominio locale"
 
 #: setup.php
 msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
@@ -2755,9 +2688,8 @@ msgid "Local IP Range"
 msgstr "Intervallo IP locale"
 
 #: setup.php
-#, fuzzy
 msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
-msgstr "Specificare l'intervallo di indirizzi IP IPv4 per la rete locale per gli host che potrebbero non essere registrati in DNS.  Questi host verranno mappati al nome di dominio locale di cui sopra.  Questo più per gli utenti domestici.  È possibile utilizzare formati CIDR o non CIDR.  Ad esempio: 192.168.11.0 o 192.168.11.0/24"
+msgstr "Fornire l'intervallo di indirizzi IP IPv4 per la rete locale per gli host che potrebbero non essere registrati nel DNS.  Questi host verranno mappati al nome di dominio locale indicato sopra.  Questa opzione è pensata soprattutto per gli utenti domestici.  È possibile utilizzare formati CIDR o non CIDR.  Ad esempio: 192.168.11.0 o 192.168.11.0/24"
 
 #: setup.php
 msgid "Use CIDR or Non-CIDR"
@@ -2765,7 +2697,7 @@ msgstr "Usa CIDR o non CIDR"
 
 #: setup.php
 msgid "Use Arin to find Domains and AS Numbers"
-msgstr "Usa Arin per trovare domini non registrati"
+msgstr "Usa ARIN per trovare domini e numeri AS"
 
 #: setup.php
 msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
@@ -2785,7 +2717,7 @@ msgstr "whois.radb.net"
 
 #: setup.php
 msgid "Whois Binary Path"
-msgstr "Percorso binario degli strumenti di flusso"
+msgstr "Percorso binario di Whois"
 
 #: setup.php
 msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
@@ -2797,15 +2729,15 @@ msgstr "Inserisci il percorso binario"
 
 #: setup.php
 msgid "Graph Drilldown Settings"
-msgstr ""
+msgstr "Impostazioni drill-down del grafico"
 
 #: setup.php
 msgid "Default Search Filter for Graph Drilldowns"
-msgstr ""
+msgstr "Filtro di ricerca predefinito per l'analisi dettagliata dei grafici"
 
 #: setup.php
 msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
-msgstr ""
+msgstr "Scegliere un filtro di ricerca FlowView esistente da utilizzare per il drill-down dei grafici."
 
 #: setup.php
 msgid "Data Retention and Report Generation"
@@ -2873,48 +2805,44 @@ msgid "Parallel Queries"
 msgstr "Query parallele"
 
 #: setup.php
-#, fuzzy
-#| msgid "Parallel Queries"
 msgid "Parallel Query Backend"
-msgstr "Query parallele"
+msgstr "Backend per query parallele"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr ""
+msgstr "Scegliere come eseguire le query FlowView parallele. Il Runner PHP legacy avvia il processo flowview_runner.php tramite fork per ogni query e shard. Il FlowView Query Service invia lo stesso lavoro map-reduce a un servizio Go persistente su localhost, evitando la latenza di avvio del processo per ogni query e del polling sul database. Richiede che il servizio flowview-query (vedere plugins/flowview/service/flowview-query) sia installato e in esecuzione."
 
 #: setup.php
 msgid "Legacy PHP Runner"
-msgstr ""
+msgstr "Esecutore PHP legacy"
 
 #: setup.php
-#, fuzzy
-#| msgid "Flow Viewer"
 msgid "FlowView Query Service"
-msgstr "Visualizzatore di flusso"
+msgstr "Servizio query FlowView"
 
 #: setup.php
 msgid "Query Service URL"
-msgstr ""
+msgstr "URL del Query Service"
 
 #: setup.php
 msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
-msgstr ""
+msgstr "URL di base del FlowView Query Service, ad esempio http://127.0.0.1:8699. Lasciare vuoto per rilevare automaticamente la porta effimera dal file delle porte del servizio."
 
 #: setup.php
 msgid "Query Service Port File"
-msgstr ""
+msgstr "File porta del Query Service"
 
 #: setup.php
 msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
-msgstr ""
+msgstr "Percorso del file della porta in cui FlowView Query Service scrive il proprio indirizzo associato. Utilizzato per rilevare l'endpoint del servizio quando l'URL del Query Service sopra è vuoto."
 
 #: setup.php
 msgid "Query Service Token"
-msgstr ""
+msgstr "Token del Query Service"
 
 #: setup.php
 msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
-msgstr ""
+msgstr "Segreto condiviso opzionale. Se impostato, Cacti lo invia al FlowView Query Service come intestazione \"Authorization: Bearer\" e il servizio rifiuta qualsiasi richiesta che modifichi lo stato priva dello stesso token. Imposta il valore corrispondente nel file di configurazione del servizio (auth_token) o nella variabile d'ambiente FLOWVIEW_QUERY_TOKEN. Consigliato ogni volta che il servizio è raggiungibile da qualsiasi entità diversa da processi locali attendibili."
 
 #: setup.php
 msgid "Max Concurrent Threads"
@@ -2935,7 +2863,7 @@ msgstr "%d discussioni"
 
 #: setup.php
 msgid "Maximum Run Time"
-msgstr "Righe massime"
+msgstr "Tempo massimo di esecuzione"
 
 #: setup.php
 msgid "If the Parallel Query does not finish in this time, exit."
@@ -2970,7 +2898,7 @@ msgstr "Partizionamento orizzontale MaxScale"
 
 #: setup.php
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
-msgstr ""
+msgstr "È richiesto solo se la connessione al database FlowView del sistema Cacti non sta già utilizzando una porta di Read-Write Split abilitata su MaxScale."
 
 #: setup.php
 msgid "Leverage MaxScale to Distribute Query Shards"
@@ -2981,23 +2909,20 @@ msgid "If you have multiple service acting as slaves for MaxScale, you can incre
 msgstr "Se si dispone di più servizi che fungono da slave per MaxScale, è possibile aumentare la velocità di esecuzione delle query distribuendo le query parallele a più server backend MariaDB."
 
 #: setup.php
-#, fuzzy
 msgid "MaxScale Read-Write Split Port"
-msgstr "Porta di sola lettura MaxScale"
+msgstr "Porta di split lettura-scrittura MaxScale"
 
 #: setup.php
-#, fuzzy
 msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
-msgstr "Deve essere la porta del servizio di sola lettura (readconnroute) e del router."
+msgstr "Deve essere la porta del servizio Read-Write-Split-Service (readwrite) e del router."
 
 #: setup.php
 msgid "Flowview"
 msgstr "FlowView"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow"
-msgstr "Nuovo flusso"
+msgstr "NetFlow"
 
 #~ msgid "Select a Listener"
 #~ msgstr "Stampa i rapporti"
