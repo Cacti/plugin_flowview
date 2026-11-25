@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/flowview/he_IL/>\nLanguage: he-IL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/flowview/he_IL/>\nLanguage: he-IL\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,13 +500,12 @@ msgid "No Matching Entries Found"
 msgstr "לא נמצאו ערכים תואמים"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "לחץ על 'המשך' כדי למחוק את התזמונים הבאים."
-msgstr[1] "לחץ על 'המשך' כדי למחוק את התזמונים הבאים."
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "לחץ על 'המשך' כדי למחוק את ערך מטמון ה-DNS הבא."
+msgstr[1] "לחץ על 'המשך' כדי למחוק את כל ערכי מטמון ה-DNS הבאים."
+msgstr[2] "לחץ על 'המשך' כדי למחוק את כל ערכי מטמון ה-DNS הבאים."
+msgstr[3] "לחץ על 'המשך' כדי למחוק את כל ערכי מטמון ה-DNS הבאים."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -1650,7 +1649,7 @@ msgstr "פתרון כתובות"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "פתרון כתובות:"
+msgstr "פתרון כתובות IP לשמות מתחם."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -2020,7 +2019,7 @@ msgstr "שמור את מסנן ה-Flow"
 
 #: includes/functions.php
 msgid "Save As"
-msgstr "שמירה בשם"
+msgstr "שמור בשם"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
@@ -2062,7 +2061,7 @@ msgstr "שורות"
 
 #: includes/functions.php
 msgid "Exclude"
-msgstr "לא לכלול"
+msgstr "החרג"
 
 #: includes/functions.php
 msgid "Top Sample"
@@ -2127,7 +2126,7 @@ msgstr "גרף"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "עמוד"
+msgstr "עמודות"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2621,7 +2620,7 @@ msgstr "בחר את המספר המרבי של תהליכי דוחות מקבי�
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "הגדרות פרוקסי אינטרנט"
+msgstr "הגדרות שרת Proxy לאינטרנט"
 
 #: setup.php
 msgid "Internet Proxy Address"
@@ -2858,12 +2857,12 @@ msgstr "המספר המרבי של הליכי משנה שישוגרו להפעל
 
 #: setup.php
 msgid "Disabled"
-msgstr "מושבת"
+msgstr "לא זמין"
 
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "%d Threads"
+msgstr "%d תהליכונים"
 
 #: setup.php
 msgid "Maximum Run Time"
