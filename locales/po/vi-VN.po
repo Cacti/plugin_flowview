@@ -4,31 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-23 16:08-0400\n"
-"PO-Revision-Date: 2024-07-14 20:38-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: vi_VN\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Vietnamese <https://translate.cacti.net/projects/cacti/flowview/vi/>\nLanguage: vi-VN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
-msgstr ""
+msgstr "Không thể tìm thấy dữ liệu thô để xuất"
 
 #: flowview.php
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
-msgstr ""
+msgstr "Truy vấn FlowView được cung cấp không tồn tại. Vui lòng gửi lại với một truy vấn hợp lệ."
 
 #: flowview.php
 msgid "Invalid source Query provided.  Please submit with a valid query."
-msgstr ""
+msgstr "Truy vấn nguồn được cung cấp không hợp lệ. Vui lòng gửi lại với truy vấn hợp lệ."
 
 #: flowview.php
 #, php-format
@@ -58,9 +46,8 @@ msgid "Authorized Agent Details"
 msgstr "Chi tiết đại lý ủy quyền"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "No Details Found"
-msgstr "Không tìm thấy mục nhập bộ nhớ cache DNS"
+msgstr "Không tìm thấy chi tiết nào"
 
 #: flowview_databases.php
 msgid "CIDR/Route"
@@ -76,7 +63,7 @@ msgstr "Khối AS"
 
 #: flowview_databases.php
 msgid "AS Set"
-msgstr "Chưa thiết lập"
+msgstr "Tập AS"
 
 #: flowview_databases.php
 msgid "Route Set"
@@ -248,11 +235,11 @@ msgstr "MNT Irt"
 
 #: flowview_databases.php
 msgid "MP Members"
-msgstr "Số"
+msgstr "Thành viên MP"
 
 #: flowview_databases.php
 msgid "Sub Domain"
-msgstr "Cổng nguồn"
+msgstr "Tên miền phụ"
 
 #: flowview_databases.php
 msgid "Pingable"
@@ -300,7 +287,7 @@ msgstr "Tên tổ chức"
 
 #: flowview_databases.php
 msgid "AS Name"
-msgstr "Tên:"
+msgstr "Tên"
 
 #: flowview_databases.php
 msgid "Author"
@@ -332,7 +319,7 @@ msgstr "Kích thước bài tập"
 
 #: flowview_databases.php
 msgid "Export Comps"
-msgstr "Báo cáo"
+msgstr "Xuất Comps"
 
 #: flowview_databases.php
 msgid "RS In"
@@ -340,7 +327,7 @@ msgstr "RS vào"
 
 #: flowview_databases.php
 msgid "Net Name"
-msgstr "Tên trường"
+msgstr "Tên mạng"
 
 #: flowview_databases.php
 msgid "DS Rdata"
@@ -400,12 +387,11 @@ msgstr "Nguồn gốc AS"
 
 #: flowview_databases.php
 msgid "MP Export"
-msgstr "Báo cáo"
+msgstr "Xuất MP"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Encryption"
-msgstr "Hết hạn"
+msgstr "Mã hóa"
 
 #: flowview_databases.php
 msgid "Geo Feed"
@@ -421,7 +407,7 @@ msgstr "Giao diện"
 
 #: flowview_databases.php
 msgid "Export Via"
-msgstr "Báo cáo"
+msgstr "Xuất qua"
 
 #: flowview_databases.php
 msgid "Trouble"
@@ -536,7 +522,7 @@ msgstr[0] "Xóa mục nhập DNS"
 
 #: flowview_databases.php
 msgid "Flowview DNS Cache Entries"
-msgstr "Lịch trình FlowView"
+msgstr "Các mục bộ nhớ đệm DNS FlowView"
 
 #: flowview_databases.php
 msgid "Verified"
@@ -608,7 +594,7 @@ msgstr "Không tìm thấy mục nhập bộ nhớ cache DNS"
 
 #: flowview_databases.php
 msgid "Flowview Internet Routes"
-msgstr "Trình nghe FlowView"
+msgstr "Các tuyến Internet FlowView"
 
 #: flowview_databases.php
 msgid "IP Version"
@@ -632,7 +618,7 @@ msgstr "Đây là Tuyến đường Internet được xuất bản."
 
 #: flowview_databases.php
 msgid "AS Number"
-msgstr "Mã cổng"
+msgstr "Số AS"
 
 #: flowview_databases.php
 msgid "The Autonomous System Number for the route."
@@ -643,9 +629,8 @@ msgid "Route Description"
 msgstr "Mô tả tuyến đường"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "The Description logged by the Route Maintainer."
-msgstr "Sự phân hủy được ghi lại bởi Người duy trì tuyến đường."
+msgstr "Mô tả được ghi lại bởi người duy trì tuyến đường."
 
 #: flowview_databases.php
 msgid "The source database used to publish the route."
@@ -693,20 +678,19 @@ msgstr "Có hai phương pháp thu thập hỗ trợ, phương pháp thứ nhấ
 
 #: flowview_devices.php
 msgid "Bind to address"
-msgstr ""
+msgstr "Gắn kết với địa chỉ"
 
 #: flowview_devices.php
 msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
-msgstr ""
+msgstr "Nếu máy chủ Cacti có nhiều địa chỉ IP, bạn có thể chỉ định giao diện cụ thể. Để là 0.0.0.0 cho giao diện chính."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Allowed Host Range"
-msgstr "Máy chủ được phép"
+msgstr "Dải máy chủ được phép"
 
 #: flowview_devices.php
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
-msgstr ""
+msgstr "Địa chỉ IP của thiết bị được phép gửi dữ liệu tới bộ thu thập luồng (flow collector) này. Để là 0.0.0.0 cho bất kỳ máy chủ nào. Lưu ý rằng PHP khá khắt khe về định dạng cho phép. Hỗ trợ cú pháp CIDR cũng như cú pháp dải địa chỉ, ví dụ: 192.168.1.0 hoặc 192.168.1.0/24. Nếu bạn muốn chỉ định nhiều địa chỉ IP cụ thể, hãy phân tách chúng bằng dấu phẩy."
 
 #: flowview_devices.php includes/arrays.php
 msgid "Port"
@@ -722,11 +706,11 @@ msgstr "Giao thức"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
-msgstr "Trình nghe để sử dụng cho Bộ lọc."
+msgstr "Giao thức IP để sử dụng cho trình lắng nghe này."
 
 #: flowview_devices.php
 msgid "UDP Protocol"
-msgstr "Giao thức IP"
+msgstr "Giao thức UDP"
 
 #: flowview_devices.php flowview_schedules.php
 msgid "Enabled"
@@ -734,7 +718,7 @@ msgstr "Bật"
 
 #: flowview_devices.php
 msgid "If checked, the Listener service will be started and will wait on incoming data."
-msgstr ""
+msgstr "Nếu được chọn, dịch vụ Listener sẽ được khởi động và chờ dữ liệu gửi đến."
 
 #: flowview_devices.php
 #, php-format
@@ -742,23 +726,20 @@ msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
 msgstr "Không tìm thấy Mẫu luồng nào cho ID thiết bị:%s và ID mẫu:%s"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "Nhấp vào 'Tiếp tục' để xóa Trình nghe Net-Flow sau đây. Sau đó, bạn sẽ cần khởi động lại Dịch vụ thu thập lưu lượng."
+msgstr "Nhấp vào 'Tiếp tục' để xóa các Trình lắng nghe NetFlow sau. Sau đó, Cacti sẽ thử khởi động lại dịch vụ Flow-Capture của bạn."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr "Nhấp vào 'Tiếp tục' để xóa Trình nghe Net-Flow sau đây. Sau đó, bạn sẽ cần khởi động lại Dịch vụ thu thập lưu lượng."
+msgstr "Nhấp vào 'Tiếp tục' để bật các Trình lắng nghe NetFlow sau. Sau đó, Cacti sẽ thử khởi động lại dịch vụ Flow-Capture của bạn."
 
 #: flowview_devices.php
-#, fuzzy
 msgid "You must select at least one Listener."
-msgstr "Bạn phải chọn ít nhất một thiết bị."
+msgstr "Bạn phải chọn ít nhất một Listener."
 
 #: flowview_devices.php
 msgid "The listener port must be a numeric value between 1 and 65535."
-msgstr ""
+msgstr "Cổng lắng nghe phải là một giá trị số từ 1 đến 65535."
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
@@ -771,11 +752,11 @@ msgstr "Lưu thành công.  Flowview Listener đã được lưu.  Tuy nhiên, d
 #: flowview_devices.php
 #, php-format
 msgid "Listener [edit: %s]"
-msgstr "Báo cáo: [chỉnh sửa: %s]"
+msgstr "Trình lắng nghe [chỉnh sửa: %s]"
 
 #: flowview_devices.php
 msgid "Listener [new]"
-msgstr "Báo cáo: [mới]"
+msgstr "Trình lắng nghe [mới]"
 
 #: flowview_devices.php
 msgid "Name"
@@ -862,9 +843,8 @@ msgid "Method"
 msgstr "Phương thức"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "Bind address"
-msgstr "Địa chỉ IP"
+msgstr "Địa chỉ gắn kết"
 
 #: flowview_devices.php
 msgid "Allowed From"
@@ -880,11 +860,11 @@ msgstr "An ninh cổng thực sự được quan sát trên cổng người nghe
 
 #: flowview_devices.php
 msgid "Backlog"
-msgstr ""
+msgstr "Hàng đợi tồn đọng"
 
 #: flowview_devices.php
 msgid "The Size of the UDP backlog in bytes."
-msgstr ""
+msgstr "Kích thước hàng đợi UDP tính bằng byte."
 
 #: flowview_devices.php
 msgid "Streams"
@@ -911,9 +891,8 @@ msgid "None"
 msgstr "Không"
 
 #: flowview_devices.php
-#, fuzzy
 msgid "No Connections"
-msgstr "Địa điểm"
+msgstr "Không có kết nối"
 
 #: flowview_devices.php includes/arrays.php includes/functions.php
 msgid "N/A"
@@ -921,7 +900,7 @@ msgstr "N/A"
 
 #: flowview_devices.php
 msgid "Cacti"
-msgstr "Xương rồng"
+msgstr "Cacti"
 
 #: flowview_devices.php
 msgid "No Flowview Listeners"
@@ -929,34 +908,34 @@ msgstr "Trình nghe FlowView"
 
 #: flowview_filters.php
 msgid "Materialize"
-msgstr ""
+msgstr "Tạo dữ liệu sẵn"
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
-msgstr ""
+msgstr "Không thể xác định khóa bộ nhớ đệm của các Bộ lọc, nên không có gì bị dọn bớt."
 
 #: flowview_filters.php
 #, php-format
 msgid "Pruned %s cached shard(s) that did not match any Filter."
-msgstr ""
+msgstr "Đã dọn bớt %s phân đoạn đã lưu đệm không khớp với bất kỳ Bộ lọc nào."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "Đã bắt đầu tạo dữ liệu sẵn cho %d bộ lọc ở chế độ nền.  %d bộ lọc hiện đang được tạo dữ liệu sẵn.  Kết quả được báo cáo trong nhật ký Cacti."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "Đã bắt đầu tạo dữ liệu sẵn cho %d bộ lọc ở chế độ nền.  Kết quả được báo cáo trong nhật ký Cacti."
 
 #: flowview_filters.php
 msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
-msgstr ""
+msgstr "Các Bộ lọc đã chọn hiện đang được tạo dữ liệu lưu sẵn. Vui lòng thử lại sau khi quá trình đó hoàn tất."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
-msgstr "Nhấp vào 'Tiếp tục' để xóa (các) Lịch biểu sau."
+msgstr "Nhấp vào 'Tiếp tục' để xóa (các) Bộ lọc sau và tất cả các Bộ lọc khớp."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
@@ -968,11 +947,11 @@ msgstr "Nhấp vào 'Tiếp tục' để bật (các) Lịch biểu sau."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
-msgstr ""
+msgstr "Nhấp 'Tiếp tục' để kết xuất dữ liệu (Materialize) cho (các) bộ lọc sau ở chế độ nền, với cả hai trạng thái bật và tắt NAT, cho toàn bộ phạm vi dữ liệu lưu lượng (flow). Các phân vùng đã được kết xuất và chính xác sẽ bị bỏ qua. Quá trình này có thể mất nhiều thời gian với tập dữ liệu lớn. Bộ lọc đang được kết xuất cũng sẽ bị bỏ qua."
 
 #: flowview_filters.php
 msgid "You must select at least one Filter."
-msgstr "Bạn phải chọn ít nhất một thiết bị."
+msgstr "Bạn phải chọn ít nhất một Bộ lọc."
 
 #: flowview_filters.php
 msgid "FlowView Filters"
@@ -988,11 +967,11 @@ msgstr "Bộ lọc"
 
 #: flowview_filters.php
 msgid "Prune"
-msgstr ""
+msgstr "Dọn bớt"
 
 #: flowview_filters.php
 msgid "Remove the cached shards that do not match any Filter"
-msgstr ""
+msgstr "Xóa các phân đoạn đã lưu đệm không khớp với bất kỳ Bộ lọc nào"
 
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
@@ -1003,14 +982,12 @@ msgid "ID"
 msgstr "ID"
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Organization"
 msgid "Materialization"
-msgstr "Tổ chức"
+msgstr "Hiện thực hóa"
 
 #: flowview_filters.php
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
-msgstr ""
+msgstr "Quá trình tạo dữ liệu sẵn (Materialization) tính toán trước kết quả của một Bộ lọc cho từng phân vùng flow, với NAT bật và tắt, rồi lưu vào bộ nhớ đệm Truy vấn song song (Parallel Query cache) để báo cáo trên dữ liệu cũ mở nhanh hơn.  Các phân vùng mới sẽ tự động được tạo dữ liệu sẵn sau khi ngừng nhận flow.  Cần thực hiện nghĩa là các phân vùng đã xoay vòng chưa được tạo dữ liệu sẵn, Đang chạy nghĩa là quá trình tạo dữ liệu sẵn đang diễn ra, và Đã cập nhật nghĩa là mọi phân vùng đã xoay vòng đều đã được tạo dữ liệu sẵn.  Đang chạy: N cho biết số lượng truy vấn của Bộ lọc đang hoạt động hiện tại.  Phân vùng vẫn đang nhận flow không được tạo dữ liệu sẵn nên không được tính."
 
 #: flowview_filters.php includes/arrays.php
 msgid "Listener"
@@ -1022,33 +999,31 @@ msgstr "Loại báo cáo"
 
 #: flowview_filters.php
 msgid "NAT Shards"
-msgstr ""
+msgstr "Phân đoạn NAT"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
-msgstr ""
+msgstr "Số lượng phân vùng của Bộ lọc này được lưu trong bộ nhớ đệm Truy vấn Song song khi bật NAT."
 
 #: flowview_filters.php
 msgid "Non-NAT Shards"
-msgstr ""
+msgstr "Phân đoạn không NAT"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
-msgstr ""
+msgstr "Số lượng phân vùng của Bộ lọc này được lưu trong bộ nhớ đệm Truy vấn Song song khi tắt NAT."
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Charting Options"
 msgid "Partitions"
-msgstr "Tùy chọn biểu đồ"
+msgstr "Các phân vùng"
 
 #: flowview_filters.php
 msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
-msgstr ""
+msgstr "Tổng số phân vùng luồng, đây là số phân đoạn tối đa mà một Bộ lọc có thể lưu vào bộ nhớ đệm có hoặc không có NAT."
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
-msgstr "Trường sắp xếp:"
+msgstr "Trường sắp xếp"
 
 #: flowview_filters.php
 msgid "Resolution"
@@ -1056,33 +1031,33 @@ msgstr "Resolution - Độ phân giải"
 
 #: flowview_filters.php
 msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
-msgstr ""
+msgstr "Không thể phân biệt các phân mảnh trong bộ nhớ đệm của các Bộ lọc với nhau, do không thể xác định khóa bộ nhớ đệm của một Bộ lọc."
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
-msgstr ""
+msgstr "Không thể xác định khóa bộ nhớ đệm của các Bộ lọc, nên hiện tại không thể dọn bớt gì.  Hãy kiểm tra xem mỗi Bộ lọc có một Báo cáo hợp lệ hay không."
 
 #: flowview_filters.php
 #, php-format
 msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
-msgstr ""
+msgstr "Phân đoạn đã lưu đệm: %s khớp với một bộ lọc. %s không khớp với bộ lọc nào và sẽ bị Prune xóa."
 
 #: flowview_filters.php
 #, php-format
 msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
-msgstr ""
+msgstr "Thao tác này sẽ xóa %s phân đoạn lưu đệm không khớp với bất kỳ Bộ lọc nào, áp dụng cho mọi Bộ lọc và mọi người dùng. Chúng phát sinh từ các Bộ lọc đã bị thay đổi hoặc xóa, và từ các báo cáo có cài đặt bị thay đổi trên trang báo cáo. %s phân đoạn lưu đệm của các Bộ lọc vẫn được giữ lại. Thao tác này không thể hoàn tác."
 
 #: flowview_filters.php
 msgid "Every cached shard matches a Filter.  There is nothing to prune."
-msgstr ""
+msgstr "Mọi phân đoạn được lưu đệm đều khớp với Bộ lọc. Không có gì để dọn dẹp."
 
 #: flowview_filters.php
 msgid "Prune Cached Shards"
-msgstr ""
+msgstr "Dọn bớt các phân đoạn đã lưu đệm"
 
 #: flowview_filters.php
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 #: flowview_schedules.php
 msgid "Send Now"
@@ -1095,7 +1070,7 @@ msgstr "Mỗi tiếng"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Hours"
-msgstr "Mỗi% d giờ"
+msgstr "Mỗi %d giờ"
 
 #: flowview_schedules.php
 msgid "Every Day"
@@ -1108,16 +1083,15 @@ msgstr "Mỗi tuần"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Weeks, 2"
-msgstr "Mỗi% d Tuần, 2"
+msgstr "Mỗi %d tuần, 2"
 
 #: flowview_schedules.php
 msgid "Every Month"
-msgstr "Mỗi tháng"
+msgstr "Hằng tháng"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "General Settings"
-msgstr "Xóa bộ lọc"
+msgstr "Cài đặt chung"
 
 #: flowview_schedules.php
 msgid "Title"
@@ -1140,9 +1114,8 @@ msgid "Name of the query to run."
 msgstr "Tên của truy vấn để chạy."
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Send Settings"
-msgstr "Bộ AS"
+msgstr "Cài đặt gửi"
 
 #: flowview_schedules.php
 msgid "Send Interval"
@@ -1153,9 +1126,8 @@ msgid "How often to send this NetFlow Report?"
 msgstr "Bao lâu để gửi Báo cáo NetFlow này?"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Base Time"
-msgstr "Lịch trình tiêu đề"
+msgstr "Thời gian cơ sở đã lên lịch"
 
 #: flowview_schedules.php
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
@@ -1163,11 +1135,11 @@ msgstr "Đây là ngày / thời gian đầu tiên để gửi email NetFlow Sca
 
 #: flowview_schedules.php
 msgid "Max Allowed Runtime"
-msgstr ""
+msgstr "Thời gian chạy tối đa cho phép"
 
 #: flowview_schedules.php
 msgid "How long should the report be allowed to execute before exiting?"
-msgstr ""
+msgstr "Báo cáo được phép thực thi tối đa trong bao lâu trước khi thoát?"
 
 #: flowview_schedules.php setup.php
 #, php-format
@@ -1181,7 +1153,7 @@ msgstr "%d phút"
 
 #: flowview_schedules.php
 msgid "Legacy Email Settings"
-msgstr ""
+msgstr "Thiết lập email cũ"
 
 #: flowview_schedules.php
 msgid "Email Addresses"
@@ -1197,24 +1169,23 @@ msgstr "Định dạng tệp để sử dụng"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "Chọn trình bao bọc html và tệp CSS tùy chỉnh để sử dụng. Tệp này chứa cả html và CSS để bao quanh báo cáo của bạn. Nếu nó chứa nhiều hơn chỉ là CSS, bạn cần phải đặt một<REPORT> thẻ bên trong của tệp. Thẻ định dạng này sẽ được thay thế bằng nội dung báo cáo. Các tệp này nằm trong thư mục 'định dạng'."
+msgstr "Chọn trình bao bọc html và tệp CSS tùy chỉnh để sử dụng. Tệp này chứa cả html và CSS để bao quanh báo cáo của bạn. Nếu nó chứa nhiều hơn chỉ đơn giản là CSS, bạn cần đặt một đặc biệt <REPORT> thẻ bên trong của tập tin. Thẻ định dạng này sẽ được thay thế bởi nội dung báo cáo. Các tệp này được đặt trong thư mục &#39;định dạng&#39;."
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
-msgstr ""
+msgstr "Cài đặt danh sách thông báo"
 
 #: flowview_schedules.php
 msgid "Notification List"
-msgstr ""
+msgstr "Danh sách thông báo"
 
 #: flowview_schedules.php
 msgid "If the Thold Plugin is installed, you may select a Notification List"
-msgstr ""
+msgstr "Nếu plugin Thold đã được cài đặt, bạn có thể chọn một Danh sách thông báo"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "The Report will arrive once complete."
-msgstr "Báo cáo sẽ đến sau khi Hoàn thành."
+msgstr "Báo cáo sẽ được gửi đến sau khi hoàn tất."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to delete the following Schedule(s)."
@@ -1239,89 +1210,82 @@ msgstr "Bạn phải chọn ít nhất một lịch trình."
 #: flowview_schedules.php
 #, php-format
 msgid "Unable to find Report Raw Data for Report ID %s"
-msgstr ""
+msgstr "Không thể tìm thấy dữ liệu thô của báo cáo cho ID báo cáo %s"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
-msgstr ""
+msgstr "Bạn phải chỉ định Email, Danh sách thông báo hoặc cả hai!"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report: [edit: %s]"
-msgstr "Báo cáo: [chỉnh sửa: %s]"
+msgstr "Báo cáo định kỳ: [chỉnh sửa: %s]"
 
 #: flowview_schedules.php
-#, fuzzy, php-format
+#, php-format
 msgid "Scheduled Report History: [edit: %s]"
-msgstr "Báo cáo: [chỉnh sửa: %s]"
+msgstr "Lịch sử báo cáo định kỳ: [chỉnh sửa: %s]"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled Report: [new]"
-msgstr "Báo cáo: [mới]"
+msgstr "Báo cáo định kỳ: [mới]"
 
 #: flowview_schedules.php setup.php
 msgid "Schedules"
-msgstr "Kế hoạch"
+msgstr "Lịch trình"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Title"
-msgstr "Loại báo cáo"
+msgstr "Tiêu đề báo cáo"
 
 #: flowview_schedules.php
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Output Type"
-msgstr "IF đầu ra"
+msgstr "Loại đầu ra"
 
 #: flowview_schedules.php
 msgid "Sent By"
-msgstr ""
+msgstr "Gửi bởi"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Date Sent"
-msgstr "Bộ lộ trình"
+msgstr "Ngày gửi"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Run Time"
-msgstr "Thời gian kết thúc"
+msgstr "Thời gian chạy"
 
 #: flowview_schedules.php
 msgid "Download Data"
-msgstr ""
+msgstr "Tải xuống dữ liệu"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Report Logs"
-msgstr "Báo cáo"
+msgstr "Nhật ký báo cáo"
 
 #: flowview_schedules.php
 msgid " [View Report Raw]"
-msgstr ""
+msgstr " [Xem báo cáo thô]"
 
 #: flowview_schedules.php
 msgid " [View Report with CSS]"
-msgstr ""
+msgstr " [Xem báo cáo có CSS]"
 
 #: flowview_schedules.php
 msgid "Manual Send"
-msgstr ""
+msgstr "Gửi thủ công"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Scheduled"
-msgstr "Kế hoạch"
+msgstr "Đã lên lịch"
 
 #: flowview_schedules.php
 #, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s Giây"
 
 #: flowview_schedules.php includes/functions.php
 msgid "Start Date Selector"
@@ -1341,20 +1305,19 @@ msgstr "Interval"
 
 #: flowview_schedules.php
 msgid "Last Sent"
-msgstr ""
+msgstr "Lần gửi gần nhất"
 
 #: flowview_schedules.php
 msgid "Next Send"
 msgstr "Gửi tiếp theo"
 
 #: flowview_schedules.php
-#, fuzzy
 msgid "Email/List"
-msgstr "Email"
+msgstr "Email/Danh sách"
 
 #: flowview_schedules.php
 msgid "Logged Sends"
-msgstr ""
+msgstr "Các lần gửi đã ghi nhật ký"
 
 #: flowview_schedules.php includes/arrays.php
 msgid "No"
@@ -1366,7 +1329,7 @@ msgstr "Có"
 
 #: includes/arrays.php includes/functions.php
 msgid "Select a Report"
-msgstr "Báo cáo in"
+msgstr "Chọn một báo cáo"
 
 #: includes/arrays.php
 msgid "Summary"
@@ -1378,7 +1341,7 @@ msgstr "IP nguồn hoặc đích"
 
 #: includes/arrays.php
 msgid "Destination Root Domain"
-msgstr "Destination IP"
+msgstr "Tên miền gốc đích"
 
 #: includes/arrays.php
 msgid "Source/Destination Root Domain"
@@ -1430,7 +1393,7 @@ msgstr "Giao diện đầu vào / đầu ra"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source AS"
-msgstr "Không có nguồn"
+msgstr "AS nguồn"
 
 #: includes/arrays.php
 msgid "Destination AS"
@@ -1499,7 +1462,7 @@ msgstr "Trả lại tất cả các dòng"
 #: includes/arrays.php
 #, php-format
 msgid "Top %d"
-msgstr "Top% d"
+msgstr "Top %d"
 
 #: includes/arrays.php
 msgid "No Limit"
@@ -1528,7 +1491,7 @@ msgstr "Gói"
 
 #: includes/arrays.php
 msgid "Destination Domain"
-msgstr "Destination IP"
+msgstr "Tên miền đích"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source Port"
@@ -1540,11 +1503,11 @@ msgstr "Cổng Đích đến"
 
 #: includes/arrays.php includes/functions.php
 msgid "Dest IP"
-msgstr "Số phận IP"
+msgstr "IP đích"
 
 #: includes/arrays.php includes/functions.php
 msgid "Source IF"
-msgstr "Không có nguồn"
+msgstr "IF nguồn"
 
 #: includes/arrays.php
 msgid "Destination IF"
@@ -1593,11 +1556,11 @@ msgstr "Điểm đến"
 #: includes/arrays.php
 #, php-format
 msgid "%d Pixels"
-msgstr "Điểm ảnh %d"
+msgstr "%d pixel"
 
 #: includes/arrays.php
 msgid "General Filters"
-msgstr "Xóa bộ lọc"
+msgstr "Bộ lọc chung"
 
 #: includes/arrays.php
 msgid "The Saved Filter to display."
@@ -1669,7 +1632,7 @@ msgstr "Loại Báo cáo In để sử dụng theo mặc định cho Bộ lọc 
 
 #: includes/arrays.php
 msgid "Range Rules"
-msgstr "Quản lý lịch"
+msgstr "Quy tắc phạm vi"
 
 #: includes/arrays.php
 msgid "Constrain the Filter Data by these time filter rules."
@@ -1677,7 +1640,7 @@ msgstr "Ràng buộc Dữ liệu Bộ lọc theo các quy tắc lọc thời gia
 
 #: includes/arrays.php
 msgid "Resolve IP's"
-msgstr "Giải quyết các địa chỉ:"
+msgstr "Giải quyết các địa chỉ"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
@@ -1697,7 +1660,7 @@ msgstr "Các hàng tối đa cần cung cấp trong Bộ lọc. Cài đặt này
 
 #: includes/arrays.php
 msgid "Minimum Bytes"
-msgstr "Byte tối thiểu:"
+msgstr "Byte tối thiểu"
 
 #: includes/arrays.php
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
@@ -1732,17 +1695,16 @@ msgid "Graph Height"
 msgstr "Chiều cao biểu đồ"
 
 #: includes/arrays.php
-#, fuzzy
 msgid "The Graph Height to use by default."
-msgstr "Biểu đồ Hight để sử dụng theo mặc định."
+msgstr "Chiều cao đồ thị được sử dụng mặc định."
 
 #: includes/arrays.php includes/functions.php
 msgid "Use NAT Data"
-msgstr ""
+msgstr "Sử dụng dữ liệu NAT"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
+msgstr "Hiển thị IP Nguồn/Đích và tên DNS sau NAT (đã biên dịch) trong kết quả báo cáo thay cho các giá trị gốc trước NAT."
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1789,10 +1751,8 @@ msgid "Select the Specific Protocol for the Filter."
 msgstr "Chọn Giao thức cụ thể cho Bộ lọc."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Protocols"
 msgid "All Protocols"
-msgstr "Giao thức"
+msgstr "Tất cả giao thức"
 
 #: includes/arrays.php
 msgid "TCP Flags"
@@ -1863,56 +1823,40 @@ msgid "Filter on the select Destination AS for in the Filter.  This can be a com
 msgstr "Lọc trên AS đích được chọn cho trong Bộ lọc. Đây có thể là danh sách được phân tách bằng dấu phẩy của đích AS's"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Source IP"
 msgid "Post-NAT Source IP"
-msgstr "IP nguồn"
+msgstr "IP nguồn sau NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Lọc trên IP nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
+msgstr "Lọc theo IP nguồn đã dịch (sau NAT) được ghi lại trong bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 phân cách bằng dấu phẩy, hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 phân cách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
 msgid "Post-NAT Source Port"
-msgstr "Cổng nguồn UDP / TCP"
+msgstr "Cổng nguồn sau NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
 msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Lọc trên các Cổng nguồn được chọn cho trong Bộ lọc. Đây có thể là danh sách Cổng nguồn được phân tách bằng dấu phẩy."
+msgstr "Lọc theo cổng nguồn đã dịch (sau NAT) trong bộ lọc. Đây có thể là danh sách các cổng phân cách bằng dấu phẩy."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest IP"
 msgid "Post-NAT Dest IP"
-msgstr "Số phận IP"
+msgstr "IP đích sau NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
 msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr "Lọc trên IP đích đã chọn cho trong Bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 được phân tách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
+msgstr "Lọc theo IP đích đã dịch (sau NAT) được ghi lại trong bộ lọc. Đây có thể là danh sách các địa chỉ IPv4 hoặc IPv6 phân cách bằng dấu phẩy, hoặc danh sách các dải địa chỉ IPv4 hoặc IPv6 phân cách bằng dấu phẩy ở định dạng CIDR (ví dụ: 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest Port"
 msgid "Post-NAT Dest Port"
-msgstr "Cổng Dest"
+msgstr "Cổng đích sau NAT"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
 msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr "Lọc trên các Cổng đích đã chọn trong Bộ lọc. Đây có thể là danh sách các Cổng Đích được phân tách bằng dấu phẩy."
+msgstr "Lọc theo cổng đích đã dịch (sau NAT) trong bộ lọc. Đây có thể là danh sách các cổng phân cách bằng dấu phẩy."
 
 #: includes/arrays.php
 msgid "DNS Cache"
-msgstr "DNS Cache"
+msgstr "Bộ nhớ đệm DNS"
 
 #: includes/arrays.php
 msgid "CIDR/Routes"
@@ -1971,19 +1915,19 @@ msgid "Persons"
 msgstr "Người"
 
 #: includes/functions-pre13.php
-#, fuzzy, php-format
+#, php-format
 msgid "Cacti %s"
-msgstr "Xương rồng"
+msgstr "Cacti %s"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
-msgstr ""
+msgstr "Báo cáo '%s' từ nguồn %s với id %s đã được lên lịch chạy!"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
-msgstr ""
+msgstr "Báo cáo '%s' từ nguồn %s với id %s không thể lên lịch chạy do gặp lỗi!"
 
 #: includes/functions.php
 msgid "General"
@@ -1991,11 +1935,11 @@ msgstr "Chung"
 
 #: includes/functions.php
 msgid "Logs"
-msgstr ""
+msgstr "Nhật ký"
 
 #: includes/functions.php
 msgid "Select a Report Type First"
-msgstr "Báo cáo in"
+msgstr "Chọn một loại báo cáo trước"
 
 #: includes/functions.php
 #, php-format
@@ -2008,15 +1952,15 @@ msgstr "Báo cáo: [mới]"
 
 #: includes/functions.php
 msgid "Cached Results Affected"
-msgstr ""
+msgstr "Kết quả đã lưu đệm bị ảnh hưởng"
 
 #: includes/functions.php
 msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
-msgstr ""
+msgstr "Những thay đổi này ảnh hưởng đến kết quả đã lưu trong bộ nhớ đệm của Bộ lọc này. Việc lưu sẽ bắt đầu quá trình tạo dữ liệu lưu sẵn ở chế độ nền để xây dựng lại chúng. Nhấn 'Tiếp tục' để lưu Bộ lọc hoặc 'Hủy' để tiếp tục chỉnh sửa."
 
 #: includes/functions.php
 msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
-msgstr ""
+msgstr "Các thay đổi đối với Bộ lọc này ảnh hưởng đến kết quả đã lưu trong bộ nhớ đệm, vì vậy quá trình tạo dữ liệu cụ thể cho nó đã được bắt đầu chạy ngầm.  Tiến trình được hiển thị trên trang Bộ lọc và kết quả được ghi trong nhật ký Cacti."
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
@@ -2034,7 +1978,7 @@ msgstr "Báo cáo đã in: %s [Bao gồm các ghi đè như cụ thể bên dư�
 
 #: includes/functions.php
 msgid "Select a Filter"
-msgstr "Báo cáo in"
+msgstr "Chọn một bộ lọc"
 
 #: includes/functions.php
 msgid "Apply Filter"
@@ -2054,7 +1998,7 @@ msgstr "Chỉnh sửa Bộ lọc Hiện tại"
 
 #: includes/functions.php
 msgid "Create new Flow Filter"
-msgstr "Tần suất để tạo một tệp Flow mới."
+msgstr "Tần suất để tạo một tệp Flow mới"
 
 #: includes/functions.php
 msgid "New"
@@ -2066,7 +2010,7 @@ msgstr "Lưu"
 
 #: includes/functions.php
 msgid "Save the Flow Filter"
-msgstr "Báo cáo in"
+msgstr "Lưu bộ lọc Flow"
 
 #: includes/functions.php
 msgid "Save As"
@@ -2074,7 +2018,7 @@ msgstr "Lưu thành"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
-msgstr "Báo cáo in"
+msgstr "Lưu bộ lọc Flow hiện có thành bộ lọc mới"
 
 #: includes/functions.php
 msgid "Rename"
@@ -2086,7 +2030,7 @@ msgstr "Đổi tên bộ lọc luồng"
 
 #: includes/functions.php
 msgid "Delete the Flow Filter"
-msgstr "Báo cáo in"
+msgstr "Xóa bộ lọc Flow"
 
 #: includes/functions.php
 msgid "Report"
@@ -2104,7 +2048,7 @@ msgstr "In: %s"
 
 #: includes/functions.php
 msgid "Select a Filter First"
-msgstr "Báo cáo in"
+msgstr "Chọn một bộ lọc trước"
 
 #: includes/functions.php
 msgid "Lines"
@@ -2137,7 +2081,7 @@ msgstr "Chỉ miền"
 
 #: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
-msgstr ""
+msgstr "Hiển thị IP/tên DNS sau NAT (đã biên dịch) thay cho các giá trị gốc"
 
 #: includes/functions.php
 msgid "Timespan"
@@ -2161,11 +2105,11 @@ msgstr "Bộ chọn ngày kết thúc"
 
 #: includes/functions.php
 msgid "Shift Time Backward"
-msgstr "Chuyển thời gian lùi lại"
+msgstr "Thay đổi thời gian lùi"
 
 #: includes/functions.php
 msgid "Define Shifting Interval"
-msgstr "Xác định khoảng thời gian dịch chuyển"
+msgstr "Xác định khoảng thời gian thay đổi"
 
 #: includes/functions.php
 msgid "Shift Time Forward"
@@ -2200,9 +2144,8 @@ msgid "Table"
 msgstr "Bảng"
 
 #: includes/functions.php
-#, fuzzy
 msgid "Export Raw Data"
-msgstr "Báo cáo"
+msgstr "Xuất dữ liệu thô"
 
 #: includes/functions.php
 msgid "Save Flow Filter"
@@ -2210,11 +2153,11 @@ msgstr "Bộ lọc mới"
 
 #: includes/functions.php
 msgid "New Name"
-msgstr "新しい名前"
+msgstr "Tên mới"
 
 #: includes/functions.php
 msgid "Delete Flow Filter"
-msgstr "Báo cáo in"
+msgstr "Xóa bộ lọc Flow"
 
 #: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
@@ -2275,7 +2218,7 @@ msgstr " <new>"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
-msgstr ""
+msgstr "Đã lưu cài đặt bộ lọc. Quá trình hiện thực hóa bộ lọc này đã được khởi chạy trong nền."
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
@@ -2306,10 +2249,9 @@ msgid "Subnet Filter: %s is not a value CIDR format"
 msgstr "Bộ lọc mạng con: %s không phải là định dạng CIDR giá trị"
 
 #: includes/functions.php
-#, fuzzy, php-format
-#| msgid "Subnet Filter: %s is not a value CIDR format"
+#, php-format
 msgid "IP Filter: %s is not a valid IP address"
-msgstr "Bộ lọc mạng con: %s không phải là định dạng CIDR giá trị"
+msgstr "Bộ lọc IP: %s không phải là địa chỉ IP hợp lệ"
 
 #: includes/functions.php
 msgid "unresolved"
@@ -2328,12 +2270,12 @@ msgstr "> %d byte"
 #: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "Báo cáo thống kê %s không xác định.  Vui lòng mở báo lỗi trên GitHub"
 
 #: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "Báo cáo in %s không xác định.  Vui lòng mở báo lỗi trên GitHub"
 
 #: includes/functions.php
 msgid "Source DNS"
@@ -2345,15 +2287,15 @@ msgstr "Tên Nguồn"
 
 #: includes/functions.php
 msgid "Dest DNS"
-msgstr "Dest AS"
+msgstr "DNS đích"
 
 #: includes/functions.php
 msgid "Dest Root DNS"
-msgstr "Cổng Dest"
+msgstr "DNS gốc đích"
 
 #: includes/functions.php
 msgid "DNS"
-msgstr "DSR"
+msgstr "DNS"
 
 #: includes/functions.php
 msgid "Root DNS"
@@ -2382,38 +2324,38 @@ msgstr "Gói"
 #: includes/functions.php
 #, php-format
 msgid "Not materialized yet, with NAT: %s, without NAT: %s."
-msgstr ""
+msgstr "Chưa được tạo dữ liệu sẵn, có NAT: %s, không NAT: %s."
 
 #: includes/functions.php
 msgid "Up to date"
-msgstr ""
+msgstr "Đã cập nhật mới nhất"
 
 #: includes/functions.php
 msgid "Running"
-msgstr ""
+msgstr "Đang chạy"
 
 #: includes/functions.php
 msgid "Required"
-msgstr ""
+msgstr "Cần thiết"
 
 #: includes/functions.php
 msgid "The number of queries of this Filter that are running now."
-msgstr ""
+msgstr "Số lượng truy vấn của Bộ lọc này hiện đang chạy."
 
 #: includes/functions.php
 #, php-format
 msgid "With NAT: %d, without NAT: %d."
-msgstr ""
+msgstr "Có NAT: %d, không có NAT: %d."
 
 #: includes/functions.php
 #, php-format
 msgid "Running: %s"
-msgstr ""
+msgstr "Đang chạy: %s"
 
 #: includes/functions.php
 #, php-format
 msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
-msgstr ""
+msgstr "LỖI: Truy vấn song song không hoàn thành trong Thời gian chạy tối đa %d giây. Hãy kiểm tra Thời gian chạy tối đa trong Cài đặt FlowView và đảm bảo cơ sở dữ liệu không bận xử lý thao tác khác như ALTER TABLE."
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
@@ -2570,19 +2512,16 @@ msgid "FlowView Chart for %s Type is %s"
 msgstr "Biểu đồ FlowView cho %s Loại là %s"
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "Supported"
 msgid "Supported (NAT)"
-msgstr "Hỗ trợ"
+msgstr "Hỗ trợ (NAT)"
 
 #: includes/functions.php
 msgid "Not Supported"
 msgstr "Không được hỗ trợ"
 
 #: includes/functions.php setup.php
-#, fuzzy
 msgid "MyISAM (Fast, Non-Crash Safe)"
-msgstr "Aria (Nhanh, An toàn)"
+msgstr "MyISAM (Nhanh, không an toàn khi gặp sự cố)"
 
 #: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
@@ -2593,14 +2532,12 @@ msgid "InnoDB (Slow, High Concurrency)"
 msgstr "InnoDB (chậm, tính đồng thời cao)"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow User"
-msgstr "Phiên bản NetFlow"
+msgstr "Người dùng NetFlow"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow Admin"
-msgstr "Phiên bản NetFlow"
+msgstr "Quản trị NetFlow"
 
 #: setup.php
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
@@ -2644,7 +2581,7 @@ msgstr "Trình xem lưu lượng"
 
 #: setup.php
 msgid "Dashboard"
-msgstr "Bảng điều khiển"
+msgstr "Bảng tổng quan"
 
 #: setup.php
 msgid "(save)"
@@ -2656,56 +2593,53 @@ msgstr "(chinnhr sửa)"
 
 #: setup.php
 msgid "(actions)"
-msgstr "Hành động"
+msgstr "(thao tác)"
 
 #: setup.php
-#, fuzzy, php-format
+#, php-format
 msgid "%d Process"
-msgstr "Điểm ảnh %d"
+msgstr "%d tiến trình"
 
 #: setup.php
 #, php-format
 msgid "%d Processes"
-msgstr ""
+msgstr "%d Tiến trình"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
-msgstr ""
+msgstr "Báo cáo các tiến trình đồng thời (Chỉ dành cho FlowView)"
 
 #: setup.php
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
-msgstr ""
+msgstr "Chọn số lượng tiến trình báo cáo đồng thời tối đa có thể chạy tại một thời điểm."
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Settings"
-msgstr "Kiểm soát Internet"
+msgstr "Cài đặt Proxy Internet"
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy Address"
-msgstr "Kiểm soát Internet"
+msgstr "Địa chỉ Proxy Internet"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "Đối với các dịch vụ lõi Cacti hoặc plugin yêu cầu truy cập Internet, hãy nhập máy chủ proxy và cổng tại đây theo định dạng IP:PORT. Ví dụ: 192.168.1.1:8080."
 
 #: setup.php
-#, fuzzy
 msgid "Internet Proxy User"
-msgstr "Kiểm soát Internet"
+msgstr "Tên người dùng Proxy Internet"
 
 #: setup.php
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "Nếu Proxy Internet của bạn yêu cầu tên người dùng, hãy nhập tại đây."
 
 #: setup.php
 msgid "Internet Proxy Password"
-msgstr ""
+msgstr "Mật khẩu Proxy Internet"
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "Nếu Proxy Internet của bạn yêu cầu mật khẩu, hãy nhập tại đây."
 
 #: setup.php
 msgid "Name Resolution"
@@ -2732,13 +2666,12 @@ msgid "Don't Resolve DNS"
 msgstr "Không giải quyết DNS"
 
 #: setup.php
-#, fuzzy
 msgid "Download the Internet Registry Daily"
-msgstr "Chi tiết đăng ký tuyến Internet"
+msgstr "Tải xuống dữ liệu Internet Registry hằng ngày"
 
 #: setup.php
 msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
-msgstr ""
+msgstr "Nếu bạn quan tâm đến thông tin công khai về toàn bộ mạng Internet, bạn có thể chọn tùy chọn này. Cacti sẽ kết nối tới các Cơ quan Đăng ký Internet trên toàn thế giới mỗi ngày một lần để kiểm tra các thay đổi về tuyến đường của toàn bộ Internet và tải thông tin đó vào Cacti. Lưu ý rằng việc này sẽ tạo ra một cơ sở dữ liệu khá lớn, hơn 3GB dữ liệu."
 
 #: setup.php
 msgid "Local Domain Name"
@@ -2753,9 +2686,8 @@ msgid "Local IP Range"
 msgstr "Dải IP cục bộ"
 
 #: setup.php
-#, fuzzy
 msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
-msgstr "Cung cấp dải địa chỉ IP IPv4 cho mạng cục bộ của bạn cho các máy chủ có thể không được đăng ký trong DNS.  Các máy chủ này sẽ được ánh xạ tới Tên miền cục bộ ở trên.  Điều này nhiều hơn cho người dùng gia đình.  Bạn có thể sử dụng định dạng CIDR hoặc không CIDR.  Đối với kỳ thi: 192.168.11.0 hoặc 192.168.11.0/24"
+msgstr "Cung cấp dải địa chỉ IP IPv4 cho mạng cục bộ của bạn đối với các máy chủ có thể chưa được đăng ký trong DNS. Các máy chủ này sẽ được ánh xạ tới Tên miền cục bộ ở trên. Tính năng này phù hợp hơn cho người dùng gia đình. Bạn có thể sử dụng định dạng CIDR hoặc không phải CIDR. Ví dụ: 192.168.11.0 hoặc 192.168.11.0/24"
 
 #: setup.php
 msgid "Use CIDR or Non-CIDR"
@@ -2763,7 +2695,7 @@ msgstr "Sử dụng CIDR hoặc Non-CIDR"
 
 #: setup.php
 msgid "Use Arin to find Domains and AS Numbers"
-msgstr "Sử dụng Arin để tìm các tên miền chưa đăng ký"
+msgstr "Sử dụng Arin để tìm Tên miền và Số AS"
 
 #: setup.php
 msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
@@ -2783,7 +2715,7 @@ msgstr "whois.radb.net"
 
 #: setup.php
 msgid "Whois Binary Path"
-msgstr "Công cụ lưu lượng Đường dẫn nhị phân"
+msgstr "Đường dẫn tệp thực thi Whois"
 
 #: setup.php
 msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
@@ -2795,15 +2727,15 @@ msgstr "Nhập đường dẫn nhị phân"
 
 #: setup.php
 msgid "Graph Drilldown Settings"
-msgstr ""
+msgstr "Cài đặt xem chi tiết biểu đồ"
 
 #: setup.php
 msgid "Default Search Filter for Graph Drilldowns"
-msgstr ""
+msgstr "Bộ lọc tìm kiếm mặc định cho xem chi tiết biểu đồ"
 
 #: setup.php
 msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
-msgstr ""
+msgstr "Chọn bộ lọc tìm kiếm FlowView hiện có để dùng cho chức năng xem chi tiết biểu đồ (Graph Drilldowns)."
 
 #: setup.php
 msgid "Data Retention and Report Generation"
@@ -2820,27 +2752,27 @@ msgstr "Khoảng thời gian Cacti sẽ duy trì các bảng Flow được phân
 #: setup.php
 #, php-format
 msgid "%d Week"
-msgstr "% d Tuần"
+msgstr "%d Tuần"
 
 #: setup.php
 #, php-format
 msgid "%d Weeks"
-msgstr "% d Tuần"
+msgstr "%d Tuần"
 
 #: setup.php
 #, php-format
 msgid "%d Month"
-msgstr "% d Tháng"
+msgstr "%d Tháng"
 
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "% d Tháng"
+msgstr "%d Tháng"
 
 #: setup.php
 #, php-format
 msgid "%d Year"
-msgstr "% d Năm"
+msgstr "%d Năm"
 
 #: setup.php
 msgid "Database Partitioning Scheme"
@@ -2871,48 +2803,44 @@ msgid "Parallel Queries"
 msgstr "Truy vấn song song"
 
 #: setup.php
-#, fuzzy
-#| msgid "Parallel Queries"
 msgid "Parallel Query Backend"
-msgstr "Truy vấn song song"
+msgstr "Backend truy vấn song song"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr ""
+msgstr "Chọn cách thực thi các truy vấn FlowView song song. Trình chạy PHP cũ (Legacy PHP Runner) tạo tiến trình flowview_runner.php cho mỗi truy vấn và phân đoạn (shard). Dịch vụ truy vấn FlowView (FlowView Query Service) phân phối cùng tác vụ map-reduce tới một dịch vụ Go chạy liên tục qua localhost, tránh độ trễ khởi động tiến trình và thăm dò cơ sở dữ liệu cho từng truy vấn. Yêu cầu dịch vụ flowview-query (xem plugins/flowview/service/flowview-query) phải được cài đặt và đang chạy."
 
 #: setup.php
 msgid "Legacy PHP Runner"
-msgstr ""
+msgstr "Trình chạy PHP cũ"
 
 #: setup.php
-#, fuzzy
-#| msgid "Flow Viewer"
 msgid "FlowView Query Service"
-msgstr "Trình xem lưu lượng"
+msgstr "Dịch vụ truy vấn FlowView"
 
 #: setup.php
 msgid "Query Service URL"
-msgstr ""
+msgstr "URL dịch vụ truy vấn"
 
 #: setup.php
 msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
-msgstr ""
+msgstr "URL cơ sở của Dịch vụ truy vấn FlowView, ví dụ http://127.0.0.1:8699. Để trống để tự động phát hiện cổng tạm thời từ tệp cổng của dịch vụ."
 
 #: setup.php
 msgid "Query Service Port File"
-msgstr ""
+msgstr "Tệp cổng dịch vụ truy vấn"
 
 #: setup.php
 msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
-msgstr ""
+msgstr "Đường dẫn đến tệp cổng mà FlowView Query Service ghi địa chỉ đã liên kết vào. Được sử dụng để khám phá điểm cuối dịch vụ khi URL Dịch vụ truy vấn ở trên để trống."
 
 #: setup.php
 msgid "Query Service Token"
-msgstr ""
+msgstr "Token dịch vụ truy vấn"
 
 #: setup.php
 msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
-msgstr ""
+msgstr "Khóa bí mật dùng chung tùy chọn. Khi được thiết lập, Cacti sẽ gửi nó đến FlowView Query Service dưới dạng tiêu đề \"Authorization: Bearer\" và dịch vụ sẽ từ chối mọi yêu cầu thay đổi trạng thái không xuất trình cùng mã token đó. Đặt giá trị khớp trong tệp cấu hình của dịch vụ (auth_token) hoặc biến môi trường FLOWVIEW_QUERY_TOKEN. Khuyến nghị sử dụng bất cứ khi nào dịch vụ có thể được truy cập bởi bất kỳ tiến trình nào khác ngoài các tiến trình cục bộ đáng tin cậy."
 
 #: setup.php
 msgid "Max Concurrent Threads"
@@ -2924,16 +2852,16 @@ msgstr "Số lượng luồng tối đa sẽ được gửi đi để chạy cá
 
 #: setup.php
 msgid "Disabled"
-msgstr "Vô hiệu hóa"
+msgstr "đã vô hiệu hóa"
 
 #: setup.php
 #, php-format
 msgid "%d Threads"
-msgstr "Chủ đề %d"
+msgstr "%d Chủ đề"
 
 #: setup.php
 msgid "Maximum Run Time"
-msgstr "Hàng tối đa"
+msgstr "Thời gian chạy tối đa"
 
 #: setup.php
 msgid "If the Parallel Query does not finish in this time, exit."
@@ -2968,7 +2896,7 @@ msgstr "MaxScale Sharding"
 
 #: setup.php
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
-msgstr ""
+msgstr "Tùy chọn này chỉ bắt buộc nếu kết nối cơ sở dữ liệu FlowView của hệ thống Cacti chưa sử dụng cổng Tách Đọc-Ghi có bật MaxScale."
 
 #: setup.php
 msgid "Leverage MaxScale to Distribute Query Shards"
@@ -2979,23 +2907,20 @@ msgid "If you have multiple service acting as slaves for MaxScale, you can incre
 msgstr "Nếu bạn có nhiều dịch vụ hoạt động như nô lệ cho MaxScale, bạn có thể tăng tốc độ truy vấn bằng cách phân phối các truy vấn song song đến nhiều máy chủ phụ trợ MariaDB."
 
 #: setup.php
-#, fuzzy
 msgid "MaxScale Read-Write Split Port"
-msgstr "Cổng chỉ đọc MaxScale"
+msgstr "Cổng tách Đọc-Ghi MaxScale"
 
 #: setup.php
-#, fuzzy
 msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
-msgstr "Đây phải là cổng của dịch vụ và bộ định tuyến Read-Only-Service (readconnroute)."
+msgstr "Đây phải là cổng của dịch vụ và bộ định tuyến Read-Write-Split-Service (readwrite)."
 
 #: setup.php
 msgid "Flowview"
 msgstr "FlowView"
 
 #: setup.php
-#, fuzzy
 msgid "NetFlow"
-msgstr "Dòng chảy mới"
+msgstr "NetFlow"
 
 #~ msgid "Select a Listener"
 #~ msgstr "Báo cáo in"
