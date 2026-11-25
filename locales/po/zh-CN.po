@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: flowview on cacti 1.1.34\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 00:18+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Simplified Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hans/>\nLanguage: zh-CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: flowview on cacti 1.1.34\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Simplified Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hans/>\nLanguage: zh-CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -500,10 +500,9 @@ msgid "No Matching Entries Found"
 msgstr "未找到匹配的条目"
 
 #: flowview_databases.php
-#, fuzzy
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] "点击“继续”删除下列时间表。"
+msgstr[0] "点击“继续”以删除以下 DNS 缓存条目。"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -1149,7 +1148,7 @@ msgstr "%d 分钟"
 #: flowview_schedules.php setup.php
 #, php-format
 msgid "%d Minutes"
-msgstr "%d 分钟"
+msgstr "%d分钟"
 
 #: flowview_schedules.php
 msgid "Legacy Email Settings"
@@ -1169,7 +1168,7 @@ msgstr "格式化文件以使用"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr "择要使用的自定义html包装器和CSS文件. 该文件包含html和CSS.以包装您的报告.如果它包含的不仅仅是CSS.你需要在文件中放置一个特殊的<REPORT>标签.此格式标签将被报告内容替换. 这些文件位于'formats'目录."
+msgstr "择要使用的自定义html包装器和CSS文件. 该文件包含html和CSS.以包装您的报告.如果它包含的不仅仅是CSS.你需要在文件中放置一个特殊的<REPORT>标签.此格式标签将被报告内容替换. 这些文件位于'formats'目录。"
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
@@ -1644,7 +1643,7 @@ msgstr "解析地址："
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "解析地址："
+msgstr "将 IP 地址解析为域名。"
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -2121,7 +2120,7 @@ msgstr "图形模板"
 
 #: includes/functions.php
 msgid "Bar"
-msgstr "栏"
+msgstr "柱状图"
 
 #: includes/functions.php
 msgid "Pie"
@@ -2615,11 +2614,11 @@ msgstr "选择任意时刻可同时运行的最大并发报表进程数。"
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Internet 代理设置"
+msgstr "互联网代理设置"
 
 #: setup.php
 msgid "Internet Proxy Address"
-msgstr "Internet 代理地址"
+msgstr "互联网代理地址"
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
@@ -2762,12 +2761,12 @@ msgstr "%d 周"
 #: setup.php
 #, php-format
 msgid "%d Month"
-msgstr "%d 月"
+msgstr "%d 个月"
 
 #: setup.php
 #, php-format
 msgid "%d Months"
-msgstr "%d 月"
+msgstr "%d 个月"
 
 #: setup.php
 #, php-format
@@ -2852,7 +2851,7 @@ msgstr "为运行 FlowView 查询而调度的最大线程数。 请注意，每�
 
 #: setup.php
 msgid "Disabled"
-msgstr "已禁用"
+msgstr "禁用"
 
 #: setup.php
 #, php-format
@@ -2878,7 +2877,7 @@ msgstr "在清除缓存查询结果之前，FlowView 应将缓存查询结果保
 #: setup.php
 #, php-format
 msgid "%d Hours"
-msgstr "%d 小时"
+msgstr "%d 时"
 
 #: setup.php
 #, php-format
