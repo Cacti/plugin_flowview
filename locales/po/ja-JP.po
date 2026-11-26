@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/flowview/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Japanese <https://translate.cacti.net/projects/cacti/flowview/ja/>\nLanguage: ja-JP\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -787,7 +787,7 @@ msgstr "リスナー検出テンプレート(Listener Detected Templates)"
 
 #: flowview_devices.php
 msgid "Ex Addr"
-msgstr "Ex Addr"
+msgstr "エクスポーターアドレス"
 
 #: flowview_devices.php flowview_filters.php includes/arrays.php
 msgid "All"
@@ -823,7 +823,7 @@ msgstr "長さ"
 
 #: flowview_devices.php
 msgid "Unpack"
-msgstr "Unpack"
+msgstr "展開"
 
 #: flowview_devices.php
 msgid "No Inbound Stream Templates Detected"
@@ -1138,7 +1138,7 @@ msgstr "最大許容実行時間"
 
 #: flowview_schedules.php
 msgid "How long should the report be allowed to execute before exiting?"
-msgstr "レポートの実行が終了するまでに許可される最大時間を指定します。"
+msgstr "レポートが終了するまで実行を許可する時間はどのくらいにしますか？"
 
 #: flowview_schedules.php setup.php
 #, php-format
@@ -1213,7 +1213,7 @@ msgstr "レポート ID %s のレポート生データが見つかりません"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
-msgstr "メールアドレス、通知リスト、またはその両方を指定する必要があります。"
+msgstr "メールアドレス、通知リスト、またはその両方を指定する必要があります！"
 
 #: flowview_schedules.php
 #, php-format
@@ -1643,7 +1643,7 @@ msgstr "アドレス解決："
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr "アドレス解決："
+msgstr "IP アドレスをドメイン名に解決します。"
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
@@ -1815,7 +1815,7 @@ msgstr "フィルタで選択した宛先インターフェイスでフィルタ
 
 #: includes/arrays.php includes/functions.php
 msgid "Dest AS"
-msgstr "Dest AS"
+msgstr "宛先 AS"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
@@ -2170,12 +2170,12 @@ msgstr "バイトの上位%s分布チャート"
 #: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
-msgstr "Top %s Pie Chart of Bytes"
+msgstr "バイト数の上位 %s 円グラフ"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
-msgstr "Top %s Treemap Chart of Bytes"
+msgstr "バイト数の上位 %s ツリーマップグラフ"
 
 #: includes/functions.php
 #, php-format
@@ -2306,7 +2306,7 @@ msgstr "宛先ポート"
 
 #: includes/functions.php
 msgid "Dest IF"
-msgstr "Dest IF"
+msgstr "宛先 IF"
 
 #: includes/functions.php
 msgid "Dest Prefix"
@@ -2439,15 +2439,15 @@ msgstr "フロー時間分布 (%%)"
 
 #: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
-msgstr "統計レポートまたは印刷レポートを選択してください。"
+msgstr "統計レポートまたは印刷レポートを選択してください！"
 
 #: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
-msgstr "統計レポートまたは印刷レポートのみを選択してください（両方ではありません）。"
+msgstr "統計レポートまたは印刷レポートのみを選択してください（両方ではありません）！"
 
 #: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
-msgstr "日付が無効です。終了日/時刻が開始日/時刻より前です。"
+msgstr "日付が無効です。終了日/時刻が開始日/時刻より前です！"
 
 #: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
@@ -2467,7 +2467,7 @@ msgstr "宛先アドレスに無効なサブネットです。 <br> （ '192.168
 
 #: includes/functions.php
 msgid "Invalid value for Source Interface!"
-msgstr "ソースインタフェースの値が無効です。"
+msgstr "ソースインタフェースの値が無効です！"
 
 #: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
@@ -2479,7 +2479,7 @@ msgstr "Source ASの値が無効です。 （0 - 65535）"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Interface!"
-msgstr "宛先インタフェースの値が無効です。"
+msgstr "宛先インタフェースの値が無効です！"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
@@ -2499,11 +2499,11 @@ msgstr "TCPフラグの値が無効です。 （例：0x1b、0x1b / SA、SA / SA
 
 #: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
-msgstr "カットオフオクテットの値が無効です。"
+msgstr "カットオフオクテットの値が無効です！"
 
 #: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
-msgstr "カットオフラインの値が無効です。"
+msgstr "カットオフラインの値が無効です！"
 
 #: includes/functions.php
 #, php-format
