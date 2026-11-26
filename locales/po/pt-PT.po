@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Portuguese (Portugal) <https://translate.cacti.net/projects/cacti/flowview/pt_PT/>\nLanguage: pt-PT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-26 03:27-0800\n"
+"PO-Revision-Date: 2026-11-26 05:52+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Portuguese (Portugal) <https://translate.cacti.net/projects/cacti/flowview/pt_PT/>\n"
+"Language: pt-PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -1082,8 +1094,9 @@ msgid "Every Week"
 msgstr "Todas as semanas"
 
 #: flowview_schedules.php
-#, php-format
-msgid "Every %d Weeks, 2"
+#, fuzzy, php-format
+#| msgid "Every %d Weeks, 2"
+msgid "Every %d Weeks"
 msgstr "Cada %d Semanas, 2"
 
 #: flowview_schedules.php
@@ -1964,6 +1977,12 @@ msgid "The changes to this Filter affect its cached results, so a materializatio
 msgstr "As alterações a este Filtro afetam os seus resultados em cache, pelo que foi iniciada uma materialização em segundo plano. O respetivo progresso é apresentado na página Filtros e os seus resultados são registados no registo do Cacti."
 
 #: includes/functions.php
+#, fuzzy
+#| msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgid "The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "As alterações a este Filtro afetam os seus resultados em cache, pelo que foi iniciada uma materialização em segundo plano. O respetivo progresso é apresentado na página Filtros e os seus resultados são registados no registo do Cacti."
+
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Filtro indefinido [Selecione o filtro para obter detalhes]"
 
@@ -2216,6 +2235,12 @@ msgstr "Renomear layout"
 #: includes/functions.php
 msgid " <new>"
 msgstr " <new>"
+
+#: includes/functions.php
+#, fuzzy
+#| msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgid "Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes."
+msgstr "Definições do filtro guardadas. Foi iniciada uma materialização deste filtro em segundo plano."
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
