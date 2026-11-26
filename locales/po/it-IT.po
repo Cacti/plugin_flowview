@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/flowview/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Italian <https://translate.cacti.net/projects/cacti/flowview/it/>\nLanguage: it-IT\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -243,7 +243,7 @@ msgstr "Sottodominio"
 
 #: flowview_databases.php
 msgid "Pingable"
-msgstr "Pingable"
+msgstr "Raggiungibile via ping"
 
 #: flowview_databases.php
 msgid "Alias"
@@ -599,7 +599,7 @@ msgstr "Rotte Internet di Flowview"
 
 #: flowview_databases.php
 msgid "IP Version"
-msgstr "Versione"
+msgstr "Versione IP"
 
 #: flowview_databases.php
 msgid "IPv4"
@@ -789,7 +789,7 @@ msgstr "Modelli rilevati dal listener"
 
 #: flowview_devices.php
 msgid "Ex Addr"
-msgstr "Ex Addr"
+msgstr "Indirizzo esportatore"
 
 #: flowview_devices.php flowview_filters.php includes/arrays.php
 msgid "All"
@@ -861,7 +861,7 @@ msgstr "La sicurezza della porta effettivamente osservata sulla porta dei listen
 
 #: flowview_devices.php
 msgid "Backlog"
-msgstr "Backlog"
+msgstr "Arretrati"
 
 #: flowview_devices.php
 msgid "The Size of the UDP backlog in bytes."
@@ -869,7 +869,7 @@ msgstr "La dimensione della coda UDP in byte."
 
 #: flowview_devices.php
 msgid "Streams"
-msgstr "Flussi"
+msgstr "Stream"
 
 #: flowview_devices.php
 msgid "The number of inbound connections from various sources."
@@ -877,7 +877,7 @@ msgstr "Il numero di connessioni in entrata da varie origini."
 
 #: flowview_devices.php
 msgid "Stream Versions"
-msgstr "Versione"
+msgstr "Versioni stream"
 
 #: flowview_devices.php
 msgid "The Traffic Flow versions being observed."
@@ -1257,7 +1257,7 @@ msgstr "Data invio"
 
 #: flowview_schedules.php
 msgid "Run Time"
-msgstr "Durata"
+msgstr "Tempo di esecuzione"
 
 #: flowview_schedules.php
 msgid "Download Data"
@@ -1801,7 +1801,7 @@ msgstr "Filtrare in base all'IP di destinazione selezionato per nel filtro. Può
 
 #: includes/arrays.php
 msgid "Dest Ports"
-msgstr "Porta di destinazione"
+msgstr "Porte di destinazione"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
@@ -1936,7 +1936,7 @@ msgstr "Generale"
 
 #: includes/functions.php
 msgid "Logs"
-msgstr "Logs"
+msgstr "Registri"
 
 #: includes/functions.php
 msgid "Select a Report Type First"
@@ -2280,11 +2280,11 @@ msgstr "Il report stampato %s non è riconosciuto. Apri una segnalazione di bug 
 
 #: includes/functions.php
 msgid "Source DNS"
-msgstr "Origine Dati"
+msgstr "DNS di origine"
 
 #: includes/functions.php
 msgid "Source Root DNS"
-msgstr "Origine Dati"
+msgstr "DNS root di origine"
 
 #: includes/functions.php
 msgid "Dest DNS"
@@ -2616,7 +2616,7 @@ msgstr "Seleziona il numero massimo di processi di report simultanei eseguibili 
 
 #: setup.php
 msgid "Internet Proxy Settings"
-msgstr "Impostazioni generali"
+msgstr "Impostazioni proxy Internet"
 
 #: setup.php
 msgid "Internet Proxy Address"
@@ -2704,7 +2704,7 @@ msgstr "Molti servizi di raccolta dati Big Tech amano mascherare la loro proprie
 
 #: setup.php
 msgid "Whois Provider Host"
-msgstr "Whois Provider Host"
+msgstr "Host fornitore Whois"
 
 #: setup.php
 msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
