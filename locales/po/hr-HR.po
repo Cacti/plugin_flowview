@@ -1,0 +1,2936 @@
+# Croatian translation for Cacti.
+# Copyright (C) 2004-2026 The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-11-26 18:57+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Croatian <developers@cacti.net>\n"
+"Language: hr-HR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "Nije moguće pronaći sirove podatke za izvoz"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "Navedeni Flowview upit ne postoji. Pošaljite valjani upit."
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "Naveden je nevaljani izvorni upit. Pošaljite valjani upit."
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "Nije moguće izbrisati filtar toka '%s' jer se koristi u zakazanom izvješću."
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "Filtar toka '%s' izbrisan."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "Izbriši"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "DNS predmemorija je ispražnjena. Ponovno će se puniti kako zapisi budu pristizali."
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "Pojedinosti o registru internetskih ruta"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "Pojedinosti o ovlaštenom agentu"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "Pojedinosti nisu pronađene"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR/Ruta"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "Autonomni broj"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "AS blok"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "AS skup"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "Skup ruta"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "Domena"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "Skup filtara"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "Peering skup"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Mreža"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "Internetski usmjerivač"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "Tim za odgovor na incidente"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "Ovlašteni agent"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "Organizacija"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "Uloga"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "Osoba"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "Skup usmjerivača"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "Napomene"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "Zadnja izmjena"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Izvor"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "Datum registracije"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT održava"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "Administrativni kontakt"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "Promjene"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "Obavijesti"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "Opis"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "Tehnički kontakt"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "Podređeni MNT"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "Država"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "E-pošta za zlouporabe"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "Broj faksa"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "Telefon"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "E-pošta"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "Adresa"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "Status"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "Članovi prema Fef"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "Kontakti za zlouporabu"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "MNT referenca"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "Članovi"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "MNT obavijest"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "Autorizacija"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "MNT rute"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "Član u"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "E-pošta za ažuriranja"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "NOC oznaka"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "Sponzorska organizacija"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT Irt"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "MP članovi"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "Poddomena"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "Odgovara na ping"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "Pseudonim"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "Vrsta organizacije"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "Upućuje na"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "MP peering"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "Izvezi"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "Rupe"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "MP zadano"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "Komponente"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "RS izlaz"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "Naziv organizacije"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "Naziv AS-a"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "Autor"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "IRT obavijest"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "Aggr MTD"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "Vrsta AS-a"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "MP filtar"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "Zadana ruta"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "Veličina dodjele"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "Izvoz komponenti"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "RS ulaz"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "Naziv mreže"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "DS Rdata"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "Granica agregacije"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Filtar"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "MP uvoz"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "Jezik"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "RESFful poveznica"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "Peer"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "Kontakt za zonu"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "Umetanje"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "MP Peer"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "Upućeno od"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "Obrazac"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "MNT domene"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "Izvorišni AS"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "MP izvoz"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "Šifriranje"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "Geo Feed"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "Geo indeks"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "Adresa sučelja"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "Izvoz putem"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "Poteškoće"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "Poslužitelji naziva"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "Ping oznaka"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "Sučelje"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "Uvezi"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "Potpis"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "Geolokacija"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "Lokalni AS"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "Uvoz putem"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "FATALNO: Nepoznata tablica baze podataka %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "Pretraži"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "Bilo koji"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "Unosi"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "Zadano"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "Idi"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "Postavi/osvježi filtre"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "Očisti"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "Očisti filtre"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "Isprazni DNS predmemoriju"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "Nije navedeno"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "Nisu pronađeni odgovarajući unosi"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "Kliknite 'Nastavi' za brisanje sljedećeg unosa DNS predmemorije."
+msgstr[1] "Kliknite 'Nastavi' za brisanje svih sljedećih unosa DNS predmemorije."
+msgstr[2] "Kliknite 'Nastavi' za brisanje svih sljedećih unosa DNS predmemorije."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "Odustani"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "Nastavi"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "Izbriši DNS unos"
+msgstr[1] "Izbriši DNS unose"
+msgstr[2] "Izbriši DNS unose"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "Unosi DNS predmemorije za Flowview"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "Provjereno"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "Neprovjereno"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "Očisti"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP adresa"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "Ovo je IP adresa unosa u predmemoriji."
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "DNS naziv računala"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "DNS naziv dodijeljen IP adresi."
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "Izvor DNS naziva računala. Može biti DNS, statičko pretraživanje ili ARIN."
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "Arin provjereno"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "Podaci servisa Arin za ovu IP adresu su provjereni ili je riječ o IP adresi lokalne domene."
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "CIDR ID"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "Primarni ključ servisa Arin. Ovo nisu službeni podaci servisa Arin."
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "ID autonomnog sustava"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "Izvorni Arin AS. Ovo su službeni Arin AS podaci."
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "Vrijeme ažuriranja"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "Ovo je vrijeme kada je DNS predmemorija unesena ili posljednji put ažurirana."
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "Nisu pronađeni unosi u DNS predmemoriji"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "Flowview internetske rute"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "IP inačica"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "IPv4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "Ruta"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "Ovo je objavljena internetska ruta."
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "AS broj"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "Broj autonomnog sustava za rutu."
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "Opis rute"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "Opis koji je zabilježio održavatelj rute."
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "Izvorna baza podataka korištena za objavu rute."
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "Održava"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "Internetski operator koji održava rutu za klijenta."
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "Vrijeme posljednje izmjene podataka o ovoj ruti."
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "Nisu pronađene podudarajuće rute"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "Omogući"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "Onemogući"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "Naziv slušača"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "Naziv uređaja koji će biti prikazan."
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "Metoda prikupljanja"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "Postoje dvije podržane metode prikupljanja: prva koristi naslijeđene binarne datoteke flow-tools, a druga koristi vlastiti Cacti poslužitelj za tokove temeljen na PHP-u."
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "Veži na adresu"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "Ako poslužitelj Cacti ima više IP adresa, možete navesti određeno sučelje. Ostavite 0.0.0.0 za primarno sučelje."
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "Dopušteni raspon glavnih računala"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "IP adresa uređaja kojem je dopušteno slanje ovom prikupljaču tokova. Ostavite 0.0.0.0 za bilo koje glavno računalo. Imajte na umu da je PHP izbirljiv u pogledu onoga što dopušta. Podržana je CIDR sintaksa kao i sintaksa raspona, primjerice 192.168.1.0 ili 192.168.1.0/24. Ako želite određene IP adrese, odvojite ih zarezom."
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Priključak"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "Port na kojem će ovaj prikupljač slušati."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Protokol"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "IP protokol koji se koristi za ovaj slušač."
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "UDP protokol"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "Omogućeno"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "Ako je označeno, usluga slušača bit će pokrenuta i čekat će dolazne podatke."
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "Nije pronađen predložak toka za ID uređaja:%s i ID predloška:%s"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Kliknite 'Nastavi' za brisanje sljedećih NetFlow slušača. Nakon toga će Cacti pokušati ponovno pokrenuti vašu uslugu Flow-Capture."
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Kliknite 'Nastavi' za omogućavanje sljedećih NetFlow slušača. Nakon toga će Cacti pokušati ponovno pokrenuti vašu uslugu Flow-Capture."
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "Morate odabrati barem jedan slušač."
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "Port slušača mora biti brojčana vrijednost između 1 i 65535."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "Spremanje je uspjelo. Flowview slušač je spremljen, a usluga ponovno pokrenuta."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "Spremanje je uspjelo. Flowview slušač je spremljen. Međutim, usluga flow-capture nije pokrenuta."
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "Slušač [uređivanje: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "Slušač [novi]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "Naziv"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "Inačica"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "Predlošci"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "Posljednje ažuriranje"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "Aktivni tokovi ažuriraju se svakih 5 minuta"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "Nisu otkriveni dolazni tokovi"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "Predlošci koje je otkrio slušač"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "Adresa izvoznika"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "Sve"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "Predložak"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "ID predloška"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "Naziv polja"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "Podržano"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "ID polja"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "Vrsta polja"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "Duljina"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "Raspakiranje"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "Nisu otkriveni predlošci dolaznih tokova"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "FlowView slušači"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "Slušači"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "Metoda"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "Adresa vezanja"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "Dopušteno od"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "Uočeno slušanje"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "Sigurnost porta koja je stvarno uočena na portu slušača."
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "Red čekanja"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "Veličina UDP reda čekanja u bajtovima."
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "Tokovi"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "Broj dolaznih veza iz različitih izvora."
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "Inačice tokova"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "Inačice prometnog toka koje se prate."
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "Maksimalno vrijeme ažuriranja svih tokova koji se prikupljaju. Ova se vrijednost ažurira svakih 5 minuta."
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "Nijedan"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "Nema veza"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "N/P"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "Cacti"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "Nema Flowview slušača"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "Materijaliziraj"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "Ključevi predmemorije filtara nisu se mogli odrediti pa ništa nije uklonjeno."
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "Uklonjeno je %s predmemoriranih dijelova koji nisu odgovarali nijednom filtru."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "Materijalizacija %d filtra/filtara pokrenuta je u pozadini. %d filtar/filtara već se materijalizira. Rezultati se bilježe u Cacti zapisnik."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "Materijalizacija %d filtra/filtara pokrenuta je u pozadini. Rezultati se bilježe u Cacti zapisnik."
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "Odabrani filtar/filtri već se materijaliziraju. Pokušajte ponovno nakon završetka."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "Kliknite 'Nastavi' za brisanje sljedećih filtara i svih odgovarajućih filtara."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "Kliknite 'Nastavi' za onemogućavanje sljedećih filtara i svih odgovarajućih filtara."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "Kliknite 'Nastavi' za omogućavanje sljedećih filtara."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "Kliknite 'Nastavi' za materijalizaciju sljedećih filtara u pozadini, s uključenim i isključenim NAT-om, za cijeli raspon podataka o tokovima. Particije koje su već materijalizirane i točne se preskaču. To može potrajati dugo na velikim skupovima podataka. Filtar koji se već materijalizira se preskače."
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "Morate odabrati barem jedan filtar."
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "FlowView filtri"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "FlowView filtri [ Dodajte uređaje prije filtara ]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "Filtri"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "Pročisti"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "Ukloni predmemorirane fragmente koji se ne podudaraju ni s jednim filtrom"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "Naziv filtra"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "ID"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "Materijalizacija"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "Materijalizacija unaprijed izračunava rezultate filtra za svaku particiju tokova, s uključenim i isključenim NAT-om, te ih pohranjuje u predmemoriju paralelnih upita kako bi se izvješća za starije podatke brzo otvarala. Nove particije materijaliziraju se automatski nakon što prestanu primati tokove. Potrebno znači da rotirane particije još nisu materijalizirane, U tijeku znači da je materijalizacija u tijeku, a Ažurno znači da je svaka rotirana particija materijalizirana. U tijeku: N označava koliko se upita filtra trenutačno izvršava. Particija koja još prima tokove nije materijalizirana, stoga se ne računa."
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "Osluškivač"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Vrsta izvješća"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "NAT fragmenti"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "Broj particija ovog filtra koje su pohranjene u predmemoriji paralelnih upita s uključenim NAT-om."
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "Fragmenti bez NAT-a"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "Broj particija ovog filtra koje su pohranjene u predmemoriji paralelnih upita s isključenim NAT-om."
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "Particije"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "Ukupan broj particija tokova, što je najveći broj fragmenata koje filtar može imati predmemorirano s NAT-om ili bez njega."
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Polje za sortiranje"
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "Razlučivost"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "Predmemorirane fragmente filtara nije bilo moguće razlikovati od ostalih jer se ključevi predmemorije filtra nisu mogli odrediti."
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "Ključevi predmemorije filtara nisu se mogli odrediti, pa se trenutačno ništa ne može pročistiti. Provjerite ima li svaki filtar valjano izvješće."
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "Predmemorirani fragmenti: %s se podudara s filtrom. %s se ne podudara ni s jednim filtrom, što Pročisti uklanja."
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "Ovim se uklanja %s predmemorirani(h) fragment(a) koji se ne podudaraju ni s jednim filtrom, za svaki filtar i svakog korisnika. Oni potječu od promijenjenih ili izbrisanih filtara te iz izvješća kojima su postavke promijenjene na stranici izvješća. Zadržava se %s predmemorirani(h) fragment(a) filtara. Ova se radnja ne može poništiti."
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "Svaki predmemorirani fragment podudara se s filtrom. Nema ničega za pročišćavanje."
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "Pročisti predmemorirane fragmente"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "Zatvori"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "Pošalji sada"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "Svaki sat"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Svakih %d sati"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "Svaki dan"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "Svaki tjedan"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "Svakih %d tjedana, 2"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "Svaki mjesec"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "Opće postavke"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "Naslov"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "Novi raspored"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "Unesite naslov izvješća za FlowView raspored."
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "Hoće li se ovo NetFlow skeniranje poslati ili ne."
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "Naziv upita koji treba pokrenuti."
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "Postavke slanja"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "Interval slanja"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "Koliko često slati ovo NetFlow izvješće?"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "Zakazano osnovno vrijeme"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "Ovo je prvi datum / vrijeme slanja e-pošte s NetFlow skeniranjem. Sve buduće poruke e-pošte izračunat će se na temelju ovog vremena uvećanog za gore navedeni interval."
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "Najdulje dopušteno vrijeme izvođenja"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "Koliko dugo je izvješću dopušteno izvođenje prije izlaza?"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minuta"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minuta"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "Naslijeđene postavke e-pošte"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "Adrese e-pošte"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "Adrese e-pošte (odvojene zarezom) na koje treba poslati ovo NetFlow skeniranje."
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "Datoteka oblikovanja za korištenje"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Odaberite prilagođenu HTML omotnicu i CSS datoteku za korištenje. Ova datoteka sadrži i HTML i CSS za obuhvaćanje vašeg izvješća. Ako sadrži više od samog CSS-a, unutar datoteke morate postaviti posebnu oznaku <REPORT>. Ova oznaka oblikovanja bit će zamijenjena sadržajem izvješća. Te se datoteke nalaze u direktoriju 'formats'."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "Postavke popisa obavijesti"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "Popis obavijesti"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "Ako je instaliran dodatak Thold, možete odabrati popis obavijesti"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "Izvješće će stići čim bude dovršeno."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Kliknite 'Nastavi' za brisanje sljedećih rasporeda."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Kliknite 'Nastavi' kako biste odmah poslali sljedeće rasporede."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Kliknite 'Nastavi' kako biste onemogućili sljedeće rasporede."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Kliknite 'Nastavi' kako biste omogućili sljedeće rasporede."
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "Morate odabrati barem jedan raspored."
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "Nije moguće pronaći sirove podatke izvješća za ID izvješća %s"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "Morate navesti adrese e-pošte, popis obavijesti ili oboje!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Zakazano izvješće: [uredi: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Povijest zakazanog izvješća: [uredi: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "Zakazano izvješće: [novo]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "Rasporedi"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "Naslov izvješća"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "ID"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "Vrsta izlaza"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "Poslao"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "Datum slanja"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "Vrijeme izvođenja"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "Preuzmi podatke"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "Zapisnici izvješća"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [Prikaži sirovo izvješće]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [Prikaži izvješće s CSS-om]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "Ručno slanje"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "Zakazano"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s sekundi"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "Odabir početnog datuma"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "FlowView rasporedi"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "FlowView rasporedi [ Dodajte uređaje prije rasporeda ]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "Interval"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "Posljednje slanje"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "Sljedeće slanje"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "E-pošta/Popis"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "Zabilježena slanja"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Ne"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Da"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Odaberite izvješće"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Sažetak"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Izvorna korijenska domena"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Odredišna korijenska domena"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Izvorna/odredišna korijenska domena"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP/TCP odredišni priključak"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP/TCP izvorni priključak"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP/TCP priključak"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Izvorišni IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Odredišni IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Izvorišni/odredišni IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Izvorišni ili odredišni IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP protokol"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Ulazno sučelje"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Izlazno sučelje"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Ulazno/izlazno sučelje"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Izvorišni AS"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Odredišni AS"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Izvorišni/odredišni AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Izvorišni prefiks"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Odredišni prefiks"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Izvorišni/odredišni prefiks"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Vremena tokova"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Izvorišni/odredišni IP-ovi i priključci"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "AS brojevi"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 stupca"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Prikaži emulaciju IP obračuna"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Bilo koji dio u rasponu (sporo)"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Vrijeme završetka u rasponu (brzo)"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Vrijeme početka u rasponu (brzo)"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "U potpunosti u rasponu (sporo)"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Vrati sve retke"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Prvih %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Bez ograničenja"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s bajtova"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Izvorišna domena"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Tokovi"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bajtovi"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Paketi"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Odredišna domena"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Izvorišni priključak"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Odredišni priključak"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Odr. IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Izv. sučelje"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Odr. sučelje"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Odredišni prefiks"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Vrijeme početka"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Vrijeme završetka"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Aktivno"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pak"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Zastavice"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Odredište"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d piksela"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Opći filtri"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Spremljeni filtar za prikaz."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Novi filtar"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Slušač koji će se koristiti za filtar."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "ID predloška toka"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "ID predloška toka samo za v9 i IPFIX tokove. Imajte na umu da se ID-ovi predložaka mogu razlikovati od proizvođača do proizvođača."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Adresa strujanja"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "IP adresa strujanja ili naziv glavnog računala s popisa registriranih strujanja."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Predodređene postavke"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Ako se ovaj filtar temelji na unaprijed definiranom vremenskom rasponu, odaberite ga ovdje."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Detaljni kriteriji filtra"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Vrsta izvješća koja se zadano koristi za ovaj filtar pri stvaranju izvješća."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Ispisano"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Statističko"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Statističko izvješće"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Vrsta prikaza izvješća koja se zadano koristi za ovaj filtar pri stvaranju izvješća."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Ispisano izvješće"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Vrsta ispisanog izvješća koja se zadano koristi za ovaj filtar pri stvaranju ispisanog izvješća."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Pravila raspona"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Ograničite podatke filtra ovim pravilima vremenskog filtra."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Razriješi IP adrese"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Razriješi IP adrese u nazive domena."
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Zadano polje za sortiranje filtra. Ova će se postavka primijeniti na sva zakazana izvješća."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Najveći broj redaka"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Najveći broj redaka koji se prikazuje u filtru. Ova će se postavka primijeniti na sva zakazana izvješća."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Najmanji broj bajtova"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Najmanji ukupni broj bajtova koji se uzima u obzir za filtar. Svi ukupni iznosi tokova manji od tog broja bajtova bit će zanemareni."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Mogućnosti grafikona"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Vrsta grafikona"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Vrsta grafikona koja se zadano prikazuje. Uključuje stupčasti, kružni i hijerarhijski grafikon."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Stupčasti grafikon"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Kružni grafikon"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Hijerarhijski grafikon"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Visina grafikona"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "Visina grafikona koja se koristi prema zadanim postavkama."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "Koristi NAT podatke"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "Prikaži izvornu/odredišnu IP adresu i DNS naziv nakon NAT-a (prevedene) u izlazu izvješća umjesto izvornih vrijednosti prije NAT-a."
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Ploča tablice"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Treba li ploča tablice biti prikazana prema zadanim postavkama."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Ploča bajtova"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Treba li ploča bajtova biti prikazana prema zadanim postavkama."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Ploča paketa"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Treba li ploča paketa biti prikazana prema zadanim postavkama."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Ploča tokova"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Treba li ploča tokova biti prikazana prema zadanim postavkama."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Filtri protokola"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Protokoli"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Odaberite određeni protokol za filtar."
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "Svi protokoli"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP zastavice"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "TCP zastavice koje se pretražuju u filtru. To može biti popis TCP zastavica odvojen zarezima"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "TOS polja"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "TOS polja koja se pretražuju u filtru. To može biti popis TOS polja odvojen zarezima"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtriraj prema odabranoj izvornoj IP adresi u filtru. To može biti popis IPv4 ili IPv6 adresa odvojen zarezima ili popis raspona IPv4 ili IPv6 adresa u CIDR formatu odvojen zarezima (npr. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Izvorni priključci"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Filtriraj prema odabranim izvornim priključcima u filtru. To može biti popis izvornih priključaka odvojen zarezima."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Izvorno sučelje"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Filtriraj prema odabranom izvornom sučelju u filtru. To može biti popis izvornih sučelja odvojen zarezima"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Filtriraj prema odabranom odredišnom AS-u u filtru. To može biti popis izvornih AS-ova odvojen zarezima"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtriraj prema odabranoj odredišnoj IP adresi u filtru. To može biti popis IPv4 ili IPv6 adresa odvojen zarezima ili popis raspona IPv4 ili IPv6 adresa u CIDR formatu odvojen zarezima (npr. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Odredišni priključci"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Filtriraj prema odabranim odredišnim priključcima u filtru. To može biti popis odredišnih priključaka odvojen zarezima."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Odredišno sučelje"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Filtriraj prema odabranom odredišnom sučelju u filtru. To može biti popis odredišnih sučelja odvojen zarezima."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Odredišni AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Filtriraj prema odabranom odredišnom AS-u u filtru. To može biti popis odredišnih AS-ova odvojen zarezima"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "Izvorna IP adresa nakon NAT-a"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtriraj prema prevedenoj izvornoj IP adresi (nakon NAT-a) zabilježenoj u filtru. To može biti popis IPv4 ili IPv6 adresa odvojen zarezima ili popis raspona IPv4 ili IPv6 adresa u CIDR formatu odvojen zarezima (npr. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "Izvorni priključak nakon NAT-a"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtriraj prema prevedenom izvornom priključku (nakon NAT-a) u filtru. To može biti popis priključaka odvojen zarezima."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "Odredišna IP adresa nakon NAT-a"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtriraj prema prevedenoj odredišnoj IP adresi (nakon NAT-a) zabilježenoj u filtru. To može biti popis IPv4 ili IPv6 adresa odvojen zarezima ili popis raspona IPv4 ili IPv6 adresa u CIDR formatu odvojen zarezima (npr. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "Odredišni priključak nakon NAT-a"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtriraj prema prevedenom odredišnom priključku (nakon NAT-a) u filtru. To može biti popis priključaka odvojen zarezima."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS predmemorija"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Rute"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Autonomni brojevi"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS blokovi"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS skupovi"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Skupovi ruta"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Domene"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Skupovi filtara"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Peering skupovi"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Internetski usmjerivači"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Timovi za odgovor na incidente"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Agenti za autentifikaciju"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Organizacije"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Uloge"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Osobe"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "Izvješće '%s' iz izvora %s s ID-om %s zakazano je za pokretanje!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "Izvješće '%s' iz izvora %s s ID-om %s nije zakazano za pokretanje zbog pogreške!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "Općenito"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "Zapisnici"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "Prvo odaberite vrstu izvješća"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Filtar: [uredi: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "Filtar: [novi]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "Pogođeni predmemorirani rezultati"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "Ove promjene utječu na predmemorirane rezultate ovog filtra. Spremanjem filtra pokreće se materijalizacija u pozadini radi njihove ponovne izgradnje. Pritisnite 'Nastavi' za spremanje filtra ili 'Odustani' za nastavak uređivanja."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Promjene ovog filtra utječu na njegove predmemorirane rezultate, stoga je u pozadini pokrenuta njegova materijalizacija. Njezin napredak prikazan je na stranici Filtri, a rezultati se bilježe u zapisnik sustava Cacti."
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Nedefinirani filtar [ Odaberite filtar za pojedinosti ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Statističko izvješće: %s [ Uključujući nadjačavanja navedena u nastavku ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Ispisano izvješće: %s [ Uključujući nadjačavanja navedena u nastavku ]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "Odaberite filtar"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "Primijeni filtar"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "Očisti filtar"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "Uredi"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "Uredi filtar toka"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "Stvori novi filtar toka"
+
+#: includes/functions.php
+msgid "New"
+msgstr "Novo"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "Spremi"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "Spremi filtar toka"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "Spremi kao"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Spremi postojeći filtar toka kao novi filtar"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "Preimenuj"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "Preimenuj filtar toka"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "Izbriši filtar toka"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "Izvješće"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "Statističko: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "Ispisano: %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "Prvo odaberite filtar"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "Linije"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "Izuzmi"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "Najveći uzorak"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "Najvećih %d uzoraka"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "Okteti"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "Prikaži samo domene na grafikonima ispod"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "Samo domene/nazivi računala"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "Prikaži IP/DNS naziv nakon NAT-a (prevedeni) umjesto izvornih vrijednosti"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "Vremenski raspon"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "Prilagođeno"
+
+#: includes/functions.php
+msgid "From"
+msgstr "Od"
+
+#: includes/functions.php
+msgid "To"
+msgstr "Do"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "Odabir završnog datuma"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "Pomakni vrijeme unatrag"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "Definiraj interval pomaka"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "Pomakni vrijeme unaprijed"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "Grafikon"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "Stupčasti"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "Kružni"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "Hijerarhijski"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "Visina"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "Prikaži/Sakrij"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "Tablica"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "Izvezi neobrađene podatke"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "Spremi filtar protoka"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "Novi naziv"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "Izbriši filtar protoka"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "Za brisanje ovog filtra protoka pritisnite Nastavi. Ako se filtar protoka koristi u zakazanom izvješću, radnja će biti blokirana."
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Grafikon raspodjele bajtova za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "Kružni grafikon bajtova za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Hijerarhijski grafikon bajtova za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Grafikon raspodjele paketa za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "Kružni grafikon paketa za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Hijerarhijski grafikon paketa za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Grafikon raspodjele protoka za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Kružni grafikon protoka za najvećih %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Hijerarhijski grafikon protoka za najvećih %s"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "Preimenuj raspored"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "Postavke filtra su spremljene. Materijalizacija ovog filtra pokrenuta je u pozadini."
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "Postavke filtra spremljene"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Klijent/Privatno (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Nepoznato (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Filtar podmreže: %s nije valjani CIDR format"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "IP filtar: %s nije valjana IP adresa"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "nerazriješeno"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d bajtova"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d bajtova"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "Statističko izvješće %s nije poznato. Prijavite pogrešku na GitHubu"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "Ispisano izvješće %s nije poznato. Prijavite pogrešku na GitHubu"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "Izvorni DNS"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "Izvorni korijenski DNS"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "Odredišni DNS"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "Odredišni korijenski DNS"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "DNS"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "Korijenski DNS"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "Odredišni priključak"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "Odredišno sučelje"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "Odredišni prefiks"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "Vrsta usluge"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "Bajtova/paket"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "Još nije materijalizirano, s NAT-om: %s, bez NAT-a: %s."
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "Ažurno"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "U tijeku"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "Obvezno"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "Broj upita ovog filtra koji se trenutačno izvode."
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "S NAT-om: %d, bez NAT-a: %d."
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "Izvodi se: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "POGREŠKA: Paralelni upit nije završio unutar maksimalnog vremena izvođenja od %d sekundi. Provjerite maksimalno vrijeme izvođenja u postavkama dodatka FlowView te provjerite nije li baza podataka zauzeta drugom radnjom kao što je ALTER TABLE."
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Vrijeme za paralelni upit je isteklo. Obratite se svom administratoru"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Logički: %s, Numerički: %s, Heksadekadski: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "Malo kašnjenje"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "Propusnost"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "Pouzdanost"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "Minimalni trošak"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "Nadzor mreže"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "Nadzor interneta"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "Kritični ECP"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "Iznimno hitno"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "Hitno"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "Žurno"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "Prioritetno"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "Redovito"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "Sažeta statistika"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "Raspodjela veličine IP paketa (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Raspodjela paketa po toku (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Raspodjela okteta po toku (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Raspodjela vremena toka (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Morate odabrati statističko izvješće ili ispisano izvješće!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Morate odabrati samo statističko izvješće ili ispisano izvješće (ne oba)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Nevažeći datumi, završni datum/vrijeme je prije početnog datuma/vremena!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Nevažeća IP adresa za izvorišnu adresu!<br>(Mora biti u obliku '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Nevažeća podmreža za izvorišnu adresu!<br>(Mora biti u obliku '192.168.0.1/255.255.255.0' ili '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Nevažeća IP adresa za odredišnu adresu!<br>(Mora biti u obliku '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Nevažeća podmreža za odredišnu adresu!<br>(Mora biti u obliku '192.168.0.1/255.255.255.0' ili '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "Nevažeća vrijednost za izvorišno sučelje!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Nevažeća vrijednost za izvorišni priključak! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Nevažeća vrijednost za izvorišni AS! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "Nevažeća vrijednost za odredišno sučelje!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Nevažeća vrijednost za odredišni priključak! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Nevažeća vrijednost za odredišni AS! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Nevažeća vrijednost za protokol! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Nevažeća vrijednost za TCP zastavicu! (npr.: 0x1b ili 0x1b/SA ili SA/SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Nevažeća vrijednost za granični broj okteta!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Nevažeća vrijednost za granični broj redaka!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "FlowView grafikon za %s je vrste %s"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "Podržano (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "Nije podržano"
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (brzo, nije otporno na pad sustava)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (brzo, otporno na pad sustava)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (sporo, visoka istodobnost)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "NetFlow korisnik"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "NetFlow administrator"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Preimenujte datoteku config.php.dist ili config_local.php.dist u direktoriju flowview te postavite svoju bazu podataka prije instalacije."
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Imajte na umu da se tablice dodatka Flowview nadograđuju u pozadini. To može potrajati neko vrijeme. Za više informacija provjerite Cacti zapisnik"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "Filtar je izbrisan"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "Filtar je ažuriran"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "Uvoz/izvoz"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "Baze podataka"
+
+#: setup.php
+msgid "Normal User"
+msgstr "Obični korisnik"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Administracija sustava"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "Preglednik tokova"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "Nadzorna ploča"
+
+#: setup.php
+msgid "(save)"
+msgstr "(spremi)"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(uredi)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "(radnje)"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "%d proces"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "%d procesa"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "Istodobni procesi izvješća (samo FlowView)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "Odaberite najveći broj istodobnih procesa izvješća koji mogu biti pokrenuti u isto vrijeme."
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Postavke internetskog proxy poslužitelja"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Adresa internetskog proxyja"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Za osnovne Cacti servise ili dodatke kojima je potreban pristup internetu, ovdje unesite proxy poslužitelj i priključak u sljedećem formatu IP:PORT. Na primjer 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Korisnik internetskog proxyja"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Ako vaš internetski proxy zahtijeva korisničko ime, unesite ga ovdje."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Lozinka internetskog proxyja"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Ako vaš internetski proxy zahtijeva lozinku, unesite je ovdje."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "Razrješavanje naziva"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "Razrješavanje naziva glavnog računala"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Metoda kojom želite razrješavati nazive glavnih računala."
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "Koristi lokalni poslužitelj"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Koristi DNS poslužitelje pod Pošta/Izvješćivanje/DNS"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "Ne razrješavaj DNS"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "Preuzimaj internetski registar svakodnevno"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "Ako ste zainteresirani za javno dostupne informacije o cijelom internetu, možete odabrati ovu mogućnost. Cacti će se jednom dnevno povezati s internetskim registrima diljem svijeta, provjeriti promjene ruta za cijeli internet i učitati te informacije u Cacti. Imajte na umu da će to stvoriti prilično veliku bazu podataka s više od 3 GB podataka."
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "Naziv lokalne domene"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "Za IPv4 adrese na lokalnoj mreži koje se ne razrješavaju lokalno, dodajte ovaj sufiks dobivenoj IP adresi."
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "Lokalni raspon IP adresa"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Unesite raspon IPv4 adresa za svoju lokalnu mrežu za glavna računala koja možda nisu registrirana u DNS-u. Ta će se glavna računala mapirati na gore navedeni naziv lokalne domene. Ovo je namijenjeno ponajprije kućnim korisnicima. Možete koristiti CIDR ili ne-CIDR oblike. Primjerice: 192.168.11.0 ili 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "Koristi CIDR ili ne-CIDR"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Koristi Arin za pronalaženje domena i AS brojeva"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Mnoge velike tehnološke tvrtke za prikupljanje podataka vole prikriti svoje vlasništvo nad domenama kako bi zamaglile činjenicu da prikupljaju vaše osobne podatke. Ako vas to zabrinjava i vaša instalacija sustava Cacti ima pristup internetu, možete koristiti Arin za uklanjanje prikrivanja tih velikih tehnoloških tvrtki."
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "Poslužitelj pružatelja usluge whois"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Unesite naziv glavnog računala za razrješavanje whois poziva. Ako vrijednost nije prazna, morate imati izvršnu datoteku whois u putanji sustava."
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "Putanja izvršne datoteke whois"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Unesite putanju za izvršnu datoteku 'whois'. Izvršna datoteka 'whois' koristit će se za pronalaženje AS podataka koji dopunjuju Arin."
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "Unesite putanju izvršne datoteke"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "Postavke detaljnog prikaza grafikona"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "Zadani filtar pretraživanja za detaljne prikaze grafikona"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "Odaberite postojeći Flowview filtar pretraživanja za detaljne prikaze grafikona."
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "Čuvanje podataka i generiranje izvješća"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "Pravila čuvanja podataka"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Vrijeme tijekom kojeg će Cacti zadržati particionirane tablice tokova."
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "%d tjedan"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d tjedana"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d mjesec"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d mjeseci"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d godina"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "Shema particioniranja baze podataka"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Ovisno o broju tokova u minuti, možda će vam trebati više tablica dnevno."
+
+#: setup.php
+msgid "Daily"
+msgstr "Dnevno"
+
+#: setup.php
+msgid "Hourly"
+msgstr "Svaki sat"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "Mehanizam pohrane za sirove tablice"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Mehanizam Aria savršen je za sve osim za sirovu tablicu uživo (Live). Sirova tablica uživo uvijek će koristiti InnoDB. Odaberite po želji."
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "Paralelni upiti"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "Pozadinski sustav za paralelne upite"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "Odaberite način izvršavanja paralelnih FlowView upita. Naslijeđeni PHP pokretač račva proces flowview_runner.php za svaki upit i fragment. FlowView usluga upita šalje isti map-reduce zadatak dugotrajnoj Go usluzi putem adrese localhost, čime se izbjegava pokretanje procesa po upitu i kašnjenje pri prozivanju baze podataka. Zahtijeva da usluga flowview-query (pogledajte plugins/flowview/service/flowview-query) bude instalirana i pokrenuta."
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "Naslijeđeni PHP pokretač"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "FlowView usluga upita"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "URL usluge upita"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "Osnovni URL FlowView usluge upita, na primjer http://127.0.0.1:8699. Ostavite prazno za automatsko otkrivanje privremenog priključka iz datoteke priključka usluge."
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "Datoteka priključka usluge upita"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "Putanja do datoteke priključka u koju FlowView usluga upita zapisuje svoju povezanu adresu. Koristi se za otkrivanje krajnje točke usluge kada je gornji URL usluge upita prazan."
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "Token usluge upita"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "Neobavezna dijeljena tajna. Kada je postavljena, Cacti je šalje FlowView usluzi upita kao zaglavlje \"Authorization: Bearer\", a usluga odbija svaki zahtjev koji mijenja stanje ako ne sadrži isti token. Postavite odgovarajuću vrijednost u konfiguracijskoj datoteci usluge (auth_token) ili u varijabli okruženja FLOWVIEW_QUERY_TOKEN. Preporučuje se kad god je usluga dostupna bilo čemu osim pouzdanim lokalnim procesima."
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "Maksimalan broj istodobnih niti"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Najveći broj niti koje će se pokrenuti za izvršavanje FlowView upita. Imajte na umu da možete imati najviše 1 nit po particiji baze podataka te trebate paziti da ne preopteretite poslužitelj baze podataka prevelikim brojem istodobno aktivnih niti."
+
+#: setup.php
+msgid "Disabled"
+msgstr "Onemogućeno"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "%d dretvi"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "Maksimalno vrijeme izvođenja"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Ako paralelni upit ne završi u ovom vremenu, izađi."
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "Vrijeme trajanja podataka u predmemoriji"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "Koliko dugo FlowView treba čuvati rezultate upita u predmemoriji prije njihovog čišćenja?"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d sati"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d dan"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d dana"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "MaxScale fragmentiranje"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "Ovo je potrebno samo ako veza s Flowview bazom podataka vašeg Cacti sustava već ne koristi priključak za razdvajanje čitanja i pisanja (Read-Write Split) koji je omogućio MaxScale."
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "Iskoristi MaxScale za raspodjelu fragmenata upita"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "Ako imate više usluga koje djeluju kao podređeni poslužitelji za MaxScale, možete povećati brzinu upita raspodjelom paralelnih upita na više pozadinskih MariaDB poslužitelja."
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "MaxScale priključak za razdvajanje čitanja i pisanja"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "Ovo treba biti priključak usluge i usmjerivača Read-Write-Split-Service (readwrite)."
+
+#: setup.php
+msgid "Flowview"
+msgstr "Flowview"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
