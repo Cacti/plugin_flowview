@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 10:49+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Korean <https://translate.cacti.net/projects/cacti/flowview/ko/>\nLanguage: ko-KR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-26 03:27-0800\n"
+"PO-Revision-Date: 2026-11-26 10:49+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Korean <https://translate.cacti.net/projects/cacti/flowview/ko/>\n"
+"Language: ko-KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -1080,8 +1092,9 @@ msgid "Every Week"
 msgstr "매주"
 
 #: flowview_schedules.php
-#, php-format
-msgid "Every %d Weeks, 2"
+#, fuzzy, php-format
+#| msgid "Every %d Weeks, 2"
+msgid "Every %d Weeks"
 msgstr "%d주마다, 2"
 
 #: flowview_schedules.php
@@ -1962,6 +1975,12 @@ msgid "The changes to this Filter affect its cached results, so a materializatio
 msgstr "이 필터에 대한 변경 사항이 캐시된 결과에 영향을 미치므로 백그라운드에서 구체화(materialization)가 시작되었습니다. 진행 상황은 필터 페이지에 표시되며 결과는 Cacti 로그에 보고됩니다."
 
 #: includes/functions.php
+#, fuzzy
+#| msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgid "The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "이 필터에 대한 변경 사항이 캐시된 결과에 영향을 미치므로 백그라운드에서 구체화(materialization)가 시작되었습니다. 진행 상황은 필터 페이지에 표시되며 결과는 Cacti 로그에 보고됩니다."
+
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "정의되지 않은 필터 [세부 정보를 보려면 필터 선택]"
 
@@ -2214,6 +2233,12 @@ msgstr "레이아웃 이름 바꾸기"
 #: includes/functions.php
 msgid " <new>"
 msgstr " 신규"
+
+#: includes/functions.php
+#, fuzzy
+#| msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgid "Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes."
+msgstr "필터 설정이 저장되었습니다. 이 필터의 구체화가 백그라운드에서 시작되었습니다."
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
