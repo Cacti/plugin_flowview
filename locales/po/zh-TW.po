@@ -4,7 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hant/>\nLanguage: zh-TW\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-26 03:27-0800\n"
+"PO-Revision-Date: 2026-11-26 05:52+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/projects/cacti/flowview/zh_Hant/>\n"
+"Language: zh-TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -1080,8 +1092,9 @@ msgid "Every Week"
 msgstr "每週"
 
 #: flowview_schedules.php
-#, php-format
-msgid "Every %d Weeks, 2"
+#, fuzzy, php-format
+#| msgid "Every %d Weeks, 2"
+msgid "Every %d Weeks"
 msgstr "每 %d 周，2"
 
 #: flowview_schedules.php
@@ -1962,6 +1975,12 @@ msgid "The changes to this Filter affect its cached results, so a materializatio
 msgstr "對此篩選器的變更會影響其快取結果，因此已在背景開始進行具體化作業。其進度會顯示於篩選器頁面，結果則會記錄於 Cacti 日誌中。"
 
 #: includes/functions.php
+#, fuzzy
+#| msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgid "The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "對此篩選器的變更會影響其快取結果，因此已在背景開始進行具體化作業。其進度會顯示於篩選器頁面，結果則會記錄於 Cacti 日誌中。"
+
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "未定義的篩選器 [ 選取篩選器以取得詳細資訊 ]"
 
@@ -2214,6 +2233,12 @@ msgstr "重新命名佈局"
 #: includes/functions.php
 msgid " <new>"
 msgstr " [新]"
+
+#: includes/functions.php
+#, fuzzy
+#| msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgid "Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes."
+msgstr "已儲存篩選設定。已在背景啟動此篩選條件的具體化處理。"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
