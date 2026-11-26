@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"POT-Creation-Date: 2026-11-26 03:27-0800\n"
 "PO-Revision-Date: 2026-11-25 06:55+0000\n"
 "Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -1095,8 +1095,9 @@ msgid "Every Week"
 msgstr "Кожний тиждень"
 
 #: flowview_schedules.php
-#, php-format
-msgid "Every %d Weeks, 2"
+#, fuzzy, php-format
+#| msgid "Every %d Weeks, 2"
+msgid "Every %d Weeks"
 msgstr "Кожні %d тижнів, 2"
 
 #: flowview_schedules.php
@@ -1977,6 +1978,12 @@ msgid "The changes to this Filter affect its cached results, so a materializatio
 msgstr "Зміни в цьому фільтрі впливають на його кешовані результати, тому у фоновому режимі запущено його матеріалізацію. Перебіг виконання відображається на сторінці «Фільтри», а результати записуються до журналу Cacti."
 
 #: includes/functions.php
+#, fuzzy
+#| msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgid "The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Зміни в цьому фільтрі впливають на його кешовані результати, тому у фоновому режимі запущено його матеріалізацію. Перебіг виконання відображається на сторінці «Фільтри», а результати записуються до журналу Cacti."
+
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "Невизначений фільтр [ Виберіть фільтр для перегляду подробиць ]"
 
@@ -2229,6 +2236,12 @@ msgstr "Перейменувати макет"
 #: includes/functions.php
 msgid " <new>"
 msgstr " <новий>"
+
+#: includes/functions.php
+#, fuzzy
+#| msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgid "Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes."
+msgstr "Налаштування фільтра збережено. У фоновому режимі запущено матеріалізацію цього фільтра."
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
@@ -2935,4 +2948,3 @@ msgstr "Flowview"
 #: setup.php
 msgid "NetFlow"
 msgstr "NetFlow"
-
