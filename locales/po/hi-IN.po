@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"POT-Creation-Date: 2026-11-26 03:27-0800\n"
 "PO-Revision-Date: 2026-11-26 10:49+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Hindi <https://translate.cacti.net/projects/cacti/flowview/hi/>\n"
@@ -1094,8 +1094,9 @@ msgid "Every Week"
 msgstr "प्रत्येक सप्ताह"
 
 #: flowview_schedules.php
-#, php-format
-msgid "Every %d Weeks, 2"
+#, fuzzy, php-format
+#| msgid "Every %d Weeks, 2"
+msgid "Every %d Weeks"
 msgstr "प्रत्येक %d सप्ताह, 2"
 
 #: flowview_schedules.php
@@ -1976,6 +1977,12 @@ msgid "The changes to this Filter affect its cached results, so a materializatio
 msgstr "इस फ़िल्टर में किए गए परिवर्तन इसके कैश किए गए परिणामों को प्रभावित करते हैं, इसलिए पृष्ठभूमि में इसका मटेरियलाइज़ेशन शुरू कर दिया गया है। इसकी प्रगति फ़िल्टर पृष्ठ पर दिखाई जाती है और इसके परिणाम Cacti लॉग में रिपोर्ट किए जाते हैं।"
 
 #: includes/functions.php
+#, fuzzy
+#| msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgid "The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "इस फ़िल्टर में किए गए परिवर्तन इसके कैश किए गए परिणामों को प्रभावित करते हैं, इसलिए पृष्ठभूमि में इसका मटेरियलाइज़ेशन शुरू कर दिया गया है। इसकी प्रगति फ़िल्टर पृष्ठ पर दिखाई जाती है और इसके परिणाम Cacti लॉग में रिपोर्ट किए जाते हैं।"
+
+#: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
 msgstr "अपरिभाषित फ़िल्टर [विवरण प्राप्त करने के लिए फ़िल्टर का चयन करें]"
 
@@ -2228,6 +2235,12 @@ msgstr "लेआउट का नाम बदलें"
 #: includes/functions.php
 msgid " <new>"
 msgstr " <new>"
+
+#: includes/functions.php
+#, fuzzy
+#| msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgid "Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes."
+msgstr "फ़िल्टर सेटिंग्स सहेजी गईं। इस फ़िल्टर का मैटेरियलाइज़ेशन पृष्ठभूमि में शुरू कर दिया गया है।"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
