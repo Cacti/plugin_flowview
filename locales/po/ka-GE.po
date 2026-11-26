@@ -4,29 +4,29 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-25 22:35+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/flowview/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: Cacti\nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Georgian <https://translate.cacti.net/projects/cacti/flowview/ka/>\nLanguage: ka-GE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
-msgstr ""
+msgstr "ექსპორტისთვის დაუმუშავებელი მონაცემები ვერ მოიძებნა"
 
 #: flowview.php
 msgid "Flowview Query provided does not exist.  Please submit with a valid query."
-msgstr ""
+msgstr "მითითებული Flowview მოთხოვნა არ არსებობს. გთხოვთ, გაგზავნოთ სწორი მოთხოვნა."
 
 #: flowview.php
 msgid "Invalid source Query provided.  Please submit with a valid query."
-msgstr ""
+msgstr "მითითებულია არასწორი საწყისი მოთხოვნა. გთხოვთ, გაგზავნოთ სწორი მოთხოვნა."
 
 #: flowview.php
 #, php-format
 msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
-msgstr ""
+msgstr "ნაკადის ფილტრის '%s' წაშლა შეუძლებელია, რადგან იგი გამოიყენება დაგეგმილ ანგარიშში."
 
 #: flowview.php
 #, php-format
 msgid "Flow Filter '%s' Deleted."
-msgstr ""
+msgstr "ნაკადის ფილტრი '%s' წაიშალა."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -35,11 +35,11 @@ msgstr "წაშლა"
 
 #: flowview_databases.php
 msgid "DNS Cache has been purged.  It will refill as records come in."
-msgstr ""
+msgstr "DNS ქეში გასუფთავდა. იგი ხელახლა შეივსება ჩანაწერების შემოსვლისთანავე."
 
 #: flowview_databases.php
 msgid "Internet Route Registry Details"
-msgstr ""
+msgstr "ინტერნეტ-მარშრუტების რეესტრის დეტალები"
 
 #: flowview_databases.php
 msgid "Authorized Agent Details"
@@ -47,7 +47,7 @@ msgstr "ავტორიზებული აგენტის დეტა�
 
 #: flowview_databases.php
 msgid "No Details Found"
-msgstr ""
+msgstr "დეტალები ვერ მოიძებნა"
 
 #: flowview_databases.php
 msgid "CIDR/Route"
@@ -448,7 +448,7 @@ msgstr "შემოტანა გავლით"
 #: flowview_databases.php
 #, php-format
 msgid "FATAL: Unknown Database Table %s"
-msgstr ""
+msgstr "კრიტიკული შეცდომა: უცნობი მონაცემთა ბაზის ცხრილი %s"
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php
@@ -489,21 +489,21 @@ msgstr "ფილტრების გასუფთავება"
 
 #: flowview_databases.php
 msgid "Purge the DNS Cache"
-msgstr ""
+msgstr "DNS ქეშის გასუფთავება"
 
 #: flowview_databases.php
 msgid "Not Specified"
-msgstr "მითითებული არაა"
+msgstr "მითითებული არ არის"
 
 #: flowview_databases.php
 msgid "No Matching Entries Found"
-msgstr ""
+msgstr "შესაბამისი ჩანაწერები ვერ მოიძებნა"
 
 #: flowview_databases.php
 msgid "Click 'Continue' to delete the following DNS Cache Entry."
 msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "დააჭირეთ ღილაკს 'გაგრძელება' შემდეგი DNS ქეშის ჩანაწერის წასაშლელად."
+msgstr[1] "დააჭირეთ ღილაკს 'გაგრძელება' ყველა შემდეგი DNS ქეშის ჩანაწერის წასაშლელად."
 
 #: flowview_databases.php flowview_devices.php flowview_filters.php
 #: flowview_schedules.php includes/functions.php
@@ -518,12 +518,12 @@ msgstr "გაგრძელება"
 #: flowview_databases.php
 msgid "Delete DNS Entry"
 msgid_plural "Delete DNS Entries"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "DNS ჩანაწერის წაშლა"
+msgstr[1] "DNS ჩანაწერების წაშლა"
 
 #: flowview_databases.php
 msgid "Flowview DNS Cache Entries"
-msgstr ""
+msgstr "Flowview DNS ქეშის ჩანაწერები"
 
 #: flowview_databases.php
 msgid "Verified"
@@ -543,7 +543,7 @@ msgstr "IP მისამართი"
 
 #: flowview_databases.php
 msgid "This is the IP Address of the Cache entry."
-msgstr ""
+msgstr "ეს არის ქეშის ჩანაწერის IP მისამართი."
 
 #: flowview_databases.php
 msgid "DNS Hostname"
@@ -551,11 +551,11 @@ msgstr "DNS ჰოსტის სახელი"
 
 #: flowview_databases.php
 msgid "The DNS Name assigned to the IP Address."
-msgstr ""
+msgstr "IP მისამართისთვის მინიჭებული DNS სახელი."
 
 #: flowview_databases.php
 msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
-msgstr ""
+msgstr "DNS ჰოსტის სახელის წყარო. ეს შეიძლება იყოს DNS, სტატიკური ძიება (Static Lookup) ან ARIN."
 
 #: flowview_databases.php
 msgid "Arin Verified"
@@ -563,7 +563,7 @@ msgstr "შემოწმებული Arin"
 
 #: flowview_databases.php
 msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
-msgstr ""
+msgstr "ამ IP მისამართისთვის ARIN-ის ინფორმაცია დადასტურებულია, ან იგი ლოკალური დომენის IP მისამართია."
 
 #: flowview_databases.php
 msgid "CIDR ID"
@@ -571,7 +571,7 @@ msgstr "CIDR ID"
 
 #: flowview_databases.php
 msgid "The Arin primary key.  This is not official Arin information."
-msgstr ""
+msgstr "ARIN-ის პირველადი გასაღები. ეს არ არის ARIN-ის ოფიციალური ინფორმაცია."
 
 #: flowview_databases.php
 msgid "Autonomous System ID"
@@ -579,7 +579,7 @@ msgstr "ანონიმური სისტემის ID"
 
 #: flowview_databases.php
 msgid "The Arin Origin AS.  This is official Arin AS information."
-msgstr ""
+msgstr "ARIN-ის საწყისი AS. ეს არის ARIN-ის ოფიციალური AS ინფორმაცია."
 
 #: flowview_databases.php
 msgid "Updated Time"
@@ -587,15 +587,15 @@ msgstr "განახლებული დრო"
 
 #: flowview_databases.php
 msgid "This is the time that the DNS cache was entered or last updated."
-msgstr ""
+msgstr "ეს არის დრო, როდესაც DNS ქეში შეიქმნა ან ბოლოს განახლდა."
 
 #: flowview_databases.php
 msgid "No DNS Cache Entries Found"
-msgstr ""
+msgstr "DNS ქეშის ჩანაწერები ვერ მოიძებნა"
 
 #: flowview_databases.php
 msgid "Flowview Internet Routes"
-msgstr ""
+msgstr "Flowview ინტერნეტ-მარშრუტები"
 
 #: flowview_databases.php
 msgid "IP Version"
@@ -615,7 +615,7 @@ msgstr "რაუტი"
 
 #: flowview_databases.php
 msgid "This is the published Internet Route."
-msgstr ""
+msgstr "ეს არის გამოქვეყნებული ინტერნეტ-მარშრუტი."
 
 #: flowview_databases.php
 msgid "AS Number"
@@ -623,7 +623,7 @@ msgstr "AS-ის ნომერი"
 
 #: flowview_databases.php
 msgid "The Autonomous System Number for the route."
-msgstr ""
+msgstr "მარშრუტის ავტონომიური სისტემის ნომერი."
 
 #: flowview_databases.php
 msgid "Route Description"
@@ -631,11 +631,11 @@ msgstr "რაუტის აღწერა"
 
 #: flowview_databases.php
 msgid "The Description logged by the Route Maintainer."
-msgstr ""
+msgstr "მარშრუტის მხარდამჭერის მიერ ჟურნალში ჩაწერილი აღწერა."
 
 #: flowview_databases.php
 msgid "The source database used to publish the route."
-msgstr ""
+msgstr "მარშრუტის გამოსაქვეყნებლად გამოყენებული წყარო მონაცემთა ბაზა."
 
 #: flowview_databases.php
 msgid "Maintained By"
@@ -643,15 +643,15 @@ msgstr "მთავარი პროგრამისტი"
 
 #: flowview_databases.php
 msgid "The Internet Carrier who is maintaining the route for the customer."
-msgstr ""
+msgstr "ინტერნეტ-ოპერატორი, რომელიც მომხმარებლისთვის ამ მარშრუტს ემსახურება."
 
 #: flowview_databases.php
 msgid "The last time the information on this route was modified."
-msgstr ""
+msgstr "ამ მარშრუტის შესახებ ინფორმაციის ბოლო ცვლილების დრო."
 
 #: flowview_databases.php
 msgid "No Matching Routes Found"
-msgstr ""
+msgstr "შესაბამისი მარშრუტები ვერ მოიძებნა"
 
 #: flowview_devices.php flowview_filters.php flowview_schedules.php
 msgid "Enable"
@@ -667,7 +667,7 @@ msgstr "მსმენელის სახელი"
 
 #: flowview_devices.php
 msgid "Name of the device to be displayed."
-msgstr ""
+msgstr "გამოსაჩენი მოწყობილობის სახელი."
 
 #: flowview_devices.php
 msgid "Collection Method"
@@ -675,15 +675,15 @@ msgstr "კოლექციის მეთოდი"
 
 #: flowview_devices.php
 msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
-msgstr ""
+msgstr "მხარდაჭერილია შეგროვების ორი მეთოდი: პირველი იყენებს მოძველებულ flow-tools ბინარულ ფაილებს, ხოლო მეორე — Cacti-ს საკუთარ, PHP-ზე დაფუძნებულ ნაკადების სერვერს."
 
 #: flowview_devices.php
 msgid "Bind to address"
-msgstr ""
+msgstr "მისამართზე მიბმა"
 
 #: flowview_devices.php
 msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
-msgstr ""
+msgstr "თუ Cacti სერვერს აქვს რამდენიმე IP მისამართი, შეგიძლიათ მიუთითოთ კონკრეტული ინტერფეისი. ძირითადი ინტერფეისისთვის დატოვეთ 0.0.0.0."
 
 #: flowview_devices.php
 msgid "Allowed Host Range"
@@ -691,7 +691,7 @@ msgstr "დაშვებული ჰოსტების დიაპაზ�
 
 #: flowview_devices.php
 msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
-msgstr ""
+msgstr "იმ მოწყობილობის IP მისამართი, რომელსაც უფლება აქვს გაგზავნოს მონაცემები ამ ნაკადის შემგროვებელში. ნებისმიერი ჰოსტისთვის დატოვეთ 0.0.0.0. გაითვალისწინეთ, რომ PHP მკაცრია დაშვებული ფორმატების მიმართ. მხარდაჭერილია როგორც CIDR სინტაქსი, ისე დიაპაზონის სინტაქსი, მაგალითად 192.168.1.0 ან 192.168.1.0/24. თუ გსურთ კონკრეტული IP მისამართების მითითება, გამოყავით ისინი მძიმით."
 
 #: flowview_devices.php includes/arrays.php
 msgid "Port"
@@ -699,7 +699,7 @@ msgstr "პორტი"
 
 #: flowview_devices.php
 msgid "Port this collector will listen on."
-msgstr ""
+msgstr "პორტი, რომელზეც ეს შემგროვებელი მოუსმენს."
 
 #: flowview_devices.php includes/arrays.php includes/functions.php
 msgid "Protocol"
@@ -707,7 +707,7 @@ msgstr "პროტოკოლი"
 
 #: flowview_devices.php
 msgid "The IP Protocol to use for this listener."
-msgstr ""
+msgstr "ამ მსმენელისთვის გამოსაყენებელი IP პროტოკოლი."
 
 #: flowview_devices.php
 msgid "UDP Protocol"
@@ -719,36 +719,36 @@ msgstr "ჩართულია"
 
 #: flowview_devices.php
 msgid "If checked, the Listener service will be started and will wait on incoming data."
-msgstr ""
+msgstr "თუ მონიშნულია, მსმენელი სერვისი გაეშვება და დაელოდება შემომავალ მონაცემებს."
 
 #: flowview_devices.php
 #, php-format
 msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
-msgstr ""
+msgstr "ნაკადის შაბლონი ვერ მოიძებნა მოწყობილობის ID:%s და შაბლონის ID:%s პარამეტრებისთვის"
 
 #: flowview_devices.php
 msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr ""
+msgstr "დააჭირეთ ღილაკს 'გაგრძელება' შემდეგი NetFlow მსმენელების წასაშლელად. ამის შემდეგ Cacti შეეცდება გადატვირთოს თქვენი Flow-Capture სერვისი."
 
 #: flowview_devices.php
 msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
-msgstr ""
+msgstr "დააჭირეთ ღილაკს 'გაგრძელება' შემდეგი NetFlow მსმენელების ჩასართავად. ამის შემდეგ Cacti შეეცდება გადატვირთოს თქვენი Flow-Capture სერვისი."
 
 #: flowview_devices.php
 msgid "You must select at least one Listener."
-msgstr ""
+msgstr "უნდა აირჩიოთ მინიმუმ ერთი მსმენელი."
 
 #: flowview_devices.php
 msgid "The listener port must be a numeric value between 1 and 65535."
-msgstr ""
+msgstr "მსმენელის პორტი უნდა იყოს რიცხვითი მნიშვნელობა 1-დან 65535-მდე."
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
-msgstr ""
+msgstr "შენახვა წარმატებულია. Flowview მსმენელი შენახულია და სერვისი გადაიტვირთა."
 
 #: flowview_devices.php
 msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
-msgstr ""
+msgstr "შენახვა წარმატებულია. Flowview მსმენელი შენახულია. თუმცა, სერვისი flow-capture არ მუშაობს."
 
 #: flowview_devices.php
 #, php-format
@@ -777,11 +777,11 @@ msgstr "ბოლო განახლება"
 
 #: flowview_devices.php
 msgid "Active Streams update every 5 minutes"
-msgstr ""
+msgstr "აქტიური ნაკადები განახლდება ყოველ 5 წუთში"
 
 #: flowview_devices.php
 msgid "No Inbound Streams Detected"
-msgstr ""
+msgstr "შემომავალი ნაკადები არ არის აღმოჩენილი"
 
 #: flowview_devices.php
 msgid "Listener Detected Templates"
@@ -829,7 +829,7 @@ msgstr "გაშლა"
 
 #: flowview_devices.php
 msgid "No Inbound Stream Templates Detected"
-msgstr ""
+msgstr "შემომავალი ნაკადების შაბლონები არ არის აღმოჩენილი"
 
 #: flowview_devices.php
 msgid "FlowView Listeners"
@@ -857,7 +857,7 @@ msgstr "დაკვირვებული მსმენელი"
 
 #: flowview_devices.php
 msgid "The port security actually observed on the listeners port."
-msgstr ""
+msgstr "მსმენელის პორტზე ფაქტობრივად დაფიქსირებული პორტის უსაფრთხოება."
 
 #: flowview_devices.php
 msgid "Backlog"
@@ -865,7 +865,7 @@ msgstr "მარაგი"
 
 #: flowview_devices.php
 msgid "The Size of the UDP backlog in bytes."
-msgstr ""
+msgstr "UDP მოლოდინის რიგის ზომა ბაიტებში."
 
 #: flowview_devices.php
 msgid "Streams"
@@ -873,7 +873,7 @@ msgstr "წყაროები"
 
 #: flowview_devices.php
 msgid "The number of inbound connections from various sources."
-msgstr ""
+msgstr "სხვადასხვა წყაროდან შემომავალი კავშირების რაოდენობა."
 
 #: flowview_devices.php
 msgid "Stream Versions"
@@ -881,11 +881,11 @@ msgstr "ნაკადის ვერსიები"
 
 #: flowview_devices.php
 msgid "The Traffic Flow versions being observed."
-msgstr ""
+msgstr "დაფიქსირებული ტრაფიკის ნაკადის (Traffic Flow) ვერსიები."
 
 #: flowview_devices.php
 msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
-msgstr ""
+msgstr "ყველა შეგროვებული ნაკადის განახლების მაქსიმალური დრო. ეს მნიშვნელობა განახლდება ყოველ 5 წუთში."
 
 #: flowview_devices.php flowview_schedules.php includes/functions.php
 msgid "None"
@@ -909,50 +909,50 @@ msgstr "Flowview-ის მსმენელების გარეშე"
 
 #: flowview_filters.php
 msgid "Materialize"
-msgstr ""
+msgstr "მატერიალიზება"
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
-msgstr ""
+msgstr "ფილტრების ქეშის გასაღებების დადგენა ვერ მოხერხდა, ამიტომ არაფერი გაიწმინდა."
 
 #: flowview_filters.php
 #, php-format
 msgid "Pruned %s cached shard(s) that did not match any Filter."
-msgstr ""
+msgstr "გაიწმინდა %s ქეშირებული შარდი, რომელიც არცერთ ფილტრს არ შეესაბამებოდა."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "%d ფილტრის მატერიალიზაცია დაიწყო ფონურ რეჟიმში. %d ფილტრის მატერიალიზაცია უკვე მიმდინარეობს. შედეგები აისახება Cacti-ს ჟურნალში."
 
 #: flowview_filters.php
 #, php-format
 msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
-msgstr ""
+msgstr "%d ფილტრის მატერიალიზაცია დაიწყო ფონურ რეჟიმში. შედეგები აისახება Cacti-ს ჟურნალში."
 
 #: flowview_filters.php
 msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
-msgstr ""
+msgstr "არჩეული ფილტრ(ებ)ის მატერიალიზაცია უკვე მიმდინარეობს. გთხოვთ, სცადოთ დასრულების შემდეგ."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი ფილტრ(ებ)ისა და ყველა შესაბამისი ფილტრის წასაშლელად."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი ფილტრ(ებ)ისა და ყველა შესაბამისი ფილტრის გამოსართავად."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Enable the following Filters(s)."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი ფილტრ(ებ)ის ჩასართავად."
 
 #: flowview_filters.php
 msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი ფილტრ(ებ)ის ფონურ რეჟიმში მატერიალიზებისთვის, ჩართული და გამორთული NAT-ით, ნაკადის მონაცემების მთელ დიაპაზონზე. უკვე მატერიალიზებული და ზუსტი დანაყოფები გამოტოვებულია. დიდ მონაცემთა ნაკრებებზე ამას შეიძლება დიდი დრო დასჭირდეს. ფილტრი, რომლის მატერიალიზაციაც უკვე მიმდინარეობს, გამოტოვებული იქნება."
 
 #: flowview_filters.php
 msgid "You must select at least one Filter."
-msgstr ""
+msgstr "უნდა აირჩიოთ მინიმუმ ერთი ფილტრი."
 
 #: flowview_filters.php
 msgid "FlowView Filters"
@@ -960,7 +960,7 @@ msgstr "FlowView-ის ფილტრები"
 
 #: flowview_filters.php
 msgid "FlowView Filters [ Add Devices before Filters ]"
-msgstr ""
+msgstr "FlowView ფილტრები [ ფილტრებამდე დაამატეთ მოწყობილობები ]"
 
 #: flowview_filters.php setup.php
 msgid "Filters"
@@ -968,11 +968,11 @@ msgstr "ფილტრები"
 
 #: flowview_filters.php
 msgid "Prune"
-msgstr ""
+msgstr "გაწმენდა"
 
 #: flowview_filters.php
 msgid "Remove the cached shards that do not match any Filter"
-msgstr ""
+msgstr "წაშალეთ ქეშირებული შარდები, რომლებიც არცერთ ფილტრს არ შეესაბამება"
 
 #: flowview_filters.php flowview_schedules.php
 msgid "Filter Name"
@@ -983,14 +983,12 @@ msgid "ID"
 msgstr "ID"
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Organization"
 msgid "Materialization"
-msgstr "ორგანიზაცია"
+msgstr "მატერიალიზაცია"
 
 #: flowview_filters.php
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
-msgstr ""
+msgstr "მატერიალიზაცია წინასწარ ითვლის ფილტრის შედეგებს თითოეული ნაკადის დანაყოფისთვის, ჩართული და გამორთული NAT-ით, და ინახავს მათ პარალელური მოთხოვნების ქეშში, რათა ძველ მონაცემებზე ანგარიშები სწრაფად გაიხსნას. ახალი დანაყოფები ავტომატურად მატერიალიზდება ნაკადების მიღების შეწყვეტისთანავე. 'საჭიროა' ნიშნავს, რომ როტირებული დანაყოფები ჯერ არ არის მატერიალიზებული, 'მიმდინარეობს' ნიშნავს მატერიალიზაციის პროცესს, ხოლო 'განახლებულია' ნიშნავს, რომ ყველა როტირებული დანაყოფი მატერიალიზებულია. 'გაშვებული: N' აჩვენებს, ფილტრის რამდენი მოთხოვნა მუშაობს ახლა. დანაყოფი, რომელიც კვლავ იღებს ნაკადებს, არ მატერიალიზდება და არ ითვლება."
 
 #: flowview_filters.php includes/arrays.php
 msgid "Listener"
@@ -1002,29 +1000,27 @@ msgstr "ანგარიშის ტიპი"
 
 #: flowview_filters.php
 msgid "NAT Shards"
-msgstr ""
+msgstr "NAT შარდები"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
-msgstr ""
+msgstr "ამ ფილტრის იმ დანაყოფების რაოდენობა, რომლებიც პარალელური მოთხოვნების ქეშში ჩართული NAT-ით ინახება."
 
 #: flowview_filters.php
 msgid "Non-NAT Shards"
-msgstr ""
+msgstr "არა-NAT შარდები"
 
 #: flowview_filters.php
 msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
-msgstr ""
+msgstr "ამ ფილტრის იმ დანაყოფების რაოდენობა, რომლებიც პარალელური მოთხოვნების ქეშში გამორთული NAT-ით ინახება."
 
 #: flowview_filters.php
-#, fuzzy
-#| msgid "Charting Options"
 msgid "Partitions"
-msgstr "გრაფიკის აგების პარამეტრები"
+msgstr "დანაყოფები"
 
 #: flowview_filters.php
 msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
-msgstr ""
+msgstr "ნაკადის დანაყოფების საერთო რაოდენობა, რაც წარმოადგენს შარდების მაქსიმალურ რაოდენობას, რომელიც ფილტრს შეიძლება ჰქონდეს ქეშირებული NAT-ით ან NAT-ის გარეშე."
 
 #: flowview_filters.php includes/arrays.php includes/functions.php
 msgid "Sort Field"
@@ -1036,29 +1032,29 @@ msgstr "გაფართოება"
 
 #: flowview_filters.php
 msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
-msgstr ""
+msgstr "ფილტრების ქეშირებული შარდების გამორჩევა სხვებისგან ვერ მოხერხდა, რადგან ფილტრის ქეშის გასაღებები ვერ დადგინდა."
 
 #: flowview_filters.php
 msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
-msgstr ""
+msgstr "ფილტრების ქეშის გასაღებები ვერ დადგინდა, ამიტომ ახლა არაფრის გაწმენდა არ შეიძლება. შეამოწმეთ, რომ თითოეულ ფილტრს აქვს სწორი ანგარიში."
 
 #: flowview_filters.php
 #, php-format
 msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
-msgstr ""
+msgstr "ქეშირებული შარდები: %s შეესაბამება ფილტრს. %s არ შეესაბამება არცერთ ფილტრს, რასაც გაწმენდა წაშლის."
 
 #: flowview_filters.php
 #, php-format
 msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
-msgstr ""
+msgstr "ეს წაშლის %s ქეშირებულ შარდს, რომელიც არცერთ ფილტრს არ შეესაბამება, ყველა ფილტრისა და ყველა მომხმარებლისთვის. ისინი წარმოიქმნება შეცვლილი ან წაშლილი ფილტრებიდან და იმ ანგარიშებიდან, რომელთა პარამეტრებიც შეიცვალა ანგარიშის გვერდზე. ფილტრების %s ქეშირებული შარდი შენახული იქნება. ამ მოქმედების გაუქმება შეუძლებელია."
 
 #: flowview_filters.php
 msgid "Every cached shard matches a Filter.  There is nothing to prune."
-msgstr ""
+msgstr "ყველა ქეშირებული შარდი შეესაბამება ფილტრს. გასაწმენდი არაფერია."
 
 #: flowview_filters.php
 msgid "Prune Cached Shards"
-msgstr ""
+msgstr "ქეშირებული შარდების გაწმენდა"
 
 #: flowview_filters.php
 msgid "Close"
@@ -1088,7 +1084,7 @@ msgstr "ყოველკვირა"
 #: flowview_schedules.php
 #, php-format
 msgid "Every %d Weeks, 2"
-msgstr ""
+msgstr "ყოველ %d კვირაში, 2"
 
 #: flowview_schedules.php
 msgid "Every Month"
@@ -1108,15 +1104,15 @@ msgstr "ახალი გეგმა"
 
 #: flowview_schedules.php
 msgid "Enter a Report Title for the FlowView Schedule."
-msgstr ""
+msgstr "შეიყვანეთ ანგარიშის სათაური FlowView განრიგისთვის."
 
 #: flowview_schedules.php
 msgid "Whether or not this NetFlow Scan will be sent."
-msgstr ""
+msgstr "გაიგზავნება თუ არა ეს NetFlow სკანირება."
 
 #: flowview_schedules.php
 msgid "Name of the query to run."
-msgstr ""
+msgstr "გასაშვები მოთხოვნის სახელი."
 
 #: flowview_schedules.php
 msgid "Send Settings"
@@ -1128,7 +1124,7 @@ msgstr "გაგზავნის შუალედი"
 
 #: flowview_schedules.php
 msgid "How often to send this NetFlow Report?"
-msgstr ""
+msgstr "რა სიხშირით გაიგზავნოს ეს NetFlow ანგარიში?"
 
 #: flowview_schedules.php
 msgid "Scheduled Base Time"
@@ -1136,7 +1132,7 @@ msgstr "დაგეგმილი საბაზისო დრო"
 
 #: flowview_schedules.php
 msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
-msgstr ""
+msgstr "ეს არის NetFlow სკანირების ელფოსტის გაგზავნის პირველი თარიღი / დრო. ყველა მომავალი ელფოსტა გამოითვლება ამ დროს დამატებული ზემოთ მითითებული ინტერვალით."
 
 #: flowview_schedules.php
 msgid "Max Allowed Runtime"
@@ -1144,7 +1140,7 @@ msgstr "მაქს. დაშვებული შესრულების
 
 #: flowview_schedules.php
 msgid "How long should the report be allowed to execute before exiting?"
-msgstr ""
+msgstr "რამდენ ხანს უნდა ჰქონდეს ანგარიშს შესრულების უფლება დასრულებამდე?"
 
 #: flowview_schedules.php setup.php
 #, php-format
@@ -1166,15 +1162,15 @@ msgstr "ელფოსტის მისამართები"
 
 #: flowview_schedules.php
 msgid "Email addresses (command delimited) to send this NetFlow Scan to."
-msgstr ""
+msgstr "ელფოსტის მისამართები (მძიმით გამოყოფილი), რომლებზეც გაიგზავნება ეს NetFlow სკანირება."
 
 #: flowview_schedules.php setup.php
 msgid "Format File to Use"
-msgstr ""
+msgstr "გამოსაყენებელი ფორმატის ფაილი"
 
 #: flowview_schedules.php setup.php
 msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
-msgstr ""
+msgstr "აირჩიეთ გამოსაყენებელი მორგებული html გარსი (wrapper) და CSS ფაილი. ეს ფაილი შეიცავს როგორც html-ს, ასევე CSS-ს თქვენი ანგარიშის გასაფორმებლად. თუ იგი მხოლოდ CSS-ზე მეტს შეიცავს, ფაილში უნდა მოათავსოთ სპეციალური <REPORT> ტეგი. ეს ფორმატის ტეგი ჩანაცვლდება ანგარიშის შიგთავსით. ეს ფაილები განთავსებულია 'formats' დირექტორიაში."
 
 #: flowview_schedules.php
 msgid "Notification List Settings"
@@ -1186,40 +1182,40 @@ msgstr "გაფრთხილებების სია"
 
 #: flowview_schedules.php
 msgid "If the Thold Plugin is installed, you may select a Notification List"
-msgstr ""
+msgstr "თუ Thold მოდული დაინსტალირებულია, შეგიძლიათ აირჩიოთ შეტყობინებების სია"
 
 #: flowview_schedules.php
 msgid "The Report will arrive once complete."
-msgstr ""
+msgstr "ანგარიში დასრულებისთანავე მოვა."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to delete the following Schedule(s)."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი განრიგ(ებ)ის წასაშლელად."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to send the following Schedule(s) now."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი განრიგ(ებ)ის ახლავე გასაგზავნად."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to Disable the following Schedule(s)."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი განრიგ(ებ)ის გამოსართავად."
 
 #: flowview_schedules.php
 msgid "Click 'Continue' to Enable the following Schedule(s)."
-msgstr ""
+msgstr "დააწკაპუნეთ 'გაგრძელება'-ზე შემდეგი განრიგ(ებ)ის ჩასართავად."
 
 #: flowview_schedules.php
 msgid "You must select at least one schedule."
-msgstr ""
+msgstr "უნდა აირჩიოთ მინიმუმ ერთი განრიგი."
 
 #: flowview_schedules.php
 #, php-format
 msgid "Unable to find Report Raw Data for Report ID %s"
-msgstr ""
+msgstr "ვერ მოიძებნა ანგარიშის დაუმუშავებელი მონაცემები ანგარიშის ID-სთვის %s"
 
 #: flowview_schedules.php
 msgid "You must specify Emails, a Notification List or both!"
-msgstr ""
+msgstr "უნდა მიუთითოთ ელფოსტა, შეტყობინებების სია ან ორივე!"
 
 #: flowview_schedules.php
 #, php-format
@@ -1273,11 +1269,11 @@ msgstr "რეპორტის ჟურნალი"
 
 #: flowview_schedules.php
 msgid " [View Report Raw]"
-msgstr ""
+msgstr " [დაუმუშავებელი ანგარიშის ნახვა]"
 
 #: flowview_schedules.php
 msgid " [View Report with CSS]"
-msgstr ""
+msgstr " [ანგარიშის CSS-ით ნახვა]"
 
 #: flowview_schedules.php
 msgid "Manual Send"
@@ -1302,7 +1298,7 @@ msgstr "FlowView-ის გეგმები"
 
 #: flowview_schedules.php
 msgid "FlowView Schedules [ Add Devices before Schedules ]"
-msgstr ""
+msgstr "FlowView განრიგები [ დაამატეთ მოწყობილობები განრიგებამდე ]"
 
 #: flowview_schedules.php
 msgid "Interval"
@@ -1577,7 +1573,7 @@ msgstr "ახალი ფილტრი"
 
 #: includes/arrays.php
 msgid "The Listener to use for the Filter."
-msgstr ""
+msgstr "ფილტრისთვის გამოსაყენებელი მსმენელი."
 
 #: includes/arrays.php
 msgid "Flow Template ID"
@@ -1585,7 +1581,7 @@ msgstr "დინების შაბლონის ID"
 
 #: includes/arrays.php
 msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
-msgstr ""
+msgstr "ნაკადის შაბლონის ID მხოლოდ v9 და IPFIX ნაკადებისთვის. გაითვალისწინეთ, რომ შაბლონის ID-ები შეიძლება განსხვავდებოდეს მწარმოებლების მიხედვით."
 
 #: includes/arrays.php
 msgid "Stream Address"
@@ -1593,7 +1589,7 @@ msgstr "ნაკადის მისამართი"
 
 #: includes/arrays.php
 msgid "The Stream IP Address or Hostname from the list of registered streams."
-msgstr ""
+msgstr "ნაკადის IP მისამართი ან ჰოსტის სახელი რეგისტრირებული ნაკადების სიიდან."
 
 #: includes/arrays.php
 msgid "Presets"
@@ -1601,15 +1597,15 @@ msgstr "წინასწარ განსაზღვრული"
 
 #: includes/arrays.php
 msgid "If this Filter is based upon a pre-defined Timespan, select it here."
-msgstr ""
+msgstr "თუ ეს ფილტრი ეფუძნება წინასწარ განსაზღვრულ დროის ინტერვალს, აირჩიეთ იგი აქ."
 
 #: includes/arrays.php
 msgid "Detailed Filter Criteria"
-msgstr ""
+msgstr "ფილტრის დეტალური კრიტერიუმები"
 
 #: includes/arrays.php
 msgid "The Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "ანგარიშის შექმნისას ამ ფილტრისთვის ნაგულისხმევად გამოსაყენებელი ანგარიშის ტიპი."
 
 #: includes/arrays.php
 msgid "Printed"
@@ -1625,7 +1621,7 @@ msgstr "სტატისტიკური ანგარიში"
 
 #: includes/arrays.php
 msgid "The Display Report Type to use by default for this Filter when creating a Report."
-msgstr ""
+msgstr "ანგარიშის შექმნისას ამ ფილტრისთვის ნაგულისხმევად გამოსაყენებელი საჩვენებელი ანგარიშის ტიპი."
 
 #: includes/arrays.php
 msgid "Printed Report"
@@ -1633,7 +1629,7 @@ msgstr "დაბეჭდილი ანგარიში"
 
 #: includes/arrays.php
 msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
-msgstr ""
+msgstr "დასაბეჭდი ანგარიშის შექმნისას ამ ფილტრისთვის ნაგულისხმევად გამოსაყენებელი დასაბეჭდი ანგარიშის ტიპი."
 
 #: includes/arrays.php
 msgid "Range Rules"
@@ -1641,7 +1637,7 @@ msgstr "შუალედის წესები"
 
 #: includes/arrays.php
 msgid "Constrain the Filter Data by these time filter rules."
-msgstr ""
+msgstr "ფილტრის მონაცემების შეზღუდვა დროის ფილტრის ამ წესებით."
 
 #: includes/arrays.php
 msgid "Resolve IP's"
@@ -1649,11 +1645,11 @@ msgstr "IP-ების ამოხსნა"
 
 #: includes/arrays.php
 msgid "Resolve IP Addresses to Domain Names."
-msgstr ""
+msgstr "IP მისამართების გარდაქმნა დომენურ სახელებად."
 
 #: includes/arrays.php
 msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "ფილტრის დახარისხების ნაგულისხმევი ველი. ეს პარამეტრი გავრცელდება ყველა დაგეგმილ ანგარიშზე."
 
 #: includes/arrays.php
 msgid "Maximum Rows"
@@ -1661,7 +1657,7 @@ msgstr "მაქს. მწკრივები"
 
 #: includes/arrays.php
 msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
-msgstr ""
+msgstr "ფილტრში გამოსატანი მწკრივების მაქსიმალური რაოდენობა. ეს პარამეტრი გავრცელდება ყველა დაგეგმილ ანგარიშზე."
 
 #: includes/arrays.php
 msgid "Minimum Bytes"
@@ -1669,7 +1665,7 @@ msgstr "მინ ბაიტი"
 
 #: includes/arrays.php
 msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
-msgstr ""
+msgstr "ფილტრისთვის გასათვალისწინებელი ბაიტების მინიმალური ჯამური რაოდენობა. ნაკადის ნებისმიერი ჯამი, რომელიც ამ რაოდენობის ბაიტზე ნაკლებია, უგულებელყოფილი იქნება."
 
 #: includes/arrays.php
 msgid "Charting Options"
@@ -1681,7 +1677,7 @@ msgstr "გრაფიკის ტიპი"
 
 #: includes/arrays.php
 msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
-msgstr ""
+msgstr "ნაგულისხმევად საჩვენებელი გრაფიკის ტიპი. ხელმისაწვდომია სვეტოვანი (Bar), წრიული (Pie) და ხისებრი რუკა (Treemap)."
 
 #: includes/arrays.php
 msgid "Bar Chart"
@@ -1701,15 +1697,15 @@ msgstr "გრაფიკის სიმაღლე"
 
 #: includes/arrays.php
 msgid "The Graph Height to use by default."
-msgstr ""
+msgstr "ნაგულისხმევად გამოსაყენებელი გრაფიკის სიმაღლე."
 
 #: includes/arrays.php includes/functions.php
 msgid "Use NAT Data"
-msgstr ""
+msgstr "NAT მონაცემების გამოყენება"
 
 #: includes/arrays.php
 msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
-msgstr ""
+msgstr "ანგარიშის შედეგში საწყისი, NAT-მდე მნიშვნელობების ნაცვლად აჩვენეთ NAT-ის შემდგომი (ტრანსლირებული) წყაროს/დანიშნულების IP და DNS სახელი."
 
 #: includes/arrays.php
 msgid "Table Panel"
@@ -1717,7 +1713,7 @@ msgstr "ცხრილის პანელი"
 
 #: includes/arrays.php
 msgid "Should the Table Panel be displayed by default."
-msgstr ""
+msgstr "უნდა გამოჩნდეს თუ არა ცხრილის პანელი ნაგულისხმევად."
 
 #: includes/arrays.php
 msgid "Bytes Panel"
@@ -1725,7 +1721,7 @@ msgstr "ბაიტების პანელი"
 
 #: includes/arrays.php
 msgid "Should the Bytes Panel be displayed by default."
-msgstr ""
+msgstr "უნდა გამოჩნდეს თუ არა ბაიტების პანელი ნაგულისხმევად."
 
 #: includes/arrays.php
 msgid "Packets Panel"
@@ -1733,7 +1729,7 @@ msgstr "პაკეტების პანელი"
 
 #: includes/arrays.php
 msgid "Should the Packets Panel be displayed by default."
-msgstr ""
+msgstr "უნდა გამოჩნდეს თუ არა პაკეტების პანელი ნაგულისხმევად."
 
 #: includes/arrays.php
 msgid "Flows Panel"
@@ -1741,7 +1737,7 @@ msgstr "დინებების პანელი"
 
 #: includes/arrays.php
 msgid "Should the Flows Panel be displayed by default."
-msgstr ""
+msgstr "უნდა გამოჩნდეს თუ არა ნაკადების პანელი ნაგულისხმევად."
 
 #: includes/arrays.php
 msgid "Protocol Filters"
@@ -1753,13 +1749,11 @@ msgstr "პროტოკოლები"
 
 #: includes/arrays.php
 msgid "Select the Specific Protocol for the Filter."
-msgstr ""
+msgstr "აირჩიეთ კონკრეტული პროტოკოლი ფილტრისთვის."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Protocols"
 msgid "All Protocols"
-msgstr "პროტოკოლები"
+msgstr "ყველა პროტოკოლი"
 
 #: includes/arrays.php
 msgid "TCP Flags"
@@ -1767,7 +1761,7 @@ msgstr "TCP ალმები"
 
 #: includes/arrays.php
 msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
-msgstr ""
+msgstr "ფილტრში მოსაძებნი TCP ალმები. ეს შეიძლება იყოს მძიმით გამოყოფილი TCP ალმების სია"
 
 #: includes/arrays.php
 msgid "TOS Fields"
@@ -1775,11 +1769,11 @@ msgstr "TOS ველები"
 
 #: includes/arrays.php
 msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
-msgstr ""
+msgstr "ფილტრში მოსაძებნი TOS ველები. ეს შეიძლება იყოს მძიმით გამოყოფილი TOS ველების სია"
 
 #: includes/arrays.php
 msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "ფილტრაცია არჩეული წყაროს IP მისამართის მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი IPv4 ან IPv6 მისამართების სია, ან CIDR ფორმატში მოცემული IPv4 ან IPv6 მისამართების დიაპაზონების სია (მაგ., 192.168.1.0/24)."
 
 #: includes/arrays.php
 msgid "Source Ports"
@@ -1787,7 +1781,7 @@ msgstr "წყარო პორტები"
 
 #: includes/arrays.php
 msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
-msgstr ""
+msgstr "ფილტრაცია არჩეული წყაროს პორტების მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი წყაროს პორტების სია."
 
 #: includes/arrays.php
 msgid "Source Interface"
@@ -1795,15 +1789,15 @@ msgstr "წყარო ინტერფეისი"
 
 #: includes/arrays.php
 msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
-msgstr ""
+msgstr "ფილტრაცია არჩეული წყაროს ინტერფეისის მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი წყაროს ინტერფეისების სია"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
-msgstr ""
+msgstr "ფილტრაცია არჩეული დანიშნულების AS-ის მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი წყაროს AS-ების სია"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "ფილტრაცია არჩეული დანიშნულების IP მისამართის მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი IPv4 ან IPv6 მისამართების სია, ან CIDR ფორმატში მოცემული IPv4 ან IPv6 მისამართების დიაპაზონების სია (მაგ., 192.168.1.0/24)."
 
 #: includes/arrays.php
 msgid "Dest Ports"
@@ -1811,7 +1805,7 @@ msgstr "სამიზნ პორტები"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
-msgstr ""
+msgstr "ფილტრაცია არჩეული დანიშნულების პორტების მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი დანიშნულების პორტების სია."
 
 #: includes/arrays.php
 msgid "Dest Interface"
@@ -1819,7 +1813,7 @@ msgstr "სამიზნე ინტერფეისი"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
-msgstr ""
+msgstr "ფილტრაცია არჩეული დანიშნულების ინტერფეისის მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი დანიშნულების ინტერფეისების სია."
 
 #: includes/arrays.php includes/functions.php
 msgid "Dest AS"
@@ -1827,47 +1821,39 @@ msgstr "სამიზნ AS"
 
 #: includes/arrays.php
 msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
-msgstr ""
+msgstr "ფილტრაცია არჩეული დანიშნულების AS-ის მიხედვით. ეს შეიძლება იყოს მძიმით გამოყოფილი დანიშნულების AS-ების სია"
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Source IP"
 msgid "Post-NAT Source IP"
-msgstr "წყარო IP"
+msgstr "NAT-ის შემდგომი წყაროს IP"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "გაფილტრეთ ფილტრში ჩაწერილი ტრანსლირებული (NAT-ის შემდგომი) წყაროს IP-ის მიხედვით. ეს შეიძლება იყოს IPv4 ან IPv6 მისამართების მძიმით გამოყოფილი სია, ან IPv4 ან IPv6 მისამართების დიაპაზონების მძიმით გამოყოფილი სია CIDR ფორმატში (მაგ., 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "UDP/TCP Source Port"
 msgid "Post-NAT Source Port"
-msgstr "UDP/TCP წყარო პორტი"
+msgstr "NAT-ის შემდგომი წყაროს პორტი"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr ""
+msgstr "გაფილტრეთ ფილტრში არსებული ტრანსლირებული (NAT-ის შემდგომი) წყაროს პორტის მიხედვით. ეს შეიძლება იყოს პორტების მძიმით გამოყოფილი სია."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest IP"
 msgid "Post-NAT Dest IP"
-msgstr "სამიზნ IP"
+msgstr "NAT-ის შემდგომი დანიშნულების IP"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
-msgstr ""
+msgstr "გაფილტრეთ ფილტრში ჩაწერილი ტრანსლირებული (NAT-ის შემდგომი) დანიშნულების IP-ის მიხედვით. ეს შეიძლება იყოს IPv4 ან IPv6 მისამართების მძიმით გამოყოფილი სია, ან IPv4 ან IPv6 მისამართების დიაპაზონების მძიმით გამოყოფილი სია CIDR ფორმატში (მაგ., 192.168.1.0/24)."
 
 #: includes/arrays.php
-#, fuzzy
-#| msgid "Dest Port"
 msgid "Post-NAT Dest Port"
-msgstr "სამიზნ. პორტი"
+msgstr "NAT-ის შემდგომი დანიშნულების პორტი"
 
 #: includes/arrays.php
 msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
-msgstr ""
+msgstr "გაფილტრეთ ფილტრში არსებული ტრანსლირებული (NAT-ის შემდგომი) დანიშნულების პორტის მიხედვით. ეს შეიძლება იყოს პორტების მძიმით გამოყოფილი სია."
 
 #: includes/arrays.php
 msgid "DNS Cache"
@@ -1937,12 +1923,12 @@ msgstr "Cacti %s"
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s is scheduled to run!"
-msgstr ""
+msgstr "ანგარიში '%s' წყაროდან %s, id %s, დაგეგმილია გასაშვებად!"
 
 #: includes/functions-pre13.php
 #, php-format
 msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
-msgstr ""
+msgstr "ანგარიში '%s' წყაროდან %s, id %s, შეცდომის გამო გასაშვებად არ დაიგეგმა!"
 
 #: includes/functions.php
 msgid "General"
@@ -1954,12 +1940,12 @@ msgstr "ჟურნალი"
 
 #: includes/functions.php
 msgid "Select a Report Type First"
-msgstr ""
+msgstr "ჯერ აირჩიეთ ანგარიშის ტიპი"
 
 #: includes/functions.php
 #, php-format
 msgid "Filter: [edit: %s]"
-msgstr ""
+msgstr "ფილტრი: [რედაქტირება: %s]"
 
 #: includes/functions.php
 msgid "Filter: [new]"
@@ -1967,29 +1953,29 @@ msgstr "ფილტრი: [ახალი]"
 
 #: includes/functions.php
 msgid "Cached Results Affected"
-msgstr ""
+msgstr "ქეშირებულ შედეგებზე გავლენა"
 
 #: includes/functions.php
 msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
-msgstr ""
+msgstr "ეს ცვლილებები გავლენას ახდენს ამ ფილტრის ქეშირებულ შედეგებზე. შენახვა ფონურ რეჟიმში დაიწყებს მატერიალიზაციას მათ ხელახლა ასაგებად. დააჭირეთ 'გაგრძელება'-ს ფილტრის შესანახად, ან 'გაუქმება'-ს რედაქტირების გასაგრძელებლად."
 
 #: includes/functions.php
 msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
-msgstr ""
+msgstr "ამ ფილტრში შეტანილი ცვლილებები გავლენას ახდენს მის ქეშირებულ შედეგებზე, ამიტომ მისი მატერიალიზაცია ფონურ რეჟიმში დაიწყო. მისი პროგრესი ნაჩვენებია ფილტრების გვერდზე, ხოლო შედეგები აისახება Cacti-ს ჟურნალში."
 
 #: includes/functions.php
 msgid "Undefined Filter [ Select Filter to get Details ]"
-msgstr ""
+msgstr "განუსაზღვრელი ფილტრი [ დეტალების სანახავად აირჩიეთ ფილტრი ]"
 
 #: includes/functions.php
 #, php-format
 msgid "Statistical Report: %s [ Including overrides as specified below ]"
-msgstr ""
+msgstr "სტატისტიკური ანგარიში: %s [ ქვემოთ მითითებული გადაფარვების ჩათვლით ]"
 
 #: includes/functions.php
 #, php-format
 msgid "Printed Report: %s [ Including overrides as specified below ]"
-msgstr ""
+msgstr "ბეჭდური ანგარიში: %s [ ქვემოთ მითითებული გადაფარვების ჩათვლით ]"
 
 #: includes/functions.php
 msgid "Select a Filter"
@@ -2009,11 +1995,11 @@ msgstr "ჩასწორება"
 
 #: includes/functions.php
 msgid "Edit the Flow Filter"
-msgstr ""
+msgstr "ნაკადის ფილტრის რედაქტირება"
 
 #: includes/functions.php
 msgid "Create new Flow Filter"
-msgstr ""
+msgstr "ახალი ნაკადის ფილტრის შექმნა"
 
 #: includes/functions.php
 msgid "New"
@@ -2025,7 +2011,7 @@ msgstr "შენახვა"
 
 #: includes/functions.php
 msgid "Save the Flow Filter"
-msgstr ""
+msgstr "ნაკადის ფილტრის შენახვა"
 
 #: includes/functions.php
 msgid "Save As"
@@ -2033,7 +2019,7 @@ msgstr "შენახვა, როგორც"
 
 #: includes/functions.php
 msgid "Save the existing Flow Filter as new Filter"
-msgstr ""
+msgstr "არსებული ნაკადის ფილტრის ახალ ფილტრად შენახვა"
 
 #: includes/functions.php
 msgid "Rename"
@@ -2041,11 +2027,11 @@ msgstr "სახელის გადარქმევა"
 
 #: includes/functions.php
 msgid "Rename the Flow Filter"
-msgstr ""
+msgstr "ნაკადის ფილტრის გადარქმევა"
 
 #: includes/functions.php
 msgid "Delete the Flow Filter"
-msgstr ""
+msgstr "ნაკადის ფილტრის წაშლა"
 
 #: includes/functions.php
 msgid "Report"
@@ -2063,7 +2049,7 @@ msgstr "დაბეჭდილია: %s"
 
 #: includes/functions.php
 msgid "Select a Filter First"
-msgstr ""
+msgstr "ჯერ აირჩიეთ ფილტრი"
 
 #: includes/functions.php
 msgid "Lines"
@@ -2088,7 +2074,7 @@ msgstr "ოქტეტები"
 
 #: includes/functions.php
 msgid "Show only Domains on Charts Below"
-msgstr ""
+msgstr "ქვემოთ მოცემულ დიაგრამებზე მხოლოდ დომენების ჩვენება"
 
 #: includes/functions.php
 msgid "Domains/Hostnames Only"
@@ -2096,7 +2082,7 @@ msgstr "მხოლოდ დომენები/ჰოსტის სახ
 
 #: includes/functions.php
 msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
-msgstr ""
+msgstr "საწყისი მნიშვნელობების ნაცვლად NAT-ის შემდგომი (ტრანსლირებული) IP/DNS სახელის ჩვენება"
 
 #: includes/functions.php
 msgid "Timespan"
@@ -2176,52 +2162,52 @@ msgstr "დინების ფილტრის წაშლა"
 
 #: includes/functions.php
 msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
-msgstr ""
+msgstr "ამ ნაკადის ფილტრის წასაშლელად დააჭირეთ ღილაკს 'გაგრძელება'. თუ ნაკადის ფილტრი გამოიყენება დაგეგმილ ანგარიშში, ოპერაცია დაიბლოკება."
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Bytes"
-msgstr ""
+msgstr "ბაიტების ტოპ %s განაწილების დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Bytes"
-msgstr ""
+msgstr "ბაიტების ტოპ %s წრიული დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Bytes"
-msgstr ""
+msgstr "ბაიტების ტოპ %s ხისებრი რუკის დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Packets"
-msgstr ""
+msgstr "პაკეტების ტოპ %s განაწილების დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Packets"
-msgstr ""
+msgstr "პაკეტების ტოპ %s წრიული დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Packets"
-msgstr ""
+msgstr "პაკეტების ტოპ %s ხისებრი რუკის დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Distribution Chart of Flows"
-msgstr ""
+msgstr "ნაკადების ტოპ %s განაწილების დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Pie Chart of Flows"
-msgstr ""
+msgstr "ნაკადების ტოპ %s წრიული დიაგრამა"
 
 #: includes/functions.php
 #, php-format
 msgid "Top %s Treemap Chart of Flows"
-msgstr ""
+msgstr "ნაკადების ტოპ %s ხისებრი რუკის დიაგრამა"
 
 #: includes/functions.php
 msgid "Rename Layout"
@@ -2233,7 +2219,7 @@ msgstr " <ახალი>"
 
 #: includes/functions.php
 msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
-msgstr ""
+msgstr "ფილტრის პარამეტრები შენახულია. ამ ფილტრის მატერიალიზაცია ფონურ რეჟიმში დაიწყო."
 
 #: includes/functions.php
 msgid "Filter Settings Saved"
@@ -2261,12 +2247,12 @@ msgstr "Netflow - %s"
 #: includes/functions.php
 #, php-format
 msgid "Subnet Filter: %s is not a value CIDR format"
-msgstr ""
+msgstr "ქვექსელის ფილტრი: %s არ არის სწორი CIDR ფორმატი"
 
 #: includes/functions.php
 #, php-format
 msgid "IP Filter: %s is not a valid IP address"
-msgstr ""
+msgstr "IP ფილტრი: %s არ არის სწორი IP მისამართი"
 
 #: includes/functions.php
 msgid "unresolved"
@@ -2275,7 +2261,7 @@ msgstr "გადაუწყვეტელი"
 #: includes/functions.php
 #, php-format
 msgid "%d - %d Bytes"
-msgstr ""
+msgstr "%d - %d ბაიტი"
 
 #: includes/functions.php
 #, php-format
@@ -2285,12 +2271,12 @@ msgstr "> %d ბაიტი"
 #: includes/functions.php
 #, php-format
 msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "სტატისტიკური ანგარიში %s უცნობია. გთხოვთ, გახსნათ შეცდომის ბილეთი GitHub-ზე"
 
 #: includes/functions.php
 #, php-format
 msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
-msgstr ""
+msgstr "დაბეჭდილი ანგარიში %s უცნობია. გთხოვთ, გახსნათ შეცდომის ბილეთი GitHub-ზე"
 
 #: includes/functions.php
 msgid "Source DNS"
@@ -2339,11 +2325,11 @@ msgstr "ბაიტი/პაკეტი"
 #: includes/functions.php
 #, php-format
 msgid "Not materialized yet, with NAT: %s, without NAT: %s."
-msgstr ""
+msgstr "ჯერ არ არის მატერიალიზებული, NAT-ით: %s, NAT-ის გარეშე: %s."
 
 #: includes/functions.php
 msgid "Up to date"
-msgstr ""
+msgstr "განახლებულია"
 
 #: includes/functions.php
 msgid "Running"
@@ -2355,31 +2341,31 @@ msgstr "აუცილებელია"
 
 #: includes/functions.php
 msgid "The number of queries of this Filter that are running now."
-msgstr ""
+msgstr "ამ ფილტრის იმ მოთხოვნების რაოდენობა, რომლებიც ახლა სრულდება."
 
 #: includes/functions.php
 #, php-format
 msgid "With NAT: %d, without NAT: %d."
-msgstr ""
+msgstr "NAT-ით: %d, NAT-ის გარეშე: %d."
 
 #: includes/functions.php
 #, php-format
 msgid "Running: %s"
-msgstr ""
+msgstr "მიმდინარე: %s"
 
 #: includes/functions.php
 #, php-format
 msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
-msgstr ""
+msgstr "შეცდომა: პარალელური მოთხოვნა ვერ დასრულდა შესრულების მაქსიმალურ %d წამში. შეამოწმეთ მაქსიმალური შესრულების დრო FlowView-ს პარამეტრებში და დარწმუნდით, რომ მონაცემთა ბაზა არ არის დაკავებული სხვა ოპერაციით, როგორიცაა ALTER TABLE."
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
-msgstr ""
+msgstr "პარალელური მოთხოვნის ვადა ამოიწურა. გთხოვთ, დაუკავშირდეთ თქვენს ადმინისტრატორს"
 
 #: includes/functions.php
 #, php-format
 msgid "Boolean: %s, Numeric: %s, Hex: %s"
-msgstr ""
+msgstr "ლოგიკური: %s, რიცხვითი: %s, თექვსმეტობითი: %s"
 
 #: includes/functions.php
 msgid "Low Delay"
@@ -2436,101 +2422,99 @@ msgstr "შეჯამებული სტატისტიკა"
 #: includes/functions.php
 #, php-format
 msgid "IP Packet Size Distribution (%%)"
-msgstr ""
+msgstr "IP პაკეტის ზომის განაწილება (%%)"
 
 #: includes/functions.php
 #, php-format
 msgid "Packets per Flow Distribution (%%)"
-msgstr ""
+msgstr "პაკეტების განაწილება თითო ნაკადზე (%%)"
 
 #: includes/functions.php
 #, php-format
 msgid "Octets per Flow Distribution (%%)"
-msgstr ""
+msgstr "ოქტეტების განაწილება თითო ნაკადზე (%%)"
 
 #: includes/functions.php
 #, php-format
 msgid "Flow Time Distribution (%%)"
-msgstr ""
+msgstr "ნაკადის დროის განაწილება (%%)"
 
 #: includes/functions.php
 msgid "You must select a Statistics Report or Printed Report!"
-msgstr ""
+msgstr "უნდა აირჩიოთ სტატისტიკური ანგარიში ან ბეჭდური ანგარიში!"
 
 #: includes/functions.php
 msgid "You must select only a Statistics Report or a Printed Report (not both)!"
-msgstr ""
+msgstr "უნდა აირჩიოთ მხოლოდ სტატისტიკური ანგარიში ან ბეჭდური ანგარიში (ორივე ერთად არა)!"
 
 #: includes/functions.php
 msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
-msgstr ""
+msgstr "არასწორი თარიღები, დასრულების თარიღი/დრო დაწყების თარიღზე/დროზე ადრეა!"
 
 #: includes/functions.php
 msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr ""
+msgstr "არასწორი IP საწყისი მისამართისთვის!<br>(უნდა იყოს '192.168.0.1' ფორმატში)"
 
 #: includes/functions.php
 msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr ""
+msgstr "არასწორი ქვექსელი საწყისი მისამართისთვის!<br>(უნდა იყოს '192.168.0.1/255.255.255.0' ან '192.168.0.1/24' ფორმატში)"
 
 #: includes/functions.php
 msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
-msgstr ""
+msgstr "არასწორი IP დანიშნულების მისამართისთვის!<br>(უნდა იყოს '192.168.0.1' ფორმატში)"
 
 #: includes/functions.php
 msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
-msgstr ""
+msgstr "არასწორი ქვექსელი დანიშნულების მისამართისთვის!<br>(უნდა იყოს '192.168.0.1/255.255.255.0' ან '192.168.0.1/24' ფორმატში)"
 
 #: includes/functions.php
 msgid "Invalid value for Source Interface!"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა საწყისი ინტერფეისისთვის!"
 
 #: includes/functions.php
 msgid "Invalid value for Source Port! (0 - 65535)"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა საწყისი პორტისთვის! (0 - 65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Source AS! (0 - 65535)"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა საწყისი AS-ისთვის! (0 - 65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Interface!"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა დანიშნულების ინტერფეისისთვის!"
 
 #: includes/functions.php
 msgid "Invalid value for Destination Port! (0 - 65535)"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა დანიშნულების პორტისთვის! (0 - 65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Destination AS! (0 - 65535)"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა დანიშნულების AS-ისთვის! (0 - 65535)"
 
 #: includes/functions.php
 msgid "Invalid value for Protocol! (1 - 255)"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა პროტოკოლისთვის! (1 - 255)"
 
 #: includes/functions.php
 msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა TCP დროშისთვის! (მაგ: 0x1b ან 0x1b/SA ან SA/SA)"
 
 #: includes/functions.php
 msgid "Invalid value for Cutoff Octets!"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა ზღვრული ოქტეტებისთვის!"
 
 #: includes/functions.php
 msgid "Invalid value for Cutoff Lines!"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა ზღვრული ხაზებისთვის!"
 
 #: includes/functions.php
 #, php-format
 msgid "FlowView Chart for %s Type is %s"
-msgstr ""
+msgstr "FlowView დიაგრამა %s-ისთვის, ტიპია %s"
 
 #: includes/functions.php
-#, fuzzy
-#| msgid "Supported"
 msgid "Supported (NAT)"
-msgstr "მხარდაჭერილია"
+msgstr "მხარდაჭერილია (NAT)"
 
 #: includes/functions.php
 msgid "Not Supported"
@@ -2538,15 +2522,15 @@ msgstr "მხარდაჭერილი არაა"
 
 #: includes/functions.php setup.php
 msgid "MyISAM (Fast, Non-Crash Safe)"
-msgstr ""
+msgstr "MyISAM (სწრაფი, ავარიისადმი არამდგრადი)"
 
 #: includes/functions.php setup.php
 msgid "Aria (Fast, Crash Safe)"
-msgstr ""
+msgstr "Aria (სწრაფი, ავარიისგან დაცული)"
 
 #: includes/functions.php setup.php
 msgid "InnoDB (Slow, High Concurrency)"
-msgstr ""
+msgstr "InnoDB (ნელი, მაღალი კონკურენტულობა)"
 
 #: setup.php
 msgid "NetFlow User"
@@ -2558,19 +2542,19 @@ msgstr "NetFlow-ის ადმინისტრატორი"
 
 #: setup.php
 msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
-msgstr ""
+msgstr "გთხოვთ, გადაარქვათ სახელი თქვენს config.php.dist ან config_local.php.dist ფაილებს flowview დირექტორიაში და დაყენებამდე შეცვალოთ მონაცემთა ბაზის პარამეტრები."
 
 #: setup.php
 msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
-msgstr ""
+msgstr "გაითვალისწინეთ, რომ Flowview მოდულის ცხრილები ფონურ რეჟიმში ახლდება. ამას შეიძლება გარკვეული დრო დასჭირდეს. დამატებითი ინფორმაციისთვის შეამოწმეთ Cacti-ს ჟურნალი"
 
 #: setup.php
 msgid "The Filter has been Deleted"
-msgstr ""
+msgstr "ფილტრი წაიშალა"
 
 #: setup.php
 msgid "The Filter has been Updated"
-msgstr ""
+msgstr "ფილტრი განახლდა"
 
 #: setup.php
 msgid "Import/Export"
@@ -2624,11 +2608,11 @@ msgstr "%d პროცესი"
 
 #: setup.php
 msgid "Report Concurrent Processes (FlowView Only)"
-msgstr ""
+msgstr "ანგარიშის პარალელური პროცესები (მხოლოდ FlowView)"
 
 #: setup.php
 msgid "Select the maximum concurrent reports processes that can be running at any one time."
-msgstr ""
+msgstr "აირჩიეთ ანგარიშების პარალელური პროცესების მაქსიმალური რაოდენობა, რომელთა გაშვებაც ერთდროულად შეიძლება."
 
 #: setup.php
 msgid "Internet Proxy Settings"
@@ -2640,7 +2624,7 @@ msgstr "ინტერნეტ-პროქსის მისამართ�
 
 #: setup.php
 msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
-msgstr ""
+msgstr "Cacti-ს ძირითადი სერვისებისთვის ან მოდულებისთვის, რომლებსაც ინტერნეტთან წვდომა სჭირდებათ, აქ შეიყვანეთ პროქსი სერვერი და პორტი ფორმატით IP:PORT. მაგალითად, 192.168.1.1:8080."
 
 #: setup.php
 msgid "Internet Proxy User"
@@ -2648,7 +2632,7 @@ msgstr "ინტერნეტის პროქსის მომხმა�
 
 #: setup.php
 msgid "If your Internet Proxy requires a username, enter it here."
-msgstr ""
+msgstr "თუ თქვენი ინტერნეტ პროქსი მომხმარებლის სახელს მოითხოვს, შეიყვანეთ აქ."
 
 #: setup.php
 msgid "Internet Proxy Password"
@@ -2656,7 +2640,7 @@ msgstr "ინერნეტ-პროქსის პაროლი"
 
 #: setup.php
 msgid "If your Internet Proxy requires a password, enter it here."
-msgstr ""
+msgstr "თუ თქვენი ინტერნეტ პროქსი პაროლს მოითხოვს, შეიყვანეთ აქ."
 
 #: setup.php
 msgid "Name Resolution"
@@ -2668,15 +2652,15 @@ msgstr "ჰოსტის სახელის ამოხსნა"
 
 #: setup.php
 msgid "The method by which you wish to resolve hostnames."
-msgstr ""
+msgstr "მეთოდი, რომლითაც გსურთ ჰოსტის სახელების ამოხსნა."
 
 #: setup.php
 msgid "Use Local Server"
-msgstr ""
+msgstr "ლოკალური სერვერის გამოყენება"
 
 #: setup.php
 msgid "Use DNS Servers under Mail/Reporting/DNS"
-msgstr ""
+msgstr "DNS სერვერების გამოყენება განყოფილებიდან ფოსტა/ანგარიშები/DNS"
 
 #: setup.php
 msgid "Don't Resolve DNS"
@@ -2684,11 +2668,11 @@ msgstr "არ ამოხსნა DNS"
 
 #: setup.php
 msgid "Download the Internet Registry Daily"
-msgstr ""
+msgstr "ინტერნეტ-რეესტრის ყოველდღიური ჩამოტვირთვა"
 
 #: setup.php
 msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
-msgstr ""
+msgstr "თუ გაინტერესებთ მთელი ინტერნეტის შესახებ საჯაროდ ხელმისაწვდომი ინფორმაცია, შეგიძლიათ აირჩიოთ ეს პარამეტრი. Cacti დღეში ერთხელ დაუკავშირდება მსოფლიო ინტერნეტ-რეესტრებს, შეამოწმებს ცვლილებებს მთელი ინტერნეტის მარშრუტებში და ჩატვირთავს ამ ინფორმაციას Cacti-ში. გაითვალისწინეთ, რომ ეს შექმნის საკმაოდ დიდ მონაცემთა ბაზას 3 გბაიტზე მეტი მონაცემებით."
 
 #: setup.php
 msgid "Local Domain Name"
@@ -2696,7 +2680,7 @@ msgstr "ლოკალური დომენის სახელი"
 
 #: setup.php
 msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
-msgstr ""
+msgstr "ლოკალურ ქსელში არსებული IPv4 მისამართებისთვის, რომლებიც ლოკალურად არ იხსნება, მიუმატეთ ეს სუფიქსი მიღებულ IP მისამართს."
 
 #: setup.php
 msgid "Local IP Range"
@@ -2704,19 +2688,19 @@ msgstr "ლოკალური IP-ების შუალედი"
 
 #: setup.php
 msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
-msgstr ""
+msgstr "მიუთითეთ თქვენი ლოკალური ქსელის IPv4 IP მისამართების დიაპაზონი იმ ჰოსტებისთვის, რომლებიც შესაძლოა DNS-ში რეგისტრირებული არ იყოს. ეს ჰოსტები მიებმება ზემოთ მითითებულ ლოკალურ დომენის სახელს. ეს უფრო საშინაო მომხმარებლებისთვისაა. შეგიძლიათ გამოიყენოთ როგორც CIDR, ისე არა-CIDR ფორმატი. მაგალითად: 192.168.11.0 ან 192.168.11.0/24"
 
 #: setup.php
 msgid "Use CIDR or Non-CIDR"
-msgstr ""
+msgstr "CIDR-ის ან არა-CIDR-ის გამოყენება"
 
 #: setup.php
 msgid "Use Arin to find Domains and AS Numbers"
-msgstr ""
+msgstr "Arin-ის გამოყენება დომენებისა და AS ნომრების მოსაძებნად"
 
 #: setup.php
 msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
-msgstr ""
+msgstr "მონაცემთა შეგროვების მრავალი მსხვილი ტექნოლოგიური სერვისი ცდილობს დამალოს თავისი დომენების მფლობელობა, რათა შენიღბოს თქვენი პერსონალური ინფორმაციის შეგროვების ფაქტი. თუ ეს გაწუხებთ და თქვენს Cacti-ს ინსტალაციას აქვს ინტერნეტთან წვდომა, შეგიძლიათ გამოიყენოთ Arin ამ მსხვილი ტექნოლოგიური კომპანიების შენიღბვის მოსახსნელად."
 
 #: setup.php
 msgid "Whois Provider Host"
@@ -2724,7 +2708,7 @@ msgstr "Whois-ის მომწოდებელი ჰოსტი"
 
 #: setup.php
 msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
-msgstr ""
+msgstr "გთხოვთ, მიუთითოთ ჰოსტის სახელი whois მოთხოვნების შესასრულებლად. თუ ცარიელი არ არის, სისტემურ გზაში უნდა გქონდეთ whois ბინარული ფაილი."
 
 #: setup.php
 msgid "whois.radb.net"
@@ -2736,7 +2720,7 @@ msgstr "Whois-ს გამშვების ბილიკი"
 
 #: setup.php
 msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
-msgstr ""
+msgstr "გთხოვთ, მიუთითოთ 'whois' ბინარული ფაილის გზა. 'whois' ბინარული ფაილი გამოყენებული იქნება AS ინფორმაციის მოსაძებნად Arin-ის შესავსებად."
 
 #: setup.php
 msgid "Enter binary path"
@@ -2748,15 +2732,15 @@ msgstr "გრაფიკის დრილდაუნის მორგე�
 
 #: setup.php
 msgid "Default Search Filter for Graph Drilldowns"
-msgstr ""
+msgstr "ნაგულისხმევი ძიების ფილტრი გრაფიკების დეტალიზაციისთვის"
 
 #: setup.php
 msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
-msgstr ""
+msgstr "აირჩიეთ FlowView-ს არსებული ძიების ფილტრი გრაფიკების დეტალიზაციაში გამოსაყენებლად."
 
 #: setup.php
 msgid "Data Retention and Report Generation"
-msgstr ""
+msgstr "მონაცემთა შენახვა და ანგარიშების გენერირება"
 
 #: setup.php
 msgid "Data Retention Policy"
@@ -2764,7 +2748,7 @@ msgstr "მონაცემების შენარჩუნების �
 
 #: setup.php
 msgid "The amount of time Cacti will maintain the partitioned Flow tables."
-msgstr ""
+msgstr "დროის ხანგრძლივობა, რომლის განმავლობაშიც Cacti შეინახავს დანაწევრებულ ნაკადის ცხრილებს."
 
 #: setup.php
 #, php-format
@@ -2797,7 +2781,7 @@ msgstr "მონაცემთა ბაზის დაყოფის სქ
 
 #: setup.php
 msgid "Depending on the number of flows per minute, you may require more tables per day."
-msgstr ""
+msgstr "წუთში ნაკადების რაოდენობიდან გამომდინარე, შესაძლოა დღეში მეტი ცხრილი დაგჭირდეთ."
 
 #: setup.php
 msgid "Daily"
@@ -2809,59 +2793,55 @@ msgstr "საათში ერთხელ"
 
 #: setup.php
 msgid "Storage Engine for Raw Tables"
-msgstr ""
+msgstr "შენახვის ძრავა დაუმუშავებელი ცხრილებისთვის"
 
 #: setup.php
 msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
-msgstr ""
+msgstr "Aria ძრავა იდეალურია ყველა ცხრილისთვის, გარდა Live დაუმუშავებელი ცხრილისა. Live დაუმუშავებელი ცხრილი ყოველთვის InnoDB იქნება. გააკეთეთ არჩევანი."
 
 #: setup.php
 msgid "Parallel Queries"
 msgstr "პარალელური მოთხოვნები"
 
 #: setup.php
-#, fuzzy
-#| msgid "Parallel Queries"
 msgid "Parallel Query Backend"
-msgstr "პარალელური მოთხოვნები"
+msgstr "პარალელური მოთხოვნების ბექენდი"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr ""
+msgstr "აირჩიეთ, როგორ შესრულდეს FlowView-ს პარალელური მოთხოვნები. მოძველებული PHP შემსრულებელი ყოველი მოთხოვნისა და შარდისთვის უშვებს flowview_runner.php პროცესს. FlowView მოთხოვნების სერვისი იმავე map-reduce სამუშაოს აგზავნის localhost-ზე მუდმივად გაშვებულ Go სერვისში, რითაც თავიდან იცილებს თითოეულ მოთხოვნაზე პროცესის გაშვებასა და მონაცემთა ბაზის გამოკითხვის დაყოვნებას. საჭიროებს flowview-query სერვისის (იხილეთ plugins/flowview/service/flowview-query) დაინსტალირებას და გაშვებას."
 
 #: setup.php
 msgid "Legacy PHP Runner"
-msgstr ""
+msgstr "მოძველებული PHP შემსრულებელი"
 
 #: setup.php
-#, fuzzy
-#| msgid "Flow Viewer"
 msgid "FlowView Query Service"
-msgstr "დინების ნახვა"
+msgstr "FlowView მოთხოვნების სერვისი"
 
 #: setup.php
 msgid "Query Service URL"
-msgstr ""
+msgstr "მოთხოვნების სერვისის URL"
 
 #: setup.php
 msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
-msgstr ""
+msgstr "FlowView მოთხოვნების სერვისის საბაზისო URL, მაგალითად http://127.0.0.1:8699. დატოვეთ ცარიელი, რათა დროებითი პორტი ავტომატურად ამოიცნოს სერვისის პორტის ფაილიდან."
 
 #: setup.php
 msgid "Query Service Port File"
-msgstr ""
+msgstr "მოთხოვნების სერვისის პორტის ფაილი"
 
 #: setup.php
 msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
-msgstr ""
+msgstr "გზა პორტის ფაილამდე, რომელშიც FlowView მოთხოვნების სერვისი წერს თავის მიბმულ მისამართს. გამოიყენება სერვისის საბოლოო წერტილის აღმოსაჩენად, როდესაც ზემოთ მითითებული მოთხოვნების სერვისის URL ცარიელია."
 
 #: setup.php
 msgid "Query Service Token"
-msgstr ""
+msgstr "მოთხოვნების სერვისის ტოკენი"
 
 #: setup.php
 msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
-msgstr ""
+msgstr "არასავალდებულო საერთო საიდუმლო გასაღები. დაყენებისას Cacti მას უგზავნის FlowView მოთხოვნების სერვისს როგორც \"Authorization: Bearer\" თავსართს, და სერვისი უარყოფს მდგომარეობის შემცვლელ ნებისმიერ მოთხოვნას, რომელიც არ შეიცავს იმავე ტოკენს. დააყენეთ შესაბამისი მნიშვნელობა სერვისის კონფიგურაციის ფაილში (auth_token) ან FLOWVIEW_QUERY_TOKEN გარემოს ცვლადში. რეკომენდებულია ყოველთვის, როცა სერვისი ხელმისაწვდომია სანდო ლოკალური პროცესების გარდა სხვა წყაროებისთვისაც."
 
 #: setup.php
 msgid "Max Concurrent Threads"
@@ -2869,7 +2849,7 @@ msgstr "მაქს. ერთდროული ნაკადები"
 
 #: setup.php
 msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
-msgstr ""
+msgstr "ნაკადების (threads) მაქსიმალური რაოდენობა, რომელიც გაიგზავნება FlowView მოთხოვნების შესასრულებლად. გაითვალისწინეთ, რომ მონაცემთა ბაზის თითოეულ დანაყოფზე შეგიძლიათ გქონდეთ მაქსიმუმ 1 ნაკადი და ფრთხილად უნდა იყოთ, რომ ზედმეტად ბევრი ერთდროული ნაკადით არ გადატვირთოთ მონაცემთა ბაზის სერვერი."
 
 #: setup.php
 msgid "Disabled"
@@ -2886,15 +2866,15 @@ msgstr "გაშვებების მაქს. დრო"
 
 #: setup.php
 msgid "If the Parallel Query does not finish in this time, exit."
-msgstr ""
+msgstr "თუ პარალელური მოთხოვნა ამ დროში არ დასრულდება, მუშაობის შეწყვეტა."
 
 #: setup.php
 msgid "Cached Data Time to Live"
-msgstr ""
+msgstr "ქეშირებული მონაცემების სიცოცხლის ხანგრძლივობა"
 
 #: setup.php
 msgid "How long should FlowView hold onto Cached Query results before purging them?"
-msgstr ""
+msgstr "რამდენ ხანს უნდა შეინახოს FlowView-მ ქეშირებული მოთხოვნის შედეგები მათ წაშლამდე?"
 
 #: setup.php
 #, php-format
@@ -2917,33 +2897,31 @@ msgstr "MaxScale-ით დაყოფა"
 
 #: setup.php
 msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
-msgstr ""
+msgstr "ეს საჭიროა მხოლოდ იმ შემთხვევაში, თუ თქვენი Cacti სისტემის FlowView მონაცემთა ბაზის კავშირი ჯერ არ იყენებს MaxScale-ით ჩართულ Read-Write გაყოფის პორტს."
 
 #: setup.php
 msgid "Leverage MaxScale to Distribute Query Shards"
-msgstr ""
+msgstr "MaxScale-ის გამოყენება მოთხოვნის შარდების გასანაწილებლად"
 
 #: setup.php
 msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
-msgstr ""
+msgstr "თუ MaxScale-ისთვის დაქვემდებარებულად (slave) რამდენიმე სერვისი გაქვთ, შეგიძლიათ გაზარდოთ მოთხოვნების სიჩქარე პარალელური მოთხოვნების რამდენიმე MariaDB სერვერზე განაწილებით."
 
 #: setup.php
 msgid "MaxScale Read-Write Split Port"
-msgstr ""
+msgstr "MaxScale Read-Write გაყოფის პორტი"
 
 #: setup.php
 msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
-msgstr ""
+msgstr "ეს უნდა იყოს Read-Write-Split-Service (readwrite) სერვისისა და როუტერის პორტი."
 
 #: setup.php
 msgid "Flowview"
 msgstr "Flowview"
 
 #: setup.php
-#, fuzzy
-#| msgid "NetFlow User"
 msgid "NetFlow"
-msgstr "NetFlow-ის მომხმარებელი"
+msgstr "NetFlow"
 
 #~ msgid "OK"
 #~ msgstr "დიახ"
