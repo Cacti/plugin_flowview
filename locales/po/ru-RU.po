@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/flowview/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 10:49+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Russian <https://translate.cacti.net/projects/cacti/flowview/ru/>\nLanguage: ru-RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -2811,7 +2811,7 @@ msgstr "Механизм параллельных запросов"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr "Выберите способ выполнения параллельных запросов FlowView. Устаревший обработчик PHP (Legacy PHP Runner) запускает процесс flowview_runner.php для каждого запроса и шарда. Служба запросов FlowView (FlowView Query Service) отправляет ту же задачу map-reduce долгоживущей службе Go через localhost, избегая задержек запуска процесса и опроса базы данных для каждого запроса. Требует установленной и запущенной службы flowview-query (см. plugins/flowview/service/flowview-query)."
+msgstr "Выберите способ выполнения параллельных запросов FlowView. Устаревший обработчик PHP (Legacy PHP Runner) запускает процесс flowview_runner.php для каждого запроса и шарда. Служба запросов (FlowView Query Service) отправляет ту же задачу map-reduce долгоживущей службе Go через localhost, избегая задержек запуска процесса и опроса базы данных для каждого запроса. Требует установленной и запущенной службы flowview-query (см. plugins/flowview/service/flowview-query)."
 
 #: setup.php
 msgid "Legacy PHP Runner"
