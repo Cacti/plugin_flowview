@@ -1,0 +1,2936 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Kinyarwanda\n"
+"Language: rw-RW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "Ntibishoboka kubona Amakuru Adatunganyijwe yo Kohereza hanze"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "Ishakisha rya Flowview ryatanzwe ntiribaho. Nyamuneka ohereza ishakisha ryemewe."
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "Ikibazo cy'inkomoko cyatanzwe kitari cyo. Nyamuneka ohereza ukoresheje ikibazo nyacyo."
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "Ntibishoboka gusiba Akayunguruzo k'Uruvunge '%s' kuko gakoreshwa muri Raporo Igenwe."
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "Akayunguruzo k'urujya n'uruza '%s' kasibwe."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "Siba"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "Ububiko bw'agateganyo bwa DNS bwasibwe. Buzongera bwuzure uko inyandiko ziza."
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "Ibisobanuro by'ububiko bw'inzira za interineti"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "Ibisobanuro by'umukozi wahawe uburenganzira"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "Nta bisobanuro birambuye byabonetse"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR/Inzira"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "Umubare wigenga"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "Igice cya AS"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "Itsinda rya AS"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "Itsinda ry'inzira"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "Indomayini"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "Itsinda ry'akayunguruzo"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "Itsinda ryo guhuzanzira"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Umuyoboro"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "Ruteri ya interineti"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "Itsinda Rishinzwe Gukemura Ibibazo"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "Ushinzwe iyemeza"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "Ikigo"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "Inshingano"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "Umuntu"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "Itsinda rya ruteri"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "Ibisobanuro"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "Byahinduwe ubushize"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Inkomoko"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "Itariki yo Kwiyandikisha"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT Na"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "Umuyobozi wo kuvugana na we"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "Impinduka"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "Menyesha"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "Ibisobanuro"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "Umuntu ushinzwe tekiniki"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "MNT yo hasi"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "Igihugu"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "Imeyili y'imikoreshereze mibi"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "Nimero ya Faksi"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "Telefone"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "Imeyili"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "Aderesi"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "Imiterere"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "Abanyamuryango hakurikijwe Fef"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "Imyirondoro y'imikoreshereze mibi"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "Indanganturo ya MNT"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "Abanyamuryango"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "Imenyesha rya MNT"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "Itangwa ry'uburenganzira"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "Inzira za MNT"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "Umunyamuryango wa"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "Imeyili y'amavugurura"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "Ikirango cya NOC"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "Ikigo Gitera Inkunga"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT Irt"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "Abanyamuryango ba MP"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "Idomene nto"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "Bishobora gukorerwa Ping"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "Irindi zina"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "Ubwoko bw'ikigo"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "Reba kuri"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "Guhuza imiyoboro kwa MP"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "Sohora"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "Imyanya irimo ubusa"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "Ibisanzwe bya MP"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "Ibice"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "RS Isohoka"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "Izina ry'ikigo"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "Izina rya AS"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "Uwanditse"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "Kumenyesha IRT"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "Iteranyirizo MTD"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "Ubwoko bwa AS"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "Akayunguruzo ka MP"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "Inzira mburabuzi"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "Ingano y'ibigenewe"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "Kohereza hanze ibice"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "RS Yinjira"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "Izina ry'Umuyoboro"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "Amakuru ya DS Rdata"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "Umupaka w'iteranyirizo"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Akayunguruzo"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "Kwinjiza kwa MP"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "Ururimi"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "Ihuza rya RESFful"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "Umuhuzanzira"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "Uwo kubariza muri Zone"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "Injiza"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "Umufatanyabikorwa wa MP"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "Byoherejwe na"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "Ifishi"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "Domene za MNT"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "AS y'inkomoko"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "Kohereza hanze kwa MP"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "Ishyirwa mu ibanga"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "Isoko y'amakuru y'ahantu"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "Urutonde rw'ahantu"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "Aderesi y'impuza"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "Kohereza ukoresheje"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "Ikibazo"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "Seriveri z'Amazina"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "Imiyoborere ya Ping"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "Impuza"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "Injiza"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "Umukono"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "Aho biherereye ku ikarita"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "AS y'imbere"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "Injiza Binyuze muri"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "IKOSA RIKOMEYE: Imbonerahamwe y'ububikoshingiro itazwi %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "Shakisha"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "Icyo ari cyo cyose"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "Ibyinjijwe"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "Mburabuzi"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "Komeza"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "Gushyiraho/Kuvugurura muyunguruzi"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "Siba"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "Gusiba muyunguruzi"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "Siba burundu ububiko bw'agateganyo bwa DNS"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "Ntibyagaragajwe"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "Nta byinjijwe bihura byabonetse"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "Kanda 'Komeza' kugira ngo usibe Icyanditswe mu bubiko bw'agateganyo bwa DNS gikurikira."
+msgstr[1] "Kanda 'Komeza' kugira ngo usibe Ibyanditswe mu bubiko bw'agateganyo bwa DNS bikurikira byose."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "Hagarika"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "Komeza"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "Siba icyanditswe cya DNS"
+msgstr[1] "Siba ibyanditswe bya DNS"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "Ibyabitswe bya DNS bya Flowview"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "Byagenzuwe"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "Ntibyasuzumwe"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "Siba burundu"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "Aderesi ya IP"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "Iyi ni Aderesi ya IP y'ibyinjijwe mu Bubiko bw'agateganyo."
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "Izina rya Mwakirizi rya DNS"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "Izina rya DNS ryahawe Aderesi IP."
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "Inkomoko y'Izina rya Mwakirizi rya DNS.  Ishobora kuba DNS, Static Lookup cyangwa ARIN."
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "Byemejwe na Arin"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "Amakuru ya Arin y'iyi Aderesi IP yagenzuwe, cyangwa ni Aderesi IP y'urubuga rw'imbere."
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "ID ya CIDR"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "Urufunguzo rw'ibanze rwa Arin.  Aya si amakuru yemewe ya Arin."
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "ID ya Sisitemu Yigenga"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "AS y'Inkomoko ya Arin.  Aya ni amakuru yemewe ya AS ya Arin."
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "Igihe byavuguruwe"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "Iki ni igihe ububiko bw'agateganyo bwa DNS bwinjijwemo cyangwa bwavuguruwe bwa nyuma."
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "Nta Makuru y'Ububiko bw'Agateganyo bwa DNS Yabonetse"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "Inzira za Interineti za Flowview"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "Verisiyo ya IP"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "IPv4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "Inzira"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "Iyi ni Inzira ya Interineti yatangajwe."
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "Nomero ya AS"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "Umubare wa Autonomous System w'iyi nzira."
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "Ibisobanuro by'inzira"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "Ibisobanuro byanditswe n'Ushinzwe kubungabunga inzira."
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "Ububiko bw'amakuru bw'inkomoko bukoreshwa mu gutangaza inzira."
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "Bikurikiranwa na"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "Ikigo gitanga Interineti kibungabunga inzira y'umukiriya."
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "Igihe cya nyuma amakuru ari kuri iyi nzira yahinduwe."
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "Nta nzira zihura zabonetse"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "Koresha"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "Hagarika"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "Izina ry'Icyakira amakuru"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "Izina ry'igikoresho rigomba kugaragazwa."
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "Uburyo bwo gukusanya"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "Hari uburyo bubiri bwemewe bwo gukusanya amakuru, ubwa mbere bukoresha porogaramu za kera za flow-tools naho ubwa kabiri bukifashisha seriveri y'umuyoboro wa flow ya Cacti ubwayo ishingiye kuri PHP."
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "Huza na aderesi"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "Niba seriveri ya Cacti ifite Aderesi za IP nyinshi, ushobora kwerekana interefasi yihariye. Reka bibe 0.0.0.0 kuri interefasi y'ibanze."
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "Igice cya Mwakirizi cyemewe"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "Aderesi ya IP y'igikoresho cyemerewe kohereza kuri uyu mukusanyiriza w'imigendekere (flow collector).  Reka bibe 0.0.0.0 kuri mwakirizi uwo ari we wese.  Menya ko PHP igorana ku byo yemera.  Imyandikire ya CIDR iremewe kimwe n'imyandikire y'intera urugero 192.168.1.0 cyangwa 192.168.1.0/24.  Niba ushaka aderesi za IP zihariye, zitandukanye ukoresheje akitso."
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Irembo"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "Poruti iki gikusanyamakuru kizategerezaho."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Porotokole"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "Porotokole ya IP ikoreshwa kuri uyu mwumvi."
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "Porotokole ya UDP"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "Byafunguwe"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "Niba bihiswemo, serivisi ya Listener izatangizwa kandi itegereze amakuru yinjira."
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "Nta nyandikorugero ya Flow yabonetse kuri Igikoresho ID:%s na Inyandikorugero ID:%s"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Kanda 'Komeza' kugira ngo usibe Abumva ba NetFlow bakurikira.  Nyuma y'ibyo, Cacti izagerageza kongera gutangiza Serivisi yawe ya Flow-Capture."
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Kanda 'Komeza' kugira ngo ufungure Abumva ba NetFlow bakurikira.  Nyuma y'ibyo, Cacti izagerageza kongera gutangiza Serivisi yawe ya Flow-Capture."
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "Ugomba guhitamo nibura Umwumvirizi umwe."
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "Umuyoboro utega (port) ugomba kuba umubare uri hagati ya 1 na 65535."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "Kubika byagenze neza. Icyumviriza cya Flowview cyabitswe, kandi serivisi yongeye gutangizwa."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "Kubika byagenze neza. Icyumviriza cya Flowview cyabitswe. Ariko, serivisi ya flow-capture ntabwo iri gukora."
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "Icyakira amakuru [hindura: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "Icyakira amakuru [gishya]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "Izina"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "Verisiyo"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "Inyandikorugero"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "Biheruka Kuvugururwa"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "Imiyoboro ikora ivugururwa buri minota 5"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "Nta miyoboro yinjira yatahuwe"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "Inyandikorugero zatahuwe n'Icyakira amakuru"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "Aderesi y'ohereza"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "Byose"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "Inyandikorugero"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "ID y'inyandikorugero"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "Izina ry'Umwanya"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "Birashyigikiwe"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "ID y'umwanya"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "Ubwoko bw'umwanya"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "Uburebure"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "Fungura igipfunyika"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "Nta nyandikorugero z'imiyoboro yinjira zatahuwe"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "Ibyakira bya FlowView"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "Ibyakira amakuru"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "Uburyo"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "Aderesi yo guhuza"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "Byemewe kuva"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "Kwakira kwagaragaye"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "Umutekano w'umuyoboro wagaragaye mu by'ukuri ku muyoboro w'abumva."
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "Ibyasigaye bitarakorwa"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "Ingano y'ibitegereje bya UDP mu ma-byte."
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "Imiyoboro y'amakuru"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "Umubare w'imiyoboro yinjira iturutse ku nkomoko zitandukanye."
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "Verisiyo z'imiyoboro y'amakuru"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "Verisiyo za Traffic Flow ziri gukurikiranwa."
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "Igihe ntarengwa cy'ivugurura mu miyoboro yose iri gukusanywa. Aka gaciro kavugururwa buri minota 5."
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "Nta na kimwe"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "Nta Huza Rihari"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "Ntibihari"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "Cacti"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "Nta byakira amakuru bya Flowview"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "Tegura mbere"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "Imfunguzo z'ububiko bw'agateganyo z'Utuyunguruzo ntizashoboye kuboneka, bityo nta kintu cyasibwe."
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "Hakuweho ibice %s byari bibitswe bitahuye n'Akayunguruzo na kamwe."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "Itegura mbere ry'Akayunguruzo/Utuyunguruzo %d ryatangiye gukorwa inyuma. Akayunguruzo/Utuyunguruzo %d turi gukorerwa itegura mbere ubu. Ibisubizo byabyo bitangazwa mu nyandiko y'ibikorwa ya Cacti."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "Itegura mbere ry'Akayunguruzo/Utuyunguruzo %d ryatangiye gukorwa inyuma. Ibisubizo byabyo bitangazwa mu nyandiko y'ibikorwa ya Cacti."
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "Akayunguruzo (utuyunguruzo) twahiswemo turimo gushyirwa mu bikorwa.  Nyamuneka ongera ugerageze nibimara kurangira."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "Kanda 'Komeza' kugira ngo usibe Akayunguruzo/Utuyunguruzo dukurikira n'Utuyunguruzo twose duhwanye."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "Kanda 'Komeza' kugira ngo uhagarike Utuyunguruzo dukurikira n'Akayunguruzo kose gahuye."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "Kanda 'Komeza' kugira ngo ufungure Utuyunguruzo dukurikira."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "Kanda 'Komeza' kugira ngo utunganye mu ibanga Akayunguruzo/Utuyunguruzo dukurikira, NAT yafunguwe kandi yahagaritswe, ku rwego rwose rw'amakuru y'uruhererekane. Ibice byamaze gutunganywa kandi bikaba ari ukuri birasimbukwa. Ibi bishobora gutwara igihe kirekire ku mubare munini w'amakuru. Akayunguruzo kari gutunganywa karasimbukwa."
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "Ugomba guhitamo nibura Akayunguruzo kamwe."
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "Utuyunguruzo twa FlowView"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "Utuyunguruzo twa FlowView [ Ongeraho Ibikoresho mbere y'Utuyunguruzo ]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "Utuyunguruzo"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "Kuraho ibitakenewe"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "Kuraho ibice bibitswe bidahura n'Akayunguruzo na kamwe"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "Izina ry'umuyunguruzo"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "ID"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "Itegura mbere"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "Itegura mbere ribanza kubara ibisubizo by'Akayunguruzo kuri buri gice cy'imigendekere y'amakuru, igihe NAT ifunguye n'igihe ifunze, rikabibika mu bubiko bwihuse bwa Parallel Query kugira ngo raporo ku makuru ya kera zifunguke vuba. Ibice bishya bitegurwa mbere ku buryo bwikora iyo bihagaritse kwakira imigendekere y'amakuru. Bisabwa bisobanura ko ibice byahinduwe bitarategurwa mbere, Birimo gukora bisobanura ko itegura mbere riri gukorwa, naho Byavuguruwe bisobanura ko buri gice cyahinduwe cyateguwe mbere. Birimo gukora: N ni umubare w'ibibazo by'Akayunguruzo biri gukora ubu. Igice kikiri kwakira imigendekere y'amakuru ntigitegurwa mbere, bityo nticyibarwa."
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "Icyakira amakuru"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Ubwoko bwa raporo"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "Ibice bya NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "Umubare w'ibice by'aka Kayunguruzo bibitswe mu bubiko bw'igihe gito bwa Parallel Query igihe NAT ifunguye."
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "Ibice bitari NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "Umubare w'ibice by'aka Kayunguruzo bibitswe mu bubiko bw'igihe gito bwa Parallel Query igihe NAT ifunze."
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "Ibice"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "Umubare wose w'ibice by'imigezi y'amakuru, ari bwo bice byinshi bishoboka Akayunguruzo gashobora kubika mu bubiko bw'agateganyo hamwe na NAT cyangwa hatariyo."
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Umwanya wo gutondeka"
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "Igisubizo"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "Ibice byabitswe by'agateganyo by'Utuyunguruzo ntibyashoboye gutandukanywa n'ibindi, kuko imfunguzo z'ububiko bw'agateganyo z'Akayunguruzo zitashoboye kuboneka."
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "Imfunguzo z'ububiko bw'agateganyo z'Utuyunguruzo ntizashoboye kuboneka, bityo nta kintu gishobora gusibwa ubu. Genzura ko buri Kayunguruzo gafite Raporo yemewe."
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "Ibice byabitswe by'agateganyo: %s bihura n'Akayunguruzo.  %s bidahura n'Akayunguruzo ako ari ko kose, ibyo gusukura bikuraho."
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "Ibi bisiba ibice bibitswe by'agateganyo %s bidahura n'Akayunguruzo ako ari ko kose, kuri buri Kayunguruzo na buri ukoresha.  Bituruka ku Tuyunguruzo twahinduwe cyangwa twasibwe, no ku maraporo afite amagenamiterere yahinduriwe ku rupapuro rwa raporo.  Ibice bibitswe by'agateganyo %s by'Utuyunguruzo birabikwa.  Ibi ntibishobora gusubirwaho."
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "Buri gice kibitswe mu bubiko bwihuse gihuye n'Akayunguruzo.  Nta kintu cyo gukuraho."
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "Kuraho ibice bibitswe bitakenewe"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "Funga"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "Ohereza ubu"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "Buri saha"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Buri masaha %d"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "Buri munsi"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "Buri cyumweru"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "Buri byumweru %d, 2"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "Buri kwezi"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "Igenamiterere rusange"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "Umutwe"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "Gahunda Nshya"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "Andika umutwe wa raporo kuri gahunda ya FlowView."
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "Niba iri suzuma rya NetFlow rizoherezwa cyangwa ritazoherezwa."
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "Izina ry'ibaza rigomba gukoreshwa."
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "Amagenamiterere yo Kohereza"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "Intera yo Kohereza"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "Ni kangahe iyi Raporo ya NetFlow yoherezwa?"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "Igihe cy'Ibanze Cyateganyijwe"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "Iyi ni itariki / igihe cya mbere cyo kohereza imeyili ya NetFlow Scan. Imeyili zose zizakurikiraho zizabarwa uhereye kuri iki gihe wongeyeho intera yatanzwe haruguru."
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "Igihe ntarengwa cyemewe cyo gukora"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "Ni igihe kingana iki raporo igomba kwemererwa gukora mbere yo guhagarara?"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Umunota %d"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Iminota %d"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "Amagenamiterere ya kera y'Imeyili"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "Aderesi z'Imeyili"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "Aderesi z'imeyili (zitandukanyijwe n'ibwiriza) zo koherezaho iri Genzura rya NetFlow."
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "Idosiye y'imiterere yo gukoresha"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Hitamo idosiye yihariye ya html n'iya CSS yo gukoresha.  Iyi dosiye irimo byombi, html na CSS, byo gukikiza raporo yawe.  Niba irimo ibirenze CSS gusa, ugomba gushyira akamenyetso kihariye <REPORT> imbere muri iyo dosiye.  Aka kamenyetso k'imiterere kazasimburwa n'ibikubiye muri raporo.  Izi dosiye ziherereye mu bubiko bwa 'formats'."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "Amagenamiterere y'urutonde rw'imenyesha"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "Urutonde rw'abamenyeshwa"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "Niba Umugereka wa Thold washyizwemo, ushobora guhitamo Urutonde rw'Imenyesha"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "Raporo izahagera nimara kurangira."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Kanda 'Komeza' kugira ngo usibe Gahunda ikurikira/zikurikira."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Kanda 'Komeza' kugira ngo wohereze Gahunda ikurikira/zikurikira ubu."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Kanda 'Komeza' kugira ngo uhagarike Gahunda zikurikira."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Kanda 'Komeza' kugira ngo ufungure Gahunda zikurikira."
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "Ugomba guhitamo nibura gahunda imwe."
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "Ntibishoboka kubona Amakuru Adatunganyijwe ya Raporo ku Ndangamubare ya Raporo %s"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "Ugomba kugaragaza Imeyili, Urutonde rwo Kumenyesha cyangwa byombi!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Raporo Iteganyijwe: [hindura: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Amateka ya Raporo Ziteganyijwe: [hindura: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "Raporo Iteganyijwe: [nshya]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "Gahunda"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "Umutwe wa raporo"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "Indango"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "Ubwoko bw'ibisohoka"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "Byoherejwe na"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "Itariki yoherejweho"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "Igihe cyo gukora"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "Kurura amakuru"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "Ibikorwa bya Raporo"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [Reba raporo uko yakabaye]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [Reba raporo ikoresheje CSS]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "Kohereza n'Intoki"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "Byateganyijwe"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "Amasegonda %s"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "Guhitamo itariki itangira"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "Gahunda za FlowView"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "Gahunda za FlowView [ Ongeraho Ibikoresho mbere ya Gahunda ]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "Intera y'igihe"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "Igihe cya nyuma byoherejwe"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "Iyohereza Rikurikira"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "Imeyili/Urutonde"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "Ibyoherejwe byanditswe mu ikayi"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Oya"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Yego"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Hitamo Raporo"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Incamake"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Domain y'Imizi Inkomoko"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Domene y'ibanze y'icyerekezo"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Domain y'Imizi Inkomoko/Icyerekezo"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "Icyambu kigana cya UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "Icyambu cy'Inkomoko cya UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "Icyambu cya UDP/TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "IP Inkomoko"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "IP y'icyerekezo"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "IP Inkomoko/Icyerekezo"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "IP Inkomoko cyangwa Icyerekezo"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "Porotokole ya IP"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Impuza yinjira"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Umuyoboro usohora"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Impuza yinjira/isohoka"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "AS Inkomoko"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "AS y'icyerekezo"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "AS Inkomoko/Icyerekezo"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Imbanziriza Inkomoko"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Imbanziriza y'icyerekezo"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Imbanziriza Inkomoko/Icyerekezo"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Ibihe by'urujya n'uruza"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "IP n'Ama-Port Inkomoko/Icyerekezo"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Nomero za AS"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "Inkingi 132"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Erekana ikigereranyo cy'ibarura rya IP"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Igice icyo ari cyo cyose mu rwego (bitinda)"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Isaha yo kurangiriraho iri mu cyiciro (byihuse)"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Igihe cyo gutangira mu kigero (byihuse)"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Byose biri mu cyiciro (bitinda)"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Garura imirongo yose"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Bikuru %d bya mbere"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Nta mupaka"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Bytes"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Domain Inkomoko"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Urujya n'uruza"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bayiti"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Udutwaro tw'amakuru"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Domene y'icyerekezo"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Port Inkomoko"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Port y'icyerekezo"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "IP y'icyerekezo"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "IF Inkomoko"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "IF y'icyerekezo"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Imbanziriza y'icyerekezo"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Igihe cyo gutangira"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Isaha yo kurangiriraho"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Irakora"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Ibimenyetso"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Icyerekezo"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "Pigiseli %d"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Utuyunguruzo rusange"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Akayunguruzo kabitswe ko kwerekana."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Akayunguruzo Gashya"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Umwumvi wo gukoresha ku Kayunguruzo."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "ID y'Inyandikorugero y'urujya n'uruza"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "Indangamuntu y'Inyandikorugero ya Flow kuri Flows za v9 na IPFIX gusa.  Menya ko Indangamuntu z'Inyandikorugero zishobora gutandukana bitewe n'uwabikoze."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Aderesi y'umuyoboro w'amakuru"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Aderesi ya IP cyangwa Izina rya Mwakirizi bya Stream biva ku rutonde rwa za stream zanditswe."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Ibyateguwe mbere"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Niba aka Kayunguruzo gashingiye ku Gihe cyagenwe mbere, gahitemo hano."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Ibisabwa birambuye by'Akayunguruzo"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Ubwoko bwa Raporo bukoreshwa ku buryo busanzwe kuri aka Kayunguruzo igihe hakorwa Raporo."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Cyacapishijwe"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "By'ibarurishamibare"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Raporo y'ibarurishamibare"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Ubwoko bwo kwerekana Raporo bukoreshwa nk'ibanziriza kuri aka Kayunguruzo mu gihe cyo gukora Raporo."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Raporo yacapishijwe"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Ubwoko bwa Raporo icapye bukoreshwa ku buryo busanzwe kuri aka Kayunguruzo igihe hakorwa Raporo icapye."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Amategeko y'intera"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Fungira Amakuru y'Akayunguruzo kuri aya mategeko y'akayunguruzo k'igihe."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Hindura za IP"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Hindura Aderesi za IP mu mazina y'imbuga (Domain Names)."
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Umwanya usanzwe wo Gutondekanya w'Akayunguruzo. Iri genamiterere rizakurikizwa kuri Raporo zose zishyizwe ku ngengabihe."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Imirongo ntarengwa"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Umubare ntarengwa w'Imirongo itangwa mu Kayunguruzo.  Iri genamiterere rizakurikizwa kuri Raporo zose zashyizwe kuri gahunda."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Bayite nke zishoboka"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Umubare muto wose w'Amabite yo kwitabwaho mu Kayunguruzo.  Igiteranyo cy'umuvuduko wose kiri munsi y'aya mabite kizirengagizwa."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Amahitamo y'ibishushanyo mbonera"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Ubwoko bw'igishushanyo"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Ubwoko bw'Igishushanyo bwo kwerekana nk'ibanziriza.  Burimo Bar, Pie, na Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Igishushanyo cy'utubari"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Igishushanyo cy'uruziga"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Igishushanyo cya Treemap"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Ubuhagarike bw'igishushanyo"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "Ubuhagarike bw'Igishushanyo bukoreshwa nk'ibanziriza."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "Koresha amakuru ya NAT"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "Erekana IP y'Inkomoko/Icyerekezo n'izina rya DNS rya nyuma ya NAT (ryahinduwe) mu bisohoka bya raporo mu mwanya w'indangagaciro z'umwimerere za mbere ya NAT."
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Agasanduku k'imbonerahamwe"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Ese umwanya w'imbonerahamwe ugomba kwerekanwa ku buryo busanzwe."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Umwanya wa Bayiti"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Ese umwanya wa Bytes ugomba kwerekanwa ku buryo busanzwe."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Igisate cy'udutwaro tw'amakuru"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Ese umwanya wa Packets ugomba kwerekanwa ku buryo busanzwe."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Urubuga rw'urujya n'uruza"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Ese umwanya wa Flows ugomba kwerekanwa ku buryo busanzwe."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Utuyunguruzo twa porotokole"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Porotokole"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Hitamo Porotokole Yihariye y'Akayunguruzo."
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "Porotokole Zose"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "Ibimenyetso bya TCP"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "Ibimenyetso bya TCP byo gushakisha mu Kayunguruzo. Ibi bishobora kuba urutonde rwa TCP Flags rutandukanyijwe n'ikitso"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "Imirima ya TOS"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Ibice bya TOS byo gushakisha mu Kayunguruzo. Ibi bishobora kuba urutonde rw'ibice bya TOS rutandukanyijwe n'ikitso"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Yungurura hakurikijwe IP y'inkomoko yahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rwa aderesi za IPv4 cyangwa IPv6 zitandukanyijwe n'akitso, cyangwa urutonde rw'ibice bya aderesi za IPv4 cyangwa IPv6 mu buryo bwa CIDR (urugero: 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Ama-Port Inkomoko"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Yungurura hakurikijwe Ibyambu by'inkomoko byahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rw'ibyambu by'inkomoko bitandukanyijwe n'akitso."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Interfasi Inkomoko"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Yungurura hakurikijwe Interifase y'inkomoko yahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rwa za Interifase z'inkomoko zitandukanyijwe n'akitso"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Yungurura hakurikijwe AS y'icyerekezo yahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rwa za AS z'inkomoko zitandukanyijwe n'akitso"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Yungurura hakurikijwe IP y'icyerekezo yahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rwa aderesi za IPv4 cyangwa IPv6 zitandukanyijwe n'akitso, cyangwa urutonde rw'ibice bya aderesi za IPv4 cyangwa IPv6 mu buryo bwa CIDR (urugero: 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Port z'icyerekezo"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Yungurura hakurikijwe Ibyambu by'icyerekezo byahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rw'ibyambu by'icyerekezo bitandukanyijwe n'akitso."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Umuhuza w'icyerekezo"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Yungurura hakurikijwe Interifase y'icyerekezo yahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rwa za Interifase z'icyerekezo zitandukanyijwe n'akitso."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "AS y'icyerekezo"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Yungurura hakurikijwe AS y'icyerekezo yahiswemo mu Kayunguruzo. Iri rishobora kuba urutonde rwa za AS z'icyerekezo zitandukanyijwe n'akitso"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "IP ikomokaho nyuma ya NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Yungurura hakurikijwe IP y'inkomoko yahinduwe (nyuma ya NAT) yanditswe mu Kayunguruzo. Iri rishobora kuba urutonde rwa aderesi za IPv4 cyangwa IPv6 zitandukanyijwe n'akitso, cyangwa urutonde rw'ibice bya aderesi za IPv4 cyangwa IPv6 mu buryo bwa CIDR (urugero: 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "Poruti ikomokaho nyuma ya NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Yungurura hakurikijwe Icyambu cy'inkomoko cyahinduwe (nyuma ya NAT) mu Kayunguruzo. Iri rishobora kuba urutonde rw'ibyambu rutandukanyijwe n'akitso."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "IP yerekezaho nyuma ya NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Yungurura hakurikijwe IP y'icyerekezo yahinduwe (nyuma ya NAT) yanditswe mu Kayunguruzo. Iri rishobora kuba urutonde rwa aderesi za IPv4 cyangwa IPv6 zitandukanyijwe n'akitso, cyangwa urutonde rw'ibice bya aderesi za IPv4 cyangwa IPv6 mu buryo bwa CIDR (urugero: 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "Poruti yerekezaho nyuma ya NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Yungurura hakurikijwe Icyambu cy'icyerekezo cyahinduwe (nyuma ya NAT) mu Kayunguruzo. Iri rishobora kuba urutonde rw'ibyambu rutandukanyijwe n'akitso."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "Ububiko bw'agateganyo bwa DNS"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Inzira"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Imibare yigenga"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "Ibice bya AS"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "Amatsinda ya AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Amatsinda y'inzira"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Indangarubuga"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Amatsinda y'akayunguruzo"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Amatsinda yo guhuzanzira"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Ruteri za interineti"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Amatsinda Ashinzwe Gukemura Ibibazo"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Abashinzwe iyemeza"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Ibigo"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Inshingano"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Abantu"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "Raporo '%1$s' iturutse ku isoko %2$s ifite id %3$s yashyizwe ku rutonde rwo gukora!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "Raporo '%1$s' iturutse ku isoko %2$s ifite id %3$s ntiyashyizwe ku rutonde rwo gukora kubera ikosa!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "Rusange"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "Inyandiko z'ibyabaye"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "Hitamo Ubwoko bwa Raporo mbere"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Akayunguruzo: [hindura: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "Akayunguruzo: [gashya]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "Ibisubizo byabitswe by'agateganyo byagizweho ingaruka"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "Izi mpinduka zigira ingaruka ku bisubizo bibitswe mu bubiko bw'agateganyo by'aka Kayunguruzo. Kubibika bitangiza igikorwa cyo kongera kubyubaka mu nyuma. Kanda 'Komeza' kugira ngo ubike Akayunguruzo, cyangwa 'Hagarika' kugira ngo ukomeze kugahindura."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Impinduka kuri aka Kayunguruzo zigira ingaruka ku bisubizo byako byabitswe by'agateganyo, bityo itunganywa ryako ryatangijwe mu mutima. Aho bigeze herekanwa ku rupapuro rw'Utuyunguruzo kandi ibisubizo byako bitangazwa mu nyandiko y'ibikorwa ya Cacti."
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Akayunguruzo Katagenwe [ Hitamo Akayunguruzo kugira ngo ubone Ibisobanuro ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Raporo y'ibarurishamibare: %s [ Harimo ibyasimbujwe nk'uko byasobanuwe hasi ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Raporo yacapishijwe: %s [ Harimo ibyasimbujwe nk'uko bigaragajwe hasi ]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "Hitamo Akayunguruzo"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "Koresha muyunguruzi"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "Kuraho Akayunguruzo"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "Hindura"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "Hindura Akayunguruzo k'Imigendekere"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "Hanga Akayunguruzo gashya ka Flow"
+
+#: includes/functions.php
+msgid "New"
+msgstr "Gishya"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "Bika"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "Bika Akayunguruzo ka Flow"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "Bika nka"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Bika Akayunguruzo ka Flow gasanzwe nk'Akayunguruzo gashya"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "Hindura izina"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "Hindura Izina ry'Akayunguruzo ka Flow"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "Siba Akayunguruzo ka Flow"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "Raporo"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "Ibarurishamibare: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "Cyacapishijwe: %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "Hitamo Akayunguruzo mbere"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "Imirongo"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "Kudashyiramo"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "Urugero rw'ibya mbere"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "Ingero %d za mbere"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "Okuteti"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "Erekana amazina y'imiyoboro (Domains) gusa ku bishushanyo bikurikira"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "Indangarubuga/Amazina ya ba Mwakirizi gusa"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "Erekana izina rya IP/DNS rya nyuma ya NAT (ryahinduwe) mu mwanya w'indangagaciro z'umwimerere"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "Intera y'igihe"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "Byihariye"
+
+#: includes/functions.php
+msgid "From"
+msgstr "Kuva"
+
+#: includes/functions.php
+msgid "To"
+msgstr "Kugeza"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "Guhitamo itariki irangira"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "Subiza igihe inyuma"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "Shyiraho intera yo kwimura igihe"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "Imura igihe imbere"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "Igishushanyo"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "Akabari"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "Igishushanyo cy'uruziga"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "Ikarita ya Treemap"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "Ubuhagarike"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "Erekana/Hisha"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "Imbonerahamwe"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "Kohereza hanze amakuru adahinduwe"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "Bika Akayunguruzo ka Flow"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "Izina Rishya"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "Siba Akayunguruzo k'imigendekere y'amakuru"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "Kugira ngo usibe aka Kayunguruzo k'Umuyoboro, kanda Komeza.  Niba aka Kayunguruzo k'Umuyoboro gakoreshwa muri Raporo Igenwe, igikorwa kizahagarikwa."
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Imbonerahamwe y'Ikwirakwizwa ry'Amabayiti %s ya Mbere"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "Igishushanyo cy'uruziga cy'ibya mbere %s bya Bayiti"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Igishushanyo cya Treemap cy'ibya mbere %s bya Bayiti"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Imbonerahamwe y'Ikwirakwizwa ry'Udusanduku tw'amakuru %s twa Mbere"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "Igishushanyo cy'uruziga cy'ibya mbere %s bya Paketi"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Igishushanyo cya Treemap cy'ibya mbere %s bya Paketi"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Imbonerahamwe y'Ikwirakwizwa ry'Imiyoboro %s ya Mbere"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Igishushanyo cy'uruziga cy'ibya mbere %s by'Imijyo y'amakuru"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Igishushanyo cya Treemap cy'ibya mbere %s by'Imijyo y'amakuru"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "Hindura izina ry'imiterere"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "Amagenamiterere y'Akayunguruzo yabitswe. Ishyirwa mu bikorwa ry'aka Kayunguruzo ryatangiye inyuma."
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "Igenamiterere ry'Akayunguruzo Ryabitswe"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Umukiliya/Bwite (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Bitazwi (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Akayunguruzo k'umuyoboro muto: %s si imiterere yemewe ya CIDR"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "Akayunguruzo ka IP: %s si aderesi ya IP yemewe"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "bitarakemuka"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "Bayiti %d - %d"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> Bayite %d"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "Raporo y'imibare %s ntizwi. Nyamuneka fungura ikibazo kuri GitHub"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "Raporo icapye %s ntizwi. Nyamuneka fungura ikibazo kuri GitHub"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "DNS Inkomoko"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "DNS y'Imizi Inkomoko"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "DNS y'icyerekezo"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "Root DNS y'icyerekezo"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "DNS"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "DNS shingiro"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "Port y'icyerekezo"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "IF y'icyerekezo"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "Imbanziriza y'icyerekezo"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "Ubwoko bwa Serivisi"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "Bayiti/Paketi"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "Ntabwo birashyirwa mu bikorwa, bifite NAT: %s, bidafite NAT: %s."
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "Bigezweho"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "Biri gukora"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "Birakenewe"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "Umubare w'ibibazo by'ishakisha by'aka Kayunguruzo biri gukora ubu."
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "Hamwe na NAT: %d, nta NAT: %d."
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "Birakora: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "IKOSA: Ikibazo Kibangikanye nticyarangije mu Gihe Ntarengwa cyo Gukora cy'amasegonda %d.  Genzura Igihe Ntarengwa cyo Gukora mu Magenamiterere ya FlowView, kandi urebe ko ububiko bw'amakuru budahuze n'ikindi gikorwa nka ALTER TABLE."
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Igikorwa cyo gushakisha icyarimwe cyarengeje igihe. Nyamuneka hamagara umuyobozi wa sisitemu wawe"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Buleyeni: %s, Imibare: %s, Hex: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "Gutinda guto"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "Umuvuduko w'amakuru"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "Kwizerwa"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "Ikiguzi gito"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "Igenzura ry'Umuyoboro"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "Igenzura rya interineti"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "ECP ikomeye"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "Kurenga Flash"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "Flash"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "Ako kanya"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "Icyihutirwa"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "Igikorwa gihoraho"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "Imibare y'incamake"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "Ikigabanyo cy'Ingano y'Ipaki ya IP (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Ikwirakwizwa ry'udutwaro kuri buri muyoboro (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Ikwirakwizwa rya Okuteti kuri buri rujya (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Ikwirakwizwa ry'igihe cy'urujya n'uruza (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Ugomba guhitamo Raporo y'Imibare cyangwa Raporo Icapye!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Ugomba guhitamo Raporo y'Imibare cyangwa Raporo Icapye gusa (ntabwo ari zombi)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Amatariki atari yo, Itariki/Igihe cyo kurangiza iri mbere y'Itariki/Igihe cyo gutangira!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP itari yo kuri Aderesi y'Inkomoko!<br>(Igomba kuba iri mu buryo bwa '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Umuyoboro wungirije utari wo kuri Aderesi y'Inkomoko!<br>(Ugomba kuba uri mu buryo bwa '192.168.0.1/255.255.255.0' cyangwa '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP itari yo kuri Aderesi y'Icyerekezo!<br>(Igomba kuba iri mu buryo bwa '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Umuyoboro wungirije utari wo kuri Aderesi y'Icyerekezo!<br>(Ugomba kuba uri mu buryo bwa '192.168.0.1/255.255.255.0' cyangwa '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "Agaciro katari ko ku mpuza y'inkomoko!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Agaciro katari ko ku irembo ry'inkomoko! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Agaciro katari ko kuri AS y'inkomoko! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "Agaciro katari ko ku mpuza y'icyerekezo!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Agaciro katari ko ku irembo ry'icyerekezo! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Agaciro katari ko kuri AS y'icyerekezo! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Agaciro katari ko kuri Porotokole! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Agaciro katari ko ku ibendera rya TCP! (urugero: 0x1b cyangwa 0x1b/SA cyangwa SA/SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Agaciro katari ko ku ma-Octet ntarengwa!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Agaciro katari ko ku mirongo ntarengwa!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "Igishushanyo cya FlowView kuri %s Ubwoko ni %s"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "Bishyigikiwe (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "Ntibishyigikiwe"
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (Byihuta, Ntidakingira ihungabana)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (Yihuta, Ikingiye ku ihagarara)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (Bitinda, Ibikorwa byinshi icyarimwe)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "Ukoresha NetFlow"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "Umuyobozi wa NetFlow"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Nyamuneka hindura izina ry'imwe muri dosiye zawe config.php.dist cyangwa config_local.php.dist mu bubiko bwa flowview, kandi uhindure igenamiterere ry'ububiko bw'amakuru mbere yo gushyiramo porogaramu."
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Turakumenyesha ko imbonerahamwe z'umugereka wa Flowview zirimo kuvugururwa mu nyuma. Ibi bishobora gufata igihe. Reba mu nyandiko z'ibikorwa za Cacti kugira ngo ubone amakuru arambuye"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "Akayunguruzo Kasibwe"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "Akayunguruzo Kavuguruwe"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "Kwinjiza/Gusohora"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "Ububiko bw'amakuru"
+
+#: setup.php
+msgid "Normal User"
+msgstr "Ukoresha Usanzwe"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Ubuyobozi bwa Sisitemu"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "Ikireba urujya n'uruza"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "Ikibaho cy'ibikorwa"
+
+#: setup.php
+msgid "(save)"
+msgstr "(bika)"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(hindura)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "(ibikorwa)"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "Igikorwa %d"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "Ibikorwa %d"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "Ibikorwa Bikorera Rimwe bya Raporo (FlowView Gusa)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "Hitamo umubare ntarengwa w'ibikorwa bya raporo bishobora gukorera icyarimwe."
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Igenamiterere rya Proxy ya Interineti"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Aderesi ya Proxy ya Interineti"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Kuri serivisi z'ibanze za Cacti cyangwa imigereka (Plugins) bisaba interineti, injiza hano seriveri ya proxy n'umuryango (port) mu buryo bukurikira IP:PORT. Urugero: 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Umukoresha wa Proxy ya Interineti"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Niba Proxy yawe ya Interineti isaba izina ry'ukoresha, ryinjize hano."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Ijambobanga rya Proxy ya Interineti"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Niba Proxy yawe ya Interineti isaba ijambobanga, ryinjize hano."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "Isobanura ry'Izina"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "Igena ry'Izina rya Mwakirizi"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Uburyo wifuza gukoresha mu gushakisha amazina ya ba mwakirizi."
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "Koresha seriveri y'imbere"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Koresha seriveri za DNS ziri munsi ya Imeyili/Raporo/DNS"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "Ntusobanure DNS"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "Kurura urutonde rw'ishyinguro rya Interineti buri munsi"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "Niba ushishikajwe n'amakuru aboneka ku mugaragaro areba murandasi yose, ushobora guhitamo ubu buryo. Cacti izagera kuri Internet Registries ku isi yose rimwe ku munsi irebe impinduka mu nzira za murandasi yose maze yinjize ayo makuru muri Cacti. Menya ko ibi bizarema ububiko bw'amakuru bunini cyane burenga 3GBytes z'amakuru."
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "Izina rya domain y'imbere"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "Kuri aderesi za IPv4 ziri ku muyoboro w'imbere zidashobora gushakishwa imbere, ongeraho iki gice cyo ku musozo kuri aderesi ya IP ivuyemo."
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "Igice cya IP z'imbere"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Tanga urutonde rw'aderesi za IP za IPv4 ku muyoboro wawe w'imbere kuri ba mwakirizi bashobora kuba batanditswe muri DNS. Abo ba mwakirizi bazahuzwa n'Izina ry'Urubuga rw'Imbere riri hejuru. Ibi bigenewe cyane abakoresha bo mu rugo. Ushobora gukoresha imiterere ya CIDR cyangwa itari CIDR. Urugero: 192.168.11.0 cyangwa 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "Koresha CIDR cyangwa itari CIDR"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Koresha Arin mu gushaka ama-Domain n'imibare ya AS"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Serivisi nyinshi z'ikoranabuhanga rikomeye zikusanya amakuru zikunda guhisha ko ari zo zifite imbuga kugira ngo zihishe ko zikusanya amakuru yawe bwite. Niba ibi biguhangayikishije kandi Cacti yawe ikaba ibona Interineti, ushobora gukoresha Arin kugira ngo ukureho iryo hisha kuri ayo masosiyete akomeye y'ikoranabuhanga."
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "Mwakirizi utanga serivisi ya Whois"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Nyamuneka tanga izina rya mwakirizi ryo gusesengura ibibazo bya whois. Niba atari ubusa, ugomba kuba ufite porogaramu ya whois mu nzira ya sisitemu yawe."
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "Inzira ya porogaramu ya Whois"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Nyamuneka tanga inzira ya dosiye ya porogaramu ya 'whois'. Porogaramu ya 'whois' izakoreshwa mu gushaka amakuru ya AS yunganira Arin."
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "Andika inzira ya binary"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "Amagenamiterere yo gucukumbura Igishushanyo"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "Akayunguruzo mburabuzi k'ishakisha ku isesengura ryimbitse ry'igishushanyo"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "Hitamo Akayunguruzo ko Gushakisha ka Flowview gasanzweho kugira ngo gakoreshwe mu gucengera mu Gishushanyo."
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "Kubika amakuru no gukora raporo"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "Politiki yo kubika amakuru"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Igihe Cacti izabika imbonerahamwe za Flow zigabanyijemo ibice."
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "Icyumweru %d"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "Ibyumweru %d"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "Ukwezi %d"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "Amezi %d"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "Umwaka %d"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "Gahunda yo kugabanya ibice by'ububiko bw'amakuru"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Ukurikije umubare w'imigendekere (flows) ku munota, ushobora gukenera imbonerahamwe nyinshi ku munsi."
+
+#: setup.php
+msgid "Daily"
+msgstr "Buri munsi"
+
+#: setup.php
+msgid "Hourly"
+msgstr "Buri saha"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "Moteri y'ububiko bw'imbonerahamwe zidatunganyije"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Moteri ya Aria ni nziza kuri byose uretse imbonerahamwe mbisi ikora mu gihe nyacyo.  Imbonerahamwe mbisi ikora mu gihe nyacyo izahora ari InnoDB.  Hitamo iyo ushaka."
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "Ibazamakuru ribera icyarimwe"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "Uburyo bw'inyuma bw'ibazamakuru ribera icyarimwe"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "Hitamo uko ibibazo bya FlowView bikorera icyarimwe bitunganywa. Legacy PHP Runner itangiza igikorwa cya flowview_runner.php kuri buri kibazo na buri gice. Serivisi y'Ibibazo ya FlowView yohereza uwo murimo umwe wa map-reduce kuri serivisi ya Go ikora igihe kirekire binyuze kuri localhost, bikirinda gutangiza igikorwa kuri buri kibazo n'itinda ryo gukusanya mu bubiko bw'amakuru. Bisaba ko serivisi ya flowview-query (reba plugins/flowview/service/flowview-query) iba yarashyizweho kandi irimo gukora."
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "Ikoresha rya kera rya PHP"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "Serivisi y'ishakisha ya FlowView"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "URL ya Serivisi y'Ububazo"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "URL shingiro ya Serivisi y'Ibibazo ya FlowView, urugero http://127.0.0.1:8699. Siga harimo ubusa kugira ngo ishakishe mu buryo bwikora icyambu cy'igihe gito mu idosiye y'ibyambu bya serivisi."
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "Idosiye y'icyambu cya Serivisi y'Ububazo"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "Inzira igana kuri dosiye y'umuyoboro aho Serivisi y'Ibazamakuru ya FlowView yandika aderesi yayo.  Ikoreshwa mu gushakisha aho serivisi ikorera igihe URL ya Serivisi y'Ibazamakuru iri hejuru iri ubusa."
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "Ikimenyetso cya Serivisi y'Ububazo"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "Ibanga risangiwe ritari ngombwa.  Iyo rishyizweho, Cacti iryohereza kuri Serivisi y'Ibaza rya FlowView nk'umutwe wa \"Authorization: Bearer\" maze serivisi ikanga ubusabe bwose buhindura imiterere buterekanye ikimenyetso kimwe.  Shyira agaciro gahura mu idosiye y'igenamiterere ya serivisi (auth_token) cyangwa mu gihinduka cy'ibidukikije cya FLOWVIEW_QUERY_TOKEN.  Birasabwa igihe cyose serivisi ishobora kugerwaho n'ikindi kintu kitari porogaramu z'aho zizewe."
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "Imirongo y'ibikorwa ikorera rimwe ntarengwa"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Umubare ntarengwa w'imirongo y'ibikorwa (threads) izoherezwa gukora ibibazo by'ishakisha bya FlowView. Menya ko ushobora kugira igipimo cyo hejuru cy'umurongo 1 kuri buri gice cy'ububiko bw'amakuru, kandi ugomba kwitonda ntugirengo uremereze seriveri y'ububiko bw'amakuru yawe ukoresha imirongo y'ibikorwa myinshi ikorera icyarimwe."
+
+#: setup.php
+msgid "Disabled"
+msgstr "Byahagaritswe"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "Imirongo y'ibikorwa %d"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "Igihe ntarengwa cyo gukora"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Niba Ikibazo cy'uburyo bukorera rimwe kitarangira muri iki gihe, sohoka."
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "Igihe amakuru yabitswe by'agateganyo amara akora"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "Ni igihe kingana iki FlowView igomba kubika ibisubizo by'Ibibazo byabitswe by'agateganyo mbere yo kubisiba?"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "Amasaha %d"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "Umunsi %d"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "Iminsi %d"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "Igabanyabubiko rya MaxScale"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "Ibi bikenewe gusa niba ihuza ry'Ububiko bw'amakuru bwa Flowview bwa Sisitemu yawe ya Cacti ritarakoresha icyambu cya Read-Write Split gifite MaxScale."
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "Koresha MaxScale mu gukwirakwiza ibice by'ubusabe"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "Niba ufite serivisi nyinshi zikora nk'izikurikira kuri MaxScale, ushobora kongera umuvuduko wo gushakisha amakuru ukwirakwiza ibibazo bikorera rimwe kuri seriveri nyinshi za MariaDB ziri inyuma."
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "Umuyoboro wa MaxScale ugabanya gusoma no kwandika"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "Iki kigomba kuba icyambu cya serivisi ya Read-Write-Split-Service (readwrite) na router."
+
+#: setup.php
+msgid "Flowview"
+msgstr "Flowview"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
+

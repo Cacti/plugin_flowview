@@ -1,0 +1,2936 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-10-23 16:08-0400\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Malagasy\n"
+"Language: mg-MG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "Tsy hita ny angona manta haondrana"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "Tsy misy ny fangatahana Flowview nomena.  Alefaso miaraka amin'ny fangatahana manankery azafady."
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "Fangatahana loharano tsy manan-kery no nomena. Alefaso miaraka amin'ny fangatahana manan-kery azafady."
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "Tsy afaka mamafa ny Sivana fikorianana '%s' satria ampiasaina amin'ny Tatitra voalahatra izy io."
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "Voafafa ny Sivana fikoriana '%s'."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "Fafao"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "Nodiovina ny tahiry vonjimaika DNS. Hofenoina indray izany rehefa tonga ny firaketana."
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "Antsipirian'ny Internet Route Registry"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "Antsipirian'ny mpandraharaha nahazo alalana"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "Tsy misy antsipiriany hita"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR/Lalana"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "Laharana mahaleo tena"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "Bloky AS"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "Fitambarana AS"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "Andian-dalana"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "Sehatra"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "Andiana Sivana"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "Andiana fifandraisana"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Tambajotra"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "Router Internet"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "Ekipa Mpamaly Tranga"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "Mpandraharaha fanamarinana"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "Fikambanana"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "Andraikitra"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "Olona"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "Andian-drotera"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "Fanamarihana"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "Fanovana farany"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Loharano"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "Datin'ny fisoratana anarana"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT avy amin'ny"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "Fifandraisana mpitantana"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "Fanovana"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "Ampandreneso"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "Famaritana"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "Fifandraisana ara-teknika"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "MNT Ambany"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "Firenena"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "Mailaka momba ny fanararaotana"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "Laharan'ny Fax"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "Telefaona"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "Mailaka"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "Adiresy"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "Sata"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "Mpikambana araka ny Fef"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "Fifandraisana momba ny fanararaotana"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "Referansa MNT"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "Mpikambana"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "Fampahafantarana MNT"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "Fanomezan-dalana"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "Lalana MNT"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "Mpikambana ao amin'ny"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "Mailaka fanavaozana"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "Anarana famantarana NOC"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "Fikambanana mpanohana"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT Irt"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "MP Mpikambana"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "Zana-tsehatra"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "Azo anaovana Ping"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "Solon'anarana"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "Karazana fikambanana"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "Manondro"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "MP Fampifandraisana"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "Aondrana"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "Bangana"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "MP Voafaritra mialoha"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "Singa"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "RS Mivoaka"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "Anaran'ny fikambanana"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "Anaran'ny AS"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "Mpanoratra"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "Fampandrenesana IRT"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "Fanambarana MTD"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "Karazana AS"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "MP Sivana"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "Lalana mahazatra"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "Haben'ny fanendrena"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "Aondrana ny singa"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "RS Miditra"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "Anaran'ny tambajotra"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "DS Rdata"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "Sisintany fanambarana"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Sivana"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "MP Fanafarana"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "Fiteny"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "Rohy RESFful"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "Mpiray tambajotra"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "Fifandraisana amin'ny Faritra"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "Ampidiro"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "MP Mpiara-mampifandray"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "Natoron'i"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "Taratasy famenoana"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "Sehatra MNT"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "AS fiaviana"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "MP Fanondranana"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "Fanafenana"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "Famahanana Geo"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "Tondro Geo"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "Adiresin'ny fifandraisana"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "Fanondranana amin'ny alalan'ny"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "Olana"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "Mpizara anarana"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "Fikirakirana Ping"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "Fifandraisana"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "Manafatra"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "Sonia"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "Toerana jeografika"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "AS an-toerana"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "Manafatra amin'ny alalan'ny"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "MATOTRA: Tabilao angon-drakitra tsy fantatra %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "Fikarohana"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "Na inona na inona"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "Andininy"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "Voafaritra mialoha"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "Alefa"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "Hametraka/Hanavao sivana"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "Fafao"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "Esory ny sivana"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "Fafao tanteraka ny tahiry DNS"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "Tsy voafaritra"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "Tsy misy fidirana mifanaraka hita"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "Tsindrio ny 'Tohizo' mba hamafana ity fidirana ao amin'ny tahiry vonjimaika DNS manaraka ity."
+msgstr[1] "Tsindrio ny 'Tohizo' mba hamafana ireto fidirana ao amin'ny tahiry vonjimaika DNS manaraka rehetra ireto."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "Foano"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "Tohizo"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "Fafao ny fidirana DNS"
+msgstr[1] "Fafao ireo fidirana DNS"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "Fidirana Cache DNS Flowview"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "Voamarina"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "Tsy voamarina"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "Diovy tanteraka"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "Adiresy IP"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "Ity ny Adiresy IP an'ny fidirana Cache."
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "Anaran'ny Mpampiantrano DNS"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "Ny anarana DNS natokana ho an'ny adiresy IP."
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "Ny loharanon'ny Anaran'ny mpampiantrano DNS. Mety ho DNS, Fikarohana Raikitra na ARIN izany."
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "Voamarin'ny Arin"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "Voamarina ny fampahalalana Arin ho an'ity adiresy IP ity, na adiresy IP an'ny sehatra anatiny izy ity."
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "ID CIDR"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "Ny lakile voalohany Arin. Tsy fampahalalana ôfisialy avy amin'ny Arin ity."
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "Famantarana Rafitra Mahaleo Tena"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "Ny Arin Origin AS. Fampahalalana ôfisialy momba ny Arin AS ity."
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "Fotoana nanavaozana"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "Ity no fotoana nampidirana na nanavaozana farany ny cache DNS."
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "Tsy nisy fidirana fitadidiana DNS hita"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "Lalana Internet Flowview"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "Kinova IP"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "IPv4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "Lalana"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "Ity no Lalan'ny Internet navoaka."
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "Laharan'ny AS"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "Ny laharan'ny rafitra mahaleotena (AS) ho an'ny lalana."
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "Famaritana ny lalana"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "Ny famaritana voarakitry ny mpitazona ny lalana."
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "Ny tahiry angon-drakitra loharano ampiasaina hamoahana ny lalana."
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "Karakarain'i"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "Ny mpamatsy Internet izay mikojakoja ny lalana ho an'ny mpanjifa."
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "Ny fotoana farany nanovana ny fampahalalana momba ity lalana ity."
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "Tsy misy lalana mifanaraka hita"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "Alefa"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "Ajanony"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "Anaran'ny mpihaino"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "Anaran'ny Fitaovana haseho."
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "Fomba fanangonana"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "Misy fomba fanangonana roa tohanana: ny voalohany dia mampiasa ny rindrankajy flow-tools taloha ary ny faharoa dia mampiasa ny mpizara flow stream miorina amin'ny PHP an'ny Cacti ihany."
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "Afatory amin'ny adiresy"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "Raha manana Adiresy IP maromaro ny lohamilina Cacti dia afaka mamaritra seha-pifandraisana manokana ianao. Avelao ho 0.0.0.0 ho an'ny seha-pifandraisana voalohany."
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "Elanelan'ny Mpampiantrano ekena"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "Adiresy IP an'ny Fitaovana mahazo mandefa any amin'ity mpanangona flow ity. Avelao ho 0.0.0.0 raha ho an'ny Mpampiantrano rehetra. Mariho fa saro-pady ny PHP amin'izay avelany. Tohanana ny rafitra CIDR ary koa ny rafitra elanelana, ohatra 192.168.1.0 na 192.168.1.0/24. Raha te-hampiasa adiresy IP manokana ianao dia saraho amin'ny faingo izy ireo."
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Seranana"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "Seranana hohenoin'ity mpanangona ity."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Protokoly"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "Ny prôtokôly IP ampiasaina ho an'ity mpihaino ity."
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "Protokoly UDP"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "Mavitrika"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "Raha voamarika dia hatomboka ny serivisy Listener ary hiandry ny angona miditra."
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "Tsy nahitana Modely Flow ho an'ny Fitaovana ID:%s sy Modely ID:%s"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Tsindrio ny 'Tohizo' mba hamafana ireto Mpihaino NetFlow manaraka ireto.  Aorian'izany dia hanandrana hamerina handefa ny serivisy Flow-Capture ny Cacti."
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Tsindrio ny 'Tohizo' mba hampavitrika ireto Mpihaino NetFlow manaraka ireto.  Aorian'izany dia hanandrana hamerina handefa ny serivisy Flow-Capture ny Cacti."
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "Tsy maintsy misafidy Mpihaino iray farafahakeliny ianao."
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "Ny seranana mpihaino dia tsy maintsy sanda isa eo anelanelan'ny 1 sy 65535."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "Nahomby ny fitehirizana.  Voatahiry ny Mpihaino Flowview, ary natomboka indray ny tolotra."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "Nahomby ny fitehirizana.  Voatahiry ny Mpihaino Flowview.  Na izany aza, tsy mandeha ny tolotra flow-capture."
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "Mpihaino [ovao: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "Mpihaino [vaovao]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "Anarana"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "Kinova"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "Modely"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "Fanavaozana farany"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "Manavao isaky ny 5 minitra ny fikorianan'angona mavitrika"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "Tsy misy fikorianana miditra hita"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "Modely hitan'ny mpihaino"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "Adiresy Ex"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "Rehetra"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "Modely"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "ID môdely"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "Anaran'ny saha"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "Tohanana"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "ID-n'ny saha"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "Karazan-tsaha"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "Halava"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "Esory amin'ny fonosana"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "Tsy misy Modely fikorianana miditra hita"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "Mpihaino FlowView"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "Mpihaino"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "Fomba"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "Adiresy ifamatorana"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "Ekena avy amin'ny"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "Fihainoana voamarika"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "Ny fiarovana ny seranana hita marina teo amin'ny seranan'ny mpihaino."
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "Asa miandry"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "Ny haben'ny tahiry miandry UDP amin'ny oktety."
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "Fikorianana"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "Ny isan'ny fifandraisana miditra avy amin'ny loharano samihafa."
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "Kinovan'ny fikorianana"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "Ireo dikan-teny Traffic Flow arahi-maso."
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "Ny fotoana fanavaozana ambony indrindra avy amin'ny riaka rehetra angonina. Havaozina isaky ny 5 minitra ity sanda ity."
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "Tsy misy"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "Tsy misy fifandraisana"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "Tsy misy"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "Cacti"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "Tsy misy mpihaino Flowview"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "Ampivaingano"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "Tsy azo fantarina ny fanalahidy tahirin'ireo Sivana, ka tsy nisy voafafa."
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "Nanesotra sombiny voatahiry %s izay tsy nifanaraka tamin'ny Sivana."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "Natomboka tany ambadika ny fampivainganana Sivana %d.  Sivana %d no efa eo am-pampivainganana.  Voarakitra ao amin'ny tatitr'asa Cacti ny valiny."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "Natomboka tany ambadika ny fampivainganana Sivana %d.  Voarakitra ao amin'ny tatitr'asa Cacti ny valiny."
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "Efa ao anatin'ny fanatontosana ny Sivana voafidy. Andramo indray azafady rehefa vita izany."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "Tsindrio ny 'Tohizo' mba hamafa ireto Sivana manaraka ireto sy ny Sivana rehetra mifanaraka aminy."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "Tsindrio ny 'Tohizo' mba hanaovana ho Tsy mavitrika ireto Sivana manaraka ireto sy izay Sivana mifanaraka rehetra."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "Tsindrio ny 'Tohizo' mba hampavitrika ireto Sivana manaraka ireto."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "Tsindrio ny 'Tohizo' mba hamokatra mialoha ireto Sivana manaraka ireto any ambadika, miaraka amin'ny NAT mandeha sy maty, ho an'ny angon'ny fikorianana manontolo. Hodiavina ireo fizarazarana efa vita sy marina. Mety haharitra ela izany raha lehibe ny tahirin-kevitra. Hodiavina ny Sivana izay efa eo am-pamokarana mialoha."
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "Tsy maintsy misafidy Sivana iray farafahakeliny ianao."
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "Sivana FlowView"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "Sivana FlowView [ Manampy Fitaovana alohan'ny Sivana ]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "Sivana"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "Esory"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "Esory ireo ampahany voatahiry ao anaty cache izay tsy mifanaraka amin'ny Sivana na iray aza"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "Anaran'ny sivana"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "ID"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "Fampivainganana"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "Ny fampivainganana dia mikajy mialoha ny valin'ny Sivana iray ho an'ny fizarana fikorianana tsirairay, miaraka amin'ny NAT mandeha sy maty, ary mitahiry izany ao amin'ny fitadidiana vonjimaikan'ny Parallel Query, mba hisokatra haingana ny tatitra momba ny angona taloha.  Ampivainganina ho azy ireo fizarana vaovao raha vao mijanona tsy mandray fikorianana intsony.  Ny hoe Ilaina dia midika fa mbola tsy nampivainganina ireo fizarana nihodina, ny hoe Mandeha dia midika fa eo am-pampivainganana, ary ny hoe Ara-potoana dia midika fa efa nampivainganina daholo ny fizarana nihodina tsirairay.  Ny hoe Mandeha: N dia manondro ny isan'ny fangatahan'ny Sivana miasa amin'izao fotoana izao.  Tsy ampivainganina ny fizarana mbola mandray fikorianana, ka tsy isaina izany."
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "Mpihaino"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Karazana tatitra"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "Fizarana NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "Ny isan'ny fizarana amin'ity Sivana ity izay voatahiry ao amin'ny fitadidiana vonjimaika Parallel Query miaraka amin'ny NAT mavitrika."
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "Shards tsy NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "Ny isan'ny fizarana amin'ity Sivana ity izay voatahiry ao amin'ny fitadidiana vonjimaika Parallel Query miaraka amin'ny NAT tsy mavitrika."
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "Fizarana"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "Ny fitambaran'ny isan'ny fizarana fikorianan'ny angona, izay isan'ny ampahany be indrindra azon'ny Sivana tahirizina vonjimaika miaraka na tsy misy NAT."
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Saha fandaharana"
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "Famaritana"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "Tsy azo avahana amin'ny hafa ireo ampahan-tahirin'ny Sivana, satria tsy azo fantarina ny fanalahidy tahirin'ny Sivana iray."
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "Tsy azo fantarina ny fanalahidy tahirin'ireo Sivana, ka tsy misy azo fafana ankehitriny. Hamarino fa manana Tatitra manan-kery ny Sivana tsirairay."
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "Sombiny anaty cache: %s mifanaraka amin'ny Sivana.  %s tsy mifanaraka amin'ny Sivana na iray aza, izay esorin'ny Prune."
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "Manala %s sombiny voatahiry anaty cache tsy mifanaraka amin'ny Sivana na iray aza ity, ho an'ny Sivana rehetra sy ny mpampiasa rehetra. Avy amin'ny Sivana novana na nofafana izy ireo, ary avy amin'ny tatitra manana fandrindrana novana tao amin'ny pejin'ny tatitra. Ny %s sombiny voatahiry anaty cache an'ny Sivana dia tazonina. Tsy azo averina intsony ity."
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "Mifanaraka amin'ny Sivana ny sombin-tahiry voatahiry rehetra. Tsy misy na inona na inona hofafana."
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "Esory ireo sombiny voatahiry"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "Akatony"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "Alefaso izao"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "Isan'ora"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Isaky ny %d ora"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "Isan'andro"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "Isan-kerinandro"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks, 2"
+msgstr "Isaky ny %d herinandro, 2"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "Isam-bolana"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "Fikirana ankapobeny"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "Lohateny"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "Fandaharam-potoana vaovao"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "Ampidiro ny Lohatenin'ny Tatitra ho an'ny Fandaharam-potoana FlowView."
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "Na halefa ity Fikarohana NetFlow ity na tsia."
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "Anaran'ny fangatahana halefa."
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "Fandrindrana ny fandefasana"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "Elanelam-potoana fandefasana"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "Impiry no handefasana ity Tatitra NetFlow ity?"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "Fotoana Fototra Voalahatra"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "Ity ny daty / ora voalohany handefasana ny mailaka NetFlow Scan. Ny Mailaka ho avy rehetra dia hokajiana avy amin'ity ora ity miampy ny elanelam-potoana omena etsy ambony."
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "Faharetan'ny fiasana farany ambony azo ekena"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "Mandra-pahoviana no tokony havela handeha ny tatitra alohan'ny hivoahany?"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minitra"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minitra"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "Fandrindrana Mailaka taloha"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "Adiresy mailaka"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "Adiresy mailaka (sarahan'ny faingo) handefasana ity fitiliana NetFlow ity."
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "Rakitra endrika hampiasaina"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Safidio ny rakitra fonony html namboarina sy CSS hampiasaina. Ity rakitra ity dia misy html sy CSS hamonosana ny tatitrao. Raha mihoatra noho ny CSS tsotra no ao anatiny dia mila mametraka marika manokana <REPORT> ao anatin'ny rakitra ianao. Io marika endrika io dia hosoloina ny votoatin'ny tatitra. Ireo rakitra ireo dia ao amin'ny lahatahiry 'formats'."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "Fandrindrana ny lisitra fampandrenesana"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "Lisitry ny Fampandrenesana"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "Raha tafapetraka ny Thold Plugin, dia azonao atao ny misafidy Lisitry ny Fampahafantarana"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "Ho tonga ny Tatitra rehefa vita."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Tsindrio ny 'Tohizo' mba hamafa ireto Fandaharam-potoana manaraka ireto."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Tsindrio ny 'Tohizo' mba handefa ireto Fandaharam-potoana manaraka ireto izao."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Tsindrio ny 'Tohizo' mba hanaovana ho Tsy mavitrika ireto Fandaharam-potoana manaraka ireto."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Tsindrio ny 'Tohizo' mba hampavitrika ireto Fandaharam-potoana manaraka ireto."
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "Tsy maintsy misafidy fandaharam-potoana iray farafahakeliny ianao."
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "Tsy hita ny angona manta ho an'ny Tatitra manana ID %s"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "Tsy maintsy mamaritra Mailaka, Lisitry ny Fampahafantarana, na izy roa ianao!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Tatitra Voalahatra: [ovao: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Tantaran'ny Tatitra Voalahatra: [ovao: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "Tatitra Voalahatra: [vaovao]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "Fandaharam-potoana"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "Lohatenin'ny tatitra"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "Famantarana"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "Karazana vokatra"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "Nalefan'i"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "Daty nandefasana"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "Faharetan'ny fampandehanana"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "Alaivo ny angona"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "Tatitra firaketana"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [Hijery ny tatitra manta]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [Hijery ny tatitra miaraka amin'ny CSS]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "Fandefasana tanana"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "Voalahatra"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s Segondra"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "Mpifidy daty fanombohana"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "Fandaharam-potoana FlowView"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "Fandaharam-potoana FlowView [ Manampy Fitaovana alohan'ny Fandaharam-potoana ]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "Elanelana"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "Nalefa farany"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "Fandefasana manaraka"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "Mailaka/Lisitra"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "Fandefasana voarakitra"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Tsia"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Eny"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Misafidiana Tatitra"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Famintinana"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Sehatra fototra loharano"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Sehatra faka fiafarana"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Sehatra fototra loharano/tanjona"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "Seranana iantefan'ny UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "Seranana loharanon'ny UDP/TCP"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "Seranana UDP/TCP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "IP loharano"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "IP fiafarana"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "IP loharano/tanjona"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "IP loharano na tanjona"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "Protokola IP"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Fifandraisana fidirana"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Fitaovana ifandraisana mivoaka"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Fifandraisana fidirana/fivoahana"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "AS loharano"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "AS fiafarana"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "AS loharano/tanjona"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Tovona loharano"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Tovona fiafarana"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Tovona loharano/tanjona"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Fotoanan'ny fikoriana"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "IP sy Port loharano/tanjona"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "Laharan'ny AS"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "Tsanganana 132"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Asehoy ny fakan-tahaka IP Accounting"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Izay ampahany ao anatin'ny elanelana (miadana)"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Ora Fiafarana ao anatin'ny elanelana (haingana)"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Ora fanombohana ao anatin'ny elanelana (haingana)"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Ao anatin'ny elanelana tanteraka (miadana)"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Avereno ny tsipika rehetra"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "%d ambony indrindra"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Tsy misy fetra"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s Oktety"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Sehatra loharano"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Fikoriana"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Fonosan'angona"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Sehatra fiafarana"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Port loharano"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Port fiafarana"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "IP fiafarana"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "IF loharano"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "IF fiafarana"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Tovona fiafarana"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Fotoana fanombohana"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Ora Fiafarana"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Mavitrika"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/Pk"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Mari-pamantarana"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Fiafarana"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d Piksela"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Sivana ankapobeny"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Ny Sivana Voatahiry haseho."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Sivana vaovao"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Ny mpihaino ampiasaina ho an'ny Sivana."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "ID-n'ny Modely fikoriana"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "Ny ID-n'ny Modely Flow ho an'ny Flow v9 sy IPFIX ihany. Mariho fa mety ho samy hafa ny ID-n'ny Modely arakaraka ny mpanamboatra."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Adiresin'ny fikorianana"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Ny Adiresy IP na Anaran'ny Mpampiantrano an'ny Stream avy amin'ny lisitry ny stream voasoratra anarana."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Fandrindrana mialoha"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Raha mifototra amin'ny Elanelam-potoana voafaritra mialoha ity Sivana ity, dia fidio eto izany."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Fepetra antsipiriany amin'ny sivana"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Ny Karazana Tatitra ampiasaina voafaritra mialoha ho an'ity Sivana ity rehefa mamorona Tatitra."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Voatonta"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Antontan'isa"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Tatitra antontan'isa"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Ny karazana fampisehoana tatitra ampiasaina amin'ny fomba mahazatra ho an'ity Sivana ity rehefa mamorona tatitra."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Tatitra voatonta"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Ny Karazana Tatitra Avoaka ampiasaina voafaritra mialoha ho an'ity Sivana ity rehefa mamorona Tatitra Avoaka."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Fitsipiky ny elanelana"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Fero araka ireto fitsipika sivana ara-potoana ireto ny angona voasivana."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Avadiho ny IP"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Avadiho ho anaran-tsehatra ireo adiresy IP."
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Ny Saha Fandaharana voafaritra mialoha ho an'ny Sivana. Hampiharina amin'ny Tatitra Voalahatra rehetra ity fandrindrana ity."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Andalana farany ambony"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Ny isan'ny andalana farany ambony omena ao amin'ny Sivana. Hampiharina amin'ny Tatitra voalahatra rehetra ity fandrindrana ity."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Bytes farafahakeliny"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Ny fitambaran'ny Bytes farany ambany raisina ho an'ny Sivana. Hodian-tsy hita izay fitambaran'ny flow latsaky io isan'ny bytes io."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Safidin'ny tabilao sary"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Karazana kisary"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Ny karazana Kisary aseho amin'ny fomba mahazatra. Anisan'izany ny Bar, Pie, ary Treemap."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Kisary bara"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Kisary boribory"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Kisary sarin-kazo"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Haavon'ny grafika"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "Ny haavon'ny Kisary ampiasaina amin'ny fomba mahazatra."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "Ampiasao ny angona NAT"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "Asehoy ao amin'ny vokatra tatitra ny adiresy IP Loharano/Tanjona sy ny anarana DNS taorian'ny NAT (nadika) fa tsy ireo sanda tany am-boalohany talohan'ny NAT."
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Takelaky ny tabilao"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Tokony haseho ho lasitra ve ny takelaka Tabilao."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Takelaka Bytes"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Tokony haseho ho lasitra ve ny takelaka Bytes."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Takelaka fonosan'angona"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Tokony haseho ho lasitra ve ny takelaka Packets."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Takelaka Fikoriana"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Tokony haseho ho lasitra ve ny takelaka Flows."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Sivana protokoly"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Protokoly"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Misafidiana ny protocole manokana ho an'ny Sivana."
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "Protokoly rehetra"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "Marika TCP (Flags)"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "Ny Saina TCP hokarohina ao amin'ny Sivana. Azo atao lisitra misaraka amin'ny faingo ireo Saina TCP ireo"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "Saha TOS"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "Ny Sahan'ny TOS hokarohina ao amin'ny Sivana. Azo atao lisitra misaraka amin'ny faingo ireo Sahan'ny TOS ireo"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Sivana amin'ny IP loharano voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo adiresy IPv4 na IPv6 nosarahina tamin'ny faingo izany, na lisitr'ireo elanelan'adiresy IPv4 na IPv6 amin'ny endrika CIDR nosarahina tamin'ny faingo (oh. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Ireo Port loharano"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Sivana amin'ny Seranana loharano voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo Seranana loharano nosarahina tamin'ny faingo izany."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Interface loharano"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Sivana amin'ny Interface loharano voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo Interface loharano nosarahina tamin'ny faingo izany"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Sivana amin'ny AS tanjona voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo AS loharano nosarahina tamin'ny faingo izany"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Sivana amin'ny IP tanjona voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo adiresy IPv4 na IPv6 nosarahina tamin'ny faingo izany, na lisitr'ireo elanelan'adiresy IPv4 na IPv6 amin'ny endrika CIDR nosarahina tamin'ny faingo (oh. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Ireo Port fiafarana"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Sivana amin'ny Seranana tanjona voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo Seranana tanjona nosarahina tamin'ny faingo izany."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Interface fiafarana"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Sivana amin'ny Interface tanjona voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo Interface tanjona nosarahina tamin'ny faingo izany."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "AS fiafarana"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Sivana amin'ny AS tanjona voafantina ao amin'ny Sivana.  Mety ho lisitr'ireo AS tanjona nosarahina tamin'ny faingo izany"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "IP loharano aorian'ny NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Sivana amin'ny IP loharano nadika (taorian'ny NAT) voarakitra ao amin'ny Sivana.  Mety ho lisitr'ireo adiresy IPv4 na IPv6 nosarahina tamin'ny faingo izany, na lisitr'ireo elanelan'adiresy IPv4 na IPv6 amin'ny endrika CIDR nosarahina tamin'ny faingo (oh. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "Seranana loharano aorian'ny NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Sivana amin'ny Seranana loharano nadika (taorian'ny NAT) ao amin'ny Sivana.  Mety ho lisitr'ireo Seranana nosarahina tamin'ny faingo izany."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "IP tanjona aorian'ny NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Sivana amin'ny IP tanjona nadika (taorian'ny NAT) voarakitra ao amin'ny Sivana.  Mety ho lisitr'ireo adiresy IPv4 na IPv6 nosarahina tamin'ny faingo izany, na lisitr'ireo elanelan'adiresy IPv4 na IPv6 amin'ny endrika CIDR nosarahina tamin'ny faingo (oh. 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "Seranana tanjona aorian'ny NAT"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Sivana amin'ny Seranana tanjona nadika (taorian'ny NAT) ao amin'ny Sivana.  Mety ho lisitr'ireo Seranana nosarahina tamin'ny faingo izany."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "Tahiry vonjimaika DNS"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Lalana"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Laharana mahaleo tena"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "Bloky AS"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "Fitambarana AS"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Andian-dalana"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Sehatra"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Andiana Sivana"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Andiana fifandraisana"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Ireo Router Internet"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Ekipa Mpamaly Tranga"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Mpandraharaha fanamarinana"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Fikambanana"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Andraikitra"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Olona"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "Voalahatra handeha ny Tatitra '%1$s' avy amin'ny loharano %2$s manana id %3$s!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "Tsy voalahatra handeha ny Tatitra '%1$s' avy amin'ny loharano %2$s manana id %3$s noho ny hadisoana!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "Ankapobeny"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "Firaketana"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "Misafidiana Karazan-tatitra aloha"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Sivana: [ovao: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "Sivana: [vaovao]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "Vokatra anaty cache voakasika"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "Ireo fanovana ireo dia misy fiantraikany amin'ny vokatra voatahiry anatin'ny cache ho an'ity Sivana ity. Ny fitahirizana azy dia manomboka fananganana any ambadika hanamboarana azy ireo indray. Tsindrio ny 'Tohizo' hitahirizana ny Sivana, na 'Foano' hanohizana ny fanovana azy."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Misy fiantraikany amin'ny vokatra voatahiriny ny fanovana natao tamin'ity Sivana ity, ka natomboka any ambadika ny fanatanterahana azy. Aseho ao amin'ny pejy Sivana ny fandrosoany ary taterina ao amin'ny diarin'i Cacti ny vokany."
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Sivana tsy voafaritra [ Mifidiana Sivana hahazoana antsipiriany ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Tatitra antontan'isa: %s [ Tafiditra ao ny fanoloana araka ny voafaritra eto ambany ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Tatitra voatonta: %s [ Tafiditra ao ny fanoloana voafaritra eto ambany ]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "Safidio ny Sivana"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "Ampiharo ny Sivana"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "Esory ny Sivana"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "Ovao"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "Ovao ny Sivana Flow"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "Mamorona Sivana Flow vaovao"
+
+#: includes/functions.php
+msgid "New"
+msgstr "Vaovao"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "Tehirizo"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "Tehirizo ny Sivana Flow"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "Tehirizo ho"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Tehirizo ho Sivana vaovao ny Sivana Flow efa misy"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "Ovao anarana"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "Ovao ny anaran'ny Sivana fikorianana"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "Fafao ny sivana Flow"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "Tatitra"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "Antontan'isa: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "Voatonta: %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "Misafidiana Sivana aloha"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "Tsipika"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "Tsy ampidirina"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "Santionany ambony indrindra"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "Santionany %d ambony indrindra"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "Okteta"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "Asehoy ny sehatra (Domains) ihany amin'ireo kisary etsy ambany"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "Sehatra/Anaran'ny mpampiantrano ihany"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "Asehoy ny anarana IP/DNS taorian'ny NAT (nadika) fa tsy ireo sanda tany am-boalohany"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "Elanelam-potoana"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "Manokana"
+
+#: includes/functions.php
+msgid "From"
+msgstr "Manomboka ny"
+
+#: includes/functions.php
+msgid "To"
+msgstr "Hatramin'ny"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "Mpifidy daty fiafarana"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "Ahemotra ny fotoana"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "Farito ny elanelam-potoana famindrana"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "Aroso mandroso ny fotoana"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "Kisary"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "Bara"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "Boribory"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "Sarin-kazo"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "Haavo"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "Asehoy/Afeno"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "Tabilao"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "Aondrana ny angona manta"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "Tehirizo ny Sivana Flow"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "Anarana vaovao"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "Fafao ny Sivana Flow"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "Raha hamafa ity Sivana Flow ity, tsindrio ny Tohizo. Raha ampiasaina amin'ny Tatitra voalahatra ny Sivana Flow dia hosakanana ny asa."
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Kisarin'ny fitsinjarana Bytes %s ambony indrindra"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "Kisary boribory %s ambony indrindra ho an'ny Oktety"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Kisary sarin-kazo %s ambony indrindra ho an'ny Oktety"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Kisarin'ny fitsinjarana Packets %s ambony indrindra"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "Kisary boribory %s ambony indrindra ho an'ny Fonosana"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Kisary sarin-kazo %s ambony indrindra ho an'ny Fonosana"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Kisarin'ny fitsinjarana Flows %s ambony indrindra"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Kisary boribory %s ambony indrindra ho an'ny Fikoriana"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Kisary sarin-kazo %s ambony indrindra ho an'ny Fikoriana"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "Ovao anarana ny fandrindrana"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "Voatahiry ny Fandrindrana Sivana. Natomboka any ambadika ny fanatanterahana ity Sivana ity."
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "Voatahiry ny fikirakirana sivana"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Mpanjifa/Manokana (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Tsy fantatra (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "Netflow - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Sivana zana-tambajotra: %s dia tsy endrika CIDR manan-kery"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "Sivana IP: Tsy adiresy IP manankery ny %s"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "tsy voavaha"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d Okteta"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d Oktety"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "Tsy fantatra ny Tatitra Antontan'isa %s. Sokafy ny tatitra lesoka ao amin'ny GitHub azafady"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "Tsy fantatra ny Tatitra Avoaka %s. Sokafy ny tatitra lesoka ao amin'ny GitHub azafady"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "DNS loharano"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "DNS fototra loharano"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "DNS fiafarana"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "DNS faka fiafarana"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "DNS"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "DNS fototra"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "Port fiafarana"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "IF fiafarana"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "Tovona fiafarana"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "Karazana serivisy"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "Bytes/Pakety"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "Mbola tsy tanteraka, misy NAT: %s, tsy misy NAT: %s."
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "Efa voaavao"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "Mandeha"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "Ilaina"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "Ny isan'ny fangatahana amin'ity Sivana ity izay mandeha amin'izao fotoana izao."
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "Miaraka amin'ny NAT: %d, tsy misy NAT: %d."
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "Mandeha: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "HADISOANA: Tsy vita tao anatin'ny Fotoana fandehanana ambony indrindra %d segondra ny Fangatahana mirazotra. Hamarino ny Fotoana fandehanana ambony indrindra ao amin'ny Fandrindrana FlowView, ary hamarino fa tsy sahirana amin'ny asa hafa toy ny ALTER TABLE ny tahiry angona."
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Tapitra ny fe-potoana ho an'ny Fangatahana Mifanindry. Mifandraisa amin'ny mpitantana anao azafady"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Boleana: %s, Isa: %s, Hex: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "Fahatarana ambany"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "Tahan'ny fifamoivoizana"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "Fahatokiana"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "Vidiny farafahakeliny"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "Fifehezana tambajotra"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "Fanaraha-maso Internet"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "ECP henjana"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "Mihoatra ny Tselatra"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "Tselatra"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "Avy hatrany"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "Laharam-pahamehana"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "Fomba mahazatra"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "Antontan'isa famintinana"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "Fizaran'ny haben'ny fonosana IP (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Fizaran'ny fonosan'angona isaky ny fikorianana (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Fitsinjaran'ny okteta isaky ny fikorianana (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Fizaran'ny fotoanan'ny fikoriana (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Tsy maintsy misafidy Tatitra Statistika na Tatitra Natonta ianao!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Tsy maintsy misafidy Tatitra Statistika na Tatitra Natonta iray ihany ianao (fa tsy izy roa)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Daty tsy manan-kery, ny Daty/Ora famaranana dia alohan'ny Daty/Ora fanombohana!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP tsy manan-kery ho an'ny Adiresy Loharano!<br>(Tsy maintsy amin'ny endrika '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Zana-tambajotra tsy manan-kery ho an'ny Adiresy Loharano!<br>(Tsy maintsy amin'ny endrika '192.168.0.1/255.255.255.0' na '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "IP tsy manan-kery ho an'ny Adiresy Aleha!<br>(Tsy maintsy amin'ny endrika '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Zana-tambajotra tsy manan-kery ho an'ny Adiresy Aleha!<br>(Tsy maintsy amin'ny endrika '192.168.0.1/255.255.255.0' na '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "Sandany tsy manan-kery ho an'ny Fifandraisana Loharano!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Sandany tsy manan-kery ho an'ny Seranana Loharano! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Sandany tsy manan-kery ho an'ny AS Loharano! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "Sandany tsy manan-kery ho an'ny Fifandraisana Aleha!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Sandany tsy manan-kery ho an'ny Seranana Aleha! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Sandany tsy manan-kery ho an'ny AS Aleha! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Sandany tsy manan-kery ho an'ny Protokol! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Sandany tsy manan-kery ho an'ny Saina TCP! (ohatra: 0x1b na 0x1b/SA na SA/SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Sandany tsy manan-kery ho an'ny Octets famerana!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Sandany tsy manan-kery ho an'ny Andalana famerana!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "Ny kisary FlowView ho an'ny %s dia karazana %s"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "Tohana (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "Tsy tohanana"
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (Haingana, tsy voaaro amin'ny fahasimbana)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (Haingana, Voaro amin'ny fahasimbana)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (Miadana, Fahafahana mifanindry avo)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "Mpampiasa NetFlow"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "Mpitantana NetFlow"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Azafady, ovay anarana ny iray amin'ireo rakitra config.php.dist na config_local.php.dist ao amin'ny lahatahiry flowview, ary ovay ny fandrindrana ny angon-drakitrao alohan'ny hametrahana azy."
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Ampahafantarina ianao fa eo am-panavaozana ao ambadika ny tabilaon'ny plugin Flowview.  Mety haka fotoana izany. Jereo ny diarin'i Cacti raha mila fanazavana fanampiny"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "Voafafa ny Sivana"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "Nohavaozina ny Sivana"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "Fanafarana/Fanondranana"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "Angon-drakitra"
+
+#: setup.php
+msgid "Normal User"
+msgstr "Mpampiasa tsotra"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Fitantanana ny rafitra"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "Mpijery fikoriana"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "Takelaka fanaraha-maso"
+
+#: setup.php
+msgid "(save)"
+msgstr "(tehirizo)"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(ovao)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "(hetsika)"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "%d Fizotra"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "%d Dingana"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "Tatitra ny dingana miaraka mandeha (FlowView ihany)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "Misafidiana ny isa fara fahabetsaky ny fizotran'ny tatitra afaka mandeha miaraka amin'ny fotoana iray."
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Fandrindrana ny proxy Internet"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Adiresin'ny proxy Internet"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Ho an'ny sampan-draharaha fototry ny Cacti na ireo Tovana izay mila fidirana amin'ny Internet, ampidiro eto ny lohamilina proxy sy ny seranana araka ity endrika ity: IP:PORT. Ohatra 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Mpampiasa ny proxy Internet"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Raha mitaky anaran'ny mpampiasa ny proxy Internet-nao dia ampidiro eto izany."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Tenimiafin'ny proxy Internet"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Raha mitaky tenimiafina ny proxy Internet-nao dia ampidiro eto izany."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "Famahana anarana"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "Famahana ny anaran'ny mpampiantrano"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Ny fomba tianao hamahana ny anaran'ny mpampiantrano."
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "Ampiasao ny mpizara eto an-toerana"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Ampiasao ny mpizara DNS eo ambanin'ny Mailaka/Tatitra/DNS"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "Aza mamaha DNS"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "Alaivo isan'andro ny Rejistra Internet"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "Raha liana amin'ny vaovao azon'ny besinimaro momba ny aterineto manontolo ianao, dia azonao safidiana ity safidy ity. Hifandray amin'ireo Rejistiran'ny Aterineto manerana izao tontolo izao indray mandeha isan'andro ny Cacti ary hanamarina ny fiovana eo amin'ny làlana ho an'ny aterineto manontolo ka hampiditra izany vaovao izany ao amin'ny Cacti. Mariho fa hiteraka tahiry angona lehibe mihoatra ny 3GBytes izany."
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "Anaran-tsehatra an-toerana"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "Ho an'ireo adiresy IPv4 ao amin'ny tambajotra eo an-toerana izay tsy voavaha eo an-toerana, ampio ity tovana ity amin'ny adiresy IP azo."
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "Elanelan'ny IP an-toerana"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Omeo ny elanelan'ny adiresy IP IPv4 ho an'ny tambajotra eo an-toerana ho an'ireo mpampiantrano izay mety tsy voasoratra ao amin'ny DNS. Ireo mpampiantrano ireo dia hampifandraisina amin'ny Anaran-tsehatra eo an-toerana etsy ambony. Natokana kokoa ho an'ny mpampiasa an-trano izany. Azonao ampiasaina na ny endrika CIDR na ny tsy CIDR. Ohatra: 192.168.11.0 na 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "Ampiasao ny CIDR na Tsy CIDR"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Ampiasao ny Arin hikarohana Domains sy laharana AS"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Betsaka amin'ireo sampan-draharaha mpanangona angona ao amin'ny Big Tech no tia manafina ny fananany sehatra (domain) mba hanaronana ny fanangonany ny mombamomba anao manokana.  Raha mampanahy anao izany ary afaka mifandray amin'ny Internet ny fametrahana Cacti anao, dia azonao ampiasaina ny Arin hanesorana ny sarona amin'ireo orinasa Big Tech ireo."
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "Mpampiantrano mpamatsy Whois"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Omeo ny anaran'ny mpampiantrano hamahana ny antso whois azafady.  Raha tsy foana izany, dia tsy maintsy ao amin'ny lalan'ny rafitrao ny programa whois."
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "Lalan'ny rakitra azo alefa Whois"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Omeo ny lalan'ny programa 'whois' azafady.  Ny programa 'whois' dia hampiasaina hitadiavana fampahalalana AS manampy ny Arin."
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "Ampidiro ny lalan'ny rakitra binera"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "Fandrindrana ny fitsirihana lalina ny Kisary"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "Sivana fikarohana mahazatra ho an'ny antsipirian'ny Kisary"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "Safidio ny Sivana fikarohana Flowview efa misy hampiasaina amin'ny fikarohana lalina amin'ny Kisary."
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "Fitahirizana angona sy famokarana tatitra"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "Politika fitahirizana angona"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Ny faharetan'ny fotoana hitazonan'i Cacti ireo tabilao Flow voazarazara."
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "%d Herinandro"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d Herinandro"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d Volana"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d Volana"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d taona"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "Rafitra fizarana angon-drakitra"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Arakaraka ny isan'ny flow isan-minitra dia mety hila tabilao bebe kokoa isan'andro ianao."
+
+#: setup.php
+msgid "Daily"
+msgstr "Isan'andro"
+
+#: setup.php
+msgid "Hourly"
+msgstr "Isan'ora"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "Motera fitahirizana ho an'ny tabilao manta"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Ny Aria Engine dia mety tsara ho an'ny rehetra afa-tsy ny tabilao manta Live. Ny tabilao manta Live dia ho InnoDB foana. Safidio izay tianao."
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "Fangatahana mifanindran-dalana"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "Rafitra fototry ny fangatahana mifanindran-dalana"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "Safidio ny fomba fanatanterahana ireo fangatahana FlowView mifanindry. Ny Legacy PHP Runner dia manokatra dingana flowview_runner.php isaky ny fangatahana sy fizarana. Ny FlowView Query Service dia mandefa io asa map-reduce io ihany any amin'ny serivisy Go maharitra amin'ny alalan'ny localhost, ka misoroka ny fahatarana amin'ny fanombohana dingana isaky ny fangatahana sy ny fanontaniana ny tahirin-kevitra. Mitaky ny fametrahana sy fampandehanana ny serivisy flowview-query (jereo ny plugins/flowview/service/flowview-query)."
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "Mpampandeha PHP taloha"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "Serivisy fangatahana FlowView"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "URL an'ny serivisy fangatahana"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "URL fototry ny Sampandraharaha Fanontaniana FlowView, ohatra http://127.0.0.1:8699.  Avelao ho foana mba hikarohana ho azy ny seranana vonjimaika avy amin'ny rakitra seranan'ny sampandraharaha."
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "Rakitry ny seranan'ny serivisy fangatahana"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "Lalana mankany amin'ny rakitra seranana anoratan'ny FlowView Query Service ny adiresiny mifamatotra.  Ampiasaina hahitana ny teboka fiafaran'ny serivisy rehefa foana ny URL-n'ny Query Service etsy ambony."
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "Mariky ny serivisy fangatahana"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "Tsiambaratelo iombonana safidy.  Rehefa voafaritra, dia alefan'ny Cacti any amin'ny FlowView Query Service ho lohateny \"Authorization: Bearer\" izany ary lavin'ny serivisy ny fangatahana manova sata izay tsy manolotra ny mari-pamantarana mitovy.  Apetraho ao amin'ny rakitra fikandranan'ny serivisy (auth_token) na ny miovaova tontolo FLOWVIEW_QUERY_TOKEN ny sanda mifanandrify.  Atoro mafy isaky ny azo idiran'ny zavatra hafa ankoatra ny fizotry ny rafitra eo an-toerana azo itokisana ilay serivisy."
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "Kofehy miaraka miasa farany ambony"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Ny isan'ny kofehy (threads) ambony indrindra halefa hampandeha ny fangatahana FlowView. Mariho fa afaka manana kofehy 1 farafahabetsany isaky ny fizaran'angon-drakitra ianao, ary tokony hitandrina mba tsy havesatra loatra ny lohamilina angon-drakitrao noho ny fananana kofehy maro loatra mandeha miaraka."
+
+#: setup.php
+msgid "Disabled"
+msgstr "Tsy mavitrika"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "%d zotra"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "Faharetan'ny fiasana farany ambony"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Raha tsy vita ao anatin'izao fotoana izao ny Fangatahana Mifanindry, dia mialà."
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "Fotoana fahaveloman'ny angona anaty cache"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "Mandra-pahoviana no tokony hitazonan'ny FlowView ny valin'ny fangatahana voatahiry alohan'ny hamafana azy?"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ora"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d Andro"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d Andro"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "Fizarana angona MaxScale"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "Tsy ilaina izany raha tsy hoe tsy mampiasa seranana Read-Write Split miaraka amin'ny MaxScale mavitrika ny fifandraisan'ny Tahirin-kevitra Flowview an'ny Rafitra Cacti-nao."
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "Ampiasao ny MaxScale hizarana ireo sombin'ny fangatahana"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "Raha manana serivisy maromaro miasa ho mpanaraka (slaves) ho an'ny MaxScale ianao, dia azonao ampitomboina ny hafainganam-pandehan'ny fangatahana amin'ny fizarana ny fangatahana mifanindry amin'ny mpizara MariaDB maromaro."
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "Seranana fanasarahana famakiana-fanoratana MaxScale"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "Tokony ho seranan'ny sampan-draharaha sy ny mpanapaka Read-Write-Split-Service (readwrite) ity."
+
+#: setup.php
+msgid "Flowview"
+msgstr "Flowview"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
+
