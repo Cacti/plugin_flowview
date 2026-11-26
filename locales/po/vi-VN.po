@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 05:52+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Vietnamese <https://translate.cacti.net/projects/cacti/flowview/vi/>\nLanguage: vi-VN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
+msgstr "Project-Id-Version: \nReport-Msgid-Bugs-To: developers@cacti.net\nPOT-Creation-Date: 2026-10-23 16:08-0400\nPO-Revision-Date: 2026-11-26 10:49+0000\nLast-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\nLanguage-Team: Vietnamese <https://translate.cacti.net/projects/cacti/flowview/vi/>\nLanguage: vi-VN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.11.4\n"
 
 #: flowview.php
 msgid "Unable to find Raw Data for to Export"
@@ -986,7 +986,7 @@ msgstr "Hiện thực hóa"
 
 #: flowview_filters.php
 msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
-msgstr "Quá trình tạo dữ liệu sẵn (Materialization) tính toán trước kết quả của một Bộ lọc cho từng phân vùng flow, với NAT bật và tắt, rồi lưu vào bộ nhớ đệm Truy vấn song song (Parallel Query cache) để báo cáo trên dữ liệu cũ mở nhanh hơn.  Các phân vùng mới sẽ tự động được tạo dữ liệu sẵn sau khi ngừng nhận flow.  Cần thực hiện nghĩa là các phân vùng đã xoay vòng chưa được tạo dữ liệu sẵn, Đang chạy nghĩa là quá trình tạo dữ liệu sẵn đang diễn ra, và Đã cập nhật nghĩa là mọi phân vùng đã xoay vòng đều đã được tạo dữ liệu sẵn.  Đang chạy: N cho biết số lượng truy vấn của Bộ lọc đang hoạt động hiện tại.  Phân vùng vẫn đang nhận flow không được tạo dữ liệu sẵn nên không được tính."
+msgstr "Quá trình tạo dữ liệu sẵn (Materialization) tính toán trước kết quả của một Bộ lọc cho từng phân vùng flow, với NAT bật và tắt, rồi lưu vào bộ nhớ đệm Truy vấn đồng thời (Parallel Query cache) để báo cáo trên dữ liệu cũ mở nhanh hơn.  Các phân vùng mới sẽ tự động được tạo dữ liệu sẵn sau khi ngừng nhận flow.  Cần thực hiện nghĩa là các phân vùng đã xoay vòng chưa được tạo dữ liệu sẵn, Đang chạy nghĩa là quá trình tạo dữ liệu sẵn đang diễn ra, và Đã cập nhật nghĩa là mọi phân vùng đã xoay vòng đều đã được tạo dữ liệu sẵn.  Đang chạy: N cho biết số lượng truy vấn của Bộ lọc đang hoạt động hiện tại.  Phân vùng vẫn đang nhận flow không được tạo dữ liệu sẵn nên không được tính."
 
 #: flowview_filters.php includes/arrays.php
 msgid "Listener"
@@ -2354,11 +2354,11 @@ msgstr "Đang chạy: %s"
 #: includes/functions.php
 #, php-format
 msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
-msgstr "LỖI: Truy vấn song song không hoàn thành trong Thời gian chạy tối đa %d giây. Hãy kiểm tra Thời gian chạy tối đa trong Cài đặt FlowView và đảm bảo cơ sở dữ liệu không bận xử lý thao tác khác như ALTER TABLE."
+msgstr "LỖI: Truy vấn đồng thời không hoàn thành trong Thời gian chạy tối đa %d giây. Hãy kiểm tra Thời gian chạy tối đa trong Cài đặt FlowView và đảm bảo cơ sở dữ liệu không bận xử lý thao tác khác như ALTER TABLE."
 
 #: includes/functions.php
 msgid "The Parallel Query Timed Out.  Please contact your administrator"
-msgstr "Truy vấn song song đã hết thời gian.  Vui lòng liên hệ với quản trị viên của bạn"
+msgstr "Truy vấn đồng thời đã hết thời gian.  Vui lòng liên hệ với quản trị viên của bạn"
 
 #: includes/functions.php
 #, php-format
@@ -2799,15 +2799,15 @@ msgstr "Aria Engine là hoàn hảo cho tất cả trừ bảng Live thô.  Bả
 
 #: setup.php
 msgid "Parallel Queries"
-msgstr "Truy vấn song song"
+msgstr "Truy vấn đồng thời"
 
 #: setup.php
 msgid "Parallel Query Backend"
-msgstr "Backend truy vấn song song"
+msgstr "Backend truy vấn đồng thời"
 
 #: setup.php
 msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
-msgstr "Chọn cách thực thi các truy vấn FlowView song song. Trình chạy PHP cũ (Legacy PHP Runner) tạo tiến trình flowview_runner.php cho mỗi truy vấn và phân đoạn (shard). Dịch vụ truy vấn FlowView (FlowView Query Service) phân phối cùng tác vụ map-reduce tới một dịch vụ Go chạy liên tục qua localhost, tránh độ trễ khởi động tiến trình và thăm dò cơ sở dữ liệu cho từng truy vấn. Yêu cầu dịch vụ flowview-query (xem plugins/flowview/service/flowview-query) phải được cài đặt và đang chạy."
+msgstr "Chọn cách thực thi các truy vấn FlowView đồng thời. Trình chạy PHP cũ (Legacy PHP Runner) tạo tiến trình flowview_runner.php cho mỗi truy vấn và phân đoạn (shard). Dịch vụ truy vấn (FlowView Query Service) phân phối cùng tác vụ map-reduce tới một dịch vụ Go chạy liên tục qua localhost, tránh độ trễ khởi động tiến trình và thăm dò cơ sở dữ liệu cho từng truy vấn. Yêu cầu dịch vụ flowview-query (xem plugins/flowview/service/flowview-query) phải được cài đặt và đang chạy."
 
 #: setup.php
 msgid "Legacy PHP Runner"
@@ -2864,7 +2864,7 @@ msgstr "Thời gian chạy tối đa"
 
 #: setup.php
 msgid "If the Parallel Query does not finish in this time, exit."
-msgstr "Nếu Truy vấn song song không kết thúc trong thời gian này, hãy thoát."
+msgstr "Nếu Truy vấn đồng thời không kết thúc trong thời gian này, hãy thoát."
 
 #: setup.php
 msgid "Cached Data Time to Live"
@@ -2903,7 +2903,7 @@ msgstr "Tận dụng MaxScale để phân phối các phân đoạn truy vấn"
 
 #: setup.php
 msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
-msgstr "Nếu bạn có nhiều dịch vụ hoạt động như nô lệ cho MaxScale, bạn có thể tăng tốc độ truy vấn bằng cách phân phối các truy vấn song song đến nhiều máy chủ phụ trợ MariaDB."
+msgstr "Nếu bạn có nhiều dịch vụ hoạt động như nô lệ cho MaxScale, bạn có thể tăng tốc độ truy vấn bằng cách phân phối các truy vấn đồng thời đến nhiều máy chủ phụ trợ MariaDB."
 
 #: setup.php
 msgid "MaxScale Read-Write Split Port"
