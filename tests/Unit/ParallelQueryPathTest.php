@@ -207,6 +207,21 @@ describe('running a report', function () {
 			->and(plugin_test_db_calls('db_execute_prepared', 'INSERT INTO parallel_database_query_shard'))->toBeEmpty();
 	});
 
+	it('renders the Bytes/Packet column header for non-summary statistical reports', function () {
+		$GLOBALS['__test_config']['flowview_parallel_threads'] = 1;
+
+		plugin_test_queue_partitions(array('plugin_flowview_raw_2024001'));
+		plugin_test_queue_db_result('db_fetch_row_prepared', plugin_test_query_filter());
+		plugin_test_queue_db_result('db_fetch_assoc_prepared', array(
+			array('flows' => 2, 'bytes' => 200, 'packets' => 4),
+		));
+
+		$output = run_flow_query(false, 4, strtotime('2024-01-01 00:00:00'), strtotime('2024-01-05 00:00:00'));
+
+		expect($output)->toBeArray()
+			->and($output['table'])->toContain('Bytes/Packet');
+	});
+
 	it('says a report it does not know is a bug, and has nothing to show', function () {
 		plugin_test_queue_db_result('db_fetch_row_prepared', plugin_test_query_filter(array('statistics' => 98)));
 		plugin_test_queue_db_result('db_fetch_row_prepared', plugin_test_query_filter(array('statistics' => 0, 'printed' => 98)));

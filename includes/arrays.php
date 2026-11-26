@@ -588,15 +588,15 @@ $print_columns_array = array(
 );
 
 $graph_heights = array(
-	300 => __('%d Pixels', 300),
-	350 => __('%d Pixels', 350),
-	400 => __('%d Pixels', 400),
-	450 => __('%d Pixels', 450),
-	500 => __('%d Pixels', 500),
-	550 => __('%d Pixels', 550),
-	600 => __('%d Pixels', 600),
-	650 => __('%d Pixels', 650),
-	700 => __('%d Pixels', 700)
+	300 => __('%d Pixels', 300, 'flowview'),
+	350 => __('%d Pixels', 350, 'flowview'),
+	400 => __('%d Pixels', 400, 'flowview'),
+	450 => __('%d Pixels', 450, 'flowview'),
+	500 => __('%d Pixels', 500, 'flowview'),
+	550 => __('%d Pixels', 550, 'flowview'),
+	600 => __('%d Pixels', 600, 'flowview'),
+	650 => __('%d Pixels', 650, 'flowview'),
+	700 => __('%d Pixels', 700, 'flowview')
 );
 
 $devices = array_rekey(
@@ -755,7 +755,7 @@ $filter_edit = array(
 		'default' => 'bar',
 		'array' => array(
 			'bar'     => __('Bar Chart', 'flowview'),
-			'pie'     => __('Pie Chart', 'fowview'),
+			'pie'     => __('Pie Chart', 'flowview'),
 			'treemap' => __('Treemap Chart', 'flowview')
 		)
 	),

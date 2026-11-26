@@ -1145,9 +1145,9 @@ function flowview_display_filter(): void {
 		if (cacti_sizeof($row)) {
 			$report_fixed = flowview_filter_report_key($row) != '';
 			if ($row['statistics'] > 0) {
-				$title = __esc('Statistical Report: %s [ Including overrides as specified below ]', $stat_report_array[$row['statistics']]);
+				$title = __esc('Statistical Report: %s [ Including overrides as specified below ]', $stat_report_array[$row['statistics']], 'flowview');
 			} elseif ($row['printed'] > 0) {
-				$title = __esc('Printed Report: %s [ Including overrides as specified below ]', $print_report_array[$row['printed']]);
+				$title = __esc('Printed Report: %s [ Including overrides as specified below ]', $print_report_array[$row['printed']], 'flowview');
 			}
 		}
 	}
@@ -1338,7 +1338,7 @@ function flowview_display_filter(): void {
 							?>
 						</select>
 					</td>
-					<td class='nowrap' title='<?php print __esc('Show only Domains on Charts Below');?>'>
+					<td class='nowrap' title='<?php print __esc('Show only Domains on Charts Below', 'flowview');?>'>
 						<span>
 							<input type='checkbox' id='domains' name='domains' <?php print (get_request_var('domains') == 'true' ? 'checked':'');?>>
 							<label for='domains'><?php print __('Domains/Hostnames Only', 'flowview');?></label>
@@ -1503,20 +1503,20 @@ function flowview_display_filter(): void {
 	/* the Filter the page was drawn for, should the Filter select have lost it */
 	var flowviewQueryId = <?php print (int) get_request_var('query');?>;
 
-	var byteLabel       = '<?php print __('Bytes', 'flowview');?>';
-	var byteBarTitle    = '<?php print __('Top %s Distribution Chart of Bytes', get_request_var('cutofflines'), 'flowview');?>';
-	var bytePieTitle    = '<?php print __('Top %s Pie Chart of Bytes', get_request_var('cutofflines'), 'flowview');?>';
-	var byteTreeTitle   = '<?php print __('Top %s Treemap Chart of Bytes', get_request_var('cutofflines'), 'flowview');?>';
+	var byteLabel       = <?php print json_encode(__('Bytes', 'flowview'));?>;
+	var byteBarTitle    = <?php print json_encode(__('Top %s Distribution Chart of Bytes', get_request_var('cutofflines'), 'flowview'));?>;
+	var bytePieTitle    = <?php print json_encode(__('Top %s Pie Chart of Bytes', get_request_var('cutofflines'), 'flowview'));?>;
+	var byteTreeTitle   = <?php print json_encode(__('Top %s Treemap Chart of Bytes', get_request_var('cutofflines'), 'flowview'));?>;
 
-	var packetLabel     = '<?php print __('Packets', 'flowview');?>';
-	var packetBarTitle  = '<?php print __('Top %s Distribution Chart of Packets', get_request_var('cutofflines'), 'flowview');?>';
-	var packetPieTitle  = '<?php print __('Top %s Pie Chart of Packets', get_request_var('cutofflines'), 'flowview');?>';
-	var packetTreeTitle = '<?php print __('Top %s Treemap Chart of Packets', get_request_var('cutofflines'), 'flowview');?>';
+	var packetLabel     = <?php print json_encode(__('Packets', 'flowview'));?>;
+	var packetBarTitle  = <?php print json_encode(__('Top %s Distribution Chart of Packets', get_request_var('cutofflines'), 'flowview'));?>;
+	var packetPieTitle  = <?php print json_encode(__('Top %s Pie Chart of Packets', get_request_var('cutofflines'), 'flowview'));?>;
+	var packetTreeTitle = <?php print json_encode(__('Top %s Treemap Chart of Packets', get_request_var('cutofflines'), 'flowview'));?>;
 
-	var flowLabel       = '<?php print __('Flows', 'flowview');?>';
-	var flowBarTitle    = '<?php print __('Top %s Distribution Chart of Flows', get_request_var('cutofflines'), 'flowview');?>';
-	var flowPieTitle    = '<?php print __('Top %s Pie Chart of Flows', get_request_var('cutofflines'), 'flowview');?>';
-	var flowTreeTitle   = '<?php print __('Top %s Treemap Chart of Flows', get_request_var('cutofflines'), 'flowview');?>';
+	var flowLabel       = <?php print json_encode(__('Flows', 'flowview'));?>;
+	var flowBarTitle    = <?php print json_encode(__('Top %s Distribution Chart of Flows', get_request_var('cutofflines'), 'flowview'));?>;
+	var flowPieTitle    = <?php print json_encode(__('Top %s Pie Chart of Flows', get_request_var('cutofflines'), 'flowview'));?>;
+	var flowTreeTitle   = <?php print json_encode(__('Top %s Treemap Chart of Flows', get_request_var('cutofflines'), 'flowview'));?>;
 
 	var pattern = [
 		'#1f77b4',
@@ -1642,7 +1642,7 @@ function flowview_display_filter(): void {
 		});
 
 		$('#rename').off('click').on('click', function() {
-			$('#save_div').dialog('option', 'title', '<?php print __('Rename Layout', 'analytics');?>');
+			$('#save_div').dialog('option', 'title', <?php print json_encode(__('Rename Layout', 'flowview'));?>);
 			$('#snewname').attr('value', $('#query option:selected').text());
 			$('#snew').attr('value', '0');
 			$('#srename').attr('value', '1');
@@ -1650,7 +1650,7 @@ function flowview_display_filter(): void {
 		});
 
 		$('#saveas').off('click').on('click', function() {
-			$('#snewname').attr('value', $('#query option:selected').text() + '<?php print __(' <new>', 'flowview');?>');
+			$('#snewname').attr('value', $('#query option:selected').text() + <?php print json_encode(__(' <new>', 'flowview'));?>);
 			$('#snew').attr('value', '1');
 			$('#srename').attr('value', '0');
 			$('#save_div').dialog('open');
@@ -2188,7 +2188,7 @@ function flowview_display_filter(): void {
 					$('#text').show().text('[ <?php print __esc('Filter Settings Saved.  A materialization of this Filter has been started in the background.', 'flowview');?> ]').fadeOut(10000);
 				}
 			} else {
-				$('#text').show().text('[ <?php print __('Filter Settings Saved', 'flowview');?> ]').fadeOut(2000);
+				$('#text').show().text('[ ' + <?php print json_encode(__('Filter Settings Saved', 'flowview'));?> + ' ]').fadeOut(2000);
 			}
 		});
 	}
@@ -4158,7 +4158,7 @@ function run_flow_query($session, $query_id, $start, $end, bool $plan_only = fal
 							$table .= '<th class="right">' . __('Packets', 'flowview') . '</th>';
 						}
 
-						$table .= '<th class="right">' . __('Bytes/Packet') . '</th>';
+						$table .= '<th class="right">' . __('Bytes/Packet', 'flowview') . '</th>';
 
 						$table .= '</tr></thead><tbody>';
 					}

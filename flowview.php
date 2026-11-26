@@ -277,7 +277,7 @@ function delete_filter(): void {
 		raise_message('flow_delete', __esc('Unable to Delete Flow Filter \'%s\' as its in use in a Scheduled Report.', $name, 'flowview'), MESSAGE_LEVEL_WARN);
 	} else {
 		flowview_db_execute_prepared('DELETE FROM plugin_flowview_queries WHERE id = ?', [$query]);
-		raise_message('flow_delete', __esc('Flow Filter \'%s\' Deleted.', 'flowview'), MESSAGE_LEVEL_INFO);
+		raise_message('flow_delete', __esc('Flow Filter \'%s\' Deleted.', $name, 'flowview'), MESSAGE_LEVEL_INFO);
 	}
 }
 
