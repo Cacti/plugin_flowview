@@ -50,7 +50,7 @@ $sendinterval_arr = array(
 	43200   => __('Every %d Hours', 12, 'flowview'),
 	86400   => __('Every Day', 'flowview'),
 	432000  => __('Every Week', 'flowview'),
-	864000  => __('Every %d Weeks, 2', 'flowview'),
+	864000  => __('Every %d Weeks', 2, 'flowview'),
 	1728000 => __('Every Month', 'flowview'),
 );
 
@@ -156,10 +156,10 @@ $schedule_edit = array(
 		'value' => '|arg1:email|'
 	),
 	'format_file' => array(
-		'friendly_name' => __('Format File to Use', 'monitor'),
+		'friendly_name' => __('Format File to Use', 'flowview'),
 		'method' => 'drop_array',
 		'default' => read_config_option('flowview_format_file'),
-		'description' => __('Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the \'formats\' directory.', 'monitor'),
+		'description' => __('Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the \'formats\' directory.', 'flowview'),
 		'array' => $formats,
 		'value' => '|arg1:format_file|'
 	),
@@ -795,7 +795,7 @@ function edit_general($header_label, $report): void {
 	var startOpen = false;
 
 	$(function() {
-		$('#start').after("<i id='startDate' class='calendar fa fa-calendar' title='<?php print __esc('Start Date Selector', 'flowview');?>'></i>");
+		$('#start').after($('<i>', { id: 'startDate', class: 'calendar fa fa-calendar', title: <?php print json_encode(__('Start Date Selector', 'flowview'));?> }));
 		$('#startDate').on('click', function() {
 			if (startOpen) {
 				startOpen = false;

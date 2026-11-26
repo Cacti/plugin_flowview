@@ -815,12 +815,12 @@ function view_db_table($tab, &$tabs): void {
 			$i++;
 		}
 	} else {
-		print __esc("FATAL: Unknown Database Table %s", $tab) . PHP_EOL;
+		print __esc("FATAL: Unknown Database Table %s", $tab, 'flowview') . PHP_EOL;
 		exit;
 	}
 
 	if (!flowview_db_table_exists($table_name)) {
-		print __esc("FATAL: Unknown Database Table %s", $table_name) . PHP_EOL;
+		print __esc("FATAL: Unknown Database Table %s", $table_name, 'flowview') . PHP_EOL;
 		exit;
 	}
 

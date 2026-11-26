@@ -192,7 +192,7 @@ function flowview_launch_background_upgrade(bool $force = false): void {
 	if (read_config_option('flowview_db_upgrade_notified', true) != 'on') {
 		set_config_option('flowview_db_upgrade_notified', 'on');
 
-		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information'), MESSAGE_LEVEL_INFO);
+		raise_message('flowview_upgrade', __('Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information', 'flowview'), MESSAGE_LEVEL_INFO);
 	}
 
 	if ($force || !flowview_background_upgrade_running()) {
@@ -533,7 +533,7 @@ function flowview_config_settings(): void {
 
 				for($i = 1; $i <= 10; $i++) {
 					if ($i == 1) {
-						$processes[$i] = __('%d Process', $i);
+						$processes[$i] = __('%d Process', $i, 'flowview');
 					} else {
 						$processes[$i] = __('%d Processes', $i);
 					}
