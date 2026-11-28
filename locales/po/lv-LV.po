@@ -1,0 +1,2945 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-26 03:27-0800\n"
+"PO-Revision-Date: 2026-11-28 02:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Latvian <https://translate.cacti.net/projects/cacti/flowview/lv/>\n"
+"Language: lv-LV\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 0 || n % 100 >= 11 && n % 100 <= 19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
+
+#: flowview.php
+msgid "Unable to find Raw Data for to Export"
+msgstr "Nevar atrast neapstrādātus datus eksportēšanai"
+
+#: flowview.php
+msgid "Flowview Query provided does not exist.  Please submit with a valid query."
+msgstr "Norādītais Flowview vaicājums neeksistē. Lūdzu, iesniedziet derīgu vaicājumu."
+
+#: flowview.php
+msgid "Invalid source Query provided.  Please submit with a valid query."
+msgstr "Norādīts nederīgs avota vaicājums. Lūdzu, iesniedziet derīgu vaicājumu."
+
+#: flowview.php
+#, php-format
+msgid "Unable to Delete Flow Filter '%s' as its in use in a Scheduled Report."
+msgstr "Nevar dzēst plūsmas filtru '%s', jo tas tiek izmantots plānotā atskaitē."
+
+#: flowview.php
+#, php-format
+msgid "Flow Filter '%s' Deleted."
+msgstr "Plūsmas filtrs '%s' ir dzēsts."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Delete"
+msgstr "Dzēst"
+
+#: flowview_databases.php
+msgid "DNS Cache has been purged.  It will refill as records come in."
+msgstr "DNS kešatmiņa ir iztīrīta. Tā tiks piepildīta no jauna, saņemot ierakstus."
+
+#: flowview_databases.php
+msgid "Internet Route Registry Details"
+msgstr "Interneta maršrutu reģistra informācija"
+
+#: flowview_databases.php
+msgid "Authorized Agent Details"
+msgstr "Autorizētā aģenta informācija"
+
+#: flowview_databases.php
+msgid "No Details Found"
+msgstr "Informācija nav atrasta"
+
+#: flowview_databases.php
+msgid "CIDR/Route"
+msgstr "CIDR/Maršruts"
+
+#: flowview_databases.php
+msgid "Autonomous Number"
+msgstr "Autonomās sistēmas numurs"
+
+#: flowview_databases.php
+msgid "AS Block"
+msgstr "AS bloks"
+
+#: flowview_databases.php
+msgid "AS Set"
+msgstr "AS kopa"
+
+#: flowview_databases.php
+msgid "Route Set"
+msgstr "Maršrutu kopa"
+
+#: flowview_databases.php
+msgid "Domain"
+msgstr "Domēns"
+
+#: flowview_databases.php
+msgid "Filter Set"
+msgstr "Filtru kopa"
+
+#: flowview_databases.php
+msgid "Peering Set"
+msgstr "Vienādranga savienojumu kopa"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Network"
+msgstr "Tīkls"
+
+#: flowview_databases.php
+msgid "Internet Router"
+msgstr "Interneta maršrutētājs"
+
+#: flowview_databases.php
+msgid "Incident Response Team"
+msgstr "Incidentu reaģēšanas komanda"
+
+#: flowview_databases.php
+msgid "Auth Agent"
+msgstr "Autentifikācijas aģents"
+
+#: flowview_databases.php
+msgid "Organization"
+msgstr "Organizācija"
+
+#: flowview_databases.php
+msgid "Role"
+msgstr "Loma"
+
+#: flowview_databases.php
+msgid "Person"
+msgstr "Persona"
+
+#: flowview_databases.php
+msgid "Router Set"
+msgstr "Maršrutētāju kopa"
+
+#: flowview_databases.php
+msgid "Remarks"
+msgstr "Piezīmes"
+
+#: flowview_databases.php
+msgid "Last Modified"
+msgstr "Pēdējoreiz modificēts"
+
+#: flowview_databases.php includes/arrays.php
+msgid "Source"
+msgstr "Avots"
+
+#: flowview_databases.php
+msgid "Registration Date"
+msgstr "Reģistrācijas datums"
+
+#: flowview_databases.php
+msgid "MNT By"
+msgstr "MNT uzturētājs"
+
+#: flowview_databases.php
+msgid "Admin Contact"
+msgstr "Administratīvā kontaktpersona"
+
+#: flowview_databases.php
+msgid "Changes"
+msgstr "Izmaiņas"
+
+#: flowview_databases.php
+msgid "Notify"
+msgstr "Paziņot"
+
+#: flowview_databases.php
+msgid "Description"
+msgstr "Apraksts"
+
+#: flowview_databases.php
+msgid "Tech Contact"
+msgstr "Tehniskā kontaktpersona"
+
+#: flowview_databases.php
+msgid "MNT Lower"
+msgstr "MNT apakšlīmenis"
+
+#: flowview_databases.php
+msgid "Country"
+msgstr "Valsts"
+
+#: flowview_databases.php
+msgid "Abuse Email"
+msgstr "Ļaunprātīgas izmantošanas e-pasts"
+
+#: flowview_databases.php
+msgid "Fax Number"
+msgstr "Faksa numurs"
+
+#: flowview_databases.php
+msgid "Phone"
+msgstr "Tālrunis"
+
+#: flowview_databases.php
+msgid "Email"
+msgstr "E-pasts"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Address"
+msgstr "Adrese"
+
+#: flowview_databases.php flowview_devices.php
+msgid "Status"
+msgstr "Statuss"
+
+#: flowview_databases.php
+msgid "Members By Fef"
+msgstr "Dalībnieki pēc atsauces"
+
+#: flowview_databases.php
+msgid "Abuse Contacts"
+msgstr "Ļaunprātīgas izmantošanas kontakti"
+
+#: flowview_databases.php
+msgid "MNT Reference"
+msgstr "MNT atsauce"
+
+#: flowview_databases.php
+msgid "Members"
+msgstr "Dalībnieki"
+
+#: flowview_databases.php
+msgid "MNT Notify"
+msgstr "MNT paziņošana"
+
+#: flowview_databases.php
+msgid "Authorization"
+msgstr "Autorizācija"
+
+#: flowview_databases.php
+msgid "MNT Routes"
+msgstr "MNT maršruti"
+
+#: flowview_databases.php
+msgid "Member of"
+msgstr "Dalībnieks kopā"
+
+#: flowview_databases.php
+msgid "Updates Email"
+msgstr "Atjauninājumu e-pasts"
+
+#: flowview_databases.php
+msgid "NOC Handle"
+msgstr "NOC identifikators"
+
+#: flowview_databases.php
+msgid "Sponsor Org"
+msgstr "Sponsorējošā organizācija"
+
+#: flowview_databases.php
+msgid "MNT Irt"
+msgstr "MNT IRT"
+
+#: flowview_databases.php
+msgid "MP Members"
+msgstr "MP dalībnieki"
+
+#: flowview_databases.php
+msgid "Sub Domain"
+msgstr "Apakšdomēns"
+
+#: flowview_databases.php
+msgid "Pingable"
+msgstr "Atsaucas uz ping"
+
+#: flowview_databases.php
+msgid "Alias"
+msgstr "Aizstājvārds"
+
+#: flowview_databases.php
+msgid "Org Type"
+msgstr "Organizācijas tips"
+
+#: flowview_databases.php
+msgid "Refer To"
+msgstr "Atsaukties uz"
+
+#: flowview_databases.php
+msgid "MP Peering"
+msgstr "MP vienādranga savienojums"
+
+#: flowview_databases.php flowview_devices.php includes/functions.php
+msgid "Export"
+msgstr "Eksportēt"
+
+#: flowview_databases.php
+msgid "Holes"
+msgstr "Maršruta izņēmumi"
+
+#: flowview_databases.php
+msgid "MP Default"
+msgstr "MP noklusējums"
+
+#: flowview_databases.php
+msgid "Components"
+msgstr "Komponenti"
+
+#: flowview_databases.php
+msgid "RS Out"
+msgstr "RS izejošais"
+
+#: flowview_databases.php
+msgid "Organization Name"
+msgstr "Organizācijas nosaukums"
+
+#: flowview_databases.php
+msgid "AS Name"
+msgstr "AS nosaukums"
+
+#: flowview_databases.php
+msgid "Author"
+msgstr "Autors"
+
+#: flowview_databases.php
+msgid "IRT Notify"
+msgstr "IRT paziņošana"
+
+#: flowview_databases.php
+msgid "Aggr MTD"
+msgstr "Agregācijas metode"
+
+#: flowview_databases.php
+msgid "AS Type"
+msgstr "AS tips"
+
+#: flowview_databases.php
+msgid "MP Filter"
+msgstr "MP filtrs"
+
+#: flowview_databases.php
+msgid "Default Route"
+msgstr "Noklusējuma maršruts"
+
+#: flowview_databases.php
+msgid "Assignment Size"
+msgstr "Piešķiršanas apjoms"
+
+#: flowview_databases.php
+msgid "Export Comps"
+msgstr "Eksporta komponenti"
+
+#: flowview_databases.php
+msgid "RS In"
+msgstr "RS ienākošais"
+
+#: flowview_databases.php
+msgid "Net Name"
+msgstr "Tīkla nosaukums"
+
+#: flowview_databases.php
+msgid "DS Rdata"
+msgstr "DS RDATA"
+
+#: flowview_databases.php
+msgid "Aggr Boundary"
+msgstr "Agregācijas robeža"
+
+#: flowview_databases.php includes/arrays.php includes/functions.php
+msgid "Filter"
+msgstr "Filtrs"
+
+#: flowview_databases.php
+msgid "MP Import"
+msgstr "MP imports"
+
+#: flowview_databases.php
+msgid "Language"
+msgstr "Valoda"
+
+#: flowview_databases.php
+msgid "RESFful Link"
+msgstr "RESTful saite"
+
+#: flowview_databases.php
+msgid "Peer"
+msgstr "Vienādranga mezgls"
+
+#: flowview_databases.php
+msgid "Zone Contact"
+msgstr "Zonas kontaktpersona"
+
+#: flowview_databases.php
+msgid "Inject"
+msgstr "Ievadīt"
+
+#: flowview_databases.php
+msgid "MP Peer"
+msgstr "MP vienādranga mezgls"
+
+#: flowview_databases.php
+msgid "Referral By"
+msgstr "Atsauce no"
+
+#: flowview_databases.php
+msgid "Form"
+msgstr "Veidlapa"
+
+#: flowview_databases.php
+msgid "MNT Domains"
+msgstr "MNT domēni"
+
+#: flowview_databases.php
+msgid "Origin AS"
+msgstr "Izcelsmes AS"
+
+#: flowview_databases.php
+msgid "MP Export"
+msgstr "MP eksports"
+
+#: flowview_databases.php
+msgid "Encryption"
+msgstr "Šifrēšana"
+
+#: flowview_databases.php
+msgid "Geo Feed"
+msgstr "Ģeolokācijas plūsma"
+
+#: flowview_databases.php
+msgid "Geo Index"
+msgstr "Ģeolokācijas indekss"
+
+#: flowview_databases.php
+msgid "Interface Addr"
+msgstr "Saskarnes adrese"
+
+#: flowview_databases.php
+msgid "Export Via"
+msgstr "Eksportēt caur"
+
+#: flowview_databases.php
+msgid "Trouble"
+msgstr "Problēmu ziņošana"
+
+#: flowview_databases.php
+msgid "Name Servers"
+msgstr "Nosaukumu serveri"
+
+#: flowview_databases.php
+msgid "Ping Handle"
+msgstr "Ping identifikators"
+
+#: flowview_databases.php
+msgid "Interface"
+msgstr "Saskarne"
+
+#: flowview_databases.php
+msgid "Import"
+msgstr "Importēt"
+
+#: flowview_databases.php
+msgid "Signature"
+msgstr "Paraksts"
+
+#: flowview_databases.php
+msgid "Geo Location"
+msgstr "Ģeogrāfiskā atrašanās vieta"
+
+#: flowview_databases.php
+msgid "Local AS"
+msgstr "Lokālais AS"
+
+#: flowview_databases.php
+msgid "Import Via"
+msgstr "Importēt caur"
+
+#: flowview_databases.php
+#, php-format
+msgid "FATAL: Unknown Database Table %s"
+msgstr "KRITISKA KĻŪDA: nezināma datubāzes tabula %s"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Search"
+msgstr "Meklēt"
+
+#: flowview_databases.php
+msgid "Any"
+msgstr "Jebkurš"
+
+#: flowview_databases.php
+msgid "Entries"
+msgstr "Ieraksti"
+
+#: flowview_databases.php flowview_filters.php flowview_schedules.php
+msgid "Default"
+msgstr "Noklusējuma"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Go"
+msgstr "Atlasīt"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Set/Refresh Filters"
+msgstr "Iestatīt/atsvaidzināt filtrus"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Clear"
+msgstr "Notīrīt"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php
+msgid "Clear Filters"
+msgstr "Notīrīt filtrus"
+
+#: flowview_databases.php
+msgid "Purge the DNS Cache"
+msgstr "Iztīrīt DNS kešatmiņu"
+
+#: flowview_databases.php
+msgid "Not Specified"
+msgstr "Nav norādīts"
+
+#: flowview_databases.php
+msgid "No Matching Entries Found"
+msgstr "Nav atrasts neviens atbilstošs ieraksts"
+
+#: flowview_databases.php
+msgid "Click 'Continue' to delete the following DNS Cache Entry."
+msgid_plural "Click 'Continue' to delete all following DNS Cache Entries."
+msgstr[0] "Noklikšķiniet uz 'Turpināt', lai dzēstu visus tālāk norādītos DNS kešatmiņas ierakstus."
+msgstr[1] "Noklikšķiniet uz 'Turpināt', lai dzēstu tālāk norādīto DNS kešatmiņas ierakstu."
+msgstr[2] "Noklikšķiniet uz 'Turpināt', lai dzēstu visus tālāk norādītos DNS kešatmiņas ierakstus."
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Cancel"
+msgstr "Atcelt"
+
+#: flowview_databases.php flowview_devices.php flowview_filters.php
+#: flowview_schedules.php includes/functions.php
+msgid "Continue"
+msgstr "Turpināt"
+
+#: flowview_databases.php
+msgid "Delete DNS Entry"
+msgid_plural "Delete DNS Entries"
+msgstr[0] "Dzēst DNS ierakstus"
+msgstr[1] "Dzēst DNS ierakstu"
+msgstr[2] "Dzēst DNS ierakstus"
+
+#: flowview_databases.php
+msgid "Flowview DNS Cache Entries"
+msgstr "Flowview DNS kešatmiņas ieraksti"
+
+#: flowview_databases.php
+msgid "Verified"
+msgstr "Verificēts"
+
+#: flowview_databases.php
+msgid "Unverified"
+msgstr "Neverificēts"
+
+#: flowview_databases.php
+msgid "Purge"
+msgstr "Iztīrīt"
+
+#: flowview_databases.php includes/arrays.php
+msgid "IP Address"
+msgstr "IP adrese"
+
+#: flowview_databases.php
+msgid "This is the IP Address of the Cache entry."
+msgstr "Šī ir kešatmiņas ieraksta IP adrese."
+
+#: flowview_databases.php
+msgid "DNS Hostname"
+msgstr "DNS resursdatora nosaukums"
+
+#: flowview_databases.php
+msgid "The DNS Name assigned to the IP Address."
+msgstr "IP adresei piešķirtais DNS nosaukums."
+
+#: flowview_databases.php
+msgid "The source of the DNS Hostname.  It can either be DNS, Static Lookup or ARIN."
+msgstr "DNS resursdatora nosaukuma avots. Tas var būt DNS, statiska uzmeklēšana vai ARIN."
+
+#: flowview_databases.php
+msgid "Arin Verified"
+msgstr "ARIN verificēts"
+
+#: flowview_databases.php
+msgid "The Arin information for this IP Address is verified, or it's a Local Domain IP Address."
+msgstr "ARIN informācija šai IP adresei ir verificēta, vai arī tā ir lokālā domēna IP adrese."
+
+#: flowview_databases.php
+msgid "CIDR ID"
+msgstr "CIDR ID"
+
+#: flowview_databases.php
+msgid "The Arin primary key.  This is not official Arin information."
+msgstr "ARIN primārā atslēga. Šī nav oficiāla ARIN informācija."
+
+#: flowview_databases.php
+msgid "Autonomous System ID"
+msgstr "Autonomās sistēmas ID"
+
+#: flowview_databases.php
+msgid "The Arin Origin AS.  This is official Arin AS information."
+msgstr "ARIN izcelsmes AS. Šī ir oficiāla ARIN AS informācija."
+
+#: flowview_databases.php
+msgid "Updated Time"
+msgstr "Atjaunināšanas laiks"
+
+#: flowview_databases.php
+msgid "This is the time that the DNS cache was entered or last updated."
+msgstr "Laiks, kad DNS kešatmiņas ieraksts tika pievienots vai pēdējoreiz atjaunināts."
+
+#: flowview_databases.php
+msgid "No DNS Cache Entries Found"
+msgstr "DNS kešatmiņas ieraksti nav atrasti"
+
+#: flowview_databases.php
+msgid "Flowview Internet Routes"
+msgstr "Flowview interneta maršruti"
+
+#: flowview_databases.php
+msgid "IP Version"
+msgstr "IP versija"
+
+#: flowview_databases.php
+msgid "IPv4"
+msgstr "IPv4"
+
+#: flowview_databases.php
+msgid "IPv6"
+msgstr "IPv6"
+
+#: flowview_databases.php
+msgid "Route"
+msgstr "Maršruts"
+
+#: flowview_databases.php
+msgid "This is the published Internet Route."
+msgstr "Šis ir publicētais interneta maršruts."
+
+#: flowview_databases.php
+msgid "AS Number"
+msgstr "AS numurs"
+
+#: flowview_databases.php
+msgid "The Autonomous System Number for the route."
+msgstr "Maršruta autonomās sistēmas numurs."
+
+#: flowview_databases.php
+msgid "Route Description"
+msgstr "Maršruta apraksts"
+
+#: flowview_databases.php
+msgid "The Description logged by the Route Maintainer."
+msgstr "Maršruta uzturētāja reģistrētais apraksts."
+
+#: flowview_databases.php
+msgid "The source database used to publish the route."
+msgstr "Avota datubāze, kas izmantota maršruta publicēšanai."
+
+#: flowview_databases.php
+msgid "Maintained By"
+msgstr "Uzturētājs"
+
+#: flowview_databases.php
+msgid "The Internet Carrier who is maintaining the route for the customer."
+msgstr "Interneta operators, kas uztur maršrutu klientam."
+
+#: flowview_databases.php
+msgid "The last time the information on this route was modified."
+msgstr "Laiks, kad informācija par šo maršrutu tika pēdējoreiz modificēta."
+
+#: flowview_databases.php
+msgid "No Matching Routes Found"
+msgstr "Nav atrasts neviens atbilstošs maršruts"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Enable"
+msgstr "Iespējot"
+
+#: flowview_devices.php flowview_filters.php flowview_schedules.php
+msgid "Disable"
+msgstr "Atspējot"
+
+#: flowview_devices.php
+msgid "Listener Name"
+msgstr "Klausītāja nosaukums"
+
+#: flowview_devices.php
+msgid "Name of the device to be displayed."
+msgstr "Attēlojamais ierīces nosaukums."
+
+#: flowview_devices.php
+msgid "Collection Method"
+msgstr "Vākšanas metode"
+
+#: flowview_devices.php
+msgid "There are two support collection methods, the first utilizes the legacy flow-tools binaries and the second leverages Cacti's own PHP based flow stream server."
+msgstr "Ir atbalstītas divas vākšanas metodes: pirmā izmanto mantotās flow-tools binārās programmas, bet otrā izmanto Cacti paša PHP bāzēto plūsmas straumes serveri."
+
+#: flowview_devices.php
+msgid "Bind to address"
+msgstr "Piesaistīt adresei"
+
+#: flowview_devices.php
+msgid "If Cacti server has more IP Addresses, you can specify specific interface. Leave as 0.0.0.0 for primary interface."
+msgstr "Ja Cacti serverim ir vairākas IP adreses, varat norādīt konkrētu saskarni. Atstājiet 0.0.0.0, lai izmantotu primāro saskarni."
+
+#: flowview_devices.php
+msgid "Allowed Host Range"
+msgstr "Atļauto resursdatoru diapazons"
+
+#: flowview_devices.php
+msgid "IP Address of the device that is allowed to send to this flow collector.  Leave as 0.0.0.0 for any host.  Note that PHP is finicky about what it allows.  CIDR syntax is supported as well as range syntax for example 192.168.1.0 or 192.168.1.0/24.  If you want specific IP addresses, separate them by a comma."
+msgstr "Ierīces IP adrese, kurai atļauts sūtīt datus šim plūsmas kolektoram. Atstājiet 0.0.0.0 jebkuram resursdatoram. Ņemiet vērā, ka PHP ir stingrs attiecībā uz atļauto formātu. Tiek atbalstīta CIDR sintakse, kā arī diapazona sintakse, piemēram, 192.168.1.0 vai 192.168.1.0/24. Ja vēlaties norādīt konkrētas IP adreses, atdaliet tās ar komatu."
+
+#: flowview_devices.php includes/arrays.php
+msgid "Port"
+msgstr "Ports"
+
+#: flowview_devices.php
+msgid "Port this collector will listen on."
+msgstr "Ports, kuru šis kolektors klausīsies."
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "Protocol"
+msgstr "Protokols"
+
+#: flowview_devices.php
+msgid "The IP Protocol to use for this listener."
+msgstr "IP protokols, ko izmantot šim klausītājam."
+
+#: flowview_devices.php
+msgid "UDP Protocol"
+msgstr "UDP protokols"
+
+#: flowview_devices.php flowview_schedules.php
+msgid "Enabled"
+msgstr "Iespējots"
+
+#: flowview_devices.php
+msgid "If checked, the Listener service will be started and will wait on incoming data."
+msgstr "Ja atzīmēts, klausītāja pakalpojums tiks palaists un gaidīs ienākošos datus."
+
+#: flowview_devices.php
+#, php-format
+msgid "No Flow Template was found for Device ID:%s and Template ID:%s"
+msgstr "Netika atrasta plūsmas veidne ierīces ID:%s un veidnes ID:%s"
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Delete the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu tālāk norādītos NetFlow klausītājus. Pēc tam Cacti mēģinās restartēt jūsu flow-capture pakalpojumu."
+
+#: flowview_devices.php
+msgid "Click 'Continue' to Enable the following NetFlow Listeners.  After which, Cacti will attempt to restart your Flow-Capture Service."
+msgstr "Noklikšķiniet uz 'Turpināt', lai iespējotu tālāk norādītos NetFlow klausītājus. Pēc tam Cacti mēģinās restartēt jūsu flow-capture pakalpojumu."
+
+#: flowview_devices.php
+msgid "You must select at least one Listener."
+msgstr "Jāatlasa vismaz viens klausītājs."
+
+#: flowview_devices.php
+msgid "The listener port must be a numeric value between 1 and 65535."
+msgstr "Klausītāja portam jābūt skaitliskai vērtībai no 1 līdz 65535."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved, and the service restarted."
+msgstr "Saglabāšana veiksmīga. Flowview klausītājs ir saglabāts, un pakalpojums ir restartēts."
+
+#: flowview_devices.php
+msgid "Save Successful.  The Flowview Listener has been saved.  However, the service flow-capture is not running."
+msgstr "Saglabāšana veiksmīga. Flowview klausītājs ir saglabāts. Tomēr pakalpojums flow-capture nedarbojas."
+
+#: flowview_devices.php
+#, php-format
+msgid "Listener [edit: %s]"
+msgstr "Klausītājs [rediģēt: %s]"
+
+#: flowview_devices.php
+msgid "Listener [new]"
+msgstr "Klausītājs [jauns]"
+
+#: flowview_devices.php
+msgid "Name"
+msgstr "Nosaukums"
+
+#: flowview_devices.php
+msgid "Version"
+msgstr "Versija"
+
+#: flowview_devices.php includes/functions.php
+msgid "Templates"
+msgstr "Veidnes"
+
+#: flowview_devices.php
+msgid "Last Updated"
+msgstr "Pēdējoreiz atjaunināts"
+
+#: flowview_devices.php
+msgid "Active Streams update every 5 minutes"
+msgstr "Aktīvās straumes tiek atjauninātas ik pēc 5 minūtēm"
+
+#: flowview_devices.php
+msgid "No Inbound Streams Detected"
+msgstr "Ienākošās straumes nav noteiktas"
+
+#: flowview_devices.php
+msgid "Listener Detected Templates"
+msgstr "Klausītāja noteiktās veidnes"
+
+#: flowview_devices.php
+msgid "Ex Addr"
+msgstr "Eksportētāja adrese"
+
+#: flowview_devices.php flowview_filters.php includes/arrays.php
+msgid "All"
+msgstr "Visi"
+
+#: flowview_devices.php
+msgid "Template"
+msgstr "Veidne"
+
+#: flowview_devices.php
+msgid "Template ID"
+msgstr "Veidnes ID"
+
+#: flowview_devices.php
+msgid "Field Name"
+msgstr "Lauka nosaukums"
+
+#: flowview_devices.php includes/functions.php
+msgid "Supported"
+msgstr "Atbalstīts"
+
+#: flowview_devices.php
+msgid "Field ID"
+msgstr "Lauka ID"
+
+#: flowview_devices.php
+msgid "Field Type"
+msgstr "Lauka tips"
+
+#: flowview_devices.php
+msgid "Length"
+msgstr "Garums"
+
+#: flowview_devices.php
+msgid "Unpack"
+msgstr "Atpakot"
+
+#: flowview_devices.php
+msgid "No Inbound Stream Templates Detected"
+msgstr "Ienākošo straumju veidnes nav konstatētas"
+
+#: flowview_devices.php
+msgid "FlowView Listeners"
+msgstr "FlowView klausītāji"
+
+#: flowview_devices.php setup.php
+msgid "Listeners"
+msgstr "Klausītāji"
+
+#: flowview_devices.php
+msgid "Method"
+msgstr "Metode"
+
+#: flowview_devices.php
+msgid "Bind address"
+msgstr "Piesaistes adrese"
+
+#: flowview_devices.php
+msgid "Allowed From"
+msgstr "Atļauts no"
+
+#: flowview_devices.php
+msgid "Observed Listen"
+msgstr "Novērotā klausīšanās"
+
+#: flowview_devices.php
+msgid "The port security actually observed on the listeners port."
+msgstr "Faktiski novērotā porta drošība klausītāja portā."
+
+#: flowview_devices.php
+msgid "Backlog"
+msgstr "Gaidīšanas rinda"
+
+#: flowview_devices.php
+msgid "The Size of the UDP backlog in bytes."
+msgstr "UDP gaidīšanas rindas izmērs baitos."
+
+#: flowview_devices.php
+msgid "Streams"
+msgstr "Straumes"
+
+#: flowview_devices.php
+msgid "The number of inbound connections from various sources."
+msgstr "Ienākošo savienojumu skaits no dažādiem avotiem."
+
+#: flowview_devices.php
+msgid "Stream Versions"
+msgstr "Straumju versijas"
+
+#: flowview_devices.php
+msgid "The Traffic Flow versions being observed."
+msgstr "Novērotās datplūsmas versijas."
+
+#: flowview_devices.php
+msgid "The maximum update time from all streams being collected.  This value is updated every 5 minutes."
+msgstr "Maksimālais atjaunināšanas laiks no visām vāktajām straumēm. Šī vērtība tiek atjaunināta ik pēc 5 minūtēm."
+
+#: flowview_devices.php flowview_schedules.php includes/functions.php
+msgid "None"
+msgstr "Nav"
+
+#: flowview_devices.php
+msgid "No Connections"
+msgstr "Nav savienojumu"
+
+#: flowview_devices.php includes/arrays.php includes/functions.php
+msgid "N/A"
+msgstr "Nav pieejams"
+
+#: flowview_devices.php
+msgid "Cacti"
+msgstr "Cacti"
+
+#: flowview_devices.php
+msgid "No Flowview Listeners"
+msgstr "Nav FlowView klausītāju"
+
+#: flowview_filters.php
+msgid "Materialize"
+msgstr "Materializēt"
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing was pruned."
+msgstr "Neizdevās noteikt filtru kešatmiņas atslēgas, tāpēc nekas netika iztīrīts."
+
+#: flowview_filters.php
+#, php-format
+msgid "Pruned %s cached shard(s) that did not match any Filter."
+msgstr "Iztīrīti kešatmiņas fragmenti (%s), kas neatbilda nevienam filtram."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  %d Filter(s) are already being materialized.  Its results are reported in the Cacti log."
+msgstr "Fonā tika sākta filtru materializācija (skaits: %d). Jau tiek materializēti filtri (skaits: %d). Rezultāti tiek ziņoti Cacti žurnālā."
+
+#: flowview_filters.php
+#, php-format
+msgid "Materialization of %d Filter(s) was started in the background.  Its results are reported in the Cacti log."
+msgstr "Fonā tika sākta filtru materializācija (skaits: %d). Rezultāti tiek ziņoti Cacti žurnālā."
+
+#: flowview_filters.php
+msgid "The selected Filter(s) are already being materialized.  Please try again once that has finished."
+msgstr "Atlasītie filtri jau tiek materializēti. Lūdzu, mēģiniet vēlreiz, kad process būs pabeigts."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to delete the following Filter(s) and all matching Filter."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu tālāk norādītos filtrus un visus atbilstošos filtrus."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Disable the following Filters(s) and all matching Filter."
+msgstr "Noklikšķiniet uz 'Turpināt', lai atspējotu tālāk norādītos filtrus un visus atbilstošos filtrus."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Enable the following Filters(s)."
+msgstr "Noklikšķiniet uz 'Turpināt', lai iespējotu tālāk norādītos filtrus."
+
+#: flowview_filters.php
+msgid "Click 'Continue' to Materialize the following Filter(s) in the background, with NAT on and off, for the entire range of flow data.  Partitions that are already materialized and accurate are skipped.  This can take a long time on large data sets.  A Filter that is already being materialized is skipped."
+msgstr "Noklikšķiniet uz 'Turpināt', lai fonā materializētu tālāk norādītos filtrus ar ieslēgtu un izslēgtu NAT visam plūsmas datu diapazonam. Jau materializētās un precīzās partīcijas tiek izlaistas. Lielām datu kopām tas var aizņemt ilgu laiku. Filtrs, kas jau tiek materializēts, tiek izlaists."
+
+#: flowview_filters.php
+msgid "You must select at least one Filter."
+msgstr "Jāatlasa vismaz viens filtrs."
+
+#: flowview_filters.php
+msgid "FlowView Filters"
+msgstr "FlowView filtri"
+
+#: flowview_filters.php
+msgid "FlowView Filters [ Add Devices before Filters ]"
+msgstr "FlowView filtri [ Pievienojiet ierīces pirms filtriem ]"
+
+#: flowview_filters.php setup.php
+msgid "Filters"
+msgstr "Filtri"
+
+#: flowview_filters.php
+msgid "Prune"
+msgstr "Iztīrīt"
+
+#: flowview_filters.php
+msgid "Remove the cached shards that do not match any Filter"
+msgstr "Noņemt kešotos fragmentus, kas neatbilst nevienam filtram"
+
+#: flowview_filters.php flowview_schedules.php
+msgid "Filter Name"
+msgstr "Filtra nosaukums"
+
+#: flowview_filters.php
+msgid "ID"
+msgstr "ID"
+
+#: flowview_filters.php
+msgid "Materialization"
+msgstr "Materializācija"
+
+#: flowview_filters.php
+msgid "Materialization pre-computes the results of a Filter for each flow partition, with NAT on and off, and stores them in the Parallel Query cache, so reports over older data open quickly.  New partitions are materialized automatically once they stop receiving flows.  Required means partitions that have rotated are not materialized yet, Running means a materialization is in progress, and Up to date means every rotated partition is materialized.  Running: N is how many queries of the Filter are working now.  The partition still receiving flows is not materialized, so it does not count."
+msgstr "Materializācija iepriekš aprēķina filtra rezultātus katrai plūsmas partīcijai ar ieslēgtu un izslēgtu NAT un saglabā tos paralēlo vaicājumu kešatmiņā, lai atskaites par vecākiem datiem atvērtos ātri. Jaunas partīcijas tiek materializētas automātiski, kad tās vairs nesaņem plūsmas. 'Nepieciešams' nozīmē, ka rotētās partīcijas vēl nav materializētas, 'Darbojas' nozīmē, ka notiek materializācija, bet 'Aktuāls' nozīmē, ka katra rotētā partīcija ir materializēta. 'Darbojas: N' norāda, cik filtra vaicājumu pašlaik darbojas. Partīcija, kas joprojām saņem plūsmas, netiek materializēta, tāpēc tā netiek ieskaitīta."
+
+#: flowview_filters.php includes/arrays.php
+msgid "Listener"
+msgstr "Klausītājs"
+
+#: flowview_filters.php includes/arrays.php
+msgid "Report Type"
+msgstr "Atskaites tips"
+
+#: flowview_filters.php
+msgid "NAT Shards"
+msgstr "NAT fragmenti"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT on."
+msgstr "Šī filtra partīciju skaits, kas saglabātas paralēlo vaicājumu kešatmiņā ar ieslēgtu NAT."
+
+#: flowview_filters.php
+msgid "Non-NAT Shards"
+msgstr "Fragmenti bez NAT"
+
+#: flowview_filters.php
+msgid "The number of partitions of this Filter that are stored in the Parallel Query cache with NAT off."
+msgstr "Šī filtra partīciju skaits, kas saglabātas paralēlo vaicājumu kešatmiņā ar izslēgtu NAT."
+
+#: flowview_filters.php
+msgid "Partitions"
+msgstr "Partīcijas"
+
+#: flowview_filters.php
+msgid "The total number of flow partitions, which is the most shards a Filter can have cached with or without NAT."
+msgstr "Kopējais plūsmas partīciju skaits, kas ir maksimālais fragmentu skaits, kādu filtrs var saglabāt kešatmiņā ar vai bez NAT."
+
+#: flowview_filters.php includes/arrays.php includes/functions.php
+msgid "Sort Field"
+msgstr "Kārtošanas lauks"
+
+#: flowview_filters.php
+msgid "Resolution"
+msgstr "Izšķirtspēja"
+
+#: flowview_filters.php
+msgid "The cached shards of the Filters could not be told apart from the others, as the cache keys of a Filter could not be worked out."
+msgstr "Filtru kešotos fragmentus neizdevās atšķirt no pārējiem, jo nevarēja noteikt filtra kešatmiņas atslēgas."
+
+#: flowview_filters.php
+msgid "The cache keys of the Filters could not be worked out, so nothing can be pruned right now.  Check that each Filter has a valid Report."
+msgstr "Neizdevās noteikt filtru kešatmiņas atslēgas, tāpēc pašlaik neko nevar iztīrīt. Pārbaudiet, vai katram filtram ir derīga atskaite."
+
+#: flowview_filters.php
+#, php-format
+msgid "Cached Shards: %s matching a Filter.  %s not matching any Filter, which Prune removes."
+msgstr "Kešotie fragmenti: %s atbilst filtram. %s neatbilst nevienam filtram, un 'Iztīrīt' tos noņem."
+
+#: flowview_filters.php
+#, php-format
+msgid "This removes %s cached shard(s) that do not match any Filter, for every Filter and every user.  They come from Filters that were changed or deleted, and from reports with settings changed on the report page.  The %s cached shard(s) of the Filters are kept.  This can not be undone."
+msgstr "Šī darbība noņem kešotos fragmentus (%s), kas neatbilst nevienam filtram, visiem filtriem un visiem lietotājiem. Tie rodas no mainītiem vai dzēstiem filtriem un no atskaitēm ar atskaites lapā mainītiem iestatījumiem. Filtru kešotie fragmenti (%s) tiek saglabāti. Šo darbību nevar atsaukt."
+
+#: flowview_filters.php
+msgid "Every cached shard matches a Filter.  There is nothing to prune."
+msgstr "Katrs kešotais fragments atbilst kādam filtram. Nav nekā iztīrāma."
+
+#: flowview_filters.php
+msgid "Prune Cached Shards"
+msgstr "Iztīrīt kešotos fragmentus"
+
+#: flowview_filters.php
+msgid "Close"
+msgstr "Aizvērt"
+
+#: flowview_schedules.php
+msgid "Send Now"
+msgstr "Sūtīt tūlīt"
+
+#: flowview_schedules.php
+msgid "Every Hour"
+msgstr "Katru stundu"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Hours"
+msgstr "Ik pēc %d stundām"
+
+#: flowview_schedules.php
+msgid "Every Day"
+msgstr "Katru dienu"
+
+#: flowview_schedules.php
+msgid "Every Week"
+msgstr "Katru nedēļu"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Every %d Weeks"
+msgstr "Ik pēc %d nedēļām"
+
+#: flowview_schedules.php
+msgid "Every Month"
+msgstr "Katru mēnesi"
+
+#: flowview_schedules.php
+msgid "General Settings"
+msgstr "Vispārīgie iestatījumi"
+
+#: flowview_schedules.php
+msgid "Title"
+msgstr "Virsraksts"
+
+#: flowview_schedules.php
+msgid "New Schedule"
+msgstr "Jauns plānotājs"
+
+#: flowview_schedules.php
+msgid "Enter a Report Title for the FlowView Schedule."
+msgstr "Ievadiet atskaites virsrakstu FlowView plānotājam."
+
+#: flowview_schedules.php
+msgid "Whether or not this NetFlow Scan will be sent."
+msgstr "Norāda, vai šī NetFlow skenēšana tiks nosūtīta."
+
+#: flowview_schedules.php
+msgid "Name of the query to run."
+msgstr "Izpildāmā vaicājuma nosaukums."
+
+#: flowview_schedules.php
+msgid "Send Settings"
+msgstr "Sūtīšanas iestatījumi"
+
+#: flowview_schedules.php
+msgid "Send Interval"
+msgstr "Sūtīšanas intervāls"
+
+#: flowview_schedules.php
+msgid "How often to send this NetFlow Report?"
+msgstr "Cik bieži sūtīt šo NetFlow atskaiti?"
+
+#: flowview_schedules.php
+msgid "Scheduled Base Time"
+msgstr "Ieplānotais bāzes laiks"
+
+#: flowview_schedules.php
+msgid "This is the first date / time to send the NetFlow Scan email.  All future Emails will be calculated off of this time plus the interval given above."
+msgstr "Šis ir pirmais datums / laiks NetFlow skenēšanas e-pasta nosūtīšanai. Visi turpmākie e-pasti tiks aprēķināti, pieskaitot iepriekš norādīto intervālu šim laikam."
+
+#: flowview_schedules.php
+msgid "Max Allowed Runtime"
+msgstr "Maks. atļautais izpildes laiks"
+
+#: flowview_schedules.php
+msgid "How long should the report be allowed to execute before exiting?"
+msgstr "Cik ilgi atskaitei atļauts izpildīties pirms darbības pārtraukšanas?"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minūte"
+
+#: flowview_schedules.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minūtes"
+
+#: flowview_schedules.php
+msgid "Legacy Email Settings"
+msgstr "Mantotie e-pasta iestatījumi"
+
+#: flowview_schedules.php
+msgid "Email Addresses"
+msgstr "E-pasta adreses"
+
+#: flowview_schedules.php
+msgid "Email addresses (command delimited) to send this NetFlow Scan to."
+msgstr "E-pasta adreses (atdalītas ar komatiem), uz kurām nosūtīt šo NetFlow skenēšanu."
+
+#: flowview_schedules.php setup.php
+msgid "Format File to Use"
+msgstr "Izmantojamais formāta fails"
+
+#: flowview_schedules.php setup.php
+msgid "Choose the custom html wrapper and CSS file to use.  This file contains both html and CSS to wrap around your report.  If it contains more than simply CSS, you need to place a special <REPORT> tag inside of the file.  This format tag will be replaced by the report content.  These files are located in the 'formats' directory."
+msgstr "Izvēlieties izmantojamo pielāgoto HTML ietvara un CSS failu. Šajā failā ir gan HTML, gan CSS jūsu atskaites noformēšanai. Ja tas satur vairāk nekā tikai CSS, failā jāievieto īpašs <REPORT> tags. Šis formāta tags tiks aizstāts ar atskaites saturu. Šie faili atrodas direktorijā 'formats'."
+
+#: flowview_schedules.php
+msgid "Notification List Settings"
+msgstr "Paziņojumu saraksta iestatījumi"
+
+#: flowview_schedules.php
+msgid "Notification List"
+msgstr "Paziņojumu saraksts"
+
+#: flowview_schedules.php
+msgid "If the Thold Plugin is installed, you may select a Notification List"
+msgstr "Ja ir instalēts spraudnis Thold, varat atlasīt paziņojumu sarakstu"
+
+#: flowview_schedules.php
+msgid "The Report will arrive once complete."
+msgstr "Atskaite tiks piegādāta, tiklīdz tā būs pabeigta."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to delete the following Schedule(s)."
+msgstr "Noklikšķiniet uz 'Turpināt', lai dzēstu tālāk norādītos plānotājus."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to send the following Schedule(s) now."
+msgstr "Noklikšķiniet uz 'Turpināt', lai tūlīt nosūtītu tālāk norādītos plānotājus."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Disable the following Schedule(s)."
+msgstr "Noklikšķiniet uz 'Turpināt', lai atspējotu tālāk norādītos plānotājus."
+
+#: flowview_schedules.php
+msgid "Click 'Continue' to Enable the following Schedule(s)."
+msgstr "Noklikšķiniet uz 'Turpināt', lai iespējotu tālāk norādītos plānotājus."
+
+#: flowview_schedules.php
+msgid "You must select at least one schedule."
+msgstr "Jāatlasa vismaz viens plānotājs."
+
+#: flowview_schedules.php
+#, php-format
+msgid "Unable to find Report Raw Data for Report ID %s"
+msgstr "Nevar atrast atskaites neapstrādātos datus atskaitei ar ID %s"
+
+#: flowview_schedules.php
+msgid "You must specify Emails, a Notification List or both!"
+msgstr "Jānorāda e-pasta adreses, paziņojumu saraksts vai abi!"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report: [edit: %s]"
+msgstr "Plānotā atskaite: [rediģēt: %s]"
+
+#: flowview_schedules.php
+#, php-format
+msgid "Scheduled Report History: [edit: %s]"
+msgstr "Plānotās atskaites vēsture: [rediģēt: %s]"
+
+#: flowview_schedules.php
+msgid "Scheduled Report: [new]"
+msgstr "Plānotā atskaite: [jauna]"
+
+#: flowview_schedules.php setup.php
+msgid "Schedules"
+msgstr "Plānotāji"
+
+#: flowview_schedules.php
+msgid "Report Title"
+msgstr "Atskaites virsraksts"
+
+#: flowview_schedules.php
+msgid "Id"
+msgstr "ID"
+
+#: flowview_schedules.php
+msgid "Output Type"
+msgstr "Izvades tips"
+
+#: flowview_schedules.php
+msgid "Sent By"
+msgstr "Nosūtīja"
+
+#: flowview_schedules.php
+msgid "Date Sent"
+msgstr "Nosūtīšanas datums"
+
+#: flowview_schedules.php
+msgid "Run Time"
+msgstr "Izpildes laiks"
+
+#: flowview_schedules.php
+msgid "Download Data"
+msgstr "Lejupielādēt datus"
+
+#: flowview_schedules.php
+msgid "Report Logs"
+msgstr "Atskaišu žurnāli"
+
+#: flowview_schedules.php
+msgid " [View Report Raw]"
+msgstr " [Skatīt neapstrādātu atskaiti]"
+
+#: flowview_schedules.php
+msgid " [View Report with CSS]"
+msgstr " [Skatīt atskaiti ar CSS]"
+
+#: flowview_schedules.php
+msgid "Manual Send"
+msgstr "Manuāla nosūtīšana"
+
+#: flowview_schedules.php
+msgid "Scheduled"
+msgstr "Ieplānots"
+
+#: flowview_schedules.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s sekundes"
+
+#: flowview_schedules.php includes/functions.php
+msgid "Start Date Selector"
+msgstr "Sākuma datuma atlasītājs"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules"
+msgstr "FlowView plānotāji"
+
+#: flowview_schedules.php
+msgid "FlowView Schedules [ Add Devices before Schedules ]"
+msgstr "FlowView plānotāji [ Pievienojiet ierīces pirms plānotājiem ]"
+
+#: flowview_schedules.php
+msgid "Interval"
+msgstr "Intervāls"
+
+#: flowview_schedules.php
+msgid "Last Sent"
+msgstr "Pēdējo reizi nosūtīts"
+
+#: flowview_schedules.php
+msgid "Next Send"
+msgstr "Nākamā nosūtīšana"
+
+#: flowview_schedules.php
+msgid "Email/List"
+msgstr "E-pasts/saraksts"
+
+#: flowview_schedules.php
+msgid "Logged Sends"
+msgstr "Reģistrētās nosūtīšanas"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "No"
+msgstr "Nē"
+
+#: flowview_schedules.php includes/arrays.php
+msgid "Yes"
+msgstr "Jā"
+
+#: includes/arrays.php includes/functions.php
+msgid "Select a Report"
+msgstr "Atlasiet atskaiti"
+
+#: includes/arrays.php
+msgid "Summary"
+msgstr "Kopsavilkums"
+
+#: includes/arrays.php
+msgid "Source Root Domain"
+msgstr "Avota saknes domēns"
+
+#: includes/arrays.php
+msgid "Destination Root Domain"
+msgstr "Galamērķa saknes domēns"
+
+#: includes/arrays.php
+msgid "Source/Destination Root Domain"
+msgstr "Avota/galamērķa saknes domēns"
+
+#: includes/arrays.php
+msgid "UDP/TCP Destination Port"
+msgstr "UDP/TCP galamērķa ports"
+
+#: includes/arrays.php
+msgid "UDP/TCP Source Port"
+msgstr "UDP/TCP avota ports"
+
+#: includes/arrays.php
+msgid "UDP/TCP Port"
+msgstr "UDP/TCP ports"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IP"
+msgstr "Avota IP"
+
+#: includes/arrays.php
+msgid "Destination IP"
+msgstr "Galamērķa IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source/Destination IP"
+msgstr "Avota/galamērķa IP"
+
+#: includes/arrays.php
+msgid "Source or Destination IP"
+msgstr "Avota vai galamērķa IP"
+
+#: includes/arrays.php
+msgid "IP Protocol"
+msgstr "IP protokols"
+
+#: includes/arrays.php
+msgid "Input Interface"
+msgstr "Ievades saskarne"
+
+#: includes/arrays.php
+msgid "Output Interface"
+msgstr "Izvades saskarne"
+
+#: includes/arrays.php
+msgid "Input/Output Interface"
+msgstr "Ievades/izvades saskarne"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source AS"
+msgstr "Avota AS"
+
+#: includes/arrays.php
+msgid "Destination AS"
+msgstr "Galamērķa AS"
+
+#: includes/arrays.php
+msgid "Source/Destination AS"
+msgstr "Avota/galamērķa AS"
+
+#: includes/arrays.php
+msgid "IP ToS"
+msgstr "IP ToS"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Prefix"
+msgstr "Avota prefikss"
+
+#: includes/arrays.php
+msgid "Destination Prefix"
+msgstr "Galamērķa prefikss"
+
+#: includes/arrays.php
+msgid "Source/Destination Prefix"
+msgstr "Avota/galamērķa prefikss"
+
+#: includes/arrays.php
+msgid "Flow Times"
+msgstr "Plūsmu laiki"
+
+#: includes/arrays.php
+msgid "Source/Destination IPs and Ports"
+msgstr "Avota/galamērķa IP un porti"
+
+#: includes/arrays.php
+msgid "AS Numbers"
+msgstr "AS numuri"
+
+#: includes/arrays.php
+msgid "132 Columns"
+msgstr "132 kolonnas"
+
+#: includes/arrays.php
+msgid "Show IP Accounting Emulation"
+msgstr "Rādīt IP uzskaites emulāciju"
+
+#: includes/arrays.php
+msgid "Any Part in Range (slow)"
+msgstr "Jebkura daļa diapazonā (lēni)"
+
+#: includes/arrays.php
+msgid "End Time in Range (fast)"
+msgstr "Beigu laiks diapazonā (ātri)"
+
+#: includes/arrays.php
+msgid "Start Time in Range (fast)"
+msgstr "Sākuma laiks diapazonā (ātri)"
+
+#: includes/arrays.php
+msgid "Entirely in Range (slow)"
+msgstr "Pilnībā diapazonā (lēni)"
+
+#: includes/arrays.php
+msgid "Return All Lines"
+msgstr "Atgriezt visas rindas"
+
+#: includes/arrays.php
+#, php-format
+msgid "Top %d"
+msgstr "Pirmie %d"
+
+#: includes/arrays.php
+msgid "No Limit"
+msgstr "Bez ierobežojuma"
+
+#: includes/arrays.php
+#, php-format
+msgid "%s Bytes"
+msgstr "%s baiti"
+
+#: includes/arrays.php
+msgid "Source Domain"
+msgstr "Avota domēns"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flows"
+msgstr "Plūsmas"
+
+#: includes/arrays.php includes/functions.php
+msgid "Bytes"
+msgstr "Baiti"
+
+#: includes/arrays.php includes/functions.php
+msgid "Packets"
+msgstr "Paketes"
+
+#: includes/arrays.php
+msgid "Destination Domain"
+msgstr "Galamērķa domēns"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source Port"
+msgstr "Avota ports"
+
+#: includes/arrays.php
+msgid "Destination Port"
+msgstr "Galamērķa ports"
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest IP"
+msgstr "Galamērķa IP"
+
+#: includes/arrays.php includes/functions.php
+msgid "Source IF"
+msgstr "Avota saskarne"
+
+#: includes/arrays.php
+msgid "Destination IF"
+msgstr "Galamērķa saskarne"
+
+#: includes/arrays.php
+msgid "TOS"
+msgstr "TOS"
+
+#: includes/arrays.php
+msgid "Destingation Prefix"
+msgstr "Galamērķa prefikss"
+
+#: includes/arrays.php includes/functions.php
+msgid "Start Time"
+msgstr "Sākuma laiks"
+
+#: includes/arrays.php includes/functions.php
+msgid "End Time"
+msgstr "Beigu laiks"
+
+#: includes/arrays.php
+msgid "Active"
+msgstr "Aktīvs"
+
+#: includes/arrays.php
+msgid "B/Pk"
+msgstr "B/pak"
+
+#: includes/arrays.php
+msgid "Ts"
+msgstr "Ts"
+
+#: includes/arrays.php
+msgid "Fl"
+msgstr "Fl"
+
+#: includes/arrays.php includes/functions.php
+msgid "Flags"
+msgstr "Karogi"
+
+#: includes/arrays.php
+msgid "Destination"
+msgstr "Galamērķis"
+
+#: includes/arrays.php
+#, php-format
+msgid "%d Pixels"
+msgstr "%d pikseļi"
+
+#: includes/arrays.php
+msgid "General Filters"
+msgstr "Vispārīgie filtri"
+
+#: includes/arrays.php
+msgid "The Saved Filter to display."
+msgstr "Attēlojamais saglabātais filtrs."
+
+#: includes/arrays.php
+msgid "New Filter"
+msgstr "Jauns filtrs"
+
+#: includes/arrays.php
+msgid "The Listener to use for the Filter."
+msgstr "Klausītājs, ko izmantot šim filtram."
+
+#: includes/arrays.php
+msgid "Flow Template ID"
+msgstr "Plūsmas veidnes ID"
+
+#: includes/arrays.php
+msgid "The Flow Template ID for v9 and IPFIX Flows only.  Note that Template ID's may differ from manufacturer to manufacturer."
+msgstr "Plūsmas veidnes ID tikai v9 un IPFIX plūsmām. Ņemiet vērā, ka veidnes ID dažādiem ražotājiem var atšķirties."
+
+#: includes/arrays.php
+msgid "Stream Address"
+msgstr "Straumes adrese"
+
+#: includes/arrays.php
+msgid "The Stream IP Address or Hostname from the list of registered streams."
+msgstr "Straumes IP adrese vai resursdatora nosaukums no reģistrēto straumju saraksta."
+
+#: includes/arrays.php
+msgid "Presets"
+msgstr "Iepriekšiestatījumi"
+
+#: includes/arrays.php
+msgid "If this Filter is based upon a pre-defined Timespan, select it here."
+msgstr "Ja šis filtrs balstās uz iepriekš definētu laika posmu, atlasiet to šeit."
+
+#: includes/arrays.php
+msgid "Detailed Filter Criteria"
+msgstr "Detalizēti filtra kritēriji"
+
+#: includes/arrays.php
+msgid "The Report Type to use by default for this Filter when creating a Report."
+msgstr "Atskaites veids, ko pēc noklusējuma izmantot šim filtram, veidojot atskaiti."
+
+#: includes/arrays.php
+msgid "Printed"
+msgstr "Drukas"
+
+#: includes/arrays.php
+msgid "Statistical"
+msgstr "Statistiskā"
+
+#: includes/arrays.php
+msgid "Statistical Report"
+msgstr "Statistiskā atskaite"
+
+#: includes/arrays.php
+msgid "The Display Report Type to use by default for this Filter when creating a Report."
+msgstr "Attēlojamās atskaites veids, ko pēc noklusējuma izmantot šim filtram, veidojot atskaiti."
+
+#: includes/arrays.php
+msgid "Printed Report"
+msgstr "Drukas atskaite"
+
+#: includes/arrays.php
+msgid "The Printed Report Type to use by default for this Filter when creating a Printed Report."
+msgstr "Drukas atskaites veids, ko pēc noklusējuma izmantot šim filtram, veidojot drukas atskaiti."
+
+#: includes/arrays.php
+msgid "Range Rules"
+msgstr "Diapazona kārtulas"
+
+#: includes/arrays.php
+msgid "Constrain the Filter Data by these time filter rules."
+msgstr "Ierobežot filtra datus ar šīm laika filtra kārtulām."
+
+#: includes/arrays.php
+msgid "Resolve IP's"
+msgstr "Atrisināt IP adreses"
+
+#: includes/arrays.php
+msgid "Resolve IP Addresses to Domain Names."
+msgstr "Atrisināt IP adreses uz domēnu nosaukumiem."
+
+#: includes/arrays.php
+msgid "The default Sort Field for the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Filtra noklusējuma kārtošanas lauks. Šis iestatījums tiks lietots visām plānotajām atskaitēm."
+
+#: includes/arrays.php
+msgid "Maximum Rows"
+msgstr "Maksimālais rindu skaits"
+
+#: includes/arrays.php
+msgid "The Maximum Rows to provide in the Filter.  This setting will be applied for any Scheduled Reports."
+msgstr "Maksimālais rindu skaits, ko iekļaut filtrā. Šis iestatījums tiks lietots visām plānotajām atskaitēm."
+
+#: includes/arrays.php
+msgid "Minimum Bytes"
+msgstr "Minimālais baitu skaits"
+
+#: includes/arrays.php
+msgid "The Minimum Total Bytes to consider for the Filter.  Any flow totals that are less than this many bytes will be ignored."
+msgstr "Minimālais kopējais baitu skaits, ko ņemt vērā filtrā. Visas plūsmas, kuru kopējais apjoms ir mazāks par šo baitu skaitu, tiks ignorētas."
+
+#: includes/arrays.php
+msgid "Charting Options"
+msgstr "Diagrammu opcijas"
+
+#: includes/arrays.php
+msgid "Graph Type"
+msgstr "Grafika veids"
+
+#: includes/arrays.php
+msgid "The Graph Type to display by default.  They include Bar, Pie, and Treemap."
+msgstr "Grafika veids, ko attēlot pēc noklusējuma. Pieejami stabiņu, sektoru un koka kartes grafiki."
+
+#: includes/arrays.php
+msgid "Bar Chart"
+msgstr "Stabiņu diagramma"
+
+#: includes/arrays.php
+msgid "Pie Chart"
+msgstr "Sektoru diagramma"
+
+#: includes/arrays.php
+msgid "Treemap Chart"
+msgstr "Koka kartes diagramma"
+
+#: includes/arrays.php
+msgid "Graph Height"
+msgstr "Grafika augstums"
+
+#: includes/arrays.php
+msgid "The Graph Height to use by default."
+msgstr "Grafika augstums, ko izmantot pēc noklusējuma."
+
+#: includes/arrays.php includes/functions.php
+msgid "Use NAT Data"
+msgstr "Izmantot NAT datus"
+
+#: includes/arrays.php
+msgid "Show the post-NAT (translated) Source/Destination IP and DNS name in report output instead of the original, pre-NAT values."
+msgstr "Atskaites izvadē rādīt pēc-NAT (tulkoto) avota/mērķa IP adresi un DNS nosaukumu, nevis sākotnējās pirms-NAT vērtības."
+
+#: includes/arrays.php
+msgid "Table Panel"
+msgstr "Tabulas panelis"
+
+#: includes/arrays.php
+msgid "Should the Table Panel be displayed by default."
+msgstr "Vai pēc noklusējuma attēlot tabulas paneli."
+
+#: includes/arrays.php
+msgid "Bytes Panel"
+msgstr "Baitu panelis"
+
+#: includes/arrays.php
+msgid "Should the Bytes Panel be displayed by default."
+msgstr "Vai pēc noklusējuma attēlot baitu paneli."
+
+#: includes/arrays.php
+msgid "Packets Panel"
+msgstr "Pakešu panelis"
+
+#: includes/arrays.php
+msgid "Should the Packets Panel be displayed by default."
+msgstr "Vai pēc noklusējuma attēlot pakešu paneli."
+
+#: includes/arrays.php
+msgid "Flows Panel"
+msgstr "Plūsmu panelis"
+
+#: includes/arrays.php
+msgid "Should the Flows Panel be displayed by default."
+msgstr "Vai pēc noklusējuma attēlot plūsmu paneli."
+
+#: includes/arrays.php
+msgid "Protocol Filters"
+msgstr "Protokolu filtri"
+
+#: includes/arrays.php
+msgid "Protocols"
+msgstr "Protokoli"
+
+#: includes/arrays.php
+msgid "Select the Specific Protocol for the Filter."
+msgstr "Atlasiet konkrēto protokolu filtram."
+
+#: includes/arrays.php
+msgid "All Protocols"
+msgstr "Visi protokoli"
+
+#: includes/arrays.php
+msgid "TCP Flags"
+msgstr "TCP karogi"
+
+#: includes/arrays.php
+msgid "The TCP Flags to search for in the Filter.  This can be a comma delimited list of TCP Flags"
+msgstr "TCP karogi, ko meklēt filtrā. Tas var būt ar komatiem atdalīts TCP karogu saraksts"
+
+#: includes/arrays.php
+msgid "TOS Fields"
+msgstr "TOS lauki"
+
+#: includes/arrays.php
+msgid "The TOS Fields to search for in the Filter.  This can be a comma delimited list of TOS Fields"
+msgstr "TOS lauki, ko meklēt filtrā. Tas var būt ar komatiem atdalīts TOS lauku saraksts"
+
+#: includes/arrays.php
+msgid "Filter on the select Source IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrēt pēc atlasītās avota IP adreses. Tas var būt ar komatiem atdalīts IPv4 vai IPv6 adrešu saraksts vai IPv4 vai IPv6 adrešu diapazonu saraksts CIDR formātā (piem., 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Source Ports"
+msgstr "Avota porti"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Ports for in the Filter.  This can be a comma delimited list of Source Ports."
+msgstr "Filtrēt pēc atlasītajiem avota portiem. Tas var būt ar komatiem atdalīts avota portu saraksts."
+
+#: includes/arrays.php
+msgid "Source Interface"
+msgstr "Avota saskarne"
+
+#: includes/arrays.php
+msgid "Filter on the select Source Interface for in the Filter.  This can be a comma delimited list of Source Interfaces"
+msgstr "Filtrēt pēc atlasītās avota saskarnes. Tas var būt ar komatiem atdalīts avota saskarņu saraksts"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Source AS's"
+msgstr "Filtrēt pēc atlasītās avota AS. Tas var būt ar komatiem atdalīts avota AS saraksts"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination IP for in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrēt pēc atlasītās mērķa IP adreses. Tas var būt ar komatiem atdalīts IPv4 vai IPv6 adrešu saraksts vai IPv4 vai IPv6 adrešu diapazonu saraksts CIDR formātā (piem., 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Dest Ports"
+msgstr "Mērķa porti"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Ports for in the Filter.  This can be a comma delimited list of Destimation Ports."
+msgstr "Filtrēt pēc atlasītajiem mērķa portiem. Tas var būt ar komatiem atdalīts mērķa portu saraksts."
+
+#: includes/arrays.php
+msgid "Dest Interface"
+msgstr "Mērķa saskarne"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination Interface for in the Filter.  This can be a comma delimited list of Destimation Interfaces."
+msgstr "Filtrēt pēc atlasītās mērķa saskarnes. Tas var būt ar komatiem atdalīts mērķa saskarņu saraksts."
+
+#: includes/arrays.php includes/functions.php
+msgid "Dest AS"
+msgstr "Mērķa AS"
+
+#: includes/arrays.php
+msgid "Filter on the select Destination AS for in the Filter.  This can be a comma delimited list of Destimation AS's"
+msgstr "Filtrēt pēc atlasītās mērķa AS. Tas var būt ar komatiem atdalīts mērķa AS saraksts"
+
+#: includes/arrays.php
+msgid "Post-NAT Source IP"
+msgstr "Pēc-NAT avota IP"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrēt pēc tulkotās (pēc-NAT) avota IP adreses. Tas var būt ar komatiem atdalīts IPv4 vai IPv6 adrešu saraksts vai IPv4 vai IPv6 adrešu diapazonu saraksts CIDR formātā (piem., 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Source Port"
+msgstr "Pēc-NAT avota ports"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Source Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrēt pēc tulkotā (pēc-NAT) avota porta. Tas var būt ar komatiem atdalīts portu saraksts."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest IP"
+msgstr "Pēc-NAT mērķa IP"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination IP recorded in the Filter.  This can be a comma delimited list of IPv4 or IPv6 addresses, or a comma delimited list of IPv4 or IPv6 address ranges in CIDR format (eg. 192.168.1.0/24)."
+msgstr "Filtrēt pēc tulkotās (pēc-NAT) mērķa IP adreses. Tas var būt ar komatiem atdalīts IPv4 vai IPv6 adrešu saraksts vai IPv4 vai IPv6 adrešu diapazonu saraksts CIDR formātā (piem., 192.168.1.0/24)."
+
+#: includes/arrays.php
+msgid "Post-NAT Dest Port"
+msgstr "Pēc-NAT mērķa ports"
+
+#: includes/arrays.php
+msgid "Filter on the translated (post-NAT) Destination Port for in the Filter.  This can be a comma delimited list of Ports."
+msgstr "Filtrēt pēc tulkotā (pēc-NAT) mērķa porta. Tas var būt ar komatiem atdalīts portu saraksts."
+
+#: includes/arrays.php
+msgid "DNS Cache"
+msgstr "DNS kešatmiņa"
+
+#: includes/arrays.php
+msgid "CIDR/Routes"
+msgstr "CIDR/Maršruti"
+
+#: includes/arrays.php
+msgid "Autonomous Numbers"
+msgstr "Autonomo sistēmu numuri"
+
+#: includes/arrays.php
+msgid "AS Blocks"
+msgstr "AS bloki"
+
+#: includes/arrays.php
+msgid "AS Sets"
+msgstr "AS kopas"
+
+#: includes/arrays.php
+msgid "Route Sets"
+msgstr "Maršrutu kopas"
+
+#: includes/arrays.php
+msgid "Domains"
+msgstr "Domēni"
+
+#: includes/arrays.php
+msgid "Filter Sets"
+msgstr "Filtru kopas"
+
+#: includes/arrays.php
+msgid "Peering Sets"
+msgstr "Pīringa kopas"
+
+#: includes/arrays.php
+msgid "Internet Routers"
+msgstr "Interneta maršrutētāji"
+
+#: includes/arrays.php
+msgid "Incident Response Teams"
+msgstr "Incidentu reaģēšanas komandas"
+
+#: includes/arrays.php
+msgid "Auth Agents"
+msgstr "Autentifikācijas aģenti"
+
+#: includes/arrays.php
+msgid "Organizations"
+msgstr "Organizācijas"
+
+#: includes/arrays.php
+msgid "Roles"
+msgstr "Lomas"
+
+#: includes/arrays.php
+msgid "Persons"
+msgstr "Personas"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "Cacti %s"
+msgstr "Cacti %s"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s is scheduled to run!"
+msgstr "Atskaite '%s' no avota %s ar ID %s ir ieplānota izpildei!"
+
+#: includes/functions-pre13.php
+#, php-format
+msgid "The Report '%s' from source %s with id %s was not scheduled to run due to an error!"
+msgstr "Atskaite '%s' no avota %s ar ID %s kļūdas dēļ netika ieplānota izpildei!"
+
+#: includes/functions.php
+msgid "General"
+msgstr "Vispārīgi"
+
+#: includes/functions.php
+msgid "Logs"
+msgstr "Žurnāli"
+
+#: includes/functions.php
+msgid "Select a Report Type First"
+msgstr "Vispirms atlasiet atskaites veidu"
+
+#: includes/functions.php
+#, php-format
+msgid "Filter: [edit: %s]"
+msgstr "Filtrs: [rediģēt: %s]"
+
+#: includes/functions.php
+msgid "Filter: [new]"
+msgstr "Filtrs: [jauns]"
+
+#: includes/functions.php
+msgid "Cached Results Affected"
+msgstr "Ietekmēti kešotie rezultāti"
+
+#: includes/functions.php
+msgid "These changes affect the cached results of this Filter.  Saving it starts a materialization in the background to rebuild them.  Press 'Continue' to save the Filter, or 'Cancel' to keep editing it."
+msgstr "Šīs izmaiņas ietekmē šī filtra kešotos rezultātus. Saglabājot to, fonā tiks sākta materializācija, lai tos pārbūvētu. Nospiediet 'Turpināt', lai saglabātu filtru, vai 'Atcelt', lai turpinātu tā rediģēšanu."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results, so a materialization of it has been started in the background.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Izmaiņas šajā filtrā ietekmē tā kešotos rezultātus, tāpēc fonā ir sākta tā materializācija. Tās norise ir redzama lapā Filtri, un rezultāti tiek reģistrēti Cacti žurnālā."
+
+#: includes/functions.php
+msgid "The changes to this Filter affect its cached results.  A materialization of it is already running, so a fresh one is queued and will start when that finishes.  Its progress is shown on the Filters page and its results are reported in the Cacti log."
+msgstr "Izmaiņas šajā filtrā ietekmē tā kešotos rezultātus. Tā materializācija jau darbojas, tāpēc rindā ir pievienota jauna, kas sāksies pēc pašreizējās pabeigšanas. Tās norise ir redzama lapā Filtri, un rezultāti tiek reģistrēti Cacti žurnālā."
+
+#: includes/functions.php
+msgid "Undefined Filter [ Select Filter to get Details ]"
+msgstr "Nedefinēts filtrs [ Atlasiet filtru, lai skatītu detalizētu informāciju ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical Report: %s [ Including overrides as specified below ]"
+msgstr "Statistiskā atskaite: %s [ Ietverot tālāk norādītos pārrakstījumus ]"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed Report: %s [ Including overrides as specified below ]"
+msgstr "Drukas atskaite: %s [ Ietverot tālāk norādītos pārrakstījumus ]"
+
+#: includes/functions.php
+msgid "Select a Filter"
+msgstr "Atlasiet filtru"
+
+#: includes/functions.php
+msgid "Apply Filter"
+msgstr "Lietot filtru"
+
+#: includes/functions.php
+msgid "Clear Filter"
+msgstr "Notīrīt filtru"
+
+#: includes/functions.php
+msgid "Edit"
+msgstr "Rediģēt"
+
+#: includes/functions.php
+msgid "Edit the Flow Filter"
+msgstr "Rediģēt plūsmas filtru"
+
+#: includes/functions.php
+msgid "Create new Flow Filter"
+msgstr "Izveidot jaunu plūsmas filtru"
+
+#: includes/functions.php
+msgid "New"
+msgstr "Jauns"
+
+#: includes/functions.php
+msgid "Save"
+msgstr "Saglabāt"
+
+#: includes/functions.php
+msgid "Save the Flow Filter"
+msgstr "Saglabāt plūsmas filtru"
+
+#: includes/functions.php
+msgid "Save As"
+msgstr "Saglabāt kā"
+
+#: includes/functions.php
+msgid "Save the existing Flow Filter as new Filter"
+msgstr "Saglabāt esošo plūsmas filtru kā jaunu filtru"
+
+#: includes/functions.php
+msgid "Rename"
+msgstr "Pārdēvēt"
+
+#: includes/functions.php
+msgid "Rename the Flow Filter"
+msgstr "Pārdēvēt plūsmas filtru"
+
+#: includes/functions.php
+msgid "Delete the Flow Filter"
+msgstr "Dzēst plūsmas filtru"
+
+#: includes/functions.php
+msgid "Report"
+msgstr "Atskaite"
+
+#: includes/functions.php
+#, php-format
+msgid "Statistical: %s"
+msgstr "Statistiskā: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Printed: %s"
+msgstr "Drukas: %s"
+
+#: includes/functions.php
+msgid "Select a Filter First"
+msgstr "Vispirms atlasiet filtru"
+
+#: includes/functions.php
+msgid "Lines"
+msgstr "Rindas"
+
+#: includes/functions.php
+msgid "Exclude"
+msgstr "Izslēgt"
+
+#: includes/functions.php
+msgid "Top Sample"
+msgstr "Top paraugs"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %d Samples"
+msgstr "Top %d paraugi"
+
+#: includes/functions.php
+msgid "Octets"
+msgstr "Okteti"
+
+#: includes/functions.php
+msgid "Show only Domains on Charts Below"
+msgstr "Tālāk esošajās diagrammās rādīt tikai domēnus"
+
+#: includes/functions.php
+msgid "Domains/Hostnames Only"
+msgstr "Tikai domēni/resursdatoru nosaukumi"
+
+#: includes/functions.php
+msgid "Show the post-NAT (translated) IP/DNS name instead of the original values"
+msgstr "Rādīt pēc-NAT (tulkoto) IP/DNS nosaukumu, nevis sākotnējās vērtības"
+
+#: includes/functions.php
+msgid "Timespan"
+msgstr "Laika posms"
+
+#: includes/functions.php
+msgid "Custom"
+msgstr "Pielāgots"
+
+#: includes/functions.php
+msgid "From"
+msgstr "No"
+
+#: includes/functions.php
+msgid "To"
+msgstr "Līdz"
+
+#: includes/functions.php
+msgid "End Date Selector"
+msgstr "Beigu datuma atlasītājs"
+
+#: includes/functions.php
+msgid "Shift Time Backward"
+msgstr "Nobīdīt laiku atpakaļ"
+
+#: includes/functions.php
+msgid "Define Shifting Interval"
+msgstr "Definēt nobīdes intervālu"
+
+#: includes/functions.php
+msgid "Shift Time Forward"
+msgstr "Nobīdīt laiku uz priekšu"
+
+#: includes/functions.php
+msgid "Graph"
+msgstr "Grafiks"
+
+#: includes/functions.php
+msgid "Bar"
+msgstr "Stabiņu"
+
+#: includes/functions.php
+msgid "Pie"
+msgstr "Sektoru"
+
+#: includes/functions.php
+msgid "Treemap"
+msgstr "Koka karte"
+
+#: includes/functions.php
+msgid "Height"
+msgstr "Augstums"
+
+#: includes/functions.php
+msgid "Show/Hide"
+msgstr "Rādīt/Slēpt"
+
+#: includes/functions.php
+msgid "Table"
+msgstr "Tabula"
+
+#: includes/functions.php
+msgid "Export Raw Data"
+msgstr "Eksportēt neapstrādātus datus"
+
+#: includes/functions.php
+msgid "Save Flow Filter"
+msgstr "Saglabāt plūsmas filtru"
+
+#: includes/functions.php
+msgid "New Name"
+msgstr "Jauns nosaukums"
+
+#: includes/functions.php
+msgid "Delete Flow Filter"
+msgstr "Dzēst plūsmas filtru"
+
+#: includes/functions.php
+msgid "To Delete this Flow Filter, press Continue.  If the Flow Filter is in use in a Scheduled Report, the operation will be blocked."
+msgstr "Lai dzēstu šo plūsmas filtru, nospiediet Turpināt. Ja plūsmas filtrs tiek izmantots plānotajā atskaitē, darbība tiks bloķēta."
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Bytes"
+msgstr "Top %s baitu sadalījuma diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Bytes"
+msgstr "Top %s baitu sektoru diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Bytes"
+msgstr "Top %s baitu koka kartes diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Packets"
+msgstr "Top %s pakešu sadalījuma diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Packets"
+msgstr "Top %s pakešu sektoru diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Packets"
+msgstr "Top %s pakešu koka kartes diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Distribution Chart of Flows"
+msgstr "Top %s plūsmu sadalījuma diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Pie Chart of Flows"
+msgstr "Top %s plūsmu sektoru diagramma"
+
+#: includes/functions.php
+#, php-format
+msgid "Top %s Treemap Chart of Flows"
+msgstr "Top %s plūsmu koka kartes diagramma"
+
+#: includes/functions.php
+msgid "Rename Layout"
+msgstr "Pārdēvēt izkārtojumu"
+
+#: includes/functions.php
+msgid " <new>"
+msgstr " <new>"
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter is already running, so a fresh one is queued and will start when it finishes."
+msgstr "Filtra iestatījumi saglabāti. Šī filtra materializācija jau darbojas, tāpēc rindā ir pievienota jauna, kas sāksies pēc pašreizējās pabeigšanas."
+
+#: includes/functions.php
+msgid "Filter Settings Saved.  A materialization of this Filter has been started in the background."
+msgstr "Filtra iestatījumi saglabāti. Fonā ir sākta šī filtra materializācija."
+
+#: includes/functions.php
+msgid "Filter Settings Saved"
+msgstr "Filtra iestatījumi saglabāti"
+
+#: includes/functions.php
+#, php-format
+msgid "Client/Private (%s)"
+msgstr "Klients/Privāts (%s)"
+
+#: includes/functions.php
+msgid "icmp (0)"
+msgstr "icmp (0)"
+
+#: includes/functions.php
+#, php-format
+msgid "Unknown (%s)"
+msgstr "Nezināms (%s)"
+
+#: includes/functions.php
+#, php-format
+msgid "Netflow - %s"
+msgstr "NetFlow - %s"
+
+#: includes/functions.php
+#, php-format
+msgid "Subnet Filter: %s is not a value CIDR format"
+msgstr "Apakštīkla filtrs: %s nav derīgs CIDR formāts"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Filter: %s is not a valid IP address"
+msgstr "IP filtrs: %s nav derīga IP adrese"
+
+#: includes/functions.php
+msgid "unresolved"
+msgstr "neatrisināts"
+
+#: includes/functions.php
+#, php-format
+msgid "%d - %d Bytes"
+msgstr "%d - %d baiti"
+
+#: includes/functions.php
+#, php-format
+msgid "> %d Bytes"
+msgstr "> %d baiti"
+
+#: includes/functions.php
+#, php-format
+msgid "The Statistical Report %s is not known.  Please open a bug on GitHub"
+msgstr "Statistiskā atskaite %s nav zināma. Lūdzu, ziņojiet par kļūdu vietnē GitHub"
+
+#: includes/functions.php
+#, php-format
+msgid "The Printed Report %s is not known.  Please open a bug on GitHub"
+msgstr "Drukas atskaite %s nav zināma. Lūdzu, ziņojiet par kļūdu vietnē GitHub"
+
+#: includes/functions.php
+msgid "Source DNS"
+msgstr "Avota DNS"
+
+#: includes/functions.php
+msgid "Source Root DNS"
+msgstr "Avota saknes DNS"
+
+#: includes/functions.php
+msgid "Dest DNS"
+msgstr "Mērķa DNS"
+
+#: includes/functions.php
+msgid "Dest Root DNS"
+msgstr "Mērķa saknes DNS"
+
+#: includes/functions.php
+msgid "DNS"
+msgstr "DNS"
+
+#: includes/functions.php
+msgid "Root DNS"
+msgstr "Saknes DNS"
+
+#: includes/functions.php
+msgid "Dest Port"
+msgstr "Mērķa ports"
+
+#: includes/functions.php
+msgid "Dest IF"
+msgstr "Mērķa saskarne"
+
+#: includes/functions.php
+msgid "Dest Prefix"
+msgstr "Mērķa prefikss"
+
+#: includes/functions.php
+msgid "Type of Service"
+msgstr "Pakalpojuma veids"
+
+#: includes/functions.php
+msgid "Bytes/Packet"
+msgstr "Baiti/pakete"
+
+#: includes/functions.php
+#, php-format
+msgid "Not materialized yet, with NAT: %s, without NAT: %s."
+msgstr "Vēl nav materializēts, ar NAT: %s, bez NAT: %s."
+
+#: includes/functions.php
+msgid "Up to date"
+msgstr "Aktuāls"
+
+#: includes/functions.php
+msgid "Running"
+msgstr "Darbojas"
+
+#: includes/functions.php
+msgid "Required"
+msgstr "Nepieciešams"
+
+#: includes/functions.php
+msgid "The number of queries of this Filter that are running now."
+msgstr "Šī filtra vaicājumu skaits, kas pašlaik darbojas."
+
+#: includes/functions.php
+#, php-format
+msgid "With NAT: %d, without NAT: %d."
+msgstr "Ar NAT: %d, bez NAT: %d."
+
+#: includes/functions.php
+#, php-format
+msgid "Running: %s"
+msgstr "Darbojas: %s"
+
+#: includes/functions.php
+#, php-format
+msgid "ERROR: The Parallel Query did not finish within the Maximum Run Time of %d seconds.  Check the Maximum Run Time under the FlowView Settings, and that the database is not busy with another operation such as an ALTER TABLE."
+msgstr "KĻŪDA: Paralēlais vaicājums netika pabeigts maksimālajā izpildes laikā (%d sekundes). Pārbaudiet maksimālo izpildes laiku sadaļā FlowView iestatījumi un pārliecinieties, vai datubāze nav aizņemta ar citu darbību, piemēram, ALTER TABLE."
+
+#: includes/functions.php
+msgid "The Parallel Query Timed Out.  Please contact your administrator"
+msgstr "Paralēlajam vaicājumam iestājās noildze. Lūdzu, sazinieties ar savu administratoru"
+
+#: includes/functions.php
+#, php-format
+msgid "Boolean: %s, Numeric: %s, Hex: %s"
+msgstr "Būla: %s, Skaitliskā: %s, Heksadecimālā: %s"
+
+#: includes/functions.php
+msgid "Low Delay"
+msgstr "Zema aizture"
+
+#: includes/functions.php
+msgid "Throughput"
+msgstr "Caurlaidspēja"
+
+#: includes/functions.php
+msgid "Reliability"
+msgstr "Uzticamība"
+
+#: includes/functions.php
+msgid "Mincost"
+msgstr "Minimālās izmaksas"
+
+#: includes/functions.php
+msgid "Net Control"
+msgstr "Tīkla vadība"
+
+#: includes/functions.php
+msgid "Internet Control"
+msgstr "Interneta vadība"
+
+#: includes/functions.php
+msgid "Critic ECP"
+msgstr "Kritiskā ECP"
+
+#: includes/functions.php
+msgid "Flash Override"
+msgstr "Zibens prioritāte"
+
+#: includes/functions.php
+msgid "Flash"
+msgstr "Zibens"
+
+#: includes/functions.php
+msgid "Immediate"
+msgstr "Tūlītēja"
+
+#: includes/functions.php
+msgid "Priority"
+msgstr "Prioritāte"
+
+#: includes/functions.php
+msgid "Routine"
+msgstr "Parasta"
+
+#: includes/functions.php
+msgid "Summary Statistics"
+msgstr "Kopsavilkuma statistika"
+
+#: includes/functions.php
+#, php-format
+msgid "IP Packet Size Distribution (%%)"
+msgstr "IP pakešu izmēra sadalījums (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Packets per Flow Distribution (%%)"
+msgstr "Pakešu skaita plūsmā sadalījums (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Octets per Flow Distribution (%%)"
+msgstr "Oktetu skaita plūsmā sadalījums (%%)"
+
+#: includes/functions.php
+#, php-format
+msgid "Flow Time Distribution (%%)"
+msgstr "Plūsmas ilguma sadalījums (%%)"
+
+#: includes/functions.php
+msgid "You must select a Statistics Report or Printed Report!"
+msgstr "Jums jāatlasa statistikas atskaite vai drukātā atskaite!"
+
+#: includes/functions.php
+msgid "You must select only a Statistics Report or a Printed Report (not both)!"
+msgstr "Jums jāatlasa tikai statistikas atskaite vai tikai drukātā atskaite (ne abas)!"
+
+#: includes/functions.php
+msgid "Invalid dates, End Date/Time is earlier than Start Date/Time!"
+msgstr "Nederīgi datumi: beigu datums/laiks ir agrāks par sākuma datumu/laiku!"
+
+#: includes/functions.php
+msgid "Invalid IP for the Source Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Nederīga avota IP adrese!<br>(Jābūt formātā '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Source Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Nederīgs avota adreses apakštīkls!<br>(Jābūt formātā '192.168.0.1/255.255.255.0' vai '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid IP for the Destination Address!<br>(Must be in the form of '192.168.0.1')"
+msgstr "Nederīga mērķa IP adrese!<br>(Jābūt formātā '192.168.0.1')"
+
+#: includes/functions.php
+msgid "Invalid subnet for the Destination Address!<br>(Must be in the form of '192.168.0.1/255.255.255.0' or '192.168.0.1/24')"
+msgstr "Nederīgs mērķa adreses apakštīkls!<br>(Jābūt formātā '192.168.0.1/255.255.255.0' vai '192.168.0.1/24')"
+
+#: includes/functions.php
+msgid "Invalid value for Source Interface!"
+msgstr "Nederīga avota saskarnes vērtība!"
+
+#: includes/functions.php
+msgid "Invalid value for Source Port! (0 - 65535)"
+msgstr "Nederīga avota porta vērtība! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Source AS! (0 - 65535)"
+msgstr "Nederīga avota AS vērtība! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Interface!"
+msgstr "Nederīga mērķa saskarnes vērtība!"
+
+#: includes/functions.php
+msgid "Invalid value for Destination Port! (0 - 65535)"
+msgstr "Nederīga mērķa porta vērtība! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Destination AS! (0 - 65535)"
+msgstr "Nederīga mērķa AS vērtība! (0 - 65535)"
+
+#: includes/functions.php
+msgid "Invalid value for Protocol! (1 - 255)"
+msgstr "Nederīga protokola vērtība! (1 - 255)"
+
+#: includes/functions.php
+msgid "Invalid value for TCP Flag! (ex: 0x1b or 0x1b/SA or SA/SA)"
+msgstr "Nederīga TCP karoga vērtība! (piem., 0x1b vai 0x1b/SA vai SA/SA)"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Octets!"
+msgstr "Nederīga oktetu sliekšņa vērtība!"
+
+#: includes/functions.php
+msgid "Invalid value for Cutoff Lines!"
+msgstr "Nederīga rindu skaita ierobežojuma vērtība!"
+
+#: includes/functions.php
+#, php-format
+msgid "FlowView Chart for %s Type is %s"
+msgstr "FlowView diagramma vienumam %s, tips: %s"
+
+#: includes/functions.php
+msgid "Supported (NAT)"
+msgstr "Atbalstīts (NAT)"
+
+#: includes/functions.php
+msgid "Not Supported"
+msgstr "Nav atbalstīts"
+
+#: includes/functions.php setup.php
+msgid "MyISAM (Fast, Non-Crash Safe)"
+msgstr "MyISAM (ātrs, nav drošs pret avārijām)"
+
+#: includes/functions.php setup.php
+msgid "Aria (Fast, Crash Safe)"
+msgstr "Aria (ātrs, drošs pret avārijām)"
+
+#: includes/functions.php setup.php
+msgid "InnoDB (Slow, High Concurrency)"
+msgstr "InnoDB (lēnāks, augsta vienlaicība)"
+
+#: setup.php
+msgid "NetFlow User"
+msgstr "NetFlow lietotājs"
+
+#: setup.php
+msgid "NetFlow Admin"
+msgstr "NetFlow administrators"
+
+#: setup.php
+msgid "Please rename either your config.php.dist or config_local.php.dist files in the flowview directory, and change setup your database before installing."
+msgstr "Pirms instalēšanas, lūdzu, pārdēvējiet failu config.php.dist vai config_local.php.dist direktorijā flowview un pielāgojiet datubāzes iestatījumus."
+
+#: setup.php
+msgid "Please be advised the Flowview plugins Tables are being upgraded in the background.  This may take some time. Check the Cacti log for more information"
+msgstr "Lūdzu, ņemiet vērā, ka FlowView spraudņa tabulas tiek jauninātas fonā. Tas var aizņemt kādu laiku. Plašāku informāciju skatiet Cacti žurnālā"
+
+#: setup.php
+msgid "The Filter has been Deleted"
+msgstr "Filtrs ir dzēsts"
+
+#: setup.php
+msgid "The Filter has been Updated"
+msgstr "Filtrs ir atjaunināts"
+
+#: setup.php
+msgid "Import/Export"
+msgstr "Importēt/Eksportēt"
+
+#: setup.php
+msgid "FlowView"
+msgstr "FlowView"
+
+#: setup.php
+msgid "Databases"
+msgstr "Datubāzes"
+
+#: setup.php
+msgid "Normal User"
+msgstr "Parasts lietotājs"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Sistēmas administrēšana"
+
+#: setup.php
+msgid "Flow Viewer"
+msgstr "Plūsmu skatītājs"
+
+#: setup.php
+msgid "Dashboard"
+msgstr "Informācijas panelis"
+
+#: setup.php
+msgid "(save)"
+msgstr "(saglabāt)"
+
+#: setup.php
+msgid "(edit)"
+msgstr "(rediģēt)"
+
+#: setup.php
+msgid "(actions)"
+msgstr "(darbības)"
+
+#: setup.php
+#, php-format
+msgid "%d Process"
+msgstr "%d process"
+
+#: setup.php
+#, php-format
+msgid "%d Processes"
+msgstr "%d procesi"
+
+#: setup.php
+msgid "Report Concurrent Processes (FlowView Only)"
+msgstr "Vienlaicīgie atskaišu procesi (tikai FlowView)"
+
+#: setup.php
+msgid "Select the maximum concurrent reports processes that can be running at any one time."
+msgstr "Atlasiet maksimālo vienlaicīgo atskaišu procesu skaitu, kas var darboties vienlaikus."
+
+#: setup.php
+msgid "Internet Proxy Settings"
+msgstr "Interneta starpniekservera iestatījumi"
+
+#: setup.php
+msgid "Internet Proxy Address"
+msgstr "Interneta starpniekservera adrese"
+
+#: setup.php
+msgid "For either core Cacti Services or Plugins that require internet access, enter the proxy server and port here in the following format IP:PORT.  For example 192.168.1.1:8080."
+msgstr "Cacti pamatpakalpojumiem vai spraudņiem, kuriem nepieciešama piekļuve internetam, šeit ievadiet starpniekserveri un portu formātā IP:PORTS. Piemēram, 192.168.1.1:8080."
+
+#: setup.php
+msgid "Internet Proxy User"
+msgstr "Interneta starpniekservera lietotājs"
+
+#: setup.php
+msgid "If your Internet Proxy requires a username, enter it here."
+msgstr "Ja interneta starpniekserveris pieprasa lietotājvārdu, ievadiet to šeit."
+
+#: setup.php
+msgid "Internet Proxy Password"
+msgstr "Interneta starpniekservera parole"
+
+#: setup.php
+msgid "If your Internet Proxy requires a password, enter it here."
+msgstr "Ja interneta starpniekserveris pieprasa paroli, ievadiet to šeit."
+
+#: setup.php
+msgid "Name Resolution"
+msgstr "Nosaukumu atrisināšana"
+
+#: setup.php
+msgid "Hostname Resolution"
+msgstr "Resursdatoru nosaukumu atrisināšana"
+
+#: setup.php
+msgid "The method by which you wish to resolve hostnames."
+msgstr "Metode, ar kuru vēlaties atrisināt resursdatoru nosaukumus."
+
+#: setup.php
+msgid "Use Local Server"
+msgstr "Izmantot lokālo serveri"
+
+#: setup.php
+msgid "Use DNS Servers under Mail/Reporting/DNS"
+msgstr "Izmantot DNS serverus no sadaļas Pasts/Atskaites/DNS"
+
+#: setup.php
+msgid "Don't Resolve DNS"
+msgstr "Neatrisināt DNS"
+
+#: setup.php
+msgid "Download the Internet Registry Daily"
+msgstr "Lejupielādēt interneta reģistru katru dienu"
+
+#: setup.php
+msgid "If you are interested in the publicly available information about the entire internet, you can select this option.  Cacti will reach out to the Internet Registries throughout the world once a day and check for changes in the routes for the entire internet and load that information into Cacti.  Not that this will create a fairly large database of over 3GBytes of data."
+msgstr "Ja jūs interesē publiski pieejamā informācija par visu internetu, varat atlasīt šo opciju. Cacti reizi dienā sazināsies ar interneta reģistriem visā pasaulē, pārbaudīs maršrutu izmaiņas visā internetā un ielādēs šo informāciju Cacti. Ņemiet vērā, ka tas izveidos diezgan lielu datubāzi ar vairāk nekā 3 GB datu."
+
+#: setup.php
+msgid "Local Domain Name"
+msgstr "Lokālā domēna nosaukums"
+
+#: setup.php
+msgid "For IPv4 addresses on the local network that do not resolve locally, append this suffix to the resultant ip address."
+msgstr "Lokālā tīkla IPv4 adresēm, kuras netiek atrisinātas lokāli, pievienot šo sufiksu iegūtajai IP adresei."
+
+#: setup.php
+msgid "Local IP Range"
+msgstr "Lokālais IP diapazons"
+
+#: setup.php
+msgid "Provide the IPv4 ip address range for your local network for hosts that may not be registered in DNS.  These hosts will be mapped to the Local Domain Name above.  This more for home users.  You can use either CIDR or non-CIDR formats.  For example: 192.168.11.0 or 192.168.11.0/24"
+msgstr "Norādiet lokālā tīkla IPv4 adrešu diapazonu resursdatoriem, kas var nebūt reģistrēti DNS. Šie resursdatori tiks piesaistīti iepriekš norādītajam lokālā domēna nosaukumam. Tas galvenokārt paredzēts mājas lietotājiem. Varat izmantot gan CIDR, gan ne-CIDR formātu. Piemēram: 192.168.11.0 vai 192.168.11.0/24"
+
+#: setup.php
+msgid "Use CIDR or Non-CIDR"
+msgstr "Izmantojiet CIDR vai ne-CIDR"
+
+#: setup.php
+msgid "Use Arin to find Domains and AS Numbers"
+msgstr "Izmantot ARIN domēnu un AS numuru atrašanai"
+
+#: setup.php
+msgid "Many Big Tech data collection services like to mask their ownership of domains to obfuscate the fact that they are collecting your personal information.  If you are concerned with this and your Cacti install has access to the Internet, you can use Arin to remove the mask from those Big Tech companies."
+msgstr "Daudzi lielo tehnoloģiju uzņēmumu datu vākšanas pakalpojumi mēdz slēpt domēnu piederību, lai maskētu faktu, ka tie vāc jūsu personas datus. Ja jūs par to uztraucaties un jūsu Cacti instalācijai ir piekļuve internetam, varat izmantot ARIN, lai atklātu šo lielo tehnoloģiju uzņēmumu piederību."
+
+#: setup.php
+msgid "Whois Provider Host"
+msgstr "Whois nodrošinātāja resursdators"
+
+#: setup.php
+msgid "Please provide the hostname for resolving whois calls.  If not null, you must have the whois binary in your system path."
+msgstr "Lūdzu, norādiet resursdatora nosaukumu whois pieprasījumu atrisināšanai. Ja vērtība nav tukša, jūsu sistēmas ceļā ir jābūt pieejamam whois izpildāmajam failam."
+
+#: setup.php
+msgid "whois.radb.net"
+msgstr "whois.radb.net"
+
+#: setup.php
+msgid "Whois Binary Path"
+msgstr "Whois izpildāmā faila ceļš"
+
+#: setup.php
+msgid "Please provide the pathname for the 'whois' binary.  The 'whois' binary will be used to find AS information supplementing Arin."
+msgstr "Lūdzu, norādiet 'whois' izpildāmā faila ceļu. Izpildāmais fails 'whois' tiks izmantots AS informācijas meklēšanai, papildinot ARIN."
+
+#: setup.php
+msgid "Enter binary path"
+msgstr "Ievadiet izpildāmā faila ceļu"
+
+#: setup.php
+msgid "Graph Drilldown Settings"
+msgstr "Grafiku detalizācijas iestatījumi"
+
+#: setup.php
+msgid "Default Search Filter for Graph Drilldowns"
+msgstr "Noklusējuma meklēšanas filtrs grafiku detalizācijai"
+
+#: setup.php
+msgid "Choose an existing Flowview Search Filter to use for Graph Drilldowns."
+msgstr "Izvēlieties esošu FlowView meklēšanas filtru, ko izmantot grafiku detalizācijai."
+
+#: setup.php
+msgid "Data Retention and Report Generation"
+msgstr "Datu glabāšana un atskaišu ģenerēšana"
+
+#: setup.php
+msgid "Data Retention Policy"
+msgstr "Datu glabāšanas politika"
+
+#: setup.php
+msgid "The amount of time Cacti will maintain the partitioned Flow tables."
+msgstr "Laika periods, kuru Cacti saglabās sadalītās plūsmu tabulas."
+
+#: setup.php
+#, php-format
+msgid "%d Week"
+msgstr "%d nedēļa"
+
+#: setup.php
+#, php-format
+msgid "%d Weeks"
+msgstr "%d nedēļas"
+
+#: setup.php
+#, php-format
+msgid "%d Month"
+msgstr "%d mēnesis"
+
+#: setup.php
+#, php-format
+msgid "%d Months"
+msgstr "%d mēneši"
+
+#: setup.php
+#, php-format
+msgid "%d Year"
+msgstr "%d gads"
+
+#: setup.php
+msgid "Database Partitioning Scheme"
+msgstr "Datubāzes partīciju shēma"
+
+#: setup.php
+msgid "Depending on the number of flows per minute, you may require more tables per day."
+msgstr "Atkarībā no plūsmu skaita minūtē var būt nepieciešams vairāk tabulu dienā."
+
+#: setup.php
+msgid "Daily"
+msgstr "Ikdienas"
+
+#: setup.php
+msgid "Hourly"
+msgstr "Ikstundas"
+
+#: setup.php
+msgid "Storage Engine for Raw Tables"
+msgstr "Glabāšanas dzinis neapstrādātajām tabulām"
+
+#: setup.php
+msgid "The Aria Engine is perfect for all but the Live raw table.  The Live raw table will always be InnoDB.  Take your pick."
+msgstr "Aria dzinis ir lieliski piemērots visām tabulām, izņemot aktīvo (Live) neapstrādāto tabulu. Aktīvā neapstrādātā tabula vienmēr izmantos InnoDB. Izvēlieties piemērotāko."
+
+#: setup.php
+msgid "Parallel Queries"
+msgstr "Paralēlie vaicājumi"
+
+#: setup.php
+msgid "Parallel Query Backend"
+msgstr "Paralēlo vaicājumu aizmugursistēma"
+
+#: setup.php
+msgid "Choose how parallel FlowView queries are executed.  The Legacy PHP Runner forks the flowview_runner.php process per query and shard.  The FlowView Query Service dispatches the same map-reduce work to a long-running Go service over localhost, avoiding per-query process startup and database polling latency.  Requires the flowview-query service (see plugins/flowview/service/flowview-query) to be installed and running."
+msgstr "Izvēlieties, kā tiek izpildīti paralēlie FlowView vaicājumi. Mantotais PHP izpildītājs (Legacy PHP Runner) katram vaicājumam un fragmentam sazarojas ar flowview_runner.php procesu. FlowView vaicājumu pakalpojums (FlowView Query Service) nosūta to pašu map-reduce darbu ilgstoši strādājošam Go pakalpojumam caur localhost, izvairoties no procesu startēšanas un datubāzes aptaujas aiztures katram vaicājumam. Nepieciešams instalēts un darbojošs flowview-query pakalpojums (skatiet plugins/flowview/service/flowview-query)."
+
+#: setup.php
+msgid "Legacy PHP Runner"
+msgstr "Mantotais PHP izpildītājs"
+
+#: setup.php
+msgid "FlowView Query Service"
+msgstr "FlowView vaicājumu pakalpojums"
+
+#: setup.php
+msgid "Query Service URL"
+msgstr "Vaicājumu pakalpojuma URL"
+
+#: setup.php
+msgid "Base URL of the FlowView Query Service, for example http://127.0.0.1:8699.  Leave blank to auto-discover the ephemeral port from the service's port file."
+msgstr "FlowView vaicājumu pakalpojuma bāzes URL, piemēram, http://127.0.0.1:8699. Atstājiet tukšu, lai automātiski noteiktu pagaidu portu no pakalpojuma porta faila."
+
+#: setup.php
+msgid "Query Service Port File"
+msgstr "Vaicājumu pakalpojuma porta fails"
+
+#: setup.php
+msgid "Path to the port file the FlowView Query Service writes its bound address to.  Used to discover the service endpoint when the Query Service URL above is blank."
+msgstr "Ceļš uz porta failu, kurā FlowView vaicājumu pakalpojums ieraksta piesaistīto adresi. Tiek izmantots pakalpojuma galapunkta noteikšanai, ja iepriekš norādītais vaicājumu pakalpojuma URL ir tukšs."
+
+#: setup.php
+msgid "Query Service Token"
+msgstr "Vaicājumu pakalpojuma pilnvara"
+
+#: setup.php
+msgid "Optional shared secret.  When set, Cacti sends it to the FlowView Query Service as an \"Authorization: Bearer\" header and the service rejects any state-changing request that does not present the same token.  Set the matching value in the service's config file (auth_token) or the FLOWVIEW_QUERY_TOKEN environment variable.  Recommended whenever the service is reachable by anything other than trusted local processes."
+msgstr "Neobligāts koplietotais noslēpums. Ja tas ir iestatīts, Cacti nosūta to FlowView vaicājumu pakalpojumam kā galveni \"Authorization: Bearer\", un pakalpojums noraida jebkuru stāvokli mainošu pieprasījumu, kurā nav norādīta tā pati pilnvara. Iestatiet atbilstošo vērtību pakalpojuma konfigurācijas failā (auth_token) vai vides mainīgajā FLOWVIEW_QUERY_TOKEN. Ieteicams vienmēr, kad pakalpojums ir sasniedzams arī ārpus uzticamiem lokālajiem procesiem."
+
+#: setup.php
+msgid "Max Concurrent Threads"
+msgstr "Maks. vienlaicīgie pavedieni"
+
+#: setup.php
+msgid "The maximum number of threads that will be dispatched to run the FlowView queries.  Note that you can have at most 1 thread per database partition, and you should be careful not to overload your database server with having too many concurrent threads running."
+msgstr "Maksimālais pavedienu skaits, kas tiks palaists FlowView vaicājumu izpildei. Ņemiet vērā, ka katrai datubāzes partīcijai var būt ne vairāk kā 1 pavediens, un jāuzmanās, lai nepārslogotu datubāzes serveri ar pārāk daudziem vienlaicīgi darbojošiem pavedieniem."
+
+#: setup.php
+msgid "Disabled"
+msgstr "Atspējots"
+
+#: setup.php
+#, php-format
+msgid "%d Threads"
+msgstr "%d pavedieni"
+
+#: setup.php
+msgid "Maximum Run Time"
+msgstr "Maksimālais izpildes laiks"
+
+#: setup.php
+msgid "If the Parallel Query does not finish in this time, exit."
+msgstr "Ja paralēlais vaicājums nebeidzas šajā laikā, pārtraukt izpildi."
+
+#: setup.php
+msgid "Cached Data Time to Live"
+msgstr "Kešoto datu glabāšanas ilgums (TTL)"
+
+#: setup.php
+msgid "How long should FlowView hold onto Cached Query results before purging them?"
+msgstr "Cik ilgi FlowView jāglabā kešoto vaicājumu rezultāti pirms to dzēšanas?"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d stundas"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d diena"
+
+#: setup.php
+#, php-format
+msgid "%d Days"
+msgstr "%d dienas"
+
+#: setup.php
+msgid "MaxScale Sharding"
+msgstr "MaxScale fragmentēšana"
+
+#: setup.php
+msgid "This is only required if your Cacti System's Flowview Database connection is not already using a MaxScale enabled Read-Write Split port."
+msgstr "Tas ir nepieciešams tikai tad, ja jūsu Cacti sistēmas FlowView datubāzes savienojums jau neizmanto MaxScale iespējotu lasīšanas/rakstīšanas sadalīšanas (Read-Write Split) portu."
+
+#: setup.php
+msgid "Leverage MaxScale to Distribute Query Shards"
+msgstr "Izmantot MaxScale vaicājumu fragmentu sadalei"
+
+#: setup.php
+msgid "If you have multiple service acting as slaves for MaxScale, you can increase the speed of querying by distributing the parallel queries to multiple MariaDB backend servers."
+msgstr "Ja jums ir vairāki serveri, kas darbojas kā pakārtotie mezgli (slaves) priekš MaxScale, varat palielināt vaicājumu ātrumu, sadalot paralēlos vaicājumus starp vairākiem MariaDB aizmugursistēmas serveriem."
+
+#: setup.php
+msgid "MaxScale Read-Write Split Port"
+msgstr "MaxScale lasīšanas/rakstīšanas sadalīšanas ports"
+
+#: setup.php
+msgid "This should be the port of the Read-Write-Split-Service (readwrite) service and router."
+msgstr "Tam jābūt pakalpojuma un maršrutētāja Read-Write-Split-Service (readwrite) portam."
+
+#: setup.php
+msgid "Flowview"
+msgstr "FlowView"
+
+#: setup.php
+msgid "NetFlow"
+msgstr "NetFlow"
